@@ -12,7 +12,12 @@ import {
 import { isAbsolute, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { gitleaksPaths, gitleaksVersion, requireGitleaks } from './lib/gitleaks.mjs'
+import {
+  downloadGitleaksArchive,
+  gitleaksPaths,
+  gitleaksVersion,
+  requireGitleaks,
+} from './lib/gitleaks.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const { directory, executable, executableName, release } = gitleaksPaths(root)
@@ -23,16 +28,7 @@ try {
   mkdirSync(directory, { recursive: true })
   const temporary = mkdtempSync(join(directory, 'install-'))
   try {
-    const archiveName = `gitleaks_${gitleaksVersion}_${release[0]}`
-    const response = await fetch(
-      `https://github.com/gitleaks/gitleaks/releases/download/v${gitleaksVersion}/${archiveName}`,
-      { signal: AbortSignal.timeout(120_000) },
-    )
-    if (!response.ok) throw new Error(`Gitleaks download failed: HTTP ${response.status}`)
-    const bytes = Buffer.from(await response.arrayBuffer())
-    if (createHash('sha256').update(bytes).digest('hex') !== release[1]) {
-      throw new Error('Gitleaks archive SHA-256 does not match the reviewed release')
-    }
+    const { archiveName, bytes } = await downloadGitleaksArchive(release)
     const archive = join(temporary, archiveName)
     writeFileSync(archive, bytes)
     execFileSync('tar', ['-xf', archive, '-C', temporary, executableName], { stdio: 'pipe' })

@@ -28,7 +28,7 @@ pnpm check:privacy
 pnpm check:privacy:history
 ```
 
-`privacy:setup` downloads Gitleaks 8.30.1 from its official release, verifies a checked-in SHA-256, and caches the executable in ignored `.local/privacy-tools/`. It supports Windows, macOS and Linux on x64/arm64 and requires `tar` for extraction. Offline checks reuse that verified local installation. Missing, corrupted or wrong-version scanners fail closed; setup does not alter global Git configuration.
+`privacy:setup` downloads Gitleaks 8.30.1 from its official release and uses GitHub's release asset API if the direct URL returns a server error. Both routes verify the same checked-in SHA-256 before caching the executable in ignored `.local/privacy-tools/`. It supports Windows, macOS and Linux on x64/arm64 and requires `tar` for extraction. Offline checks reuse that verified local installation. Missing, corrupted or wrong-version scanners fail closed; setup does not alter global Git configuration.
 
 `check:privacy` inspects tracked and nonignored new working-tree files. It rejects sensitive filenames (including DER exports), personal home/workspace paths, mailboxes and phone numbers, and scans text for Gitleaks default rules plus source-session credentials. Binary PKCS#8, PKCS#1 and SEC1 private keys are also rejected when renamed to hide their format. Tests generate temporary keys in memory instead of committing key fixtures. It also checks forced additions that bypass `.gitignore`. The complete index is copied into a disposable ignored directory for staged checks; working-tree changes cannot hide staged bytes. Snapshots are removed after either success or rejection, and diagnostics show rule/location without matched values.
 

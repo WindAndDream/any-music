@@ -14,7 +14,7 @@ import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { test } from 'node:test'
 import { fileURLToPath } from 'node:url'
 
-import { gitleaksPaths, requireGitleaks } from '../lib/gitleaks.mjs'
+import { downloadGitleaksArchive, gitleaksPaths, requireGitleaks } from '../lib/gitleaks.mjs'
 import {
   inspectPrivacyFile,
   inspectPrivacyText,
@@ -29,6 +29,21 @@ const fakeToken = [
   createHash('sha256').update('offline privacy regression only').digest('hex').slice(0, 36),
 ].join('_')
 const cacheReady = existsSync(gitleaksPaths(root).executable)
+
+test('Gitleaks setup uses the pinned release asset API after a gateway failure', async (t) => {
+  const bytes = Buffer.from('synthetic scanner archive')
+  const digest = createHash('sha256').update(bytes).digest('hex')
+  const fetch = t.mock.method(globalThis, 'fetch', async (url, options) => {
+    if (new URL(url).host === 'github.com') return new Response(null, { status: 504 })
+    assert.equal(url, 'https://api.github.com/repos/gitleaks/gitleaks/releases/assets/1234')
+    assert.equal(options.headers.accept, 'application/octet-stream')
+    return new Response(bytes)
+  })
+
+  assert.deepEqual((await downloadGitleaksArchive(['test.zip', digest, 1234])).bytes, bytes)
+  await assert.rejects(downloadGitleaksArchive(['test.zip', 'wrong-digest', 1234]), /SHA-256/u)
+  assert.equal(fetch.mock.callCount(), 4)
+})
 
 test('privacy rules reject personal paths, mailboxes, phones and forced sensitive files', () => {
   const home = ['C:', 'Users', 'private-person', 'Cookies'].join('/')
