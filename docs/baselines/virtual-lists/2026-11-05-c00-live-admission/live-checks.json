@@ -1,0 +1,1045 @@
+{
+  "date": "2026-11-05",
+  "runtimeScope": "shared",
+  "productionAdmission": "not passed; default gate remains closed",
+  "method": "User-authorized real installed development Tampermonkey and isolated native WebView inspection; test-only app.provide enables private C00 key, never production source or persisted preference. Development sources served by existing Vite workflows.",
+  "sourceFiles": [
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+      "sha256": "fcf71ec3d54a8428c06bd00b9c1ef3f95f8752283629f221dca1bc21554fab81"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "b5d6f846f29ee2556f9b0ebc69dbe1756ca24bbfeb376ea41aee2511bf6c5538"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-grid-css-layout.ts",
+      "sha256": "b1c7d2515b18c50d26143f6c9d19471f2c61905e078e84bf508dd397f6249406"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTrackCardGrid.test.ts",
+      "sha256": "fae2420f721c3bce250e8f7fa1773935b2586c4c6ebe80119d406761d50d46fc"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-grid-css-layout.test.ts",
+      "sha256": "0489530e1e9578486b15be4e76cb3937c97606d0f406e6891bff3c6152974270"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue",
+      "sha256": "9773a2382907ecba4997a12e017643a02f83e9ee282fc40e23deec8236d78ee4"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/VirtualQueuePlatformGrid.test.ts",
+      "sha256": "106e0c196d8a86e8c986b89c5afb3d6bd153003013d4885e2410019d2ba0fe7c"
+    }
+  ],
+  "userscript": {
+    "environment": {
+      "browser": "Chrome/156.0.8078.76",
+      "manager": "Tampermonkey 5.5.1",
+      "kind": "installed server:Any Music development script, real GM APIs and actual Shadow host"
+    },
+    "fixture": {
+      "count": 1000,
+      "identity": "c00-live:<index>",
+      "title": "C00 测试歌曲 <4-digit index>; every seventh title has long text",
+      "sources": ["bilibili", "douyin"],
+      "initialStorage": "empty development-script manager storage",
+      "artwork": "none"
+    },
+    "initialBaseline": {
+      "candidate": false,
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1.0000000447034836
+      },
+      "scroll": {
+        "x": 260.5714416503906,
+        "y": 88.5714340209961,
+        "width": 1166.857177734375,
+        "height": 721.6875610351562,
+        "top": 0,
+        "scrollHeight": 104760
+      },
+      "grid": {
+        "x": 298.1160888671875,
+        "y": 297.8839416503906,
+        "width": 1086.0535888671875,
+        "height": 104509.1328125,
+        "columns": "354.018px 354.018px 354.018px",
+        "gap": "12px"
+      },
+      "mounted": 1000,
+      "cells": [
+        {
+          "id": "c00-live:0",
+          "box": {
+            "x": 298.1160888671875,
+            "y": 297.8839416503906,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:1",
+          "box": {
+            "x": 664.1339721679688,
+            "y": 297.8839416503906,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:2",
+          "box": {
+            "x": 1030.15185546875,
+            "y": 297.8839416503906,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:3",
+          "box": {
+            "x": 298.1160888671875,
+            "y": 610.8214721679688,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:4",
+          "box": {
+            "x": 664.1339721679688,
+            "y": 610.8214721679688,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:5",
+          "box": {
+            "x": 1030.15185546875,
+            "y": 610.8214721679688,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        }
+      ]
+    },
+    "initialCandidate": {
+      "candidate": true,
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1.0000000447034836
+      },
+      "scroll": {
+        "x": 260.5714416503906,
+        "y": 88.5714340209961,
+        "width": 1166.857177734375,
+        "height": 721.6875610351562,
+        "top": 0,
+        "scrollHeight": 53284
+      },
+      "grid": {
+        "x": 298.1160888671875,
+        "y": 297.8839416503906,
+        "width": 1086.0535888671875,
+        "height": 53033.62890625,
+        "columns": "354.018px 354.018px 354.018px",
+        "gap": "12px"
+      },
+      "mounted": 12,
+      "cells": [
+        {
+          "id": "c00-live:0",
+          "box": {
+            "x": 298.1160888671875,
+            "y": 297.8839416503906,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:1",
+          "box": {
+            "x": 664.1339721679688,
+            "y": 297.8839416503906,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:2",
+          "box": {
+            "x": 1030.15185546875,
+            "y": 297.8839416503906,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:3",
+          "box": {
+            "x": 298.1160888671875,
+            "y": 610.8214721679688,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:4",
+          "box": {
+            "x": 664.1339721679688,
+            "y": 610.8214721679688,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        },
+        {
+          "id": "c00-live:5",
+          "box": {
+            "x": 1030.15185546875,
+            "y": 610.8214721679688,
+            "width": 354.01788330078125,
+            "height": 300.9375
+          }
+        }
+      ]
+    },
+    "matchingFirstSixCardRectangles": true,
+    "offscreenNativeFocus": {
+      "result": true,
+      "label": "播放《C00 测试歌曲 0900》；长按封面拖动排序，方向键调整顺序",
+      "owner": "c00-live:900",
+      "mounted": 21
+    },
+    "responsive": [
+      {
+        "viewport": {
+          "width": 2000,
+          "height": 1000,
+          "dpr": 1.0000000447034836
+        },
+        "columns": "317.027px 317.027px 317.027px 317.027px 317.027px",
+        "mounted": 20,
+        "firstSixWidths": [
+          317.02679443359375, 317.02679443359375, 317.02679443359375, 317.02679443359375,
+          317.02679443359375, 317.02679443359375
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "dpr": 1.0000000447034836
+        },
+        "columns": "354.018px 354.018px 354.018px",
+        "mounted": 12,
+        "firstSixWidths": [
+          354.01788330078125, 354.01788330078125, 354.01788330078125, 354.01788330078125,
+          354.01788330078125, 354.01788330078125
+        ]
+      },
+      {
+        "viewport": {
+          "width": 800,
+          "height": 1000,
+          "dpr": 1.0000000447034836
+        },
+        "columns": "314.571px 314.571px",
+        "mounted": 8,
+        "firstSixWidths": [
+          314.5714416503906, 314.5714416503906, 314.5714416503906, 314.5714416503906,
+          314.5714416503906, 314.5714416503906
+        ]
+      },
+      {
+        "viewport": {
+          "width": 375,
+          "height": 1000,
+          "dpr": 1.0000000447034836
+        },
+        "columns": "313.714px",
+        "mounted": 7,
+        "firstSixWidths": [
+          313.71429443359375, 313.71429443359375, 313.71429443359375, 313.71429443359375,
+          313.71429443359375, 313.71429443359375
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "dpr": 1.0000000447034836
+        },
+        "columns": "354.018px 354.018px 354.018px",
+        "mounted": 12,
+        "firstSixWidths": [
+          354.01788330078125, 354.01788330078125, 354.01788330078125, 354.01788330078125,
+          354.01788330078125, 354.01788330078125
+        ]
+      }
+    ],
+    "nativeFind": {
+      "baseline": {
+        "nativeFind": true,
+        "selection": "C00 测试歌曲 0900",
+        "scrollBefore": 0,
+        "scrollAfter": 0
+      },
+      "candidate": {
+        "nativeFind": false,
+        "selection": "",
+        "scrollBefore": 0,
+        "scrollAfter": 0
+      },
+      "result": "failed parity"
+    },
+    "cleanup": {
+      "cleanup": true,
+      "removedSyntheticKeys": 13,
+      "fixtureTracks": 1000,
+      "preservedBrowserProfile": true,
+      "preservedExtension": true
+    }
+  },
+  "tauri": {
+    "runtime": "Existing opt-in plugin-delivery-acceptance Windows harness with current Tauri frontend, current native IPC and fresh temporary native/product/WebView directories; AM_S15_USE_PRODUCTION_ADMISSION=1",
+    "environment": {
+      "os": "Windows 10.0.26200 x86_64",
+      "webview": "156.0.4314.58",
+      "frontend": "Vite development server at http://127.0.0.1:21420/",
+      "viewport": [1280, 851],
+      "dpr": 1.75
+    },
+    "checks": {
+      "frontendProductionBuild": "passed, c00-tauri-frontend-build.log; root must rebuild final changes",
+      "currentHarnessBuild": "passed, c00-tauri-harness-build.log",
+      "initial1000ItemBaseline": {
+        "mountedCards": 1000,
+        "themeSurfaceElements": 19225
+      },
+      "initial1000ItemCandidate": {
+        "mountedCards": 12,
+        "themeSurfaceElements": 501
+      },
+      "initialVisibleGeometry": "Same first 12 card rectangles; baseline and candidate screenshots have identical SHA-256 AD3B4E5019F41AE93840A4D2E92267C1ABA8A9167BE81A172894CD8230264EB8",
+      "endAndReturn": "Candidate reaches item 999 with 13 mounted cards, returns to item 0 with 12",
+      "menuFocus": "Origin item retained while offscreen; trusted Escape closes dialog and restores original actions key. Existing preventScroll behavior also confirmed in baseline",
+      "nativeFindOffscreen900": {
+        "baseline": true,
+        "candidate": false
+      },
+      "nativeRangeSelectionIncludes900And999": {
+        "baseline": true,
+        "candidate": false
+      },
+      "responsiveBeforeFix": "2000px 5 columns -> 1280px: three explicit plus zero-width implicit columns, reproduced and screenshot inspected",
+      "responsiveAfterFix": "2000px 5 -> 1280px 3 -> 2000px 5 -> 800px 2 -> 1280px 3; mounted counts 20/12/20/8/12, all positive measured widths; screenshot inspected"
+    },
+    "nativeFind": {
+      "baseline": true,
+      "candidate": false
+    },
+    "nativeTextSelection": {
+      "baseline": {
+        "length": 44861,
+        "contains900": true,
+        "contains999": true
+      },
+      "candidate": {
+        "length": 549,
+        "contains900": false,
+        "contains999": false
+      }
+    },
+    "responsiveAfter": {
+      "wide": {
+        "viewport": {
+          "width": 2000,
+          "height": 851
+        },
+        "columns": "322.054px 322.054px 322.062px 322.054px 322.054px",
+        "gridWidth": 1658.2857666015625,
+        "items": [
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 292,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 626.0535888671875,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 322.0625,
+            "height": 287.71429443359375,
+            "x": 960.107177734375,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "4",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1294.169677734375,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "5",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1628.2232666015625,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 292,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 626.0535888671875,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 322.0625,
+            "height": 287.71429443359375,
+            "x": 960.107177734375,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "4",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1294.169677734375,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "5",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1628.2232666015625,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 292,
+            "y": 891.1964721679688
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 626.0535888671875,
+            "y": 891.1964721679688
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 322.0625,
+            "height": 287.71429443359375,
+            "x": 960.107177734375,
+            "y": 891.1964721679688
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "4",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1294.169677734375,
+            "y": 891.1964721679688
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "5",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1628.2232666015625,
+            "y": 891.1964721679688
+          }
+        ],
+        "state": {
+          "top": 0,
+          "scrollHeight": 32170,
+          "clientHeight": 598,
+          "count": 20,
+          "first": "c00-native:0",
+          "last": "c00-native:19",
+          "nodes": 685
+        }
+      },
+      "narrow": {
+        "viewport": {
+          "width": 1280,
+          "height": 851
+        },
+        "columns": "311.045px 311.045px 311.045px",
+        "gridWidth": 957.1428833007812,
+        "items": [
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 282.5714416503906,
+            "y": 282.33929443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 605.6160888671875,
+            "y": 282.33929443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 928.6607666015625,
+            "y": 282.33929443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 282.5714416503906,
+            "y": 575.169677734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 605.6160888671875,
+            "y": 575.169677734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 928.6607666015625,
+            "y": 575.169677734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 282.5714416503906,
+            "y": 868.0000610351562
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 605.6160888671875,
+            "y": 868.0000610351562
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 928.6607666015625,
+            "y": 868.0000610351562
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 282.5714416503906,
+            "y": 1160.8304443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 605.6160888671875,
+            "y": 1160.8304443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 928.6607666015625,
+            "y": 1160.8304443359375
+          }
+        ],
+        "state": {
+          "top": 0,
+          "scrollHeight": 53022,
+          "clientHeight": 583,
+          "count": 12,
+          "first": "c00-native:0",
+          "last": "c00-native:11",
+          "nodes": 501
+        }
+      },
+      "expanded": {
+        "viewport": {
+          "width": 2000,
+          "height": 851
+        },
+        "columns": "322.054px 322.054px 322.062px 322.054px 322.054px",
+        "gridWidth": 1658.2857666015625,
+        "items": [
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 292,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 626.0535888671875,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 322.0625,
+            "height": 287.71429443359375,
+            "x": 960.107177734375,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "4",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1294.169677734375,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "5",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1628.2232666015625,
+            "y": 291.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 292,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 626.0535888671875,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 322.0625,
+            "height": 287.71429443359375,
+            "x": 960.107177734375,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "4",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1294.169677734375,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "5",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1628.2232666015625,
+            "y": 591.482177734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 292,
+            "y": 891.1964721679688
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 626.0535888671875,
+            "y": 891.1964721679688
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 322.0625,
+            "height": 287.71429443359375,
+            "x": 960.107177734375,
+            "y": 891.1964721679688
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "4",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1294.169677734375,
+            "y": 891.1964721679688
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "5",
+            "width": 322.0535888671875,
+            "height": 287.71429443359375,
+            "x": 1628.2232666015625,
+            "y": 891.1964721679688
+          }
+        ],
+        "state": {
+          "top": 0,
+          "scrollHeight": 32170,
+          "clientHeight": 598,
+          "count": 20,
+          "first": "c00-native:0",
+          "last": "c00-native:19",
+          "nodes": 685
+        }
+      },
+      "small": {
+        "viewport": {
+          "width": 800,
+          "height": 851
+        },
+        "columns": "327.143px 327.143px",
+        "gridWidth": 666.2857666015625,
+        "items": [
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 327.14288330078125,
+            "height": 290.89288330078125,
+            "x": 100.00000762939453,
+            "y": 275.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 327.14288330078125,
+            "height": 290.89288330078125,
+            "x": 439.14288330078125,
+            "y": 275.76788330078125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 327.14288330078125,
+            "height": 290.89288330078125,
+            "x": 100.00000762939453,
+            "y": 578.6607666015625
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 327.14288330078125,
+            "height": 290.89288330078125,
+            "x": 439.14288330078125,
+            "y": 578.6607666015625
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 327.14288330078125,
+            "height": 290.89288330078125,
+            "x": 100.00000762939453,
+            "y": 881.5535888671875
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 327.14288330078125,
+            "height": 290.89288330078125,
+            "x": 439.14288330078125,
+            "y": 881.5535888671875
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 327.14288330078125,
+            "height": 290.89288330078125,
+            "x": 100.00000762939453,
+            "y": 1184.446533203125
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 327.14288330078125,
+            "height": 290.89288330078125,
+            "x": 439.14288330078125,
+            "y": 1184.446533203125
+          }
+        ],
+        "state": {
+          "top": 0,
+          "scrollHeight": 78962,
+          "clientHeight": 583,
+          "count": 8,
+          "first": "c00-native:0",
+          "last": "c00-native:7",
+          "nodes": 408
+        }
+      },
+      "restored": {
+        "viewport": {
+          "width": 1280,
+          "height": 851
+        },
+        "columns": "311.045px 311.045px 311.045px",
+        "gridWidth": 957.1428833007812,
+        "items": [
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 282.5714416503906,
+            "y": 282.33929443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 605.6160888671875,
+            "y": 282.33929443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 928.6607666015625,
+            "y": 282.33929443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 282.5714416503906,
+            "y": 575.169677734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 605.6160888671875,
+            "y": 575.169677734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 928.6607666015625,
+            "y": 575.169677734375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 282.5714416503906,
+            "y": 868.0000610351562
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 605.6160888671875,
+            "y": 868.0000610351562
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 928.6607666015625,
+            "y": 868.0000610351562
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "1",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 282.5714416503906,
+            "y": 1160.8304443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "2",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 605.6160888671875,
+            "y": 1160.8304443359375
+          },
+          {
+            "class": "list__cell virtual-grid-cell",
+            "column": "3",
+            "width": 311.0446472167969,
+            "height": 280.83038330078125,
+            "x": 928.6607666015625,
+            "y": 1160.8304443359375
+          }
+        ],
+        "state": {
+          "top": 0,
+          "scrollHeight": 53022,
+          "clientHeight": 583,
+          "count": 12,
+          "first": "c00-native:0",
+          "last": "c00-native:11",
+          "nodes": 501
+        }
+      }
+    },
+    "limits": [
+      "Native WebView UI evidence only: opt-in harness intentionally omits product media-server/account lifecycle; this is not full production desktop acceptance",
+      "Development frontend and synthetic stable test tracks without artwork or media URLs; no authenticated HTTP, playback, downloads, IME, touch, physical-device or p95/p99 performance evidence",
+      "Responsive transitions use CDP viewport emulation within native WebView, not OS window resize or mobile-device acceptance",
+      "Find and text-selection equivalence gates fail; keep production canary closed and C00 admission open",
+      "Existing startup warnings for unknown collection-display keys outside C00 were observed and left unchanged"
+    ],
+    "cleanup": {
+      "nativeApp": "gracefully closed own PID 8292",
+      "developmentServer": "stopped own verified Vite PID 2972",
+      "ports21420And24360": "no listeners after cleanup",
+      "temporarySyntheticProfile": "retained under root recorded in c00-tauri-control.json; never used normal product data/accounts",
+      "productionSourceEdits": false,
+      "nativeSourceEdits": false
+    },
+    "finalCodeParity": {
+      "date": "2026-11-05",
+      "scope": "Final-code native WebView parity recheck after responsive CSS and platform-continuity fixes",
+      "harness": "Current plugin-delivery-acceptance executable; fresh isolated UUID temp native/product/WebView root because harness intentionally does not support reopening old roots",
+      "frontend": "Actual final-code Tauri Vite frontend; current native IPC; same synthetic1000 track fixture; no normal product data",
+      "viewportCssPx": [1280, 851],
+      "devicePixelRatio": 1.75,
+      "baseline": {
+        "mountedCards": 1000,
+        "themeSurfaceElements": 19225
+      },
+      "candidate": {
+        "mountedCards": 12,
+        "themeSurfaceElements": 501
+      },
+      "first12CardRectangles": "All x/y/width/height exactly equal, zero mismatches",
+      "baselineScreenshotSha256": "AD3B4E5019F41AE93840A4D2E92267C1ABA8A9167BE81A172894CD8230264EB8",
+      "candidateScreenshotSha256": "AD3B4E5019F41AE93840A4D2E92267C1ABA8A9167BE81A172894CD8230264EB8",
+      "screenshotVisuallyInspected": true,
+      "cleanup": "Requested graceful close, then stopped remaining own native harness PID34024 after matching executable path; stopped verified Vite PID22116 and lingering own WebView browser PID1804 after matching exact synthetic data_directory. No source edits. Ports21420/24360 absent on final check.",
+      "limits": "Fixed viewport/fixture/skin only. Existing native Find/text-selection blocker and earlier stated production lifecycle/media/device/performance limits remain open. This check does not admit C00.",
+      "sourceFiles": [
+        {
+          "path": "packages/ui/src/composables/virtual-scroll/use-virtual-grid-css-layout.ts",
+          "sha256": "b1c7d2515b18c50d26143f6c9d19471f2c61905e078e84bf508dd397f6249406"
+        },
+        {
+          "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+          "sha256": "b5d6f846f29ee2556f9b0ebc69dbe1756ca24bbfeb376ea41aee2511bf6c5538"
+        },
+        {
+          "path": "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue",
+          "sha256": "9773a2382907ecba4997a12e017643a02f83e9ee282fc40e23deec8236d78ee4"
+        },
+        {
+          "path": "packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue",
+          "sha256": "6c7d59865b9759722393988742566b534101f42a4467e916914ed187ded0a522"
+        },
+        {
+          "path": "packages/ui/src/composables/use-presentation-continuity.ts",
+          "sha256": "6d351054b20cd2888946cc91bc7839435f098c9553ff950aa4320947bbaad6d2"
+        },
+        {
+          "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-retention.ts",
+          "sha256": "ab6b825bd0bb08bc437a218c8a6cdffd2f53bd9f49e38d570ae2b238f0595b88"
+        },
+        {
+          "path": "packages/theme-default/src/composables/classic-virtual-favorites-canary.ts",
+          "sha256": "e6e2b920eb0f7a761db6aa0feee8734b7605dd47b8f62420bdf13e67644b3c98"
+        }
+      ]
+    }
+  },
+  "screenshots": [
+    {
+      "path": "c00-tauri-responsive-before.png",
+      "sha256": "09634833094f080ab121b68eea6973b5b699dab7723f939662e7fc3739102642"
+    },
+    {
+      "path": "c00-tauri-responsive-after.png",
+      "sha256": "72b74576ebe0b1b18e18db47d23fc93a80378fd1e39aae1bdf22b6e5a1569676"
+    },
+    {
+      "path": "c00-gm-responsive-after.png",
+      "sha256": "c5bda1c8c0dda153de4f384bf56a663634d300d90560191b226d7e5114d47570"
+    },
+    {
+      "path": "c00-tauri-final-candidate.png",
+      "sha256": "ad3b4e5019f41ae93840a4d2e92267c1aba8a9167be81a172894cd8230264eb8"
+    }
+  ],
+  "openGates": [
+    "Native Find cannot reach unmounted occurrences in either runtime; WebView native Range selection omits them. Existing data-layer text filtering is preserved but does not establish parity.",
+    "Complete P03 visual/layout/image matrix and actual frame p95/p99; no performance claim from mounted counts or Node timing.",
+    "Final production Userscript grants/startup and full Tauri product/account/media lifecycle; isolated WebView harness omits media-server/account lifecycle.",
+    "Native IME, full pointer/touch drag matrix, themes/skins, actual playback/download continuity and physical mobile acceptance."
+  ],
+  "logDirectory": "logs/2026-11-05-virtual-list-implementation"
+}

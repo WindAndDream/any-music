@@ -1,0 +1,8 @@
+
+ RUN  v4.1.11 <project-root>/packages/music-workbench
+
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  02:16:29
+   Duration  6.71s (transform 3.08s, setup 0ms, import 5.47s, tests 1.08s, environment 0ms)

@@ -1,0 +1,17 @@
+
+> any-music@0.0.0 lint <project-root>
+> node scripts/check-package-boundaries.mjs && node scripts/check-plugin-isolation.mjs && node scripts/check-plugin-vm.mjs && node scripts/check-mobile-boundaries.mjs && oxlint .
+
+Shared package dependency and lightweight entry boundaries passed.
+{"appCommands":69,"productCommands":66,"relays":["plugin_probe_relay","plugin_executor_relay"],"offlineOnly":true,"nativeTargetAdmission":"separate exact target record"}
+{"profileHash":"ccec9d23283bd9fcf31572499461d81371e3e42d669015c08e196c71041497b3","wasmSha256":"5dadb9901b620bf9cbb6e314058e25d8cd2b2a343727f0ed0a2175bd6ade5b10","offlineOnly":true,"nativeTargetAdmission":"separate exact target record"}
+Mobile ACLs checked offline; Android/iOS device and channel acceptance remains pending.
+packages/theme-default/test/components/music-sources/ClassicCatalog.test.ts:21:11: warning eslint(no-shadow): 'defineComponent' is already declared in the upper scope. help: Consider renaming 'defineComponent' to avoid shadowing the variable from the outer scope.
+packages/theme-default/test/components/music-sources/ClassicCatalog.test.ts:21:28: warning eslint(no-shadow): 'h' is already declared in the upper scope. help: Consider renaming 'h' to avoid shadowing the variable from the outer scope.
+packages/theme-default/test/components/music-sources/ClassicCatalog.test.ts:25:11: warning eslint(no-shadow): 'defineComponent' is already declared in the upper scope. help: Consider renaming 'defineComponent' to avoid shadowing the variable from the outer scope.
+packages/theme-default/test/components/music-sources/ClassicCatalog.test.ts:25:28: warning eslint(no-shadow): 'h' is already declared in the upper scope. help: Consider renaming 'h' to avoid shadowing the variable from the outer scope.
+packages/theme-default/test/components/music-sources/ClassicCatalog.test.ts:101:7: warning eslint(no-await-in-loop): Unexpected `await` inside a loop. help: Collect all promises into an array and use `Promise.all()` to run them in parallel, rather than awaiting each one sequentially inside the loop.
+packages/ui/src/composables/music-sources/use-scroll-page-loader.ts:31:17: warning unicorn(consistent-function-scoping): Function `createAdmission` does not capture any variables from its parent scope help: Move `createAdmission` to the outer scope to avoid recreating it on every call.
+packages/theme-default/src/components/music-sources/use-classic-catalog.ts:11:8: error eslint(no-unused-vars): Identifier 'AppDialog' is imported but never used. help: Consider removing this import.
+packages/theme-default/src/components/music-sources/use-classic-catalog.ts:12:8: error eslint(no-unused-vars): Identifier 'BottomSheet' is imported but never used. help: Consider removing this import.
+ ELIFECYCLE  Command failed with exit code 1.

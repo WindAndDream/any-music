@@ -1,0 +1,613 @@
+{
+  "documentType": "verification-evidence",
+  "runtimeScope": "shared",
+  "date": "2026-11-07",
+  "admission": false,
+  "scope": "C01 Classic queue and C02 playlist-track candidates only; no product/browser/server launched and no production gate enabled.",
+  "source": [
+    {
+      "path": "packages/theme-default/src/composables/classic-virtual-favorites-canary.ts",
+      "bytes": 1705,
+      "sha256": "4cafa3d3a3146d826343d3ab821983f72ac2fba2aee28930cc8a2df8e52fd803",
+      "beforeSha256": "e6e2b920eb0f7a761db6aa0feee8734b7605dd47b8f62420bdf13e67644b3c98"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-collection-presentation.ts",
+      "bytes": 10580,
+      "sha256": "d2104f8de3c68d46fe6b1058243510c132c74195e3aa7a189d69e20f8178bff3",
+      "beforeSha256": "207b39e43dbc8a9ac34280a2646ff126f3f2913e19d3c9bdf15bf280e8c191e8"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+      "bytes": 11788,
+      "sha256": "176b28f58f4649587deed5a293af314a739ff7f7615266f0527f77dd693a4e6c",
+      "beforeSha256": "dff10b7bc1ac4524733f099834c58b739bffbe3ee754462edac06eb01809516a"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicCollectionContent.vue",
+      "bytes": 9613,
+      "sha256": "f97b2a88d26d10ada4acff04bbe2e4d43e65606f4657db36637acb40287fc5bf",
+      "beforeSha256": "c0279757c4d6d3074e3c602f5564ca03c6b3a558aa4157449488121fc11e43a2"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/queue-track-grid-contracts.ts",
+      "bytes": 1413,
+      "sha256": "876f76f0943fc8c33f89ed3b4d5cb889cb639590362f51394223a9d6830cca15",
+      "beforeSha256": "3c21e147d55d84ae96b699399bd8294219ee766c606e33a240bac9eee960d5bc"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue",
+      "bytes": 8223,
+      "sha256": "c45deeaef77ddecd45caafe50ca47a97275b06ed2a4d6f7d0c0ad10022dbbb69",
+      "beforeSha256": "4d0d17491291f62ff6dee59eafd7de3d23d20eabd3eec2745f34cf415aaae13e"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue",
+      "bytes": 8232,
+      "sha256": "1811f775b342c70f4f542857918805e6153213aeec1e97da1ec22650aa47f567",
+      "beforeSha256": "3adbcb860c3c94d990ce222df9bc423b436120fa7b91f7428370b315c361dc89"
+    },
+    {
+      "path": "packages/theme-default/test/helpers/virtual-grid-renderer.ts",
+      "bytes": 4278,
+      "sha256": "3feab56f8eacb8ed0c653bcb4bad11605162f2a63e393231463cc275c7d1a652",
+      "beforeSha256": "bf9002bf78db7b24be564d225dc4c5bc003b1e3e8ab675fb4b4a986a51d3c7af"
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicFavorites.admission.test.ts",
+      "bytes": 19655,
+      "sha256": "df6dacf1bd662b556e9decaf68ab462d3b674ee46d73318925f8b788a555f78d",
+      "beforeSha256": "c9baaf821ead58f5b295df7d74f267bb00d6ef0eecfaa5a502865141832b92c0"
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicTrackCollection.virtual.test.ts",
+      "bytes": 21726,
+      "sha256": "f55a6e2aaa4d248e79f3b9dde98c642f4496d4b1a9891233f450a09c704249d7",
+      "beforeSha256": null
+    }
+  ],
+  "sharedFoundation": [
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts",
+      "bytes": 14567,
+      "sha256": "25980b700ae6088db58271c2030e9065520ef88c84128458f93a6b93c5e53ca3",
+      "matchesO01": true
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-measured-virtual-grid.test.ts",
+      "bytes": 26134,
+      "sha256": "98df3762830050fb6fc604ef666378122663b10094c3659cd4e5da2ee1dde5b9",
+      "matchesO01": true
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+      "bytes": 11108,
+      "sha256": "db013f9d01355de73c43dbd186139f46e6da4d6cdcad92e1110d33aef26bc783",
+      "matchesO01": true
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "bytes": 9490,
+      "sha256": "5a403bee6a1b9378a635570cfb9f7a64d6a51818524573af7d9eccfc23101613",
+      "matchesO01": true
+    }
+  ],
+  "implementation": [
+    "Independent private default-false gates for Favorites, queue and playlist details; no production providers. Existing real rows, bounded measured grids, retention and complete virtual reorder geometry are reused.",
+    "Parent/lazy-grid semantic regions use favorites:*, queue:* and playlist:<id>:*. Existing collection navigation, editing owner, filtering, selection, numbering, current-item projection and mutation actions remain authoritative.",
+    "C14 playlist overview, Studio C03-C05, shared measurement/motion, storage, transport, native authority and runtime startup are outside this batch."
+  ],
+  "automated": {
+    "newRegressions": 28,
+    "consumerTests": {
+      "candidateIntegration": 22,
+      "additionalIndependentGateCases": 6
+    },
+    "finalRootChecks": [
+      {
+        "command": "pnpm test",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c01-c02-test.log",
+        "sha256": "c51814844f73b2026295983209a3583bdfa50f8382fd73cb26df1e387c765342"
+      },
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c01-c02-typecheck-root.log",
+        "sha256": "4e0217bb598008da1e4dfa80c2366da464a8bcb4822a6ecbb118896596f1e568"
+      },
+      {
+        "command": "pnpm lint",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c01-c02-lint-final.log",
+        "sha256": "5cf6eae5c773d5c7d721e99706b8d85f7150217f7a0c5eaa5b3b297757ea496b"
+      },
+      {
+        "command": "pnpm format:check",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c01-c02-format-check.log"
+      },
+      {
+        "command": "pnpm build",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c01-c02-build.log",
+        "sha256": "46228eea1854266b9062d9f814d28b8b468d142fa186a6ad9dabbd573abdf4af"
+      }
+    ],
+    "themeDefault": {
+      "files": 67,
+      "tests": 585,
+      "result": "passed in root test"
+    },
+    "ui": {
+      "files": 119,
+      "tests": 1061,
+      "result": "passed in root test"
+    },
+    "musicWorkbench": {
+      "files": 71,
+      "tests": 626,
+      "result": "passed in root test, including existing C00 cross-theme continuity"
+    },
+    "finalTargetedRecheck": {
+      "command": "pnpm --filter @any-music/theme-default exec vitest run test/components/library/ClassicTrackCollection.virtual.test.ts",
+      "path": "logs/2026-11-07-virtual-list-implementation/c01-c02-final-test-cleanup.log",
+      "tests": 22,
+      "exitCode": 0,
+      "reason": "After moving a test helper to module scope to remove its lint warning; product sources unchanged since the full suite."
+    },
+    "coverage": [
+      "Actual compiled queue and playlist consumers with injected geometry at 0/1/80/1000/10000 tracks; bounded mounts and no initial business commands.",
+      "Full host-filtered playback order, positions and select-all preserving outside selections; complete queue/playlist batch removal.",
+      "Previously offscreen/empty/broad/cleared host results stay bounded; empty restoration finishes without a lazy delegate.",
+      "Distant occurrence restore before focus, complete-order keyboard moves in both directions, disposed-adapter rejection and same-scope replacement handoff.",
+      "Platform detail uses its complete subset and original positions; growing overview is bounded, moves on the full platform order and returns to a distant entry/offset/focus.",
+      "Current queue song remains a host projection, without follow-scroll or replay; switching playlists invalidates pending removal and changes restoration identity.",
+      "Throwing lazy loaders prove default/false/foreign consumer gates never execute the virtual candidate."
+    ],
+    "method": "Node custom Vue renderer with injected boxes and simulated focus/events. Async modules preload only in candidate tests; separate admission tests use throwing loaders. Native layout, actual browser focus, OS capture and frame-time claims are excluded.",
+    "lint": "Passed; existing warnings outside this batch remain. No warning in the changed source/test after helper cleanup."
+  },
+  "productionArtifacts": {
+    "scope": "Static production identity only; no artifact launched or admitted.",
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 5941615,
+      "sha256": "f9d5474e845b8f9f21c09722a529a677328cc478f5c47a36a57ad6bba93c97c7",
+      "gzipBytes": 1155005
+    },
+    "tauriFrontend": [
+      {
+        "path": "apps/tauri/dist/assets/ActiveDownloadPanel-DX2gMjcZ.js",
+        "bytes": 9189,
+        "sha256": "6230f34a9a5308c89f4d19acc48e86e855428fa9332931f367c7c0ad73d67a10",
+        "gzipBytes": 3724
+      },
+      {
+        "path": "apps/tauri/dist/assets/AppDialog-DhUNWhOb.js",
+        "bytes": 6349,
+        "sha256": "6a366822233bf076564931ecb5b60ece3d06363dfbf048029a3b0fb60d3f043e",
+        "gzipBytes": 2768
+      },
+      {
+        "path": "apps/tauri/dist/assets/AppIcon-CB0Bazkg.js",
+        "bytes": 4418,
+        "sha256": "9afed489b11ecc29f495f269774cd053d33183003beae2079cf1f203e3d52ea2",
+        "gzipBytes": 2101
+      },
+      {
+        "path": "apps/tauri/dist/assets/CollectionDisplayDialog-CrrfGDAf.js",
+        "bytes": 41480,
+        "sha256": "96aa610a199a2491bb3115b14df23c71c2b99b6da999ace6613801d829112eec",
+        "gzipBytes": 14419
+      },
+      {
+        "path": "apps/tauri/dist/assets/CollectionSelectionToolbar-CPZpYE7p.js",
+        "bytes": 48528,
+        "sha256": "32b66a1894bb1a9dc6652f875ca5722fc3a33d9552463ffa638317bebf8ef151",
+        "gzipBytes": 17798
+      },
+      {
+        "path": "apps/tauri/dist/assets/ContributionActions-BQm82gIQ.js",
+        "bytes": 25035,
+        "sha256": "dd64039f384c6e6910e133736fc6e52f8e6bb511b3eb887972cb1d5ba04e1aca",
+        "gzipBytes": 9449
+      },
+      {
+        "path": "apps/tauri/dist/assets/DownloadTrackRow-BiJ0oAO2.js",
+        "bytes": 10832,
+        "sha256": "6e1f961ab8e9b7b50b7c0eea0a732ecd56e6b687785dba3640cc014cecf191a7",
+        "gzipBytes": 3729
+      },
+      {
+        "path": "apps/tauri/dist/assets/ExternalSourceSettings-kUp9nGz5.js",
+        "bytes": 18567,
+        "sha256": "e46a2d224f97582456eb535e0c826d5def69a622fc3b20c28eba9a57dafae4cf",
+        "gzipBytes": 6165
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueuePanel-D6zCHBH8.js",
+        "bytes": 20279,
+        "sha256": "50a177084f20e9792fc5996de3c44555724a01c2e9b93839f2dbb74b7d6dc8f6",
+        "gzipBytes": 7267
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueuePlatformGridItem-Dt3aShvo.js",
+        "bytes": 1260,
+        "sha256": "54eb8e6847669c76b8c02443f3f7db8d17ed166de6cef2070ae96f7e0e34ad3d",
+        "gzipBytes": 628
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueuePlatformGroup-CYVVTBjL.js",
+        "bytes": 6759,
+        "sha256": "f6a4065ee272752ded6348168856d992fd00cb670a99d4819d2422c8b995ffc6",
+        "gzipBytes": 2582
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueueTrackGrid-By7kf8ja.js",
+        "bytes": 19700,
+        "sha256": "9b2455e4373dfe688e5186eaa12d34ffdee0534cde6173de4f04933c0585d26c",
+        "gzipBytes": 7068
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueueTrackGridItem-W-8xqv2x.js",
+        "bytes": 5101,
+        "sha256": "99d9283e6179c5ec305047d70b4a38fa4b4f6ca318ca77a0ba740fae2e33bd18",
+        "gzipBytes": 1970
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueueViewControls-DRBfvJ_K.js",
+        "bytes": 83368,
+        "sha256": "50ea6ddea816fa1c085f9e7dbbb02539883c635a40374ecc933abdb6a8cc4e37",
+        "gzipBytes": 24048
+      },
+      {
+        "path": "apps/tauri/dist/assets/TrackCardSummary-BTfvLXZi.js",
+        "bytes": 2454,
+        "sha256": "abb2879492c540e41988962881ac42070afc254150a7b697333971cb57dad299",
+        "gzipBytes": 1158
+      },
+      {
+        "path": "apps/tauri/dist/assets/TrackRow-C_YlzXv9.js",
+        "bytes": 7153,
+        "sha256": "84f7d3a7e2db0be43d0dfdb5c2521a70942aa4fd5c3227855e5985b91691716f",
+        "gzipBytes": 2661
+      },
+      {
+        "path": "apps/tauri/dist/assets/VirtualQueuePlatformGrid-BPGq0E7R.js",
+        "bytes": 4524,
+        "sha256": "4a4c179776a4b7fc46cbb77573dd674bc119f1cb832b4d39c3733efa03589f8f",
+        "gzipBytes": 1882
+      },
+      {
+        "path": "apps/tauri/dist/assets/VirtualQueueTrackGrid-dMVa2t5T.js",
+        "bytes": 4830,
+        "sha256": "1b5fe152cc12b17963926ed356b221226923872e8627a7f73a696f3ffbd05305",
+        "gzipBytes": 2005
+      },
+      {
+        "path": "apps/tauri/dist/assets/__vite-browser-external-8b-sKxde.js",
+        "bytes": 1142,
+        "sha256": "31ef1a57e0dfbf30974fe2940fd488c14433d7a708bde8ebe69a703d7f1bfc5c",
+        "gzipBytes": 643
+      },
+      {
+        "path": "apps/tauri/dist/assets/__vite-browser-external-D3_sD4Dv.js",
+        "bytes": 77,
+        "sha256": "ae53911ef5ad69a049cb94c01283ab7ae5da80e5e0df19f44d8820458d61517a",
+        "gzipBytes": 95
+      },
+      {
+        "path": "apps/tauri/dist/assets/_plugin-vue_export-helper-DycKsNoE.js",
+        "bytes": 85991,
+        "sha256": "86fa276146a115dff16078a9541fbbf786481791bba4c7181e7e992a60f63ca0",
+        "gzipBytes": 33070
+      },
+      {
+        "path": "apps/tauri/dist/assets/app-error-BjZGph4G.js",
+        "bytes": 7448,
+        "sha256": "1f87c8d9b58adfe6647a92b9217e74ddf68c8df27a230e097538342a2c271f9a",
+        "gzipBytes": 2082
+      },
+      {
+        "path": "apps/tauri/dist/assets/audio-exporter-PbUZSpQ-.js",
+        "bytes": 317664,
+        "sha256": "142666fffc0b7319c520c298b49b4fcfe608840dc993992d6f538a004b2b3abe",
+        "gzipBytes": 134263
+      },
+      {
+        "path": "apps/tauri/dist/assets/audio-exporter-SpWRGWO0.js",
+        "bytes": 82,
+        "sha256": "e463949342ecf6a6a7720ac0c7e342e537c7484b5f381aa761c971c5034edd49",
+        "gzipBytes": 87
+      },
+      {
+        "path": "apps/tauri/dist/assets/douyin-request-state-CFbLQ2P_.js",
+        "bytes": 4610,
+        "sha256": "3b3f15fd27074662d2fd37941335beb05bde604798aaedec2d4c52f18c3ed29f",
+        "gzipBytes": 2057
+      },
+      {
+        "path": "apps/tauri/dist/assets/download-archive-aGajjFNI.js",
+        "bytes": 7398,
+        "sha256": "3aaaea66fac5a5656b7ff7c4e9036c3580424c2f10215c2ac7afd7490bd2e495",
+        "gzipBytes": 3128
+      },
+      {
+        "path": "apps/tauri/dist/assets/download-history-ClxXYuGB.js",
+        "bytes": 4519,
+        "sha256": "77ec4b040651faa3ceb139fc971e2dc9840006b217211ca026f9a300146be446",
+        "gzipBytes": 1629
+      },
+      {
+        "path": "apps/tauri/dist/assets/grid-move-animations-BD1jDMub.js",
+        "bytes": 1238,
+        "sha256": "e284c5b25b360cff902585423bc4ee26c97eab494d85fe182b910dd4c4a7aef5",
+        "gzipBytes": 587
+      },
+      {
+        "path": "apps/tauri/dist/assets/http-Bx2BUOLo.js",
+        "bytes": 183,
+        "sha256": "b4441747f73aa575c1dff22a888dd46e26165fa3221b005c7d4f048250286d55",
+        "gzipBytes": 157
+      },
+      {
+        "path": "apps/tauri/dist/assets/index-DejhCSvs.js",
+        "bytes": 1998790,
+        "sha256": "b45f625b490e0e0d68d2e9b4b67b5e20a3b8ad3a9d943f85c7985d533a2baeab",
+        "gzipBytes": 342548
+      },
+      {
+        "path": "apps/tauri/dist/assets/index-duw-FMCM.css",
+        "bytes": 50951,
+        "sha256": "c683673fa6b99daf6e1dbbc4aa4c76c3ae93774c32de5462f1659edc4a0de637",
+        "gzipBytes": 8460
+      },
+      {
+        "path": "apps/tauri/dist/assets/native-http-CXwOM5um.js",
+        "bytes": 4945,
+        "sha256": "cbb76db178813d52d7fbd775c3964186c4e0b322616865ca1bc98caadb4c308c",
+        "gzipBytes": 2063
+      },
+      {
+        "path": "apps/tauri/dist/assets/native-scroll-anchor-AmDGT_cs.js",
+        "bytes": 531,
+        "sha256": "519eda4df45bb268c526fb58466cc892615bf4dbffdf989322af3da4926bd2a8",
+        "gzipBytes": 261
+      },
+      {
+        "path": "apps/tauri/dist/assets/native-source-plugins-DLjJ8yI0.js",
+        "bytes": 3672,
+        "sha256": "e54bb7f6bb99f4cd3a2be8b46c8f1b204bc348b68a789e72e6a927829b89697a",
+        "gzipBytes": 1516
+      },
+      {
+        "path": "apps/tauri/dist/assets/output-C0ZydUOt.js",
+        "bytes": 444694,
+        "sha256": "3d7cca8b0bd29dcacd6003d58b5ecfeca12e4997299f7866b91742b43432bfc9",
+        "gzipBytes": 112097
+      },
+      {
+        "path": "apps/tauri/dist/assets/plugin-CTPDroLL.js",
+        "bytes": 139,
+        "sha256": "9c2fb1e3430d6277fb82138495240d09207c36c5835ee3e0800b3b54a197a2ca",
+        "gzipBytes": 141
+      },
+      {
+        "path": "apps/tauri/dist/assets/policies-Ca8WcR-N.js",
+        "bytes": 569,
+        "sha256": "d37f4656af824a83aadf43da0d9aa5117fbd017f260b0c0ad9c119d034888f99",
+        "gzipBytes": 358
+      },
+      {
+        "path": "apps/tauri/dist/assets/preload-helper-Czpn1I53.js",
+        "bytes": 1196,
+        "sha256": "aba87f2a53e45ecdc9113fc30387d16e449d1676428cf5f82dd624c1df97d152",
+        "gzipBytes": 675
+      },
+      {
+        "path": "apps/tauri/dist/assets/render-custom-track-media-D4w_CI6y.js",
+        "bytes": 797,
+        "sha256": "64972e3a68cf8b32930d45b2d0b2644a399b8713a809181505212e66963b024a",
+        "gzipBytes": 570
+      },
+      {
+        "path": "apps/tauri/dist/assets/renderers-bzvu1fRW.js",
+        "bytes": 6650,
+        "sha256": "ff7fbb337360d15b7e2052a67924fe93462f5baec9d6972590f07a9ccb32ae04",
+        "gzipBytes": 2805
+      },
+      {
+        "path": "apps/tauri/dist/assets/resolved-media-loader-ocXT3m_V.js",
+        "bytes": 1155,
+        "sha256": "c59fd27c378583becb595e65332a8e1779cb3696c41b5ffb0ee3ad30c429005a",
+        "gzipBytes": 753
+      },
+      {
+        "path": "apps/tauri/dist/assets/runtime-CgS4T0Xi.js",
+        "bytes": 8439,
+        "sha256": "34cec013111b005f430d3594e938ebf37ebd19412e1c8429fd926f627d68a7c5",
+        "gzipBytes": 3745
+      },
+      {
+        "path": "apps/tauri/dist/assets/runtime-D-wjysKE.js",
+        "bytes": 40592,
+        "sha256": "df9d8c5b9bb19ab30c4b536f51ed959dc026a37d9ef7f4d55eb0d6f4e131aa98",
+        "gzipBytes": 13477
+      },
+      {
+        "path": "apps/tauri/dist/assets/runtime-DbAXju5d.js",
+        "bytes": 26550,
+        "sha256": "04f2f6a147d7ad29d8328a72f0607daeacbbe193456a3174088d4d448a07aa94",
+        "gzipBytes": 9542
+      },
+      {
+        "path": "apps/tauri/dist/assets/studio-h5I5pO0N.js",
+        "bytes": 9895,
+        "sha256": "7efb498b9af81fc0ffc57840a82b18ab16d25f5efbc65a1f134492859b004db3",
+        "gzipBytes": 1913
+      },
+      {
+        "path": "apps/tauri/dist/assets/styles-B0gCKNRk.js",
+        "bytes": 21296,
+        "sha256": "1dee93db7e4d564b21be6b27560b100657cb0b3b560e33fa84140e52c9e3175f",
+        "gzipBytes": 3164
+      },
+      {
+        "path": "apps/tauri/dist/assets/track-dgi1syLW.js",
+        "bytes": 575,
+        "sha256": "edb5ea839e9a8b4084bff5c9a7c9fc03dd872892b04d84a011d8e87d614e4e81",
+        "gzipBytes": 318
+      },
+      {
+        "path": "apps/tauri/dist/assets/url-parser-CDWVVYUf.js",
+        "bytes": 3946,
+        "sha256": "766d72c26c5deb4a6395dfd3a4d4db22d8e199dd3df364a90022e7ec60ff4d66",
+        "gzipBytes": 1621
+      },
+      {
+        "path": "apps/tauri/dist/assets/url-parser-kjUb53_w.js",
+        "bytes": 1909,
+        "sha256": "696c1fdbd862fc1e31ae349c9ea4b131ddaebdf0492e80458b305f506d3ea274",
+        "gzipBytes": 973
+      },
+      {
+        "path": "apps/tauri/dist/assets/url-parser-oaXEezhI.js",
+        "bytes": 1283,
+        "sha256": "3b486f92fc76983687ff29dd74f1cd375d2f477774b056e9e1d598502fd9a0df",
+        "gzipBytes": 816
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-action-feedback-Cj2NZ4wC.js",
+        "bytes": 4330,
+        "sha256": "079543161b1e6d2d2032688d37602ef5078ab51d81d07724af3c56d9dce126d8",
+        "gzipBytes": 1789
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-confirmation-dialog-BMAlCKlG.js",
+        "bytes": 1960,
+        "sha256": "92808ac8a323a4a05b9a46f5dd7756d04fa6e53996ed873b8db139c97d78e094",
+        "gzipBytes": 969
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-download-list-controls-ht4d6Kor.js",
+        "bytes": 3564,
+        "sha256": "e8526e12abc384d1df03ddcfe0dbabfb2c85c2d084bef9dfd9ceeccc58ae5333",
+        "gzipBytes": 1523
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-favorite-filters-CloCh8cV.js",
+        "bytes": 4720,
+        "sha256": "addfc4e4b2bd83a7734c1e68acd5235dd9e0b6652f2065dbdf2f9f69a1409511",
+        "gzipBytes": 1781
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-presentation-continuity-TPXQP3h8.js",
+        "bytes": 4796,
+        "sha256": "15ac5c6076569dbb50f6df93bd456c22ee243872e12fafe7e33f0615eb9a20bd",
+        "gzipBytes": 1967
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-track-name-CT8H6CmU.js",
+        "bytes": 2171,
+        "sha256": "35862e87646093251f5e10df3bd91a3c5f6ebf34db4878c2e1441b696e0432a8",
+        "gzipBytes": 1185
+      },
+      {
+        "path": "apps/tauri/dist/assets/virtual-grid-reorder-geometry-gQuCbC-z.js",
+        "bytes": 62963,
+        "sha256": "5f7a85cde9abaad3e15565cffba01b50401327cdc3b5edb4a372c11f69befb16",
+        "gzipBytes": 19751
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-CDoa7JYp.js",
+        "bytes": 39777,
+        "sha256": "ecb4d9a0da51fdbbffcb21cb1d99fc6d6622e03e269ab79ff9391f1dede2b6d4",
+        "gzipBytes": 12901
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-lXX6fP34.js",
+        "bytes": 147225,
+        "sha256": "58c811c594663dd931dae0b21d982fc5671cf8254fcb8b75ec79f1da8c010f79",
+        "gzipBytes": 38384
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-rRZ8A6fv.js",
+        "bytes": 28799,
+        "sha256": "141774bf8ec4571213892deb0792e18468a448684effdb0be21394aefb77aeb1",
+        "gzipBytes": 9664
+      }
+    ],
+    "tauriRelease": {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 29860352,
+      "sha256": "669ae5a03c30092b0dac3debe33c2ba4d80b8ec40b45d1b82a696d6e8a446156"
+    },
+    "audits": [
+      {
+        "path": "apps/userscript/dist/userscript-build-audit.json",
+        "bytes": 50490,
+        "sha256": "2c30b77aa0cb440a5685250ba6fd9599a5944862ecaa2f646324600327589a93"
+      },
+      {
+        "path": "apps/userscript/dist/theme-build-audit.json",
+        "bytes": 81130,
+        "sha256": "9b00425be9ed34acd43f7ee9c5c22da08e195cd8e7f9a07d98e321488150ebe3"
+      },
+      {
+        "path": "apps/tauri/dist/theme-build-audit.json",
+        "bytes": 89055,
+        "sha256": "2f521ecb810bb493e1dda551547c0f5d60dc8a5a427ae2447a59afa44f3925cb"
+      }
+    ],
+    "auditSummary": [
+      {
+        "path": "apps/userscript/dist/userscript-build-audit.json",
+        "executableVirtualModules": {
+          "eager": []
+        }
+      },
+      {
+        "path": "apps/userscript/dist/theme-build-audit.json",
+        "executableVirtualModules": {
+          "metadata": [],
+          "startup": [],
+          "documentStart": []
+        }
+      },
+      {
+        "path": "apps/tauri/dist/theme-build-audit.json",
+        "executableVirtualModules": {
+          "metadata": [],
+          "startup": []
+        }
+      }
+    ],
+    "comparison": {
+      "baseline": "2026-11-07-o01-row-equivalence/verification.json",
+      "scope": "Static artifact byte cost only; gzip level 9, compress each frontend JavaScript asset independently, matching the prior record. No runtime/performance admission.",
+      "userscript": {
+        "rawDelta": 928,
+        "gzipDelta": 266
+      },
+      "tauriJavaScript": {
+        "rawDelta": 405,
+        "gzipDelta": 128
+      }
+    }
+  },
+  "runtimeInspection": {
+    "performed": false,
+    "reason": "No explicit browser/application inspection request in this task."
+  },
+  "remaining": [
+    "C00/O00-O02 runtime hotspots and budgets; actual-height O(N) reconstruction and S00 persistence remain unresolved.",
+    "Each C01/C02 branch still needs installed GM and native WebView layout/artwork/focus/IME/pointer/touch/capture/drop/interruption/reduced-motion acceptance and production-artifact/permission evidence.",
+    "Studio C04/C05 counterparts are not integrated; cross-theme queue/playlist semantic restoration is not accepted by Classic-only replacement tests.",
+    "G01-G03 sustained account/playback/download/theme/hide-show and final device/release combinations stay open."
+  ],
+  "nextIndependentCodeBatch": "C03 Studio table and styled-grid representative, followed by C04/C05; keep consumer-specific gates closed until their runtime exits pass.",
+  "minimumReverseScope": "Only the source/test deltas named above, the Classic package guide and bilingual plan/evidence. Preserve all pre-existing modified/untracked foundations, storage, motion and unrelated workspace changes; never delete an entire prior untracked module.",
+  "committed": false,
+  "pushed": false
+}

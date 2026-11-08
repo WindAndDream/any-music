@@ -1,0 +1,23 @@
+Scope: 3 of 22 workspace projects
+packages/ui test$ vitest run
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/ui test:  ❯ test/composables/use-back-navigation.test.ts (0 test)
+packages/ui test: ⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+packages/ui test:  FAIL  test/composables/use-back-navigation.test.ts [ test/composables/use-back-navigation.test.ts ]
+packages/ui test: Error: Cannot find module '/src/components/settings/SettingsNavigation.vue' imported from <project-root>/packages/ui/test/composables/use-back-navigation.test.ts
+packages/ui test:  ❯ test/composables/use-back-navigation.test.ts:6:1
+packages/ui test:       4| import AppDialog from '../../src/components/AppDialog.vue'
+packages/ui test:       5| import BottomSheet from '../../src/components/BottomSheet.vue'
+packages/ui test:       6| import SettingsNavigation from '../../src/components/settings/Settings…
+packages/ui test:        | ^
+packages/ui test:       7| import {
+packages/ui test:       8|   createBackNavigation,
+packages/ui test:  Test Files  1 failed | 75 passed (76)
+packages/ui test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+packages/ui test:       Tests  451 passed (451)
+packages/ui test:    Start at  01:56:35
+packages/ui test:    Duration  6.94s (transform 14.32s, setup 0ms, import 37.39s, tests 4.55s, environment 29ms)
+packages/ui test: Failed
+<project-root>\packages\ui:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/ui@0.0.0 test: `vitest run`
+Exit status 1

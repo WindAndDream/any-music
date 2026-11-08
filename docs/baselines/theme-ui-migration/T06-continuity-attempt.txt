@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 <project-root>/packages/music-workbench
+
+ ❯ test/features/workbench/use-workbench-controller.test.ts (4 tests | 1 failed) 1597ms
+     × keeps real classic download and queue views on one scheduler across root replacement 1081ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/features/workbench/use-workbench-controller.test.ts > stable workbench lifetime > keeps real classic download and queue views on one scheduler across root replacement
+AssertionError: expected '正在加载功能模块只会在首次使用该功能时执行对应代码。' to contain '测试下载进度 42%'
+
+Expected: "测试下载进度 42%"
+Received: "正在加载功能模块只会在首次使用该功能时执行对应代码。"
+
+ ❯ test/features/workbench/use-workbench-controller.test.ts:419:62
+    417|     await vi.waitFor(() => expect(signal).toBeDefined())
+    418|     progress?.({ message: '测试下载进度 42%' })
+    419|     await vi.waitFor(() => expect(f.rootElement.textContent).toContain…
+       |                                                              ^
+    420|     const original = c.downloads.batches.value[0]!
+    421|     const ids = original.items.map((item) => item.id)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  02:01:34
+   Duration  6.74s (transform 3.13s, setup 0ms, import 4.89s, tests 1.60s, environment 0ms)
+
+undefined
+<project-root>\packages\music-workbench:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command "vitest" not found

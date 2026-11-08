@@ -1,0 +1,537 @@
+{
+  "documentType": "verification-evidence",
+  "runtimeScope": "shared",
+  "date": "2026-11-06",
+  "scope": "Card rendering continuity and drag/scroll release; C00 remains default closed",
+  "sourceSha256": {
+    "packages/ui/src/composables/grid-move-animations.ts": "362efe004fb4b1982b615edf0f2ad5ce4a43f38d1118b145642c558ad0588bbf",
+    "packages/ui/src/composables/music-sources/use-grid-move-transition.ts": "c49e5c5f651bee44e3c09c667d2839762a23241c7c97650d446d76cfe92c4e48",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-grid-move-transition.ts": "b0196c5b0915728be874fef4b937c58c9823120e89097a4e48fd93b9c130067e",
+    "packages/ui/src/composables/use-grid-reorder.ts": "655c9f743fd89fa78de6c3191ce0aa3cd93e5c8c2550e16fcb6d0065c80d0aee",
+    "packages/ui/src/composables/dom-grid-reorder-geometry.ts": "9e7b2f79593646b017554a64270ea434adaebc43e55e2d2caec9b2e3ef9ed578",
+    "packages/ui/src/composables/grid-reorder-geometry.ts": "052e8a697e6d5bfe6f13b52a079c4006af671e75b8c3b7a9f1b40c54f644f08c",
+    "packages/ui/src/composables/native-scroll-anchor.ts": "f7674a88f5ea6056d61ac7c2fd3a637e22ddeb2f8cef685052668c6fc52b00fc",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-anchor.ts": "1f875e807985b1ac42f98b1fc99f6781ca32a87c10dda28c95a6fc6d0b7a6391",
+    "packages/ui/src/composables/virtual-scroll/virtual-grid-reorder-geometry.ts": "b0d90cf2f8d49a95f16dbca9fc2458f8a907e084ad852e721b904179c8459c83",
+    "packages/ui/src/styles/index.scss": "5ca214f1fcf346b130804eff9404956eaf5ed25830c4ae4fb7e14c8f5c998f2d",
+    "packages/ui/src/styles/_controls.scss": "b0fd1da9f74aafc95436664ed91696845ad8fac2e2fce1ca86f58d1748b8601c",
+    "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue": "ac14b867830e2d3e63a35909f4d0be16fb364867421689f55ea1565c59b1611a",
+    "packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue": "4d0d17491291f62ff6dee59eafd7de3d23d20eabd3eec2745f34cf415aaae13e",
+    "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue": "3adbcb860c3c94d990ce222df9bc423b436120fa7b91f7428370b315c361dc89"
+  },
+  "rootChecks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T03:51:09.5348648Z",
+      "endedAt": "2026-11-06T03:53:09.7482437Z",
+      "log": "root-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T03:53:09.7996692Z",
+      "endedAt": "2026-11-06T03:54:24.3843978Z",
+      "log": "root-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T03:54:24.3859496Z",
+      "endedAt": "2026-11-06T03:54:28.3952843Z",
+      "log": "root-lint-retry.log",
+      "initialExitCode": 1,
+      "reason": "Removed unnecessary array spread in the new test fixture; retry passed"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T03:54:28.3973950Z",
+      "endedAt": "2026-11-06T03:54:33.2062155Z",
+      "log": "root-format-check.log"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T03:54:33.2077267Z",
+      "endedAt": "2026-11-06T03:57:32.9130817Z",
+      "log": "root-build.log"
+    }
+  ],
+  "uiTests": 1046,
+  "logDirectory": "logs/2026-11-06-card-motion-flicker",
+  "runtimeEvidence": {
+    "userscript": {
+      "browser": "Chrome/156.0.8078.76",
+      "runtime": "Installed Tampermonkey development script with current source, dedicated persistent profile",
+      "accepted": [
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-after-keyboard.json",
+          "frames": 107,
+          "method": "Passive screencast and CV/WAAPI lifecycle instrumentation",
+          "animations": 401,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-after-valid-density.json",
+          "frames": 112,
+          "method": "Passive screencast and CV/WAAPI lifecycle instrumentation",
+          "animations": 395,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-after-drag.json",
+          "frames": 65,
+          "method": "Passive screencast and CV/WAAPI lifecycle instrumentation",
+          "animations": 0,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-after-valid-sidebar.json",
+          "frames": 49,
+          "method": "Passive screencast and CV/WAAPI lifecycle instrumentation",
+          "animations": 0,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-final-minimal-density.json",
+          "frames": 121,
+          "method": "Passive screencast and CV/WAAPI lifecycle instrumentation",
+          "animations": 395,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-final-minimal-keyboard.json",
+          "frames": 148,
+          "method": "Passive screencast and CV/WAAPI lifecycle instrumentation",
+          "animations": 21,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-final-minimal-drag.json",
+          "frames": 85,
+          "method": "Passive screencast and CV/WAAPI lifecycle instrumentation",
+          "animations": 0,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-final-confirmed-dark-default-density.json",
+          "frames": 113,
+          "method": "Passive screencast and CV/WAAPI lifecycle instrumentation",
+          "animations": 395,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-refresh-cold-scroll-drag.json",
+          "frames": 69,
+          "method": "Source geometry diagnostic plus native screencast; no timing claim",
+          "animations": 0,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0,
+          "pointerup": [
+            {
+              "label": "pointerup-before",
+              "t": 1329.300000000745,
+              "top": 461.08038330078125,
+              "left": 285.5446472167969,
+              "scroll": 550.2857055664062,
+              "source": true,
+              "landing": false
+            },
+            {
+              "label": "pointerup-after",
+              "t": 1369.300000000745,
+              "top": 461.0803527832031,
+              "left": 285.5446472167969,
+              "scroll": 550.2857055664062,
+              "source": false,
+              "landing": true
+            }
+          ],
+          "resizeCancellations": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-refresh-warm-edge-scroll-drag.json",
+          "frames": 79,
+          "method": "Source geometry diagnostic plus native screencast; no timing claim",
+          "animations": 0,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0,
+          "pointerup": [
+            {
+              "label": "pointerup-before",
+              "t": 1333.199999999255,
+              "top": 742.4019165039062,
+              "left": 285.5446472167969,
+              "scroll": 678.8571166992188,
+              "source": true,
+              "landing": false
+            },
+            {
+              "label": "pointerup-after",
+              "t": 1378.699999999255,
+              "top": 742.6876220703125,
+              "left": 285.5446472167969,
+              "scroll": 678.8571166992188,
+              "source": false,
+              "landing": true
+            }
+          ],
+          "resizeCancellations": 0
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/gm-final-up-edge-scroll-drag.json",
+          "frames": 76,
+          "method": "Source geometry diagnostic plus native screencast; no timing claim",
+          "animations": 0,
+          "unprotectedAnimations": 0,
+          "protectedContentSkips": 0,
+          "pointerup": [
+            {
+              "label": "pointerup-before",
+              "t": 1347,
+              "top": 60.71428680419922,
+              "left": 285.5446472167969,
+              "scroll": 101.71428680419922,
+              "source": true,
+              "landing": false
+            },
+            {
+              "label": "pointerup-after",
+              "t": 1386,
+              "top": 61.00001907348633,
+              "left": 285.5446472167969,
+              "scroll": 101.71428680419922,
+              "source": false,
+              "landing": true
+            }
+          ],
+          "resizeCancellations": 0
+        }
+      ]
+    },
+    "tauri": {
+      "runtime": "Current frontend in the retained isolated complete native debug composition; not release-artifact live acceptance",
+      "control": {
+        "date": "2026-11-06",
+        "identifier": "com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533",
+        "tempRoot": "<user-home>/AppData/Local/Temp/any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533",
+        "nativeRoot": "<user-home>/AppData/Local/com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533",
+        "nativeDebugPort": 24361,
+        "frontendPort": 21420,
+        "binary": "<user-home>/AppData/Local/Temp/any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533/c00-production-debug.exe",
+        "binarySha256": "E3482197064ABC1AF3EDF0619584E427355F59CC31962DC6022AF01510BEC339",
+        "currentNativeCompositionSha256": "DB2AEA496E057B5A648FD54B277BD37FD64599774B3951B428CFBF093D9DA8A8",
+        "notes": "Card motion flicker diagnosis: retained isolated complete native debug composition, freshly started current Vite frontend; C00 stays default closed. Not release/native-rebuild admission."
+      },
+      "accepted": [
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-keyboard-forward.json",
+          "action": "keyboard",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 20,
+          "osForegroundSamples": 11,
+          "osNonOwnedSamples": 0,
+          "orderChanged": true
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-keyboard-backward.json",
+          "action": "keyboard",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 19,
+          "osForegroundSamples": 10,
+          "osNonOwnedSamples": 0,
+          "orderChanged": true
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-drag-forward-accepted.json",
+          "action": "drag",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 47,
+          "osForegroundSamples": 18,
+          "osNonOwnedSamples": 0,
+          "orderChanged": true
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-drag-backward.json",
+          "action": "drag",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 50,
+          "osForegroundSamples": 19,
+          "osNonOwnedSamples": 0,
+          "orderChanged": true
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-columns.json",
+          "action": "columns",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 19,
+          "osForegroundSamples": 10,
+          "osNonOwnedSamples": 0,
+          "orderChanged": false
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-playlist.json",
+          "action": "playlist-keyboard",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 14,
+          "osForegroundSamples": 9,
+          "osNonOwnedSamples": 0,
+          "orderChanged": true
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-reverse-default.json",
+          "action": "density-reverse",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 84,
+          "osForegroundSamples": 20,
+          "osNonOwnedSamples": 0,
+          "orderChanged": false
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-reverse-minimal.json",
+          "action": "density-reverse",
+          "skin": "minimal",
+          "mode": "passive",
+          "frames": 87,
+          "osForegroundSamples": 17,
+          "osNonOwnedSamples": 0,
+          "orderChanged": false
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-sidebar.json",
+          "action": "sidebar",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 14,
+          "osForegroundSamples": 9,
+          "osNonOwnedSamples": 0,
+          "orderChanged": false
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-reduced-motion.json",
+          "action": "reduce",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 13,
+          "osForegroundSamples": 11,
+          "osNonOwnedSamples": 0,
+          "orderChanged": false
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-final-cross-row-forward.json",
+          "action": "drag-cross",
+          "skin": "default",
+          "mode": "passive",
+          "frames": 48,
+          "osForegroundSamples": 18,
+          "osNonOwnedSamples": 0,
+          "orderChanged": true
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-scroll-edge-final.json",
+          "action": "scroll-drag",
+          "skin": "default",
+          "mode": "Source geometry diagnostic plus native screencast",
+          "frames": 57,
+          "osForegroundSamples": 21,
+          "osNonOwnedSamples": 0,
+          "orderChanged": true,
+          "pointerup": [
+            {
+              "label": "pointerup-before",
+              "t": 1127.7999999998137,
+              "top": 586,
+              "left": 162.049072265625,
+              "scroll": 593.1428833007812,
+              "source": true,
+              "landing": false,
+              "anchor": "none"
+            },
+            {
+              "label": "pointerup-after",
+              "t": 1170.7000000001863,
+              "top": 586.2857666015625,
+              "left": 162.049072265625,
+              "scroll": 593.1428833007812,
+              "source": false,
+              "landing": true,
+              "anchor": "none"
+            }
+          ]
+        },
+        {
+          "record": "logs/2026-11-06-card-motion-flicker/native-scroll-cold-final.json",
+          "action": "scroll-drag",
+          "skin": "default",
+          "mode": "Source geometry diagnostic plus native screencast",
+          "frames": 62,
+          "osForegroundSamples": 21,
+          "osNonOwnedSamples": 0,
+          "orderChanged": true,
+          "pointerup": [
+            {
+              "label": "pointerup-before",
+              "t": 1140.2999999998137,
+              "top": 391.6071472167969,
+              "left": 162.04904174804688,
+              "scroll": 550.2857055664062,
+              "source": true,
+              "landing": false,
+              "anchor": "none"
+            },
+            {
+              "label": "pointerup-after",
+              "t": 1187.0999999996275,
+              "top": 391.6071472167969,
+              "left": 162.04910278320312,
+              "scroll": 550.2857055664062,
+              "source": false,
+              "landing": true,
+              "anchor": "none"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "injectedStyles": {
+    "userscript": {
+      "normal": {
+        "zIndex": "auto",
+        "contain": "content",
+        "contentVisibility": "auto",
+        "focusWithin": false
+      },
+      "moving": {
+        "zIndex": "1",
+        "contain": "content",
+        "contentVisibility": "visible",
+        "focusWithin": false
+      },
+      "focused": {
+        "zIndex": "2",
+        "contain": "content",
+        "contentVisibility": "visible",
+        "focusWithin": true
+      },
+      "landingAndMoving": {
+        "zIndex": "3",
+        "contain": "content",
+        "contentVisibility": "visible",
+        "focusWithin": true
+      },
+      "sourceAndMoving": {
+        "zIndex": "2",
+        "contain": "content",
+        "contentVisibility": "visible",
+        "focusWithin": true
+      },
+      "actualInjectedStyleVerified": true
+    },
+    "tauri": {
+      "normal": {
+        "zIndex": "auto",
+        "contain": "content",
+        "contentVisibility": "auto",
+        "focusWithin": false
+      },
+      "moving": {
+        "zIndex": "1",
+        "contain": "content",
+        "contentVisibility": "visible",
+        "focusWithin": false
+      },
+      "focused": {
+        "zIndex": "2",
+        "contain": "content",
+        "contentVisibility": "visible",
+        "focusWithin": true
+      },
+      "landingAndMoving": {
+        "zIndex": "3",
+        "contain": "content",
+        "contentVisibility": "visible",
+        "focusWithin": true
+      },
+      "sourceAndMoving": {
+        "zIndex": "2",
+        "contain": "content",
+        "contentVisibility": "visible",
+        "focusWithin": true
+      },
+      "actualInjectedStyleVerified": true
+    }
+  },
+  "regressionSensitivity": {
+    "record": "logs/2026-11-06-card-motion-flicker/motion-lease-fault-injection.log",
+    "method": "Temporary no-op visibility lease causes normal and virtual motion regressions to fail; source restored byte-for-byte"
+  },
+  "observedBeforeFix": {
+    "record": "logs/2026-11-06-card-motion-flicker/gm-edge-warm-before-bubble-scroll-drag.json",
+    "problem": "Release changes scrollTop from 678.8571 to 329.7143 CSS px",
+    "coldScrollRecord": "logs/2026-11-06-card-motion-flicker/gm-anchor-cold-diagnostic-scroll-drag.json",
+    "coldProblem": "Root height adjustment cancels active drag before pointerup"
+  },
+  "excluded": [
+    {
+      "records": "Earlier hidden/one-frame GM attempts, native lost-capture harness attempts and native-final-cross-row-backward",
+      "reason": "No reliable continuous input/foreground/commit evidence"
+    },
+    {
+      "record": "logs/2026-11-06-card-motion-flicker/gm-final-dark-default-density.json",
+      "reason": "Theme-selection command failed before capture; use final-confirmed-dark-default instead"
+    }
+  ],
+  "visualInspection": [
+    "GM down/up edge and cold-scroll release samples show no viewport change at pointerup; subpixel source boundary changes up to 0.286 CSS px",
+    "Native cold and edge scroll releases retain scrollTop and anchor suppression through landing",
+    "Viewed intermediate raw frames/contact sheets for GM/native scroll, minimal density reversals and dark/default density reversal"
+  ],
+  "limits": [
+    "Fixture data uses placeholder artwork; no physical touch/IME/mobile-device or release-artifact runtime acceptance",
+    "Source geometry diagnostics read one moving surface and do not establish frame-time performance",
+    "DOM refresh detects capture-root height changes; fixed or unchanged total-height redistribution needs explicit spatial revisions or a measured adapter",
+    "Height changes after landing animation starts retain the existing cancellation policy",
+    "Previous C00 performance evidence belongs to its recorded build; no C00 admission or performance improvement claimed"
+  ],
+  "cleanup": {
+    "gmFixture": {
+      "cleanup": true,
+      "removedSyntheticKeys": 13,
+      "fixtureTracks": 80,
+      "preservedBrowserProfile": true,
+      "preservedExtension": true
+    },
+    "browser": {
+      "closedDedicatedBrowser": true,
+      "preservedProfile": "<project-root>\\.local\\userscript-browser\\chrome",
+      "preservedExtension": true
+    },
+    "native": {
+      "nativePid": 14212,
+      "forced": false,
+      "remainingListeners": 0,
+      "nativeRemaining": false
+    },
+    "listeners": {
+      "remainingTaskListeners": 0,
+      "ports": []
+    }
+  }
+}

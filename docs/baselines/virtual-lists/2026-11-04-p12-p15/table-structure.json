@@ -1,0 +1,35 @@
+{
+  "method": "Vue Node custom renderer of controlled native VirtualTable; installed engine, 100px injected viewport, 20px injected natural tbody boxes, overscan2/cache32, one header/footer row. No real native table layout, focus, sticky headers, accessibility-tree or runtime/frame evidence.",
+  "samples": [
+    {
+      "count": 0,
+      "mounted": 0,
+      "observed": 4,
+      "released": 0
+    },
+    {
+      "count": 1,
+      "mounted": 1,
+      "observed": 5,
+      "released": 1
+    },
+    {
+      "count": 80,
+      "mounted": 7,
+      "observed": 11,
+      "released": 7
+    },
+    {
+      "count": 1000,
+      "mounted": 7,
+      "observed": 11,
+      "released": 7
+    },
+    {
+      "count": 10000,
+      "mounted": 7,
+      "observed": 11,
+      "released": 7
+    }
+  ]
+}

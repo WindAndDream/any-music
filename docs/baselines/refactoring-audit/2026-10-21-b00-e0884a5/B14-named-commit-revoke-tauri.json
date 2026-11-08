@@ -1,0 +1,306 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-named-commit-revoke-tauri",
+  "parentBatch": "B14",
+  "candidate": "B14-named-commit-revoke",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T13:51:09.889Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+  "scope": {
+    "invariant": "Named state.set derives authority solely from native task identity, rechecks context/epoch/grants/object and namespace versions, commits value/provenance/receipt atomically against revocation, and closes transient authority before acknowledging cancellation. Production IPC exposes named controls and bounded relays without arbitrary authority writers.",
+    "selectedChain": "Product command_run -> native executor task/caller/context -> exact relay identity/sequence -> broker state.set -> Runtime::prepare/commit -> SQLite; product revoke -> durable epoch/authority change -> network cancel -> ACK; product command_cancel -> Executors::cancel_install -> host_end_session -> ACK.",
+    "allowedPaths": [
+      "apps/tauri/src-tauri/src/plugins/executor.rs (task/caller, selected broker arm, relay, cancellation and owner tests)",
+      "apps/tauri/src-tauri/src/plugins/control.rs (product/named controls)",
+      "apps/tauri/src-tauri/src/plugins.rs (reused durable revoke dispatch)",
+      "crates/am-plugin-runtime/src/data.rs and direct authority/Store contracts",
+      "Native registry/product permission/main capability and bounded build/S03 relay excerpts"
+    ],
+    "readFiles": [
+      "crates/am-plugin-runtime/src/data.rs:88-202,262-328",
+      "crates/am-plugin-runtime/tests/offline.rs:485-519,665-707 (prior context/revoke tests reused)",
+      "apps/tauri/src-tauri/src/plugins/executor.rs:1-98,333-452,506-529,568-862",
+      "apps/tauri/src-tauri/src/plugins/control.rs:1-65,105-249",
+      "apps/tauri/src-tauri/src/ipc.rs:1-68",
+      "apps/tauri/src-tauri/permissions/product.toml",
+      "apps/tauri/src-tauri/capabilities/main.json",
+      "apps/tauri/src-tauri/build.rs:47-90",
+      "apps/tauri/src-tauri/src/isolation.rs (diagnostic relay and cfg symbols only)"
+    ],
+    "exclusions": [
+      "Product fixes and permanent tests",
+      "Full package verification/consent/DEV pairing/installation and platform admission acceptance",
+      "Independent network byte/sink barriers, renderer output exports and complete executor lifecycle/resource isolation",
+      "Other named operations or annotation feature acceptance beyond shared commit validation",
+      "Actual application/WebView/browser/emulator race, UI or live regressions",
+      "Root final test/typecheck/lint/build/native/MSRV/deny release collection, commit and push"
+    ]
+  },
+  "declaredStatus": {
+    "claim": "Named operations recheck native authority/version/idempotency and commit data/provenance/receipts with revocation; cancellation closes contexts before its ACK; no production fixture/raw grant/session/general data-relay writers exist.",
+    "references": [
+      "crates/am-plugin-runtime/AGENTS.md:5",
+      "apps/tauri/src-tauri/AGENTS.md:19",
+      "apps/tauri/src-tauri/AGENTS.md:22",
+      "apps/tauri/src-tauri/src/plugins/executor.rs:68"
+    ],
+    "assessment": "Commit/revoke and bounded IPC checks pass; command cancellation incorrectly acknowledges native close failures."
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Are named business writes owned by runtime and native persistence instead of renderer apply callbacks?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/plugins/executor.rs:594",
+        "crates/am-plugin-runtime/src/data.rs:139",
+        "crates/am-plugin-runtime/src/data.rs:165"
+      ],
+      "detail": "Broker maps bounded DTOs to a native WriteRequest using task.caller/task.context, then calls prepare/commit. The runtime owns the installation namespace, provenance and receipt; the renderer receives an already committed result."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Does cancellation wait for durable session/context closure before reporting success?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/plugins/executor.rs:63",
+        "apps/tauri/src-tauri/src/plugins/control.rs:175",
+        ".codex-tmp/audit-b14-named-commit/probes.rs:99",
+        ".codex-tmp/audit-b14-named-commit/probes.log"
+      ],
+      "findingIds": ["B14-N01"],
+      "detail": "A native SQLite session-close write failure is swallowed. Both false-success acknowledgement and a subsequently persisted already-admitted write are reproduced. Successful cancellation control closes authority and rejects the late write."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Do commit/revoke, optimistic versions, replay receipts and provenance remain atomic under competition?",
+      "evidence": [
+        "crates/am-plugin-runtime/src/data.rs:91",
+        "crates/am-plugin-runtime/src/data.rs:141",
+        "crates/am-plugin-runtime/src/data.rs:262",
+        ".codex-tmp/audit-b14-named-commit/probes.rs:120",
+        ".codex-tmp/audit-b14-named-commit/probes.rs:136"
+      ],
+      "detail": "Clock/identity/epoch/grants/selected version and namespace expectedVersion are checked within transactions; checked version increments preserve bounds. Identical retries share a receipt; changed operation payloads reject. Two real SQLite connections admit only one conflicting version, and simultaneous commit/revoke produces only the two serially valid outcomes. Revoke-first denies old reservations; commit-first retains value/private provenance/receipt."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Are caller identities native and production permissions restricted to named operations?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/plugins/executor.rs:361",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:700",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:732",
+        "apps/tauri/src-tauri/src/ipc.rs:4",
+        "apps/tauri/src-tauri/permissions/product.toml:1",
+        ".codex-tmp/audit-b14-named-commit/ipc-check.json"
+      ],
+      "detail": "Native task creation supplies channel/document/account/context and package proof. Relay checks actual WebView/window/document, task lifetime, sequence, request/context and Schema. Static registry checks cover 61 commands and 18 reviewed plugin command names; no raw seed/grant/session/data relay or direct state.set/get command is registered. Main product grants target only main. Native ACL tests resolve all registered commands for executor labels and allow only their relay.",
+      "limit": "This establishes registry/ACL and the selected call chain, not a complete consent/DEV/package/admission or live relay security audit. B14-R01 remains open on guard time sampling."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Are failure evidence and unsupported proof boundaries preserved?",
+      "evidence": [
+        ".codex-tmp/audit-b14-named-commit/runtime-tests.log",
+        ".codex-tmp/audit-b14-named-commit/executor-tests.log",
+        ".codex-tmp/audit-b14-named-commit/product-caller-test.log",
+        ".codex-tmp/audit-b14-named-commit/probes.log",
+        ".codex-tmp/audit-b14-named-commit/rustfmt.log"
+      ],
+      "detail": "24 runtime tests, 2 executor resource/ACL tests and 1 product-caller test pass. Eleven additional headless native probes report 9 pass and 2 fail; failure exit 101 is retained as evidence for B14-N01. Actual SQLite/runtime and source-extracted unmodified bodies are used, without launching UI. Previous three reports remain valid by current file hashes."
+    }
+  ],
+  "verification": [
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p am-plugin-runtime --locked",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:41:35.2434188+08:00",
+      "finishedAt": "2026-10-21T21:41:36.6547588+08:00",
+      "log": ".codex-tmp/audit-b14-named-commit/runtime-tests.log",
+      "logSha256": "365152115016428793c96f14ca1ffde19f29c9b218f961c5f733326d597262be"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib plugins::executor::tests --locked",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:43:17.1719453+08:00",
+      "finishedAt": "2026-10-21T21:43:18.4011301+08:00",
+      "log": ".codex-tmp/audit-b14-named-commit/executor-tests.log",
+      "logSha256": "f5701cbbcbe6867ea57003d7c6733dd5b0778b07a32f951e98f9a3b8cb769413"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib plugins::tests::rejects_executor_remote_and_child_callers --locked -- --exact",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:43:18.4467037+08:00",
+      "finishedAt": "2026-10-21T21:43:19.4179512+08:00",
+      "log": ".codex-tmp/audit-b14-named-commit/product-caller-test.log",
+      "logSha256": "97e4a1fce2e14f2a91dcdb1d2ffcb9f41a60b9161eeff96499e0c86ff1465242"
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "node .codex-tmp/audit-b14-named-commit/prepare-probes.mjs; rustc <PowerShell argument array from probe-rustc-args.json>; .codex-tmp/audit-b14-named-commit/probes.exe audit_named:: --nocapture",
+      "exitCode": 101,
+      "startedAt": "2026-10-21T21:48:02.1593807+08:00",
+      "finishedAt": "2026-10-21T21:48:08.9109941+08:00",
+      "log": ".codex-tmp/audit-b14-named-commit/probes.log",
+      "compileLog": ".codex-tmp/audit-b14-named-commit/probe-compile.log",
+      "arguments": ".codex-tmp/audit-b14-named-commit/probe-rustc-args.json",
+      "logSha256": "685c9a81e26fb21c79b0524fa29fb5669e405224bd86c014478424834fe1c56b"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node .codex-tmp/audit-b14-named-commit/check-ipc.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:47:10.2428839+08:00",
+      "finishedAt": "2026-10-21T21:47:10.3737976+08:00",
+      "log": ".codex-tmp/audit-b14-named-commit/ipc-check.log",
+      "logSha256": "e7a0dd55f6131fb8e16d31f6a21f1d82883542d608f4fdd039ff44338dd4d9d3"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "rustfmt --check --edition 2024 --config skip_children=true crates/am-plugin-runtime/src/data.rs apps/tauri/src-tauri/src/plugins.rs apps/tauri/src-tauri/src/plugins/control.rs apps/tauri/src-tauri/src/plugins/executor.rs apps/tauri/src-tauri/src/ipc.rs",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:48:02.1373655+08:00",
+      "finishedAt": "2026-10-21T21:48:02.4443631+08:00",
+      "log": ".codex-tmp/audit-b14-named-commit/rustfmt.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "testSummary": {
+    "permanentRuntimeTests": 24,
+    "permanentExecutorTests": 2,
+    "permanentProductCallerTests": 1,
+    "additionalProbes": {
+      "total": 11,
+      "passed": 9,
+      "failed": 2
+    },
+    "registeredCommands": 61,
+    "reviewedPluginCommandNames": 18,
+    "productImplementationChanged": false
+  },
+  "findings": [
+    {
+      "id": "B14-N01",
+      "priority": 2,
+      "severity": "P2",
+      "status": "open",
+      "title": "Propagate native session-close errors before acknowledging command cancellation",
+      "owner": "apps/tauri/src-tauri/src/plugins/executor.rs",
+      "locations": [
+        {
+          "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+          "start": 63,
+          "end": 70
+        },
+        {
+          "path": "apps/tauri/src-tauri/src/plugins/control.rs",
+          "start": 180,
+          "end": 183
+        }
+      ],
+      "trigger": "A running task is canceled while the SQLite transaction that closes its native session fails before COMMIT. A previously admitted relay reaches its blocking broker after the cancel response and storage becomes writable again.",
+      "observed": "cancel_install discards authority.with(host_end_session) errors and returns unit. plugin_command_cancel consequently returns Ok(()). The failed transaction retains the session/context; after the injected SQLite failure is cleared, the unchanged state.set arm returns version 1 and the late value is persisted.",
+      "effect": "The user receives a successful cancellation acknowledgement while old native write authority remains usable by already admitted work. This violates the documented close-before-ACK contract. Normal cancellation closes the session and denies the same late write.",
+      "evidence": [
+        ".codex-tmp/audit-b14-named-commit/probes.rs:99",
+        ".codex-tmp/audit-b14-named-commit/probes.rs:106",
+        ".codex-tmp/audit-b14-named-commit/probes.log",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:70",
+        "apps/tauri/src-tauri/src/plugins/control.rs:182",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:718",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:597"
+      ],
+      "limit": "Reproduced with the unchanged extracted cancellation method, product-command body and state.set arm, actual runtime and actual SQLite adapter. Native/view setup is headless and the already admitted relay is simulated; no actual WebView race or exploit was executed. The demonstrated late write is confined to the installation namespace, not canonical host library data.",
+      "suggestedAction": "Make cancel_install return a Result and propagate poisoned-task-lock/session-close failures. Return success from plugin_command_cancel only after every matching session/context has durably closed. Keep already admitted work unable to commit after successful cancellation; cover failure and successful controls with permanent regressions."
+    }
+  ],
+  "inheritedFindings": [
+    {
+      "id": "B14-R01",
+      "severity": "P2",
+      "status": "open",
+      "ownerBatch": "B14-runtime-ports-tauri",
+      "detail": "Pre-transaction Clock sampling in check_context/check_capability is unchanged; its six failing expiry probes remain valid."
+    }
+  ],
+  "probeEvidence": {
+    "localFiles": [
+      {
+        "path": ".codex-tmp/audit-b14-named-commit/probes.rs",
+        "sha256": "2dea15172cea5f5fdb3c7dc418ce88bbae95ee132da2943032aa2461d9d132e6"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-named-commit/prepare-probes.mjs",
+        "sha256": "c57b8983d1b5e0e32f09e0d8a375db298ae8be7e136132fb94372ce7ed325118"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-named-commit/named.generated.rs",
+        "sha256": "4528e4cfe957af56ec5a992526798f1f377aa8b9ecbd164cb67360273b277f3f"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-named-commit/store.generated.rs",
+        "sha256": "336a2622c30f25beb28015e4cb138f72ebf69f030260bf6b27c477c430552bbe"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-named-commit/probe-rustc-args.json",
+        "sha256": "9e1c2bdd83b692b36c00e60bbba56c040a54c95a350b17987123bfeec84b1292"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-named-commit/check-ipc.mjs",
+        "sha256": "f6bc579cb4e7faea2910311b6ab839f4f7c045af57a57596d43534140425182b"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-named-commit/ipc-check.json",
+        "sha256": "88d167ae85ded9832943a34a9b4a46340dc318f68457b4203f7284d7487601c4"
+      }
+    ],
+    "method": "The generator copies cancel_install, the product cancel body and selected state.set broker arm verbatim. Test-owned native authority and product/view adapters replace setup only; Caller/session/package fixtures never enter product code. The unchanged SQLite implementation uses a relocated child-test #[path]. Its real fail_before_commit injection rolls back session closure. A direct call to the copied state.set arm models already-admitted relay work after the false ACK.",
+    "reproduction": "$auditArgs = @(Get-Content -Raw -LiteralPath '.codex-tmp/audit-b14-named-commit/probe-rustc-args.json' | ConvertFrom-Json); & rustc @auditArgs; & '.codex-tmp/audit-b14-named-commit/probes.exe' audit_named:: --nocapture",
+    "retention": "Ignored local probes/logs and generated harness only; product files, permanent tests and manifests are unchanged."
+  },
+  "missingEvidence": [
+    "B14-R01 and B14-N01 remain unrepaired and lack permanent regressions.",
+    "A real WebView/IPC cancellation race and actual admitted desktop execution were not run.",
+    "Output/anonymous-network final-sink barriers, full installation/DEV/native consent and platform admission retain their own B15/B16/B18 scopes.",
+    "Crash/power-loss/device durability and root final release gates were not performed for this audit-only request."
+  ],
+  "unreadPaths": [
+    "Plugin package installation/rollback internals",
+    "DEV pairing/session lifecycle internals",
+    "Native network final byte/sink delivery barriers",
+    "Renderer result saving/export internals",
+    "Other source operations and runtime/device acceptance"
+  ],
+  "nextBatch": {
+    "batchId": "B14-repair-runtime-expiry-tauri",
+    "type": "implementation-fix",
+    "runtime": "tauri",
+    "entry": "crates/am-plugin-runtime/src/authority.rs:303",
+    "question": "Repair B14-R01 by sampling time inside both Store transactions and add permanent delayed-admission expiry regressions; then rerun affected runtime/native checks.",
+    "remainingFindingIds": ["B14-N01"],
+    "note": "The four audit candidates are reviewed; implementation repair was outside this audit request."
+  },
+  "handoffZh": "B14-named-commit-revoke-tauri 已排查，基线 acf455c，目标源码未变，结论 violating / needs-fix。具名 state.set 使用原生 Task 身份和 context；prepare/commit 重检 epoch、授权、对象版本、expectedVersion 与 operationId，并原子保存值/来源/回执。真实双 SQLite 连接的版本竞争及 commit/revoke 同时竞争、撤权两种先后顺序通过。现有 24 项 runtime、2 项 executor ACL/资源、1 项产品调用方测试通过；11 项额外探针为 9 通过、2 失败。新增 P2 B14-N01：取消时忽略 host_end_session 存储失败仍 ACK 成功，存储恢复后已准入队列的写入仍能落盘；探针使用原样代码及真实 SQLite，无实际 WebView。IPC 61 个注册命令/18 个插件命令及 main 权限边界通过。未改产品或永久测试，未启动 UI、提交推送。B14 四批均已排查：策略/存储通过，runtime 与命名操作各有 P2，共 B14-R01、B14-N01 两项未修复，板块验收不通过。下一步先修复 R01，再处理 N01，复跑受影响测试和必要门禁；外网/安装/DEV/设备仍保持独立证据范围。"
+}

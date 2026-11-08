@@ -1,0 +1,19 @@
+{
+  "profileId": "am-quickjs-noeval-desktop-v1",
+  "profileHash": "ccec9d23283bd9fcf31572499461d81371e3e42d669015c08e196c71041497b3",
+  "sources": {
+    "packages/plugin-sandbox-browser/scripts/build.mjs": "072ae8e29404b427daac46dc5c5c40d6562349d6553fa62609126875ecb4ccd2",
+    "packages/plugin-sandbox-browser/src/browser.ts": "ad6b2054e2099d75dd347614505d29a1d6c40a2f3ccc5dd12b19fb9279307d8f",
+    "packages/plugin-sandbox-browser/src/sandbox-session.ts": "f2b10ce5327f79add53dc45af4119e7eccdcc4913d353a12d2ad68c986d5c773",
+    "packages/plugin-sandbox-browser/src/worker-runtime.ts": "5ee5dd019d07f8f58dd035dc2d685b45b33b5878037517a573fd33d3396278b4",
+    "packages/plugin-sandbox-browser/src/worker.ts": "65153b7ae3124cc50dd2f95944fe99e68f48763145d807d02886ba316b646e94",
+    "packages/plugin-testkit/src/test-host.ts": "62975dd379d8885ee3b5fd18bc6e71a660854a25cd5a42196ae1266f83e61fc5",
+    "packages/plugin-vm/engine/build.json": "fca5303eae02b75947dc3ecd75aaea11c5a658f81bfef31035d53cae76b6d4cc",
+    "packages/plugin-vm/scripts/build-engine.py": "665c81ecbacd2381388c96c2f40a622dba8e10db88760a037df85811543feaa3",
+    "packages/plugin-vm/src/admission.ts": "d8c7b085040ca0798881463e9f7beb0bf11770baf09e541b0a566e67cbc7dc56",
+    "packages/plugin-vm/src/contracts.ts": "a43498d1f9d99907a641dab1c6845cec73614e4fd0ba85338715699a98d1911a",
+    "packages/plugin-vm/src/guest-bootstrap.ts": "3f1e13e334bc81b818d9dd85ae3b1b230b4218995d5a0eb7fcb927a1a0197006",
+    "packages/plugin-vm/src/plugin-vm.ts": "ac22f1ec6bd603efac242f2dc9f4b4d64a93874948718c4212d4d5a0abb836de",
+    "packages/plugin-vm/src/profile.ts": "d2b27ebc627c2b7c249a2783230823f8f538298851c478184ce475874870aac1"
+  }
+}

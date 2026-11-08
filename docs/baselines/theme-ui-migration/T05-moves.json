@@ -1,0 +1,130 @@
+[
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogContextDetailsDialog.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogContextDetailsDialog.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogContextTitle.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogContextTitle.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogDisplayModeDialog.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogDisplayModeDialog.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogDrawer.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogDrawer.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogDrawerActionsDialog.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogDrawerCard.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogDrawerCard.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogDrawerDetails.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogDrawerDetails.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogDrawerList.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogDrawerList.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogDrawerListHeader.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogDrawerListHeader.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogDrawerOperatorPanel.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogDrawerOperatorPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogErrorDetails.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogErrorDetails.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogErrorNotice.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogErrorNotice.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogFilterCalendar.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogFilterCalendar.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogFilterDateControls.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogFilterDateControls.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogFilterDateRange.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogFilterDateRange.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogFilterHistoryList.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogFilterHistoryList.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogFilterPreview.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogFilterPreview.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogFilterRangeList.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogFilterRangeList.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogHeadingHandle.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogHeadingHandle.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogNamingFilterControls.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogNamingFilterControls.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogOperatorActions.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogOperatorActions.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogPlaylistPickerDialog.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogPlaylistPickerDialog.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogTrackFilterEditor.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogTrackFilterEditor.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogTrackFilterPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogTrackFilterSummary.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogTrackFilterSummary.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+    "to": "packages/theme-default/src/components/music-sources/CatalogTrackOperatorPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/MusicSourcePickerButton.vue",
+    "to": "packages/theme-default/src/components/music-sources/MusicSourcePickerButton.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/MusicSourcePickerDialog.vue",
+    "to": "packages/theme-default/src/components/music-sources/MusicSourcePickerDialog.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/SourceToolbar.vue",
+    "to": "packages/theme-default/src/components/music-sources/SourceToolbar.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/TrackList.vue",
+    "to": "packages/theme-default/src/components/music-sources/TrackList.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/TrackActionButton.vue",
+    "to": "packages/theme-default/src/components/music-sources/TrackActionButton.vue"
+  }
+]

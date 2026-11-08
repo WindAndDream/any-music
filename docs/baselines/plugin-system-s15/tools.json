@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-19",
+  "runtimeScope": "repository",
+  "node": "v24.11.1",
+  "toolVersion": "0.1.0",
+  "license": "MIT",
+  "dependencyComponents": 23,
+  "wireVersions": [1],
+  "previousWireMajor": null,
+  "previousMajorMigrationDays": 180,
+  "projects": [
+    {
+      "template": "source-code",
+      "sha256": "658dc44ffb6e3c0eb286ee5dde4a3bafdb62c2e3c452978caa6ec2b883d1b728",
+      "bytes": 8386
+    },
+    {
+      "template": "source-declarative",
+      "sha256": "552ff4cb753f79946e5e487ed466ef1ad64a3e1dd1d16059d9905cbf342838cb",
+      "bytes": 3998
+    },
+    {
+      "template": "tag-suggestion",
+      "sha256": "24b03516187301b05d32e98036b3faba5f72e547d88936abcbb9d51a77160f03",
+      "bytes": 5715
+    },
+    {
+      "template": "export",
+      "sha256": "ad8027c82b374946cd56b80478b1933cf5fb99a187d037b08bcfc357ee69aea0",
+      "bytes": 4387
+    }
+  ],
+  "offRepository": true,
+  "applicationLaunched": false,
+  "browserLaunched": false,
+  "productionAdmission": false
+}

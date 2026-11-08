@@ -1,0 +1,246 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-pure-policy-tauri",
+  "parentBatch": "B14",
+  "candidate": "B14-pure-policy",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T21:18:17.0477471+08:00",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+  "scope": {
+    "invariant": "Policy decisions over trusted native snapshots are deterministic and IO-free, reject stale or unauthorized calls, preserve data-risk restrictions and enforce bounded arithmetic; compatibility never grants activation authority.",
+    "selectedChain": "Trusted native snapshot/call/now -> am_plugin_policy::evaluate -> native Result<(), Denial>; direct authority::authorize caller excerpt only. negotiate is checked through the existing bounded decode/corpus harness.",
+    "allowedPaths": [
+      "crates/am-plugin-policy",
+      "crates/am-plugin-runtime/src/authority.rs (direct caller excerpts only)",
+      "Protocol manifest and existing generated-consistency/differential/dependency checks"
+    ],
+    "reviewedSourceFiles": [
+      "crates/am-plugin-policy/Cargo.toml",
+      "crates/am-plugin-policy/src/lib.rs",
+      "crates/am-plugin-policy/src/authorization.rs",
+      "crates/am-plugin-policy/src/negotiation.rs",
+      "crates/am-plugin-policy/tests/authorization.rs",
+      "crates/am-plugin-policy/examples/corpus.rs",
+      "crates/am-plugin-protocol/Cargo.toml",
+      "crates/am-plugin-runtime/src/authority.rs",
+      "scripts/check-plugin-protocol.mjs"
+    ],
+    "expansionReasons": [
+      "The direct runtime caller identifies where native snapshots and now originate; no runtime port, persistence or revocation chain is expanded.",
+      "Protocol/schema checks establish the documented decode precondition of negotiate without manually auditing generated DTOs or the full SDK."
+    ],
+    "exclusions": [
+      "Product-code fixes and permanent regression tests",
+      "Store/Clock/Ids/InstallFiles implementation audit",
+      "SQLite schema-3 initialization, serialization, corruption and atomic durability",
+      "Named commit/revoke races, expectedVersion, receipts, provenance and cancellation of blocking jobs",
+      "Production command registration, grants/session creation, native consent and exact target admission",
+      "B15 anonymous transport, B16 package recovery, live app/browser inspection, root final acceptance, commit and push"
+    ]
+  },
+  "declaredStatus": {
+    "claim": "am-plugin-policy depends only on protocol; trusted callers inject time, identity, scope, grants and usage. Runtime/application authority remains separate.",
+    "references": [
+      "crates/AGENTS.md:3",
+      "crates/AGENTS.md:5",
+      "docs/en/desktop/backend-engineering.md:36",
+      "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:153"
+    ],
+    "evidenceLimit": "Historical S12 schema-1 and pre-S13/S15 stage statements are historical evidence; current desktop/native guides establish schema 3 and current delivery. This batch does not accept either persistence or delivery."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-applicable"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Does the pure policy owner remain free of concrete IO, databases, global clocks and application authority?",
+      "evidence": [
+        "crates/am-plugin-policy/Cargo.toml:12",
+        "crates/am-plugin-policy/src/lib.rs:1",
+        ".codex-tmp/audit-b14-policy/rust-boundaries.log:50"
+      ],
+      "detail": "Only protocol is a production dependency; the complete checked closure contains protocol/serialization and proc-macro support, without Tauri, SQLite, network or clock implementations. std::io is limited to the explicitly local corpus example."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Are time and authority inputs injected, with decisions unable to become renderer bearer grants?",
+      "evidence": [
+        "crates/am-plugin-policy/src/authorization.rs:1",
+        "crates/am-plugin-policy/src/authorization.rs:67",
+        "crates/am-plugin-policy/src/authorization.rs:69",
+        "crates/am-plugin-runtime/src/authority.rs:568"
+      ],
+      "detail": "evaluate accepts borrowed native snapshots and explicit now_ms, returning Result<(), Denial>. Direct caller constructs the inputs and maps denial locally. Actual native caller/session provenance is deferred to B14-runtime-ports."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "question": "Do identity, epoch, enablement, independent deadlines, exact scope and operation grants fail closed?",
+      "evidence": [
+        "crates/am-plugin-policy/src/authorization.rs:74",
+        "crates/am-plugin-policy/tests/authorization.rs:4",
+        ".codex-tmp/audit-b14-policy/probes.rs:28"
+      ],
+      "detail": "Existing regressions plus four audit probes reject mismatched and empty identities, changed epochs, disabled policy, independent expiry/deadline equality, scope-prefix guesses and every ungranted operation."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Are historical private levels, secret rejection and combined network/data risks preserved?",
+      "evidence": [
+        "crates/am-plugin-policy/src/authorization.rs:93",
+        "crates/am-plugin-policy/tests/authorization.rs:76",
+        ".codex-tmp/audit-b14-policy/probes.rs:115"
+      ],
+      "detail": "The maximum historical/current level prevents narrowing the selected data from removing private-egress restrictions. A network grant requires approval across all operations after private history. Secret history/current data remain denied even with approval. Offline public reads do not mutate retained private history."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Are all three budget dimensions bounded without overflow, and unknown required contracts rejected before activation?",
+      "evidence": [
+        "crates/am-plugin-policy/src/authorization.rs:103",
+        "crates/am-plugin-policy/src/negotiation.rs:45",
+        "crates/am-plugin-policy/src/negotiation.rs:80",
+        "crates/am-plugin-policy/src/negotiation.rs:106",
+        "crates/am-plugin-policy/src/negotiation.rs:120",
+        ".codex-tmp/audit-b14-policy/protocol-differential.log"
+      ],
+      "detail": "checked_add rejects over-limit and overflow in requests/bytes/concurrency; 18 independent budget boundary cases pass. 183 shared TS/Rust decoding/schema/negotiation cases pass, including unknown required capability/version rejection, optional skipping, unsupported forms/external policy and missing required contributions. Compatibility is explicitly not activation authorization."
+    }
+  ],
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "cargo clippy -p am-plugin-policy --all-targets --locked -- -D warnings",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:15:49.1901138+08:00",
+      "finishedAt": "2026-10-21T21:15:57.1676568+08:00",
+      "log": ".codex-tmp/audit-b14-policy/cargo-clippy.log",
+      "logSha256": "b5450e942dd45b7217ae4508bade32e1b8792d4f1458090a64f03159fd7bd7fd"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "cargo fmt -p am-plugin-policy -- --check",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:15:48.2315676+08:00",
+      "finishedAt": "2026-10-21T21:15:49.123365+08:00",
+      "log": ".codex-tmp/audit-b14-policy/cargo-fmt.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p am-plugin-policy --locked",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:13:48.4108795+08:00",
+      "finishedAt": "2026-10-21T21:13:51.0858869+08:00",
+      "log": ".codex-tmp/audit-b14-policy/cargo-test.log",
+      "logSha256": "570a4798b7a72a47967f28baa480ee80c5eb991a4b6b6afa09dac638152b76c3"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "rustc --edition=2024 --test .codex-tmp/audit-b14-policy/probes.rs --extern am_plugin_policy=target/debug/libam_plugin_policy.rlib -L dependency=target/debug/deps -o .codex-tmp/audit-b14-policy/probes.exe; .codex-tmp/audit-b14-policy/probes.exe --nocapture",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:15:36.1285833+08:00",
+      "finishedAt": "2026-10-21T21:15:37.2698059+08:00",
+      "log": ".codex-tmp/audit-b14-policy/probes.log",
+      "logSha256": "62c26765f94e95fb78c3ed20126c00c2657d290800947435fdf1917582ad0e59"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:protocol",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:14:49.6958616+08:00",
+      "finishedAt": "2026-10-21T21:14:51.0636564+08:00",
+      "log": ".codex-tmp/audit-b14-policy/protocol-differential.log",
+      "logSha256": "f59fa7e94c59eebc3dcdbb01487d4f34166131889cf9eb98ae00c335a5c7b667"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm check:protocol:generated",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:14:48.9077946+08:00",
+      "finishedAt": "2026-10-21T21:14:49.6633555+08:00",
+      "log": ".codex-tmp/audit-b14-policy/protocol-generated.log",
+      "logSha256": "0a6f6838cf17bbedd7b951775f2ee01066ebb482712a4a2e2a720f74a451f25a"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm check:rust:boundaries",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:14:51.0732919+08:00",
+      "finishedAt": "2026-10-21T21:14:55.2597281+08:00",
+      "log": ".codex-tmp/audit-b14-policy/rust-boundaries.log",
+      "logSha256": "87e867acabb052c25c566d6de6a9aedb0397e02fe3cbe1ea8aeca848c23f7093"
+    }
+  ],
+  "testSummary": {
+    "permanentPolicyTests": 3,
+    "auditOnlyProbeTests": 8,
+    "budgetBoundaryCases": 18,
+    "sharedDifferentialCases": 183,
+    "generatedDefinitions": 47,
+    "productImplementationChanged": false
+  },
+  "probeEvidence": {
+    "source": ".codex-tmp/audit-b14-policy/probes.rs",
+    "sourceSha256": "e3da6a95d7cf7e1be092dcc01a8ad2b8349639a2535049fb3bf7758728ef71b7",
+    "retention": "Ignored local audit probes/logs only; no permanent product test was added.",
+    "recoveredHarnessIssue": "The first standalone rustc attempt used target/debug rather than target/debug/deps for dependency search (E0463). The corrected harness passed all 8 tests against the unchanged Cargo-built library. Initial failure remains in probe-initial-compile.log and probes-initial-result.json; it is not a product finding."
+  },
+  "findings": [],
+  "missingEvidence": [
+    "Pure policy results do not prove actual native caller provenance or persisted identity/epoch validation.",
+    "Atomic values/provenance/receipts, durable revocation and commit races require separate runtime/storage/named-operation batches.",
+    "Cancellation retaining an executing blocking-pool permit, unknown schema and corrupt-grant behavior are not checked.",
+    "Production absence of fixture/grant/session/general-relay IPC requires separate command-boundary evidence.",
+    "No production artifact/resource graph or live runtime evidence was collected. Live UI is unnecessary for this IO-free algorithm batch; B14 as a whole remains pending.",
+    "Root full gates were not rerun for this scoped audit without product/native implementation changes; final collection remains B21."
+  ],
+  "unreadPaths": [
+    "crates/am-plugin-runtime/src/model.rs and ports",
+    "crates/am-plugin-runtime/src/data.rs and commit/revoke implementations",
+    "apps/tauri/src-tauri/src/storage/plugins*",
+    "apps/tauri/src-tauri/src/plugins* and src/ipc.rs",
+    "Runtime/application transactional and blocking-pool tests"
+  ],
+  "dependencies": [
+    {
+      "owner": "B03",
+      "status": "not-accepted-by-this-batch",
+      "detail": "Generated consistency and 183 differential cases were rerun as direct evidence only; SDK subentries and complete native protocol ownership remain separate."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B14-runtime-ports-tauri",
+    "candidate": "B14-runtime-ports",
+    "runtime": "tauri",
+    "question": "Trace one runtime operation through injected Store/Clock/Ids and transaction ordering; verify session/caller identity and epoch are checked against native ledger state before policy decisions. Inspect InstallFiles only when required by that chain.",
+    "entry": "crates/am-plugin-runtime/src/authority.rs",
+    "guide": "crates/am-plugin-runtime/AGENTS.md",
+    "exclusions": [
+      "SQLite adapter implementation",
+      "Independent named commit/revoke audit",
+      "Package recovery or anonymous transport",
+      "Product changes or live app/browser inspection"
+    ]
+  },
+  "handoffZh": "B14-pure-policy-tauri 已完成，基线 acf455c，策略实现未改动。审查 am-plugin-policy 全部实现、现有授权测试及直接 authority::authorize 调用片段，确认纯依赖、显式时间和快照、身份/epoch/期限/scope/grant 拒绝、数据历史与外传组合限制、三维预算溢出和兼容协商边界。现有 3 项测试、8 项本地探针（含 18 组预算边界）、183 条跨语言语料、47 项生成定义校验、依赖边界、fmt 与 Clippy 均通过。结论 conformant / pass-scoped，无确认缺陷。本次 artifact 未执行，纯算法 live 不适用；未启动应用/浏览器，未提交推送。B14 仍仅完成 1/4：Store 等端口、SQLite schema 3、事务原子性、撤权持久化、取消许可及生产 IPC 均未验收。下一批唯一入口为 B14-runtime-ports-tauri，从 runtime/authority.rs 与本地指南开始，先复核本报告哈希，不重复展开策略库。"
+}

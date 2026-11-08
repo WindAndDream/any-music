@@ -1,0 +1,203 @@
+
+> any-music@0.0.0 test <project-root>
+> node --test scripts/test/*.test.mjs && pnpm -r --if-present run test
+
+✔ mobile theme packages cannot depend on desktop/native APIs, including through a second script block (138.6652ms)
+✔ mobile capabilities separate Android built-in transport from iOS local data (665.6414ms)
+✔ desktop or remote privilege cannot enter mobile through configuration (38.0035ms)
+✔ accepts valid sources and deferred/type-only heavy imports (109.3887ms)
+✔ VM profiles and adapter roots stay engine-free; native imports and production testkit are rejected (102.9385ms)
+✔ trusted build directory discovery cannot eagerly load Vue through the workbench root (116.8125ms)
+✔ theme metadata stays lightweight and Vue adapters cannot import private workbench state (165.2531ms)
+✔ rejects undeclared and forbidden internal dependencies (131.2722ms)
+✔ tag metadata remains lightweight and the feature cannot consume host repositories (129.1787ms)
+✔ rejects app aliases and relative paths outside the package (100.8072ms)
+✔ creation metadata cannot load presentation or access private host state (105.8807ms)
+✔ routing packages reject Node and music dependencies while accepting their public edge (108.8621ms)
+✔ follows the source plugin root barrel to eager codecs (67.7514ms)
+✔ SDK rejects runtime libraries, even through a local barrel (71.4396ms)
+✔ rejects browser audio implementations without a codec import (70.9648ms)
+✔ accepts export patterns and rejects private exports (88.0809ms)
+✔ source metadata cannot load protocols and source plugins cannot access the host (69.0788ms)
+✔ independent themes accept only public metadata, Vue and style entries without eager presentation (141.0117ms)
+✔ theme dependency fixtures reject cross-theme, host, native, SDK, private and cyclic edges (278.3957ms)
+✔ theme metadata follows local barrels; private exports and cross-theme Sass cannot escape checks (134.1301ms)
+✔ built-in themes cannot acquire plugin authority through package imports (120.8823ms)
+✔ the actual registry has complete AppManifest coverage and exact main authority (501.6057ms)
+✔ new commands, broad capabilities, remote access and relay grants cannot silently bypass review (27.8549ms)
+✔ actual acceptance records fail closed on missing evidence, leaked authority or inconsistent targets (3.4707ms)
+✔ pure protocol/policy dependency closures reject an IO dependency several edges away (102.4157ms)
+✔ Cargo cycle and reverse policy dependency are rejected (65.0113ms)
+✔ anonymous plugin transport cannot acquire native authority or account persistence (79.9202ms)
+✔ standard-library IO and global clocks cannot bypass a dependency-only check (1.6935ms)
+✔ package verification cannot acquire native runtime authority or a transport (71.8046ms)
+✔ Android signing needs an explicit release and complete credentials before any build (5.3671ms)
+✔ release verification rejects compiled debug, backup, cleartext and test-harness variants (9.7156ms)
+✔ instrumentation requires completed tests and rejects adb success with failed JUnit (1.2454ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2605.5475
+Scope: 21 of 22 workspace projects
+packages/audio-composition test$ vitest run
+packages/network-routing test$ vitest run
+packages/plugin-sdk test$ pnpm generate:check && vitest run
+packages/audio-composition test:  RUN  v4.1.11 <project-root>/packages/audio-composition
+packages/network-routing test:  RUN  v4.1.11 <project-root>/packages/network-routing
+packages/plugin-sdk test: > @any-music/plugin-sdk@0.1.0 generate:check <project-root>\packages\plugin-sdk
+packages/plugin-sdk test: > node scripts/generate.mjs --check
+packages/network-routing test:  Test Files  2 passed (2)
+packages/network-routing test:       Tests  28 passed (28)
+packages/network-routing test:    Start at  02:18:43
+packages/network-routing test:    Duration  664ms (transform 259ms, setup 0ms, import 487ms, tests 38ms, environment 0ms)
+packages/network-routing test: Done
+packages/audio-composition test:  Test Files  5 passed (5)
+packages/audio-composition test:       Tests  15 passed (15)
+packages/audio-composition test:    Start at  02:18:43
+packages/audio-composition test:    Duration  1.05s (transform 454ms, setup 0ms, import 1.22s, tests 475ms, environment 1ms)
+packages/audio-composition test: Done
+packages/plugin-sdk test: SDK generated artifacts match (47 definitions).
+packages/plugin-sdk test:  RUN  v4.1.11 <project-root>/packages/plugin-sdk
+packages/plugin-sdk test:  Test Files  5 passed (5)
+packages/plugin-sdk test:       Tests  120 passed (120)
+packages/plugin-sdk test:    Start at  02:18:46
+packages/plugin-sdk test:    Duration  1.38s (transform 2.88s, setup 0ms, import 5.29s, tests 154ms, environment 1ms)
+packages/plugin-sdk test: Done
+packages/account-pool test$ vitest run
+packages/core test$ vitest run
+packages/plugin-vm test$ vitest run
+packages/account-pool test:  RUN  v4.1.11 <project-root>/packages/account-pool
+packages/plugin-vm test:  RUN  v4.1.11 <project-root>/packages/plugin-vm
+packages/core test:  RUN  v4.1.11 <project-root>/packages/core
+packages/account-pool test:  Test Files  3 passed (3)
+packages/account-pool test:       Tests  22 passed (22)
+packages/account-pool test:    Start at  02:18:48
+packages/account-pool test:    Duration  712ms (transform 263ms, setup 0ms, import 684ms, tests 47ms, environment 0ms)
+packages/account-pool test: Done
+packages/core test:  Test Files  8 passed (8)
+packages/core test:       Tests  49 passed (49)
+packages/core test:    Start at  02:18:48
+packages/core test:    Duration  801ms (transform 712ms, setup 0ms, import 1.43s, tests 132ms, environment 2ms)
+packages/core test: Done
+packages/plugin-vm test:  Test Files  3 passed (3)
+packages/plugin-vm test:       Tests  39 passed (39)
+packages/plugin-vm test:    Start at  02:18:48
+packages/plugin-vm test:    Duration  1.62s (transform 1.11s, setup 0ms, import 1.80s, tests 41ms, environment 2ms)
+packages/plugin-vm test: Done
+packages/plugin-center test$ vitest run
+packages/plugin-sandbox-browser test$ pnpm build && vitest run
+packages/ui test$ vitest run
+packages/plugin-testkit test$ vitest run
+packages/plugin-center test:  RUN  v4.1.11 <project-root>/packages/plugin-center
+packages/plugin-testkit test:  RUN  v4.1.11 <project-root>/packages/plugin-testkit
+packages/plugin-sandbox-browser test: > @any-music/plugin-sandbox-browser@0.1.0 build <project-root>\packages\plugin-sandbox-browser
+packages/plugin-sandbox-browser test: > node scripts/build.mjs
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/plugin-sandbox-browser test: vite v8.2.2 building client environment for production...
+packages/plugin-sandbox-browser test: transforming...
+packages/plugin-sandbox-browser test: ✓ 24 modules transformed.
+packages/plugin-sandbox-browser test: rendering chunks...
+packages/plugin-center test:  Test Files  9 passed (9)
+packages/plugin-center test:       Tests  56 passed (56)
+packages/plugin-center test:    Start at  02:18:50
+packages/plugin-center test:    Duration  1.16s (transform 3.02s, setup 0ms, import 4.96s, tests 205ms, environment 2ms)
+packages/plugin-sandbox-browser test: computing gzip size...
+packages/plugin-sandbox-browser test: dist/worker.js  780.35 kB │ gzip: 333.29 kB
+packages/plugin-sandbox-browser test: ✓ built in 668ms
+packages/plugin-center test: Done
+packages/plugin-sandbox-browser test:  RUN  v4.1.11 <project-root>/packages/plugin-sandbox-browser
+packages/plugin-testkit test:  Test Files  1 passed (1)
+packages/plugin-testkit test:       Tests  33 passed (33)
+packages/plugin-testkit test:    Start at  02:18:50
+packages/plugin-testkit test:    Duration  7.01s (transform 1.30s, setup 0ms, import 2.19s, tests 4.45s, environment 0ms)
+packages/plugin-testkit test: Done
+packages/plugin-sandbox-browser test:  Test Files  3 passed (3)
+packages/plugin-sandbox-browser test:       Tests  18 passed (18)
+packages/plugin-sandbox-browser test:    Start at  02:18:52
+packages/plugin-sandbox-browser test:    Duration  5.55s (transform 4.09s, setup 0ms, import 6.44s, tests 2.95s, environment 1ms)
+packages/plugin-sandbox-browser test: Done
+packages/ui test:  Test Files  61 passed (61)
+packages/ui test:       Tests  328 passed (328)
+packages/ui test:    Start at  02:18:50
+packages/ui test:    Duration  7.68s (transform 17.74s, setup 0ms, import 31.51s, tests 2.26s, environment 50ms)
+packages/ui test: Done
+packages/plugin-cli test$ pnpm --filter @any-music/plugin-testkit build && node --test test/*.test.mjs
+packages/plugin-music-creation test$ vitest run
+packages/plugin-source-bilibili test$ vitest run
+packages/plugin-source-douyin test$ vitest run
+packages/plugin-source-bilibili test:  RUN  v4.1.11 <project-root>/packages/plugin-source-bilibili
+packages/plugin-source-douyin test:  RUN  v4.1.11 <project-root>/packages/plugin-source-douyin
+packages/plugin-cli test: > @any-music/plugin-testkit@0.1.0 build <project-root>\packages\plugin-testkit
+packages/plugin-cli test: > node scripts/build.mjs
+packages/plugin-music-creation test:  RUN  v4.1.11 <project-root>/packages/plugin-music-creation
+packages/plugin-source-bilibili test:  Test Files  3 passed (3)
+packages/plugin-source-bilibili test:       Tests  47 passed (47)
+packages/plugin-source-bilibili test:    Start at  02:18:59
+packages/plugin-source-bilibili test:    Duration  1.27s (transform 1.06s, setup 0ms, import 2.01s, tests 46ms, environment 0ms)
+packages/plugin-source-bilibili test: Done
+packages/plugin-tag-management test$ vitest run
+packages/plugin-source-douyin test:  Test Files  6 passed (6)
+packages/plugin-source-douyin test:       Tests  86 passed (86)
+packages/plugin-source-douyin test:    Start at  02:18:59
+packages/plugin-source-douyin test:    Duration  1.53s (transform 1.84s, setup 0ms, import 3.02s, tests 269ms, environment 19ms)
+packages/plugin-source-douyin test: Done
+packages/plugin-ui-vue test$ vitest run
+packages/plugin-tag-management test:  RUN  v4.1.11 <project-root>/packages/plugin-tag-management
+packages/plugin-ui-vue test:  RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+packages/plugin-cli test: ✔ public source template paginates anonymous catalog responses through named ports and handles denial (843.0475ms)
+packages/plugin-cli test: ✔ source-code: create → check → same VM tests → reproducible archive → verify → migration (524.1353ms)
+packages/plugin-cli test: ✔ source-declarative: create → check → same VM tests → reproducible archive → verify → migration (124.5675ms)
+packages/plugin-music-creation test:  Test Files  4 passed (4)
+packages/plugin-music-creation test:       Tests  14 passed (14)
+packages/plugin-music-creation test:    Start at  02:18:59
+packages/plugin-music-creation test:    Duration  4.42s (transform 7.61s, setup 0ms, import 14.07s, tests 63ms, environment 3ms)
+packages/plugin-music-creation test: Done
+packages/theme-default test$ vitest run
+packages/plugin-cli test: ✔ tag-suggestion: create → check → same VM tests → reproducible archive → verify → migration (400.3096ms)
+packages/plugin-cli test: ✔ export: create → check → same VM tests → reproducible archive → verify → migration (318.6623ms)
+packages/plugin-cli test: ✔ config and pack hooks are inert; sealed source survives path edits (202.5816ms)
+packages/plugin-tag-management test:  Test Files  3 passed (3)
+packages/plugin-tag-management test:       Tests  11 passed (11)
+packages/plugin-tag-management test:    Start at  02:19:01
+packages/plugin-tag-management test:    Duration  3.31s (transform 3.67s, setup 0ms, import 6.57s, tests 50ms, environment 1ms)
+packages/plugin-tag-management test: Done
+packages/theme-default test:  RUN  v4.1.11 <project-root>/packages/theme-default
+packages/plugin-cli test: ✔ small sealed assets retain bounded memory and preserve their original package bytes (432.3019ms)
+packages/plugin-cli test: ✔ sealed reads preserve empty files, exact limits and over-budget rejection (618.2083ms)
+packages/plugin-cli test: ✔ non-config JSON null returns a configuration error (70.8973ms)
+packages/plugin-cli test: ✔ non-config JSON [] returns a configuration error (45.377ms)
+packages/plugin-cli test: ✔ non-config JSON true returns a configuration error (34.392ms)
+packages/plugin-cli test: ✔ non-config JSON 0 returns a configuration error (37.1438ms)
+packages/plugin-cli test: ✔ non-config JSON "invalid" returns a configuration error (79.409ms)
+packages/plugin-cli test: ✔ non-config JSON {} returns a configuration error (37.9312ms)
+packages/plugin-cli test: ✔ static checks reject native globals, dynamic code, network and foreign imports (2.0061ms)
+packages/plugin-cli test: ✔ linked files and escaped graphs are rejected (32.5841ms)
+packages/plugin-cli test: ✔ signatures use raw integrity bytes and an explicit publisher pin (200.1441ms)
+packages/plugin-cli test: ✔ CLI stdout is JSON and failures have stable exit codes (61.1827ms)
+packages/plugin-cli test: ✔ DEV requires host pairing and never creates a server or launches an application (0.5573ms)
+packages/plugin-cli test: ✔ pack smoke rejects a malformed continuation and invalid nested completion JSON (176.0917ms)
+packages/plugin-ui-vue test:  ❯ test/trusted/presentation.test.ts (0 test)
+packages/plugin-ui-vue test: ⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+packages/plugin-ui-vue test:  FAIL  test/trusted/presentation.test.ts [ test/trusted/presentation.test.ts ]
+packages/plugin-ui-vue test: Error: Cannot find package '@any-music/ui/components/music-sources/TrackList.vue' imported from <project-root>/packages/plugin-ui-vue/test/trusted/presentation.test.ts
+packages/plugin-ui-vue test:  ❯ test/trusted/presentation.test.ts:4:1
+packages/plugin-ui-vue test:       2| import { UI_PRESENTATION } from '@any-music/ui'
+packages/plugin-ui-vue test:       3| import type { TrackSummaryProps, UiPresentation } from '@any-music/ui'
+packages/plugin-ui-vue test:       4| import TrackList from '@any-music/ui/components/music-sources/TrackLis…
+packages/plugin-ui-vue test:        | ^
+packages/plugin-ui-vue test:       5| import TrackRow from '@any-music/ui/components/music-sources/TrackRow.…
+packages/plugin-ui-vue test:       6| import { expect, it, vi } from 'vitest'
+packages/plugin-ui-vue test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+packages/plugin-ui-vue test:  Test Files  1 failed | 8 passed (9)
+packages/plugin-ui-vue test:       Tests  51 passed (51)
+packages/plugin-ui-vue test:    Start at  02:19:01
+packages/plugin-ui-vue test:    Duration  4.79s (transform 11.64s, setup 0ms, import 15.85s, tests 1.58s, environment 4ms)
+packages/plugin-ui-vue test: Failed
+<project-root>\packages\plugin-ui-vue:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/plugin-ui-vue@0.0.0 test: `vitest run`
+Exit status 1
+ ELIFECYCLE  Test failed. See above for more details.

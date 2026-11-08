@@ -1,0 +1,330 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchIds": ["B19-android-capabilities-acl-tauri", "B19-ios-capability-boundary-tauri"],
+  "capturedAt": "2026-10-21T23:43:55.0972805+08:00",
+  "completedAt": "2026-10-21T15:52:40.050Z",
+  "head": "a693165205be0bc321764768d796d7c842f7a446",
+  "initialHead": "a693165205be0bc321764768d796d7c842f7a446",
+  "environment": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "targets": ["aarch64-linux-android", "x86_64-linux-android", "x86_64-pc-windows-msvc"],
+    "os": "Microsoft Windows NT 10.0.26200.0",
+    "host": "Windows; Android NDK and SDK configured; no macOS/Xcode or iOS Rust target"
+  },
+  "initialWorktree": [
+    " M Cargo.lock",
+    " M apps/tauri/src-tauri/src/plugins/control.rs",
+    " M apps/tauri/src-tauri/src/plugins/executor.rs",
+    " M apps/tauri/src-tauri/src/plugins/unavailable_executor.rs",
+    " M crates/am-plugin-package/src/lib.rs",
+    " M crates/am-plugin-runtime/src/authority.rs",
+    " M crates/am-plugin-runtime/tests/offline.rs",
+    " M docs/baselines/plugin-system-s15/toolchain-sbom.json",
+    " M docs/baselines/plugin-system-s15/tools.json",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+    " M docs/en/desktop/README.md",
+    " M docs/en/desktop/backend-engineering.md",
+    " M docs/en/desktop/douyin-background-login-experiment.md",
+    " M docs/en/desktop/runtime-architecture.md",
+    " M docs/en/desktop/rust-workspace-plan.md",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/Rust\\345\\267\\245\\344\\275\\234\\345\\214\\272\\350\\247\\204\\345\\210\\222.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\345\\220\\216\\347\\253\\257\\345\\267\\245\\347\\250\\213\\350\\247\\204\\350\\214\\203.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\346\\212\\226\\351\\237\\263\\345\\220\\216\\345\\217\\260\\347\\231\\273\\345\\275\\225\\350\\257\\225\\351\\252\\214.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\346\\226\\207\\346\\241\\243\\347\\264\\242\\345\\274\\225.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\350\\277\\220\\350\\241\\214\\347\\253\\257\\346\\236\\266\\346\\236\\204.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204\\350\\256\\241\\345\\210\\222.md\"",
+    " M packages/plugin-cli/src/project.mjs",
+    " M packages/plugin-cli/test/tools.test.mjs",
+    " M packages/plugin-sdk/src/node/package-format.mjs",
+    " M packages/plugin-sdk/test/fixtures/packages/corpus.json",
+    " M packages/plugin-sdk/test/package-corpus-generator.mjs",
+    "?? apps/tauri/src-tauri/src/plugins/executor/",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri-before-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri.json"
+  ],
+  "deliveryWorktree": [
+    " M Cargo.lock",
+    " M apps/tauri/src-tauri/src/plugins/control.rs",
+    " M apps/tauri/src-tauri/src/plugins/executor.rs",
+    " M apps/tauri/src-tauri/src/plugins/packages.rs",
+    " M apps/tauri/src-tauri/src/plugins/packages/tests.rs",
+    " M apps/tauri/src-tauri/src/plugins/unavailable_executor.rs",
+    " M crates/am-plugin-package/src/lib.rs",
+    " M crates/am-plugin-runtime/src/authority.rs",
+    " M crates/am-plugin-runtime/src/install.rs",
+    " M crates/am-plugin-runtime/src/install_model.rs",
+    " M crates/am-plugin-runtime/src/lib.rs",
+    " M crates/am-plugin-runtime/tests/offline.rs",
+    " M docs/baselines/plugin-system-s15/toolchain-sbom.json",
+    " M docs/baselines/plugin-system-s15/tools.json",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+    " M docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+    " M docs/en/desktop/README.md",
+    " M docs/en/desktop/backend-engineering.md",
+    " M docs/en/desktop/douyin-background-login-experiment.md",
+    " M docs/en/desktop/runtime-architecture.md",
+    " M docs/en/desktop/rust-workspace-plan.md",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/Rust\\345\\267\\245\\344\\275\\234\\345\\214\\272\\350\\247\\204\\345\\210\\222.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\345\\220\\216\\347\\253\\257\\345\\267\\245\\347\\250\\213\\350\\247\\204\\350\\214\\203.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\346\\212\\226\\351\\237\\263\\345\\220\\216\\345\\217\\260\\347\\231\\273\\345\\275\\225\\350\\257\\225\\351\\252\\214.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\346\\226\\207\\346\\241\\243\\347\\264\\242\\345\\274\\225.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\350\\277\\220\\350\\241\\214\\347\\253\\257\\346\\236\\266\\346\\236\\204.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204S15\\345\\267\\245\\345\\205\\267\\344\\270\\216\\346\\241\\214\\351\\235\\242\\344\\272\\244\\344\\273\\230.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204\\350\\256\\241\\345\\210\\222.md\"",
+    " M packages/plugin-cli/src/project.mjs",
+    " M packages/plugin-cli/test/tools.test.mjs",
+    " M packages/plugin-sdk/src/node/package-format.mjs",
+    " M packages/plugin-sdk/test/fixtures/packages/corpus.json",
+    " M packages/plugin-sdk/test/package-corpus-generator.mjs",
+    "?? .gitattributes",
+    "?? apps/tauri/src-tauri/src/plugins/executor/",
+    "?? apps/tauri/src-tauri/src/plugins/packages/rollback_tests.rs",
+    "?? crates/am-plugin-runtime/src/rollback.rs",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri-before-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository-baseline.json"
+  ],
+  "fileHashes": {
+    "files": [
+      {
+        "sha256": "0d493e07e98d58be1ff329b95825a29cbff7449df9efa6a8f047c6639a868a00",
+        "path": "apps/tauri/src-tauri/src/system/capabilities.rs",
+        "sha256AtDelivery": "0d493e07e98d58be1ff329b95825a29cbff7449df9efa6a8f047c6639a868a00",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "1c85165217abfcc8abd094efa01083cb5b2bae30afe4c980474ae1f952e4a0bb",
+        "path": "apps/tauri/src-tauri/src/lib.rs",
+        "sha256AtDelivery": "1c85165217abfcc8abd094efa01083cb5b2bae30afe4c980474ae1f952e4a0bb",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "67f3fe0b980541bad33f6644421dffc09319273fd00d712c1569d59297d1037d",
+        "path": "apps/tauri/src-tauri/build.rs",
+        "sha256AtDelivery": "67f3fe0b980541bad33f6644421dffc09319273fd00d712c1569d59297d1037d",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "8b1ebec364fb6f1aeacd2e8de4528012fe897e0572b7cae31e458ca0d191e9e6",
+        "path": "apps/tauri/src-tauri/src/ipc.rs",
+        "sha256AtDelivery": "8b1ebec364fb6f1aeacd2e8de4528012fe897e0572b7cae31e458ca0d191e9e6",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "f4a76e767d2c4b39c68043ea93930860c36c71d4326060e3126daa506925e1c5",
+        "path": "apps/tauri/src-tauri/src/browser/verification.rs",
+        "sha256AtDelivery": "f4a76e767d2c4b39c68043ea93930860c36c71d4326060e3126daa506925e1c5",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "225b8f1d3fb2f61c2db16b8a079964bf67fef92b31e582980530d6ace48d090a",
+        "path": "apps/tauri/src-tauri/src/system/android.rs",
+        "sha256AtDelivery": "225b8f1d3fb2f61c2db16b8a079964bf67fef92b31e582980530d6ace48d090a",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "2b0369646cf81524daa32e5297b944059bb7a6784c22510fe98cb24fb606e6c4",
+        "path": "apps/tauri/src-tauri/src/plugins.rs",
+        "sha256AtDelivery": "2b0369646cf81524daa32e5297b944059bb7a6784c22510fe98cb24fb606e6c4",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "10abb235d87002f686fb91dcb87d5ea45b7646c758679eca4aeae67a9ad49793",
+        "path": "apps/tauri/src-tauri/src/plugins/unavailable_executor.rs",
+        "sha256AtDelivery": "10abb235d87002f686fb91dcb87d5ea45b7646c758679eca4aeae67a9ad49793",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "46467f05f13a96d2f01d16abc62b3dc0a669a6f6cf90ef01909f8f879db9e468",
+        "path": "apps/tauri/src-tauri/capabilities/main.json",
+        "sha256AtDelivery": "46467f05f13a96d2f01d16abc62b3dc0a669a6f6cf90ef01909f8f879db9e468",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "9397387669f291e6a1bb2b1f779e8bde1adb8e59609f5bc470ce935b6106d835",
+        "path": "apps/tauri/src-tauri/capabilities/main-android.json",
+        "sha256AtDelivery": "9397387669f291e6a1bb2b1f779e8bde1adb8e59609f5bc470ce935b6106d835",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "f984e0304e3868ed51fd106b9aceed0c8eebcd92a2ff2b39d7d578a946481450",
+        "path": "apps/tauri/src-tauri/capabilities/main-mobile.json",
+        "sha256AtDelivery": "f984e0304e3868ed51fd106b9aceed0c8eebcd92a2ff2b39d7d578a946481450",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "9329a89a64a84c43fcf71c2067336ebb12628d9a62ec37c7be2daf85abc235a1",
+        "path": "apps/tauri/src-tauri/permissions/mobile.toml",
+        "sha256AtDelivery": "9329a89a64a84c43fcf71c2067336ebb12628d9a62ec37c7be2daf85abc235a1",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "afc5fcd3d7851142d5cb5dbe396bd25c19b2d887523de5f776b018fa32045085",
+        "path": "apps/tauri/src-tauri/tauri.conf.json",
+        "sha256AtDelivery": "afc5fcd3d7851142d5cb5dbe396bd25c19b2d887523de5f776b018fa32045085",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "cfd90e9fcfaa976bee58b0c3e5746a1e4da3b45f7fb7805af42c8069880b1e99",
+        "path": "apps/tauri/src-tauri/tauri.android.conf.json",
+        "sha256AtDelivery": "cfd90e9fcfaa976bee58b0c3e5746a1e4da3b45f7fb7805af42c8069880b1e99",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "fc9f805be22befa8663cc50ff93918fbf49706e2aef88b3240a3aa7cc86796a1",
+        "path": "apps/tauri/src-tauri/tauri.ios.conf.json",
+        "sha256AtDelivery": "fc9f805be22befa8663cc50ff93918fbf49706e2aef88b3240a3aa7cc86796a1",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "7dcd66ee95247fafc252ce9d30c179067a1db883d935732a74b718ff0d937ba7",
+        "path": "apps/tauri/src/platform/runtime-capabilities.ts",
+        "sha256AtDelivery": "7dcd66ee95247fafc252ce9d30c179067a1db883d935732a74b718ff0d937ba7",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "9bb0e2e0365a9379c996f26c4cdbdeac35ac38595a7049b2453af56b42690694",
+        "path": "apps/tauri/src/platform/configure-tauri-workbench.ts",
+        "sha256AtDelivery": "9bb0e2e0365a9379c996f26c4cdbdeac35ac38595a7049b2453af56b42690694",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "17bc1d12afb25e512898966d76254713c2a8b7576bd00ad56ec8a111b9cae776",
+        "path": "apps/tauri/src/platform/native-plugin-authority.ts",
+        "sha256AtDelivery": "17bc1d12afb25e512898966d76254713c2a8b7576bd00ad56ec8a111b9cae776",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "96fea9a82caf4805c0298c046411a6835b44ebaac7572db8cc7ef90c334ddd1a",
+        "path": "apps/tauri/src/main.ts",
+        "sha256AtDelivery": "96fea9a82caf4805c0298c046411a6835b44ebaac7572db8cc7ef90c334ddd1a",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "b106f29d1c3b28bc621ff0144bbf4b716ae91b93eae793231485ac6b772fc7d6",
+        "path": "apps/tauri/test/platform/configure-tauri-workbench.test.ts",
+        "sha256AtDelivery": "b106f29d1c3b28bc621ff0144bbf4b716ae91b93eae793231485ac6b772fc7d6",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "c775f1a3b690540e306cb8bedbc20fe01c8690495abea9db677a5ad9eb18acb9",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/AndroidManifest.xml",
+        "sha256AtDelivery": "c775f1a3b690540e306cb8bedbc20fe01c8690495abea9db677a5ad9eb18acb9",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "04eed1c167b5777889332e39278f16a29382ba721fe1aada51e2b239b0f49533",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/BootstrapActivity.kt",
+        "sha256AtDelivery": "04eed1c167b5777889332e39278f16a29382ba721fe1aada51e2b239b0f49533",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "56828a0afdaee99d1f8a086cb7ab4cc6f5375eada4d2172e020712a89a248561",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobileWebViewSupport.kt",
+        "sha256AtDelivery": "56828a0afdaee99d1f8a086cb7ab4cc6f5375eada4d2172e020712a89a248561",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "c48e6db40f4344555dd8effebd7f479c6dbb42c09aec687c08db35be5ad94eaf",
+        "path": "apps/tauri/src-tauri/gen/android/app/build.gradle.kts",
+        "sha256AtDelivery": "c48e6db40f4344555dd8effebd7f479c6dbb42c09aec687c08db35be5ad94eaf",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "33ea31f85a7328e5e5666d0f71c15a437895f542498253b180e3ef6010628a2a",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/res/xml/network_security_config.xml",
+        "sha256AtDelivery": "33ea31f85a7328e5e5666d0f71c15a437895f542498253b180e3ef6010628a2a",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "85509ef3ad8bbd69b9d501e1dfb0f45c0c5703b58ee898a536be3ba21f9fb487",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/res/values/strings.xml",
+        "sha256AtDelivery": "85509ef3ad8bbd69b9d501e1dfb0f45c0c5703b58ee898a536be3ba21f9fb487",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "e1776df1a6bcbb0c680325dcb20455821c68feb1cfc9a2f9ed411e7c0b9adc03",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/res/values-zh/strings.xml",
+        "sha256AtDelivery": "e1776df1a6bcbb0c680325dcb20455821c68feb1cfc9a2f9ed411e7c0b9adc03",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "51e073616bb17d7c04eae5be935a293b8f70b765615d25e22089984bb08b95d6",
+        "path": "scripts/check-mobile-boundaries.mjs",
+        "sha256AtDelivery": "51e073616bb17d7c04eae5be935a293b8f70b765615d25e22089984bb08b95d6",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "33dd4bb10586d97f5122c65f213dd2041a40f7f48f354a8aa257e2d249a894ce",
+        "path": "scripts/test/check-mobile-boundaries.test.mjs",
+        "sha256AtDelivery": "33dd4bb10586d97f5122c65f213dd2041a40f7f48f354a8aa257e2d249a894ce",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "e49e1919e04b6c026a19f4931687cb27261bdd186f0f236d68eda332438f8264",
+        "path": "scripts/check-mobile-android.mjs",
+        "sha256AtDelivery": "e49e1919e04b6c026a19f4931687cb27261bdd186f0f236d68eda332438f8264",
+        "changedSinceHashCapture": false
+      },
+      {
+        "sha256": "89f92fe7a0b6d47c955fa7753bfa4cb19273154795fedc4419a02225204e23c2",
+        "path": "Cargo.lock",
+        "sha256AtDelivery": "89f92fe7a0b6d47c955fa7753bfa4cb19273154795fedc4419a02225204e23c2",
+        "changedSinceHashCapture": false
+      }
+    ],
+    "capturedAt": "2026-10-21T23:48:52.7412007+08:00"
+  },
+  "concurrency": "Other work changed Cargo.lock, native plugin rollback/executor and documentation during this audit. The first native test compile failed because packages/tests.rs temporarily referenced a not-yet-created rollback_tests.rs. That file subsequently appeared; the same test command was retried without product edits by this audit. Mobile capability/ACL/renderer/bootstrap files have no working-tree diff. Hashes describe the delivery snapshot; no claim that the entire worktree was frozen during compilation.",
+  "ownedChanges": [
+    "B19 audit reports/baseline and the B19 ledger entry only; local ignored logs and this generator"
+  ]
+}

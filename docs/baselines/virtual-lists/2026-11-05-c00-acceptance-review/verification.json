@@ -1,0 +1,138 @@
+{
+  "date": "2026-11-05",
+  "runtimeScope": "shared",
+  "scope": "C00 empty-result continuity correction and additional partial admission evidence; no production admission",
+  "sourceFiles": [
+    {
+      "path": "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+      "sha256": "dff10b7bc1ac4524733f099834c58b739bffbe3ee754462edac06eb01809516a"
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicFavorites.admission.test.ts",
+      "sha256": "c9baaf821ead58f5b295df7d74f267bb00d6ef0eecfaa5a502865141832b92c0"
+    }
+  ],
+  "changes": [
+    {
+      "path": "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+      "behavior": "Wait for lazy virtual delegate only while nonempty; cancel stale restoration on navigation/filter/empty-boundary changes."
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicFavorites.admission.test.ts",
+      "behavior": "Flat/platform regressions for initially empty and becoming-empty while lazy restoration waits; no business actions."
+    }
+  ],
+  "targetedChecks": [
+    {
+      "command": "pnpm --filter @any-music/theme-default test",
+      "result": "passed",
+      "files": 66,
+      "tests": 553,
+      "log": "c00-consumer-package-tests.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default typecheck",
+      "result": "passed",
+      "log": "c00-consumer-typecheck-retry.log"
+    },
+    {
+      "scope": "Shared UI audit",
+      "result": "passed, no source changes",
+      "files": 28,
+      "tests": 440,
+      "log": "c00-virtual-core-initial-tests.log"
+    }
+  ],
+  "rootChecks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "c00-session-root-test-retry.log",
+      "initialAttempt": {
+        "command": "pnpm test",
+        "exitCode": 1,
+        "log": "c00-session-root-test.log"
+      }
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "c00-session-root-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "c00-session-root-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "c00-session-root-format-check-final.log"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "c00-session-root-build.log"
+    }
+  ],
+  "rootTestRetry": [
+    {
+      "command": "pnpm --filter @any-music/theme-studio exec vitest run test/metadata.test.ts",
+      "exitCode": 0,
+      "log": "c00-session-studio-metadata-retry.log"
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "c00-session-root-test-retry.log"
+    }
+  ],
+  "review": "Three subagents: theme consumer fix, independent shared UI/cross-review and desktop inspection. Parent owned GM inspection/integration/root checks. No source edits for inconclusive drag trace.",
+  "admission": {
+    "passed": false,
+    "candidate": "Private gate remains default-closed",
+    "notStarted": ["O00", "O01", "O02", "O03", "C01"],
+    "remaining": [
+      "Small-list sidebar regression and large-data product-generation persistence long tasks.",
+      "Default skin pixel/raster parity, remaining visual/artwork combinations and reliable frame-tail evidence.",
+      "Native drag/capture, real IME/touch/device and production grant/artifact acceptance.",
+      "Full native graceful shutdown and active account/playback/download continuity.",
+      "10k native renderer mirror fixture size admission; direct setup failure is not a public product-save regression proof."
+    ]
+  },
+  "cleanup": {
+    "userscript": {
+      "cleanup": true,
+      "removedSyntheticKeys": 13,
+      "fixtureTracks": 1000,
+      "preservedBrowserProfile": true,
+      "preservedExtension": true
+    },
+    "desktop": {
+      "frontendStoppedByParent": true,
+      "remainingRoots": [],
+      "reason": "After graceful window close, owned WebView and debug listener exited but exact isolated root process did not exit within the bounded wait.",
+      "retainedRoots": [
+        "<user-home>\\AppData\\Local\\Temp\\any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533",
+        "<user-home>\\AppData\\Local\\com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533"
+      ],
+      "gracefulCloseRequested": true,
+      "forcedRootPids": [8316],
+      "remainingListeners": [],
+      "remainingWebviews": []
+    },
+    "services": "Owned GM/Vite setup and native frontend stopped; dedicated installed browser profile/extensions and uniquely identified native reproduction root retained."
+  },
+  "sourceAndArtifactIdentity": "build-artifacts.json",
+  "logDirectory": "logs/2026-11-05-virtual-list-implementation",
+  "commit": false,
+  "push": false,
+  "documentationLinks": {
+    "result": "passed",
+    "log": "c00-session-documentation-links.log"
+  },
+  "diffCheck": {
+    "result": "passed",
+    "log": "c00-session-diff-check-final.log"
+  }
+}

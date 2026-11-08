@@ -1,0 +1,504 @@
+{
+  "documentType": "audit-repair-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B13-vm-profile-control-fix",
+  "parentBatch": "B13",
+  "runtime": "shared",
+  "repairedAt": "2026-10-21T13:38:06.530Z",
+  "originalReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared.json",
+  "originalBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared-baseline.json",
+  "baseline": {
+    "head": "acf455cb3e33259ce8887672f3fe679659161180",
+    "capturedAt": "2026-10-21T13:31:47.261Z",
+    "hashes": {
+      "packages/plugin-vm/src/profile.ts": "d2b27ebc627c2b7c249a2783230823f8f538298851c478184ce475874870aac1",
+      "packages/plugin-vm/test/profile.test.ts": "c7a51e26e6cde2c697b7966013fdd81e7c171131fc2852ca7fcb6224454e7c16",
+      "packages/plugin-vm/src/profile-identity.ts": "f0a28b8ae266ccd4d2d750a7567826d6967307eb5f91a3af417ebcdb32d8596e",
+      "packages/plugin-vm/engine/profile.json": "931652e192e697933d9f4af2af73c5ecbfbb28be01a6c556c5a9ad42486dca00",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md": "7932eb537bba293498ba181b5b6c780e9af38ff44863e48007e8f3ffa5b8adef",
+      "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md": "5b38df6e771561380dbc3fae2d2a91836662d3b98921bd139b307d753805f3b9",
+      "docs/baselines/plugin-system-s15/target-admission.json": "168e6beb90fbc927123314e30a0d8dd4e01606baaef161bb6b457ad9e5bb5793"
+    },
+    "workingTree": [
+      " M apps/tauri/src-tauri/src/network/http.rs",
+      " M apps/tauri/src/platform/native-http.ts",
+      " M apps/tauri/test/platform/native-http.test.ts",
+      " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      " M docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+      " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204S15\\345\\267\\245\\345\\205\\267\\344\\270\\216\\346\\241\\214\\351\\235\\242\\344\\272\\244\\344\\273\\230.md\"",
+      " M packages/plugin-vm/engine/profile.json",
+      " M packages/plugin-vm/src/profile-identity.ts",
+      " M packages/plugin-vm/src/profile.ts",
+      "?? apps/tauri/src-tauri/src/network/http/",
+      "?? apps/tauri/test/fixtures/native-http-response.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+      "?? packages/plugin-vm/test/profile.test.ts"
+    ]
+  },
+  "scope": "Repair B13-P01 only: validate effective VM budget values once, preserve supported defaults/minimums/tightening, reject unsupported keys, regenerate reviewed Profile identity and verify directly affected consumers. No engine/bridge/Worker/testkit ownership audit or native admission renewal.",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "resolvedFindings": [
+    {
+      "id": "B13-P01",
+      "status": "fixed",
+      "changes": [
+        "Check all own keys with Reflect.ownKeys, rejecting unknown hidden keys and symbols.",
+        "Read each supported property once into an owned snapshot, including inherited/non-enumerable values. Apply defaults only to absent properties, keeping explicit null/undefined invalid.",
+        "Validate every effective snapshot field against safe-integer, positive and fixed-Profile maximum bounds, then enforce the startup heap minimum."
+      ],
+      "evidence": [
+        "packages/plugin-vm/src/profile.ts:34",
+        "packages/plugin-vm/test/profile.test.ts:16",
+        ".codex-tmp/fix-b13-vm-profile-control/regression-red.log",
+        ".codex-tmp/fix-b13-vm-profile-control/regression-green.log",
+        ".codex-tmp/fix-b13-vm-profile-control/probes.log",
+        ".codex-tmp/fix-b13-vm-profile-control/artifact-smoke.log"
+      ],
+      "regression": "33 permanent cases: 19 fail against the original source and all 33 pass after repair; the original 10 supplemental audit probes all pass. Additional assertions cover defaults, strict budgets, valid single-read getters, invalid explicit values, unknown hidden/symbol fields and the startup heap minimum.",
+      "compatibility": "Profile ID, version fields and all numeric limits remain unchanged. The validation is stricter for invalid configurations. Valid plain, frozen and single-read accessor configurations still work. No WASM, loader, bridge or native authority code was modified by this task."
+    }
+  ],
+  "verification": [
+    {
+      "command": "pnpm --filter @any-music/plugin-vm exec vitest run test/profile.test.ts",
+      "startedAt": "2026-10-21T13:24:20.5356871+00:00",
+      "completedAt": "2026-10-21T13:24:21.8294439+00:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/regression-red.log",
+      "result": "fail",
+      "expectedFailure": true,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-vm exec vitest run test/profile.test.ts test/admission.test.ts",
+      "startedAt": "2026-10-21T13:24:51.9740196+00:00",
+      "completedAt": "2026-10-21T13:24:53.4477666+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/regression-green.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm check:plugin:vm",
+      "startedAt": "2026-10-21T13:26:43.9385193+00:00",
+      "completedAt": "2026-10-21T13:26:50.4375016+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/vm.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-vm exec vitest run --config ../../.codex-tmp/audit-b13-vm-profile-control/vitest.config.mts",
+      "startedAt": "2026-10-21T13:26:25.3312576+00:00",
+      "completedAt": "2026-10-21T13:26:26.5918104+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/probes.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-vm --filter @any-music/plugin-sandbox-browser --filter @any-music/plugin-testkit typecheck",
+      "startedAt": "2026-10-21T13:26:25.3344652+00:00",
+      "completedAt": "2026-10-21T13:26:28.6226222+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/target-types.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm test",
+      "startedAt": "2026-10-21T13:27:11.0689827+00:00",
+      "completedAt": "2026-10-21T13:29:00.2146584+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/test.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-21T13:30:02.0439112+00:00",
+      "completedAt": "2026-10-21T13:31:14.2365609+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/typecheck.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm lint",
+      "startedAt": "2026-10-21T13:27:11.0688554+00:00",
+      "completedAt": "2026-10-21T13:27:16.8869131+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/lint.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-21T13:27:11.0676169+00:00",
+      "completedAt": "2026-10-21T13:27:17.6820454+00:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/format.log",
+      "result": "fail",
+      "expectedFailure": false,
+      "scope": "pre-existing repository issue; outside B13 repair"
+    },
+    {
+      "command": "pnpm build",
+      "startedAt": "2026-10-21T13:31:37.0168511+00:00",
+      "completedAt": "2026-10-21T13:34:47.8884656+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/build.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-testkit build",
+      "startedAt": "2026-10-21T13:34:38.0890562+00:00",
+      "completedAt": "2026-10-21T13:34:39.0903779+00:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/testkit-build.log",
+      "result": "pass",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "node .codex-tmp/fix-b13-vm-profile-control/artifact-smoke.mjs",
+      "startedAt": "2026-10-21T13:35:58.216Z",
+      "completedAt": "2026-10-21T13:35:58.330Z",
+      "exitCode": 0,
+      "result": "pass",
+      "profileHash": "ccec9d23283bd9fcf31572499461d81371e3e42d669015c08e196c71041497b3",
+      "sameEngine": true,
+      "checks": [
+        "embedded Profile/engine identity",
+        "normal guest result with tightened budget",
+        "no fetch global",
+        "inherited over-budget rejection",
+        "non-enumerable over-budget rejection",
+        "changing getter rejection and exactly one read"
+      ],
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/artifact-smoke.log",
+      "expectedFailure": false,
+      "scope": "repair and directly affected regression verification"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "startedAt": "2026-10-21T13:32:44.1633015+00:00",
+      "completedAt": "2026-10-21T13:33:00.5866688+00:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/fix-b13-vm-profile-control/deny.log",
+      "result": "fail",
+      "expectedFailure": false,
+      "scope": "pre-existing repository issue; outside B13 repair"
+    }
+  ],
+  "counts": {
+    "permanentRegressions": 33,
+    "vmPackageTests": 39,
+    "vmGateTests": 90,
+    "originalAuditProbes": 10,
+    "builtTestkitSmokeChecks": 6,
+    "fullTestSummary": {
+      "vitest": [
+        {
+          "package": "packages/network-routing",
+          "passed": 28
+        },
+        {
+          "package": "packages/audio-composition",
+          "passed": 15
+        },
+        {
+          "package": "packages/plugin-sdk",
+          "passed": 107
+        },
+        {
+          "package": "packages/account-pool",
+          "passed": 22
+        },
+        {
+          "package": "packages/core",
+          "passed": 47
+        },
+        {
+          "package": "packages/plugin-vm",
+          "passed": 39
+        },
+        {
+          "package": "packages/plugin-center",
+          "passed": 56
+        },
+        {
+          "package": "packages/plugin-testkit",
+          "passed": 33
+        },
+        {
+          "package": "packages/plugin-sandbox-browser",
+          "passed": 18
+        },
+        {
+          "package": "packages/ui",
+          "passed": 593
+        },
+        {
+          "package": "packages/plugin-source-bilibili",
+          "passed": 47
+        },
+        {
+          "package": "packages/plugin-source-douyin",
+          "passed": 86
+        },
+        {
+          "package": "packages/plugin-music-creation",
+          "passed": 12
+        },
+        {
+          "package": "packages/plugin-tag-management",
+          "passed": 10
+        },
+        {
+          "package": "packages/plugin-ui-vue",
+          "passed": 32
+        },
+        {
+          "package": "packages/music-workbench",
+          "passed": 367
+        },
+        {
+          "package": "apps/tauri",
+          "passed": 318
+        },
+        {
+          "package": "apps/userscript",
+          "passed": 80
+        }
+      ],
+      "vitestPassed": 1910,
+      "rustTestGroups": [
+        {
+          "passed": 9,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 24,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 155,
+          "failed": 0,
+          "ignored": 1
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "rustPassed": 201,
+      "rustIgnored": 1,
+      "protocolDifferential": 183,
+      "limit": "Counts are separate suite summaries. Rust policy/protocol tests may also run in differential tooling; do not sum these as unique coverage."
+    }
+  },
+  "profile": {
+    "previousHash": "f238d186b463b5a4db3f0f3672709ce5fb2ea230a09576237692e04db82b1fde",
+    "currentHash": "ccec9d23283bd9fcf31572499461d81371e3e42d669015c08e196c71041497b3",
+    "wasmSha256": "5dadb9901b620bf9cbb6e314058e25d8cd2b2a343727f0ed0a2175bd6ade5b10",
+    "regeneration": "Reviewed profile.ts diff, formatted source, then ran node scripts/check-plugin-vm.mjs --write. Fresh VM gate/lint and built testkit confirm the source/identity/embedded engine remain in agreement.",
+    "nativeAdmission": {
+      "currentProfileHash": "ccec9d23283bd9fcf31572499461d81371e3e42d669015c08e196c71041497b3",
+      "recordedProfileHash": "f238d186b463b5a4db3f0f3672709ce5fb2ea230a09576237692e04db82b1fde",
+      "matches": false,
+      "existingAcceptanceUnchanged": true,
+      "result": "current Profile rejected by native exact-target check until fresh live acceptance"
+    },
+    "consequence": "The native exact-target guard compares this Profile and rebuilt resources with the historical record. It now rejects current external installation/execution until fresh exact-target live acceptance. Existing accepted:true evidence was preserved rather than fabricated or relabeled. Built-in runtime entry policy was not edited."
+  },
+  "artifacts": [
+    "packages/plugin-sandbox-browser/dist/worker.js",
+    "packages/plugin-testkit/dist/index.js",
+    "packages/plugin-testkit/dist/engine/profile.json",
+    "apps/userscript/dist/any-music.user.js",
+    "target/release/any-music-tauri.exe"
+  ],
+  "rootChecks": {
+    "test": "pass",
+    "typecheck": "pass",
+    "lint": "pass",
+    "build": "pass",
+    "format:check": "fail: 12 pre-existing unchanged documentation files"
+  },
+  "remainingRepositoryIssues": [
+    {
+      "owner": "B20/B21",
+      "issue": "Twelve documentation-format failures predate this repair and remain unchanged from HEAD.",
+      "evidence": {
+        "count": 12,
+        "unchangedFromHead": true,
+        "files": [
+          "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+          "docs/en/desktop/README.md",
+          "docs/en/desktop/backend-engineering.md",
+          "docs/en/desktop/douyin-background-login-experiment.md",
+          "docs/en/desktop/runtime-architecture.md",
+          "docs/en/desktop/rust-workspace-plan.md",
+          "docs/zh-cn/桌面端/Rust工作区规划.md",
+          "docs/zh-cn/桌面端/后端工程规范.md",
+          "docs/zh-cn/桌面端/抖音后台登录试验.md",
+          "docs/zh-cn/桌面端/文档索引.md",
+          "docs/zh-cn/桌面端/运行端架构.md",
+          "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+        ]
+      },
+      "log": ".codex-tmp/fix-b13-vm-profile-control/format.log"
+    },
+    {
+      "owner": "Cargo.lock / repository security maintenance",
+      "issue": "Supplemental cargo deny reports RUSTSEC-2026-0382 (rustls-webpki 0.103.15) and RUSTSEC-2026-0381 (webpki-roots 1.0.9). Cargo.lock is unchanged; this is pre-existing dependency risk, not a VM regression.",
+      "result": "fail",
+      "log": ".codex-tmp/fix-b13-vm-profile-control/deny.log",
+      "action": "Resolve the dependency security advisories separately and rerun native/release security gates before delivery; no advisory ignore or unrelated lockfile upgrade was added."
+    }
+  ],
+  "changedFiles": [
+    "packages/plugin-vm/src/profile.ts",
+    "packages/plugin-vm/test/profile.test.ts",
+    "packages/plugin-vm/src/profile-identity.ts",
+    "packages/plugin-vm/engine/profile.json",
+    "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md",
+    "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+    "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json"
+  ],
+  "limits": [
+    "No promise of absence of every possible defect; results establish the stated regression/build scope.",
+    "No app/browser/emulator, screenshot/click, live target acceptance, commit or push was performed.",
+    "Other three B13 candidates remain unreviewed; offline same-engine suites do not certify their implementation or WebView isolation.",
+    "Other chats changed native HTTP implementation/tests and audit metadata during this run. Their changes are preserved; root checks describe the working tree at their recorded times, not an independent acceptance of those concurrent changes.",
+    "The first local check runner had a single-argument PowerShell invocation error; corrected before the successful VM gate. Its log is retained as a harness error, not a product failure."
+  ],
+  "nextBatch": {
+    "batchId": "B18-profile-reacceptance-tauri",
+    "parentBatch": "B18",
+    "runtime": "tauri",
+    "status": "pending",
+    "question": "Reaccept the current Windows/WebView/Profile/resource combination using the existing isolated native acceptance harness after repository delivery blockers are resolved.",
+    "allowedPaths": [
+      "apps/tauri/scripts/accept-plugin-delivery.mjs",
+      "The existing s15-acceptance example and exact target/resource evidence",
+      "Bilingual S15 admission status"
+    ],
+    "requiresExplicitRuntimeInspectionRequest": true,
+    "requiredGuidance": [
+      "AGENTS.md",
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      ".agents/skills/any-music-tauri-runtime/SKILL.md"
+    ],
+    "continuation": "The budget repair is complete and offline-tested. Current Profile/resources differ from the previously accepted target, so native installation/execution correctly remain closed. Do not copy the new hash into acceptance records without a fresh authorized live run. Existing Rust TLS advisories are a separate repository release blocker; retain all other concurrent audit/product work."
+  }
+}

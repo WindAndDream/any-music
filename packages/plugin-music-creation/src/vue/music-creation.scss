@@ -1,0 +1,297 @@
+@use './timeline';
+
+// 片段创作把素材管理和时间线并排；每列独立滚动，长资料库不会挤走保存操作。
+.material-collections {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(230px, auto);
+  gap: 8px 12px;
+  padding: 10px;
+  border-bottom: 1px solid var(--am-color-border);
+  background: var(--am-color-surface);
+}
+
+.material-collections__heading {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.material-collections__heading strong,
+.material-collections__heading small {
+  display: block;
+}
+
+.material-collections__heading strong {
+  font-size: 13px;
+}
+
+.material-collections__heading small,
+.material-collections__heading > span {
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+}
+
+.material-collections__controls,
+.material-collections__create {
+  display: flex;
+  min-width: 0;
+  gap: 6px;
+}
+
+.material-collections__controls {
+  grid-column: 1;
+}
+
+.material-collections__create {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.material-collections__cleanup {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--am-color-text-secondary);
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.material-collections__cleanup input {
+  margin-top: 2px;
+  accent-color: var(--am-color-danger);
+}
+
+.material-collections__select,
+.material-collections__create input,
+.material-filter input,
+.material-filter select,
+.material-track__range input {
+  min-width: 0;
+  min-height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 7px;
+  background: var(--am-color-surface);
+  color: var(--am-color-text);
+  font: 11px var(--am-font-family);
+}
+
+.material-collections__select,
+.material-collections__create input {
+  flex: 1 1 auto;
+}
+
+.material-collections button,
+.material-track button {
+  min-height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 6px;
+  background: var(--am-color-surface);
+  color: var(--am-color-text);
+  font: 600 10px var(--am-font-family);
+  cursor: pointer;
+}
+
+.material-collections__create button {
+  border-color: var(--am-color-accent);
+  background: var(--am-color-accent);
+  color: var(--am-color-on-accent);
+}
+
+.material-collections__delete,
+.material-track__remove {
+  color: var(--am-color-danger) !important;
+}
+
+.material-collections button:disabled,
+.material-track button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.material-filter {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.4fr) repeat(5, minmax(105px, 1fr));
+  gap: 7px;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--am-color-border);
+  background: var(--am-color-surface-subtle);
+}
+
+.pending-materials {
+  border-bottom: 1px solid var(--am-color-border);
+  background: var(--am-color-surface-subtle);
+}
+
+.pending-materials__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 10px;
+}
+
+.pending-materials__header strong,
+.pending-materials__header small {
+  display: block;
+}
+
+.pending-materials__header strong {
+  font-size: 12px;
+}
+
+.pending-materials__header small,
+.pending-materials__header > span,
+.pending-materials__empty {
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+}
+
+.pending-materials__empty {
+  margin: 0;
+  padding: 0 10px 10px;
+}
+
+.pending-materials__items {
+  display: grid;
+  max-height: 230px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  overflow: auto;
+  padding: 0 9px 9px;
+}
+
+.pending-material {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 7px;
+  padding: 7px;
+  border: 1px solid color-mix(in srgb, var(--am-color-accent) 28%, var(--am-color-border));
+  border-radius: 9px;
+  background: var(--am-color-surface);
+}
+
+.pending-material__actions {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pending-material__actions button {
+  min-height: 28px;
+  padding: 0 7px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 6px;
+  background: var(--am-color-surface);
+  color: var(--am-color-text);
+  font: 600 10px var(--am-font-family);
+  cursor: pointer;
+}
+
+.pending-material__actions button:first-child {
+  border-color: var(--am-color-accent);
+  color: var(--am-color-accent);
+}
+
+.pending-material__actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pending-material__actions .pending-material__remove {
+  color: var(--am-color-danger);
+}
+
+.material-track {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 7px;
+  padding: 7px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 9px;
+  background: var(--am-color-surface);
+}
+
+.material-track--included {
+  border-color: color-mix(in srgb, var(--am-color-accent) 35%, var(--am-color-border));
+}
+
+.material-track__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.material-track__tags span {
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--am-color-accent) 12%, var(--am-color-surface));
+  color: var(--am-color-accent);
+  font-size: 10px;
+}
+
+.material-track__range {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(80px, 1fr)) repeat(3, auto);
+  gap: 5px;
+  align-items: end;
+  padding-top: 7px;
+  border-top: 1px dashed var(--am-color-border);
+}
+
+.material-track__range label {
+  color: var(--am-color-text-secondary);
+  font-size: 9px;
+}
+
+.material-track__range input {
+  display: block;
+  width: 100%;
+  margin-top: 3px;
+}
+
+@container am-workbench (max-width: 760px) {
+  .material-collections,
+  .pending-materials__items {
+    grid-template-columns: 1fr;
+  }
+
+  .material-collections__controls,
+  .material-collections__create,
+  .material-collections__cleanup {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .material-filter,
+  .material-track__range {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .material-filter > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .material-track__range button {
+    min-width: 0;
+  }
+}
+
+@container am-workbench (max-width: 480px) {
+  .material-filter,
+  .material-track__range {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .material-filter > *,
+  .material-track__range > * {
+    grid-column: 1;
+  }
+}

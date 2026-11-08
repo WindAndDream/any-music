@@ -1,0 +1,350 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B06-workbench-storage-shared",
+  "parentBatch": "B06",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T15:30:39.2734664+08:00",
+  "scope": {
+    "invariant": "A current product generation must preserve host/namespace ownership and publish a complete recoverable snapshot without losing a successfully committed competing update or persisting transient host track data.",
+    "allowedPaths": [
+      "packages/music-workbench/src/storage/product-generation-store.ts",
+      "packages/music-workbench/src/storage/product-data.ts",
+      "packages/music-workbench/src/storage/product-data-projection.ts",
+      "packages/music-workbench/src/storage/product-storage.ts",
+      "packages/music-workbench/src/storage/local-music-library-repository.ts (direct host track sanitizer)",
+      "packages/music-workbench/src/runtime/storage.ts and workbench-runtime.ts (storage-port excerpts)",
+      "packages/music-workbench/test/storage (targeted tests and fixtures)",
+      "package manifest, Vitest config, relevant guides and B06 reports"
+    ],
+    "selectedChain": "Repository key -> writeProductValue ownership projection -> stable host track sanitizer when applicable -> copy/validate -> retire prior generation -> journal -> immutable core/host/namespaces -> verified schema-2 manifest -> final revision check -> commit pointer -> loadProductGeneration/restart. Ordinary host writes and named plugin writes are compared at the same boundary.",
+    "expansionReasons": [
+      "The direct local-library sanitizer is needed to assess the explicit no-Blob-URL persistence contract.",
+      "Existing portable-product-data.test.ts was read only at the host-write/newer-namespace preservation scenario; portable import/export implementation and preflight remain unaudited."
+    ],
+    "exclusions": [
+      "Product implementation changes and permanent regression tests",
+      "GM generation adapter and real Tampermonkey",
+      "Tauri renderer/native product mirror, native files and credentials",
+      "Portable import/export preflight, merge/conflicts and quotas",
+      "Tag/composer session projection withdrawal on disable (B09); this audit verifies retained namespaces only",
+      "Native plugin install/grants SQLite and paired code/data recovery (B14/B16)",
+      "Product UI, servers, browser/app/emulator launches, captureDate changes, commit/push"
+    ],
+    "scopeRule": "One shared storage boundary, first of five B06 candidates. No full B06 or runtime acceptance is claimed."
+  },
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-baseline.json",
+  "declaredStatus": {
+    "claim": "Current-only core/host/namespaces with immutable generation chunks, schema-2 manifests, one commit pointer, poisoning after interrupted product writes, stale-writer protection and isolated namespaces; product data excludes transient URLs/bytes/paths/credentials.",
+    "references": [
+      "AGENTS.md:58",
+      "packages/music-workbench/AGENTS.md:7",
+      "docs/en/cross-platform/architecture/plugin-data-ownership.md:23",
+      "docs/en/cross-platform/architecture/plugin-data-ownership.md:27"
+    ],
+    "evidenceLimit": "These are requirements and maintained claims. Shared StableValueStorage doubles do not establish GM or Rust runtime acceptance."
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Is generation ownership shared and accessed through injected/public storage contracts?",
+      "evidence": [
+        "packages/music-workbench/package.json:7",
+        "packages/music-workbench/src/storage/product-storage.ts:1",
+        "packages/music-workbench/src/storage/product-generation-store.ts:1",
+        "packages/music-workbench/src/runtime/workbench-runtime.ts:16",
+        "packages/music-workbench/src/runtime/storage.ts:3"
+      ],
+      "detail": "The owner exposes /storage and consumes a type-only StableValueStorage port; the inspected storage modules have no GM/Tauri/Node/app imports. All six internal production dependencies use workspace:*. No production graph or complete transitive dependency scan was performed."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Are staging, corruption/restart, writer freeze and concurrent commits safe?",
+      "evidence": [
+        "packages/music-workbench/src/storage/product-generation-store.ts:120",
+        "packages/music-workbench/src/storage/product-generation-store.ts:150",
+        "packages/music-workbench/src/storage/product-generation-store.ts:167",
+        "packages/music-workbench/src/storage/product-generation-store.ts:175",
+        "packages/music-workbench/src/storage/product-generation-store.ts:181",
+        "packages/music-workbench/src/storage/product-generation-store.ts:211",
+        "packages/music-workbench/test/storage/product-generation-store.test.ts:97",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.test.ts:107"
+      ],
+      "detail": "Existing tests exercise before/after-persistence failure at each write and reclamation step, stale snapshots, competing commits during staging, checksum failures and retained live chunks. Supplemental altered-part/manifest probes reject publication; poisoned ordinary writes perform no further generation IO; replacement freezes writes until reload. B06-S01 fails: a competing successful commit between the last check and unconditional pointer write is lost. The shared port has no atomic compare-and-publish operation."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Are current-only initialization and host/namespace ownership preserved at this boundary?",
+      "evidence": [
+        "packages/music-workbench/src/storage/product-generation-store.ts:186",
+        "packages/music-workbench/src/storage/product-data-projection.ts:37",
+        "packages/music-workbench/src/storage/product-data-projection.ts:54",
+        "packages/music-workbench/src/storage/product-data-projection.ts:112",
+        "packages/music-workbench/src/storage/product-data-projection.ts:174",
+        "packages/music-workbench/test/storage/product-generation-store.test.ts:22",
+        "packages/music-workbench/test/storage/portable-product-data.test.ts:60",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.test.ts:14",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.test.ts:29"
+      ],
+      "detail": "Initialization reads only current product keys. Ordinary host library writes strip host tag/material joins and preserve tag/composer and unknown future namespaces; recording disablement also retains them. Unsupported namespace writers/readers reject without overwriting the opaque value. Unknown IDs have no generic named storage reader. Proxy secrets are separated in the existing shared test. Namespace retention is established; actual session projection withdrawal, plugin execution/registration, GM prefix and native credential storage are deferred."
+    },
+    {
+      "criterion": "C4",
+      "result": "fail",
+      "question": "Do ordinary host track writes exclude transient data?",
+      "evidence": [
+        "packages/music-workbench/src/storage/product-data-projection.ts:155",
+        "packages/music-workbench/src/storage/local-music-library-repository.ts:148",
+        "packages/music-workbench/src/storage/local-music-library-repository.ts:174",
+        "packages/music-workbench/src/storage/local-music-library-repository.ts:362",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.test.ts:141",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.test.ts:160"
+      ],
+      "detail": "The tested unknown mediaUrl/mediaBytes/finalPath/password properties are excluded by ordinary library writes, and the proxy-secret isolation test passes. B06-S02 fails because artworkUrl uses optionalString with no stable-URL validation: a Blob URL survives ordinary save, generation load and restart. This is not an assertion that all host fields, opaque namespace contents, portable data or runtime credential paths have been accepted."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Are evidence and remaining limits reproducible and owned correctly?",
+      "evidence": [
+        "packages/music-workbench/test/storage/product-generation-store.test.ts:13",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/storage-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/typecheck.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/final-input-check.json"
+      ],
+      "detail": "5 existing test files / 29 tests pass, and workbench typecheck exits 0. Nine supplementary behavioral scenarios produce seven passes and two failures. The temporary probe source and results are retained outside the repository, and the temporary test was removed. Hashed storage inputs remain unchanged. No product change, artifact build or live-runtime acceptance is included."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "fail",
+      "method": "Bounded source/contract review with line references, SHA-256 input manifest and deterministic behavioral counterexamples.",
+      "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/final-input-check.json"
+    },
+    "tests": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/storage",
+          "startedAt": "2026-10-21T15:22:55.0287728+08:00",
+          "finishedAt": "2026-10-21T15:23:00.6158229+08:00",
+          "exitCode": 0,
+          "files": 5,
+          "passed": 29,
+          "failed": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/storage-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench typecheck",
+          "startedAt": "2026-10-21T15:23:34.6688861+08:00",
+          "finishedAt": "2026-10-21T15:23:46.6726938+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/typecheck.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/storage/b06-audit-probe.test.ts --reporter=verbose",
+          "startedAt": "2026-10-21T15:25:24.7141104+08:00",
+          "finishedAt": "2026-10-21T15:25:30.7574527+08:00",
+          "exitCode": 1,
+          "passed": 7,
+          "failed": 2,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.log",
+          "source": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.test.ts",
+          "note": "Exit 1 is from two demonstrated assertions. Vitest executed all nine scenarios; the trailing pnpm command-not-found wording is not a missing test binary."
+        }
+      ]
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "Read-only storage review; no public interfaces/dependencies/product code changed. Production builds and graph acceptance remain separate."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "The current request did not authorize browser/application inspection. Shared doubles do not establish real GM storage, Rust filesystem/IPC or WebView behavior."
+    }
+  },
+  "findings": [
+    {
+      "id": "B06-S01",
+      "severity": "P1",
+      "status": "open",
+      "owner": "packages/music-workbench shared generation commit; runtime serialization must be traced in the separate GM/Tauri batches",
+      "title": "Non-atomic final pointer publication loses a successful competing update",
+      "location": "packages/music-workbench/src/storage/product-generation-store.ts:175",
+      "trigger": "Two writers load generation G. Writer A finishes staging and its final raw.read sees G. Before A's raw.write(PRODUCT_COMMIT_KEY), writer B stages/publishes its theme update and returns success. A then unconditionally publishes its already computed snapshot.",
+      "effect": "Both writes return successfully. Reload follows A's pointer and loses B's previously successful update. The defect applies to any independent field in the overwritten snapshot; the probe uses a theme change to avoid assuming runtime behavior.",
+      "evidence": [
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.test.ts:107",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.log",
+        "packages/music-workbench/src/runtime/workbench-runtime.ts:16",
+        "packages/music-workbench/src/storage/product-generation-store.ts:175"
+      ],
+      "observed": {
+        "secondReturned": true,
+        "firstReturned": true,
+        "retainedCompetingTheme": false
+      },
+      "suggestedNextAction": "Add a real atomic compare-and-publish or a runtime-owned single-writer/serialization boundary covering validation and publication, with stale-conflict handling before acknowledging success. A second read alone leaves the same gap. Add a permanent interleaving regression when the fix is authorized.",
+      "evidenceLimit": "Deterministic shared-port interleaving, matching the existing staging-race test technique. Actual GM cross-tab and Tauri renderer/native scheduling have not been inspected or reproduced."
+    },
+    {
+      "id": "B06-S02",
+      "severity": "P2",
+      "status": "open",
+      "owner": "packages/music-workbench/src/storage/local-music-library-repository.ts",
+      "title": "Blob artwork URLs are persisted in the host library",
+      "location": "packages/music-workbench/src/storage/local-music-library-repository.ts:174",
+      "trigger": "A schema-6 valid library track supplies artworkUrl='blob:https://any-music.invalid/audit-object-url-marker' and is saved using store.write('local-library:v1', library).",
+      "effect": "optionalString accepts the Blob URL unchanged; it remains in immutable generation core data and the reloaded snapshot. The persisted reference expires with its originating context and violates the explicit no-Blob-URL product contract.",
+      "evidence": [
+        "packages/music-workbench/src/storage/local-music-library-repository.ts:362",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.test.ts:160",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/probe.log"
+      ],
+      "suggestedNextAction": "Use stable-URL validation for persisted artwork metadata and omit/reject ephemeral Blob URLs. Keep ordinary stable artwork URLs and stable source identities. Add a permanent behavioral save/reload regression when the fix is authorized.",
+      "evidenceLimit": "Reproduced through the shared ordinary host save/reload path with synthetic valid metadata. No production source is claimed to emit this exact URL; portable preflight and other URL fields remain separate checks."
+    }
+  ],
+  "reviewedFiles": [
+    {
+      "path": "packages/music-workbench/package.json",
+      "scope": "exports/scripts/internal dependencies"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-storage.ts",
+      "scope": "complete public storage entry"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-generation-store.ts",
+      "scope": "complete"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-data.ts",
+      "scope": "complete"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-data-projection.ts",
+      "scope": "complete"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/local-music-library-repository.ts",
+      "scope": "lines 25-194 and 360-377; direct host track sanitizer only"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/storage.ts",
+      "scope": "complete"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "scope": "lines 1-35 / StableValueStorage only"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/product-generation-store.test.ts",
+      "scope": "complete"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/product-storage-fixtures.ts",
+      "scope": "complete"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/portable-product-data.test.ts",
+      "scope": "lines 60-102 only"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/local-music-library-repository.test.ts",
+      "scope": "lines 1-102 only"
+    },
+    {
+      "path": "packages/music-workbench/vitest.config.ts",
+      "scope": "complete"
+    }
+  ],
+  "unreadPaths": [
+    "Other workbench repositories and their direct state/normalizer implementations; tests were executed but that does not accept unread implementations",
+    "Portable import/export implementation, conflict/recipe validation, quota and namespace-opaque policy",
+    "Userscript GM adapter/composition and exact storage prefix",
+    "Tauri renderer/native product mirror, revision/disk atomicity and IPC failures",
+    "Tag/composer projection/session teardown and reenablement",
+    "B14/B16 plugin SQLite authority and paired code/data recovery"
+  ],
+  "missingEvidence": [
+    "Real Tampermonkey simultaneous-tab/restart behavior",
+    "Tauri renderer/native mirror independent restart/failure/concurrent revision evidence",
+    "Portable-data preflight and backup import acceptance",
+    "Full production graph and build evidence; root B21 gates",
+    "Actual projection withdrawal on disable (B09), beyond the retained namespace checks in this batch"
+  ],
+  "dependencies": [
+    {
+      "batchId": "B06-userscript-generation",
+      "question": "Does the actual GM adapter prevent the B06-S01 schedule? Verify storage prefix and independent recovery."
+    },
+    {
+      "batchId": "B06-tauri-renderer-mirror",
+      "question": "Does renderer/native revision handling prevent lost publication? Do not infer from the shared double."
+    },
+    {
+      "batchId": "B06-tauri-native-product-mirror",
+      "question": "Verify native envelope/disk revision and atomicity independently."
+    },
+    {
+      "batchId": "B06-plugin-portable-namespaces",
+      "question": "Audit preflight, unknown namespace import/export and authority exclusion independently."
+    },
+    {
+      "batchId": "B09",
+      "question": "Verify disabled plugin projection withdrawal and reenablement; namespace retention alone is insufficient."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B06-userscript-generation",
+    "parentBatch": "B06",
+    "runtime": "userscript",
+    "status": "pending",
+    "question": "Trace the Userscript GM generation adapter, runtime prefix and startup/recovery, and determine whether real cross-tab pointer publication supplies serialization absent from the shared storage port.",
+    "allowedPaths": [
+      "apps/userscript storage composition and GM value adapter only",
+      "apps/userscript/test/platform/product-storage.test.ts",
+      "packages/music-workbench/src/storage/product-generation-store.ts as the already audited direct dependency",
+      "B06 audit records"
+    ],
+    "excluded": [
+      "Product fixes and permanent tests",
+      "Tauri renderer/native mirrors, portable-data internals, native plugin SQLite/code-data transactions",
+      "Live browser/application inspection, commit and push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "apps/userscript/AGENTS.md",
+      "docs/en/userscript/development.md",
+      ".agents/skills/any-music-userscript-runtime/SKILL.md",
+      "docs/en/cross-platform/architecture/plugin-data-ownership.md"
+    ],
+    "criteria": [
+      "C1 GM adapter ownership and storage prefix",
+      "C3 failure/restart and concurrent-writer behavior",
+      "C4 current-only startup, namespace isolation and runtime-secret separation",
+      "C6 GM-double evidence and explicit missing live acceptance"
+    ],
+    "intendedCommands": [
+      "pnpm --filter @any-music/userscript exec vitest run test/platform/product-storage.test.ts",
+      "pnpm --filter @any-music/userscript typecheck"
+    ],
+    "stopRule": "One GM storage boundary only; record GM-double evidence separately from real Tampermonkey. B06-S01/B06-S02 remain open until separately authorized fixes; do not expand into Tauri or portable-data.",
+    "continuation": "Reuse B06-workbench-storage-shared.json and verify relevant hashes. Shared storage: 29 existing tests pass, typecheck passes; 9 supplemental scenarios yield 7 passes and two confirmed failures. No runtime adapter has been accepted. Remaining B06 candidates are Tauri renderer mirror, native product mirror and portable namespaces."
+  },
+  "handoff": "本批 B06-workbench-storage-shared，基线 c38a247。已沿普通仓库写入→归属投影→generation stage/journal/manifest→commit pointer→重载检查当前格式与命名空间隔离。现有 storage 29/29、类型检查通过；补充 9 个行为探针 7 通过、2 失败：B06-S01(P1) 最终检查与指针发布之间存在并发丢写，B06-S02(P2) artworkUrl 中的 Blob URL 被持久化。当前范围 violating/needs-fix。暂存破坏、写失败停写、替换后冻结及未知命名空间保留检查通过，但禁用后的实际投影撤回未验。临时探针和日志保存在本地，仓库只增加审计记录。GM、Tauri 两层 mirror、portable-data 和原生插件权威仍待独立排查，不代表 B06 全部完成。下一批唯一入口 B06-userscript-generation；不修改产品、不启动 UI、不提交推送。"
+}

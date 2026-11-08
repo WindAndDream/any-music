@@ -1,0 +1,22 @@
+
+> @any-music/theme-default@0.0.0 typecheck <project-root>\packages\theme-default
+> vue-tsc --noEmit -p tsconfig.json
+
+src/components/downloads/ActiveDownloadPanel.vue(3,1): error TS6133: 'Track' is declared but its value is never read.
+src/components/music-sources/ClassicCatalog.vue(136,105): error TS2322: Type 'boolean | undefined' is not assignable to type 'boolean'.
+  Type 'undefined' is not assignable to type 'boolean'.
+test/components/downloads/ActiveDownloadPanel.test.ts(180,46): error TS2322: Type '"partial"' is not assignable to type 'DownloadBatchStatus'.
+test/components/library/HistoryPanel.test.ts(15,3): error TS2741: Property 'updatedAtMs' is missing in type '{ id: string; trackId: string; startedAtMs: number; positionMs: number; durationMs: number; completed: false; }' but required in type 'PlaybackHistoryEntry'.
+test/components/library/HistoryPanel.test.ts(16,3): error TS2741: Property 'updatedAtMs' is missing in type '{ id: string; trackId: string; startedAtMs: number; positionMs: number; durationMs: number; completed: true; }' but required in type 'PlaybackHistoryEntry'.
+test/components/library/HistoryPanel.test.ts(17,3): error TS2741: Property 'updatedAtMs' is missing in type '{ id: string; trackId: string; startedAtMs: number; positionMs: number; completed: false; }' but required in type 'PlaybackHistoryEntry'.
+test/components/library/PlaylistDrawer.test.ts(28,134): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Type 'Set<unknown>' is not assignable to type 'ReadonlySet<string>'.
+      Types of property 'forEach' are incompatible.
+        Type '(callbackfn: (value: unknown, value2: unknown, set: Set<unknown>) => void, thisArg?: any) => void' is not assignable to type '(callbackfn: (value: string, value2: string, set: ReadonlySet<string>) => void, thisArg?: any) => void'.
+          Types of parameters 'callbackfn' and 'callbackfn' are incompatible.
+            Types of parameters 'value' and 'value' are incompatible.
+              Type 'unknown' is not assignable to type 'string'.
+<project-root>\packages\theme-default:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/theme-default@0.0.0 typecheck: `vue-tsc --noEmit -p tsconfig.json`
+Exit status 2

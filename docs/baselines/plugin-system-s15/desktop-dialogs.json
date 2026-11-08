@@ -1,0 +1,40 @@
+{
+  "scope": "S15",
+  "date": "2026-10-19T10:22:21.566Z",
+  "os": "windows",
+  "arch": "x86_64",
+  "osBuild": "10.0.26200",
+  "webview": "155.0.4283.62",
+  "resources": {
+    "launcher.js": "add9b738a395a223aa60a409ddbc24c0a4863a0e66e30057610056278d0ed731",
+    "worker.js": "cb62f7399919c1ff1a26b7cb16a4e1489a6314b268559adfc09050cf64460353",
+    "nativeHost": "c961b3e726bd7e4d68ba452f16d3880469695d18cf23417abdd8545def18ea0a"
+  },
+  "profileHash": "f238d186b463b5a4db3f0f3672709ce5fb2ea230a09576237692e04db82b1fde",
+  "productionAdmission": false,
+  "checks": {
+    "actualProductUi": true,
+    "fourInstalledTemplates": true,
+    "sameVmNamedBridge": true,
+    "actualNativeExportDiagnosticsAndFilePicker": true,
+    "updatePairedRollbackAndFreshConsent": true,
+    "revocationBlocksExecution": true,
+    "realDevAclInstallReloadAndDisconnect": true,
+    "redactedDiagnostics": true,
+    "nativeAcquisitionRejectsPrivateAndCredentialLinks": true,
+    "mainCannotUseExecutorRelay": true,
+    "actualGuestNoHostGlobalsOrDynamicCode": true,
+    "actualGuestCpuTermination": true,
+    "nativeContextSubstitutionRejected": true,
+    "privateSelectionCannotUsePublicNetwork": true,
+    "liveDeniedCommands": {
+      "commands": 233,
+      "subjects": 3,
+      "denials": 699
+    },
+    "sameOriginProfilesStorageCookiesAndBroadcastIsolated": true,
+    "documentWorkerCspAndNavigationBlocked": true,
+    "replayAndLiveRevocationTerminateExecutors": true,
+    "temporaryProfilesAndDevStateReclaimed": true
+  }
+}

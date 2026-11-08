@@ -1,0 +1,555 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B20-bilingual-counterparts-indexes-repository",
+  "capturedAt": "2026-10-22T10:52:01.564Z",
+  "head": "0dde162342c43725fd022c6ff8f34c250b344f5f",
+  "workingTree": [
+    "M .agents/skills/music-source-adapter/references/playback.md",
+    " M apps/tauri/src-tauri/src/plugins/control.rs",
+    " M apps/tauri/src-tauri/src/plugins/packages.rs",
+    " M apps/tauri/src-tauri/src/plugins/packages/tests.rs",
+    " M crates/am-plugin-runtime/src/install.rs",
+    " M crates/am-plugin-runtime/src/install_model.rs",
+    " M crates/am-plugin-runtime/src/lib.rs",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/development-workflow.md",
+    " M docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+    " M docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+    " M docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+    " M docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+    " M docs/en/desktop/README.md",
+    " M docs/en/desktop/backend-engineering.md",
+    " M docs/en/desktop/douyin-background-login-experiment.md",
+    " M docs/en/desktop/runtime-architecture.md",
+    " M docs/en/desktop/rust-workspace-plan.md",
+    " M docs/zh-cn/桌面端/Rust工作区规划.md",
+    " M docs/zh-cn/桌面端/后端工程规范.md",
+    " M docs/zh-cn/桌面端/抖音后台登录试验.md",
+    " M docs/zh-cn/桌面端/文档索引.md",
+    " M docs/zh-cn/桌面端/运行端架构.md",
+    " M docs/zh-cn/跨平台/架构/可复用包边界.md",
+    " M docs/zh-cn/跨平台/架构/开发工作流.md",
+    " M docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md",
+    " M docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+    " M docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+    "?? apps/tauri/src-tauri/src/plugins/packages/rollback_tests.rs",
+    "?? crates/am-plugin-runtime/src/rollback.rs",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.en.md",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.zh-cn.md"
+  ],
+  "docs": [
+    "README.en.md",
+    "README.md",
+    "docs/en/README.md",
+    "docs/en/cross-platform/README.md",
+    "docs/en/cross-platform/architecture/development-workflow.md",
+    "docs/en/cross-platform/architecture/error-and-state-model.md",
+    "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+    "docs/en/cross-platform/architecture/plugin-data-ownership.md",
+    "docs/en/cross-platform/architecture/plugin-runtime-policy.md",
+    "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+    "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+    "docs/en/cross-platform/architecture/plugin-system-s03-isolation-prototype.md",
+    "docs/en/cross-platform/architecture/plugin-system-s11-permissionless-sandbox.md",
+    "docs/en/cross-platform/architecture/plugin-system-s12-native-authority-and-offline-data.md",
+    "docs/en/cross-platform/architecture/plugin-system-s13-anonymous-networking-and-exits.md",
+    "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md",
+    "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+    "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md",
+    "docs/en/cross-platform/architecture/project-architecture.md",
+    "docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+    "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+    "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+    "docs/en/cross-platform/features/local-library-and-custom-plugins.md",
+    "docs/en/cross-platform/planning/feature-requirements-and-roadmap.md",
+    "docs/en/cross-platform/platforms/bilibili/web-api-contract.md",
+    "docs/en/cross-platform/platforms/douyin/web-api-contract.md",
+    "docs/en/desktop/README.md",
+    "docs/en/desktop/backend-engineering.md",
+    "docs/en/desktop/development.md",
+    "docs/en/desktop/douyin-background-login-experiment.md",
+    "docs/en/desktop/runtime-architecture.md",
+    "docs/en/desktop/rust-workspace-plan.md",
+    "docs/en/userscript/README.md",
+    "docs/en/userscript/architecture/edge-cases.md",
+    "docs/en/userscript/development.md",
+    "docs/zh-cn/文档索引.md",
+    "docs/zh-cn/桌面端/Rust工作区规划.md",
+    "docs/zh-cn/桌面端/后端工程规范.md",
+    "docs/zh-cn/桌面端/开发规范.md",
+    "docs/zh-cn/桌面端/抖音后台登录试验.md",
+    "docs/zh-cn/桌面端/文档索引.md",
+    "docs/zh-cn/桌面端/运行端架构.md",
+    "docs/zh-cn/用户脚本/开发规范.md",
+    "docs/zh-cn/用户脚本/文档索引.md",
+    "docs/zh-cn/用户脚本/架构/边界情况.md",
+    "docs/zh-cn/跨平台/产品规划/功能需求与路线图.md",
+    "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md",
+    "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+    "docs/zh-cn/跨平台/平台接口/哔哩哔哩/网页接口契约.md",
+    "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md",
+    "docs/zh-cn/跨平台/文档索引.md",
+    "docs/zh-cn/跨平台/架构/可复用包边界.md",
+    "docs/zh-cn/跨平台/架构/开发工作流.md",
+    "docs/zh-cn/跨平台/架构/插件数据归属.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构S03隔离原型.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构S11无权限沙盒.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构S12原生权威与离线数据.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构S13匿名联网与出口.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构S14包校验与安装恢复.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构S16手机交付.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+    "docs/zh-cn/跨平台/架构/插件运行策略.md",
+    "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+    "docs/zh-cn/跨平台/架构/错误与状态模型.md",
+    "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+    "docs/zh-cn/跨平台/架构/项目架构.md"
+  ],
+  "guides": [
+    ".agents/skills/any-music-tauri-runtime/SKILL.md",
+    ".agents/skills/any-music-ui-delivery/SKILL.md",
+    ".agents/skills/any-music-userscript-runtime/SKILL.md",
+    ".agents/skills/bilibili-contract-capture/SKILL.md",
+    ".agents/skills/douyin-contract-capture/SKILL.md",
+    ".agents/skills/music-source-adapter/SKILL.md",
+    ".agents/skills/music-source-adapter/references/playback.md",
+    "AGENTS.md",
+    "apps/tauri/AGENTS.md",
+    "apps/tauri/src-tauri/AGENTS.md",
+    "apps/userscript/AGENTS.md",
+    "crates/AGENTS.md",
+    "crates/am-plugin-net/AGENTS.md",
+    "crates/am-plugin-package/AGENTS.md",
+    "crates/am-plugin-runtime/AGENTS.md",
+    "packages/account-pool/AGENTS.md",
+    "packages/audio-composition/AGENTS.md",
+    "packages/core/AGENTS.md",
+    "packages/music-workbench/AGENTS.md",
+    "packages/network-routing/AGENTS.md",
+    "packages/plugin-center/AGENTS.md",
+    "packages/plugin-cli/AGENTS.md",
+    "packages/plugin-music-creation/AGENTS.md",
+    "packages/plugin-sandbox-browser/AGENTS.md",
+    "packages/plugin-sdk/AGENTS.md",
+    "packages/plugin-source-bilibili/AGENTS.md",
+    "packages/plugin-source-douyin/AGENTS.md",
+    "packages/plugin-tag-management/AGENTS.md",
+    "packages/plugin-testkit/AGENTS.md",
+    "packages/plugin-ui-vue/AGENTS.md",
+    "packages/plugin-vm/AGENTS.md",
+    "packages/ui/AGENTS.md",
+    "packages/utils/AGENTS.md"
+  ],
+  "files": {
+    "README.en.md": "766cfa404aca9480cec6087791162eaf9c80662835da0a09731fddbd9b62482b",
+    "README.md": "5570da4f2cde2fd9edc044e47260dd11d33b4fb55ec30522fab1310d169df949",
+    "docs/en/README.md": "688d7d435ff42125f26b881e485794e65ac46fcdb5ccd554fb539f973b42a718",
+    "docs/en/cross-platform/README.md": "7dab1c9c058497158d8a5521f46ceb01aafbf7cf4c9a7623596d43e394241ee4",
+    "docs/en/cross-platform/architecture/development-workflow.md": "401f8c86d2052ee8e0163a055547bbf4b9d8935fb2fec88a864d9376ca5fa665",
+    "docs/en/cross-platform/architecture/error-and-state-model.md": "51364483a23511f4e4f8b79b9226c4d497459409066b4cff0dafafe50fd64dc2",
+    "docs/en/cross-platform/architecture/music-source-plugin-architecture.md": "c279a1b3c30a3d268f500ab821f864543418666d342e417544bcbe34beeb4295",
+    "docs/en/cross-platform/architecture/plugin-data-ownership.md": "458b12a606d451b8406411ddde06ab275f83e6574c7abd0678f2566951a5c3ab",
+    "docs/en/cross-platform/architecture/plugin-runtime-policy.md": "ac92d44971638b61052dfb6414a217097b0d940408408050ac3df0e590331ede",
+    "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md": "92057bc53462c68225e21e3000c58be3675f2db4de53104b910f99bccb77e9eb",
+    "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md": "d12f8e600298b66e3dbb416706ff7094b2f79eabaa5a04d91174348eb7adc6d6",
+    "docs/en/cross-platform/architecture/plugin-system-s03-isolation-prototype.md": "148e510cec8507401fd0d8b405b9bc536ba009a1e4afe754862e5e2c82ceb90e",
+    "docs/en/cross-platform/architecture/plugin-system-s11-permissionless-sandbox.md": "f6de5b53c2a59188bab49c61e289243d232efce288236666db05a18a40c11a4f",
+    "docs/en/cross-platform/architecture/plugin-system-s12-native-authority-and-offline-data.md": "81268473499197dd4145f80a0d8ad44b7e784ea62a09680d6829e254703c874b",
+    "docs/en/cross-platform/architecture/plugin-system-s13-anonymous-networking-and-exits.md": "6136fd4092b89fba9edc9efe5f0b5b8cb7499586b5768f9154924a0b2a617065",
+    "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md": "813c9d839996810b99cf05a9bfe8d75ea557361ca5692dce68359c5b3dc119e6",
+    "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md": "070a7aba69c2dccc9c6d3c9794b9cf966259f6c31c90217093d634fb8ee4ea5f",
+    "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md": "e3bce31bde01e3891aa79b4a444863ea016cb91428f7e30f4801ea5b370e608d",
+    "docs/en/cross-platform/architecture/project-architecture.md": "865beeb0a89911cc969a5962537d348fde83292cffb11c26c103da5ce6f83498",
+    "docs/en/cross-platform/architecture/refactoring-audit-plan.md": "89725843eb7277992fd5106f0d548a8c3360c493b2d520781864ce79c880b6a5",
+    "docs/en/cross-platform/architecture/reusable-package-boundaries.md": "721f0ce639f76bf3059fcb62977a318f5e6012b6f4d42997b7d589386b8dbf71",
+    "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md": "a5d44ca5dd4f9327b0ed22b9d37566fede70d682b929f526ac704f601fbd434e",
+    "docs/en/cross-platform/features/local-library-and-custom-plugins.md": "d5c82ee294096bb8d1d24a1de897d7e897f894163cfa5feb76c8a4067ebebd21",
+    "docs/en/cross-platform/planning/feature-requirements-and-roadmap.md": "a79239cee12b95596e7493f3e5221f6745f0931e5a8e6dae88d3ed7201fd2235",
+    "docs/en/cross-platform/platforms/bilibili/web-api-contract.md": "693ed8d1a2db0a6d90458c6e5b72e614aa2995f8851dd29c12411548cc8b17f7",
+    "docs/en/cross-platform/platforms/douyin/web-api-contract.md": "7fb51d60ea4aa3bef35c566cb13f9df38c980a6a549777bd01feadab052c9e20",
+    "docs/en/desktop/README.md": "d3aba6ab5e43d3beaa4e91e851785391309726bee7ed35195e5ddf2ee4f3134f",
+    "docs/en/desktop/backend-engineering.md": "4963666e2106bef6b6a7ae2e01e11c1ca3c0323713f12dba9902a763f45704a2",
+    "docs/en/desktop/development.md": "bccc6de30dd676da74f95fba9fd3c0a2567089af04c0f4a85544ec99614581d4",
+    "docs/en/desktop/douyin-background-login-experiment.md": "ea5fc12b986bad24da1a10e45262c8803e48cfafd948fbdf79c3a736105296cc",
+    "docs/en/desktop/runtime-architecture.md": "38cbc27cbb1f991a6cc8f35291bb8f491ef3203afa83344e0f91306bf06897f1",
+    "docs/en/desktop/rust-workspace-plan.md": "93a48aaa4534708c911bcbb495d43ac8c3ba010ab665bffee90c4cfb054a5d49",
+    "docs/en/userscript/README.md": "dceafd8c95af18c7e41df30eed9ea82df5416ff4b04cd20688e47e440105d030",
+    "docs/en/userscript/architecture/edge-cases.md": "df9c6fa1b66de3902add5c52e9dd567cc1b5fc7957035a48f8873e91fbe9ce9d",
+    "docs/en/userscript/development.md": "b326af2745dab644f9b65f0f1ab5317b4d4455114779b77b6f95d7a77e3e6051",
+    "docs/zh-cn/文档索引.md": "2cc2b0b60dc35a90f79da0a6e94fe3a52cf57fc2ce4babffd57e63ac18aca830",
+    "docs/zh-cn/桌面端/Rust工作区规划.md": "f2faae3713851734a8c2abd75353ce4b994a0cd78e1c41e92c235f1199527252",
+    "docs/zh-cn/桌面端/后端工程规范.md": "d4b9f1badc6ee79c72cb01e84691c623e3ec28999d26420790ae31605376fbdd",
+    "docs/zh-cn/桌面端/开发规范.md": "415423551046729f7d22e854326bd5042b5d3d626f3c81b907b4c68fcac961ee",
+    "docs/zh-cn/桌面端/抖音后台登录试验.md": "8a2427b8b3d3de6de830e4e74b767a4a84c6de52d1031eb4dd76abcabe6a5e5b",
+    "docs/zh-cn/桌面端/文档索引.md": "0953201afa2518948bffb44be3afd3ff6976321121a63f15fa9f6af5ca294faf",
+    "docs/zh-cn/桌面端/运行端架构.md": "15f764fb0bbb190c37f60519a6fb541887979e157a518533f1c773bf575b5ec3",
+    "docs/zh-cn/用户脚本/开发规范.md": "f7d98366ef8954685cf7f42e2866e14bdf39576f334c230d09511cc24591a169",
+    "docs/zh-cn/用户脚本/文档索引.md": "bdd95c55cb745ec07568feff15296d3dbe58cf515a59484cd245e91a706bfddf",
+    "docs/zh-cn/用户脚本/架构/边界情况.md": "cd7dedc5986e3ba16371b1e8b6213fe113a9b11dea68d0d5f7d4860bfa116194",
+    "docs/zh-cn/跨平台/产品规划/功能需求与路线图.md": "cc964f86c5cb6acd55b147bca78c42b8d60b3feb0ea7b54718d72fd8fcc2ac11",
+    "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md": "50b94e9e1ab79f3643d0b46eff03fbe406a95d5dd97625c47dbc557b96e1ece9",
+    "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md": "0fdb52454396c51bb70edc4c34e179388472d5bfbcac976b4603838ba86022b9",
+    "docs/zh-cn/跨平台/平台接口/哔哩哔哩/网页接口契约.md": "1b9e27e36c64cb9b95a785b2e22e58768f2439e59f31f43945fb5a3df2d6b6ef",
+    "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md": "b6d5099c3c7970e259d6f5feec5bceacfe81d37bbd825b42302b28c29d9c71a8",
+    "docs/zh-cn/跨平台/文档索引.md": "d2d3c4c9e8c662eb328d1ba2676dd75766c14ae70b38e04db6a8861b89bcda14",
+    "docs/zh-cn/跨平台/架构/可复用包边界.md": "2708ee039f1d66816076326e4750e8530df0b46210ca74c6e2200404b92e323b",
+    "docs/zh-cn/跨平台/架构/开发工作流.md": "470cc547fa6e6f24b393061410c4dbfaff33727573f42b91f92161ee8e908f87",
+    "docs/zh-cn/跨平台/架构/插件数据归属.md": "d45e0eb26329f7ba9c7719d5e833a4210186110c38b89b844df1073dfeb0693c",
+    "docs/zh-cn/跨平台/架构/插件系统重构S03隔离原型.md": "a8efe44cde4ce5ed4bf7282533e0042809aef817e3687cb68f5b635921ccddd4",
+    "docs/zh-cn/跨平台/架构/插件系统重构S11无权限沙盒.md": "6e79e3a292d192945f838a3e59765e4f0a959bbd1c9554cff25ab4f237583d3b",
+    "docs/zh-cn/跨平台/架构/插件系统重构S12原生权威与离线数据.md": "ff7dc5a36215edc752829cc062b248f658d59d8ee7dcf3ca6a9ba858e478e780",
+    "docs/zh-cn/跨平台/架构/插件系统重构S13匿名联网与出口.md": "c8fb9c5f2eca83a9e391d73507ba870b702d5dd1872caa1cbae0300042e50443",
+    "docs/zh-cn/跨平台/架构/插件系统重构S14包校验与安装恢复.md": "be77426c94c88bc5853a85b987232f13f2c62f614db02d6c2e33b3500ecc9d23",
+    "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md": "ce2a9afedce1b5a190f9d118e20e6f7bebaba0d28f0b6ca41cf55c4be86ecfd1",
+    "docs/zh-cn/跨平台/架构/插件系统重构S16手机交付.md": "fc1e07a15a38305f0024e4d66a0b7da29e749feb5516a977916f7456f935fa86",
+    "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md": "861f442fcb585df7f07f61190570f36df27aacd3ef90b7cf6cbcbd4676136c13",
+    "docs/zh-cn/跨平台/架构/插件系统重构计划.md": "cb10bdda2c7e28a46fd8b15da53c5b3426ca3834d672e311cdd997add36ad26a",
+    "docs/zh-cn/跨平台/架构/插件运行策略.md": "872d8a1bb2167fa62ac4068057d4cbdc3ecffbbc890d0255c3d677e4d0ef3bf8",
+    "docs/zh-cn/跨平台/架构/重构分板块排查计划.md": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15",
+    "docs/zh-cn/跨平台/架构/错误与状态模型.md": "d2349b4b74131dd4c58c7e96f4f69849706a6002251ed7e58d6ccfefef09518c",
+    "docs/zh-cn/跨平台/架构/音乐源插件架构.md": "f2629707e966e99ffac5bbcc6e6cdaa301bc20e8adc3577d02bb6abef87608a4",
+    "docs/zh-cn/跨平台/架构/项目架构.md": "c7159601c133fc8434dc37f02ed3382abd3846b49dbd063d34dba93b7735073c",
+    ".agents/skills/any-music-tauri-runtime/SKILL.md": "1eb5c2a442dba52f39f8d8443b7884caa1c5f2cf792778669566d13f93006b86",
+    ".agents/skills/any-music-ui-delivery/SKILL.md": "aef43e7cbd6b1e870d190d3291df13253a2216a73fa118dbbc1ec012812c5411",
+    ".agents/skills/any-music-userscript-runtime/SKILL.md": "cbc5ebb0db3444fcecc35c6a75859188e44616c946578ff9db72084930169bc7",
+    ".agents/skills/bilibili-contract-capture/SKILL.md": "d609324327797f20397ff8329d25119a1717ea04ae5aa6a15ce04139950db38e",
+    ".agents/skills/douyin-contract-capture/SKILL.md": "7b1741231737d0d3da250dcf4728b6fc5841c4342b9b8580348f51fb6588d7ca",
+    ".agents/skills/music-source-adapter/SKILL.md": "8ad57139d36b4bbeb41e43d8a1f93b48e637ce79e2c2e4346520867d5413357a",
+    ".agents/skills/music-source-adapter/references/playback.md": "6cbb6f41e6ff8b0a841c77648d671536463d4c070650f14086e09262509c912c",
+    "AGENTS.md": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177",
+    "apps/tauri/AGENTS.md": "b824b3579a0783c66ef8feeed8d235e4303167486fbeec46a980fb57d95518fa",
+    "apps/tauri/src-tauri/AGENTS.md": "84aca77100c43018f388b0d4e9d139f79c6e9aed82ae1a40cb7ffa072a90259e",
+    "apps/userscript/AGENTS.md": "729a9c32a4a1fa26c258eef53fc5ef36603bb142916909b2066c69d338ffcad6",
+    "crates/AGENTS.md": "aec1b1d8587da76c626726f0b50328a54d80ff8524812775f6d6c2116782274b",
+    "crates/am-plugin-net/AGENTS.md": "02c57a4c20212d27cf1469f9c8e9f752ff22b23172b82e946b6bf9069e1d2315",
+    "crates/am-plugin-package/AGENTS.md": "ead2f09150ce3a9a35f7ff2eeb619eb3e770a2e2c6c5d93e2fed4d57b44d69d3",
+    "crates/am-plugin-runtime/AGENTS.md": "e7aeb9661794336f1245bbfb48e11a32c812227aa5fa7d63970b64f12a8f6af6",
+    "packages/account-pool/AGENTS.md": "25d94f4a90822641e50c82089f6cb982fe59c243f0cc74ae5657edd54fa5566c",
+    "packages/audio-composition/AGENTS.md": "32b9a85952c9a58513ada4afc83930ec6181fdc091df4e20b78d6ea782e23fbc",
+    "packages/core/AGENTS.md": "1ee3bb17f954e71a8550de9b6dc72a0d9b5931a83866f4bd8afbf38f6ebb93af",
+    "packages/music-workbench/AGENTS.md": "1c73c5188fabf882082e7e2d08dfa7fe3f0abb03e5d926b11f96a203525c7d8f",
+    "packages/network-routing/AGENTS.md": "7697d7cd71999b6f477842d5925bab46b3cdb6bc809f749da9c6a49715e506b0",
+    "packages/plugin-center/AGENTS.md": "9da312e706600d97d1994e21ebd7cc0aaa3c38002990171b33c9b7db3a93d973",
+    "packages/plugin-cli/AGENTS.md": "cd0ab701715ae2922d7b16abe33510c757c5c79cbb118142fdcd2c03cd093f19",
+    "packages/plugin-music-creation/AGENTS.md": "ea1ca33e8a7f05108fdf172b846fc892dbd88c1af278f4716b8d3b93d93e02cd",
+    "packages/plugin-sandbox-browser/AGENTS.md": "9e08dbb822f97493eca7cc5f2686298763719ee472da9b0d32c00b3aa05b37c2",
+    "packages/plugin-sdk/AGENTS.md": "30bfd9cc8e49eee9d5c0b2f2779eda995c4ce3d0abfd0ec1893d2b79b6d7f76d",
+    "packages/plugin-source-bilibili/AGENTS.md": "b7c0e59fdb5fddf39de456603c4e9c8c4c1fcad40bf715d1c1069c5870d4f42b",
+    "packages/plugin-source-douyin/AGENTS.md": "4cf5dbdf739940709bdb43316065a342738e9e0168fc32842d6608d5c2804384",
+    "packages/plugin-tag-management/AGENTS.md": "df2d590de2defd1755651b248caa1e388fb28fceedb9dc4954f8c6f363ea511f",
+    "packages/plugin-testkit/AGENTS.md": "0534e908166ad8d771e46cd22b47031323412df66abb5b7e65d32266280ec704",
+    "packages/plugin-ui-vue/AGENTS.md": "d7c5ffe3fa6062f6845d14d180a715980adcf97bb3d3d631aba31ce74edc7b91",
+    "packages/plugin-vm/AGENTS.md": "7dbe141b141eda2ae0020820a76f3452f642c13e746e2b3d935899f76b949078",
+    "packages/ui/AGENTS.md": "1d38b0d9f79324421f4b0b787732f12662580ba4c19179c6e0cb593e0d79dc2e",
+    "packages/utils/AGENTS.md": "41c2cb4dedc4a6c55173df272208939374ec4191b0ecec17e1fd4038be3a2f73"
+  },
+  "metadata": {
+    "README.en.md": {
+      "runtimeScope": "repository"
+    },
+    "README.md": {
+      "runtimeScope": "repository"
+    },
+    "docs/en/README.md": {
+      "documentType": "documentation-index",
+      "runtimeScope": "repository"
+    },
+    "docs/en/cross-platform/README.md": {
+      "documentType": "documentation-index",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/architecture/development-workflow.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/architecture/error-and-state-model.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/architecture/music-source-plugin-architecture.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/architecture/plugin-data-ownership.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/architecture/plugin-runtime-policy.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md": {
+      "documentType": "architecture-plan",
+      "runtimeScope": "shared",
+      "documentStatus": "accepted"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md": {
+      "documentType": "architecture",
+      "runtimeScope": "repository"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-s03-isolation-prototype.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-s11-permissionless-sandbox.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-s12-native-authority-and-offline-data.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-s13-anonymous-networking-and-exits.md": {
+      "documentType": "implementation-evidence",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "repository"
+    },
+    "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/cross-platform/architecture/project-architecture.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/architecture/refactoring-audit-plan.md": {
+      "documentType": "audit-plan",
+      "runtimeScope": "repository"
+    },
+    "docs/en/cross-platform/architecture/reusable-package-boundaries.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md": {
+      "documentType": "feature-design",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/features/local-library-and-custom-plugins.md": {
+      "documentType": "feature-design",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/planning/feature-requirements-and-roadmap.md": {
+      "documentType": "product-planning",
+      "runtimeScope": "shared"
+    },
+    "docs/en/cross-platform/platforms/bilibili/web-api-contract.md": {
+      "documentType": "platform-interface",
+      "runtimeScope": "shared",
+      "platform": "bilibili",
+      "captureDate": "2026-09-03"
+    },
+    "docs/en/cross-platform/platforms/douyin/web-api-contract.md": {
+      "documentType": "platform-interface",
+      "runtimeScope": "shared",
+      "platform": "douyin",
+      "captureDate": "2026-10-20"
+    },
+    "docs/en/desktop/README.md": {
+      "documentType": "documentation-index",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/desktop/backend-engineering.md": {
+      "documentType": "architecture",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/desktop/development.md": {
+      "documentType": "architecture",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/desktop/douyin-background-login-experiment.md": {
+      "documentType": "implementation",
+      "runtimeScope": "tauri",
+      "platform": "douyin",
+      "captureDate": "2026-10-03"
+    },
+    "docs/en/desktop/runtime-architecture.md": {
+      "documentType": "architecture",
+      "runtimeScope": "tauri"
+    },
+    "docs/en/desktop/rust-workspace-plan.md": {
+      "documentType": "architecture-plan",
+      "runtimeScope": "tauri",
+      "documentStatus": "accepted"
+    },
+    "docs/en/userscript/README.md": {
+      "documentType": "documentation-index",
+      "runtimeScope": "userscript"
+    },
+    "docs/en/userscript/architecture/edge-cases.md": {
+      "documentType": "architecture",
+      "runtimeScope": "userscript"
+    },
+    "docs/en/userscript/development.md": {
+      "documentType": "architecture",
+      "runtimeScope": "userscript"
+    },
+    "docs/zh-cn/文档索引.md": {
+      "documentType": "documentation-index",
+      "runtimeScope": "repository"
+    },
+    "docs/zh-cn/桌面端/Rust工作区规划.md": {
+      "documentType": "architecture-plan",
+      "runtimeScope": "tauri",
+      "documentStatus": "accepted"
+    },
+    "docs/zh-cn/桌面端/后端工程规范.md": {
+      "documentType": "architecture",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/桌面端/开发规范.md": {
+      "documentType": "architecture",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/桌面端/抖音后台登录试验.md": {
+      "documentType": "implementation",
+      "runtimeScope": "tauri",
+      "platform": "douyin",
+      "captureDate": "2026-10-03"
+    },
+    "docs/zh-cn/桌面端/文档索引.md": {
+      "documentType": "documentation-index",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/桌面端/运行端架构.md": {
+      "documentType": "architecture",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/用户脚本/开发规范.md": {
+      "documentType": "architecture",
+      "runtimeScope": "userscript"
+    },
+    "docs/zh-cn/用户脚本/文档索引.md": {
+      "documentType": "documentation-index",
+      "runtimeScope": "userscript"
+    },
+    "docs/zh-cn/用户脚本/架构/边界情况.md": {
+      "documentType": "architecture",
+      "runtimeScope": "userscript"
+    },
+    "docs/zh-cn/跨平台/产品规划/功能需求与路线图.md": {
+      "documentType": "product-planning",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md": {
+      "documentType": "feature-design",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md": {
+      "documentType": "feature-design",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/平台接口/哔哩哔哩/网页接口契约.md": {
+      "documentType": "platform-interface",
+      "runtimeScope": "shared",
+      "platform": "bilibili",
+      "captureDate": "2026-09-03"
+    },
+    "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md": {
+      "documentType": "platform-interface",
+      "runtimeScope": "shared",
+      "platform": "douyin",
+      "captureDate": "2026-10-20"
+    },
+    "docs/zh-cn/跨平台/文档索引.md": {
+      "documentType": "documentation-index",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/架构/可复用包边界.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/架构/开发工作流.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/架构/插件数据归属.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构S03隔离原型.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构S11无权限沙盒.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构S12原生权威与离线数据.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构S13匿名联网与出口.md": {
+      "documentType": "implementation-evidence",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构S14包校验与安装恢复.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "repository"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构S16手机交付.md": {
+      "documentType": "implementation-record",
+      "runtimeScope": "tauri"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md": {
+      "documentType": "architecture",
+      "runtimeScope": "repository"
+    },
+    "docs/zh-cn/跨平台/架构/插件系统重构计划.md": {
+      "documentType": "architecture-plan",
+      "runtimeScope": "shared",
+      "documentStatus": "accepted"
+    },
+    "docs/zh-cn/跨平台/架构/插件运行策略.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/架构/重构分板块排查计划.md": {
+      "documentType": "audit-plan",
+      "runtimeScope": "repository"
+    },
+    "docs/zh-cn/跨平台/架构/错误与状态模型.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/架构/音乐源插件架构.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    },
+    "docs/zh-cn/跨平台/架构/项目架构.md": {
+      "documentType": "architecture",
+      "runtimeScope": "shared"
+    }
+  },
+  "checkerSha256": "6a463d9a5f41365e8cfd292e8c5fbbf4134bd6b78d3bc625c074bd2efa86a818",
+  "limits": "Structural scan of docs/root READMEs and local guide/skill links only. Stage/design bodies, translation completeness, external URLs and product/runtime behavior are not audited."
+}

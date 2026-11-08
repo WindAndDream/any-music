@@ -1,0 +1,15 @@
+{
+  "stage": "Userscript and desktop frontends built; optimized native root build continues",
+  "artifact": {
+    "path": "apps/userscript/dist/any-music.user.js",
+    "bytes": 5029346,
+    "sha256": "ea76bbf97f9e795f8494f2277319fe8fc33c421f36f4029071d3190f3598fc63"
+  },
+  "inputs": 630,
+  "aggregateSha256": "1aadecc6e681bf93ded40ba4a55f1aad0b9cefdf1eb72d9e71da798c5e530ae9",
+  "driftFromBuildStart": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  }
+}

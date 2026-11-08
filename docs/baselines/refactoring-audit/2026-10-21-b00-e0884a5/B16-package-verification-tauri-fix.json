@@ -1,0 +1,385 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B16-package-verification-tauri-fix",
+  "candidate": "B16-package-verification",
+  "parentBatch": "B16",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T15:36:17.980Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix-baseline.json",
+  "previousReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json",
+  "scope": {
+    "invariant": "Every recognized sourceMappingURL= directive must contain the complete allowed local value main.js.map, so a remote/path/data reference cannot mask itself with the same suffix in query, fragment or repeated marker.",
+    "changedPaths": [
+      "crates/am-plugin-package/src/lib.rs",
+      "packages/plugin-sdk/src/node/package-format.mjs",
+      "packages/plugin-sdk/test/package-corpus-generator.mjs",
+      "packages/plugin-sdk/test/fixtures/packages/corpus.json"
+    ],
+    "exclusions": [
+      "Other four B16 installation/recovery audit candidates",
+      "B14 authority repair, B15 Gate review and B18 admission/live review",
+      "Unrelated documentation formatting and locked TLS dependency upgrades",
+      "Product/browser/device launch, physical power-cut acceptance, commit and push"
+    ],
+    "generatedEvidencePaths": [
+      "docs/baselines/plugin-system-s15/tools.json",
+      "docs/baselines/plugin-system-s15/toolchain-sbom.json"
+    ]
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "resolvedFindingIds": ["B16-P01"],
+  "openFindingIds": [],
+  "findings": [
+    {
+      "id": "B16-P01",
+      "status": "resolved",
+      "severity": "P2",
+      "change": "Rust uses split_once on each line and Node uses the first marker offset plus the entire remainder; both compare the whole trimmed reference with main.js.map instead of matching the line suffix. Any additional query/fragment/path/data/marker remains part of the rejected value.",
+      "evidence": [
+        "crates/am-plugin-package/src/lib.rs:178",
+        "packages/plugin-sdk/src/node/package-format.mjs:240",
+        "packages/plugin-sdk/test/package-corpus-generator.mjs:200",
+        "packages/plugin-sdk/test/fixtures/packages/corpus.json",
+        ".codex-tmp/fix-b16-package/red-node.log",
+        ".codex-tmp/fix-b16-package/red-rust.log",
+        ".codex-tmp/fix-b16-package/green-sdk.log",
+        ".codex-tmp/fix-b16-package/green-rust.log"
+      ],
+      "regressions": {
+        "addedCases": 13,
+        "positiveCases": 4,
+        "negativeCases": 9,
+        "newlyExposedBeforeRepair": 7,
+        "positiveBehavior": [
+          "Exact local reference without final newline",
+          "CRLF code and trailing spaces/tabs",
+          "Legacy //@ comment",
+          "Multiple valid local directives on separate lines"
+        ],
+        "refusals": [
+          "HTTPS query suffix masking",
+          "HTTPS fragment suffix masking",
+          "Repeated marker inside remote query",
+          "Protocol-relative remote URL",
+          "Inline data URL",
+          "Parent traversal with a masked tail",
+          "Second directive glued to a local value",
+          "Query appended to the local name",
+          "Remote directive followed by a valid local line"
+        ]
+      }
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "detail": "All new complete-reference refusal and normal local-reference cases pass in Rust, source Node and built public Node artifact. This preserves the existing conservative line scanner rather than introducing a JavaScript parser or new runtime behavior."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "detail": "Owned bytes, content hashes, integrity/signature validation, public DTOs and stable publisher vectors are unchanged; all 43 original raw fixtures are retained. Native snapshot/load and recovery tests pass."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "detail": "No authorization/admission/storage/IPC/network port was added or modified. Root boundary checks and exact native release feature checks pass. Offline package tests do not reopen production target admission."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "detail": "Regression demonstrated red before implementation, then green through the owner suites, direct native consumer, full-root tests, independent packed tooling and real production build. Existing unrelated root-format and dependency-advisory failures remain recorded separately."
+    }
+  ],
+  "verification": [
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "pnpm --filter @any-music/plugin-sdk exec vitest run test/package-format.test.ts",
+      "startedAt": "2026-10-21T23:24:41.2494123+08:00",
+      "completedAt": "2026-10-21T23:24:43.5748753+08:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/fix-b16-package/red-node.log",
+      "detail": "Before implementation repair: seven new forbidden complete-reference cases are wrongly accepted, while 50 other checks pass. This is the intended red regression, not a missing Vitest executable."
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "cargo test -p am-plugin-package --test corpus --locked",
+      "startedAt": "2026-10-21T23:24:49.6738381+08:00",
+      "completedAt": "2026-10-21T23:24:53.0525506+08:00",
+      "exitCode": 101,
+      "logPath": ".codex-tmp/fix-b16-package/red-rust.log",
+      "detail": "Before implementation repair: the shared raw corpus first fails at the remote-query-mask case; cancellation remains green."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p am-plugin-package --locked",
+      "startedAt": "2026-10-21T23:25:08.2281809+08:00",
+      "completedAt": "2026-10-21T23:25:12.2464633+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/green-rust.log",
+      "detail": "Three Rust integration tests pass, including all 56 shared raw package cases and exact-byte signatures."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/plugin-sdk test",
+      "startedAt": "2026-10-21T23:25:08.2332262+08:00",
+      "completedAt": "2026-10-21T23:25:15.7602829+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/green-sdk.log",
+      "detail": "Generated artifacts match and all 120 SDK tests pass."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "node .codex-tmp/fix-b16-package/check-fixture-generation.mjs",
+      "startedAt": "2026-10-21T23:25:51.2031400+08:00",
+      "completedAt": "2026-10-21T23:25:51.6183560+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/fixture-generation.log",
+      "detail": "All 13 added raw fixtures match the permanent generator byte-for-byte; original 43 cases and public golden/revocation vectors preserved."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:plugin:package",
+      "startedAt": "2026-10-21T23:26:04.3615497+08:00",
+      "completedAt": "2026-10-21T23:26:50.9103689+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/package-gate.log",
+      "detail": "56 Node cases, Rust/Node Ed25519 interoperability, verifier tests and 17 native package installation/update/rollback/recovery tests pass."
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "pnpm test",
+      "startedAt": "2026-10-21T23:26:04.3539146+08:00",
+      "completedAt": "2026-10-21T23:28:06.7429637+08:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/fix-b16-package/root-tests.log",
+      "detail": "Initial complete run overlapped several build/check jobs; both runtime creation-module imports exceeded their existing 20-second timeout. No assertion/timeout was relaxed; the same complete test command was rerun with sequential workspace scheduling."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm test",
+      "startedAt": "2026-10-21T23:31:17.0287009+08:00",
+      "completedAt": "2026-10-21T23:35:47.1930678+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/root-tests-serial.log",
+      "environment": {
+        "npm_config_workspace_concurrency": "1"
+      },
+      "detail": "Complete root test command passes with npm_config_workspace_concurrency=1; test files, assertions and timeouts are unchanged."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-21T23:26:23.8079779+08:00",
+      "completedAt": "2026-10-21T23:30:45.0235564+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/root-typecheck.log",
+      "detail": "All workspace TypeScript/Vue checks, generated protocol/boundaries, Rust formatting and zero-warning all-target Clippy pass."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-21T23:26:04.3497848+08:00",
+      "completedAt": "2026-10-21T23:26:08.0887581+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/root-lint.log",
+      "detail": "Full dependency, isolation, VM, mobile boundary and lint checks pass."
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-21T23:26:08.1592059+08:00",
+      "completedAt": "2026-10-21T23:26:16.1510388+08:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/fix-b16-package/root-format.log",
+      "detail": "The same 12 unchanged documentation files fail formatting; none of the four changed product/test files is listed. No unrelated documentation was reformatted."
+    },
+    {
+      "level": "artifact",
+      "result": "pass",
+      "command": "pnpm build",
+      "startedAt": "2026-10-21T23:27:46.4390774+08:00",
+      "completedAt": "2026-10-21T23:34:25.9335906+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/root-build.log",
+      "detail": "Complete root production build passes, including Userscript and Tauri release application. No application was launched."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:native",
+      "startedAt": "2026-10-21T23:27:29.9083186+08:00",
+      "completedAt": "2026-10-21T23:30:24.6640470+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/native-check.log",
+      "detail": "Workspace all-target native check and exact accepted release feature matrix pass."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:rust:msrv",
+      "startedAt": "2026-10-21T23:26:04.3983179+08:00",
+      "completedAt": "2026-10-21T23:27:15.0438310+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/rust-msrv.log",
+      "detail": "Entire workspace/all-target check passes on pinned MSRV 1.90.0."
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "pnpm check:rust:deny",
+      "startedAt": "2026-10-21T23:27:15.2295859+08:00",
+      "completedAt": "2026-10-21T23:27:44.8958345+08:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/fix-b16-package/rust-deny.log",
+      "detail": "Existing locked TLS dependencies trigger RUSTSEC-2026-0381 and RUSTSEC-2026-0382. Neither Cargo.lock nor dependencies changed in this repair."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:rust:deny:pure",
+      "startedAt": "2026-10-21T23:32:38.7878583+08:00",
+      "completedAt": "2026-10-21T23:32:43.7150873+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/rust-deny-pure.log",
+      "detail": "Protocol/policy/runtime/package dependency audit passes; existing unmatched-license/duplicate-version warnings remain non-fatal."
+    },
+    {
+      "level": "artifact",
+      "result": "pass",
+      "command": "pnpm check:plugin:tools",
+      "startedAt": "2026-10-21T23:27:29.8474459+08:00",
+      "completedAt": "2026-10-21T23:29:07.6613917+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/tools-artifacts.log",
+      "detail": "Packed SDK/CLI/testkit tested in an independent offline consumer with four templates, exact VM tests and reproducible archives."
+    },
+    {
+      "level": "artifact",
+      "result": "pass",
+      "command": "node .codex-tmp/fix-b16-package/check-built-verifier.mjs",
+      "startedAt": "2026-10-21T23:30:51.2575143+08:00",
+      "completedAt": "2026-10-21T23:30:51.4876797+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/built-sdk-verifier.log",
+      "detail": "Built public SDK /node accepts/rejects all 56 shared raw cases, including every added source-map case."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm exec oxfmt --check packages/plugin-sdk/src/node/package-format.mjs packages/plugin-sdk/test/package-corpus-generator.mjs packages/plugin-sdk/test/fixtures/packages/corpus.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix-baseline.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json docs/baselines/plugin-system-s15/tools.json docs/baselines/plugin-system-s15/toolchain-sbom.json",
+      "startedAt": "2026-10-21T23:38:01.3452435+08:00",
+      "completedAt": "2026-10-21T23:38:01.8927707+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-b16-package/changed-format-final.log",
+      "detail": "Final scoped formatter check covers all changed Node source/test files, fix records, ledger and generated S15 offline artifact records."
+    }
+  ],
+  "remainingGateFailures": [
+    {
+      "command": "pnpm format:check",
+      "result": "fail",
+      "owner": "Existing documentation formatting debt",
+      "affectedFiles": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/en/desktop/README.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/en/desktop/runtime-architecture.md",
+        "docs/en/desktop/rust-workspace-plan.md",
+        "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "docs/zh-cn/桌面端/后端工程规范.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/桌面端/文档索引.md",
+        "docs/zh-cn/桌面端/运行端架构.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      ],
+      "logPath": ".codex-tmp/fix-b16-package/root-format.log",
+      "detail": "Files unchanged by this repair. A separate scoped format check covers all changed product/test/report files."
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "result": "fail",
+      "owner": "Existing TLS dependency release blocker",
+      "advisoryIds": ["RUSTSEC-2026-0381", "RUSTSEC-2026-0382"],
+      "logPath": ".codex-tmp/fix-b16-package/rust-deny.log",
+      "detail": "Pinned webpki-roots and rustls-webpki are unchanged. The verifier/pure dependency audit passes; a TLS dependency upgrade remains a separate change."
+    }
+  ],
+  "resolvedVerificationFailures": [
+    {
+      "command": "pnpm test",
+      "firstAttempt": ".codex-tmp/fix-b16-package/root-tests.log",
+      "successfulRetry": ".codex-tmp/fix-b16-package/root-tests-serial.log",
+      "detail": "Initial concurrent full run timed out while lazily importing the creation module in both runtime suites. Lower workspace scheduling concurrency only; no code, timeout or assertion modification was made for the retry."
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "crates/am-plugin-package/src/lib.rs",
+      "sha256": "94324e3b885453bbac94a09f02a77fe65cf6798cab54ddd7b9d0562ba5a4db75"
+    },
+    {
+      "path": "packages/plugin-sdk/src/node/package-format.mjs",
+      "sha256": "57dd19a344eea8999fc8aa7399b39b21bb9f86e2b6408cb4a174ee5ceb02dd6a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/package-corpus-generator.mjs",
+      "sha256": "33b8c44f1f23282e7148a3203dd295e10f97f4eafba6a0d08e18a545e636d4c0"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/packages/corpus.json",
+      "sha256": "710b6fcc3cb3eb43c075381f993d5e54cc480c496e8a052512370bd0eba3bba1"
+    }
+  ],
+  "missingEvidence": [
+    "No live app/browser/device or power-cut acceptance was authorized or run.",
+    "Other four B16 subbatches remain unreviewed despite passing existing native regression tests.",
+    "Complete repository release readiness remains blocked by the two existing gate failures above."
+  ],
+  "nextBatch": {
+    "batchId": "B16-runtime-install-files-tauri",
+    "runtime": "tauri",
+    "status": "pending",
+    "entry": "crates/am-plugin-runtime/src/install.rs",
+    "question": "Review InstallFiles paired-generation publication/recovery, monotonic epoch and owned-copy migration as its own bounded audit."
+  },
+  "handoff": "B16-P01 is repaired in Rust and Node, with 13 shared raw regressions and preserved original vectors. Owner tests, 17 native package cases, packed tooling, full-root tests on retry, typecheck/lint/production build, native checks and MSRV pass. Root-format has 12 unchanged documentation failures and whole-workspace cargo-deny has two pre-existing TLS advisories; pure verifier deny passes. The original failing audit remains historical. Only one of five B16 candidates is reviewed; the next independent audit is runtime InstallFiles. No commit/push or product launch occurred.",
+  "observations": [
+    {
+      "kind": "generated-evidence",
+      "detail": "check:plugin:tools refreshes its tracked offline artifact/SBOM records; those generated hash updates are retained and do not provision or change live target admission."
+    },
+    {
+      "kind": "concurrent-workspace",
+      "detail": "Another workspace operation edited native control/executor and runtime authority/tests while this repair was in progress. These files were preserved and are outside this repair. Their last writes were at 23:25-23:26 Asia/Shanghai, before the successful final production build and complete serial test run; this report does not review or claim ownership of those fixes."
+    }
+  ],
+  "subsequentGateResolution": {
+    "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/repository-format-tls-fix.json",
+    "resolvedGateFailures": ["pnpm format:check", "pnpm check:rust:deny"],
+    "status": "resolved",
+    "detail": "Original verification outputs and remainingGateFailures describe the earlier audit time. Both classes are now repaired and verified by the linked maintenance report."
+  }
+}

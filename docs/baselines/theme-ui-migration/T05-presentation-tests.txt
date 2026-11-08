@@ -1,0 +1,8 @@
+
+ RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  02:20:08
+   Duration  1.80s (transform 862ms, setup 0ms, import 1.53s, tests 97ms, environment 0ms)

@@ -1,0 +1,137 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-named-commit-revoke-tauri",
+  "capturedAt": "2026-10-21T21:41:34.0447696+08:00",
+  "recordedAt": "2026-10-21T13:51:09.889Z",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "initialWorkingTree": [
+    " M apps/tauri/src-tauri/src/network/http.rs",
+    " M apps/tauri/src/platform/native-http.ts",
+    " M apps/tauri/test/platform/native-http.test.ts",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+    " M docs/en/desktop/development.md",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\345\\274\\200\\345\\217\\221\\350\\247\\204\\350\\214\\203.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204S15\\345\\267\\245\\345\\205\\267\\344\\270\\216\\346\\241\\214\\351\\235\\242\\344\\272\\244\\344\\273\\230.md\"",
+    " M packages/plugin-vm/engine/profile.json",
+    " M packages/plugin-vm/src/profile-identity.ts",
+    " M packages/plugin-vm/src/profile.ts",
+    "?? apps/tauri/src-tauri/src/network/http/",
+    "?? apps/tauri/test/fixtures/native-http-response.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? packages/plugin-vm/test/profile.test.ts"
+  ],
+  "sourceHashes": [
+    {
+      "path": "crates/am-plugin-runtime/src/data.rs",
+      "sha256": "b52041a716cc0bf2408843c469b6dabf411ee53e38f6b58d2c258c43edf0a296"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/authority.rs",
+      "sha256": "c5b0cf7d7d9f9da3ef3c9f7ea6f3ec5ff4d0dbd6c3130cf0c83c700755a0a96e"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/model.rs",
+      "sha256": "39019af1c04b3472b6e275193c9031a2724e0e2ce94a7a5bc5814744b7ef9e09"
+    },
+    {
+      "path": "crates/am-plugin-runtime/tests/offline.rs",
+      "sha256": "056fc73165560ec41d01426138def76af19f210c7d97f33bd78acc8f56c4ce82"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins.rs",
+      "sha256": "2b0369646cf81524daa32e5297b944059bb7a6784c22510fe98cb24fb606e6c4"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+      "sha256": "943603eacfe41d6af016224282d8a941990b5802e3a69af2c7c06cb2d8700d25"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/control.rs",
+      "sha256": "380c8caf438ad3c918c7848b591b8dec2057cbfaf80cceb1219d940de3f33725"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/ipc.rs",
+      "sha256": "8b1ebec364fb6f1aeacd2e8de4528012fe897e0572b7cae31e458ca0d191e9e6"
+    },
+    {
+      "path": "apps/tauri/src-tauri/build.rs",
+      "sha256": "67f3fe0b980541bad33f6644421dffc09319273fd00d712c1569d59297d1037d"
+    },
+    {
+      "path": "apps/tauri/src-tauri/permissions/product.toml",
+      "sha256": "0b384ea07ba442ec44e03a4efd381c12d0fde480a870905939a8b64f8dc3e61f"
+    },
+    {
+      "path": "apps/tauri/src-tauri/capabilities/main.json",
+      "sha256": "46467f05f13a96d2f01d16abc62b3dc0a669a6f6cf90ef01909f8f879db9e468"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/storage/plugins.rs",
+      "sha256": "8b9cb58ebbb42119cae1c74b139af7c2e5d9e9281f18b5e3c67cd044ae9a04fd"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/storage/plugins/tests.rs",
+      "sha256": "511ce0f1e3b88ce236f16ceaa5cb70e27e834b2857e5d7aa089b9548ca2ea7f1"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "53212780b8821b735b6fd386c3edff8713c73827ba57a173d93f1fa53bd6f273"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff"
+    }
+  ],
+  "additionalEvidenceHashes": [
+    {
+      "path": "apps/tauri/src-tauri/src/isolation.rs",
+      "sha256": "ffc2e886f3552ce1bd6871710d933475d53557f06343a8850a900157c681565e",
+      "scope": "Bounded diagnostic relay/cfg excerpts only, not full S03 isolation acceptance."
+    }
+  ],
+  "environment": {
+    "os": "Windows",
+    "shell": "PowerShell",
+    "timezone": "Asia/Shanghai",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+    "pnpm": "10.23.0"
+  },
+  "reusedEvidence": [
+    {
+      "batchId": "B14-pure-policy-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+      "matchingInputs": 89,
+      "result": "valid-scoped-evidence"
+    },
+    {
+      "batchId": "B14-runtime-ports-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+      "matchingInputs": 14,
+      "result": "valid-scoped-evidence"
+    },
+    {
+      "batchId": "B14-authority-storage-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+      "matchingInputs": 11,
+      "result": "valid-scoped-evidence"
+    }
+  ]
+}

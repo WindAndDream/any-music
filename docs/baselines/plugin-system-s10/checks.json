@@ -1,0 +1,171 @@
+{
+  "documentType": "implementation-checks",
+  "runtimeScope": "repository",
+  "step": "S10",
+  "reviewDate": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "scriptTests": 18,
+  "vitestTests": 1570,
+  "rustTests": 109,
+  "rustIgnored": 1,
+  "protocolDifferentialCases": 171,
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "startedAtUtc": "2026-10-18T06:25:20.341522+00:00",
+      "elapsedSeconds": 56.767,
+      "localLog": ".codex-tmp/s10/test.log",
+      "sha256": "de24465843299832d3c4250d10683f8199c2c46c47b121b398e4dcdf786d0bab"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s10/typecheck.log",
+      "sha256": "9a24b9db0d4ca67957e4bc655a3d27daf94aba96e0776296befe352995381b29",
+      "revalidatedBy": "pnpm build repeated the complete root typecheck before both production builds."
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "startedAtUtc": "2026-10-18T06:30:29.540561+00:00",
+      "elapsedSeconds": 3.928,
+      "localLog": ".codex-tmp/s10/lint.log",
+      "sha256": "b6b5e296e5b1f80dbf68aa134f8ebc3bf53cf42ea02ed5a638432f7773862cc9"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "startedAtUtc": "2026-10-18T06:30:29.619689+00:00",
+      "elapsedSeconds": 3.827,
+      "localLog": ".codex-tmp/s10/format-check.log",
+      "sha256": "456e62f622f6157009e6741b7e960190fce519f5792907a40468fca8d8da3bae"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "startedAtUtc": "2026-10-18T06:25:20.526403+00:00",
+      "elapsedSeconds": 131.716,
+      "localLog": ".codex-tmp/s10/build.log",
+      "sha256": "1fdc6f04e7aec240402ba2f0b7e3ba38a833f104c54846502ac256bb70731f05"
+    }
+  ],
+  "userscriptGraph": {
+    "path": "docs/baselines/plugin-system-s10/userscript-build-audit.json",
+    "sha256": "128c015ba00b0ce8005c699e6eff66a44d2d3edbd970736fd2a820c9362f63a2",
+    "renderedModules": 398,
+    "documentStartStaticModules": 26,
+    "connect": [
+      "api.bilibili.com",
+      "bilivideo.cn",
+      "bilivideo.com",
+      "www.douyin.com",
+      "www-hj.douyin.com",
+      "www.iesdouyin.com",
+      "douyinvod.com"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3393054,
+      "sha256": "cfb5172b10549a0ec9f532afb08cbc4250e2b5baa467cdee72ded890d5df2da6"
+    },
+    {
+      "path": "apps/userscript/dist/userscript-build-audit.json",
+      "bytes": 30957,
+      "sha256": "4f48dca79a0c264e088818c1f43fe7ddf0e6b358bcade95985f1f635d78a39b4"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 18051072,
+      "sha256": "62cf4aa33860022a666e426d3811e1db3740e529dd5811ec3e0a0f0ca9e3a796"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CustomPluginPanel-C_LAAkfu.js",
+      "bytes": 47527,
+      "sha256": "9cd31b088ed8a953809553f7b352c712a5f8b9f642cec7c98abeaa5bafa2024d"
+    }
+  ],
+  "evidence": {
+    "policy": "Userscript explicitly injects none; no legacy factories or panel loader. Registry skips restored construction, rejects install/enable/check/activate/media and excludes external prefetch. Library and workbench direct installation also check policy before parsing.",
+    "identity": "Built-in source identity derives only from directory instances. Forged builtIn/signature/provenance, factory provenance and ID collisions are covered. The generic framework still has build-directory-only module activation.",
+    "archive": "New v2/v3/unknown migration preserves raw customPlugins in archives; ordinary library saves cannot rewrite them. Dedicated legacy-source-manifests:v1 edits and separate execution:none export preserve core and namespace data. Original keys/S06 backups remain intact. Each-write failures and production GM archive-write failure are tested.",
+    "backup": "Portable core rejects manifest fields; extra top-level grant/archive claims and opaque namespace data cannot install or execute sources. The separate archive wrapper has no automatic desktop bulk installer and carries no execution permission.",
+    "ui": "Node component events verify migration explanation, export, cancelled/confirmed deletion and clear-all without install/check/enable. Workbench owns writes and saving; unknown records remain exportable and explicitly clearable.",
+    "tauri": "Actual v2/v3 interpreter through a native HTTP double retains anonymous omit, precise scheme/host/port and import/media scopes with no startup requests or restored new grants. New code/public broker/installation authority remain S11-S14.",
+    "production": "Actual production bundle module audit rejects legacy interpreter/installation UI, external VM/installer/public-network broker, and eager Vue/Pinia/styles/source implementation. Both trusted themes, built-in sources/tags/creation and the inert archive panel are present. External-only @connect wildcard removed. Tauri frontend and Windows no-bundle release built.",
+    "scope": "S10 only. S03 awaits actual isolation acceptance and S11-S16 remain pending. No Rust implementation changed; existing S06 audit restrictions remain."
+  },
+  "workingTree": {
+    "initialFilesHashed": 1112,
+    "unchangedFiles": 1058,
+    "modifiedInitialFiles": [
+      "packages/music-workbench/test/features/music-sources/use-music-source-registry.test.ts",
+      "packages/music-workbench/src/features/library/use-local-music-library.ts",
+      "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts",
+      "packages/music-sources/AGENTS.md",
+      "packages/music-workbench/test/features/plugins/use-music-creation.test.ts",
+      "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "docs/en/cross-platform/features/local-library-and-custom-plugins.md",
+      "packages/plugin-center/test/music-sources/managed-music-source-plugin.test.ts",
+      "pnpm-lock.yaml",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-baseline.md",
+      "packages/ui/AGENTS.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "packages/music-workbench/AGENTS.md",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "apps/tauri/package.json",
+      "docs/en/desktop/development.md",
+      "packages/music-workbench/src/plugin-adapters/workbench-view-components.ts",
+      "docs/zh-cn/用户脚本/开发规范.md",
+      "packages/plugin-center/src/music-sources/music-source-registry.ts",
+      "apps/userscript/AGENTS.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+      "apps/tauri/test/features/music-sources/verification-flow.test.ts",
+      "docs/en/cross-platform/README.md",
+      "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+      "apps/userscript/test/platform/product-storage.test.ts",
+      "docs/zh-cn/跨平台/架构/插件系统重构基线.md",
+      "packages/plugin-center/AGENTS.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "packages/music-workbench/src/storage/local-music-library-repository.ts",
+      "packages/music-workbench/src/features/music-sources/use-music-source-registry.ts",
+      "apps/userscript/vite.config.ts",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "AGENTS.md",
+      "packages/music-workbench/src/storage/product-storage.ts",
+      "packages/plugin-center/test/music-sources/music-source-registry.test.ts",
+      "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+      "apps/tauri/AGENTS.md",
+      "packages/music-workbench/package.json",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      ".agents/skills/any-music-userscript-runtime/SKILL.md",
+      "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md",
+      "packages/plugin-center/src/index.ts",
+      "packages/music-workbench/test/features/music-sources/use-music-source-workbench.test.ts",
+      "packages/music-workbench/src/storage/product-data-projection.ts",
+      "apps/userscript/src/platform/configure-userscript-workbench.ts",
+      "docs/en/userscript/development.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md"
+    ],
+    "deletedInitialFiles": [],
+    "initialDirtyEntries": 378,
+    "allInitialDirtyPathsRemainDirty": true,
+    "noCommitOrPush": true
+  },
+  "notPerformed": [
+    "application/browser/dev-server/emulator launch",
+    "website/installed-GM/Rust-public-network/visual/focus/device acceptance",
+    "actual WebView isolation acceptance",
+    "native/MSRV/deny beyond root gates; no Rust implementation change",
+    "Git commit or push"
+  ]
+}

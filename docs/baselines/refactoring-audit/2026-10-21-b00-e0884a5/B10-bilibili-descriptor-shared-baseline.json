@@ -1,0 +1,267 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B10-bilibili-descriptor-shared",
+  "capturedAt": "2026-10-21T10:22:23.4242061+00:00",
+  "head": "844b5e35b0d6b152350c34043857e042170cbd61",
+  "workingTree": [
+    " M apps/tauri/src/platform/product-storage.ts",
+    " M apps/tauri/test/platform/product-storage.test.ts",
+    " M apps/userscript/src/bootstrap-userscript-app.ts",
+    " M apps/userscript/src/platform/configure-userscript-workbench.ts",
+    " M apps/userscript/src/platform/dev/install-dev-userscript-runtime.ts",
+    " M apps/userscript/test/platform/product-storage.test.ts",
+    " M apps/userscript/vite.config.ts",
+    "A  docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-baseline.json",
+    "A  docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+    "A  docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared.json",
+    "MM docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "M  docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+    " M docs/en/cross-platform/architecture/plugin-data-ownership.md",
+    " M docs/en/desktop/development.md",
+    " M docs/en/userscript/development.md",
+    " M docs/zh-cn/桌面端/开发规范.md",
+    " M docs/zh-cn/用户脚本/开发规范.md",
+    " M docs/zh-cn/跨平台/架构/插件数据归属.md",
+    "M  docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+    " M packages/core/src/download/download-history.ts",
+    " M packages/core/src/index.ts",
+    " M packages/core/src/models/track.ts",
+    " M packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+    "M  packages/music-workbench/src/media/range-media-source.ts",
+    "M  packages/music-workbench/src/media/resolved-media-loader.ts",
+    " M packages/music-workbench/src/storage/local-music-library-repository.ts",
+    " M packages/music-workbench/src/storage/product-generation-store.ts",
+    " M packages/music-workbench/src/storage/product-storage.ts",
+    " M packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts",
+    "M  packages/music-workbench/test/media/range-media-source.test.ts",
+    "M  packages/music-workbench/test/media/resolved-media-loader.test.ts",
+    " M packages/music-workbench/test/storage/product-generation-store.test.ts",
+    " M packages/music-workbench/test/storage/product-storage-fixtures.ts",
+    "?? apps/userscript/src/platform/product-storage.ts",
+    "?? apps/userscript/test/bootstrap-userscript-app.test.ts",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared.json"
+  ],
+  "targetWorkingTree": [],
+  "environment": {
+    "os": "Windows",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "timezone": "Asia/Shanghai"
+  },
+  "fileHashes": [
+    {
+      "path": "packages/plugin-source-bilibili/package.json",
+      "sha256": "d52c2a562a336fc732242dbe9c9e425ae82f1d75b4d960ee04396df6bdc71526"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/AGENTS.md",
+      "sha256": "b7c0e59fdb5fddf39de456603c4e9c8c4c1fcad40bf715d1c1069c5870d4f42b"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/index.ts",
+      "sha256": "c04eb33120a48b27857d3ef654f6dea38cff100a06e0610f5356b342517350ce"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/descriptor.ts",
+      "sha256": "1d0bd2e06544bb34767dfd26b0b64535f1962373c70a0b466c3aecc23f68f693"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/url-parser.ts",
+      "sha256": "13a5ab4c5d7a2a44e8ea81c5bbe72a7e0fe8dc129b0d546f3f46b04f91ff580f"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/runtime.ts",
+      "sha256": "9894c5fc9a0d2a4cd3beab31803a7be256784a357de4e12dc4e68bc12c5ef437"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/bilibili-plugin.ts",
+      "sha256": "005b655972426780d7bd0646233d6cae4803773f10dffdea73ee2734a84bd362"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/test/bilibili-plugin.test.ts",
+      "sha256": "fdf97e409e32705b71a9b407b5f5a5a77255ae55bf0bd5a01029787b9bba0d1e"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/test/bilibili-api.test.ts",
+      "sha256": "8fa9b5180804af5c85f369030ddf6431a59f489743d16aec45760f1e9768ec13"
+    },
+    {
+      "path": "packages/plugin-center/AGENTS.md",
+      "sha256": "9da312e706600d97d1994e21ebd7cc0aaa3c38002990171b33c9b7db3a93d973"
+    },
+    {
+      "path": "packages/plugin-center/package.json",
+      "sha256": "739a12bd6b5044b13c4a8e8a62d92d9959ce73be30e474b8f666c95969072df2"
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/index.ts",
+      "sha256": "240ceda1c262f1b11e3808c4422318dc332b09e689ba397a1b0ef09e32e7a174"
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts",
+      "sha256": "f99ac67694d0c43893bf41634106409e6ac1ca8cc17483ffd2c003daed9b0d24"
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/managed-music-source-plugin.ts",
+      "sha256": "9d9ae67853cb8fae8664741040192350aaf8677860139bd4a50580536a515b3b"
+    },
+    {
+      "path": "packages/plugin-center/test/music-sources/lazy-music-source-plugin.test.ts",
+      "sha256": "c698c20a9f8c10986ef12bc34c150f2da9e647839fd06a60b2f68746fbf9d1cb"
+    },
+    {
+      "path": "packages/core/src/music-source/plugin.ts",
+      "sha256": "c594d641189504e8dade3fd9411e47cb86fc4cc8a36170b61d733dc22b545c86"
+    },
+    {
+      "path": "packages/core/src/music-source/policies.ts",
+      "sha256": "770f19554ffd3025626454e6d83ba9f68badea3434381b0f50c401f475e34a59"
+    },
+    {
+      "path": "scripts/check-package-boundaries.mjs",
+      "sha256": "18c11924b7b99c9486cbcaf0643f9aff1612f877dbab6ef7689ef57410ca442f"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+      "sha256": "7dcbe68c54943dd0825b74fd7febdb8633ffc9ff5d6373bbcb464772b5da4af0"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "sha256": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15"
+    }
+  ],
+  "logs": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor",
+  "supplementalHashes": [
+    {
+      "path": "packages/core/AGENTS.md",
+      "sha256": "1ee3bb17f954e71a8550de9b6dc72a0d9b5931a83866f4bd8afbf38f6ebb93af",
+      "capturedAt": "2026-10-21T10:27:34.932Z",
+      "reading": "Contract or direct preflight excerpt only; no independent UI/workbench implementation audit."
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts",
+      "sha256": "22158e6c1c8bd37e33ae0eea63a9976bc5c9c1ceaa6d02fee557622a34d46241",
+      "capturedAt": "2026-10-21T10:27:34.932Z",
+      "reading": "Contract or direct preflight excerpt only; no independent UI/workbench implementation audit."
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/source-input-validation.ts",
+      "sha256": "3df3b01ba5b135807f115899d6740a726076ee8edb75a2ca0bdad6739cd87aca",
+      "capturedAt": "2026-10-21T10:27:34.932Z",
+      "reading": "Contract or direct preflight excerpt only; no independent UI/workbench implementation audit."
+    }
+  ],
+  "staticGraph": {
+    "result": "pass",
+    "visitedCount": 23,
+    "graphKind": "transpiled static import graph; no product bundle or runtime acceptance",
+    "fileHashes": [
+      {
+        "path": "packages/plugin-source-bilibili/src/index.ts",
+        "sha256": "c04eb33120a48b27857d3ef654f6dea38cff100a06e0610f5356b342517350ce"
+      },
+      {
+        "path": "packages/plugin-source-bilibili/src/descriptor.ts",
+        "sha256": "1d0bd2e06544bb34767dfd26b0b64535f1962373c70a0b466c3aecc23f68f693"
+      },
+      {
+        "path": "packages/plugin-source-bilibili/src/url-parser.ts",
+        "sha256": "13a5ab4c5d7a2a44e8ea81c5bbe72a7e0fe8dc129b0d546f3f46b04f91ff580f"
+      },
+      {
+        "path": "packages/core/src/index.ts",
+        "sha256": "bbed35f40f47d50364fb1f1b15e09ca6ca4ce7bb3c8d69952c9665439be34580"
+      },
+      {
+        "path": "packages/core/src/library/track-name.ts",
+        "sha256": "4ce9cc5eeaeae461c2812a1ddbc127e04888c6b587e12dfc9e406e70b827b462"
+      },
+      {
+        "path": "packages/core/src/errors/app-error.ts",
+        "sha256": "9dda4aeb158118e6c4ea902485f126c7d3aa9f38c08af67b0f439c992e2ba43e"
+      },
+      {
+        "path": "packages/core/src/download/download-queue.ts",
+        "sha256": "219bc655c259973f08dbe0f0fd2244d7559480d09444dfcc80f7c205f30bde72"
+      },
+      {
+        "path": "packages/core/src/download/download-history.ts",
+        "sha256": "476bd46eb214d80224e57a4c862ff7a7d8cc0b56726b5bb9895c13555de6845f"
+      },
+      {
+        "path": "packages/core/src/models/track.ts",
+        "sha256": "e08560223fdfc9dc4bbff619c206fac5ec1c71c4d3c211c37388463475cd52d7"
+      },
+      {
+        "path": "packages/core/src/music-source/plugin.ts",
+        "sha256": "c594d641189504e8dade3fd9411e47cb86fc4cc8a36170b61d733dc22b545c86"
+      },
+      {
+        "path": "packages/core/src/library/models.ts",
+        "sha256": "9500c12ad4198624f93ae34069a12d3af6dee5c643c2237b271fb592a31ffc3e"
+      },
+      {
+        "path": "packages/core/src/library/material-collection.ts",
+        "sha256": "cba13b7130d4b993b4c315eecfdabd9fe25a1f4ea10844884d54f5ab0c19c8c5"
+      },
+      {
+        "path": "packages/core/src/library/favorites.ts",
+        "sha256": "b7d7c626e477ce187bc5e1ea6339c1f5d040522fa32c31a5c8c68228064ca471"
+      },
+      {
+        "path": "packages/core/src/library/segment-recipe.ts",
+        "sha256": "8e405edc59a51da0e40c3aae587607f1af686843a758c3e7a7157dd090b462f9"
+      },
+      {
+        "path": "packages/audio-composition/src/index.ts",
+        "sha256": "e80425e13d95ef1d61ec88897bec8255d40a68d350a3dbcb41826d21bbc5ab38"
+      },
+      {
+        "path": "packages/audio-composition/src/models.ts",
+        "sha256": "050ad5fec92bc2a18151b74e155d18ba1b6471b70556b8fb911480eb0964602c"
+      },
+      {
+        "path": "packages/audio-composition/src/segment-recipe.ts",
+        "sha256": "07c7cd93665f4aa639962652173252ae41d00c16b15417e80736b894eb943f64"
+      },
+      {
+        "path": "packages/audio-composition/src/virtual-playback-plan.ts",
+        "sha256": "c11c42cf16537636b3b943398a162c8476363740e066719456e9d972035169dc"
+      },
+      {
+        "path": "packages/audio-composition/src/virtual-audio-preload.ts",
+        "sha256": "9c7970bcdb5834a8b8372003cb0ea22f05509b9a8573ec3fa9f5f82eb7393282"
+      },
+      {
+        "path": "packages/core/src/music-source/policies.ts",
+        "sha256": "770f19554ffd3025626454e6d83ba9f68badea3434381b0f50c401f475e34a59"
+      },
+      {
+        "path": "packages/core/src/player/normalize-progress.ts",
+        "sha256": "2b4afcbec4d075547f60172d61d706552bd971de699a546fbcb5f409bb134b73"
+      },
+      {
+        "path": "packages/utils/src/index.ts",
+        "sha256": "dc6a6654cd22c697e8d4eeab59af262a1d5672e630284223b1105baa5db63bd5"
+      },
+      {
+        "path": "packages/utils/src/number/clamp.ts",
+        "sha256": "c991ffa6dd6c69054605448a5704f3c44f02812ccc0a6af6a6db082a405c4eb5"
+      }
+    ],
+    "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/metadata-graph.log"
+  },
+  "finalVerification": {
+    "checkedAt": "2026-10-21T10:27:34.932Z",
+    "currentHead": "cdbd92dd17652ec2fad5f65a921dcc18547bfe8c",
+    "changedInputs": [],
+    "detail": "HEAD advanced during concurrent repository activity. All initial audited inputs and the complete checked metadata graph are unchanged; evidence is retained by file hashes, not by HEAD equality."
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B15-public-target-bounded-transport-tauri",
+  "parentBatch": "B15",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T13:19:23.832Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+  "scope": {
+    "invariant": "Anonymous HTTPS dispatch, redirects, bounded reads and resource Range/release all use one injected Gate, reject nonpublic targets and unsupported routes, and stop further sink delivery when that Gate denies or cancels.",
+    "selectedChain": "Request/Resources.read -> Network.execute/run -> target + all DNS candidates -> pinned fresh TLS client per hop -> Gate dispatch/delivery checks -> trusted Sink; cancellation and ResourceRef release stop subsequent reads.",
+    "allowedPaths": [
+      "crates/am-plugin-net",
+      "Application network Gate factory and executor network.request call-site excerpts only"
+    ],
+    "exclusions": [
+      "Product fixes or permanent regression tests",
+      "Native Gate/revoke/SQLite internals",
+      "Independent persistent network ledger and final guest response delivery",
+      "Generic omit and anonymous register_media refusal implementations",
+      "Built-in account HTTP/proxies/media, package acquisition, external target admission",
+      "Application/browser/device launch and production artifact/live acceptance",
+      "Root final gates, commit and push"
+    ],
+    "expansionReasons": [
+      "network.rs:1-69 and executor.rs:622-652 identify the real application injection and trusted response sink; neither entire neighboring module was reviewed."
+    ],
+    "readingLimit": "One selected transport chain; implementation reading stopped before NativeGate trait implementation, durable store and final guest delivery. Remaining candidates are pending."
+  },
+  "declaredStatus": {
+    "claim": "The current native transport is anonymous, independently owned, public-target constrained and bounded; application authority supplies grants, budgets and revocation barriers.",
+    "references": [
+      "crates/am-plugin-net/AGENTS.md:3",
+      "docs/en/desktop/development.md:44",
+      "docs/en/cross-platform/architecture/plugin-system-s13-anonymous-networking-and-exits.md:19",
+      "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:160"
+    ],
+    "evidenceLimit": "S13 is historical implementation evidence. Its old production-admission closure and command/test counts do not define current S15 support. No historical test result was reused as a current pass."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Is anonymous IO owned by am-plugin-net with native authority injected independently of accounts?",
+      "evidence": [
+        "crates/am-plugin-net/Cargo.toml:18",
+        "crates/am-plugin-net/src/lib.rs:1",
+        "crates/am-plugin-net/src/transport.rs:11",
+        "apps/tauri/src-tauri/src/plugins/network.rs:9",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:626"
+      ],
+      "detail": "No Tauri/runtime/account/vault/SQLite dependency in the transport crate. Public Gate/Sink/Resolver ports inject authority and controlled destinations; metadata boundary validation passes."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Do public-target and redirect checks precede connections without proxy/account fallback?",
+      "evidence": [
+        "crates/am-plugin-net/src/target.rs:14",
+        "crates/am-plugin-net/src/target.rs:104",
+        "crates/am-plugin-net/src/target.rs:123",
+        "crates/am-plugin-net/src/transport.rs:159",
+        "crates/am-plugin-net/src/transport.rs:198",
+        "crates/am-plugin-net/src/transport.rs:218",
+        "crates/am-plugin-net/src/transport.rs:294",
+        "crates/am-plugin-net/tests/targets.rs:4",
+        "crates/am-plugin-net/tests/transport.rs:281",
+        "crates/am-plugin-net/tests/transport.rs:329",
+        "crates/am-plugin-net/tests/transport.rs:355"
+      ],
+      "detail": "HTTPS 443 and exact normalized scopes; every DNS answer must be public. Fresh clients pin checked addresses, retain original hostname TLS and check peer IP. At most three redirects; each destination and DNS set is checked again. Unsupported proxy routes dispatch zero requests. Test-only address/CA substitution is cfg(test).",
+      "limit": "Local TLS substitutes the socket address only in test builds. Production public-network connectivity and the real OS resolver path were not exercised; IANA registry recertification is not part of this source-contract audit."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "question": "Are requests and body delivery bounded, with cancellation and resource reads retaining the same authority contract?",
+      "evidence": [
+        "crates/am-plugin-net/src/request.rs:50",
+        "crates/am-plugin-net/src/request.rs:125",
+        "crates/am-plugin-net/src/transport.rs:124",
+        "crates/am-plugin-net/src/transport.rs:167",
+        "crates/am-plugin-net/src/transport.rs:187",
+        "crates/am-plugin-net/src/transport.rs:275",
+        "crates/am-plugin-net/src/resources.rs:22",
+        "crates/am-plugin-net/src/resources.rs:61",
+        "crates/am-plugin-net/src/resources.rs:81",
+        "crates/am-plugin-net/src/resources.rs:108",
+        "crates/am-plugin-net/tests/transport.rs:17",
+        "crates/am-plugin-net/tests/transport.rs:368",
+        "crates/am-plugin-net/tests/transport.rs:388"
+      ],
+      "detail": "Request validation caps URL/headers/POST/response sizes, permits bounded single Range only, and enforces exit/method constraints. Overall 30-second and connect 10-second deadlines are configured. Gate charges each dispatch and delivered chunk. Range/repeated reads share the stored Gate and child cancellation token. Tests assert four requests at redirect exhaustion, one request before denied redirects, zero requests on mixed DNS/proxies, no post-release request, and partial-stream cancellation.",
+      "limit": "The test Gate uses a token/counters, not durable native epochs. Native cumulative 64-request/128-MiB session enforcement, concurrent revoke acknowledgement and final guest response consumption are not established. Deadline expiration and cancellation while waiting for DNS are statically traced but lack dedicated tests in the existing 12-test suite."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Are credentials and transient resources kept outside public/persisted response data?",
+      "evidence": [
+        "crates/am-plugin-net/src/request.rs:75",
+        "crates/am-plugin-net/src/transport.rs:73",
+        "crates/am-plugin-net/src/transport.rs:229",
+        "crates/am-plugin-net/src/resources.rs:8",
+        "crates/am-plugin-net/tests/transport.rs:224",
+        "crates/am-plugin-net/tests/transport.rs:249",
+        "crates/am-plugin-net/tests/transport.rs:440"
+      ],
+      "detail": "Cookie/Authorization/Host/proxy headers are rejected. Cross-origin 303 reconstructs GET without plugin headers or POST body; cross-origin POST preservation fails. No Set-Cookie persistence or response header relay. ResourceRef and remote URLs are in-memory only with no serialization interface. ExternalLink/Export/HostWrite reject before dispatch. Errors are bounded native categories; application excerpt projects a fixed message.",
+      "limit": "No review of native audit redaction/storage or downstream product snapshot persistence; no claim that the external transport crate itself implements generic media registration policy."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Are current owner tests and boundary evidence reproducible without overstating production acceptance?",
+      "evidence": [
+        "crates/am-plugin-net/Cargo.toml:7",
+        "crates/am-plugin-net/src/lib.rs:26",
+        "crates/am-plugin-net/tests/fixtures/README.md:1",
+        ".codex-tmp/audit-b15-public-target/cargo-test.log",
+        ".codex-tmp/audit-b15-public-target/cargo-clippy.log",
+        ".codex-tmp/audit-b15-public-target/rust-boundaries.log"
+      ],
+      "detail": "Nine TLS/unit tests are included by the crate lib test harness and three target tests are explicit integration tests; all 12 pass on this baseline. Targeted all-target Clippy and dependency-boundary checks pass. No implementation, permanent test, maintained guide, platform contract or captureDate was changed."
+    }
+  ],
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "Scoped source/manifest/test review",
+      "exitCode": null,
+      "time": "2026-10-21T13:19:23.832Z",
+      "logPath": null,
+      "detail": "Locations and review limits are listed in checks and readFiles."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p am-plugin-net --locked",
+      "startedAt": "2026-10-21T21:14:17.8761699+08:00",
+      "completedAt": "2026-10-21T21:14:34.8839361+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b15-public-target/cargo-test.log",
+      "detail": "12 passed: 9 controlled local TLS/unit tests and 3 public-target integration tests; no ignored or failed tests."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo clippy -p am-plugin-net --all-targets --locked -- -D warnings",
+      "startedAt": "2026-10-21T21:15:48.6861289+08:00",
+      "completedAt": "2026-10-21T21:16:01.3933166+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b15-public-target/cargo-clippy.log",
+      "detail": "Target crate all-target Clippy passes with warnings denied."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:rust:boundaries",
+      "startedAt": "2026-10-21T21:15:48.6858878+08:00",
+      "completedAt": "2026-10-21T21:15:50.8345670+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b15-public-target/rust-boundaries.log",
+      "detail": "Repository metadata boundary check passes, including the separate anonymous transport dependency closure. This is not a review of other crates."
+    },
+    {
+      "level": "artifact",
+      "result": "not-run",
+      "command": null,
+      "exitCode": null,
+      "time": "2026-10-21T13:19:23.832Z",
+      "logPath": null,
+      "reason": "The subbatch changes no source/interface and does not claim production artifact or exact-target admission."
+    },
+    {
+      "level": "live",
+      "result": "not-run",
+      "command": null,
+      "exitCode": null,
+      "time": "2026-10-21T13:19:23.832Z",
+      "logPath": null,
+      "reason": "No current-task authorization for application/browser inspection. Controlled local TLS tests do not establish product runtime acceptance."
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "pnpm exec oxfmt --check docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "exitCode": 1,
+      "time": "2026-10-21T13:20:26.056Z",
+      "logPath": null,
+      "detail": "Initial report-format check found summary.json formatting only. The summary was formatted with oxfmt; the final check is recorded separately. This was not a product/test failure.",
+      "resolved": true
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm exec oxfmt --check docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "startedAt": "2026-10-21T21:20:26.0950685+08:00",
+      "completedAt": "2026-10-21T21:20:26.6521934+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b15-public-target/report-format.log",
+      "detail": "Final scoped report-format check passes after formatting summary.json. Report JSON, evidence locations, ledger entry and all source hashes also verified."
+    }
+  ],
+  "findings": [],
+  "observations": [
+    {
+      "kind": "evidence-limit",
+      "detail": "Existing transport tests do not override Gate.deliver with a durable revoke barrier; the production implementation must be reviewed separately."
+    },
+    {
+      "kind": "evidence-limit",
+      "detail": "The production executor buffers bytes behind response handles. Later network.readResponse and guest delivery are deliberately unread, so transport sink success is not final delivery acceptance."
+    }
+  ],
+  "readFiles": [
+    {
+      "path": "crates/am-plugin-net/Cargo.toml",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "crates/am-plugin-net/src/lib.rs",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "crates/am-plugin-net/src/request.rs",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "crates/am-plugin-net/src/target.rs",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "crates/am-plugin-net/src/transport.rs",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "crates/am-plugin-net/src/resources.rs",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/targets.rs",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/transport.rs",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/fixtures/README.md",
+      "reviewed": "entire text file"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/network.rs",
+      "reviewed": "1-69 only; factory/injection boundary"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+      "reviewed": "622-652 only; network.request call site"
+    }
+  ],
+  "unreadPaths": [
+    "apps/tauri/src-tauri/src/plugins/network.rs:70 onward",
+    "apps/tauri/src-tauri/src/plugins.rs authority barrier/revoke implementation",
+    "crates/am-plugin-runtime network authority/ledger implementation",
+    "apps/tauri/src-tauri/src/storage/plugins network ledger persistence",
+    "apps/tauri/src-tauri/src/plugins/executor.rs network.readResponse/final delivery and resource lifecycle",
+    "apps/tauri/src-tauri/src/network/http.rs omit and media registration implementations"
+  ],
+  "missingEvidence": [
+    "NativeGate durable identity/epoch/expiry and revocation acknowledgement",
+    "Persistent cumulative network ledger and restart/failed-store behavior",
+    "Final guest byte delivery concurrent with revoke",
+    "Actual admitted desktop target production execution; no new live evidence"
+  ],
+  "dependencies": [
+    {
+      "batchId": "B14",
+      "status": "unreviewed",
+      "question": "Durable policy/authority/store transactions provide the native Gate contract; this subbatch does not certify them."
+    },
+    {
+      "batchId": "B18",
+      "status": "unreviewed",
+      "question": "Exact target admission, IPC/executor resource restrictions and final response delivery need their own evidence."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B15-native-gate-tauri",
+    "candidate": "B15-native-gate",
+    "parentBatch": "B15",
+    "runtime": "tauri",
+    "status": "pending",
+    "question": "Does NativeGate bind trusted caller/context/exit/permit and serialize durable epoch checks, task cancellation and revoke acknowledgement without borrowing account clients?",
+    "allowedPaths": [
+      "apps/tauri/src-tauri/src/plugins/network.rs",
+      "apps/tauri/src-tauri/src/plugins.rs authority barrier/revoke excerpts only",
+      "One directly required am-plugin-runtime exit authority contract and matching owner tests"
+    ],
+    "exclusions": [
+      "Independent persistent ledger and final executor response delivery chains",
+      "Built-in account HTTP/media implementation audit, package installation and other runtimes",
+      "Product fixes, live app/browser inspection, commit and push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "crates/AGENTS.md",
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      ".agents/skills/any-music-tauri-runtime/SKILL.md"
+    ],
+    "continuation": "Reuse docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json after checking scoped hashes. This report proves the transport-side Gate contract only; NativeGate, durable ledger and final guest delivery remain independent unreviewed candidates."
+  },
+  "handoff": "B15 first candidate only, runtime tauri, HEAD acf455c. Public-target/bounded transport conforms within the reviewed chain; 12 tests, crate Clippy and metadata boundary checks pass. No confirmed product finding and no product changes. Application excerpts identify native-only Gate injection and the bounded response sink, without certifying durable authority. Artifact/live are not run. Three B15 candidates remain unreviewed: NativeGate, persistent ledger and final-byte delivery. Continue only B15-native-gate-tauri after checking hashes; do not mark all B15 accepted or expand into built-in account networking."
+}

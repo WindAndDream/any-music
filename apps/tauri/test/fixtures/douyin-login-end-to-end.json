@@ -1,0 +1,49 @@
+{
+  "documentType": "platform-interface-capture",
+  "platform": "douyin",
+  "captureDate": "2026-10-03",
+  "scope": "End-to-end confirmation of the Douyin QR sign-in on the chrome-devtools-mcp Chrome profile: the user scanned the app-rendered QR, completed second verification on the phone, and the browser reached a signed-in state. Only cookie NAMES and structural facts are recorded. No cookie value, session id, token, ticket, mobile number or account detail is kept.",
+  "endToEndResult": {
+    "sequence": "fresh QR issued by get_qrcode -> user scan -> check_qrconnect returned error_code 2046 -> short code sent and submitted -> validate_code returned a ticket -> retry poll -> signed in",
+    "pageSignalsAfterSuccess": [
+      "the 登录 button disappeared",
+      "the 登录后免费畅享 login wall disappeared",
+      "the login panel disappeared and the page navigated, which wiped the in-page recorder",
+      "a GET to /aweme/v1/web/user/profile/self/ returned 200, an endpoint that only answers for a signed-in session"
+    ],
+    "recorderNote": "The in-page recorders were cleared by the post-login navigation, so the send_code / validate_code / confirmed frames of this particular run were not retained. Their contract was already captured earlier in the session and is unchanged."
+  },
+  "credentialCookieNames": {
+    "why": "The sign-in completion check in apps/tauri/src-tauri/src/login.rs keys on sessionid | sessionid_ss, and until this run that pair had no capture backing at all: no fixture recorded it, and searches over the page's own scripts found nothing.",
+    "method": "Read the Cookie request header of a post-sign-in same-origin XHR (/aweme/v1/web/user/profile/self/) rather than document.cookie, because the credential cookies are HttpOnly.",
+    "observedNames": [
+      "sessionid",
+      "sessionid_ss",
+      "sid_tt",
+      "sid_guard",
+      "uid_tt",
+      "uid_tt_ss",
+      "session_tlb_tag",
+      "sid_ucp_v1",
+      "ssid_ucp_v1",
+      "x_tt_token",
+      "passport_assist_user",
+      "passport_mfa_token",
+      "n_mh",
+      "login_time",
+      "bd_ticket_guard_server_data"
+    ],
+    "notes": [
+      "sessionid and sessionid_ss were present and carried the same value, as did sid_tt.",
+      "sessionid is HttpOnly and therefore invisible to document.cookie, which is why the earlier script searches could never have found it.",
+      "Anonymous session cookies that were already present before sign-in (passport_csrf_token, ttwid, odin_tt, UIFID, sdk_source_info, biz_trace_id, bd_ticket_guard_*) simply persist.",
+      "The sign-in also set login_time, a millisecond timestamp."
+    ],
+    "verdict": "The pair the desktop client checks is confirmed correct by live observation. The longer list above is recorded as context only; if the completion check ever needs widening, widen it from an observation like this one rather than by guessing."
+  },
+  "outstanding": [
+    "The confirmed response body of this run was lost to the post-login navigation, so the credential-field selection from that body still rests on the earlier capture.",
+    "Cross-SDK-version stability of the 0x8838 a_bogus constant remains unverifiable until Douyin ships a new build.",
+    "Only the mobile_sms_verify path has been exercised end to end; face_verify and mobile_up_sms_verify are contract-documented but not completed."
+  ]
+}

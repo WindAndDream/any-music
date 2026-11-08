@@ -1,0 +1,8 @@
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+All matched files use the correct format.
+Finished in 3148ms on 1359 files using 12 threads.

@@ -1,0 +1,32 @@
+✔ mobile theme packages cannot depend on desktop/native APIs, including through a second script block (80.3273ms)
+✔ mobile capabilities separate Android built-in transport from iOS local data (171.9689ms)
+✔ desktop or remote privilege cannot enter mobile through configuration (25.9856ms)
+✔ accepts valid sources and deferred/type-only heavy imports (81.0371ms)
+✔ VM profiles and adapter roots stay engine-free; native imports and production testkit are rejected (71.1645ms)
+✔ trusted build directory discovery cannot eagerly load Vue through the workbench root (69.2784ms)
+✔ theme metadata stays lightweight and Vue adapters cannot import private workbench state (67.1243ms)
+✔ rejects undeclared and forbidden internal dependencies (47.7952ms)
+✔ tag metadata remains lightweight and the feature cannot consume host repositories (51.6509ms)
+✔ rejects app aliases and relative paths outside the package (49.8469ms)
+✔ creation metadata cannot load presentation or access private host state (54.7946ms)
+✔ routing packages reject Node and music dependencies while accepting their public edge (76.1795ms)
+✔ follows the source plugin root barrel to eager codecs (59.9975ms)
+✔ SDK rejects runtime libraries, even through a local barrel (50.8483ms)
+✔ rejects browser audio implementations without a codec import (94.0387ms)
+✔ accepts export patterns and rejects private exports (74.4244ms)
+✔ source metadata cannot load protocols and source plugins cannot access the host (55.0935ms)
+✔ independent themes accept only public metadata, Vue and style entries without eager presentation (106.6953ms)
+✔ theme dependency fixtures reject cross-theme, host, native, SDK, private and cyclic edges (216.7873ms)
+✔ theme metadata follows local barrels; private exports and cross-theme Sass cannot escape checks (101.3873ms)
+✔ built-in themes cannot acquire plugin authority through package imports (87.7058ms)
+✔ the actual registry has complete AppManifest coverage and exact main authority (161.4969ms)
+✔ new commands, broad capabilities, remote access and relay grants cannot silently bypass review (16.4659ms)
+✔ actual acceptance records fail closed on missing evidence, leaked authority or inconsistent targets (3.2792ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1891.064

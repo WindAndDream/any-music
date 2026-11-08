@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-evidence",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R2",
+  "date": "2026-10-27",
+  "startedDate": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "status": "passed-for-recorded-repaired-production-artifact",
+  "overallT13Status": "in-progress",
+  "scope": "Production Tampermonkey active/queued downloads, both theme replacements, cancellation/explicit retry, bounded failure retries, ZIP/save dispatch records, native/Range/full-read paths and full-browser cold restart without duplicate media/save work.",
+  "workspace": {
+    "baseCommit": "c24ff542a663fd7266808323c730cb3b50a9fcc9",
+    "alreadyDirtyAtStart": true,
+    "preservedEarlierChanges": true,
+    "productionFilesChangedThisBatch": ["apps/userscript/src/platform/resource-cache.ts"],
+    "regressionTestsChanged": ["apps/userscript/test/platform/resource-cache.test.ts"],
+    "commitOrPush": false,
+    "inputManifest": "T13/gm-r2-repaired-production-inputs.json",
+    "recordedInputFiles": 609,
+    "changedFromGmR1": ["apps/userscript/src/platform/resource-cache.ts"],
+    "aggregateSha256": "f95c542ab9ecfd3cf1772e75e20f81a397bab6d46c7ae9f9631c0cf9c94f7e94",
+    "recordedRepairedInputsUnchangedAtHandoff": true
+  },
+  "artifacts": {
+    "original": {
+      "sha256": "fc88355902a82e283665095d290a8cc5b893bb3389f4a8560ddee76b6a40e45a",
+      "bytes": 5021592,
+      "managerEditorVerified": true,
+      "status": "download/media cases passed; cold injection failed after cache growth",
+      "observations": "T13/gm-r2-live-observations.json",
+      "failure": "T13/gm-r2-cold-start-failure.json"
+    },
+    "repaired": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "sha256": "0886a79eb011945df2d343226b92aa875750a085496fa2defe884ce857778f21",
+      "bytes": 5021753,
+      "managerEditorSha256": "0886a79eb011945df2d343226b92aa875750a085496fa2defe884ce857778f21",
+      "managerEditorBytes": 5021753,
+      "managerEditorVerifiedBeforeAndAfterBrowserRestart": true,
+      "productionInstalled": true,
+      "metadata": {
+        "grants": [
+          "GM.deleteValue",
+          "GM.getTab",
+          "GM.getTabs",
+          "GM.getValue",
+          "GM.listValues",
+          "GM.saveTab",
+          "GM.setValue",
+          "GM_addValueChangeListener",
+          "GM_cookie",
+          "GM_deleteValue",
+          "GM_getValue",
+          "GM_openInTab",
+          "GM_removeValueChangeListener",
+          "GM_setValue",
+          "GM_xmlhttpRequest",
+          "unsafeWindow"
+        ],
+        "connect": [
+          "hdslb.com",
+          "byteimg.com",
+          "douyinpic.com",
+          "pstatp.com",
+          "126.net",
+          "music.163.com",
+          "music.126.net",
+          "api.bilibili.com",
+          "bilivideo.cn",
+          "bilivideo.com",
+          "www.douyin.com",
+          "www-hj.douyin.com",
+          "www.iesdouyin.com",
+          "douyinvod.com"
+        ],
+        "grantCount": 16,
+        "connectCount": 14,
+        "noframes": true,
+        "runAt": "document-start",
+        "externalRequireOrResources": false
+      },
+      "observations": "T13/gm-r2-repaired-live-observations.json"
+    }
+  },
+  "environment": {
+    "runtime": "installed production Userscript with real Tampermonkey GM APIs",
+    "os": "Windows",
+    "browser": "Chrome 156.0.8078.47",
+    "manager": "Tampermonkey 5.5.0",
+    "originalHost": "http://127.0.0.1:18865/gm-r1.html",
+    "repairedHost": "http://127.0.0.1:18866/gm-r2.html",
+    "hostImportsProductOrGmDoubles": false,
+    "pageGlobalGm": "undefined",
+    "hostProductLocalStorageKeys": [],
+    "externalPlugins": "none",
+    "developmentScriptsEnabled": false,
+    "inspectionMethods": [
+      "Browser-tool pointer clicks/selects and Escape for theme/download/retry/play actions.",
+      "Read-only Shadow DOM/audio references, manager stored product projections and temporary manager webRequest observers.",
+      "DNR fault injection blocks only CDN or native media, or strips Range, without changing product source or returning fake media.",
+      "Precisely timed old-read switching uses a separately labeled DOM click on the existing product play button."
+    ],
+    "temporaryRulesAndObserversRemoved": true
+  },
+  "cases": [
+    {
+      "id": "R2-01",
+      "result": "passed",
+      "behavior": "Same three task IDs, selection and sole audio survive Studio to classic to Studio while two tasks run and the third remains queued.",
+      "repairedResolveRequestsBeforeCancellation": 2,
+      "implicitReplayOnThemeReplacement": false
+    },
+    {
+      "id": "R2-02",
+      "result": "passed",
+      "behavior": "Cancel selected stops both active tasks and the queued task; queued item gains no new attempt before explicit continuation. No output saves for this repaired cancellation run. Original run also records in-flight GM media ERR_ABORTED.",
+      "repairedCancelledAttemptNumbers": [8, 5],
+      "queuedItemAttemptCountUnchanged": 7
+    },
+    {
+      "id": "R2-03",
+      "result": "passed",
+      "behavior": "With actual CDN requests blocked, each of three repaired tasks stops after initial failure plus three automatic retries, retains failure attempts and shows AM-7001. Removing the fault leaves failure until explicit retry.",
+      "blockedRequests": 12,
+      "automaticAttemptsPerItem": 4
+    },
+    {
+      "id": "R2-04",
+      "result": "passed",
+      "behavior": "Explicit three-track retry uses the same task IDs and one two-slot pool; the third attempt starts after a slot is released. MP3 generation precedes one ZIP save for this successful pass.",
+      "maxObservedActiveDownloadAttempts": 2,
+      "archive": {
+        "fileName": "any-music-download-20261025-154813 (4).zip",
+        "bytes": 12456527,
+        "sha256": "3daa22c2dc28c7f527ecbc6a8b70f800dc8707729d0ce5309a7614127272378a",
+        "crcPassed": true,
+        "entries": [
+          {
+            "name": "We Never (Remix) (若如初见).mp3",
+            "bytes": 4556981
+          },
+          {
+            "name": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+            "bytes": 4270726
+          },
+          {
+            "name": "神总是忧郁的——《幻昼》降调版.mp3",
+            "bytes": 3609475
+          },
+          {
+            "name": "any-music-download-report.json",
+            "bytes": 18627
+          }
+        ],
+        "report": {
+          "generatedAtMs": 1793031030024,
+          "batchId": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+          "items": [
+            {
+              "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+              "status": "succeeded"
+            },
+            {
+              "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+              "status": "succeeded"
+            },
+            {
+              "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+              "status": "succeeded"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "R2-05",
+      "result": "passed",
+      "behavior": "Native HTTPS audio reaches playing. Native-only media blocking then produces GM Range probes/chunks, 206 replies and playing MSE blob audio. Removed Range produces oversized-probe abort and complete-read fallback, then playing blob audio. Each exercised path is repeated on the repaired artifact.",
+      "originalRequests": {
+        "resolveRequests": 23,
+        "nativeMediaRequests": 11,
+        "rangeRequests": 50,
+        "rangeResponses206": 46,
+        "abortedRangeRequests": 3,
+        "maxObservedConcurrentRangeRequests": 3,
+        "maxRequestedRangeBytes": 2097152
+      },
+      "repairedRequests": {
+        "resolveRequests": 24,
+        "nativeMediaRequests": 7,
+        "rangeRequests": 35,
+        "rangeResponses206": 32,
+        "abortedRangeRequests": 1,
+        "maxObservedConcurrentRangeRequests": 3,
+        "maxRequestedRangeBytes": 2097152
+      }
+    },
+    {
+      "id": "R2-06",
+      "result": "passed-with-method-boundary",
+      "behavior": "Old Range read is aborted on a request-triggered DOM track switch, with no later old-path read and the latest track playing. The original artifact records explicit ERR_ABORTED request 106. Repaired observations retain one aborted Range and latest-track ownership; do not label every abort as a track-switch abort or count the precision DOM action as physical input.",
+      "originalTrackSwitchRequestId": "106",
+      "originalTriggerAtMs": 1793030180115
+    },
+    {
+      "id": "R2-07",
+      "result": "passed-after-repair",
+      "behavior": "Real Range traffic exceeds the retained budget and LRU evicts 11 prior entries while stored cache stays under 32 MiB. Browser is then fully restarted with cache retained; launcher and workbench start, three tasks/attempts/save metadata persist, sole new audio has no source and stays paused.",
+      "maximumSampledCacheChargeBytes": 33221772,
+      "coldCacheChargeBytes": 33072536,
+      "coldManagerDataBytes": 33117402,
+      "coldEvidence": "T13/gm-r2-repaired-cold-start.json",
+      "extraResolveImportOrMediaRequestsAfterColdStart": 0,
+      "duplicateSaveFiles": 0
+    }
+  ],
+  "finding": {
+    "id": "GM-R2-F1",
+    "description": "Accumulated manager cache prevents script injection before application cleanup.",
+    "originalManagerRecordBytes": 69030799,
+    "originalCacheChargedBytes": 69016252,
+    "error": "Unchecked runtime.lastError: Message exceeded maximum allowed size of 64MiB.",
+    "repair": "Clamp actual GM cache occupancy to min(configured preference, 32 MiB) through existing LRU before writes/startup checkpoints. Include Base64/metadata charge, preserve preference and native limits, and explain effective limit in settings.",
+    "tests": [
+      "Accumulate over 64 MiB of encoded responses without exceeding the retained manager budget; restart keeps newest hit and evicts oldest.",
+      "Opening an oversized manifest trims LRU values without touching the product commit."
+    ],
+    "manualRecovery": "Oversized pre-repair test storage cannot inject cleanup code. Remove only disposable GM cache values and reload the dedicated manager; product-generation fingerprints match before/after.",
+    "recoveryEvidence": "T13/gm-r2-cold-start-failure.json"
+  },
+  "savingBoundary": {
+    "gmRecord": "savedAtMs and archive name/size acknowledge browser save dispatch; this runtime does not provide native file verification or a native cryptographic receipt.",
+    "independentDiskVerification": "Actual final file SHA-256/CRC/three MP3 entries/report are verified separately in T13/gm-r2-saved-files.json.",
+    "fileNameReuse": "Explicit retry preserves the historical batch startedAtMs and archive base name. Browser adds (1)..(4) to intentional saves. This is not an implicit reload save.",
+    "intentionalSavesThisBatch": 4,
+    "repairedIntentionalSaves": 1,
+    "finalZipSha256": "3daa22c2dc28c7f527ecbc6a8b70f800dc8707729d0ce5309a7614127272378a",
+    "finalZipBytes": 12456527,
+    "reportReflectsGenerationBeforeSaveDispatch": true
+  },
+  "verification": {
+    "rootTest": {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "vitestFiles": 309,
+      "vitestTests": 2333,
+      "rustPassedAcrossWorkspace": 253,
+      "protocolDifferentialCases": 200
+    },
+    "rootTypecheck": {
+      "command": "pnpm typecheck",
+      "exitCode": 0
+    },
+    "rootLint": {
+      "command": "pnpm lint",
+      "exitCode": 0
+    },
+    "rootFormat": {
+      "command": "pnpm format:check",
+      "exitCode": 0
+    },
+    "rootBuild": {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "includes": "Root typecheck, both frontends and Windows optimized application build; no native application was launched."
+    },
+    "targetedBeforeRepair": {
+      "userscriptTests": 92,
+      "downloadMediaThemeContinuityTests": 90,
+      "nativeCompatibilityAndTransportTests": 14,
+      "userscriptTypecheck": 0
+    },
+    "targetedAfterRepair": {
+      "userscriptTests": 94
+    },
+    "earlierFailures": [
+      "First concurrent root run: added 64 MiB-scale regression exceeded default 5s timeout; it passed alone and now has a 30s local-data budget.",
+      "Second root run while optimized build still ran: pre-existing Studio standalone-consumer build test exceeded 5s; no unrelated test edited.",
+      "Final full root test after the optimized build finished passes."
+    ],
+    "rootGatesCover": "Recorded current combined dirty workspace, preserving pre-existing edits; runtime acceptance covers only listed production artifact/cases."
+  },
+  "handoff": {
+    "nextBatch": "GM-R3",
+    "nextCase": "Signed-in/private Bilibili, then Douyin/NetEase and source-host/capability cases; split by source when useful.",
+    "browserState": "Repaired production script installed and enabled; Studio expanded on downloads after full browser restart; idle sole audio. No fault rules or observers remain.",
+    "hostServer": "Only static acceptance HTML and frozen candidate served from a temporary directory on 127.0.0.1:18866; server retained for handoff.",
+    "sourceInputHashChangeRequiresRegression": true
+  },
+  "remainingLimits": [
+    "Public Bilibili in dedicated Chrome/Tampermonkey; signed-in/private/other-source and source-host capability checks remain GM-R3.",
+    "GM-R4 full visual/input/focus/touch/protected-surface coverage remains open; DOM precision switches are labeled.",
+    "No Firefox GM proxy, other manager/browser, endurance, power-loss-during-save or native runtime acceptance claim.",
+    "The 32 MiB cache budget leaves startup headroom; it is not a guarantee against arbitrarily large product/manager data or lower manager quotas.",
+    "The original R1 artifact remains failed for the newly discovered cold-cache case; only the repaired artifact passes this batch.",
+    "No platform captureDate changes, commit or push."
+  ]
+}

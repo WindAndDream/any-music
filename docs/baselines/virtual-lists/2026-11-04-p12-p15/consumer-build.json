@@ -1,0 +1,154 @@
+{
+  "capturedAt": "2026-11-04T03:01:11.041Z",
+  "method": "Isolated Vite production ESM builds of existing list fixtures and actual grid/table SFCs. External Vue; JS/component CSS; per-file gzip level 9. No product/browser launched.",
+  "buildOptions": {
+    "mode": "production",
+    "minify": "oxc",
+    "target": "es2022",
+    "formats": ["es"],
+    "external": ["vue"],
+    "gzipLevel": 9
+  },
+  "results": [
+    {
+      "name": "FullListConsumer",
+      "entry": "export { FullListConsumer as Consumer } from \"../../packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 3734,
+          "gzipBytes": 1520,
+          "sha256": "c3becd470b3f0e4eb63ca77847b16c245e61f1c24da07e38a7fe3d11e5fa306e"
+        }
+      ],
+      "modules": [
+        "logs/2026-11-04-virtual-list-implementation/p12-FullListConsumer.entry.mjs",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+        "packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts"
+      ],
+      "bytes": 3734,
+      "gzipBytes": 1520
+    },
+    {
+      "name": "MeasuredListConsumer",
+      "entry": "export { MeasuredListConsumer as Consumer } from \"../../packages/ui/test/fixtures/virtual-scroll/measured-list-consumer.ts\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 57122,
+          "gzipBytes": 15354,
+          "sha256": "27fedec74a1e5c4027b7957360de1f3d9e7b3788a8cb14276b15450fe3af16e7"
+        }
+      ],
+      "modules": [
+        "logs/2026-11-04-virtual-list-implementation/p12-MeasuredListConsumer.entry.mjs",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/index.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/ios-gesture.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/lazy-measurements.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/scroll-classifier.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/utils.js",
+        "node_modules/.pnpm/@tanstack+vue-virtual@3.13.51_vue@3.5.44_typescript@6.0.3_/node_modules/@tanstack/vue-virtual/dist/esm/index.js",
+        "packages/ui/src/composables/virtual-scroll/use-measured-virtual-list.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-list-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-retained-range.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+        "packages/ui/test/fixtures/virtual-scroll/measured-list-consumer.ts"
+      ],
+      "bytes": 57122,
+      "gzipBytes": 15354
+    },
+    {
+      "name": "VirtualTrackCardGrid",
+      "entry": "export { default as Consumer } from \"../../packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 61869,
+          "gzipBytes": 16818,
+          "sha256": "7609b0e9e5ded52f30507b62f522f6ea00cc0cdc713ac532a228127ce40a1673"
+        },
+        {
+          "fileName": "consumer.css",
+          "bytes": 1221,
+          "gzipBytes": 437,
+          "sha256": "200f794f621ba6825a19a45d3a8cdb163885ad039032f76ba10f5e96cb64a29e"
+        }
+      ],
+      "modules": [
+        "\u0000plugin-vue:export-helper",
+        "logs/2026-11-04-virtual-list-implementation/p12-VirtualTrackCardGrid.entry.mjs",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/index.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/ios-gesture.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/lazy-measurements.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/scroll-classifier.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/utils.js",
+        "node_modules/.pnpm/@tanstack+vue-virtual@3.13.51_vue@3.5.44_typescript@6.0.3_/node_modules/@tanstack/vue-virtual/dist/esm/index.js",
+        "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+        "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue?vue&type=script&setup=true&lang.ts",
+        "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue?vue&type=style&index=0&scoped=d945cb12&lang.css",
+        "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+        "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=script&setup=true&lang.ts",
+        "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=style&index=0&scoped=9a5c01a2&lang.css",
+        "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-grid-css-layout.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-retained-range.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts"
+      ],
+      "bytes": 63090,
+      "gzipBytes": 17255
+    },
+    {
+      "name": "VirtualTable",
+      "entry": "export { default as Consumer } from \"../../packages/ui/src/components/virtual-scroll/VirtualTable.vue\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 62559,
+          "gzipBytes": 16871,
+          "sha256": "e9c5b326443f316f8c8dfdcfd590899a262210573ff968f2f8003331c67a04f7"
+        },
+        {
+          "fileName": "consumer.css",
+          "bytes": 239,
+          "gzipBytes": 153,
+          "sha256": "215090958e738f17211c5fa17811733b7b6a407a3f530d2c12b5817f75509256"
+        }
+      ],
+      "modules": [
+        "\u0000plugin-vue:export-helper",
+        "logs/2026-11-04-virtual-list-implementation/p12-VirtualTable.entry.mjs",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/index.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/ios-gesture.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/lazy-measurements.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/scroll-classifier.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/utils.js",
+        "node_modules/.pnpm/@tanstack+vue-virtual@3.13.51_vue@3.5.44_typescript@6.0.3_/node_modules/@tanstack/vue-virtual/dist/esm/index.js",
+        "packages/ui/src/components/virtual-scroll/VirtualTable.vue",
+        "packages/ui/src/components/virtual-scroll/VirtualTable.vue?vue&type=script&setup=true&lang.ts",
+        "packages/ui/src/components/virtual-scroll/VirtualTable.vue?vue&type=style&index=0&scoped=28df182d&lang.css",
+        "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue",
+        "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue?vue&type=script&setup=true&lang.ts",
+        "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue?vue&type=style&index=0&scoped=f051726f&lang.css",
+        "packages/ui/src/composables/virtual-scroll/use-measured-virtual-list.ts",
+        "packages/ui/src/composables/virtual-scroll/use-measured-virtual-table.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-list-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-retained-range.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-table-layout.ts"
+      ],
+      "bytes": 62798,
+      "gzipBytes": 17024
+    }
+  ],
+  "limits": "Different markup and contracts; this is consuming-build cost, not production incremental size or runtime performance evidence. Table/group/sticky-header CSS, focus/IME, browser Find/text selection and installed runtimes remain unaccepted."
+}

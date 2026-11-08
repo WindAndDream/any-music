@@ -1,0 +1,91 @@
+Browser tab: 1, Title: "Any Music", URL: "http://127.0.0.1:18766/index.html?preview=gm-r4".
+0 AXWebArea Any Music, URL: 127.0.0.1:18766/index.html?preview=gm-r4
+	1 container
+		2 container
+			3 button 关闭
+			4 container 设置
+				5 container
+					6 heading 设置, Value: 2, ID: v-37-title
+						7 text 设置
+					8 text 让 Any Music 更合你的习惯。
+					9 button 关闭
+				10 container 设置分类
+					11 container
+						12 heading 外观与导航, Value: 3, ID: v-38-interface
+							13 text 外观与导航
+						14 container 外观与导航
+							15 button 外观与布局 跟随系统
+								16 text 外观与布局
+								17 text 跟随系统
+							18 button 导航管理 排序与显示
+								19 text 导航管理
+								20 text 排序与显示
+					21 container
+						22 heading 音乐源, Value: 3, ID: v-38-music
+							23 text 音乐源
+						24 container 音乐源
+							25 button 音乐源管理 已启用 3 个音乐源
+								26 text 音乐源管理
+								27 text 已启用 3 个音乐源
+					28 container
+						29 heading 网络与下载, Value: 3, ID: v-38-network
+							30 text 网络与下载
+						31 container 网络与下载
+							32 button 资源缓存 容量 · 位置 · 清理
+								33 text 资源缓存
+								34 text 容量 · 位置 · 清理
+							35 button 请求代理 未启用
+								36 text 请求代理
+								37 text 未启用
+							38 button 歌曲下载 最多 2 首同时下载
+								39 text 歌曲下载
+								40 text 最多 2 首同时下载
+					41 container
+						42 heading 记录与创作, Value: 3, ID: v-38-data
+							43 text 记录与创作
+						44 container 记录与创作
+							45 button 播放历史 最多保留 500 条
+								46 text 播放历史
+								47 text 最多保留 500 条
+							48 button 筛选历史 音乐列表 · 列表内歌曲
+								49 text 筛选历史
+								50 text 音乐列表 · 列表内歌曲
+							51 button 创作者资料 本地用户
+								52 text 创作者资料
+								53 text 本地用户
+				54 container Description: 请求代理, ID: v-38-detail
+					55 container
+						56 heading 请求代理, Value: 3
+							57 text 请求代理
+						58 text 保存代理配置，按需启用或关闭。
+					59 container
+						60 text 启用请求代理
+						61 text 未启用，当前使用直连。已保存的配置会保留。
+						62 switch Description: 启用请求代理, Value: 0
+						63 heading 代理配置, Value: 4
+							64 text 代理配置
+						65 container
+							66 text 类型
+							67 pop up button (collapsed, settable) 类型, Value: HTTP, Secondary Actions: Expand
+								68 menu
+									69 (selected) HTTP
+									70 HTTPS
+									71 SOCKS5
+									72 SOCKS4
+						73 container
+							74 text 端口
+							75 stepper (settable, integer) 端口, Value: 8080
+						76 container
+							77 text 主机
+							78 text field (settable) 主机, Value: gm-r4.invalidgm-r4-unsaved.invalid
+						79 container
+							80 text 用户名（可选）
+							81 text field (settable) 用户名（可选）, Value: <redacted>
+						82 container
+							83 text 密码（可选）
+							84 text field (settable) 密码（可选）
+						85 text 填写域名或 IP 即可，无需协议与端口。关闭代理时也可以编辑并保存配置。
+						86 text 代理用于平台 API、媒体下载和分段读取。当前由 Firefox 版 Tampermonkey 5.5+ 支持，其他环境保持直连。 代理凭据保存在当前脚本的 Tampermonkey 存储中。
+						87 button 保存代理配置
+
+The focused UI element is 56 heading 请求代理, Value: 3

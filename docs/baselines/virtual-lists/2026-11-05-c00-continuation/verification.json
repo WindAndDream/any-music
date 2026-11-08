@@ -1,0 +1,280 @@
+{
+  "date": "2026-11-05",
+  "runtimeScope": "shared renderer; C00 code prerequisites, not production virtual-rendering admission",
+  "logDirectory": "logs/2026-11-04-virtual-list-implementation",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "result": "passed",
+      "log": "c00-continuation-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "log": "c00-continuation-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed; existing warnings outside the batch retained",
+      "log": "c00-continuation-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "c00-continuation-format-check.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed; both production frontends and Tauri release executable",
+      "log": "c00-continuation-build.log"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/music-workbench/test/features/workbench/theme-semantic-continuity.test.ts",
+      "sha256": "017b139531a29e26006f1e3aa216bb79754f839d7712c2e1b51a291a045491ae"
+    },
+    {
+      "path": "packages/music-workbench/test/helpers/semantic-theme-renderer.ts",
+      "sha256": "f2039b71204a85339e3b77f0c429a7bfeaba6d9f7a50989c26824aecfeda0c16"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueuePlatformGrid.vue",
+      "sha256": "e8d4cb5498bc2a5c61401291c624d16034fad1edaa2f3c89ef408c66f36cf7e2"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueuePlatformGridItem.vue",
+      "sha256": "cb29cd200807fa6daa41edd0a168c8a210cf050ca116c31d8d410989c599b8bf"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue",
+      "sha256": "febecb308ed175f0bd6ba1c8d620b00c9ce793e02a6c7638ecc3ebba22a86b46"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue",
+      "sha256": "6c7d59865b9759722393988742566b534101f42a4467e916914ed187ded0a522"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/queue-platform-grid-contracts.ts",
+      "sha256": "2498bf2237c7b13adcd5dc7743f854ee67e191247781cfe9815eaacf03a87529"
+    },
+    {
+      "path": "packages/theme-default/src/composables/classic-virtual-favorites-canary.ts",
+      "sha256": "e6e2b920eb0f7a761db6aa0feee8734b7605dd47b8f62420bdf13e67644b3c98"
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicFavorites.admission.test.ts",
+      "sha256": "9645defee75a08b19e655f332021847b67432fea6c7fe9eb57de3155e75390bd"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/VirtualQueuePlatformGrid.test.ts",
+      "sha256": "65de0793df6e2490651483867391da117aed1b1a389e80d3c90d5ceabd0c3290"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/VirtualQueueTrackGrid.test.ts",
+      "sha256": "8f6f1235614094aab464d871942eb7898fa7e3f2351ff79c5478ba9baa8391a9"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "716d2a168430cfee3eb4b36369625b2f377d609d1867e590eac86b4097b2e061"
+    },
+    {
+      "path": "packages/ui/src/composables/grid-reorder-geometry.ts",
+      "sha256": "8d6b18416834bac4861d6ef893486ee2d48fa061d66201c845df322f76011a8f"
+    },
+    {
+      "path": "packages/ui/src/composables/use-presentation-continuity.ts",
+      "sha256": "6d351054b20cd2888946cc91bc7839435f098c9553ff950aa4320947bbaad6d2"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-anchor.ts",
+      "sha256": "6c9e4f2d1961b16b902b9ccc9af2eebf51057d82e59e78bd1ddfb7ac19f6f2d2"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/virtual-grid-reorder-geometry.ts",
+      "sha256": "412207f8cffce9f52c3e0050a56be0440fbd89758ea806935575147ba576ec24"
+    },
+    {
+      "path": "packages/ui/src/product/presentation-continuity.ts",
+      "sha256": "ad92f187d201e538130505cfdbb06a631b478c2d5243b50bbae58507feb4a53f"
+    },
+    {
+      "path": "packages/ui/test/composables/use-presentation-continuity.test.ts",
+      "sha256": "9256e09f9810b980b18de9cff58b616058d50ac1b5a2811e85d68ecc9ae5fc8d"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-scroll-anchor.test.ts",
+      "sha256": "995af2c13b447c24ad1907954b2d0a1dd142b70b4cda84580ecdb24226e549e5"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-grid-reorder-geometry.test.ts",
+      "sha256": "6770513cf9805cf351b4c47c0bba1247d4654586d06ac7f9bd13664c9655a35a"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-grid-reorder-retention.test.ts",
+      "sha256": "ecabf9f72789b55e7020236fa7659763c154ba57d243ab6bf6575788caaab3db"
+    },
+    {
+      "path": "packages/plugin-ui-vue/AGENTS.md",
+      "sha256": "3b1afe7948b053e954e97addfe263e8597bef989206bc29dd091b7d1039d0d23"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-contracts.ts",
+      "sha256": "3894990c2ed8dbf9482724f5e8abfde55f9ccb0a63bad63508ab1821ca1c2b29"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-controller.ts",
+      "sha256": "4205a05f4a89c1146e650dd5a9ff85b913d4aa1b4119736a7d2ecc45d28d8162"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-resources.ts",
+      "sha256": "f84c8f028039c18d0c165235088ed20531870a1f88d2483b328a769bce270730"
+    },
+    {
+      "path": "packages/plugin-ui-vue/test/trusted/root-theme-controller.test.ts",
+      "sha256": "f8d4dda35ae2ad407c21f6e0178bc2bb019be9342eb885d3438a1af4b11979c7"
+    },
+    {
+      "path": "packages/plugin-ui-vue/test/trusted/theme-resources.test.ts",
+      "sha256": "ffadd1631573389802c5401a2de2095abf69068620722af2abf459f9b6327246"
+    },
+    {
+      "path": "packages/theme-default/AGENTS.md",
+      "sha256": "152159a2d6e090ab9f4993dfe337a30319119cd380ff7b080e340aa556573b6a"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicCollectionContent.vue",
+      "sha256": "c0279757c4d6d3074e3c602f5564ca03c6b3a558aa4157449488121fc11e43a2"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+      "sha256": "25676aa6267c9304201061416fd6418a0ac8689ab28aea47e26b180670e645f1"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueuePlatformGroup.vue",
+      "sha256": "d42604c2196303a07f5a965723566ba67211bbcb8c48fad2b4dc1bc73cb6b941"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueueTrackRow.vue",
+      "sha256": "a13c34ddaffeaa1a842c4dbdc8bacdaf987a3b0c1db2590118ce96d117cabe6c"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/TrackRow.vue",
+      "sha256": "bb6012abcba8031a5c015f6d8a3195845230b66b3a36bb2ccd2892a05feef13d"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-collection-presentation.ts",
+      "sha256": "19e8b07bd0f77b7c30242df4412e1fff03e77f9d71fce71c3f08d7c80cd123b8"
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicLibrary.test.ts",
+      "sha256": "bb12f08ea3a407730179edc61a78c8c209c4fb52f19cb5d2858453f19acba3fe"
+    },
+    {
+      "path": "packages/theme-default/test/helpers/test-renderer.ts",
+      "sha256": "b06a11718ad338fa220ab807d8882b3dc39f7e3ad677d47edb9aa8f4c97fe614"
+    },
+    {
+      "path": "packages/theme-studio/src/components/catalog/StudioTrackRow.vue",
+      "sha256": "251bedab9c4b31cda46f1a3c96a4547872a7960283f55202a2224179cf69bc17"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioCollection.vue",
+      "sha256": "88e7ecbe0ac60d5f519c497cec67f9868c94698cb534d8a4923ba92224f884da"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioFavorites.vue",
+      "sha256": "266de8f777f4dbd127ee860fec737e1a48e1b9cef5314db37139d55a4ae08144"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioTrackTable.vue",
+      "sha256": "02aa1ffb3c2c991b58744fcda5c0263eb5ad2c3d05f97a00da05952d527904ee"
+    },
+    {
+      "path": "packages/ui/AGENTS.md",
+      "sha256": "4760e172c08cdb4babe2dd49e5a2e1ffbe8c2750daca188566440d13043d81d0"
+    },
+    {
+      "path": "packages/ui/src/components/CollectionCard.vue",
+      "sha256": "667cd8c817bc33d8d219fdd8b1c02ff88eb76f7f93e66a058f78e24497ba2199"
+    },
+    {
+      "path": "packages/ui/src/composables/use-collection-navigation.ts",
+      "sha256": "8bd03ae98b3f0fd88f5fc1fe6386c1b1550d78ad0bdb75b183acc12071983141"
+    },
+    {
+      "path": "packages/ui/src/composables/use-grid-reorder.ts",
+      "sha256": "ce862561fa7a04515c9d961741719551c601f6264ce4b6594916032495100193"
+    },
+    {
+      "path": "packages/ui/src/library.ts",
+      "sha256": "a244dcca8016f46ecb966b1d275927c4881d9378ab56f6ab20256ac3c838bb4a"
+    },
+    {
+      "path": "packages/ui/src/theme.ts",
+      "sha256": "5c74e7909f8763495581bbfb5c5744e35537b9662b0234bf3c5d62e2469f5187"
+    },
+    {
+      "path": "packages/ui/test/composables/use-collection-navigation.test.ts",
+      "sha256": "696f3bf83912e4af3e13b6780404351d4093dafaae5d5823f2c86ae9578506ca"
+    },
+    {
+      "path": "packages/ui/test/product/theme-metadata.test.ts",
+      "sha256": "f1aaa7048595aa5b7694c6189758aa70dacec6e8c7b8bb31835b9ce0e67c495c"
+    }
+  ],
+  "packageTests": [
+    {
+      "package": "@any-music/ui",
+      "files": 116,
+      "tests": 1005
+    },
+    {
+      "package": "@any-music/theme-default",
+      "files": 66,
+      "tests": 547
+    },
+    {
+      "package": "@any-music/theme-studio",
+      "files": 10,
+      "tests": 28
+    },
+    {
+      "package": "@any-music/plugin-ui-vue",
+      "files": 8,
+      "tests": 60
+    },
+    {
+      "package": "@any-music/music-workbench",
+      "files": 69,
+      "tests": 605
+    }
+  ],
+  "intermediateFailures": [
+    "The first whole-repository run found the public ui/theme expected-export list had not included the two intentional neutral continuity functions. The list was updated; the Vue/business import prohibition remains intact. The focused check and final whole-repository retry pass; the initial log is retained as c00-continuation-test-initial.log.",
+    "The second whole-repository run found two existing Classic navigation fixtures injected their scroll owner only after mounting, when the new semantic bridge had already read the DOM owner. The owner is now supplied before mount, preserving every scroll/focus assertion; all 35 Classic library regressions and the final whole-repository retry pass. The second log is retained as c00-continuation-test-second.log.",
+    "The root return-metadata addition initially inferred only scrollTop; an explicit neutral state type fixed its typecheck. The first targeted typecheck log is retained.",
+    "Agent focused iterations exposed delayed measurement landing, incomplete browser-like dataset/attribute test-host behavior, and cancellation edge cases; failure/retry logs remain under their recorded prefixes."
+  ],
+  "nativeBuild": {
+    "path": "target/release/any-music-tauri.exe",
+    "bytes": 29856256,
+    "sha256": "2cbcc1d3adcc37ffa9f00bab40a1fdbbf975c77deffc3d7ce371f55984cc2248",
+    "nativeSourceChangedInBatch": false
+  },
+  "assessment": {
+    "P14": "Neutral transient occurrence/intra-item/control adapter, synchronous lazy-readiness bridge, cancellable trusted transaction and actual compiled Classic/Studio consumer regressions. Native acceptance remains open; other consumers need their own semantic mapping.",
+    "C00": "Flat Favorites, platform details and growing platform overview have default-closed candidates. Full selection/order/actions remain controlled by the existing collection. Newly measured row heights refresh same-identity drag geometry, source grabbed position and frozen release rebasing; incompatible structural changes cancel.",
+    "overview": "Original CollectionGrid 320/480/240px widths, gaps and container-based mobile rules retained; real cards, complete group selection, bounded offscreen retention and semantic return offset before focus. Platform grouping is one pass; track-to-platform reorder comparisons use a controlled-result index instead of repeated full scans.",
+    "structure": "Injected CSS/box Node fixtures cover 0/1/80/1,000/10,000 platform and track occurrences. Mounted platform slots stay within 15 initially and 24 for distant windows under the recorded fixture; retained interactions remain bounded. These are synthetic structure assertions, not browser-computed layout or total product component/FPS counts.",
+    "motionLimit": "Natural measurement is accepted while dragging and through the frozen controlled landing handoff. Reflow after landing motion starts retains the established cancellation behavior. A changed measurement generation still rebuilds the derived spatial index in O(N); pointer and ordinary scroll do not trigger that rebuild. No frame-time bound is claimed."
+  },
+  "openGates": [
+    "P03 actual layout/visual/frame baseline and hardware-specific performance criteria",
+    "Browser Find/cross-window text selection and native focus/IME/physical input parity",
+    "Installed Userscript/Shadow host, actual Tauri WebView and supported mobile targets (G01-G03)",
+    "C00 production admission, then O00-O03 before C01 expansion; whole-plan G00/G04 remain open"
+  ],
+  "noProductBrowserLaunch": true,
+  "noCommitPush": true
+}

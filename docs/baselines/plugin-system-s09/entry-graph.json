@@ -1,0 +1,115 @@
+[
+  {
+    "entry": "packages/plugin-source-bilibili/src/index.ts",
+    "modules": [
+      "packages/audio-composition/src/index.ts",
+      "packages/audio-composition/src/models.ts",
+      "packages/audio-composition/src/segment-recipe.ts",
+      "packages/audio-composition/src/virtual-audio-preload.ts",
+      "packages/audio-composition/src/virtual-playback-plan.ts",
+      "packages/core/src/download/download-history.ts",
+      "packages/core/src/download/download-queue.ts",
+      "packages/core/src/errors/app-error.ts",
+      "packages/core/src/index.ts",
+      "packages/core/src/library/favorites.ts",
+      "packages/core/src/library/material-collection.ts",
+      "packages/core/src/library/models.ts",
+      "packages/core/src/library/segment-recipe.ts",
+      "packages/core/src/library/track-name.ts",
+      "packages/core/src/music-source/declarative-manifest.ts",
+      "packages/core/src/music-source/plugin.ts",
+      "packages/core/src/music-source/policies.ts",
+      "packages/core/src/player/normalize-progress.ts",
+      "packages/core/src/player/virtual-playback-plan.ts",
+      "packages/plugin-source-bilibili/src/descriptor.ts",
+      "packages/plugin-source-bilibili/src/index.ts",
+      "packages/plugin-source-bilibili/src/url-parser.ts",
+      "packages/utils/src/index.ts",
+      "packages/utils/src/number/clamp.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "entry.js",
+        "bytes": 12242,
+        "sha256": "8f6f0063bac5b54171c024e1827e50c230d60624c9cadcdf39e1a6e72f146910"
+      }
+    ]
+  },
+  {
+    "entry": "packages/plugin-source-douyin/src/index.ts",
+    "modules": [
+      "packages/audio-composition/src/index.ts",
+      "packages/audio-composition/src/models.ts",
+      "packages/audio-composition/src/segment-recipe.ts",
+      "packages/audio-composition/src/virtual-audio-preload.ts",
+      "packages/audio-composition/src/virtual-playback-plan.ts",
+      "packages/core/src/download/download-history.ts",
+      "packages/core/src/download/download-queue.ts",
+      "packages/core/src/errors/app-error.ts",
+      "packages/core/src/index.ts",
+      "packages/core/src/library/favorites.ts",
+      "packages/core/src/library/material-collection.ts",
+      "packages/core/src/library/models.ts",
+      "packages/core/src/library/segment-recipe.ts",
+      "packages/core/src/library/track-name.ts",
+      "packages/core/src/music-source/declarative-manifest.ts",
+      "packages/core/src/music-source/plugin.ts",
+      "packages/core/src/music-source/policies.ts",
+      "packages/core/src/player/normalize-progress.ts",
+      "packages/core/src/player/virtual-playback-plan.ts",
+      "packages/plugin-source-douyin/src/descriptor.ts",
+      "packages/plugin-source-douyin/src/index.ts",
+      "packages/plugin-source-douyin/src/url-parser.ts",
+      "packages/utils/src/index.ts",
+      "packages/utils/src/number/clamp.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "entry.js",
+        "bytes": 16008,
+        "sha256": "2256b5c503bdfea888047b78babaec2959215823492edafdad4cf14b6df26032"
+      }
+    ]
+  },
+  {
+    "entry": "packages/music-sources/src/index.ts",
+    "modules": [
+      "packages/audio-composition/src/index.ts",
+      "packages/audio-composition/src/models.ts",
+      "packages/audio-composition/src/segment-recipe.ts",
+      "packages/audio-composition/src/virtual-audio-preload.ts",
+      "packages/audio-composition/src/virtual-playback-plan.ts",
+      "packages/core/src/download/download-history.ts",
+      "packages/core/src/download/download-queue.ts",
+      "packages/core/src/errors/app-error.ts",
+      "packages/core/src/index.ts",
+      "packages/core/src/library/favorites.ts",
+      "packages/core/src/library/material-collection.ts",
+      "packages/core/src/library/models.ts",
+      "packages/core/src/library/segment-recipe.ts",
+      "packages/core/src/library/track-name.ts",
+      "packages/core/src/music-source/declarative-manifest.ts",
+      "packages/core/src/music-source/plugin.ts",
+      "packages/core/src/music-source/policies.ts",
+      "packages/core/src/player/normalize-progress.ts",
+      "packages/core/src/player/virtual-playback-plan.ts",
+      "packages/music-sources/src/descriptors.ts",
+      "packages/music-sources/src/index.ts",
+      "packages/plugin-source-bilibili/src/descriptor.ts",
+      "packages/plugin-source-bilibili/src/index.ts",
+      "packages/plugin-source-bilibili/src/url-parser.ts",
+      "packages/plugin-source-douyin/src/descriptor.ts",
+      "packages/plugin-source-douyin/src/index.ts",
+      "packages/plugin-source-douyin/src/url-parser.ts",
+      "packages/utils/src/index.ts",
+      "packages/utils/src/number/clamp.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "entry.js",
+        "bytes": 17624,
+        "sha256": "d24bdcb72303c27898e7674f22e94d07a110c00f6d39269bd35f0a3094254e7f"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1778 @@
+{
+  "documentType": "verification-evidence",
+  "runtimeScope": "shared",
+  "date": "2026-11-07",
+  "taskStartDate": "2026-11-06",
+  "admission": false,
+  "scope": "C00 measurement/motion correction and partial runtime revalidation only. O00/C01 and G00-G04 remain open.",
+  "sourceDigest": "8ea78e1a711b5df49f56dcd4a1886a65f60c424ca4582d9d7691bfd16863332f",
+  "sourceSha256": {
+    "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts": "25458e36c7b89b5d33b8b2718279d0e77daf2445bf7fb1ba4df904b55aeaa495",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts": "db013f9d01355de73c43dbd186139f46e6da4d6cdcad92e1110d33aef26bc783",
+    "packages/ui/AGENTS.md": "4b6ae79c841156b26ed40ad1560ab42c623a462ed9512dcd88612e2d4b87c739"
+  },
+  "changes": [
+    "Publish measurement revision and mounted-reflow cause atomically; first/remounted windows and bounded height-cache eviction update rendering, anchors and live drag geometry without FLIP.",
+    "Per-mounted last natural height detects genuine resize/load reflow even after cache eviction. Private motion baseline follows ingress while the opaque token remains stable; mixed ingress/reflow and width batches preserve motion.",
+    "Reject and exactly reverse checksum experiment after alternating complete-commit comparison; no production/test storage changes retained."
+  ],
+  "automated": {
+    "rootChecks": [
+      {
+        "command": "pnpm test",
+        "exitCode": 0,
+        "path": "logs/2026-11-06-virtual-list-implementation/session-root-test.log",
+        "sha256": "c54a2d4c0a66c7f7cdb3a614da70c7658ce0c9ae20d62462d1de0c301e48d3a0"
+      },
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0,
+        "path": "logs/2026-11-06-virtual-list-implementation/session-root-typecheck.log",
+        "sha256": "ca8d58070658d3031df05795bed68c93fde230b1ea69b7e349a8eb6e4b3e82eb"
+      },
+      {
+        "command": "pnpm lint",
+        "exitCode": 0,
+        "path": "logs/2026-11-06-virtual-list-implementation/session-final-lint.log",
+        "sha256": "3e65c43ed1511c875b8d23f4e212190999e08dac03fc85f8e6ce9942af8cd186"
+      },
+      {
+        "command": "pnpm format:check",
+        "exitCode": 0,
+        "path": "logs/2026-11-06-virtual-list-implementation/session-root-format-check.log",
+        "sha256": "cac1226fe3f7ffcb7ca65f2b32c1871d1f7ca4ea3746fafa9e136c0507480a21"
+      },
+      {
+        "command": "pnpm build",
+        "exitCode": 0,
+        "path": "logs/2026-11-06-virtual-list-implementation/session-root-build.log",
+        "sha256": "62ed214e77f9b47f936c815e1d00b0804fa5148c2cc465ad29a36c3ce7504813"
+      }
+    ],
+    "ui": {
+      "files": 119,
+      "tests": 1056,
+      "result": "passed in final root test"
+    },
+    "focused": {
+      "files": 3,
+      "tests": 59,
+      "result": "passed"
+    },
+    "meaningfulNewRegressions": 4
+  },
+  "productionBuild": {
+    "comparison": [
+      {
+        "runtime": "userscript",
+        "payloadBytes": 5940115,
+        "payloadGzipBytes": 1154625,
+        "previousPayloadBytes": 5938960,
+        "previousPayloadGzipBytes": 1154335,
+        "deltaBytes": 1155,
+        "deltaGzipBytes": 290
+      },
+      {
+        "runtime": "tauri",
+        "payloadBytes": 3678492,
+        "payloadGzipBytes": 886758,
+        "previousPayloadBytes": 3678026,
+        "previousPayloadGzipBytes": 886583,
+        "deltaBytes": 466,
+        "deltaGzipBytes": 175
+      }
+    ],
+    "buildAudits": [
+      {
+        "path": "apps/userscript/dist/userscript-build-audit.json",
+        "sha256": "2c30b77aa0cb440a5685250ba6fd9599a5944862ecaa2f646324600327589a93",
+        "entries": {
+          "eager": {
+            "modules": 25,
+            "executableVirtualModules": [],
+            "virtualStyleResources": []
+          }
+        }
+      },
+      {
+        "path": "apps/userscript/dist/theme-build-audit.json",
+        "sha256": "9b00425be9ed34acd43f7ee9c5c22da08e195cd8e7f9a07d98e321488150ebe3",
+        "entries": {
+          "metadata": {
+            "modules": 3,
+            "executableVirtualModules": [],
+            "virtualStyleResources": []
+          },
+          "startup": {
+            "modules": 877,
+            "executableVirtualModules": [],
+            "virtualStyleResources": [
+              "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=style&index=0&scoped=dc9e5970&inline&lang.css"
+            ]
+          },
+          "documentStart": {
+            "modules": 25,
+            "executableVirtualModules": [],
+            "virtualStyleResources": []
+          }
+        }
+      },
+      {
+        "path": "apps/tauri/dist/theme-build-audit.json",
+        "sha256": "2f521ecb810bb493e1dda551547c0f5d60dc8a5a427ae2447a59afa44f3925cb",
+        "entries": {
+          "metadata": {
+            "modules": 3,
+            "executableVirtualModules": [],
+            "virtualStyleResources": []
+          },
+          "startup": {
+            "modules": 992,
+            "executableVirtualModules": [],
+            "virtualStyleResources": [
+              "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=style&index=0&scoped=dc9e5970&inline&lang.css"
+            ]
+          }
+        }
+      }
+    ],
+    "nativeExecutable": {
+      "path": "target/release/any-music-tauri.exe",
+      "sha256": "d5d2a0627ab79ad69729af1ac4833f7d753ad845754ad7e039f2de76566903cc",
+      "scope": "Built, not installed/release-runtime acceptance"
+    }
+  },
+  "userscript": {
+    "runtime": "Installed Tampermonkey 5.5.1 development script with real GM storage and Chrome156; dedicated persistent profile. Development delivery, not final production permissions/artifact admission.",
+    "static": {
+      "scope": "Synthetic80; pointer moved outside cards before final screenshots; CSS viewport overrides are not physical devices",
+      "results": [
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "minimal",
+            "density": "comfortable",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 41,
+          "changedBounds": [1422, 117, 1428, 125],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-comfortable-1440-1-baseline.png",
+              "sha256": "ce28b15b5e2185513f476297ab7bacdc44bd9f81c77d526e35f73d4bfa4ecf28"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-comfortable-1440-1-candidate.png",
+              "sha256": "51c6d658684bda56ba1b66e1d9e70954d16451605f062bde0dbbf387fb7d5cff"
+            }
+          ],
+          "mounted": [80, 8]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "default",
+            "density": "comfortable",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 264,
+          "changedBounds": [1422, 120, 1428, 165],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-comfortable-1440-1-baseline.png",
+              "sha256": "297f4afc1cc669db064ad20ffb3fb2c418faa384f362bed2fb0d2e8df3fe169d"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-comfortable-1440-1-candidate.png",
+              "sha256": "8c89c87f62567c3aa5a8db4cf70db6387ec3e6ad49e4f84954e85c23ba50f597"
+            }
+          ],
+          "mounted": [80, 12]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "default",
+            "density": "standard",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 301,
+          "changedBounds": [1422, 129, 1428, 180],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-standard-1440-1-baseline.png",
+              "sha256": "7f38c5ea2a9fd1c7d50d3094280594d2cc789b717e6acfa5f3738921f499de93"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-standard-1440-1-candidate.png",
+              "sha256": "7be1d59a362ae6dcf6f1186b5bd4fe5670da8349ad3529c32562b9f94665487f"
+            }
+          ],
+          "mounted": [80, 12]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "default",
+            "density": "compact",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 530,
+          "changedBounds": [1422, 139, 1428, 228],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-compact-1440-1-baseline.png",
+              "sha256": "a516e560a086c7c1759829a57b159b0ccb9455d16319c29d3bbfaf321d32282c"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-compact-1440-1-candidate.png",
+              "sha256": "374840844b1cd5ba09eb823ae4624c53b7f2a845af459db65e2aa729a98ad802"
+            }
+          ],
+          "mounted": [80, 16]
+        },
+        {
+          "scenario": {
+            "theme": "dark",
+            "style": "minimal",
+            "density": "comfortable",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 42,
+          "changedBounds": [1422, 117, 1428, 125],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-minimal-comfortable-1440-1-baseline.png",
+              "sha256": "435634979502fc3b42ff123c32c10362570117c26c3946c76d4ca2e6cee351a8"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-minimal-comfortable-1440-1-candidate.png",
+              "sha256": "b7e27ad17dba8be02a9573fa3a0dc5ff70281a2334b6a2b90985f4d79fb24372"
+            }
+          ],
+          "mounted": [80, 8]
+        },
+        {
+          "scenario": {
+            "theme": "dark",
+            "style": "default",
+            "density": "comfortable",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 264,
+          "changedBounds": [1422, 120, 1428, 165],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-default-comfortable-1440-1-baseline.png",
+              "sha256": "b329d8fb3ed1ffec69c89f0e31de2385d032cc67c7fa03e2b64b2135d240b8d8"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-default-comfortable-1440-1-candidate.png",
+              "sha256": "6b4a64fbc7c9d707576df5e6a42af3ea0c5327ffeba40e61c74ebf92913f0b72"
+            }
+          ],
+          "mounted": [80, 12]
+        },
+        {
+          "scenario": {
+            "theme": "dark",
+            "style": "default",
+            "density": "standard",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 302,
+          "changedBounds": [1422, 129, 1428, 180],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-default-standard-1440-1-baseline.png",
+              "sha256": "8ada3ed097357f83b75ff4afaa81af271d63d94ac776f1cc1e4fb0916c7e842c"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-default-standard-1440-1-candidate.png",
+              "sha256": "0aba52fdb5e555275a185072a60073ec08bc0340bf5aebf81b45e06aadde6733"
+            }
+          ],
+          "mounted": [80, 12]
+        },
+        {
+          "scenario": {
+            "theme": "dark",
+            "style": "default",
+            "density": "compact",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 531,
+          "changedBounds": [1422, 138, 1428, 228],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-default-compact-1440-1-baseline.png",
+              "sha256": "33ce0ba6ca668e3c6356275765866a38cd7932e017143f51227965c3ea6a1828"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-default-compact-1440-1-candidate.png",
+              "sha256": "a618ce5bdf59b1db6de8e982a15d2bee6df28be9349e6cccbb671cdca0a12f6e"
+            }
+          ],
+          "mounted": [80, 16]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "minimal",
+            "density": "standard",
+            "width": 375,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 375,
+            "height": 1000
+          },
+          "totalChangedPixels": 54,
+          "changedBounds": [370, 98, 375, 110],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-standard-375-1-baseline.png",
+              "sha256": "070ca47497f4394186aa9ee72b193a8efa3d69708de03d181407c5ef0c89788a"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-standard-375-1-candidate.png",
+              "sha256": "6e7b62075e954cf01bbc539b4ef33d3cad6c935d82ad423c9dc0964352c35693"
+            }
+          ],
+          "mounted": [80, 7]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "minimal",
+            "density": "standard",
+            "width": 375,
+            "columns": 2
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 375,
+            "height": 1000
+          },
+          "totalChangedPixels": 129,
+          "changedBounds": [370, 106, 375, 133],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-standard-375-2-baseline.png",
+              "sha256": "998b8caabd8850302b20642bfc5037d89e3e5b5abd1614564ceff2c52e3020d9"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-standard-375-2-candidate.png",
+              "sha256": "fd4e664b595bd1eb39d0f5c1304953229577a73c343b22627b86e0f93036fed4"
+            }
+          ],
+          "mounted": [80, 10]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "default",
+            "density": "standard",
+            "width": 375,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 375,
+            "height": 1000
+          },
+          "totalChangedPixels": 11,
+          "changedBounds": [370, 97, 375, 100],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-standard-375-1-baseline.png",
+              "sha256": "5b87999856431b3df904a13c3b095eff32f16092282fb27097078d6726487118"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-standard-375-1-candidate.png",
+              "sha256": "642d3eacc2d7a31ebdebe1c0b5dd55b103e137352fe9c23b9f578c2f9d65bed0"
+            }
+          ],
+          "mounted": [80, 6]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "default",
+            "density": "standard",
+            "width": 375,
+            "columns": 2
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 375,
+            "height": 1000
+          },
+          "totalChangedPixels": 56,
+          "changedBounds": [370, 141, 375, 153],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-standard-375-2-baseline.png",
+              "sha256": "e5e0276e71942c81745da1bd7144a717ec33e5cb5918144cb1ceb780f5920128"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-default-standard-375-2-candidate.png",
+              "sha256": "766fbd57547ba5c70493874bbaed9fd3cc160de680d58468c4fd1027ac2b61ba"
+            }
+          ],
+          "mounted": [80, 14]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "minimal",
+            "density": "standard",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 232,
+          "changedBounds": [1422, 145, 1428, 185],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-standard-1440-1-baseline.png",
+              "sha256": "3d1a57b223149e359845b5bdea4b3e26d1b1c122958c599df77fd2518bd66ea0"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-standard-1440-1-candidate.png",
+              "sha256": "54af672aa1c77ef69093b220c3128e049d6186fd078cd19bc7d30d6a27fb8744"
+            }
+          ],
+          "mounted": [80, 12]
+        },
+        {
+          "scenario": {
+            "theme": "light",
+            "style": "minimal",
+            "density": "compact",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 343,
+          "changedBounds": [1422, 181, 1428, 239],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-compact-1440-1-baseline.png",
+              "sha256": "1b426075f3d947f87ae318fae0fcde4550e7b95a88bc81885f3ba36e43701807"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-light-minimal-compact-1440-1-candidate.png",
+              "sha256": "a8bd2f3499d9c5a46536b75b45238b27faf8ee353dc33f0a7b2725dfb190a825"
+            }
+          ],
+          "mounted": [80, 20]
+        },
+        {
+          "scenario": {
+            "theme": "dark",
+            "style": "minimal",
+            "density": "standard",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 232,
+          "changedBounds": [1422, 145, 1428, 185],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-minimal-standard-1440-1-baseline.png",
+              "sha256": "98c88424abda01694d1cf8725cc495eec6f948c669da6b6ad5ad6a80be84f031"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-minimal-standard-1440-1-candidate.png",
+              "sha256": "0e30298600d9276e755428478e71df945e5244a290ebae06dc5a06fab2f284c0"
+            }
+          ],
+          "mounted": [80, 12]
+        },
+        {
+          "scenario": {
+            "theme": "dark",
+            "style": "minimal",
+            "density": "compact",
+            "width": 1440,
+            "columns": 1
+          },
+          "rectangleMismatches": 0,
+          "screenshotPixels": {
+            "width": 1440,
+            "height": 1000
+          },
+          "totalChangedPixels": 344,
+          "changedBounds": [1422, 181, 1428, 239],
+          "visibleCards": [
+            {
+              "id": "c00-live:0",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:1",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:2",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:3",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:4",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:5",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:6",
+              "changedPixels": 0
+            },
+            {
+              "id": "c00-live:7",
+              "changedPixels": 0
+            }
+          ],
+          "allSharedVisibleCardPixelsEqual": true,
+          "screenshots": [
+            {
+              "candidate": false,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-minimal-compact-1440-1-baseline.png",
+              "sha256": "65d2988a40c393b85a562b99b9f7c1efef5d410633f9db5b7f1d9e56a376ceff"
+            },
+            {
+              "candidate": true,
+              "path": "logs/2026-11-06-virtual-list-implementation/session-gm-visual-dark-minimal-compact-1440-1-candidate.png",
+              "sha256": "9e000b861141bd79f850b79007ccbcf88165f823e8ff99f7763339d3ee4cc5de"
+            }
+          ],
+          "mounted": [80, 20]
+        }
+      ]
+    },
+    "sidebarCounterfactual": {
+      "scope": "Reconstructed pre-edit source with only this session two source hunks reversed, not an originally captured snapshot. Same80 fixture and controlled GM method; one diagnostic comparison, not statistical acceptance.",
+      "oldSourceProbe": {
+        "component": "VirtualTrackCardGrid",
+        "hasReflowRevision": false
+      },
+      "finalSourceProbe": {
+        "component": "VirtualTrackCardGrid",
+        "hasReflowRevision": true
+      },
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-80-true-sidebar-90.json",
+        "sha256": "a036e66f086698978cb81a00fd8f68ebdf2080f4d6a6919c58399c71a5487636"
+      },
+      "sourceFinalRestoredExactly": true
+    },
+    "ingress": {
+      "passed": true,
+      "flipReads": 0,
+      "flipAnimations": 0,
+      "windows": [
+        {
+          "fraction": 0.15,
+          "mounted": 21,
+          "first": "c00-live:194",
+          "last": "c00-live:214"
+        },
+        {
+          "fraction": 0.3,
+          "mounted": 24,
+          "first": "c00-live:308",
+          "last": "c00-live:331"
+        },
+        {
+          "fraction": 0.5,
+          "mounted": 21,
+          "first": "c00-live:500",
+          "last": "c00-live:520"
+        },
+        {
+          "fraction": 0.75,
+          "mounted": 21,
+          "first": "c00-live:764",
+          "last": "c00-live:784"
+        },
+        {
+          "fraction": 1,
+          "mounted": 21,
+          "first": "c00-live:58",
+          "last": "c00-live:78"
+        },
+        {
+          "fraction": 0.7,
+          "mounted": 21,
+          "first": "c00-live:761",
+          "last": "c00-live:781"
+        },
+        {
+          "fraction": 0.4,
+          "mounted": 21,
+          "first": "c00-live:443",
+          "last": "c00-live:463"
+        },
+        {
+          "fraction": 0,
+          "mounted": 12,
+          "first": "c00-live:80",
+          "last": "c00-live:91"
+        }
+      ],
+      "method": "Diagnostic prototype instrumentation on installed GM development script; full-range window jumps, not frame-time or physical input acceptance"
+    },
+    "functional": {
+      "scope": "Installed Tampermonkey development script, current frozen source; synthetic 1000 tracks without artwork; not production/input-device acceptance",
+      "initial": {
+        "count": 1000,
+        "records": 1000,
+        "candidate": true,
+        "mounted": 12,
+        "columns": "354.018px 354.018px 354.018px",
+        "scrollHeight": 53585,
+        "cells": [
+          {
+            "id": "c00-live:80",
+            "box": {
+              "x": 298.1160888671875,
+              "y": 297.8839416503906,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:81",
+            "box": {
+              "x": 664.1339721679688,
+              "y": 297.8839416503906,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:82",
+            "box": {
+              "x": 1030.15185546875,
+              "y": 297.8839416503906,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:83",
+            "box": {
+              "x": 298.1160888671875,
+              "y": 660.9107666015625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:84",
+            "box": {
+              "x": 664.1339721679688,
+              "y": 660.9107666015625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:85",
+            "box": {
+              "x": 1030.15185546875,
+              "y": 660.9107666015625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:86",
+            "box": {
+              "x": 298.1160888671875,
+              "y": 1023.9375610351562,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:87",
+            "box": {
+              "x": 664.1339721679688,
+              "y": 1023.9375610351562,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          }
+        ],
+        "styles": {
+          "contain": "content",
+          "contentVisibility": "visible",
+          "intrinsic": "none"
+        }
+      },
+      "opened": {
+        "id": "c00-live:80",
+        "dialogs": 1
+      },
+      "retained": {
+        "count": 1000,
+        "records": 1000,
+        "candidate": true,
+        "mounted": 24,
+        "columns": "354.018px 354.018px 354.018px",
+        "scrollHeight": 55655,
+        "cells": [
+          {
+            "id": "c00-live:80",
+            "box": {
+              "x": 298.1160888671875,
+              "y": -53186.69140625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:81",
+            "box": {
+              "x": 664.1339721679688,
+              "y": -53186.69140625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:82",
+            "box": {
+              "x": 1030.15185546875,
+              "y": -53186.69140625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:58",
+            "box": {
+              "x": 298.1160888671875,
+              "y": -674.4732666015625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:59",
+            "box": {
+              "x": 664.1339721679688,
+              "y": -674.4732666015625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:60",
+            "box": {
+              "x": 1030.15185546875,
+              "y": -674.4732666015625,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:61",
+            "box": {
+              "x": 298.1160888671875,
+              "y": -311.4464416503906,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:62",
+            "box": {
+              "x": 664.1339721679688,
+              "y": -311.4464416503906,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          }
+        ],
+        "sourceMounted": true,
+        "dialog": true
+      },
+      "closed": {
+        "dialogs": 0,
+        "active": "c00-live:80"
+      },
+      "tail": {
+        "target": "c00-live:79",
+        "okay": true,
+        "active": "c00-live:79",
+        "position": "1000",
+        "size": "1000",
+        "count": 1000,
+        "records": 1000,
+        "candidate": true,
+        "mounted": 13,
+        "columns": "354.018px 354.018px 354.018px",
+        "scrollHeight": 55655,
+        "cells": [
+          {
+            "id": "c00-live:67",
+            "box": {
+              "x": 298.1160888671875,
+              "y": -992.8214721679688,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:68",
+            "box": {
+              "x": 664.1339721679688,
+              "y": -992.8214721679688,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:69",
+            "box": {
+              "x": 1030.15185546875,
+              "y": -992.8214721679688,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:70",
+            "box": {
+              "x": 298.1160888671875,
+              "y": -629.794677734375,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:71",
+            "box": {
+              "x": 664.1339721679688,
+              "y": -629.794677734375,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:72",
+            "box": {
+              "x": 1030.15185546875,
+              "y": -629.794677734375,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:73",
+            "box": {
+              "x": 298.1160888671875,
+              "y": -266.76788330078125,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          },
+          {
+            "id": "c00-live:74",
+            "box": {
+              "x": 664.1339721679688,
+              "y": -266.76788330078125,
+              "width": 354.01788330078125,
+              "height": 351.02679443359375
+            }
+          }
+        ]
+      },
+      "passed": true
+    },
+    "performance": {
+      "method": "9s operations,1200 CSS px/s scrolling and at most12 sidebar reversals700ms apart; native1453x1093 window producing1440x1000 viewport, no focus/viewport emulation, foreground ownership sampled100ms, no parallel tests/builds/native animation. rAF intervals are not presented-frame/CPU time.",
+      "phases": [
+        {
+          "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-1000-true-scroll-1.json",
+          "sha256": "b0cc59cc4a98bc5ae2fb8740b5155702d947a4e378b2cceea2c9c6c7db59dee8",
+          "count": 1000,
+          "candidate": true,
+          "round": 1,
+          "kind": "scroll",
+          "viewport": {
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1.75
+          },
+          "frameIntervals": {
+            "samples": 1465,
+            "p50Ms": 5.899999999906868,
+            "p95Ms": 6,
+            "p99Ms": 17.699999999953434,
+            "maxMs": 29.4000000001397,
+            "over16_7Ms": 26,
+            "over33_4Ms": 0
+          },
+          "longTasksMs": [],
+          "metrics": {
+            "LayoutCount": 86,
+            "RecalcStyleCount": 1206,
+            "LayoutDuration": 0.06880800000000001,
+            "RecalcStyleDuration": 0.38341200000000003,
+            "ScriptDuration": 0.112558,
+            "TaskDuration": 1.9395780000000002
+          },
+          "maxMounted": 24,
+          "osForegroundSamples": 157,
+          "osNonOwnedSamples": 0
+        },
+        {
+          "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-10000-true-scroll-1.json",
+          "sha256": "0812fe2f06b9cc04207645a653665ffedf8aee04c0777b3acc56ac1cb36a90b9",
+          "count": 10000,
+          "candidate": true,
+          "round": 1,
+          "kind": "scroll",
+          "viewport": {
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1.75
+          },
+          "frameIntervals": {
+            "samples": 1465,
+            "p50Ms": 5.899999999906868,
+            "p95Ms": 6,
+            "p99Ms": 17.699999999953434,
+            "maxMs": 23.600000000093132,
+            "over16_7Ms": 28,
+            "over33_4Ms": 0
+          },
+          "longTasksMs": [],
+          "metrics": {
+            "LayoutCount": 86,
+            "RecalcStyleCount": 1206,
+            "LayoutDuration": 0.06908,
+            "RecalcStyleDuration": 0.37526,
+            "ScriptDuration": 0.10554,
+            "TaskDuration": 1.918066
+          },
+          "maxMounted": 24,
+          "osForegroundSamples": 163,
+          "osNonOwnedSamples": 0
+        },
+        {
+          "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-10000-true-sidebar-1.json",
+          "sha256": "b6c4eccd2dc175dd4a10eedee68f9ddec0b50c6c9005e3aed5bcf3a68e950544",
+          "count": 10000,
+          "candidate": true,
+          "round": 1,
+          "kind": "sidebar",
+          "viewport": {
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1.75
+          },
+          "frameIntervals": {
+            "samples": 677,
+            "p50Ms": 5.899999999906868,
+            "p95Ms": 47.0999999998603,
+            "p99Ms": 258.80000000004657,
+            "maxMs": 276.70000000018626,
+            "over16_7Ms": 51,
+            "over33_4Ms": 48
+          },
+          "longTasksMs": [
+            277, 62, 79, 276, 81, 263, 85, 256, 72, 261, 74, 50, 261, 100, 265, 78, 258, 68, 262,
+            74, 260, 69, 260, 78, 69, 265, 81
+          ],
+          "metrics": {
+            "LayoutCount": 237,
+            "RecalcStyleCount": 3321,
+            "LayoutDuration": 0.404882,
+            "RecalcStyleDuration": 1.2331779999999999,
+            "ScriptDuration": 0.420643,
+            "TaskDuration": 5.59324
+          },
+          "maxMounted": 16,
+          "osForegroundSamples": 159,
+          "osNonOwnedSamples": 0
+        },
+        {
+          "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-80-false-sidebar-1.json",
+          "sha256": "512b71e831792ecf204b5ddf6b8179e113dce32ef0cf0634845fef6d4c0603b9",
+          "count": 80,
+          "candidate": false,
+          "round": 1,
+          "kind": "sidebar",
+          "viewport": {
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1.75
+          },
+          "frameIntervals": {
+            "samples": 1224,
+            "p50Ms": 5.900000000023283,
+            "p95Ms": 17.600000000093132,
+            "p99Ms": 23.5,
+            "maxMs": 29.5,
+            "over16_7Ms": 100,
+            "over33_4Ms": 0
+          },
+          "longTasksMs": [],
+          "metrics": {
+            "LayoutCount": 188,
+            "RecalcStyleCount": 2139,
+            "LayoutDuration": 0.819637,
+            "RecalcStyleDuration": 1.34369,
+            "ScriptDuration": 0.027031,
+            "TaskDuration": 3.114934
+          },
+          "maxMounted": 80,
+          "osForegroundSamples": 160,
+          "osNonOwnedSamples": 0
+        },
+        {
+          "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-80-false-sidebar-2.json",
+          "sha256": "4b5c5302af221e622da8716be4a7dd1266c67024a6b57c8a2c3d09b3240c8204",
+          "count": 80,
+          "candidate": false,
+          "round": 2,
+          "kind": "sidebar",
+          "viewport": {
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1.75
+          },
+          "frameIntervals": {
+            "samples": 1173,
+            "p50Ms": 5.900000000023283,
+            "p95Ms": 17.70000000006985,
+            "p99Ms": 23.699999999953434,
+            "maxMs": 47,
+            "over16_7Ms": 134,
+            "over33_4Ms": 4
+          },
+          "longTasksMs": [],
+          "metrics": {
+            "LayoutCount": 164,
+            "RecalcStyleCount": 8814,
+            "LayoutDuration": 0.992281,
+            "RecalcStyleDuration": 1.307035,
+            "ScriptDuration": 0.052127,
+            "TaskDuration": 3.311497
+          },
+          "maxMounted": 80,
+          "osForegroundSamples": 158,
+          "osNonOwnedSamples": 0
+        },
+        {
+          "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-80-true-sidebar-1.json",
+          "sha256": "7bb1062ec2feb356cc6c19e15f6affd19bdf3b5dce55be8cb471bb1c62d68371",
+          "count": 80,
+          "candidate": true,
+          "round": 1,
+          "kind": "sidebar",
+          "viewport": {
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1.75
+          },
+          "frameIntervals": {
+            "samples": 1044,
+            "p50Ms": 5.900000000023283,
+            "p95Ms": 35.29999999993015,
+            "p99Ms": 58.800000000046566,
+            "maxMs": 88.29999999993015,
+            "over16_7Ms": 71,
+            "over33_4Ms": 61
+          },
+          "longTasksMs": [78, 51, 66, 85, 56, 50, 57, 79, 50, 70, 80, 62, 79, 59, 67, 53, 60],
+          "metrics": {
+            "LayoutCount": 413,
+            "RecalcStyleCount": 5415,
+            "LayoutDuration": 0.655958,
+            "RecalcStyleDuration": 1.780704,
+            "ScriptDuration": 0.05414,
+            "TaskDuration": 3.73926
+          },
+          "maxMounted": 16,
+          "osForegroundSamples": 158,
+          "osNonOwnedSamples": 0
+        },
+        {
+          "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-80-true-sidebar-2.json",
+          "sha256": "2f4c59feeb1095987a6a6e7ea8e4b52d3b47ea5c82221ebb0bdd1792a96dd1bc",
+          "count": 80,
+          "candidate": true,
+          "round": 2,
+          "kind": "sidebar",
+          "viewport": {
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1.75
+          },
+          "frameIntervals": {
+            "samples": 1041,
+            "p50Ms": 5.900000000023283,
+            "p95Ms": 35.300000000046566,
+            "p99Ms": 53,
+            "maxMs": 105.90000000002328,
+            "over16_7Ms": 72,
+            "over33_4Ms": 64
+          },
+          "longTasksMs": [102, 59, 80, 55, 78, 50, 56, 80, 51, 69, 78, 56, 70, 58, 58],
+          "metrics": {
+            "LayoutCount": 414,
+            "RecalcStyleCount": 5333,
+            "LayoutDuration": 0.638487,
+            "RecalcStyleDuration": 1.784207,
+            "ScriptDuration": 0.041388,
+            "TaskDuration": 3.737902
+          },
+          "maxMounted": 16,
+          "osForegroundSamples": 157,
+          "osNonOwnedSamples": 0
+        },
+        {
+          "path": "logs/2026-11-06-virtual-list-implementation/session-gm-performance-80-true-sidebar-3.json",
+          "sha256": "205b3ef0a4a09e6b34a5bcf6439ccbba929c644552bb491d8c348e98318a1e0f",
+          "count": 80,
+          "candidate": true,
+          "round": 3,
+          "kind": "sidebar",
+          "viewport": {
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1.75
+          },
+          "frameIntervals": {
+            "samples": 1046,
+            "p50Ms": 5.900000000023283,
+            "p95Ms": 35.29999999993015,
+            "p99Ms": 58.90000000002328,
+            "maxMs": 82.40000000002328,
+            "over16_7Ms": 73,
+            "over33_4Ms": 67
+          },
+          "longTasksMs": [77, 62, 61, 75, 50, 56, 68, 63, 72, 59, 69, 62, 51, 55, 68, 56, 61],
+          "metrics": {
+            "LayoutCount": 423,
+            "RecalcStyleCount": 5470,
+            "LayoutDuration": 0.6627799999999999,
+            "RecalcStyleDuration": 1.807258,
+            "ScriptDuration": 0.04011,
+            "TaskDuration": 3.697721
+          },
+          "maxMounted": 16,
+          "osForegroundSamples": 157,
+          "osNonOwnedSamples": 0
+        }
+      ]
+    },
+    "cleanup": {
+      "cleanup": true,
+      "fixtureTracks": 10000,
+      "removedSyntheticKeys": 10,
+      "writerReleased": true,
+      "profilePreserved": true,
+      "extensionPreserved": true
+    },
+    "processCleanup": {
+      "remainingListeners": [],
+      "remainingOwned": [],
+      "stoppedSetupPid": 24216,
+      "browserPid": 28456,
+      "profilePreserved": true
+    }
+  },
+  "nativeEvidence": "native-review.json",
+  "storageEvidence": "storage-review.json",
+  "intermediateDiagnostics": [
+    "GM harness session was lost to prior development HMR; re-opened and re-bootstrapped after source freeze. First static matrix retained as hover diagnostic and excluded from final visual comparison.",
+    "Native cold evaluation timeout under parallel root verification and image-intersection/hover diagnostic attempts are retained in local logs; only final isolated-slot results are summarized.",
+    "On November7 native launcher HTTP readiness was corrected to use PowerShell basic parsing; no product change. OS foreground violations remain excluded. Native normal close did not exit within8s and forced owned cleanup is recorded.",
+    "The initial GM ingress diagnostic exceeded its transport timer; increased only the local command budget and reran ingress and functional checks separately. Final recorded checks pass."
+  ],
+  "limits": [
+    "C00 private candidate stays default-closed. Current performance/visual limits in the runtime records remain open; development evidence does not admit production artifacts, permissions or physical devices.",
+    "Full identity/row geometry, semantic metadata and a fixed number of motion snapshots scale with N. A bounded height cache/DOM does not imply bounded total memory/frame cost; this batch may retain latest row baseline and preceding motion-token row snapshot.",
+    "Complete generation persistence remains synchronous O(N). A real yielding implementation requires an explicit async preparation/commit and serialized writer contract across shared storage and both runtime adapters, detached candidates, post-yield stale barriers, flush/disposal/error/crash/interleaving tests. No lock-release shortcut or weakened validation was adopted.",
+    "Native80 sidebar samples with lost OS foreground and pointer/density/reduced-motion recordings with lost OS foreground are not admission evidence. Native pointer recordings did not observe landing markers. Normal WM_CLOSE did not exit the isolated host within8s; forced cleanup is recorded and normal shutdown stays open.",
+    "Remote artwork/decode performance, physical system theme/input/IME/touch/full capture/interruption/drop matrix, sustained account/playback/download/theme/hide-show flows and final production installation remain open. Native local-artwork/system emulation/motion observations apply only to the recorded scenarios."
+  ],
+  "reversal": "Only the two measurement/grid source hunks, their two test files, corresponding UI guide/UI contract/plan and this evidence. Preserve all preceding width batches, semantic maps, containment, drag/continuity/storage changes and other pre-existing modified/untracked work. Do not delete entire pre-existing virtual modules.",
+  "coordination": "Three subagents handled measurement, rejected persistence experiment and isolated native review; primary integrated/reviewed, ran root gates and installed-GM checks. No new user-owned chat, commit or push.",
+  "logDirectory": "logs/2026-11-06-virtual-list-implementation",
+  "finalSourceIntegrity": {
+    "checkedAt": "2026-11-07T03:31:32.292Z",
+    "sourceFiles": 1179,
+    "sourceDigest": "8ea78e1a711b5df49f56dcd4a1886a65f60c424ca4582d9d7691bfd16863332f",
+    "mismatches": []
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B06-workbench-storage-shared",
+  "parentRunId": "2026-10-21-b00-e0884a5",
+  "capturedAt": "2026-10-21T15:23:34.2477968+08:00",
+  "reportFinalizedAt": "2026-10-21T15:30:39.3620918+08:00",
+  "head": "c38a2479d669ca788ddac958a3b19cd08223817b",
+  "environment": {
+    "cwd": "<project-root>",
+    "shell": "PowerShell",
+    "powershellVersion": "7.6.6",
+    "os": "Microsoft Windows NT 10.0.26200.0",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "userTimezone": "Asia/Shanghai"
+  },
+  "taskStartWorkingTree": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json"
+  ],
+  "initialHashCaptureWorkingTree": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json"
+  ],
+  "inputs": [
+    {
+      "path": "packages/music-workbench/package.json",
+      "sha256": "98a74b0beff51fe56c81f8ec2118eaea6ad138dd8a54b7024ae6a68c37775155"
+    },
+    {
+      "path": "packages/music-workbench/vitest.config.ts",
+      "sha256": "2751b2731cc68332ae32c1b5e9bf5bad72184e6d8fe6c828a897141ebb5d9bcf"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "sha256": "50ed7646c03b707dc8cc0a4235b12c941c52fd6dd63ff3a506ba09de52e4d1fa"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/storage.ts",
+      "sha256": "c7ad1d8e6794c8800f411b5d9db0128f14acba8a68f700e84a85a2b84dddc452"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-storage.ts",
+      "sha256": "47395d1847abef69b5363f25161ee5fda3bc1780b52356b1efd302819753767a"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-data.ts",
+      "sha256": "f8b85a61254c5576c03acb2b724cd8546249d758963c0e5a1b1e9fb81ba62e4d"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-generation-store.ts",
+      "sha256": "b64231c980f406ca15a5488f1888f6dc3137c0b82d03090a94157ba96477759d"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-data-projection.ts",
+      "sha256": "4d34723e50177dc192ea5062423b6c4a73a668c5ac845a8c88a2598f11d0c75f"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/local-music-library-repository.ts",
+      "sha256": "ed085928e788c0fbb82fafa76a2123d81a71db1d11391d5564ebdd6a96d44102"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/product-generation-store.test.ts",
+      "sha256": "e5d6c9dd449ed3e4439486f90a9025eca6e12ae878226fd9b866b87f2542127b"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/product-storage-fixtures.ts",
+      "sha256": "350c692f3a64bb8503e23526eeb6825a0247f1ba27a5be01e6be8e68ca335e42"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-data-ownership.md",
+      "sha256": "bfac3bb5eef8a7a8df6b7fdd2615803fac4864753aa4064209d51d674b7d05b5"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177"
+    },
+    {
+      "path": "packages/music-workbench/AGENTS.md",
+      "sha256": "1c73c5188fabf882082e7e2d08dfa7fe3f0abb03e5d926b11f96a203525c7d8f"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e"
+    },
+    {
+      "path": "package.json",
+      "sha256": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+      "sha256": "89725843eb7277992fd5106f0d548a8c3360c493b2d520781864ce79c880b6a5"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/project-architecture.md",
+      "sha256": "865beeb0a89911cc969a5962537d348fde83292cffb11c26c103da5ce6f83498"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "sha256": "9b108401084637dfd5e73864d5b37990661df447ea91d25d2830a4c2bbfdbb2c"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/development-workflow.md",
+      "sha256": "3e8edc5c234f5bf2a8e65bbd2db26bb39db9730e620055289319ece9fa1e2fad"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/portable-product-data.ts",
+      "sha256": "8569b856bbbcc0386f9a4ca6ff4df63b2f17e256a599399056d72d031019be6d"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/playback-queue-repository.ts",
+      "sha256": "53eecb01fc6c1df4bd1058a44e46cdda18e8f52ce561807788c9d48e69c830fc"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/music-source-workspace-repository.ts",
+      "sha256": "518e28841666388c56eb6e73b3d27e432cd8a682a39536c3ae8af592f70f4cbb"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/download-history-repository.ts",
+      "sha256": "99d0812d1aaebe2f6de18b59cb5a7833f64af357d6a87431fb476fe76077f6d5"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/catalog-filter-history-repository.ts",
+      "sha256": "4e953929e9e84ffbe20a4f2a26f85aa7fad4503fcc05d9e2586e138d7e7b09a1"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/app-shell-preferences-repository.ts",
+      "sha256": "e3098d159a63d1430442e8aba5de646de2476f2253b9e0157d93db5ee5af0e58"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/storage-repository-keys.test.ts",
+      "sha256": "41d522b1f59108656bfaa2979831e89284477d29b1380c4b7a8f5722404a937f"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/portable-product-data.test.ts",
+      "sha256": "edb5baf3a0786c4c35ed52b98acedff04c412fce1443f745f340808cdca7a106"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/local-music-library-repository.test.ts",
+      "sha256": "b60debdc6e2f02cab76a7f5564cfa297c6480327cee578d494384ca7d827dd01"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/catalog-filter-history-repository.test.ts",
+      "sha256": "d07cc0d85e03dc8d992e1f97f25533ee9aba902107e0474683a4d36605a8e625"
+    }
+  ],
+  "capturePolicy": "Principal shared storage source hashes captured after existing targeted tests and before supplemental probes. Additional unchanged guides/storage tests were added to the hash inventory after probe execution. Inventory membership does not imply every hashed file was read or audited. Relevant product paths were clean at task start; final hashes are rechecked.",
+  "localEvidenceDirectory": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage",
+  "finalInputCheckLog": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-shared-storage/final-input-check.json",
+  "unrelatedWorkingChangesObserved": [
+    " M packages/plugin-center/src/contribution-registry.ts",
+    " M packages/plugin-center/test/contribution-registry.test.ts"
+  ],
+  "workingTreePolicy": "Preserve all pre-existing and concurrently appearing edits. B06 product implementations are unchanged; the supplemental test was archived locally and removed. Read/write the latest ledger and preserve all other batch records and pending continuations."
+}

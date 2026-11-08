@@ -1,0 +1,95 @@
+{
+  "documentType": "implementation-checks",
+  "runtimeScope": "repository",
+  "step": "S09",
+  "reviewDate": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "scriptTests": 18,
+  "vitestTests": 1549,
+  "rustTests": 109,
+  "rustIgnored": 1,
+  "protocolDifferentialCases": 171,
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s09/test.log",
+      "sha256": "ecf5bc68764a3afa0caa1ddcba33b1850c2f38b89fc61b6f00c40b183380761b"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s09/typecheck.log",
+      "sha256": "b6c6703d2c1c1f4cb5f089d80b1358a006012b0632d95db74903a805ab02b2c1",
+      "revalidatedBy": "pnpm build runs the complete pnpm typecheck again before building both production runtimes."
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s09/lint.log",
+      "sha256": "dbe8fe119f2d07f9ace599a0ea824b6d2f85688d5de582d720974333d5230be2"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s09/format-check.log",
+      "sha256": "0d5db3261cf158f37e71dc786105a91957aba45932a5638116de6f696bec7211"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s09/build.log",
+      "sha256": "f936ac36f47bea43cc70c8d40a0be87144a7bf7716dd94cee4123781da02a190"
+    },
+    {
+      "command": "node .codex-tmp/s09/entry-graph.mjs",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s09/entry-graph.log",
+      "sha256": "37d1998172abc65b7784061cfba37d995d32145ea96cba13f14ed5c953d77890"
+    }
+  ],
+  "entryGraph": {
+    "path": "docs/baselines/plugin-system-s09/entry-graph.json",
+    "sha256": "1237f9a215e9483c828281e1ef5795909b5aa2d93f5e30b02e565170666bdc99"
+  },
+  "artifacts": [
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3481004,
+      "sha256": "734704c37055bf97e389a849962968d983e92ac4c5e461b2816f4dd62a17e4f5"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 18046976,
+      "sha256": "a61aa742f50f865685ed8c1dcc141eef16c82a6ed6eb3cd4bfb4fae720f012a7"
+    },
+    {
+      "path": "apps/tauri/dist/assets/runtime-BNP5LcNr.js",
+      "bytes": 25243,
+      "sha256": "40aa7957dcca6a0a3a6f6911218ed9c38ac17fe03931b47910e6001d9d4e8b0e"
+    },
+    {
+      "path": "apps/tauri/dist/assets/runtime-kd_VNj8o.js",
+      "bytes": 39363,
+      "sha256": "e7d469a0a630932a5c8323ba733f2d9603f703d9af74df4898298823b856710e"
+    }
+  ],
+  "evidence": {
+    "sourceOwnership": "Moved the existing source implementations, embedded sanitized fixtures and mirrored tests; retained pre-existing Douyin changes. Original move hashes are in ignored .codex-tmp/s09/moved.json.",
+    "metadata": "Three actual entry bundles contain no protocols, signing libraries, Vue, browser implementation or external executor. Negative package graph tests reject forbidden eager dependencies.",
+    "identities": "Package/module/provider/contribution identities are distinct. Stored bilibili/douyin track, tag, recipe, drawer and playlist references are unchanged.",
+    "host": "One-page consumption, early close, cancellation at transport, stale generations, late media/grants, idempotent release, retry, zero usability and no replay are covered automatically. Final-page readers close before the UI receives hasMore=false, even without another next/return.",
+    "userscript": "Real Bilibili source protocol through the injected GM test port; include and cancellation, plus Douyin capture cancellation. Single production script; no installed-script/live-network claim.",
+    "tauri": "Real source protocol through IPC doubles; operation and account cancellation, account-bound include, native grant partial failure and release/retry. Separate source chunks and Windows release built without launching.",
+    "wire": "Existing DTO/listingRef/nextPage/close/cancel/default-quality/release/verify adapter regressions pass; functions and credentials stay internal. No external executor or authorization chain was enabled.",
+    "scope": "S09 only; legacy manifest retirement remains S10 and S03 actual isolation remains pending.",
+    "workingTree": "All initially dirty paths remain in the dirty tree; moved implementations preserve the pre-existing work. No reset, commit or push was performed."
+  },
+  "notPerformed": [
+    "application/browser/dev-server/emulator launch",
+    "website/installed-GM/Rust public-network/visual/focus/device acceptance",
+    "captureDate changes",
+    "additional native/MSRV/deny checks (no Rust implementation changes)",
+    "Git commit or push"
+  ]
+}

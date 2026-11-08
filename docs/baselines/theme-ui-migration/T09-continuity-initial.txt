@@ -1,0 +1,38 @@
+
+ RUN  v4.1.11 <project-root>/packages/music-workbench
+
+ ❯ test/features/workbench/theme-controller-continuity.test.ts (2 tests | 1 failed) 1432ms
+     × preserves requests, selection, native playback and navigation across classic → Studio → classic 1200ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/features/workbench/theme-controller-continuity.test.ts > T09 actual classic/Studio roots with one real business controller > preserves requests, selection, native playback and navigation across classic → Studio → classic
+AssertionError: expected [] to deeply equal [ 1 ]
+
+- Expected
++ Received
+
+- [
+-   1,
+- ]
++ []
+
+ ❯ test/features/workbench/theme-controller-continuity.test.ts:95:48
+     93|     const query = findCatalogElement(f.root, (node) => node.props['ari…
+     94|     dispatchCatalogEvent(findCatalogElement(f.root, (node) => node.tag…
+     95|     await vi.waitFor(() => expect(f.requested).toEqual([1]))
+       |                                                ^
+     96|     const id = c.workspace.drawers.value[0]!.id
+     97|     c.openCatalogDrawer(id)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  03:51:04
+   Duration  9.10s (transform 3.60s, setup 0ms, import 7.48s, tests 1.43s, environment 0ms)
+
+undefined
+<project-root>\packages\music-workbench:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command "vitest" not found

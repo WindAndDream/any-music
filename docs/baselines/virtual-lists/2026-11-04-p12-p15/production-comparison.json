@@ -1,0 +1,53 @@
+{
+  "baseline": "../2026-11-03-p09-p11/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "method": "Production frontend JS/CSS/Wasm totals; per-file gzip level 9; native executable excluded from payload totals.",
+  "changedBuildSources": [
+    "packages/ui/src/components/virtual-scroll/VirtualTable.vue",
+    "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue",
+    "packages/ui/src/composables/virtual-scroll/use-measured-virtual-table.ts",
+    "packages/ui/src/composables/virtual-scroll/virtual-table-layout.ts",
+    "packages/ui/src/virtual-scroll.ts"
+  ],
+  "runtimeResults": [
+    {
+      "runtime": "userscript",
+      "payloadBytesDelta": 236,
+      "payloadGzipBytesDelta": 39,
+      "audits": [
+        {
+          "path": "apps/userscript/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "tableStyleOrSfcEntries": [
+            "packages/ui/src/components/virtual-scroll/VirtualTable.vue?vue&type=style&index=0&scoped=e93934cf&inline&lang.css",
+            "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue?vue&type=style&index=0&scoped=9008693b&inline&lang.css"
+          ]
+        },
+        {
+          "path": "apps/userscript/dist/userscript-build-audit.json",
+          "virtualizerPresent": false,
+          "tableStyleOrSfcEntries": [
+            "packages/ui/src/components/virtual-scroll/VirtualTable.vue",
+            "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue"
+          ]
+        }
+      ]
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytesDelta": 232,
+      "payloadGzipBytesDelta": 41,
+      "audits": [
+        {
+          "path": "apps/tauri/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "tableStyleOrSfcEntries": [
+            "packages/ui/src/components/virtual-scroll/VirtualTable.vue?vue&type=style&index=0&scoped=e93934cf&inline&lang.css",
+            "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue?vue&type=style&index=0&scoped=9008693b&inline&lang.css"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "No production virtual-list/table renderer enabled. Shared SFC style collection can affect bundles without rendering a new component. Combined workspace deltas are not pure table cost; consuming-build cost is recorded separately. No product/browser/native-layout/frame acceptance."
+}

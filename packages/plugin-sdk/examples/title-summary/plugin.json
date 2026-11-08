@@ -1,0 +1,71 @@
+{
+  "manifestVersion": 1,
+  "packageFormatVersion": 1,
+  "id": "org.example.title-summary",
+  "version": "0.1.0",
+  "name": {
+    "zh-CN": "标题摘要",
+    "en": "Title summary"
+  },
+  "description": {
+    "zh-CN": "标题摘要",
+    "en": "Title summary"
+  },
+  "sdk": {
+    "minimum": "0.1.0",
+    "maximumExclusive": "1.0.0"
+  },
+  "wireVersions": [1],
+  "runtimeProfileVersion": 1,
+  "contributionVersion": 1,
+  "dataSchemaVersion": 1,
+  "execution": "sandbox-code",
+  "entry": "dist/main.js",
+  "integrity": "integrity.json",
+  "forms": ["desktop", "mobile"],
+  "capabilities": [
+    {
+      "id": "state.write",
+      "version": 1,
+      "required": false,
+      "reason": {
+        "zh-CN": "保存本次标题摘要",
+        "en": "Save this title summary"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "summarize",
+      "title": {
+        "zh-CN": "标题摘要",
+        "en": "Title summary"
+      }
+    }
+  ],
+  "contributions": [
+    {
+      "contributionId": "summary",
+      "pointId": "workspace.views",
+      "contractVersion": 1,
+      "required": true,
+      "title": {
+        "zh-CN": "标题摘要",
+        "en": "Title summary"
+      },
+      "scope": {
+        "sections": ["catalog"],
+        "forms": ["desktop", "mobile"]
+      },
+      "viewId": "summary",
+      "inputSchemaId": "urn:any-music:plugin:command-context:1",
+      "eventSchemaId": "urn:any-music:plugin:ui-event:1",
+      "cardinality": "many",
+      "fallback": "hidden",
+      "budgetProfileVersion": 1
+    }
+  ],
+  "activationEvents": ["on-command", "on-view"],
+  "memoryClass": "minimum",
+  "$schema": "./plugin-manifest.schema.json"
+}

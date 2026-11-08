@@ -1,0 +1,182 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B09-tag-management-shared",
+  "capturedAt": "2026-10-21T10:18:12.8830890+00:00",
+  "head": "844b5e35b0d6b152350c34043857e042170cbd61",
+  "workingTree": [
+    " M apps/tauri/src/platform/product-storage.ts",
+    " M apps/tauri/test/platform/product-storage.test.ts",
+    " M apps/userscript/src/bootstrap-userscript-app.ts",
+    " M apps/userscript/src/platform/configure-userscript-workbench.ts",
+    " M apps/userscript/src/platform/dev/install-dev-userscript-runtime.ts",
+    " M apps/userscript/test/platform/product-storage.test.ts",
+    " M apps/userscript/vite.config.ts",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+    " M docs/en/cross-platform/architecture/plugin-data-ownership.md",
+    " M docs/en/desktop/development.md",
+    " M docs/en/userscript/development.md",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\345\\274\\200\\345\\217\\221\\350\\247\\204\\350\\214\\203.md\"",
+    " M \"docs/zh-cn/\\347\\224\\250\\346\\210\\267\\350\\204\\232\\346\\234\\254/\\345\\274\\200\\345\\217\\221\\350\\247\\204\\350\\214\\203.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\346\\225\\260\\346\\215\\256\\345\\275\\222\\345\\261\\236.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\351\\237\\263\\344\\271\\220\\346\\272\\220\\346\\217\\222\\344\\273\\266\\346\\236\\266\\346\\236\\204.md\"",
+    " M packages/core/src/download/download-history.ts",
+    " M packages/core/src/index.ts",
+    " M packages/core/src/models/track.ts",
+    " M packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+    " M packages/music-workbench/src/media/range-media-source.ts",
+    " M packages/music-workbench/src/media/resolved-media-loader.ts",
+    " M packages/music-workbench/src/storage/local-music-library-repository.ts",
+    " M packages/music-workbench/src/storage/product-generation-store.ts",
+    " M packages/music-workbench/src/storage/product-storage.ts",
+    " M packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts",
+    " M packages/music-workbench/test/media/range-media-source.test.ts",
+    " M packages/music-workbench/test/media/resolved-media-loader.test.ts",
+    " M packages/music-workbench/test/storage/product-generation-store.test.ts",
+    " M packages/music-workbench/test/storage/product-storage-fixtures.ts",
+    "?? apps/userscript/src/platform/product-storage.ts",
+    "?? apps/userscript/test/bootstrap-userscript-app.test.ts",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared.json"
+  ],
+  "environment": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "os": "Microsoft Windows NT 10.0.26200.0"
+  },
+  "hashes": [
+    {
+      "path": "packages/plugin-tag-management/package.json",
+      "sha256": "47c859967288f5701488d67cd5ed2cf9e659b28d7cca89c464739bd5eed76dc0"
+    },
+    {
+      "path": "packages/plugin-tag-management/vitest.config.ts",
+      "sha256": "cd1c6ec6d1df3d3dcb70040faff62e6957c1d145fcd1da4fb5ee75140ae4f674"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/index.ts",
+      "sha256": "038789f8d501d41733a767488e93ffdc48c6031378d523b12bda790365ff612d"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/tag-session.ts",
+      "sha256": "0b257ce6ab2cde3dfbd3b85fdcaa38193dddb44a6b965f0ad7d0a9b8a9a96c68"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/tags.ts",
+      "sha256": "0c2824dc2af27b4b0d20bdf3a02132e54a9173b84d7198f11fc8326251d3644a"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/index.ts",
+      "sha256": "81e9721b9a92a0c5191a7fd0dabf1f74827fa981cd683d35ec17a35df70b2c0b"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue",
+      "sha256": "9259ea578e70a1adacc56fc547017a13ebf583183988bbba4627115ae9440ee6"
+    },
+    {
+      "path": "packages/plugin-tag-management/test/tag-session.test.ts",
+      "sha256": "685f0fa5b252b5dd71985ed3e49349aac3a9b2a06c2c2908e6adebd61173f895"
+    },
+    {
+      "path": "packages/plugin-tag-management/test/tags.test.ts",
+      "sha256": "07e9741815a240cb88d13b36058506ec7ea1373c8fc2d9d743803b563f9fe9d9"
+    },
+    {
+      "path": "packages/plugin-tag-management/test/vue/use-tag-management-filters.test.ts",
+      "sha256": "b134aac13d0d603e5704eb9f01881c99a4269e001ecbf61f93534a4626613af5"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-tag-management.ts",
+      "sha256": "f684fb25a1bd0c60f7b3f9562adb63ad42d00a67c74f65e5922d35a185e4d0d9"
+    },
+    {
+      "path": "packages/music-workbench/test/features/plugins/use-tag-management.test.ts",
+      "sha256": "8bd968733eabccfa4a30ca3fdb69627bcf2f3b8c0ece22b6998f69c68826dce9"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-generation-store.ts",
+      "sha256": "68a069f28a5ee21437d3ea9edafc45cc0231e549ff85688887a4c14a8c6ca0a9"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/product-generation-store.test.ts",
+      "sha256": "0b5d8da3061186b5e17fa65d6b40fb3c3818e5717d3098ecf93b2d90eff1487c"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/product-storage-fixtures.ts",
+      "sha256": "30e3316cc709aadb7d7ec32f695da754274b1842fbf923ae15798fd63c0618c2"
+    },
+    {
+      "path": "packages/ui/src/product/tag-management.ts",
+      "sha256": "e9445f1d0585cbdc82d90a4fc63bddd8057fdf55a40c1996f3288e5f77d4fdf0"
+    }
+  ],
+  "supplementalHashes": {
+    "capturedAt": "2026-10-21T10:22:28.162Z",
+    "reason": "Post-test capture of bounded import-scan files and the delegated namespace projection. No product file was modified by this audit. Original 16 hashes rechecked unchanged.",
+    "hashes": [
+      {
+        "path": "packages/plugin-tag-management/tsconfig.json",
+        "sha256": "ae80ad5f5cc9436f3a6010a24a57d8f3a465fd20de249c5f42aa4dcc9234ca22"
+      },
+      {
+        "path": "packages/plugin-tag-management/src/env.d.ts",
+        "sha256": "74b479eb928febd2bf79a71fedda1bc8c3324635bc5647e972f10df521ac36de"
+      },
+      {
+        "path": "packages/plugin-tag-management/src/vue/tag-management.scss",
+        "sha256": "4a191f086df7bd58c5c74b6a493c09a2e237bc83731126edf565fceb7ad9dcd0"
+      },
+      {
+        "path": "packages/plugin-tag-management/src/vue/use-tag-management-filters.ts",
+        "sha256": "2c25a09e6d3a011d495c0f34321146d8588c6ed9f71990e10433f39084b87010"
+      },
+      {
+        "path": "packages/plugin-tag-management/src/vue/components/TagFilterBar.vue",
+        "sha256": "ddf9f79c5f72ffbe98890ea0aaf63a01b37f81f2c1b36b44dc41c0d8a2695514"
+      },
+      {
+        "path": "packages/plugin-tag-management/src/vue/components/TagMaintenanceToolbar.vue",
+        "sha256": "612b7267113689942d8e04692543c2e43632b7fe5e411c55f29bafef6c14e829"
+      },
+      {
+        "path": "packages/plugin-tag-management/src/vue/components/TagPlatformDrawer.vue",
+        "sha256": "ebe36d4525c01943108503864b5851907dc960b677492b6364eeea4291d9d159"
+      },
+      {
+        "path": "packages/plugin-tag-management/src/vue/components/TagTrackCard.vue",
+        "sha256": "ff4dc2b05c76d36deed05ca1d40549c2e838e1acf6b3fe9d1b84cfaf46e7e49d"
+      },
+      {
+        "path": "packages/music-workbench/src/storage/product-data-projection.ts",
+        "sha256": "4d34723e50177dc192ea5062423b6c4a73a668c5ac845a8c88a2598f11d0c75f"
+      },
+      {
+        "path": "packages/music-workbench/src/storage/product-storage.ts",
+        "sha256": "09bf7c7773033027cf37906bd42fc03c4e7079812b4ffba424cae392d8033d09"
+      },
+      {
+        "path": "packages/music-workbench/package.json",
+        "sha256": "98a74b0beff51fe56c81f8ec2118eaea6ad138dd8a54b7024ae6a68c37775155"
+      },
+      {
+        "path": "packages/ui/package.json",
+        "sha256": "d3fe0a16fed8ee803aea0d5be2c64d5b2b0183c1500f2d57075f1e0a3a75416b"
+      },
+      {
+        "path": "packages/music-workbench/src/runtime/workbench-runtime.ts",
+        "sha256": "50ed7646c03b707dc8cc0a4235b12c941c52fd6dd63ff3a506ba09de52e4d1fa"
+      }
+    ]
+  },
+  "unchangedAt": "2026-10-21T10:22:28.165Z",
+  "headAtCompletion": "844b5e35b0d6b152350c34043857e042170cbd61",
+  "productChangesByAudit": []
+}

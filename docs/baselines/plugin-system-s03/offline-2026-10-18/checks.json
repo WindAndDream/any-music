@@ -1,0 +1,141 @@
+{
+  "scope": "S03",
+  "status": "awaiting-acceptance",
+  "launchedAppOrBrowser": false,
+  "checks": [
+    {
+      "label": "isolation",
+      "command": "pnpm check:plugin:isolation",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/isolation.log",
+      "sha256": "ab004cd9734079a8f0f239c252f3e62e6cf4f29965e53b27c6033680f6af0deb",
+      "note": "Exit code recorded by the completed tool call; target log copied after execution."
+    },
+    {
+      "label": "test",
+      "command": "pnpm test",
+      "startedAt": "2026-10-18T07:54:20.791Z",
+      "finishedAt": "2026-10-18T07:55:18.682Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/test.log",
+      "sha256": "7bad32897bfc5325c53a6fec16c5e0740bf531a41a46dd7be7e3ff1187fe6175"
+    },
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-18T07:55:18.692Z",
+      "finishedAt": "2026-10-18T07:56:08.456Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/typecheck.log",
+      "sha256": "af2c549594484fce9d5ce7810dd7be3441da6d21f54aa8bae27b9375120e2a2f"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-18T07:56:08.464Z",
+      "finishedAt": "2026-10-18T07:56:10.218Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/lint.log",
+      "sha256": "14f65736b328b3b5062b0150dd899cb8fdc4930e7556edf390b258352c236500"
+    },
+    {
+      "label": "format",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-18T07:56:10.226Z",
+      "finishedAt": "2026-10-18T07:56:14.067Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/format.log",
+      "sha256": "563a2e4e9e11871712620990655d45be33585e3a03b23e184d5b7ec752a8bbe1"
+    },
+    {
+      "label": "build",
+      "command": "pnpm build",
+      "startedAt": "2026-10-18T07:56:14.075Z",
+      "finishedAt": "2026-10-18T07:58:11.118Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/build.log",
+      "sha256": "ee6ead8d92569d540e4c3fc170a1b94c06dbd8db82d7e098091c5d7cd99aff82"
+    },
+    {
+      "label": "native",
+      "command": "pnpm check:native",
+      "startedAt": "2026-10-18T07:58:11.125Z",
+      "finishedAt": "2026-10-18T07:58:23.310Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/native.log",
+      "sha256": "4177a3809c8b2398ac59e330a85137783491177b0c3458d596e540991a2cb83d"
+    },
+    {
+      "label": "msrv",
+      "command": "pnpm check:rust:msrv",
+      "startedAt": "2026-10-18T07:58:23.317Z",
+      "finishedAt": "2026-10-18T07:58:36.436Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/msrv.log",
+      "sha256": "df451bf9c62f76b67da4f81ae6b06fe2c3f3cb5f073f45b471bd1343b4ef6130"
+    },
+    {
+      "label": "deny",
+      "command": "pnpm check:rust:deny",
+      "startedAt": "2026-10-18T07:58:36.442Z",
+      "finishedAt": "2026-10-18T07:58:47.366Z",
+      "exitCode": 1,
+      "log": ".codex-tmp/s03-followup-20261018-1556/deny.log",
+      "sha256": "f498171730a05d760e2893d82b0e901ae181dead25799239096a3f9e11b7a2d1"
+    },
+    {
+      "label": "deny-pure",
+      "command": "pnpm check:rust:deny:pure",
+      "startedAt": "2026-10-18T07:58:47.378Z",
+      "finishedAt": "2026-10-18T07:58:49.600Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-followup-20261018-1556/deny-pure.log",
+      "sha256": "cd9f425ffaddc524bf4d5ea1d2687e15d98be14b9dfd0cef273e11b71669d860"
+    }
+  ],
+  "capturedAt": "2026-10-18T07:59:31.281Z",
+  "testCounts": {
+    "script": 18,
+    "vitest": 1591,
+    "rust": 109,
+    "rustIgnored": 1,
+    "protocolDifferential": 171,
+    "focusedVitest": 22,
+    "focusedRust": 4
+  },
+  "preservation": {
+    "preexistingPaths": 634,
+    "unchangedPaths": 624,
+    "changedWithinS03Scope": [
+      "apps/tauri/src/isolation-probe/launcher.ts",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/en/cross-platform/architecture/plugin-system-s03-isolation-prototype.md",
+      "docs/en/cross-platform/README.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S03隔离原型.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "package.json"
+    ]
+  },
+  "engine": {
+    "purpose": "S03 fixed probe only; not an accepted production Profile",
+    "package": "@jitl/quickjs-wasmfile-release-sync",
+    "version": "0.31.0",
+    "wasmSha256": "0c031dd404df00f2d1ed9491a6590d014e88a50424996e5fd70feff1c931c045",
+    "artifacts": {
+      "worker": {
+        "bytes": 1452150,
+        "sha256": "c1ac3154b47200f8dc81fbb9c50ea388570ed73a59a6dddc9c959f869e981f91"
+      },
+      "launcher": {
+        "bytes": 2116,
+        "sha256": "a3b86f65c50a4d4b35eb3607dbaea1376f86a8f14a289dd4ea629abd350d044e"
+      }
+    }
+  },
+  "acceptedTargets": [],
+  "codePluginsEnabled": false,
+  "remainingExitEvidence": "Actual target WebView command/CSP/network/storage/lifecycle isolation and exact runtime versions; no app or browser launch authorized."
+}

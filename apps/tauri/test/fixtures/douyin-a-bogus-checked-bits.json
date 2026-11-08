@@ -1,0 +1,144 @@
+{
+  "documentType": "platform-interface-capture",
+  "platform": "douyin",
+  "captureDate": "2026-10-03",
+  "scope": "Isolated measurement of the a_bogus region the passport poll endpoint actually validates. Values were produced by the live Web SecSDK through an in-page deterministic rig (seeded Math.random, pinned Date.now) and judged only by whether the server accepted the request (error_code 0) or rejected it (4031). No cookie, token or account value is recorded.",
+  "why": "Every other a_bogus field proved irrelevant: corrupting decoded bytes from index 4 onward, even a 21-byte block, is tolerated by the server. The first four decoded bytes are therefore the whole checked surface, and characterising them decides whether a native client must reproduce the full current algorithm or only a small fixed part of it.",
+  "checkedBitMask": {
+    "method": "Full single-bit sweep of the first 32 decoded bits, then cross-checked at the value level.",
+    "bitOrder": "bit0 is the least significant bit of each decoded byte.",
+    "mask": {
+      "byte0": "X.X.X.X.",
+      "byte1": ".X.X.X.X",
+      "byte2": "X.X.X.X.",
+      "byte3": ".X.X.X.X"
+    },
+    "legend": "X = flipping this bit makes the server reject; . = flipping it is tolerated",
+    "enforcedBitCount": 16,
+    "shape": "Every other bit, with the phase alternating per byte: bytes 0 and 2 enforce their even bits, bytes 1 and 3 their odd bits. Read as a little-endian 32-bit value the enforced positions are 0,2,4,6, 9,11,13,15, 16,18,20,22, 25,27,29,31."
+  },
+  "theValueIsConstant": {
+    "method": "Six accepted payloads generated with different seeds and different pinned clocks, then the enforced bits extracted from each in order (byte0 even bits first, then byte1 odd, byte2 even, byte3 odd) into a 16-bit number.",
+    "samples": [
+      {
+        "seed": 1337,
+        "clock": 1791028800000,
+        "payloadBytes": 137,
+        "first4": [43, 82, 88, 3],
+        "extracted16": 34872
+      },
+      {
+        "seed": 7,
+        "clock": 1791028900000,
+        "payloadBytes": 140,
+        "first4": [3, 82, 88, 2],
+        "extracted16": 34872
+      },
+      {
+        "seed": 99,
+        "clock": 1791028800000,
+        "payloadBytes": 137,
+        "first4": [169, 3, 88, 19],
+        "extracted16": 34872
+      },
+      {
+        "seed": 12345,
+        "clock": 1791030000000,
+        "payloadBytes": 140,
+        "first4": [137, 82, 88, 23],
+        "extracted16": 34872
+      },
+      {
+        "seed": 777,
+        "clock": 1791028800000,
+        "payloadBytes": 137,
+        "first4": [161, 22, 80, 22],
+        "extracted16": 34872
+      },
+      {
+        "seed": 31337,
+        "clock": 1791024000000,
+        "payloadBytes": 137,
+        "first4": [137, 18, 90, 7],
+        "extracted16": 34872
+      }
+    ],
+    "finding": "The first four bytes differ wildly between samples while the enforced sixteen bits are identical every time: 34872 = 0x8838. The checked content is therefore a CONSTANT, not a digest of the query, not a timestamp, and not derived from the client's random material.",
+    "decisiveMutation": {
+      "method": "Rewrite only those sixteen bits on an otherwise untouched accepted payload, re-encode and resend.",
+      "control": "error_code 0",
+      "setToZero": "4031",
+      "setToAllOnes": "4031",
+      "setToAnotherSamplesSameValue": "error_code 0 (expected: it is the same value)",
+      "valuePlusOne": "4031",
+      "conclusion": "The sixteen bits must carry exactly 0x8838. Neighbouring value 0x8839 is already rejected, so this is an equality check on a fixed constant rather than a range or parity rule."
+    },
+    "openQuestions": [
+      "Whether 0x8838 holds for other endpoints and other request shapes, or is specific to this poll shape.",
+      "Whether it is stable across login sessions and across SDK versions, or rotates with a released constant.",
+      "Whether the payload length, which varied between 137 and 144 bytes across accepted samples, is checked at all."
+    ]
+  },
+  "consequenceForImplementation": {
+    "oldAssumption": "A native client would have to reproduce the current a_bogus algorithm end to end, which is why this work was parked as deep reverse engineering.",
+    "newReading": "The server enforces a fixed 16-bit constant in a known set of bit positions and ignores everything else in the payload. That is a construction problem, not a reverse-engineering problem.",
+    "nextTestsInOrder": [
+      "Build a payload whose checked bits equal 0x8838 and whose remaining bytes are arbitrary (for example all zero) and see whether the server accepts it.",
+      "If yes, patch the value into the project's existing createDouyinABogus output and re-test, which would turn the existing signer into a working one.",
+      "Check whether 0x8838 also satisfies the send_code and validate_code endpoints, since those are believed to be far more lenient than the poll."
+    ],
+    "mintResults": {
+      "browserRealm": "Every minted payload was ACCEPTED: 137 bytes of zero filler, 137 bytes of 0xFF, index-based filler, the project's own 124-byte length, 200 bytes and even 32 bytes — all error_code 0.",
+      "negativeControls": {
+        "137 zeros without the constant": "4031",
+        "the constant at the wrong bit phase": "4031",
+        "no a_bogus at all": "error_code 0 — the session accepts an absent a_bogus, which matches the earlier observation that a wrong a_bogus is worse than none"
+      },
+      "conclusion": "In the browser realm the checked bits are the ONLY thing that matters: filler content and payload length are both free. The gate is an equality check on 0x8838 in those sixteen positions."
+    },
+    "caution": "A constant that merely appears constant in one session may still rotate per session or per SDK build. Confirm across a fresh browser session before treating it as fixed in product code.",
+    "nativeVerification": {
+      "status": "SUCCESS — the gate is cleared from a plain native HTTP client",
+      "earlierSparseAttempt": {
+        "what": "A native client with a sparse parameter surface polled with four a_bogus variants: absent, the minted 137-byte payload, a minted 32-byte payload and a deliberately wrong payload.",
+        "result": "All four returned error_code 22 (非法应用), including the control with no a_bogus at all.",
+        "reading": "That 22 is not about a_bogus: those requests also omitted the passport CSRF header that the accepted requests carry. It is the same error seen on the very first native probe and it never occurs in the browser."
+      },
+      "successfulAttempt": {
+        "what": "Native Node client, no browser, no secsdk, no TLS impersonation, sending the full captured parameter surface plus the minted a_bogus, with x-tt-passport-csrf-token / x-tt-passport-trace-id / x-tt-passport-verify-portrait and the cookie jar.",
+        "results": [
+          "get_qrcode with the minted token: error_code 0, token issued",
+          "check_qrconnect with the minted token: error_code 0, status new — ACCEPTED",
+          "check_qrconnect without any a_bogus: error_code 4031 — so the token is genuinely required",
+          "check_qrconnect with the sparse surface plus the minted token: error_code 0 too"
+        ],
+        "signedKeys": "account_app_language, account_sdk_source, account_sdk_source_info, aid, biz_trace_id, device_platform, fp, is_from_iesaccountsaas, is_from_ttaccountsdk, language",
+        "signedKeysNote": "Identical to the ten-key set decoded from 124 live browser polls.",
+        "headerIsolation": {
+          "why": "The successful native run carried every header the browser sends, so it did not show which of them the desktop client must reproduce.",
+          "method": "Native client, full parameter surface, minted a_bogus, then remove exactly one header per attempt, with the control repeated at the end to detect any poisoning of the session.",
+          "results": {
+            "everything (control)": "error_code 0",
+            "without x-tt-passport-verify-portrait": "error_code 0",
+            "without x-tt-passport-trace-id": "error_code 0",
+            "without x-tt-passport-csrf-token": "error_code 0",
+            "without the cookie header entirely": "error_code 0",
+            "control repeated at the end": "error_code 0"
+          },
+          "conclusion": "No individual header is required once a_bogus is valid. Notable for the portrait header in particular: it is client generated and the client had left it out of the Rust builder, and leaving it out costs nothing. This also means the request surface douyin_login.rs already builds is sufficient, and the earlier code 22 came from a sparse parameter surface rather than from a missing header.",
+          "notTested": "Removing every header at once, and the sparse-parameter-plus-no-cookie combination that produced code 22."
+        }
+      },
+      "implementation": {
+        "where": "apps/tauri/src-tauri/src/douyin_passport.rs",
+        "function": "mint_abogus() builds a deterministic 137-byte payload, sets the sixteen checked bits and encodes it with the same custom Base64 alphabet; douyin_login.rs appends it to the QR endpoints only, after signing.",
+        "tests": "A unit test round-trips lengths 32/124/137/200, asserts the checked value for zero and 0xFF filler, and confirms every single checked bit is load-bearing. 23 lib tests pass with cargo fmt and clippy clean.",
+        "stillOpen": [
+          "RESOLVED — cross-session stability. A brand-new browser context (separate cookies and storage, empty jar) loaded the login page fresh; the SecSDK there produced a 144-byte payload whose first four bytes were 43,7,82,18 and whose checked sixteen bits were again 34872 = 0x8838. The constant is therefore not per-session, and the earlier caution is discharged.",
+          "RESOLVED — the Rust implementation's own output. A temporary probe wrote the exact string returned by douyin_passport::mint_abogus() (184 characters beginning DfsfDEDD) to disk and a native Node client sent it: get_qrcode returned error_code 0 with a token, and check_qrconnect returned error_code 0 with status new, while the same request without a_bogus returned 4031. The production mint is therefore accepted by the live endpoint. The temporary probe was removed in the same session and the file now contains no trace of it.",
+          "Still open: cross-SDK-version stability of 0x8838 cannot be verified until Douyin ships a new build, and the login state machine has not been exercised end to end against the live site."
+        ]
+      }
+    }
+  }
+}

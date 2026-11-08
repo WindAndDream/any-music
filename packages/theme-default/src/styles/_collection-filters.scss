@@ -1,0 +1,331 @@
+// Shared geometry for song, music-list and playlist filtering.
+@mixin panel {
+  .catalog-filters {
+    display: grid;
+    /* 预览并入概览/详情标题，整页只占一条轨道，不另增顶部行。 */
+    grid-template-rows: minmax(0, 1fr);
+    block-size: 100%;
+    min-block-size: 0;
+    overflow: hidden;
+    color: var(--am-color-text);
+  }
+
+  .catalog-filters__overview {
+    display: grid;
+    grid-template-columns: minmax(210px, 0.28fr) minmax(0, 1fr);
+    min-block-size: 0;
+    overflow: hidden;
+  }
+
+  .catalog-filters__dimensions {
+    display: grid;
+    align-content: start;
+    gap: var(--am-space-2);
+    min-block-size: 0;
+    overflow-y: auto;
+    padding-inline-end: var(--am-space-5);
+    border-inline-end: 1px solid var(--am-color-border);
+  }
+
+  .catalog-filter-dimension {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: var(--am-space-2);
+    inline-size: 100%;
+    min-block-size: 64px;
+    padding: var(--am-space-2) var(--am-space-3);
+    border: 1px solid transparent;
+    border-radius: var(--am-radius-sm);
+    color: var(--am-color-text-secondary);
+    text-align: start;
+    background: transparent;
+    cursor: pointer;
+    transition:
+      color var(--am-motion-fast),
+      border-color var(--am-motion-fast),
+      background-color var(--am-motion-fast),
+      transform var(--am-motion-fast);
+  }
+
+  .catalog-filter-dimension:hover {
+    border-color: var(--am-color-border);
+    color: var(--am-color-text);
+    background: var(--am-color-hover);
+    transform: translateX(2px);
+  }
+
+  .catalog-filter-dimension:focus-visible,
+  .catalog-filters__detail button:focus-visible {
+    outline: var(--am-focus-ring);
+    outline-offset: var(--am-focus-offset);
+  }
+
+  .catalog-filter-dimension__icon {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 36px;
+    block-size: 36px;
+    border-radius: var(--am-radius-control);
+    color: var(--am-color-primary);
+    background: var(--am-color-primary-soft);
+  }
+
+  .catalog-filter-dimension__copy {
+    display: grid;
+    gap: 2px;
+    min-inline-size: 0;
+  }
+
+  .catalog-filter-dimension__copy small {
+    overflow: hidden;
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .catalog-filter-dimension__count {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: 21px;
+    block-size: 21px;
+    padding-inline: 5px;
+    border-radius: var(--am-radius-detail);
+    color: var(--am-color-on-primary);
+    font-size: 10px;
+    background: var(--am-color-primary);
+  }
+
+  .catalog-filters__summary {
+    min-block-size: 0;
+    overflow-y: auto;
+    padding-inline-start: var(--am-space-6);
+    padding-inline-end: var(--am-space-1);
+  }
+
+  .catalog-filters__detail {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    min-block-size: 0;
+    overflow: hidden;
+  }
+
+  .catalog-filters__detail-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--am-space-3);
+    padding: var(--am-space-2) 0 var(--am-space-5);
+    border-block-end: 1px solid var(--am-color-border);
+  }
+
+  .catalog-filters__detail-heading {
+    min-inline-size: 0;
+    justify-self: start;
+    text-align: start;
+  }
+
+  .catalog-filters__detail-heading > div {
+    display: grid;
+    gap: 2px;
+  }
+
+  .catalog-filters__detail-heading strong {
+    font-size: var(--am-font-size-lg);
+    letter-spacing: -0.015em;
+  }
+
+  .catalog-filters__detail-heading small {
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+  }
+
+  .catalog-filters__detail-content {
+    min-block-size: 0;
+    overflow-y: auto;
+    padding: var(--am-space-5) var(--am-space-1) var(--am-space-5) 0;
+  }
+
+  .catalog-filters__detail-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--am-space-5);
+    padding-block-start: var(--am-space-4);
+    border-block-start: 1px solid var(--am-color-border);
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-sm);
+  }
+
+  .catalog-filters__detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--am-space-2);
+  }
+
+  .catalog-filters__detail-actions button {
+    display: inline-flex;
+    min-block-size: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--am-space-2);
+    min-inline-size: 112px;
+    padding-inline: var(--am-space-4);
+    border: 1px solid var(--am-color-primary);
+    border-radius: var(--am-radius-control);
+    background: var(--am-color-primary);
+    color: var(--am-color-on-primary);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+  }
+
+  .catalog-filters__footer-back {
+    display: inline-flex;
+  }
+
+  /* 返回与外层“取消”保持同一中性次级动作语义，避免被误认为提交操作。 */
+  .catalog-filters__detail-actions .catalog-filters__footer-back {
+    border-color: var(--am-color-border-strong);
+    background: var(--am-color-surface);
+    color: var(--am-color-text);
+  }
+
+  .catalog-filter-fade-enter-active {
+    transition: opacity 450ms ease;
+  }
+
+  .catalog-filter-fade-leave-active {
+    transition: opacity 150ms ease;
+  }
+
+  .catalog-filter-fade-enter-from,
+  .catalog-filter-fade-leave-to {
+    opacity: 0;
+  }
+
+  @container am-bottom-sheet (min-width: 761px) {
+    .catalog-filters__detail-content {
+      display: grid;
+      align-items: start;
+      padding-inline: var(--am-space-5);
+    }
+
+    .catalog-filters__detail-content :deep(.catalog-filter-editor) {
+      inline-size: min(100%, 1120px);
+      justify-self: center;
+      padding: var(--am-space-5);
+    }
+    .catalog-filters__detail--published
+      .catalog-filters__detail-content
+      :deep(.catalog-filter-editor) {
+      inline-size: 100%;
+      block-size: 100%;
+      grid-template-rows: minmax(0, 1fr);
+      padding: 0;
+    }
+    /* 滚动高度传到左右列，防止历史增多时把日历一起推走。 */
+    .catalog-filters__detail--published .catalog-filters__detail-content {
+      align-items: stretch;
+      overflow: hidden;
+    }
+  }
+
+  @container am-bottom-sheet (max-width: 760px) {
+    .catalog-filters__overview {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr) auto;
+      gap: var(--am-space-3);
+    }
+
+    .catalog-filters__summary {
+      grid-row: 1;
+      padding: var(--am-space-2) 0 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: none;
+    }
+
+    .catalog-filters__summary::-webkit-scrollbar,
+    .catalog-filters__dimensions::-webkit-scrollbar {
+      display: none;
+    }
+
+    .catalog-filters__dimensions {
+      grid-row: 2;
+      display: flex;
+      gap: var(--am-space-2);
+      min-block-size: 0;
+      padding: var(--am-space-3) 0 0;
+      border-inline-end: 0;
+      border-block-start: 1px solid var(--am-color-border);
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: inline proximity;
+      scrollbar-width: none;
+      touch-action: pan-x;
+    }
+
+    .catalog-filter-dimension {
+      grid-template-columns: auto auto auto;
+      flex: 0 0 auto;
+      inline-size: auto;
+      min-inline-size: 118px;
+      min-block-size: 48px;
+      scroll-snap-align: start;
+    }
+
+    .catalog-filter-dimension:hover {
+      transform: none;
+    }
+
+    .catalog-filter-dimension__arrow {
+      display: none;
+    }
+
+    .catalog-filter-dimension__icon {
+      inline-size: 30px;
+      block-size: 30px;
+    }
+
+    .catalog-filters__detail-header {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--am-space-2);
+      padding-block-start: 0;
+    }
+
+    .catalog-filters__detail-content {
+      padding-block: var(--am-space-4);
+    }
+
+    .catalog-filters__detail-footer {
+      align-items: center;
+      gap: var(--am-space-2);
+    }
+
+    .catalog-filters__detail-footer > span {
+      min-inline-size: 0;
+      text-align: start;
+    }
+
+    .catalog-filters__detail-actions {
+      flex: 0 0 auto;
+    }
+
+    .catalog-filters__detail-actions button {
+      min-inline-size: clamp(84px, 24cqi, 112px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .catalog-filter-dimension,
+    .catalog-filter-fade-enter-active,
+    .catalog-filter-fade-leave-active {
+      transition: none;
+      animation: none;
+    }
+  }
+}

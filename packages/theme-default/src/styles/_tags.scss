@@ -1,0 +1,307 @@
+// The tag directory keeps intrinsic tile widths and clips each row's final tile to its remainder.
+:where(.am-theme-default) {
+  .tag-management__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--am-space-2);
+    margin-block-end: var(--am-space-4);
+    padding-block-end: var(--am-space-3);
+    border-block-end: 1px solid var(--am-color-border);
+  }
+  .tag-management__create {
+    display: inline-flex;
+    box-sizing: border-box;
+    block-size: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--am-space-2);
+    padding: 0 var(--am-space-3);
+    border: 1px solid var(--am-color-primary);
+    border-radius: var(--am-radius-control);
+    background: var(--am-color-primary);
+    color: var(--am-color-on-primary);
+    font: 650 var(--am-font-size-xs) var(--am-font-family);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .tag-management .tag-management__create:is(:hover, :focus-visible) {
+    background: color-mix(in srgb, var(--am-color-primary) 90%, var(--am-color-text));
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tag-management__create .app-icon {
+      transition: transform var(--am-motion-slow) var(--am-ease-emphasized);
+    }
+    .tag-management__create:is(:hover, :focus-visible) .app-icon {
+      transform: rotate(90deg) scale(1.15);
+    }
+  }
+  .tag-management__results {
+    min-inline-size: 0;
+  }
+  .tag-management__display,
+  .tag-management__criteria button,
+  .tag-management__empty button {
+    display: inline-flex;
+    min-block-size: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--am-space-2);
+    padding: var(--am-space-2) var(--am-space-3);
+    border: 0;
+    border-radius: var(--am-radius-control);
+    background: var(--am-color-surface);
+    color: var(--am-color-text);
+    font: 650 var(--am-font-size-sm) var(--am-font-family);
+    cursor: pointer;
+  }
+  .tag-management__display {
+    flex: none;
+  }
+  .tag-management__tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    gap: var(--am-space-2);
+    min-inline-size: 0;
+  }
+  .tag-management__tag {
+    display: flex;
+    flex: 0 0 auto;
+    inline-size: var(--am-intrinsic-wrap-size, max-content);
+    min-inline-size: min(44px, 100%);
+    max-inline-size: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    min-block-size: 52px;
+    align-items: center;
+    gap: var(--am-space-2);
+    padding: var(--am-space-3);
+    border: 1px solid var(--am-color-border);
+    border-radius: var(--am-radius-row);
+    background: var(--am-color-surface);
+    color: var(--am-color-text);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+  .tag-management__tag-list--rows .tag-management__tag {
+    flex-basis: 100%;
+    inline-size: 100%;
+  }
+  .tag-management__tag strong {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--am-font-size-sm);
+  }
+  .tag-management__tag small {
+    flex: none;
+    white-space: nowrap;
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+  }
+  .tag-management__tag > .app-icon {
+    flex: none;
+    color: var(--am-color-primary);
+  }
+  .tag-management__tag input {
+    flex: none;
+    inline-size: 18px;
+    block-size: 18px;
+    margin: 0;
+    accent-color: var(--am-color-primary);
+    cursor: pointer;
+  }
+  .tag-management__tag--selected {
+    border-color: var(--am-color-primary);
+    box-shadow: inset 0 0 0 1px var(--am-color-primary);
+  }
+  .tag-management__criteria {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--am-space-2);
+    margin-block-end: var(--am-space-3);
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+  }
+  .tag-management__criteria button {
+    margin-inline-start: auto;
+    color: var(--am-color-primary);
+  }
+  .tag-management__empty {
+    display: grid;
+    justify-items: center;
+    gap: var(--am-space-3);
+    padding: var(--am-space-8) var(--am-space-4);
+    text-align: center;
+  }
+  .tag-management__empty h3 {
+    margin: 0;
+    font-size: var(--am-font-size-md);
+  }
+  .tag-management__empty p {
+    margin: 0;
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-sm);
+    line-height: 1.7;
+  }
+  .tag-management__error {
+    color: var(--am-color-danger);
+    font-size: var(--am-font-size-sm);
+    overflow-wrap: anywhere;
+  }
+  .tag-management__merge button {
+    display: flex;
+    justify-self: end;
+    align-items: center;
+    justify-content: center;
+    gap: var(--am-space-2);
+    min-inline-size: 112px;
+    min-block-size: 44px;
+    padding: var(--am-space-2) var(--am-space-3);
+    border: 1px solid var(--am-color-primary);
+    border-radius: var(--am-radius-control);
+    background: var(--am-color-primary);
+    color: var(--am-color-on-primary);
+    font: 650 var(--am-font-size-sm) var(--am-font-family);
+    cursor: pointer;
+  }
+  .tag-management__display-options {
+    display: grid;
+    gap: var(--am-space-3);
+  }
+  .tag-management__display-options button {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr);
+    align-items: center;
+    gap: var(--am-space-3);
+    min-block-size: 90px;
+    padding: var(--am-space-3);
+    border: 1px solid var(--am-color-border);
+    border-radius: var(--am-radius-card);
+    background: var(--am-color-surface);
+    color: var(--am-color-text);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+  .tag-management__display-options button[aria-pressed='true'] {
+    border-color: var(--am-color-primary);
+    background: var(--am-color-primary-container);
+  }
+  .tag-management__display-options small {
+    display: block;
+    margin-block-start: var(--am-space-1);
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+    line-height: 1.6;
+  }
+  .tag-management__preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .tag-management__preview i {
+    flex: 0 0 30%;
+    block-size: 14px;
+    border-radius: var(--am-radius-detail);
+    background: var(--am-color-primary);
+    opacity: 0.55;
+  }
+  .tag-management__preview i:nth-child(2) {
+    flex-basis: calc(70% - 4px);
+    opacity: 0.3;
+  }
+  .tag-management__preview--rows i:nth-child(n) {
+    flex-basis: 100%;
+  }
+  .tag-management__merge,
+  .tag-management__merge label {
+    display: grid;
+    min-inline-size: 0;
+    gap: var(--am-space-3);
+  }
+  .tag-management__merge p {
+    margin: 0;
+  }
+  .tag-management__merge-divider {
+    inline-size: 100%;
+    margin: var(--am-space-1) 0;
+    border: 0;
+    border-block-start: 1px solid var(--am-color-border);
+  }
+  .tag-management__merge-field {
+    position: relative;
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-sm);
+  }
+  // Reveal on dialog insertion so the underline stays complete when focus moves to Confirm.
+  .tag-management__merge-field::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    block-size: 3px;
+    background: var(--am-color-primary);
+    pointer-events: none;
+    transform-origin: left center;
+    animation: am-tag-merge-underline var(--am-motion-slow) var(--am-ease-standard);
+  }
+  @keyframes am-tag-merge-underline {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .tag-management__merge input {
+    box-sizing: border-box;
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 52px;
+    padding: var(--am-space-2) 0;
+    border: 0;
+    border-block-end: 1px solid var(--am-color-border-strong);
+    border-radius: 0;
+    background: transparent;
+    color: var(--am-color-text);
+    font: inherit;
+    font-size: var(--am-font-size-xl);
+  }
+  :is(.tag-management, .tag-management__display-options) button:hover {
+    background: var(--am-color-hover);
+  }
+  .tag-management__merge button:is(:hover, :focus-visible):not(:disabled) {
+    border-color: var(--am-color-primary-hover);
+    background: var(--am-color-primary-hover);
+  }
+  :is(.tag-management, .tag-management__display-options) :is(button, input):focus-visible,
+  .tag-management__merge button:focus-visible,
+  .tag-management__tag:has(input:focus-visible) {
+    outline: var(--am-focus-ring);
+    outline-offset: var(--am-focus-offset);
+  }
+  .tag-management__merge input:focus,
+  .tag-management__merge input:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+  .tag-management__merge button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .tag-management--mobile .tag-management__create {
+    inline-size: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tag-management__merge-field::after {
+      animation: none;
+    }
+  }
+}

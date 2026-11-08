@@ -1,0 +1,1 @@
+{"schemaVersion":1,"viewId":"summary","viewRevision":1,"nodeId":"form","commandId":"summarize","contextRef":"context","values":[{"fieldId":"note","value":"example"}]}

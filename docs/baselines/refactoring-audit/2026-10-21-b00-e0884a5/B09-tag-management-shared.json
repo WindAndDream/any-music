@@ -1,0 +1,236 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B09-tag-management-shared",
+  "parentBatch": "B09",
+  "runtime": "shared",
+  "createdAt": "2026-10-21T10:22:28.330Z",
+  "scope": {
+    "invariant": "The optional built-in tag plugin owns its rules/associations; disable withdraws tag projections and rejects old mutations while retaining data, and re-enable restores from the same namespace without replaying writes.",
+    "allowedPaths": [
+      "packages/plugin-tag-management",
+      "packages/music-workbench/src/features/plugins/use-tag-management.ts",
+      "packages/music-workbench/test/features/plugins/use-tag-management.test.ts",
+      "Direct named storage projection and its existing regression test",
+      "Public UI tag port and package exports only"
+    ],
+    "extensionReason": "The named storage adapter delegates to product-data-projection.ts. Only the library/tag key branches were read to verify ordinary host writes cannot rewrite the plugin namespace; the independent B06 transaction/recovery chain was not audited.",
+    "excluded": [
+      "Creation implementation",
+      "Application injection and GM/Rust adapters",
+      "Complete tag page confirmation/focus/layout audit and generic dormant filter UI",
+      "Product-code changes and permanent new tests",
+      "Product/browser/emulator launch, commit or push"
+    ]
+  },
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+  "declaredStatus": {
+    "claim": "S07 ownership, namespace isolation and generation-bound disable/restore are declared implemented; this report independently reviews one tag subbatch only.",
+    "references": [
+      "packages/plugin-tag-management/AGENTS.md:3",
+      "packages/music-workbench/AGENTS.md:13",
+      "docs/en/cross-platform/architecture/plugin-data-ownership.md:16",
+      "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md:231"
+    ]
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "criteria": ["C1", "C2", "C3", "C4", "C6"],
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "detail": "The feature owns tag rules/session state. Internal imports consume public core/plugin-center/ui exports with workspace:*; no app, workbench, private repository or runtime import in the tag package. Host consumes public ports and an injected loader.",
+      "evidence": [
+        "packages/plugin-tag-management/package.json:6",
+        "packages/plugin-tag-management/src/tag-session.ts:1",
+        "packages/plugin-tag-management/src/tags.ts:7",
+        "packages/ui/src/product/tag-management.ts:5",
+        "packages/music-workbench/src/features/plugins/use-tag-management.ts:9"
+      ],
+      "automation": {
+        "command": "node <user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b09-tags\\import-scan.cjs",
+        "startedAt": "2026-10-21T10:20:45.3224205+00:00",
+        "finishedAt": "2026-10-21T10:20:45.5999293+00:00",
+        "exitCode": 0,
+        "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b09-tags\\import-scan.log"
+      }
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "detail": "The metadata root has only type imports and no runtime dependency edges. Specialist views/state/styles enter through the separate /vue export. The shared loader boundary ignores stale results and supports retry after a rejected import; real application injection is a separate subbatch.",
+      "evidence": [
+        "packages/plugin-tag-management/src/index.ts:1",
+        "packages/plugin-tag-management/src/vue/index.ts:1",
+        "packages/music-workbench/src/features/plugins/use-tag-management.ts:22",
+        "packages/music-workbench/test/features/plugins/use-tag-management.test.ts:73"
+      ]
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "detail": "Synchronous generation changes dispose old sessions. Disabled state immediately withdraws user-tag projections while retaining source metadata and namespace values; re-enable restores without writes. Disposed/stale actions reject mutations. Batch IDs deduplicate before one namespace write.",
+      "evidence": [
+        "packages/plugin-tag-management/src/tag-session.ts:30",
+        "packages/plugin-tag-management/src/tag-session.ts:41",
+        "packages/music-workbench/src/features/plugins/use-tag-management.ts:56",
+        "packages/music-workbench/src/features/plugins/use-tag-management.ts:80",
+        "packages/plugin-tag-management/test/tag-session.test.ts:84",
+        "packages/music-workbench/test/features/plugins/use-tag-management.test.ts:50",
+        "packages/music-workbench/test/features/plugins/use-tag-management.test.ts:89"
+      ]
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "detail": "Tag records persist track IDs, labels and update timestamps only. Commits preserve unrelated namespace fields and publish session state only after a successful synchronous write. Host library writes strip user tags and do not change namespaces. Unknown namespace versions are preserved read-only; lazy/session load errors cross the host boundary as AppErrorState.",
+      "evidence": [
+        "packages/plugin-tag-management/src/tag-session.ts:7",
+        "packages/plugin-tag-management/src/tag-session.ts:34",
+        "packages/music-workbench/src/features/plugins/use-tag-management.ts:35",
+        "packages/music-workbench/src/features/plugins/use-tag-management.ts:50",
+        "packages/music-workbench/src/storage/product-data-projection.ts:37",
+        "packages/music-workbench/src/storage/product-data-projection.ts:54",
+        "packages/music-workbench/src/storage/product-data-projection.ts:119",
+        "packages/music-workbench/test/storage/product-generation-store.test.ts:56",
+        "packages/plugin-tag-management/test/tag-session.test.ts:49",
+        "packages/plugin-tag-management/test/tag-session.test.ts:96"
+      ]
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "detail": "Tests reside with the plugin and the shared host adapter. Targeted tests cover normalization/search/filter rules, namespace changes, write failure, disable/restore, stale loader and lazy-load retry. 36 tests and both scoped typechecks pass. This is scoped Node automation, not actual page interactions or runtime acceptance.",
+      "evidence": [
+        "packages/plugin-tag-management/test/tags.test.ts:19",
+        "packages/plugin-tag-management/test/tag-session.test.ts:48",
+        "packages/plugin-tag-management/test/vue/use-tag-management-filters.test.ts:7",
+        "packages/music-workbench/test/features/plugins/use-tag-management.test.ts:49"
+      ]
+    }
+  ],
+  "callChain": [
+    "Build-known createTagManagementModule returns metadata without importing the /vue entry.",
+    "useTagManagement receives loadTagManagement/storage/rememberTracks ports; no tag implementation import in production adapter.",
+    "load() creates a generation-bound session, exposing only plugin:feature.tags:v1 plus the named canonical-track action.",
+    "Plugin mutations normalize/deduplicate labels, synchronously write namespace, then publish associations and changed().",
+    "Host read/project observes revision; disable disposes the session and removes tag projections; enable recreates from retained namespace."
+  ],
+  "verification": {
+    "static": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "node <user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b09-tags\\import-scan.cjs",
+          "startedAt": "2026-10-21T10:20:45.3224205+00:00",
+          "finishedAt": "2026-10-21T10:20:45.5999293+00:00",
+          "exitCode": 0,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b09-tags\\import-scan.log"
+        }
+      ],
+      "detail": "Bounded TypeScript AST import/export scan plus the cited manual call-chain review. No runtime imports at metadata root and no disallowed/private package imports. Not a production resource graph."
+    },
+    "tests": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/plugin-tag-management test",
+          "startedAt": "2026-10-21T10:18:14.2007688+00:00",
+          "finishedAt": "2026-10-21T10:18:19.8169314+00:00",
+          "exitCode": 0,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b09-tags\\tag-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-tag-management.test.ts test/storage/product-generation-store.test.ts",
+          "startedAt": "2026-10-21T10:18:14.2002207+00:00",
+          "finishedAt": "2026-10-21T10:18:20.8410152+00:00",
+          "exitCode": 0,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b09-tags\\host-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-tag-management --filter @any-music/music-workbench typecheck",
+          "startedAt": "2026-10-21T10:18:14.2373743+00:00",
+          "finishedAt": "2026-10-21T10:18:39.1243456+00:00",
+          "exitCode": 0,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b09-tags\\typecheck.log"
+        }
+      ],
+      "counts": {
+        "pluginTests": 10,
+        "sharedBoundaryAndStorageTests": 26,
+        "totalTests": 36,
+        "typecheckedPackages": 2
+      },
+      "detail": "All exit codes 0. The 26 host tests include the complete existing generation-store file as regression support; this does not reopen or accept all B06 storage recovery concerns."
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "No public entry, dependency or product code changed. Consumer build/resource inspection remains separate; no artifact evidence is reused from other batches."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "The current task did not explicitly authorize browser/application inspection. No UI, Tampermonkey, Tauri or device acceptance claim."
+    },
+    "rootGates": {
+      "result": "not-run",
+      "reason": "Bounded records-only audit with no commit. The plan reserves full root gates for B21/final closure or an authorized fix/commit."
+    },
+    "records": {
+      "result": "pass",
+      "validation": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b09-tags/records-validation.json",
+      "validationCommand": "node <user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b09-tags\\validate-records.cjs",
+      "formattingEvidence": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b09-tags/records-format.result.json",
+      "detail": "JSON, referenced evidence paths/line bounds, command exit codes, baseline hashes and whole-board pending scope validated. Formatting result is recorded separately at formattingEvidence. Existing unrelated changes are retained."
+    }
+  },
+  "findings": [],
+  "unreadPaths": [
+    "packages/plugin-music-creation/**",
+    "apps/userscript tag/creation injection",
+    "apps/tauri tag/creation injection",
+    "Full specialist component templates/styles, async page-event wiring and generic dormant-filter UI"
+  ],
+  "missingEvidence": [
+    "B09 creation disable/restore and host-published recipe execution with creation disabled",
+    "Affected media failure after leaf source disable",
+    "Separate Userscript/Tauri application injection and production resource graphs",
+    "Real page confirmation/focus/layout behavior; component logic tests are not live evidence"
+  ],
+  "dependencies": [
+    {
+      "owner": "B06",
+      "detail": "Only the direct tag/library namespace key boundary and its current tests were checked. No verdict on independent storage transaction/recovery concerns or earlier findings."
+    },
+    {
+      "owner": "B09-userscript-injection / B09-tauri-injection",
+      "detail": "Confirm application-owned metadata/loader injection and actual lazy resource loading independently."
+    }
+  ],
+  "handoff": "B09-tag-management-shared is conformant/pass-scoped at the recorded HEAD and file hashes. No confirmed violation was found in the chosen ownership and disable/restore invariant. Static review, 36 Node tests and two typechecks pass; artifact/live/root gates were not run. No product implementation or existing test was changed. Creation and both runtime injection candidates remain unreviewed; do not mark B09 complete. Next: B09-music-creation-shared, scoped to its namespace/lifecycle and published-recipe boundary.",
+  "nextBatch": {
+    "batchId": "B09-music-creation-shared",
+    "parentBatch": "B09",
+    "runtime": "shared",
+    "status": "pending",
+    "question": "Verify creation draft/material namespace ownership and disable/restore; published host recipes must remain executable when creation is disabled, and disabled leaf sources must fail explicitly.",
+    "allowedPaths": [
+      "packages/plugin-music-creation",
+      "packages/music-workbench/src/features/plugins/use-music-creation.ts and its matching test",
+      "At most one directly required named host/storage/public contract"
+    ],
+    "excluded": [
+      "B09 Userscript/Tauri injection audits",
+      "Product-code fixes, independent playback/transport implementation audits",
+      "Product UI/live inspection, commit and push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "packages/plugin-music-creation/AGENTS.md",
+      "packages/music-workbench/AGENTS.md",
+      "docs/en/cross-platform/architecture/plugin-data-ownership.md"
+    ],
+    "continuation": "Reuse the B09 tag report only after checking relevant hashes. Tag and creation are separate candidates; the tag pass does not establish creation or runtime injection acceptance."
+  }
+}

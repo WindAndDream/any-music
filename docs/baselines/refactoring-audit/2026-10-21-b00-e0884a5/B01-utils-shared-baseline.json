@@ -1,0 +1,145 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B01-utils-shared",
+  "capturedAt": "2026-10-21T13:51:43.3647242+08:00",
+  "head": "1fe6a2f0ef3ebaf082741ac2d1d4ffb4beafaac9",
+  "branch": "develop",
+  "workingTree": [
+    " M docs/en/README.md",
+    " M docs/en/cross-platform/README.md",
+    " M docs/zh-cn/文档索引.md",
+    " M docs/zh-cn/跨平台/文档索引.md",
+    "?? docs/baselines/refactoring-audit/",
+    "?? docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+    "?? docs/zh-cn/跨平台/架构/重构分板块排查计划.md"
+  ],
+  "relevantDiff": [],
+  "versions": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0"
+  },
+  "fileHashes": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/development-workflow.md",
+      "sha256": "3e8edc5c234f5bf2a8e65bbd2db26bb39db9730e620055289319ece9fa1e2fad"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/project-architecture.md",
+      "sha256": "865beeb0a89911cc969a5962537d348fde83292cffb11c26c103da5ce6f83498"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "sha256": "9b108401084637dfd5e73864d5b37990661df447ea91d25d2830a4c2bbfdbb2c"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "sha256": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15"
+    },
+    {
+      "path": "package.json",
+      "sha256": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e"
+    },
+    {
+      "path": "packages/core/AGENTS.md",
+      "sha256": "1ee3bb17f954e71a8550de9b6dc72a0d9b5931a83866f4bd8afbf38f6ebb93af"
+    },
+    {
+      "path": "packages/core/package.json",
+      "sha256": "573644b47c3809b86f277cafc2e1ac7d45074143d23dfb21a661ddd277009ae1"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "sha256": "3ac3653f86a4efb77348443a3b1864eb06890745f71bf550b34fafda4b315453"
+    },
+    {
+      "path": "packages/core/src/player/normalize-progress.ts",
+      "sha256": "c7e07f5a99ed0eb67ae07b1fd8d75a1112e8bc0c9e5b271fe6732838adc347ac"
+    },
+    {
+      "path": "packages/core/test\\download\\download-history.test.ts",
+      "sha256": "71f4a9b80862ca409dd965377b472c377d134dd971c2f8e2edfba00acd436cf3"
+    },
+    {
+      "path": "packages/core/test\\download\\download-queue.test.ts",
+      "sha256": "5f864ee94c54bd767340e91297cca80a13607181c6531824964744feaf7dd0d7"
+    },
+    {
+      "path": "packages/core/test\\errors\\app-error.test.ts",
+      "sha256": "24c6e1a7e368865ba4b30c831239c1479d4242d9a9a8f8ada7e2aadc196bfe13"
+    },
+    {
+      "path": "packages/core/test\\fixtures\\download\\download-history-v2.json",
+      "sha256": "b7b5dfdd280d73900f50d9f3283b2f6843a3f490ad3d264f09c74fa3d01a663c"
+    },
+    {
+      "path": "packages/core/test\\fixtures\\music-source\\declarative-v2.json",
+      "sha256": "92115bd6a8986a55d6de4029a8ef7c7fa08ec1e1ce7039f98e19e8712a45368f"
+    },
+    {
+      "path": "packages/core/test\\fixtures\\music-source\\declarative-v3.json",
+      "sha256": "a86de7e72ed500aef0d171a6607c7197ff8adf3a16234ff59e73aba4b8634554"
+    },
+    {
+      "path": "packages/core/test\\library\\favorites.test.ts",
+      "sha256": "aa7e2b1f2d831390cc92c5c0dd51a5ab42afdb414a44f29c7af3c5f93a5c50b7"
+    },
+    {
+      "path": "packages/core/test\\library\\material-collection.test.ts",
+      "sha256": "bbddc03ede1cc6cc59dc74ca6a6d788a03bb907df00dfa21138c1340962123d1"
+    },
+    {
+      "path": "packages/core/test\\library\\segment-recipe.test.ts",
+      "sha256": "fd8c82cc5588c3c4268a3e3b94ed696a993b786d151742500249739dfd65ab60"
+    },
+    {
+      "path": "packages/core/test\\music-source\\policies.test.ts",
+      "sha256": "922f5c5417cc8c5567012826067ed618b180bf1de344478d0f249eda41932ff3"
+    },
+    {
+      "path": "packages/core/tsconfig.json",
+      "sha256": "d57fb9c620a6b107339e892b34ebb33907c728c9d14c7b8f35c7d77a735f6d86"
+    },
+    {
+      "path": "packages/utils/AGENTS.md",
+      "sha256": "41c2cb4dedc4a6c55173df272208939374ec4191b0ecec17e1fd4038be3a2f73"
+    },
+    {
+      "path": "packages/utils/package.json",
+      "sha256": "5abbc0d6d1e1dce952143cecd2e51317a20b6cda101c361f0c75d948deee395f"
+    },
+    {
+      "path": "packages/utils/src/index.ts",
+      "sha256": "dc6a6654cd22c697e8d4eeab59af262a1d5672e630284223b1105baa5db63bd5"
+    },
+    {
+      "path": "packages/utils/src/number/clamp.ts",
+      "sha256": "c991ffa6dd6c69054605448a5704f3c44f02812ccc0a6af6a6db082a405c4eb5"
+    },
+    {
+      "path": "packages/utils/src/number/index.ts",
+      "sha256": "e145333604c66d3b3e6bf43fc9ebf418ffb06e951f0b8f6b61d4b968e1f0f35e"
+    },
+    {
+      "path": "packages/utils/tsconfig.json",
+      "sha256": "ff4934c8780ead0236d5337e17466540d4d9e3bab2d5226a7fac9440025daafb"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "1088468b37100ccc795f68db947bab7db5a3bf886b8ecf88762bfdc6df656714"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "sha256": "a54d24214863db254a94db67f8ded43f5cf6465184be18799d88bdc02087ffa1"
+    }
+  ]
+}

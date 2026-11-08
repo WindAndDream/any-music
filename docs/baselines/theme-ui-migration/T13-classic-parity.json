@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-regression-evidence",
+  "runtimeScope": "shared",
+  "batchId": "T13-classic-parity",
+  "date": "2026-10-24",
+  "timezone": "Asia/Shanghai",
+  "baselineCommit": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "status": "complete",
+  "scope": "Classic shared presentation only; no runtime transport, native authority, persisted data or source protocol changes.",
+  "repairs": [
+    "Desktop discovery keeps the original music-list heading; account content is limited to its original top-bar/mobile locations.",
+    "Search/import restores the source label and initial input focus; removes the added unstyled clear-input control.",
+    "Settings keeps the modal primitive mounted for both transitions, passes bounded height to its columns and releases detail suspension on disposal.",
+    "Opening settings closes the mobile navigation drawer and ordinary preferences.",
+    "Removes the extra favorites-filter trigger/dialog and Listen Later clear-list action; existing bottom-toolbar filters and selection operations remain."
+  ],
+  "verification": {
+    "classic": {
+      "files": 50,
+      "tests": 354,
+      "result": "passed"
+    },
+    "crossThemeCoverage": {
+      "tests": 23,
+      "result": "passed",
+      "staleConfirmation": "Uses the shared download action rather than an added Classic-only control."
+    },
+    "repositoryTests": {
+      "vitestFiles": 290,
+      "vitestTests": 2123,
+      "includes": "Repository script, CLI, Cargo workspace and 183 protocol differential checks",
+      "result": "passed"
+    },
+    "rootGates": {
+      "test": "passed",
+      "typecheck": "passed",
+      "lint": "passed",
+      "format:check": "passed",
+      "build": "passed"
+    },
+    "consumerBuilds": {
+      "tauriFrontend": "passed",
+      "userscriptProduction": "passed",
+      "windowsRelease": "passed"
+    }
+  },
+  "browserEvidence": {
+    "environment": "Isolated headless Chrome, local Vite preview, production Classic style resources and inert host projections; original UI components rendered separately from Git archive.",
+    "scenarios": [
+      "Desktop discovery heading/account placement, baseline search/import button styles, source label, input focus, Escape focus return",
+      "Settings enter/leave motion, original two-column geometry, independent sidebar scrolling to last item, form editing, Escape focus return",
+      "Queue/favorites/downloads preserve original headings, collection/status controls and empty states without added controls",
+      {
+        "width": 1280,
+        "height": 600,
+        "mobile": false,
+        "theme": "light",
+        "motion": "no-preference",
+        "geometry": {
+          "client": 388,
+          "scroll": 682,
+          "width": 257
+        }
+      },
+      {
+        "width": 411,
+        "height": 640,
+        "mobile": true,
+        "theme": "dark",
+        "motion": "no-preference",
+        "geometry": {
+          "client": 567,
+          "scroll": 708,
+          "width": 411
+        }
+      },
+      {
+        "width": 411,
+        "height": 864,
+        "mobile": true,
+        "theme": "light",
+        "motion": "reduce",
+        "geometry": {
+          "client": 791,
+          "scroll": 791,
+          "width": 411
+        }
+      }
+    ],
+    "baselineButtons": [
+      {
+        "text": "搜索",
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(0, 47, 167)",
+        "height": "36px",
+        "borderRadius": "6px",
+        "fontWeight": "680",
+        "disabled": false
+      },
+      {
+        "text": "导入链接",
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgba(26, 26, 31, 0.6)",
+        "height": "36px",
+        "borderRadius": "6px",
+        "fontWeight": "680",
+        "disabled": false
+      },
+      {
+        "text": "搜索",
+        "background": "rgb(0, 47, 167)",
+        "color": "rgb(255, 255, 255)",
+        "height": "42px",
+        "borderRadius": "5px",
+        "fontWeight": "720",
+        "disabled": false
+      },
+      {
+        "text": "导入",
+        "background": "rgb(0, 47, 167)",
+        "color": "rgb(255, 255, 255)",
+        "height": "42px",
+        "borderRadius": "5px",
+        "fontWeight": "720",
+        "disabled": true
+      }
+    ],
+    "baselineSettings": {
+      "client": 634,
+      "scroll": 682
+    },
+    "currentButtons": [
+      {
+        "text": "搜索",
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(0, 47, 167)",
+        "height": "36px",
+        "borderRadius": "6px",
+        "fontWeight": "680",
+        "disabled": false
+      },
+      {
+        "text": "导入链接",
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgba(26, 26, 31, 0.6)",
+        "height": "36px",
+        "borderRadius": "6px",
+        "fontWeight": "680",
+        "disabled": false
+      },
+      {
+        "text": "搜索",
+        "background": "rgb(0, 47, 167)",
+        "color": "rgb(255, 255, 255)",
+        "height": "42px",
+        "borderRadius": "5px",
+        "fontWeight": "720",
+        "disabled": false
+      },
+      {
+        "text": "导入",
+        "background": "rgb(0, 47, 167)",
+        "color": "rgb(255, 255, 255)",
+        "height": "42px",
+        "borderRadius": "5px",
+        "fontWeight": "720",
+        "disabled": true
+      }
+    ],
+    "settingsEnter": {
+      "classes": "bottom-sheet am-bottom-sheet-enter-active am-bottom-sheet-enter-to",
+      "animations": [
+        {
+          "duration": 220,
+          "playState": "running"
+        },
+        {
+          "duration": 340,
+          "playState": "running"
+        }
+      ]
+    },
+    "currentSettings": {
+      "client": 634,
+      "scroll": 682
+    },
+    "settingsLeave": {
+      "classes": "bottom-sheet am-bottom-sheet-leave-active am-bottom-sheet-leave-to",
+      "animations": [
+        {
+          "duration": 220,
+          "playState": "running"
+        },
+        {
+          "duration": 340,
+          "playState": "running"
+        }
+      ]
+    },
+    "pageErrors": [],
+    "limits": [
+      "No installed Tampermonkey or foreign-host validation.",
+      "No native WebView, real account, playback/download, Android or iOS acceptance in this follow-up.",
+      "No changes to original product data; fixture controls use inert host projections."
+    ]
+  },
+  "localEvidence": {
+    "directory": ".tmp/theme-parity",
+    "runner": ".tmp/theme-parity/verify.cjs",
+    "screenshots": [
+      "baseline-search.png",
+      "baseline-settings.png",
+      "after-catalog.png",
+      "after-search.png",
+      "after-import.png",
+      "after-settings.png",
+      "after-queue.png",
+      "after-favorites.png",
+      "after-downloads.png",
+      "after-settings-1280-light-no-preference.png",
+      "after-settings-411-dark-no-preference.png",
+      "after-settings-411-light-reduce.png"
+    ],
+    "logs": [
+      "root-test.txt",
+      "root-test-final.txt",
+      "root-typecheck.txt",
+      "root-lint-final.txt",
+      "root-format.txt",
+      "root-build.txt",
+      "root-build-final.txt",
+      "classic-tests-final.txt",
+      "tauri-frontend-final.txt",
+      "userscript-final.txt",
+      "root-format-final.txt"
+    ],
+    "attempts": "The initial repository test depended on the removed Classic clear-list control; updated to exercise shared download confirmation and passed. Preview-harness setup/selector/fixture assertions were repaired before the recorded successful run."
+  },
+  "git": {
+    "commit": false,
+    "push": false
+  },
+  "artifacts": {
+    "windowsRelease": {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 28359168,
+      "sha256": "2f1709c9528c9148fe0f5679875c9fd9a366d6ead3b5fc2918ea20290bb6a6d8"
+    },
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 4897379,
+      "sha256": "2324106207dc535372d71744376df4af08147669acafd2303bddb0358f3bb14c"
+    }
+  }
+}

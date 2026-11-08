@@ -1,0 +1,8 @@
+
+> @any-music/theme-studio@0.0.0 typecheck <project-root>\packages\theme-studio
+> vue-tsc --noEmit -p tsconfig.json
+
+src/components/player/StudioPlayer.vue(4,37): error TS2307: Cannot find module '@any-music/ui/components/music-sources/playback-mode-options' or its corresponding type declarations.
+<project-root>\packages\theme-studio:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/theme-studio@0.0.0 typecheck: `vue-tsc --noEmit -p tsconfig.json`
+Exit status 2

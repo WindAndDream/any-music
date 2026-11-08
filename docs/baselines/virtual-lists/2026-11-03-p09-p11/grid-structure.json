@@ -1,0 +1,35 @@
+{
+  "method": "Vue Node custom renderer of controlled VirtualTrackCardGrid; installed engine; 100px injected viewport, 20px natural cell boxes, three injected browser-resolved CSS columns, gap12, overscan2, cache32; flat keyed cells/resource-owning slot cards. No real CSS Grid/layout/image decode/frame timing/runtime acceptance.",
+  "samples": [
+    {
+      "count": 0,
+      "mounted": 0,
+      "observed": 2,
+      "released": 0
+    },
+    {
+      "count": 1,
+      "mounted": 1,
+      "observed": 3,
+      "released": 1
+    },
+    {
+      "count": 80,
+      "mounted": 18,
+      "observed": 20,
+      "released": 18
+    },
+    {
+      "count": 1000,
+      "mounted": 18,
+      "observed": 20,
+      "released": 18
+    },
+    {
+      "count": 10000,
+      "mounted": 18,
+      "observed": 20,
+      "released": 18
+    }
+  ]
+}

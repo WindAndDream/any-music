@@ -1,0 +1,46 @@
+{
+  "baseline": "../2026-11-04-r07-r08/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "method": "Production frontend JS/CSS/Wasm totals; per-file gzip level 9. Native executable excluded from frontend payload totals.",
+  "runtimeResults": [
+    {
+      "runtime": "userscript",
+      "payloadBytesDelta": 132876,
+      "payloadGzipBytesDelta": 32246,
+      "audits": [
+        {
+          "path": "apps/userscript/dist/theme-build-audit.json",
+          "startupVirtualizerPresent": false,
+          "startupVirtualReorderPresent": false,
+          "metadataVirtualizerPresent": false,
+          "documentStartVirtualizerPresent": false,
+          "renderedVirtualizerPresent": null
+        },
+        {
+          "path": "apps/userscript/dist/userscript-build-audit.json",
+          "startupVirtualizerPresent": null,
+          "startupVirtualReorderPresent": null,
+          "metadataVirtualizerPresent": null,
+          "documentStartVirtualizerPresent": null,
+          "renderedVirtualizerPresent": true
+        }
+      ]
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytesDelta": 70937,
+      "payloadGzipBytesDelta": 24509,
+      "audits": [
+        {
+          "path": "apps/tauri/dist/theme-build-audit.json",
+          "startupVirtualizerPresent": false,
+          "startupVirtualReorderPresent": false,
+          "metadataVirtualizerPresent": false,
+          "documentStartVirtualizerPresent": null,
+          "renderedVirtualizerPresent": null
+        }
+      ]
+    }
+  ],
+  "limits": "The closed canary has no production provider. Dynamic candidate code may be physically included without startup execution, especially in a single Userscript file. Combined dirty-workspace payload differences do not establish frame-time or native parity."
+}

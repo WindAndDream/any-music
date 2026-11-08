@@ -1,0 +1,217 @@
+{
+  "batchId": "T07",
+  "status": "complete",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "scope": "Classic ordinary settings, appearance/navigation pickers, filter-history editors and global ordinary confirmation/notice integration. Complete-root production adoption remains T11.",
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "observedDuringWork": "Source/catalog and library/download extraction files continued changing during this task. Checks describe the shared working tree, not an isolated T07 checkout.",
+    "preservation": "No reset, revert, commit, push, server, product UI, browser or emulator launch. Unrelated migration/native changes retained."
+  },
+  "prerequisites": {
+    "T05": "Complete; independent T05 evidence retained.",
+    "T06": "Complete; independent T06 evidence retained."
+  },
+  "ownership": {
+    "theme-default": [
+      "Settings navigation, source/profile/history/download presentation, filter-history region forms/dialogs",
+      "Appearance/navigation preference panel, picker and order list",
+      "ClassicSettings/ClassicOverlays complete-root adapters",
+      "OrdinaryOverlays via app-injected chrome port",
+      "Moved interaction, layout and settings Back integration tests; new root-adapter/confirmation identity tests"
+    ],
+    "ui": [
+      "Settings/ordinary-overlay structural contracts; source descriptors only",
+      "Headless editing/navigation/validation and per-region filter-history drafts",
+      "In-memory active-session check, modal/feedback primitives, semantic focus keys and neutral protected-form styles"
+    ],
+    "music-workbench": [
+      "Consumes injected Settings/Preferences/PreferenceDialog/Overlays; no concrete theme imports",
+      "Actual close invalidates editing scope synchronously and changes settings presentation identity",
+      "Existing media, downloads, account/proxy models, installation/consent and recovery remain stable host owners"
+    ]
+  },
+  "invariants": [
+    "No form save or draft reset on presentation replacement",
+    "Profile/history/concurrency drafts, validation and independent filter-history drafts survive replacement",
+    "Actual close/reopen resets drafts and invalidates retained callbacks before render",
+    "Replaced/closed/disposed confirmation callbacks cannot confirm a newer request",
+    "UI theme selection remains independent of light/dark/system appearance",
+    "Account/login, credentials, native previews/consents and recovery stay behind fixed host boundaries",
+    "New theme SFC CSS is scoped; existing independent Shadow-tree protection is retained"
+  ],
+  "targetedVerification": {
+    "testFiles": 39,
+    "tests": 184,
+    "suites": [
+      {
+        "command": "pnpm --filter @any-music/theme-default exec vitest run test/components/settings test/components/overlays test/components/shell/ClassicRoot.test.ts test/components/shell/ProductWorkbench.preferences.test.ts",
+        "exitCode": 0,
+        "files": 8,
+        "tests": 36,
+        "log": "T07-theme-tests.txt"
+      },
+      {
+        "command": "pnpm --filter @any-music/ui exec vitest run test/composables/use-global-settings.test.ts test/composables/use-settings-navigation.test.ts test/composables/use-back-navigation.test.ts test/composables/use-editing-session.test.ts test/product/theme-contracts.test.ts test/product/theme-metadata.test.ts",
+        "exitCode": 0,
+        "files": 6,
+        "tests": 19,
+        "log": "T07-ui-tests.txt"
+      },
+      {
+        "command": "pnpm --filter @any-music/plugin-ui-vue exec vitest run test/trusted/ThemeHost.test.ts test/trusted/generic-theme-host.test.ts test/trusted/root-theme-controller.test.ts test/trusted/theme-controller.test.ts test/trusted/theme-directory.test.ts test/trusted/theme-resources.test.ts",
+        "exitCode": 0,
+        "files": 6,
+        "tests": 37,
+        "log": "T07-root-host-tests.txt"
+      },
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench",
+        "exitCode": 0,
+        "files": 1,
+        "tests": 5,
+        "log": "T07-lifetime-tests.txt"
+      },
+      {
+        "command": "pnpm --filter @any-music/userscript test",
+        "exitCode": 0,
+        "files": 17,
+        "tests": 80,
+        "log": "T07-userscript-tests.txt"
+      },
+      {
+        "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/configure-tauri-workbench.test.ts",
+        "exitCode": 0,
+        "files": 1,
+        "tests": 7,
+        "log": "T07-tauri-composition-tests.txt"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "pnpm --filter @any-music/ui typecheck",
+      "exitCode": 0,
+      "log": "T07-ui-typecheck.txt"
+    },
+    {
+      "command": "pnpm exec oxlint <T07 settings/overlay/headless files>",
+      "exitCode": 0,
+      "log": "T07-target-lint.txt"
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 1,
+      "log": "T07-root-test-final.txt",
+      "limitation": "Current plugin-ui-vue presentation test imports removed UI TrackList.vue; theme layout suite also has moved catalog paths."
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 2,
+      "log": "T07-root-typecheck-final.txt",
+      "limitation": "Current plugin-ui-vue presentation test imports removed UI TrackList.vue."
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 1,
+      "log": "T07-root-lint-final.txt",
+      "limitation": "Package/plugin/VM/mobile boundaries passed in the later run; unused AppDialog/BottomSheet imports in T05 use-classic-catalog.ts still failed oxlint."
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "log": "T07-root-format.txt",
+      "limitation": "Shared-worktree snapshot reported 76 files, primarily ongoing T05/T06 source/library moves. T07-owned files are formatted separately; no whole-repository formatting rewrite was applied."
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 2,
+      "log": "T07-root-build.txt",
+      "limitation": "Stopped during typecheck at the removed TrackList.vue test import; native release build did not run."
+    },
+    {
+      "command": "pnpm build:userscript:prod",
+      "exitCode": 0,
+      "log": "T07-userscript-build.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/tauri build:frontend",
+      "exitCode": 0,
+      "log": "T07-tauri-build.txt",
+      "limitation": "Existing large-chunk warning remains."
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default typecheck",
+      "exitCode": 0,
+      "log": "T07-theme-typecheck.txt"
+    },
+    {
+      "command": "pnpm exec oxfmt --check <T07 settings/overlay/contracts/headless files and evidence>",
+      "exitCode": 0,
+      "files": 33,
+      "log": "T07-target-format.txt"
+    }
+  ],
+  "intermediateFindings": [
+    "Repaired moved preference-option imports, settings Back test ownership, mock hoisting/aliases and listener binding; reran affected T07 checks.",
+    "Filter-history drafts previously lived only in the view; now retained by the stable editing scope.",
+    "Added synchronous validation-error clearing to avoid a queued input watcher erasing a same-tick submit error.",
+    "Initial whole-worktree boundary failures for the library export/core value import changed during ongoing extraction; later boundary checks passed."
+  ],
+  "remainingLimits": [
+    "Both frontend builds are compiler/bundle evidence only.",
+    "No real focus/layout/style/device, installed GM, Rust transport, native-save or playback continuity acceptance was performed.",
+    "No new native/external-plugin authority or admission."
+  ],
+  "artifacts": {
+    "frontends": [
+      {
+        "path": "apps/userscript/dist",
+        "fileCount": 3,
+        "bytes": 4807375
+      },
+      {
+        "path": "apps/tauri/dist",
+        "fileCount": 67,
+        "bytes": 2842366
+      }
+    ],
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 4772531,
+      "sha256": "9b217658f0f81d929d141e74ff0ef6cd39bba173616deb74891fc747137dadf6"
+    },
+    "limitations": "These are shared-working-tree frontend build artifacts. They do not establish native or live acceptance."
+  },
+  "checksPhase": "Original T07 attempts; preserved as historical evidence. Current completion is established by integrationClosure.",
+  "integrationClosure": {
+    "date": "2026-10-24",
+    "verifiedByBatch": "T08",
+    "evidence": "T08.json",
+    "gates": [
+      {
+        "command": "pnpm test",
+        "exitCode": 0
+      },
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0
+      },
+      {
+        "command": "pnpm lint",
+        "exitCode": 0
+      },
+      {
+        "command": "pnpm format:check",
+        "exitCode": 0
+      },
+      {
+        "command": "pnpm build",
+        "exitCode": 0
+      }
+    ],
+    "scope": "Closes T07 prerequisite/current-worktree automated integration gates; preserves original failed-attempt logs and live T13 limitations."
+  }
+}

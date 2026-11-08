@@ -1,0 +1,422 @@
+[
+  {
+    "id": "manifest-valid",
+    "schema": "PluginManifest",
+    "file": "manifest-valid.txt",
+    "accepted": true,
+    "stage": "negotiate"
+  },
+  {
+    "id": "manifest-declarative",
+    "schema": "PluginManifest",
+    "file": "manifest-declarative.txt",
+    "accepted": true,
+    "stage": "negotiate"
+  },
+  {
+    "id": "duplicate-key",
+    "schema": "PluginManifest",
+    "file": "duplicate-key.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "duplicate-escaped-key",
+    "schema": "PluginManifest",
+    "file": "duplicate-escaped-key.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "dangerous-key",
+    "schema": "PluginManifest",
+    "file": "dangerous-key.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "nested-dangerous-key",
+    "schema": "PluginManifest",
+    "file": "nested-dangerous-key.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "unsafe-integer",
+    "schema": "MusicListingInput",
+    "file": "unsafe-integer.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "exponent-number",
+    "schema": "PluginTask",
+    "file": "exponent-number.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "negative-zero",
+    "schema": "PluginTask",
+    "file": "negative-zero.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "lone-surrogate",
+    "schema": "MusicListingInput",
+    "file": "lone-surrogate.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "valid-unicode",
+    "schema": "MusicListingInput",
+    "file": "valid-unicode.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "deep-json",
+    "schema": "MusicListingInput",
+    "file": "deep-json.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "too-many-nodes",
+    "schema": "MusicListingInput",
+    "file": "too-many-nodes.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "oversized-message",
+    "schema": "MusicListingInput",
+    "file": "oversized-message.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "oversized-string",
+    "schema": "MusicListingInput",
+    "file": "oversized-string.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "page-size-range",
+    "schema": "MusicSearchInput",
+    "file": "page-size-range.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "unknown-manifestVersion",
+    "schema": "PluginManifest",
+    "file": "unknown-manifestVersion.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-packageFormatVersion",
+    "schema": "PluginManifest",
+    "file": "unknown-packageFormatVersion.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-runtimeProfileVersion",
+    "schema": "PluginManifest",
+    "file": "unknown-runtimeProfileVersion.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-contributionVersion",
+    "schema": "PluginManifest",
+    "file": "unknown-contributionVersion.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-dataSchemaVersion",
+    "schema": "PluginManifest",
+    "file": "unknown-dataSchemaVersion.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-wire",
+    "schema": "PluginManifest",
+    "file": "unknown-wire.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-sdk",
+    "schema": "PluginManifest",
+    "file": "unknown-sdk.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-required-capability",
+    "schema": "PluginManifest",
+    "file": "unknown-required-capability.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-optional-capability",
+    "schema": "PluginManifest",
+    "file": "unknown-optional-capability.txt",
+    "accepted": true,
+    "stage": "negotiate"
+  },
+  {
+    "id": "unknown-capability-version",
+    "schema": "PluginManifest",
+    "file": "unknown-capability-version.txt",
+    "accepted": false,
+    "stage": "negotiate"
+  },
+  {
+    "id": "trusted-field",
+    "schema": "PluginManifest",
+    "file": "trusted-field.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "undeclared-command",
+    "schema": "PluginManifest",
+    "file": "undeclared-command.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "duplicate-contribution",
+    "schema": "PluginManifest",
+    "file": "duplicate-contribution.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "trusted-extension",
+    "schema": "PluginManifest",
+    "file": "trusted-extension.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "valid-host-request",
+    "schema": "HostRequest",
+    "file": "valid-host-request.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "unknown-operation",
+    "schema": "HostRequest",
+    "file": "unknown-operation.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "spoofed-identity",
+    "schema": "HostRequest",
+    "file": "spoofed-identity.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "valid-response",
+    "schema": "HostResponse",
+    "file": "valid-response.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "mismatched-response",
+    "schema": "HostResponse",
+    "file": "mismatched-response.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "valid-task",
+    "schema": "PluginTask",
+    "file": "valid-task.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "invalid-task",
+    "schema": "PluginTask",
+    "file": "invalid-task.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "valid-event",
+    "schema": "HostEvent",
+    "file": "valid-event.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "valid-ui",
+    "schema": "UiDocument",
+    "file": "valid-ui.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "code-ui",
+    "schema": "UiDocument",
+    "file": "code-ui.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "event-missing-task",
+    "schema": "HostEvent",
+    "file": "event-missing-task.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "event-wrong-payload",
+    "schema": "HostEvent",
+    "file": "event-wrong-payload.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "event-invalid-task",
+    "schema": "HostEvent",
+    "file": "event-invalid-task.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "valid-ui-form",
+    "schema": "UiDocument",
+    "file": "valid-ui-form.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "invalid-ui-password",
+    "schema": "UiDocument",
+    "file": "invalid-ui-password.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "invalid-ui-form-fields",
+    "schema": "UiDocument",
+    "file": "invalid-ui-form-fields.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "valid-ui-form-event",
+    "schema": "UiEvent",
+    "file": "valid-ui-form-event.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-valid",
+    "schema": "PluginManifest",
+    "file": "source-auth-valid.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-optional",
+    "schema": "PluginManifest",
+    "file": "source-auth-optional.txt",
+    "accepted": true,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-browser",
+    "schema": "PluginManifest",
+    "file": "source-auth-browser.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-duplicate-method",
+    "schema": "PluginManifest",
+    "file": "source-auth-duplicate-method.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-no-method",
+    "schema": "PluginManifest",
+    "file": "source-auth-no-method.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-missing-field",
+    "schema": "PluginManifest",
+    "file": "source-auth-missing-field.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-duplicate-field",
+    "schema": "PluginManifest",
+    "file": "source-auth-duplicate-field.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-code",
+    "schema": "PluginManifest",
+    "file": "source-auth-code.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-missing-capability",
+    "schema": "PluginManifest",
+    "file": "source-auth-missing-capability.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-insecure-url",
+    "schema": "PluginManifest",
+    "file": "source-auth-insecure-url.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-url-credentials",
+    "schema": "PluginManifest",
+    "file": "source-auth-url-credentials.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-unsupported-version",
+    "schema": "PluginManifest",
+    "file": "source-auth-unsupported-version.txt",
+    "accepted": false,
+    "stage": "schema"
+  },
+  {
+    "id": "source-auth-unknown-provider",
+    "schema": "PluginManifest",
+    "file": "source-auth-unknown-provider.txt",
+    "accepted": false,
+    "stage": "schema"
+  }
+]

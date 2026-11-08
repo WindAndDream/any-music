@@ -1,0 +1,369 @@
+ M .agents/skills/any-music-ui-delivery/SKILL.md
+ M apps/tauri/package.json
+ M apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobileDocumentAccess.kt
+ M apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobilePlatformPlugin.kt
+ M apps/tauri/src-tauri/permissions/mobile.toml
+ M apps/tauri/src-tauri/permissions/product.toml
+ M apps/tauri/src-tauri/src/ipc.rs
+ M apps/tauri/src-tauri/src/lib.rs
+ M apps/tauri/src-tauri/src/state.rs
+ M apps/tauri/src-tauri/src/system.rs
+ M apps/tauri/src-tauri/src/system/android.rs
+ M apps/tauri/src-tauri/src/system/download.rs
+ M apps/tauri/src-tauri/src/system/lifecycle.rs
+ M apps/tauri/src/App.vue
+ M apps/tauri/src/components/accounts/AccountConnectionForm.vue
+ M apps/tauri/src/components/accounts/AccountCreateForm.vue
+ M apps/tauri/src/components/accounts/AccountNameForm.vue
+ M apps/tauri/src/components/accounts/AccountSettingsPanel.vue
+ M apps/tauri/src/components/accounts/ProxySettingsPanel.vue
+ M apps/tauri/src/main.ts
+ M apps/tauri/src/platform/configure-tauri-workbench.ts
+ M apps/tauri/src/styles/app.scss
+ M apps/tauri/src/vite-env.d.ts
+ M apps/tauri/test/components/accounts/ProxySettingsPanel.test.ts
+ M apps/tauri/test/platform/configure-tauri-workbench.test.ts
+ M apps/userscript/package.json
+ M apps/userscript/src/bootstrap-userscript-app.ts
+ M apps/userscript/src/platform/configure-userscript-workbench.ts
+ M apps/userscript/src/platform/dom/shadow-style-registry.ts
+ M apps/userscript/test/platform/dom/shadow-style-registry.test.ts
+ M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json
+ M docs/en/README.md
+ M docs/en/cross-platform/README.md
+ M docs/en/cross-platform/architecture/plugin-data-ownership.md
+ M docs/en/cross-platform/architecture/plugin-system-redesign-plan.md
+ M docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md
+ M docs/en/cross-platform/architecture/project-architecture.md
+ M docs/en/cross-platform/architecture/reusable-package-boundaries.md
+ M docs/en/cross-platform/features/cross-platform-ui-and-interaction.md
+ M docs/en/cross-platform/features/local-library-and-custom-plugins.md
+ M docs/en/desktop/README.md
+ M docs/en/desktop/backend-engineering.md
+ M docs/en/desktop/development.md
+ M docs/en/desktop/douyin-background-login-experiment.md
+ M docs/en/desktop/runtime-architecture.md
+ M docs/en/desktop/rust-workspace-plan.md
+ M docs/zh-cn/文档索引.md
+ M docs/zh-cn/桌面端/Rust工作区规划.md
+ M docs/zh-cn/桌面端/后端工程规范.md
+ M docs/zh-cn/桌面端/开发规范.md
+ M docs/zh-cn/桌面端/抖音后台登录试验.md
+ M docs/zh-cn/桌面端/文档索引.md
+ M docs/zh-cn/桌面端/运行端架构.md
+ M docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md
+ M docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md
+ M docs/zh-cn/跨平台/文档索引.md
+ M docs/zh-cn/跨平台/架构/可复用包边界.md
+ M docs/zh-cn/跨平台/架构/插件数据归属.md
+ M docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md
+ M docs/zh-cn/跨平台/架构/插件系统重构计划.md
+ M docs/zh-cn/跨平台/架构/项目架构.md
+ M packages/core/src/download/download-history.ts
+ M packages/core/src/index.ts
+ M packages/core/test/download/download-history.test.ts
+ M packages/music-workbench/AGENTS.md
+ M packages/music-workbench/package.json
+ M packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue
+ D packages/music-workbench/src/components/music-sources/PlayerBar.vue
+ D packages/music-workbench/src/components/music-sources/PlayerControlActions.vue
+ D packages/music-workbench/src/components/music-sources/PlayerSettingsDialog.vue
+ D packages/music-workbench/src/components/music-sources/player-control-options.ts
+ M packages/music-workbench/src/components/settings/NetworkProxySettingsForm.vue
+ M packages/music-workbench/src/features/audio-export/download-audio.ts
+ M packages/music-workbench/src/features/downloads/download-archive.ts
+ M packages/music-workbench/src/features/downloads/use-download-manager.ts
+ M packages/music-workbench/src/features/downloads/use-player-download.ts
+ M packages/music-workbench/src/features/library/use-track-collection-view.ts
+ M packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts
+ M packages/music-workbench/src/features/player/use-audio-player.ts
+ M packages/music-workbench/src/features/plugins/use-music-creation.ts
+ M packages/music-workbench/src/features/plugins/use-tag-management.ts
+ M packages/music-workbench/src/features/plugins/use-workbench-modules.ts
+ M packages/music-workbench/src/features/plugins/use-workbench-theme.ts
+ M packages/music-workbench/src/features/settings/use-network-proxy-settings-form.ts
+ M packages/music-workbench/src/index.ts
+ M packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts
+ M packages/music-workbench/src/plugin-adapters/workbench-modules.ts
+ M packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts
+ M packages/music-workbench/src/plugin-adapters/workbench-view-components.ts
+ M packages/music-workbench/src/runtime/workbench-runtime.ts
+ M packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts
+ D packages/music-workbench/test/components/music-sources/PlayerBar.test.ts
+ D packages/music-workbench/test/components/music-sources/PlayerControlActions.test.ts
+ D packages/music-workbench/test/components/music-sources/PlayerSettingsDialog.test.ts
+ M packages/music-workbench/test/features/downloads/use-download-manager.test.ts
+ M packages/music-workbench/test/features/downloads/use-player-download.test.ts
+ M packages/music-workbench/test/features/plugins/use-workbench-modules.test.ts
+ M packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts
+ M packages/music-workbench/test/fixtures/storage/repositories.json
+ M packages/music-workbench/test/plugin-adapters/workbench-modules.test.ts
+ M packages/music-workbench/test/plugin-adapters/workbench-ui.test.ts
+ M packages/music-workbench/test/storage/product-generation-store.test.ts
+ M packages/music-workbench/test/storage/storage-repository-keys.test.ts
+ M packages/music-workbench/vitest.config.ts
+ M packages/plugin-music-creation/AGENTS.md
+ M packages/plugin-music-creation/src/creation-session.ts
+ M packages/plugin-music-creation/src/index.ts
+ M packages/plugin-music-creation/src/vue/components/MaterialCollectionToolbar.vue
+ M packages/plugin-music-creation/src/vue/components/MaterialTrackRow.vue
+ M packages/plugin-music-creation/src/vue/components/SegmentComposer.vue
+ M packages/plugin-music-creation/src/vue/components/SegmentTimeline.vue
+ M packages/plugin-music-creation/src/vue/music-creation.scss
+ M packages/plugin-music-creation/src/vue/use-material-library-filters.ts
+ M packages/plugin-music-creation/src/vue/use-segment-composer.ts
+ M packages/plugin-music-creation/test/creation-session.test.ts
+ M packages/plugin-music-creation/test/vue/use-segment-composer.test.ts
+ M packages/plugin-tag-management/AGENTS.md
+ M packages/plugin-tag-management/src/tag-session.ts
+ M packages/plugin-tag-management/src/vue/components/TagMaintenanceToolbar.vue
+ M packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue
+ M packages/plugin-tag-management/src/vue/components/TagPlatformDrawer.vue
+ M packages/plugin-tag-management/src/vue/components/TagTrackCard.vue
+ M packages/plugin-tag-management/src/vue/tag-management.scss
+ M packages/plugin-tag-management/src/vue/use-tag-management-filters.ts
+ M packages/plugin-tag-management/test/vue/use-tag-management-filters.test.ts
+ M packages/plugin-ui-vue/AGENTS.md
+ M packages/plugin-ui-vue/package.json
+ M packages/plugin-ui-vue/src/trusted/index.ts
+ M packages/plugin-ui-vue/src/trusted/theme-contracts.ts
+ M packages/plugin-ui-vue/src/trusted/theme-controller.ts
+ M packages/plugin-ui-vue/src/trusted/theme-directory.ts
+ M packages/plugin-ui-vue/src/trusted/theme-resources.ts
+ M packages/plugin-ui-vue/test/trusted/presentation.test.ts
+ M packages/plugin-ui-vue/test/trusted/theme-controller.test.ts
+ M packages/plugin-ui-vue/test/trusted/theme-resources.test.ts
+ M packages/ui/AGENTS.md
+ M packages/ui/package.json
+ D packages/ui/src/components/downloads/ActiveDownloadPanel.vue
+ D packages/ui/src/components/downloads/DownloadHistoryBatchCard.vue
+ D packages/ui/src/components/downloads/DownloadHistoryPanel.vue
+ D packages/ui/src/components/downloads/DownloadHistoryTrackItem.vue
+ D packages/ui/src/components/downloads/download-history-presentation.ts
+ D packages/ui/src/components/library/CustomTrackDrawer.vue
+ D packages/ui/src/components/library/CustomTrackPanel.vue
+ D packages/ui/src/components/library/FavoriteFilterBar.vue
+ D packages/ui/src/components/library/FavoritePanel.vue
+ D packages/ui/src/components/library/FavoritePlatformDrawer.vue
+ D packages/ui/src/components/library/FavoriteTrackRow.vue
+ D packages/ui/src/components/library/HistoryOperatorPanel.vue
+ D packages/ui/src/components/library/HistoryPanel.vue
+ D packages/ui/src/components/library/PlaylistAddToolbar.vue
+ D packages/ui/src/components/library/PlaylistCard.vue
+ D packages/ui/src/components/library/PlaylistDrawer.vue
+ D packages/ui/src/components/library/PlaylistFilterSheet.vue
+ D packages/ui/src/components/library/PlaylistPanel.vue
+ D packages/ui/src/components/music-sources/CatalogContextDetailsDialog.vue
+ D packages/ui/src/components/music-sources/CatalogContextTitle.vue
+ D packages/ui/src/components/music-sources/CatalogDisplayModeDialog.vue
+ D packages/ui/src/components/music-sources/CatalogDrawer.vue
+ D packages/ui/src/components/music-sources/CatalogDrawerActionsDialog.vue
+ D packages/ui/src/components/music-sources/CatalogDrawerCard.vue
+ D packages/ui/src/components/music-sources/CatalogDrawerDetails.vue
+ D packages/ui/src/components/music-sources/CatalogDrawerList.vue
+ D packages/ui/src/components/music-sources/CatalogDrawerListHeader.vue
+ D packages/ui/src/components/music-sources/CatalogDrawerOperatorPanel.vue
+ D packages/ui/src/components/music-sources/CatalogErrorDetails.vue
+ D packages/ui/src/components/music-sources/CatalogErrorNotice.vue
+ D packages/ui/src/components/music-sources/CatalogFilterCalendar.vue
+ D packages/ui/src/components/music-sources/CatalogFilterDateControls.vue
+ D packages/ui/src/components/music-sources/CatalogFilterDateRange.vue
+ D packages/ui/src/components/music-sources/CatalogFilterHistoryList.vue
+ D packages/ui/src/components/music-sources/CatalogFilterHistoryRegionDialog.vue
+ D packages/ui/src/components/music-sources/CatalogFilterHistoryRegionSettings.vue
+ D packages/ui/src/components/music-sources/CatalogFilterHistorySettings.vue
+ D packages/ui/src/components/music-sources/CatalogFilterPreview.vue
+ D packages/ui/src/components/music-sources/CatalogFilterRangeList.vue
+ D packages/ui/src/components/music-sources/CatalogHeadingHandle.vue
+ D packages/ui/src/components/music-sources/CatalogNamingFilterControls.vue
+ D packages/ui/src/components/music-sources/CatalogOperatorActions.vue
+ D packages/ui/src/components/music-sources/CatalogPlaylistPickerDialog.vue
+ D packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue
+ D packages/ui/src/components/music-sources/CatalogTrackFilterEditor.vue
+ D packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue
+ D packages/ui/src/components/music-sources/CatalogTrackFilterSummary.vue
+ D packages/ui/src/components/music-sources/CatalogTrackOperatorPanel.vue
+ D packages/ui/src/components/music-sources/GlobalSettingsPanel.vue
+ D packages/ui/src/components/music-sources/MusicSourcePickerButton.vue
+ D packages/ui/src/components/music-sources/MusicSourcePickerDialog.vue
+ D packages/ui/src/components/music-sources/QueuePanel.vue
+ D packages/ui/src/components/music-sources/QueuePlatformGroup.vue
+ D packages/ui/src/components/music-sources/QueuePlatformHeading.vue
+ D packages/ui/src/components/music-sources/QueueTrackActionsDialog.vue
+ D packages/ui/src/components/music-sources/QueueTrackGrid.vue
+ D packages/ui/src/components/music-sources/QueueTrackRow.vue
+ D packages/ui/src/components/music-sources/QueueViewControls.vue
+ D packages/ui/src/components/music-sources/SourceToolbar.vue
+ D packages/ui/src/components/music-sources/TrackActionButton.vue
+ D packages/ui/src/components/music-sources/TrackList.vue
+ M packages/ui/src/components/music-sources/catalog-track-filter-presentation.ts
+ M packages/ui/src/components/plugins/NativePluginAuthorityPanel.vue
+ M packages/ui/src/components/plugins/PluginPackagePreview.vue
+ D packages/ui/src/components/product-workbench/AppShellPreferenceDialog.vue
+ D packages/ui/src/components/product-workbench/AppShellPreferencesPanel.vue
+ D packages/ui/src/components/product-workbench/NavigationOrderList.vue
+ D packages/ui/src/components/product-workbench/ProductTopBar.vue
+ D packages/ui/src/components/product-workbench/ProductWorkbench.vue
+ D packages/ui/src/components/product-workbench/app-shell-preference-options.ts
+ D packages/ui/src/components/settings/CreatorProfileSettingsForm.vue
+ D packages/ui/src/components/settings/MusicSourceSettings.vue
+ M packages/ui/src/components/settings/ProxyCreateForm.vue
+ M packages/ui/src/components/settings/ProxyManagementList.vue
+ D packages/ui/src/components/settings/SettingsNavigation.vue
+ M packages/ui/src/components/settings/SettingsNumberForm.vue
+ M packages/ui/src/components/tracks/TrackNameEditor.vue
+ D packages/ui/src/composables/downloads/download-history-view.ts
+ M packages/ui/src/composables/filters/use-filter-draft.ts
+ M packages/ui/src/composables/library/use-custom-track-panel.ts
+ M packages/ui/src/composables/library/use-playlist-filters.ts
+ M packages/ui/src/composables/library/use-playlist-panel.ts
+ M packages/ui/src/composables/music-sources/catalog-filter-history-settings.ts
+ M packages/ui/src/composables/music-sources/use-catalog-drawer-list.ts
+ M packages/ui/src/composables/music-sources/use-catalog-filter-history-settings.ts
+ M packages/ui/src/composables/music-sources/use-catalog-list-controls.ts
+ M packages/ui/src/composables/music-sources/use-catalog-track-filter-editor.ts
+ M packages/ui/src/composables/music-sources/use-catalog-track-filters.ts
+ M packages/ui/src/composables/music-sources/use-queue-list-controls.ts
+ M packages/ui/src/composables/music-sources/use-scroll-page-loader.ts
+ M packages/ui/src/composables/music-sources/use-track-batch-actions.ts
+ M packages/ui/src/composables/use-collection-navigation.ts
+ M packages/ui/src/composables/use-global-settings.ts
+ M packages/ui/src/composables/use-settings-navigation.ts
+ M packages/ui/src/index.ts
+ M packages/ui/src/product/action-feedback.ts
+ M packages/ui/src/product/app-shell-preferences.ts
+ M packages/ui/src/product/filter-history-settings.ts
+ M packages/ui/src/product/music-creation.ts
+ M packages/ui/src/product/product-navigation.ts
+ M packages/ui/src/product/tag-management.ts
+ M packages/ui/src/product/ui-presentation.ts
+ D packages/ui/src/styles/_downloads.scss
+ M packages/ui/src/styles/_feature-panels.scss
+ M packages/ui/src/styles/_product-workbench.scss
+ M packages/ui/src/styles/_settings.scss
+ M packages/ui/src/styles/index.scss
+ D packages/ui/test/components/library/CustomTrackPanel.test.ts
+ D packages/ui/test/components/library/FavoritePanel.test.ts
+ D packages/ui/test/components/library/PlaylistAddToolbar.test.ts
+ D packages/ui/test/components/music-sources/CatalogContextDetailsDialog.test.ts
+ D packages/ui/test/components/music-sources/CatalogContextTitle.test.ts
+ D packages/ui/test/components/music-sources/CatalogDrawer.activity.test.ts
+ D packages/ui/test/components/music-sources/CatalogDrawer.test.ts
+ D packages/ui/test/components/music-sources/CatalogDrawerActionsDialog.test.ts
+ D packages/ui/test/components/music-sources/CatalogDrawerCard.test.ts
+ D packages/ui/test/components/music-sources/CatalogDrawerList.test.ts
+ D packages/ui/test/components/music-sources/CatalogErrorDetails.test.ts
+ D packages/ui/test/components/music-sources/CatalogErrorNotice.test.ts
+ D packages/ui/test/components/music-sources/CatalogFilterHistorySettings.test.ts
+ D packages/ui/test/components/music-sources/CatalogHeadingHandle.test.ts
+ D packages/ui/test/components/music-sources/CatalogTrackActionsDialog.test.ts
+ D packages/ui/test/components/music-sources/CatalogTrackFilterEditor.test.ts
+ D packages/ui/test/components/music-sources/CatalogTrackFilterPanel.test.ts
+ D packages/ui/test/components/music-sources/CatalogTrackOperatorPanel.test.ts
+ D packages/ui/test/components/music-sources/GlobalSettingsPanel.test.ts
+ D packages/ui/test/components/music-sources/MusicSourcePickerDialog.test.ts
+ D packages/ui/test/components/music-sources/QueuePanel.interactions.test.ts
+ D packages/ui/test/components/music-sources/QueuePanel.test.ts
+ D packages/ui/test/components/music-sources/QueuePlatformGroup.test.ts
+ D packages/ui/test/components/music-sources/QueueTrackGrid.test.ts
+ D packages/ui/test/components/music-sources/QueueTrackRow.test.ts
+ D packages/ui/test/components/music-sources/catalog-selection-markup.test.ts
+ M packages/ui/test/components/plugins/PluginPackagePreview.test.ts
+ D packages/ui/test/components/product-workbench/AppShellPreferencesPanel.test.ts
+ D packages/ui/test/components/product-workbench/NavigationOrderList.test.ts
+ D packages/ui/test/components/product-workbench/ProductWorkbench.layout.test.ts
+ D packages/ui/test/components/product-workbench/ProductWorkbench.test.ts
+ D packages/ui/test/composables/downloads/download-history-view.test.ts
+ M packages/ui/test/composables/music-sources/use-scroll-page-loader.test.ts
+ M packages/ui/test/composables/music-sources/use-track-batch-actions.test.ts
+ M packages/ui/test/composables/use-back-navigation.test.ts
+ M packages/ui/test/product/app-shell-preferences.test.ts
+ M pnpm-lock.yaml
+ M scripts/check-mobile-boundaries.mjs
+ M scripts/check-package-boundaries.mjs
+ M scripts/check-plugin-isolation.mjs
+ M scripts/test/check-mobile-boundaries.test.mjs
+ M scripts/test/check-package-boundaries.test.mjs
+ M scripts/test/check-plugin-isolation.test.mjs
+?? apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobileDownloadDirectory.kt
+?? apps/tauri/src-tauri/src/system/download_directory.rs
+?? apps/tauri/src-tauri/src/system/download_scheduler.rs
+?? apps/tauri/src/components/downloads/
+?? apps/tauri/src/features/downloads/
+?? apps/tauri/src/platform/native-download-scheduler.ts
+?? apps/tauri/src/platform/verify-native-download.ts
+?? apps/tauri/test/features/downloads/
+?? apps/tauri/test/platform/native-download-scheduler.test.ts
+?? apps/tauri/test/platform/verify-native-download.test.ts
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final-baseline.json
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.en.md
+?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.zh-cn.md
+?? docs/baselines/theme-ui-migration/
+?? docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md
+?? docs/en/cross-platform/architecture/independent-theme-ui-t00-baseline.md
+?? docs/zh-cn/跨平台/架构/独立主题UI迁移T00基线.md
+?? docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md
+?? packages/music-workbench/src/components/music-sources/MusicWorkbenchPresentation.vue
+?? packages/music-workbench/src/features/downloads/download-scheduler.ts
+?? packages/music-workbench/src/features/player/player-presentation.ts
+?? packages/music-workbench/src/features/plugins/use-workbench-root-theme.ts
+?? packages/music-workbench/src/features/plugins/use-workbench-theme-session.ts
+?? packages/music-workbench/src/features/workbench/
+?? packages/music-workbench/src/theme.ts
+?? packages/music-workbench/test/features/player/player-presentation.test.ts
+?? packages/music-workbench/test/features/plugins/use-workbench-root-theme.test.ts
+?? packages/music-workbench/test/features/workbench/
+?? packages/music-workbench/test/fixtures/theme-features.ts
+?? packages/music-workbench/test/helpers/
+?? packages/plugin-music-creation/src/vue/collection-toolbar-state.ts
+?? packages/plugin-music-creation/src/vue/material-range-state.ts
+?? packages/plugin-music-creation/src/vue/timeline-state.ts
+?? packages/plugin-tag-management/src/vue/tag-maintenance-state.ts
+?? packages/plugin-tag-management/src/vue/tag-track-state.ts
+?? packages/plugin-ui-vue/src/trusted/ThemeHost.vue
+?? packages/plugin-ui-vue/src/trusted/ThemeHostSurface.vue
+?? packages/plugin-ui-vue/src/trusted/ThemeRootBoundary.vue
+?? packages/plugin-ui-vue/src/trusted/themes/index.ts
+?? packages/plugin-ui-vue/test/trusted/ThemeHost.test.ts
+?? packages/plugin-ui-vue/test/trusted/generic-theme-host.test.ts
+?? packages/plugin-ui-vue/test/trusted/root-theme-controller.test.ts
+?? packages/plugin-ui-vue/test/trusted/root-theme-fixture.ts
+?? packages/plugin-ui-vue/test/trusted/theme-directory.test.ts
+?? packages/theme-default/
+?? packages/theme-studio/
+?? packages/ui/src/catalog.ts
+?? packages/ui/src/components/plugins/NativePluginCommandResult.vue
+?? packages/ui/src/components/plugins/NativePluginInstallList.vue
+?? packages/ui/src/components/plugins/PluginPackageConsent.vue
+?? packages/ui/src/components/plugins/PluginSettingsSection.vue
+?? packages/ui/src/composables/downloads/use-download-list-controls.ts
+?? packages/ui/src/composables/library/playlist-editing-state.ts
+?? packages/ui/src/composables/music-sources/catalog-filter-editing-state.ts
+?? packages/ui/src/composables/tracks/track-action-editing-state.ts
+?? packages/ui/src/composables/use-editing-session.ts
+?? packages/ui/src/library.ts
+?? packages/ui/src/product/catalog-presentation.ts
+?? packages/ui/src/product/library-presentation.ts
+?? packages/ui/src/product/ordinary-overlays.ts
+?? packages/ui/src/product/settings-presentation.ts
+?? packages/ui/src/product/specialist-presentation.ts
+?? packages/ui/src/product/theme-contracts.ts
+?? packages/ui/src/product/theme-features.ts
+?? packages/ui/src/product/theme-metadata.ts
+?? packages/ui/src/product/workbench-chrome.ts
+?? packages/ui/src/theme.ts
+?? packages/ui/test/components/plugins/NativePluginAuthorityPanel.test.ts
+?? packages/ui/test/composables/downloads/use-download-list-controls.test.ts
+?? packages/ui/test/composables/use-editing-session.test.ts
+?? packages/ui/test/composables/use-global-settings.test.ts
+?? packages/ui/test/fixtures/
+?? packages/ui/test/product/theme-contracts.test.ts
+?? packages/ui/test/product/theme-contracts.types.ts
+?? packages/ui/test/product/theme-metadata.test.ts
+?? scripts/test/helpers/

@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-05",
+  "runtimeScope": "shared; C00 corrective changes and partial live inspection, no production admission",
+  "logDirectory": "logs/2026-11-05-virtual-list-implementation",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "result": "passed",
+      "log": "c00-live-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "log": "c00-live-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed",
+      "log": "c00-live-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "c00-live-format-check-final.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed",
+      "log": "c00-live-build.log"
+    }
+  ],
+  "changes": [
+    {
+      "scope": "P11 root/ready handoff",
+      "regressions": "Two stable-cell cases: root replacement and same-turn hidden/return. Re-register after handoff; preserve stale helper invalidation."
+    },
+    {
+      "scope": "P14 overview continuity",
+      "regressions": "Two natural-height cases (120/280px), content-generation invalidation during pending item900/offset17 restore; suspend competing anchor until finally."
+    },
+    {
+      "scope": "P09 CSS geometry",
+      "regressions": "Parser shrink/expand and component 5→3→1→2→5; controlled zero implicit tracks, CSS remains authority, no child enumeration/probe."
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+      "sha256": "fcf71ec3d54a8428c06bd00b9c1ef3f95f8752283629f221dca1bc21554fab81"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "b5d6f846f29ee2556f9b0ebc69dbe1756ca24bbfeb376ea41aee2511bf6c5538"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-grid-css-layout.ts",
+      "sha256": "b1c7d2515b18c50d26143f6c9d19471f2c61905e078e84bf508dd397f6249406"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTrackCardGrid.test.ts",
+      "sha256": "fae2420f721c3bce250e8f7fa1773935b2586c4c6ebe80119d406761d50d46fc"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-grid-css-layout.test.ts",
+      "sha256": "0489530e1e9578486b15be4e76cb3937c97606d0f406e6891bff3c6152974270"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue",
+      "sha256": "9773a2382907ecba4997a12e017643a02f83e9ee282fc40e23deec8236d78ee4"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/VirtualQueuePlatformGrid.test.ts",
+      "sha256": "106e0c196d8a86e8c986b89c5afb3d6bd153003013d4885e2410019d2ba0fe7c"
+    }
+  ],
+  "review": "Independent subagent audit and cross-review; main integration and runtime checks. Preserve all initial dirty/untracked work. No native production source changes, commit or push.",
+  "admission": "C00 remains open due observed native Find/text-selection differences and remaining real-runtime gates; O00/C01 not started."
+}

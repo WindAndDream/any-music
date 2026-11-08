@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-19T11:08:19.763Z",
+  "os": "windows",
+  "arch": "x86_64",
+  "osBuild": "10.0.26200",
+  "webview": "155.0.4283.62",
+  "resources": {
+    "launcher.js": "add9b738a395a223aa60a409ddbc24c0a4863a0e66e30057610056278d0ed731",
+    "worker.js": "cb62f7399919c1ff1a26b7cb16a4e1489a6314b268559adfc09050cf64460353",
+    "nativeHost": "227a4b527096c0d5eefcb24dc7e677b88a50a01d8e2976683a7fbf17ec074c4e"
+  },
+  "profileHash": "f238d186b463b5a4db3f0f3672709ce5fb2ea230a09576237692e04db82b1fde",
+  "accepted": true,
+  "scope": "S15 Windows catalog/command delivery; minimum VM profile",
+  "evidence": "desktop-acceptance.json",
+  "unknownOrChangedTargets": "closed"
+}

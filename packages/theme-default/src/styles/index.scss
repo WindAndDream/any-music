@@ -1,0 +1,215 @@
+@use './foundation';
+@use './specialists';
+@use './tags';
+@use './plugins';
+@use './catalog';
+@use './library';
+
+// Classic presentation; tokens, resets and host controls remain in UI.
+:where(.am-theme-default) {
+  // 跨端产品工作台只负责布局契约；覆盖宿主页还是嵌入原生 WebView 由 presentation 决定。
+  &.product-workbench {
+    --am-workbench-inline-inset: 0px;
+    position: relative;
+    inline-size: 100%;
+    block-size: 100%;
+    min-block-size: 0;
+  }
+
+  &.product-workbench--overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .music-app-shell,
+  .product-reopen {
+    pointer-events: auto;
+  }
+
+  // Specialist controls share the content width, including pages without a catalog wrapper.
+  &.product-workbench .music-app-shell .music-app-shell__content {
+    container-name: am-content am-workbench;
+  }
+
+  @media (max-width: 768px) {
+    .music-app-shell .am-workspace-surface {
+      // Playlist actions start at the collection surface inset, without another toolbar inset.
+      :is(
+        .catalog-drawers__header,
+        .queue-view-controls,
+        .download-collection__toolbar,
+        .classic-plugins__toolbar,
+        .custom-tracks__toolbar
+      ) {
+        padding-block-start: 0;
+      }
+
+      // These pages have no collection frame; reproduce its outer and inner top spacing.
+      > :is(.custom-tracks, .composer) {
+        padding-block-start: calc(
+          clamp(var(--am-space-4), 2.2cqi, var(--am-space-7)) + var(--am-space-4)
+        );
+      }
+    }
+  }
+
+  .product-reopen {
+    position: fixed;
+    inset-block-start: 50%;
+    inset-inline-end: var(--am-space-2);
+    display: grid;
+    inline-size: 48px;
+    block-size: 48px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--am-color-primary);
+    border-radius: var(--am-radius-card);
+    background: var(--am-color-primary);
+    box-shadow: 0 10px 30px var(--am-color-primary-shadow);
+    color: var(--am-color-on-primary);
+    cursor: pointer;
+    transform: translateY(-50%);
+  }
+
+  @supports (border-color: color-mix(in srgb, white 50%, transparent)) {
+    .product-reopen {
+      border-color: color-mix(in srgb, var(--am-color-primary) 78%, white);
+    }
+  }
+
+  .product-sidebar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    block-size: 100%;
+    min-block-size: 0;
+  }
+
+  .product-sidebar__brand {
+    /* 固定图标列和单行文字，收起时不改变品牌行高度或重新居中图标。 */
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    min-block-size: var(--am-size-top-bar);
+    align-items: center;
+    gap: var(--am-space-3);
+    padding: var(--am-space-3);
+    border-block-end: 1px solid var(--am-color-border);
+  }
+
+  .product-sidebar__mark {
+    display: grid;
+    inline-size: 44px;
+    block-size: 44px;
+    place-items: center;
+    border-radius: var(--am-radius-card);
+    background: var(--am-color-brand);
+    box-shadow: 0 8px 22px var(--am-color-primary-shadow);
+    color: var(--am-color-on-brand);
+  }
+
+  .product-sidebar__brand-copy {
+    display: grid;
+    min-inline-size: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .product-sidebar__brand-copy strong {
+    font-size: var(--am-font-size-md);
+    letter-spacing: -0.02em;
+  }
+
+  .product-sidebar__brand-copy small {
+    overflow: hidden;
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .product-sidebar > .navigation-rail {
+    min-block-size: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .product-sidebar__footer {
+    display: grid;
+    gap: var(--am-space-1);
+    padding: var(--am-space-2);
+    border-block-start: 1px solid var(--am-color-border);
+  }
+
+  .product-sidebar__footer button {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    min-inline-size: 0;
+    min-block-size: 44px;
+    align-items: center;
+    gap: var(--am-space-2);
+    padding: 0 var(--am-space-3) 0 var(--am-space-2);
+    overflow: hidden;
+    border: 0;
+    border-radius: var(--am-radius-control);
+    background: transparent;
+    color: var(--am-color-text-secondary);
+    cursor: pointer;
+    text-align: start;
+    transition:
+      background-color var(--am-motion-fast) var(--am-ease-standard),
+      color var(--am-motion-fast) var(--am-ease-standard),
+      transform var(--am-motion-fast) var(--am-ease-standard);
+  }
+
+  .product-sidebar__footer button > :first-child {
+    justify-self: center;
+  }
+
+  .product-sidebar__footer button:hover {
+    background: var(--am-color-surface-hover);
+    color: var(--am-color-text);
+  }
+
+  .product-sidebar__footer button span {
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .product-sidebar__brand-copy,
+  .product-sidebar__footer button span {
+    transition:
+      opacity var(--am-motion-fast) var(--am-ease-standard),
+      visibility 0s;
+  }
+
+  .music-app-shell--sidebar-collapsed .product-sidebar__brand-copy,
+  .music-app-shell--sidebar-collapsed .product-sidebar__footer button span {
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0s, var(--am-motion-fast);
+  }
+
+  .am-launcher-enter-active,
+  .am-launcher-leave-active {
+    transition:
+      opacity var(--am-motion-normal) var(--am-ease-standard),
+      transform var(--am-motion-slow) var(--am-ease-emphasized);
+  }
+
+  .am-launcher-enter-from,
+  .am-launcher-leave-to {
+    opacity: 0;
+    transform: translateX(16px) scale(0.98);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-sidebar__brand-copy,
+    .product-sidebar__footer button span {
+      transition: none;
+    }
+  }
+}

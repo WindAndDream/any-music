@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-evidence",
+  "runtimeScope": "shared",
+  "batchId": "T13-PC-2026-11-01",
+  "date": "2026-11-01",
+  "timezone": "Asia/Shanghai",
+  "status": "windows-recorded-scope-passed-gm-final-repeat-blocked",
+  "overallT13Status": "in-progress",
+  "mobile": "Explicitly deferred by the user; no mobile launch, device acceptance or status closure.",
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "preservedEarlierChanges": true,
+    "commitOrPush": false,
+    "baseCommit": "74aaf93395e4e73b47dbe52405e4f74621b64655",
+    "sourceManifest": "T13/pc-2026-11-01/source-delivered.json",
+    "inputsUnchangedThroughFinalChecks": true
+  },
+  "scope": "Two complete themes on a Windows optimized native application and an installed production Tampermonkey script. Exact artifacts and input classes remain separate.",
+  "environment": {
+    "os": "Windows 11 Pro, 10.0.26200",
+    "chrome": "156.0.8078.76",
+    "tampermonkey": "5.5.0",
+    "nativeOrigin": "http://tauri.localhost/",
+    "installedGmOrigin": "http://127.0.0.1:19430/",
+    "nativePartition": "com.anymusic.t13-pc-20261101",
+    "nativeInputViewport": "1280x851, original 1.75 display scale",
+    "matrixViewports": ["760x900", "1440x900"],
+    "webview": "Edg/156.0.4314.58",
+    "scrollViewport": "950x600 desktop emulation; deviceScaleFactor 1. The keyboard/form cases use the original 1.75 scale."
+  },
+  "artifacts": {
+    "windows": {
+      "path": ".codex-tmp/t13-pc-20261101/windows-delivered.exe",
+      "bytes": 29809152,
+      "sha256": "ddc00964c97b49039eb797fdcff01332747f015f1367909b4a514e646f566fb6",
+      "build": "Optimized x86_64-pc-windows-msvc; --locked --no-default-features; tauri/custom-protocol; independent application identifier only. The normal production app and its data were left running/untouched.",
+      "sourceFingerprint": "df00a7e7f7d0e22c0d7763ad0a1dfd50c8400d30fcd6d190bb6d2ef0da71405b"
+    },
+    "installedGm": {
+      "path": "apps/userscript/dist/any-music.user.js at installation time",
+      "sha256": "97f6d8fea4a2bbdccf6f5a88c29c036f2a7fc500aabe7eeddd935492ad7b1d84",
+      "manager": "Actual Tampermonkey, loaded from the existing 5.5.0 extension files in a dedicated profile. Production script installed from the bounded localhost artifact server, with no preview GM substitute.",
+      "independentManagerEditorHash": false,
+      "limit": "The served artifact hash and install UI identify the input; the manager editor was not independently hashed. This installed bundle predates the final Studio settings width-container repair."
+    },
+    "latestGm": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 5628056,
+      "sha256": "972bd5d63a25f071ecf69e71871edf2f0576ad3bbdb8c051f2484e888d7d7e56"
+    }
+  },
+  "methods": {
+    "matrix": "Public named theme/navigation/appearance actions, live readonly feature props, deep Shadow DOM geometry and same-reference idle audio sampling. These are DOM/layout samples, not active media or 240 screenshot/input passes.",
+    "nativeInput": "Trusted CDP pointer and keyboard events at original display scale; Enter includes its character event and Shift uses modifier 8. No physical human keyboard/mouse or touch claim.",
+    "scrolling": "36 actual playlists created through the product create action; trusted wheel on native WebView; public theme selection; no spacer or synthetic scrollTop assignment.",
+    "recovery": "Controlled existing modules.openRecovery entry followed by actual Tab and Retry controls; no naturally occurring startup failure claim."
+  },
+  "accepted": {
+    "matrix": {
+      "windows": 120,
+      "installedGmEarlierArtifact": 120,
+      "failed": 0,
+      "evidence": "T13/pc-2026-11-01/matrix.json",
+      "hostIsolation": "The installed GM host retained its one original hostile stylesheet; theme buttons were isolated in Shadow DOM."
+    },
+    "nativeCases": {
+      "count": 6,
+      "failed": 0,
+      "evidence": "T13/pc-2026-11-01/windows-delivered-cases.json",
+      "cases": [
+        {
+          "id": "settings-width-container",
+          "pass": true
+        },
+        {
+          "id": "account-draft-native-keys",
+          "pass": true
+        },
+        {
+          "id": "proxy-draft-and-real-close",
+          "pass": true
+        },
+        {
+          "id": "specialist-drafts",
+          "pass": true
+        },
+        {
+          "id": "protected-interface-surfaces",
+          "pass": true
+        },
+        {
+          "id": "controlled-recovery",
+          "pass": true
+        }
+      ]
+    },
+    "scroll": {
+      "pass": true,
+      "classic": 1200,
+      "studio": 1200,
+      "classicReturn": 1200,
+      "evidence": "T13/pc-2026-11-01/windows-delivered-scroll.json"
+    }
+  },
+  "repairs": [
+    {
+      "id": "PC-F1",
+      "problem": "Theme replacement disposed AccountSettingsPanel, which closed the application-owned account dialog/session. Native account name/connection and proxy drafts were also presentation-owned.",
+      "change": "Only the actual host settings-close/navigation resets native editor cells. Presentation disposal releases its focus-trap contribution. Proxy draft, validation and pending save receipt survive replacement without resubmitting.",
+      "verification": "Native account draft round trip, forward/reverse Tab, native proxy draft round trip and close/reset; lifecycle, ordered connection/name editor and pending-save regression tests."
+    },
+    {
+      "id": "PC-F2",
+      "problem": "Studio settings inherited the 1100px general page breakpoint; the dialog classified itself as narrow and stacked every category above its content.",
+      "change": "Give settings a width container and its own 720px child split breakpoint. Wide desktop dialogs use two columns; a 760px window stacks without horizontal overflow.",
+      "verification": "Final native 1280px two-column and 760px one-column geometry, reviewed before/after screenshots, plus the recorded page/appearance matrix."
+    }
+  ],
+  "checks": [
+    {
+      "command": "pnpm test",
+      "environment": {
+        "RUST_TEST_THREADS": "1"
+      },
+      "exitCode": 0,
+      "log": "T13/pc-2026-11-01/root-test-delivered.txt"
+    },
+    {
+      "command": "pnpm typecheck",
+      "invokedBy": "pnpm build",
+      "environment": {
+        "CARGO_BUILD_TARGET": "x86_64-pc-windows-msvc"
+      },
+      "exitCode": 0,
+      "log": "T13/pc-2026-11-01/root-build-delivered.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "existingWarningsRetained": true,
+      "log": "T13/pc-2026-11-01/root-lint-delivered.txt"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T13/pc-2026-11-01/root-format-delivered.txt"
+    },
+    {
+      "command": "pnpm build",
+      "environment": {
+        "CARGO_BUILD_TARGET": "x86_64-pc-windows-msvc"
+      },
+      "exitCode": 0,
+      "log": "T13/pc-2026-11-01/root-build-delivered.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/components/accounts test/features/accounts",
+      "exitCode": 0,
+      "files": 22,
+      "tests": 203,
+      "log": "T13/pc-2026-11-01/account-tests-final.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-studio test",
+      "exitCode": 0,
+      "files": 9,
+      "tests": 26,
+      "log": "T13/pc-2026-11-01/studio-tests.txt"
+    },
+    {
+      "command": "node node_modules/@tauri-apps/cli/tauri.js build --no-bundle --target x86_64-pc-windows-msvc --config windows-inspection.json -- --locked --no-default-features",
+      "cwd": "apps/tauri",
+      "configOverride": {
+        "identifier": "com.anymusic.t13-pc-20261101"
+      },
+      "exitCode": 0,
+      "log": "T13/pc-2026-11-01/windows-build-final-responsive.txt"
+    }
+  ],
+  "excludedAttempts": [
+    "A parallel root run failed at an optional native resource-cache read. That code has a 100ms hot-path deadline, but the trace did not establish the cause. The exact test passed alone and full root tests passed with RUST_TEST_THREADS=1; no production deadline was relaxed.",
+    "The first GM full matrix awaited animation frames while the dedicated browser was hidden and timed out. Its partial work is excluded; the completed 120-cell matrix is retained.",
+    "GM wheel input acknowledgements timed out/background keyboard samples did not establish the long-scroll case. The later browser restart was automatically rejected; no GM long-scroll pass is inferred.",
+    "Early native input attempts at an emulated display scale, an incomplete Enter event and incorrect Shift modifier are excluded. Final input cases use the original display scale and corrected events.",
+    "Before a material collection exists, Classic intentionally omits title/filter controls; collection creation also resets its filter. Accepted specialist drafts are typed after that explicit setup.",
+    "An intermediate settings layout candidate lacked its own width container. Its narrow sample failed and is excluded; only the delivered artifact has the accepted responsive layout."
+  ],
+  "blockers": [
+    {
+      "action": "Restart dedicated Chrome acceptance browser",
+      "result": "Automatic approval review rejected the restart command with blocked by policy; no more specific reason was provided.",
+      "effect": "Could not finish the final installed-GM repeat after the Studio stylesheet repair. No bypass attempted."
+    },
+    {
+      "action": "Complete OS-native picker/install/consent and physical-input acceptance",
+      "result": "The enabled computer-use inventory exposed no native application control surface. WebView interface observations do not establish OS dialog operations or physical human input.",
+      "effect": "These exits remain open; no successful native save/installation is inferred."
+    }
+  ],
+  "remaining": {
+    "gm": [
+      "Install/revalidate the final production bundle, including the final Studio settings layout, and finish this build's input/scroll/cold-start follow-up.",
+      "Physical human keyboard/mouse/touch, other browser/manager combinations, and unrecorded source/account/entitlement combinations."
+    ],
+    "windows": [
+      "Physical human input; full native system file/directory-picker and install/consent interactions; untested account/permission combinations. Interface rendering and native snapshot reads do not close those operations."
+    ],
+    "sourceAndMedia": "This pass does not repeat authenticated source transport, active playback, downloads, native saves or every source/account combination. Prior R1-R4/native evidence retains its own recorded artifact scope.",
+    "mobile": "Deferred unchanged; Android/iOS exits remain with their existing records."
+  },
+  "cleanup": {
+    "independentProductDataRetained": true,
+    "originalProductDataUntouched": true,
+    "noCredentialEntryOrAccountCreation": true,
+    "noProxySaved": true,
+    "noNativeInstallOrConsentApproval": true,
+    "temporaryNativeProcessClosed": true,
+    "temporaryBrowserProcessesClosed": true,
+    "localAcceptanceServerStopped": true
+  },
+  "screenshots": {
+    "before": {
+      "path": "T13/pc-2026-11-01/studio-settings-before.png",
+      "windowsSha256": "205f0e56f9e3c11fcc7c5de16567a73f32b9bfd83f8dc3b44ab321c8140d5734"
+    },
+    "finalWide": "T13/pc-2026-11-01/studio-settings-wide.png",
+    "finalNarrow": "T13/pc-2026-11-01/studio-settings-narrow.png",
+    "nativeRecovery": "T13/pc-2026-11-01/native-recovery.png",
+    "installedGmEarlier": [
+      "T13/pc-2026-11-01/gm-classic-760.png",
+      "T13/pc-2026-11-01/gm-classic-1440.png"
+    ],
+    "review": "Representative before/after native settings, native recovery and installed GM screenshots reviewed separately from the 240 DOM matrix cases."
+  },
+  "checkTotals": {
+    "vitestFiles": 355,
+    "vitestTests": 2765,
+    "protocolDifferentialCases": 200
+  },
+  "initialFailureEvidence": "T13/pc-2026-11-01/initial-cache-failure.txt"
+}

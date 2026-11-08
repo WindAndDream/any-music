@@ -1,0 +1,36 @@
+{
+  "sdkVersion": "0.1.0",
+  "manifestVersions": [1],
+  "wireVersions": [1],
+  "runtimeProfileVersions": [1],
+  "contributionVersions": [1],
+  "packageFormatVersions": [1],
+  "dataSchemaVersions": [1],
+  "form": "desktop",
+  "externalPlugins": "sandbox-code",
+  "sandboxAvailable": true,
+  "capabilities": [
+    {
+      "id": "state.read",
+      "versions": [1]
+    },
+    {
+      "id": "state.write",
+      "versions": [1]
+    },
+    {
+      "id": "network.publicHttps",
+      "versions": [1]
+    },
+    {
+      "id": "crypto.sha256",
+      "versions": [1]
+    }
+  ],
+  "extensionPoints": [
+    {
+      "id": "workspace.views",
+      "versions": [1]
+    }
+  ]
+}

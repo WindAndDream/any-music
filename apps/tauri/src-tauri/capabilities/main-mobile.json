@@ -1,0 +1,7 @@
+{
+  "identifier": "main-mobile",
+  "description": "Mobile main view. Device and channel acceptance is pending; no desktop browser, executor or external-plugin authority.",
+  "platforms": ["iOS"],
+  "webviews": ["main"],
+  "permissions": ["core:default", "allow-mobile-commands"]
+}

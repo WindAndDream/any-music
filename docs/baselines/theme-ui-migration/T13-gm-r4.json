@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-evidence",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R4",
+  "date": "2026-10-27",
+  "timezone": "Asia/Shanghai",
+  "status": "passed-for-recorded-preview-browser-input-and-dom-matrix",
+  "overallT13Status": "in-progress",
+  "scope": "Complete-theme page and overlay presentation, professional editing continuity, keyboard/pointer alternatives, focus, meaningful semantic scrolling and Userscript-reachable protected surfaces. Preview, installed GM, DOM-driven sampling and touch-capable emulation remain separate evidence classes.",
+  "dependencies": {
+    "GM-R2": "T13-gm-r2.json",
+    "GM-R3": "T13-gm-r3.json",
+    "coordination": "Independent UI repairs and preview checks ran while R2/R3 owned runtime cases. Installed R4 continued after R3 completed and released the dedicated browser. No R3 CAPTCHA was automated or bypassed."
+  },
+  "environment": {
+    "os": "Windows",
+    "browser": "Chrome 156.0.8078.47",
+    "manager": "Tampermonkey 5.5.0",
+    "installedHost": "http://127.0.0.1:18870/",
+    "hostContract": "Static HTML, one host button and one host stylesheet; no product entry, development GM substitutes or product stylesheet imports.",
+    "preview": "Vite renderer preview on the separately recorded 18766 and 18767 origins; development GM substitutes do not prove GM transport.",
+    "externalPlugins": "none"
+  },
+  "artifacts": {
+    "firstCombinedCandidate": {
+      "sha256": "2cd841733a348a0baf589d11a87b33f260c8522959af87a4233f9b571e5ee080",
+      "bytes": 5023211,
+      "manifest": "T13/gm-r4/production-inputs-first-candidate.json"
+    },
+    "beforeRecoveryRepair": {
+      "sha256": "c944e1c9518b25e193a7aab9ebc35400b604df8970ad7ced4f7ff5906b907134",
+      "bytes": 5024444,
+      "managerSourceIndependentlyMatched": true,
+      "grants": 16,
+      "connectDomains": 15,
+      "developmentScriptsEnabled": false,
+      "evidence": "T13/gm-r4/installed-c944-manager.json",
+      "scope": "Installed ordinary-page, source-guard, system appearance, professional draft and focus/scroll checks; controlled recovery reproduction exposes the repaired defect below."
+    },
+    "final": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "sha256": "3ec503f70b3694fe0170879ebacc76cbb4ccd3666f6b0cd22df64f8ada234d71",
+      "bytes": 5029624,
+      "managerSourceSha256": "3ec503f70b3694fe0170879ebacc76cbb4ccd3666f6b0cd22df64f8ada234d71",
+      "managerSourceBytes": 5029624,
+      "managerDataUnchangedOnUpdate": true,
+      "productionEnabled": true,
+      "developmentScriptsEnabled": false,
+      "grantCount": 16,
+      "connectCount": 15,
+      "inputFiles": 630,
+      "inputManifest": "T13/gm-r4/production-inputs.json",
+      "aggregateSha256": "d020a9b067f2b1f4f951151c5b6a712ee3d08921a7b03cd2b75d4439b3af35f7",
+      "inputsUnchangedDuringFinalGates": true,
+      "evidence": "T13/gm-r4/installed-final-manager.json"
+    },
+    "recoveryCandidate": {
+      "sha256": "ea76bbf97f9e795f8494f2277319fe8fc33c421f36f4029071d3190f3598fc63",
+      "bytes": 5029346,
+      "inputFiles": 630,
+      "managerSourceMatched": true,
+      "managerDataUnchangedOnUpdate": true,
+      "evidence": "T13/gm-r4/installed-ea76-manager.json",
+      "scope": "Recovery repair, 120 live-projection matrix samples, wide/narrow proxy Tab checks and meaningful same-range installed scroll; narrow Classic settings-return defect found during continuation."
+    }
+  },
+  "inputClassification": {
+    "browserInput": "Native browser automation clicks, field filling/selects, Tab/Shift+Tab, Escape and PageDown; CUA preview keyboard/pointer input. This is not physical human keyboard/mouse evidence.",
+    "domDriven": "Read-only deep-Shadow DOM/focus/geometry observations; explicitly labeled public presentation actions for theme/page/color sampling. Final matrix uses live props and two Vue nextTick flushes. Existing host modules.openRecovery() is invoked through the Vue controller prop without persisting a failure.",
+    "touchCapableEmulation": "411x864, mobile/touch viewport, maxTouchPoints=1. An observed automated click emits trusted pointerdown with pointerType=mouse and no touchstart. It is counted as pointer input in a touch-capable viewport, not as a trusted touch gesture.",
+    "physicalKeyboardMouse": false,
+    "physicalTouch": false,
+    "trustedTouchGesture": false
+  },
+  "presentationCoverage": {
+    "pages": [
+      "catalog",
+      "queue",
+      "favorites",
+      "playlists",
+      "custom-tracks",
+      "tags",
+      "composer",
+      "downloads",
+      "history",
+      "plugins"
+    ],
+    "themes": ["default", "studio"],
+    "previewScreenshots": "T13/gm-r4/preview-coverage.json",
+    "previewReview": "32 original screenshots independently checked against visible headings and actual image format/dimensions. Complete page layouts are sampled in both themes across wide/narrow and light/dark views. This is not a screenshot of every Cartesian combination.",
+    "installedDomMatrix": {
+      "samples": 120,
+      "themes": ["default", "studio"],
+      "pages": [
+        "catalog",
+        "queue",
+        "favorites",
+        "playlists",
+        "custom-tracks",
+        "tags",
+        "composer",
+        "downloads",
+        "history",
+        "plugins"
+      ],
+      "viewports": ["411x864 mobile/touch", "1440x900 mobile/touch"],
+      "appearancePreferences": ["light", "dark", "system"],
+      "systemColorSchemeForMatrix": "dark",
+      "separateSystemLightObservation": "EA76 ordinary settings/system-light regression, recorded in installed-ea76-inputs.json",
+      "reducedMotion": true,
+      "method": "Explicitly DOM-driven public presentation actions; two Vue nextTick flushes per observation, live props and computed layout. No painted-frame assertion.",
+      "evidence": [
+        "T13/gm-r4/installed-final-matrix-411.json",
+        "T13/gm-r4/installed-final-matrix-1440.json"
+      ],
+      "assertions": "All 120 match requested/live appearance and resolved DOM attributes, one theme root, one same-reference idle audio, and the sole original host stylesheet.",
+      "limit": "These are DOM/layout observations rather than 120 screenshot or physical-touch passes. Actual reviewed visual screenshots and native-keyboard cases are recorded separately."
+    },
+    "earlierMatrices": {
+      "c944": "The original appearance property was an initial stale projection; each file explicitly documents it. Requested arguments and actual resolved DOM attributes still agree.",
+      "ea76": "120 rendered-frame samples also passed before the narrow-focus repair; kept under installed-ea76-matrix-*."
+    }
+  },
+  "acceptedCases": [
+    {
+      "id": "R4-F1",
+      "behavior": "Protected proxy host field Tab reaches username and Shift+Tab returns to host through nested host Shadow roots. Preview checks include narrow light/dark and wider layouts. The GM host draft is a dummy .invalid hostname; no proxy save, enablement or credential entry is performed in the installed R4 check.",
+      "evidence": [
+        "T13/gm-r4/installed-c944-first-observations.json",
+        "T13/gm-r4/installed-ea76-inputs.json"
+      ]
+    },
+    {
+      "id": "R4-F2",
+      "behavior": "A theme replacement while settings is open preserves the new modal's initial close-button focus. After the leave transition, Escape returns to the new semantic settings opener. Classic's nested theme picker Escape returns to its own opener and leaves the parent settings open. A later 411px Classic return-target failure was repaired and independently rechecked on final 3ec5: after the leaving transition, focus is the visible navigation:open button. The mobile drawer also passes native Enter/Tab/Shift+Tab/Escape.",
+      "evidence": [
+        "T13/gm-r4/installed-c944-first-observations.json",
+        "T13/gm-r4/installed-c944-professional-initial.json",
+        "T13/gm-r4/installed-final-focus.json"
+      ]
+    },
+    {
+      "id": "R4-E1",
+      "behavior": "Native input fills an uncreated collection name, unpublished work title and named material query. Studio-to-classic UI switching retains all three; return through the public host theme action retains all three in Studio. No create/publish/clear/download action is invoked. The original empty-library query-remount defect is separately reproduced/repaired in preview and component tests.",
+      "evidence": [
+        "T13/gm-r4/installed-c944-professional-initial.json",
+        "T13/gm-r4/installed-c944-professional-return.json",
+        "T13/gm-r4/preview-creation-query-fixed.json"
+      ]
+    },
+    {
+      "id": "R4-S1",
+      "behavior": "Twenty-seven playlists created through preview UI form a real long list. Keyboard PageDown reaches 1381.142822265625 CSS px; classic and Studio both restore exactly that offset on a round trip, with a single audio in each sample.",
+      "evidence": "T13/gm-r4/preview-layout-observations.json",
+      "boundary": "Preview storage fixture and browser keyboard input; no GM transport or physical-keyboard claim."
+    },
+    {
+      "id": "R4-S2",
+      "behavior": "Installed Classic at 950x900 reaches 1489.7142333984375 CSS px by native PageDown. Studio's responsive layout has a smaller 274.8571472167969 CSS px scroll range, and restoration clamps to that actual maximum. The target is not falsely reported as preserving an impossible offset.",
+      "evidence": "T13/gm-r4/installed-c944-professional-initial.json"
+    },
+    {
+      "id": "R4-P1",
+      "behavior": "Studio's last enabled source stays checked and disabled with the visible and associated explanation 至少需要保留一个已启用的音乐源。 Source labels measure 44 CSS px. Other sources can still be enabled; all three are restored after this check.",
+      "evidence": [
+        "T13/gm-r4/installed-c944-studio-source-guard.png",
+        "T13/gm-r4/installed-ea76-additional-inputs.json"
+      ],
+      "observationBoundary": "The source checkbox checked/disabled/aria-describedby and 44px label measurement were read directly from the installed DOM; source protocols are unchanged by this UI repair."
+    },
+    {
+      "id": "R4-P2",
+      "behavior": "GM exposes no empty account category, external installation/consent controls or native account authority. Protected proxy/cache/identity surfaces retain host-only resources in separate Shadow roots; the static host retains its sole original stylesheet. Shared composition tests separately retain injected native account settings.",
+      "evidence": [
+        "T13/gm-r4/installed-c944-first-observations.json",
+        "T13/gm-r4/r4-implementation-review.json"
+      ]
+    },
+    {
+      "id": "R4-A1",
+      "behavior": "Explicit light/dark and system-dark match live preferences and resolved DOM attributes in every final matrix cell; system-light and zero-second reduced-motion dialog styles are independently sampled in the earlier EA76 input record. Every matrix cell keeps one same-reference idle audio and the original host stylesheet. This is not active-playback or physical-touch evidence.",
+      "evidence": [
+        "T13/gm-r4/installed-final-matrix-411.json",
+        "T13/gm-r4/installed-final-matrix-1440.json",
+        "T13/gm-r4/installed-ea76-inputs.json"
+      ]
+    },
+    {
+      "id": "R4-S3",
+      "behavior": "Final installed 3ec5 uses the retained eleven real catalog lists at 1440x600. Native PageDown reaches 1118.857177734375 CSS px; Classic-to-Studio-to-Classic restores exactly this offset in both directions. Both destination ranges exceed it. Theme replacement is explicitly DOM-driven; no spacer, synthetic scroll assignment or new request is used to create the long-list content.",
+      "evidence": "T13/gm-r4/installed-final-smoke.json"
+    },
+    {
+      "id": "R4-K1",
+      "behavior": "Native Tab from Studio settings reaches navigation, and native Enter/Tab reaches all ten destinations in order. Horizontal navigation scrolls to its final plugin target. Immediate samples may precede native horizontal-scroll settling; no claim that every intermediate button is already fully exposed in that same frame.",
+      "evidence": "T13/gm-r4/installed-ea76-keyboard-navigation.json"
+    }
+  ],
+  "recoveryFinding": {
+    "id": "GM-R4-F10",
+    "reproduction": "On installed c944, invoke the existing host modules.openRecovery() through the MusicWorkbenchThemeHost controller prop. This is a controlled DOM-driven entry, not a naturally occurring startup failure or ordinary UI button.",
+    "before": {
+      "viewport": "411x864 mobile/touch, system dark, reduced motion",
+      "panel": {
+        "top": 0,
+        "width": 48.000003814697266,
+        "height": 1718.196533203125,
+        "bottom": 1718.196533203125
+      },
+      "initialDeepFocus": "BODY",
+      "buttonHeights": [119.53572082519531, 119.53572082519531, 170.73214721679688],
+      "firstTab": "重新加载"
+    },
+    "repair": "Host-owned overlay/embedded recovery layout hides the empty presentation placeholder while retaining the same style Shadow container. Recovery takes initial focus, contains Tab endpoints including busy state, and returns focus to the new presentation after successful recovery without overriding a valid internal focus.",
+    "files": [
+      "packages/plugin-ui-vue/src/trusted/ThemeHost.vue",
+      "packages/ui/src/components/plugins/ModuleRecoveryPanel.vue"
+    ],
+    "targetRegression": {
+      "newCases": 7,
+      "pluginUiVue": "8 files / 53 tests",
+      "ui": "63 files / 351 tests",
+      "typecheck": 0,
+      "targetLint": 0,
+      "targetFormat": 0
+    },
+    "installedFinalRegression": {
+      "artifact": "ea76bbf97f9e795f8494f2277319fe8fc33c421f36f4029071d3190f3598fc63",
+      "evidence": "T13/gm-r4/installed-ea76-recovery.json",
+      "screenshot": "T13/gm-r4/installed-ea76-recovery-narrow.jpeg",
+      "wrapperWidth": 411.4285888671875,
+      "wrapperHeight": 864.0000610351562,
+      "panelWidth": 411.4285888671875,
+      "panelHeight": 253.2678680419922,
+      "buttonHeights": 44.000003814697266,
+      "initialFocus": "SECTION 系统模块恢复",
+      "tabWrap": true,
+      "escapeKeepsRecovery": true,
+      "nativeKeyboardRetry": true,
+      "returnedFocusToNewRoot": true,
+      "sameShadowContainer": true,
+      "sameUniqueIdleAudio": true,
+      "naturalFailureClaim": false,
+      "latestArtifactSmoke": {
+        "artifact": "3ec503f70b3694fe0170879ebacc76cbb4ccd3666f6b0cd22df64f8ada234d71",
+        "evidence": "T13/gm-r4/installed-final-smoke.json",
+        "result": "Controlled wide recovery initially focuses its section; native Tab/Enter retries, needsRecovery becomes false and the same idle audio/new-root focus are retained. Narrow geometry/Tab wrapping screenshot remains explicitly bound to EA76; recovery component source is unchanged by the later return-focus-only repair."
+      }
+    }
+  },
+  "implementationReview": "T13/gm-r4/r4-implementation-review.json",
+  "verification": {
+    "buildAudit": "T13/gm-r4/build-audit.json",
+    "finalRootChecks": {
+      "exitCodes": {
+        "test": 0,
+        "typecheck": 0,
+        "lint": 0,
+        "format": 0,
+        "build": 0
+      },
+      "testSummary": {
+        "vitestFiles": 316,
+        "vitestTests": 2399,
+        "rustPassed": 253,
+        "rustIgnored": 1,
+        "nodeTests": 58,
+        "protocolDifferentialCases": 200
+      },
+      "buildScope": "Root pnpm build: both production frontends and optimized Windows application; no native UI launch.",
+      "evidence": "T13/gm-r4/build-audit.json",
+      "logPrefix": "T13/gm-r4/narrow-final-",
+      "documentationBoundary": "Later live evidence and both maintained plans receive a separate final format/link/fingerprint check in T13/gm-r4/delivery-closeout.json."
+    },
+    "priorGates": "The c944 pre-recovery stage independently passed GM-R3 root gates: 314 Vitest files / 2365 cases, Node 58, Rust 253 and protocol differential 200. These do not establish the later recovery repair.",
+    "earlierFailure": "An earlier GM-R4 native cache test failed at an Option::unwrap; the same case passed alone and full root reruns passed. Its cause was not established. Retained logs and the pre-recovery audit record both outcomes."
+  },
+  "limits": [
+    "No physical human keyboard/mouse, actual touch hardware, or trusted emulated touch gesture was exercised. Keyboard/pointer alternatives and touch-capable viewport geometry are identified explicitly.",
+    "This is Userscript R4. Native account/consent/install and platform recovery acceptance remain with their native runtime/device records; disabled GM capabilities are not fabricated for visual completeness.",
+    "Installed Chrome screenshot capture stalled and timed out after several successful captures; the connection was recovered using only the dedicated test profile. Failed captures are not counted or assigned a guessed cause. Preview screenshots and installed DOM/input evidence retain separate boundaries.",
+    "No complete browser/manager/device Cartesian acceptance is implied; visual screenshots sample representative states and the broad color/viewport matrix is DOM-driven.",
+    "No website contract captureDate, commit or push changed. Unrelated workspace edits are preserved and included in the actual final build manifest.",
+    "A final requestAnimationFrame-based sampling attempt timed out and its incomplete output was discarded. The complete final 120-cell matrix was rerun using Vue queue flushes and computed layout; it is not paint-timing evidence."
+  ],
+  "narrowFocusFinding": {
+    "id": "GM-R4-F11",
+    "artifactBefore": "ea76bbf97f9e795f8494f2277319fe8fc33c421f36f4029071d3190f3598fc63",
+    "reproduction": "411x864, Studio settings remains open through public theme replacement to Classic; Escape closes the settings, then deep focus is BODY. The semantic settings trigger belongs to the closed mobile navigation drawer.",
+    "evidence": "T13/gm-r4/installed-ea76-before-narrow-fix.json",
+    "sampleLabel": "final-classic-settings-escape-opener",
+    "repair": "Choose a visible semantic return target and provide the visible mobile navigation trigger as Classic fallback.",
+    "installedFinalRegression": {
+      "artifact": "3ec503f70b3694fe0170879ebacc76cbb4ccd3666f6b0cd22df64f8ada234d71",
+      "evidence": "T13/gm-r4/installed-final-focus.json",
+      "result": {
+        "sample": {
+          "label": "3ec5-classic-narrow-settings-escape-settled",
+          "at": "2026-10-27T15:25:35.500Z",
+          "viewport": {
+            "width": 411,
+            "height": 864,
+            "dpr": 1.0000000447034836,
+            "touch": 1,
+            "dark": true,
+            "reduced": true
+          },
+          "theme": "default",
+          "resolved": "dark",
+          "appearance": "system",
+          "focus": {
+            "tag": "BUTTON",
+            "key": "navigation:open",
+            "label": "打开功能导航"
+          },
+          "audio": {
+            "count": 1,
+            "sameReference": true,
+            "paused": true,
+            "hasSource": false,
+            "time": 0
+          },
+          "scroll": [
+            {
+              "key": "workspace",
+              "top": 0,
+              "height": 577,
+              "total": 2850,
+              "width": 406,
+              "totalWidth": 406
+            }
+          ],
+          "dialogs": [],
+          "protectedSurfaces": [
+            {
+              "type": "slot",
+              "styles": 1
+            },
+            {
+              "type": "slot",
+              "styles": 1
+            },
+            {
+              "type": "protected"
+            },
+            {
+              "type": "slot",
+              "styles": 1
+            }
+          ],
+          "hostStyleCount": 1,
+          "themeRootCount": 1
+        },
+        "open": false,
+        "visibleNavigationTarget": true,
+        "visibility": "visible",
+        "rects": 1
+      },
+      "boundary": "The earlier immediate sample still contains the leaving modal; the settled sample independently has no dialog, open=false and visible navigation:open focus. No transient leaving frame is called a failed return."
+    },
+    "repairFiles": [
+      "packages/ui/src/components/modal-focus.ts",
+      "packages/theme-default/src/ClassicRoot.vue",
+      "packages/theme-default/src/components/shell/ProductTopBar.vue"
+    ],
+    "targetRegression": {
+      "newCases": 8,
+      "ui": "64 files / 362 tests",
+      "classic": "52 files / 378 tests",
+      "typecheck": 0,
+      "targetLint": 0,
+      "targetFormat": 0
+    }
+  },
+  "completedAt": "2026-10-27T15:35:15.337916+00:00",
+  "cleanup": {
+    "restoredPresentation": "Studio / system / catalog",
+    "enabledSources": 3,
+    "recoveryOpen": false,
+    "audio": "Unique idle audio, no media source in final smoke",
+    "temporaryEmulation": "Reset before leaving dedicated test tab at about:blank",
+    "commitOrPush": false
+  }
+}

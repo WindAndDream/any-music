@@ -1,0 +1,320 @@
+T00-C01 | pnpm --filter @any-music/ui test | exit 0
+
+> @any-music/ui@0.0.0 test <project-root>\packages\ui
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/ui
+
+
+ Test Files  91 passed (91)
+      Tests  619 passed (619)
+   Start at  15:26:21
+   Duration  10.91s (transform 25.09s, setup 0ms, import 67.37s, tests 7.92s, environment 41ms)
+
+T00-C02 | pnpm --filter @any-music/music-workbench test | exit 0
+
+> @any-music/music-workbench@0.0.0 test <project-root>\packages\music-workbench
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/music-workbench
+
+
+ Test Files  54 passed (54)
+      Tests  382 passed (382)
+   Start at  15:26:33
+   Duration  10.40s (transform 29.85s, setup 0ms, import 76.41s, tests 10.06s, environment 21ms)
+
+T00-C03 | pnpm --filter @any-music/plugin-ui-vue test | exit 0
+
+> @any-music/plugin-ui-vue@0.0.0 test <project-root>\packages\plugin-ui-vue
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+
+
+ Test Files  5 passed (5)
+      Tests  32 passed (32)
+   Start at  15:26:45
+   Duration  5.03s (transform 4.90s, setup 0ms, import 9.84s, tests 516ms, environment 3ms)
+
+T00-C04 | pnpm --filter @any-music/plugin-tag-management test | exit 0
+
+> @any-music/plugin-tag-management@0.0.0 test <project-root>\packages\plugin-tag-management
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/plugin-tag-management
+
+
+ Test Files  3 passed (3)
+      Tests  10 passed (10)
+   Start at  15:26:51
+   Duration  4.13s (transform 2.73s, setup 0ms, import 4.94s, tests 33ms, environment 1ms)
+
+T00-C05 | pnpm --filter @any-music/plugin-music-creation test | exit 0
+
+> @any-music/plugin-music-creation@0.0.0 test <project-root>\packages\plugin-music-creation
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/plugin-music-creation
+
+
+ Test Files  4 passed (4)
+      Tests  12 passed (12)
+   Start at  15:26:56
+   Duration  4.01s (transform 5.75s, setup 0ms, import 11.86s, tests 46ms, environment 1ms)
+
+T00-C06 | pnpm --filter @any-music/userscript test | exit 0
+
+> @any-music/userscript@0.0.0 test <project-root>\apps\userscript
+> vitest run --config vitest.config.ts
+
+
+ RUN  v4.1.11 <project-root>/apps/userscript
+
+
+ Test Files  17 passed (17)
+      Tests  80 passed (80)
+   Start at  15:27:01
+   Duration  7.05s (transform 7.78s, setup 0ms, import 10.94s, tests 7.41s, environment 6ms)
+
+T00-C07 | pnpm --filter @any-music/core test | exit 0
+
+> @any-music/core@0.0.0 test <project-root>\packages\core
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/core
+
+
+ Test Files  8 passed (8)
+      Tests  49 passed (49)
+   Start at  15:27:08
+   Duration  605ms (transform 695ms, setup 0ms, import 1.39s, tests 113ms, environment 1ms)
+
+T00-C08 | pnpm --filter @any-music/tauri exec vitest run | exit 0
+
+ RUN  v4.1.11 <project-root>/apps/tauri
+
+
+ Test Files  39 passed (39)
+      Tests  352 passed (352)
+   Start at  15:27:10
+   Duration  8.81s (transform 36.41s, setup 0ms, import 67.10s, tests 9.63s, environment 18ms)
+
+T00-C09 | pnpm --filter @any-music/ui typecheck | exit 0
+
+> @any-music/ui@0.0.0 typecheck <project-root>\packages\ui
+> vue-tsc --noEmit -p tsconfig.json
+
+T00-C10 | pnpm --filter @any-music/music-workbench typecheck | exit 0
+
+> @any-music/music-workbench@0.0.0 typecheck <project-root>\packages\music-workbench
+> vue-tsc --noEmit -p tsconfig.json
+
+T00-C11 | pnpm --filter @any-music/plugin-ui-vue typecheck | exit 0
+
+> @any-music/plugin-ui-vue@0.0.0 typecheck <project-root>\packages\plugin-ui-vue
+> vue-tsc --noEmit -p tsconfig.json
+
+T00-C12 | pnpm --filter @any-music/plugin-tag-management typecheck | exit 0
+
+> @any-music/plugin-tag-management@0.0.0 typecheck <project-root>\packages\plugin-tag-management
+> vue-tsc --noEmit -p tsconfig.json
+
+T00-C13 | pnpm --filter @any-music/plugin-music-creation typecheck | exit 0
+
+> @any-music/plugin-music-creation@0.0.0 typecheck <project-root>\packages\plugin-music-creation
+> vue-tsc --noEmit -p tsconfig.json
+
+T00-C14 | pnpm --filter @any-music/userscript typecheck | exit 0
+
+> @any-music/userscript@0.0.0 typecheck <project-root>\apps\userscript
+> vue-tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json && vue-tsc --noEmit -p tsconfig.test.json
+
+T00-C15 | pnpm --filter @any-music/core typecheck | exit 0
+
+> @any-music/core@0.0.0 typecheck <project-root>\packages\core
+> tsc --noEmit -p tsconfig.json
+
+T00-C16 | pnpm --filter @any-music/tauri exec vue-tsc --noEmit -p tsconfig.json | exit 0
+
+
+T00-C17 | pnpm build:userscript:prod | exit 0
+
+> any-music@0.0.0 build:userscript:prod <project-root>
+> pnpm --filter @any-music/userscript run build:prod
+
+
+> @any-music/userscript@0.0.0 build:prod <project-root>\apps\userscript
+> vite build --mode prod
+
+vite v8.2.2 building client environment for prod...
+transforming...
+✓ 679 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/userscript-build-audit.json     32.21 kB │ gzip:   3.97 kB
+dist/any-music.user.js            4,722.48 kB │ gzip: 926.50 kB
+
+✓ built in 6.26s
+[PLUGIN_TIMINGS] Your build spent 95% of 6.3s inside plugin hooks (5.9s).
+Measured inside the callback, so queue time is excluded and time the callback itself awaited is not:
+  - monkey:buildBundle generateBundle (72%, 4.5s, 1 call)
+Those rows are 72% of the build; the rest of the 95% is below.
+Not measurable — 2 hooks whose calls overlap, so elapsed time covers work other calls were doing. Profile with `node --cpu-prof`:
+  - vite:css transform (96 calls)
+  - monkey:css transform (679 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
+T00-C18 | pnpm --filter @any-music/tauri build:frontend | exit 0
+
+> @any-music/tauri@0.0.0 build:frontend <project-root>\apps\tauri
+> vite build --mode prod
+
+vite v8.2.2 building client environment for prod...
+transforming...
+✓ 777 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         3.04 kB │ gzip:   0.79 kB
+dist/assets/AppIcon-D4ck_dDu.css                        0.16 kB │ gzip:   0.13 kB
+dist/assets/TrackCardSummary-gJSrTlII.css               0.42 kB │ gzip:   0.23 kB
+dist/assets/TrackCardGrid-DiH6o5Tp.css                  2.24 kB │ gzip:   0.64 kB
+dist/assets/QueueViewControls-thGrXOE_.css              2.67 kB │ gzip:   0.76 kB
+dist/assets/vue-BPjObDYi.css                            4.23 kB │ gzip:   1.05 kB
+dist/assets/ActiveDownloadPanel-g0gTGD1z.css            5.56 kB │ gzip:   1.22 kB
+dist/assets/CatalogHeadingHandle-KQfBfzaf.css           7.77 kB │ gzip:   1.45 kB
+dist/assets/BottomSheet-DPiYjZe2.css                    9.10 kB │ gzip:   1.55 kB
+dist/assets/ExternalSourceSettings-B4D0PMVV.css         9.50 kB │ gzip:   1.60 kB
+dist/assets/PlaylistPanel-Do1u5-mC.css                 13.32 kB │ gzip:   2.01 kB
+dist/assets/QueuePanel-5blCmKVG.css                    15.10 kB │ gzip:   2.61 kB
+dist/assets/vue-DVUfAYEH.css                           15.22 kB │ gzip:   2.60 kB
+dist/assets/GlobalSettingsPanel-Bc1a9tts.css           15.32 kB │ gzip:   2.46 kB
+dist/assets/TrackRow-D31RhYG6.css                      58.09 kB │ gzip:   7.55 kB
+dist/assets/index-CE9z8AYV.css                        216.90 kB │ gzip:  29.50 kB
+dist/assets/QueuePanel--qQBchi8.js                      0.06 kB │ gzip:   0.08 kB
+dist/assets/__vite-browser-external-D3_sD4Dv.js         0.07 kB │ gzip:   0.09 kB
+dist/assets/audio-exporter-DOIHxJ75.js                  0.08 kB │ gzip:   0.08 kB
+dist/assets/plugin-CTPDroLL.js                          0.13 kB │ gzip:   0.14 kB
+dist/assets/http-Bx2BUOLo.js                            0.18 kB │ gzip:   0.15 kB
+dist/assets/playback-history-filters-TtojXpjP.js        0.19 kB │ gzip:   0.16 kB
+dist/assets/use-favorite-filters-BIlmOPDC.js            0.24 kB │ gzip:   0.17 kB
+dist/assets/ui-contributions-DLFvYa83.js                0.32 kB │ gzip:   0.25 kB
+dist/assets/TrackSourcePageLink-Cp6L2mPo.js             0.40 kB │ gzip:   0.32 kB
+dist/assets/policies-Ca8WcR-N.js                        0.56 kB │ gzip:   0.35 kB
+dist/assets/render-custom-track-media-Cm9V1NvN.js       0.79 kB │ gzip:   0.57 kB
+dist/assets/use-confirmation-dialog-CHptKBtC.js         0.98 kB │ gzip:   0.56 kB
+dist/assets/use-catalog-list-controls-BZPnqdGs.js       0.99 kB │ gzip:   0.50 kB
+dist/assets/__vite-browser-external-8b-sKxde.js         1.14 kB │ gzip:   0.64 kB
+dist/assets/resolved-media-loader-ocXT3m_V.js           1.15 kB │ gzip:   0.75 kB
+dist/assets/preload-helper-Czpn1I53.js                  1.19 kB │ gzip:   0.67 kB
+dist/assets/use-settings-feedback-BN-SCupX.js           1.52 kB │ gzip:   0.85 kB
+dist/assets/url-parser-BgMrwjwU.js                      1.67 kB │ gzip:   0.88 kB
+dist/assets/HistoryPanel-a5AVcqB_.js                    2.56 kB │ gzip:   1.36 kB
+dist/assets/FavoritePanel-kZdaOkL7.js                   2.60 kB │ gzip:   1.05 kB
+dist/assets/native-source-plugins-rS0Y4hhB.js           3.16 kB │ gzip:   1.37 kB
+dist/assets/FavoriteTrackRow-CDSGUwjG.js                3.37 kB │ gzip:   1.48 kB
+dist/assets/TrackCardSummary-Ufjus8Iz.js                3.40 kB │ gzip:   1.58 kB
+dist/assets/use-action-feedback-ChCdFJnZ.js             3.90 kB │ gzip:   1.60 kB
+dist/assets/url-parser-CDWVVYUf.js                      3.94 kB │ gzip:   1.62 kB
+dist/assets/QueueViewControls-BFA-fhvi.js               4.38 kB │ gzip:   2.01 kB
+dist/assets/studio-theme-DJ8CDfWS.js                    4.53 kB │ gzip:   1.68 kB
+dist/assets/douyin-request-state-CFbLQ2P_.js            4.61 kB │ gzip:   2.06 kB
+dist/assets/native-http-CZsR900D.js                     4.90 kB │ gzip:   2.04 kB
+dist/assets/download-history-BEKzmkgW.js                5.04 kB │ gzip:   1.80 kB
+dist/assets/TrackCardGrid-7T1j-v1y.js                   5.63 kB │ gzip:   2.23 kB
+dist/assets/download-archive-aGajjFNI.js                7.39 kB │ gzip:   3.13 kB
+dist/assets/app-error-BjZGph4G.js                       7.44 kB │ gzip:   2.09 kB
+dist/assets/BottomSheet-Con2gVpF.js                     7.49 kB │ gzip:   2.38 kB
+dist/assets/CustomTrackPanel-DHdR3jy-.js                8.07 kB │ gzip:   3.27 kB
+dist/assets/use-catalog-filter-history-D24KUf4V.js     11.96 kB │ gzip:   4.42 kB
+dist/assets/runtime-dom.esm-bundler-CtmTBcqy.js        16.29 kB │ gzip:   6.91 kB
+dist/assets/vue-j-3Cqpmi.js                            16.48 kB │ gzip:   5.83 kB
+dist/assets/ActiveDownloadPanel-Mi1EbBuG.js            18.09 kB │ gzip:   6.15 kB
+dist/assets/ExternalSourceSettings-BDjYywFN.js         22.17 kB │ gzip:   7.57 kB
+dist/assets/CatalogHeadingHandle-BM7V0YtH.js           24.40 kB │ gzip:   8.67 kB
+dist/assets/runtime-ed0Noo7_.js                        25.28 kB │ gzip:   9.08 kB
+dist/assets/GlobalSettingsPanel-CHmUhgDd.js            28.34 kB │ gzip:   9.18 kB
+dist/assets/PlaylistPanel-BWmZH6uN.js                  28.80 kB │ gzip:   9.11 kB
+dist/assets/vue-DuTiLEEN.js                            30.37 kB │ gzip:  10.13 kB
+dist/assets/QueuePanel-DDLHV030.js                     32.08 kB │ gzip:  10.27 kB
+dist/assets/runtime-D-4MfbVr.js                        39.39 kB │ gzip:  13.23 kB
+dist/assets/TrackRow-CCt_9zU3.js                       60.45 kB │ gzip:  18.19 kB
+dist/assets/AppIcon-CAC2vpK-.js                        73.87 kB │ gzip:  29.24 kB
+dist/assets/audio-exporter-DYCAokAO.js                317.66 kB │ gzip: 135.98 kB
+dist/assets/output-C0ZydUOt.js                        444.69 kB │ gzip: 113.24 kB
+dist/assets/index-a1r1EKh2.js                       1,145.35 kB │ gzip: 198.31 kB
+
+✓ built in 1.82s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+T00-C19 | node scripts/check-package-boundaries.mjs | exit 0
+Shared package dependency and lightweight entry boundaries passed.
+
+T00-C20 | node scripts/check-plugin-isolation.mjs | exit 0
+{"appCommands":69,"productCommands":66,"relays":["plugin_probe_relay","plugin_executor_relay"],"offlineOnly":true,"nativeTargetAdmission":"separate exact target record"}
+
+T00-C21 | pnpm check:mobile:boundaries | exit 0
+
+> any-music@0.0.0 check:mobile:boundaries <project-root>
+> node scripts/check-mobile-boundaries.mjs
+
+Mobile ACLs checked offline; Android/iOS device and channel acceptance remains pending.
+
+T00-C22 | node --test scripts/test/check-package-boundaries.test.mjs scripts/test/check-plugin-isolation.test.mjs scripts/test/check-mobile-boundaries.test.mjs | exit 0
+✔ mobile capabilities separate Android built-in transport from iOS local data (3.8706ms)
+✔ desktop or remote privilege cannot enter mobile through configuration (24.1598ms)
+✔ accepts valid sources and deferred/type-only heavy imports (66.4904ms)
+✔ VM profiles and adapter roots stay engine-free; native imports and production testkit are rejected (55.1249ms)
+✔ trusted build directory discovery cannot eagerly load Vue through the workbench root (51.0834ms)
+✔ theme metadata stays lightweight and Vue adapters cannot import private workbench state (58.8426ms)
+✔ rejects undeclared and forbidden internal dependencies (45.1427ms)
+✔ tag metadata remains lightweight and the feature cannot consume host repositories (58.1216ms)
+✔ rejects app aliases and relative paths outside the package (50.6444ms)
+✔ creation metadata cannot load presentation or access private host state (46.9138ms)
+✔ routing packages reject Node and music dependencies while accepting their public edge (51.4362ms)
+✔ follows the source plugin root barrel to eager codecs (44.2395ms)
+✔ SDK rejects runtime libraries, even through a local barrel (43.4782ms)
+✔ rejects browser audio implementations without a codec import (36.6073ms)
+✔ accepts export patterns and rejects private exports (55.8339ms)
+✔ source metadata cannot load protocols and source plugins cannot access the host (41.4507ms)
+✔ the actual registry has complete AppManifest coverage and exact main authority (3.799ms)
+✔ new commands, broad capabilities, remote access and relay grants cannot silently bypass review (13.991ms)
+✔ actual acceptance records fail closed on missing evidence, leaked authority or inconsistent targets (2.8357ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1101.3454
+
+T00-C23 | pnpm format:check | exit 0
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+All matched files use the correct format.
+Finished in 3891ms on 1171 files using 12 threads.
+
+T00-C24 | pnpm format:check | exit 0
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+All matched files use the correct format.
+Finished in 4028ms on 1175 files using 12 threads.

@@ -1,0 +1,624 @@
+[
+  {
+    "id": "settings-width-container",
+    "wide": {
+      "width": 1280,
+      "columns": "229.473px 655.661px",
+      "nav": {
+        "x": 184.57144165039062,
+        "y": 152.23214721679688,
+        "width": 229.4732208251953,
+        "height": 616,
+        "top": 152.23214721679688,
+        "right": 414.04466247558594,
+        "bottom": 768.2321472167969,
+        "left": 184.57144165039062
+      },
+      "content": {
+        "x": 434.0446472167969,
+        "y": 152.23214721679688,
+        "width": 655.6607666015625,
+        "height": 993.71435546875,
+        "top": 152.23214721679688,
+        "right": 1089.7054138183594,
+        "bottom": 1145.9465026855469,
+        "left": 434.0446472167969
+      },
+      "widthOverflow": false
+    },
+    "narrow": {
+      "width": 760,
+      "columns": "673.143px",
+      "nav": {
+        "x": 40.57143020629883,
+        "y": 155.1428680419922,
+        "width": 673.1428833007812,
+        "height": 616,
+        "top": 155.1428680419922,
+        "right": 713.7143135070801,
+        "bottom": 771.1428680419922,
+        "left": 40.57143020629883
+      },
+      "content": {
+        "x": 40.57143020629883,
+        "y": 791.1428833007812,
+        "width": 673.1428833007812,
+        "height": 993.71435546875,
+        "top": 791.1428833007812,
+        "right": 713.7143135070801,
+        "bottom": 1784.8572387695312,
+        "left": 40.57143020629883
+      },
+      "widthOverflow": false
+    },
+    "pass": true
+  },
+  {
+    "id": "account-draft-native-keys",
+    "forward": {
+      "label": "添加并登录",
+      "contained": true
+    },
+    "reverse": {
+      "label": "给账号起一个名字",
+      "contained": true
+    },
+    "account": [
+      {
+        "theme": "studio",
+        "name": "T13 final account draft",
+        "styles": 1,
+        "audio": {
+          "count": 1,
+          "sameReference": true,
+          "paused": true,
+          "hasSource": false,
+          "time": 0
+        }
+      },
+      {
+        "theme": "default",
+        "name": "T13 final account draft",
+        "styles": 1,
+        "audio": {
+          "count": 1,
+          "sameReference": true,
+          "paused": true,
+          "hasSource": false,
+          "time": 0
+        }
+      }
+    ],
+    "accountReturn": {
+      "label": "关闭",
+      "contained": true
+    },
+    "settingsReturn": {
+      "key": "settings:open",
+      "label": "设置",
+      "contained": false
+    },
+    "keys": [
+      {
+        "key": "settings:appearance",
+        "label": "外观与布局\n深色主题",
+        "contained": true
+      },
+      {
+        "key": "settings:navigation",
+        "label": "导航管理\n排序与显示",
+        "contained": true
+      },
+      {
+        "key": "settings:display",
+        "label": "展示方式\n默认风格 · 排列方式",
+        "contained": true
+      },
+      {
+        "key": "settings:sources",
+        "label": "音乐源管理\n已启用 3 个音乐源",
+        "contained": true
+      },
+      {
+        "key": "settings:external-sources",
+        "label": "外置音乐源\n接口导入 · 文件导入",
+        "contained": true
+      },
+      {
+        "key": "settings:accounts",
+        "label": "账号管理\n已启用 0 个账号",
+        "contained": true
+      },
+      {
+        "key": "settings:cache",
+        "label": "资源缓存\n容量 · 位置 · 清理",
+        "contained": true
+      },
+      {
+        "key": "settings:proxy",
+        "label": "代理管理\n已配置 0 个代理 · 按账号分配",
+        "contained": true
+      },
+      {
+        "key": "settings:downloads",
+        "label": "歌曲下载\n最多 2 首同时下载",
+        "contained": true
+      },
+      {
+        "key": "settings:playback-history",
+        "label": "播放历史\n最多保留 500 条",
+        "contained": true
+      },
+      {
+        "key": "settings:filter-history",
+        "label": "筛选历史\n音乐列表 · 列表内歌曲",
+        "contained": true
+      },
+      {
+        "key": "settings:creator-profile",
+        "label": "创作者资料\n本地用户",
+        "contained": true
+      },
+      {
+        "label": "界面主题：经典",
+        "contained": true
+      },
+      {
+        "label": "侧栏位置：左侧",
+        "contained": true
+      },
+      {
+        "label": "主题：深色",
+        "contained": true
+      },
+      {
+        "label": "移动端底部导航",
+        "contained": true
+      },
+      {
+        "label": "关闭",
+        "contained": true
+      },
+      {
+        "key": "settings:appearance",
+        "label": "外观与布局\n深色主题",
+        "contained": true
+      },
+      {
+        "key": "settings:navigation",
+        "label": "导航管理\n排序与显示",
+        "contained": true
+      },
+      {
+        "key": "settings:display",
+        "label": "展示方式\n默认风格 · 排列方式",
+        "contained": true
+      },
+      {
+        "key": "settings:sources",
+        "label": "音乐源管理\n已启用 3 个音乐源",
+        "contained": true
+      },
+      {
+        "key": "settings:external-sources",
+        "label": "外置音乐源\n接口导入 · 文件导入",
+        "contained": true
+      },
+      {
+        "key": "settings:accounts",
+        "label": "账号管理\n已启用 0 个账号",
+        "contained": true
+      },
+      {
+        "key": "settings:cache",
+        "label": "资源缓存\n容量 · 位置 · 清理",
+        "contained": true
+      }
+    ],
+    "finalFocus": {
+      "key": "settings:open",
+      "label": "设置",
+      "contained": false
+    },
+    "pass": true
+  },
+  {
+    "id": "proxy-draft-and-real-close",
+    "proxy": [
+      {
+        "theme": "studio",
+        "name": "T13 final unsaved proxy",
+        "url": "http://example.invalid:7897"
+      },
+      {
+        "theme": "default",
+        "name": "T13 final unsaved proxy",
+        "url": "http://example.invalid:7897"
+      }
+    ],
+    "reset": "",
+    "pass": true
+  },
+  {
+    "id": "specialist-drafts",
+    "editor": [
+      {
+        "theme": "default",
+        "values": [
+          "on",
+          "T13 final uncreated collection",
+          "T13 final material query",
+          "T13 final unpublished work",
+          "0"
+        ],
+        "audio": {
+          "count": 1,
+          "sameReference": true,
+          "paused": true,
+          "hasSource": false,
+          "time": 0
+        }
+      },
+      {
+        "theme": "studio",
+        "values": [
+          "on",
+          "T13 final uncreated collection",
+          "T13 final unpublished work",
+          "T13 final material query",
+          "0",
+          "1"
+        ],
+        "audio": {
+          "count": 1,
+          "sameReference": true,
+          "paused": true,
+          "hasSource": false,
+          "time": 0
+        }
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "protected-interface-surfaces",
+    "surfaces": [
+      {
+        "theme": "default",
+        "section": "accounts",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 717
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 1039,
+            "scrollWidth": 1039
+          }
+        ]
+      },
+      {
+        "theme": "default",
+        "section": "proxy",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 711
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 1039,
+            "scrollWidth": 1039
+          }
+        ]
+      },
+      {
+        "theme": "default",
+        "section": "cache",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 711
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 1039,
+            "scrollWidth": 1039
+          }
+        ]
+      },
+      {
+        "theme": "default",
+        "section": "downloads",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 717
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 1039,
+            "scrollWidth": 1039
+          }
+        ]
+      },
+      {
+        "theme": "default",
+        "section": "external-sources",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 0
+          },
+          {
+            "styles": 1,
+            "width": 711
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 1039,
+            "scrollWidth": 1039
+          }
+        ]
+      },
+      {
+        "theme": "studio",
+        "section": "accounts",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 660
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 959,
+            "scrollWidth": 959
+          }
+        ]
+      },
+      {
+        "theme": "studio",
+        "section": "proxy",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 660
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 959,
+            "scrollWidth": 959
+          }
+        ]
+      },
+      {
+        "theme": "studio",
+        "section": "cache",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 656
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 959,
+            "scrollWidth": 959
+          }
+        ]
+      },
+      {
+        "theme": "studio",
+        "section": "downloads",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 660
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 959,
+            "scrollWidth": 959
+          }
+        ]
+      },
+      {
+        "theme": "studio",
+        "section": "external-sources",
+        "hosts": [
+          {
+            "styles": 1,
+            "width": 1280
+          },
+          {
+            "styles": 1,
+            "width": 656
+          }
+        ],
+        "dialogs": [
+          {
+            "width": 959,
+            "scrollWidth": 959
+          }
+        ]
+      }
+    ],
+    "limit": "Interface and native snapshot reads only; no native file-picker save, package installation or consent approval.",
+    "pass": true
+  },
+  {
+    "id": "controlled-recovery",
+    "recovery": {
+      "focus": "系统模块恢复",
+      "buttons": [
+        {
+          "text": "重新加载",
+          "height": 44.000003814697266
+        },
+        {
+          "text": "安全启动",
+          "height": 44.000003814697266
+        },
+        {
+          "text": "恢复默认主题",
+          "height": 44.000003814697266
+        }
+      ],
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      }
+    },
+    "recoveryKeys": ["重新加载", "安全启动", "恢复默认主题", "重新加载"],
+    "recovered": {
+      "label": "recovered",
+      "at": "2026-11-01T12:18:57.880Z",
+      "viewport": {
+        "width": 1280,
+        "height": 851,
+        "dpr": 1.75,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心创作工"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1280,
+          "totalWidth": 1280
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 714,
+          "total": 714,
+          "width": 1280,
+          "totalWidth": 1280
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 714,
+          "total": 927,
+          "width": 1004,
+          "totalWidth": 1004
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 2,
+      "themeRootCount": 1
+    },
+    "limit": "Public openRecovery test entry, not a natural startup failure.",
+    "pass": true
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-19",
+  "runtimeScope": "repository",
+  "tools": {
+    "sdk": "0.1.0",
+    "cli": "0.1.0",
+    "testkit": "0.1.0",
+    "nodeMinimum": "24.11.0",
+    "license": "MIT"
+  },
+  "versions": {
+    "wire": [1],
+    "profile": 1,
+    "package": 1,
+    "data": 1,
+    "budget": 1,
+    "contribution": 1
+  },
+  "previousWireMajor": null,
+  "previousMajorMigrationDays": 180,
+  "securityRevocationException": true,
+  "hostAdmission": "exact native OS/WebView/Profile/resource record",
+  "desktop": {
+    "memoryClasses": ["minimum"],
+    "capabilities": ["state.read", "state.write", "crypto.sha256", "network.publicHttps"],
+    "contributions": {
+      "music.sources": "metadata catalog via named search command; no media resolver"
+    },
+    "executions": ["sandbox-code", "declarative static catalog schemaVersion 1"],
+    "unknownRequired": "rejected",
+    "unknownOptional": "unavailable"
+  },
+  "mobile": {
+    "admitted": false,
+    "step": "S16"
+  },
+  "unavailable": [
+    "media resolution/playback",
+    "legacy declarative execution",
+    "arbitrary UI extension points",
+    "guest npm imports",
+    "external JS migrations",
+    "marketplace/publish",
+    "provisioned distribution refresh"
+  ]
+}

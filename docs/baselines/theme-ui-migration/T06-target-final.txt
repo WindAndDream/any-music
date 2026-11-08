@@ -1,0 +1,8 @@
+
+ RUN  v4.1.11 <project-root>/packages/theme-default
+
+
+ Test Files  11 passed (11)
+      Tests  68 passed (68)
+   Start at  02:29:16
+   Duration  6.51s (transform 18.68s, setup 0ms, import 33.73s, tests 1.78s, environment 5ms)

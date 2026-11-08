@@ -1,0 +1,12 @@
+
+> @any-music/plugin-ui-vue@0.0.0 test <project-root>\packages\plugin-ui-vue
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+
+
+ Test Files  9 passed (9)
+      Tests  55 passed (55)
+   Start at  19:18:22
+   Duration  10.36s (transform 19.54s, setup 0ms, import 26.58s, tests 1.29s, environment 3ms)

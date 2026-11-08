@@ -1,0 +1,78 @@
+// Collection pages share state buttons and a sliding selection surface.
+@mixin state-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  min-block-size: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--am-space-2);
+  padding-inline: var(--am-space-3);
+  border: 0;
+  border-radius: var(--am-radius-control);
+  background: transparent;
+  color: var(--am-color-text-secondary);
+  cursor: pointer;
+  font: 650 var(--am-font-size-xs) var(--am-font-family);
+  white-space: nowrap;
+  touch-action: manipulation;
+  transition:
+    background-color var(--am-motion-fast),
+    color var(--am-motion-fast);
+
+  &[aria-pressed='true'] {
+    background: var(--am-color-surface);
+    box-shadow: var(--am-shadow-control);
+    color: var(--am-color-primary);
+  }
+  &:is(:hover, :focus-visible) {
+    background: var(--am-color-surface-hover);
+  }
+  &:is(:hover, :focus-visible):not([aria-pressed='true']) {
+    color: var(--am-color-text);
+  }
+  &:focus-visible {
+    outline: var(--am-focus-ring);
+    outline-offset: calc(-1 * var(--am-focus-offset));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+@mixin state-tabs($count) {
+  --am-state-tab-count: #{$count};
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: repeat(var(--am-state-tab-count), 1fr);
+  inline-size: max-content;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: calc(100% / var(--am-state-tab-count));
+    border-radius: var(--am-radius-control);
+    background: var(--am-color-surface);
+    box-shadow: var(--am-shadow-control);
+    transform: translateX(calc(var(--am-state-tab-index, 0) * 100%));
+    transition: transform var(--am-motion-normal) var(--am-ease-standard);
+    pointer-events: none;
+    content: '';
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  > button {
+    @include state-button;
+
+    &[aria-pressed='true'] {
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+}

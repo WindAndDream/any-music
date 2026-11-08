@@ -1,0 +1,1 @@
+Shared package dependency and lightweight entry boundaries passed.

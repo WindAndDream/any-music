@@ -1,0 +1,163 @@
+{
+  "scope": "S06",
+  "status": "implemented",
+  "date": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "checkedAt": "2026-10-17T16:18:15.136Z",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:14:56.005Z",
+      "logSha256": "621ec518fa2175645777bd77e42b019cf2d6e590fcc9f24f6dc695833a7fbd32"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:15:37.395Z",
+      "logSha256": "44cb282a6d7acc15ce61ae4c27ff41bdb190a3c08a32a5b541c9a7c0e0cedb3c"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:15:38.542Z",
+      "logSha256": "b6b5e296e5b1f80dbf68aa134f8ebc3bf53cf42ea02ed5a638432f7773862cc9"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:15:42.076Z",
+      "logSha256": "ca5a809c759127fff4c142dade8e15aef323016a4bd5c1a22a5ec8fa48ab4f3b"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:17:18.249Z",
+      "logSha256": "c5cebd0aa6b8b25edc7ab3bb27b749bcfbe9ac59a1533e06a91298073e4bab83"
+    },
+    {
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:01:59.406Z",
+      "logSha256": "b8328b4859208c2825157108a78c2d5d18b4297a51031150724917c2edaa647d"
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:02:10.536Z",
+      "logSha256": "81524d07fd581df3e5f8ba2d8853ef41f18e7301e46d70d5426a7ff83eafe52a"
+    },
+    {
+      "command": "pnpm check:rust:deny:pure",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:02:13.980Z",
+      "logSha256": "a791df20d90c00d8d46cce1cb9880a00e07aa23b5731c4a43002228be5e5309c"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "exitCode": 1,
+      "logCompletedAt": "2026-10-17T16:02:16.412Z",
+      "logSha256": "5c419dd2c993c9a879b89c14097f140f6785e4ecb39c533a5619e368b2f36da4"
+    }
+  ],
+  "tests": {
+    "script": 15,
+    "vitest": 1505,
+    "rust": 109,
+    "rustIgnored": 1,
+    "protocolDifferential": 171
+  },
+  "limitations": [
+    "Existing rustls 0.23.45 advisories RUSTSEC-2026-0346/0347/0348/0349 fail the workspace dependency audit; no advisory exemptions or dependency changes.",
+    "S00 synthetic sanitized fixtures match legacy formats; no historical-release or real-user backup corpus.",
+    "No app, browser, development server, simulator, live GM/IPC or device acceptance. S03 remains pending; S07-S16 not implemented.",
+    "Import/export are data-layer APIs. Import requires a full workbench reload before writing again."
+  ],
+  "lockfiles": {
+    "Cargo.lock": {
+      "sha256": "ede1f3780515d02277d7afcd95548809e612de7651efaaf2b519fc274d3ed013",
+      "unchangedFromStart": true
+    },
+    "pnpm-lock.yaml": {
+      "sha256": "e32e3e5cf8ef107594db5937dde803e6ca8283d146867339e11978e10533e9bb",
+      "unchangedFromStart": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3436778,
+      "sha256": "5711a6941ce3188947ef46a8595b54d403fb67f9adc4f3d22288e139875654fa"
+    },
+    {
+      "path": "apps/tauri/dist/index.html",
+      "bytes": 2737,
+      "sha256": "426068c2c3c89b93d91752fddca60507e220daf888956b8adb3d899938c549c1"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 18038784,
+      "sha256": "df4a16d7cba45308d00c5648368153f3b9c46888f1191760071f46e46ba28b17"
+    }
+  ],
+  "uncommittedChangesPreserved": true,
+  "gitCommitOrPush": false,
+  "preservation": {
+    "initialManifestSha256": "316735884431cdaa7cd4f6ca8bbab54ec96f91ad165423c696d2d32580508aa5",
+    "unchangedOriginalFileCount": 1012,
+    "incrementallyModifiedOriginalPaths": [
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-baseline.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构基线.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      "apps/tauri/src-tauri/src/storage/product.rs",
+      "apps/tauri/src/platform/product-storage.ts",
+      "apps/userscript/AGENTS.md",
+      "apps/userscript/src/platform/configure-userscript-workbench.ts",
+      "apps/userscript/src/platform/dev/install-dev-userscript-runtime.ts",
+      "docs/en/cross-platform/README.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "docs/en/desktop/development.md",
+      "docs/en/userscript/development.md",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "docs/zh-cn/用户脚本/开发规范.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      "packages/core/AGENTS.md",
+      "packages/core/src/index.ts",
+      "packages/core/src/library/models.ts",
+      "packages/music-workbench/AGENTS.md",
+      "packages/music-workbench/package.json",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts"
+    ],
+    "newS06Paths": [
+      "apps/tauri/test/platform/product-storage.test.ts",
+      "apps/userscript/test/platform/product-storage.test.ts",
+      "docs/baselines/plugin-system-s06/checks.json",
+      "docs/en/cross-platform/architecture/plugin-system-s06-data-ownership-and-migration.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S06数据归属与迁移.md",
+      "packages/music-workbench/src/storage/portable-product-data.ts",
+      "packages/music-workbench/src/storage/product-data-projection.ts",
+      "packages/music-workbench/src/storage/product-data.ts",
+      "packages/music-workbench/src/storage/product-generation-store.ts",
+      "packages/music-workbench/src/storage/product-storage.ts",
+      "packages/music-workbench/test/storage/portable-product-data.test.ts",
+      "packages/music-workbench/test/storage/product-generation-store.test.ts",
+      "packages/music-workbench/test/storage/product-storage-fixtures.ts"
+    ],
+    "removedOriginalPaths": []
+  },
+  "postReviewTargetedTests": {
+    "command": "pnpm --filter @any-music/music-workbench test -- test/storage/product-generation-store.test.ts test/storage/portable-product-data.test.ts",
+    "passed": 24,
+    "reason": "Newer/damaged tag and composer data remains opaque; host writes stay independent and plugin edits are blocked. Included again in the final root test run."
+  },
+  "documentationLinks": {
+    "filesChecked": 21,
+    "missing": 0
+  }
+}

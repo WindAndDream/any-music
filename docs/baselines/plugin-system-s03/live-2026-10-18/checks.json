@@ -1,0 +1,278 @@
+{
+  "scope": "S03",
+  "status": "implemented",
+  "launchedAppOrBrowser": true,
+  "checks": [
+    {
+      "label": "isolation",
+      "command": "pnpm check:plugin:isolation",
+      "startedAt": "2026-10-18T08:28:21.366Z",
+      "finishedAt": "2026-10-18T08:28:44.444Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/isolation.log",
+      "sha256": "dae7d25dea15e67e79db84c8d48e317e77770e0146c017fe9fcae541257a8857"
+    },
+    {
+      "label": "test",
+      "command": "pnpm test",
+      "startedAt": "2026-10-18T08:28:44.452Z",
+      "finishedAt": "2026-10-18T08:29:52.163Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/test.log",
+      "sha256": "16a4a8cf63e327a788328af61c504a2718f934e783ed3437bff785e15523b37b"
+    },
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-18T08:29:52.171Z",
+      "finishedAt": "2026-10-18T08:30:44.126Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/typecheck.log",
+      "sha256": "040c1f13ec41172946841cf2bc435345d112c47ad607adb91eacf2bd9cbfafbe"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-18T08:30:44.134Z",
+      "finishedAt": "2026-10-18T08:30:45.540Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/lint.log",
+      "sha256": "14f65736b328b3b5062b0150dd899cb8fdc4930e7556edf390b258352c236500"
+    },
+    {
+      "label": "format",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-18T08:30:45.541Z",
+      "finishedAt": "2026-10-18T08:30:49.276Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/format.log",
+      "sha256": "dee9979830de90f670deabe6a0e27a8af6a1c0c49e6752e9959767a07c78a9b0"
+    },
+    {
+      "label": "build",
+      "command": "pnpm build",
+      "startedAt": "2026-10-18T08:30:49.284Z",
+      "finishedAt": "2026-10-18T08:32:47.566Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/build.log",
+      "sha256": "4a4581c964d93f5f63627dcfd31ae824ed2100eb38e470a3a61a52c17f06f8d4"
+    },
+    {
+      "label": "native",
+      "command": "pnpm check:native",
+      "startedAt": "2026-10-18T08:32:47.574Z",
+      "finishedAt": "2026-10-18T08:32:56.010Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/native.log",
+      "sha256": "14213b38ba1ab18580027a03fc2afbcd359b063bd9a5951fa48484f32464eeb5"
+    },
+    {
+      "label": "msrv",
+      "command": "pnpm check:rust:msrv",
+      "startedAt": "2026-10-18T08:32:56.017Z",
+      "finishedAt": "2026-10-18T08:33:05.397Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/msrv.log",
+      "sha256": "55ef5fbf8fc927bea54da98022b0ada496ffd5a3fd38650d68d76cf855de1833"
+    },
+    {
+      "label": "deny",
+      "command": "pnpm check:rust:deny",
+      "startedAt": "2026-10-18T08:33:05.405Z",
+      "finishedAt": "2026-10-18T08:33:08.415Z",
+      "exitCode": 1,
+      "log": ".codex-tmp/s03-live-20261018/deny.log",
+      "sha256": "f498171730a05d760e2893d82b0e901ae181dead25799239096a3f9e11b7a2d1"
+    },
+    {
+      "label": "deny-pure",
+      "command": "pnpm check:rust:deny:pure",
+      "startedAt": "2026-10-18T08:33:08.425Z",
+      "finishedAt": "2026-10-18T08:33:10.634Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/deny-pure.log",
+      "sha256": "cd9f425ffaddc524bf4d5ea1d2687e15d98be14b9dfd0cef273e11b71669d860"
+    },
+    {
+      "label": "prototype-clippy",
+      "command": "cargo clippy -p any-music-tauri --example plugin-isolation-probe --features s03-isolation-probe --locked -- -D warnings",
+      "startedAt": "2026-10-18T08:33:10.645Z",
+      "finishedAt": "2026-10-18T08:33:13.742Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/prototype-clippy.log",
+      "sha256": "7dcb40047f7fec7cfd5d2de7ba07c3e65bbe7f5a294334b91465627ec743a26d"
+    },
+    {
+      "label": "final-isolation",
+      "command": "pnpm check:plugin:isolation",
+      "startedAt": "2026-10-18T08:40:01.260Z",
+      "finishedAt": "2026-10-18T08:40:17.095Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/final-isolation.log",
+      "sha256": "8fcd90d5c51e45f519fe9f75c3485f5b3519356ded949e3701705ec00931f5c9"
+    },
+    {
+      "label": "final-report-tests",
+      "command": "node --test scripts/test/check-plugin-isolation.test.mjs",
+      "startedAt": "2026-10-18T08:40:17.103Z",
+      "finishedAt": "2026-10-18T08:40:17.269Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/final-report-tests.log",
+      "sha256": "2ae6eca9ae862528494b31c840c09c9746cdd0d9071c507a20e7923f38b02e3f"
+    },
+    {
+      "label": "final-lint",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-18T08:40:17.277Z",
+      "finishedAt": "2026-10-18T08:40:18.693Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/final-lint.log",
+      "sha256": "0d01c29f5632f5863c0c764faea55d1c44e34d887d881acb82a71c9346bf4444"
+    },
+    {
+      "label": "final-rust-fmt",
+      "command": "cargo fmt --all --check",
+      "startedAt": "2026-10-18T08:40:18.700Z",
+      "finishedAt": "2026-10-18T08:40:19.373Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/final-rust-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "final-prototype-clippy",
+      "command": "cargo clippy -p any-music-tauri --example plugin-isolation-probe --features s03-isolation-probe --locked -- -D warnings",
+      "startedAt": "2026-10-18T08:40:19.373Z",
+      "finishedAt": "2026-10-18T08:40:22.330Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/final-prototype-clippy.log",
+      "sha256": "8a2eb866fb31c04025e4d277c8635b53d106f30c7591f83868f3d3641856b610"
+    },
+    {
+      "label": "final-prototype-msrv",
+      "command": "cargo +1.90.0 check -p any-music-tauri --example plugin-isolation-probe --features s03-isolation-probe --locked --target-dir target/msrv",
+      "startedAt": "2026-10-18T08:40:22.337Z",
+      "finishedAt": "2026-10-18T08:40:30.434Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/final-prototype-msrv.log",
+      "sha256": "75acc45df84867c5cc02fb1f32f85d765ea7cad755efa80e3ae1afcae18dc66e"
+    },
+    {
+      "label": "final-format",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-18T08:40:30.442Z",
+      "finishedAt": "2026-10-18T08:40:34.447Z",
+      "exitCode": 1,
+      "log": ".codex-tmp/s03-live-20261018/final-format.log",
+      "sha256": "b84b734b75951c67720d88b645c8a00b03f2eedd106db0910f72e4758c50aae2"
+    },
+    {
+      "label": "actual-webview",
+      "command": "pnpm accept:plugin:isolation",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/acceptance-unload.log",
+      "sha256": "38730379f822bbe8755ce406dc0319d0b68d035f1289d716676c318a0a93a5d5"
+    },
+    {
+      "label": "lint-last",
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/lint-final.log",
+      "sha256": "dbe8fe119f2d07f9ace599a0ea824b6d2f85688d5de582d720974333d5230be2"
+    },
+    {
+      "label": "format-last",
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03-live-20261018/format-last.log",
+      "sha256": "cfc08989a4f190c0e736db8efed81cc3555e60011e82d923db70edc38a9c944f"
+    }
+  ],
+  "capturedAt": "2026-10-18T08:45:28.715Z",
+  "actualAcceptanceSha256": "752ad954be6e77e52b20754e5fe8d205523eb5ae02a4d9d34853cfb8210af1ba",
+  "acceptedTargets": [
+    {
+      "target": "Windows",
+      "osVersion": "10.0.26200.9711 (25H2)",
+      "webviewVersion": "Edg/155.0.4283.60",
+      "applicationHash": "cb85766deb5496a2762fb2d04b9a10ec0d8f94934fdd2ffe52202caa4d623e82",
+      "profile": "S03 diagnostic 0.31.0; production Profile unaccepted"
+    }
+  ],
+  "codePluginsEnabled": false,
+  "productionProbeMarkers": 0,
+  "runtimeProcessesRemaining": 0,
+  "syntheticProfilesRemaining": 0,
+  "limits": "Only the recorded Windows S03 diagnostic combination is accepted. Other targets and S11 production Profile remain unaccepted; inherited rustls advisories still fail full cargo-deny.",
+  "testCounts": {
+    "script": 19,
+    "vitest": 1591,
+    "rust": 109,
+    "rustIgnored": 1,
+    "protocolDifferential": 171,
+    "focusedVitest": 22,
+    "focusedRust": 4,
+    "actualChecks": 11,
+    "actualAclDenials": 636
+  },
+  "preservation": {
+    "preexistingPaths": 638,
+    "unchangedPaths": 612,
+    "changedWithinS03Scope": [
+      "apps/tauri/scripts/build-isolation-probe.mjs",
+      "apps/tauri/src-tauri/build.rs",
+      "apps/tauri/src-tauri/src/isolation/prototype.rs",
+      "apps/tauri/src/isolation-probe/launcher.ts",
+      "apps/tauri/test/isolation-probe/probe-session.test.ts",
+      "docs/baselines/plugin-system-s03/target-acceptance.json",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/en/cross-platform/architecture/plugin-system-s03-isolation-prototype.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/README.md",
+      "docs/en/desktop/backend-engineering.md",
+      "docs/en/desktop/development.md",
+      "docs/en/desktop/README.md",
+      "docs/en/desktop/runtime-architecture.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S03隔离原型.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "docs/zh-cn/桌面端/后端工程规范.md",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "docs/zh-cn/桌面端/文档索引.md",
+      "docs/zh-cn/桌面端/运行端架构.md",
+      "package.json",
+      "scripts/test/check-plugin-isolation.test.mjs"
+    ],
+    "gitHead": "976c405b93719755b5879d576fbd836926ccbcdf"
+  },
+  "sourceHashes": {
+    "apps/tauri/scripts/build-isolation-probe.mjs": "6e73a779071a7b9cb7020fa2c29a14879f9101afa111f680976360c98c396fc5",
+    "apps/tauri/src-tauri/build.rs": "d06df940df555cebf7bff7b59af7ca4bcd356d944d96a5fd8a73dc2c88f0ee45",
+    "apps/tauri/src-tauri/src/isolation/prototype.rs": "4ae6154892d81df4b83f7ae623b9bfa807d8387e494f2fbec08fb15fa4f60ddf",
+    "apps/tauri/src/isolation-probe/launcher.ts": "b271a5075e5aaed82ef17f47f5c9bdf2b3e205496726a1a07c730e2f78c0bacd",
+    "apps/tauri/test/isolation-probe/probe-session.test.ts": "e233ce1dd4bad78f751850d6d791877f9edee8591a6598652262438c58af3231",
+    "package.json": "d7ed2aa6a344ec13a638cbd574b28ac2a2686cd9376f015d1ba20b80038677d4",
+    "scripts/test/check-plugin-isolation.test.mjs": "d33405cbaa07a624edeb0d7f2d564aef6e156ec3341491f3c20d9cd173cf4ef4",
+    "apps/tauri/src/isolation-probe/network-worker.ts": "ef5adf843fc63d6e07bd75e6fa9c92a3b7023550c8391295b820c14bba92f113",
+    "apps/tauri/scripts/accept-isolation-probe.mjs": "3e0fabcfc29251b32769b183d30fc6b97fafcdc96fadd505d54205103d91e466",
+    "apps/tauri/scripts/isolation-cdp.mjs": "bdf70aedcd86a906ba2e7b3456daa2a48183f8e86033cb37d6559e6ccdd60102",
+    "apps/tauri/scripts/isolation-browser-checks.mjs": "d0a19ff4e9f7da396527491306cabb1dfba79da9f365d1a18e977bf24775a820",
+    "apps/tauri/scripts/isolation-acceptance-report.mjs": "e6930a51604f423509b5a67bc0ae52fd3de53900c1a6d01f9296e7559251cbad",
+    "Cargo.lock": "ede1f3780515d02277d7afcd95548809e612de7651efaaf2b519fc274d3ed013",
+    "pnpm-lock.yaml": "a2179dc31c46ba11634d4d5776b92637923a276fe9610c84ee3f82e4c1ef2a93"
+  },
+  "newPaths": [
+    "apps/tauri/scripts/accept-isolation-probe.mjs",
+    "apps/tauri/scripts/isolation-acceptance-report.mjs",
+    "apps/tauri/scripts/isolation-browser-checks.mjs",
+    "apps/tauri/scripts/isolation-cdp.mjs",
+    "apps/tauri/src/isolation-probe/network-worker.ts",
+    "docs/baselines/plugin-system-s03/live-2026-10-18/acceptance.json",
+    "docs/baselines/plugin-system-s03/live-2026-10-18/checks.json",
+    "docs/baselines/plugin-system-s03/live-2026-10-18/previous-target-acceptance.json",
+    "docs/baselines/plugin-system-s03/live-2026-10-18/start.json"
+  ],
+  "checkedLocalLinks": 360
+}

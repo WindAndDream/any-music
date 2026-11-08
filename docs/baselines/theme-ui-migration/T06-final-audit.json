@@ -1,0 +1,40 @@
+{
+  "runtimeScope": "shared",
+  "batch": "T06",
+  "movesChecked": 37,
+  "issues": [],
+  "integrationInputs": [
+    {
+      "path": "packages/theme-default/src/vue.ts",
+      "sha256": "505b84b35b63fd3ac35739708ad29498758536dfe0d8f97d264e4435274c356b"
+    },
+    {
+      "path": "packages/theme-default/src/library.ts",
+      "sha256": "9e1b2f2c59dc3e8d783a2dc378d012ca86ee61a7b8585d5f9e867580bb876aeb"
+    },
+    {
+      "path": "packages/ui/src/library.ts",
+      "sha256": "d2322af4d37a08e347f5d849b02cf0a5df89431d0991834659fd3c67e65a4244"
+    },
+    {
+      "path": "packages/ui/src/product/library-presentation.ts",
+      "sha256": "d731cb9ea6ddfdafcbf3b513e86e9b746575f133172a015c647c6db2bbd97219"
+    },
+    {
+      "path": "packages/ui/src/product/theme-features.ts",
+      "sha256": "121249a570c5bd3394c2b5b7d2b029166c024991a9006fb9b99f1216bdb623c0"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/workbench-view-components.ts",
+      "sha256": "a3e6969c90176a72aab1e5fb48ef62c63adc3a80b9d63bc7133e8a4e593c8921"
+    },
+    {
+      "path": "apps/userscript/src/platform/configure-userscript-workbench.ts",
+      "sha256": "09da0c7dd51bd377b66869e4eca6c686b7f985c8ec2673aa436ef3e1475ebae6"
+    },
+    {
+      "path": "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "sha256": "ea64d28dacaad593d26f9bd9986868945d1efd74dbe2f8e82b58c12a30774c29"
+    }
+  ]
+}

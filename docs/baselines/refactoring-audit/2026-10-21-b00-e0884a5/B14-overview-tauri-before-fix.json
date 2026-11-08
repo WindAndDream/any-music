@@ -1,0 +1,211 @@
+{
+  "documentType": "audit-summary",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14",
+  "reviewedAt": "2026-10-21T13:51:09.889Z",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "auditComplete": true,
+  "acceptanceComplete": false,
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "scope": "All four planned B14 candidates were reviewed in separate bounded batches. This is audit completion, not repaired implementation or release/live acceptance.",
+  "reviewedSubbatches": [
+    {
+      "batchId": "B14-pure-policy-tauri",
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "not-run",
+        "live": "not-applicable"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+      "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json"
+    },
+    {
+      "batchId": "B14-runtime-ports-tauri",
+      "refactorStatus": "violating",
+      "verdict": "needs-fix",
+      "evidence": {
+        "static": "fail",
+        "tests": "fail",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+      "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json"
+    },
+    {
+      "batchId": "B14-authority-storage-tauri",
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+      "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json"
+    },
+    {
+      "batchId": "B14-named-commit-revoke-tauri",
+      "refactorStatus": "violating",
+      "verdict": "needs-fix",
+      "evidence": {
+        "static": "fail",
+        "tests": "fail",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+      "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json"
+    }
+  ],
+  "counts": {
+    "planned": 4,
+    "reviewed": 4,
+    "passScoped": 2,
+    "needsFix": 2,
+    "openFindings": 2
+  },
+  "findings": [
+    {
+      "id": "B14-R01",
+      "priority": 2,
+      "severity": "P2",
+      "status": "open",
+      "title": "Sample authorization time after entering the Store transaction",
+      "owner": "crates/am-plugin-runtime/src/authority.rs",
+      "locations": [
+        {
+          "path": "crates/am-plugin-runtime/src/authority.rs",
+          "start": 303,
+          "end": 306
+        },
+        {
+          "path": "crates/am-plugin-runtime/src/authority.rs",
+          "start": 317,
+          "end": 319
+        }
+      ],
+      "trigger": "Call check_context or check_capability while now < the grant/session/context expiry, then let Store acquisition wait until now >= that expiry before invoking the transaction closure.",
+      "observed": "All six guard/expiry combinations return Ok(()) instead of Err(Expired). Positive controls succeed before the wait; already-expired controls and read with transaction-local time deny correctly.",
+      "effect": "Expired context/capability checks can authorize after Store contention. Direct executor callers use check_context before guest bootstrap/final-output delivery and check_capability before broker operations.",
+      "evidence": [
+        ".codex-tmp/audit-b14-runtime-ports/probes.rs:94",
+        ".codex-tmp/audit-b14-runtime-ports/probes.log",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:167",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:578",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:719",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:728"
+      ],
+      "limit": "Reproduced against the unchanged runtime with a deterministic injected Store/Clock, not a live native SQLite queue. Native epoch/revocation checks still use current ledger state; this finding does not establish unauthorized persisted writes. No executor exploit or live runtime acceptance is claimed.",
+      "suggestedAction": "Borrow self.clock before transaction, then call clock.now_ms() inside each transaction closure before bound_context, matching read/create_session/host_context. Add permanent delayed-admission regressions for both methods and all expiry sources; rerun runtime and direct executor tests."
+    },
+    {
+      "id": "B14-N01",
+      "priority": 2,
+      "severity": "P2",
+      "status": "open",
+      "title": "Propagate native session-close errors before acknowledging command cancellation",
+      "owner": "apps/tauri/src-tauri/src/plugins/executor.rs",
+      "locations": [
+        {
+          "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+          "start": 63,
+          "end": 70
+        },
+        {
+          "path": "apps/tauri/src-tauri/src/plugins/control.rs",
+          "start": 180,
+          "end": 183
+        }
+      ],
+      "trigger": "A running task is canceled while the SQLite transaction that closes its native session fails before COMMIT. A previously admitted relay reaches its blocking broker after the cancel response and storage becomes writable again.",
+      "observed": "cancel_install discards authority.with(host_end_session) errors and returns unit. plugin_command_cancel consequently returns Ok(()). The failed transaction retains the session/context; after the injected SQLite failure is cleared, the unchanged state.set arm returns version 1 and the late value is persisted.",
+      "effect": "The user receives a successful cancellation acknowledgement while old native write authority remains usable by already admitted work. This violates the documented close-before-ACK contract. Normal cancellation closes the session and denies the same late write.",
+      "evidence": [
+        ".codex-tmp/audit-b14-named-commit/probes.rs:99",
+        ".codex-tmp/audit-b14-named-commit/probes.rs:106",
+        ".codex-tmp/audit-b14-named-commit/probes.log",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:70",
+        "apps/tauri/src-tauri/src/plugins/control.rs:182",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:718",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:597"
+      ],
+      "limit": "Reproduced with the unchanged extracted cancellation method, product-command body and state.set arm, actual runtime and actual SQLite adapter. Native/view setup is headless and the already admitted relay is simulated; no actual WebView race or exploit was executed. The demonstrated late write is confined to the installation namespace, not canonical host library data.",
+      "suggestedAction": "Make cancel_install return a Result and propagate poisoned-task-lock/session-close failures. Return success from plugin_command_cancel only after every matching session/context has durably closed. Keep already admitted work unable to commit after successful cancellation; cover failure and successful controls with permanent regressions."
+    }
+  ],
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "evidenceValidity": {
+    "reusedEvidence": [
+      {
+        "batchId": "B14-pure-policy-tauri",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+        "matchingInputs": 89,
+        "result": "valid-scoped-evidence"
+      },
+      {
+        "batchId": "B14-runtime-ports-tauri",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+        "matchingInputs": 14,
+        "result": "valid-scoped-evidence"
+      },
+      {
+        "batchId": "B14-authority-storage-tauri",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+        "matchingInputs": 11,
+        "result": "valid-scoped-evidence"
+      }
+    ],
+    "currentBatchBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+    "result": "All original scoped hashes still match; previous findings and passed scopes remain valid."
+  },
+  "verificationBySubbatch": [
+    {
+      "batchId": "B14-pure-policy-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+      "note": "Read exact commands, exits, timestamps, logs and limits in the corresponding report; repeated tests are not summed as unique cases."
+    },
+    {
+      "batchId": "B14-runtime-ports-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+      "note": "Read exact commands, exits, timestamps, logs and limits in the corresponding report; repeated tests are not summed as unique cases."
+    },
+    {
+      "batchId": "B14-authority-storage-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+      "note": "Read exact commands, exits, timestamps, logs and limits in the corresponding report; repeated tests are not summed as unique cases."
+    },
+    {
+      "batchId": "B14-named-commit-revoke-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+      "note": "Read exact commands, exits, timestamps, logs and limits in the corresponding report; repeated tests are not summed as unique cases."
+    }
+  ],
+  "limits": [
+    "B14-R01 and B14-N01 remain unrepaired and lack permanent regressions.",
+    "A real WebView/IPC cancellation race and actual admitted desktop execution were not run.",
+    "Output/anonymous-network final-sink barriers, full installation/DEV/native consent and platform admission retain their own B15/B16/B18 scopes.",
+    "Crash/power-loss/device durability and root final release gates were not performed for this audit-only request."
+  ],
+  "productImplementationChanged": false,
+  "nextAction": {
+    "batchId": "B14-repair-runtime-expiry-tauri",
+    "type": "implementation-fix",
+    "runtime": "tauri",
+    "entry": "crates/am-plugin-runtime/src/authority.rs:303",
+    "question": "Repair B14-R01 by sampling time inside both Store transactions and add permanent delayed-admission expiry regressions; then rerun affected runtime/native checks.",
+    "remainingFindingIds": ["B14-N01"],
+    "note": "The four audit candidates are reviewed; implementation repair was outside this audit request."
+  }
+}

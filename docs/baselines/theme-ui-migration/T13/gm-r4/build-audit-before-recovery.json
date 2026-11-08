@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "documentType": "production-build-and-verification-audit",
+  "runtimeScope": "userscript",
+  "checkedAt": "2026-10-27T08:59:14.014272+00:00",
+  "inputCount": 606,
+  "aggregateSha256": "132d7e77af9bdf583eefc4e6dfcfc2e5751e2b09dfa10db2e02b49d4d24574cb",
+  "inputManifest": "production-inputs.json",
+  "comparedBuildInputManifest": "../gm-r3/final-production-inputs.json",
+  "changedAfterRecordedBuildInputs": [],
+  "artifact": {
+    "path": "apps/userscript/dist/any-music.user.js",
+    "bytes": 5024444,
+    "sha256": "c944e1c9518b25e193a7aab9ebc35400b604df8970ad7ced4f7ff5906b907134"
+  },
+  "buildLog": "../gm-r3/root-build.log",
+  "verification": {
+    "executionOwner": "Independent GM-R3 final combined-workspace runs after source freeze, already recorded in ../../T13-gm-r3.json. This GM-R4 audit recomputes fingerprints and reads existing logs; it does not rerun the five root commands.",
+    "exitCodes": {
+      "test": 0,
+      "typecheck": 0,
+      "lint": 0,
+      "format": 0,
+      "build": 0
+    },
+    "exitCodeEvidence": "../gm-r3/root-check-exit-codes.json",
+    "logs": {
+      "test": "../gm-r3/root-test.log",
+      "typecheck": "../gm-r3/root-typecheck.log",
+      "lint": "../gm-r3/root-lint.log",
+      "format": "../gm-r3/root-format.log",
+      "build": "../gm-r3/root-build.log"
+    },
+    "logSha256": {
+      "../gm-r3/root-test.log": "92c1e95e5ef762f3cde420b618e078fdc3ec32af55a563789bf663dd19d622f3",
+      "../gm-r3/root-typecheck.log": "9eec6e4a98fc38139dbf180b1203212e0d60a218986edaf3f3aabc5a9bfcf35b",
+      "../gm-r3/root-lint.log": "66333cce3898f6db26ad6c94ca21c857a12382249397325a70405ba3c6e44111",
+      "../gm-r3/root-format.log": "c6ea3d1696435b3a27be332ebd36973ae8bab0c5bae0191b6351e95c0a2e8224",
+      "../gm-r3/root-build.log": "e13578d78eb6b12c4139684bf16bb98d30f86756a4002ac0aaf7c52d1224f36e",
+      "../gm-r3/root-check-exit-codes.json": "e2a62d0fca90676204a7910beba9d928bfce47212a665c126dc5c055bc352ba3"
+    },
+    "testSummary": {
+      "vitestFiles": 314,
+      "vitestTests": 2365,
+      "rustPassed": 253,
+      "nodeTests": 58,
+      "protocolDifferentialCases": 200
+    },
+    "buildScope": "Both production frontends and optimized Windows application; no native UI launch follows from build success.",
+    "documentationBoundary": "The independent GM-R3 format pass predates GM-R4 evidence updates; the final GM-R4 documentation/format check is separate."
+  },
+  "studioSourceToggleRegression": {
+    "testFile": "packages/theme-studio/test/components/settings/StudioSettings.test.ts",
+    "testFileSha256AtAudit": "913283cccbc3dca0a084301500e829266f6a7653b4be12319b97a55c6f6f35e6",
+    "cases": 3,
+    "packageTestDiscovery": "packages/theme-studio/vitest.config.ts includes test/**/*.test.ts without a file filter.",
+    "currentDiscoveredTestFiles": [
+      "packages/theme-studio/test/components/StudioFeatureStatus.test.ts",
+      "packages/theme-studio/test/components/library/StudioTrackTable.test.ts",
+      "packages/theme-studio/test/components/settings/StudioAppearance.test.ts",
+      "packages/theme-studio/test/components/settings/StudioSettings.test.ts",
+      "packages/theme-studio/test/metadata.test.ts"
+    ],
+    "rootLogEvidence": "../gm-r3/root-test.log records packages/theme-studio: 5 files / 19 tests passed; these five discovered files include StudioSettings.test.ts and its three last-source/other-source regression cases.",
+    "measurementLimit": "The root log reports aggregate package counts rather than individual test filenames. Test-file membership is established by the recorded package command/configuration and current five-file inventory, not a per-test hash at execution time.",
+    "finalArtifactContainsLastSourceExplanation": true
+  },
+  "earlierGmR4FailureAndReruns": {
+    "firstAttemptLog": "root-test-final-attempt1.log",
+    "failure": "storage::resource_cache::tests::persists_chunks_and_settings_without_urls_and_clear_rejects_late_writes panicked at apps/tauri/src-tauri/src/storage/resource_cache/tests.rs:134:49: Option::unwrap() on None. Native suite: 204 passed / 1 failed / 1 ignored; package exit status 101.",
+    "targetedRerunLog": "root-test-native-targeted.log",
+    "targetedRerun": "The same native test passed alone: 1 passed / 205 filtered out.",
+    "fullRerunBeforeLastSourceFixLog": "root-test-before-source-toggle.log",
+    "fullRerunBeforeLastSourceFix": "The complete rerun passed with 313 Vitest files / 2,357 tests and the native/protocol suites.",
+    "fullRerunAfterLastSourceFixLog": "root-test.log",
+    "fullRerunAfterLastSourceFix": "A later complete GM-R4 root test passed with 314 Vitest files / 2,365 tests and the native/protocol suites. GM-R3 subsequently performed its independent passing final run referenced above.",
+    "cause": "Not established by these records. Passing reruns do not establish the original failure cause; no unrelated native implementation repair is claimed."
+  },
+  "preservedEarlierCandidate": {
+    "manifest": "production-inputs-first-candidate.json",
+    "buildAudit": "build-audit-first-candidate.json",
+    "sha256": "2cd841733a348a0baf589d11a87b33f260c8522959af87a4233f9b571e5ee080",
+    "bytes": 5023211,
+    "aggregateSha256": "d4496bc031029fef0a37729d94e69d40288a7163e7637a85a488cac4a5b3b364",
+    "changedInputsToFinal": [
+      "packages/plugin-source-netease/src/types.ts",
+      "packages/theme-default/src/components/plugins/ClassicPlugins.vue",
+      "packages/theme-default/src/styles/_specialists.scss",
+      "packages/theme-studio/src/components/settings/StudioSettings.vue"
+    ],
+    "scope": "First-candidate records remain unchanged. Existing gm-r4/root-build.log is the intermediate build; final c944 reproducibility uses the independent gm-r3/root-build.log."
+  },
+  "limits": [
+    "Stable source fingerprints and automated checks do not establish browser focus/layout, GM transport or physical input. Installed GM-R4 cases are recorded separately.",
+    "No commit/push or product-source change was performed by this audit."
+  ]
+}

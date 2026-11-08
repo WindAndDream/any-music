@@ -1,0 +1,53 @@
+// Generated schema selectors. Do not edit.
+import type * as Protocol from './protocol.ts'
+export interface SchemaTypes {
+  LocalizedText: Protocol.LocalizedText
+  WireError: Protocol.WireError
+  CapabilityRequirement: Protocol.CapabilityRequirement
+  ExtensionRequirement: Protocol.ExtensionRequirement
+  ContributionScope: Protocol.ContributionScope
+  ContributionDescriptor: Protocol.ContributionDescriptor
+  CommandDescriptor: Protocol.CommandDescriptor
+  PluginManifest: Protocol.PluginManifest
+  HostCapabilities: Protocol.HostCapabilities
+  CommandContext: Protocol.CommandContext
+  PluginTask: Protocol.PluginTask
+  HostEvent: Protocol.HostEvent
+  UiNode: Protocol.UiNode
+  UiDocument: Protocol.UiDocument
+  UiEvent: Protocol.UiEvent
+  WireTrack: Protocol.WireTrack
+  WireTrackPage: Protocol.WireTrackPage
+  WireListing: Protocol.WireListing
+  WireMediaQuality: Protocol.WireMediaQuality
+  WireMedia: Protocol.WireMedia
+  MusicSearchInput: Protocol.MusicSearchInput
+  MusicImportInput: Protocol.MusicImportInput
+  MusicListingInput: Protocol.MusicListingInput
+  MusicResolveInput: Protocol.MusicResolveInput
+  MusicReleaseInput: Protocol.MusicReleaseInput
+  MusicCancelInput: Protocol.MusicCancelInput
+  EmptyResult: Protocol.EmptyResult
+  StateGetInput: Protocol.StateGetInput
+  StateSetInput: Protocol.StateSetInput
+  StateValue: Protocol.StateValue
+  NetworkInput: Protocol.NetworkInput
+  NetworkResult: Protocol.NetworkResult
+  ResponseReadInput: Protocol.ResponseReadInput
+  ResponseChunk: Protocol.ResponseChunk
+  ResponseReleaseInput: Protocol.ResponseReleaseInput
+  DigestInput: Protocol.DigestInput
+  DigestResult: Protocol.DigestResult
+  HostRequest: Protocol.HostRequest
+  HostResponse: Protocol.HostResponse
+  MusicRequest: Protocol.MusicRequest
+  MusicResponse: Protocol.MusicResponse
+  PackageIntegrityEntry: Protocol.PackageIntegrityEntry
+  PackageIntegrity: Protocol.PackageIntegrity
+  PackageSignature: Protocol.PackageSignature
+  PackageRevocations: Protocol.PackageRevocations
+  GuestInvocation: Protocol.GuestInvocation
+  GuestStep: Protocol.GuestStep
+  SourceCredentialField: Protocol.SourceCredentialField
+  SourceAuthentication: Protocol.SourceAuthentication
+}

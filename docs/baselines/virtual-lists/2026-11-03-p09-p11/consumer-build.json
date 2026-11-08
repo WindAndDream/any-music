@@ -1,0 +1,109 @@
+{
+  "capturedAt": "2026-11-03T13:39:20.703Z",
+  "method": "Isolated Vite production builds of Node-tested full/measured native-list consumers and the actual controlled VirtualTrackCardGrid SFC. Vue external, JS plus component CSS counted; no product/browser launched.",
+  "buildOptions": {
+    "mode": "production",
+    "minify": "oxc",
+    "target": "es2022",
+    "formats": ["es"],
+    "external": ["vue"],
+    "gzipLevel": 9
+  },
+  "results": [
+    {
+      "name": "FullListConsumer",
+      "entry": "export { FullListConsumer as Consumer } from \"../../packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 3734,
+          "gzipBytes": 1520,
+          "sha256": "c3becd470b3f0e4eb63ca77847b16c245e61f1c24da07e38a7fe3d11e5fa306e"
+        }
+      ],
+      "modules": [
+        "logs/2026-11-03-virtual-list-implementation/p09-p11-FullListConsumer.entry.mjs",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+        "packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts"
+      ],
+      "bytes": 3734,
+      "gzipBytes": 1520
+    },
+    {
+      "name": "MeasuredListConsumer",
+      "entry": "export { MeasuredListConsumer as Consumer } from \"../../packages/ui/test/fixtures/virtual-scroll/measured-list-consumer.ts\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 57122,
+          "gzipBytes": 15343,
+          "sha256": "32b965dd7e91e3c5cb169b0d96c546cecbfa3985fe7c7e68a8ea83576d11cdd9"
+        }
+      ],
+      "modules": [
+        "logs/2026-11-03-virtual-list-implementation/p09-p11-MeasuredListConsumer.entry.mjs",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/index.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/ios-gesture.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/lazy-measurements.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/scroll-classifier.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/utils.js",
+        "node_modules/.pnpm/@tanstack+vue-virtual@3.13.51_vue@3.5.44_typescript@6.0.3_/node_modules/@tanstack/vue-virtual/dist/esm/index.js",
+        "packages/ui/src/composables/virtual-scroll/use-measured-virtual-list.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-list-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-retained-range.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+        "packages/ui/test/fixtures/virtual-scroll/measured-list-consumer.ts"
+      ],
+      "bytes": 57122,
+      "gzipBytes": 15343
+    },
+    {
+      "name": "VirtualTrackCardGrid",
+      "entry": "export { default as Consumer } from \"../../packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 61869,
+          "gzipBytes": 16818,
+          "sha256": "7609b0e9e5ded52f30507b62f522f6ea00cc0cdc713ac532a228127ce40a1673"
+        },
+        {
+          "fileName": "consumer.css",
+          "bytes": 1221,
+          "gzipBytes": 437,
+          "sha256": "200f794f621ba6825a19a45d3a8cdb163885ad039032f76ba10f5e96cb64a29e"
+        }
+      ],
+      "modules": [
+        "\u0000plugin-vue:export-helper",
+        "logs/2026-11-03-virtual-list-implementation/p09-p11-VirtualTrackCardGrid.entry.mjs",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/index.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/ios-gesture.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/lazy-measurements.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/scroll-classifier.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/utils.js",
+        "node_modules/.pnpm/@tanstack+vue-virtual@3.13.51_vue@3.5.44_typescript@6.0.3_/node_modules/@tanstack/vue-virtual/dist/esm/index.js",
+        "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+        "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue?vue&type=script&setup=true&lang.ts",
+        "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue?vue&type=style&index=0&scoped=d945cb12&lang.css",
+        "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+        "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=script&setup=true&lang.ts",
+        "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=style&index=0&scoped=9a5c01a2&lang.css",
+        "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-grid-css-layout.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-retained-range.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts"
+      ],
+      "bytes": 63090,
+      "gzipBytes": 17255
+    }
+  ],
+  "limits": "Grid is not yet consumed by production lists. Component markup/CSS differs from list fixtures. P10/P11 are opt-in and unused by this component build; do not treat its size as their combined integration cost. No real CSS measurement, native layout, focus, input, image decode or frame acceptance."
+}

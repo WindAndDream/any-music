@@ -1,0 +1,196 @@
+{
+  "batchId": "T13",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "status": "in-progress",
+  "delivery": "Requested four-view visual repair and representative authorized runtime inspection delivered; the broader live continuity matrix remains open.",
+  "focusViews": ["catalog", "queue", "favorites", "downloads"],
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "preservedEarlierChanges": true,
+    "commitOrPush": false
+  },
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": ".codex-tmp/collection-trigger-root-test-final.txt"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": ".codex-tmp/collection-trigger-root-typecheck-final.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": ".codex-tmp/collection-trigger-root-lint-final.txt"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13/root-build.txt"
+    },
+    {
+      "command": "pnpm build:mobile:android aarch64",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13/root-android-final-build.txt"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13/root-format.txt"
+    }
+  ],
+  "regressions": [
+    "Restore classic fixed collection controls and two-row bottom operators.",
+    "Restore full-screen filtering and correct selection counts; keep unavailable actions disabled outside fieldsets.",
+    "Move nested settings dialogs outside suspended theme ancestors.",
+    "Render protected account details in separate host-only Shadow overlays and align data-am-theme attributes.",
+    "Restore classic collection song actions at the root, retaining host editing scopes and rejecting stale dialog callbacks.",
+    "Style track/favorite/catalog filter footers with 44px targets, primary apply buttons and equal-width narrow actions.",
+    "Restore original collection groups/detail navigation/cards/dates and download status surfaces through existing host-owned projections and actions.",
+    "Restore discovery sticky context/platform locking and close the mobile sidebar after navigation.",
+    "Give teleported favorite filters an independent query container and let the slot author style its 44px trigger."
+  ],
+  "targetedTests": {
+    "classicFiles": 50,
+    "classicTests": 351,
+    "protectedFiles": 8,
+    "protectedTests": 42,
+    "crossThemeCoverageTests": 23
+  },
+  "runtimeEvidence": [
+    {
+      "runtime": "userscript-development",
+      "url": "http://127.0.0.1:18764/?monkey=0",
+      "initialUrl": "http://127.0.0.1:18763/?monkey=0",
+      "themes": ["default", "studio"],
+      "observed": [
+        "Wide classic operators/filters and Escape focus return",
+        "411x864 system dark and reduced motion",
+        "1280x850 light Studio and hide/show",
+        "Integrated four-view wide layouts and empty-state heights have no horizontal overflow; the favorite trigger is 44px with themed surface/text/radius."
+      ],
+      "limit": "User selected the development server. This is a GM substitute, not installed GM or foreign-host/transport acceptance. Browser screenshots timed out; browser evidence uses accessibility and computed geometry."
+    },
+    {
+      "runtime": "tauri-Windows",
+      "build": "Native debug runner with an independent inspection partition and Vite on port 21420",
+      "themes": ["default", "studio"],
+      "observed": [
+        "Light/dark theme switching",
+        "Actual mouse operates nested appearance and protected account dialogs",
+        "Native Bilibili import/playback and completed MP3 save",
+        "Real mouse opens Favorites song actions, types an unsaved custom name and returns focus to its trigger with Escape.",
+        "An unsubmitted creation collection name survives Classic-to-Studio-to-Classic switching through real settings controls without creating a collection."
+      ],
+      "playbackSwitch": {
+        "beforeSeconds": 43.069923,
+        "afterSeconds": 43.745745,
+        "paused": false,
+        "sameAudioNode": true,
+        "audioNodeCount": 1,
+        "continuedAfterReturning": true
+      },
+      "nativeSave": {
+        "completedBatches": 1,
+        "outputBytes": 49320811
+      },
+      "originalData": {
+        "observationPhase": "Initial inspection; later file revisions and an existing native window are not a recovery claim.",
+        "mutated": false,
+        "snapshotSchema": 2,
+        "currentSequence": 422,
+        "previousSequence": 421,
+        "currentCoreChecksumMatches": false,
+        "previousCoreChecksumMatches": false,
+        "hostAndNamespacesChecksumsMatch": true
+      },
+      "limit": "Initial native-file generation validation failed and this task performed no data recovery. An existing native window was visible after resuming. Media observations were captured during the repair pass; subsequent UI refinements have targeted tests and runtime UI checks, not an exhaustive repeat of every media case."
+    },
+    {
+      "runtime": "tauri-Android",
+      "device": {
+        "physical": true,
+        "abi": "arm64-v8a",
+        "model": "23113RKC6C",
+        "android": "15",
+        "webView": "153.0.8010.36"
+      },
+      "build": "Debug arm64 APK from production application sources",
+      "themes": ["default", "studio"],
+      "observed": [
+        "411x864 fixed classic controls and full-screen filter",
+        "Touch and filter system Back",
+        "Touch selects dark Studio after the inert fix",
+        "Appearance restored to system and classic theme",
+        "Favorites operator overflow advances from scrollLeft 0 to 247.23809814453125 at clientWidth 339 and scrollWidth 732.",
+        "Integrated discovery/queue/favorites/downloads layouts and automatic mobile drawer close.",
+        "Favorite platform filter content has no horizontal overflow at 411x864, with equal-width 44px footer targets.",
+        "Queue platform overview/detail navigation with one existing track; the temporary queue entry was removed and flat mode restored.",
+        "Final installed APK confirms the favorite trigger is 44px with a 6px radius and themed surface.",
+        "Download status overflow advances to scrollLeft 147.04762268066406 at clientWidth 196 and scrollWidth 390."
+      ],
+      "limit": "Not optimized release, iOS, external execution or the full mobile media/save matrix.",
+      "installedApkSha256MatchesBuild": true,
+      "testCleanup": {
+        "temporaryQueueEntriesRemoved": true,
+        "queueArrangementRestored": "flat",
+        "originalDownloadRecordsPreserved": true
+      }
+    }
+  ],
+  "openAcceptance": [
+    "Original desktop core-data recovery requires a separately reviewed path; no reset or checksum rewriting occurred.",
+    "Complete active/queued native download switching and final-save deduplication, scroll restoration and failure recovery across the requested runtimes.",
+    "Installed GM/foreign-host transport and optimized Android media/proxy/save acceptance remain separate; mobile external policy stays none."
+  ],
+  "artifactSha256": {
+    "userscript": "ee37981d5e3349aab6115701d948ec0ff52e87a7a29ed0fcd744e037b576cc10",
+    "windowsRelease": "b500c64e7d3b47e228e996e4c95b118dda3d081d1a523f4c9cf3584031804994",
+    "androidDebugApk": "7cf7bc3f52aea737dcf819d2767efeffc0e872074b99aa69c561e539dd9d6668"
+  },
+  "localEvidence": {
+    "directory": ".codex-tmp/t13",
+    "logs": [
+      ".codex-tmp/collection-trigger-root-test-final.txt",
+      ".codex-tmp/collection-trigger-root-typecheck-final.txt",
+      ".codex-tmp/collection-trigger-root-lint-final.txt",
+      ".codex-tmp/t13/root-build.txt",
+      ".codex-tmp/t13/root-android-final-build.txt",
+      ".codex-tmp/t13/root-format.txt"
+    ],
+    "screenshots": [
+      ".codex-tmp/t13/android-discovery-integrated.png",
+      ".codex-tmp/t13/android-queue-integrated.png",
+      ".codex-tmp/t13/android-favorites-integrated.png",
+      ".codex-tmp/t13/android-downloads-integrated.png",
+      ".codex-tmp/t13/android-favorites-filter-integrated.png",
+      ".codex-tmp/t13/android-queue-platform-detail.png"
+    ],
+    "screenshotLimit": "The platform-detail screenshot predates only the final favorite-trigger CSS refinement. Protected account screenshots and raw runtime logs are not copied into maintained documentation."
+  },
+  "scope": "No source protocol, native command, credentials, storage schema or target admission changes in this pass.",
+  "artifactBytes": {
+    "userscript": 4909747,
+    "windowsRelease": 28359168,
+    "androidDebugApk": 244712715
+  },
+  "rootVerification": {
+    "vitestFiles": 290,
+    "vitestTests": 2120,
+    "protocolDifferentialCases": 183,
+    "nodeCliAndCargoGatesIncluded": true
+  },
+  "latestFollowUp": {
+    "date": "2026-10-25",
+    "evidence": "docs/baselines/theme-ui-migration/T13-runtime-followup.json",
+    "scope": "Final combined-source Windows and signed optimized Android acceptance, installed GM repeat deferred by the user; exact artifacts, real native queue/save/proxy/recipe retention and remaining physical-interruption exits. T13 remains in progress."
+  },
+  "latestPcFollowUp": {
+    "date": "2026-11-01",
+    "evidence": "docs/baselines/theme-ui-migration/T13-pc-2026-11-01.json",
+    "scope": "Recorded optimized Windows UI/input/scroll/protected-form acceptance and repairs; earlier installed GM DOM matrix, final installed repeat blocked. Mobile deferred; T13 remains in progress."
+  }
+}

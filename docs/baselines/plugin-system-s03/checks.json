@@ -1,0 +1,562 @@
+{
+  "capturedAt": "2026-10-16T20:51:26.582Z",
+  "scope": "S03",
+  "status": "awaiting-acceptance",
+  "checks": [
+    {
+      "label": "target",
+      "command": "pnpm check:plugin:isolation",
+      "startedAt": "2026-10-16T20:43:09.642Z",
+      "finishedAt": "2026-10-16T20:43:20.209Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/target.log",
+      "sha256": "a4b1863e0ed7ebccf95554d5c9bd35eaa91cdccfc557bf03dfc949098cadde60"
+    },
+    {
+      "label": "test",
+      "command": "pnpm test",
+      "startedAt": "2026-10-16T20:43:20.210Z",
+      "finishedAt": "2026-10-16T20:44:30.224Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/test.log",
+      "sha256": "95576716a140a1dedf72364bc6a3ceb4e7ddda1cfd96f81f5d83dfbd2de38c62"
+    },
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-16T20:44:30.225Z",
+      "finishedAt": "2026-10-16T20:45:13.468Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/typecheck.log",
+      "sha256": "dbd05326ad4cc05424a973701e450852d598b173d7841f593035e437eb27f9b2"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-16T20:45:13.468Z",
+      "finishedAt": "2026-10-16T20:45:15.345Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/lint.log",
+      "sha256": "743f575506437f72667d162c39482ee4dd1fc292cc4d8b527584e01b32d9b76d"
+    },
+    {
+      "label": "format",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-16T20:45:15.345Z",
+      "finishedAt": "2026-10-16T20:45:19.297Z",
+      "exitCode": 1,
+      "log": ".codex-tmp/s03/format.log",
+      "sha256": "9b35da429a4c5aee26877ab5316226b6c88435d18799b668f8fd9db0a99f4dcc"
+    },
+    {
+      "label": "build",
+      "command": "pnpm build",
+      "startedAt": "2026-10-16T20:45:19.297Z",
+      "finishedAt": "2026-10-16T20:47:04.824Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/build.log",
+      "sha256": "615fc876e0d3f96e863a4a1a4bea5635cef33afa44870d9fda08bfcda06396d2"
+    },
+    {
+      "label": "native",
+      "command": "pnpm check:native",
+      "startedAt": "2026-10-16T20:47:04.824Z",
+      "finishedAt": "2026-10-16T20:47:19.589Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/native.log",
+      "sha256": "d5e349c49a45e5c343c92aba898ff49cf269587c69a6c7e6778c48a4d8ba3aa8"
+    },
+    {
+      "label": "msrv",
+      "command": "pnpm check:rust:msrv",
+      "startedAt": "2026-10-16T20:47:19.589Z",
+      "finishedAt": "2026-10-16T20:47:36.759Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/msrv.log",
+      "sha256": "59275dd6b9e3a1ea47414cde93d78393ffefdc840005faf82f2af5d6dd48ac87"
+    },
+    {
+      "label": "deny",
+      "command": "pnpm check:rust:deny",
+      "startedAt": "2026-10-16T20:47:36.760Z",
+      "finishedAt": "2026-10-16T20:47:47.715Z",
+      "exitCode": 1,
+      "log": ".codex-tmp/s03/deny.log",
+      "sha256": "5c419dd2c993c9a879b89c14097f140f6785e4ecb39c533a5619e368b2f36da4"
+    },
+    {
+      "label": "deny-pure",
+      "command": "pnpm check:rust:deny:pure",
+      "startedAt": "2026-10-16T20:47:47.716Z",
+      "finishedAt": "2026-10-16T20:47:50.427Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/deny-pure.log",
+      "sha256": "a791df20d90c00d8d46cce1cb9880a00e07aa23b5731c4a43002228be5e5309c"
+    },
+    {
+      "label": "prototype-clippy",
+      "command": "cargo clippy -p any-music-tauri --all-targets --features s03-isolation-probe --locked -- -D warnings",
+      "startedAt": "2026-10-16T20:47:50.427Z",
+      "finishedAt": "2026-10-16T20:47:54.516Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/prototype-clippy.log",
+      "sha256": "7daf5c2160d81f1e2122a46a6e7644fdef6e5044326f244ece5fcfef111d6422"
+    },
+    {
+      "label": "target",
+      "command": "pnpm check:plugin:isolation",
+      "startedAt": "2026-10-16T20:48:07.086Z",
+      "finishedAt": "2026-10-16T20:48:19.120Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/target-2.log",
+      "sha256": "a148687acb573d62ee10a801b95938a9d4470c214ff34b0b05c013e168f8404d"
+    },
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-16T20:48:19.120Z",
+      "finishedAt": "2026-10-16T20:48:54.930Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/typecheck-2.log",
+      "sha256": "d40b6f3e9524ba27367871150871196dae2a3be8c6f182d80244fcbdecb4f1fd"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-16T20:48:54.931Z",
+      "finishedAt": "2026-10-16T20:48:56.391Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/lint-2.log",
+      "sha256": "c155f5746439ab89e8dfcefff905b0148dad3cd35951a69cf5b82bba836540a6"
+    },
+    {
+      "label": "format",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-16T20:48:56.391Z",
+      "finishedAt": "2026-10-16T20:48:59.999Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/format-2.log",
+      "sha256": "764b604ee06d2ed1b8435a44265606b7c9fd5bac716d79c24d6e1a5a210314cd"
+    },
+    {
+      "label": "prototype-clippy",
+      "command": "cargo clippy -p any-music-tauri --all-targets --features s03-isolation-probe --locked -- -D warnings",
+      "startedAt": "2026-10-16T20:48:59.999Z",
+      "finishedAt": "2026-10-16T20:49:03.632Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/prototype-clippy-2.log",
+      "sha256": "ad2acf41a4c43bf33b66a8ba79bf6e3502de2f6b2c07d6e0156242f271eec702"
+    },
+    {
+      "label": "isolation-config-tests",
+      "command": "node --test scripts/test/check-plugin-isolation.test.mjs",
+      "startedAt": "2026-10-16T20:49:03.633Z",
+      "finishedAt": "2026-10-16T20:49:03.978Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/isolation-config-tests-1.log",
+      "sha256": "f00bb6d5445c15615171290b306cff1f126695d8ecb88383a3f36ed890c15c51"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-16T20:50:47.196Z",
+      "finishedAt": "2026-10-16T20:50:48.651Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/lint-3.log",
+      "sha256": "b6b5e296e5b1f80dbf68aa134f8ebc3bf53cf42ea02ed5a638432f7773862cc9"
+    },
+    {
+      "label": "format",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-16T20:50:48.652Z",
+      "finishedAt": "2026-10-16T20:50:52.135Z",
+      "exitCode": 1,
+      "log": ".codex-tmp/s03/format-3.log",
+      "sha256": "c0e8cac2abc088685e83acc47d08121c3aab73acc42f25b781773e6baaf3a0cd"
+    },
+    {
+      "label": "format",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-16T20:51:23.204Z",
+      "finishedAt": "2026-10-16T20:51:26.581Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s03/format-4.log",
+      "sha256": "7fdbc3c0e04f492076dc67943f85e36e240db78ac79faec14aa5ef3af29dd726"
+    }
+  ],
+  "launchedAppOrBrowser": false,
+  "gitPublished": false,
+  "testSummary": {
+    "vitestPassed": 1400,
+    "nativePassed": 108,
+    "nativeIgnored": 1,
+    "s03": {
+      "nativeIsolation": 4,
+      "vmIsolation": 1,
+      "staticConfig": 2
+    }
+  },
+  "environment": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)"
+  },
+  "artifacts": [
+    {
+      "path": "apps/tauri/dist/assets/ActiveDownloadPanel-D556Hneu.js",
+      "bytes": 4144,
+      "sha256": "1b51f56eab95f6bff787e1f427505c0b858ba4fda0d211a000deb3da8d6b8bf7"
+    },
+    {
+      "path": "apps/tauri/dist/assets/app-error-BjZGph4G.js",
+      "bytes": 7448,
+      "sha256": "1f87c8d9b58adfe6647a92b9217e74ddf68c8df27a230e097538342a2c271f9a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/AppIcon-D4ck_dDu.css",
+      "bytes": 164,
+      "sha256": "8cc42051a7d3a3628ff5e14d5e526096557a70a91c02b1b7d860906f7debbffe"
+    },
+    {
+      "path": "apps/tauri/dist/assets/AppIcon-DPRv58jr.js",
+      "bytes": 4290,
+      "sha256": "435985742bc78030d2efd816d6c1321e276f7699a55f248e801e4efda794eb77"
+    },
+    {
+      "path": "apps/tauri/dist/assets/audio-exporter-BEev7hla.js",
+      "bytes": 317622,
+      "sha256": "305f90659ffc7b2d355a7abe3dc8819bf2a6f3dacb29a325dbde7f709f11d0bd"
+    },
+    {
+      "path": "apps/tauri/dist/assets/audio-exporter-CjwsS8gv.js",
+      "bytes": 82,
+      "sha256": "77b16b70b915085b19fc8ace4dcc9856415d8ff8214716280f4ff3734c610b01"
+    },
+    {
+      "path": "apps/tauri/dist/assets/bilibili-DVPJPxo8.js",
+      "bytes": 24394,
+      "sha256": "16930931f081ec375a2a092a04b51240efcc3f94ea4842221083bb1c96318b06"
+    },
+    {
+      "path": "apps/tauri/dist/assets/BottomSheet-BNJ4Lggr.css",
+      "bytes": 9108,
+      "sha256": "14626e6ec3c8148598195755c8fe6cfea3ec1a1bf9a5cb596247474c7fc617e0"
+    },
+    {
+      "path": "apps/tauri/dist/assets/BottomSheet-oDKiSgb5.js",
+      "bytes": 6320,
+      "sha256": "d9a56e644b98f1f16f64e0c40a4397884f762beb5f2755a0067a9c25a629e932"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CatalogDisplayModeDialog-18Ts8130.css",
+      "bytes": 67253,
+      "sha256": "54f901f00b0f28b04fd94d8d5231cdcee1d606a1d4ec2187c18b082392c3e789"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CatalogDisplayModeDialog-C6tUbEkY.js",
+      "bytes": 83952,
+      "sha256": "7678001e8481424dca7099e6d4b76baf64dde5f5bf10ba6d5cf26db3f276f652"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CustomPluginPanel-BKtpEssx.js",
+      "bytes": 47526,
+      "sha256": "ccd858fd540e71a0a5c070c1083acaf0855b7bd54e3ce3994ba4725a09c1b1e2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CustomTrackPanel-DflbH1Ji.js",
+      "bytes": 7961,
+      "sha256": "836373e87dc110308c20940d2fe28f60394a00af7f9c768c5027e2eb33afcb53"
+    },
+    {
+      "path": "apps/tauri/dist/assets/declarative-manifest-EgRPOwBO.js",
+      "bytes": 11254,
+      "sha256": "504ce32a6780b16c8cb67cac1599808694d1615e59cd213a440e7d60441d5ba6"
+    },
+    {
+      "path": "apps/tauri/dist/assets/douyin-Cpik2zqK.js",
+      "bytes": 37411,
+      "sha256": "bb3fe3568c9bd63f971a6a293a2713ecee083c337a163a9f0afeb2ec800a97b2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/douyin-request-state-CFbLQ2P_.js",
+      "bytes": 4610,
+      "sha256": "3b3f15fd27074662d2fd37941335beb05bde604798aaedec2d4c52f18c3ed29f"
+    },
+    {
+      "path": "apps/tauri/dist/assets/download-archive-aGajjFNI.js",
+      "bytes": 7398,
+      "sha256": "3aaaea66fac5a5656b7ff7c4e9036c3580424c2f10215c2ac7afd7490bd2e495"
+    },
+    {
+      "path": "apps/tauri/dist/assets/download-history-CoRpQVKm.js",
+      "bytes": 4298,
+      "sha256": "272f13114e0849fb2183cc0cb23595b87dfc3de08f88f454a3e65c2969ce5d5a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/DownloadHistoryPanel-CMs_dQfz.js",
+      "bytes": 14060,
+      "sha256": "2b181769205e4ca1911923cb016ea2480680aeac136b9457f2a918283a855400"
+    },
+    {
+      "path": "apps/tauri/dist/assets/FavoritePanel-DYFvN4I6.js",
+      "bytes": 2623,
+      "sha256": "43974e60f22432e6139b4e4915952e6d772540e86ea3f71c03b8808490753ec5"
+    },
+    {
+      "path": "apps/tauri/dist/assets/FavoriteTrackRow-XER9evLV.js",
+      "bytes": 3397,
+      "sha256": "58add77c9728c314d613b0f148d9087491c569d6311cb1b8788a6f7d67eb510b"
+    },
+    {
+      "path": "apps/tauri/dist/assets/GlobalSettingsPanel-C6Jw9amT.css",
+      "bytes": 13713,
+      "sha256": "812783a525fcded84c72db0fa56f06c32b25275893b3bd4bd329d5cb5947c6b4"
+    },
+    {
+      "path": "apps/tauri/dist/assets/GlobalSettingsPanel-exJeUO56.js",
+      "bytes": 26577,
+      "sha256": "dc28bdd225d89ae3af2bd0802bc5753f28dbb647a9c9429168584f7389b5c2ee"
+    },
+    {
+      "path": "apps/tauri/dist/assets/HistoryPanel-BJHSqjp0.js",
+      "bytes": 2572,
+      "sha256": "2dc94f6c1e4c969a4eed881a1b1db7835db9d89b0c8222894f05f53d6c7d6bd2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/http-Bx2BUOLo.js",
+      "bytes": 183,
+      "sha256": "b4441747f73aa575c1dff22a888dd46e26165fa3221b005c7d4f048250286d55"
+    },
+    {
+      "path": "apps/tauri/dist/assets/index-CUVEJYiy.js",
+      "bytes": 443567,
+      "sha256": "aef236d8629f294e102d984579bb2126eefc700d4baa199b260286374e1e6328"
+    },
+    {
+      "path": "apps/tauri/dist/assets/index-iIw8B2ND.css",
+      "bytes": 249273,
+      "sha256": "36599b9b32b45d730e97965eaa99abc7a01cd9046b0d4709d484a3eac3890487"
+    },
+    {
+      "path": "apps/tauri/dist/assets/output-CpaAufgJ.js",
+      "bytes": 445910,
+      "sha256": "6cbd39264b4551ad6a25bc53fc4a8589efdfb57fa2295befeb1e5f7283f277f8"
+    },
+    {
+      "path": "apps/tauri/dist/assets/playback-history-filters-TtojXpjP.js",
+      "bytes": 193,
+      "sha256": "8000c160be74a669241bf44fa08fad41f711647418517258a5d1ea84e180d676"
+    },
+    {
+      "path": "apps/tauri/dist/assets/PlaylistPanel-BePNFUNB.js",
+      "bytes": 28052,
+      "sha256": "0a6aa4ad91976608736416b1669389beeb13fab2a11b0f4cb919e1656ffee43d"
+    },
+    {
+      "path": "apps/tauri/dist/assets/PlaylistPanel-D8u6BtFN.css",
+      "bytes": 13321,
+      "sha256": "520afc3d9d15722867ec2185f17c69479bc67fa8766239a00cf17a425d886d96"
+    },
+    {
+      "path": "apps/tauri/dist/assets/policies-B5_mwgWi.js",
+      "bytes": 705,
+      "sha256": "75847c1602b048a2fd523f640013902aed3e8b2b0057fb5b395ba0c1cb5a11cf"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-BRbAskaq.css",
+      "bytes": 17506,
+      "sha256": "f377f0773552c5dcc63cfb6caec98a515cb4b437350c0b5ed9402e5e4bf5a5a2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-D0_vX0M0.js",
+      "bytes": 66,
+      "sha256": "ad22f3cd327ce9426290a7d51e97c16aab7022b47b3912fea8713c792304531a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-ok7CdI_u.js",
+      "bytes": 35560,
+      "sha256": "12990f91bd9147d4d9b6770bca109f0b0be7b825e9e89c547b827916f14fe049"
+    },
+    {
+      "path": "apps/tauri/dist/assets/render-custom-track-media-D8hNDFU1.js",
+      "bytes": 797,
+      "sha256": "b5be055f73bf2bc20cfe6a040a695e3d0d531b8f02a9f3b27fd7ac205bb0fc1a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/resolved-media-loader-r4Hh--3K.js",
+      "bytes": 1143,
+      "sha256": "677d7a13f68d4e3c91fc052808af6bd9b6cc818d21399e0d181e47c68b2564bb"
+    },
+    {
+      "path": "apps/tauri/dist/assets/runtime-core.esm-bundler-CTS-s628.js",
+      "bytes": 67464,
+      "sha256": "ffb206c07ae8e21465e0c1bf97a7ece448d1e5f4dfb44d2249762466a05defcf"
+    },
+    {
+      "path": "apps/tauri/dist/assets/runtime-dom.esm-bundler-DpXnxeSF.js",
+      "bytes": 15360,
+      "sha256": "0f333e9dfe31edb10493ba3adfc08bb6e78c8e59fe3025ff2fe9561d04adfea4"
+    },
+    {
+      "path": "apps/tauri/dist/assets/SegmentComposer-B4Q1EWMR.js",
+      "bytes": 24029,
+      "sha256": "5ed467667e8b95256f7db8230e4476075ad759d1ec359b0f9894aa220d620969"
+    },
+    {
+      "path": "apps/tauri/dist/assets/SegmentComposer-DFgHPyMp.css",
+      "bytes": 5949,
+      "sha256": "03edb3d699331f55a970deb8c5878b1399f9cb2cd098398b7daffffd774cafa9"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TagManagementPanel-jBsv1YE-.js",
+      "bytes": 14195,
+      "sha256": "b7bf5577544707a7ba275694452510e886b36e891f63b29705997e638ac288ff"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackCardSummary-Cy_W44ZM.js",
+      "bytes": 3465,
+      "sha256": "fc1bb43b89144b8ac47f8523b1e55c6283a73c4352cfd92921886ef82f10ede6"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackCardSummary-gJSrTlII.css",
+      "bytes": 422,
+      "sha256": "b71d3d8c395b5bd6d8c588ada49a3ca3e3c521de2a33f24277f8fb37fbe3a489"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackSourcePageLink-DlWXBxuZ.js",
+      "bytes": 423,
+      "sha256": "79ce9b9e1c1cd0748f9b141080453fe2a32a7eaad3ba62240b42063554f92240"
+    },
+    {
+      "path": "apps/tauri/dist/assets/url-parser-BXFKcRPm.js",
+      "bytes": 3948,
+      "sha256": "40f0a2508e3e4bacd55c97d0984c2997abbd1de7e6d99fed10867d9be5875767"
+    },
+    {
+      "path": "apps/tauri/dist/assets/url-parser-CpMzpdTE.js",
+      "bytes": 1503,
+      "sha256": "fa879b72607d143d95785cbc720e8c108480ce50ced72aec35773b4e12d5cf76"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-catalog-filter-history-vZUX-D_N.js",
+      "bytes": 15198,
+      "sha256": "89b743039e35e19d0e2f59302886ba764cb68f67aef50440ebcfad1d8a7d45d0"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-catalog-list-controls-DdTZEBhN.js",
+      "bytes": 1013,
+      "sha256": "bfb069f6db25a34fba0d3943b962b85730f60f5fba2b9d4fbae6c51b78e4339f"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-confirmation-dialog-W2cYpCy7.js",
+      "bytes": 969,
+      "sha256": "bd9522044de5c5d588e3ca0b8b9f970663a04a55d57f18bec0b3b5475144f678"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-favorite-filters-BIlmOPDC.js",
+      "bytes": 247,
+      "sha256": "db57de29e742472f37c126014a9df58a4b195adb2e1692e4f9b4b690888f7253"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-settings-feedback-B-beOzbi.js",
+      "bytes": 1599,
+      "sha256": "d048ada400ce471a14b16e989f29255f2bfe3ae51be7af6b94e6597c85c051fc"
+    },
+    {
+      "path": "apps/tauri/dist/assets/__vite-browser-external-D3JzJRFO.js",
+      "bytes": 77,
+      "sha256": "6c8ab9d6f5e0e1fae12292bd3fd090a0396aa3c115aaa997df71fa3ac8906925"
+    },
+    {
+      "path": "apps/tauri/dist/assets/__vite-browser-external-DisMlCMZ.js",
+      "bytes": 1015,
+      "sha256": "9b3ef04e256342bdcf39d55efb6a4cbd0793b588012548d6215c1d159bfcf74b"
+    },
+    {
+      "path": "apps/tauri/dist/index.html",
+      "bytes": 2571,
+      "sha256": "7c832c0fc79959ace582b9ec265e25ecbf4a516500746aabb3e7e7b23c3ccc2b"
+    },
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3339167,
+      "sha256": "c325a070b9489deb974dd8ad2bf263a2d49eb57a48626951b04a4b2ba5e3e70d"
+    },
+    {
+      "path": "apps/userscript/dist/favicon.svg",
+      "bytes": 323,
+      "sha256": "cc0d86ba45aa6d335387275250865b0a8948b2f3f764840558aebb162d1fd671"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 18035200,
+      "sha256": "c8d276e1358e023385b486cfe43c8e438e9d5c890930c3651d442bc6581e6d3e"
+    }
+  ],
+  "artifactComparison": {
+    "baseline": "S02 artifacts",
+    "compared": 58,
+    "unchanged": 57,
+    "changed": ["target/release/any-music-tauri.exe"]
+  },
+  "productionProbeScan": {
+    "markers": ["s03Counter", "S03 fixed diagnostic", "s03-isolation-probe/worker"],
+    "files": 58,
+    "matches": 0
+  },
+  "commandCoverage": {
+    "application": 42,
+    "relay": 1,
+    "business": 41,
+    "coreAndOfficial": 171,
+    "deniedUniqueCommands": 212
+  },
+  "preservation": {
+    "initialHead": "976c405b93719755b5879d576fbd836926ccbcdf",
+    "finalHead": "976c405b93719755b5879d576fbd836926ccbcdf",
+    "initialFileHashesChecked": 199,
+    "changedExistingFiles": [
+      ".gitignore",
+      "apps/tauri/package.json",
+      "apps/tauri/src-tauri/AGENTS.md",
+      "apps/tauri/src-tauri/Cargo.toml",
+      "docs/en/cross-platform/README.md",
+      "docs/en/desktop/README.md",
+      "docs/en/desktop/backend-engineering.md",
+      "docs/en/desktop/development.md",
+      "docs/en/desktop/runtime-architecture.md",
+      "docs/zh-cn/桌面端/后端工程规范.md",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "docs/zh-cn/桌面端/文档索引.md",
+      "docs/zh-cn/桌面端/运行端架构.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "package.json",
+      "pnpm-lock.yaml",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "scripts/check-rust-workspace.mjs"
+    ],
+    "missingExistingFiles": []
+  },
+  "limitations": {
+    "status": "awaiting-acceptance",
+    "actualWebviewIsolation": "not-run",
+    "acceptedTargets": [],
+    "codePluginsEnabled": false,
+    "launchedAppOrBrowser": false,
+    "gitPublished": false,
+    "fullAuditPassed": false,
+    "inheritedDependency": "rustls 0.23.45",
+    "advisories": [
+      "RUSTSEC-2026-0346",
+      "RUSTSEC-2026-0347",
+      "RUSTSEC-2026-0348",
+      "RUSTSEC-2026-0349"
+    ],
+    "pendingSteps": "S04–S16",
+    "s11TargetAdmission": "blocked"
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B12-renderer-platform-tauri",
+  "candidate": "B12-renderer-platform",
+  "parentBatch": "B12",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T13:23:34.119Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+  "scope": {
+    "invariant": "An account-bound built-in HTTP operation preserves account/request identity, response budgets and cancellation across renderer -> IPC -> Rust, without renderer-owned credentials or a WebView transport fallback.",
+    "selectedChain": "configureTauriWorkbench / AccountRuntime.createPlugin -> createNativeHttpClient -> http_request -> network/http.execute -> native account session / send_routed; cancellation -> cancel_request -> RequestRegistry token -> timeout/select and renderer projection.",
+    "allowedPaths": [
+      "apps/tauri/src/platform/native-http.ts and matching tests",
+      "configure-tauri-workbench.ts HTTP injection and AccountRuntime.createPlugin only",
+      "Direct Rust network/http.rs, request_registry.rs and model.rs HTTP DTO/validation excerpts"
+    ],
+    "expansionReasons": [
+      "Rust HTTP/registry are the immediate IPC implementation. Their guards, token and timeout ownership are necessary to distinguish native cancellation from merely ignoring a renderer result.",
+      "The createPlugin excerpt and source-cancellation test establish operation/account signal composition. Complete account selection, identity transitions, CookieStore/proxy construction and media grant lifecycles remain separate candidates.",
+      "Capability-composition tests support injection only. Their Android cases do not establish B19 acceptance."
+    ],
+    "exclusions": [
+      "Product implementation changes or permanent regression tests",
+      "Independent accounts/vault/proxy, browser/CDP, media grants, system/download and complete IPC/ACL audits",
+      "Native execute/body-limit/failover fixtures beyond existing HTTP helper tests",
+      "Shared source protocols/player behavior and external Gate implementation",
+      "Production artifacts, live account/HTTP/playback, product/browser/emulator launch, commit and push"
+    ]
+  },
+  "declaredStatus": {
+    "claim": "Built-in HTTP uses Rust account clients; request IDs cancel native reads, account/operation signals revoke the same request, credentials stay native, and binary responses use raw IPC buffers.",
+    "references": [
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      "docs/en/desktop/development.md",
+      "docs/en/desktop/backend-engineering.md:73"
+    ],
+    "limit": "Expected contracts only; not evidence of complete B12 or real native runtime acceptance."
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Are HTTP injection and account-specific adapters owned by Tauri and using public package exports?",
+      "evidence": [
+        "apps/tauri/package.json",
+        "apps/tauri/src/platform/configure-tauri-workbench.ts:63",
+        "apps/tauri/src/features/accounts/account-runtime.ts:513",
+        "apps/tauri/src/platform/native-http.ts:1"
+      ],
+      "detail": "The application constructs IPC clients and injects them. Inspected imports use public entries and workspace dependencies. No full application dependency-graph audit is claimed."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Are identities/budgets retained, subscriptions released and late completion suppressed after cancellation?",
+      "evidence": [
+        "apps/tauri/src/platform/native-http.ts:44",
+        "apps/tauri/src/platform/native-http.ts:59",
+        "apps/tauri/src/platform/native-http.ts:65",
+        "apps/tauri/src/platform/native-http.ts:70",
+        "apps/tauri/src-tauri/src/network/http.rs:350",
+        "apps/tauri/test/features/accounts/source-cancellation.test.ts:52",
+        ".codex-tmp/audit-b12-renderer/audit-probes.log"
+      ],
+      "detail": "Fixed account IDs, fresh request IDs, forwarded budgets, cancellation dispatch and subscription cleanup pass. Only success is checked against cancellation; a late rejection is mapped without checking the cancelled signal (B12-R01). Native static checks show an outer total timeout, cancellation token and finish call, not a complete native request fixture."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Does the adapter exclude credential headers from IPC and retain ordinary error code/detail?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/network/http.rs:18",
+        "apps/tauri/src-tauri/src/network/http.rs:42",
+        "apps/tauri/src/platform/native-http.ts:21",
+        "apps/tauri/src-tauri/src/network/http.rs:402",
+        "apps/tauri/src-tauri/src/network/http.rs:432"
+      ],
+      "detail": "Rust rejects case-insensitive credential/Host request headers and excludes Set-Cookie response headers. Normal error code/detail and size-recovery projection pass. native-http performs no persistence. CookieStore/vault isolation, arbitrary response content, account catalogs and product storage remain unreviewed; cancellation precedence belongs to C3."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Does the inspected boundary bind included requests natively and reject unbound generic anonymous traffic?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/network/http.rs:81",
+        "apps/tauri/src-tauri/src/network/http.rs:95",
+        "apps/tauri/src-tauri/src/network/http.rs:334",
+        "apps/tauri/src-tauri/src/network/http.rs:356",
+        "apps/tauri/src-tauri/src/network/http.rs:373",
+        "apps/tauri/src-tauri/src/network/http.rs:383"
+      ],
+      "detail": "Included requests require an account, check availability and obtain its native session. Generic omit accepts only the current loopback port/media UUID path; actual grant lookup is outside this batch. Both commands call require_main. Its implementation, exact ACL, external Gate authority and account-client construction remain unreviewed."
+    },
+    {
+      "criterion": "C6",
+      "result": "fail",
+      "question": "Does implementation match maintained native transport conventions and avoid overstating evidence?",
+      "evidence": [
+        "docs/en/desktop/backend-engineering.md:73",
+        "docs/zh-cn/桌面端/后端工程规范.md:73",
+        "apps/tauri/src-tauri/src/network/http.rs:295",
+        "apps/tauri/src-tauri/src/model.rs:55",
+        "apps/tauri/src/platform/native-http.ts:55",
+        "apps/tauri/test/platform/native-http.test.ts:12"
+      ],
+      "detail": "Ordinary byte responses still serialize JSON number arrays, contrary to the raw-binary IPC convention (B12-R02). Existing tests explicitly accept that wire shape. Offline/live limits are recorded; captureDate and support matrices are unchanged."
+    }
+  ],
+  "verification": [
+    {
+      "kind": "static",
+      "result": "fail",
+      "command": "Read bounded renderer/IPC/native excerpts and compare maintained native rules",
+      "exitCode": null,
+      "detail": "B12-R01 is identified and reproduced. B12-R02 is a static implementation/convention mismatch. Scoped source hashes matched the captured baseline after testing."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/native-http.test.ts test/platform/configure-tauri-workbench.test.ts test/features/accounts/source-cancellation.test.ts",
+      "exitCode": 0,
+      "time": "2026-10-21T21:15:32+08:00",
+      "cases": {
+        "passed": 13,
+        "failed": 0
+      },
+      "logPath": ".codex-tmp/audit-b12-renderer/targeted-vitest.log"
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib network::http --locked",
+      "exitCode": 0,
+      "cases": {
+        "passed": 4,
+        "failed": 0
+      },
+      "logPath": ".codex-tmp/audit-b12-renderer/native-http.log",
+      "limit": "Header projection, route restriction and anonymous-grant URL validation only; these tests do not invoke execute/http_request."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib network::request_registry --locked",
+      "exitCode": 0,
+      "cases": {
+        "passed": 2,
+        "failed": 0
+      },
+      "logPath": ".codex-tmp/audit-b12-renderer/request-registry.log",
+      "limit": "Early/active cancellation, duplicate rejection and bounded tombstone reclamation; not complete registry acceptance."
+    },
+    {
+      "kind": "tests",
+      "result": "fail",
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/b12-native-http.audit.test.ts",
+      "exitCode": 1,
+      "time": "2026-10-21T21:16:54+08:00",
+      "cases": {
+        "passed": 3,
+        "failed": 3
+      },
+      "logPath": ".codex-tmp/audit-b12-renderer/audit-probes.log",
+      "probePath": ".codex-tmp/audit-b12-renderer/b12-native-http.audit.test.ts",
+      "reproduce": "Copy probePath to apps/tauri/test/platform/b12-native-http.audit.test.ts, run this command from repository root, then remove only that temporary file. It was removed after the audit.",
+      "detail": "Three cancelled-then-late-rejection probes fail; normal resolve/reject detach and fixed identity/fresh IDs across two requests pass. pnpm prints a misleading trailing Command vitest not found after the assertion failure; Vitest did run six cases. The initial run had an audit-hook teardown error; that hook was corrected before this canonical run. Its old log is retained separately."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/tauri typecheck",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b12-renderer/tauri-typecheck.log",
+      "detail": "Includes vue-tsc, generated-protocol consistency, Rust dependency boundaries, workspace rustfmt and all-target workspace Clippy with -D warnings."
+    },
+    {
+      "kind": "artifact",
+      "result": "not-run",
+      "command": null,
+      "exitCode": null,
+      "reason": "No public entry, dependency or product implementation changed. Production build/graph acceptance and final root gates belong to later closure; no older-baseline evidence is reused."
+    },
+    {
+      "kind": "live",
+      "result": "not-run",
+      "command": null,
+      "exitCode": null,
+      "reason": "This request authorizes an audit, not browser/application inspection. No app, server, browser or emulator was launched. IPC doubles/native helper tests do not establish real account HTTP or playback."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B12-R01",
+      "severity": "P2",
+      "status": "open",
+      "criterion": "C3",
+      "title": "Cancelled HTTP requests can expose a late native failure instead of cancellation",
+      "trigger": "Start a cancellable request, cancel its signal, then reject pending http_request IPC with network-error, request-timeout or response-too-large.",
+      "effect": "The catch branch does not recheck cancellation. It exposes network-error/request-timeout/ResponseTooLargeError despite cancel_request being sent. Native select and frontend settlement can race, so callers cannot consistently identify a deliberately cancelled operation. No UI retry or live playback consequence is asserted by this probe.",
+      "owner": "apps/tauri/src/platform/native-http.ts",
+      "evidence": [
+        "apps/tauri/src/platform/native-http.ts:63",
+        "apps/tauri/src/platform/native-http.ts:70",
+        ".codex-tmp/audit-b12-renderer/b12-native-http.audit.test.ts:14",
+        ".codex-tmp/audit-b12-renderer/audit-probes.log:11"
+      ],
+      "suggestedNextAction": "In a separate repair task, normalize a cancelled signal before mapping a late rejection. Retain native cancellation/finally cleanup and add permanent regressions for late network/timeout/size failures and unchanged normal error mapping."
+    },
+    {
+      "id": "B12-R02",
+      "severity": "P2",
+      "status": "open",
+      "criterion": "C6",
+      "title": "Ordinary binary HTTP still crosses IPC as a JSON number array",
+      "trigger": "A built-in/native loopback HTTP read requests responseType=bytes.",
+      "effect": "Rust converts the byte vector to serde_json::Value; renderer receives number[] then allocates Uint8Array again. The body limit defaults to 16 MiB and permits up to 512 MiB, so it does not bound additional per-byte JSON representation/IPC encoding allocations. This violates the maintained raw-binary Response/buffer-view convention. No measured peak-memory figure or demonstrated playback failure is asserted.",
+      "owner": "apps/tauri/src-tauri/src/network/http.rs + model.rs HTTP DTO and apps/tauri/src/platform/native-http.ts",
+      "evidence": [
+        "docs/en/desktop/backend-engineering.md:73",
+        "docs/zh-cn/桌面端/后端工程规范.md:73",
+        "apps/tauri/src-tauri/src/network/http.rs:200",
+        "apps/tauri/src-tauri/src/network/http.rs:295",
+        "apps/tauri/src-tauri/src/model.rs:55",
+        "apps/tauri/src/platform/native-http.ts:55",
+        "apps/tauri/src/platform/native-http.ts:68"
+      ],
+      "suggestedNextAction": "In a separate native/renderer repair, carry byte bodies with a bounded raw IPC Response and typed buffer view while retaining status/headers, account identity, size-recovery errors and cancellation. Update bytes contract tests and verify a real native binary fixture."
+    }
+  ],
+  "readPaths": [
+    {
+      "path": "apps/tauri/src/platform/native-http.ts",
+      "ranges": ["1-78"]
+    },
+    {
+      "path": "apps/tauri/test/platform/native-http.test.ts",
+      "ranges": ["1-90"]
+    },
+    {
+      "path": "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "ranges": ["1-97"],
+      "limit": "Only HTTP/capability injection accepted; adjacent media/save are not independently audited."
+    },
+    {
+      "path": "apps/tauri/test/platform/configure-tauri-workbench.test.ts",
+      "ranges": ["1-120", "test-name index"],
+      "limit": "Seven cases executed; injection/capability evidence only."
+    },
+    {
+      "path": "apps/tauri/src/features/accounts/account-runtime.ts",
+      "ranges": ["493-537"],
+      "limit": "createPlugin signal/account binding only."
+    },
+    {
+      "path": "apps/tauri/test/features/accounts/source-cancellation.test.ts",
+      "ranges": ["1-76"]
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/network/http.rs",
+      "ranges": ["1-481"],
+      "limit": "Direct IPC implementation only. No expansion into send_routed/credential construction."
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/network/request_registry.rs",
+      "ranges": ["1-102"],
+      "limit": "Cancellation handoff/helper tests only; full candidate remains unreviewed."
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/model.rs",
+      "ranges": ["40-93"],
+      "limit": "HTTP DTO and URL/ID validation only."
+    },
+    {
+      "path": "apps/tauri/vite.config.ts",
+      "ranges": ["1-18"],
+      "limit": "Configuration read only; no product server or artifact generated."
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/ipc.rs",
+      "ranges": ["http_request symbol match"],
+      "limit": "Registry index only; full IPC/ACL audit pending."
+    },
+    {
+      "path": "apps/tauri/test/features/accounts/account-runtime.test.ts",
+      "ranges": ["cancellation/account-ID symbol index only"],
+      "limit": "File not read or executed; not accepted evidence."
+    }
+  ],
+  "unreadPaths": [
+    "Complete native network execution fixtures, send_routed/proxy failover and account queue lifecycle",
+    "Complete RequestRegistry consumer/drop/lifecycle behavior outside the inspected HTTP boundary",
+    "Accounts/public DTOs/vault/CookieStore/proxy construction and environment mutation",
+    "browser/CDP matching, bounded response ownership and target cleanup",
+    "media grants/listener/account-bound Range streaming and revocation",
+    "system/download and exact IPC registry/main WebView capability/remote-page deny rules"
+  ],
+  "missingEvidence": [
+    "Repairs/permanent regressions for B12-R01 and raw-binary HTTP contract for B12-R02",
+    "Native execute/http_request fixtures for reading, declared/chunked limits, queue/timeout cancellation and account-environment invalidation",
+    "Current production artifact/graph evidence and final root gates",
+    "Exact Windows native account CookieStore/proxy/IPC requests, loopback playback/seek/download and remote-page rejection acceptance"
+  ],
+  "dependencies": [
+    {
+      "batch": "B02",
+      "boundary": "AccountRuntime -> public account-pool/network-routing",
+      "question": "Shared algorithm evidence does not establish desktop account/session/proxy wiring."
+    },
+    {
+      "batch": "B07/B10",
+      "boundary": "Source operation -> injected native HTTP/media",
+      "question": "Source/player and real Rust media acceptance remain independent; no shared implementation audited here."
+    },
+    {
+      "batch": "B12-ipc-acl/B15",
+      "boundary": "http_request/cancel_request -> require_main; generic omit -> loopback grant",
+      "question": "Exact caller/ACL and external Gate internals are outside this subbatch."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B12-native-network-tauri",
+    "candidate": "B12-native-network",
+    "runtime": "tauri",
+    "question": "Audit one native built-in read through account queue -> routed send -> bounded body -> cancellation/timeout/finish, with local native fixtures; retain the two open renderer/IPC repair findings.",
+    "allowedPaths": [
+      "apps/tauri/src-tauri/src/network/http.rs",
+      "One directly required native account/session or routing boundary and matching tests"
+    ],
+    "stopRule": "One native read lifecycle only. No CDP/media listener/file-save/ACL expansion. Recheck scoped hashes; no live inspection without an explicit request."
+  },
+  "handoff": "B12-renderer-platform-tauri / tauri / acf455cb3e33259ce8887672f3fe679659161180。范围限平台 HTTP 接线和直接 Rust 边界，未修改产品代码。C1/C4/C5 在所选边界通过，C3/C6 失败：B12-R01 为取消后迟到的网络、超时及超预算错误未归一为取消；B12-R02 为二进制 HTTP 仍经 JSON 数字数组跨 IPC，与原生规范不符。现有前端 13 项、Rust 6 项测试和应用 typecheck 均通过；补充探针 3 通过、3 失败，失败均复现 R01。临时测试已移出产品目录，脚本及日志保留在 .codex-tmp/audit-b12-renderer。状态 violating / needs-fix；未执行生产构建、全量收口和 live，不能推出真实账号或播放验收通过。其余七个 B12 候选仍未审查。下一唯一排查入口为 B12-native-network-tauri，修复作为另行任务处理。"
+}

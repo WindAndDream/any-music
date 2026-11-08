@@ -1,0 +1,2522 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B21-repository-final",
+  "parentBatch": "B21",
+  "runtime": "repository",
+  "reviewedAt": "2026-10-22T03:41:51.070Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final-baseline.json",
+  "head": "a693165205be0bc321764768d796d7c842f7a446",
+  "scope": "Coverage/evidence aggregation, applicable offline gates and five-category final handoff. This completes the B21 audit activity, not the complete repository refactoring acceptance.",
+  "auditExecutionComplete": true,
+  "acceptanceComplete": false,
+  "refactorStatus": "unreviewed",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "evidenceQualification": "Tests pass on the fresh unchanged-source serial root run. Earlier default/isolated failures remain open as B21-T01; the pass does not erase them. Artifact checks do not renew exact-target or device admission.",
+  "criteria": ["C1", "C5", "C6"],
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "scope": "Executable repository dependency/public-entry/lightweight/production isolation guards, not an audit of every module.",
+      "evidence": ".codex-tmp/b21-final/lint.log"
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "scope": "Coverage and report routing: only actual subbatch reports count; B12 board-wide pass and B06 pre-repair pointer corrected.",
+      "evidence": "summary.json and coverage in this report"
+    },
+    {
+      "criterion": "C6",
+      "result": "fail",
+      "scope": "Repeatability of the default test gate; fresh serial success is qualified by two observed theme assertion failures.",
+      "evidence": "B21-T01"
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "scope": "Current Userscript/mobile external boundaries and changed desktop Profile fail-closed behavior only; live target admission is not renewed.",
+      "evidence": [
+        "B11-document-start-launcher-userscript.json",
+        "B18-native-delivery-control-tauri-fix.json",
+        "B19-android-capabilities-acl-tauri-fix.json"
+      ]
+    },
+    {
+      "criterion": "C6",
+      "result": "unknown",
+      "scope": "Full planned implementation coverage and exact GM/Rust/device/OS channel acceptance remain incomplete.",
+      "evidence": "notReviewed and implementedWithoutLiveAcceptance"
+    }
+  ],
+  "counts": {
+    "candidates": 112,
+    "reviewed": 24,
+    "unreviewed": 88
+  },
+  "coverage": [
+    {
+      "batchId": "B01",
+      "runtime": ["shared"],
+      "candidateCount": 8,
+      "reviewedCount": 1,
+      "remaining": [
+        "B01-audio-recipes",
+        "B01-audio-prefetch",
+        "B01-audio-browser",
+        "B01-core-errors",
+        "B01-core-library",
+        "B01-core-download",
+        "B01-core-ports"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B01-utils-shared",
+          "candidate": "B01-utils",
+          "runtime": ["shared"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-fix.json",
+          "reportSha256": "5cf15919951426fd255a41ee76bfc00211700553478b03a8c221482c35025ed9",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B02",
+      "runtime": ["shared"],
+      "candidateCount": 2,
+      "reviewedCount": 1,
+      "remaining": ["B02-account-pool"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B02-network-routing-shared",
+          "candidate": "B02-network-routing",
+          "runtime": ["shared"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-fix.json",
+          "reportSha256": "960aaa32dae95193199350bfcdccbb3df3e6db556f2322c93c7b6eaa4aaeda96",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B03",
+      "runtime": ["shared", "tauri"],
+      "candidateCount": 7,
+      "reviewedCount": 1,
+      "remaining": [
+        "B03-sdk-music",
+        "B03-sdk-schema",
+        "B03-sdk-guest",
+        "B03-sdk-host",
+        "B03-sdk-node",
+        "B03-native-protocol"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B03-sdk-root-shared",
+          "candidate": "B03-sdk-root",
+          "runtime": ["shared", "tauri"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B03-sdk-root-shared.json",
+          "reportSha256": "ed69edd3b5c540f40d6a90d36b885a2b7c8ccac34d6ea1e64272a5d4552ddfa1",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B04",
+      "runtime": ["shared"],
+      "candidateCount": 5,
+      "reviewedCount": 1,
+      "remaining": [
+        "B04-music-sources",
+        "B04-dependencies",
+        "B04-enable-disable",
+        "B04-availability"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B04-generic-root-shared",
+          "candidate": "B04-generic-root",
+          "runtime": ["shared"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-fix.json",
+          "reportSha256": "e0b810ba22fa6d52964af465bbbedc44a84f90d93180f6c23d8179aefd3c028d",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B05",
+      "runtime": ["shared"],
+      "candidateCount": 7,
+      "reviewedCount": 1,
+      "remaining": [
+        "B05-library",
+        "B05-plugins",
+        "B05-settings",
+        "B05-runtime",
+        "B05-stores",
+        "B05-plugin-adapters"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B05-music-sources-shared",
+          "candidate": "B05-music-sources",
+          "runtime": ["shared"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+          "reportSha256": "d8e77fb6e9fd4ba6422621f087c61de82b0e6c001cac2aebfb3fd86779e64410",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B06",
+      "runtime": ["shared", "userscript", "tauri"],
+      "candidateCount": 5,
+      "reviewedCount": 1,
+      "remaining": [
+        "B06-userscript-generation",
+        "B06-tauri-renderer-mirror",
+        "B06-tauri-native-product-mirror",
+        "B06-plugin-portable-namespaces"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B06-workbench-storage-shared",
+          "candidate": "B06-shared-storage",
+          "runtime": "shared",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+          "reportSha256": "e8052ecad59c8b88adb3d5ae7ef23ac48891a5c963a079fe73d5263a872bec15",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B07",
+      "runtime": ["shared", "userscript", "tauri"],
+      "candidateCount": 6,
+      "reviewedCount": 1,
+      "remaining": [
+        "B07-player",
+        "B07-downloads",
+        "B07-audio-export",
+        "B07-userscript-media-wiring",
+        "B07-tauri-media-wiring"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B07-media-shared",
+          "candidate": "B07-media",
+          "runtime": ["shared", "userscript", "tauri"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+          "reportSha256": "2a1481cc8f2146aca5ee597462014760c21cf857f215d6e3a862dfd8b24f7ccc",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B08",
+      "runtime": ["shared"],
+      "candidateCount": 5,
+      "reviewedCount": 1,
+      "remaining": [
+        "B08-controlled-components",
+        "B08-theme-root",
+        "B08-theme-directory",
+        "B08-layout-live"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "needs-fix",
+      "subbatches": [
+        {
+          "batchId": "B08-theme-trusted-shared",
+          "candidate": "B08-theme-trusted",
+          "runtime": "shared",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-fix.json",
+          "reportSha256": "4847e41f5ea8ab4f110a64a6838db357cb1f25590192a6791e0732fbfce7c380",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B09",
+      "runtime": ["shared", "userscript", "tauri"],
+      "candidateCount": 4,
+      "reviewedCount": 1,
+      "remaining": ["B09-music-creation", "B09-userscript-injection", "B09-tauri-injection"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B09-tag-management-shared",
+          "candidate": "B09-tag-management",
+          "runtime": "shared",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+          "reportSha256": "44c938a49d28684b0bb503f1a65cb72c52783e0347b789e47b91ef8d95d2a9e3",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B10",
+      "runtime": ["shared"],
+      "candidateCount": 10,
+      "reviewedCount": 1,
+      "remaining": [
+        "B10-bilibili-session",
+        "B10-bilibili-search",
+        "B10-bilibili-import-listing",
+        "B10-bilibili-media",
+        "B10-douyin-descriptor",
+        "B10-douyin-session",
+        "B10-douyin-search",
+        "B10-douyin-import-listing",
+        "B10-douyin-media"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B10-bilibili-descriptor-shared",
+          "candidate": "B10-bilibili-descriptor",
+          "runtime": ["shared"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-fix.json",
+          "reportSha256": "b5a7da021bad788a1456deafd45754b2fccc3cb19eac9f13ab046fc14b436fab",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B11",
+      "runtime": ["userscript"],
+      "candidateCount": 7,
+      "reviewedCount": 1,
+      "remaining": [
+        "B11-shadow-dom",
+        "B11-gm-http",
+        "B11-page-bridges",
+        "B11-gm-storage",
+        "B11-single-proxy",
+        "B11-production-graph"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B11-document-start-launcher-userscript",
+          "candidate": "B11-document-start-launcher",
+          "runtime": ["userscript"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript.json",
+          "reportSha256": "b328a030a1d9fcaa1ec89595ee36e5b1e4f79ceb48c42e04cdb3685a45d3eabf",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B12",
+      "runtime": ["tauri"],
+      "candidateCount": 8,
+      "reviewedCount": 1,
+      "remaining": [
+        "B12-native-network",
+        "B12-request-registry",
+        "B12-accounts-vault-proxy",
+        "B12-browser-cdp-operation",
+        "B12-media-grants",
+        "B12-system-download",
+        "B12-ipc-acl"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B12-renderer-platform-tauri",
+          "candidate": "B12-renderer-platform",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix.json",
+          "reportSha256": "22a50c47a482aa9411fe29bf8c96f03f8d448a30dbb524fa36d823b1fe5631e4",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B13",
+      "runtime": ["shared"],
+      "candidateCount": 4,
+      "reviewedCount": 1,
+      "remaining": ["B13-vm-engine-bridge", "B13-browser-adapter", "B13-same-engine-testkit"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B13-vm-profile-control-shared",
+          "candidate": "B13-vm-profile-control",
+          "runtime": "shared",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+          "reportSha256": "b34b41acd1266c25146c071dce0d948a1a3211c2ce967e3a1d74948bf2fe90a0",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B14",
+      "runtime": ["tauri"],
+      "candidateCount": 4,
+      "reviewedCount": 4,
+      "remaining": [],
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "subbatches": [
+        {
+          "batchId": "B14-pure-policy-tauri",
+          "candidate": "B14-pure-policy",
+          "runtime": ["tauri"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+          "reportSha256": "b08ddc3464fc31effcc5f544ebf42ab4e7bf2c2e9f6ac47a3bfd30fd553684e6",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-applicable"
+          }
+        },
+        {
+          "batchId": "B14-runtime-ports-tauri",
+          "candidate": "B14-runtime-ports",
+          "runtime": ["tauri"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+          "reportSha256": "ca51c0da6a3a956697d31ac282505c564e87042a8223ec45767e19f3752e09f9",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        },
+        {
+          "batchId": "B14-authority-storage-tauri",
+          "candidate": "B14-authority-storage",
+          "runtime": ["tauri"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+          "reportSha256": "cbca36627fd1aad66a995ab8e6bd857621969d84563f18b3f77e2eb4bd0b414b",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        },
+        {
+          "batchId": "B14-named-commit-revoke-tauri",
+          "candidate": "B14-named-commit-revoke",
+          "runtime": ["tauri"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+          "reportSha256": "b20aa1b7621e56c92da318a6b4257c1ad384ef902e52be69d7a3f6a5ec96127d",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B15",
+      "runtime": ["tauri"],
+      "candidateCount": 4,
+      "reviewedCount": 1,
+      "remaining": ["B15-native-gate", "B15-network-ledger", "B15-final-byte-delivery"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B15-public-target-bounded-transport-tauri",
+          "candidate": "B15-public-target-bounded-transport",
+          "runtime": ["tauri"],
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+          "reportSha256": "d6a60aa760609bf6c5088dfff49d01250c976d2a1efbc07d02073b5246910f4e",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B16",
+      "runtime": ["tauri"],
+      "candidateCount": 5,
+      "reviewedCount": 1,
+      "remaining": [
+        "B16-runtime-install-files",
+        "B16-application-package-files",
+        "B16-package-transactions",
+        "B16-revocations-recovery"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B16-package-verification-tauri",
+          "candidate": "B16-package-verification",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+          "reportSha256": "ddfe173b53e70e12efc9f787314c1d0ba71208fe0c12e36cfc4f85415a7fbb26",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B17",
+      "runtime": ["repository", "tauri"],
+      "candidateCount": 6,
+      "reviewedCount": 1,
+      "remaining": [
+        "B17-sdk-node-artifact",
+        "B17-testkit-artifact",
+        "B17-windows-dev-pairing",
+        "B17-windows-dev-reload",
+        "B17-windows-dev-end"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B17-cli-build-pack-sign",
+          "candidate": "B17-cli-build-pack-sign",
+          "runtime": "node",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json",
+          "reportSha256": "5c4f979a960b4e6477fe21b65bb50d3284ce6bdbc3e5d4d3bf85b84798a464f1",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B18",
+      "runtime": ["tauri"],
+      "candidateCount": 4,
+      "reviewedCount": 1,
+      "remaining": [
+        "B18-executor-relay",
+        "B18-resource-filter",
+        "B18-command-catalog-save-operation"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B18-native-delivery-control-tauri",
+          "candidate": "B18-native-delivery-control",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix.json",
+          "reportSha256": "b6646f7939bbaf1c357c7afa05e9ccc7ecdacd060fb05a90b8abba361b709040",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B19",
+      "runtime": ["tauri"],
+      "candidateCount": 7,
+      "reviewedCount": 2,
+      "remaining": [
+        "B19-android-document-save-keystore",
+        "B19-android-lifecycle",
+        "B19-android-bilibili-accounts-proxy-media",
+        "B19-android-build-signing",
+        "B19-android-minimum-device-channel"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B19-android-capabilities-acl-tauri",
+          "candidate": "B19-android-capabilities-acl",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri-fix.json",
+          "reportSha256": "695d846fba410c48b486d25d51c94566770e707cc5dfee7f7d28fbb72bfa3d70",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        },
+        {
+          "batchId": "B19-ios-capability-boundary-tauri",
+          "candidate": "B19-ios-adapters",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-ios-capability-boundary-tauri.json",
+          "reportSha256": "12db63bd566f331f0cdc6cf7c66475b854598947acfeb8c297e6f0b27b43b246",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        }
+      ]
+    },
+    {
+      "batchId": "B20",
+      "runtime": ["repository"],
+      "candidateCount": 4,
+      "reviewedCount": 1,
+      "remaining": [
+        "B20-ownership-status-scope",
+        "B20-bilingual-counterparts-indexes",
+        "B20-targeted-legacy-check"
+      ],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "subbatches": [
+        {
+          "batchId": "B20-reviewed-area-guidance-repository",
+          "candidate": "B20-reviewed-area-guidance",
+          "runtime": "repository",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json",
+          "reportSha256": "3bdbb3867cf9cd43922756ab42fc49043e07753ffda498fef18b773fa4687049",
+          "evidence": {
+            "static": "pass",
+            "tests": "not-applicable",
+            "artifact": "not-run",
+            "live": "not-applicable"
+          }
+        }
+      ]
+    }
+  ],
+  "finalCategories": {
+    "reviewedConformant": [
+      {
+        "batchId": "B01-utils-shared",
+        "candidate": "B01-utils",
+        "runtime": ["shared"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-fix.json",
+        "reportSha256": "5cf15919951426fd255a41ee76bfc00211700553478b03a8c221482c35025ed9",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-applicable"
+        }
+      },
+      {
+        "batchId": "B02-network-routing-shared",
+        "candidate": "B02-network-routing",
+        "runtime": ["shared"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-fix.json",
+        "reportSha256": "960aaa32dae95193199350bfcdccbb3df3e6db556f2322c93c7b6eaa4aaeda96",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-applicable"
+        }
+      },
+      {
+        "batchId": "B03-sdk-root-shared",
+        "candidate": "B03-sdk-root",
+        "runtime": ["shared", "tauri"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B03-sdk-root-shared.json",
+        "reportSha256": "ed69edd3b5c540f40d6a90d36b885a2b7c8ccac34d6ea1e64272a5d4552ddfa1",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-applicable"
+        }
+      },
+      {
+        "batchId": "B04-generic-root-shared",
+        "candidate": "B04-generic-root",
+        "runtime": ["shared"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-fix.json",
+        "reportSha256": "e0b810ba22fa6d52964af465bbbedc44a84f90d93180f6c23d8179aefd3c028d",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-applicable"
+        }
+      },
+      {
+        "batchId": "B05-music-sources-shared",
+        "candidate": "B05-music-sources",
+        "runtime": ["shared"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+        "reportSha256": "d8e77fb6e9fd4ba6422621f087c61de82b0e6c001cac2aebfb3fd86779e64410",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B06-workbench-storage-shared",
+        "candidate": "B06-shared-storage",
+        "runtime": "shared",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+        "reportSha256": "e8052ecad59c8b88adb3d5ae7ef23ac48891a5c963a079fe73d5263a872bec15",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B07-media-shared",
+        "candidate": "B07-media",
+        "runtime": ["shared", "userscript", "tauri"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+        "reportSha256": "2a1481cc8f2146aca5ee597462014760c21cf857f215d6e3a862dfd8b24f7ccc",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B08-theme-trusted-shared",
+        "candidate": "B08-theme-trusted",
+        "runtime": "shared",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-fix.json",
+        "reportSha256": "4847e41f5ea8ab4f110a64a6838db357cb1f25590192a6791e0732fbfce7c380",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B09-tag-management-shared",
+        "candidate": "B09-tag-management",
+        "runtime": "shared",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+        "reportSha256": "44c938a49d28684b0bb503f1a65cb72c52783e0347b789e47b91ef8d95d2a9e3",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "not-run",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B10-bilibili-descriptor-shared",
+        "candidate": "B10-bilibili-descriptor",
+        "runtime": ["shared"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-fix.json",
+        "reportSha256": "b5a7da021bad788a1456deafd45754b2fccc3cb19eac9f13ab046fc14b436fab",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B11-document-start-launcher-userscript",
+        "candidate": "B11-document-start-launcher",
+        "runtime": ["userscript"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript.json",
+        "reportSha256": "b328a030a1d9fcaa1ec89595ee36e5b1e4f79ceb48c42e04cdb3685a45d3eabf",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B12-renderer-platform-tauri",
+        "candidate": "B12-renderer-platform",
+        "runtime": "tauri",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix.json",
+        "reportSha256": "22a50c47a482aa9411fe29bf8c96f03f8d448a30dbb524fa36d823b1fe5631e4",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B13-vm-profile-control-shared",
+        "candidate": "B13-vm-profile-control",
+        "runtime": "shared",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+        "reportSha256": "b34b41acd1266c25146c071dce0d948a1a3211c2ce967e3a1d74948bf2fe90a0",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B14-pure-policy-tauri",
+        "candidate": "B14-pure-policy",
+        "runtime": ["tauri"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+        "reportSha256": "b08ddc3464fc31effcc5f544ebf42ab4e7bf2c2e9f6ac47a3bfd30fd553684e6",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "not-run",
+          "live": "not-applicable"
+        }
+      },
+      {
+        "batchId": "B14-runtime-ports-tauri",
+        "candidate": "B14-runtime-ports",
+        "runtime": ["tauri"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+        "reportSha256": "ca51c0da6a3a956697d31ac282505c564e87042a8223ec45767e19f3752e09f9",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "not-run",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B14-authority-storage-tauri",
+        "candidate": "B14-authority-storage",
+        "runtime": ["tauri"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+        "reportSha256": "cbca36627fd1aad66a995ab8e6bd857621969d84563f18b3f77e2eb4bd0b414b",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "not-run",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B14-named-commit-revoke-tauri",
+        "candidate": "B14-named-commit-revoke",
+        "runtime": ["tauri"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+        "reportSha256": "b20aa1b7621e56c92da318a6b4257c1ad384ef902e52be69d7a3f6a5ec96127d",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "not-run",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B15-public-target-bounded-transport-tauri",
+        "candidate": "B15-public-target-bounded-transport",
+        "runtime": ["tauri"],
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+        "reportSha256": "d6a60aa760609bf6c5088dfff49d01250c976d2a1efbc07d02073b5246910f4e",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "not-run",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B16-package-verification-tauri",
+        "candidate": "B16-package-verification",
+        "runtime": "tauri",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+        "reportSha256": "ddfe173b53e70e12efc9f787314c1d0ba71208fe0c12e36cfc4f85415a7fbb26",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B17-cli-build-pack-sign",
+        "candidate": "B17-cli-build-pack-sign",
+        "runtime": "node",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json",
+        "reportSha256": "5c4f979a960b4e6477fe21b65bb50d3284ce6bdbc3e5d4d3bf85b84798a464f1",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-applicable"
+        }
+      },
+      {
+        "batchId": "B18-native-delivery-control-tauri",
+        "candidate": "B18-native-delivery-control",
+        "runtime": "tauri",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix.json",
+        "reportSha256": "b6646f7939bbaf1c357c7afa05e9ccc7ecdacd060fb05a90b8abba361b709040",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "pass",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B19-android-capabilities-acl-tauri",
+        "candidate": "B19-android-capabilities-acl",
+        "runtime": "tauri",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri-fix.json",
+        "reportSha256": "695d846fba410c48b486d25d51c94566770e707cc5dfee7f7d28fbb72bfa3d70",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "not-run",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B19-ios-capability-boundary-tauri",
+        "candidate": "B19-ios-adapters",
+        "runtime": "tauri",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-ios-capability-boundary-tauri.json",
+        "reportSha256": "12db63bd566f331f0cdc6cf7c66475b854598947acfeb8c297e6f0b27b43b246",
+        "evidence": {
+          "static": "pass",
+          "tests": "pass",
+          "artifact": "not-run",
+          "live": "not-run"
+        }
+      },
+      {
+        "batchId": "B20-reviewed-area-guidance-repository",
+        "candidate": "B20-reviewed-area-guidance",
+        "runtime": "repository",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json",
+        "reportSha256": "3bdbb3867cf9cd43922756ab42fc49043e07753ffda498fef18b773fa4687049",
+        "evidence": {
+          "static": "pass",
+          "tests": "not-applicable",
+          "artifact": "not-run",
+          "live": "not-applicable"
+        }
+      }
+    ],
+    "confirmedNeedsFix": [
+      {
+        "id": "B21-T01",
+        "severity": "P3",
+        "owner": "B08 / packages/music-workbench theme regression tests",
+        "status": "open",
+        "title": "Theme preference regression is not stable across executed runs",
+        "trigger": "Run the ordinary root suite, or the isolated theme file in the observed loaded environment. The assertion at line 105 expects the second preference write within vi.waitFor; both observed runs timed out with one call.",
+        "effect": "The default root gate stops before application/Rust tests. A fresh serial root run passes without implementation/assertion changes, so the issue is validation stability; no deterministic product defect is established.",
+        "evidence": [
+          "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts:105",
+          ".codex-tmp/b21-final/test.log",
+          ".codex-tmp/b21-final/theme-recheck.log",
+          ".codex-tmp/b21-final/test-retry.log"
+        ],
+        "suggestedNextAction": "Execute B08-theme-preference-test-stability-shared. Isolate lazy theme loading from the asserted preference-write behavior and establish bounded, repeatable waits; preserve the original failure semantics. Load/cold imports are a hypothesis, not an established root cause."
+      }
+    ],
+    "notReviewed": [
+      {
+        "parentBatch": "B01",
+        "candidate": "B01-audio-recipes",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B01",
+        "candidate": "B01-audio-prefetch",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B01",
+        "candidate": "B01-audio-browser",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B01",
+        "candidate": "B01-core-errors",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B01",
+        "candidate": "B01-core-library",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B01",
+        "candidate": "B01-core-download",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B01",
+        "candidate": "B01-core-ports",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B02",
+        "candidate": "B02-account-pool",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B03",
+        "candidate": "B03-sdk-music",
+        "runtime": ["shared", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B03",
+        "candidate": "B03-sdk-schema",
+        "runtime": ["shared", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B03",
+        "candidate": "B03-sdk-guest",
+        "runtime": ["shared", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B03",
+        "candidate": "B03-sdk-host",
+        "runtime": ["shared", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B03",
+        "candidate": "B03-sdk-node",
+        "runtime": ["shared", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B03",
+        "candidate": "B03-native-protocol",
+        "runtime": ["shared", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B04",
+        "candidate": "B04-music-sources",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B04",
+        "candidate": "B04-dependencies",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B04",
+        "candidate": "B04-enable-disable",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B04",
+        "candidate": "B04-availability",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B05",
+        "candidate": "B05-library",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B05",
+        "candidate": "B05-plugins",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B05",
+        "candidate": "B05-settings",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B05",
+        "candidate": "B05-runtime",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B05",
+        "candidate": "B05-stores",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B05",
+        "candidate": "B05-plugin-adapters",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B06",
+        "candidate": "B06-userscript-generation",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B06",
+        "candidate": "B06-tauri-renderer-mirror",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B06",
+        "candidate": "B06-tauri-native-product-mirror",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B06",
+        "candidate": "B06-plugin-portable-namespaces",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B07",
+        "candidate": "B07-player",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B07",
+        "candidate": "B07-downloads",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B07",
+        "candidate": "B07-audio-export",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B07",
+        "candidate": "B07-userscript-media-wiring",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B07",
+        "candidate": "B07-tauri-media-wiring",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B08",
+        "candidate": "B08-controlled-components",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B08",
+        "candidate": "B08-theme-root",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B08",
+        "candidate": "B08-theme-directory",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B08",
+        "candidate": "B08-layout-live",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B09",
+        "candidate": "B09-music-creation",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B09",
+        "candidate": "B09-userscript-injection",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B09",
+        "candidate": "B09-tauri-injection",
+        "runtime": ["shared", "userscript", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-bilibili-session",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-bilibili-search",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-bilibili-import-listing",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-bilibili-media",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-douyin-descriptor",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-douyin-session",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-douyin-search",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-douyin-import-listing",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B10",
+        "candidate": "B10-douyin-media",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B11",
+        "candidate": "B11-shadow-dom",
+        "runtime": ["userscript"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B11",
+        "candidate": "B11-gm-http",
+        "runtime": ["userscript"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B11",
+        "candidate": "B11-page-bridges",
+        "runtime": ["userscript"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B11",
+        "candidate": "B11-gm-storage",
+        "runtime": ["userscript"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B11",
+        "candidate": "B11-single-proxy",
+        "runtime": ["userscript"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B11",
+        "candidate": "B11-production-graph",
+        "runtime": ["userscript"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B12",
+        "candidate": "B12-native-network",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B12",
+        "candidate": "B12-request-registry",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B12",
+        "candidate": "B12-accounts-vault-proxy",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B12",
+        "candidate": "B12-browser-cdp-operation",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B12",
+        "candidate": "B12-media-grants",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B12",
+        "candidate": "B12-system-download",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B12",
+        "candidate": "B12-ipc-acl",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B13",
+        "candidate": "B13-vm-engine-bridge",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B13",
+        "candidate": "B13-browser-adapter",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B13",
+        "candidate": "B13-same-engine-testkit",
+        "runtime": ["shared"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B15",
+        "candidate": "B15-native-gate",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B15",
+        "candidate": "B15-network-ledger",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B15",
+        "candidate": "B15-final-byte-delivery",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B16",
+        "candidate": "B16-runtime-install-files",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B16",
+        "candidate": "B16-application-package-files",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B16",
+        "candidate": "B16-package-transactions",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B16",
+        "candidate": "B16-revocations-recovery",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B17",
+        "candidate": "B17-sdk-node-artifact",
+        "runtime": ["repository", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B17",
+        "candidate": "B17-testkit-artifact",
+        "runtime": ["repository", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B17",
+        "candidate": "B17-windows-dev-pairing",
+        "runtime": ["repository", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B17",
+        "candidate": "B17-windows-dev-reload",
+        "runtime": ["repository", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B17",
+        "candidate": "B17-windows-dev-end",
+        "runtime": ["repository", "tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B18",
+        "candidate": "B18-executor-relay",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B18",
+        "candidate": "B18-resource-filter",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B18",
+        "candidate": "B18-command-catalog-save-operation",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B19",
+        "candidate": "B19-android-document-save-keystore",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B19",
+        "candidate": "B19-android-lifecycle",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B19",
+        "candidate": "B19-android-bilibili-accounts-proxy-media",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B19",
+        "candidate": "B19-android-build-signing",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B19",
+        "candidate": "B19-android-minimum-device-channel",
+        "runtime": ["tauri"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B20",
+        "candidate": "B20-ownership-status-scope",
+        "runtime": ["repository"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B20",
+        "candidate": "B20-bilingual-counterparts-indexes",
+        "runtime": ["repository"],
+        "result": "unknown"
+      },
+      {
+        "parentBatch": "B20",
+        "candidate": "B20-targeted-legacy-check",
+        "runtime": ["repository"],
+        "result": "unknown"
+      }
+    ],
+    "implementedWithoutLiveAcceptance": [
+      {
+        "runtime": "userscript",
+        "owner": "B11",
+        "scope": "Real Tampermonkey GM transport/account/media behavior; launcher and production-graph tests are offline evidence only."
+      },
+      {
+        "runtime": "tauri",
+        "owner": "B12",
+        "scope": "Current native account/CookieStore/proxy/media and browser operations; native fixtures/IPC doubles do not replace product acceptance."
+      },
+      {
+        "runtime": "tauri",
+        "owner": "B13/B18",
+        "scope": "Profile ccec9d23283bd9fcf31572499461d81371e3e42d669015c08e196c71041497b3 differs from the historical f238d186b463b5a4db3f0f3672709ce5fb2ea230a09576237692e04db82b1fde. Current desktop external installation/execution needs fresh exact OS/WebView/Profile/resource/native-host acceptance; existing record is not renewed."
+      },
+      {
+        "runtime": "tauri",
+        "owner": "B19/S16",
+        "scope": "Existing signed Android APK/AAB integrity checks pass. They are historical binaries, not fresh builds of B21 sources. Optimized-release/broader/minimum-device media/proxy/interruption and channel exits remain open; documented first-cold-start and forced Activity-recreation failures stay unaccepted."
+      },
+      {
+        "runtime": "tauri",
+        "owner": "B18",
+        "scope": "Manual rollback preview/consent/epoch rejection has fresh offline code/test evidence, but actual native dialog and exact target behavior were not exercised in B21."
+      }
+    ],
+    "unsupportedByDesign": [
+      {
+        "runtime": "userscript",
+        "capability": "External plugins",
+        "status": "unsupported-by-design",
+        "rejectionPathsChecked": true,
+        "evidence": [
+          "apps/userscript/src/platform/configure-userscript-workbench.ts:21",
+          "B11-document-start-launcher-userscript.json",
+          ".codex-tmp/b21-final/lint.log"
+        ]
+      },
+      {
+        "runtime": "tauri",
+        "capability": "Mobile external install/execute/DEV authority",
+        "status": "unsupported-by-design",
+        "rejectionPathsChecked": true,
+        "evidence": [
+          "B19-android-capabilities-acl-tauri-fix.json",
+          "B19-ios-capability-boundary-tauri.json",
+          ".codex-tmp/b21-final/test-retry.log"
+        ]
+      }
+    ]
+  },
+  "declaredUnsupportedNotReaudited": [
+    {
+      "capability": "External catalog media resolution",
+      "owner": "B18-command-catalog-save-operation",
+      "status": "unknown",
+      "detail": "Current matrix declares no media resolution. The independent catalog rejection chain has not been audited; do not turn a declaration into new runtime acceptance."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B21-T01",
+      "severity": "P3",
+      "owner": "B08 / packages/music-workbench theme regression tests",
+      "status": "open",
+      "title": "Theme preference regression is not stable across executed runs",
+      "trigger": "Run the ordinary root suite, or the isolated theme file in the observed loaded environment. The assertion at line 105 expects the second preference write within vi.waitFor; both observed runs timed out with one call.",
+      "effect": "The default root gate stops before application/Rust tests. A fresh serial root run passes without implementation/assertion changes, so the issue is validation stability; no deterministic product defect is established.",
+      "evidence": [
+        "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts:105",
+        ".codex-tmp/b21-final/test.log",
+        ".codex-tmp/b21-final/theme-recheck.log",
+        ".codex-tmp/b21-final/test-retry.log"
+      ],
+      "suggestedNextAction": "Execute B08-theme-preference-test-stability-shared. Isolate lazy theme loading from the asserted preference-write behavior and establish bounded, repeatable waits; preserve the original failure semantics. Load/cold imports are a hypothesis, not an established root cause."
+    }
+  ],
+  "ledgerRepairs": [
+    {
+      "id": "B21-L01",
+      "result": "resolved",
+      "detail": "B12 aggregate pass corrected to pending/unreviewed with seven missing candidates; the renderer-platform child remains pass-scoped."
+    },
+    {
+      "id": "B21-L02",
+      "result": "resolved",
+      "detail": "B06 routes to its current repair report; B17-C01/C02 are revalidated against current code, 21 CLI tests and fresh public tarballs. Historical reports are preserved."
+    }
+  ],
+  "verification": [
+    {
+      "command": "pnpm test",
+      "result": "fail",
+      "exitCode": 1,
+      "startedAt": "2026-10-21T15:44:45.2651762+00:00",
+      "finishedAt": "2026-10-21T15:48:17.6401826+00:00",
+      "logPath": ".codex-tmp/b21-final/test.log",
+      "logSha256": "a5605c44e084403f93b81f65e399d5497cec8dd1d69fcdbb7be0d4b9485f39b5",
+      "level": "tests"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T15:48:18.6355147+00:00",
+      "finishedAt": "2026-10-21T15:55:02.9783337+00:00",
+      "logPath": ".codex-tmp/b21-final/typecheck.log",
+      "logSha256": "beaa77503aef921d7bcbf3cd541cb98b9b8ce2a090f6ffc1715feab8c643636d",
+      "level": "static"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T15:55:03.2399917+00:00",
+      "finishedAt": "2026-10-21T15:55:12.0519381+00:00",
+      "logPath": ".codex-tmp/b21-final/lint.log",
+      "logSha256": "61759e2de68c1bec3b02765f50fe3441b3d9e0b9fcf2f32c12e276520b8aa448",
+      "level": "static"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "fail",
+      "exitCode": 1,
+      "startedAt": "2026-10-21T15:55:12.1020003+00:00",
+      "finishedAt": "2026-10-21T15:55:28.1190419+00:00",
+      "logPath": ".codex-tmp/b21-final/format-check.log",
+      "logSha256": "20117e56d4ce413ac60fcc8944cc2e0f53bb1f1700eda055e5df60662bfa6ae7",
+      "level": "static"
+    },
+    {
+      "command": "pnpm build",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T15:55:28.1374557+00:00",
+      "finishedAt": "2026-10-21T16:02:06.4637611+00:00",
+      "logPath": ".codex-tmp/b21-final/build.log",
+      "logSha256": "8619bd0af33da383f914782771ba1be7151a7f9da846bdea05e5ef7037d891c8",
+      "level": "artifact"
+    },
+    {
+      "command": "pnpm check:native",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T16:02:06.4986536+00:00",
+      "finishedAt": "2026-10-21T16:02:18.6942256+00:00",
+      "logPath": ".codex-tmp/b21-final/check-native.log",
+      "logSha256": "b7bac96f898381f595c89e81fbccf49e9631d17348881ce072cb246691074c36",
+      "level": "static"
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T16:02:18.7062219+00:00",
+      "finishedAt": "2026-10-21T16:02:49.7812587+00:00",
+      "logPath": ".codex-tmp/b21-final/check-rust-msrv.log",
+      "logSha256": "628fad4c25d53db3985e8d289432c297725e1b5cc88fd93f26acb379e77b6e00",
+      "level": "static"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T16:02:49.7930996+00:00",
+      "finishedAt": "2026-10-21T16:03:07.5189596+00:00",
+      "logPath": ".codex-tmp/b21-final/check-rust-deny.log",
+      "logSha256": "27fe080083e8d39615d9891f721ad038ab08a94995440deeae787b35dece30e4",
+      "level": "static"
+    },
+    {
+      "command": "pnpm check:mobile:android",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T16:03:07.5333740+00:00",
+      "finishedAt": "2026-10-21T16:03:16.9832463+00:00",
+      "logPath": ".codex-tmp/b21-final/check-mobile-android.log",
+      "logSha256": "161281a1541faae814f5d5768d9cd4dc69ee2a9f2583d77112f567937deb72ab",
+      "level": "static"
+    },
+    {
+      "command": "pnpm test",
+      "result": "pass",
+      "exitCode": 0,
+      "environment": {
+        "npm_config_workspace_concurrency": "1"
+      },
+      "startedAt": "2026-10-22T03:31:19.9224345+00:00",
+      "finishedAt": "2026-10-22T03:34:47.6062567+00:00",
+      "logPath": ".codex-tmp/b21-final/test-retry.log",
+      "logSha256": "49cfc8dbeb88290c9254f6da27a537ec192d426d34dd0f3daf2fc778aa57a407",
+      "level": "tests"
+    },
+    {
+      "command": "pnpm check:plugin:tools",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:33:42.9190752+00:00",
+      "finishedAt": "2026-10-22T03:34:33.7712646+00:00",
+      "logPath": ".codex-tmp/b21-final/plugin-tools.log",
+      "logSha256": "2924967db5e7bc6e4d1a75a9b41ad98a456c5385810a7f6d7eb79a58c6350a7e",
+      "detail": "Fresh independent tarball consumer and four templates; generated historical S15 evidence restored byte-for-byte, current observed outputs retained locally.",
+      "level": "artifact"
+    },
+    {
+      "command": "pnpm check:mobile:release aarch64",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:57:01.9850251+08:00",
+      "finishedAt": "2026-10-21T23:57:07.8522462+08:00",
+      "logPath": ".codex-tmp/b21-final/mobile-release.log",
+      "reason": "Verified integrity/security metadata of the existing signed arm64 APK/AAB only; these historical binaries were not rebuilt from the current B21 source baseline.",
+      "level": "artifact",
+      "logSha256": "29f6d297b2e8581090cdf1a9c4bef29ddfaa8ab87be131d58a51ac0802317d04"
+    },
+    {
+      "command": "pnpm check:mobile:release x86_64",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T15:57:29.4233432+00:00",
+      "finishedAt": "2026-10-21T15:57:35.4578835+00:00",
+      "logPath": ".codex-tmp/b21-final/mobile-release-x86_64.log",
+      "reason": "Verified existing signed x86_64 artifacts only; this does not reaccept the documented cold-start failure or bind these historical binaries to current sources.",
+      "level": "artifact",
+      "logSha256": "e0ebbeda6ea3400365e221993067ee1d0db5bdabd223adee8eb1e2c9f026dfeb"
+    },
+    {
+      "command": "node scripts/check-plugin-package.mjs",
+      "level": "tests",
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/plugin-package-boundaries.log",
+      "logSha256": "0967263889c7c9ea548ea247281560dc86a67a625afc725f6e327c864416348f",
+      "detail": "56 shared Node/Rust package cases and ephemeral cross-language Ed25519 vector; no product launch."
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "level": "tests",
+      "result": "fail",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/b21-final/theme-recheck.log",
+      "logSha256": "02ac4222d6f66ceb9eeab71c4f3849f753769605e3caf68ccc30b7bd0a20fedf",
+      "detail": "Same expected-two-writes timeout as the first root run. The trailing pnpm wrapper says command not found, but Vitest did execute all seven tests and reported one assertion failure; this is not an absent Vitest binary."
+    },
+    {
+      "command": "pnpm test",
+      "level": "tests",
+      "result": "not-run",
+      "exitCode": null,
+      "logPath": ".codex-tmp/b21-final/test-retry-interrupted.log",
+      "logSha256": "fc6b5cdadfc07656c54b21f00e326ffe51b636b43a3af22b52a0fb94a0bd6906",
+      "detail": "Earlier serial retry was interrupted without a final exit code. It is retained and is not counted as a pass."
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "fail",
+      "exitCode": 1,
+      "startedAt": "2026-10-22T03:31:57.2511615+00:00",
+      "finishedAt": "2026-10-22T03:32:01.3801484+00:00",
+      "logPath": ".codex-tmp/b21-final/format-check-resume.log",
+      "level": "static",
+      "logSha256": "6b075e16b9baf094680e6337132b7c5fda62d9cfc3eaa5200541726044ca3393"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:42:17.8492232+00:00",
+      "finishedAt": "2026-10-22T03:42:28.4136074+00:00",
+      "logPath": ".codex-tmp/b21-final/format-check-final.log",
+      "logSha256": "e25c599e464d88aeb1e89608410fa2338220d538945912585f1bc69f43feb92e",
+      "level": "static"
+    }
+  ],
+  "evidenceFreshness": [
+    {
+      "batchId": "B01-utils-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 11,
+        "matched": 11,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B02-network-routing-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 3,
+        "matched": 3,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B03-sdk-root-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B03-sdk-root-shared.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B03-sdk-root-shared.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 17,
+        "matched": 17,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B04-generic-root-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 2,
+        "matched": 2,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B05-music-sources-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 2,
+        "matched": 2,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B06-workbench-storage-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 38,
+        "matched": 24,
+        "changed": [
+          "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+          "docs/en/desktop/README.md",
+          "docs/en/desktop/backend-engineering.md",
+          "docs/en/desktop/douyin-background-login-experiment.md",
+          "docs/en/desktop/runtime-architecture.md",
+          "docs/en/desktop/rust-workspace-plan.md",
+          "docs/zh-cn/桌面端/Rust工作区规划.md",
+          "docs/zh-cn/桌面端/后端工程规范.md",
+          "docs/zh-cn/桌面端/抖音后台登录试验.md",
+          "docs/zh-cn/桌面端/文档索引.md",
+          "docs/zh-cn/桌面端/运行端架构.md",
+          "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+          "docs/en/desktop/development.md",
+          "docs/zh-cn/桌面端/开发规范.md"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B07-media-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 11,
+        "matched": 9,
+        "changed": [
+          "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+          "docs/zh-cn/跨平台/架构/音乐源插件架构.md"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B08-theme-trusted-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 4,
+        "matched": 4,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B09-tag-management-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 29,
+        "matched": 29,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B10-bilibili-descriptor-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 36,
+        "matched": 24,
+        "changed": [
+          "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+          "docs/en/desktop/README.md",
+          "docs/en/desktop/backend-engineering.md",
+          "docs/en/desktop/douyin-background-login-experiment.md",
+          "docs/en/desktop/runtime-architecture.md",
+          "docs/en/desktop/rust-workspace-plan.md",
+          "docs/zh-cn/桌面端/Rust工作区规划.md",
+          "docs/zh-cn/桌面端/后端工程规范.md",
+          "docs/zh-cn/桌面端/抖音后台登录试验.md",
+          "docs/zh-cn/桌面端/文档索引.md",
+          "docs/zh-cn/桌面端/运行端架构.md",
+          "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B11-document-start-launcher-userscript",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 18,
+        "matched": 18,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B12-renderer-platform-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 10,
+        "matched": 9,
+        "changed": ["Cargo.lock"],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B13-vm-profile-control-shared",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 7,
+        "matched": 5,
+        "changed": [
+          "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+          "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B14-pure-policy-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 7,
+        "matched": 5,
+        "changed": ["apps/tauri/src-tauri/src/plugins/control.rs", "Cargo.lock"],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B14-runtime-ports-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 7,
+        "matched": 5,
+        "changed": ["apps/tauri/src-tauri/src/plugins/control.rs", "Cargo.lock"],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B14-authority-storage-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 7,
+        "matched": 5,
+        "changed": ["apps/tauri/src-tauri/src/plugins/control.rs", "Cargo.lock"],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B14-named-commit-revoke-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 7,
+        "matched": 5,
+        "changed": ["apps/tauri/src-tauri/src/plugins/control.rs", "Cargo.lock"],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B15-public-target-bounded-transport-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 28,
+        "matched": 24,
+        "changed": [
+          "docs/en/desktop/development.md",
+          "docs/en/desktop/backend-engineering.md",
+          "Cargo.lock",
+          "apps/tauri/src-tauri/src/plugins/executor.rs"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B16-package-verification-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 4,
+        "matched": 4,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B17-cli-build-pack-sign",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 4,
+        "matched": 4,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B18-native-delivery-control-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 16,
+        "matched": 16,
+        "changed": [],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B19-android-capabilities-acl-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri-fix.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri-fix.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 1,
+        "matched": 0,
+        "changed": ["apps/tauri/src-tauri/capabilities/main-android.json"],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B19-ios-capability-boundary-tauri",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-ios-capability-boundary-tauri.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-ios-capability-boundary-tauri.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 31,
+        "matched": 30,
+        "changed": ["apps/tauri/src-tauri/capabilities/main-android.json"],
+        "missing": []
+      }
+    },
+    {
+      "batchId": "B20-reviewed-area-guidance-repository",
+      "effectiveReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json",
+      "freshness": {
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json",
+        "refactorStatus": "conformant",
+        "verdict": "pass-scoped",
+        "hashCount": 60,
+        "matched": 60,
+        "changed": [],
+        "missing": []
+      }
+    }
+  ],
+  "freshnessLimits": "Hashes only cover files captured by each report. Documentation/lockfile/direct-neighbor changes are recorded explicitly and supplemented by fresh root tests/guards or the linked remediation; no blanket whole-source re-review is claimed. B19 Android description-only correction does not change iOS permissions or native policy.",
+  "gateCoverage": [
+    {
+      "group": "B03",
+      "coveredBy": "Root typecheck invokes generated protocol validation; successful root Tauri test invokes pnpm check:protocol."
+    },
+    {
+      "group": "B13",
+      "coveredBy": "Root lint invokes the VM consistency guard, root tests run VM/browser-adapter/testkit owner suites; no duplicate VM gate is needed."
+    },
+    {
+      "group": "B14-B16",
+      "coveredBy": "Fresh root Cargo workspace tests plus the package corpus checker and native/MSRV/deny/release checks."
+    },
+    {
+      "group": "B17",
+      "coveredBy": "Fresh public artifact consumer plus root CLI/testkit tests; Windows DEV remains outside the audited scope."
+    },
+    {
+      "group": "B19",
+      "coveredBy": "Root mobile guards/tests, Android Clippy and existing arm64/x86_64 signed artifact verification; no emulator/device launch."
+    }
+  ],
+  "missingEvidence": [
+    "88 planned candidates remain unreviewed; full test success does not supply their missing architecture evidence.",
+    "Fresh GM/Rust/device/OS channel acceptance is absent.",
+    "Default theme-test repeatability needs repair."
+  ],
+  "unreadPaths": "All implementations outside existing scoped reports and the explicitly revalidated B17/B18 direct chains; see every notReviewed candidate. No whole-repository source scan was performed.",
+  "dependencies": [
+    "B01-audio-recipes",
+    "B01-audio-prefetch",
+    "B01-audio-browser",
+    "B01-core-errors",
+    "B01-core-library",
+    "B01-core-download",
+    "B01-core-ports",
+    "B02-account-pool",
+    "B03-sdk-music",
+    "B03-sdk-schema",
+    "B03-sdk-guest",
+    "B03-sdk-host",
+    "B03-sdk-node",
+    "B03-native-protocol",
+    "B04-music-sources",
+    "B04-dependencies",
+    "B04-enable-disable",
+    "B04-availability",
+    "B05-library",
+    "B05-plugins",
+    "B05-settings",
+    "B05-runtime",
+    "B05-stores",
+    "B05-plugin-adapters",
+    "B06-userscript-generation",
+    "B06-tauri-renderer-mirror",
+    "B06-tauri-native-product-mirror",
+    "B06-plugin-portable-namespaces",
+    "B07-player",
+    "B07-downloads",
+    "B07-audio-export",
+    "B07-userscript-media-wiring",
+    "B07-tauri-media-wiring",
+    "B08-controlled-components",
+    "B08-theme-root",
+    "B08-theme-directory",
+    "B08-layout-live",
+    "B09-music-creation",
+    "B09-userscript-injection",
+    "B09-tauri-injection",
+    "B10-bilibili-session",
+    "B10-bilibili-search",
+    "B10-bilibili-import-listing",
+    "B10-bilibili-media",
+    "B10-douyin-descriptor",
+    "B10-douyin-session",
+    "B10-douyin-search",
+    "B10-douyin-import-listing",
+    "B10-douyin-media",
+    "B11-shadow-dom",
+    "B11-gm-http",
+    "B11-page-bridges",
+    "B11-gm-storage",
+    "B11-single-proxy",
+    "B11-production-graph",
+    "B12-native-network",
+    "B12-request-registry",
+    "B12-accounts-vault-proxy",
+    "B12-browser-cdp-operation",
+    "B12-media-grants",
+    "B12-system-download",
+    "B12-ipc-acl",
+    "B13-vm-engine-bridge",
+    "B13-browser-adapter",
+    "B13-same-engine-testkit",
+    "B15-native-gate",
+    "B15-network-ledger",
+    "B15-final-byte-delivery",
+    "B16-runtime-install-files",
+    "B16-application-package-files",
+    "B16-package-transactions",
+    "B16-revocations-recovery",
+    "B17-sdk-node-artifact",
+    "B17-testkit-artifact",
+    "B17-windows-dev-pairing",
+    "B17-windows-dev-reload",
+    "B17-windows-dev-end",
+    "B18-executor-relay",
+    "B18-resource-filter",
+    "B18-command-catalog-save-operation",
+    "B19-android-document-save-keystore",
+    "B19-android-lifecycle",
+    "B19-android-bilibili-accounts-proxy-media",
+    "B19-android-build-signing",
+    "B19-android-minimum-device-channel",
+    "B20-ownership-status-scope",
+    "B20-bilingual-counterparts-indexes",
+    "B20-targeted-legacy-check"
+  ],
+  "nextBatch": "B08-theme-preference-test-stability-shared",
+  "delivery": {
+    "productImplementationChanged": false,
+    "historicalEvidencePreserved": true,
+    "productBrowserEmulatorLaunched": false,
+    "committed": false,
+    "pushed": false,
+    "acceptanceRecordsChanged": false
+  },
+  "gateSummary": {
+    "pnpm test": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/test-retry.log",
+      "finishedAt": "2026-10-22T03:34:47.6062567+00:00",
+      "environment": {
+        "npm_config_workspace_concurrency": "1"
+      }
+    },
+    "pnpm typecheck": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/typecheck.log",
+      "finishedAt": "2026-10-21T15:55:02.9783337+00:00"
+    },
+    "pnpm lint": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/lint.log",
+      "finishedAt": "2026-10-21T15:55:12.0519381+00:00"
+    },
+    "pnpm format:check": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/format-check-final.log",
+      "finishedAt": "2026-10-22T03:42:28.4136074+00:00"
+    },
+    "pnpm build": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/build.log",
+      "finishedAt": "2026-10-21T16:02:06.4637611+00:00"
+    },
+    "pnpm check:native": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/check-native.log",
+      "finishedAt": "2026-10-21T16:02:18.6942256+00:00"
+    },
+    "pnpm check:rust:msrv": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/check-rust-msrv.log",
+      "finishedAt": "2026-10-21T16:02:49.7812587+00:00"
+    },
+    "pnpm check:rust:deny": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/check-rust-deny.log",
+      "finishedAt": "2026-10-21T16:03:07.5189596+00:00"
+    },
+    "pnpm check:mobile:android": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/check-mobile-android.log",
+      "finishedAt": "2026-10-21T16:03:16.9832463+00:00"
+    },
+    "pnpm check:plugin:tools": {
+      "result": "pass",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/b21-final/plugin-tools.log",
+      "finishedAt": "2026-10-22T03:34:33.7712646+00:00"
+    }
+  },
+  "nativeReleaseMatrix": {
+    "version": 1,
+    "releaseToolchain": "1.91.1",
+    "msrv": "1.90.0",
+    "releases": [
+      {
+        "target": "x86_64-pc-windows-msvc",
+        "package": "any-music-tauri",
+        "defaultFeatures": false,
+        "features": ["tauri/custom-protocol"]
+      }
+    ],
+    "pendingPlatforms": ["macOS", "Linux", "Android", "iOS"]
+  },
+  "reviewedInputs": [
+    "AGENTS.md",
+    "package.json",
+    "pnpm-workspace.yaml",
+    "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:196",
+    "docs/en/cross-platform/architecture/development-workflow.md",
+    "docs/en/cross-platform/architecture/project-architecture.md",
+    "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+    "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md:23",
+    "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:54",
+    "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:26",
+    "apps/tauri/AGENTS.md",
+    "apps/tauri/src-tauri/AGENTS.md",
+    "crates/AGENTS.md",
+    "packages/plugin-cli/AGENTS.md",
+    "packages/music-workbench/AGENTS.md",
+    "packages/plugin-cli/src/project.mjs:72",
+    "packages/plugin-cli/test/tools.test.mjs:150",
+    "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts:105",
+    "packages/music-workbench/src/features/plugins/use-workbench-theme.ts",
+    "packages/plugin-ui-vue/src/trusted/theme-controller.ts",
+    "crates/am-plugin-runtime/src/rollback.rs",
+    "apps/tauri/src-tauri/src/plugins/control.rs:151",
+    "apps/tauri/src-tauri/src/plugins/packages.rs:242",
+    "apps/tauri/src-tauri/src/plugins/packages/rollback_tests.rs"
+  ],
+  "finalFormatVerified": true,
+  "finalInputRecheck": {
+    "capturedAt": "2026-10-22T03:45:13.324Z",
+    "head": "0da1709902881f8be406be725de4097b80c7748f",
+    "nonAuditChangesSinceSuccessfulTest": [],
+    "localManifest": ".codex-tmp/b21-final/final-input-recheck.json",
+    "manifestSha256": "bc6e3d3a3f00e916b9a64ac028029a9a6c200a58d406da1405624e256df9c655"
+  },
+  "finalHead": "0da1709902881f8be406be725de4097b80c7748f",
+  "headChangeNote": "HEAD advanced independently from the command baseline to the final recheck. Full file-hash comparison shows no product or maintained-document content change; only audit records differ. B21 made no commit or push, so the unchanged-input evidence remains valid."
+}

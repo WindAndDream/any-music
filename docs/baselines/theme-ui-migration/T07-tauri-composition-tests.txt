@@ -1,0 +1,8 @@
+
+ RUN  v4.1.11 <project-root>/apps/tauri
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  02:09:59
+   Duration  6.72s (transform 3.09s, setup 0ms, import 6.18s, tests 13ms, environment 0ms)

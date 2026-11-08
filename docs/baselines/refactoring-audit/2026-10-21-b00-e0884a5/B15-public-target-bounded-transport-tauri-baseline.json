@@ -1,0 +1,141 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B15-public-target-bounded-transport-tauri",
+  "capturedAt": "2026-10-21T13:19:23.832Z",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "initialHead": "acf455cb3e33259ce8887672f3fe679659161180",
+  "initialWorkingTree": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json"
+  ],
+  "workingTreeBeforeReport": "M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+  "relevantWorkingTreeChanges": "",
+  "environment": {
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "v24.11.1",
+    "shell": "PowerShell",
+    "userTimezone": "Asia/Shanghai",
+    "rustc": "1.91.1 (ed61e7d7e 2025-11-07)",
+    "cargo": "1.91.1 (ea2d97820 2025-10-10)",
+    "pnpm": "10.23.0"
+  },
+  "sourceHashes": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177"
+    },
+    {
+      "path": "crates/AGENTS.md",
+      "sha256": "aec1b1d8587da76c626726f0b50328a54d80ff8524812775f6d6c2116782274b"
+    },
+    {
+      "path": "crates/am-plugin-net/AGENTS.md",
+      "sha256": "02c57a4c20212d27cf1469f9c8e9f752ff22b23172b82e946b6bf9069e1d2315"
+    },
+    {
+      "path": "apps/tauri/AGENTS.md",
+      "sha256": "b824b3579a0783c66ef8feeed8d235e4303167486fbeec46a980fb57d95518fa"
+    },
+    {
+      "path": "apps/tauri/src-tauri/AGENTS.md",
+      "sha256": "84aca77100c43018f388b0d4e9d139f79c6e9aed82ae1a40cb7ffa072a90259e"
+    },
+    {
+      "path": ".agents/skills/any-music-tauri-runtime/SKILL.md",
+      "sha256": "1eb5c2a442dba52f39f8d8443b7884caa1c5f2cf792778669566d13f93006b86"
+    },
+    {
+      "path": "docs/en/desktop/development.md",
+      "sha256": "fa5a16c426ef019ecbb8654487eb71a1c8f89f552baa9a3c60b445c197adb920"
+    },
+    {
+      "path": "docs/en/desktop/backend-engineering.md",
+      "sha256": "a140ffb5a4ed91334ab5f31380e1cda4089ead612a3fd97e3298f7115d82ea61"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-s13-anonymous-networking-and-exits.md",
+      "sha256": "6136fd4092b89fba9edc9efe5f0b5b8cb7499586b5768f9154924a0b2a617065"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "sha256": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "53212780b8821b735b6fd386c3edff8713c73827ba57a173d93f1fa53bd6f273"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "3e9da041cf8d454d57c4fb0bbe0d5f72c424739f9d213abcc6a0db4087ce7f13"
+    },
+    {
+      "path": "package.json",
+      "sha256": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e"
+    },
+    {
+      "path": "crates/am-plugin-net/Cargo.toml",
+      "sha256": "9bbafae9ca04464268fbfd0c92a84d5d8ad81c1ca08632a6dd8fe78c347a96c1"
+    },
+    {
+      "path": "crates/am-plugin-net/src/lib.rs",
+      "sha256": "7ee02ab89b813ad1be5572ebfc30a297b4aa0a1f235bae86b7a56e1e747f9700"
+    },
+    {
+      "path": "crates/am-plugin-net/src/request.rs",
+      "sha256": "036dd91a01a1aaa81855276e56d89d8d2906a329520117812b331f47f668986f"
+    },
+    {
+      "path": "crates/am-plugin-net/src/target.rs",
+      "sha256": "f86500a20e326b397ab97bfbab2f82f094b96b7beaca0a246d913c01f3a66460"
+    },
+    {
+      "path": "crates/am-plugin-net/src/transport.rs",
+      "sha256": "d0814f2155d8aff20b104895deae6c9d559a58fbd9822c0214111d33728759c1"
+    },
+    {
+      "path": "crates/am-plugin-net/src/resources.rs",
+      "sha256": "4660b26efb62b40d2cb926bdc88d3231246aaa0c28c601f987be01f536706ba7"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/targets.rs",
+      "sha256": "c8193eb3aebad75d726b3af141982d76c2dd3754dae6d6943e32d22e440d83b4"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/transport.rs",
+      "sha256": "4b364a5e0a0ea8027c48cfc64d4cd4fa68b269cc712e01617778295f213ea3fd"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/fixtures/README.md",
+      "sha256": "7a812b8474d3117d04340c8ad8d4635cc96a215f199f686cd0af1b278e8f99e9"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/network.rs",
+      "sha256": "6a7d632cb1c8f3b385a2a931107f65678f030421ef73737db4ba0bbddd67624c"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+      "sha256": "943603eacfe41d6af016224282d8a941990b5802e3a69af2c7c06cb2d8700d25"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/fixtures/ca.der",
+      "sha256": "1338cdce21793464ad3a35a46e8ca44de79f881ebc6e5fce8b747e72422a648f"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/fixtures/server.der",
+      "sha256": "dd05fc2276bfb40ccca5363f12e38af023d00976bec08124631b81d5d2003c98"
+    },
+    {
+      "path": "crates/am-plugin-net/tests/fixtures/server-key.der",
+      "sha256": "ad6d2a4718c25ced4bafa5d08746b372f2749ad8a313219fe29fbb27ebee63a1"
+    }
+  ],
+  "limit": "Hashes were captured after targeted checks. Scoped tracked implementation files were clean at initial status and remained clean; no product/test/fixture source was modified. Whole-file hashes of the two application neighbors do not imply whole-file review."
+}

@@ -1,0 +1,324 @@
+{
+  "documentType": "audit-fix-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B05-music-sources-shared-fix",
+  "parentBatch": "B05",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T07:42:08.985Z",
+  "scope": {
+    "findingIds": ["B05-M01"],
+    "invariant": "Pending source refreshes display only the selected source session/cache, while same-source refresh retains known identity and stale completions, failure/retry, expiry, invalidation and disposal retain their existing ownership rules.",
+    "changedProductPaths": [
+      "packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+      "packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts"
+    ],
+    "exclusions": [
+      "Other B05 candidates and search/import/catalog audits",
+      "Storage/media/native/GM changes and existing parallel work",
+      "Live UI/browser/app/server inspection and commit/push"
+    ]
+  },
+  "baseline": {
+    "audit": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json",
+    "sourceBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+    "headAtFixStart": "c38a2479d669ca788ddac958a3b19cd08223817b",
+    "headAtVerification": "844b5e35b0d6b152350c34043857e042170cbd61",
+    "verificationWorkingTree": [
+      "M apps/userscript/src/bootstrap-userscript-app.ts",
+      " M apps/userscript/src/platform/configure-userscript-workbench.ts",
+      " M apps/userscript/vite.config.ts",
+      " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      " M packages/core/src/download/download-history.ts",
+      " M packages/core/src/index.ts",
+      " M packages/core/src/models/track.ts",
+      " M packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+      " M packages/music-workbench/src/media/range-media-source.ts",
+      " M packages/music-workbench/src/media/resolved-media-loader.ts",
+      " M packages/music-workbench/src/storage/local-music-library-repository.ts",
+      " M packages/music-workbench/src/storage/product-generation-store.ts",
+      " M packages/music-workbench/src/storage/product-storage.ts",
+      " M packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts",
+      " M packages/music-workbench/test/media/range-media-source.test.ts",
+      " M packages/music-workbench/test/storage/product-storage-fixtures.ts",
+      "?? apps/userscript/src/platform/product-storage.ts",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared.json"
+    ],
+    "note": "The shared workspace has separate B04/B06/B07 work and external commits during this task. This fix owns only the two listed product paths and B05 records; no commit/push is made by this task.",
+    "finalFileHashes": [
+      {
+        "path": "packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+        "sha256": "6af8a5afcef86766c9c64cc7cfb1416f0d541e21f4a71d3202d214eef1c9dc11"
+      },
+      {
+        "path": "packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts",
+        "sha256": "2467900edbb1c65680f87f501b1dcb8233a1eb265ee77527cebe4fa90e1dacb2"
+      }
+    ]
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "changes": [
+    "Retain the source ID that owns the displayed session. A cross-source refresh projects that source cached session or checking before awaiting getSession; a same-source refresh preserves its current session.",
+    "Capture the request source ID once for success/error cache writes. Explicit expiry and invalidation also bind the displayed state to its source, preserving those states during an explicit refresh.",
+    "Keep generation checks, invalidation cache eviction, public contracts and the controlled badge unchanged. No new network request, dependency, persistence or runtime capability is introduced."
+  ],
+  "checks": [
+    {
+      "criterion": "C1/C2",
+      "result": "pass",
+      "evidence": [
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:13",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:29",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-lint.log"
+      ],
+      "detail": "The owning shared composable and its public contracts/ports remain unchanged; repository dependency/lightweight/plugin/mobile boundary lint passes."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "evidence": [
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:29",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:40",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:65",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:81",
+        "packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts:9",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/regression-before.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/regression-after.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/render-probe-after.log"
+      ],
+      "detail": "Two new source-identity regression cases fail against the old implementation; all 13 owner tests pass after repair. The original six-case Node SSR reproduction now passes 6/6, including actual public SessionBadge rendering."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "evidence": [
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:45",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:50",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:76",
+        "packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts"
+      ],
+      "detail": "Operational errors remain AppErrorState, caches stay ephemeral and source-keyed, and expiry/invalidation/failed retry/late rejection tests pass. B06 persistent data and native credentials remain outside this repair."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "evidence": [
+        "packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-test.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-typecheck.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-build.log"
+      ],
+      "detail": "Nine substantive permanent regressions supplement the original four tests. Full repository test/typecheck/lint and production build pass. Formatting debt is retained explicitly below; no live/runtime claim is made."
+    }
+  ],
+  "regressionScenarios": [
+    "Uncached source selection clears the previous identity while making exactly one request per source.",
+    "Same-source refresh retains known identity until the request settles.",
+    "Switching back restores the selected cache only; older completion cannot replace it or clear current busy state.",
+    "A newly selected explicit expired state survives until its refresh settles.",
+    "A newly selected invalidation survives refresh without restoring another identity or stale cache.",
+    "A late rejected source request cannot populate caches or clear current busy state.",
+    "A source without session capability makes no getSession request.",
+    "Failed selected-source refresh normalizes errors, retries explicitly and preserves other source cache.",
+    "Scope disposal suppresses late publication and resets busy state."
+  ],
+  "verification": {
+    "gates": [
+      {
+        "command": "pnpm test",
+        "startedAt": "2026-10-21T15:37:03.0679306+08:00",
+        "finishedAt": "2026-10-21T15:38:08.2575992+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-test.log"
+      },
+      {
+        "command": "pnpm typecheck",
+        "startedAt": "2026-10-21T15:37:03.0703641+08:00",
+        "finishedAt": "2026-10-21T15:38:24.2732876+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-typecheck.log"
+      },
+      {
+        "command": "pnpm lint",
+        "startedAt": "2026-10-21T15:37:03.0653291+08:00",
+        "finishedAt": "2026-10-21T15:37:08.5661649+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-lint.log"
+      },
+      {
+        "command": "pnpm format:check",
+        "startedAt": "2026-10-21T15:37:03.0853024+08:00",
+        "finishedAt": "2026-10-21T15:37:08.6780927+08:00",
+        "exitCode": 1,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-format.log"
+      },
+      {
+        "command": "pnpm build",
+        "startedAt": "2026-10-21T15:38:33.3354174+08:00",
+        "finishedAt": "2026-10-21T15:40:49.7614343+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/root-build.log"
+      }
+    ],
+    "targeted": [
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/music-sources/use-plugin-session.test.ts",
+        "phase": "before fix",
+        "exitCode": 1,
+        "passed": 11,
+        "failed": 2,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/regression-before.log"
+      },
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/music-sources/use-plugin-session.test.ts",
+        "phase": "after fix",
+        "exitCode": 0,
+        "passed": 13,
+        "failed": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/regression-after.log"
+      },
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/music-sources/b05-session-audit.probe.test.ts",
+        "phase": "original audit probe after fix",
+        "exitCode": 0,
+        "passed": 6,
+        "failed": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/render-probe-after.log",
+        "note": "Temporary file restored only for this check, then removed before full root tests. Permanent regressions remain in the owning session test file."
+      }
+    ],
+    "totals": {
+      "workbenchTests": 323,
+      "workbenchFiles": 53,
+      "rootVitestTests": 1765,
+      "rootVitestWorkspaceRuns": 18,
+      "protocolDifferentialCases": 183
+    },
+    "formatting": {
+      "result": "fail-existing",
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "existingUnmodifiedFiles": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/en/desktop/README.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/en/desktop/runtime-architecture.md",
+        "docs/en/desktop/rust-workspace-plan.md",
+        "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "docs/zh-cn/桌面端/后端工程规范.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/桌面端/文档索引.md",
+        "docs/zh-cn/桌面端/运行端架构.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      ],
+      "detail": "All 12 failing documentation files are clean against Git HEAD. Neither repaired product file appears in this list. Changed-file format verification is run separately after saving this report.",
+      "changedFiles": {
+        "result": "pass",
+        "exitCode": 0,
+        "command": "pnpm exec oxfmt --check packages/music-workbench/src/features/music-sources/use-plugin-session.ts packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-fix/changed-format.log"
+      }
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "No browser/application inspection was requested. Node SSR is behavioral test evidence only, and the production build does not prove GM/Rust live account behavior."
+    },
+    "finalInputCheck": {
+      "checkedAt": "2026-10-21T07:42:48.065Z",
+      "result": "pass",
+      "unchangedInputs": [
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+        "packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts"
+      ],
+      "temporaryProbeRemoved": true
+    }
+  },
+  "findings": [
+    {
+      "id": "B05-M01",
+      "status": "resolved",
+      "severity": "P2",
+      "owner": "packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+      "historicalReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json",
+      "resolution": "Displayed session ownership changes before a new source request starts. Cached restoration is source-specific; same-source identity, explicit expired/invalidated state and generation cleanup remain intact."
+    }
+  ],
+  "missingEvidence": [
+    "Exact production Userscript/Tauri UI session-switch acceptance was not run.",
+    "Remaining B05 candidates and operations are not accepted by this fix or broad passing tests."
+  ],
+  "nextBatch": "B05-library-shared",
+  "commitVerification": {
+    "checkedAt": "2026-10-21T10:23:53.003Z",
+    "head": "158da139f0cac80c1c8a3dadfe5c811d4c140cb0",
+    "gates": [
+      {
+        "command": "pnpm test",
+        "startedAt": "2026-10-21T18:13:36.7959561+08:00",
+        "finishedAt": "2026-10-21T18:16:27.9748307+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-commit/root-test.log"
+      },
+      {
+        "command": "pnpm typecheck",
+        "startedAt": "2026-10-21T18:13:37.0323718+08:00",
+        "finishedAt": "2026-10-21T18:16:44.9829369+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-commit/root-typecheck.log"
+      },
+      {
+        "command": "pnpm lint",
+        "startedAt": "2026-10-21T18:13:36.6592430+08:00",
+        "finishedAt": "2026-10-21T18:13:47.5054879+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-commit/root-lint.log"
+      },
+      {
+        "command": "pnpm format:check",
+        "startedAt": "2026-10-21T18:13:36.7634652+08:00",
+        "finishedAt": "2026-10-21T18:13:48.3086914+08:00",
+        "exitCode": 1,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-commit/root-format.log"
+      },
+      {
+        "command": "pnpm build",
+        "startedAt": "2026-10-21T18:20:56.7269411+08:00",
+        "finishedAt": "2026-10-21T18:23:33.6061495+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-session-commit/root-build.log"
+      }
+    ],
+    "formattingDebt": {
+      "files": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/en/desktop/README.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/en/desktop/runtime-architecture.md",
+        "docs/en/desktop/rust-workspace-plan.md",
+        "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "docs/zh-cn/桌面端/后端工程规范.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/桌面端/文档索引.md",
+        "docs/zh-cn/桌面端/运行端架构.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      ],
+      "result": "fail-existing",
+      "detail": "The same 12 documentation files fail formatting as during fix verification. They are outside this commit; changed files are checked separately."
+    },
+    "note": "Checks run against the shared working tree including parallel changes. The isolated commit index contains only B05 source/session repair, matching tests, historical B05 reports and B05 ledger fields."
+  }
+}

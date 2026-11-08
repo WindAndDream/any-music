@@ -1,0 +1,399 @@
+[
+  {
+    "label": "preview-wide-studio-explicit-dark",
+    "audioCount": 1,
+    "focus": {
+      "key": "navigation:catalog",
+      "label": null,
+      "tag": "BUTTON"
+    },
+    "protected": [
+      {
+        "kind": "protected",
+        "shadow": false,
+        "styleCount": 0
+      },
+      {
+        "kind": "slot",
+        "shadow": true,
+        "styleCount": 1
+      },
+      {
+        "kind": "slot",
+        "shadow": true,
+        "styleCount": 1
+      }
+    ],
+    "scroll": [
+      {
+        "height": 60,
+        "key": "navigation",
+        "left": 0,
+        "scrollHeight": 60,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 763,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 763,
+        "scrollWidth": 1170,
+        "top": 0,
+        "width": 1170
+      },
+      {
+        "height": 351,
+        "key": "catalog:requests",
+        "left": 0,
+        "scrollHeight": 351,
+        "scrollWidth": 220,
+        "top": 0,
+        "width": 220
+      }
+    ],
+    "themes": [
+      {
+        "id": "studio",
+        "resolved": "dark"
+      }
+    ],
+    "viewport": {
+      "dpr": 1.0000000447034836,
+      "height": 900,
+      "reducedMotion": false,
+      "systemDark": false,
+      "width": 1440
+    }
+  },
+  {
+    "label": "preview-studio-keyboard-long-scroll",
+    "audioCount": 1,
+    "focus": {
+      "key": null,
+      "label": null,
+      "tag": "BUTTON"
+    },
+    "protected": [
+      {
+        "kind": "protected",
+        "shadow": false,
+        "styleCount": 0
+      },
+      {
+        "kind": "slot",
+        "shadow": true,
+        "styleCount": 1
+      }
+    ],
+    "scroll": [
+      {
+        "height": 60,
+        "key": "navigation",
+        "left": 0,
+        "scrollHeight": 60,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 763,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 2144,
+        "scrollWidth": 1164,
+        "top": 0,
+        "width": 1164
+      }
+    ],
+    "themes": [
+      {
+        "id": "studio",
+        "resolved": "dark"
+      }
+    ],
+    "viewport": {
+      "dpr": 1.0000000447034836,
+      "height": 900,
+      "reducedMotion": false,
+      "systemDark": false,
+      "width": 1440
+    }
+  },
+  {
+    "label": "preview-studio-keyboard-long-scroll-settled",
+    "audioCount": 1,
+    "focus": {
+      "key": null,
+      "label": null,
+      "tag": "BUTTON"
+    },
+    "protected": [
+      {
+        "kind": "protected",
+        "shadow": false,
+        "styleCount": 0
+      },
+      {
+        "kind": "slot",
+        "shadow": true,
+        "styleCount": 1
+      }
+    ],
+    "scroll": [
+      {
+        "height": 60,
+        "key": "navigation",
+        "left": 0,
+        "scrollHeight": 60,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 763,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 2144,
+        "scrollWidth": 1164,
+        "top": 1334.857177734375,
+        "width": 1164
+      }
+    ],
+    "themes": [
+      {
+        "id": "studio",
+        "resolved": "dark"
+      }
+    ],
+    "viewport": {
+      "dpr": 1.0000000447034836,
+      "height": 900,
+      "reducedMotion": false,
+      "systemDark": false,
+      "width": 1440
+    }
+  },
+  {
+    "label": "preview-studio-before-theme-long-scroll",
+    "audioCount": 1,
+    "focus": {
+      "key": null,
+      "label": null,
+      "tag": "BUTTON"
+    },
+    "protected": [
+      {
+        "kind": "protected",
+        "shadow": false,
+        "styleCount": 0
+      },
+      {
+        "kind": "slot",
+        "shadow": true,
+        "styleCount": 1
+      }
+    ],
+    "scroll": [
+      {
+        "height": 60,
+        "key": "navigation",
+        "left": 0,
+        "scrollHeight": 60,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 763,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 2144,
+        "scrollWidth": 1164,
+        "top": 1381.142822265625,
+        "width": 1164
+      }
+    ],
+    "themes": [
+      {
+        "id": "studio",
+        "resolved": "dark"
+      }
+    ],
+    "viewport": {
+      "dpr": 1.0000000447034836,
+      "height": 900,
+      "reducedMotion": false,
+      "systemDark": false,
+      "width": 1440
+    }
+  },
+  {
+    "label": "preview-classic-after-long-scroll-theme-switch",
+    "audioCount": 1,
+    "focus": {
+      "key": null,
+      "label": "关闭",
+      "tag": "BUTTON"
+    },
+    "protected": [
+      {
+        "kind": "protected",
+        "shadow": false,
+        "styleCount": 0
+      },
+      {
+        "kind": "slot",
+        "shadow": true,
+        "styleCount": 1
+      },
+      {
+        "kind": "theme-selection",
+        "shadow": false,
+        "styleCount": 0
+      }
+    ],
+    "scroll": [
+      {
+        "height": 663,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 8264,
+        "scrollWidth": 1161,
+        "top": 1381.142822265625,
+        "width": 1161
+      },
+      {
+        "height": 635,
+        "key": "settings:overview",
+        "left": 0,
+        "scrollHeight": 827,
+        "scrollWidth": 251,
+        "top": 0,
+        "width": 251
+      },
+      {
+        "height": 635,
+        "key": "settings:appearance",
+        "left": 0,
+        "scrollHeight": 635,
+        "scrollWidth": 781,
+        "top": 0,
+        "width": 781
+      }
+    ],
+    "themes": [
+      {
+        "id": "default",
+        "resolved": "dark"
+      }
+    ],
+    "viewport": {
+      "dpr": 1.0000000447034836,
+      "height": 900,
+      "reducedMotion": false,
+      "systemDark": false,
+      "width": 1440
+    }
+  },
+  {
+    "label": "preview-studio-after-reverse-long-scroll",
+    "audioCount": 1,
+    "focus": {
+      "key": "settings:open",
+      "label": "打开全局设置",
+      "tag": "BUTTON"
+    },
+    "protected": [
+      {
+        "kind": "protected",
+        "shadow": false,
+        "styleCount": 0
+      },
+      {
+        "kind": "slot",
+        "shadow": true,
+        "styleCount": 1
+      }
+    ],
+    "scroll": [
+      {
+        "height": 60,
+        "key": "navigation",
+        "left": 0,
+        "scrollHeight": 60,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 763,
+        "scrollWidth": 1440,
+        "top": 0,
+        "width": 1440
+      },
+      {
+        "height": 763,
+        "key": "workspace",
+        "left": 0,
+        "scrollHeight": 2144,
+        "scrollWidth": 1164,
+        "top": 1381.142822265625,
+        "width": 1164
+      }
+    ],
+    "themes": [
+      {
+        "id": "studio",
+        "resolved": "dark"
+      }
+    ],
+    "viewport": {
+      "dpr": 1.0000000447034836,
+      "height": 900,
+      "reducedMotion": false,
+      "systemDark": false,
+      "width": 1440
+    }
+  }
+]

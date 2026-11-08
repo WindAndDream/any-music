@@ -1,0 +1,86 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B05-music-sources-shared",
+  "capturedAt": "2026-10-21T15:15:18.6741866+08:00",
+  "head": "c38a2479d669ca788ddac958a3b19cd08223817b",
+  "workingTree": [],
+  "targetWorkingTree": [],
+  "environment": {
+    "os": "Windows",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "timezone": "Asia/Shanghai"
+  },
+  "fileHashes": [
+    {
+      "path": "packages/music-workbench/package.json",
+      "sha256": "98a74b0beff51fe56c81f8ec2118eaea6ad138dd8a54b7024ae6a68c37775155"
+    },
+    {
+      "path": "packages/music-workbench/AGENTS.md",
+      "sha256": "1c73c5188fabf882082e7e2d08dfa7fe3f0abb03e5d926b11f96a203525c7d8f"
+    },
+    {
+      "path": "packages/music-workbench/src/index.ts",
+      "sha256": "892647890e155bedc291fa0b38fc46ce5770f8140ef4d2536209252589e45d45"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "sha256": "50ed7646c03b707dc8cc0a4235b12c941c52fd6dd63ff3a506ba09de52e4d1fa"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts",
+      "sha256": "d53d51df5e72f7f75d071e736e5a7b5102ac49b95cccc663e176695f96bd28b6"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-registry.ts",
+      "sha256": "7a4a4e9dee1a59c8d08eba20ec4b53c6ab9de0d22c0a93403ee08032081c58ef"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+      "sha256": "b56869dd383b28fc767e5daf84e8daeaf5e5fa7beed8865b0d897fb0090a0c5c"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts",
+      "sha256": "22158e6c1c8bd37e33ae0eea63a9976bc5c9c1ceaa6d02fee557622a34d46241"
+    },
+    {
+      "path": "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "sha256": "e1c852ae8be55ad85960752aa16dfdfa49b403ed83e1c964753d941d0c26832d"
+    },
+    {
+      "path": "packages/music-workbench/test/features/music-sources/use-music-source-workbench.test.ts",
+      "sha256": "4f10c951882eb58d8bbf412f981b4944a76a19c0ead83aa229c531596c92792e"
+    },
+    {
+      "path": "packages/music-workbench/test/features/music-sources/use-music-source-registry.test.ts",
+      "sha256": "0f28e231face6b874baeac4df67c17c8cf54ddbd5b7dffffe5ddf73b0b4cb0f1"
+    },
+    {
+      "path": "packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts",
+      "sha256": "bc88807186bacc16fd9f2a7fc811f555c89f31edef21726d6b6f75db4124db90"
+    },
+    {
+      "path": "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts",
+      "sha256": "68f566aaf5bd21be4c1b1d2a87a05fdb03f31ebe318f96c6398cf863a946224e"
+    },
+    {
+      "path": "packages/music-workbench/vitest.config.ts",
+      "sha256": "2751b2731cc68332ae32c1b5e9bf5bad72184e6d8fe6c828a897141ebb5d9bcf"
+    },
+    {
+      "path": "packages/music-workbench/tsconfig.json",
+      "sha256": "a51ba24f04f6a63dea399930183c097cdb0d566d39d047903eddede77dd50184"
+    },
+    {
+      "path": "packages/ui/AGENTS.md",
+      "sha256": "1d38b0d9f79324421f4b0b787732f12662580ba4c19179c6e0cb593e0d79dc2e"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/SessionBadge.vue",
+      "sha256": "e7d06df1b53941da71ff65ea091279c5cc4a6dc7ed6833d8a5ebdb3fb76b70ac"
+    }
+  ]
+}

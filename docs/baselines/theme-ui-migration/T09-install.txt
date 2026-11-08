@@ -1,0 +1,6 @@
+Scope: all 23 workspace projects
+Progress: resolved 0, reused 1, downloaded 0, added 0
+Already up to date
+Progress: resolved 371, reused 265, downloaded 0, added 0, done
+
+Done in 1.2s using pnpm v10.23.0

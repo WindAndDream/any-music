@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "runtimeScope": "userscript",
+  "files": [
+    {
+      "fileName": "any-music-download-20261025-154813 (1).zip",
+      "bytes": 4279383,
+      "sha256": "7e1ead323ec69fb2533ad5dfb8872f289a77b7b15662735ff205fc5560a3a9d5",
+      "crcPassed": true,
+      "entries": [
+        {
+          "name": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+          "bytes": 4270726
+        },
+        {
+          "name": "any-music-download-report.json",
+          "bytes": 8291
+        }
+      ],
+      "report": {
+        "generatedAtMs": 1793029674954,
+        "batchId": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+        "items": [
+          {
+            "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+            "status": "cancelled"
+          },
+          {
+            "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+            "status": "succeeded"
+          },
+          {
+            "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+            "status": "cancelled"
+          }
+        ]
+      }
+    },
+    {
+      "fileName": "any-music-download-20261025-154813 (2).zip",
+      "bytes": 8838824,
+      "sha256": "ce6ac20161d4008b8c8afe10974e235fa0d16b0e93c01d2858d0070e335ef28f",
+      "crcPassed": true,
+      "entries": [
+        {
+          "name": "We Never (Remix) (若如初见).mp3",
+          "bytes": 4556981
+        },
+        {
+          "name": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+          "bytes": 4270726
+        },
+        {
+          "name": "any-music-download-report.json",
+          "bytes": 10589
+        }
+      ],
+      "report": {
+        "generatedAtMs": 1793029826942,
+        "batchId": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+        "items": [
+          {
+            "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+            "status": "succeeded"
+          },
+          {
+            "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+            "status": "succeeded"
+          },
+          {
+            "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+            "status": "failed"
+          }
+        ]
+      }
+    },
+    {
+      "fileName": "any-music-download-20261025-154813 (3).zip",
+      "bytes": 12448714,
+      "sha256": "49299edef88982bd9bbc6cbbca1a1fe50f252e87d63561f06322ea8a95556b79",
+      "crcPassed": true,
+      "entries": [
+        {
+          "name": "We Never (Remix) (若如初见).mp3",
+          "bytes": 4556981
+        },
+        {
+          "name": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+          "bytes": 4270726
+        },
+        {
+          "name": "神总是忧郁的——《幻昼》降调版.mp3",
+          "bytes": 3609475
+        },
+        {
+          "name": "any-music-download-report.json",
+          "bytes": 10814
+        }
+      ],
+      "report": {
+        "generatedAtMs": 1793030044414,
+        "batchId": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+        "items": [
+          {
+            "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+            "status": "succeeded"
+          },
+          {
+            "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+            "status": "succeeded"
+          },
+          {
+            "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+            "status": "succeeded"
+          }
+        ]
+      }
+    },
+    {
+      "fileName": "any-music-download-20261025-154813 (4).zip",
+      "bytes": 12456527,
+      "sha256": "3daa22c2dc28c7f527ecbc6a8b70f800dc8707729d0ce5309a7614127272378a",
+      "crcPassed": true,
+      "entries": [
+        {
+          "name": "We Never (Remix) (若如初见).mp3",
+          "bytes": 4556981
+        },
+        {
+          "name": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+          "bytes": 4270726
+        },
+        {
+          "name": "神总是忧郁的——《幻昼》降调版.mp3",
+          "bytes": 3609475
+        },
+        {
+          "name": "any-music-download-report.json",
+          "bytes": 18627
+        }
+      ],
+      "report": {
+        "generatedAtMs": 1793031030024,
+        "batchId": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+        "items": [
+          {
+            "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+            "status": "succeeded"
+          },
+          {
+            "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+            "status": "succeeded"
+          },
+          {
+            "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+            "status": "succeeded"
+          }
+        ]
+      }
+    }
+  ],
+  "repairedFinalFileName": "any-music-download-20261025-154813 (4).zip"
+}

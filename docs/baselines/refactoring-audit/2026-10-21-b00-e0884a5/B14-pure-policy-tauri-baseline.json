@@ -1,0 +1,411 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-pure-policy-tauri",
+  "capturedAt": "2026-10-21T21:18:17.0477471+08:00",
+  "initialHead": "acf455cb3e33259ce8887672f3fe679659161180",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "initialWorkingTree": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json"
+  ],
+  "workingTreeAtRecord": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json"
+  ],
+  "relevantChangesSinceInitialHead": [],
+  "sourceHashes": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "53212780b8821b735b6fd386c3edff8713c73827ba57a173d93f1fa53bd6f273"
+    },
+    {
+      "path": "crates/AGENTS.md",
+      "sha256": "aec1b1d8587da76c626726f0b50328a54d80ff8524812775f6d6c2116782274b"
+    },
+    {
+      "path": "crates/am-plugin-policy/Cargo.toml",
+      "sha256": "196ac114ca3aa9ee05333fd2127069178109e200d344134459bd8caa795e7cff"
+    },
+    {
+      "path": "crates/am-plugin-policy/examples/corpus.rs",
+      "sha256": "7821bd62e375a734180c2f02eea277a04ec711c2e00f1a2e15e05bae4a24849b"
+    },
+    {
+      "path": "crates/am-plugin-policy/src/authorization.rs",
+      "sha256": "136457fadfa9fec3c0ba4880e4b82fc275bc1aaaeade60e187c419c8feabd281"
+    },
+    {
+      "path": "crates/am-plugin-policy/src/lib.rs",
+      "sha256": "e7ef01e9e6dccbd6ca1a18afd945ee5bb85db77b713372b9eab540c977b37ebc"
+    },
+    {
+      "path": "crates/am-plugin-policy/src/negotiation.rs",
+      "sha256": "8c30b974045ac01ba24507715c2bd789755d998e2b698aae087739a280bdb419"
+    },
+    {
+      "path": "crates/am-plugin-policy/tests/authorization.rs",
+      "sha256": "689b05527cc83774c948c7b2275728d24c7ff641788d6abbace886b27e54a9b2"
+    },
+    {
+      "path": "crates/am-plugin-protocol/Cargo.toml",
+      "sha256": "2923cf20a79210572a9c75a1ca5eee786ce86a8ee372ea6bba0f6d236d005197"
+    },
+    {
+      "path": "crates/am-plugin-protocol/src/boundary.rs",
+      "sha256": "52b2d9fa4f48f71dc2b9eec6a48e57425388cb0e4eb7931e88512ab27c51b32b"
+    },
+    {
+      "path": "crates/am-plugin-protocol/src/generated.rs",
+      "sha256": "2ca72a5042d2061198784df1c9cfa17aa1b245dd2059eee98a86d9288eece835"
+    },
+    {
+      "path": "crates/am-plugin-protocol/src/lib.rs",
+      "sha256": "c698f5036abef5892dc4dd2ae61cec2930c1f4cc931c7a4e294925a0d199d69c"
+    },
+    {
+      "path": "crates/am-plugin-protocol/src/semantics.rs",
+      "sha256": "a0b0f695c1cb80c82378b3cbb898e15f78e1ddfe590a8b241f1f3121a1a4620d"
+    },
+    {
+      "path": "crates/am-plugin-runtime/AGENTS.md",
+      "sha256": "e7aeb9661794336f1245bbfb48e11a32c812227aa5fa7d63970b64f12a8f6af6"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/authority.rs",
+      "sha256": "c5b0cf7d7d9f9da3ef3c9f7ea6f3ec5ff4d0dbd6c3130cf0c83c700755a0a96e"
+    },
+    {
+      "path": "packages/plugin-sdk/schema/v1/protocol.schema.json",
+      "sha256": "e79b519cdc0d317d9b8a780b1c39869fedcd759ade3d9db543257c754ccdb578"
+    },
+    {
+      "path": "packages/plugin-sdk/src/index.ts",
+      "sha256": "6c2fa9700fd6d445bf13ed5d2135aae6387f182b1d2bd4b30a013e220d50baf7"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/index.ts",
+      "sha256": "d5be189abcd146e59570eff5e1230de192f452c96d9addd416738afee448490e"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/protocol.ts",
+      "sha256": "8092d893369641d080d871875763e4fdf393eb628f568398cf9f692c39974337"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/registry.ts",
+      "sha256": "add5498e7b93b1fb7d6401e5bd109e729e627926adf4c9e1acd6eaba10eba260"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/schema-types.ts",
+      "sha256": "2ee26bbedabfd25d83c7f742672341588c612b9359350cb8c0513c67a8ae846e"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/validators.d.ts",
+      "sha256": "8f8922002f276ceb5c695df7d1a3138ea7bfc80d06edf9995a04a14eddf0f692"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/validators.js",
+      "sha256": "7bb794a04be596c6cb432b13bd2f9eabe38a212c4d75327cf9bac32a92c2d882"
+    },
+    {
+      "path": "packages/plugin-sdk/src/guest.ts",
+      "sha256": "8d9fec12b6588fda3ee55e3cf267fb6896fbe2faa8a1469a8a04c6e9ff434079"
+    },
+    {
+      "path": "packages/plugin-sdk/src/host.ts",
+      "sha256": "78bd20a03612668a7ee50966a73c7eb60d2a173dcb8babd0d9e8ae60ee0f36db"
+    },
+    {
+      "path": "packages/plugin-sdk/src/index.ts",
+      "sha256": "6c2fa9700fd6d445bf13ed5d2135aae6387f182b1d2bd4b30a013e220d50baf7"
+    },
+    {
+      "path": "packages/plugin-sdk/src/music.ts",
+      "sha256": "c0ec0d0a06a65464c0021fbdc4e472999c8115a099e28c09f2674368dd9802d0"
+    },
+    {
+      "path": "packages/plugin-sdk/src/negotiate.ts",
+      "sha256": "78a45c695e7ced9cffd57c1394fbc51fbe16b8f7ff3e0b9c8a72bfd7b82694f8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/node/package-format.mjs",
+      "sha256": "775a264cb7b059b8d5b1267516a05ae9200d57a1f5ff6f30651fae173a8f1526"
+    },
+    {
+      "path": "packages/plugin-sdk/src/plugin-call-error.ts",
+      "sha256": "f0987a9dc20c552bdfa246cd1b923bd16e17917997b85af445726028a15b7854"
+    },
+    {
+      "path": "packages/plugin-sdk/src/ports.ts",
+      "sha256": "fbfdba28a73b5b91e8d38d8759860df84b282bc1ce12f4868eb1042c56c7bee8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/index.ts",
+      "sha256": "d5be189abcd146e59570eff5e1230de192f452c96d9addd416738afee448490e"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/json-boundary.ts",
+      "sha256": "9045ff32a95a656a1a29c1aedbe159a0f4ac3a641fd62829d33a465849970a98"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/README.md",
+      "sha256": "b440129dbe98dbfab52153ee1a38e156f85d57935920ee7c452b9b65c29f5cd8"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/code-ui.txt",
+      "sha256": "101baaf743076c3e9ddb58ca26ff6587a969edd660eb997f7b0dbaab6d090725"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/dangerous-key.txt",
+      "sha256": "c41410f63f12184b0267818cfd73628577017f115f2629342a63d26bdf5a3e40"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/deep-json.txt",
+      "sha256": "afe82d317ffec17b64d315dcac87c4aad708708fa7a7b155300d785f49011c86"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/duplicate-contribution.txt",
+      "sha256": "df5ea0c1d5ded6b4345318353406fa64cde063336889de3199b83f8599f5900a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/duplicate-escaped-key.txt",
+      "sha256": "0afe7a2b4ae7459cbd3799895ade4de2a4647ce083ca142e1cc4f3a925e83678"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/duplicate-key.txt",
+      "sha256": "5a312998bddb7c3d2f5fdf186b674ba8553c0007db3599484aba906837583bc1"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/event-invalid-task.txt",
+      "sha256": "de1e1e566cb7371ab5251505c55d140b24c5849901b73c62644b23060830661a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/event-missing-task.txt",
+      "sha256": "94503501ca6f4ded02e79f41adf773bbff18407537d87cd326bc30332c98f4b2"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/event-wrong-payload.txt",
+      "sha256": "7584b4cbc7ad90cce23660044fdeab624c09f996913ba3790613b21fed34198d"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/exponent-number.txt",
+      "sha256": "f3e001e64ddcc4aa58d3250b52b01ac24207ca7113ebd76526e5e3d2b1c34eae"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/host.json",
+      "sha256": "24cfac115f2001862d209343240bd1614d4441eca809e81c0bc1ab2ae426ab0c"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/index.json",
+      "sha256": "832e383b8729ecea2a95e6157abb5c8cb68c13a29264f2b6af73049b7853d565"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/invalid-task.txt",
+      "sha256": "d9999a1a29d698e2c401f0357d0a435938097ec227c236b1fd9e3065780cf104"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/invalid-ui-form-fields.txt",
+      "sha256": "6b70d4f963ebb81a70b0e5b5bc3f1f6e94dec7f7cf858ae27fdf747d30b2f523"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/invalid-ui-password.txt",
+      "sha256": "efb36c4761f506cd61af756adb6edb76e7d9c573d3fea06f15a0a01786acdb9b"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/lone-surrogate.txt",
+      "sha256": "e57fff0dd51316daeaff6417a237bb7a11e27021ca6d8f2ea0bde903f533665b"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/manifest-declarative.txt",
+      "sha256": "b21d65142db173f96ae5189bd6be742463749851b5354b7048963e6972be2d94"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/manifest-valid.txt",
+      "sha256": "8e1fff0d4393b8c26f93b927d5fe8a3e9efd7d9ee48291079c2ebbd60cb075fa"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/mismatched-response.txt",
+      "sha256": "09e0dd65417952715c492056d34fc7a0b1e64aad4f9f367002acd135e2556022"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/negative-zero.txt",
+      "sha256": "cccabfc33b51318cb72428ec3839d008b4d45642c91225568461a0fd948f72ac"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/nested-dangerous-key.txt",
+      "sha256": "77417069f02cdcf2a85c66521ce19bd8d63014e9ca343ed0e994153a3cc2cbfa"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/oversized-message.txt",
+      "sha256": "8c13c710d452eb4d0549d3bad662c1ae591dbf18ed4bf025c247a3cabaed8ceb"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/oversized-string.txt",
+      "sha256": "04cf249bcd22016c7800e4298b7a3c73c7bf6b9b4ec8980df11d607be2501b42"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/page-size-range.txt",
+      "sha256": "772c4855ffb7053150009e4aefabff7d831a0936f3d9ff0bf6b0df4cff98b81c"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/spoofed-identity.txt",
+      "sha256": "853cebbc90f915a269d82175e9a979be6c7c59bf55c5188a6329aa41b19edd8a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/too-many-nodes.txt",
+      "sha256": "f0cc91ceab43677031fe7e23c944f2c81a28443a3b2cc80f2cfe4a7981884e85"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/trusted-extension.txt",
+      "sha256": "697dc5afda60e46a5719df928f41d3adc2f36dbed4db7e0edd5e5e4062eb0b49"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/trusted-field.txt",
+      "sha256": "e530dcb6359a467aa2945e700c9e81976c95081942e52fa62e25f257a3a563e1"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/undeclared-command.txt",
+      "sha256": "1b84857d2ee42796c79515afc7106f7122dc3744e0fd29c50f1d39bd605a04a2"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-capability-version.txt",
+      "sha256": "65e7b06639868e61b05beb03c8aa7020b1c611b2a9222780d961c770f1eb9cbb"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-contributionVersion.txt",
+      "sha256": "fef7e25bf68d6077d44b3c6d9c5164b55a4136e5e3361a71c2848b63bd8b8d74"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-dataSchemaVersion.txt",
+      "sha256": "5cf4bd80915003de0ea3fa045c6d4284f31f4cb89556b90f00c93fcf71af6cb6"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-manifestVersion.txt",
+      "sha256": "a464c88c03131eecd0d790064806c3c200280de1d135f21e67ca990c496ac894"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-operation.txt",
+      "sha256": "3894cc78fafc1443d8f4b7496e00ead1eb789d51ba4bfef964689786194aea70"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-optional-capability.txt",
+      "sha256": "566e7f63250c493d4a63373ca1f3d53c9cb3a3be796f8be7dabdab9dc6bfca0a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-packageFormatVersion.txt",
+      "sha256": "3e9a4102ecdbc6e4a596a734289a1513111faba903028dfdac38e84efc2ddb84"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-required-capability.txt",
+      "sha256": "fd3ac19411b586e31eb7f4564e996e48dc67996b1d494bb66edb6ad39450e105"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-runtimeProfileVersion.txt",
+      "sha256": "0d195ba0021b2b69007abadad8087e0a531aece386e3cf1bfee8b86ba6f0c81c"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-sdk.txt",
+      "sha256": "215047c3a1781d4d1ff6a7a560925532d21472bd03b8f3b1aa3aaef792036eb3"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-wire.txt",
+      "sha256": "63605c22b6fc9a494fd45b3a24e33808e8f54c7e5adcbe0ec0d61d40d807b21e"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unsafe-integer.txt",
+      "sha256": "6def10acf385ec4b3f02e1a551a72c2f49b74e9b77bf67cd6282bfe15cf07caa"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-event.txt",
+      "sha256": "8d3de744a1810e2fb08383a5c10a612c170faeefe87c80869d03d46050c9d121"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-host-request.txt",
+      "sha256": "5cba27e00b35804d79c01ce1f75a0793c644c71adc8d2406aaca2c8ac8433265"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-response.txt",
+      "sha256": "b86fb4f96bb5a500f64a23de0fe59b9018c79dbe6556c6e2b27966f2dcfaac3d"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-task.txt",
+      "sha256": "73b69064e200e9330d8ae9a4dcc8e3d82908ef6f3bedc42e4096d8f8af66259e"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-ui-form-event.txt",
+      "sha256": "59787b55a7569b5369e74c1b279a2b7da7bc4ae46aed0c22293adc743e97f132"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-ui-form.txt",
+      "sha256": "30eadad67e01cfa2d15f9a2f3187f36714d3e73cb11057003b6eb1d07472ed67"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-ui.txt",
+      "sha256": "f101482b851e3d0acf914eb9f249ec176229b92ab4709f167ae3da8e0905a233"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-unicode.txt",
+      "sha256": "8dead6485088aae629e62c27f1c9ccdbef31c580d0e8451d49b26751a0f2b9b8"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "3e9da041cf8d454d57c4fb0bbe0d5f72c424739f9d213abcc6a0db4087ce7f13"
+    },
+    {
+      "path": "scripts/check-plugin-protocol.mjs",
+      "sha256": "0602bd8fd0914e258994ab6e281208434983121f5616f097ce6a4889d8118e7b"
+    },
+    {
+      "path": "scripts/check-rust-workspace.mjs",
+      "sha256": "79a0e193d5fd86cf69f0cd17a75fe766ed8951408681ea67c94c37140520b5cd"
+    },
+    {
+      "path": "scripts/generate-plugin-protocol.mjs",
+      "sha256": "d5e75cc5818fd164c4e41dd58853b1792ee64024f06ad7996c74d922eedd17d8"
+    }
+  ],
+  "hashScope": "Hashes include indirect protocol/corpus/checker evidence inputs; hashing generated files or fixtures does not mean their implementation was manually audited.",
+  "initialHashRechecks": [
+    {
+      "path": "crates/am-plugin-policy/src/authorization.rs",
+      "sha256": "136457fadfa9fec3c0ba4880e4b82fc275bc1aaaeade60e187c419c8feabd281",
+      "unchanged": true
+    },
+    {
+      "path": "crates/am-plugin-policy/src/negotiation.rs",
+      "sha256": "8c30b974045ac01ba24507715c2bd789755d998e2b698aae087739a280bdb419",
+      "unchanged": true
+    },
+    {
+      "path": "crates/am-plugin-policy/tests/authorization.rs",
+      "sha256": "689b05527cc83774c948c7b2275728d24c7ff641788d6abbace886b27e54a9b2",
+      "unchanged": true
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff",
+      "unchanged": true
+    }
+  ],
+  "environment": {
+    "os": "Windows",
+    "shell": "PowerShell",
+    "timezone": "Asia/Shanghai",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0"
+  }
+}

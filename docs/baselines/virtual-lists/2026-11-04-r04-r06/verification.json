@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-04",
+  "runtimeScope": "shared renderer; both production frontend builds checked separately",
+  "logDirectory": "logs/2026-11-04-virtual-list-implementation",
+  "checks": [
+    {
+      "command": "UI virtual/drag/geometry/pagination target",
+      "result": "passed: 30 files / 442 tests; both new files contribute 60 regressions",
+      "log": "r04-r06-combined-target.log"
+    },
+    {
+      "command": "pnpm test",
+      "result": "passed; UI package 112 files / 903 tests; includes production composition, Rust workspace tests and TS/Rust protocol differential",
+      "log": "r04-r06-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "log": "r04-r06-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with existing warnings outside this batch",
+      "log": "r04-r06-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "r04-r06-format-check.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed: both production frontends and Tauri release executable",
+      "log": "r04-r06-build.log"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/ui/src/composables/use-grid-reorder.ts",
+      "sha256": "ff46d885d82c1165ec58cdbcee997988714b2d9b523bf1aa89a6c005a6b8a71a"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-grid-reorder-landing.test.ts",
+      "sha256": "1f1b547c335c2e1ecbb35510a46db90f7fa9bfd3eabe75732b2afc4a4d8fb6b8"
+    },
+    {
+      "path": "packages/ui/test/composables/use-grid-reorder.interruption.test.ts",
+      "sha256": "c16b470f237d164903df354ece1d426caccfe9483470de1e3aab19e096e31ce0"
+    }
+  ],
+  "dragAssessment": {
+    "R04": "Implemented: forward same/cross-row and remote release, actual interrupted-neighbor rebasing, fresh controlled objects and next-parent-render commit.",
+    "R05": "Implemented: mirrored backward release, same keyed source, stable-slot visibility/elevation and bounded holds until completion.",
+    "R06": "Implemented: independent landing invalidation, generation before reentrant host callback, each deferred phase rechecks roots/source, expected eligible-subset order accepted only before rebasing.",
+    "regressionCounts": {
+      "bidirectionalMeasuredComposition": 12,
+      "interruptionAndCleanup": 48
+    },
+    "composition": {
+      "occurrences": 1000,
+      "remoteTargetDistance": 500,
+      "retainedKeyCap": 2,
+      "mountedCellsUpperExclusive": 32,
+      "injectedMotionBoxes": true
+    },
+    "cleanup": "Capture, holds released exactly once, source/landing/settling markers, window/document/root/scroller listeners, observer targets, frames and timers return to baseline.",
+    "review": "Three subagents with disjoint test/audit ownership; coordinator owns production changes and integration. Read-only final review found no blocker."
+  },
+  "openGates": [
+    "R07 offscreen keyboard/focus/reduced motion and R08 keyed FLIP",
+    "Every production virtual consumer including C00 remains pending",
+    "P14 consumer-specific offscreen semantic restoration before relevant consumer admission",
+    "P03 actual layout/visual/frame baseline, browser Find/text selection and native table/focus/IME behavior",
+    "Installed Userscript, Tauri WebView, mobile and G01-G03"
+  ],
+  "noProductBrowserLaunch": true,
+  "noCommitPush": true
+}

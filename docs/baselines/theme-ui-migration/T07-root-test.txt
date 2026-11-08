@@ -1,0 +1,100 @@
+
+> any-music@0.0.0 test <project-root>
+> node --test scripts/test/*.test.mjs && pnpm -r --if-present run test
+
+✔ mobile theme packages cannot depend on desktop/native APIs, including through a second script block (219.5306ms)
+✖ mobile capabilities separate Android built-in transport from iOS local data (1853.4603ms)
+✔ desktop or remote privilege cannot enter mobile through configuration (122.4426ms)
+✔ accepts valid sources and deferred/type-only heavy imports (142.968ms)
+✔ VM profiles and adapter roots stay engine-free; native imports and production testkit are rejected (116.4259ms)
+✔ trusted build directory discovery cannot eagerly load Vue through the workbench root (113.1561ms)
+✔ theme metadata stays lightweight and Vue adapters cannot import private workbench state (126.4487ms)
+✔ rejects undeclared and forbidden internal dependencies (110.1518ms)
+✔ tag metadata remains lightweight and the feature cannot consume host repositories (113.0198ms)
+✔ rejects app aliases and relative paths outside the package (88.2498ms)
+✔ creation metadata cannot load presentation or access private host state (101.2036ms)
+✔ routing packages reject Node and music dependencies while accepting their public edge (181.594ms)
+✔ follows the source plugin root barrel to eager codecs (84.0603ms)
+✔ SDK rejects runtime libraries, even through a local barrel (82.7918ms)
+✔ rejects browser audio implementations without a codec import (81.7865ms)
+✔ accepts export patterns and rejects private exports (114.5459ms)
+✔ source metadata cannot load protocols and source plugins cannot access the host (96.6357ms)
+✔ independent themes accept only public metadata, Vue and style entries without eager presentation (190.0055ms)
+✔ theme dependency fixtures reject cross-theme, host, native, SDK, private and cyclic edges (481.9595ms)
+✔ theme metadata follows local barrels; private exports and cross-theme Sass cannot escape checks (156.9654ms)
+✔ built-in themes cannot acquire plugin authority through package imports (156.981ms)
+✖ the actual registry has complete AppManifest coverage and exact main authority (1883.4234ms)
+✔ new commands, broad capabilities, remote access and relay grants cannot silently bypass review (63.053ms)
+✔ actual acceptance records fail closed on missing evidence, leaked authority or inconsistent targets (19.5466ms)
+✔ pure protocol/policy dependency closures reject an IO dependency several edges away (182.5574ms)
+✔ Cargo cycle and reverse policy dependency are rejected (68.0653ms)
+✔ anonymous plugin transport cannot acquire native authority or account persistence (74.3131ms)
+✔ standard-library IO and global clocks cannot bypass a dependency-only check (1.0305ms)
+✔ package verification cannot acquire native runtime authority or a transport (58.5009ms)
+✔ Android signing needs an explicit release and complete credentials before any build (5.1922ms)
+✔ release verification rejects compiled debug, backup, cleartext and test-harness variants (3.8106ms)
+✔ instrumentation requires completed tests and rejects adb success with failed JUnit (1.135ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 30
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19087.8744
+
+✖ failing tests:
+
+test at scripts\test\check-mobile-boundaries.test.mjs:34:1
+✖ mobile capabilities separate Android built-in transport from iOS local data (1853.4603ms)
+  AssertionError [ERR_ASSERTION]: Mobile themes consume controlled inputs without native/desktop authority
+  + actual - expected
+
+  + [
+  +   'packages\\theme-default: themes expose only metadata ., /vue and /styles at their canonical public entries',
+  +   'packages\\theme-default\\src\\components\\downloads\\download-track-presentation.ts: theme core dependencies must be public types only'
+  + ]
+  - []
+
+      at TestContext.inspectMobileBoundaries (file:///<project-root>/scripts/check-mobile-boundaries.mjs:135:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'packages\\theme-default: themes expose only metadata ., /vue and /styles at their canonical public entries', 'packages\\theme-default\\src\\components\\downloads\\download-track-presentation.ts: theme core dependencies must be public types only' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\check-plugin-isolation.test.mjs:31:1
+✖ the actual registry has complete AppManifest coverage and exact main authority (1883.4234ms)
+  AssertionError [ERR_ASSERTION]: Built-in theme packages cannot import plugin/runtime authority
+  + actual - expected
+
+  + [
+  +   'packages\\theme-default: themes expose only metadata ., /vue and /styles at their canonical public entries',
+  +   'packages\\theme-default\\src\\components\\downloads\\download-track-presentation.ts: theme core dependencies must be public types only'
+  + ]
+  - []
+
+      at inspectIsolationConfig (file:///<project-root>/scripts/check-plugin-isolation.mjs:62:10)
+      at TestContext.<anonymous> (file:///<project-root>/scripts/test/check-plugin-isolation.test.mjs:32:20)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'packages\\theme-default: themes expose only metadata ., /vue and /styles at their canonical public entries', 'packages\\theme-default\\src\\components\\downloads\\download-track-presentation.ts: theme core dependencies must be public types only' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+ ELIFECYCLE  Test failed. See above for more details.

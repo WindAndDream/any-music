@@ -1,0 +1,812 @@
+{
+  "capturedAt": "2026-10-16T08:40:25.727Z",
+  "scope": "S02",
+  "status": "implemented",
+  "checks": [
+    {
+      "label": "app-manifest",
+      "command": "cargo check --manifest-path apps/tauri/src-tauri/Cargo.toml --all-targets --locked",
+      "startedAt": "2026-10-16T08:32:46.671Z",
+      "finishedAt": "2026-10-16T08:32:51.097Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/app-manifest.log",
+      "sha256": "0209f7b8e92f785078356c5cb393c16e57708f43acc5d1bfbb368a0e25704cb4"
+    },
+    {
+      "label": "boundaries",
+      "command": "pnpm check:rust:boundaries",
+      "startedAt": "2026-10-16T08:33:51.749Z",
+      "finishedAt": "2026-10-16T08:33:53.257Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/boundaries.log",
+      "sha256": "499be82c26a8ace01ec4eb20d5cc7083f48a4233c50b29e0352acfbb16cecf36"
+    },
+    {
+      "label": "build",
+      "command": "pnpm build",
+      "startedAt": "2026-10-16T08:33:56.577Z",
+      "finishedAt": "2026-10-16T08:37:15.707Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/build.log",
+      "sha256": "bb497bb9a3c0e28e01d8a5b8608d84d535a68baf787e117cf4126811a9a1bc91"
+    },
+    {
+      "label": "deny-pure",
+      "command": "pnpm check:rust:deny:pure",
+      "startedAt": "2026-10-16T08:31:49.652Z",
+      "finishedAt": "2026-10-16T08:31:52.281Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/deny-pure.log",
+      "sha256": "a791df20d90c00d8d46cce1cb9880a00e07aa23b5731c4a43002228be5e5309c"
+    },
+    {
+      "label": "deny",
+      "command": "pnpm check:rust:deny",
+      "startedAt": "2026-10-16T08:31:52.345Z",
+      "finishedAt": "2026-10-16T08:31:54.923Z",
+      "exitCode": 1,
+      "log": ".codex-tmp/s02/deny.log",
+      "sha256": "5c419dd2c993c9a879b89c14097f140f6785e4ecb39c533a5619e368b2f36da4"
+    },
+    {
+      "label": "drift",
+      "command": "node .codex-tmp/s02/check-drift.mjs",
+      "startedAt": "2026-10-16T08:35:10.379Z",
+      "finishedAt": "2026-10-16T08:35:13.139Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/drift.log",
+      "sha256": "faa1773384a89dc9f9b1466011f6841e0244f0e7625a62574d3239afc09ad44c"
+    },
+    {
+      "label": "format-check",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-16T08:40:21.073Z",
+      "finishedAt": "2026-10-16T08:40:24.971Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/format-check.log",
+      "sha256": "37935f54595e5de9af249be8b817f5ab70dbfe1862e5cf8acb2fff904bc9a00a"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-16T08:36:19.356Z",
+      "finishedAt": "2026-10-16T08:36:21.206Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/lint.log",
+      "sha256": "a4d6a96f72f4391bf3fed654be660accc392691381490e2166313f868b6d9957"
+    },
+    {
+      "label": "msrv",
+      "command": "pnpm check:rust:msrv",
+      "startedAt": "2026-10-16T08:32:26.678Z",
+      "finishedAt": "2026-10-16T08:32:46.550Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/msrv.log",
+      "sha256": "8d5b6a5ed263776da6431b7faf0b996e2bc863172629a88bad11f4bc48a64ab9"
+    },
+    {
+      "label": "native",
+      "command": "pnpm check:native",
+      "startedAt": "2026-10-16T08:36:41.007Z",
+      "finishedAt": "2026-10-16T08:37:19.797Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/native.log",
+      "sha256": "db6614c106afbda3767dcf93c9fb64a9cf5f353d8d4371fa90595b9a9caa3aba"
+    },
+    {
+      "label": "target",
+      "command": "cargo test -p am-plugin-protocol -p am-plugin-policy --locked",
+      "startedAt": "2026-10-16T08:31:26.345Z",
+      "finishedAt": "2026-10-16T08:31:34.477Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/target.log",
+      "sha256": "634972aa61756c86db25b57f51f30ed4c9ac1ca599df348b81c755510397628a"
+    },
+    {
+      "label": "test",
+      "command": "pnpm test",
+      "startedAt": "2026-10-16T08:35:13.505Z",
+      "finishedAt": "2026-10-16T08:36:40.714Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/test.log",
+      "sha256": "751348b20afb648643aeb24f7933f938d3047845b26f6ad5427e55e5839fa583"
+    },
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-16T08:33:11.282Z",
+      "finishedAt": "2026-10-16T08:33:56.502Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s02/typecheck.log",
+      "sha256": "143b37da5798de60a5b44d270f318c59d8fef284dbbd899ae1ccfe0d6c7d0196"
+    }
+  ],
+  "testSummary": {
+    "vitest": 1399,
+    "rootBoundaries": 11,
+    "rustPassed": 105,
+    "rustIgnored": 1,
+    "differentialCases": 167,
+    "sharedRawCorpus": 43,
+    "newRustTests": 7
+  },
+  "preservation": {
+    "existingFiles": 278,
+    "unchangedCount": 261,
+    "unchanged": [
+      "apps/tauri/src-tauri/src/browser/douyin_browser/import.rs",
+      "apps/userscript/test/platform/dom/shadow-style-registry.test.ts",
+      "docs/baselines/plugin-system-s00/checks.json",
+      "docs/baselines/plugin-system-s00/start.json",
+      "docs/baselines/plugin-system-s01/checks.json",
+      "docs/baselines/plugin-system-s01/start.json",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-baseline.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构基线.md",
+      "packages/core/test/fixtures/download/download-history-v1.json",
+      "packages/core/test/fixtures/download/download-history-v2.json",
+      "packages/core/test/fixtures/music-source/declarative-v2.json",
+      "packages/core/test/fixtures/music-source/declarative-v3.json",
+      "packages/music-workbench/src/features/library/use-favorite-collection.ts",
+      "packages/music-workbench/src/features/library/use-track-collection-view.ts",
+      "packages/music-workbench/src/features/music-sources/use-catalog-scroll-restoration.ts",
+      "packages/music-workbench/src/plugin-adapters/core-music-source-provider.ts",
+      "packages/music-workbench/src/plugin-adapters/music-source-values.ts",
+      "packages/music-workbench/src/plugin-adapters/wire-track-listing.ts",
+      "packages/music-workbench/test/features/library/use-favorite-collection.test.ts",
+      "packages/music-workbench/test/features/library/use-track-collection-view.test.ts",
+      "packages/music-workbench/test/features/music-sources/use-catalog-scroll-restoration.test.ts",
+      "packages/music-workbench/test/fixtures/storage/local-library-v1.json",
+      "packages/music-workbench/test/fixtures/storage/local-library-v2.json",
+      "packages/music-workbench/test/fixtures/storage/local-library-v3.json",
+      "packages/music-workbench/test/fixtures/storage/local-library-v4.json",
+      "packages/music-workbench/test/fixtures/storage/local-library-v5.json",
+      "packages/music-workbench/test/fixtures/storage/local-library-v6.json",
+      "packages/music-workbench/test/fixtures/storage/repositories.json",
+      "packages/music-workbench/test/plugin-adapters/core-music-source-provider.test.ts",
+      "packages/music-workbench/test/plugin-adapters/music-source-values.test.ts",
+      "packages/music-workbench/test/plugin-adapters/wire-track-listing.test.ts",
+      "packages/plugin-sdk/AGENTS.md",
+      "packages/plugin-sdk/README.md",
+      "packages/plugin-sdk/examples/public-page.ts",
+      "packages/plugin-sdk/examples/title-summary/main.ts",
+      "packages/plugin-sdk/examples/title-summary/plugin-manifest.schema.json",
+      "packages/plugin-sdk/examples/title-summary/plugin.json",
+      "packages/plugin-sdk/package.json",
+      "packages/plugin-sdk/schema/registry.json",
+      "packages/plugin-sdk/schema/v1/protocol.schema.json",
+      "packages/plugin-sdk/scripts/build.mjs",
+      "packages/plugin-sdk/scripts/check-package.mjs",
+      "packages/plugin-sdk/scripts/generate.mjs",
+      "packages/plugin-sdk/src/generated/protocol.ts",
+      "packages/plugin-sdk/src/generated/registry.ts",
+      "packages/plugin-sdk/src/generated/schema-types.ts",
+      "packages/plugin-sdk/src/generated/validators.d.ts",
+      "packages/plugin-sdk/src/generated/validators.js",
+      "packages/plugin-sdk/src/index.ts",
+      "packages/plugin-sdk/src/music.ts",
+      "packages/plugin-sdk/src/negotiate.ts",
+      "packages/plugin-sdk/src/plugin-call-error.ts",
+      "packages/plugin-sdk/src/ports.ts",
+      "packages/plugin-sdk/src/schema/README.md",
+      "packages/plugin-sdk/src/schema/index.ts",
+      "packages/plugin-sdk/src/schema/json-boundary.ts",
+      "packages/plugin-sdk/test/examples.test.ts",
+      "packages/plugin-sdk/test/fixtures/corpus/code-ui.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/dangerous-key.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/deep-json.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/duplicate-contribution.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/duplicate-escaped-key.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/duplicate-key.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/event-invalid-task.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/event-missing-task.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/event-wrong-payload.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/exponent-number.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/host.json",
+      "packages/plugin-sdk/test/fixtures/corpus/index.json",
+      "packages/plugin-sdk/test/fixtures/corpus/invalid-task.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/lone-surrogate.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/manifest-declarative.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/manifest-valid.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/mismatched-response.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/negative-zero.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/nested-dangerous-key.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/oversized-message.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/oversized-string.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/page-size-range.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/spoofed-identity.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/too-many-nodes.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/trusted-extension.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/trusted-field.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/undeclared-command.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-capability-version.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-contributionVersion.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-dataSchemaVersion.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-manifestVersion.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-operation.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-optional-capability.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-packageFormatVersion.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-required-capability.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-runtimeProfileVersion.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-sdk.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unknown-wire.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/unsafe-integer.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/valid-event.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/valid-host-request.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/valid-response.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/valid-task.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/valid-ui.txt",
+      "packages/plugin-sdk/test/fixtures/corpus/valid-unicode.txt",
+      "packages/plugin-sdk/test/fixtures/sdk-only-host.ts",
+      "packages/plugin-sdk/test/negotiate.test.ts",
+      "packages/plugin-sdk/test/schema/index.test.ts",
+      "packages/plugin-sdk/tsconfig.build.json",
+      "packages/plugin-sdk/tsconfig.json",
+      "packages/plugin-sdk/tsconfig.test.json",
+      "packages/ui/src/components/CollectionBreadcrumbs.vue",
+      "packages/ui/src/components/CollectionCard.vue",
+      "packages/ui/src/components/CollectionGrid.vue",
+      "packages/ui/src/components/music-sources/CatalogDrawerListHeader.vue",
+      "packages/ui/src/components/music-sources/MusicListEmptyState.vue",
+      "packages/ui/src/components/music-sources/QueuePlatformGroup.vue",
+      "packages/ui/src/components/music-sources/QueuePlatformHeading.vue",
+      "packages/ui/src/components/music-sources/QueueTrackActionsDialog.vue",
+      "packages/ui/src/components/music-sources/QueueTrackGrid.vue",
+      "packages/ui/src/components/music-sources/QueueViewControls.vue",
+      "packages/ui/src/components/music-sources/TrackActionButton.vue",
+      "packages/ui/src/components/music-sources/TrackCardGrid.vue",
+      "packages/ui/src/composables/music-sources/queue-reorder-geometry.ts",
+      "packages/ui/src/composables/music-sources/use-catalog-drawer-reorder.ts",
+      "packages/ui/src/composables/music-sources/use-queue-list-controls.ts",
+      "packages/ui/src/composables/music-sources/use-queue-view-toolbar.ts",
+      "packages/ui/src/composables/music-sources/use-track-batch-actions.ts",
+      "packages/ui/src/composables/use-collection-navigation.ts",
+      "packages/ui/src/composables/use-copy-text.ts",
+      "packages/ui/src/composables/use-grid-reorder.ts",
+      "packages/ui/src/composables/use-long-press-drag.ts",
+      "packages/ui/src/product/clipboard.ts",
+      "packages/ui/src/product/track-collection.ts",
+      "packages/ui/src/product/track-playback-state.ts",
+      "packages/ui/test/components/library/FavoritePanel.test.ts",
+      "packages/ui/test/components/music-sources/CatalogDrawer.activity.test.ts",
+      "packages/ui/test/components/music-sources/QueuePanel.interactions.test.ts",
+      "packages/ui/test/components/music-sources/QueuePlatformGroup.test.ts",
+      "packages/ui/test/components/music-sources/QueueTrackGrid.test.ts",
+      "packages/ui/test/composables/music-sources/queue-reorder-geometry.test.ts",
+      "packages/ui/test/composables/music-sources/use-catalog-drawer-reorder.test.ts",
+      "packages/ui/test/composables/music-sources/use-queue-list-controls.test.ts",
+      "packages/ui/test/composables/music-sources/use-queue-view-toolbar.test.ts",
+      "packages/ui/test/composables/music-sources/use-track-batch-actions.test.ts",
+      "packages/ui/test/composables/use-collection-navigation.test.ts",
+      "packages/ui/test/composables/use-copy-text.test.ts",
+      "packages/ui/test/composables/use-long-press-drag.test.ts",
+      "packages/ui/test/product/clipboard.test.ts",
+      "apps/tauri/src-tauri/src/browser/cdp.rs",
+      "apps/tauri/src-tauri/src/browser/douyin_browser.rs",
+      "apps/tauri/src-tauri/src/browser/douyin_browser/commands.rs",
+      "apps/tauri/src-tauri/src/browser/douyin_browser/detail.rs",
+      "apps/tauri/src-tauri/src/browser/douyin_browser/scroll-page.js",
+      "apps/tauri/src-tauri/src/browser/douyin_browser/search.rs",
+      "apps/tauri/src-tauri/src/browser/douyin_browser/search/cache.rs",
+      "apps/tauri/src/platform/douyin-browser-catalog.ts",
+      "apps/tauri/test/platform/douyin-browser-catalog.test.ts",
+      "apps/userscript/src/platform/dom/shadow-style-registry.ts",
+      "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+      "docs/en/cross-platform/features/local-library-and-custom-plugins.md",
+      "docs/en/cross-platform/planning/feature-requirements-and-roadmap.md",
+      "docs/en/cross-platform/platforms/douyin/web-api-contract.md",
+      "docs/en/desktop/development.md",
+      "docs/en/userscript/development.md",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "docs/zh-cn/用户脚本/开发规范.md",
+      "docs/zh-cn/跨平台/产品规划/功能需求与路线图.md",
+      "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md",
+      "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+      "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      "packages/core/test/download/download-history.test.ts",
+      "packages/core/test/music-source/declarative-manifest.test.ts",
+      "packages/music-sources/src/douyin/douyin-api.ts",
+      "packages/music-sources/src/douyin/douyin-plugin.ts",
+      "packages/music-sources/src/douyin/runtime-contracts.ts",
+      "packages/music-sources/src/douyin/url-parser.ts",
+      "packages/music-sources/test/douyin/douyin-api.test.ts",
+      "packages/music-sources/test/douyin/douyin-plugin.test.ts",
+      "packages/music-sources/test/douyin/url-parser.test.ts",
+      "packages/music-workbench/AGENTS.md",
+      "packages/music-workbench/package.json",
+      "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "packages/music-workbench/src/components/music-sources/PlayerBar.vue",
+      "packages/music-workbench/src/features/downloads/use-player-download.ts",
+      "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts",
+      "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts",
+      "packages/music-workbench/src/features/player/playback-queue-state.ts",
+      "packages/music-workbench/src/features/player/use-audio-player.ts",
+      "packages/music-workbench/src/features/player/use-playback-queue.ts",
+      "packages/music-workbench/src/storage/playback-queue-repository.ts",
+      "packages/music-workbench/src/stores/music-source-workspace-store.ts",
+      "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts",
+      "packages/music-workbench/test/features/downloads/use-player-download.test.ts",
+      "packages/music-workbench/test/features/music-sources/use-music-source-workbench.test.ts",
+      "packages/music-workbench/test/features/music-sources/use-music-source-workspace.test.ts",
+      "packages/music-workbench/test/features/player/playback-queue-state.test.ts",
+      "packages/music-workbench/test/features/player/use-audio-player.test.ts",
+      "packages/music-workbench/test/features/player/use-playback-queue.test.ts",
+      "packages/music-workbench/test/storage/local-music-library-repository.test.ts",
+      "packages/music-workbench/test/storage/storage-repository-keys.test.ts",
+      "packages/ui/src/components/MusicAppShell.vue",
+      "packages/ui/src/components/SidePanel.vue",
+      "packages/ui/src/components/app-icon.ts",
+      "packages/ui/src/components/library/FavoritePanel.vue",
+      "packages/ui/src/components/music-sources/CatalogDrawer.vue",
+      "packages/ui/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+      "packages/ui/src/components/music-sources/CatalogDrawerCard.vue",
+      "packages/ui/src/components/music-sources/CatalogDrawerDetails.vue",
+      "packages/ui/src/components/music-sources/CatalogDrawerList.vue",
+      "packages/ui/src/components/music-sources/CatalogDrawerOperatorPanel.vue",
+      "packages/ui/src/components/music-sources/CatalogOperatorActions.vue",
+      "packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "packages/ui/src/components/music-sources/CatalogTrackFilterEditor.vue",
+      "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue",
+      "packages/ui/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+      "packages/ui/src/components/music-sources/PlayerControlPager.vue",
+      "packages/ui/src/components/music-sources/QueuePanel.vue",
+      "packages/ui/src/components/music-sources/QueueTrackRow.vue",
+      "packages/ui/src/components/music-sources/SourceToolbar.vue",
+      "packages/ui/src/components/music-sources/TrackList.vue",
+      "packages/ui/src/components/music-sources/TrackRow.vue",
+      "packages/ui/src/components/music-sources/catalog-drawer-presentation.ts",
+      "packages/ui/src/components/music-sources/catalog-track-filter-presentation.ts",
+      "packages/ui/src/components/product-workbench/ProductTopBar.vue",
+      "packages/ui/src/components/product-workbench/ProductWorkbench.vue",
+      "packages/ui/src/composables/music-sources/catalog-filter-history-settings.ts",
+      "packages/ui/src/composables/music-sources/use-catalog-drawer-list.ts",
+      "packages/ui/src/composables/music-sources/use-catalog-filter-history-settings.ts",
+      "packages/ui/src/composables/music-sources/use-queue-reorder.ts",
+      "packages/ui/src/composables/player/use-player-control-pager.ts",
+      "packages/ui/src/index.ts",
+      "packages/ui/src/product/action-feedback.ts",
+      "packages/ui/src/product/catalog-drawer.ts",
+      "packages/ui/src/product/filter-history-settings.ts",
+      "packages/ui/src/styles/_feature-panels.scss",
+      "packages/ui/src/styles/_product-workbench.scss",
+      "packages/ui/src/styles/index.scss",
+      "packages/ui/test/components/music-sources/CatalogDrawer.test.ts",
+      "packages/ui/test/components/music-sources/CatalogDrawerActionsDialog.test.ts",
+      "packages/ui/test/components/music-sources/CatalogDrawerCard.test.ts",
+      "packages/ui/test/components/music-sources/CatalogDrawerList.test.ts",
+      "packages/ui/test/components/music-sources/CatalogTrackActionsDialog.test.ts",
+      "packages/ui/test/components/music-sources/CatalogTrackOperatorPanel.test.ts",
+      "packages/ui/test/components/music-sources/PlayerControlPager.test.ts",
+      "packages/ui/test/components/music-sources/QueuePanel.test.ts",
+      "packages/ui/test/components/music-sources/catalog-drawer-presentation.test.ts",
+      "packages/ui/test/components/music-sources/catalog-selection-markup.test.ts",
+      "packages/ui/test/components/music-sources/catalog-test-renderer.ts",
+      "packages/ui/test/components/product-workbench/ProductWorkbench.layout.test.ts",
+      "packages/ui/test/components/product-workbench/ProductWorkbench.test.ts",
+      "packages/ui/test/composables/music-sources/use-catalog-filter-history.test.ts",
+      "packages/ui/test/composables/music-sources/use-queue-reorder.test.ts",
+      "packages/ui/test/composables/player/use-player-control-pager.test.ts",
+      "pnpm-lock.yaml",
+      "pnpm-workspace.yaml",
+      "scripts/check-package-boundaries.mjs",
+      "scripts/test/check-package-boundaries.test.mjs"
+    ],
+    "intentionalDocumentationChanges": [
+      {
+        "path": "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "before": "68a8bd81d05341bed6c13a04b3f645754d8f1ab6a84f2d968443de5e2a6b62da",
+        "after": "7d105b54f34cbe4f487e8dd3f543c012151c22491b1acfe4d46478af07bac94c"
+      },
+      {
+        "path": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+        "before": "4d6bfb544fbf927a6199e179b40a3b582356e80bb4f6eaf5f1cbd60a994d0112",
+        "after": "76f2e3a7b2654e507fba16d1a2b45a46671d69771ddb98d02f18f842141e41ea"
+      },
+      {
+        "path": "docs/en/cross-platform/architecture/plugin-system-s01-contracts.md",
+        "before": "c0f767f3ff451125a6c63361a2f8a1b66143a41d5e9293875169dc458e314781",
+        "after": "d74c9fc8671dd13adc74ff4a991bbe1aaa26149f59288649d9a6f497bd8f59cd"
+      },
+      {
+        "path": "docs/en/desktop/rust-workspace-plan.md",
+        "before": "65264115581c73aa2298631d5dc0c123a64be56a1afa0d138f5b8a1e8263b746",
+        "after": "00008f5af5ddb706fe1a8103e77e76a4c56c339370c0090b5eca99faea6f45e0"
+      },
+      {
+        "path": "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "before": "d0432e87152b4ffcc03013cb7d33e97d835f906dc072acd99412a713fb8d7ca5",
+        "after": "1dff3dcb3d7244c258820b9e7d9fe94df21a5f42bf233779321ba88e284f69b3"
+      },
+      {
+        "path": "docs/zh-cn/跨平台/架构/插件系统重构S01契约.md",
+        "before": "cc960c5a0af27952a912c17f7f921fe55027c2f49f1a0f50aefff09531d1ba84",
+        "after": "5ad94e083b7b30c9271d30cb53287c32eb108ffccb4c87024be5142e02fcbac9"
+      },
+      {
+        "path": "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+        "before": "3e7d8d2ffbbf18cca3f4709a466a4570656e9df0fcd7cca122f8f40c86b67e7f",
+        "after": "e591b52c71773a88632751adea474c458300305fde9407c419f5ce35f859869a"
+      },
+      {
+        "path": "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+        "before": "c0e0e5629f89c1a86666fd4d02ce9a47f1f21c23fb470c21e16f70168ba72d34",
+        "after": "39a5a3b017108d69f07ff49af9bb205ec1d29e07efce2047469a8c94d0718b2b"
+      },
+      {
+        "path": "AGENTS.md",
+        "before": "ffba20ece55575ae1db83033b4b996dde7efe2b2c3a2f6a94dc0a2a70caf14f0",
+        "after": "35e4085687a2df9a6fffd1e199d1dcaa7b9732ea6d66c18e835aae4d39a496c3"
+      },
+      {
+        "path": "apps/tauri/AGENTS.md",
+        "before": "659edf931ad7f42ffde6d56f6fa101b20b53c91d1b7034796accd1641c6cef9c",
+        "after": "ae8e8e545e3743877accb90a8a613bacd47862b27c8221c68b199de586aa9960"
+      },
+      {
+        "path": "apps/tauri/src-tauri/AGENTS.md",
+        "before": "4ab21c224f92fcf7a714bc7b986c7526b3df410a11b28466b59b2ea670cb8435",
+        "after": "dc0437e502805c882d3ddc08d5bb1faf6cc7454a53d44f15998fc5073b842d0e"
+      },
+      {
+        "path": "docs/en/cross-platform/README.md",
+        "before": "b7530ab5e4a342af19ce7f62c9e495d01001ef89e647e6de8a264ab4b8c152b5",
+        "after": "db302971b449a4e7fa975d2bbdaf4b42d7e43aa6cd64d7143a8e6e5853e598a8"
+      },
+      {
+        "path": "docs/en/desktop/README.md",
+        "before": "748a659d4499ae3ad958da64e5d667604138115bbd0fe8259663a70454e16df9",
+        "after": "16a89ac0b18c287b5eb6c69e2236a6658aad7cf3352cb6b87e2064adf6949bf0"
+      },
+      {
+        "path": "docs/en/desktop/runtime-architecture.md",
+        "before": "970799195e6a0fbe44474db478fe3997a71a4d0863514879396f25863ced187c",
+        "after": "a25bddfaf95a7e5a3e119ab051e4bfe3324c265e2a211609b2cf79b25d47f59e"
+      },
+      {
+        "path": "docs/zh-cn/桌面端/文档索引.md",
+        "before": "2dba32d425bcc193ffebba5ba3818de2af856c0ab2291ff44d71108dc6154304",
+        "after": "d6e05d0149c9cc96113df91b672f9b4b7ce42cf20b4530d4338d057810a2c05d"
+      },
+      {
+        "path": "docs/zh-cn/桌面端/运行端架构.md",
+        "before": "04506a7056365463fc44ee227531e3b46e06a133b717a7d8829ca8dc2c53c9c6",
+        "after": "036ad08d8120cadca11c0351a2e4842fac3c8f1aa382818e3cf65940ecd9baa2"
+      },
+      {
+        "path": "docs/zh-cn/跨平台/文档索引.md",
+        "before": "c42128a5ee274cf8b4ec0a60c0a50d66037f735cf24731ba02daaa468cebcf78",
+        "after": "a1dea48d1a264cb189928c303abdceb93f131869830fb38d3fa5b8cf486302da"
+      }
+    ],
+    "unexpected": [],
+    "thirdPartyLockEntriesUnchanged": true,
+    "thirdPartyPackages": 561
+  },
+  "workspace": {
+    "root": "<project-root>",
+    "target": "<project-root>\\target",
+    "members": [
+      "path+file:///<project-root>/apps/tauri/src-tauri#any-music-tauri@0.1.0",
+      "path+file:///<project-root>/crates/am-plugin-protocol#0.1.0",
+      "path+file:///<project-root>/crates/am-plugin-policy#0.1.0"
+    ],
+    "defaultMembers": ["path+file:///<project-root>/apps/tauri/src-tauri#any-music-tauri@0.1.0"]
+  },
+  "artifacts": [
+    {
+      "path": "apps/tauri/dist/assets/ActiveDownloadPanel-D556Hneu.js",
+      "bytes": 4144,
+      "sha256": "1b51f56eab95f6bff787e1f427505c0b858ba4fda0d211a000deb3da8d6b8bf7"
+    },
+    {
+      "path": "apps/tauri/dist/assets/app-error-BjZGph4G.js",
+      "bytes": 7448,
+      "sha256": "1f87c8d9b58adfe6647a92b9217e74ddf68c8df27a230e097538342a2c271f9a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/AppIcon-D4ck_dDu.css",
+      "bytes": 164,
+      "sha256": "8cc42051a7d3a3628ff5e14d5e526096557a70a91c02b1b7d860906f7debbffe"
+    },
+    {
+      "path": "apps/tauri/dist/assets/AppIcon-DPRv58jr.js",
+      "bytes": 4290,
+      "sha256": "435985742bc78030d2efd816d6c1321e276f7699a55f248e801e4efda794eb77"
+    },
+    {
+      "path": "apps/tauri/dist/assets/audio-exporter-BEev7hla.js",
+      "bytes": 317622,
+      "sha256": "305f90659ffc7b2d355a7abe3dc8819bf2a6f3dacb29a325dbde7f709f11d0bd"
+    },
+    {
+      "path": "apps/tauri/dist/assets/audio-exporter-CjwsS8gv.js",
+      "bytes": 82,
+      "sha256": "77b16b70b915085b19fc8ace4dcc9856415d8ff8214716280f4ff3734c610b01"
+    },
+    {
+      "path": "apps/tauri/dist/assets/bilibili-DVPJPxo8.js",
+      "bytes": 24394,
+      "sha256": "16930931f081ec375a2a092a04b51240efcc3f94ea4842221083bb1c96318b06"
+    },
+    {
+      "path": "apps/tauri/dist/assets/BottomSheet-BNJ4Lggr.css",
+      "bytes": 9108,
+      "sha256": "14626e6ec3c8148598195755c8fe6cfea3ec1a1bf9a5cb596247474c7fc617e0"
+    },
+    {
+      "path": "apps/tauri/dist/assets/BottomSheet-oDKiSgb5.js",
+      "bytes": 6320,
+      "sha256": "d9a56e644b98f1f16f64e0c40a4397884f762beb5f2755a0067a9c25a629e932"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CatalogDisplayModeDialog-18Ts8130.css",
+      "bytes": 67253,
+      "sha256": "54f901f00b0f28b04fd94d8d5231cdcee1d606a1d4ec2187c18b082392c3e789"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CatalogDisplayModeDialog-C6tUbEkY.js",
+      "bytes": 83952,
+      "sha256": "7678001e8481424dca7099e6d4b76baf64dde5f5bf10ba6d5cf26db3f276f652"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CustomPluginPanel-BKtpEssx.js",
+      "bytes": 47526,
+      "sha256": "ccd858fd540e71a0a5c070c1083acaf0855b7bd54e3ce3994ba4725a09c1b1e2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CustomTrackPanel-DflbH1Ji.js",
+      "bytes": 7961,
+      "sha256": "836373e87dc110308c20940d2fe28f60394a00af7f9c768c5027e2eb33afcb53"
+    },
+    {
+      "path": "apps/tauri/dist/assets/declarative-manifest-EgRPOwBO.js",
+      "bytes": 11254,
+      "sha256": "504ce32a6780b16c8cb67cac1599808694d1615e59cd213a440e7d60441d5ba6"
+    },
+    {
+      "path": "apps/tauri/dist/assets/douyin-Cpik2zqK.js",
+      "bytes": 37411,
+      "sha256": "bb3fe3568c9bd63f971a6a293a2713ecee083c337a163a9f0afeb2ec800a97b2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/douyin-request-state-CFbLQ2P_.js",
+      "bytes": 4610,
+      "sha256": "3b3f15fd27074662d2fd37941335beb05bde604798aaedec2d4c52f18c3ed29f"
+    },
+    {
+      "path": "apps/tauri/dist/assets/download-archive-aGajjFNI.js",
+      "bytes": 7398,
+      "sha256": "3aaaea66fac5a5656b7ff7c4e9036c3580424c2f10215c2ac7afd7490bd2e495"
+    },
+    {
+      "path": "apps/tauri/dist/assets/download-history-CoRpQVKm.js",
+      "bytes": 4298,
+      "sha256": "272f13114e0849fb2183cc0cb23595b87dfc3de08f88f454a3e65c2969ce5d5a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/DownloadHistoryPanel-CMs_dQfz.js",
+      "bytes": 14060,
+      "sha256": "2b181769205e4ca1911923cb016ea2480680aeac136b9457f2a918283a855400"
+    },
+    {
+      "path": "apps/tauri/dist/assets/FavoritePanel-DYFvN4I6.js",
+      "bytes": 2623,
+      "sha256": "43974e60f22432e6139b4e4915952e6d772540e86ea3f71c03b8808490753ec5"
+    },
+    {
+      "path": "apps/tauri/dist/assets/FavoriteTrackRow-XER9evLV.js",
+      "bytes": 3397,
+      "sha256": "58add77c9728c314d613b0f148d9087491c569d6311cb1b8788a6f7d67eb510b"
+    },
+    {
+      "path": "apps/tauri/dist/assets/GlobalSettingsPanel-C6Jw9amT.css",
+      "bytes": 13713,
+      "sha256": "812783a525fcded84c72db0fa56f06c32b25275893b3bd4bd329d5cb5947c6b4"
+    },
+    {
+      "path": "apps/tauri/dist/assets/GlobalSettingsPanel-exJeUO56.js",
+      "bytes": 26577,
+      "sha256": "dc28bdd225d89ae3af2bd0802bc5753f28dbb647a9c9429168584f7389b5c2ee"
+    },
+    {
+      "path": "apps/tauri/dist/assets/HistoryPanel-BJHSqjp0.js",
+      "bytes": 2572,
+      "sha256": "2dc94f6c1e4c969a4eed881a1b1db7835db9d89b0c8222894f05f53d6c7d6bd2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/http-Bx2BUOLo.js",
+      "bytes": 183,
+      "sha256": "b4441747f73aa575c1dff22a888dd46e26165fa3221b005c7d4f048250286d55"
+    },
+    {
+      "path": "apps/tauri/dist/assets/index-CUVEJYiy.js",
+      "bytes": 443567,
+      "sha256": "aef236d8629f294e102d984579bb2126eefc700d4baa199b260286374e1e6328"
+    },
+    {
+      "path": "apps/tauri/dist/assets/index-iIw8B2ND.css",
+      "bytes": 249273,
+      "sha256": "36599b9b32b45d730e97965eaa99abc7a01cd9046b0d4709d484a3eac3890487"
+    },
+    {
+      "path": "apps/tauri/dist/assets/output-CpaAufgJ.js",
+      "bytes": 445910,
+      "sha256": "6cbd39264b4551ad6a25bc53fc4a8589efdfb57fa2295befeb1e5f7283f277f8"
+    },
+    {
+      "path": "apps/tauri/dist/assets/playback-history-filters-TtojXpjP.js",
+      "bytes": 193,
+      "sha256": "8000c160be74a669241bf44fa08fad41f711647418517258a5d1ea84e180d676"
+    },
+    {
+      "path": "apps/tauri/dist/assets/PlaylistPanel-BePNFUNB.js",
+      "bytes": 28052,
+      "sha256": "0a6aa4ad91976608736416b1669389beeb13fab2a11b0f4cb919e1656ffee43d"
+    },
+    {
+      "path": "apps/tauri/dist/assets/PlaylistPanel-D8u6BtFN.css",
+      "bytes": 13321,
+      "sha256": "520afc3d9d15722867ec2185f17c69479bc67fa8766239a00cf17a425d886d96"
+    },
+    {
+      "path": "apps/tauri/dist/assets/policies-B5_mwgWi.js",
+      "bytes": 705,
+      "sha256": "75847c1602b048a2fd523f640013902aed3e8b2b0057fb5b395ba0c1cb5a11cf"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-BRbAskaq.css",
+      "bytes": 17506,
+      "sha256": "f377f0773552c5dcc63cfb6caec98a515cb4b437350c0b5ed9402e5e4bf5a5a2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-D0_vX0M0.js",
+      "bytes": 66,
+      "sha256": "ad22f3cd327ce9426290a7d51e97c16aab7022b47b3912fea8713c792304531a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-ok7CdI_u.js",
+      "bytes": 35560,
+      "sha256": "12990f91bd9147d4d9b6770bca109f0b0be7b825e9e89c547b827916f14fe049"
+    },
+    {
+      "path": "apps/tauri/dist/assets/render-custom-track-media-D8hNDFU1.js",
+      "bytes": 797,
+      "sha256": "b5be055f73bf2bc20cfe6a040a695e3d0d531b8f02a9f3b27fd7ac205bb0fc1a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/resolved-media-loader-r4Hh--3K.js",
+      "bytes": 1143,
+      "sha256": "677d7a13f68d4e3c91fc052808af6bd9b6cc818d21399e0d181e47c68b2564bb"
+    },
+    {
+      "path": "apps/tauri/dist/assets/runtime-core.esm-bundler-CTS-s628.js",
+      "bytes": 67464,
+      "sha256": "ffb206c07ae8e21465e0c1bf97a7ece448d1e5f4dfb44d2249762466a05defcf"
+    },
+    {
+      "path": "apps/tauri/dist/assets/runtime-dom.esm-bundler-DpXnxeSF.js",
+      "bytes": 15360,
+      "sha256": "0f333e9dfe31edb10493ba3adfc08bb6e78c8e59fe3025ff2fe9561d04adfea4"
+    },
+    {
+      "path": "apps/tauri/dist/assets/SegmentComposer-B4Q1EWMR.js",
+      "bytes": 24029,
+      "sha256": "5ed467667e8b95256f7db8230e4476075ad759d1ec359b0f9894aa220d620969"
+    },
+    {
+      "path": "apps/tauri/dist/assets/SegmentComposer-DFgHPyMp.css",
+      "bytes": 5949,
+      "sha256": "03edb3d699331f55a970deb8c5878b1399f9cb2cd098398b7daffffd774cafa9"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TagManagementPanel-jBsv1YE-.js",
+      "bytes": 14195,
+      "sha256": "b7bf5577544707a7ba275694452510e886b36e891f63b29705997e638ac288ff"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackCardSummary-Cy_W44ZM.js",
+      "bytes": 3465,
+      "sha256": "fc1bb43b89144b8ac47f8523b1e55c6283a73c4352cfd92921886ef82f10ede6"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackCardSummary-gJSrTlII.css",
+      "bytes": 422,
+      "sha256": "b71d3d8c395b5bd6d8c588ada49a3ca3e3c521de2a33f24277f8fb37fbe3a489"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackSourcePageLink-DlWXBxuZ.js",
+      "bytes": 423,
+      "sha256": "79ce9b9e1c1cd0748f9b141080453fe2a32a7eaad3ba62240b42063554f92240"
+    },
+    {
+      "path": "apps/tauri/dist/assets/url-parser-BXFKcRPm.js",
+      "bytes": 3948,
+      "sha256": "40f0a2508e3e4bacd55c97d0984c2997abbd1de7e6d99fed10867d9be5875767"
+    },
+    {
+      "path": "apps/tauri/dist/assets/url-parser-CpMzpdTE.js",
+      "bytes": 1503,
+      "sha256": "fa879b72607d143d95785cbc720e8c108480ce50ced72aec35773b4e12d5cf76"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-catalog-filter-history-vZUX-D_N.js",
+      "bytes": 15198,
+      "sha256": "89b743039e35e19d0e2f59302886ba764cb68f67aef50440ebcfad1d8a7d45d0"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-catalog-list-controls-DdTZEBhN.js",
+      "bytes": 1013,
+      "sha256": "bfb069f6db25a34fba0d3943b962b85730f60f5fba2b9d4fbae6c51b78e4339f"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-confirmation-dialog-W2cYpCy7.js",
+      "bytes": 969,
+      "sha256": "bd9522044de5c5d588e3ca0b8b9f970663a04a55d57f18bec0b3b5475144f678"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-favorite-filters-BIlmOPDC.js",
+      "bytes": 247,
+      "sha256": "db57de29e742472f37c126014a9df58a4b195adb2e1692e4f9b4b690888f7253"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-settings-feedback-B-beOzbi.js",
+      "bytes": 1599,
+      "sha256": "d048ada400ce471a14b16e989f29255f2bfe3ae51be7af6b94e6597c85c051fc"
+    },
+    {
+      "path": "apps/tauri/dist/assets/__vite-browser-external-D3JzJRFO.js",
+      "bytes": 77,
+      "sha256": "6c8ab9d6f5e0e1fae12292bd3fd090a0396aa3c115aaa997df71fa3ac8906925"
+    },
+    {
+      "path": "apps/tauri/dist/assets/__vite-browser-external-DisMlCMZ.js",
+      "bytes": 1015,
+      "sha256": "9b3ef04e256342bdcf39d55efb6a4cbd0793b588012548d6215c1d159bfcf74b"
+    },
+    {
+      "path": "apps/tauri/dist/index.html",
+      "bytes": 2571,
+      "sha256": "7c832c0fc79959ace582b9ec265e25ecbf4a516500746aabb3e7e7b23c3ccc2b"
+    },
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3339167,
+      "sha256": "c325a070b9489deb974dd8ad2bf263a2d49eb57a48626951b04a4b2ba5e3e70d"
+    },
+    {
+      "path": "apps/userscript/dist/favicon.svg",
+      "bytes": 323,
+      "sha256": "cc0d86ba45aa6d335387275250865b0a8948b2f3f764840558aebb162d1fd671"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 17783296,
+      "sha256": "c0f32a80833280f1f17a55e51ab05c701744144f4a1293de1dde126e2a8f226b"
+    }
+  ],
+  "artifactComparison": {
+    "baseline": "S00 deliveryArtifacts",
+    "compared": 57,
+    "unchanged": 57
+  },
+  "limitations": {
+    "fullAuditPassed": false,
+    "inheritedDependency": "rustls 0.23.45",
+    "advisories": [
+      "RUSTSEC-2026-0346",
+      "RUSTSEC-2026-0347",
+      "RUSTSEC-2026-0348",
+      "RUSTSEC-2026-0349"
+    ],
+    "externalCapabilitiesEnabled": false,
+    "launchedAppOrBrowser": false,
+    "gitPublished": false,
+    "pendingSteps": "S03–S16",
+    "pendingPlatforms": ["macOS", "Linux", "Android", "iOS"]
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 6,
+  "profile": {
+    "id": "local-user:fixture",
+    "displayName": "Fixture creator"
+  },
+  "settings": {
+    "historyLimit": 2
+  },
+  "tracks": [
+    {
+      "track": {
+        "id": "fixture:audio:a",
+        "title": "Fixture a",
+        "artists": [
+          {
+            "id": "artist:fixture",
+            "name": "Fixture artist"
+          }
+        ],
+        "durationMs": 10000,
+        "sourceTags": ["source-tag"],
+        "source": {
+          "pluginId": "fixture",
+          "mediaKind": "audio",
+          "resourceId": "a"
+        }
+      },
+      "favoritedAtMs": 20,
+      "addedAtMs": 10,
+      "updatedAtMs": 20,
+      "customName": "Fixture local name"
+    },
+    {
+      "track": {
+        "id": "fixture:audio:b",
+        "title": "Fixture b",
+        "artists": [
+          {
+            "id": "artist:fixture",
+            "name": "Fixture artist"
+          }
+        ],
+        "durationMs": 10000,
+        "sourceTags": ["source-tag"],
+        "source": {
+          "pluginId": "fixture",
+          "mediaKind": "audio",
+          "resourceId": "b"
+        }
+      },
+      "favoritedAtMs": 20,
+      "addedAtMs": 10,
+      "updatedAtMs": 20
+    },
+    {
+      "track": {
+        "id": "local:custom:mix",
+        "title": "Fixture mix",
+        "artists": [
+          {
+            "id": "artist:fixture",
+            "name": "Fixture artist"
+          }
+        ],
+        "durationMs": 10000,
+        "sourceTags": ["source-tag"],
+        "source": {
+          "pluginId": "local-custom",
+          "mediaKind": "custom",
+          "resourceId": "mix"
+        }
+      },
+      "addedAtMs": 10,
+      "updatedAtMs": 20
+    }
+  ],
+  "playlists": [
+    {
+      "id": "collection:fixture",
+      "name": "Fixture playlist",
+      "trackIds": ["local:custom:mix", "fixture:audio:b", "fixture:audio:a"],
+      "createdAtMs": 10,
+      "updatedAtMs": 20
+    }
+  ],
+  "history": [
+    {
+      "id": "history:fixture",
+      "trackId": "fixture:audio:a",
+      "startedAtMs": 10,
+      "updatedAtMs": 20,
+      "positionMs": 500,
+      "completed": false
+    }
+  ],
+  "customTracks": [
+    {
+      "trackId": "local:custom:mix",
+      "version": 2,
+      "recipe": [
+        {
+          "sourceTrackId": "fixture:audio:b",
+          "startMs": 1000,
+          "endMs": 3000
+        },
+        {
+          "sourceTrackId": "fixture:audio:a",
+          "startMs": 0,
+          "endMs": 1000
+        }
+      ],
+      "creator": {
+        "id": "local-user:fixture",
+        "displayName": "Fixture creator"
+      },
+      "sourceCredits": [
+        {
+          "pluginId": "fixture",
+          "artistId": "artist:fixture",
+          "artistName": "Fixture artist"
+        }
+      ],
+      "createdAtMs": 20
+    }
+  ]
+}

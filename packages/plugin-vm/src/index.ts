@@ -1,0 +1,5 @@
+export { createPluginVm } from './plugin-vm'
+export type { PluginVm } from './plugin-vm'
+export { VmError } from './contracts'
+export type { VmPorts, VmResources, StandardOperation } from './contracts'
+export { VmAdmission } from './admission'

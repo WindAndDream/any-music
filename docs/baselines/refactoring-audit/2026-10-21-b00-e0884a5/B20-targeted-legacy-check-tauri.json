@@ -1,0 +1,104 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "batchId": "B20-targeted-legacy-check-tauri",
+  "runtime": "tauri",
+  "schemaVersion": 1,
+  "parentBatch": "B20-targeted-legacy-check-repository",
+  "startedAt": "2026-10-22T11:02:12.789Z",
+  "completedAt": "2026-10-22T11:08:53.874Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-repository-baseline.json",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "findings": [],
+  "openFindingIds": [],
+  "changedFiles": [],
+  "scope": "Tauri direct native-capability/source/module/authority-port composition and canonical IPC registry; no native business or exact-target acceptance re-audit.",
+  "checks": [
+    {
+      "criterion": "C1/C5 current sources and native authority",
+      "result": "pass",
+      "evidence": [
+        "apps/tauri/src/platform/configure-tauri-workbench.ts:33",
+        "apps/tauri/src/features/music-sources/built-in-source-directory.ts:20",
+        "apps/tauri/src/platform/native-plugin-authority.ts:16",
+        "apps/tauri/src-tauri/src/plugins/control.rs:169"
+      ],
+      "detail": "Native capability discovery selects built-in sources, named installation/command ports or preview-only ports. .amplugin verification/consent remains native-owned. Current installation/rollback operations are retained; no old source JSON installer/archive operation is registered."
+    },
+    {
+      "criterion": "C5 canonical IPC names and permissions",
+      "result": "pass",
+      "evidence": [
+        "apps/tauri/src-tauri/src/ipc.rs",
+        "apps/tauri/src-tauri/src/lib.rs",
+        "apps/tauri/src-tauri/build.rs",
+        "apps/tauri/src-tauri/permissions/product.toml"
+      ],
+      "detail": "A single generate_handler registry contains 61 unique command names. Existing isolation checks confirm canonical registration, build-derived manifest, exact permission lists and relay separation. No targeted old source-install/archive alias occurs. Counts do not establish capability or live admission."
+    },
+    {
+      "criterion": "C1/C6 production closure and owner inventory",
+      "result": "pass",
+      "evidence": [
+        "apps/tauri/package.json",
+        "apps/tauri/test/features/music-sources/built-in-source-directory.test.ts",
+        "apps/tauri/test/platform/native-plugin-authority.test.ts"
+      ],
+      "detail": "The 17-package internal closure excludes old music-sources and CLI/testkit. Source metadata tests and native port fixtures remain with application composition; protocol tests/fixtures remain with source packages and SDK."
+    }
+  ],
+  "productionClosure": [
+    "@any-music/account-pool",
+    "@any-music/audio-composition",
+    "@any-music/core",
+    "@any-music/music-workbench",
+    "@any-music/network-routing",
+    "@any-music/plugin-center",
+    "@any-music/plugin-music-creation",
+    "@any-music/plugin-sandbox-browser",
+    "@any-music/plugin-sdk",
+    "@any-music/plugin-source-bilibili",
+    "@any-music/plugin-source-douyin",
+    "@any-music/plugin-tag-management",
+    "@any-music/plugin-ui-vue",
+    "@any-music/plugin-vm",
+    "@any-music/tauri",
+    "@any-music/ui",
+    "@any-music/utils"
+  ],
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node scripts/check-plugin-isolation.mjs",
+      "exitCode": 0,
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/isolation.log",
+      "time": "2026-10-22T11:08:53.874Z"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/features/music-sources/built-in-source-directory.test.ts test/platform/native-plugin-authority.test.ts",
+      "exitCode": 0,
+      "passed": 5,
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/tauri-tests.log",
+      "time": "2026-10-22T11:08:53.874Z"
+    }
+  ],
+  "missingEvidence": [
+    "No semantic equivalence audit of every native command body; duplicate names/canonical registration and targeted former source aliases are the checked invariant.",
+    "No fresh native build, OS/WebView/Profile/resource admission, account/media or mobile acceptance."
+  ],
+  "unreadPaths": [
+    "Native install/upgrade/rollback/recovery/revocation business internals",
+    "Native transport/account/CDP and platform-specific lifecycle behavior"
+  ],
+  "nextBatch": null
+}

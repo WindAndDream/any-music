@@ -1,0 +1,6 @@
+# Match oxfmt and reproducible source hashes on every checkout, including Windows.
+* text=auto eol=lf
+
+# Preserve the generated engine byte-for-byte; its manifest enforces the reviewed hash.
+# Privacy scanning still inspects this file. Do not format vendored engine output.
+packages/plugin-vm/engine/loader.mjs -whitespace

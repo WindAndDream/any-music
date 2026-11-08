@@ -1,0 +1,173 @@
+{
+  "step": "S13",
+  "reviewDate": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "status": "implemented-native-local-acceptance",
+  "scope": ["tauri-native", "legacy-execution-gates"],
+  "productionExternalActivation": false,
+  "productionCodeAdmission": false,
+  "installationAdded": false,
+  "ipcCommandsAdded": 0,
+  "pluginDbSchema": 2,
+  "appOrBrowserLaunched": false,
+  "gitCommittedOrPushed": false,
+  "networkAcceptance": "controlled-local-TLS-only",
+  "liveOrDeviceAcceptanceAdded": false,
+  "proxyRoutesEnabled": false,
+  "cookieJarOrCredentialCapabilityAdded": false,
+  "legacyExecutionEnabled": false,
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T11:10:07.836302+00:00",
+      "localLog": ".codex-tmp/s13/test.log",
+      "logSha256": "7afd382a6ef33c9aa9a541f9db2749859e3863b6aec8b152bf2244a13f9b3f6e"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T11:08:21.801250+00:00",
+      "localLog": ".codex-tmp/s13/typecheck.log",
+      "logSha256": "e4f120c58a600680bd2351eeab34439a679bc1a4085f698c3a5d07c22d737dd5"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T11:07:50.833535+00:00",
+      "localLog": ".codex-tmp/s13/lint.log",
+      "logSha256": "8fddccc49552f59cf4c8e54d369378a569ce5d606073bdf5e3400cfc54c57da1"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T11:07:57.766707+00:00",
+      "localLog": ".codex-tmp/s13/format.log",
+      "logSha256": "c46ff0531c3380abe5ba07b9a9d6f44354ed5b8de67241459fd0badfd5573e6a"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T11:13:16.650048+00:00",
+      "localLog": ".codex-tmp/s13/build.log",
+      "logSha256": "9346dd77f49c3ab8cfbcf964a7059a7bf9fafd26f8c12b043aa6af1451f78ba2"
+    },
+    {
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T11:13:28.604406+00:00",
+      "localLog": ".codex-tmp/s13/native.log",
+      "logSha256": "23fcbfee8438af621cfb4015ebbddb10c4e04f72f946898424f23eed3fe11f42"
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T11:13:32.556310+00:00",
+      "localLog": ".codex-tmp/s13/msrv.log",
+      "logSha256": "6cb2310e4eb2577cbd8a52cf392f833ce85976077a1a7e1a19d99b5b9d169866"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "exitCode": 1,
+      "completedAtUtc": "2026-10-18T11:00:57.281264+00:00",
+      "localLog": ".codex-tmp/s13/deny.log",
+      "logSha256": "222931d0f16a287206de2499b2236ddfee71e54439c2b338a917a5917edf5d39"
+    },
+    {
+      "command": "pnpm check:rust:deny:pure",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T11:00:58.984628+00:00",
+      "localLog": ".codex-tmp/s13/deny-pure.log",
+      "logSha256": "2e38fdede14dc3abdb33c4c5242816a9f7bedac9801a63fdcaeffa06a3a56f73"
+    }
+  ],
+  "existingAuditBlockers": [
+    "RUSTSEC-2026-0346",
+    "RUSTSEC-2026-0347",
+    "RUSTSEC-2026-0348",
+    "RUSTSEC-2026-0349"
+  ],
+  "pureAuditExcludes": ["any-music-tauri", "am-plugin-net"],
+  "priorAttempt": {
+    "command": "pnpm test",
+    "exitCode": 1,
+    "localLog": ".codex-tmp/s13/test-concurrent.log",
+    "failure": "Existing unchanged use-music-creation test timed out during concurrent checks; complete test run repeated after compilation finished."
+  },
+  "preservation": {
+    "initialFileCount": 1205,
+    "changedExistingFiles": [
+      "Cargo.lock",
+      "Cargo.toml",
+      "apps/tauri/src-tauri/src/plugins.rs",
+      "apps/tauri/src-tauri/src/storage/plugins.rs",
+      "apps/tauri/src-tauri/src/storage/plugins/tests.rs",
+      "apps/tauri/src/features/music-sources/legacy-music-sources.ts",
+      "apps/tauri/test/features/music-sources/legacy-music-sources.test.ts",
+      "crates/AGENTS.md",
+      "crates/am-plugin-runtime/AGENTS.md",
+      "crates/am-plugin-runtime/src/authority.rs",
+      "crates/am-plugin-runtime/src/data.rs",
+      "crates/am-plugin-runtime/src/lib.rs",
+      "crates/am-plugin-runtime/src/model.rs",
+      "crates/am-plugin-runtime/tests/offline.rs",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/en/desktop/rust-workspace-plan.md",
+      "docs/zh-cn/桌面端/Rust工作区规划.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "scripts/check-rust-workspace.mjs",
+      "scripts/test/check-rust-workspace.test.mjs",
+      "AGENTS.md",
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      "apps/tauri/src-tauri/Cargo.toml",
+      "apps/tauri/src-tauri/src/media.rs",
+      "apps/tauri/src-tauri/src/network/http.rs",
+      "apps/tauri/src/platform/native-http.ts",
+      "docs/en/cross-platform/README.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "docs/en/desktop/backend-engineering.md",
+      "docs/en/desktop/development.md",
+      "docs/en/desktop/runtime-architecture.md",
+      "docs/zh-cn/桌面端/后端工程规范.md",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "docs/zh-cn/桌面端/运行端架构.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      "package.json"
+    ],
+    "newFiles": [
+      "apps/tauri/src-tauri/src/plugins/network.rs",
+      "crates/am-plugin-net/AGENTS.md",
+      "crates/am-plugin-net/Cargo.toml",
+      "crates/am-plugin-net/src/lib.rs",
+      "crates/am-plugin-net/src/request.rs",
+      "crates/am-plugin-net/src/resources.rs",
+      "crates/am-plugin-net/src/target.rs",
+      "crates/am-plugin-net/src/transport.rs",
+      "crates/am-plugin-net/tests/fixtures/README.md",
+      "crates/am-plugin-net/tests/fixtures/ca.der",
+      "crates/am-plugin-net/tests/fixtures/server-key.der",
+      "crates/am-plugin-net/tests/fixtures/server.der",
+      "crates/am-plugin-net/tests/targets.rs",
+      "crates/am-plugin-net/tests/transport.rs",
+      "crates/am-plugin-runtime/src/egress.rs",
+      "docs/en/cross-platform/architecture/plugin-system-s13-anonymous-networking-and-exits.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S13匿名联网与出口.md"
+    ],
+    "missingInitialFiles": []
+  },
+  "counts": {
+    "node": 21,
+    "vitest": 1659,
+    "rustPassed": 156,
+    "rustIgnored": 1,
+    "protocolDifferential": 171,
+    "networkTests": 12,
+    "runtimeTests": 24
+  }
+}

@@ -1,0 +1,37 @@
+---
+name: any-music-ui-delivery
+description: Implement or review Any Music shared product UI, Userscript Shadow DOM mounting or Tauri embedded layout, responsive styles and accessible interactions. Exclude source protocols and domain-only work.
+---
+
+# Any Music UI Delivery
+
+Deliver the requested UI while preserving library, playback, download and source contracts. Follow explicit user directions and the root verification policy.
+
+## Locate the change
+
+Read the target package guide and the relevant section of the [UI contract](../../../docs/en/cross-platform/features/cross-platform-ui-and-interaction.md). Use packages/ui and music-workbench as the shared product baseline. Identify the requested consumer: Userscript uses host-page/Shadow mounting, Tauri uses embedded layout and native ports; viewport width does not identify runtime.
+
+Identify current props, emits, wording, async states, persistence and disposal before a refactor. Put neutral primitives, controlled contracts and reusable headless UI composables in `packages/ui`; classic chrome/catalog/library/settings presentation belongs to `packages/theme-default`, injected by application build code; keep reusable product orchestration in `packages/music-workbench/src/features`, runtime bindings in each app’s `src/platform`, and shared business composition in `packages/music-workbench`. `apps/tauri` composes desktop and mobile consumers. Android document/Keystore/save, Bilibili account HTTP/QR, account proxy and foreground media adapters exist; broader device/release media/proxy acceptance and mobile external execution admission remain pending. Native Android startup messages live in maintained Kotlin/XML, including the obsolete-WebView fallback; do not add a JavaScript dependency to a message needed before JavaScript can start.
+
+Tag rules/state/renderless editing and neutral specialist controls belong to `packages/plugin-tag-management`; creation drafts/materials/renderless editing and neutral specialist controls belong to `packages/plugin-music-creation`. Whole-page classic tag/creation layouts and page CSS belong to `packages/theme-default`, consuming named public `ui/theme` projections/actions and host-adapted neutral controls. Their lightweight metadata is injected by each app and specialist Vue UI loads through `/vue`; the workbench owns named host ports and projections, not copies of plugin state. Published recipes remain host-owned.
+
+## Implement
+
+Studio presentation lives in `packages/theme-studio`, with independent shell, navigation, player, catalog, library, downloads, settings/dialogs and specialist layouts consuming public controlled contracts. It never imports Classic pages or selectors. Both production runtimes use one complete-root host, app-owned metadata/loaders and an explicit Classic fallback. Build-owned inline SFC/shared/theme styles enter the stable presentation surface; protected slots receive host-only styles in separate surfaces. Partial loaders/dispatch and extraction maps are unsupported. One theme.root allocation admits a complete definition; cross-theme behavior/continuity fixtures belong to workbench tests with test-only theme dependencies. For new themes, follow [Independent Theme Development](../../../docs/en/cross-platform/architecture/independent-theme-development.md); theme-* checks and the SFC collector discover them automatically.
+
+- Reuse semantic `--am-*` tokens, `AppIcon` and the shared no-referrer image boundary. Preserve native semantics, accessible names, error text, focus and keyboard/touch alternatives.
+- Keep shared panels controlled through typed props/emits/slots or injected contracts. Extract cross-view state and effects into composables; keep pure calculations as functions. See [development workflow](../../../docs/en/cross-platform/architecture/development-workflow.md) when changing these boundaries.
+- Plugin identity, installation, consent and recovery use fixed host UI. S15 native ports provide preview/approval/rollback, DEV and controlled results; UI neither grants authority nor loads guest artwork/page URLs. Unknown targets show the native blocker. Userscript manages built-ins only; see the [S15 matrix](../../../docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md) for actual capabilities.
+- Use Grid/Flex and container queries for descendants; media queries govern viewport/input mode. Prefer transform/opacity motion with reduced-motion support. Add a library only after measuring its justified benefit and bundle cost.
+- For card movement, read the [motion lifetime contract](../../../docs/en/cross-platform/features/cross-platform-ui-and-interaction.md#7-motion-and-gestures). Preserve shared render leases, stable card paint boundaries and preview-to-landing ownership; regress interruption and stale cleanup. Authorized live checks must inspect animation frames, actual injected styles and valid input capture, not only settled screenshots.
+- For scrolling during reorder, pointerup only resolves the final hit/translation; it never advances edge autoscroll. Share reference-counted `native-scroll-anchor.ts` suppression with the virtual anchor owner from before drag measurement through landing cleanup. Batch DOM stable-slot refreshes on changed capture-root height, including release before ResizeObserver delivery, and preserve the grabbed point. Ordinary pointer/scroll frames reuse geometry; unchanged-total-height redistribution needs an explicit spatial revision or measured adapter. Width/column, identity and root changes still cancel. Verify stale observers, cancellation/failure and overlapping-owner restoration. Keep paint containment on the card, outside motion wrappers; historical frame timings do not validate a later motion build.
+- Userscript only: keep document-start bridges and the framework-free launcher light. Vue, Pinia, styles and feature state load after bootstrap-userscript-app.ts; inline Shadow styles enter the product root and hiding preserves work. Tauri imports styles normally and mounts an embedded workbench; do not add GM hooks, host guards or a userscript launcher. Runtime binding changes follow [Userscript](../any-music-userscript-runtime/SKILL.md) or [Tauri](../any-music-tauri-runtime/SKILL.md).
+- Keep mobile bundle isolation real through entries, named exports and async boundaries. CSS visibility is not evidence of pruning; inspect output only when that target exists and is in scope.
+
+## Verify and hand off
+
+Run package tests/typecheck and the root gates. Build a real consumer when shared styles/exports change. Shared component regressions belong to UI's `test/`; application composition regressions stay in the app.
+
+Only launch a product, preview, browser or emulator when the user explicitly requests runtime inspection in this task. Node component tests may exercise events without opening a UI; they do not prove DOM focus, layout or visual quality. If live viewing is authorized, check the affected light/dark/system, wide/narrow, keyboard/touch and reduced-motion states; overlays need Escape and focus return, and userscript hide/show must preserve ongoing work.
+
+Report what changed and what was verified; name remaining runtime/host/device checks. The Vite GM substitute proves neither authenticated transport nor Tampermonkey permissions, downloads or cross-host behavior. Frontend component tests do not prove desktop IPC, Rust accounts, grants or native saving.

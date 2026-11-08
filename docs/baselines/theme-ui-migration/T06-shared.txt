@@ -1,0 +1,34 @@
+Scope: 3 of 22 workspace projects
+packages/ui test$ vitest run
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/ui test:  ❯ test/composables/use-back-navigation.test.ts (0 test)
+packages/ui test:  ❯ test/components/music-sources/catalog-selection-markup.test.ts (0 test)
+packages/ui test: ⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+packages/ui test:  FAIL  test/composables/use-back-navigation.test.ts [ test/composables/use-back-navigation.test.ts ]
+packages/ui test: Error: Cannot find module '/src/components/settings/SettingsNavigation.vue' imported from <project-root>/packages/ui/test/composables/use-back-navigation.test.ts
+packages/ui test:  ❯ test/composables/use-back-navigation.test.ts:6:1
+packages/ui test:       4| import AppDialog from '../../src/components/AppDialog.vue'
+packages/ui test:       5| import BottomSheet from '../../src/components/BottomSheet.vue'
+packages/ui test:       6| import SettingsNavigation from '../../src/components/settings/Settings…
+packages/ui test:        | ^
+packages/ui test:       7| import {
+packages/ui test:       8|   createBackNavigation,
+packages/ui test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+packages/ui test:  FAIL  test/components/music-sources/catalog-selection-markup.test.ts [ test/components/music-sources/catalog-selection-markup.test.ts ]
+packages/ui test: Error: ENOENT: no such file or directory, open '<project-root>\packages\ui\src\components\music-sources\CatalogDrawer.vue'
+packages/ui test:  ❯ test/components/music-sources/catalog-selection-markup.test.ts:9:29
+packages/ui test:       7|   'utf8',
+packages/ui test:       8| )
+packages/ui test:       9| const catalogDrawerSource = readFileSync(
+packages/ui test:        |                             ^
+packages/ui test:      10|   new URL('../../../src/components/music-sources/CatalogDrawer.vue', i…
+packages/ui test:      11|   'utf8',
+packages/ui test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+packages/ui test:  Test Files  2 failed | 60 passed (62)
+packages/ui test:       Tests  324 passed (324)
+packages/ui test:    Start at  02:04:56
+packages/ui test:    Duration  7.00s (transform 13.85s, setup 0ms, import 27.27s, tests 1.59s, environment 30ms)
+packages/ui test: Failed
+<project-root>\packages\ui:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/ui@0.0.0 test: `vitest run`
+Exit status 1

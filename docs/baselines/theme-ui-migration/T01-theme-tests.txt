@@ -1,0 +1,15 @@
+Scope: 2 of 21 workspace projects
+packages/ui test$ vitest run
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/ui test:  Test Files  93 passed (93)
+packages/ui test:       Tests  625 passed (625)
+packages/ui test:    Start at  16:05:55
+packages/ui test:    Duration  19.57s (transform 80.37s, setup 0ms, import 134.38s, tests 15.34s, environment 40ms)
+packages/ui test: Done
+packages/plugin-ui-vue test$ vitest run
+packages/plugin-ui-vue test:  RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+packages/plugin-ui-vue test:  Test Files  6 passed (6)
+packages/plugin-ui-vue test:       Tests  33 passed (33)
+packages/plugin-ui-vue test:    Start at  16:06:15
+packages/plugin-ui-vue test:    Duration  9.62s (transform 10.41s, setup 0ms, import 19.35s, tests 871ms, environment 3ms)
+packages/plugin-ui-vue test: Done

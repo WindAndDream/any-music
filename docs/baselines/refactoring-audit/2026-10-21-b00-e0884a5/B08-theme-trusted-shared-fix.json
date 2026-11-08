@@ -1,0 +1,246 @@
+{
+  "documentType": "audit-repair-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B08-theme-trusted-shared-fix",
+  "parentBatch": "B08",
+  "runtime": "shared",
+  "fixes": ["B08-T01", "B08-T02"],
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "scope": {
+    "invariant": "Reject stale/disposed theme selections before host allocation and persist only a current live selection; distinguish a failed preference save from a real theme fallback.",
+    "implementationPaths": [
+      "packages/plugin-ui-vue/src/trusted/theme-controller.ts",
+      "packages/music-workbench/src/features/plugins/use-workbench-theme.ts"
+    ],
+    "testPaths": [
+      "packages/plugin-ui-vue/test/trusted/theme-controller.test.ts",
+      "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts"
+    ],
+    "exclusions": [
+      "Other four B08 candidates",
+      "Real DOM focus/layout, browser module-fetch retry, runtime/host/mobile acceptance",
+      "Independent host module activation cancellation design and plugin/native authority"
+    ],
+    "interfaceChanges": "No package dependency, public export, loader target, storage schema/key, props/emits, theme resource contract or host allocation callback signature changed. The composable failure flag is now derived from its error kind and remains a boolean ref for consumers."
+  },
+  "baseline": {
+    "originalAudit": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared.json",
+    "originalBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-baseline.json",
+    "initialStatusLog": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/initial-status.log",
+    "headChangeAssessment": "Other work advanced HEAD during this repair. Unrelated source/tests/docs and reports were preserved. The four repair inputs are recorded by final hash.",
+    "startingHead": "cdbd92dd17652ec2fad5f65a921dcc18547bfe8c",
+    "finalHead": "9dc061654ba30a74f595c5ce5201fa2270cd5cf5",
+    "finalInputHashes": [
+      {
+        "path": "packages/plugin-ui-vue/src/trusted/theme-controller.ts",
+        "sha256": "a9b51672ba3ec9afb43ff2456ee6d9ac55c7657a00b8e16d24323c4f67c828b0"
+      },
+      {
+        "path": "packages/music-workbench/src/features/plugins/use-workbench-theme.ts",
+        "sha256": "126c1b753dbbc0b3965633e86ed01bc140382f5705472a7a5038079b9fe596c3"
+      },
+      {
+        "path": "packages/plugin-ui-vue/test/trusted/theme-controller.test.ts",
+        "sha256": "aee94f8d5508ed6de1e545939584d78f925867dfd624aef95242b247506e1624"
+      },
+      {
+        "path": "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts",
+        "sha256": "70e41847aa370ea4e4b7c1b2f16202277df382f250711837eb1977cad2ee9fd6"
+      }
+    ],
+    "formattingDebtUnchanged": true
+  },
+  "changes": [
+    {
+      "findingId": "B08-T01",
+      "status": "resolved",
+      "owner": "packages/plugin-ui-vue/src/trusted/theme-controller.ts:37",
+      "detail": "Return before starting work if already disposed; check generation/disposal immediately after the loader resolves and before invoking the side-effectful allocation callback. Retain post-allocation and post-activation checks. The workbench additionally ignores retained actions and late persistence after disposal or replacement."
+    },
+    {
+      "findingId": "B08-T02",
+      "status": "resolved",
+      "owner": "packages/music-workbench/src/features/plugins/use-workbench-theme.ts:24",
+      "detail": "Track theme/read/write failure kinds independently from the derived failure boolean. A failed write keeps the working theme and explicitly reports that preference saving failed. Retrying selection saves normalized per-theme settings and clears the error. Only a current usable default presentation reports a default fallback; failed default recovery uses a neutral error."
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "detail": "Implementation stays with the trusted controller and workbench preferences; owner tests stay in each package. No runtime/plugin-center implementation, public export or dependency was added."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "detail": "Literal build-known loaders and canonical descriptor validation remain unchanged; rejected imports can retry."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "detail": "Permanent tests cover superseded imports, imports finishing after disposal, actions after disposal, late allocation rejection, import retry, queued cleanup, mounted composable disposal and renderer recovery. Existing controlled presentation/state tests remain passing."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "detail": "Theme preference shape/key and normalized density remain unchanged. Save failures report the actual persistence failure, retain the active theme and permit retry; real and failed default fallback report distinct outcomes."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "detail": "13 permanent regressions were added. Before source fixes, five of the first 12 new scenarios failed, reproducing the reported defects and retained-after-disposal work. Final targeted and complete repository tests pass. Root formatting retains 12 untouched pre-existing documentation issues; scoped acceptance does not close those issues or the rest of B08."
+    }
+  ],
+  "verification": {
+    "red": [
+      {
+        "command": "pnpm --filter @any-music/plugin-ui-vue exec vitest run test/trusted/theme-controller.test.ts",
+        "exitCode": 1,
+        "passed": 8,
+        "failed": 3,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/controller-red.log"
+      },
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+        "exitCode": 1,
+        "passed": 4,
+        "failed": 2,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/workbench-red.log"
+      }
+    ],
+    "target": [
+      {
+        "command": "pnpm --filter @any-music/plugin-ui-vue test",
+        "exitCode": 0,
+        "passed": 32,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/plugin-tests.log"
+      },
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts test/features/plugins/use-workbench-modules.test.ts",
+        "exitCode": 0,
+        "passed": 13,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/workbench-tests.log",
+        "note": "Initial six theme scenarios plus seven existing module scenarios; the seventh theme scenario and final assertion changes were subsequently rerun separately."
+      },
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+        "exitCode": 0,
+        "passed": 7,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/workbench-final-tests.log",
+        "note": "Final owner file, including failed-default fallback and settled asynchronous outcome checks."
+      }
+    ],
+    "gates": [
+      {
+        "command": "pnpm test",
+        "exitCode": 0,
+        "environment": {
+          "VITEST_MAX_WORKERS": "2",
+          "npm_config_workspace_concurrency": "1"
+        },
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/root-test-final.log",
+        "note": "Complete root script, including all package/application tests, Cargo workspace tests and 183 TS/Rust differential protocol cases. Concurrency is limited; assertions and test timeouts are unchanged."
+      },
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0,
+        "invocation": "Executed by pnpm build:prod before recursive production builds.",
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/root-build.log",
+        "note": "All shared/application checks and the Tauri Rust checks pass. An earlier standalone run encountered two syntax errors in another audit temporary file; that file was subsequently removed by its owner."
+      },
+      {
+        "command": "pnpm lint",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/root-lint-final.log"
+      },
+      {
+        "command": "pnpm format:check",
+        "exitCode": 1,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/root-format.log",
+        "reason": "12 pre-existing documentation files fail formatting. git diff from the repair starting HEAD shows none of those files changed. The four repair files and generated report/ledger formatting pass separately."
+      },
+      {
+        "command": "pnpm build",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/root-build.log",
+        "note": "Root production build, including Userscript artifact and Tauri release --no-bundle with --locked --no-default-features; no product UI was launched."
+      }
+    ],
+    "changedFilesFormatting": {
+      "result": "pass",
+      "sourceLog": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/changed-format.log",
+      "reportLog": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/report-format.log"
+    },
+    "supersededFailures": [
+      {
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/root-test.log",
+        "reason": "First root run overlapped typechecks and used default package/file concurrency. Existing application lazy-creation imports timed out at 20 seconds and a Userscript source polling assertion exceeded its 1-second wait. Full rerun with bounded concurrency passes without changing implementation/assertions/timeouts for those tests."
+      },
+      {
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/target-typecheck.log",
+        "reason": "The first new test imported UiThemeSelection, which is not publicly exported. The test now infers the value from the public injection key; no product export was added."
+      },
+      {
+        "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-fix/root-typecheck.log",
+        "reason": "Unrelated temporary B11 audit file used constructor parameter properties with erasableSyntaxOnly. The file disappeared before the successful final root build typecheck. This repair did not modify or remove it."
+      }
+    ],
+    "live": {
+      "result": "not-run",
+      "reason": "The user requested repair and verification, without explicit browser/application inspection. No dev server, preview, browser, app, emulator or screenshot was launched."
+    },
+    "distinctTargetTests": 46
+  },
+  "formattingDebt": [
+    "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+    "docs/en/desktop/README.md",
+    "docs/en/desktop/backend-engineering.md",
+    "docs/en/desktop/douyin-background-login-experiment.md",
+    "docs/en/desktop/runtime-architecture.md",
+    "docs/en/desktop/rust-workspace-plan.md",
+    "docs/zh-cn/桌面端/Rust工作区规划.md",
+    "docs/zh-cn/桌面端/后端工程规范.md",
+    "docs/zh-cn/桌面端/抖音后台登录试验.md",
+    "docs/zh-cn/桌面端/文档索引.md",
+    "docs/zh-cn/桌面端/运行端架构.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+  ],
+  "remainingLimits": [
+    "Verification establishes scoped code/test/build evidence, not a guarantee that every environment and untested interaction is regression-free.",
+    "Real focus/layout, runtime mounting and actual browser import-failure recovery remain untested.",
+    "An allocation already entered before invalidation remains owned by its injected host; this repair preserves rejection of its stale result and does not introduce a new host cancellation API.",
+    "The other four B08 candidate audits remain unreviewed and the 12 existing documentation format failures remain open."
+  ],
+  "nextBatch": {
+    "batchId": "B08-controlled-components-shared",
+    "parentBatch": "B08",
+    "runtime": "shared",
+    "status": "pending",
+    "question": "Audit one controlled TrackList/TrackRow interaction contract: selection, disabled play/download and event forwarding; preserve business ownership outside the components.",
+    "allowedPaths": [
+      "packages/ui/src/components/music-sources/TrackList.vue",
+      "packages/ui/src/components/music-sources/TrackRow.vue",
+      "Their direct renderer/public prop contracts and matching owner tests only"
+    ],
+    "excluded": [
+      "Other controlled component groups",
+      "Declarative root/directory acceptance and runtime UI inspection",
+      "Product fixes unless separately requested"
+    ],
+    "continuation": "Both trusted-theme findings are repaired with permanent regressions. Reuse the repair report after checking its four final input hashes. This does not accept the rest of B08."
+  },
+  "handoff": {
+    "summary": "B08-T01/T02 are repaired. 13 regressions cover import/selection/disposal/cleanup/retry and persistence/fallback feedback. Final trusted package tests pass 32/32, theme composable tests 7/7, and the existing module consumer tests 7/7. Complete root tests, root typechecks, lint and production builds pass. Root formatting still fails on 12 unchanged documentation files. No product UI/live acceptance and no commit/push. Other B08 candidates remain pending.",
+    "committed": false,
+    "pushed": false
+  },
+  "reviewedAt": "2026-10-21T11:01:38.653Z"
+}

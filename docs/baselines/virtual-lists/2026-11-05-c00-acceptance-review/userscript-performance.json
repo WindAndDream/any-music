@@ -1,0 +1,883 @@
+{
+  "date": "2026-11-05",
+  "runtimeScope": "userscript",
+  "admission": false,
+  "environment": {
+    "cpu": "AMD Ryzen 5 5600 6-Core Processor              ",
+    "logicalCpus": 12,
+    "memoryBytes": 17101819904,
+    "os": "10.0.26200",
+    "browser": "Chrome/156.0.8078.76",
+    "manager": "Tampermonkey 5.5.1",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "idle": {
+      "samples": 255,
+      "p50Ms": 5.899999999997817,
+      "p95Ms": 6,
+      "p99Ms": 6,
+      "maxMs": 6.200000000000728,
+      "over16_7Ms": 0,
+      "over33_4Ms": 0
+    }
+  },
+  "method": {
+    "runtime": "Installed server:Any Music development script, actual GM/Shadow runtime; development frontend, not final production artifact",
+    "fixture": "Empty verified development-script storage; ascending 80/1000/10000 favorites and records; c00-live:<index>, deterministic Chinese titles/authors, no artwork/network",
+    "frames": "rAF intervals over 3s per operation after render ticks plus450ms transition settling; scroll1200 CSS px/s from start; sidebar elapsed500ms intervals, at most6 toggles; one run per case",
+    "controls": "Native WebView closed; root tests/builds not running; no source HMR in retained clean pass. Earlier mixed/HMR/interrupted or incorrect fixture passes excluded.",
+    "limits": "Frame intervals include all product main-thread work. Not paint presentation measurements, CPU time per frame, cold startup, all-list traversal, image decoding, mobile, or production grants. Too few 10k sidebar frames for reliable tail statistics."
+  },
+  "sourceFiles": [
+    {
+      "path": "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+      "sha256": "dff10b7bc1ac4524733f099834c58b739bffbe3ee754462edac06eb01809516a"
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicFavorites.admission.test.ts",
+      "sha256": "c9baaf821ead58f5b295df7d74f267bb00d6ef0eecfaa5a502865141832b92c0"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "b5d6f846f29ee2556f9b0ebc69dbe1756ca24bbfeb376ea41aee2511bf6c5538"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts",
+      "sha256": "774620ddf169d1663b06648eac47fd3da5d992863ea53485a3670c4ca8d3eb7f"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-generation-store.ts",
+      "sha256": "68a069f28a5ee21437d3ea9edafc45cc0231e549ff85688887a4c14a8c6ca0a9"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-data.ts",
+      "sha256": "f8b85a61254c5576c03acb2b724cd8546249d758963c0e5a1b1e9fb81ba62e4d"
+    },
+    {
+      "path": "apps/userscript/src/platform/product-storage.ts",
+      "sha256": "9ae5635492a09556c7af473bbc92867ebb039be2e7f490673e3820b29d631132"
+    },
+    {
+      "path": "apps/tauri/src/platform/product-storage.ts",
+      "sha256": "48248176bd2fe40adc2fc8bd3beb0cb39cfe25fecdcebf4d915b9001287d9cdd"
+    }
+  ],
+  "cases": [
+    {
+      "count": 80,
+      "candidate": false,
+      "mounted": 80,
+      "viewRemountAndSettleMs": 1089,
+      "measures": [
+        {
+          "kind": "scroll",
+          "durationMs": 3000,
+          "toggles": 0,
+          "scrollPixelsPerSecond": 1200,
+          "frameIntervals": {
+            "samples": 510,
+            "p50Ms": 5.899999999997817,
+            "p95Ms": 6,
+            "p99Ms": 6,
+            "maxMs": 6,
+            "over16_7Ms": 0,
+            "over33_4Ms": 0
+          },
+          "longTasks": [],
+          "metrics": {
+            "LayoutCount": 0,
+            "RecalcStyleCount": 0,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0,
+            "ScriptDuration": 0.0006410000000000001,
+            "TaskDuration": 0.30821299999999996
+          },
+          "finalMounted": 80,
+          "finalRecords": 80,
+          "finalFavorites": 80,
+          "tailReliability": "Single short run; diagnostic comparison, not full acceptance"
+        },
+        {
+          "kind": "sidebar",
+          "durationMs": 3005.9000000000015,
+          "toggles": 6,
+          "frameIntervals": {
+            "samples": 340,
+            "p50Ms": 5.900000000001455,
+            "p95Ms": 17.700000000000728,
+            "p99Ms": 23.600000000002183,
+            "maxMs": 29.400000000001455,
+            "over16_7Ms": 76,
+            "over33_4Ms": 0
+          },
+          "longTasks": [],
+          "metrics": {
+            "LayoutCount": 83,
+            "RecalcStyleCount": 390,
+            "LayoutDuration": 0.372998,
+            "RecalcStyleDuration": 0.7821389999999999,
+            "ScriptDuration": 0.007692000000000001,
+            "TaskDuration": 1.582556
+          },
+          "finalMounted": 80,
+          "finalRecords": 80,
+          "finalFavorites": 80,
+          "tailReliability": "Single short run; diagnostic comparison, not full acceptance"
+        }
+      ]
+    },
+    {
+      "count": 80,
+      "candidate": true,
+      "mounted": 12,
+      "viewRemountAndSettleMs": 1036.0999999940395,
+      "measures": [
+        {
+          "kind": "scroll",
+          "durationMs": 3000,
+          "toggles": 0,
+          "scrollPixelsPerSecond": 1200,
+          "frameIntervals": {
+            "samples": 494,
+            "p50Ms": 5.900000000001455,
+            "p95Ms": 6,
+            "p99Ms": 17.599999999998545,
+            "maxMs": 17.700000000004366,
+            "over16_7Ms": 6,
+            "over33_4Ms": 0
+          },
+          "longTasks": [],
+          "metrics": {
+            "LayoutCount": 50,
+            "RecalcStyleCount": 1225,
+            "LayoutDuration": 0.030333,
+            "RecalcStyleDuration": 0.23215199999999991,
+            "ScriptDuration": 0.055477,
+            "TaskDuration": 0.8868169999999997
+          },
+          "finalMounted": 12,
+          "finalRecords": 80,
+          "finalFavorites": 80,
+          "tailReliability": "Single short run; diagnostic comparison, not full acceptance"
+        },
+        {
+          "kind": "sidebar",
+          "durationMs": 3000.0999999999985,
+          "toggles": 6,
+          "frameIntervals": {
+            "samples": 304,
+            "p50Ms": 5.900000000001455,
+            "p95Ms": 29.400000000001455,
+            "p99Ms": 35.299999999995634,
+            "maxMs": 35.30000000000291,
+            "over16_7Ms": 57,
+            "over33_4Ms": 9
+          },
+          "longTasks": [],
+          "metrics": {
+            "LayoutCount": 303,
+            "RecalcStyleCount": 4470,
+            "LayoutDuration": 0.26569499999999996,
+            "RecalcStyleDuration": 0.6623320000000001,
+            "ScriptDuration": 0.026678999999999994,
+            "TaskDuration": 1.7813229999999995
+          },
+          "finalMounted": 12,
+          "finalRecords": 80,
+          "finalFavorites": 80,
+          "tailReliability": "Single short run; diagnostic comparison, not full acceptance"
+        }
+      ]
+    },
+    {
+      "count": 1000,
+      "candidate": false,
+      "mounted": 1000,
+      "viewRemountAndSettleMs": 1846,
+      "measures": [
+        {
+          "kind": "scroll",
+          "durationMs": 3000,
+          "toggles": 0,
+          "scrollPixelsPerSecond": 1200,
+          "frameIntervals": {
+            "samples": 509,
+            "p50Ms": 5.900000000001455,
+            "p95Ms": 6,
+            "p99Ms": 6,
+            "maxMs": 12,
+            "over16_7Ms": 0,
+            "over33_4Ms": 0
+          },
+          "longTasks": [],
+          "metrics": {
+            "LayoutCount": 0,
+            "RecalcStyleCount": 0,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0,
+            "ScriptDuration": 0.0008179999999999993,
+            "TaskDuration": 1.4423110000000001
+          },
+          "finalMounted": 1000,
+          "finalRecords": 1000,
+          "finalFavorites": 1000,
+          "tailReliability": "Single short run; diagnostic comparison, not full acceptance"
+        },
+        {
+          "kind": "sidebar",
+          "durationMs": 3000,
+          "toggles": 6,
+          "frameIntervals": {
+            "samples": 39,
+            "p50Ms": 5.900000000001455,
+            "p95Ms": 429.40000000000146,
+            "p99Ms": 441,
+            "maxMs": 441,
+            "over16_7Ms": 10,
+            "over33_4Ms": 10
+          },
+          "longTasks": [
+            {
+              "startTime": 49377.09999999404,
+              "duration": 190
+            },
+            {
+              "startTime": 49570.90000000596,
+              "duration": 212
+            },
+            {
+              "startTime": 49783.59999999404,
+              "duration": 224
+            },
+            {
+              "startTime": 50008.40000000596,
+              "duration": 187
+            },
+            {
+              "startTime": 50196.70000000298,
+              "duration": 220
+            },
+            {
+              "startTime": 50417.20000000298,
+              "duration": 427
+            },
+            {
+              "startTime": 50847.29999999702,
+              "duration": 346
+            },
+            {
+              "startTime": 51193.70000000298,
+              "duration": 428
+            },
+            {
+              "startTime": 51623.29999999702,
+              "duration": 404
+            },
+            {
+              "startTime": 52028.79999999702,
+              "duration": 198
+            }
+          ],
+          "metrics": {
+            "LayoutCount": 10,
+            "RecalcStyleCount": 41,
+            "LayoutDuration": 0.3939210000000001,
+            "RecalcStyleDuration": 1.725673,
+            "ScriptDuration": 0.020975000000000008,
+            "TaskDuration": 2.864274000000001
+          },
+          "finalMounted": 1000,
+          "finalRecords": 1000,
+          "finalFavorites": 1000,
+          "tailReliability": "Insufficient frames for reliable p95/p99 admission; retained as observed long-task evidence"
+        }
+      ]
+    },
+    {
+      "count": 1000,
+      "candidate": true,
+      "mounted": 12,
+      "viewRemountAndSettleMs": 1014.6999999880791,
+      "measures": [
+        {
+          "kind": "scroll",
+          "durationMs": 3000,
+          "toggles": 0,
+          "scrollPixelsPerSecond": 1200,
+          "frameIntervals": {
+            "samples": 495,
+            "p50Ms": 5.900000000001455,
+            "p95Ms": 6,
+            "p99Ms": 11.80000000000291,
+            "maxMs": 17.69999999999709,
+            "over16_7Ms": 3,
+            "over33_4Ms": 0
+          },
+          "longTasks": [],
+          "metrics": {
+            "LayoutCount": 50,
+            "RecalcStyleCount": 1224,
+            "LayoutDuration": 0.030094999999999983,
+            "RecalcStyleDuration": 0.20374800000000004,
+            "ScriptDuration": 0.04106399999999999,
+            "TaskDuration": 0.8112159999999999
+          },
+          "finalMounted": 12,
+          "finalRecords": 1000,
+          "finalFavorites": 1000,
+          "tailReliability": "Single short run; diagnostic comparison, not full acceptance"
+        },
+        {
+          "kind": "sidebar",
+          "durationMs": 2999.9000000000015,
+          "toggles": 6,
+          "frameIntervals": {
+            "samples": 281,
+            "p50Ms": 5.900000000001455,
+            "p95Ms": 35.299999999995634,
+            "p99Ms": 53,
+            "maxMs": 58.799999999995634,
+            "over16_7Ms": 55,
+            "over33_4Ms": 16
+          },
+          "longTasks": [
+            {
+              "startTime": 59012.59999999404,
+              "duration": 63
+            },
+            {
+              "startTime": 59512,
+              "duration": 59
+            },
+            {
+              "startTime": 60012,
+              "duration": 52
+            },
+            {
+              "startTime": 60511.90000000596,
+              "duration": 56
+            },
+            {
+              "startTime": 61012.09999999404,
+              "duration": 55
+            },
+            {
+              "startTime": 61512,
+              "duration": 56
+            }
+          ],
+          "metrics": {
+            "LayoutCount": 266,
+            "RecalcStyleCount": 3951,
+            "LayoutDuration": 0.2424869999999999,
+            "RecalcStyleDuration": 0.5833889999999999,
+            "ScriptDuration": 0.03981000000000001,
+            "TaskDuration": 1.8010389999999994
+          },
+          "finalMounted": 12,
+          "finalRecords": 1000,
+          "finalFavorites": 1000,
+          "tailReliability": "Single short run; diagnostic comparison, not full acceptance"
+        }
+      ]
+    },
+    {
+      "count": 10000,
+      "candidate": false,
+      "mounted": 10000,
+      "viewRemountAndSettleMs": 9714.5,
+      "measures": [
+        {
+          "kind": "scroll",
+          "durationMs": 3017.600000000006,
+          "toggles": 0,
+          "scrollPixelsPerSecond": 1200,
+          "frameIntervals": {
+            "samples": 58,
+            "p50Ms": 41.19999999999709,
+            "p95Ms": 111.69999999999709,
+            "p99Ms": 117.70000000001164,
+            "maxMs": 117.70000000001164,
+            "over16_7Ms": 57,
+            "over33_4Ms": 57
+          },
+          "longTasks": [
+            {
+              "startTime": 75154.79999999702,
+              "duration": 89
+            },
+            {
+              "startTime": 75280.79999999702,
+              "duration": 116
+            },
+            {
+              "startTime": 75433.70000000298,
+              "duration": 88
+            },
+            {
+              "startTime": 75718.5,
+              "duration": 98
+            },
+            {
+              "startTime": 75978.59999999404,
+              "duration": 93
+            },
+            {
+              "startTime": 76261.59999999404,
+              "duration": 175
+            },
+            {
+              "startTime": 76513.09999999404,
+              "duration": 93
+            },
+            {
+              "startTime": 76763.5,
+              "duration": 92
+            },
+            {
+              "startTime": 77008.59999999404,
+              "duration": 92
+            },
+            {
+              "startTime": 77286.90000000596,
+              "duration": 172
+            },
+            {
+              "startTime": 77536.40000000596,
+              "duration": 91
+            },
+            {
+              "startTime": 77817.29999999702,
+              "duration": 88
+            }
+          ],
+          "metrics": {
+            "LayoutCount": 0,
+            "RecalcStyleCount": 0,
+            "LayoutDuration": 0,
+            "RecalcStyleDuration": 0,
+            "ScriptDuration": 0.0004170000000000007,
+            "TaskDuration": 3.2425780000000017
+          },
+          "finalMounted": 10000,
+          "finalRecords": 10000,
+          "finalFavorites": 10000,
+          "tailReliability": "Insufficient frames for reliable p95/p99 admission; retained as observed long-task evidence"
+        },
+        {
+          "kind": "sidebar",
+          "durationMs": 4176.5,
+          "toggles": 3,
+          "frameIntervals": {
+            "samples": 2,
+            "p50Ms": 1982.2999999999884,
+            "p95Ms": 2194.2000000000116,
+            "p99Ms": 2194.2000000000116,
+            "maxMs": 2194.2000000000116,
+            "over16_7Ms": 2,
+            "over33_4Ms": 2
+          },
+          "longTasks": [
+            {
+              "startTime": 79151.90000000596,
+              "duration": 2274
+            },
+            {
+              "startTime": 81427,
+              "duration": 1976
+            }
+          ],
+          "metrics": {
+            "LayoutCount": 5,
+            "RecalcStyleCount": 17,
+            "LayoutDuration": 1.377196,
+            "RecalcStyleDuration": 6.331584,
+            "ScriptDuration": 0.096468,
+            "TaskDuration": 11.272548999999998
+          },
+          "finalMounted": 10000,
+          "finalRecords": 10000,
+          "finalFavorites": 10000,
+          "tailReliability": "Insufficient frames for reliable p95/p99 admission; retained as observed long-task evidence"
+        }
+      ]
+    },
+    {
+      "count": 10000,
+      "candidate": true,
+      "mounted": 16,
+      "viewRemountAndSettleMs": 1090.300000011921,
+      "measures": [
+        {
+          "kind": "scroll",
+          "durationMs": 3000,
+          "toggles": 0,
+          "scrollPixelsPerSecond": 1200,
+          "frameIntervals": {
+            "samples": 479,
+            "p50Ms": 5.899999999994179,
+            "p95Ms": 6,
+            "p99Ms": 23.5,
+            "maxMs": 23.69999999999709,
+            "over16_7Ms": 11,
+            "over33_4Ms": 0
+          },
+          "longTasks": [],
+          "metrics": {
+            "LayoutCount": 46,
+            "RecalcStyleCount": 1566,
+            "LayoutDuration": 0.04175400000000007,
+            "RecalcStyleDuration": 0.268953999999999,
+            "ScriptDuration": 0.03978900000000002,
+            "TaskDuration": 0.9058300000000017
+          },
+          "finalMounted": 16,
+          "finalRecords": 10000,
+          "finalFavorites": 10000,
+          "tailReliability": "Single short run; diagnostic comparison, not full acceptance"
+        },
+        {
+          "kind": "sidebar",
+          "durationMs": 3264.699999999997,
+          "toggles": 6,
+          "frameIntervals": {
+            "samples": 6,
+            "p50Ms": 547,
+            "p95Ms": 570.5,
+            "p99Ms": 570.5,
+            "maxMs": 570.5,
+            "over16_7Ms": 6,
+            "over33_4Ms": 6
+          },
+          "longTasks": [
+            {
+              "startTime": 97407.59999999404,
+              "duration": 508
+            },
+            {
+              "startTime": 97917,
+              "duration": 566
+            },
+            {
+              "startTime": 98484.59999999404,
+              "duration": 530
+            },
+            {
+              "startTime": 99015.90000000596,
+              "duration": 562
+            },
+            {
+              "startTime": 99579.29999999702,
+              "duration": 548
+            },
+            {
+              "startTime": 100128.5,
+              "duration": 544
+            }
+          ],
+          "metrics": {
+            "LayoutCount": 51,
+            "RecalcStyleCount": 700,
+            "LayoutDuration": 0.06462499999999993,
+            "RecalcStyleDuration": 0.1439319999999995,
+            "ScriptDuration": 0.19879499999999994,
+            "TaskDuration": 3.5239800000000017
+          },
+          "finalMounted": 16,
+          "finalRecords": 10000,
+          "finalFavorites": 10000,
+          "tailReliability": "Insufficient frames for reliable p95/p99 admission; retained as observed long-task evidence"
+        }
+      ]
+    }
+  ],
+  "cpuProfile": {
+    "method": "CPU sampled diagnostic, includes profiler overhead; not timing admission",
+    "scope": "Separate 10k candidate sidebar diagnostic with profiler overhead, not part of timing comparison",
+    "sampledHotspots": [
+      {
+        "frame": {
+          "functionName": "check",
+          "scriptId": "314",
+          "url": "http://127.0.0.1:18765/@fs/<project-root>/packages/music-workbench/src/storage/product-data.ts",
+          "lineNumber": 13,
+          "columnNumber": 15
+        },
+        "selfMs": 1117.221999999998,
+        "samples": 758
+      },
+      {
+        "frame": {
+          "functionName": "(idle)",
+          "scriptId": "0",
+          "url": "",
+          "lineNumber": -1,
+          "columnNumber": -1
+        },
+        "selfMs": 968.1789999999991,
+        "samples": 649
+      },
+      {
+        "frame": {
+          "functionName": "checksum",
+          "scriptId": "312",
+          "url": "http://127.0.0.1:18765/@fs/<project-root>/packages/music-workbench/src/storage/product-generation-store.ts",
+          "lineNumber": 14,
+          "columnNumber": 17
+        },
+        "selfMs": 455.14300000000026,
+        "samples": 313
+      },
+      {
+        "frame": {
+          "functionName": "copyJson",
+          "scriptId": "314",
+          "url": "http://127.0.0.1:18765/@fs/<project-root>/packages/music-workbench/src/storage/product-data.ts",
+          "lineNumber": 33,
+          "columnNumber": 24
+        },
+        "selfMs": 348.7429999999997,
+        "samples": 236
+      },
+      {
+        "frame": {
+          "functionName": "(program)",
+          "scriptId": "0",
+          "url": "",
+          "lineNumber": -1,
+          "columnNumber": -1
+        },
+        "selfMs": 311.328,
+        "samples": 132
+      },
+      {
+        "frame": {
+          "functionName": "encode",
+          "scriptId": "0",
+          "url": "",
+          "lineNumber": -1,
+          "columnNumber": -1
+        },
+        "selfMs": 304.4329999999998,
+        "samples": 205
+      },
+      {
+        "frame": {
+          "functionName": "(garbage collector)",
+          "scriptId": "0",
+          "url": "",
+          "lineNumber": -1,
+          "columnNumber": -1
+        },
+        "selfMs": 294.133,
+        "samples": 196
+      },
+      {
+        "frame": {
+          "functionName": "",
+          "scriptId": "312",
+          "url": "http://127.0.0.1:18765/@fs/<project-root>/packages/music-workbench/src/storage/product-generation-store.ts",
+          "lineNumber": 17,
+          "columnNumber": 36
+        },
+        "selfMs": 281.5829999999999,
+        "samples": 189
+      },
+      {
+        "frame": {
+          "functionName": "jsonText",
+          "scriptId": "314",
+          "url": "http://127.0.0.1:18765/@fs/<project-root>/packages/music-workbench/src/storage/product-data.ts",
+          "lineNumber": 12,
+          "columnNumber": 24
+        },
+        "selfMs": 190.686,
+        "samples": 129
+      },
+      {
+        "frame": {
+          "functionName": "Ut",
+          "scriptId": "1415",
+          "url": "",
+          "lineNumber": 9,
+          "columnNumber": 109
+        },
+        "selfMs": 145.38599999999994,
+        "samples": 98
+      },
+      {
+        "frame": {
+          "functionName": "postMessage",
+          "scriptId": "5",
+          "url": "chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/content.js",
+          "lineNumber": 37,
+          "columnNumber": 376
+        },
+        "selfMs": 116.40800000000004,
+        "samples": 78
+      },
+      {
+        "frame": {
+          "functionName": "getBoundingClientRect",
+          "scriptId": "0",
+          "url": "",
+          "lineNumber": -1,
+          "columnNumber": -1
+        },
+        "selfMs": 103.71700000000001,
+        "samples": 70
+      },
+      {
+        "frame": {
+          "functionName": "write",
+          "scriptId": "68",
+          "url": "http://127.0.0.1:18765/src/platform/product-storage.ts",
+          "lineNumber": 101,
+          "columnNumber": 8
+        },
+        "selfMs": 81.658,
+        "samples": 55
+      },
+      {
+        "frame": {
+          "functionName": "At",
+          "scriptId": "1415",
+          "url": "",
+          "lineNumber": 9,
+          "columnNumber": 79
+        },
+        "selfMs": 78.926,
+        "samples": 53
+      },
+      {
+        "frame": {
+          "functionName": "$t",
+          "scriptId": "5",
+          "url": "chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/content.js",
+          "lineNumber": 8,
+          "columnNumber": 1293
+        },
+        "selfMs": 64.449,
+        "samples": 43
+      },
+      {
+        "frame": {
+          "functionName": "t",
+          "scriptId": "1415",
+          "url": "",
+          "lineNumber": 10,
+          "columnNumber": 42
+        },
+        "selfMs": 53.931999999999995,
+        "samples": 36
+      },
+      {
+        "frame": {
+          "functionName": "i",
+          "scriptId": "1414",
+          "url": "",
+          "lineNumber": 0,
+          "columnNumber": 252
+        },
+        "selfMs": 50.118,
+        "samples": 34
+      },
+      {
+        "frame": {
+          "functionName": "",
+          "scriptId": "1415",
+          "url": "",
+          "lineNumber": 10,
+          "columnNumber": 378
+        },
+        "selfMs": 48.49700000000001,
+        "samples": 33
+      },
+      {
+        "frame": {
+          "functionName": "postMessage",
+          "scriptId": "0",
+          "url": "",
+          "lineNumber": -1,
+          "columnNumber": -1
+        },
+        "selfMs": 24.943000000000005,
+        "samples": 17
+      },
+      {
+        "frame": {
+          "functionName": "",
+          "scriptId": "312",
+          "url": "http://127.0.0.1:18765/@fs/<project-root>/packages/music-workbench/src/storage/product-generation-store.ts",
+          "lineNumber": 17,
+          "columnNumber": 121
+        },
+        "selfMs": 23.603999999999996,
+        "samples": 16
+      },
+      {
+        "frame": {
+          "functionName": "isRef",
+          "scriptId": "60",
+          "url": "http://127.0.0.1:18765/node_modules/.vite/deps/vue.runtime.esm-bundler-Cm34ddDH.js?v=8970e43b",
+          "lineNumber": 1387,
+          "columnNumber": 14
+        },
+        "selfMs": 12.967999999999998,
+        "samples": 9
+      },
+      {
+        "frame": {
+          "functionName": "",
+          "scriptId": "636",
+          "url": "http://127.0.0.1:18765/@fs/<project-root>/packages/theme-default/src/components/music-sources/QueueTrackRow.vue",
+          "lineNumber": 91,
+          "columnNumber": 30
+        },
+        "selfMs": 11.847999999999999,
+        "samples": 8
+      },
+      {
+        "frame": {
+          "functionName": "t",
+          "scriptId": "1415",
+          "url": "",
+          "lineNumber": 9,
+          "columnNumber": 444
+        },
+        "selfMs": 8.65,
+        "samples": 6
+      },
+      {
+        "frame": {
+          "functionName": "contentGeneration",
+          "scriptId": "685",
+          "url": "http://127.0.0.1:18765/@fs/<project-root>/packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue",
+          "lineNumber": 105,
+          "columnNumber": 28
+        },
+        "selfMs": 7.327,
+        "samples": 5
+      },
+      {
+        "frame": {
+          "functionName": "animate",
+          "scriptId": "0",
+          "url": "",
+          "lineNumber": -1,
+          "columnNumber": -1
+        },
+        "selfMs": 6.417,
+        "samples": 4
+      }
+    ],
+    "interpretation": "Sampled execution is dominated by product JSON validation, checksums, copying and encoding. Source trace links shell preference persistence to full product generation processing. This does not exclude simultaneous renderer cost or justify bypassing persistence safety."
+  },
+  "openIssues": [
+    "80-item candidate sidebar p95/p99 exceeds baseline in this run; repeat and correct before C00 admission.",
+    "10k candidate retains only16 mounted cards but six roughly half-second long tasks remain. Investigate product-generation persistence while preserving atomic generations, validation, stale-writer rejection and namespace isolation."
+  ],
+  "logDirectory": "logs/2026-11-05-virtual-list-implementation"
+}

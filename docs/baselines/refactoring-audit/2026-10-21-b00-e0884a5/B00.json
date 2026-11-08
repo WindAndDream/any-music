@@ -1,0 +1,260 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "runId": "2026-10-21-b00-e0884a5",
+  "batchId": "B00",
+  "runtime": "repository",
+  "completedAt": "2026-10-21T13:44:48+08:00",
+  "scope": {
+    "question": "Can subsequent bounded audits reproduce the actual repository baseline and distinguish declared status, unreviewed implementation and unsupported/pending capabilities?",
+    "allowedPaths": [
+      "AGENTS.md",
+      "root manifests and workspace names",
+      "current worktree metadata/hashes",
+      "audit plan and related index/progress/matrix sections",
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5"
+    ],
+    "exclusions": [
+      "Product-code fixes",
+      "All full historical diffs and broad source scans",
+      "Development servers, product previews, app/browser/emulator launches, screenshots, clicks and live acceptance",
+      "Platform recapture/captureDate changes",
+      "Commit, push, publishing or system associations"
+    ]
+  },
+  "baseline": {
+    "head": "e0884a5189d6ef10a68c3ca054f2d01e84d05acd",
+    "branch": "develop",
+    "snapshot": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/baseline.json",
+    "preExistingDirtyPaths": [
+      "README.en.md",
+      "README.md",
+      "docs/en/README.md",
+      "docs/en/cross-platform/README.md",
+      "docs/zh-cn/文档索引.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+      "docs/zh-cn/跨平台/架构/重构分板块排查计划.md"
+    ]
+  },
+  "declaredStatus": {
+    "claim": "B00 starts the audit; S11-S15 implemented and S16 in progress are documentation claims, not current implementation verdicts.",
+    "reference": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:70"
+  },
+  "criteria": [
+    "C6 reproducible baseline",
+    "C1 repository scope inventory",
+    "C6 separated claims and evidence",
+    "C6 resumable subbatch queue"
+  ],
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "verdictScope": "Baseline/ledger construction only. No shared, Userscript, Tauri, VM, native or mobile implementation has passed acceptance in this run.",
+  "checks": [
+    {
+      "criterion": "C6 reproducible baseline",
+      "result": "pass",
+      "evidence": [
+        "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:72",
+        "baseline.json: git, fileHashes, environment, commands"
+      ],
+      "detail": "HEAD/branch, 8 pre-existing dirty file hashes, unstaged statistics, empty staged delta, manifests/locks and individually logged tool command exit codes captured."
+    },
+    {
+      "criterion": "C1 repository scope inventory",
+      "result": "pass",
+      "evidence": ["pnpm-workspace.yaml:1", "Cargo.toml:1", "baseline.json: workspaceInventory"],
+      "detail": "20 JS/TS projects (2 apps + 18 packages), 6 Cargo members; descendant guide names only. No implementation chain was audited."
+    },
+    {
+      "criterion": "C6 separated claims and evidence",
+      "result": "pass",
+      "evidence": [
+        "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:54",
+        "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md:25",
+        "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:54",
+        "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:28",
+        "summary.json: declaredClaims"
+      ],
+      "detail": "Document declarations, planned implementation audits and currently unsupported/pending exits remain separate. No live/admission evidence is inferred from tool availability or historical reports."
+    },
+    {
+      "criterion": "C6 resumable subbatch queue",
+      "result": "pass",
+      "evidence": [
+        "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:73",
+        "summary.json: batches, commandGroups, nextBatch"
+      ],
+      "detail": "All 22 blocks are listed; B01-B21 remain unreviewed/pending. The single next entry is B01-utils-shared. Candidate scopes, required guides, command prerequisites and handoffs are recorded."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "pass",
+      "evidence": "Baseline commands and scoped document/manifest inventory; exact command exit codes/log paths in baseline.json."
+    },
+    "tests": {
+      "result": "not-run",
+      "reason": "B00 contains no product implementation invariant or product-code changes; target behavioral tests belong to B01-B19 and full gates to B21."
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "No product build/resources were inspected or changed."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "No browser/application/device inspection was requested; B00 does not require live product evidence."
+    },
+    "reportIntegrity": {
+      "result": "pass",
+      "scope": "Report metadata/formatting only; not product behavioral tests.",
+      "checks": [
+        {
+          "command": "node <user-home>\\AppData\\Local\\Temp\\any-music-b00-check-20261021.mjs",
+          "result": "pass",
+          "exitCode": 0,
+          "startedAt": "2026-10-21T13:44:46+08:00",
+          "completedAt": "2026-10-21T13:44:47+08:00",
+          "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\report-integrity.log"
+        },
+        {
+          "command": "pnpm exec oxfmt --check docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5",
+          "result": "pass",
+          "exitCode": 0,
+          "startedAt": "2026-10-21T13:44:47+08:00",
+          "completedAt": "2026-10-21T13:44:48+08:00",
+          "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\format-check.log"
+        }
+      ],
+      "covered": [
+        "Three JSON documents parse",
+        "All 22 unique ordered blocks exist; B01-B21 stay unreviewed/pending",
+        "The single next entry is B01-utils-shared",
+        "Allowed roots, guide references and root-script commands resolve",
+        "Declared evidence line numbers and all four audit index links resolve",
+        "Baseline command exit codes are zero and local logs exist",
+        "HEAD, all recorded hashes, staged state and original dirty paths are preserved",
+        "The audit directory contains exactly three reports; later independent documentation edits/removals are recorded separately; current global status is not assumed frozen"
+      ],
+      "history": [
+        {
+          "command": "node <user-home>\\AppData\\Local\\Temp\\any-music-b00-check-20261021.mjs",
+          "result": "fail",
+          "exitCode": 1,
+          "reason": "Strict global-delta comparison detected independent documentation edits/removals during B00. Captured a separate later observation; kept original snapshot intact. Final checks preserve the original inputs and audit outputs without assuming the entire workspace is frozen.",
+          "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\report-integrity-initial-worktree-evolution.log"
+        },
+        {
+          "command": "pnpm exec oxfmt --check docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5",
+          "result": "fail",
+          "exitCode": 1,
+          "reason": "Generated JSON needed repository formatting; resolved without touching existing files.",
+          "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\format-check-initial.log"
+        }
+      ]
+    }
+  },
+  "findings": [],
+  "findingScope": "No confirmed B00 issue. This does not state that product implementation is defect-free.",
+  "readEvidence": [
+    {
+      "path": "AGENTS.md",
+      "coverage": "root guide"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "coverage": "B00 and sections 1-3/5-7; other block descriptions used solely to plan the queue"
+    },
+    {
+      "path": "package.json",
+      "coverage": "root manifest/scripts"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "coverage": "workspace/catalog/settings; no lockfile body read"
+    },
+    {
+      "path": "Cargo.toml",
+      "coverage": "root workspace/member/toolchain declarations"
+    },
+    {
+      "path": "docs/en/README.md",
+      "coverage": "runtime/index/current-support and audit entry"
+    },
+    {
+      "path": "docs/en/cross-platform/README.md",
+      "coverage": "index/audit entry"
+    },
+    {
+      "path": "docs/zh-cn/文档索引.md",
+      "coverage": "metadata/audit entry and current diff"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/文档索引.md",
+      "coverage": "metadata/audit entry and current diff"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "coverage": "lines 1-31"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+      "coverage": "lines 1-56; claims/matrix scope only, linked historical evidence not opened"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md",
+      "coverage": "lines 1-10 and 26-39; no historical runtime evidence imported"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/project-architecture.md",
+      "coverage": "context read with initial output truncation; no pass relies on unseen content"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "coverage": "architecture context only; implementation not inspected"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/development-workflow.md",
+      "coverage": "workflow context only"
+    },
+    {
+      "path": "<user-home>/.agents/skills/pnpm/SKILL.md",
+      "coverage": "pnpm invocation/configuration guidance"
+    }
+  ],
+  "unreadPaths": [
+    "All apps/packages/crates implementation and tests",
+    "Descendant AGENTS.md contents",
+    "README bodies and plan translation equivalence",
+    "Historical baselines and S00-S14 stage records",
+    "Production dependency/resource graphs, runtime admission hashes and devices"
+  ],
+  "missingEvidence": [
+    "No missing evidence blocks baseline-only B00.",
+    "All product static/tests/artifact/live checks remain pending in their owner batches."
+  ],
+  "dependencies": [],
+  "nextBatch": "B01-utils-shared",
+  "observations": [
+    {
+      "kind": "baseline-evolution",
+      "paths": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/en/desktop/README.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/en/desktop/runtime-architecture.md",
+        "docs/en/desktop/rust-workspace-plan.md",
+        "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "docs/zh-cn/桌面端/后端工程规范.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/桌面端/文档索引.md",
+        "docs/zh-cn/桌面端/运行端架构.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      ],
+      "reference": "baseline.json: git.worktreeObservations",
+      "result": "Recorded separately, including deletions with null current-file hashes. Original 8 changes remain byte-identical; independent edits may continue. No product finding or overwrite."
+    }
+  ]
+}

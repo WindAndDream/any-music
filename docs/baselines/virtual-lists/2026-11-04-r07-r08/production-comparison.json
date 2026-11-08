@@ -1,0 +1,49 @@
+{
+  "baseline": "../2026-11-04-r04-r06/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "method": "Production frontend JS/CSS/Wasm totals; per-file gzip level 9; native executable excluded from payload totals.",
+  "changedBuildSources": [
+    "packages/ui/AGENTS.md",
+    "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+    "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+    "packages/ui/src/composables/focus-availability.ts",
+    "packages/ui/src/composables/use-grid-reorder.ts",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-grid-move-transition.ts",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-item-retention.ts"
+  ],
+  "runtimeResults": [
+    {
+      "runtime": "userscript",
+      "payloadBytesDelta": 4241,
+      "payloadGzipBytesDelta": 832,
+      "audits": [
+        {
+          "path": "apps/userscript/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false,
+          "virtualGridMotionPresent": false
+        },
+        {
+          "path": "apps/userscript/dist/userscript-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false,
+          "virtualGridMotionPresent": false
+        }
+      ]
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytesDelta": 2140,
+      "payloadGzipBytesDelta": 589,
+      "audits": [
+        {
+          "path": "apps/tauri/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false,
+          "virtualGridMotionPresent": false
+        }
+      ]
+    }
+  ],
+  "limits": "Shared keyboard/lifecycle changes also enter nonvirtual consumers. Production lists retain existing rendering. Combined dirty-workspace deltas are not isolated feature cost, native parity or frame-time evidence."
+}

@@ -1,0 +1,57 @@
+
+> any-music@0.0.0 build <project-root>
+> pnpm build:prod
+
+
+> any-music@0.0.0 build:prod <project-root>
+> pnpm typecheck && pnpm -r --if-present run build:prod
+
+
+> any-music@0.0.0 typecheck <project-root>
+> pnpm -r --if-present run typecheck
+
+Scope: 21 of 22 workspace projects
+packages/audio-composition typecheck$ tsc --noEmit -p tsconfig.json
+packages/network-routing typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-sdk typecheck$ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json
+packages/utils typecheck$ tsc --noEmit -p tsconfig.json
+packages/utils typecheck: Done
+packages/network-routing typecheck: Done
+packages/audio-composition typecheck: Done
+packages/plugin-sdk typecheck: Done
+packages/account-pool typecheck$ tsc --noEmit -p tsconfig.json
+packages/core typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-vm typecheck$ tsc --noEmit -p tsconfig.json
+packages/core typecheck: Done
+packages/account-pool typecheck: Done
+packages/plugin-vm typecheck: Done
+packages/plugin-center typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-sandbox-browser typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-testkit typecheck$ tsc --noEmit -p tsconfig.json
+packages/ui typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-center typecheck: Done
+packages/plugin-sandbox-browser typecheck: Done
+packages/plugin-testkit typecheck: Done
+packages/ui typecheck: Done
+packages/plugin-music-creation typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-bilibili typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-cli typecheck$ node --check src/cli.mjs && node --check src/project.mjs && node --check src/package.mjs
+packages/plugin-source-douyin typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-cli typecheck: Done
+packages/plugin-tag-management typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-bilibili typecheck: Done
+packages/plugin-ui-vue typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-douyin typecheck: Done
+packages/theme-default typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-music-creation typecheck: Done
+packages/plugin-tag-management typecheck: Done
+packages/plugin-ui-vue typecheck: Done
+packages/theme-default typecheck: test/components/shell/ClassicRoot.test.ts(31,19): error TS2352: Conversion of type '{ catalog: DefineComponent<{ $props: { feature: UiThemeFeature<UiThemeTrackListState & { sources: readonly (MusicSourceDescriptor & { enabled: boolean; })[]; ... 5 more ...; activeDrawerId: string | null; }, UiThemeTrackListActions & { ...; }>; }; $slots: Readonly<...>; }, ... 18 more ..., any>; overlays: DefineComp...' to type 'UiThemeViews' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+packages/theme-default typecheck:   Type '{ catalog: DefineComponent<{ $props: { feature: UiThemeFeature<UiThemeTrackListState & { sources: readonly (MusicSourceDescriptor & { enabled: boolean; })[]; sourceId: string; ... 4 more ...; activeDrawerId: string | null; }, UiThemeTrackListActions & { ...; }>; }; $slots: Readonly<...>; }, ... 18 more ..., any>; ov...' is missing the following properties from type '{ readonly shell: UiThemeComponent<{ feature: UiThemeFeature<{ activeViewId: ProductViewId; destinations: readonly ProductDestination[]; hidden: boolean; description?: string | undefined; presentation?: "overlay" | ... 1 more ... | undefined; canHide?: boolean | undefined; resolvedTheme?: "light" | ... 1 more ... | ...': queue, favorites, playlists, "custom-tracks", and 4 more.
+packages/theme-default typecheck: Failed
+<project-root>\packages\theme-default:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/theme-default@0.0.0 typecheck: `vue-tsc --noEmit -p tsconfig.json`
+Exit status 2
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.

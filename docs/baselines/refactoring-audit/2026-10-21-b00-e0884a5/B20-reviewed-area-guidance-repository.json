@@ -1,0 +1,398 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B20-reviewed-area-guidance-repository",
+  "parentBatch": "B20",
+  "candidate": "B20-reviewed-area-guidance",
+  "runtime": "repository",
+  "startedAt": "2026-10-21T15:52:23.566Z",
+  "completedAt": "2026-10-22T03:35:12.918Z",
+  "timezone": "Asia/Shanghai",
+  "scope": "One repository guidance invariant: the shared package/source/workflow guides and source-adapter playback reference used by previously reviewed areas must direct future work to current owners and contracts. Include only the two conflicting acquisition/DEV paragraphs in the directly referenced accepted design.",
+  "criteria": [
+    "C1: current package/native ownership without previous-architecture instructions",
+    "C5: acquisition and DEV guidance preserves native authority and fresh approval",
+    "C6: English agent/skill guidance and precise runtime/capture boundaries",
+    "C6: targeted metadata/counterpart/index/local-link integrity",
+    "C6: distinguish maintained current guides from historical stage evidence"
+  ],
+  "baseline": {
+    "reference": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository-baseline.json",
+    "head": "a693165205be0bc321764768d796d7c842f7a446",
+    "initialWorkingTree": "See baseline. All pre-existing unrelated modifications were retained.",
+    "resumedAt": "2026-10-22T03:35:12.918Z",
+    "resumedHead": "a693165205be0bc321764768d796d7c842f7a446",
+    "otherRelevantChangesSinceStart": [],
+    "finalHashes": {
+      ".agents/skills/any-music-tauri-runtime/SKILL.md": "1eb5c2a442dba52f39f8d8443b7884caa1c5f2cf792778669566d13f93006b86",
+      ".agents/skills/any-music-ui-delivery/SKILL.md": "aef43e7cbd6b1e870d190d3291df13253a2216a73fa118dbbc1ec012812c5411",
+      ".agents/skills/any-music-userscript-runtime/SKILL.md": "cbc5ebb0db3444fcecc35c6a75859188e44616c946578ff9db72084930169bc7",
+      ".agents/skills/bilibili-contract-capture/SKILL.md": "d609324327797f20397ff8329d25119a1717ea04ae5aa6a15ce04139950db38e",
+      ".agents/skills/douyin-contract-capture/SKILL.md": "7b1741231737d0d3da250dcf4728b6fc5841c4342b9b8580348f51fb6588d7ca",
+      ".agents/skills/music-source-adapter/SKILL.md": "8ad57139d36b4bbeb41e43d8a1f93b48e637ce79e2c2e4346520867d5413357a",
+      ".agents/skills/music-source-adapter/references/playback.md": "6cbb6f41e6ff8b0a841c77648d671536463d4c070650f14086e09262509c912c",
+      "AGENTS.md": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177",
+      "README.en.md": "766cfa404aca9480cec6087791162eaf9c80662835da0a09731fddbd9b62482b",
+      "README.md": "5570da4f2cde2fd9edc044e47260dd11d33b4fb55ec30522fab1310d169df949",
+      "apps/tauri/AGENTS.md": "b824b3579a0783c66ef8feeed8d235e4303167486fbeec46a980fb57d95518fa",
+      "apps/tauri/src-tauri/AGENTS.md": "84aca77100c43018f388b0d4e9d139f79c6e9aed82ae1a40cb7ffa072a90259e",
+      "apps/userscript/AGENTS.md": "729a9c32a4a1fa26c258eef53fc5ef36603bb142916909b2066c69d338ffcad6",
+      "crates/AGENTS.md": "aec1b1d8587da76c626726f0b50328a54d80ff8524812775f6d6c2116782274b",
+      "crates/am-plugin-net/AGENTS.md": "02c57a4c20212d27cf1469f9c8e9f752ff22b23172b82e946b6bf9069e1d2315",
+      "crates/am-plugin-package/AGENTS.md": "ead2f09150ce3a9a35f7ff2eeb619eb3e770a2e2c6c5d93e2fed4d57b44d69d3",
+      "crates/am-plugin-runtime/AGENTS.md": "e7aeb9661794336f1245bbfb48e11a32c812227aa5fa7d63970b64f12a8f6af6",
+      "docs/en/README.md": "688d7d435ff42125f26b881e485794e65ac46fcdb5ccd554fb539f973b42a718",
+      "docs/en/cross-platform/README.md": "7dab1c9c058497158d8a5521f46ceb01aafbf7cf4c9a7623596d43e394241ee4",
+      "docs/en/cross-platform/architecture/development-workflow.md": "401f8c86d2052ee8e0163a055547bbf4b9d8935fb2fec88a864d9376ca5fa665",
+      "docs/en/cross-platform/architecture/music-source-plugin-architecture.md": "c279a1b3c30a3d268f500ab821f864543418666d342e417544bcbe34beeb4295",
+      "docs/en/cross-platform/architecture/plugin-data-ownership.md": "458b12a606d451b8406411ddde06ab275f83e6574c7abd0678f2566951a5c3ab",
+      "docs/en/cross-platform/architecture/plugin-runtime-policy.md": "ac92d44971638b61052dfb6414a217097b0d940408408050ac3df0e590331ede",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md": "92057bc53462c68225e21e3000c58be3675f2db4de53104b910f99bccb77e9eb",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md": "d12f8e600298b66e3dbb416706ff7094b2f79eabaa5a04d91174348eb7adc6d6",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md": "070a7aba69c2dccc9c6d3c9794b9cf966259f6c31c90217093d634fb8ee4ea5f",
+      "docs/en/cross-platform/architecture/project-architecture.md": "865beeb0a89911cc969a5962537d348fde83292cffb11c26c103da5ce6f83498",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md": "721f0ce639f76bf3059fcb62977a318f5e6012b6f4d42997b7d589386b8dbf71",
+      "docs/en/cross-platform/platforms/bilibili/web-api-contract.md": "693ed8d1a2db0a6d90458c6e5b72e614aa2995f8851dd29c12411548cc8b17f7",
+      "docs/en/cross-platform/platforms/douyin/web-api-contract.md": "7fb51d60ea4aa3bef35c566cb13f9df38c980a6a549777bd01feadab052c9e20",
+      "docs/zh-cn/文档索引.md": "2cc2b0b60dc35a90f79da0a6e94fe3a52cf57fc2ce4babffd57e63ac18aca830",
+      "docs/zh-cn/跨平台/平台接口/哔哩哔哩/网页接口契约.md": "1b9e27e36c64cb9b95a785b2e22e58768f2439e59f31f43945fb5a3df2d6b6ef",
+      "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md": "b6d5099c3c7970e259d6f5feec5bceacfe81d37bbd825b42302b28c29d9c71a8",
+      "docs/zh-cn/跨平台/文档索引.md": "d2d3c4c9e8c662eb328d1ba2676dd75766c14ae70b38e04db6a8861b89bcda14",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md": "2708ee039f1d66816076326e4750e8530df0b46210ca74c6e2200404b92e323b",
+      "docs/zh-cn/跨平台/架构/开发工作流.md": "470cc547fa6e6f24b393061410c4dbfaff33727573f42b91f92161ee8e908f87",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md": "861f442fcb585df7f07f61190570f36df27aacd3ef90b7cf6cbcbd4676136c13",
+      "docs/zh-cn/跨平台/架构/音乐源插件架构.md": "f2629707e966e99ffac5bbcc6e6cdaa301bc20e8adc3577d02bb6abef87608a4",
+      "docs/zh-cn/跨平台/架构/项目架构.md": "c7159601c133fc8434dc37f02ed3382abd3846b49dbd063d34dba93b7735073c",
+      "packages/account-pool/AGENTS.md": "25d94f4a90822641e50c82089f6cb982fe59c243f0cc74ae5657edd54fa5566c",
+      "packages/audio-composition/AGENTS.md": "32b9a85952c9a58513ada4afc83930ec6181fdc091df4e20b78d6ea782e23fbc",
+      "packages/core/AGENTS.md": "1ee3bb17f954e71a8550de9b6dc72a0d9b5931a83866f4bd8afbf38f6ebb93af",
+      "packages/core/src/music-source/plugin.ts": "c594d641189504e8dade3fd9411e47cb86fc4cc8a36170b61d733dc22b545c86",
+      "packages/music-workbench/AGENTS.md": "1c73c5188fabf882082e7e2d08dfa7fe3f0abb03e5d926b11f96a203525c7d8f",
+      "packages/music-workbench/src/media/resolved-media-loader.ts": "9ecad045ef893ec3f9c804e04132853f2efefef9406049914c0816fb601ba0fe",
+      "packages/network-routing/AGENTS.md": "7697d7cd71999b6f477842d5925bab46b3cdb6bc809f749da9c6a49715e506b0",
+      "packages/plugin-center/AGENTS.md": "9da312e706600d97d1994e21ebd7cc0aaa3c38002990171b33c9b7db3a93d973",
+      "packages/plugin-center/package.json": "739a12bd6b5044b13c4a8e8a62d92d9959ce73be30e474b8f666c95969072df2",
+      "packages/plugin-cli/AGENTS.md": "cd0ab701715ae2922d7b16abe33510c757c5c79cbb118142fdcd2c03cd093f19",
+      "packages/plugin-music-creation/AGENTS.md": "ea1ca33e8a7f05108fdf172b846fc892dbd88c1af278f4716b8d3b93d93e02cd",
+      "packages/plugin-sandbox-browser/AGENTS.md": "9e08dbb822f97493eca7cc5f2686298763719ee472da9b0d32c00b3aa05b37c2",
+      "packages/plugin-sdk/AGENTS.md": "30bfd9cc8e49eee9d5c0b2f2779eda995c4ce3d0abfd0ec1893d2b79b6d7f76d",
+      "packages/plugin-source-bilibili/AGENTS.md": "b7c0e59fdb5fddf39de456603c4e9c8c4c1fcad40bf715d1c1069c5870d4f42b",
+      "packages/plugin-source-douyin/AGENTS.md": "4cf5dbdf739940709bdb43316065a342738e9e0168fc32842d6608d5c2804384",
+      "packages/plugin-tag-management/AGENTS.md": "df2d590de2defd1755651b248caa1e388fb28fceedb9dc4954f8c6f363ea511f",
+      "packages/plugin-testkit/AGENTS.md": "0534e908166ad8d771e46cd22b47031323412df66abb5b7e65d32266280ec704",
+      "packages/plugin-ui-vue/AGENTS.md": "d7c5ffe3fa6062f6845d14d180a715980adcf97bb3d3d631aba31ce74edc7b91",
+      "packages/plugin-vm/AGENTS.md": "7dbe141b141eda2ae0020820a76f3452f642c13e746e2b3d935899f76b949078",
+      "packages/ui/AGENTS.md": "1d38b0d9f79324421f4b0b787732f12662580ba4c19179c6e0cb593e0d79dc2e",
+      "packages/utils/AGENTS.md": "41c2cb4dedc4a6c55173df272208939374ec4191b0ecec17e1fd4038be3a2f73",
+      "scripts/check-package-boundaries.mjs": "18c11924b7b99c9486cbcaf0643f9aff1612f877dbab6ef7689ef57410ca442f",
+      "scripts/check-plugin-isolation.mjs": "f9b319f3c7b00246b743883f2332010517f582b114337a9d5bacf9999944f7a4",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md": "cb10bdda2c7e28a46fd8b15da53c5b3426ca3834d672e311cdd997add36ad26a"
+    }
+  },
+  "declaredStatus": {
+    "claim": "Current implementation is the product baseline; S11-S15 implemented and S16 in progress are declarations, not a fresh architecture/runtime acceptance result.",
+    "references": [
+      "AGENTS.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md:8",
+      "docs/en/cross-platform/architecture/plugin-runtime-policy.md:14"
+    ],
+    "limits": "No status promotion for other batches, exact native target admission, mobile or live behavior."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "not-applicable",
+    "artifact": "not-run",
+    "live": "not-applicable"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "evidence": [
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md:62",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md:78",
+        "docs/zh-cn/跨平台/架构/可复用包边界.md:63",
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:176",
+        "docs/zh-cn/跨平台/架构/音乐源插件架构.md:182"
+      ],
+      "detail": "Updated maintained owners/exports/storage wording against current root and crate guides and the plugin-center manifest. Boundary checker passes; this is not an independent re-audit of crate behavior."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "evidence": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md:752",
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md:840",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md:954",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md:1052"
+      ],
+      "detail": "Corrected the two conflicting design paragraphs against root/S15 rules; native runtime and Windows DEV acceptance remain owned by B14/B17/B18."
+    },
+    {
+      "criterion": "C6-language-and-skills",
+      "result": "pass",
+      "evidence": [
+        "AGENTS.md",
+        ".agents/skills/music-source-adapter/SKILL.md",
+        ".agents/skills/music-source-adapter/references/playback.md"
+      ],
+      "detail": "26 guide files and seven skill/reference files retain English primary content; no Han matches in that structural set. Six skill names/descriptions and folder names validate mechanically. Descriptions/triggers are unchanged; actual model-selection evals were not run."
+    },
+    {
+      "criterion": "C6-metadata-counterparts-links",
+      "result": "pass",
+      "evidence": ["<user-home>/AppData/Local/Temp/any-music-b20-20261021/checks-after.json"],
+      "detail": "18 selected docs, 6 reciprocal locale pairs, 368 local links and 9 heading anchors pass. runtimeScope/documentType and paired metadata match. Four platform contract files retain byte-identical contents and captureDate. No files moved, so existing index destinations remain valid."
+    },
+    {
+      "criterion": "C6-historical-evidence",
+      "result": "pass",
+      "evidence": [
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md:16",
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:178",
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:182"
+      ],
+      "detail": "S05/S09 historical artifacts remain unchanged. Current implementation/support documents retain current authority; only labels/destinations and selected stale guidance changed."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B20-G01",
+      "severity": "P2",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Following the maintained package boundary table or migration instructions after S11-S15 extraction.",
+      "effect": "The guide still deferred native crate extraction and instructed retaining old exports/snapshots and a manifest archive, contradicting current ownership and the unreleased-product rule.",
+      "repair": "Describe the five existing native crates and concrete Tauri adapters, current host/namespace data and .amplugin storage, current MusicSourcePlugin contract and direct source composition in both locales.",
+      "evidence": [
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md:62",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md:78",
+        "docs/zh-cn/跨平台/架构/可复用包边界.md:63"
+      ]
+    },
+    {
+      "id": "B20-G02",
+      "severity": "P2",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Following the English source architecture after the old music-sources package and /declarative entry were removed.",
+      "effect": "The English guide kept forwarding entries until S16 and treated /declarative as trusted infrastructure, while its Chinese counterpart described direct composition.",
+      "repair": "Synchronize direct plugin-source-* composition, descriptor preflight and current availability/runtime-policy wording in both locales.",
+      "evidence": [
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:176",
+        "docs/zh-cn/跨平台/架构/音乐源插件架构.md:182"
+      ]
+    },
+    {
+      "id": "B20-G03",
+      "severity": "P3",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Using the development workflow or playback skill reference for a new source/media change.",
+      "effect": "The naming rule still routed DTOs through the removed declarative interpreter, and the playback reference made complete-binary depend on an old declarative manifest.",
+      "repair": "Keep upstream DTOs in source/runtime bridges and versioned SDK names at trusted adapters. Preserve the supported session-only core complete-binary result and prefetch exclusion without referencing an old JSON interpreter.",
+      "evidence": [
+        "docs/en/cross-platform/architecture/development-workflow.md:21",
+        "docs/zh-cn/跨平台/架构/开发工作流.md:21",
+        ".agents/skills/music-source-adapter/references/playback.md:7",
+        "packages/core/src/music-source/plugin.ts:165"
+      ]
+    },
+    {
+      "id": "B20-G04",
+      "severity": "P3",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Opening a maintained guide link labelled as a historical S05/S09/S10 stage record.",
+      "effect": "S05/S09 links pointed to the same maintained page and S10 labelled current policy as historical evidence, obscuring evidence age and scope.",
+      "repair": "Link S05/S09 to the retained historical check artifacts and label current runtime policy directly; do not change historical artifacts or infer fresh live acceptance.",
+      "evidence": [
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md:16",
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:178",
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:182"
+      ]
+    },
+    {
+      "id": "B20-G05",
+      "severity": "P2",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Implementing source acquisition or DEV reload from the directly referenced accepted design baseline.",
+      "effect": "Two design paragraphs still prescribed a standalone source JSON compatibility importer and reuse of DEV consent for unchanged scope, contradicting the root guide and S15 current rules.",
+      "repair": "Update only the two corresponding paragraphs in each locale: .amplugin verification/native consent, fresh native approval and higher permission epoch for every DEV reload. Preserve the existing accepted status and all upgrade/rollback/crash-recovery contracts.",
+      "evidence": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md:752",
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md:840",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md:954",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md:1052"
+      ]
+    }
+  ],
+  "openFindingIds": [],
+  "changedFiles": [
+    "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+    "docs/zh-cn/跨平台/架构/可复用包边界.md",
+    "docs/en/cross-platform/architecture/development-workflow.md",
+    "docs/zh-cn/跨平台/架构/开发工作流.md",
+    "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+    "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+    "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+    ".agents/skills/music-source-adapter/references/playback.md"
+  ],
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node <user-home>/AppData/Local/Temp/any-music-b20-20261021/audit-guidance.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T03:30:58.284Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-20261021/references.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node scripts/check-package-boundaries.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T03:35:12.918Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-20261021/boundaries-final.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node scripts/check-plugin-isolation.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T03:35:12.918Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-20261021/isolation-final.log",
+      "limits": "Offline command registry/ACL checks only; command counts do not define current product or live admission."
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm exec oxfmt --check docs/en/cross-platform/architecture/reusable-package-boundaries.md docs/zh-cn/跨平台/架构/可复用包边界.md docs/en/cross-platform/architecture/development-workflow.md docs/zh-cn/跨平台/架构/开发工作流.md docs/en/cross-platform/architecture/music-source-plugin-architecture.md docs/zh-cn/跨平台/架构/音乐源插件架构.md docs/en/cross-platform/architecture/plugin-system-redesign-plan.md docs/zh-cn/跨平台/架构/插件系统重构计划.md .agents/skills/music-source-adapter/references/playback.md",
+      "exitCode": 0,
+      "time": "2026-10-22T03:35:12.918Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-20261021/format-documents-final.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "git diff --check -- docs/en/cross-platform/architecture/reusable-package-boundaries.md docs/zh-cn/跨平台/架构/可复用包边界.md docs/en/cross-platform/architecture/development-workflow.md docs/zh-cn/跨平台/架构/开发工作流.md docs/en/cross-platform/architecture/music-source-plugin-architecture.md docs/zh-cn/跨平台/架构/音乐源插件架构.md docs/en/cross-platform/architecture/plugin-system-redesign-plan.md docs/zh-cn/跨平台/架构/插件系统重构计划.md .agents/skills/music-source-adapter/references/playback.md",
+      "exitCode": 0,
+      "time": "2026-10-22T03:35:12.918Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-20261021/diff-check.log"
+    },
+    {
+      "level": "static",
+      "result": "blocked",
+      "command": "python <user-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py .agents/skills/music-source-adapter",
+      "exitCode": 1,
+      "time": "2026-10-21T15:54:35Z",
+      "reason": "ModuleNotFoundError: No module named 'yaml'",
+      "substitute": "The local Node checker validates skill frontmatter names/descriptions/folder names and links. Only the existing playback reference changed; no skill entry frontmatter or trigger was changed.",
+      "limits": "The Python validator and actual agent-selection evals are not recorded as passing."
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm exec oxfmt --check <nine changed guide/skill files plus this report, its baseline and summary.json>",
+      "exactTargets": [
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+        "docs/zh-cn/跨平台/架构/可复用包边界.md",
+        "docs/en/cross-platform/architecture/development-workflow.md",
+        "docs/zh-cn/跨平台/架构/开发工作流.md",
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+        "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+        ".agents/skills/music-source-adapter/references/playback.md",
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json",
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository-baseline.json",
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json"
+      ],
+      "exitCode": 0,
+      "time": "2026-10-22T03:37:04.176Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-20261021/format-all-final.log",
+      "detail": "All 12 files pass."
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "Local Node report/ledger/hash/evidence-location assertions",
+      "exitCode": 0,
+      "time": "2026-10-22T03:37:04.178Z",
+      "detail": "Five findings resolved, three B20 candidates still pending, report and ledger agree, all source/document evidence hashes and line references match."
+    }
+  ],
+  "readScope": {
+    "contentReviewed": [
+      "Root AGENTS and selected crate ownership rules",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md and Chinese counterpart",
+      "docs/en/cross-platform/architecture/development-workflow.md naming/maintenance rules and counterpart changed rule",
+      "docs/en/cross-platform/architecture/music-source-plugin-architecture.md descriptor/S09/current-policy sections and Chinese counterparts",
+      "Source adapter skill and playback reference",
+      "Accepted design: acquisition/DEV paragraphs only"
+    ],
+    "structuralOnly": [
+      "Other owner AGENTS/skills in the baseline inventory",
+      "Selected project/status/index/root README counterparts and links"
+    ],
+    "supportingImplementationExcerpts": [
+      "packages/core/src/music-source/plugin.ts:133-178",
+      "packages/music-workbench/src/media/resolved-media-loader.ts:1-69",
+      "packages/plugin-center/package.json"
+    ],
+    "limits": "The retained type/credential/comment names in supporting product excerpts are not evidence for deleting a compatibility path; product logic was not modified."
+  },
+  "unreadPaths": [
+    "Other maintained desktop/runtime/account guides (next candidate)",
+    "Complete accepted-design body outside the two patched paragraphs",
+    "Complete S00-S16 historical record bodies and all device/channel acceptance",
+    "Repository-wide document metadata/counterpart/index coverage outside the selected structural set",
+    "Old source JSON/compatibility-package/duplicate-IPC semantic reachability and full moved-test/fixture/generated-output ownership (targeted legacy candidate)"
+  ],
+  "missingEvidence": [
+    "Optional Python skill validator needs PyYAML; actual skill-selection evals not run",
+    "Product tests/builds and native gates were not rerun for documentation-only edits; this does not refresh other batches",
+    "No runtime/browser/emulator/live capture was authorized or performed"
+  ],
+  "dependencies": [
+    "Existing B01-B18 scoped reports informed guide ownership; their unresolved or unreviewed areas remain unchanged",
+    "B19 reports/other native and S15 worktree edits appeared during the resumed session; they were preserved and were not silently accepted"
+  ],
+  "remainingSubbatches": [
+    "B20-ownership-status-scope",
+    "B20-bilingual-counterparts-indexes",
+    "B20-targeted-legacy-check"
+  ],
+  "nextBatch": {
+    "batchId": "B20-ownership-status-scope-repository",
+    "candidate": "B20-ownership-status-scope",
+    "parentBatch": "B20",
+    "runtime": "repository",
+    "status": "pending",
+    "question": "Do the maintained desktop runtime guide and its directly referenced progress/support statements match the audited native ownership and explicit evidence limits?",
+    "allowedPaths": [
+      "docs/en/desktop/runtime-architecture.md",
+      "docs/zh-cn/桌面端/运行端架构.md",
+      "AGENTS.md",
+      ".agents/skills/any-music-tauri-runtime/SKILL.md",
+      "Only necessary implementation-status/S15 and existing B12/B14/B18/B19 report excerpts"
+    ],
+    "exclusions": [
+      "Product fixes or runtime re-audit",
+      "Full historical stages or S16 body review",
+      "UI/browser/emulator work, recapture, commit or push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "docs/en/cross-platform/architecture/development-workflow.md",
+      "docs/en/cross-platform/architecture/refactoring-audit-plan.md (sections 2/3/5 and B20 only)"
+    ],
+    "continuation": "Reuse docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json after checking hashes. This batch closes only reviewed-area guidance. Continue one desktop-guide ownership/status/scope chain; retain separate full counterpart/index and targeted legacy candidates. Do not infer live/native acceptance from documentation or static scripts."
+  },
+  "handoff": "B20-reviewed-area-guidance-repository：以 a693165 和初始工作区哈希为基线，完成已审共享板块的维护指南子批次。五类问题已原位修复：包/原生职责仍写未来迁移、英文来源指南保留已删转发入口、开发规则及播放技能指向旧解释器、阶段记录自链及历史/当前标签混用、设计基线仍要求 JSON 兼容导入和 DEV 沿用同意。双语同步，保留 complete-binary、当前升级/回退/恢复及真实 captureDate。18 份文档、6 组对应页、26 份指南、7 个技能文件的结构检查通过；368 个本地链接、格式、依赖边界及 IPC 静态检查通过。Python 技能校验器缺 PyYAML，未记通过。本子批次 conformant/pass-scoped；B20 整体仍未验收。下一批唯一入口为 B20-ownership-status-scope-repository，从桌面运行端架构指南开始；全仓对应页/索引、遗留可达性和运行验收仍分别待查。"
+}

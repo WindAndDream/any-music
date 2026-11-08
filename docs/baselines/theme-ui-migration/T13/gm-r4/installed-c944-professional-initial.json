@@ -1,0 +1,806 @@
+{
+  "observations": [
+    {
+      "label": "installed-initial",
+      "at": "2026-10-27T09:06:48.256Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 2181,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-native-pagedown-long-scroll",
+      "at": "2026-10-27T09:06:53.583Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "label": "全部 11" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 1489.7142333984375,
+          "height": 592,
+          "total": 2181,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-long-scroll-settled-before-switch",
+      "at": "2026-10-27T09:06:57.757Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "label": "关闭" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 1489.7142333984375,
+          "height": 592,
+          "total": 2181,
+          "width": 847,
+          "totalWidth": 847
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 213,
+          "totalWidth": 213
+        },
+        {
+          "key": "settings:appearance",
+          "top": 0,
+          "height": 635,
+          "total": 635,
+          "width": 665,
+          "totalWidth": 665
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 885.1428833007812, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-nested-theme-picker-escape",
+      "at": "2026-10-27T09:07:02.916Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "label": "界面主题：经典" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 1489.7142333984375,
+          "height": 592,
+          "total": 2181,
+          "width": 847,
+          "totalWidth": 847
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 213,
+          "totalWidth": 213
+        },
+        {
+          "key": "settings:appearance",
+          "top": 0,
+          "height": 635,
+          "total": 635,
+          "width": 665,
+          "totalWidth": 665
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 885.1428833007812, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-after-classic-long-scroll",
+      "at": "2026-10-27T09:07:07.076Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "label": "关闭" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 274.8571472167969,
+          "height": 757,
+          "total": 1032,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 416,
+          "total": 416,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 918.2857666015625, "height": 707.0714721679688 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-scroll-and-settings-close-settled",
+      "at": "2026-10-27T09:07:20.881Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "settings:open", "label": "打开全局设置" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 274.8571472167969,
+          "height": 757,
+          "total": 1032,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 416,
+          "total": 416,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-queue",
+      "at": "2026-10-27T09:07:28.368Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:queue", "label": "待听" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 150.2857208251953,
+          "height": 757,
+          "total": 907,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 634,
+          "total": 634,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-favorites",
+      "at": "2026-10-27T09:07:28.880Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:favorites", "label": "我的喜欢" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 150.2857208251953,
+          "height": 757,
+          "total": 932,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 428,
+          "total": 428,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-playlists",
+      "at": "2026-10-27T09:07:29.340Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:playlists", "label": "我的歌单" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-custom",
+      "at": "2026-10-27T09:07:29.993Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:custom-tracks", "label": "自定义音乐" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 640,
+          "totalWidth": 640
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-tags",
+      "at": "2026-10-27T09:07:30.601Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:tags", "label": "标签管理" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-composer",
+      "at": "2026-10-27T09:07:31.360Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:composer", "label": "片段创作" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 1187,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-downloads",
+      "at": "2026-10-27T09:07:32.195Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:downloads", "label": "下载" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-history",
+      "at": "2026-10-27T09:07:32.976Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:history", "label": "播放历史" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 2142,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-installed-page-plugins",
+      "at": "2026-10-27T09:07:33.748Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "navigation:plugins", "label": "插件中心" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-professional-drafts-after-switch",
+      "at": "2026-10-27T09:08:16.535Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "settings:open", "label": "打开全局设置" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    }
+  ],
+  "professional": [
+    {
+      "sample": {
+        "label": "classic-professional-drafts-after-switch",
+        "at": "2026-10-27T09:08:16.535Z",
+        "viewport": {
+          "width": 950,
+          "height": 900,
+          "dpr": 1.0000000447034836,
+          "touch": 10,
+          "dark": false,
+          "reduced": true
+        },
+        "theme": "default",
+        "resolved": "light",
+        "focus": { "tag": "BUTTON", "key": "settings:open", "label": "打开全局设置" },
+        "audio": {
+          "count": 1,
+          "sameReference": true,
+          "paused": true,
+          "hasSource": false,
+          "time": 0
+        },
+        "scroll": [
+          {
+            "key": "workspace",
+            "top": 0,
+            "height": 648,
+            "total": 648,
+            "width": 847,
+            "totalWidth": 847
+          }
+        ],
+        "dialogs": [],
+        "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+        "hostStyleCount": 1,
+        "themeRootCount": 1
+      },
+      "fields": [
+        { "label": "新素材合集名称", "value": "GM-R4 未创建合集" },
+        { "label": "搜索歌曲、作者或标签", "value": "GM-R4 素材草稿" },
+        { "label": "自定义歌曲名称", "value": "GM-R4 未发布作品" }
+      ]
+    }
+  ]
+}

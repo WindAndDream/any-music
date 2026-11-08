@@ -1,0 +1,59 @@
+{
+  "baseline": "../2026-11-03-p08/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "method": "Compare production frontend JS/CSS/Wasm raw totals and per-file gzip level 9 sums. Native executable excluded from frontend size totals.",
+  "changedBuildSourcesSinceP08": [
+    "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+    "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+    "packages/ui/src/composables/virtual-scroll/use-fixed-virtual-list.ts",
+    "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts",
+    "packages/ui/src/composables/virtual-scroll/use-measured-virtual-list.ts",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-grid-css-layout.ts",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-item-retention.ts",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-anchor.ts",
+    "packages/ui/src/composables/virtual-scroll/virtual-list-geometry.ts",
+    "packages/ui/src/composables/virtual-scroll/virtual-retained-range.ts",
+    "packages/ui/src/virtual-scroll.ts"
+  ],
+  "runtimeResults": [
+    {
+      "runtime": "userscript",
+      "payloadBytesDelta": 1219,
+      "payloadGzipBytesDelta": 133,
+      "audits": [
+        {
+          "path": "apps/userscript/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "gridStyleOrSfcEntries": [
+            "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue?vue&type=style&index=0&scoped=0b64f2ed&inline&lang.css",
+            "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=style&index=0&scoped=dc9e5970&inline&lang.css"
+          ]
+        },
+        {
+          "path": "apps/userscript/dist/userscript-build-audit.json",
+          "virtualizerPresent": false,
+          "gridStyleOrSfcEntries": [
+            "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+            "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue"
+          ]
+        }
+      ]
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytesDelta": 1214,
+      "payloadGzipBytesDelta": 153,
+      "audits": [
+        {
+          "path": "apps/tauri/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "gridStyleOrSfcEntries": [
+            "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue?vue&type=style&index=0&scoped=0b64f2ed&inline&lang.css",
+            "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=style&index=0&scoped=dc9e5970&inline&lang.css"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "No production list renderer consumes the virtualizer yet. New UI SFC styles are included by the existing build-known style collector even without component rendering. These are combined build deltas; no browser/layout/frame benefit or native runtime acceptance is implied."
+}

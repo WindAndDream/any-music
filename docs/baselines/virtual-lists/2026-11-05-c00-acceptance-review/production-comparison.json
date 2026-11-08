@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-05",
+  "reference": "2026-11-05-c00-live-admission",
+  "head": "eacf1bbfb0155ce73fefc7db4396a7988c86ac4a",
+  "sourceDigest": "af071b1f1acbf9654b84488576cdc583b8f09ffe80e62327da79ba75c7bd30f3",
+  "limits": "Actual frontend artifacts, whole dirty workspace. Per-file gzip sums are not transferred payload. Does not accept native installer or predict frame performance.",
+  "comparisons": [
+    {
+      "runtime": "userscript",
+      "rawDeltaBytes": 298,
+      "gzipDeltaBytes": 54,
+      "currentRawBytes": 5927878,
+      "currentGzipBytes": 1151478
+    },
+    {
+      "runtime": "tauri",
+      "rawDeltaBytes": 187,
+      "gzipDeltaBytes": 29,
+      "currentRawBytes": 3672381,
+      "currentGzipBytes": 884530
+    }
+  ]
+}

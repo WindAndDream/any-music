@@ -1,0 +1,3341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:any-music:plugin:protocol:1",
+  "title": "PluginProtocol",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/LocalizedText"
+    },
+    {
+      "$ref": "#/$defs/WireError"
+    },
+    {
+      "$ref": "#/$defs/CapabilityRequirement"
+    },
+    {
+      "$ref": "#/$defs/ExtensionRequirement"
+    },
+    {
+      "$ref": "#/$defs/ContributionScope"
+    },
+    {
+      "$ref": "#/$defs/ContributionDescriptor"
+    },
+    {
+      "$ref": "#/$defs/CommandDescriptor"
+    },
+    {
+      "$ref": "#/$defs/PluginManifest"
+    },
+    {
+      "$ref": "#/$defs/HostCapabilities"
+    },
+    {
+      "$ref": "#/$defs/CommandContext"
+    },
+    {
+      "$ref": "#/$defs/PluginTask"
+    },
+    {
+      "$ref": "#/$defs/HostEvent"
+    },
+    {
+      "$ref": "#/$defs/UiNode"
+    },
+    {
+      "$ref": "#/$defs/UiDocument"
+    },
+    {
+      "$ref": "#/$defs/UiEvent"
+    },
+    {
+      "$ref": "#/$defs/WireTrack"
+    },
+    {
+      "$ref": "#/$defs/WireTrackPage"
+    },
+    {
+      "$ref": "#/$defs/WireListing"
+    },
+    {
+      "$ref": "#/$defs/WireMediaQuality"
+    },
+    {
+      "$ref": "#/$defs/WireMedia"
+    },
+    {
+      "$ref": "#/$defs/MusicSearchInput"
+    },
+    {
+      "$ref": "#/$defs/MusicImportInput"
+    },
+    {
+      "$ref": "#/$defs/MusicListingInput"
+    },
+    {
+      "$ref": "#/$defs/MusicResolveInput"
+    },
+    {
+      "$ref": "#/$defs/MusicReleaseInput"
+    },
+    {
+      "$ref": "#/$defs/MusicCancelInput"
+    },
+    {
+      "$ref": "#/$defs/EmptyResult"
+    },
+    {
+      "$ref": "#/$defs/StateGetInput"
+    },
+    {
+      "$ref": "#/$defs/StateSetInput"
+    },
+    {
+      "$ref": "#/$defs/StateValue"
+    },
+    {
+      "$ref": "#/$defs/NetworkInput"
+    },
+    {
+      "$ref": "#/$defs/NetworkResult"
+    },
+    {
+      "$ref": "#/$defs/ResponseReadInput"
+    },
+    {
+      "$ref": "#/$defs/ResponseChunk"
+    },
+    {
+      "$ref": "#/$defs/ResponseReleaseInput"
+    },
+    {
+      "$ref": "#/$defs/DigestInput"
+    },
+    {
+      "$ref": "#/$defs/DigestResult"
+    },
+    {
+      "$ref": "#/$defs/HostRequest"
+    },
+    {
+      "$ref": "#/$defs/HostResponse"
+    },
+    {
+      "$ref": "#/$defs/MusicRequest"
+    },
+    {
+      "$ref": "#/$defs/MusicResponse"
+    },
+    {
+      "$ref": "#/$defs/PackageIntegrityEntry"
+    },
+    {
+      "$ref": "#/$defs/PackageIntegrity"
+    },
+    {
+      "$ref": "#/$defs/PackageSignature"
+    },
+    {
+      "$ref": "#/$defs/PackageRevocations"
+    },
+    {
+      "$ref": "#/$defs/GuestInvocation"
+    },
+    {
+      "$ref": "#/$defs/GuestStep"
+    },
+    {
+      "$ref": "#/$defs/SourceCredentialField"
+    },
+    {
+      "$ref": "#/$defs/SourceAuthentication"
+    }
+  ],
+  "$defs": {
+    "LocalizedText": {
+      "type": "object",
+      "properties": {
+        "zh-CN": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      },
+      "required": ["zh-CN", "en"],
+      "additionalProperties": false,
+      "title": "LocalizedText"
+    },
+    "WireError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "invalid-input",
+            "unsupported-version",
+            "capability-unavailable",
+            "operation-cancelled",
+            "timeout",
+            "limit-exceeded",
+            "invalid-response",
+            "upstream-error",
+            "access-denied",
+            "not-found",
+            "rate-limited",
+            "conflict",
+            "not-authenticated",
+            "account-unavailable",
+            "unsupported-url",
+            "verification-required",
+            "pagination-unavailable",
+            "network-error"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "isRetryable": {
+          "type": "boolean"
+        }
+      },
+      "required": ["code", "message", "isRetryable"],
+      "additionalProperties": false,
+      "title": "WireError"
+    },
+    "CapabilityRequirement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "reason": {
+          "$ref": "#/$defs/LocalizedText"
+        }
+      },
+      "required": ["id", "version", "required", "reason"],
+      "additionalProperties": false,
+      "title": "CapabilityRequirement"
+    },
+    "ExtensionRequirement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "navigation.sidebar",
+            "workspace.views",
+            "track.actions.secondary",
+            "track.details",
+            "trackList.operator.actions",
+            "trackList.filters",
+            "settings.sections",
+            "music.sources"
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "required": ["id", "version", "required"],
+      "additionalProperties": false,
+      "title": "ExtensionRequirement"
+    },
+    "ContributionScope": {
+      "type": "object",
+      "properties": {
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["catalog", "queue", "favorites", "playlists", "history"]
+          },
+          "minItems": 0,
+          "maxItems": 5
+        },
+        "forms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["desktop", "mobile"]
+          },
+          "minItems": 1,
+          "maxItems": 2
+        }
+      },
+      "required": ["sections", "forms"],
+      "additionalProperties": false,
+      "title": "ContributionScope"
+    },
+    "ContributionDescriptor": {
+      "type": "object",
+      "properties": {
+        "contributionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "pointId": {
+          "type": "string",
+          "enum": [
+            "navigation.sidebar",
+            "workspace.views",
+            "track.actions.secondary",
+            "track.details",
+            "trackList.operator.actions",
+            "trackList.filters",
+            "settings.sections",
+            "music.sources"
+          ]
+        },
+        "contractVersion": {
+          "const": 1,
+          "type": "integer"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "title": {
+          "$ref": "#/$defs/LocalizedText"
+        },
+        "scope": {
+          "$ref": "#/$defs/ContributionScope"
+        },
+        "commandId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "viewId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "providerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "inputSchemaId": {
+          "const": "urn:any-music:plugin:command-context:1",
+          "type": "string"
+        },
+        "eventSchemaId": {
+          "const": "urn:any-music:plugin:ui-event:1",
+          "type": "string"
+        },
+        "cardinality": {
+          "const": "many",
+          "type": "string"
+        },
+        "fallback": {
+          "const": "hidden",
+          "type": "string"
+        },
+        "budgetProfileVersion": {
+          "const": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "contributionId",
+        "pointId",
+        "contractVersion",
+        "required",
+        "title",
+        "scope",
+        "inputSchemaId",
+        "eventSchemaId",
+        "cardinality",
+        "fallback",
+        "budgetProfileVersion"
+      ],
+      "additionalProperties": false,
+      "title": "ContributionDescriptor"
+    },
+    "CommandDescriptor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "title": {
+          "$ref": "#/$defs/LocalizedText"
+        }
+      },
+      "required": ["id", "title"],
+      "additionalProperties": false,
+      "title": "CommandDescriptor"
+    },
+    "PluginManifest": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "manifestVersion": {
+          "const": 1,
+          "type": "integer"
+        },
+        "packageFormatVersion": {
+          "const": 1,
+          "type": "integer"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "name": {
+          "$ref": "#/$defs/LocalizedText"
+        },
+        "description": {
+          "$ref": "#/$defs/LocalizedText"
+        },
+        "sdk": {
+          "type": "object",
+          "properties": {
+            "minimum": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "maximumExclusive": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            }
+          },
+          "required": ["minimum", "maximumExclusive"],
+          "additionalProperties": false
+        },
+        "wireVersions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "runtimeProfileVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "contributionVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "dataSchemaVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "execution": {
+          "type": "string",
+          "enum": ["declarative", "sandbox-code"]
+        },
+        "entry": {
+          "const": "dist/main.js",
+          "type": "string"
+        },
+        "integrity": {
+          "const": "integrity.json",
+          "type": "string"
+        },
+        "forms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["desktop", "mobile"]
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CapabilityRequirement"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CommandDescriptor"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "contributions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ContributionDescriptor"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "activationEvents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["on-command", "on-view", "on-source"]
+          },
+          "minItems": 0,
+          "maxItems": 3
+        },
+        "memoryClass": {
+          "type": "string",
+          "enum": ["minimum", "increased"]
+        },
+        "sourceAuthentication": {
+          "$ref": "#/$defs/SourceAuthentication"
+        }
+      },
+      "required": [
+        "manifestVersion",
+        "packageFormatVersion",
+        "id",
+        "version",
+        "name",
+        "description",
+        "sdk",
+        "wireVersions",
+        "runtimeProfileVersion",
+        "contributionVersion",
+        "dataSchemaVersion",
+        "execution",
+        "integrity",
+        "forms",
+        "capabilities",
+        "commands",
+        "contributions",
+        "activationEvents",
+        "memoryClass"
+      ],
+      "additionalProperties": false,
+      "title": "PluginManifest"
+    },
+    "HostCapabilities": {
+      "type": "object",
+      "properties": {
+        "sdkVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "manifestVersions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "wireVersions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "runtimeProfileVersions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "contributionVersions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "packageFormatVersions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "dataSchemaVersions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "form": {
+          "type": "string",
+          "enum": ["desktop", "mobile"]
+        },
+        "externalPlugins": {
+          "type": "string",
+          "enum": ["none", "declarative", "sandbox-code"]
+        },
+        "sandboxAvailable": {
+          "type": "boolean"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "versions": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 65535
+                },
+                "minItems": 1,
+                "maxItems": 8
+              }
+            },
+            "required": ["id", "versions"],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "extensionPoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "versions": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 65535
+                },
+                "minItems": 1,
+                "maxItems": 8
+              }
+            },
+            "required": ["id", "versions"],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "required": [
+        "sdkVersion",
+        "manifestVersions",
+        "wireVersions",
+        "runtimeProfileVersions",
+        "contributionVersions",
+        "packageFormatVersions",
+        "dataSchemaVersions",
+        "form",
+        "externalPlugins",
+        "sandboxAvailable",
+        "capabilities",
+        "extensionPoints"
+      ],
+      "additionalProperties": false,
+      "title": "HostCapabilities"
+    },
+    "CommandContext": {
+      "type": "object",
+      "properties": {
+        "contextRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "scope": {
+          "$ref": "#/$defs/ContributionScope"
+        },
+        "objectRefs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "version": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": ["id", "version"],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "expiresAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["contextRef", "scope", "objectRefs", "expiresAtMs"],
+      "additionalProperties": false,
+      "title": "CommandContext"
+    },
+    "PluginTask": {
+      "title": "PluginTask",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "taskId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "state": {
+              "const": "failed",
+              "type": "string"
+            },
+            "completed": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "total": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["taskId", "contextRef", "deadlineMs", "state", "completed", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "taskId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "state": {
+              "type": "string",
+              "enum": ["queued", "running", "succeeded", "cancelled"]
+            },
+            "completed": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "total": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": ["taskId", "contextRef", "deadlineMs", "state", "completed"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "HostEvent": {
+      "title": "HostEvent",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "eventId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "eventVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "event": {
+              "const": "player.track-changed",
+              "type": "string"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "trackRef": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "wireVersion",
+            "eventId",
+            "eventVersion",
+            "contextRef",
+            "event",
+            "sequence",
+            "trackRef"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "eventId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "eventVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "event": {
+              "const": "player.ended",
+              "type": "string"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "trackRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          },
+          "required": [
+            "wireVersion",
+            "eventId",
+            "eventVersion",
+            "contextRef",
+            "event",
+            "sequence",
+            "trackRef"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "eventId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "eventVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "event": {
+              "const": "task.changed",
+              "type": "string"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "task": {
+              "$ref": "#/$defs/PluginTask"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "eventId",
+            "eventVersion",
+            "contextRef",
+            "event",
+            "sequence",
+            "task"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "UiNode": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "type": {
+              "const": "text",
+              "type": "string"
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            }
+          },
+          "required": ["id", "type", "text"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "type": {
+              "const": "button",
+              "type": "string"
+            },
+            "label": {
+              "$ref": "#/$defs/LocalizedText"
+            },
+            "commandId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            }
+          },
+          "required": ["id", "type", "label", "commandId"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "type": {
+              "const": "track-list",
+              "type": "string"
+            },
+            "listingRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": ["id", "type", "listingRef"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "type": {
+              "type": "string",
+              "const": "form"
+            },
+            "label": {
+              "$ref": "#/$defs/LocalizedText"
+            },
+            "commandId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "fields": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 16,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "label": {
+                    "$ref": "#/$defs/LocalizedText"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": ["text", "number", "checkbox"]
+                  },
+                  "maxLength": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 256
+                  }
+                },
+                "required": ["id", "label", "type"],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["id", "type", "label", "commandId", "fields"],
+          "additionalProperties": false
+        }
+      ],
+      "title": "UiNode"
+    },
+    "UiDocument": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1,
+          "type": "integer"
+        },
+        "viewId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "viewRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UiNode"
+          },
+          "minItems": 0,
+          "maxItems": 1000
+        }
+      },
+      "required": ["schemaVersion", "viewId", "viewRevision", "nodes"],
+      "additionalProperties": false,
+      "title": "UiDocument"
+    },
+    "UiEvent": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1,
+          "type": "integer"
+        },
+        "viewId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "viewRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "nodeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "commandId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "contextRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "values": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "properties": {
+              "fieldId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "value": {
+                "type": "string",
+                "minLength": 0,
+                "maxLength": 256
+              }
+            },
+            "required": ["fieldId", "value"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["schemaVersion", "viewId", "viewRevision", "nodeId", "commandId", "contextRef"],
+      "additionalProperties": false,
+      "title": "UiEvent"
+    },
+    "WireTrack": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "artists": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": ["name"],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "artworkUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "publishedAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384
+        },
+        "sourceTags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "statistics": {
+          "type": "object",
+          "properties": {
+            "playCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "danmakuCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "favoriteCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "commentCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "likeCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "pluginId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "mediaKind": {
+              "type": "string",
+              "enum": ["audio", "video", "custom"]
+            },
+            "resourceId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "partId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "pageUrl": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8192
+            }
+          },
+          "required": ["pluginId", "mediaKind", "resourceId"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["id", "title", "artists", "source"],
+      "additionalProperties": false,
+      "title": "WireTrack"
+    },
+    "WireTrackPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WireTrack"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "pageNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "pageSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "hasMore": {
+          "type": "boolean"
+        }
+      },
+      "required": ["items", "pageNumber", "pageSize", "hasMore"],
+      "additionalProperties": false,
+      "title": "WireTrackPage"
+    },
+    "WireListing": {
+      "type": "object",
+      "properties": {
+        "listingRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "sourceUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192
+        },
+        "estimatedTotal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "expiresAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["listingRef", "id", "title", "expiresAtMs"],
+      "additionalProperties": false,
+      "title": "WireListing"
+    },
+    "WireMediaQuality": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "rank": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "bitrate": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["id", "label", "rank"],
+      "additionalProperties": false,
+      "title": "WireMediaQuality"
+    },
+    "WireMedia": {
+      "type": "object",
+      "properties": {
+        "mediaRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "quality": {
+          "$ref": "#/$defs/WireMediaQuality"
+        },
+        "availableQualities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WireMediaQuality"
+          },
+          "minItems": 1,
+          "maxItems": 32
+        },
+        "mimeType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "codecs": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "loadingStrategy": {
+          "type": "string",
+          "enum": ["range", "eager"]
+        },
+        "expiresAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["mediaRef", "quality", "availableQualities", "loadingStrategy", "expiresAtMs"],
+      "additionalProperties": false,
+      "title": "WireMedia"
+    },
+    "MusicSearchInput": {
+      "type": "object",
+      "properties": {
+        "providerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "pageSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": ["providerId", "query"],
+      "additionalProperties": false,
+      "title": "MusicSearchInput"
+    },
+    "MusicImportInput": {
+      "type": "object",
+      "properties": {
+        "providerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192
+        },
+        "pageSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": ["providerId", "url"],
+      "additionalProperties": false,
+      "title": "MusicImportInput"
+    },
+    "MusicListingInput": {
+      "type": "object",
+      "properties": {
+        "listingRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": ["listingRef"],
+      "additionalProperties": false,
+      "title": "MusicListingInput"
+    },
+    "MusicResolveInput": {
+      "type": "object",
+      "properties": {
+        "providerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "track": {
+          "$ref": "#/$defs/WireTrack"
+        },
+        "qualityId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "taskId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": ["providerId", "track", "taskId"],
+      "additionalProperties": false,
+      "title": "MusicResolveInput"
+    },
+    "MusicReleaseInput": {
+      "type": "object",
+      "properties": {
+        "mediaRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": ["mediaRef"],
+      "additionalProperties": false,
+      "title": "MusicReleaseInput"
+    },
+    "MusicCancelInput": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "listingRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": ["listingRef"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "taskId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": ["taskId"],
+          "additionalProperties": false
+        }
+      ],
+      "title": "MusicCancelInput"
+    },
+    "EmptyResult": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "title": "EmptyResult"
+    },
+    "StateGetInput": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": ["key"],
+      "additionalProperties": false,
+      "title": "StateGetInput"
+    },
+    "StateSetInput": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "schemaVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 65536
+        },
+        "expectedVersion": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": ["key", "schemaVersion", "value", "expectedVersion", "operationId"],
+      "additionalProperties": false,
+      "title": "StateSetInput"
+    },
+    "StateValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 65536
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["value", "version"],
+      "additionalProperties": false,
+      "title": "StateValue"
+    },
+    "NetworkInput": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192
+        },
+        "method": {
+          "type": "string",
+          "enum": ["GET", "HEAD", "POST"]
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 131072
+        }
+      },
+      "required": ["url", "method"],
+      "additionalProperties": false,
+      "title": "NetworkInput"
+    },
+    "NetworkResult": {
+      "type": "object",
+      "properties": {
+        "responseRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "status": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 599
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4194304
+        },
+        "expiresAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["responseRef", "status", "sizeBytes", "expiresAtMs"],
+      "additionalProperties": false,
+      "title": "NetworkResult"
+    },
+    "ResponseReadInput": {
+      "type": "object",
+      "properties": {
+        "responseRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4194304
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65536
+        }
+      },
+      "required": ["responseRef", "offset", "length"],
+      "additionalProperties": false,
+      "title": "ResponseReadInput"
+    },
+    "ResponseChunk": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "maxLength": 65536
+        },
+        "nextOffset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4194304
+        },
+        "done": {
+          "type": "boolean"
+        }
+      },
+      "required": ["text", "nextOffset", "done"],
+      "additionalProperties": false,
+      "title": "ResponseChunk"
+    },
+    "ResponseReleaseInput": {
+      "type": "object",
+      "properties": {
+        "responseRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": ["responseRef"],
+      "additionalProperties": false,
+      "title": "ResponseReleaseInput"
+    },
+    "DigestInput": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 65536
+        }
+      },
+      "required": ["text"],
+      "additionalProperties": false,
+      "title": "DigestInput"
+    },
+    "DigestResult": {
+      "type": "object",
+      "properties": {
+        "hex": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      },
+      "required": ["hex"],
+      "additionalProperties": false,
+      "title": "DigestResult"
+    },
+    "HostRequest": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "state.get",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/StateGetInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "state.set",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/StateSetInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "network.request",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/NetworkInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "network.readResponse",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/ResponseReadInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "network.releaseResponse",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/ResponseReleaseInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "crypto.sha256",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/DigestInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "HostRequest"
+    },
+    "HostResponse": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "state.get",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/StateValue"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "state.get",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "state.set",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/StateValue"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "state.set",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "network.request",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/NetworkResult"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "network.request",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "network.readResponse",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/ResponseChunk"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "network.readResponse",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "network.releaseResponse",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/EmptyResult"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "network.releaseResponse",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "crypto.sha256",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/DigestResult"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "crypto.sha256",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        }
+      ],
+      "title": "HostResponse"
+    },
+    "MusicRequest": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "music.search",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/MusicSearchInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "music.importUrl",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/MusicImportInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "music.nextPage",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/MusicListingInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "music.close",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/MusicListingInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "music.cancel",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/MusicCancelInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "music.resolveMedia",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/MusicResolveInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contextRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "deadlineMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "operation": {
+              "const": "music.releaseMedia",
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/MusicReleaseInput"
+            }
+          },
+          "required": [
+            "wireVersion",
+            "requestId",
+            "contextRef",
+            "deadlineMs",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "MusicRequest"
+    },
+    "MusicResponse": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.search",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/WireListing"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.search",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.importUrl",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/WireListing"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.importUrl",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.nextPage",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/WireTrackPage"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.nextPage",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.close",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/EmptyResult"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.close",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.cancel",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/EmptyResult"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.cancel",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.resolveMedia",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/WireMedia"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.resolveMedia",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.releaseMedia",
+              "type": "string"
+            },
+            "ok": {
+              "const": true,
+              "type": "boolean"
+            },
+            "result": {
+              "$ref": "#/$defs/EmptyResult"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "result"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "wireVersion": {
+              "const": 1,
+              "type": "number"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "operation": {
+              "const": "music.releaseMedia",
+              "type": "string"
+            },
+            "ok": {
+              "const": false,
+              "type": "boolean"
+            },
+            "error": {
+              "$ref": "#/$defs/WireError"
+            }
+          },
+          "required": ["wireVersion", "requestId", "operation", "ok", "error"],
+          "additionalProperties": false
+        }
+      ],
+      "title": "MusicResponse"
+    },
+    "PackageIntegrityEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "size", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8388608
+        },
+        "sha256": {
+          "type": "string",
+          "minLength": 64,
+          "maxLength": 64
+        }
+      }
+    },
+    "PackageIntegrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "files"],
+      "properties": {
+        "version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "files": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/PackageIntegrityEntry"
+          }
+        }
+      }
+    },
+    "PackageSignature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "algorithm", "keyId", "publicKey", "fingerprint", "signature"],
+      "properties": {
+        "version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "algorithm": {
+          "const": "Ed25519",
+          "type": "string"
+        },
+        "keyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "publicKey": {
+          "type": "string",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "fingerprint": {
+          "type": "string",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "signature": {
+          "type": "string",
+          "minLength": 128,
+          "maxLength": 128
+        }
+      }
+    },
+    "PackageRevocations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "sequence",
+        "issuedAtMs",
+        "expiresAtMs",
+        "pluginIds",
+        "packageHashes",
+        "publisherKeys"
+      ],
+      "properties": {
+        "version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "issuedAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "expiresAtMs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "pluginIds": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "packageHashes": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64
+          }
+        },
+        "publisherKeys": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64
+          }
+        }
+      }
+    },
+    "GuestInvocation": {
+      "type": "object",
+      "properties": {
+        "commandId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "command.run",
+            "music.search",
+            "music.importUrl",
+            "music.nextPage",
+            "music.close",
+            "music.cancel",
+            "music.resolveMedia",
+            "music.releaseMedia",
+            "migrate"
+          ]
+        },
+        "inputJson": {
+          "type": "string",
+          "maxLength": 65536
+        },
+        "contextRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "deadlineMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "checkpointJson": {
+          "type": "string",
+          "maxLength": 65536
+        },
+        "response": {
+          "$ref": "#/$defs/HostResponse"
+        }
+      },
+      "required": ["operation", "inputJson", "contextRef", "sequence", "deadlineMs"],
+      "additionalProperties": false,
+      "title": "GuestInvocation"
+    },
+    "GuestStep": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "complete"
+            },
+            "outputJson": {
+              "type": "string",
+              "maxLength": 65536
+            }
+          },
+          "required": ["kind", "outputJson"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "host"
+            },
+            "request": {
+              "$ref": "#/$defs/HostRequest"
+            },
+            "checkpointJson": {
+              "type": "string",
+              "maxLength": 65536
+            }
+          },
+          "required": ["kind", "request", "checkpointJson"],
+          "additionalProperties": false
+        }
+      ],
+      "title": "GuestStep"
+    },
+    "SourceCredentialField": {
+      "title": "SourceCredentialField",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "label": {
+          "$ref": "#/$defs/LocalizedText"
+        },
+        "secret": {
+          "type": "boolean"
+        }
+      },
+      "required": ["id", "label", "secret"],
+      "additionalProperties": false
+    },
+    "SourceAuthentication": {
+      "title": "SourceAuthentication",
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "apiBaseUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "allowUnauthenticated": {
+          "type": "boolean"
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["qr", "credentials", "phone"]
+          },
+          "minItems": 0,
+          "maxItems": 3
+        },
+        "credentialFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceCredentialField"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "apiBaseUrl",
+        "allowUnauthenticated",
+        "methods",
+        "credentialFields"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

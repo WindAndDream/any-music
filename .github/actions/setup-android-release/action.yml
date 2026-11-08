@@ -1,0 +1,59 @@
+name: Set up Android release tools
+description: Install the locked Android build toolchain without access to signing secrets.
+inputs:
+  java:
+    required: true
+    description: Java version from the target manifest.
+  sdk:
+    required: true
+    description: Android platform package version.
+  build-tools:
+    required: true
+    description: Android build-tools version.
+  ndk:
+    required: true
+    description: Android NDK version.
+  target:
+    required: true
+    description: Android Rust target prefix.
+  cache-key:
+    required: true
+    description: Independent native cache key.
+runs:
+  using: composite
+  steps:
+    - uses: ./.github/actions/setup-workspace
+      with:
+        cache-key: ${{ inputs.cache-key }}
+    - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+      with:
+        distribution: temurin
+        java-version: ${{ inputs.java }}
+        cache: gradle
+        cache-dependency-path: apps/tauri/src-tauri/gen/android/**/*.gradle.kts
+    - uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4.0.4
+      with:
+        cmdline-tools-version: '15859902' # 22.0, supports minor API levels such as 37.0
+        packages: >-
+          platforms;android-${{ inputs.sdk }}
+          build-tools;${{ inputs.build-tools }}
+          ndk;${{ inputs.ndk }}
+    - name: Select the installed NDK and Rust target
+      shell: bash
+      env:
+        AM_ANDROID_SDK: ${{ inputs.sdk }}
+        AM_ANDROID_BUILD_TOOLS: ${{ inputs.build-tools }}
+        AM_ANDROID_NDK: ${{ inputs.ndk }}
+        AM_ANDROID_TARGET: ${{ inputs.target }}
+      run: |
+        ndk_home="${ANDROID_HOME:?Android SDK setup did not set ANDROID_HOME}/ndk/$AM_ANDROID_NDK"
+        for file in "$ANDROID_HOME/platforms/android-$AM_ANDROID_SDK/android.jar" \
+                    "$ANDROID_HOME/build-tools/$AM_ANDROID_BUILD_TOOLS/source.properties" \
+                    "$ndk_home/source.properties"; do
+          if [[ ! -f "$file" ]]; then
+            echo "::error::Missing Android SDK package file: $file"
+            exit 1
+          fi
+        done
+        echo "NDK_HOME=$ndk_home" >> "$GITHUB_ENV"
+        rustup target add "$AM_ANDROID_TARGET-linux-android"

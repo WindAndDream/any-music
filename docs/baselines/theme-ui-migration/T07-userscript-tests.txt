@@ -1,0 +1,12 @@
+
+> @any-music/userscript@0.0.0 test <project-root>\apps\userscript
+> vitest run --config vitest.config.ts
+
+
+ RUN  v4.1.11 <project-root>/apps/userscript
+
+
+ Test Files  17 passed (17)
+      Tests  80 passed (80)
+   Start at  02:09:59
+   Duration  7.34s (transform 12.75s, setup 0ms, import 17.29s, tests 4.99s, environment 7ms)

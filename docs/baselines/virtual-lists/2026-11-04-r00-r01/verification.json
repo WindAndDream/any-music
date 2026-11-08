@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-04",
+  "runtimeScope": "shared renderer; both production frontend builds checked separately",
+  "logDirectory": "logs/2026-11-04-virtual-list-implementation",
+  "checks": [
+    {
+      "command": "UI virtual/drag/geometry/pagination target",
+      "result": "passed: 28 files / 397 tests",
+      "log": "r00-r01-target-test.log"
+    },
+    {
+      "command": "Classic library/queue/catalog four component targets",
+      "result": "passed: 4 files / 74 tests",
+      "log": "r00-classic-test.log"
+    },
+    {
+      "command": "pnpm test",
+      "result": "passed",
+      "log": "r00-r01-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "log": "r00-r01-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with existing warnings outside this batch",
+      "log": "r00-r01-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "r00-r01-format-check-final.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed: both production frontends and Tauri release executable",
+      "log": "r00-r01-build.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/ui typecheck",
+      "result": "passed after test-only lint cleanup",
+      "log": "r00-r01-ui-typecheck-final.log"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/ui/src/composables/grid-reorder-geometry.ts",
+      "sha256": "95c57365b54882f7fb6f8f3637819af137363152870336535720f5d76251fabe"
+    },
+    {
+      "path": "packages/ui/src/composables/dom-grid-reorder-geometry.ts",
+      "sha256": "498b1f85df2a0d86c318229db94555bf6cee8c636e809add9ff74d501fcae082"
+    },
+    {
+      "path": "packages/ui/src/composables/use-grid-reorder.ts",
+      "sha256": "5dc266c21442f02ac6348bb65e1c563476be13f8bed8434f944f3a80e97fe77d"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/virtual-grid-reorder-geometry.ts",
+      "sha256": "845d66b7830a86a3b54f89ad75f44eee3c6e348c7519c203f00d99e0932f8c43"
+    },
+    {
+      "path": "packages/ui/test/composables/dom-grid-reorder-geometry.test.ts",
+      "sha256": "9db459ab68bee9a7548bdae67d4ba1f37ff2008ba954c066d2b2ae68e923bb79"
+    },
+    {
+      "path": "packages/ui/test/composables/use-grid-reorder.test.ts",
+      "sha256": "ef91e3f095dcfa8317897e705397f66d6ca310f644cd57de9d4cecf81a016688"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-grid-reorder-geometry.test.ts",
+      "sha256": "f93f3b26298b0c536a7b59b05963e6897d037afa3cf8e9dea1145ddfb0bf445f"
+    }
+  ],
+  "dragAssessment": {
+    "R00": "implemented; injectable geometry session and unchanged default DOM behavior",
+    "R01": "implemented; immutable measured-row spatial index and mounted-only displacement; internal opt-in only",
+    "addedTests": 39,
+    "queryEvidence": {
+      "collectionSize": 10000,
+      "remoteQueries": 6,
+      "geometryReads": 6,
+      "mountedNeighbors": 10,
+      "offsetGeometryReadsMaximum": 21
+    },
+    "queryLimits": "Reads count source snapshot accesses, not universal tree traversal bounds or elapsed runtime performance. Spatial pruning depends on candidate distribution."
+  },
+  "openGates": [
+    "R02-R08 complete virtual drag retention, refresh, bidirectional landing, invalidation, keyboard and FLIP integration",
+    "Every production virtual consumer including C00 remains pending",
+    "P14 consumer-specific offscreen semantic scroll/focus restoration before relevant consumer admission",
+    "P03 actual layout/visual/frame baseline, browser Find/text selection and native table/focus/IME behavior",
+    "Installed Userscript, Tauri WebView and mobile / G01-G03"
+  ],
+  "noProductBrowserLaunch": true,
+  "noCommitPush": true
+}

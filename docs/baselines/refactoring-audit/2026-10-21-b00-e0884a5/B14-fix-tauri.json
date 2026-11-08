@@ -1,0 +1,369 @@
+{
+  "documentType": "remediation-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-fix-tauri",
+  "parentBatch": "B14",
+  "reviewedAt": "2026-10-21T15:39:12.765Z",
+  "initialBaseline": {
+    "capturedAt": "2026-10-21T23:24:04.2880105+08:00",
+    "head": "a693165205be0bc321764768d796d7c842f7a446",
+    "workingTree": [
+      " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      " M packages/plugin-sdk/test/package-corpus-generator.mjs",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json"
+    ],
+    "sourceHashes": [
+      {
+        "path": "crates/am-plugin-runtime/src/authority.rs",
+        "sha256": "c5b0cf7d7d9f9da3ef3c9f7ea6f3ec5ff4d0dbd6c3130cf0c83c700755a0a96e"
+      },
+      {
+        "path": "crates/am-plugin-runtime/tests/offline.rs",
+        "sha256": "056fc73165560ec41d01426138def76af19f210c7d97f33bd78acc8f56c4ce82"
+      },
+      {
+        "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+        "sha256": "943603eacfe41d6af016224282d8a941990b5802e3a69af2c7c06cb2d8700d25"
+      },
+      {
+        "path": "apps/tauri/src-tauri/src/plugins/control.rs",
+        "sha256": "380c8caf438ad3c918c7848b591b8dec2057cbfaf80cceb1219d940de3f33725"
+      },
+      {
+        "path": "apps/tauri/src-tauri/src/plugins/unavailable_executor.rs",
+        "sha256": "5788d442e0ceffe037081fa8e7261f6e800bdcc559d82735d65441ce39b83d87"
+      },
+      {
+        "path": "Cargo.lock",
+        "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff"
+      }
+    ]
+  },
+  "finalHead": "a693165205be0bc321764768d796d7c842f7a446",
+  "sourceHashes": [
+    {
+      "path": "crates/am-plugin-runtime/src/authority.rs",
+      "sha256": "eb4bc83e59a4306a9c19a83d7b6dd82dabe2efe8c727929c61a1b971ee0dc103"
+    },
+    {
+      "path": "crates/am-plugin-runtime/tests/offline.rs",
+      "sha256": "9830d6eed49b40a2926812872a20020a973f245efd8511568537b1900f0ae7de"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+      "sha256": "be70fc2c2eb7ddeca3534d085ef369304a9a9f540e2d2777976a9eef96a49c8b"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/executor/cancellation_tests.rs",
+      "sha256": "75801216338b1ecf8ee22a0e780c6a5b611055252fac86f796f6d02b695560e9"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/control.rs",
+      "sha256": "6885454c7391732dffb95ca00d2dceb1845c0edea2ef5dfed2e5b18a58dc789e"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/unavailable_executor.rs",
+      "sha256": "10abb235d87002f686fb91dcb87d5ea45b7646c758679eca4aeae67a9ad49793"
+    }
+  ],
+  "scope": "Repair the two confirmed B14 findings and retain existing authority, storage, IPC, grant and mobile non-execution contracts. No package/Schema/dependency migration, account/transport change, product UI launch, commit or push is part of this repair.",
+  "resolvedFindings": [
+    {
+      "id": "B14-R01",
+      "priority": 2,
+      "status": "resolved",
+      "owner": "crates/am-plugin-runtime/src/authority.rs",
+      "change": "Both guards borrow the injected clock before entering Store::transaction and sample it inside the transaction immediately before bound_context. Store waits cannot reuse the pre-admission authorization time.",
+      "regression": [
+        "context_guard_refreshes_time_after_transaction_admission",
+        "capability_guard_refreshes_time_after_transaction_admission"
+      ],
+      "coverage": "Both guards test grant/session/context expiry independently, including valid-before-wait, valid at deadline-1, and rejection exactly at deadline. Two permanent tests fail before repair and all six expiry cases pass after repair."
+    },
+    {
+      "id": "B14-N01",
+      "priority": 2,
+      "status": "resolved",
+      "owner": "apps/tauri/src-tauri/src/plugins/executor.rs",
+      "change": "cancel_install returns Result, reports poisoned-registry or durable session-close errors and still attempts closure for every matching task. The product command returns that result directly. Broker/queued relay reject canceled tasks and state.set rechecks cancellation after acquiring the native authority lock. The closed mobile adapter preserves its no-task behavior with the matching Result signature.",
+      "regression": [
+        "cancellation_propagates_session_close_failure_and_retry_closes_authority",
+        "cancelled_task_cannot_write_after_failed_close_and_storage_recovery",
+        "cancellation_failure_does_not_skip_other_matching_sessions",
+        "successful_cancellation_preserves_committed_values_and_durable_grants",
+        "unknown_install_is_a_noop_and_poisoned_task_registry_is_an_error"
+      ],
+      "coverage": "Five permanent headless tests use the actual Executors/broker, PluginAuthority, runtime and SQLite adapter. An aborting SQLite trigger injects session-close failure; tests verify error/retry, no late namespace write, continued multi-session cleanup, idempotent success, retained committed values/private provenance/receipts/grants and unknown-ID/poisoned-registry behavior. Four fail before the behavioral repair; all five pass after repair."
+    }
+  ],
+  "openFindingIds": [],
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "permanentRegressionTestsAdded": 7,
+  "targetedCounts": {
+    "runtime": 26,
+    "executorIncludingExistingAclAndResourceTests": 7
+  },
+  "verification": [
+    {
+      "name": "runtime-red",
+      "phase": "before-fix",
+      "result": "fail",
+      "command": "cargo test -p am-plugin-runtime --locked guard_refreshes_time_after_transaction_admission",
+      "exitCode": 101,
+      "startedAt": "2026-10-21T23:25:10.2674607+08:00",
+      "finishedAt": "2026-10-21T23:25:17.2477743+08:00",
+      "log": ".codex-tmp/b14-fix/runtime-red.log",
+      "logSha256": "0c0cc4ab84338cf913a3139287f2349ebaaefa30d4685a7141cb8287032877bf"
+    },
+    {
+      "name": "executor-red",
+      "phase": "before-fix",
+      "result": "fail",
+      "command": "cargo test -p any-music-tauri --lib plugins::executor::cancellation_tests --locked",
+      "exitCode": 101,
+      "startedAt": "2026-10-21T23:25:17.3026152+08:00",
+      "finishedAt": "2026-10-21T23:26:08.0302723+08:00",
+      "log": ".codex-tmp/b14-fix/executor-red.log",
+      "logSha256": "687f1ca7713b1a49a7f0160e88c9ee775318f7ae6950a97f704ff129df096a32"
+    },
+    {
+      "name": "runtime-green",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "cargo test -p am-plugin-runtime --locked",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:26:37.3475689+08:00",
+      "finishedAt": "2026-10-21T23:26:54.1747306+08:00",
+      "log": ".codex-tmp/b14-fix/runtime-green.log",
+      "logSha256": "8086ce8b9b591c34d1e2643584d372e7b41b1346a5e0b59e1192aafece5c7dac"
+    },
+    {
+      "name": "executor-green",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib plugins::executor:: --locked",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:26:54.2420492+08:00",
+      "finishedAt": "2026-10-21T23:28:13.7600827+08:00",
+      "log": ".codex-tmp/b14-fix/executor-green.log",
+      "logSha256": "886d19bffaf7e4d1cb21b854cbdf0fff1342129b3529d951005d6393925b52d0"
+    },
+    {
+      "name": "root-test",
+      "phase": "after-fix",
+      "result": "fail",
+      "command": "pnpm test",
+      "exitCode": 1,
+      "startedAt": "2026-10-21T23:28:25.4706651+08:00",
+      "finishedAt": "2026-10-21T23:30:37.5719241+08:00",
+      "log": ".codex-tmp/b14-fix/root-test.log",
+      "logSha256": "ac1a9a294a939fdeff789eb4b8ca4a4313ed92d8b01134570faa80817a1b212f"
+    },
+    {
+      "name": "userscript-isolation-recheck",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/userscript test",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:31:06.8403768+08:00",
+      "finishedAt": "2026-10-21T23:31:25.6601003+08:00",
+      "log": ".codex-tmp/b14-fix/userscript-isolation-recheck.log",
+      "logSha256": "86f9ef215fe9a7e02495ae84273c7e010336443ae9811aa77bb5fc4666d6e9dd"
+    },
+    {
+      "name": "root-test-retry",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "pnpm test",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:33:27.2142189+08:00",
+      "finishedAt": "2026-10-21T23:35:37.1780255+08:00",
+      "log": ".codex-tmp/b14-fix/root-test-retry.log",
+      "logSha256": "12b604e75121fdda5ecf54256a0fbce4014ada2a2f7ac0bda5607dd3c6952bc5"
+    },
+    {
+      "name": "root-typecheck",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:30:37.6716064+08:00",
+      "finishedAt": "2026-10-21T23:32:46.7278347+08:00",
+      "log": ".codex-tmp/b14-fix/root-typecheck.log",
+      "logSha256": "d535b27974e87f0b691036ebd44fc1e5785ee206781f57d4adb5a28f846be103"
+    },
+    {
+      "name": "root-lint",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:27:23.0962773+08:00",
+      "finishedAt": "2026-10-21T23:27:28.3460429+08:00",
+      "log": ".codex-tmp/b14-fix/root-lint.log",
+      "logSha256": "61759e2de68c1bec3b02765f50fe3441b3d9e0b9fcf2f32c12e276520b8aa448"
+    },
+    {
+      "name": "native-check",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:32:46.7578744+08:00",
+      "finishedAt": "2026-10-21T23:34:48.8040901+08:00",
+      "log": ".codex-tmp/b14-fix/native-check.log",
+      "logSha256": "48ff6465d9f6acc5247f69e812e38e370f95c38b11d25244b955189a12b1dac7"
+    },
+    {
+      "name": "rust-msrv",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:27:48.7054070+08:00",
+      "finishedAt": "2026-10-21T23:28:07.1035517+08:00",
+      "log": ".codex-tmp/b14-fix/rust-msrv.log",
+      "logSha256": "9fc3f9fa91c2c4f433ba46c32f2ed9f60e97858b169b8717ba7b3b82a83bdaa0"
+    },
+    {
+      "name": "android-check",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "pnpm check:mobile:android",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:29:06.9048248+08:00",
+      "finishedAt": "2026-10-21T23:30:08.1881773+08:00",
+      "log": ".codex-tmp/b14-fix/android-check.log",
+      "logSha256": "a4767e5d8082951cd32213a9a60a9f6532d2497bb62e6ada10d8928a495eb12b"
+    },
+    {
+      "name": "root-build",
+      "phase": "after-fix",
+      "result": "pass",
+      "command": "pnpm build",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T23:34:48.8485253+08:00",
+      "finishedAt": "2026-10-21T23:37:59.6388535+08:00",
+      "log": ".codex-tmp/b14-fix/root-build.log",
+      "logSha256": "22b76c893228aa357be7039209e2b02862eac32a3f7f4d30f1df632c8f89773d"
+    },
+    {
+      "name": "rust-deny",
+      "phase": "after-fix",
+      "result": "fail",
+      "command": "pnpm check:rust:deny",
+      "exitCode": 1,
+      "startedAt": "2026-10-21T23:27:23.1022634+08:00",
+      "finishedAt": "2026-10-21T23:27:48.2488152+08:00",
+      "log": ".codex-tmp/b14-fix/rust-deny.log",
+      "logSha256": "f2029bed857aa9849070b097d6fcc0dacf840860facfd81241a122a689c24d7a"
+    },
+    {
+      "name": "root-format-initial",
+      "phase": "after-fix",
+      "result": "fail",
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "startedAt": "2026-10-21T23:27:48.9799399+08:00",
+      "finishedAt": "2026-10-21T23:27:59.3970012+08:00",
+      "log": ".codex-tmp/b14-fix/root-format-initial.log",
+      "logSha256": "9e69994e49ef929b8fc9ca282881c102c8ccceb461b72d2c39592376490f9a39"
+    },
+    {
+      "name": "root-format-final",
+      "phase": "after-fix",
+      "result": "fail",
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "startedAt": "2026-10-21T23:38:24.4837596+08:00",
+      "finishedAt": "2026-10-21T23:38:29.2592437+08:00",
+      "log": ".codex-tmp/b14-fix/root-format-final.log",
+      "logSha256": "8cc39c7c4bf3f39e5ce0a03f15d97ce6167ad99f74c52176f5371e3d6b87c8a4"
+    }
+  ],
+  "baselineGateFailures": [
+    {
+      "gate": "pnpm check:rust:deny",
+      "result": "fail",
+      "sourceUnchanged": true,
+      "advisories": [
+        "RUSTSEC-2026-0382 (rustls-webpki 0.103.15)",
+        "RUSTSEC-2026-0381 (webpki-roots 1.0.9)"
+      ],
+      "evidence": ".codex-tmp/b14-fix/rust-deny.log",
+      "detail": "Locked dependencies already present at the repair baseline are flagged by the current advisory database. No advisory ignore, lockfile/dependency update or unrelated transport change was introduced."
+    },
+    {
+      "gate": "pnpm format:check",
+      "result": "fail",
+      "files": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/en/desktop/README.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/en/desktop/runtime-architecture.md",
+        "docs/en/desktop/rust-workspace-plan.md",
+        "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "docs/zh-cn/桌面端/后端工程规范.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/桌面端/文档索引.md",
+        "docs/zh-cn/桌面端/运行端架构.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      ],
+      "sourceUnchangedFromInitialHead": true,
+      "evidence": ".codex-tmp/b14-fix/root-format-initial.log",
+      "detail": "The same 12 pre-existing maintained-document format failures remain. Changed repair sources and report files are checked separately. No unrelated mass formatting was performed."
+    }
+  ],
+  "additionalFormatFindings": [
+    {
+      "gate": "pnpm format:check",
+      "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json",
+      "evidence": ".codex-tmp/b14-fix/root-format-final.log",
+      "detail": "This non-B14 audit record appeared after the starting baseline. The repair did not edit it; its formatting is separate from the 12 unchanged baseline documents."
+    }
+  ],
+  "recoveredVerificationIssue": {
+    "firstFullTestRun": ".codex-tmp/b14-fix/root-test.log",
+    "symptom": "Userscript built-in source composition did not call HTTP before the default one-second vi.waitFor limit during concurrent cold imports.",
+    "isolatedRecheck": "All 80 Userscript tests pass without changing their source or increasing timeouts.",
+    "finalFullRun": ".codex-tmp/b14-fix/root-test-retry.log",
+    "assessment": "The original failed log is retained. A successful unmodified isolated package run and subsequent complete pnpm test rerun support a transient scheduling/import timing failure; no Userscript product or test workaround was added."
+  },
+  "unchangedContracts": [
+    "Public IPC names, arguments, permissions and DTO/Schema versions",
+    "Durable grants/epochs and committed values, provenance and receipts during ordinary command cancellation",
+    "Mobile external policy and unavailable execution adapters",
+    "Pure-runtime dependency/IO boundaries and injected Store/Clock/Ids/InstallFiles",
+    "Existing unrelated working-tree edits and audit records"
+  ],
+  "evidenceLimits": [
+    "Tests and builds do not establish an actual admitted WebView/IPC race or application/device acceptance; no app, browser, server, emulator or screenshot was launched.",
+    "Root format/dependency-audit baselines are still not green, so no unrestricted release-readiness claim is made.",
+    "Native host/resource fingerprint admission remains exact and separate; production execution acceptance was not altered to force a target open. Android received an offline arm64 check; iOS was not built or tested on this Windows host.",
+    "No finite regression suite guarantees the absence of all other defects; conclusions apply to the changed paths and recorded verification."
+  ],
+  "nextAction": "The two B14 implementation defects are repaired. Track dependency-advisory and pre-existing document-format debt independently, and perform explicitly authorized live runtime acceptance if required for release."
+}

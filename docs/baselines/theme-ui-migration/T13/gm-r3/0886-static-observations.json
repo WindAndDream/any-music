@@ -1,0 +1,383 @@
+{
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R3",
+  "privacy": "No cookie values, account names/IDs, private folder IDs/titles, signed media URLs or signature values.",
+  "samples": [
+    {
+      "label": "static-signed-in-bilibili-after-user-scan",
+      "at": 1793042348295,
+      "origin": "http://127.0.0.1:18867",
+      "source": "bilibili",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 0
+    },
+    {
+      "label": "netease-static-play-start",
+      "at": 1793042357287,
+      "origin": "http://127.0.0.1:18867",
+      "source": "bilibili",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 0
+    },
+    {
+      "label": "netease-static-playing",
+      "at": 1793042367644,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "bilibili",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": false,
+          "time": 9.638959,
+          "readyState": 4,
+          "duration": 267.245714,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "netease-static-classic",
+      "at": 1793042380366,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "default",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": false,
+          "time": 22.365137,
+          "readyState": 4,
+          "duration": 267.245714,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "netease-static-studio-return",
+      "at": 1793042412554,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "bilibili",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": false,
+          "time": 54.556292,
+          "readyState": 4,
+          "duration": 267.245714,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "douyin-static-search-completed-before-cancel-attempt",
+      "at": 1793042519329,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "douyin",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 67.751493,
+          "readyState": 4,
+          "duration": 267.245714,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "douyin-static-play-start",
+      "at": 1793042545817,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "douyin",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "douyin-static-play-access-denied",
+      "at": 1793042569943,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "douyin",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "douyin-static-second-play-pending",
+      "at": 1793042600000,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "douyin",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "douyin-static-second-play-result",
+      "at": 1793042611580,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "douyin",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "blob",
+          "host": ""
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "bilibili-private-static-import-start",
+      "at": 1793042639587,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "bilibili",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "blob",
+          "host": ""
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "bilibili-private-first-page-loaded",
+      "at": 1793042669319,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "bilibili",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "blob",
+          "host": ""
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "bilibili-private-next-page-cancel",
+      "at": 1793042699353,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "bilibili",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "blob",
+          "host": ""
+        }
+      ],
+      "roots": 1
+    },
+    {
+      "label": "bilibili-private-explicit-continue",
+      "at": 1793042748921,
+      "origin": "http://127.0.0.1:18867",
+      "theme": "studio",
+      "source": "bilibili",
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "blob",
+          "host": ""
+        }
+      ],
+      "roots": 1
+    }
+  ],
+  "bridge": [
+    {
+      "stage": "begin",
+      "at": 1793042505729,
+      "id": "am-mvpn7ny9-2",
+      "path": "/aweme/v1/web/general/search/stream/",
+      "hasSignature": false
+    },
+    {
+      "stage": "result",
+      "at": 1793042505785,
+      "id": "am-mvpn7ny9-2",
+      "hasSignature": true
+    },
+    {
+      "stage": "cancel",
+      "at": 1793042505785,
+      "id": "am-mvpn7ny9-2",
+      "hasSignature": false
+    },
+    {
+      "stage": "begin",
+      "at": 1793042545660,
+      "id": "am-mvpn8irg-3",
+      "path": "/aweme/v1/web/aweme/detail/",
+      "hasSignature": false
+    },
+    {
+      "stage": "result",
+      "at": 1793042545669,
+      "id": "am-mvpn8irg-3",
+      "hasSignature": true
+    },
+    {
+      "stage": "cancel",
+      "at": 1793042545670,
+      "id": "am-mvpn8irg-3",
+      "hasSignature": false
+    },
+    {
+      "stage": "begin",
+      "at": 1793042599619,
+      "id": "am-mvpn9oeb-4",
+      "path": "/aweme/v1/web/aweme/detail/",
+      "hasSignature": false
+    },
+    {
+      "stage": "result",
+      "at": 1793042599685,
+      "id": "am-mvpn9oeb-4",
+      "hasSignature": true
+    },
+    {
+      "stage": "cancel",
+      "at": 1793042599685,
+      "id": "am-mvpn9oeb-4",
+      "hasSignature": false
+    }
+  ],
+  "cancelProbe": [
+    {
+      "stage": "explicit-browser-load-more",
+      "at": 1793042698469
+    },
+    {
+      "stage": "precision-dom-cancel",
+      "at": 1793042698574
+    }
+  ],
+  "privateFirst": {
+    "label": "bilibili-private-first-page-loaded",
+    "at": 1793042669319,
+    "origin": "http://127.0.0.1:18867",
+    "theme": "studio",
+    "source": "bilibili",
+    "audioCount": 1,
+    "audio": [
+      {
+        "paused": true,
+        "time": 0,
+        "readyState": 0,
+        "duration": null,
+        "urlKind": "blob",
+        "host": ""
+      }
+    ],
+    "roots": 1,
+    "signedIn": true,
+    "trackCount": 28
+  },
+  "privateContinued": {
+    "label": "bilibili-private-explicit-continue",
+    "at": 1793042748921,
+    "origin": "http://127.0.0.1:18867",
+    "theme": "studio",
+    "source": "bilibili",
+    "audioCount": 1,
+    "audio": [
+      {
+        "paused": true,
+        "time": 0,
+        "readyState": 0,
+        "duration": null,
+        "urlKind": "blob",
+        "host": ""
+      }
+    ],
+    "roots": 1,
+    "trackCount": 36
+  },
+  "endedAt": 1793042814952,
+  "measurementLimit": "The first two samples used an incorrect theme-root selector; their roots=0 values are not assertions about mounted roots."
+}
