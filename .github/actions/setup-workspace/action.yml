@@ -26,8 +26,8 @@ runs:
       run: |
         sudo apt-get update
         sudo apt-get install --no-install-recommends -y \
-          libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev \
-          patchelf libssl-dev libkeyutils-dev
+          libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libxdo-dev \
+          patchelf libssl-dev libkeyutils-dev libdbus-1-dev
     - name: Select repository Rust toolchain
       if: inputs.rust == 'true'
       shell: bash

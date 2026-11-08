@@ -36,6 +36,7 @@ runs:
         cmdline-tools-version: '15859902' # 22.0, supports minor API levels such as 37.0
         packages: >-
           platforms;android-${{ inputs.sdk }}
+          platforms;android-36
           build-tools;${{ inputs.build-tools }}
           ndk;${{ inputs.ndk }}
     - name: Select the installed NDK and Rust target
@@ -48,6 +49,7 @@ runs:
       run: |
         ndk_home="${ANDROID_HOME:?Android SDK setup did not set ANDROID_HOME}/ndk/$AM_ANDROID_NDK"
         for file in "$ANDROID_HOME/platforms/android-$AM_ANDROID_SDK/android.jar" \
+                    "$ANDROID_HOME/platforms/android-36/android.jar" \
                     "$ANDROID_HOME/build-tools/$AM_ANDROID_BUILD_TOOLS/source.properties" \
                     "$ndk_home/source.properties"; do
           if [[ ! -f "$file" ]]; then
