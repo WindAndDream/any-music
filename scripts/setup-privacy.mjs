@@ -29,9 +29,11 @@ try {
   const temporary = mkdtempSync(join(directory, 'install-'))
   try {
     const { archiveName, bytes } = await downloadGitleaksArchive(release)
-    const archive = join(temporary, archiveName)
-    writeFileSync(archive, bytes)
-    execFileSync('tar', ['-xf', archive, '-C', temporary, executableName], { stdio: 'pipe' })
+    writeFileSync(join(temporary, archiveName), bytes)
+    // Git Bash can put GNU tar ahead of the Windows tool that supports ZIP archives.
+    const tar =
+      process.platform === 'win32' ? join(process.env.SystemRoot, 'System32', 'tar.exe') : 'tar'
+    execFileSync(tar, ['-xf', archiveName, executableName], { cwd: temporary, stdio: 'pipe' })
     copyFileSync(join(temporary, executableName), executable)
     if (process.platform !== 'win32') chmodSync(executable, 0o755)
     writeFileSync(
