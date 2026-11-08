@@ -7,7 +7,7 @@ runtimeScope: repository
 
 Chinese counterpart: [GitHub Actions 构建与发布](../../../zh-cn/跨平台/架构/GitHubActions构建与发布.md).
 
-The repository has a Windows quality workflow and a release workflow for Userscript, Windows x64, macOS arm64/x64, Linux x64 and Android arm64/x64. Android publication requires release signing; iOS is excluded. These are build configurations, not runtime or plugin-execution admission. The [desktop runtime guide](../../desktop/runtime-architecture.md) and [S16 matrix](plugin-system-s16-mobile-delivery.md) own actual capabilities and remaining acceptance.
+The repository has a Windows quality workflow and a release workflow for Userscript, Windows x64, macOS arm64/x64, Linux x64 and Android arm64/x64. Android publication requires release signing. A separate build check produces an iOS simulator app. The [desktop runtime guide](../../desktop/runtime-architecture.md) and [S16 matrix](plugin-system-s16-mobile-delivery.md) own runtime capabilities, plugin-execution admission and remaining acceptance.
 
 ## Workflows and artifacts
 
@@ -17,7 +17,7 @@ The repository has a Windows quality workflow and a release workflow for Userscr
 
 PRs targeting `main` automatically build the full unsigned candidate matrix against the PR merge commit. `Release candidate checks` succeeds only when all expected builds and artifact verification succeed; a failed or skipped dependency cannot make that gate pass. Ordinary feature/fix PRs targeting `develop` run CI without building every installer. Annotated `v*` tag pushes build signed Android artifacts and enter the protected publication job. Creating a GitHub Release manually does not trigger this workflow.
 
-Android jobs set up pinned SDK command-line tools before installing the declared platform, build-tools and NDK. The platform uses Google's package version (`37.0` for API 37).
+Android jobs set up pinned SDK command-line tools before installing the declared platform, build-tools and NDK. They also install API 36 for the locked Tauri Android libraries. The app platform uses Google's package version (`37.0` for API 37).
 
 | Target            | Output                 | Signing                                               |
 | ----------------- | ---------------------- | ----------------------------------------------------- |
@@ -27,7 +27,7 @@ Android jobs set up pinned SDK command-line tools before installing the declared
 | Linux x64         | `.AppImage`, `.deb`    | Unsigned                                              |
 | Android arm64/x64 | Separate APK/AAB pairs | Candidates unsigned (`-unsigned`); publication signed |
 
-Unsigned Android APKs need signing before installation. Signed APK/AAB builds run the existing signature, signer consistency, manifest, archive and alignment verification. Per-ABI AABs still need distribution-channel acceptance; signing does not establish a validated Play submission. Missing signing secrets fail publication without a debug-key or unsigned fallback. Existing explicit local `build:mobile:android --release --signed` behavior remains available separately.
+Unsigned Android APKs need signing before installation. Signed APK/AAB builds run the existing signature, signer consistency, manifest, archive and alignment verification. Per-ABI AABs still need distribution-channel acceptance; signing does not establish a validated Play submission. Missing signing secrets fail publication without a debug-key or unsigned fallback. For a local signed arm64 build, use `pnpm build:mobile:android aarch64 --release --signed` with the signing environment configured.
 
 ## Configure GitHub before accepting contributions
 
@@ -51,6 +51,33 @@ For local Android key custody on Windows, use a private directory such as `%USER
 After the workflow is on GitHub's default branch, open **Actions → Release → Run workflow**. Leave `publish` disabled. `ref` can be a branch, commit or tag; an empty value uses the selected workflow ref. Every target and the aggregate `distribution-assets` artifact is retained for 14 days. A Git tag is unnecessary for this build-only path.
 
 All jobs build the resolved commit. Build-only artifacts use that commit's product version for filenames and metadata, even when no matching tag exists. Publishing always requires the existing exact product tag and a clean source checkout. Local staging records `sourceDirty: true` when source changes are uncommitted; those artifacts cannot be published by this workflow.
+
+### Build a single target locally
+
+Run `pnpm release:build --list` from the repository root to list the targets and formats. Pass one target ID to stage the same assets as CI under `dist/release/<target>/`.
+
+| Command                            | Build host or toolchain                                       |
+| ---------------------------------- | ------------------------------------------------------------- |
+| `pnpm release:build userscript`    | Any host with Node and pnpm                                   |
+| `pnpm release:build windows-x64`   | Windows with the x64 MSVC Rust toolchain                      |
+| `pnpm release:build macos-arm64`   | Apple Silicon Mac with Xcode and the arm64 Rust toolchain     |
+| `pnpm release:build macos-x64`     | Intel Mac with Xcode and the x64 Rust toolchain               |
+| `pnpm release:build linux-x64`     | Linux x64 with WebKitGTK 4.1 and Tauri packaging dependencies |
+| `pnpm release:build android-arm64` | Android SDK/NDK and the `aarch64-linux-android` Rust target   |
+| `pnpm release:build android-x64`   | Android SDK/NDK and the `x86_64-linux-android` Rust target    |
+
+On Linux, CI builds on Ubuntu 22.04. Install the [Tauri system dependencies](https://v2.tauri.app/start/prerequisites/#linux), `patchelf` for AppImage packaging, and `libkeyutils-dev` and `libdbus-1-dev` for the native keyring. Set `APPIMAGE_EXTRACT_AND_RUN=1` when building in a container without FUSE access. The [Android setup guide](../../../../README.en.md#android-development) lists the SDK packages and local signing commands.
+
+### Build for iOS on macOS
+
+Run **Actions → iOS build check → Run workflow** to build an unsigned arm64 simulator `.app` from the selected ref. Its ZIP is a separate Actions artifact. On an Apple Silicon Mac with Xcode and the iOS simulator runtime installed, these commands generate the Xcode project and build the app without starting a simulator.
+
+```sh
+pnpm --filter @any-music/tauri tauri ios init
+pnpm --filter @any-music/tauri tauri ios build --target aarch64-sim --no-sign -- --locked --no-default-features
+```
+
+For a device build, use Xcode and an iOS SDK that meet [Apple's submission requirements](https://developer.apple.com/news/upcoming-requirements/). Configure an Apple Developer team, distribution certificate and provisioning profile for `com.anymusic.app`, then run `pnpm build:mobile:ios` from the repository root. This invokes the App Store Connect export for arm64 and places the IPA under `apps/tauri/src-tauri/gen/apple/build/arm64/`. iOS has no maintained Xcode project, signed build evidence or channel acceptance yet and remains outside the GitHub Release matrix. See [Tauri iOS code signing](https://v2.tauri.app/distribute/sign/ios/).
 
 ## Prepare and publish a version
 

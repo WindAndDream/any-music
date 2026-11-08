@@ -84,7 +84,7 @@ pnpm privacy:setup
 ### 用户脚本
 
 ```bash
-pnpm dev:userscript       # 启动 dev 环境开发入口，pnpm dev 为等价入口
+pnpm dev                  # 启动用户脚本的 dev 环境
 pnpm build:userscript     # 仅构建 prod 环境用户脚本
 ```
 
@@ -111,7 +111,7 @@ pnpm bundle:tauri         # 生成当前平台的安装包
 
 构建安装包不代表已完成签名、自动更新或分发验收；其他操作系统仍需各自的构建依赖与验证。详见[桌面运行端](docs/zh-cn/桌面端/运行端架构.md)。
 
-自动候选构建、已签名 Android 发布和 Tag 触发的 GitHub Release 见[GitHub Actions 构建与发布](docs/zh-cn/跨平台/架构/GitHubActions构建与发布.md)。手动运行默认只构建。
+各平台构建命令、iOS 构建检查、Android 签名与 Tag 触发的 GitHub Release 见[GitHub Actions 构建与发布](docs/zh-cn/跨平台/架构/GitHubActions构建与发布.md)。手动运行默认只构建。
 
 ### Android 开发
 
@@ -239,12 +239,12 @@ x86_64 模拟器改用上表对应的 APK。覆盖安装需要与已有应用的
 
 支持 `dev`、`staging`、`prod` 三种模式，配置位于根目录 `.env.<mode>`：
 
-| 用途           | 命令                                                                                         |
-| -------------- | -------------------------------------------------------------------------------------------- |
-| 用户脚本开发   | `pnpm dev:userscript:dev` / `pnpm dev:userscript:staging` / `pnpm dev:userscript:prod`       |
-| 仅构建用户脚本 | `pnpm build:userscript:dev` / `pnpm build:userscript:staging` / `pnpm build:userscript:prod` |
-| 仅构建桌面端   | `pnpm build:tauri:dev` / `pnpm build:tauri:staging` / `pnpm build:tauri:prod`                |
-| 全仓库构建     | `pnpm build:dev` / `pnpm build:staging` / `pnpm build:prod`                                  |
+| 用途           | 命令                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------- |
+| 用户脚本开发   | `pnpm dev` / `pnpm dev:staging` / `pnpm dev:prod`                                       |
+| 仅构建用户脚本 | `pnpm build:userscript:dev` / `pnpm build:userscript:staging` / `pnpm build:userscript` |
+| 仅构建桌面端   | `pnpm build:tauri:dev` / `pnpm build:tauri:staging` / `pnpm build:tauri`                |
+| 全仓库构建     | `pnpm build:dev` / `pnpm build:staging` / `pnpm build`                                  |
 
 `pnpm dev` 默认使用 `dev`，`pnpm build` 默认使用 `prod`。业务代码通过 `import.meta.env.VITE_APP_ENV`（`'dev' | 'staging' | 'prod'`）与 `VITE_APP_DEBUG`（`'true' | 'false'`）读取环境。所有 `VITE_` 值会进入客户端产物，环境文件中不要保存密钥。
 

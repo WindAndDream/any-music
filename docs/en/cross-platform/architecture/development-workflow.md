@@ -34,7 +34,7 @@ Chinese counterpart: [开发工作流](../../../zh-cn/跨平台/架构/开发工
 
 - Keep pnpm workspace, catalog and recursive scripts; internal dependencies use `workspace:*`. Before adding libraries assess native/CSS alternatives, browser ESM, maintenance, license, tests, tree-shaking and measured bundle growth.
 - Name deployable applications `@any-music/<app>` with build:dev/staging/prod; application build defaults to prod.
-- Add root `build:<app>:<mode>` scripts using `pnpm --filter @any-music/<app> run build:<mode>` and a prod-default `build:<app>`. Root mode scripts continue recursively covering every eligible application; root build defaults to prod.
+- Use `build:<app>` for a production build and `build:<app>:dev` or `build:<app>:staging` for other modes. Root `build`, `build:dev` and `build:staging` recursively build eligible packages in their respective modes.
 - Do not add empty future-runtime directories or forwarding packages. Require a stable reused responsibility for new packages. Evaluate orchestration tools only for measured CI bottlenecks, affected graphs/remote caching or multi-team task ownership.
 - Bundle userscript dependencies by default. External @require needs a pinned version, size measurements and documented offline/cache behavior. Mobile pruning needs a real entry point and output inspection.
 

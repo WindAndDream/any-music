@@ -84,7 +84,7 @@ Reopen the terminal, IDE or Codex after installation so processes load the new e
 ### Userscript
 
 ```bash
-pnpm dev:userscript       # Start development in dev mode; pnpm dev is equivalent
+pnpm dev                  # Start Userscript development in dev mode
 pnpm build:userscript     # Build only the userscript in prod mode
 ```
 
@@ -239,12 +239,12 @@ For an x86_64 emulator, use its APK from the table instead. Replacement installs
 
 The repository supports `dev`, `staging` and `prod`, configured in root `.env.<mode>` files:
 
-| Purpose                | Commands                                                                                     |
-| ---------------------- | -------------------------------------------------------------------------------------------- |
-| Userscript development | `pnpm dev:userscript:dev` / `pnpm dev:userscript:staging` / `pnpm dev:userscript:prod`       |
-| Userscript-only build  | `pnpm build:userscript:dev` / `pnpm build:userscript:staging` / `pnpm build:userscript:prod` |
-| Desktop-only build     | `pnpm build:tauri:dev` / `pnpm build:tauri:staging` / `pnpm build:tauri:prod`                |
-| Repository-wide build  | `pnpm build:dev` / `pnpm build:staging` / `pnpm build:prod`                                  |
+| Purpose                | Commands                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| Userscript development | `pnpm dev` / `pnpm dev:staging` / `pnpm dev:prod`                                       |
+| Userscript-only build  | `pnpm build:userscript:dev` / `pnpm build:userscript:staging` / `pnpm build:userscript` |
+| Desktop-only build     | `pnpm build:tauri:dev` / `pnpm build:tauri:staging` / `pnpm build:tauri`                |
+| Repository-wide build  | `pnpm build:dev` / `pnpm build:staging` / `pnpm build`                                  |
 
 `pnpm dev` defaults to `dev`; `pnpm build` defaults to `prod`. Application code reads `import.meta.env.VITE_APP_ENV` (`'dev' | 'staging' | 'prod'`) and `VITE_APP_DEBUG` (`'true' | 'false'`). All `VITE_` values enter client output, so environment files must contain no secrets.
 

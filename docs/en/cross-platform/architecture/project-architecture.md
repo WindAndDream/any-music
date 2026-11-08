@@ -336,9 +336,6 @@ pnpm install           # Install all workspace dependencies
 pnpm dev               # Start the product userscript in dev mode
 pnpm dev:staging       # Start the product userscript in staging mode
 pnpm dev:prod          # Start the product userscript in prod mode
-pnpm dev:userscript    # Explicit alias for product userscript dev mode
-pnpm dev:userscript:staging # Start the product userscript in staging mode
-pnpm dev:userscript:prod  # Start the product userscript in prod mode
 pnpm typecheck         # Check all applications and shared packages
 pnpm test              # Run domain algorithm and manifest validation tests
 pnpm lint              # Run oxlint
