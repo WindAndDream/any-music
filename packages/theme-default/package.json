@@ -1,0 +1,34 @@
+{
+  "name": "@any-music/theme-default",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "**/*.scss"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./vue": "./src/vue.ts",
+    "./styles": "./src/styles/index.scss"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@any-music/card-styles": "workspace:*",
+    "@any-music/core": "workspace:*",
+    "@any-music/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "sass": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
+  },
+  "peerDependencies": {
+    "vue": "catalog:"
+  }
+}

@@ -1,0 +1,50 @@
+Browser tab: 1, Title: "Any Music", URL: "http://localhost:18766/index.html?preview=gm-r4".
+1 AXWebArea Any Music, URL: localhost:18766/index.html?preview=gm-r4
+	2 container
+		3 container Any Music 工作室
+			4 container
+				5 button 关闭
+				6 container 设置
+					7 container
+						8 heading 设置, Value: 2, ID: v-54-title
+							9 text 设置
+						10 button 关闭
+					11 container 全局设置
+						12 container 设置分类
+							13 button 外观与布局
+							14 button 导航管理
+							15 button 音乐源管理
+							16 button 请求代理
+							17 button 歌曲下载
+							18 button 资源缓存
+							19 button 播放历史
+							20 button 筛选历史
+							21 button 创作者资料
+						22 container
+							23 heading 请求代理, Value: 2
+								24 text 请求代理
+							25 text 启用请求代理
+							26 text 未启用，当前使用直连。已保存的配置会保留。
+							27 switch Description: 启用请求代理, Value: 0
+							28 container
+								29 heading 代理配置, Value: 4
+									30 text 代理配置
+								31 text 类型
+								32 pop up button (collapsed, settable) 类型, Value: HTTP, Secondary Actions: Expand
+									33 menu
+										34 (selected) HTTP
+										35 HTTPS
+										36 SOCKS5
+										37 SOCKS4
+								38 text 端口
+								39 stepper (settable, integer) 端口, Value: 8080
+								40 text 主机
+								41 text field (settable) 主机
+								42 text 用户名（可选）
+								43 text field (settable) 用户名（可选）
+								44 text 密码（可选）
+								45 text field (settable) 密码（可选）
+								46 text 填写域名或 IP 即可，无需协议与端口。关闭代理时也可以编辑并保存配置。 代理用于平台 API、媒体下载和分段读取。当前由 Firefox 版 Tampermonkey 5.5+ 支持，其他环境保持直连。 代理凭据保存在当前脚本的 Tampermonkey 存储中。
+								47 button 保存代理配置
+
+The focused UI element is 43 text field (settable) 用户名（可选）

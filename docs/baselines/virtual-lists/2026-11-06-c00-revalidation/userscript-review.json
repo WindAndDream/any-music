@@ -1,0 +1,1381 @@
+{
+  "date": "2026-11-06",
+  "runtimeScope": "userscript",
+  "admission": false,
+  "runtime": "Installed Tampermonkey5.5.1 development script, Chrome156.0.8078.76, real GM storage and actual Shadow host; not production grants/artifact acceptance",
+  "sourceStage": "After semantic Map and containment corrections; setup service restarted and actual injected stylesheet checked",
+  "css": {
+    "contain": "content",
+    "contentVisibility": "visible",
+    "intrinsic": "none",
+    "hasContainRule": true,
+    "viewport": [1440, 1000],
+    "styleCount": 1,
+    "cardClasses": "track-card track"
+  },
+  "performance": {
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "dpr": 1.75
+    },
+    "method": "Separate process per phase, native window resize; no focus/viewport emulation or timer-simulated frames.9s operation, sidebar up to12 reversals every700ms, scroll1200 CSS px/s. Exclusive timing, no test/build load. Native rAF idle near5.9ms; these are intervals, not presented-frame or per-frame CPU measurements.",
+    "cases": [
+      {
+        "count": 80,
+        "candidate": false,
+        "initialMounted": 80,
+        "viewRemountAndSettleMs": 1076.5999999940395,
+        "phases": [
+          {
+            "kind": "scroll",
+            "frameIntervals": {
+              "samples": 1530,
+              "p50Ms": 5.899999999994179,
+              "p95Ms": 6,
+              "p99Ms": 6,
+              "maxMs": 6,
+              "over16_7Ms": 0,
+              "over33_4Ms": 0
+            },
+            "durationMs": 8999.899999999994,
+            "toggles": 0,
+            "longTaskCount": 0,
+            "maxLongTaskMs": 0,
+            "maxMountedChildren": 80,
+            "metrics": {
+              "LayoutCount": 0,
+              "RecalcStyleCount": 0,
+              "LayoutDuration": 0,
+              "RecalcStyleDuration": 0,
+              "ScriptDuration": 0.005626000000000001,
+              "TaskDuration": 0.692128
+            },
+            "log": "gm-fresh-performance-80-false-scroll.log"
+          },
+          {
+            "kind": "sidebar",
+            "frameIntervals": {
+              "samples": 1181,
+              "p50Ms": 5.899999999994179,
+              "p95Ms": 17.70000000001164,
+              "p99Ms": 23.60000000000582,
+              "maxMs": 35.20000000001164,
+              "over16_7Ms": 152,
+              "over33_4Ms": 1
+            },
+            "durationMs": 8999.899999999994,
+            "toggles": 12,
+            "longTaskCount": 0,
+            "maxLongTaskMs": 0,
+            "maxMountedChildren": 80,
+            "metrics": {
+              "LayoutCount": 163,
+              "RecalcStyleCount": 772,
+              "LayoutDuration": 0.722172,
+              "RecalcStyleDuration": 1.559072,
+              "ScriptDuration": 0.029429999999999998,
+              "TaskDuration": 3.187263
+            },
+            "log": "gm-fresh-performance-80-false-sidebar.log"
+          }
+        ]
+      },
+      {
+        "count": 80,
+        "candidate": true,
+        "initialMounted": 16,
+        "viewRemountAndSettleMs": 1019.5,
+        "phases": [
+          {
+            "kind": "scroll",
+            "frameIntervals": {
+              "samples": 1497,
+              "p50Ms": 5.899999999994179,
+              "p95Ms": 6,
+              "p99Ms": 11.800000000017462,
+              "maxMs": 23.60000000000582,
+              "over16_7Ms": 14,
+              "over33_4Ms": 0
+            },
+            "durationMs": 9005.800000000017,
+            "toggles": 0,
+            "longTaskCount": 0,
+            "maxLongTaskMs": 0,
+            "maxMountedChildren": 32,
+            "metrics": {
+              "LayoutCount": 66,
+              "RecalcStyleCount": 2186,
+              "LayoutDuration": 0.04698,
+              "RecalcStyleDuration": 0.382177,
+              "ScriptDuration": 0.071491,
+              "TaskDuration": 1.203884
+            },
+            "log": "gm-fresh-performance-80-true-scroll.log"
+          },
+          {
+            "kind": "sidebar",
+            "frameIntervals": {
+              "samples": 1124,
+              "p50Ms": 5.900000000023283,
+              "p95Ms": 29.399999999965075,
+              "p99Ms": 35.29999999998836,
+              "maxMs": 41.29999999998836,
+              "over16_7Ms": 112,
+              "over33_4Ms": 20
+            },
+            "durationMs": 9005.700000000012,
+            "toggles": 12,
+            "longTaskCount": 0,
+            "maxLongTaskMs": 0,
+            "maxMountedChildren": 16,
+            "metrics": {
+              "LayoutCount": 608,
+              "RecalcStyleCount": 8967,
+              "LayoutDuration": 0.5765060000000001,
+              "RecalcStyleDuration": 1.370963,
+              "ScriptDuration": 0.043126000000000005,
+              "TaskDuration": 3.528973
+            },
+            "log": "gm-fresh-performance-80-true-sidebar.log"
+          }
+        ]
+      },
+      {
+        "count": 1000,
+        "candidate": false,
+        "initialMounted": 1000,
+        "viewRemountAndSettleMs": 1901.9000000059605,
+        "phases": [
+          {
+            "kind": "scroll",
+            "frameIntervals": {
+              "samples": 1508,
+              "p50Ms": 5.899999999965075,
+              "p95Ms": 6,
+              "p99Ms": 11.700000000011642,
+              "maxMs": 17.600000000034925,
+              "over16_7Ms": 1,
+              "over33_4Ms": 0
+            },
+            "durationMs": 8999.900000000023,
+            "toggles": 0,
+            "longTaskCount": 0,
+            "maxLongTaskMs": 0,
+            "maxMountedChildren": 1000,
+            "metrics": {
+              "LayoutCount": 0,
+              "RecalcStyleCount": 0,
+              "LayoutDuration": 0,
+              "RecalcStyleDuration": 0,
+              "ScriptDuration": 0.009687000000000001,
+              "TaskDuration": 6.631059
+            },
+            "log": "gm-fresh-performance-1000-false-scroll.log"
+          },
+          {
+            "kind": "sidebar",
+            "frameIntervals": {
+              "samples": 296,
+              "p50Ms": 5.900000000023283,
+              "p95Ms": 217.59999999997672,
+              "p99Ms": 241.20000000001164,
+              "maxMs": 288.20000000001164,
+              "over16_7Ms": 36,
+              "over33_4Ms": 36
+            },
+            "durationMs": 8999.900000000023,
+            "toggles": 12,
+            "longTaskCount": 36,
+            "maxLongTaskMs": 295,
+            "maxMountedChildren": 1000,
+            "metrics": {
+              "LayoutCount": 36,
+              "RecalcStyleCount": 144,
+              "LayoutDuration": 1.344805,
+              "RecalcStyleDuration": 4.610358,
+              "ScriptDuration": 0.058490999999999994,
+              "TaskDuration": 7.701879999999999
+            },
+            "log": "gm-fresh-performance-1000-false-sidebar.log"
+          }
+        ]
+      },
+      {
+        "count": 1000,
+        "candidate": true,
+        "initialMounted": 16,
+        "viewRemountAndSettleMs": 1039.7000000029802,
+        "phases": [
+          {
+            "kind": "scroll",
+            "frameIntervals": {
+              "samples": 1438,
+              "p50Ms": 5.899999999965075,
+              "p95Ms": 6,
+              "p99Ms": 17.70000000001164,
+              "maxMs": 23.600000000034925,
+              "over16_7Ms": 37,
+              "over33_4Ms": 0
+            },
+            "durationMs": 8999.900000000023,
+            "toggles": 0,
+            "longTaskCount": 0,
+            "maxLongTaskMs": 0,
+            "maxMountedChildren": 32,
+            "metrics": {
+              "LayoutCount": 160,
+              "RecalcStyleCount": 5417,
+              "LayoutDuration": 0.11233,
+              "RecalcStyleDuration": 0.943451,
+              "ScriptDuration": 0.12961699999999998,
+              "TaskDuration": 2.597533
+            },
+            "log": "gm-fresh-performance-1000-true-scroll.log"
+          },
+          {
+            "kind": "sidebar",
+            "frameIntervals": {
+              "samples": 1088,
+              "p50Ms": 5.900000000023283,
+              "p95Ms": 29.400000000023283,
+              "p99Ms": 35.29999999998836,
+              "maxMs": 53,
+              "over16_7Ms": 117,
+              "over33_4Ms": 34
+            },
+            "durationMs": 8999.799999999988,
+            "toggles": 12,
+            "longTaskCount": 1,
+            "maxLongTaskMs": 53,
+            "maxMountedChildren": 16,
+            "metrics": {
+              "LayoutCount": 574,
+              "RecalcStyleCount": 8431,
+              "LayoutDuration": 0.543466,
+              "RecalcStyleDuration": 1.300638,
+              "ScriptDuration": 0.06834,
+              "TaskDuration": 3.6462369999999997
+            },
+            "log": "gm-fresh-performance-1000-true-sidebar.log"
+          }
+        ]
+      },
+      {
+        "count": 10000,
+        "candidate": false,
+        "initialMounted": 10000,
+        "viewRemountAndSettleMs": 10621.59999999404,
+        "phases": [
+          {
+            "kind": "scroll",
+            "frameIntervals": {
+              "samples": 192,
+              "p50Ms": 35.40000000002328,
+              "p95Ms": 100,
+              "p99Ms": 117.70000000001164,
+              "maxMs": 176.39999999996508,
+              "over16_7Ms": 191,
+              "over33_4Ms": 191
+            },
+            "durationMs": 9023.400000000023,
+            "toggles": 0,
+            "longTaskCount": 27,
+            "maxLongTaskMs": 178,
+            "maxMountedChildren": 10000,
+            "metrics": {
+              "LayoutCount": 0,
+              "RecalcStyleCount": 0,
+              "LayoutDuration": 0,
+              "RecalcStyleDuration": 0,
+              "ScriptDuration": 0.0026650000000000007,
+              "TaskDuration": 9.246067
+            },
+            "log": "gm-fresh-performance-10000-false-scroll.log"
+          },
+          {
+            "kind": "sidebar",
+            "frameIntervals": {
+              "samples": 4,
+              "p50Ms": 1823.399999999965,
+              "p95Ms": 4076.4000000000233,
+              "p99Ms": 4076.4000000000233,
+              "maxMs": 4076.4000000000233,
+              "over16_7Ms": 4,
+              "over33_4Ms": 4
+            },
+            "durationMs": 9464.600000000035,
+            "toggles": 5,
+            "longTaskCount": 4,
+            "maxLongTaskMs": 4076,
+            "maxMountedChildren": 10000,
+            "metrics": {
+              "LayoutCount": 5,
+              "RecalcStyleCount": 14,
+              "LayoutDuration": 0.6542789999999998,
+              "RecalcStyleDuration": 7.69519,
+              "ScriptDuration": 0.16712,
+              "TaskDuration": 11.427433999999998
+            },
+            "log": "gm-fresh-performance-10000-false-sidebar.log"
+          }
+        ]
+      },
+      {
+        "count": 10000,
+        "candidate": true,
+        "initialMounted": 12,
+        "viewRemountAndSettleMs": 1160,
+        "phases": [
+          {
+            "kind": "scroll",
+            "frameIntervals": {
+              "samples": 1455,
+              "p50Ms": 5.900000000023283,
+              "p95Ms": 6,
+              "p99Ms": 11.799999999988358,
+              "maxMs": 194,
+              "over16_7Ms": 6,
+              "over33_4Ms": 1
+            },
+            "durationMs": 8999.899999999965,
+            "toggles": 0,
+            "longTaskCount": 0,
+            "maxLongTaskMs": 0,
+            "maxMountedChildren": 24,
+            "metrics": {
+              "LayoutCount": 165,
+              "RecalcStyleCount": 4234,
+              "LayoutDuration": 0.092028,
+              "RecalcStyleDuration": 0.702763,
+              "ScriptDuration": 0.12645,
+              "TaskDuration": 2.4370789999999998
+            },
+            "log": "gm-fresh-performance-10000-true-scroll.log"
+          },
+          {
+            "kind": "sidebar",
+            "frameIntervals": {
+              "samples": 677,
+              "p50Ms": 5.900000000023283,
+              "p95Ms": 29.400000000023283,
+              "p99Ms": 300,
+              "maxMs": 317.5999999999767,
+              "over16_7Ms": 66,
+              "over33_4Ms": 31
+            },
+            "durationMs": 8999.900000000023,
+            "toggles": 12,
+            "longTaskCount": 14,
+            "maxLongTaskMs": 322,
+            "maxMountedChildren": 16,
+            "metrics": {
+              "LayoutCount": 308,
+              "RecalcStyleCount": 4754,
+              "LayoutDuration": 0.335667,
+              "RecalcStyleDuration": 0.8380599999999999,
+              "ScriptDuration": 0.404164,
+              "TaskDuration": 5.718011
+            },
+            "log": "gm-fresh-performance-10000-true-sidebar.log"
+          }
+        ]
+      }
+    ],
+    "limits": [
+      "GM continuously checks document visibility; document focus is checked at phase end, without continuous OS foreground monitoring.",
+      "10k baseline sidebar yields too few frames/toggles for reliable tail quantiles; retain counts as severe stalls, not accepted p95/p99.",
+      "View navigation timing includes intentional settling waits; cold-mount CPU, image decode and metadata-Map memory remain separate open gates.",
+      "10k candidate scroll retains a194ms max interval despite zero Long Task entries; do not claim an upper frame bound."
+    ]
+  },
+  "visual": {
+    "method": "Exact RGBA comparison of shared visible card rectangles and full screenshots; synthetic1000 tracks without artwork. Crops include overlay-covered portions; inspect any differences instead of assuming parity.",
+    "cases": [
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "minimal",
+          "density": "comfortable",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-comfortable-1440-1-baseline.png",
+            "sha256": "4867338ed481746e899d5e8524ea976ec2d61a800e83dbbdd0ca73d80c7f7303"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-comfortable-1440-1-candidate.png",
+            "sha256": "4867338ed481746e899d5e8524ea976ec2d61a800e83dbbdd0ca73d80c7f7303"
+          }
+        ],
+        "mounted": [1000, 8]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "minimal",
+          "density": "standard",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-standard-1440-1-baseline.png",
+            "sha256": "0f10a36f6d3902137cfa18dc8f73251276267ceab6287610b2487eb726b79e4f"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-standard-1440-1-candidate.png",
+            "sha256": "0f10a36f6d3902137cfa18dc8f73251276267ceab6287610b2487eb726b79e4f"
+          }
+        ],
+        "mounted": [1000, 12]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "minimal",
+          "density": "compact",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-compact-1440-1-baseline.png",
+            "sha256": "11f38b7c80c51d473872c8e71c437f3ac36dcaf830952736ccfd173e82e2cb1b"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-compact-1440-1-candidate.png",
+            "sha256": "11f38b7c80c51d473872c8e71c437f3ac36dcaf830952736ccfd173e82e2cb1b"
+          }
+        ],
+        "mounted": [1000, 20]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "default",
+          "density": "comfortable",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-comfortable-1440-1-baseline.png",
+            "sha256": "13afe62fc7ba49b5a8ea946cd0a82440b0f7cd8e4b7ea9acf6189558096019b8"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-comfortable-1440-1-candidate.png",
+            "sha256": "13afe62fc7ba49b5a8ea946cd0a82440b0f7cd8e4b7ea9acf6189558096019b8"
+          }
+        ],
+        "mounted": [1000, 12]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "default",
+          "density": "standard",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-standard-1440-1-baseline.png",
+            "sha256": "dd0cdd789fb71b86a499ab2dec159636bc369e78a8b4b62b588d2cdb2280ea33"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-standard-1440-1-candidate.png",
+            "sha256": "dd0cdd789fb71b86a499ab2dec159636bc369e78a8b4b62b588d2cdb2280ea33"
+          }
+        ],
+        "mounted": [1000, 12]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "default",
+          "density": "compact",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-compact-1440-1-baseline.png",
+            "sha256": "1440d68381a5d6a8ed4f5291ae9174bfddc6d26f53a434d13e8c8ff26922950f"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-compact-1440-1-candidate.png",
+            "sha256": "1440d68381a5d6a8ed4f5291ae9174bfddc6d26f53a434d13e8c8ff26922950f"
+          }
+        ],
+        "mounted": [1000, 16]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "minimal",
+          "density": "comfortable",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-minimal-comfortable-1440-1-baseline.png",
+            "sha256": "411cdd98db1332213f7472795d66a93c6d1b953e1dfc27e72d7632f647aa35be"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-minimal-comfortable-1440-1-candidate.png",
+            "sha256": "411cdd98db1332213f7472795d66a93c6d1b953e1dfc27e72d7632f647aa35be"
+          }
+        ],
+        "mounted": [1000, 8]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "minimal",
+          "density": "standard",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-minimal-standard-1440-1-baseline.png",
+            "sha256": "41d6253f37230bcb49347e422cb95e3b60510ed6b0ae346daffda6f87bf30909"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-minimal-standard-1440-1-candidate.png",
+            "sha256": "41d6253f37230bcb49347e422cb95e3b60510ed6b0ae346daffda6f87bf30909"
+          }
+        ],
+        "mounted": [1000, 12]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "minimal",
+          "density": "compact",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-minimal-compact-1440-1-baseline.png",
+            "sha256": "eca137a315b836cef8ac7b2397ccc276a43d51ef3358219e634b17de9464d2be"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-minimal-compact-1440-1-candidate.png",
+            "sha256": "eca137a315b836cef8ac7b2397ccc276a43d51ef3358219e634b17de9464d2be"
+          }
+        ],
+        "mounted": [1000, 20]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "default",
+          "density": "comfortable",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 2,
+        "changedBounds": [978, 405, 981, 569],
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 1
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 1
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": false,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-default-comfortable-1440-1-baseline.png",
+            "sha256": "9e53fe3c4e324f8abea1abd938e3d5fd9ee72650306078a8aa1bc8f4d1a79d07"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-default-comfortable-1440-1-candidate.png",
+            "sha256": "89162f918974d75fcb653f5e2a5d50537616b7742aa62ed220c1d0842b638a00"
+          }
+        ],
+        "mounted": [1000, 12]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "default",
+          "density": "standard",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-default-standard-1440-1-baseline.png",
+            "sha256": "0073f86b50b0a5a20793c16c5c7c4bfdb578d566e4566783d707612495db4ffd"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-default-standard-1440-1-candidate.png",
+            "sha256": "0073f86b50b0a5a20793c16c5c7c4bfdb578d566e4566783d707612495db4ffd"
+          }
+        ],
+        "mounted": [1000, 12]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "default",
+          "density": "compact",
+          "width": 1440,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 1440,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-default-compact-1440-1-baseline.png",
+            "sha256": "85de49444045c6e15f167f56c34b699c8281c47d3c4558e2ab817a3180bc8076"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-dark-default-compact-1440-1-candidate.png",
+            "sha256": "85de49444045c6e15f167f56c34b699c8281c47d3c4558e2ab817a3180bc8076"
+          }
+        ],
+        "mounted": [1000, 16]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "minimal",
+          "density": "standard",
+          "width": 375,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 375,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-standard-375-1-baseline.png",
+            "sha256": "ba1213f3d5463428c86b3f270c4b6401306ffd53a912720279a55aea37ead8cc"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-standard-375-1-candidate.png",
+            "sha256": "ba1213f3d5463428c86b3f270c4b6401306ffd53a912720279a55aea37ead8cc"
+          }
+        ],
+        "mounted": [1000, 7]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "minimal",
+          "density": "standard",
+          "width": 375,
+          "columns": 2
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 375,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-standard-375-2-baseline.png",
+            "sha256": "c5be606f34fb74d82b2b40de7a98e0b0bc0977e6fdb137a64df02637b5e1bb0b"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-minimal-standard-375-2-candidate.png",
+            "sha256": "c5be606f34fb74d82b2b40de7a98e0b0bc0977e6fdb137a64df02637b5e1bb0b"
+          }
+        ],
+        "mounted": [1000, 10]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "default",
+          "density": "standard",
+          "width": 375,
+          "columns": 1
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 375,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-standard-375-1-baseline.png",
+            "sha256": "e58d702923da47980169179ff33338ec1e8153384510fce179c4f36e90bf2b7b"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-standard-375-1-candidate.png",
+            "sha256": "e58d702923da47980169179ff33338ec1e8153384510fce179c4f36e90bf2b7b"
+          }
+        ],
+        "mounted": [1000, 6]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "default",
+          "density": "standard",
+          "width": 375,
+          "columns": 2
+        },
+        "rectangleMismatches": 0,
+        "screenshotPixels": {
+          "width": 375,
+          "height": 1000
+        },
+        "totalChangedPixels": 0,
+        "changedBounds": null,
+        "visibleCards": [
+          {
+            "id": "c00-live:80",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:81",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:82",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:83",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:84",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:85",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:86",
+            "changedPixels": 0
+          },
+          {
+            "id": "c00-live:87",
+            "changedPixels": 0
+          }
+        ],
+        "allSharedVisibleCardPixelsEqual": true,
+        "screenshots": [
+          {
+            "candidate": false,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-standard-375-2-baseline.png",
+            "sha256": "1fa2b2cafeb6aabf0e4309d9a7f6b37f841d00404ce7f907999111913028bdf9"
+          },
+          {
+            "candidate": true,
+            "path": "logs/2026-11-06-virtual-list-implementation/gm-fresh-visual-light-default-standard-375-2-candidate.png",
+            "sha256": "1fa2b2cafeb6aabf0e4309d9a7f6b37f841d00404ce7f907999111913028bdf9"
+          }
+        ],
+        "mounted": [1000, 14]
+      }
+    ],
+    "summary": "All16 shared visible card rectangles match.15 complete screenshot pairs match exactly; dark/default/comfortable has2 differing pixels. No artwork/system-theme or physical-device acceptance."
+  },
+  "excludedAttempts": [
+    "Timed-out/hidden rAF attempts before native-window setup.",
+    "Initial GM matrix and Map-only timing used the development server startup stylesheet without the new containment rule. Those are not final CSS acceptance; gm-css-diagnostic.json vs gm-css-refreshed.json records the stale bank and verified restart."
+  ],
+  "cleanup": {
+    "cleanup": true,
+    "removedSyntheticKeys": 13,
+    "fixtureTracks": 10000,
+    "preservedBrowserProfile": true,
+    "preservedExtension": true
+  },
+  "cleanupAudit": {
+    "setupPid": 21396,
+    "browserPid": 8452,
+    "remainingOwnedListeners": 0,
+    "browserRootRemaining": false,
+    "setupRemaining": false
+  },
+  "logDirectory": "logs/2026-11-06-virtual-list-implementation"
+}

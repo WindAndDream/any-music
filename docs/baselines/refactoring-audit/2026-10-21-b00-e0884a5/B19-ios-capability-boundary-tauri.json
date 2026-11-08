@@ -1,0 +1,167 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "parentBatch": "B19",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T15:52:40.050Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-mobile-capability-boundaries-tauri-baseline.json",
+  "declaredStatus": {
+    "claim": "S16 remains in progress. Android adapter/reference-device evidence is bounded; iOS has configuration only. Both mobile external policies remain none.",
+    "references": [
+      "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:10-19",
+      "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:28-39"
+    ]
+  },
+  "verification": [
+    {
+      "kind": "static",
+      "result": "pass",
+      "command": "pnpm check:mobile:boundaries",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:43:59.609Z",
+      "log": ".codex-tmp/refactoring-audit-b19/boundaries.log",
+      "scope": "Current Android/iOS ACL, platform selectors, Android API 26 and loopback-only WebView cleartext configuration; offline only."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "node --test scripts/test/check-mobile-boundaries.test.mjs",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:44:00.308Z",
+      "log": ".codex-tmp/refactoring-audit-b19/boundary-tests.log",
+      "scope": "2 tests; includes negative configuration mutations rejecting privilege expansion, remote/wildcard views and weakened minimum/network configuration."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/configure-tauri-workbench.test.ts",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:46:09.895Z",
+      "log": ".codex-tmp/refactoring-audit-b19/renderer-capabilities.log",
+      "scope": "7 tests; unavailable mobile operations, failed discovery, inert Android preview port and provided Android account/media/save composition. IPC/account initialization are mocks."
+    },
+    {
+      "kind": "tests",
+      "result": "fail",
+      "command": "cargo test -p any-music-tauri --lib system::capabilities::tests --locked",
+      "exitCode": 101,
+      "recordedAt": "2026-10-21T15:45:29.339Z",
+      "log": ".codex-tmp/refactoring-audit-b19/native-capabilities.log",
+      "scope": "Initial run did not execute tests: concurrent packages/tests.rs declaration referenced missing packages/rollback_tests.rs. Retained as failed build evidence, not a B19 functional failure."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib system::capabilities::tests --locked",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:51:29.739Z",
+      "log": ".codex-tmp/refactoring-audit-b19/native-capabilities-retry.log",
+      "scope": "Retry after the external file appeared: 3 platform-matrix tests on Windows host; not Android/iOS execution or real IPC denial."
+    },
+    {
+      "kind": "compile",
+      "result": "pass",
+      "command": "pnpm check:mobile:android",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:48:24.173Z",
+      "log": ".codex-tmp/refactoring-audit-b19/android-clippy.log",
+      "scope": "aarch64-linux-android --lib --locked --no-default-features zero-warning Clippy through the existing API 26 NDK helper. No APK/AAB, release execution, Kotlin instrumentation or channel acceptance."
+    },
+    {
+      "kind": "artifact",
+      "result": "not-run",
+      "reason": "Build/signing/resource-artifact verification is a separate B19 candidate; no current APK/AAB or iOS archive was produced or verified by this audit."
+    },
+    {
+      "kind": "live",
+      "result": "not-run",
+      "reason": "The task requests an audit under the plan; it does not explicitly request app/browser/emulator inspection. No product, browser, simulator or emulator was launched."
+    }
+  ],
+  "dependencies": [
+    "B12 owns account/media/native HTTP acceptance; this review checks capability exposure only.",
+    "B18 owns desktop admission/executor behavior; mobile does not inherit its accepted targets.",
+    "Concurrent native/plugin changes invalidate any assumption that HEAD alone identifies the tested tree."
+  ],
+  "batchId": "B19-ios-capability-boundary-tauri",
+  "candidate": "B19-ios-adapters",
+  "platform": "ios",
+  "candidateComplete": false,
+  "scope": {
+    "invariant": "Unimplemented iOS native adapters remain unavailable and cannot inherit Android or desktop authority.",
+    "selectedChain": "tauri.ios.conf.json -> main-mobile -> allow-mobile-commands; Platform::Ios -> unavailable capabilities/none policy -> renderer unavailable-port composition.",
+    "readFiles": [
+      "apps/tauri/src-tauri/tauri.ios.conf.json:1-12",
+      "apps/tauri/src-tauri/capabilities/main-mobile.json:1-7",
+      "apps/tauri/src-tauri/permissions/mobile.toml:1-12",
+      "apps/tauri/src-tauri/src/system/capabilities.rs:41-105,128-183",
+      "apps/tauri/src/platform/configure-tauri-workbench.ts:28-97",
+      "apps/tauri/test/platform/configure-tauri-workbench.test.ts:35-57",
+      "scripts/check-mobile-boundaries.mjs:21-25,39-42,56-69"
+    ],
+    "exclusions": [
+      "Real iOS project generation or adapter implementation",
+      "Keychain/security-scoped file/share/save/media/authentication/lifecycle internals",
+      "WKWebView build/device/sign/archive/App Store acceptance"
+    ]
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1/C5: iOS-specific exact-main local capability",
+      "result": "pass",
+      "evidence": [
+        "tauri.ios.conf.json:9",
+        "capabilities/main-mobile.json:4-6",
+        "permissions/mobile.toml:1-12"
+      ],
+      "detail": "Only core defaults and six local discovery/snapshot/storage/cancellation commands. No Android HTTP/media/document-preview group or desktop install/execute/DEV authority. Offline configuration-negative tests pass."
+    },
+    {
+      "criterion": "C2/C5: unavailable native adapters and mobile none independent of desktop admission",
+      "result": "pass",
+      "evidence": [
+        "src/system/capabilities.rs:41-105,131-161",
+        "src/platform/configure-tauri-workbench.ts:28-55,68-87"
+      ],
+      "detail": "iOS account transport/proxy, secure credentials, media/save/package inputs and background execution remain unavailable; native host matrix and mocked renderer rejection tests pass."
+    },
+    {
+      "criterion": "C6: delivery claims are bounded to configuration",
+      "result": "pass",
+      "evidence": [
+        "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:14,36-37,98",
+        "gen inventory: no iOS Xcode project/Info.plist discovered"
+      ],
+      "detail": "The maintained matrix explicitly records iOS unaccepted. No generated iOS project was found in gen; this report does not mark the B19-ios-adapters candidate complete."
+    },
+    {
+      "criterion": "C3/C4: actual iOS adapter/lifecycle/credential/data behavior",
+      "result": "unknown",
+      "evidence": [],
+      "detail": "No macOS/Xcode, installed iOS Rust target, built iOS project or WKWebView/device evidence. Android/Windows tests do not prove iOS adapter behavior."
+    }
+  ],
+  "findings": [],
+  "adapterDelivery": {
+    "refactorStatus": "unreviewed",
+    "verdict": "blocked",
+    "reason": "Only configuration exists; real engineering and macOS/Xcode/device/signing evidence are absent. Unsupported operations are intentionally closed; this is not a claim of accepted iOS delivery."
+  },
+  "missingEvidence": [
+    "iOS Xcode project/build/sign/archive",
+    "Keychain and security-scoped file/share/save adapters",
+    "Account/authentication/media/lifecycle adapters",
+    "WKWebView/device/minimum-device/channel evidence"
+  ],
+  "unreadPaths": ["Future iOS adapter implementations; none were inferred from Android"],
+  "nextBatch": "B19-ios-adapters on macOS/Xcode after a real project and adapters exist"
+}

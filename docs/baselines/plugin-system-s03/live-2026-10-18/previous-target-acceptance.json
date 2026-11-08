@@ -1,0 +1,228 @@
+{
+  "recordedAt": "2026-10-16T20:42:20.764Z",
+  "scope": "S03",
+  "status": "awaiting-acceptance",
+  "acceptedTargets": [],
+  "codePluginsEnabled": false,
+  "launchedAppOrBrowser": false,
+  "hostInventory": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "windowsRegistry": {
+      "build": "26200",
+      "revision": 9711,
+      "displayVersion": "25H2"
+    },
+    "tauri": "2.12.1",
+    "application": "0.1.0",
+    "engine": {
+      "purpose": "S03 fixed probe only; not an accepted production Profile",
+      "package": "@jitl/quickjs-wasmfile-release-sync",
+      "version": "0.31.0",
+      "wasmSha256": "0c031dd404df00f2d1ed9491a6590d014e88a50424996e5fd70feff1c931c045",
+      "artifacts": {
+        "worker": {
+          "bytes": 1452150,
+          "sha256": "c1ac3154b47200f8dc81fbb9c50ea388570ed73a59a6dddc9c959f869e981f91"
+        },
+        "launcher": {
+          "bytes": 1058,
+          "sha256": "6f88434f511b61f25682c4a3e43140ef2782bcbd456a1ab0b187314d6ada5e05"
+        }
+      }
+    }
+  },
+  "targets": [
+    {
+      "target": "Windows",
+      "status": "unaccepted",
+      "candidateAdapter": true,
+      "applicationHash": null,
+      "osVersion": null,
+      "webviewVersion": null,
+      "quickjsBuild": {
+        "purpose": "S03 fixed probe only; not an accepted production Profile",
+        "package": "@jitl/quickjs-wasmfile-release-sync",
+        "version": "0.31.0",
+        "wasmSha256": "0c031dd404df00f2d1ed9491a6590d014e88a50424996e5fd70feff1c931c045",
+        "artifacts": {
+          "worker": {
+            "bytes": 1452150,
+            "sha256": "c1ac3154b47200f8dc81fbb9c50ea388570ed73a59a6dddc9c959f869e981f91"
+          },
+          "launcher": {
+            "bytes": 1058,
+            "sha256": "6f88434f511b61f25682c4a3e43140ef2782bcbd456a1ab0b187314d6ada5e05"
+          }
+        }
+      },
+      "productionProfile": null,
+      "checks": {
+        "actualCommandDenial": null,
+        "documentCsp": null,
+        "workerCsp": null,
+        "workerWasmStartup": null,
+        "directNetworkDenial": null,
+        "originStorageIsolation": null,
+        "cookieCacheIsolation": null,
+        "broadcastSharedWorkerOpenerIsolation": null,
+        "resourceNavigationDownloadDeviceDenial": null,
+        "nativeSessionDisposal": null
+      },
+      "reason": "No app/browser launch authorized; configuration and automated tests are not actual WebView evidence."
+    },
+    {
+      "target": "macOS",
+      "status": "unaccepted",
+      "candidateAdapter": false,
+      "applicationHash": null,
+      "osVersion": null,
+      "webviewVersion": null,
+      "quickjsBuild": {
+        "purpose": "S03 fixed probe only; not an accepted production Profile",
+        "package": "@jitl/quickjs-wasmfile-release-sync",
+        "version": "0.31.0",
+        "wasmSha256": "0c031dd404df00f2d1ed9491a6590d014e88a50424996e5fd70feff1c931c045",
+        "artifacts": {
+          "worker": {
+            "bytes": 1452150,
+            "sha256": "c1ac3154b47200f8dc81fbb9c50ea388570ed73a59a6dddc9c959f869e981f91"
+          },
+          "launcher": {
+            "bytes": 1058,
+            "sha256": "6f88434f511b61f25682c4a3e43140ef2782bcbd456a1ab0b187314d6ada5e05"
+          }
+        }
+      },
+      "productionProfile": null,
+      "checks": {
+        "actualCommandDenial": null,
+        "documentCsp": null,
+        "workerCsp": null,
+        "workerWasmStartup": null,
+        "directNetworkDenial": null,
+        "originStorageIsolation": null,
+        "cookieCacheIsolation": null,
+        "broadcastSharedWorkerOpenerIsolation": null,
+        "resourceNavigationDownloadDeviceDenial": null,
+        "nativeSessionDisposal": null
+      },
+      "reason": "No candidate adapter or device acceptance in S03."
+    },
+    {
+      "target": "Linux",
+      "status": "unaccepted",
+      "candidateAdapter": false,
+      "applicationHash": null,
+      "osVersion": null,
+      "webviewVersion": null,
+      "quickjsBuild": {
+        "purpose": "S03 fixed probe only; not an accepted production Profile",
+        "package": "@jitl/quickjs-wasmfile-release-sync",
+        "version": "0.31.0",
+        "wasmSha256": "0c031dd404df00f2d1ed9491a6590d014e88a50424996e5fd70feff1c931c045",
+        "artifacts": {
+          "worker": {
+            "bytes": 1452150,
+            "sha256": "c1ac3154b47200f8dc81fbb9c50ea388570ed73a59a6dddc9c959f869e981f91"
+          },
+          "launcher": {
+            "bytes": 1058,
+            "sha256": "6f88434f511b61f25682c4a3e43140ef2782bcbd456a1ab0b187314d6ada5e05"
+          }
+        }
+      },
+      "productionProfile": null,
+      "checks": {
+        "actualCommandDenial": null,
+        "documentCsp": null,
+        "workerCsp": null,
+        "workerWasmStartup": null,
+        "directNetworkDenial": null,
+        "originStorageIsolation": null,
+        "cookieCacheIsolation": null,
+        "broadcastSharedWorkerOpenerIsolation": null,
+        "resourceNavigationDownloadDeviceDenial": null,
+        "nativeSessionDisposal": null
+      },
+      "reason": "No candidate adapter or device acceptance in S03."
+    },
+    {
+      "target": "Android",
+      "status": "unaccepted",
+      "candidateAdapter": false,
+      "applicationHash": null,
+      "osVersion": null,
+      "webviewVersion": null,
+      "quickjsBuild": {
+        "purpose": "S03 fixed probe only; not an accepted production Profile",
+        "package": "@jitl/quickjs-wasmfile-release-sync",
+        "version": "0.31.0",
+        "wasmSha256": "0c031dd404df00f2d1ed9491a6590d014e88a50424996e5fd70feff1c931c045",
+        "artifacts": {
+          "worker": {
+            "bytes": 1452150,
+            "sha256": "c1ac3154b47200f8dc81fbb9c50ea388570ed73a59a6dddc9c959f869e981f91"
+          },
+          "launcher": {
+            "bytes": 1058,
+            "sha256": "6f88434f511b61f25682c4a3e43140ef2782bcbd456a1ab0b187314d6ada5e05"
+          }
+        }
+      },
+      "productionProfile": null,
+      "checks": {
+        "actualCommandDenial": null,
+        "documentCsp": null,
+        "workerCsp": null,
+        "workerWasmStartup": null,
+        "directNetworkDenial": null,
+        "originStorageIsolation": null,
+        "cookieCacheIsolation": null,
+        "broadcastSharedWorkerOpenerIsolation": null,
+        "resourceNavigationDownloadDeviceDenial": null,
+        "nativeSessionDisposal": null
+      },
+      "reason": "No candidate adapter or device acceptance in S03."
+    },
+    {
+      "target": "iOS",
+      "status": "unaccepted",
+      "candidateAdapter": false,
+      "applicationHash": null,
+      "osVersion": null,
+      "webviewVersion": null,
+      "quickjsBuild": {
+        "purpose": "S03 fixed probe only; not an accepted production Profile",
+        "package": "@jitl/quickjs-wasmfile-release-sync",
+        "version": "0.31.0",
+        "wasmSha256": "0c031dd404df00f2d1ed9491a6590d014e88a50424996e5fd70feff1c931c045",
+        "artifacts": {
+          "worker": {
+            "bytes": 1452150,
+            "sha256": "c1ac3154b47200f8dc81fbb9c50ea388570ed73a59a6dddc9c959f869e981f91"
+          },
+          "launcher": {
+            "bytes": 1058,
+            "sha256": "6f88434f511b61f25682c4a3e43140ef2782bcbd456a1ab0b187314d6ada5e05"
+          }
+        }
+      },
+      "productionProfile": null,
+      "checks": {
+        "actualCommandDenial": null,
+        "documentCsp": null,
+        "workerCsp": null,
+        "workerWasmStartup": null,
+        "directNetworkDenial": null,
+        "originStorageIsolation": null,
+        "cookieCacheIsolation": null,
+        "broadcastSharedWorkerOpenerIsolation": null,
+        "resourceNavigationDownloadDeviceDenial": null,
+        "nativeSessionDisposal": null
+      },
+      "reason": "No candidate adapter or device acceptance in S03."
+    }
+  ]
+}

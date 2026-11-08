@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-evidence",
+  "runtimeScope": "userscript",
+  "batchId": "T13-gm-dev",
+  "date": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "status": "partial-live-acceptance-delivered",
+  "overallT13Status": "in-progress",
+  "workspace": {
+    "baseCommit": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+    "alreadyDirtyAtStart": true,
+    "preservedEarlierChanges": true,
+    "concurrentCacheChangesObserved": true,
+    "commitOrPush": false,
+    "scope": "Recorded combined working tree. Concurrent resource-cache changes caused Vite reloads at 12:35 and 12:38 host log time; no whole-tree before/after fingerprint equality is claimed."
+  },
+  "workflow": {
+    "command": "pnpm --filter @any-music/userscript dev --host 127.0.0.1 --port 18765 --strictPort",
+    "origin": "http://127.0.0.1:18765",
+    "hostPage": "http://127.0.0.1:18765/gm-dev.html",
+    "installer": "http://127.0.0.1:18765/__vite-plugin-monkey.install.user.js",
+    "installedScript": "server:Any Music",
+    "productionScriptDisabledInInspectionProfile": true,
+    "serverLeftRunning": true,
+    "execSessionId": 78750,
+    "iteration": "Vite source modules and HMR/full reload. Installed the small connector once, without repeatedly building or pasting application code. One final root build was run as a gate."
+  },
+  "environment": {
+    "manager": "Tampermonkey 5.5.0",
+    "browser": "Chrome 156.0.0.0 / Windows",
+    "runtime": "installed development script with real GM APIs",
+    "gmSubstitute": false,
+    "productionArtifactAccepted": false,
+    "developmentGrantsBroaderThanProduction": true,
+    "previewRuntimeScriptLoaded": false,
+    "pageGlobalGmApiTypes": {
+      "GM": "undefined",
+      "GM_xmlhttpRequest": "undefined"
+    },
+    "sandboxEvidence": "document __monkeyWindow entry reports scriptHandler Tampermonkey and script name server:Any Music; GM.getValue exists there.",
+    "storage": "Separate manager storage for server:Any Music; no any-music:dev-preview localStorage keys after GM-only host startup.",
+    "hostProductStyleElements": 0
+  },
+  "repairs": [
+    {
+      "path": "apps/userscript/src/platform/dom/mount-userscript-launcher.ts",
+      "problem": "Second-tab writer rejection was shown only in button.title; touch users could not see the reason or retry guidance.",
+      "change": "Retain visible polite status with the actual AppError message and retry instruction; describe the retry button with aria-describedby; suppress spinner on failure; reset copy on retry; bound notice width to viewport.",
+      "live": "Bilibili source host refuses second writer. Notice has aria-hidden=false, opacity=1, actual reason and AM-1900; measured width 339.428589 and right edge 340.571446 in a narrow emulated page.",
+      "regression": "One test covers actionable error, duplicate-click suppression, reset/retry, single mounted instance and disposal."
+    },
+    {
+      "path": "apps/userscript/gm-dev.html",
+      "change": "A repeatable plain host that imports neither application entry nor GM doubles; manager injects local Vite entry. Bilingual development rules, app guide and runtime skill describe this workflow."
+    }
+  ],
+  "observations": [
+    {
+      "id": "initial-public-import-and-play",
+      "scope": "Before later concurrent cache edits reloaded the page",
+      "sourceUrl": "https://www.bilibili.com/video/BV1xx411c7mD/",
+      "calls": ["GET /x/web-interface/view", "GET /x/player/playurl"],
+      "importResult": "One public track; one loaded page.",
+      "audio": {
+        "readyState": 4,
+        "urlScheme": "https",
+        "paused": false,
+        "timeSeconds": 3.920442,
+        "durationSeconds": 2055.591701
+      },
+      "continuity": [
+        {
+          "theme": "studio",
+          "timeSeconds": 17.414878,
+          "sameAudio": true,
+          "paused": false
+        },
+        {
+          "state": "hidden",
+          "timeSeconds": 25.823336,
+          "sameAudio": true,
+          "paused": false
+        }
+      ],
+      "limit": "Native streaming is observed. This is not a bounded Range/MSE/fallback, download or full-source matrix."
+    },
+    {
+      "id": "final-playback",
+      "scope": "Fresh expanded page after concurrent cache edits; this is a separate media session",
+      "samples": [
+        {
+          "same": true,
+          "time": 16.369457,
+          "paused": false,
+          "ready": 4
+        },
+        {
+          "theme": "default",
+          "same": true,
+          "time": 17.95487,
+          "paused": false,
+          "audioCount": 1
+        },
+        {
+          "theme": "studio",
+          "same": true,
+          "time": 80.743923,
+          "paused": false,
+          "audioCount": 1,
+          "draft": "T13 GM draft 2026-10-26"
+        }
+      ],
+      "stop": {
+        "paused": true,
+        "timeSeconds": 185.437902,
+        "method": "Studio pause control"
+      },
+      "result": "Studio -> Classic -> Studio retains one identical audio element and advances time. No new view/playurl request during replacement."
+    },
+    {
+      "id": "draft-continuity",
+      "draft": "T13 GM draft 2026-10-26",
+      "submitted": false,
+      "themePath": ["studio", "default", "studio"],
+      "result": "Actual input value preserved across both theme replacements."
+    },
+    {
+      "id": "narrow-system-dark",
+      "viewport": {
+        "width": 411,
+        "height": 864
+      },
+      "systemDark": true,
+      "reducedMotion": true,
+      "studioShell": {
+        "x": 0,
+        "y": 0,
+        "width": 411.428589,
+        "height": 864.000061
+      },
+      "studioSettingsDialog": {
+        "x": 8,
+        "y": 8,
+        "width": 395.428589,
+        "height": 848.000061,
+        "horizontalOverflow": 0
+      },
+      "classicSearchDialog": {
+        "width": 389.497162,
+        "horizontalOverflow": 0
+      },
+      "keyboard": "Escape from Studio settings returned deep active element to the button labeled 打开全局设置.",
+      "limit": "Some narrow pointer interactions failed or did not act; DOM events were used for several follow-ups. Physical touch and full keyboard/focus/scroll acceptance remain open."
+    },
+    {
+      "id": "host-and-writer-isolation",
+      "hosts": ["http://127.0.0.1:18765/gm-dev.html", "https://www.bilibili.com/"],
+      "result": "Launcher present on Bilibili host; no product --am-* styles in host document. A second expanded workbench is rejected, hiding keeps the original writer. Source-host tab was closed after checking refusal.",
+      "limits": "Bilibili host was signed out. Its complete product surface was not independently accepted while another writer was expanded."
+    }
+  ],
+  "gmRequestObservation": {
+    "method": "Temporary read-only chrome.webRequest.onBeforeRequest observer in the existing manager service worker; records request ID/time/host/path/method only, filters manager initiator. No cookie, query-string, credential or media URL recorded.",
+    "records": [
+      {
+        "id": "964",
+        "at": 1792989039081.171,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/view",
+        "method": "GET"
+      },
+      {
+        "id": "968",
+        "at": 1792989061546.621,
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "method": "GET"
+      },
+      {
+        "id": "2041",
+        "at": 1792989143816.165,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "method": "GET"
+      },
+      {
+        "id": "3331",
+        "at": 1792989239623.938,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "method": "GET"
+      },
+      {
+        "id": "4173",
+        "at": 1792989294762.682,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "method": "GET"
+      },
+      {
+        "id": "6249",
+        "at": 1792989610833.92,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "method": "GET"
+      },
+      {
+        "id": "6816",
+        "at": 1792989748483.177,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "method": "GET"
+      },
+      {
+        "id": "6817",
+        "at": 1792990062630.525,
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "method": "GET"
+      }
+    ],
+    "counts": {
+      "/x/web-interface/view": 1,
+      "/x/player/playurl": 2,
+      "/x/web-interface/nav": 5
+    },
+    "scope": "One import, two intentional playback starts separated by reload, and account refreshes across development reloads. Theme switching adds no API call. Does not establish all media, scheduler, cancellation/retry or concurrency counts."
+  },
+  "verification": [
+    {
+      "command": "pnpm --filter @any-music/userscript test",
+      "exitCode": 0,
+      "files": 19,
+      "tests": 89,
+      "log": "T13/gm-dev-userscript-test.log",
+      "note": "Initial test before concurrent cache addition passed 88; latest target run passed 89."
+    },
+    {
+      "command": "pnpm --filter @any-music/userscript typecheck",
+      "exitCode": 0,
+      "note": "Also rerun by the final root build typecheck."
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "vitestFiles": 305,
+      "vitestTests": 2283,
+      "log": "T13/gm-dev-root-test-final.log",
+      "earlierLog": "T13/gm-dev-root-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T13/gm-dev-root-typecheck.log",
+      "note": "Final root build repeats the root typecheck after concurrent cache edits."
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T13/gm-dev-root-lint-final.log",
+      "earlierLog": "T13/gm-dev-root-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T13/gm-dev-root-format-final.log",
+      "earlierFailure": {
+        "exitCode": 1,
+        "log": "T13/gm-dev-root-format.log",
+        "path": "packages/ui/src/components/settings/ResourceCacheSettings.vue",
+        "scope": "Concurrent change; final format gate passes."
+      }
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T13/gm-dev-root-build.log",
+      "scope": "Both production consumers and optimized Windows executable built; no native application was launched in this continuation."
+    }
+  ],
+  "artifacts": {
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 4991650,
+      "sha256": "92849991e770cd536c2f1c54803d903ac86ef20531d971fdede84d0899abdcab",
+      "installed": false
+    }
+  },
+  "toolingLimits": [
+    "Absolute screenshot output path was rejected by the browser tool's workspace configuration.",
+    "A product viewport screenshot stalled and its wait cell was terminated; no retained product screenshot is claimed.",
+    "Some narrow pointer interactions timed out, and DOM-driven operations are explicitly separated from physical-input evidence."
+  ],
+  "remaining": [
+    "Install and accept the final production artifact with its exact @grant set and bundled startup.",
+    "Signed-in/private Bilibili and full Douyin/NetEase, host and capability combinations.",
+    "Active/queued download continuity and actual final save for this current development snapshot.",
+    "Full GM media request ordering/concurrency/cancellation/retry/failure matrix.",
+    "Physical input/touch, visual parity, meaningful semantic scroll and remaining protected surfaces.",
+    "Existing Windows/Android/iOS exits remain unchanged; no native runtime/device acceptance was added."
+  ],
+  "sourceFiles": [
+    {
+      "path": "apps/userscript/src/platform/dom/mount-userscript-launcher.ts",
+      "bytes": 10158,
+      "sha256": "cf1c535903ab9612eab0dcb32a9dc05aec85000fba93bf08c372b3f4235227bb"
+    },
+    {
+      "path": "apps/userscript/test/platform/dom/mount-userscript-launcher.test.ts",
+      "bytes": 5960,
+      "sha256": "1d66da2789f4d0f666c7e4ff91d90f45ddc86d6c19b3301eb5f0ce35f89b9833"
+    },
+    {
+      "path": "apps/userscript/gm-dev.html",
+      "bytes": 592,
+      "sha256": "c83062627019ba135c1284db15d944d6ee3a138add64a31e8a28ada4c45c56b0"
+    }
+  ]
+}

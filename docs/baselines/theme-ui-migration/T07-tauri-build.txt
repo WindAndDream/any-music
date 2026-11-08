@@ -1,0 +1,83 @@
+
+> @any-music/tauri@0.0.0 build:frontend <project-root>\apps\tauri
+> vite build --mode prod
+
+vite v8.2.2 building client environment for prod...
+transforming...
+✓ 835 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         2.90 kB │ gzip:   0.77 kB
+dist/assets/AppIcon-D4ck_dDu.css                        0.16 kB │ gzip:   0.13 kB
+dist/assets/TrackCardSummary-gJSrTlII.css               0.42 kB │ gzip:   0.23 kB
+dist/assets/HistoryOperatorPanel-BCsd0Tvu.css           2.05 kB │ gzip:   0.55 kB
+dist/assets/TrackCardGrid-DiH6o5Tp.css                  2.24 kB │ gzip:   0.64 kB
+dist/assets/QueueViewControls-bIOIMZSJ.css              2.67 kB │ gzip:   0.76 kB
+dist/assets/vue-BPjObDYi.css                            4.23 kB │ gzip:   1.05 kB
+dist/assets/ActiveDownloadPanel-BOO_vuT-.css            5.56 kB │ gzip:   1.22 kB
+dist/assets/CatalogHeadingHandle-Kpytk355.css           7.77 kB │ gzip:   1.45 kB
+dist/assets/use-catalog-list-controls-DPiYjZe2.css      9.10 kB │ gzip:   1.55 kB
+dist/assets/ExternalSourceSettings-B4D0PMVV.css         9.50 kB │ gzip:   1.60 kB
+dist/assets/PlaylistPanel-DqUcHjAf.css                 13.32 kB │ gzip:   2.01 kB
+dist/assets/QueuePanel-D13zBo3x.css                    15.10 kB │ gzip:   2.61 kB
+dist/assets/vue-DaDRMIPR.css                           15.22 kB │ gzip:   2.60 kB
+dist/assets/CatalogTrackActionsDialog-C5nvWfDC.css     58.09 kB │ gzip:   7.58 kB
+dist/assets/index-BAnrVtji.css                        237.65 kB │ gzip:  31.03 kB
+dist/assets/QueuePanel-gB81oJgL.js                      0.06 kB │ gzip:   0.08 kB
+dist/assets/__vite-browser-external-D3_sD4Dv.js         0.07 kB │ gzip:   0.09 kB
+dist/assets/audio-exporter-SpWRGWO0.js                  0.08 kB │ gzip:   0.08 kB
+dist/assets/plugin-CTPDroLL.js                          0.13 kB │ gzip:   0.14 kB
+dist/assets/http-Bx2BUOLo.js                            0.18 kB │ gzip:   0.15 kB
+dist/assets/playback-history-filters-TtojXpjP.js        0.19 kB │ gzip:   0.16 kB
+dist/assets/use-presentation-activity-DmplZXrR.js       0.19 kB │ gzip:   0.16 kB
+dist/assets/use-favorite-filters-BIlmOPDC.js            0.24 kB │ gzip:   0.17 kB
+dist/assets/ui-contributions-v725bvBl.js                0.32 kB │ gzip:   0.25 kB
+dist/assets/TrackSourcePageLink-f0ezUYkb.js             0.40 kB │ gzip:   0.32 kB
+dist/assets/policies-Ca8WcR-N.js                        0.56 kB │ gzip:   0.35 kB
+dist/assets/use-editing-session-CLHPHFI3.js             0.73 kB │ gzip:   0.40 kB
+dist/assets/render-custom-track-media-D4w_CI6y.js       0.79 kB │ gzip:   0.57 kB
+dist/assets/use-confirmation-dialog-B14fWLK5.js         0.98 kB │ gzip:   0.57 kB
+dist/assets/__vite-browser-external-8b-sKxde.js         1.14 kB │ gzip:   0.64 kB
+dist/assets/resolved-media-loader-ocXT3m_V.js           1.15 kB │ gzip:   0.75 kB
+dist/assets/preload-helper-Czpn1I53.js                  1.19 kB │ gzip:   0.67 kB
+dist/assets/url-parser-BgMrwjwU.js                      1.67 kB │ gzip:   0.88 kB
+dist/assets/HistoryPanel-DSan4Beu.js                    2.59 kB │ gzip:   1.38 kB
+dist/assets/FavoritePanel-DJb6ML_X.js                   2.60 kB │ gzip:   1.04 kB
+dist/assets/HistoryOperatorPanel-Bz9CEEZD.js            2.88 kB │ gzip:   1.45 kB
+dist/assets/native-source-plugins-CLI4SZ1r.js           3.16 kB │ gzip:   1.37 kB
+dist/assets/FavoriteTrackRow-BUjN4PvM.js                3.37 kB │ gzip:   1.48 kB
+dist/assets/TrackCardSummary-DqID9YNK.js                3.41 kB │ gzip:   1.59 kB
+dist/assets/use-action-feedback-BI3HAJey.js             3.90 kB │ gzip:   1.60 kB
+dist/assets/url-parser-CDWVVYUf.js                      3.94 kB │ gzip:   1.62 kB
+dist/assets/studio-theme-DHrN6DG0.js                    4.52 kB │ gzip:   1.68 kB
+dist/assets/QueueViewControls-BU5SMPa3.js               4.53 kB │ gzip:   2.09 kB
+dist/assets/douyin-request-state-CFbLQ2P_.js            4.61 kB │ gzip:   2.06 kB
+dist/assets/native-http-CZsR900D.js                     4.90 kB │ gzip:   2.04 kB
+dist/assets/download-history-BEKzmkgW.js                5.04 kB │ gzip:   1.80 kB
+dist/assets/TrackCardGrid-CjgPQnaa.js                   5.63 kB │ gzip:   2.24 kB
+dist/assets/download-archive-aGajjFNI.js                7.39 kB │ gzip:   3.13 kB
+dist/assets/app-error-BjZGph4G.js                       7.44 kB │ gzip:   2.09 kB
+dist/assets/CustomTrackPanel-D_fJ48EU.js                8.41 kB │ gzip:   3.42 kB
+dist/assets/use-catalog-list-controls-eSQV5Y9T.js       8.69 kB │ gzip:   2.88 kB
+dist/assets/runtime-dom.esm-bundler-CSOwpQjW.js        16.29 kB │ gzip:   6.90 kB
+dist/assets/vue-CE92Ane-.js                            16.95 kB │ gzip:   6.02 kB
+dist/assets/ActiveDownloadPanel-u7q8dNEh.js            18.37 kB │ gzip:   6.25 kB
+dist/assets/ExternalSourceSettings-BvKrT9cl.js         22.17 kB │ gzip:   7.56 kB
+dist/assets/CatalogHeadingHandle-D5JBmWas.js           24.43 kB │ gzip:   8.65 kB
+dist/assets/runtime-ed0Noo7_.js                        25.28 kB │ gzip:   9.08 kB
+dist/assets/PlaylistPanel-X1E2OKku.js                  29.46 kB │ gzip:   9.36 kB
+dist/assets/vue-XLPCy6Dq.js                            31.37 kB │ gzip:  10.45 kB
+dist/assets/QueuePanel-D_sll50J.js                     32.32 kB │ gzip:  10.38 kB
+dist/assets/runtime-D-4MfbVr.js                        39.39 kB │ gzip:  13.23 kB
+dist/assets/CatalogTrackActionsDialog-BXVlKirI.js      73.55 kB │ gzip:  22.51 kB
+dist/assets/AppIcon-BBbAgOGG.js                        74.02 kB │ gzip:  29.32 kB
+dist/assets/audio-exporter-PbUZSpQ-.js                317.66 kB │ gzip: 135.98 kB
+dist/assets/output-C0ZydUOt.js                        444.69 kB │ gzip: 113.24 kB
+dist/assets/index-Dtmpb1qy.js                       1,193.03 kB │ gzip: 212.41 kB
+
+✓ built in 1.96s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

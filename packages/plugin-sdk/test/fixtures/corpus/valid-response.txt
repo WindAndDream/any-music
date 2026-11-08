@@ -1,0 +1,1 @@
+{"wireVersion":1,"requestId":"req-1","operation":"state.get","ok":true,"result":{"value":null,"version":0}}

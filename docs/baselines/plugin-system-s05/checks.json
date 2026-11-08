@@ -1,0 +1,171 @@
+{
+  "scope": "S05",
+  "status": "implemented",
+  "date": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "checks": [
+    {
+      "finishedAt": "2026-10-17T12:14:25.6739238Z",
+      "startedAt": "2026-10-17T12:13:34.4764317Z",
+      "exitCode": 0,
+      "command": "pnpm test",
+      "logSha256": "2292e78b295987531dd98b91a6d3abc50514901bdc950719b8745e17a6f086d9"
+    },
+    {
+      "finishedAt": "2026-10-17T12:15:16.3934069Z",
+      "startedAt": "2026-10-17T12:14:25.7115283Z",
+      "exitCode": 0,
+      "command": "pnpm typecheck",
+      "logSha256": "de92f481843c14a7b2b6195f41c57ce628e72fc03945bb534b8c1176e0a1b4e2"
+    },
+    {
+      "command": "pnpm lint",
+      "startedAt": "2026-10-17T12:18:53.7458425Z",
+      "exitCode": 0,
+      "finishedAt": "2026-10-17T12:18:55.0903555Z",
+      "logSha256": "dbe8fe119f2d07f9ace599a0ea824b6d2f85688d5de582d720974333d5230be2"
+    },
+    {
+      "startedAt": "2026-10-17T12:12:01.9566257Z",
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "finishedAt": "2026-10-17T12:12:29.0118978Z",
+      "logSha256": "2254a9b4abd10fc943ccd443457c18d188ed467c7e5cb0fe7c724f68c3e1f4ac"
+    },
+    {
+      "startedAt": "2026-10-17T12:12:29.0411169Z",
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "finishedAt": "2026-10-17T12:12:40.3696186Z",
+      "logSha256": "6ef8e95b303bea95286ae63e036f641b6e6e6ffe5635a03d2ba82e7550ff0ee5"
+    },
+    {
+      "startedAt": "2026-10-17T12:12:40.3786401Z",
+      "command": "pnpm check:rust:deny",
+      "exitCode": 1,
+      "finishedAt": "2026-10-17T12:12:50.5834301Z",
+      "logSha256": "15b2efd3bf9c36b713dbf3ba544e3f685ed65a9a9a2dc48079baa79bebc2a0c1"
+    },
+    {
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-17T12:18:55.1124704Z",
+      "exitCode": 0,
+      "finishedAt": "2026-10-17T12:18:58.6474331Z",
+      "logSha256": "ea1877b98200f75454ede684035b8a5265b2515cea98982aeb2ee6bb46a291e3"
+    },
+    {
+      "command": "pnpm build",
+      "startedAt": "2026-10-17T12:18:58.6570708Z",
+      "exitCode": 0,
+      "finishedAt": "2026-10-17T12:20:56.3986160Z",
+      "logSha256": "f952d9b45e99cd757ceea55b81eb3febe9c017b8ac4d19bae3fb34e3bdf76438"
+    },
+    {
+      "exitCode": 0,
+      "startedAt": "2026-10-17T12:19:42.7192342Z",
+      "finishedAt": "2026-10-17T12:19:52.9800903Z",
+      "command": "pnpm check:rust:deny:pure",
+      "logSha256": "5ae6f7b77858ef2fb44b99f0d39b9e8e0ab90cf524db5ee645c918b1bf177fef"
+    }
+  ],
+  "tests": {
+    "script": 15,
+    "vitest": 1473,
+    "rust": 108,
+    "rustIgnored": 1,
+    "protocolDifferential": 171
+  },
+  "supplementalTargets": [
+    {
+      "command": "pnpm --filter @any-music/plugin-ui-vue test",
+      "passed": 26,
+      "logSha256": "893ca231334e818cdd226779af0a13de4245cd8b4bfcdef54547693d2dc87d47"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench test",
+      "passed": 281,
+      "logSha256": "59ee06c1e6cb4eb5e2b4f774dbe582f2a4722429e8973ef9fbf7e46290c1fd90"
+    }
+  ],
+  "preservation": {
+    "startingDirtyFileCount": 371,
+    "unchangedDirtyFileCount": 321,
+    "touchedExistingFiles": [
+      "AGENTS.md",
+      "apps/tauri/src/features/plugins/built-in-workbench-modules.ts",
+      "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "apps/tauri/test/features/plugins/built-in-workbench-modules.test.ts",
+      "apps/userscript/src/features/plugins/built-in-workbench-modules.ts",
+      "apps/userscript/src/platform/configure-userscript-workbench.ts",
+      "apps/userscript/test/features/plugins/built-in-workbench-modules.test.ts",
+      "crates/am-plugin-protocol/src/generated.rs",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-baseline.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+      "docs/en/cross-platform/README.md",
+      "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构基线.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "packages/music-workbench/AGENTS.md",
+      "packages/music-workbench/package.json",
+      "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "packages/music-workbench/src/features/plugins/use-workbench-modules.ts",
+      "packages/music-workbench/src/index.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-modules.ts",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts",
+      "packages/music-workbench/test/features/plugins/use-workbench-modules.test.ts",
+      "packages/plugin-sdk/schema/v1/protocol.schema.json",
+      "packages/plugin-sdk/src/generated/protocol.ts",
+      "packages/plugin-sdk/src/generated/validators.js",
+      "packages/plugin-sdk/src/index.ts",
+      "packages/plugin-sdk/test/fixtures/corpus/index.json",
+      "packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue",
+      "packages/ui/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+      "packages/ui/src/components/music-sources/TrackList.vue",
+      "packages/ui/src/components/music-sources/TrackRow.vue",
+      "packages/ui/src/components/MusicAppShell.vue",
+      "packages/ui/src/components/product-workbench/ProductWorkbench.vue",
+      "packages/ui/src/index.ts",
+      "packages/ui/test/components/music-sources/catalog-selection-markup.test.ts",
+      "pnpm-lock.yaml",
+      "scripts/check-package-boundaries.mjs",
+      "scripts/generate-plugin-protocol.mjs",
+      "scripts/test/check-package-boundaries.test.mjs"
+    ],
+    "cargoLockUnchanged": true
+  },
+  "artifacts": [
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3419195,
+      "sha256": "04a564791c715f8725b933cf8f9a8a6961c42df8af67635deb62542eb9d71d4a"
+    },
+    {
+      "path": "apps/tauri/dist/index.html",
+      "bytes": 2737,
+      "sha256": "09f478a7d87429ae515b42801d653d0324d608dede5e265d65f38104b9b960cb"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 18047488,
+      "sha256": "ccaa41bd09ac8cfbf00d3af88680d6f6564f4617a7dd214fe440e418646bda98"
+    }
+  ],
+  "limitations": {
+    "uiLaunched": false,
+    "gitCommitOrPush": false,
+    "realFocusVisualDeviceAcceptance": false,
+    "externalActivationEnabled": false,
+    "dependencySecurityGate": "blocked by existing rustls 0.23.45 advisories RUSTSEC-2026-0346/0347/0348/0349"
+  }
+}

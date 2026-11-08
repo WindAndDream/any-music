@@ -1,0 +1,35 @@
+{
+  "method": "Vue Node custom renderer; real FixedListConsumer using useFixedVirtualList and the installed engine, 100px injected viewport, 20px fixed rows, overscan 2; native ol/li with resource-owning slot cards. No browser/CSS layout/image decode/frame timing; not a full product or same-skin DOM comparison to P03.",
+  "samples": [
+    {
+      "count": 0,
+      "mountedCards": 0,
+      "hostElements": 1,
+      "releasedCards": 0
+    },
+    {
+      "count": 1,
+      "mountedCards": 1,
+      "hostElements": 3,
+      "releasedCards": 1
+    },
+    {
+      "count": 80,
+      "mountedCards": 7,
+      "hostElements": 15,
+      "releasedCards": 7
+    },
+    {
+      "count": 1000,
+      "mountedCards": 7,
+      "hostElements": 15,
+      "releasedCards": 7
+    },
+    {
+      "count": 10000,
+      "mountedCards": 7,
+      "hostElements": 15,
+      "releasedCards": 7
+    }
+  ]
+}

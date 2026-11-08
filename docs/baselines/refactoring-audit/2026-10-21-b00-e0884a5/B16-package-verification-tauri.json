@@ -1,0 +1,425 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B16-package-verification-tauri",
+  "parentBatch": "B16",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T14:00:03.277Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+  "scope": {
+    "invariant": "A package accepted by native verification is an owned bounded snapshot with unambiguous allowed paths/resources, exact integrity and correctly scoped signature evidence, independent of installation authority.",
+    "selectedChain": "verify(owned Vec<u8>) -> bounded ZIP framing -> normalized resource paths -> metered decompression -> exact integrity/signature/manifest/resource checks -> private VerifiedPackage -> direct native stage/verify_pair and PreviewSession snapshot consumption.",
+    "allowedPaths": [
+      "crates/am-plugin-package",
+      "SDK-owned raw corpus/golden vectors",
+      "Direct package_files stage/verify_pair and packages PreviewSession/candidate excerpts only"
+    ],
+    "exclusions": [
+      "Product code fixes or permanent regression additions",
+      "Runtime InstallFiles orchestration",
+      "Application filesystem durability, process lock lifecycle, paired generations, SQLite pointers, upgrade/rollback/migration/GC",
+      "Persistent distribution revocations, production consent/target admission and executor internals",
+      "B17 author-tool/SDK packaging architecture audit",
+      "Application/browser/device launch, production build acceptance, final root gates, commit or push"
+    ],
+    "expansionReasons": [
+      "Read package_files stage and verify_pair plus PreviewSession/candidate to establish the returned bytes are the actual direct native boundary.",
+      "Read only the Node resource checker branch and offline interop script to determine whether the new malformed-resource case is a Rust/Node differential or a shared blind spot. Node repair ownership is handed off, not broadly audited."
+    ],
+    "readingLimit": "Stopped at the verifier and direct snapshot consumers; none of the four installation/recovery candidates were expanded."
+  },
+  "declaredStatus": {
+    "claim": "S14 implemented: bounded owned ZIP/resources, original-byte signatures and remote sourcemap rejection; application installation/recovery remains a distinct authority chain.",
+    "references": [
+      "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md:14",
+      "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md:17",
+      "crates/am-plugin-package/AGENTS.md:3"
+    ]
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Does one framework-independent owner validate bytes without filesystem, transport, grant or execution authority?",
+      "evidence": [
+        "crates/am-plugin-package/Cargo.toml:12",
+        "crates/am-plugin-package/src/lib.rs:1",
+        "crates/am-plugin-package/src/lib.rs:64",
+        ".codex-tmp/audit-b16-package-verification/dependencies.log"
+      ],
+      "detail": "Normal dependency tree contains protocol, bounded ZIP/DEFLATE, SHA-256, Ed25519 and Unicode support; no Tauri/runtime/account/HTTP/SQLite dependency. Read is used over an owned in-memory Cursor. This is the verifier boundary, not an installation-authority audit."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Do framing, paths, resource restrictions, budgets and cooperative cancellation reject forbidden inputs?",
+      "evidence": [
+        "crates/am-plugin-package/src/zip_boundary.rs:23",
+        "crates/am-plugin-package/src/paths.rs:4",
+        "crates/am-plugin-package/src/lib.rs:64",
+        "crates/am-plugin-package/src/lib.rs:178",
+        ".codex-tmp/audit-b16-package-verification/source-map-results.json"
+      ],
+      "detail": "Framing checks count/size before ZIP construction; paths reject traversal, devices and normalized collisions; decompression meters actual output. Existing corpus covers representative archive/path/bomb refusals. Additional oversize archive and mid-read cancellation assertions pass. However, remote sourceMappingURL directives with a matching suffix in query/fragment are accepted (B16-P01). This does not certify every resource format or race."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Are exact payload integrity, original-byte signatures and the owned immutable loading snapshot preserved?",
+      "evidence": [
+        "crates/am-plugin-package/src/lib.rs:38",
+        "crates/am-plugin-package/src/lib.rs:109",
+        "crates/am-plugin-package/src/signature.rs:25",
+        "apps/tauri/src-tauri/src/plugins/package_files.rs:47",
+        "apps/tauri/src-tauri/src/plugins/package_files.rs:169",
+        "apps/tauri/src-tauri/src/plugins/packages.rs:10",
+        "crates/am-plugin-package/tests/corpus.rs:23"
+      ],
+      "detail": "VerifiedPackage fields are private and expose borrowed immutable values. Integrity covers all payloads and excludes only integrity/signature metadata, rejects duplicates and compares actual size/hash. verify_strict signs domain plus original directory bytes. stage retains verified owned bytes; verify_pair validates private code and returns that same snapshot as bytes, without reopening it after verification. PreviewSession holds the VerifiedPackage and derives Candidate from its manifest/hash/signer. Persistence, transactions, migration and GC are not certified by these excerpts."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Does signature validation remain distinct from publisher trust and native authorization?",
+      "evidence": [
+        "crates/am-plugin-package/src/lib.rs:52",
+        "crates/am-plugin-package/src/signature.rs:45",
+        "crates/am-plugin-package/tests/revocations.rs:6"
+      ],
+      "detail": "signer() explicitly reports possession only; unsigned packages remain valid inputs, not approved installations. Revocation verification requires caller-injected trusted fingerprints and time, rejects untrusted/expired/future/tampered lists, and can accept independently provisioned roots. No package key is automatically promoted to a distribution root. Actual app root provisioning and persisted revocation union are deferred to B16-revocations-recovery; preview/consent/target admission internals are outside this subbatch."
+    },
+    {
+      "criterion": "C6",
+      "result": "fail",
+      "question": "Do owned tests substantiate the documented validation claims and the newly checked failure paths?",
+      "evidence": [
+        "crates/am-plugin-package/tests/corpus.rs:23",
+        "crates/am-plugin-package/tests/corpus.rs:60",
+        "crates/am-plugin-package/tests/revocations.rs:6",
+        "packages/plugin-sdk/test/fixtures/packages/corpus.json",
+        "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md:17",
+        ".codex-tmp/audit-b16-package-verification/source-map-probe.log"
+      ],
+      "detail": "Three existing Rust integration tests pass, including 43 shared package cases and public Node signature vectors; Node validates the same 43 cases and an ephemeral Rust signature. Scoped Clippy passes. The remote-map corpus case does not cover query/fragment suffix masking: two added negative probes reproduce the missing refusal in both implementations. Permanent corpus changes and implementation repair remain a separate task."
+    }
+  ],
+  "verification": [
+    {
+      "level": "static",
+      "result": "fail",
+      "command": "Scoped source and normal dependency review",
+      "exitCode": null,
+      "logPath": ".codex-tmp/audit-b16-package-verification/dependencies.log",
+      "detail": "C1/C4/C5 pass within the stated boundary; C3/C6 fail on the confirmed resource-policy bypass."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p am-plugin-package --locked",
+      "startedAt": "2026-10-21T21:54:26.4634883+08:00",
+      "completedAt": "2026-10-21T21:54:27.2075068+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b16-package-verification/crate-tests.log",
+      "detail": "3 Rust integration tests pass; the corpus test evaluates 43 raw package cases."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "node scripts/check-plugin-package.mjs",
+      "startedAt": "2026-10-21T21:54:38.6999513+08:00",
+      "completedAt": "2026-10-21T21:54:39.5044616+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b16-package-verification/interop.log",
+      "detail": "43 Node package cases and an ephemeral Rust-to-Node Ed25519 vector pass."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo clippy -p am-plugin-package --all-targets --locked -- -D warnings",
+      "startedAt": "2026-10-21T21:56:56.6262902+08:00",
+      "completedAt": "2026-10-21T21:57:02.1229297+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b16-package-verification/clippy.log",
+      "detail": "Verifier crate all-target zero-warning Clippy passes."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo tree -p am-plugin-package --locked --edges normal",
+      "startedAt": "2026-10-21T21:56:56.6352516+08:00",
+      "completedAt": "2026-10-21T21:56:57.0812855+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b16-package-verification/dependencies.log",
+      "detail": "Normal dependency closure inspected; no app/runtime/network/account/SQLite dependency."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo build -p am-plugin-package --locked --message-format=json",
+      "startedAt": "2026-10-21T21:55:46.3702608+08:00",
+      "completedAt": "2026-10-21T21:55:46.7741721+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b16-package-verification/build.log",
+      "detail": "Development rlib built solely for the standalone native audit probe; this is not a production artifact check."
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "node .codex-tmp/audit-b16-package-verification/source-map-probe.mjs",
+      "startedAt": "2026-10-21T21:55:54.6139222+08:00",
+      "completedAt": "2026-10-21T21:55:54.7455581+08:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/audit-b16-package-verification/source-map-probe.log",
+      "detail": "Initial ignored scratch-script import used one excess parent directory and failed before loading product code. Corrected before reproduction; not a product failure.",
+      "category": "tooling-setup",
+      "resolved": true
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "node .codex-tmp/audit-b16-package-verification/source-map-probe.mjs",
+      "startedAt": "2026-10-21T21:56:07.4272448+08:00",
+      "completedAt": "2026-10-21T21:56:08.5719506+08:00",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/audit-b16-package-verification/source-map-probe.log",
+      "detail": "Expected diagnostic exit 1: local map accepted, ordinary remote map rejected, but both forbidden query/fragment-masked remote maps accepted by Rust and Node. Native oversize/archive ownership/mid-read cancellation assertions passed."
+    },
+    {
+      "level": "artifact",
+      "result": "not-run",
+      "command": null,
+      "exitCode": null,
+      "detail": "No production application/resource graph or release build was requested for this read-only verifier audit. The development rlib probe is not artifact admission evidence."
+    },
+    {
+      "level": "live",
+      "result": "not-run",
+      "command": null,
+      "exitCode": null,
+      "detail": "No current-task app/browser inspection authorization. No browser, application, emulator, public request, power-cut or product install/upgrade/recovery was launched."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm exec oxfmt --check docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "startedAt": "2026-10-21T22:01:42.2230608+08:00",
+      "completedAt": "2026-10-21T22:01:42.7965632+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/audit-b16-package-verification/report-format.log",
+      "detail": "All three delivered audit JSON files pass the scoped formatter check."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B16-P01",
+      "severity": "P2",
+      "status": "open",
+      "criterion": ["C3", "C6"],
+      "title": "Remote sourcemaps bypass rejection through a matching query or fragment suffix",
+      "owner": [
+        "crates/am-plugin-package/src/lib.rs:178",
+        "packages/plugin-sdk/src/node/package-format.mjs:240"
+      ],
+      "trigger": "Seal an otherwise valid sandbox-code package whose dist/main.js ends with //# sourceMappingURL=https://example.invalid/main.js.map?sourceMappingURL=main.js.map (or the equivalent #sourceMappingURL=main.js.map fragment). Keep a valid local dist/main.js.map and recompute integrity.",
+      "effect": "The check compares the entire comment line suffix instead of the complete directive URL. Both validators return a verified package containing a forbidden remote sourcemap reference, contrary to the S14 resource contract. This audit demonstrates admission of the forbidden directive only; it does not claim the VM or WebView fetched a remote map or bypassed execution/network authority.",
+      "evidence": [
+        "crates/am-plugin-package/src/lib.rs:183",
+        "crates/am-plugin-package/src/lib.rs:185",
+        "packages/plugin-sdk/src/node/package-format.mjs:245",
+        "packages/plugin-sdk/src/node/package-format.mjs:246",
+        ".codex-tmp/audit-b16-package-verification/source-map-results.json",
+        ".codex-tmp/audit-b16-package-verification/source-map-probe.log"
+      ],
+      "reproduction": {
+        "command": "node .codex-tmp/audit-b16-package-verification/source-map-probe.mjs",
+        "prerequisites": "From repository root, cargo build -p am-plugin-package --locked --message-format=json > .codex-tmp/audit-b16-package-verification/build.jsonl. Ignored probe source and fixture files remain local.",
+        "expected": "Only local main.js.map accepted; all remote directive URLs return Resource.",
+        "actual": "Both query-mask and fragment-mask variants accepted by Rust and Node; diagnostic command exits 1.",
+        "cases": [
+          {
+            "name": "local-map",
+            "directive": "main.js.map",
+            "expectedAccepted": true,
+            "nodeResult": "accepted",
+            "rustResult": "accepted",
+            "matchesContract": true,
+            "fixture": "<project-root>/.codex-tmp/audit-b16-package-verification/local-map.amplugin"
+          },
+          {
+            "name": "remote-map",
+            "directive": "https://example.invalid/main.js.map",
+            "expectedAccepted": false,
+            "nodeResult": "Resource",
+            "rustResult": "Resource",
+            "matchesContract": true,
+            "fixture": "<project-root>/.codex-tmp/audit-b16-package-verification/remote-map.amplugin"
+          },
+          {
+            "name": "remote-query-mask",
+            "directive": "https://example.invalid/main.js.map?sourceMappingURL=main.js.map",
+            "expectedAccepted": false,
+            "nodeResult": "accepted",
+            "rustResult": "accepted",
+            "matchesContract": false,
+            "fixture": "<project-root>/.codex-tmp/audit-b16-package-verification/remote-query-mask.amplugin"
+          },
+          {
+            "name": "remote-fragment-mask",
+            "directive": "https://example.invalid/main.js.map#sourceMappingURL=main.js.map",
+            "expectedAccepted": false,
+            "nodeResult": "accepted",
+            "rustResult": "accepted",
+            "matchesContract": false,
+            "fixture": "<project-root>/.codex-tmp/audit-b16-package-verification/remote-fragment-mask.amplugin"
+          }
+        ]
+      },
+      "suggestedNextAction": "Parse the actual sourceMappingURL directive value and require its complete value to be the exact allowed local reference. Apply the same rule in Rust and Node and add both negative variants to the SDK-owned raw package corpus, with local-map positives retained. Do not merely add another forbidden substring test.",
+      "repairApplied": false
+    }
+  ],
+  "observations": [
+    {
+      "kind": "evidence-limit",
+      "detail": "No further defect was confirmed in the reviewed framing/path/integrity/snapshot/trust-boundary chain. Image validation remains lightweight header checks; complete decoder validity and decoded image-memory budgets were not verified, and no separate image exploit is asserted."
+    },
+    {
+      "kind": "scope-limit",
+      "detail": "This is the first of five B16 candidates. Installation, upgrade/rollback, paired-generation recovery, process locking, durability, migration, GC and persisted revocations are still unreviewed."
+    },
+    {
+      "kind": "working-tree",
+      "detail": "Existing unrelated native HTTP, frontend tests, documentation and earlier audit changes were preserved. No product implementation, dependency, schema, lockfile or permanent test was changed."
+    }
+  ],
+  "readFiles": [
+    {
+      "path": "crates/am-plugin-package/Cargo.toml",
+      "lines": "1-24"
+    },
+    {
+      "path": "crates/am-plugin-package/src/lib.rs",
+      "lines": "1-222"
+    },
+    {
+      "path": "crates/am-plugin-package/src/zip_boundary.rs",
+      "lines": "1-115"
+    },
+    {
+      "path": "crates/am-plugin-package/src/paths.rs",
+      "lines": "1-51"
+    },
+    {
+      "path": "crates/am-plugin-package/src/signature.rs",
+      "lines": "1-69"
+    },
+    {
+      "path": "crates/am-plugin-package/tests/corpus.rs",
+      "lines": "1-65"
+    },
+    {
+      "path": "crates/am-plugin-package/tests/revocations.rs",
+      "lines": "1-38"
+    },
+    {
+      "path": "crates/am-plugin-package/examples/signing-vector.rs",
+      "lines": "1-19"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/package_files.rs",
+      "lines": "1-75,165-181; stage/verify_pair reviewed only, surrounding lock code not certified"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/packages.rs",
+      "lines": "1-25; symbol locations only elsewhere"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/packages/corpus.json",
+      "lines": "Read as structured case metadata and exact fixture inputs; did not print raw corpus"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/packages/golden.json",
+      "lines": "Consumed by existing test, hash recorded; not manually reviewed as a cryptographic proof"
+    },
+    {
+      "path": "scripts/check-plugin-package.mjs",
+      "lines": "1-40"
+    },
+    {
+      "path": "packages/plugin-sdk/src/node/package-format.mjs",
+      "lines": "1-33,230-286; resource-check parity excerpt only"
+    },
+    {
+      "path": "packages/plugin-sdk/test/package-corpus-generator.mjs",
+      "lines": "1-130; ZIP writer/seal setup reference only; script not executed/imported"
+    }
+  ],
+  "unreadPaths": [
+    "crates/am-plugin-runtime/src/install.rs and install_model.rs",
+    "apps/tauri/src-tauri/src/plugins/package_files.rs beyond the direct verified-byte consumer scope",
+    "apps/tauri/src-tauri/src/plugins/packages.rs transaction methods and packages/tests.rs",
+    "apps/tauri/src-tauri/src/plugins/revocations.rs and native storage recovery",
+    "Native target admission, consent and executor internals (B18)"
+  ],
+  "missingEvidence": [
+    "Permanent regression and repair for B16-P01",
+    "Four remaining B16 audit candidates",
+    "Complete resource decoder/decoded image budgets",
+    "Production artifact admission and explicitly authorized app/browser/restart/power-loss evidence"
+  ],
+  "dependencies": [
+    {
+      "batch": "B17",
+      "detail": "Node verifier has the same confirmed B16-P01. Coordinate one shared-corpus repair; no CLI/build/sign packaging acceptance is claimed."
+    },
+    {
+      "batch": "B14",
+      "detail": "Transaction authority/epoch findings from its independent reports are neither repaired nor re-certified here."
+    },
+    {
+      "batch": "B18",
+      "detail": "Preview/installation consent and exact OS/WebView/Profile admission require independent review and live evidence."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B16-runtime-install-files-tauri",
+    "candidate": "B16-runtime-install-files",
+    "parentBatch": "B16",
+    "runtime": "tauri",
+    "status": "pending",
+    "question": "Does runtime InstallFiles orchestration prepare, publish and recover paired code/data generations before committed pointers, preserve monotonic epochs across upgrade/rollback, and constrain migration to owned copies?",
+    "allowedPaths": [
+      "crates/am-plugin-runtime/src/install.rs",
+      "crates/am-plugin-runtime/src/install_model.rs",
+      "Matching runtime install tests and at most one necessary application adapter excerpt"
+    ],
+    "exclusions": [
+      "Full application filesystem/SQLite/revocation/GC chains",
+      "Verifier repair or independent B14/B15/B18 implementation",
+      "App/browser/live acceptance, commit and push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "crates/AGENTS.md",
+      "crates/am-plugin-runtime/AGENTS.md",
+      "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md"
+    ],
+    "continuation": "Reuse B16-package-verification-tauri.json after checking its source hashes. B16-P01 remains open in Rust and Node; do not interpret existing corpus success as closure. The remaining four B16 candidates are unreviewed."
+  },
+  "handoff": "B16-package-verification-tauri / tauri / baseline ce7dcb6. Reviewed the byte verifier and its direct native snapshot consumers. ZIP framing/path limits, exact integrity, strict original-byte signatures and possession-versus-trust separation have scoped positive evidence; existing 3 Rust tests (43 shared cases), Node/Rust interop and Clippy pass. A local offline probe confirms B16-P01: query/fragment suffix masking admits forbidden remote sourcemaps in Rust and Node; result violating/needs-fix. No product fix or UI/live acceptance occurred. The other four B16 candidates remain unreviewed; the next audit entry is runtime InstallFiles, while the verifier/corpus repair remains open.",
+  "baselineMovement": {
+    "initialHead": "ce7dcb6f03a06e66430c6022a61568a474e60bdd",
+    "headAfterReview": "a693165205be0bc321764768d796d7c842f7a446",
+    "scopedHashesUnchanged": 16,
+    "detail": "Another workspace operation committed the existing unrelated native HTTP repair during this audit. All 16 scoped hashes still match the captured baseline; this chat did not commit or push."
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "documentType": "production-build-and-verification-audit",
+  "runtimeScope": "userscript",
+  "checkedAt": "2026-10-27T15:24:25.835968+00:00",
+  "inputCount": 630,
+  "aggregateSha256": "d020a9b067f2b1f4f951151c5b6a712ee3d08921a7b03cd2b75d4439b3af35f7",
+  "inputManifest": "production-inputs.json",
+  "beforeTestsManifest": "narrow-before-tests-inputs.json",
+  "beforeBuildManifest": "narrow-before-build-inputs.json",
+  "afterBuildManifest": "narrow-after-build-inputs.json",
+  "changedAfterRecordedBuildInputs": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "changedDuringFinalGates": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "artifact": {
+    "path": "apps/userscript/dist/any-music.user.js",
+    "bytes": 5029624,
+    "sha256": "3ec503f70b3694fe0170879ebacc76cbb4ccd3666f6b0cd22df64f8ada234d71",
+    "metadata": {
+      "grantCount": 16,
+      "connectCount": 15,
+      "runAt": "document-start",
+      "noframes": true,
+      "externalRequireOrResource": false,
+      "scope": "Built source metadata only; manager installed source/enablement is verified separately by parent live acceptance."
+    }
+  },
+  "buildLog": "narrow-final-build.log",
+  "verification": {
+    "executionOwner": "GM-R4 narrow-final independent root runs after the installed narrow-focus finding was repaired.",
+    "exitCodes": {
+      "test": 0,
+      "typecheck": 0,
+      "lint": 0,
+      "format": 0,
+      "build": 0
+    },
+    "exitCodeEvidence": "narrow-final-exit-codes.json",
+    "logs": {
+      "test": "narrow-final-test.log",
+      "typecheck": "narrow-final-typecheck.log",
+      "lint": "narrow-final-lint.log",
+      "format": "narrow-final-format.log",
+      "build": "narrow-final-build.log"
+    },
+    "logSha256": {
+      "narrow-final-test.log": "b69e1972bfb3b9ff6c7f467a4016b860909f7844b83fd407600b0dbf24627e4e",
+      "narrow-final-typecheck.log": "09972c025498b84fe6bb6cf2ef1bc580a91e6571a428e64fd7fdf12765e574c0",
+      "narrow-final-lint.log": "c4678f4bfa6f846c769698073cd59c6de0be1acfc0eceb75bcdf69d2953aa06b",
+      "narrow-final-format.log": "b890f997d2b75c874db12988fd41860a820a5f3d95c2ea6fdb6014bd24665231",
+      "narrow-final-build.log": "f29c5b0c868418e5081f231be8ff5c2819cd92a4052879e00444f348f46d584f"
+    },
+    "testSummary": {
+      "vitestFiles": 316,
+      "vitestTests": 2399,
+      "rustPassed": 253,
+      "rustIgnored": 1,
+      "nodeTests": 58,
+      "protocolDifferentialCases": 200
+    },
+    "buildScope": "Root pnpm build: both production frontends and optimized Windows application; no native UI launch.",
+    "documentationBoundary": "Parent-authored acceptance/docs updates after this run receive a separate final format check.",
+    "lintWarnings": {
+      "count": 12,
+      "files": ["docs/baselines/theme-ui-migration/T13/gm-r4/observe-installed.js"],
+      "scope": "Diagnostic observer warnings are not product lint errors."
+    },
+    "formatRerun": "The first format log and formatting-only repair are retained in narrow-final-format-initial.log and narrow-final-format-fix.log.",
+    "formatRerunScope": "First narrow-final format pass flagged 17 generated evidence JSON files only; no product-source formatting defect. Formatting evidence and rerunning the root check passed."
+  },
+  "comparedWithBeforeNarrowFocus": {
+    "manifest": "production-inputs-before-narrow-focus.json",
+    "buildAudit": "build-audit-before-narrow-focus.json",
+    "artifactSha256": "ea76bbf97f9e795f8494f2277319fe8fc33c421f36f4029071d3190f3598fc63",
+    "artifactBytes": 5029346,
+    "inventoryChanges": {
+      "addedToInventory": [],
+      "removedFromInventory": []
+    },
+    "changedRecordedInputs": [
+      "packages/theme-default/src/ClassicRoot.vue",
+      "packages/theme-default/src/components/shell/ProductTopBar.vue",
+      "packages/ui/src/components/modal-focus.ts"
+    ]
+  },
+  "priorEvidence": {
+    "ea76Phase": "build-audit-before-narrow-focus.json",
+    "c944Phase": "build-audit-before-recovery.json",
+    "meaning": "Earlier successful and failed runs remain bound to their source/artifact stage. Narrow-final reruns do not establish a prior failure cause."
+  },
+  "limits": [
+    "Source/config fingerprints and automated checks do not establish installed UI/focus/transport or physical input.",
+    "No product logic edit, browser/native UI operation, commit or push is performed by this verification agent."
+  ]
+}

@@ -1,0 +1,61 @@
+title = "Any Music repository secrets"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+[[rules.allowlists]]
+description = "Reviewed file-digest maps in acceptance evidence, never arbitrary keys"
+condition = "AND"
+paths = ['''(?:^|/)docs/baselines/.*\.json$''']
+regexTarget = "line"
+regexes = [
+  '''^\s*"[^"\r\n]+\.(?:json|ts|md|txt|kt|mjs|rs|toml|yaml|vue|scss)":\s*"[a-f0-9]{64}",?\s*$''',
+]
+
+[[rules.allowlists]]
+description = "Fixed official-host validation test input"
+condition = "AND"
+paths = [
+  '''(?:^|/)apps/tauri/src-tauri/(?:src/accounts/login\.rs|gen/android/app/src/androidTest/java/com/anymusic/app/MobileBilibiliLoginTest\.kt)$''',
+]
+regexes = ['''^0123456789abcdef0123456789abcdef$''']
+
+[[rules.allowlists]]
+description = "Public Passport SDK constant, documented by the website contract capture"
+condition = "AND"
+paths = [
+  '''(?:^|/)apps/tauri/(?:test/fixtures/douyin-login-risk-capture\.json|src-tauri/src/accounts/douyin_passport\.rs)$''',
+]
+regexes = ['''^163e7ce78d58971a41f5b969996d85c2$''']
+
+[[rules.allowlists]]
+description = "Capability roadmap prose, not a credential assignment"
+condition = "AND"
+paths = ['''(?:^|/)docs/en/cross-platform/planning/feature-requirements-and-roadmap\.md$''']
+regexes = ['''^provides/consumes$''']
+
+[[rules]]
+id = "any-music-session-credential"
+description = "Music-source session credential or device token literal"
+regex = '''(?i)(?:SESSDATA|bili_jct|(?-i:sessionid)(?:_ss)?|sid_tt|sid_guard|passport_csrf_token|msToken|access_token|refresh_token)["' \t]{0,3}[:=]["' \t]{0,3}([a-z0-9_%+./=-]{12,})["';]'''
+secretGroup = 1
+keywords = [
+  "sessdata",
+  "bili_jct",
+  "sessionid",
+  "sid_tt",
+  "sid_guard",
+  "passport_csrf_token",
+  "mstoken",
+  "access_token",
+  "refresh_token",
+]
+
+[[rules.allowlists]]
+description = "Exact synthetic markers used by transport and redaction tests"
+regexes = [
+  '''^(?:same-site-ms-token|main-world-ms-token|native-ms-token|page-ms-token|synthetic-session|test-session-token|source-access-token|source-refresh-token)$''',
+]

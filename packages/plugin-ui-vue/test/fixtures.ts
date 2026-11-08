@@ -1,0 +1,60 @@
+import type { PluginManifest, UiDocument } from '@any-music/plugin-sdk'
+export const manifest: PluginManifest = {
+  manifestVersion: 1,
+  packageFormatVersion: 1,
+  id: 'org.example.summary',
+  version: '0.1.0',
+  name: { 'zh-CN': '摘要', en: 'Summary' },
+  description: { 'zh-CN': '测试', en: 'Test' },
+  sdk: { minimum: '0.1.0', maximumExclusive: '1.0.0' },
+  wireVersions: [1],
+  runtimeProfileVersion: 1,
+  contributionVersion: 1,
+  dataSchemaVersion: 1,
+  execution: 'declarative',
+  integrity: 'integrity.json',
+  forms: ['desktop', 'mobile'],
+  capabilities: [],
+  commands: [{ id: 'summarize', title: { 'zh-CN': '摘要', en: 'Summary' } }],
+  contributions: [
+    {
+      contributionId: 'summary',
+      pointId: 'workspace.views',
+      contractVersion: 1,
+      required: true,
+      title: { 'zh-CN': '摘要', en: 'Summary' },
+      scope: { sections: ['catalog'], forms: ['desktop', 'mobile'] },
+      viewId: 'summary',
+      inputSchemaId: 'urn:any-music:plugin:command-context:1',
+      eventSchemaId: 'urn:any-music:plugin:ui-event:1',
+      cardinality: 'many',
+      fallback: 'hidden',
+      budgetProfileVersion: 1,
+    },
+  ],
+  activationEvents: ['on-view'],
+  memoryClass: 'minimum',
+}
+export const document: UiDocument = {
+  schemaVersion: 1,
+  viewId: 'summary',
+  viewRevision: 1,
+  nodes: [
+    { id: 'text', type: 'text', text: '<script>untrusted text</script>' },
+    {
+      id: 'run',
+      type: 'button',
+      label: { 'zh-CN': '生成摘要', en: 'Summarize' },
+      commandId: 'summarize',
+    },
+    {
+      id: 'form',
+      type: 'form',
+      label: { 'zh-CN': '保存输入', en: 'Save input' },
+      commandId: 'summarize',
+      fields: [
+        { id: 'query', label: { 'zh-CN': '备注', en: 'Note' }, type: 'text', maxLength: 20 },
+      ],
+    },
+  ],
+}

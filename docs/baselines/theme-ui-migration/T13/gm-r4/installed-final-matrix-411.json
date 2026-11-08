@@ -1,0 +1,2829 @@
+{
+  "artifact": "3ec503f70b3694fe0170879ebacc76cbb4ccd3666f6b0cd22df64f8ada234d71",
+  "observations": [
+    {
+      "label": "3ec5-dom-matrix-411-default-light-catalog",
+      "at": "2026-10-27T15:30:02.458Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 577,
+          "total": 3261,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-queue",
+      "at": "2026-10-27T15:30:02.502Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 676,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-favorites",
+      "at": "2026-10-27T15:30:02.527Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 676,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-playlists",
+      "at": "2026-10-27T15:30:02.546Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-custom-tracks",
+      "at": "2026-10-27T15:30:02.565Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-tags",
+      "at": "2026-10-27T15:30:02.601Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-composer",
+      "at": "2026-10-27T15:30:02.638Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-downloads",
+      "at": "2026-10-27T15:30:02.666Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 660,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-history",
+      "at": "2026-10-27T15:30:02.699Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 3527,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-light-plugins",
+      "at": "2026-10-27T15:30:02.717Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-catalog",
+      "at": "2026-10-27T15:30:02.968Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 577,
+          "total": 3261,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-queue",
+      "at": "2026-10-27T15:30:02.993Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 676,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-favorites",
+      "at": "2026-10-27T15:30:03.016Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 676,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-playlists",
+      "at": "2026-10-27T15:30:03.033Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-custom-tracks",
+      "at": "2026-10-27T15:30:03.048Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-tags",
+      "at": "2026-10-27T15:30:03.065Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-composer",
+      "at": "2026-10-27T15:30:03.087Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-downloads",
+      "at": "2026-10-27T15:30:03.111Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 660,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-history",
+      "at": "2026-10-27T15:30:03.146Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 3527,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-dark-plugins",
+      "at": "2026-10-27T15:30:03.165Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-catalog",
+      "at": "2026-10-27T15:30:03.411Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 577,
+          "total": 3261,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-queue",
+      "at": "2026-10-27T15:30:03.446Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 676,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-favorites",
+      "at": "2026-10-27T15:30:03.480Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 676,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-playlists",
+      "at": "2026-10-27T15:30:03.498Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-custom-tracks",
+      "at": "2026-10-27T15:30:03.514Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-tags",
+      "at": "2026-10-27T15:30:03.532Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-composer",
+      "at": "2026-10-27T15:30:03.552Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-downloads",
+      "at": "2026-10-27T15:30:03.576Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 660,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-history",
+      "at": "2026-10-27T15:30:03.603Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 3527,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-default-system-plugins",
+      "at": "2026-10-27T15:30:03.619Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-catalog",
+      "at": "2026-10-27T15:30:04.135Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-queue",
+      "at": "2026-10-27T15:30:04.165Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 2015,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1463,
+          "total": 1463,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 1102,
+          "total": 1102,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-favorites",
+      "at": "2026-10-27T15:30:04.187Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1988,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1436,
+          "total": 1436,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 896,
+          "total": 896,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-playlists",
+      "at": "2026-10-27T15:30:04.205Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 903,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 351,
+          "total": 351,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-custom-tracks",
+      "at": "2026-10-27T15:30:04.225Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1104,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 552,
+          "total": 552,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-tags",
+      "at": "2026-10-27T15:30:04.245Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1353,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 801,
+          "total": 801,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-composer",
+      "at": "2026-10-27T15:30:04.268Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1898,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1346,
+          "total": 1346,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-downloads",
+      "at": "2026-10-27T15:30:04.290Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1432,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 880,
+          "total": 880,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-history",
+      "at": "2026-10-27T15:30:04.317Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 3663,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 3111,
+          "total": 3111,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-light-plugins",
+      "at": "2026-10-27T15:30:04.331Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 807,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 255,
+          "total": 255,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-catalog",
+      "at": "2026-10-27T15:30:04.574Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-queue",
+      "at": "2026-10-27T15:30:04.594Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 2015,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1463,
+          "total": 1463,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 1102,
+          "total": 1102,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-favorites",
+      "at": "2026-10-27T15:30:04.615Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1988,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1436,
+          "total": 1436,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 896,
+          "total": 896,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-playlists",
+      "at": "2026-10-27T15:30:04.631Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 903,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 351,
+          "total": 351,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-custom-tracks",
+      "at": "2026-10-27T15:30:04.655Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1104,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 552,
+          "total": 552,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-tags",
+      "at": "2026-10-27T15:30:04.677Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1353,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 801,
+          "total": 801,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-composer",
+      "at": "2026-10-27T15:30:04.704Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1898,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1346,
+          "total": 1346,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-downloads",
+      "at": "2026-10-27T15:30:04.727Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1432,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 880,
+          "total": 880,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-history",
+      "at": "2026-10-27T15:30:04.747Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 3663,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 3111,
+          "total": 3111,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-dark-plugins",
+      "at": "2026-10-27T15:30:04.762Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 807,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 255,
+          "total": 255,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-catalog",
+      "at": "2026-10-27T15:30:05.000Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-queue",
+      "at": "2026-10-27T15:30:05.025Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 2015,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1463,
+          "total": 1463,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 1102,
+          "total": 1102,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-favorites",
+      "at": "2026-10-27T15:30:05.049Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1988,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1436,
+          "total": 1436,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 896,
+          "total": 896,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-playlists",
+      "at": "2026-10-27T15:30:05.064Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 903,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 351,
+          "total": 351,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-custom-tracks",
+      "at": "2026-10-27T15:30:05.081Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1104,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 552,
+          "total": 552,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-tags",
+      "at": "2026-10-27T15:30:05.096Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1353,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 801,
+          "total": 801,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-composer",
+      "at": "2026-10-27T15:30:05.116Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1898,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1346,
+          "total": 1346,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-downloads",
+      "at": "2026-10-27T15:30:05.133Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1432,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 880,
+          "total": 880,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-history",
+      "at": "2026-10-27T15:30:05.150Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 3663,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 3111,
+          "total": 3111,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    },
+    {
+      "label": "3ec5-dom-matrix-411-studio-system-plugins",
+      "at": "2026-10-27T15:30:05.166Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 807,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 255,
+          "total": 255,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two Vue nextTick flushes; computed geometry, not painted-frame evidence"
+    }
+  ],
+  "instrumentation": "Live props, two Vue nextTick flushes, computed layout; no painted-frame assertion"
+}

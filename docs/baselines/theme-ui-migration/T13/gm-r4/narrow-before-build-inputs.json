@@ -1,0 +1,3190 @@
+{
+  "schemaVersion": 1,
+  "documentType": "production-input-fingerprints",
+  "runtimeScope": "userscript",
+  "aggregateAlgorithm": "SHA-256 of UTF-8 JSON.stringify(files), preserving listed field and file order",
+  "sourceRoots": [
+    "apps/userscript/src",
+    "packages/account-pool/src",
+    "packages/audio-composition/src",
+    "packages/core/src",
+    "packages/music-workbench/src",
+    "packages/network-routing/src",
+    "packages/plugin-center/src",
+    "packages/plugin-cli/src",
+    "packages/plugin-music-creation/src",
+    "packages/plugin-sandbox-browser/src",
+    "packages/plugin-sdk/src",
+    "packages/plugin-source-bilibili/src",
+    "packages/plugin-source-douyin/src",
+    "packages/plugin-source-netease/src",
+    "packages/plugin-tag-management/src",
+    "packages/plugin-testkit/src",
+    "packages/plugin-ui-vue/src",
+    "packages/plugin-vm/src",
+    "packages/theme-default/src",
+    "packages/theme-studio/src",
+    "packages/ui/src"
+  ],
+  "additionalConfigurationPatterns": ["tsconfig*.json", "vite.config.*"],
+  "scope": "Final narrow-focus repair inventory: surviving prior paths in listed order, plus current sources and production TS/Vite configuration in the same package scope. Includes source supersets rather than eager execution. Tests/documentation excluded.",
+  "capturedAt": "2026-10-27T15:22:10.660765+00:00",
+  "comparedWith": "production-inputs-before-narrow-focus.json",
+  "previousInventoryCount": 630,
+  "inputCount": 630,
+  "aggregateSha256": "d020a9b067f2b1f4f951151c5b6a712ee3d08921a7b03cd2b75d4439b3af35f7",
+  "addedToInventory": [],
+  "removedFromInventory": [],
+  "files": [
+    {
+      "path": ".env.prod",
+      "bytes": 129,
+      "sha256": "4deb15fe0e1c896d4485727328993fb6ed9f53a5c9768cdcdf7b28983f341c66"
+    },
+    {
+      "path": "apps/userscript/package.json",
+      "bytes": 1588,
+      "sha256": "c3f6640806a6899275a716c76cc6217cc3c7adfa8195da9e862e79095ded2292"
+    },
+    {
+      "path": "apps/userscript/scripts/userscript-bundle-boundary.ts",
+      "bytes": 2724,
+      "sha256": "8f945f8c850789f7b47452870e6b9b177b1cd9e100407ab1208676c536c55dc2"
+    },
+    {
+      "path": "apps/userscript/src/App.vue",
+      "bytes": 550,
+      "sha256": "1d82d70e15f760580a9586fc8c0853bac220ef992a491d993865dbfe364ca7f2"
+    },
+    {
+      "path": "apps/userscript/src/bootstrap-userscript-app.ts",
+      "bytes": 2072,
+      "sha256": "18e7a4fdeab9a869fc9a6d07547f3ab76f35a1fa799a33cf39a7f70558f441e6"
+    },
+    {
+      "path": "apps/userscript/src/features/music-sources/built-in-music-sources.ts",
+      "bytes": 722,
+      "sha256": "b74765ff730db702e4077637a199365aef530a8785155037b34c2cc9576902a6"
+    },
+    {
+      "path": "apps/userscript/src/features/music-sources/built-in-source-directory.ts",
+      "bytes": 2920,
+      "sha256": "352c2695d32d4777e5d5af22d093bb2f936fadd5e2169ee8186c64a974804244"
+    },
+    {
+      "path": "apps/userscript/src/features/plugins/built-in-theme-directory.ts",
+      "bytes": 265,
+      "sha256": "22983d6d9db33b8f199faad155b63b2f0835c90a9a4aaf22995cd003c78bbf21"
+    },
+    {
+      "path": "apps/userscript/src/features/plugins/built-in-themes.ts",
+      "bytes": 1408,
+      "sha256": "e8b27e6be6bac1fd0d81ea8a3d244c2614312f40164f3c4886e3b3e9b81ceae5"
+    },
+    {
+      "path": "apps/userscript/src/features/plugins/built-in-workbench-modules.ts",
+      "bytes": 1041,
+      "sha256": "caacd3fe1bad1471b1ea4bb8c65265d4d82b6acf9e0eab6c09ef556ce75e8450"
+    },
+    {
+      "path": "apps/userscript/src/main.ts",
+      "bytes": 2486,
+      "sha256": "f368f24f44e5b315875ea5aaba4efa78c4d03b3f06720fd903e8d9d05bf33b5c"
+    },
+    {
+      "path": "apps/userscript/src/platform/configure-userscript-workbench.ts",
+      "bytes": 1890,
+      "sha256": "21dafa70e0fe2d5a8126054b1ef105c491e543044e4c2b56fa488dee3e4005c8"
+    },
+    {
+      "path": "apps/userscript/src/platform/dev/install-dev-userscript-runtime.ts",
+      "bytes": 6436,
+      "sha256": "0c6c2cea7cf4218a24e7cf070e8f54274bcb69c83888b3d4308d604d5b8511fd"
+    },
+    {
+      "path": "apps/userscript/src/platform/dom/keyboard-event-boundary.ts",
+      "bytes": 2212,
+      "sha256": "acb1ced1bb559eef9b3a85d06911dfb6126d161ac0d9d08b64fc217837eb6c6a"
+    },
+    {
+      "path": "apps/userscript/src/platform/dom/mount-userscript-app.ts",
+      "bytes": 2803,
+      "sha256": "8f0405933c5bfbf494e860affd2019cd8ba8caa6068d032c2f6666a6381d1283"
+    },
+    {
+      "path": "apps/userscript/src/platform/dom/mount-userscript-launcher.ts",
+      "bytes": 10158,
+      "sha256": "cf1c535903ab9612eab0dcb32a9dc05aec85000fba93bf08c372b3f4235227bb"
+    },
+    {
+      "path": "apps/userscript/src/platform/dom/shadow-style-registry.ts",
+      "bytes": 2767,
+      "sha256": "f90c8c00c1166862efae7b0d6cc5cd1513899aeb2ea719fd0b033e0256ec2177"
+    },
+    {
+      "path": "apps/userscript/src/platform/http/gm-errors.ts",
+      "bytes": 407,
+      "sha256": "043b60e0e591417a8bf257cbd0aecd092f85ced56e4125562dcec0164dfecd4b"
+    },
+    {
+      "path": "apps/userscript/src/platform/http/gm-http-client.ts",
+      "bytes": 8173,
+      "sha256": "d00ba77997087f0c168dc942474833ffad18b7c81687c274f59d33f7557fa1f8"
+    },
+    {
+      "path": "apps/userscript/src/platform/http/gm-proxy.ts",
+      "bytes": 2300,
+      "sha256": "d4ab37072576da8012195753352a47c3b10972a8eadfe0d79752bb96716f0aa3"
+    },
+    {
+      "path": "apps/userscript/src/platform/music-plugins/douyin/douyin-page-bridge.ts",
+      "bytes": 10928,
+      "sha256": "5c1bfd3d29769194c2a3735631acde207479dbb96784d77412b9d0c1b73128fb"
+    },
+    {
+      "path": "apps/userscript/src/platform/music-plugins/douyin/douyin-page-capture-runtime.ts",
+      "bytes": 11204,
+      "sha256": "7853c70a068872dbb4f34a0336199e20566cb1bd9cc1bd002489c5abc38d6f95"
+    },
+    {
+      "path": "apps/userscript/src/platform/music-plugins/douyin/douyin-page-capture.ts",
+      "bytes": 13566,
+      "sha256": "22c60ede8946d0d1c45e9f048f39c7a2e7e2a1705ba1adaa5e2a5a462a3e55e4"
+    },
+    {
+      "path": "apps/userscript/src/platform/music-plugins/douyin/douyin-page-signature-bridge.ts",
+      "bytes": 13897,
+      "sha256": "4c17e61dffe659daad4252aa0d8d77ddb8332330cbd0390a05b75b9db48b41b5"
+    },
+    {
+      "path": "apps/userscript/src/platform/music-plugins/douyin/douyin-page-signer.ts",
+      "bytes": 3599,
+      "sha256": "27990533362bd0bfe3683fe61b094b68f486d84313396fe50673e188f7b5d9f7"
+    },
+    {
+      "path": "apps/userscript/src/platform/music-plugins/douyin/douyin-target-cookie-state.ts",
+      "bytes": 1684,
+      "sha256": "2c2265daa11bf0f2a2efc13af979cb192286c2df9dcff6ad2a3e98a96cfa1ee9"
+    },
+    {
+      "path": "apps/userscript/src/platform/music-plugins/douyin/index.ts",
+      "bytes": 1251,
+      "sha256": "e330d93e485a9aa4c8d2e4dd233c8d7ac0346855c81818b83803a78ee7134200"
+    },
+    {
+      "path": "apps/userscript/src/platform/product-storage.ts",
+      "bytes": 6450,
+      "sha256": "9ae5635492a09556c7af473bbc92867ebb039be2e7f490673e3820b29d631132"
+    },
+    {
+      "path": "apps/userscript/src/platform/resource-cache.ts",
+      "bytes": 14917,
+      "sha256": "fb362228c5deedfd9efd4282529ea43d9b43487a57bddf62452f1db80629577d"
+    },
+    {
+      "path": "apps/userscript/src/platform/use-product-storage-notice.ts",
+      "bytes": 937,
+      "sha256": "a99c905617359e0474f3319508693caa320ce704c64ad1d5ae3d6f37587b1269"
+    },
+    {
+      "path": "apps/userscript/src/styles/app.scss",
+      "bytes": 104,
+      "sha256": "bbad61e3c5e0307284aa3fa6c0a6944fa738b5f246722ee43a612682835aece9"
+    },
+    {
+      "path": "apps/userscript/src/styles/host.scss",
+      "bytes": 612,
+      "sha256": "25a9e166f0ab9e058c9702be7fbdb29bb0bfb123b701221c717fa094e4d67545"
+    },
+    {
+      "path": "apps/userscript/src/vite-env.d.ts",
+      "bytes": 342,
+      "sha256": "b291a62ed35c9c7fa3e5dbcabb77213b97c53fb0849b3587c7f89484a743bd09"
+    },
+    {
+      "path": "apps/userscript/vite.config.ts",
+      "bytes": 4893,
+      "sha256": "aa1fb66facd221dd5e00fac69778f649bd9ab66eba1c14f3969261a7535c1d08"
+    },
+    {
+      "path": "package.json",
+      "bytes": 4564,
+      "sha256": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e"
+    },
+    {
+      "path": "packages/account-pool/package.json",
+      "bytes": 422,
+      "sha256": "11f877681c254c4602d7d30349586a55e75774ce6ae2fd71386f1b79e6cbedcb"
+    },
+    {
+      "path": "packages/account-pool/src/catalog.ts",
+      "bytes": 8554,
+      "sha256": "72cf7a706c3ecd4c9c941aac1b1c51badc1a061d94c77749f40cd6f2a56e4dc0"
+    },
+    {
+      "path": "packages/account-pool/src/index.ts",
+      "bytes": 377,
+      "sha256": "579b4c8e524897e509323bfd21c83022aebbdfd346402c1cd833c9afe8c595df"
+    },
+    {
+      "path": "packages/account-pool/src/requests.ts",
+      "bytes": 3618,
+      "sha256": "88a75b164edbcbda0aa32b58bfc0c7a9644138d40e690e83701490e6ce5c9415"
+    },
+    {
+      "path": "packages/account-pool/src/selection.ts",
+      "bytes": 2560,
+      "sha256": "56e4f98a965e5d999f5cbf1da719b0ef70e0c4bd13e18cd3648f63fb4512ff8b"
+    },
+    {
+      "path": "packages/audio-composition/package.json",
+      "bytes": 494,
+      "sha256": "aba6b620d32fa7c88df878f0322b277c119261145e9951ad41deb6a64f75ce42"
+    },
+    {
+      "path": "packages/audio-composition/src/browser/audio-composition-error.ts",
+      "bytes": 589,
+      "sha256": "830d5447c008d2d8451b6169daf20fb9f783007fd64934a0497f784d436d80ff"
+    },
+    {
+      "path": "packages/audio-composition/src/browser/audio-exporter.ts",
+      "bytes": 9046,
+      "sha256": "790d5b0a77d490f55069ca18fbcc4d7bcc7484f680618073781c40617cd143b9"
+    },
+    {
+      "path": "packages/audio-composition/src/browser/audio-sample-normalizer.ts",
+      "bytes": 6287,
+      "sha256": "c529e380125fe89d0219eda268f80164cca7e5b86edcf8b9b520b00746bbdbd5"
+    },
+    {
+      "path": "packages/audio-composition/src/browser/index.ts",
+      "bytes": 197,
+      "sha256": "7209e7da6f31623ab7bf775ce4e584830022f771f92ce1798735aa349a36dce1"
+    },
+    {
+      "path": "packages/audio-composition/src/index.ts",
+      "bytes": 220,
+      "sha256": "e80425e13d95ef1d61ec88897bec8255d40a68d350a3dbcb41826d21bbc5ab38"
+    },
+    {
+      "path": "packages/audio-composition/src/models.ts",
+      "bytes": 536,
+      "sha256": "050ad5fec92bc2a18151b74e155d18ba1b6471b70556b8fb911480eb0964602c"
+    },
+    {
+      "path": "packages/audio-composition/src/segment-recipe.ts",
+      "bytes": 7556,
+      "sha256": "07c7cd93665f4aa639962652173252ae41d00c16b15417e80736b894eb943f64"
+    },
+    {
+      "path": "packages/audio-composition/src/virtual-audio-preload.ts",
+      "bytes": 1610,
+      "sha256": "9c7970bcdb5834a8b8372003cb0ea22f05509b9a8573ec3fa9f5f82eb7393282"
+    },
+    {
+      "path": "packages/audio-composition/src/virtual-playback-plan.ts",
+      "bytes": 5174,
+      "sha256": "c11c42cf16537636b3b943398a162c8476363740e066719456e9d972035169dc"
+    },
+    {
+      "path": "packages/core/package.json",
+      "bytes": 416,
+      "sha256": "e255e96531c64cd7bec25a4052562b28169a8d591d42b395616397aaca095e9f"
+    },
+    {
+      "path": "packages/core/src/download/download-history.ts",
+      "bytes": 13741,
+      "sha256": "18c4a68c69df63d169928dc5b2ed9626d3d769c06e66db900802bf69ca57770e"
+    },
+    {
+      "path": "packages/core/src/download/download-queue.ts",
+      "bytes": 6539,
+      "sha256": "219bc655c259973f08dbe0f0fd2244d7559480d09444dfcc80f7c205f30bde72"
+    },
+    {
+      "path": "packages/core/src/errors/app-error.ts",
+      "bytes": 13058,
+      "sha256": "9dda4aeb158118e6c4ea902485f126c7d3aa9f38c08af67b0f439c992e2ba43e"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "bytes": 3872,
+      "sha256": "d9d5fe22e39372b74d7eeee720b270613cc0e4ddfbe1017bab683d5ee049daea"
+    },
+    {
+      "path": "packages/core/src/library/favorites.ts",
+      "bytes": 2893,
+      "sha256": "b7d7c626e477ce187bc5e1ea6339c1f5d040522fa32c31a5c8c68228064ca471"
+    },
+    {
+      "path": "packages/core/src/library/material-collection.ts",
+      "bytes": 1653,
+      "sha256": "cba13b7130d4b993b4c315eecfdabd9fe25a1f4ea10844884d54f5ab0c19c8c5"
+    },
+    {
+      "path": "packages/core/src/library/models.ts",
+      "bytes": 4818,
+      "sha256": "9500c12ad4198624f93ae34069a12d3af6dee5c643c2237b271fb592a31ffc3e"
+    },
+    {
+      "path": "packages/core/src/library/segment-recipe.ts",
+      "bytes": 2002,
+      "sha256": "8e405edc59a51da0e40c3aae587607f1af686843a758c3e7a7157dd090b462f9"
+    },
+    {
+      "path": "packages/core/src/library/track-name.ts",
+      "bytes": 562,
+      "sha256": "4ce9cc5eeaeae461c2812a1ddbc127e04888c6b587e12dfc9e406e70b827b462"
+    },
+    {
+      "path": "packages/core/src/models/track.ts",
+      "bytes": 3262,
+      "sha256": "e08560223fdfc9dc4bbff619c206fac5ec1c71c4d3c211c37388463475cd52d7"
+    },
+    {
+      "path": "packages/core/src/music-source/plugin.ts",
+      "bytes": 7858,
+      "sha256": "e217e454c1fba376e78727653042d95f4523112236b39120c29633d48d36230f"
+    },
+    {
+      "path": "packages/core/src/music-source/policies.ts",
+      "bytes": 1688,
+      "sha256": "770f19554ffd3025626454e6d83ba9f68badea3434381b0f50c401f475e34a59"
+    },
+    {
+      "path": "packages/core/src/player/normalize-progress.ts",
+      "bytes": 242,
+      "sha256": "4a20c411334246dce5b9f02fc6a8e9f7516a72867b5d2b16be0dde5704a4899d"
+    },
+    {
+      "path": "packages/core/src/player/playback-mode.ts",
+      "bytes": 247,
+      "sha256": "3097baf1d45f4b33ec9a5aa22e48983db57b50d3efc7b05cc93b4761f8473a52"
+    },
+    {
+      "path": "packages/core/src/ports/account-login.ts",
+      "bytes": 1001,
+      "sha256": "00ed3a0973ea703e754a30086d41f39fb811908e06c1d92570a33ca5b329ae35"
+    },
+    {
+      "path": "packages/core/src/ports/http-client.ts",
+      "bytes": 1460,
+      "sha256": "1631d32d2d260c747476dabeacbbc3d0a681d072e8877ad212df7f681927b0f7"
+    },
+    {
+      "path": "packages/music-workbench/package.json",
+      "bytes": 1353,
+      "sha256": "4dbd0baf114d07111f1cee50086d352d609db6e55ac3da44791c1f9a910f9856"
+    },
+    {
+      "path": "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "bytes": 2874,
+      "sha256": "4711afc529457a92c6d8fccfceb49769fd501189caf729e97194c040dfecbda6"
+    },
+    {
+      "path": "packages/music-workbench/src/components/music-sources/MusicWorkbenchThemeHost.vue",
+      "bytes": 5546,
+      "sha256": "b638f752d72421ad92d12c4f396b4b7f8124077c2b5cfaf6fc9ca89268d29ea9"
+    },
+    {
+      "path": "packages/music-workbench/src/components/settings/ExternalSourceSettings.vue",
+      "bytes": 1737,
+      "sha256": "4b8fed3c2c335431e145ab1f446af6d318a818a811e76cd8da2c6ba533e466dc"
+    },
+    {
+      "path": "packages/music-workbench/src/components/settings/NetworkProxySettingsForm.vue",
+      "bytes": 5115,
+      "sha256": "33de9a8a603c1d1c95c98d3ed347e61cca816bfb0f4189314a752cf7b070796f"
+    },
+    {
+      "path": "packages/music-workbench/src/features/audio-export/audio-exporter.ts",
+      "bytes": 2735,
+      "sha256": "0d4fbfe9c6c19b3ff21ebeea7fcdfb492d00b266177708ef8e6870e5e2b27d48"
+    },
+    {
+      "path": "packages/music-workbench/src/features/audio-export/download-audio.ts",
+      "bytes": 1360,
+      "sha256": "0c3d9d1af497889971602c30d55dfb7066806b2e2016e2bfc359fc769bfbbe64"
+    },
+    {
+      "path": "packages/music-workbench/src/features/audio-export/player-export-recipe.ts",
+      "bytes": 1093,
+      "sha256": "81cd7f3eaf96e1ab50404ed9e37ff906a626a6075a7a9444f4df28d9c6b0c6f9"
+    },
+    {
+      "path": "packages/music-workbench/src/features/downloads/download-archive.ts",
+      "bytes": 3037,
+      "sha256": "c35d2137e4b133d6c1802b3cf447e1362d003c095aeed2992ca3b12c5557a8c9"
+    },
+    {
+      "path": "packages/music-workbench/src/features/downloads/download-scheduler.ts",
+      "bytes": 2291,
+      "sha256": "e4c40dc5569a59cb142055b9c93652259a11fcbe5d444db0352e8711c7185506"
+    },
+    {
+      "path": "packages/music-workbench/src/features/downloads/player-download-feedback.ts",
+      "bytes": 1128,
+      "sha256": "939f953638e5f4466a148ff2ec852e77ceeac8d2480569617ebde80843cbb8c0"
+    },
+    {
+      "path": "packages/music-workbench/src/features/downloads/use-download-collection-order.ts",
+      "bytes": 2562,
+      "sha256": "c7046d3494dbbeb911a246d3d24c9e693d4830dc0dce739f3af2c733c9749faa"
+    },
+    {
+      "path": "packages/music-workbench/src/features/downloads/use-download-manager.ts",
+      "bytes": 35914,
+      "sha256": "37e27145503ece918ca5bbd1659939315ee5b9d61f763173dc33b40a80daa8f4"
+    },
+    {
+      "path": "packages/music-workbench/src/features/downloads/use-player-download.ts",
+      "bytes": 6915,
+      "sha256": "b8a52bd5ea94865d60c9b8e9882022d4e33a724dfb45279dc57ad9d70ec8ba59"
+    },
+    {
+      "path": "packages/music-workbench/src/features/library/use-collection-display-preferences.ts",
+      "bytes": 2916,
+      "sha256": "43f76c36516bf157b0b10e4a7521eb2ebf87579bb4860da89ebb08bfe1d2ce01"
+    },
+    {
+      "path": "packages/music-workbench/src/features/library/use-favorite-collection.ts",
+      "bytes": 5988,
+      "sha256": "c8d82364667b4448d0da5c1f8bcd792ad7cdcb1437642d3fd0dc124640dbbde5"
+    },
+    {
+      "path": "packages/music-workbench/src/features/library/use-local-music-library.ts",
+      "bytes": 20478,
+      "sha256": "c6914615095bf8bb7e678c9942f1460a96f4bb7cff53a3b663dc380f256116f0"
+    },
+    {
+      "path": "packages/music-workbench/src/features/library/use-track-collection-view.ts",
+      "bytes": 1560,
+      "sha256": "cb2be988723647f820a3e1083df201d0c412e3093efc256a0dcaa40132079c7d"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/catalog-result-snapshot.ts",
+      "bytes": 2683,
+      "sha256": "ad4671056f8457e3a5af390d4d7173ec22626091ec5034b9db9d0ac3df7a034e"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/music-source-workspace-state.ts",
+      "bytes": 6843,
+      "sha256": "938bc173c1477b5c13ccd077273445390b1e8cd210da92731664d3231cbdc9e9"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-catalog-reload.ts",
+      "bytes": 2127,
+      "sha256": "9db9c9d5979eedb40edddfa4ad8f7ebc78d24ff76e946c07daf102c361b4bfca"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-catalog-scroll-restoration.ts",
+      "bytes": 834,
+      "sha256": "f4a7fa036f8c8b58ca675884161d2ac9af659ddb21e930cb9437141281c0a0ce"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-catalog-selection-operator.ts",
+      "bytes": 1852,
+      "sha256": "7d8e410cea5140d8d387f866cb179ab1a103bee98bf4cf25c56ba60c69beeea5"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-registry.ts",
+      "bytes": 3582,
+      "sha256": "7a4a4e9dee1a59c8d08eba20ec4b53c6ab9de0d22c0a93403ee08032081c58ef"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts",
+      "bytes": 43878,
+      "sha256": "4f17e613685422236c2db0ad1b29921584119789e3deff8a146684ee6bca0b6f"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts",
+      "bytes": 30932,
+      "sha256": "79fde91c2b2879e2802e7768e03da0667d596a65beeefac38e95e6e717e3672f"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+      "bytes": 3591,
+      "sha256": "6af8a5afcef86766c9c64cc7cfb1416f0d541e21f4a71d3202d214eef1c9dc11"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-track-catalog.ts",
+      "bytes": 15188,
+      "sha256": "0a7ea6049cb1553eb23adfd3727e6dde8cb064fe3d766b1dc705baedcaac95e7"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-workbench-back-navigation.ts",
+      "bytes": 1679,
+      "sha256": "32fb721376c92c6737638b8bd131b559df1bb8f47cf2d53656d3e8362a0c83ec"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/custom-segment-seek.ts",
+      "bytes": 3021,
+      "sha256": "32e2ef01a491c5e623cb86132a77d5a4ec5b34f0e270f4797ca727dbf8817704"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/native-compatible-audio.ts",
+      "bytes": 25108,
+      "sha256": "eb82377892b4abeb592bb366480fcc1810afd095ca59112830a2017a93c1c635"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/playback-queue-state.ts",
+      "bytes": 3336,
+      "sha256": "9d9b067ec7d6c6f3812b562b193dbaf2c48be103a40b8d3ade220c7d89b4ee81"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/playback-transport.ts",
+      "bytes": 3500,
+      "sha256": "a99874dce71c285f7caef0863499dbfc9227fd993569998747e700641072d622"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/player-presentation.ts",
+      "bytes": 886,
+      "sha256": "a9c41e0cdafd91775325b66c8df187338ada8a1c8c0028c307c96628f5d2eeb9"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/render-custom-track-media.ts",
+      "bytes": 2078,
+      "sha256": "6790b2db36eee23ea81b2b5410ffd002c822c9393b6a45e2f1f7bf36e171509a"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/use-audio-player.ts",
+      "bytes": 64993,
+      "sha256": "42138b9a6b2cab46df2013976faff7bd87da0baa0778de0be73f1c7e8d4abb37"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/use-playback-queue.ts",
+      "bytes": 14710,
+      "sha256": "a68e565dbd055f63865bcffb9fd726af3b53cd8cd721214529f08e0df2d0942f"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/use-progress-scrub.ts",
+      "bytes": 1306,
+      "sha256": "a01f3ec3502c80b32ef89748f3371c6e520c46aaabd0fb24a9159a90baaf1f0e"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/use-stable-playback-timeline.ts",
+      "bytes": 886,
+      "sha256": "91c13b5eb46a2f934afc75f756cc1e649f28efcb71662f3f886eee4c10a26709"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/use-virtual-audio-playback.ts",
+      "bytes": 17049,
+      "sha256": "ce22be0881078298a5d44f0c368cdbf0d1e5fe4dd53f7f810e72fb4b7bc564f3"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/virtual-audio-buffer-loader.ts",
+      "bytes": 8584,
+      "sha256": "0d86c743d4b0f52dddbdc20ea362a6fa33efa63792dfc7a27d2c4db57063cb26"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-music-creation.ts",
+      "bytes": 3274,
+      "sha256": "b1fb95611cc686b5dec9077695f81821de928034cbd0fa82729894fc72213727"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-native-plugin-authority.ts",
+      "bytes": 9289,
+      "sha256": "daf34046a2d95b91d86ebc09f87aa060b8f1ac38cbb4d12636b89eb2ac03c593"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-tag-management.ts",
+      "bytes": 3658,
+      "sha256": "3b0001c9eb54d58e3e69ec0b191895a2fed36f8882f7bbcf7017dd20a7a8f002"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-workbench-modules.ts",
+      "bytes": 14058,
+      "sha256": "e7899b38296ed757584e5c6ddd24ddf73e97a08e3a3fe01562ba895565ff4b38"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-workbench-root-theme.ts",
+      "bytes": 857,
+      "sha256": "0ce3c4a58d55fd12f54428f7ddbec17d5ecaffeae294c91ec1acb7e7e9ffdef5"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-workbench-theme-session.ts",
+      "bytes": 4133,
+      "sha256": "51449eb08c9d608bd7e0c19d7fbd7cb434a43253e4840a977783046fc712e392"
+    },
+    {
+      "path": "packages/music-workbench/src/features/settings/network-proxy-settings.ts",
+      "bytes": 4361,
+      "sha256": "6103e04c5a11fcc2a0086a29826ab7803da3c375435e5d01ff5c0ca5dd98c939"
+    },
+    {
+      "path": "packages/music-workbench/src/features/settings/use-network-proxy-settings-form.ts",
+      "bytes": 3858,
+      "sha256": "87b3209a7df2806311f8333eb05ada43d1c554d4fc7b1f731abe7e7b407f6961"
+    },
+    {
+      "path": "packages/music-workbench/src/features/settings/use-resource-cache-settings.ts",
+      "bytes": 4496,
+      "sha256": "25ca3f4c63e0acd5006223987d3fbdb5ca4668594bbd00b15b8dee3e44afd505"
+    },
+    {
+      "path": "packages/music-workbench/src/features/workbench/create-workbench-specialist-features.ts",
+      "bytes": 5686,
+      "sha256": "00d1466dcd85d77b4e179863488a965f88b24e4106b566bc8f11d21f5760eaf9"
+    },
+    {
+      "path": "packages/music-workbench/src/features/workbench/create-workbench-theme-features.ts",
+      "bytes": 8143,
+      "sha256": "343a904a2efc484892e786a819aba8731752646b9195c3dda5d242cf7b8012e0"
+    },
+    {
+      "path": "packages/music-workbench/src/features/workbench/create-workbench-track-features.ts",
+      "bytes": 19852,
+      "sha256": "8fc93020f860b3b198681261e909b3d92f0fa8abf36a9b439e2b13d77dc3241b"
+    },
+    {
+      "path": "packages/music-workbench/src/features/workbench/use-workbench-controller.ts",
+      "bytes": 32872,
+      "sha256": "76ffd3d3544746acb7b2131dd8f59073307fdf9611fd3ce1af6e4b9e12a68867"
+    },
+    {
+      "path": "packages/music-workbench/src/index.ts",
+      "bytes": 759,
+      "sha256": "7d83882db1deafcf9ce32a62aaba6ae4d0793ab1b482f5be1372ec02f816dc0f"
+    },
+    {
+      "path": "packages/music-workbench/src/media/range-media-source.ts",
+      "bytes": 12526,
+      "sha256": "94c0a40f228987b2e02534939113a14a6f434fda67f59c1525a6d285578d49b3"
+    },
+    {
+      "path": "packages/music-workbench/src/media/resolved-media-loader.ts",
+      "bytes": 2733,
+      "sha256": "9ecad045ef893ec3f9c804e04132853f2efefef9406049914c0816fb601ba0fe"
+    },
+    {
+      "path": "packages/music-workbench/src/media/response-too-large-error.ts",
+      "bytes": 358,
+      "sha256": "8307d60a3be3661c8f38eb21e34fb033df896ee2a579afa91a183263b328c77d"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/music-source-values.ts",
+      "bytes": 3520,
+      "sha256": "08337cadc1e7dcfa74c3268897f110b81253bc8562424344f720f08860f0412a"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/native-catalog-source.ts",
+      "bytes": 4243,
+      "sha256": "5c92e5e15786e7fe71f10819d418aa1baa241c29a914b96ea663aa7d521b111d"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/offline-plugin-data.ts",
+      "bytes": 3836,
+      "sha256": "80d7b1b6cb0e48500c250be7126ae39631da943be0eac72f366a268430ee5ff4"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/wire-track-listing.ts",
+      "bytes": 2133,
+      "sha256": "755b577f78a6e4f02203ec61eb72f2862f96f519ec623131be450e10d8b0fae0"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+      "bytes": 5103,
+      "sha256": "95195bed91b26686322d5582d5737d9afde938f038d4cb4dfeadc86b7f669934"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/workbench-modules.ts",
+      "bytes": 5287,
+      "sha256": "31c30219f70ec42f8d9c56f4bbae8d1c75397288938ba00bf8795c9ffb007f76"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts",
+      "bytes": 1465,
+      "sha256": "32954d1aac84d1c9407661efe8ce866773b4baed6387dc98f309757ad31e0a61"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/workbench-ui.ts",
+      "bytes": 1466,
+      "sha256": "754f69911bdedc03db67dbb9e73c1834ded416292cb71d91bd186a067b64603a"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/http.ts",
+      "bytes": 228,
+      "sha256": "9ac4d1224177da40f0c013b4995664749e6ebef850311ccdf0468d470b4b998a"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/proxy.ts",
+      "bytes": 273,
+      "sha256": "740f1f6087ae419dfc92bfe86079a9b3b9c9820d3f89f74d35b22f98a27a11a0"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/storage.ts",
+      "bytes": 312,
+      "sha256": "c7ad1d8e6794c8800f411b5d9db0128f14acba8a68f700e84a85a2b84dddc452"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "bytes": 4038,
+      "sha256": "470f4cf3a9f579ec53b9ed025f5513cfbd582b8a717a78ec685eac3fc67c9950"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/app-shell-preferences-repository.ts",
+      "bytes": 1026,
+      "sha256": "e3098d159a63d1430442e8aba5de646de2476f2253b9e0157d93db5ee5af0e58"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/catalog-filter-history-repository.ts",
+      "bytes": 1889,
+      "sha256": "4e953929e9e84ffbe20a4f2a26f85aa7fad4503fcc05d9e2586e138d7e7b09a1"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/download-history-repository.ts",
+      "bytes": 788,
+      "sha256": "99d0812d1aaebe2f6de18b59cb5a7833f64af357d6a87431fb476fe76077f6d5"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/local-music-library-repository.ts",
+      "bytes": 14254,
+      "sha256": "32bc62d6ba679022d204e08dcd9abc35548f6c7f05bd0c4ba89265a8201af589"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/music-source-workspace-repository.ts",
+      "bytes": 657,
+      "sha256": "1d91689d60c6693600a2682b3e2dfc692099184abd45d4469a52f7311d32a8e4"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/playback-queue-repository.ts",
+      "bytes": 598,
+      "sha256": "53eecb01fc6c1df4bd1058a44e46cdda18e8f52ce561807788c9d48e69c830fc"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/portable-product-data.ts",
+      "bytes": 9714,
+      "sha256": "8569b856bbbcc0386f9a4ca6ff4df63b2f17e256a599399056d72d031019be6d"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-data-projection.ts",
+      "bytes": 9910,
+      "sha256": "c276bb124fafc4142eb73dcf47091b24e96322be0997b54d2bc8f450e3b8d270"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-data.ts",
+      "bytes": 3337,
+      "sha256": "f8b85a61254c5576c03acb2b724cd8546249d758963c0e5a1b1e9fb81ba62e4d"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-generation-store.ts",
+      "bytes": 9025,
+      "sha256": "68a069f28a5ee21437d3ea9edafc45cc0231e549ff85688887a4c14a8c6ca0a9"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-storage.ts",
+      "bytes": 564,
+      "sha256": "09bf7c7773033027cf37906bd42fc03c4e7079812b4ffba424cae392d8033d09"
+    },
+    {
+      "path": "packages/music-workbench/src/stores/music-source-workspace-store.ts",
+      "bytes": 9578,
+      "sha256": "ceec38678db6a825ea5117b6b55fe113b5eb551833b09a9d06b7956a7893e255"
+    },
+    {
+      "path": "packages/music-workbench/src/theme.ts",
+      "bytes": 291,
+      "sha256": "eb31f0e39c4e3b157827589d020b1427a68c7a8b0461932147273f73165fade1"
+    },
+    {
+      "path": "packages/network-routing/package.json",
+      "bytes": 352,
+      "sha256": "be7a66706eb369c12da08f98002dcf7192e4cb5e5acdf86cd93359f9e5cfc90d"
+    },
+    {
+      "path": "packages/network-routing/src/attempts.ts",
+      "bytes": 6744,
+      "sha256": "854c91d4e08906557d38f267c0cb6cb99dea05a86de08f6fa1a29785674345da"
+    },
+    {
+      "path": "packages/network-routing/src/cancellation.ts",
+      "bytes": 1190,
+      "sha256": "bc3720bbfbe5308c23a41833e3557f6488c637616e9eb26217120258cd82149a"
+    },
+    {
+      "path": "packages/network-routing/src/index.ts",
+      "bytes": 642,
+      "sha256": "97ef0827364f7a789291e4a6c74f456185ec066d52b5461838553fef1fcc249a"
+    },
+    {
+      "path": "packages/network-routing/src/proxy-pool.ts",
+      "bytes": 12229,
+      "sha256": "bacb65c39a7070a0a809d87ef242885fbf4f4064ae5d4711a4a47305232f75f2"
+    },
+    {
+      "path": "packages/plugin-center/package.json",
+      "bytes": 467,
+      "sha256": "739a12bd6b5044b13c4a8e8a62d92d9959ce73be30e474b8f666c95969072df2"
+    },
+    {
+      "path": "packages/plugin-center/src/contribution-allocator.ts",
+      "bytes": 5073,
+      "sha256": "9e325b0ba110ab4a2736855a8cb4834c58946a3c162584d09774f8003d3fb980"
+    },
+    {
+      "path": "packages/plugin-center/src/contribution-registry.ts",
+      "bytes": 6129,
+      "sha256": "d26566925d9fc4a4d6325b7772a7052a06d3905dd17e1850aefa2e8c95fcf461"
+    },
+    {
+      "path": "packages/plugin-center/src/external-plugin-policy.ts",
+      "bytes": 399,
+      "sha256": "8a7f27b9042c66450e6bba28e02a7d2168a86f80d73220f44143c1c69df89ce4"
+    },
+    {
+      "path": "packages/plugin-center/src/index.ts",
+      "bytes": 418,
+      "sha256": "b70b455d4d7c19241bb682665fed7632a52f97ee67e7446957bdb3178c0c9de6"
+    },
+    {
+      "path": "packages/plugin-center/src/module-conditions.ts",
+      "bytes": 2411,
+      "sha256": "305eab141a21e53e1d9e0806c16407db7c792690876ab267c8d5fac92168540b"
+    },
+    {
+      "path": "packages/plugin-center/src/module-contracts.ts",
+      "bytes": 5035,
+      "sha256": "d993b5380273fe3e804938efbfc7bb6ac812fd0a566ec26977f6adbd9119f53d"
+    },
+    {
+      "path": "packages/plugin-center/src/module-controller.ts",
+      "bytes": 20527,
+      "sha256": "4b2d717329a96a3c7cdaa3b7f1a8c2f836f71d0226619b64865511fa18a24dae"
+    },
+    {
+      "path": "packages/plugin-center/src/module-dependencies.ts",
+      "bytes": 2504,
+      "sha256": "046ccc934366866fa4cbda25304733aafe0442e90f91cc771f77202f4593ee8a"
+    },
+    {
+      "path": "packages/plugin-center/src/module-recovery.ts",
+      "bytes": 773,
+      "sha256": "007b3128c8d6c0169eeefeaf56848b93c248cb4f9fa13ce70cf8779f9f5d9e7d"
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/built-in-source-target.ts",
+      "bytes": 796,
+      "sha256": "198d9deecab663b4f02e553fd05607585e13d0eb25b3465a439737f6298496c7"
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/index.ts",
+      "bytes": 208,
+      "sha256": "240ceda1c262f1b11e3808c4422318dc332b09e689ba397a1b0ef09e32e7a174"
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts",
+      "bytes": 4804,
+      "sha256": "f99ac67694d0c43893bf41634106409e6ac1ca8cc17483ffd2c003daed9b0d24"
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/managed-music-source-plugin.ts",
+      "bytes": 6367,
+      "sha256": "9d9ae67853cb8fae8664741040192350aaf8677860139bd4a50580536a515b3b"
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/music-source-registry.ts",
+      "bytes": 9066,
+      "sha256": "d5d29e8d6e8260de3d545cab5c3a80e49f390fecc6aba02811f17110522cf7d7"
+    },
+    {
+      "path": "packages/plugin-center/src/plugin-catalog.ts",
+      "bytes": 3998,
+      "sha256": "2653f02df27a0963694360d974489b482b95847d003577767a6b4203c9cd8bc9"
+    },
+    {
+      "path": "packages/plugin-cli/package.json",
+      "bytes": 757,
+      "sha256": "5e26cda1addc65d8a514a965fa2ae27bfed00a0ccaed7f18edaa06627d7dd949"
+    },
+    {
+      "path": "packages/plugin-cli/src/build.mjs",
+      "bytes": 3584,
+      "sha256": "35c6a7a4b47ac9dd32ac46ccd5def5cfca2425c578334d02aeaa81fb25ebd008"
+    },
+    {
+      "path": "packages/plugin-cli/src/cli.mjs",
+      "bytes": 6893,
+      "sha256": "8409560b072adf7f098adab228340d17717ed59c3a64a7b4a3eb91bc0736286b"
+    },
+    {
+      "path": "packages/plugin-cli/src/dev.mjs",
+      "bytes": 7384,
+      "sha256": "7c2a2e6012b0f453df34c7007f08d21f2deb5922f73f2229474aa49e51fb051d"
+    },
+    {
+      "path": "packages/plugin-cli/src/diagnostic.mjs",
+      "bytes": 508,
+      "sha256": "b4c64dd7154fc9b759c5b08e59f8c3274d35edc156f728a62446e264bc611a5b"
+    },
+    {
+      "path": "packages/plugin-cli/src/index.mjs",
+      "bytes": 322,
+      "sha256": "336b1c4aa19286622c3b6b1c5e3e3b7d9010a45bd1d156afbf9390dce0df453d"
+    },
+    {
+      "path": "packages/plugin-cli/src/package.mjs",
+      "bytes": 6975,
+      "sha256": "6fe383123e282b41627e84cb0c23c11dff1b453709a997ef9e6a1fd238184a0d"
+    },
+    {
+      "path": "packages/plugin-cli/src/project.mjs",
+      "bytes": 9760,
+      "sha256": "c072fe66ce83cc25f9344d103f03b309c2e4e1c454be807fddd5eea0e18b5c15"
+    },
+    {
+      "path": "packages/plugin-cli/src/templates.mjs",
+      "bytes": 13399,
+      "sha256": "851cf1386a4db2c673024db425182239f2918e9417459e74532aaa60279ddb22"
+    },
+    {
+      "path": "packages/plugin-music-creation/package.json",
+      "bytes": 679,
+      "sha256": "a9f3ef7de6ad25e26f95c81b4acc625abf43b9c7719f4efa4577c544385b22e2"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/creation-session.ts",
+      "bytes": 9156,
+      "sha256": "063124379f425c3444738fb856e7b7e5ebcca64a3f94dc2ea52ddd1e70d8fd60"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/env.d.ts",
+      "bytes": 62,
+      "sha256": "74b479eb928febd2bf79a71fedda1bc8c3324635bc5647e972f10df521ac36de"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/index.ts",
+      "bytes": 1696,
+      "sha256": "4fce84afbaddc20ac57066a0d7dacf52d3eac1bcadb406a3c9dab8d3b07bf59c"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/_timeline.scss",
+      "bytes": 2351,
+      "sha256": "b1e6cc143848a5169bdbfad952b4ae4c0a671d2229464c8dae30b3fa228ff094"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/collection-toolbar-state.ts",
+      "bytes": 347,
+      "sha256": "dda9f3418085bacbd3d869147291cccb8f99dbf04cf056c143d34047741c8bf1"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/components/MaterialCollectionToolbar.vue",
+      "bytes": 3656,
+      "sha256": "8040479dabc958bda082612eba3445304426788764c6c3eddf3b156b3e2a5107"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/components/MaterialFilterBar.vue",
+      "bytes": 2949,
+      "sha256": "ef2c83340e2db6299075c7204c9442f70f75df32a6fb0d11d55b7f0e3d07eb2e"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/components/MaterialTrackRow.vue",
+      "bytes": 4553,
+      "sha256": "f1f4bd83b033fe2089b63972419c02b2750e1248177df6f736c36d67c9ee052e"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/components/PendingMaterialStorage.vue",
+      "bytes": 3495,
+      "sha256": "e7b685c9aaf03a24d8bb9e954c3982a6f6bcbaaa07a3c5ef05215a60599eaa5a"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/components/SegmentComposer.vue",
+      "bytes": 4407,
+      "sha256": "e6335ce3ea3e2036985435d841f9249e56c3c81eacc1e13c058ca713d6e10a7d"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/components/SegmentTimeline.vue",
+      "bytes": 13369,
+      "sha256": "b2d8def54165c209c2735cadcca019b253238053eb0f6c2fdca33361a7b8624a"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/index.ts",
+      "bytes": 153,
+      "sha256": "e1c6f180ba4c8177c98337f6c4ca3f7dfcbd741f5c48c20859e15c584ac1f117"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/material-range-state.ts",
+      "bytes": 310,
+      "sha256": "2569473ab84a2314ab2c7b776138e8c0578b2c60a57b7d0d7d9d402f269acef0"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/music-creation.scss",
+      "bytes": 6266,
+      "sha256": "cbcb62796c278f3de60044d27b3dd0b78987ff1589c94d8172a337aa38ab7b69"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/timeline-state.ts",
+      "bytes": 186,
+      "sha256": "a8849c7d0beb53f1b06d8864a518decf78004d8d7f1d8429408234b18b20a915"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/use-material-library-filters.ts",
+      "bytes": 5543,
+      "sha256": "e6072d7adfc3b05637a406ac4705995de463f6e8cca1d984b5b502e191ccd767"
+    },
+    {
+      "path": "packages/plugin-music-creation/src/vue/use-segment-composer.ts",
+      "bytes": 9948,
+      "sha256": "5b293b42209eb24bab74d05fd50f1398bb07beacc414bc79e68ca7f00a907c05"
+    },
+    {
+      "path": "packages/plugin-sandbox-browser/package.json",
+      "bytes": 702,
+      "sha256": "3ff753d4362dcc4e72d7949a81afb3011b4e699dc2cc8ba04a1a21be8a31ed2a"
+    },
+    {
+      "path": "packages/plugin-sandbox-browser/src/assets.d.ts",
+      "bytes": 87,
+      "sha256": "75291c1c70b5d12ff6a2b7867b8bf9ced81447416add3a9101713477fdcb40da"
+    },
+    {
+      "path": "packages/plugin-sandbox-browser/src/browser.ts",
+      "bytes": 1079,
+      "sha256": "ad6b2054e2099d75dd347614505d29a1d6c40a2f3ccc5dd12b19fb9279307d8f"
+    },
+    {
+      "path": "packages/plugin-sandbox-browser/src/index.ts",
+      "bytes": 126,
+      "sha256": "5ab0f05584f9e441bcca8cc35305fee6b5d0239716c35a8616aaef84594f0fa6"
+    },
+    {
+      "path": "packages/plugin-sandbox-browser/src/sandbox-session.ts",
+      "bytes": 4670,
+      "sha256": "f2b10ce5327f79add53dc45af4119e7eccdcc4913d353a12d2ad68c986d5c773"
+    },
+    {
+      "path": "packages/plugin-sandbox-browser/src/worker-runtime.ts",
+      "bytes": 1454,
+      "sha256": "5ee5dd019d07f8f58dd035dc2d685b45b33b5878037517a573fd33d3396278b4"
+    },
+    {
+      "path": "packages/plugin-sandbox-browser/src/worker.ts",
+      "bytes": 3810,
+      "sha256": "65153b7ae3124cc50dd2f95944fe99e68f48763145d807d02886ba316b646e94"
+    },
+    {
+      "path": "packages/plugin-sdk/package.json",
+      "bytes": 1903,
+      "sha256": "b827d149d50b693288984bd7e5b03259d2a20f7e6ee0b1a9beec647dd7ab7def"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/protocol.ts",
+      "bytes": 56648,
+      "sha256": "4ae8006215a03d8d502f886bde1d11fa4b7e914d5edaeb83b99e109f17085694"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/registry.ts",
+      "bytes": 796,
+      "sha256": "aa55de2da4fc1d8b110097d0463146f38fa689c8088be949f7617983e55d73fd"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/schema-types.ts",
+      "bytes": 2192,
+      "sha256": "3566ac8d1e0ea5427ef61bbae4b92333690297d40b0a367a57c2e859ba11094f"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/validators.d.ts",
+      "bytes": 3582,
+      "sha256": "58d0d274ef82684f4c8a4f70d8d37a00d99aab071f65bcf089da36bfbeb7b7b6"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/validators.js",
+      "bytes": 2101349,
+      "sha256": "e37e5d9398002e1c0371137ba2bc19437d3eb05ba28b1e271ecabcc192b3d011"
+    },
+    {
+      "path": "packages/plugin-sdk/src/guest.ts",
+      "bytes": 990,
+      "sha256": "8d9fec12b6588fda3ee55e3cf267fb6896fbe2faa8a1469a8a04c6e9ff434079"
+    },
+    {
+      "path": "packages/plugin-sdk/src/host.ts",
+      "bytes": 2977,
+      "sha256": "78bd20a03612668a7ee50966a73c7eb60d2a173dcb8babd0d9e8ae60ee0f36db"
+    },
+    {
+      "path": "packages/plugin-sdk/src/index.ts",
+      "bytes": 745,
+      "sha256": "9ae84328ee16a0404255de9aa2a8f37d907c43f19aaa152bbaebac704ec1a902"
+    },
+    {
+      "path": "packages/plugin-sdk/src/music.ts",
+      "bytes": 1116,
+      "sha256": "c0ec0d0a06a65464c0021fbdc4e472999c8115a099e28c09f2674368dd9802d0"
+    },
+    {
+      "path": "packages/plugin-sdk/src/negotiate.ts",
+      "bytes": 4321,
+      "sha256": "78a45c695e7ced9cffd57c1394fbc51fbe16b8f7ff3e0b9c8a72bfd7b82694f8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/node/package-format.mjs",
+      "bytes": 10306,
+      "sha256": "57dd19a344eea8999fc8aa7399b39b21bb9f86e2b6408cb4a174ee5ceb02dd6a"
+    },
+    {
+      "path": "packages/plugin-sdk/src/plugin-call-error.ts",
+      "bytes": 356,
+      "sha256": "f0987a9dc20c552bdfa246cd1b923bd16e17917997b85af445726028a15b7854"
+    },
+    {
+      "path": "packages/plugin-sdk/src/ports.ts",
+      "bytes": 1567,
+      "sha256": "fbfdba28a73b5b91e8d38d8759860df84b282bc1ce12f4868eb1042c56c7bee8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/README.md",
+      "bytes": 399,
+      "sha256": "b440129dbe98dbfab52153ee1a38e156f85d57935920ee7c452b9b65c29f5cd8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/index.ts",
+      "bytes": 4634,
+      "sha256": "d7018199ba95e26e47030a387b3d25b089968ac0a1e24fe8bbd0b3cb5d398e27"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/json-boundary.ts",
+      "bytes": 6822,
+      "sha256": "9045ff32a95a656a1a29c1aedbe159a0f4ac3a641fd62829d33a465849970a98"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/package.json",
+      "bytes": 531,
+      "sha256": "d52c2a562a336fc732242dbe9c9e425ae82f1d75b4d960ee04396df6bdc71526"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/bilibili-api.ts",
+      "bytes": 7984,
+      "sha256": "2fd24820cf81dae4dea61f1bce7ddb8c1a56abfe5bc8b86a5b25989b0d79db69"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/bilibili-plugin.ts",
+      "bytes": 15170,
+      "sha256": "9390e6755a856a7a175fa70c5d1eaf7f50af6d0e5c7b24e21eba523b65885c93"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/descriptor.ts",
+      "bytes": 644,
+      "sha256": "1d0bd2e06544bb34767dfd26b0b64535f1962373c70a0b466c3aecc23f68f693"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/index.ts",
+      "bytes": 1327,
+      "sha256": "c04eb33120a48b27857d3ef654f6dea38cff100a06e0610f5356b342517350ce"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/media-quality.ts",
+      "bytes": 6168,
+      "sha256": "7fe09570e19102b32cb265079056047d9fac70c11b4aeaeb1d6a8245b56981e3"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/runtime.ts",
+      "bytes": 161,
+      "sha256": "9894c5fc9a0d2a4cd3beab31803a7be256784a357de4e12dc4e68bc12c5ef437"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/track-mappers.ts",
+      "bytes": 6517,
+      "sha256": "506dfdebdcb1e1fbeb1598634a24f6ac38964d9c925b1c04e79ef1304e85e0b0"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/types.ts",
+      "bytes": 3469,
+      "sha256": "c6818f88bf7e0cf7b98c6ae55bebb0c79075ac32bc7fd68154a4254a5b2c6b18"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/url-parser.ts",
+      "bytes": 3026,
+      "sha256": "7980b4467c8751071027ea79552a7027d451ebd0c18d2ef3671f280d8a571bdf"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/wbi-signature.ts",
+      "bytes": 1829,
+      "sha256": "4f3b113b4ae11aefd1430257d7944dfea87d8315f7833fe0f53855473a6bfa83"
+    },
+    {
+      "path": "packages/plugin-source-douyin/package.json",
+      "bytes": 602,
+      "sha256": "71f4218c2b1e56bf7969568414ac7a991d2473c011667c36532048bf45b7a1f7"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/a-bogus.ts",
+      "bytes": 7293,
+      "sha256": "2e38d4fb136241c08688b1c1e70f07707e8ae3a4624e538ee86c0e9a0bc979b8"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/descriptor.ts",
+      "bytes": 733,
+      "sha256": "cc6223e1cd48848eeb1a9001e013323ecd3f7cf983400e797c9135c55969feef"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/douyin-api.ts",
+      "bytes": 36861,
+      "sha256": "eda6b96eba0a8e63eec8deb75ed5de8a979f559f6c426101517a65df63d7e7ff"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/douyin-plugin.ts",
+      "bytes": 37614,
+      "sha256": "5fb4289cc5fdd755999ce375003adc4ea34a5eb4a995fc376f71ba6a286f554e"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/douyin-request-state.ts",
+      "bytes": 11787,
+      "sha256": "a1e2ae50ccc84b08c55bd3ad0854ac992462e294252c9f2ba68bb1c060fe9b66"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/index.ts",
+      "bytes": 1320,
+      "sha256": "c3e4c784992a0cd5da696a2b80ff55321756b56e653b979285d46605f01a88c1"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/runtime-contracts.ts",
+      "bytes": 3386,
+      "sha256": "0a944f933c8194981f460f61dc8a217b59331f15b4c3d9742b25935209925a2a"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/runtime.ts",
+      "bytes": 360,
+      "sha256": "db7875ad1ad9901f15b0a65c2feea3c62de09af68864d2b469f5de52e3728dc5"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/sm3.ts",
+      "bytes": 3565,
+      "sha256": "a688befda27e21ff0b4d979dc254fec58f37c08336979f6c1f239d1e10a42a8a"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/track-mappers.ts",
+      "bytes": 17130,
+      "sha256": "9fa84b945ebaf45b3c6530c1a495b4f707d75cb61e42f15d1cf26408ea3267a7"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/types.ts",
+      "bytes": 5702,
+      "sha256": "f1d2f33c00b0151e4a84db8da8bffcc0a75c97d3c67e928c1b12c09694b2dfa0"
+    },
+    {
+      "path": "packages/plugin-source-douyin/src/url-parser.ts",
+      "bytes": 7077,
+      "sha256": "5e593c775db6d4ff65067669ce0adbd0d28e5ef52a36f37285fa1f83ebee6061"
+    },
+    {
+      "path": "packages/plugin-source-netease/package.json",
+      "bytes": 504,
+      "sha256": "0a0658b72e4b406e8d0bc786c502aab0da81bb3dd4959ba19fd47e47f8e791b7"
+    },
+    {
+      "path": "packages/plugin-source-netease/src/descriptor.ts",
+      "bytes": 466,
+      "sha256": "8a8bd433c0a2972bcbe2620793e861ee633ff2e3bc2cde4f7d14f17b824eb771"
+    },
+    {
+      "path": "packages/plugin-source-netease/src/index.ts",
+      "bytes": 1221,
+      "sha256": "db142fc9a343c1ad4bfcb3673a31c3361451a6416b1e023a4675a3f5c27f85ca"
+    },
+    {
+      "path": "packages/plugin-source-netease/src/netease-api.ts",
+      "bytes": 5350,
+      "sha256": "9067ff7b2b5fee2685654718f76f7f4dbdc9dbe0cc649dee3696e8adce231835"
+    },
+    {
+      "path": "packages/plugin-source-netease/src/netease-plugin.ts",
+      "bytes": 9646,
+      "sha256": "a760f13b46eb5222a9afc6dcd4c15d4dea16e32bb5d4cd0d404d10599e90a128"
+    },
+    {
+      "path": "packages/plugin-source-netease/src/runtime.ts",
+      "bytes": 103,
+      "sha256": "357cd32688a474c46cda42904de949ed978ed1546b14c3a9d568122f6e654fd7"
+    },
+    {
+      "path": "packages/plugin-source-netease/src/types.ts",
+      "bytes": 2241,
+      "sha256": "2d4cdf688423fa08951a00036435cf03a975fcbddef01de3c365924d1386dacd"
+    },
+    {
+      "path": "packages/plugin-source-netease/src/url-parser.ts",
+      "bytes": 1665,
+      "sha256": "2347b1645bba9d64526646232213147f8aaebef3442c2b161486a19e4d9603df"
+    },
+    {
+      "path": "packages/plugin-tag-management/package.json",
+      "bytes": 679,
+      "sha256": "8180478a98dfefa1ac12645241177b2a892adb506f760b2ae2297afee2345a57"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/env.d.ts",
+      "bytes": 62,
+      "sha256": "74b479eb928febd2bf79a71fedda1bc8c3324635bc5647e972f10df521ac36de"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/index.ts",
+      "bytes": 1643,
+      "sha256": "038789f8d501d41733a767488e93ffdc48c6031378d523b12bda790365ff612d"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/tag-session.ts",
+      "bytes": 4442,
+      "sha256": "c3b97c42a889694f0984f7504bd9abb4d7963881d64c7a8a6a96d743df2625ab"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/tags.ts",
+      "bytes": 2323,
+      "sha256": "0c2824dc2af27b4b0d20bdf3a02132e54a9173b84d7198f11fc8326251d3644a"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/components/TagFilterBar.vue",
+      "bytes": 3836,
+      "sha256": "ddf9f79c5f72ffbe98890ea0aaf63a01b37f81f2c1b36b44dc41c0d8a2695514"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/components/TagMaintenanceToolbar.vue",
+      "bytes": 2690,
+      "sha256": "6460bc8820696e74560125bd66847dfc0276dd561460749416852422600cda6c"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue",
+      "bytes": 5555,
+      "sha256": "d90d889e12eec092d7d78627ba4be3dc55136ebb74c72c32db52302e0b93c862"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/components/TagPlatformDrawer.vue",
+      "bytes": 1794,
+      "sha256": "f8d18a74a985b8789c06e8f657660ae545f6648db65df9f935b0e7316b9c5349"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/components/TagTrackCard.vue",
+      "bytes": 2381,
+      "sha256": "6881065c1848e1430917209afe5fe8fb9e242d2bc0c09de8bf3514c9ccea4374"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/index.ts",
+      "bytes": 148,
+      "sha256": "1a462a61669bdac0e49f95408ab6de140febf2b0911d1831df43d137f78669a7"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/tag-maintenance-state.ts",
+      "bytes": 299,
+      "sha256": "b0d1d23f974ea70bf67901691613dd45e786fb56b191f408fed3ca09468ebf67"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/tag-management.scss",
+      "bytes": 4082,
+      "sha256": "11f3416810ffe7256ac1b545bab53dff98da4bf10d60ed3a8b40c0fdc67dcd96"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/tag-track-state.ts",
+      "bytes": 178,
+      "sha256": "b822c6c6f945b6af1b77a638750ec32183b2045e089ad97c907f7a89e5ea4962"
+    },
+    {
+      "path": "packages/plugin-tag-management/src/vue/use-tag-management-filters.ts",
+      "bytes": 9044,
+      "sha256": "f2ba1c14c0532d8fb27eb303e6df058fc83e063e0e9269608f65a1ce740caee7"
+    },
+    {
+      "path": "packages/plugin-testkit/package.json",
+      "bytes": 849,
+      "sha256": "3278513c21fe4ab19f629d5803670966863fdb3a814196d732bbf83feb902cb2"
+    },
+    {
+      "path": "packages/plugin-testkit/src/index.ts",
+      "bytes": 57,
+      "sha256": "dd410bfe7ceb451108b8950c9c832ccce8eb3e9e0b1765ce7d10e0e688cf4633"
+    },
+    {
+      "path": "packages/plugin-testkit/src/test-host.ts",
+      "bytes": 3452,
+      "sha256": "62975dd379d8885ee3b5fd18bc6e71a660854a25cd5a42196ae1266f83e61fc5"
+    },
+    {
+      "path": "packages/plugin-ui-vue/package.json",
+      "bytes": 644,
+      "sha256": "4825bc534f642604becf2f9734330838313f99039f4a985f2da24a8527037bea"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/DeclarativePluginView.vue",
+      "bytes": 4495,
+      "sha256": "1caeab13ae0ff8a00b6663b575ea53884b140d319ed0a55bd97fc5cd2b747613"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/declarative-session.ts",
+      "bytes": 4925,
+      "sha256": "28ce409f74efa237c544b8c31c45d8d26d41c3b8e37f29dc13566dd6f3db73d2"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/index.ts",
+      "bytes": 208,
+      "sha256": "b4d3e1763730f0ea493d4d291ba3d2d0ee1b0cab91a522f3442aece78a3d9d00"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/ThemeHost.vue",
+      "bytes": 7302,
+      "sha256": "6e71fd3eb5ccf8aab99ef932a7442870620968706534729b25551ac22f943cd1"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/ThemeHostSurface.vue",
+      "bytes": 2061,
+      "sha256": "be4d2400c92cc04e1f0ff0a2c774fd4dda2908ec8ebe5dc9383d65b91c9ef56d"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/ThemeRootBoundary.vue",
+      "bytes": 449,
+      "sha256": "29cf43d6945e303150596ba43328738f1aab38e38477d35e00dfe7352b4855af"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/WorkspaceViewBoundary.vue",
+      "bytes": 488,
+      "sha256": "25cb56efbb1fac352db7c5974a9da445d8ad600db0a85ccd78f017c9f496b88d"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/WorkspaceViewOutlet.vue",
+      "bytes": 944,
+      "sha256": "89fb98d31b7e35134895bd634387d4f54968df5244b9db7285470a8dd111e07e"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/index.ts",
+      "bytes": 673,
+      "sha256": "33266706d4e534778b7b25111784f5debf97473bdf27c1a3fab2549ab3c7667c"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-contracts.ts",
+      "bytes": 1396,
+      "sha256": "7be238ff687bfcf9ce86f7a27e35f6dbd6101165c4f1900cbb45c432758573db"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-controller.ts",
+      "bytes": 6927,
+      "sha256": "ed4e7f54df02675703b1eb81c2653466eac0047d568c7356b4ed520b542da4ca"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-directory.ts",
+      "bytes": 1136,
+      "sha256": "e6821573694938f652461f6b0485f2ac8e3310bcb55fa6477b8082f7878d259e"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-resources.ts",
+      "bytes": 3877,
+      "sha256": "f609248d9b67081587addc38ce04aef4bec164141a9af7a8e94b21f44b7a59e0"
+    },
+    {
+      "path": "packages/plugin-vm/package.json",
+      "bytes": 764,
+      "sha256": "8d976de9b87ef5d00e86a59cfd8042995cb90b4fdac6807a0bf38625d7aaa153"
+    },
+    {
+      "path": "packages/plugin-vm/src/admission.ts",
+      "bytes": 1977,
+      "sha256": "d8c7b085040ca0798881463e9f7beb0bf11770baf09e541b0a566e67cbc7dc56"
+    },
+    {
+      "path": "packages/plugin-vm/src/contracts.ts",
+      "bytes": 862,
+      "sha256": "a43498d1f9d99907a641dab1c6845cec73614e4fd0ba85338715699a98d1911a"
+    },
+    {
+      "path": "packages/plugin-vm/src/control.ts",
+      "bytes": 80,
+      "sha256": "3c70c407f026f8ad3980c0a90c0b56a7f12052fd050206cf7bc80be182970059"
+    },
+    {
+      "path": "packages/plugin-vm/src/engine-hashes.ts",
+      "bytes": 260,
+      "sha256": "d950818b7ae77aafb2f480f114c7e16c433789e9d3b465e1bd323e22153654ca"
+    },
+    {
+      "path": "packages/plugin-vm/src/guest-bootstrap.ts",
+      "bytes": 7827,
+      "sha256": "3f1e13e334bc81b818d9dd85ae3b1b230b4218995d5a0eb7fcb927a1a0197006"
+    },
+    {
+      "path": "packages/plugin-vm/src/index.ts",
+      "bytes": 244,
+      "sha256": "d508ba12eab0055a8487b9af8367937253e6cc7210de8d991127d5c55769153e"
+    },
+    {
+      "path": "packages/plugin-vm/src/plugin-vm.ts",
+      "bytes": 10295,
+      "sha256": "ac22f1ec6bd603efac242f2dc9f4b4d64a93874948718c4212d4d5a0abb836de"
+    },
+    {
+      "path": "packages/plugin-vm/src/profile-identity.ts",
+      "bytes": 151,
+      "sha256": "f0a28b8ae266ccd4d2d750a7567826d6967307eb5f91a3af417ebcdb32d8596e"
+    },
+    {
+      "path": "packages/plugin-vm/src/profile.ts",
+      "bytes": 1854,
+      "sha256": "d2b27ebc627c2b7c249a2783230823f8f538298851c478184ce475874870aac1"
+    },
+    {
+      "path": "packages/theme-default/package.json",
+      "bytes": 703,
+      "sha256": "06196ca91cd198ad1bfa9339014dd9a7b021971d540ecea0b2fd7b2ad092021f"
+    },
+    {
+      "path": "packages/theme-default/src/ClassicRoot.vue",
+      "bytes": 7783,
+      "sha256": "bc0af29ea6d37d4b63c0af1dd67b188bdb67b55b5e5aba9100b88de9905c07ea"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/ActiveDownloadPanel.vue",
+      "bytes": 14984,
+      "sha256": "e132a66b9c5612eee640d8dbde3cc3d207c48c19d05a7974bbbf6fa6f9107066"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/ClassicDownloads.vue",
+      "bytes": 7749,
+      "sha256": "b1ab452f72f73245de19104c0ce881a8f372beb08bf50a1fd8394a737dfe1ee0"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/DownloadCollectionContent.vue",
+      "bytes": 5502,
+      "sha256": "10e365499a72a87dfab4431a3a2de7fb898ae8a873120d21e7c46bb81496d262"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/DownloadCollectionHeading.vue",
+      "bytes": 1024,
+      "sha256": "50d6ebfd87ede4024a213292835e8bf99cb10b498b04e6e9157e29b64d15af12"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/DownloadOperatorPanel.vue",
+      "bytes": 4903,
+      "sha256": "bdb5bbb95380319c881df03d14785db9dc0eca63dd620d02ce4556e59193b144"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/DownloadSummary.vue",
+      "bytes": 1558,
+      "sha256": "783c83bf9181cc7961dee0c4584ba476d3cd766cb662f37d58e39a19046ba09b"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/DownloadTrackActionsDialog.vue",
+      "bytes": 4044,
+      "sha256": "108be41a2f8fa0956ce48ca33e3b1dc172866df75e1ab484ca5e659a01560280"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/DownloadTrackRow.vue",
+      "bytes": 6042,
+      "sha256": "81bd1531558739e297bf10f74856b15f20596d8a2d0633ed9f75df260d91f82a"
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/download-track-presentation.ts",
+      "bytes": 1406,
+      "sha256": "0c595bcf4b934160bc4a882e03f4ae162846eeb371908df177a4f2c25f4c9c8e"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicCollectionContent.vue",
+      "bytes": 12128,
+      "sha256": "c872f5006fa4ffa6110a743580559d2420661aebfb54fe741f3759250c0f5d57"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicCollectionControls.vue",
+      "bytes": 2071,
+      "sha256": "89b44fdac9198ea4001fb3867dc77698cae605c1cb31165af0eed8252f50bea5"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicCustomTracks.vue",
+      "bytes": 4562,
+      "sha256": "d5d39389400b2385a57c1c14ac239a7bbeee90bf2417b4cd64e6b508b9b0e237"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicFavorites.vue",
+      "bytes": 752,
+      "sha256": "3e8a1c086a092849823b706f572bfc8634d393551a0382dda55c36e5a19c44ce"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicFeatureStatus.vue",
+      "bytes": 650,
+      "sha256": "8ec57183d304359b91e3818eaa540e7ddb2ef5042bcdd286617f53944928bf7e"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicFilterFooter.vue",
+      "bytes": 1988,
+      "sha256": "43898a9e45fa9a9227ffdcc6cd2fa8e33dd38a262dc091a85796215cc4543552"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicHistory.vue",
+      "bytes": 3907,
+      "sha256": "2744ba3766b5c4bc532abf9b14a5b871c7d9813984039a571cb39dac4735bf9f"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicPlaylists.vue",
+      "bytes": 4717,
+      "sha256": "fc09ad55bc19a99589666c332dcd3ab7bad00c175ca8caca4a60221c264102a6"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicQueue.vue",
+      "bytes": 600,
+      "sha256": "4503db3cdb5ad6a1aef5d4530ffa3714beae9a6a41b77d54942fa2125c26e730"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+      "bytes": 11400,
+      "sha256": "fa19c701969d83bc8bd68a11b1706793afc83dc23d2760b5c5edf733c937543d"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicTrackFilters.vue",
+      "bytes": 3002,
+      "sha256": "97c34f38f89559ff81e8eeaae1c733c830412d02c406d0fcbfd882ff992c6117"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/CustomTrackDrawer.vue",
+      "bytes": 6774,
+      "sha256": "a631722b969a278f5294f065b92a529a6b1d442b98fc752636fa091254457256"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/CustomTrackPanel.vue",
+      "bytes": 2674,
+      "sha256": "c3eb0b0302fec1df0ef679bb9b3b764249cae5aad85cfff7c893b64496742920"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/FavoriteFilterBar.vue",
+      "bytes": 3671,
+      "sha256": "73918b452c15ea8522bf2dcd6cb93d80b36ae560204c16e43a661572b3d156dc"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/FavoritePanel.vue",
+      "bytes": 2537,
+      "sha256": "cb0ce7a01c19534f401b177216d8ba7da9db0789800611355a7d3d1674db0f27"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/FavoritePlatformDrawer.vue",
+      "bytes": 2752,
+      "sha256": "c555bb314a22c3630cbb5e2f48e3d054648fabd21710239691e6501b859840ea"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/FavoriteTrackRow.vue",
+      "bytes": 4911,
+      "sha256": "eb28e2b08f6f6f3fde246c6674519209bec26f116aa4105a27ecc1da9e057d1a"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/HistoryOperatorPanel.vue",
+      "bytes": 5455,
+      "sha256": "3a96ee3822ba322450f01fe352ed98148d5082a8961cae05c3d07680d96d05b4"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/HistoryPanel.vue",
+      "bytes": 3970,
+      "sha256": "f8221fbc241b748e686800ae621720bd2fef38f6ef2f6038beada6527062c93d"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/PlaylistAddToolbar.vue",
+      "bytes": 3468,
+      "sha256": "1127e4b96e16e9c7dca94881f9d6c35b334708b470ce8025618f77ea35310085"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/PlaylistCard.vue",
+      "bytes": 5272,
+      "sha256": "3ba28938eca93a70586ad5199c6edc21ee06dfd6f4a3944527549345ac5f24c5"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/PlaylistDrawer.vue",
+      "bytes": 15829,
+      "sha256": "da5e9ff59eddfa459352c12779cf45c97ced6a4d5c4edf1b7442f80dddb4a5ea"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/PlaylistFilterSheet.vue",
+      "bytes": 8070,
+      "sha256": "383c1bbf56bdaedfb3a927d9a89ca7f272b98611d5d91689dc7ffde34e6dcc8e"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/PlaylistPanel.vue",
+      "bytes": 9768,
+      "sha256": "33bc1e97e6cad164497c627628221ec8805b6f8a387e3f683f5a6b17667d3b13"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogContextDetailsDialog.vue",
+      "bytes": 1556,
+      "sha256": "635cd1076f7c844a14a02d2eb8060defa6d8498e972183103b020440c203000f"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogContextTitle.vue",
+      "bytes": 3432,
+      "sha256": "264478f9088c0a3847954cd44e2953a5a572e0005cced41611c6c3e7b20b660f"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDisplayModeDialog.vue",
+      "bytes": 5520,
+      "sha256": "a736f16f6f4c0b7c68a4ed566b329bfd880c6723e3492cf5fb5e7fe21c7d8cb1"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawer.vue",
+      "bytes": 12044,
+      "sha256": "bfdc987d7bdc528b40b02d62d9c1ff49ff9ec552b204299feeb1a1591e2a1ebe"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+      "bytes": 8038,
+      "sha256": "60d2f540ac328b2540ead40aabc9243b3a09be01ec506ccd19fd49b4e71d939e"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerCard.vue",
+      "bytes": 19157,
+      "sha256": "01fbdaf7557d1ee7ec65b7c9517376769ebfc81ebb515dd8d6a7daa18b9dae3f"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerDetails.vue",
+      "bytes": 9098,
+      "sha256": "32596aeecc3836ba59604628e9ae7c1d00034f7e338682f4ac35629b726a48eb"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerList.vue",
+      "bytes": 14287,
+      "sha256": "67931615d77c7105626b82d60fa1b16c45ddcf788b49daa7ebf681d3fe5aaef5"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerListHeader.vue",
+      "bytes": 9356,
+      "sha256": "be81f13b24aee14bbc5e91355a79abb37c2675c62d15c3f5a8f93b359132ebdc"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerOperatorPanel.vue",
+      "bytes": 6432,
+      "sha256": "7c435f3a3c73e9dfd80afa4194d2e74f094aac1c371c096e037f32c7f437a4fe"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogErrorDetails.vue",
+      "bytes": 11525,
+      "sha256": "6e1e61c6518eade4f0a81f0fc4d4353624f5b9c97aec58b3cd89f1aa9d6954f7"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogErrorNotice.vue",
+      "bytes": 1475,
+      "sha256": "f64902b061fe03be6636ff3b68be52fb1bf53c869c5821a6b0ae40fae95c29cc"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterCalendar.vue",
+      "bytes": 21613,
+      "sha256": "a19b7b02a1af08a5d8ba46229964cb029d4b7fe947a844f6806a34c8b43e6598"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterDateControls.vue",
+      "bytes": 2690,
+      "sha256": "9deb0d464feaee55ac2a1e0c6d8d2e754174f5e987a5e7a7594d42e09dc34653"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterDateRange.vue",
+      "bytes": 6176,
+      "sha256": "84b8e195cdba7fda12892435b91c614ea9c4f52139ee024c40d30911acb97416"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterHistoryList.vue",
+      "bytes": 10096,
+      "sha256": "8985c602ac2ebcec42b663a5c0039ea284af82a5853fe7150aee3d38554f4950"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterPreview.vue",
+      "bytes": 971,
+      "sha256": "db7fa74fbbc0669f6936fe3c21c03512f53ff9dad876479f245e88c325055290"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterRangeList.vue",
+      "bytes": 3124,
+      "sha256": "26da295f5befc6804f8350c2cd7c5d31346c5e6ccc7408ce59aba7192cfbdcb2"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogHeadingHandle.vue",
+      "bytes": 3569,
+      "sha256": "11a101ed813250c5052bd9f8fe99c48525a7041261f148b31a35a0c2fffb3bf2"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogNamingFilterControls.vue",
+      "bytes": 2624,
+      "sha256": "4fd66eeefe126b14058f1ea6f05db937d7e441cba36b330bc1ce7a16c0cc2545"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogOperatorActions.vue",
+      "bytes": 4734,
+      "sha256": "1ab734b49222476e6f6157fca2242d2134b1e304c2000e07a511ff2e2432d2d8"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogPlaylistPickerDialog.vue",
+      "bytes": 2832,
+      "sha256": "bb0fc4e0bec7d3d3b5ad9fafbb7dacaf0db2d1bb97223c4cde4dcb4a4df638e3"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "bytes": 20018,
+      "sha256": "5f628d06297247a8adf3ec882f21305690da775383fc7b968de85aa55390a526"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackFilterEditor.vue",
+      "bytes": 22819,
+      "sha256": "857a6b4ecdd694d03163cce0746831e86ae7d6d0ede3cb5242f74b2a9d01861c"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackFilterPanel.vue",
+      "bytes": 22967,
+      "sha256": "1f9add49d67fa994b6a2edde490cd861ffb14bd711eba900e02e4c5fd9500bf6"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackFilterSummary.vue",
+      "bytes": 10911,
+      "sha256": "a8429b1f84015c2fe269f715696d161f233f88083ba32ce253b1413d883edbdb"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+      "bytes": 10267,
+      "sha256": "4b8fdecf72b9ff0acf24e1ff3a9787fb66a46b52599599f839263a86138c647f"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/ClassicCatalog.vue",
+      "bytes": 20916,
+      "sha256": "36e1e1c83ec7129edfa20830ec63b7623a3bf9641cb48215dc9ba0250d01e183"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/MusicSourcePickerButton.vue",
+      "bytes": 2413,
+      "sha256": "d9b0858b93d29a96ce91f5594d9606eb0b470ef692b1ecb059f915d698de2ab5"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/MusicSourcePickerDialog.vue",
+      "bytes": 6161,
+      "sha256": "9718aa7c46fc41e9b5b7d5ccb57ab7d8682d6da1b2e19181bdf2bf6b25c1c088"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueuePanel.vue",
+      "bytes": 33068,
+      "sha256": "dba20f371b063450300cfca4c9d8e2907213db5772884ffe4f04161897b615f2"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueuePlatformGroup.vue",
+      "bytes": 8893,
+      "sha256": "51ae938ddadaebf2768f1ba0ca3d868644feaf2683150a08e72747653e9095d8"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueuePlatformHeading.vue",
+      "bytes": 4399,
+      "sha256": "bb7beee243dd94341dafa9e42a58bc0ad77449d77aa8f562d4d2034516e4126b"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueueTrackActionsDialog.vue",
+      "bytes": 2762,
+      "sha256": "faf27b207ec50f167f9cc3fe78ba6395df265a5eea14618fdc648aaf56cd37a6"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueueTrackGrid.vue",
+      "bytes": 2520,
+      "sha256": "0d886da81acd3e97c9e67e5f03d3abf43495ba7bff796113e4e8a0cc05ceb701"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueueTrackRow.vue",
+      "bytes": 4939,
+      "sha256": "60b76ac8e309036ffbfcb7c218ecbf342459d1ffe47e7f47401c5dac8185cc8e"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueueViewControls.vue",
+      "bytes": 6382,
+      "sha256": "f5255fcdf94adb2ebbd617a7c71fc20c4ffadb953f8f75f0d864e8a22606e6b2"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/SourceToolbar.vue",
+      "bytes": 15596,
+      "sha256": "b55529c054fd45e414430d976da3e5150ab3ad9b67ea8a34c5333a052a68a2ba"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/TrackActionButton.vue",
+      "bytes": 3515,
+      "sha256": "098f4485144a09d027c3df73ebe5399e119be2c5b5a78fcd6a9ad40040c9b485"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/TrackList.vue",
+      "bytes": 3771,
+      "sha256": "8fd8b30094be544d7c680248005914396f50b79f7db1e5bfb86ff7d553118d23"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/TrackRow.vue",
+      "bytes": 6218,
+      "sha256": "12d6a300775218f62c3bcea0fe5048c456c79edbe94129b3e3a3af3ed37767ed"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/source-toolbar-state.ts",
+      "bytes": 214,
+      "sha256": "64cdb8545763681775b99e5f807dc1bddf514fc939b4bf0f2d70eeabe4320151"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/use-classic-catalog.ts",
+      "bytes": 8337,
+      "sha256": "0b27cb5f947d1f8e39c2df7531138d92b4d4c8943292e1eb906be561e8a896f6"
+    },
+    {
+      "path": "packages/theme-default/src/components/overlays/ClassicOverlays.vue",
+      "bytes": 1149,
+      "sha256": "0315cbfb8a627977edca4ecf3be4fd6de1c4e006dbe507287fdcde38e7a67432"
+    },
+    {
+      "path": "packages/theme-default/src/components/overlays/ClassicPageOverlays.vue",
+      "bytes": 1023,
+      "sha256": "eb01e35f8063deaa302a1f516541b7b1eb1eed5293fd25ece5d6e5ad0480b6ac"
+    },
+    {
+      "path": "packages/theme-default/src/components/overlays/ClassicTrackDialog.vue",
+      "bytes": 2744,
+      "sha256": "9c95eb27a640439c4c5cc00b7631691787ccdf5481fc3ac8a6ee6dba42f2e1ae"
+    },
+    {
+      "path": "packages/theme-default/src/components/overlays/OrdinaryOverlays.vue",
+      "bytes": 1209,
+      "sha256": "88b634743357fe6fcb4e8d1a3b0225c1b818ab987fa6108f9991d33533ad0e09"
+    },
+    {
+      "path": "packages/theme-default/src/components/player/ClassicPlayer.vue",
+      "bytes": 2806,
+      "sha256": "d50b242708d657bc6614c511cc5e0ad8abc5798c88fd6d0075f8e9fd2e0e356c"
+    },
+    {
+      "path": "packages/theme-default/src/components/player/PlayerBar.vue",
+      "bytes": 26782,
+      "sha256": "062bf3ac3bd3d6a7c0d2401bb3bf846af868930390b01a9d0b8dafe3eceb584d"
+    },
+    {
+      "path": "packages/theme-default/src/components/player/PlayerControlActions.vue",
+      "bytes": 3724,
+      "sha256": "b71daef8e479ec764bf627d0df0033ad5964b835628fae13c66ea909889d775f"
+    },
+    {
+      "path": "packages/theme-default/src/components/player/PlayerSettingsDialog.vue",
+      "bytes": 5232,
+      "sha256": "dde9891e8f547fffdc5457dfd5f07206fe2c9d0d48421ae24c4b68f0e9858d03"
+    },
+    {
+      "path": "packages/theme-default/src/components/player/player-control-options.ts",
+      "bytes": 296,
+      "sha256": "7760b221394e556962d1003f5f9b0dd311efb9a9dce64df3eef3149c7b456a7f"
+    },
+    {
+      "path": "packages/theme-default/src/components/plugins/ClassicPlugins.vue",
+      "bytes": 1494,
+      "sha256": "d5a0ab7c9c8541d0a37128f4a6dfdb3b935d3ae12a21b76485c60a9470922ef2"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/AppShellPreferenceDialog.vue",
+      "bytes": 6445,
+      "sha256": "193c309d81cd012dd7e720ae9f9d1d114d3ae4f6728d0c16e02b2dfd12ded24e"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/AppShellPreferencesPanel.vue",
+      "bytes": 8756,
+      "sha256": "d6f32939f0dd7079fd3cf03fc6b5e03f571a3d9e9fa3aea194d87167684935d6"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/CatalogFilterHistoryRegionDialog.vue",
+      "bytes": 5048,
+      "sha256": "86eb7d3db234d97c92c482a5dded67f2d395a9f8b104ec3bbe8237f2181a205f"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/CatalogFilterHistoryRegionSettings.vue",
+      "bytes": 6811,
+      "sha256": "84ecc989ac6516e57ea38d52c06b4da9b623aad7b1048c36d9c98229156d566f"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/CatalogFilterHistorySettings.vue",
+      "bytes": 9609,
+      "sha256": "6874d60b87429c33fcf824bc468be12241f62ff6cd5589aafdf2771c8217dac8"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/ClassicSettings.vue",
+      "bytes": 7729,
+      "sha256": "a9d9e54675462538d73ef4bbbb839bd7f29431646e4ed83879a3d3404105d49c"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/CreatorProfileSettingsForm.vue",
+      "bytes": 1616,
+      "sha256": "1b966a0285c76e716d9e403ef4b9bebc95e7febe09f30a820ab2335ad84b7286"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/GlobalSettingsPanel.vue",
+      "bytes": 8787,
+      "sha256": "0b150b3f21257b611f089f1becf00c1d256326f202f2d6d7e2716a1d20ed4e6b"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/MusicSourceSettings.vue",
+      "bytes": 7239,
+      "sha256": "d21517686310cb7f7221f399b3ed83076cb11a21a65d4783caba4ca924c09760"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/NavigationOrderList.vue",
+      "bytes": 11470,
+      "sha256": "6a94169434324b7a578c74ef51336a99844894b6e79047f9bf21a33ca67bc31a"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/SettingsNavigation.vue",
+      "bytes": 9264,
+      "sha256": "e47fc73fcb896b2816277d308c7a2ae3bdfa21ddc54637e8bca72a4b68c19a63"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/app-shell-preference-options.ts",
+      "bytes": 819,
+      "sha256": "718c28cc6ae644daa492e39a8c5f60ee515e3251fe7eb6f943c22ed7e58e5099"
+    },
+    {
+      "path": "packages/theme-default/src/components/settings/settings-editing-state.ts",
+      "bytes": 757,
+      "sha256": "73d8bfff336272a7ef6fb55c66391a97fd5a834fad6a119467a2f0bbdbefb07f"
+    },
+    {
+      "path": "packages/theme-default/src/components/shell/ClassicNavigation.vue",
+      "bytes": 1152,
+      "sha256": "1ceae608b10fd4b24db63e2ed8b2893c4ea2e652fde77f0c855ec4f41a5d0bef"
+    },
+    {
+      "path": "packages/theme-default/src/components/shell/ClassicShell.vue",
+      "bytes": 5919,
+      "sha256": "8affd3a311df37c22b5758edc8f49460e79219d249a631684e428e4f27df3e9f"
+    },
+    {
+      "path": "packages/theme-default/src/components/shell/ProductTopBar.vue",
+      "bytes": 6977,
+      "sha256": "958983109391801d3c485254979b71cff891d6d0d1a7dbb79223df066c3069ab"
+    },
+    {
+      "path": "packages/theme-default/src/components/shell/ProductWorkbench.vue",
+      "bytes": 9384,
+      "sha256": "7b5ba3c071b32899c42eb6f573e87f9d1702f1c774e2b33d334e9a2b47a18c82"
+    },
+    {
+      "path": "packages/theme-default/src/components/specialists/ClassicComposer.vue",
+      "bytes": 737,
+      "sha256": "e878d920617bc141e8f412314b3c41031574f094ffd22c1d0ffbaf16521b3125"
+    },
+    {
+      "path": "packages/theme-default/src/components/specialists/ClassicTags.vue",
+      "bytes": 733,
+      "sha256": "1aa21563cb1888b57516c886e12c6b80b11f6e122bedfeb2d7e4e09f1e55aedb"
+    },
+    {
+      "path": "packages/theme-default/src/components/specialists/MusicCreationPage.vue",
+      "bytes": 6070,
+      "sha256": "48fe0ceb97ff0cdf69211a74ee0fa7faf2f6a85206be1f4d75f10ef57e9b5e2d"
+    },
+    {
+      "path": "packages/theme-default/src/components/specialists/TagManagementPage.vue",
+      "bytes": 3966,
+      "sha256": "c676060e96f6afb2d6fec030cb14fbab39968dcb1dff7c457cd1f11ed425df7a"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-collection-presentation.ts",
+      "bytes": 5479,
+      "sha256": "34ee846818c2cac1d8f63185eb00a6874c81a812ccd9d57c8ac2d0a7c74ce2a4"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-compact-controls.ts",
+      "bytes": 1593,
+      "sha256": "79f37f1783905621084c8d1d28564ab5c19040dd9c69abebf6cedd1a7cb5f810"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-downloads.ts",
+      "bytes": 4819,
+      "sha256": "8e08bfe5cbeb09794489f4cd35bf7e8c95798ac3a44141e89d8a9e5f5168f09b"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-overlays.ts",
+      "bytes": 1809,
+      "sha256": "1e903e4d52bfb679871cbbb0034fa8ff42f1017554d4fdc195f7512079157007"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-track-collection.ts",
+      "bytes": 6132,
+      "sha256": "59be778be2e243deafe4a1d7cdcb1f58e94d5ad05773b3a2a7b0cd737690249a"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-presentation-activity.ts",
+      "bytes": 546,
+      "sha256": "8f5de10d5b9ca4f9610e62d1e9f4e9da83b2cc1f745d2996a1d85ae0090ea6e8"
+    },
+    {
+      "path": "packages/theme-default/src/index.ts",
+      "bytes": 311,
+      "sha256": "5ffc98aacb12e2e06fbb930071b9dabb3a0213195aaeb78c6370bbb54cac2480"
+    },
+    {
+      "path": "packages/theme-default/src/styles/_catalog.scss",
+      "bytes": 19502,
+      "sha256": "f144f20f2f6a59cbb28900bb0e03d0424b6e9b4895118fd23e2cb0319e5ca0a7"
+    },
+    {
+      "path": "packages/theme-default/src/styles/_foundation.scss",
+      "bytes": 24094,
+      "sha256": "397739be4f8f7ec67b61c6740941326c8364b06e1825fd81ae06863ea7c76b3d"
+    },
+    {
+      "path": "packages/theme-default/src/styles/_library.scss",
+      "bytes": 16845,
+      "sha256": "e440b89da78d7f83cabc727482a63093cd5896d43b53487b7839ac47871952ed"
+    },
+    {
+      "path": "packages/theme-default/src/styles/_specialists.scss",
+      "bytes": 8339,
+      "sha256": "0855bcc3130ef081d03b0a6342f99a85bf41617518e5b312d3484fc4ed6c7f25"
+    },
+    {
+      "path": "packages/theme-default/src/styles/index.scss",
+      "bytes": 5077,
+      "sha256": "89962901b13e952f50a9c278ed9fb6777883b5b6d925ebfab135830c716f6ccc"
+    },
+    {
+      "path": "packages/theme-default/src/vue.ts",
+      "bytes": 2399,
+      "sha256": "cb0b7471ec1cdc5815eb2ac3ff052cbb2ce71c7677b4fab3b888e6ff7dda5b0e"
+    },
+    {
+      "path": "packages/theme-studio/package.json",
+      "bytes": 757,
+      "sha256": "d10618f380ddf304aa828f5917b4d4199f63c8ceaf1cd151e4b8e202987cd54e"
+    },
+    {
+      "path": "packages/theme-studio/src/StudioRoot.vue",
+      "bytes": 3323,
+      "sha256": "d0818125737032f0c88a6125eb8cdb87817607839b482d524f9fc623baf4b018"
+    },
+    {
+      "path": "packages/theme-studio/src/components/StudioFeatureStatus.vue",
+      "bytes": 846,
+      "sha256": "2cffdd824a22a1127928a1ad06379a4c1e64a63df5a5a07282f02025449e6580"
+    },
+    {
+      "path": "packages/theme-studio/src/components/catalog/StudioCatalog.vue",
+      "bytes": 1324,
+      "sha256": "c25a329ed41fa006184738c028cbf6ae7ea4ea3214b60fc6e9407dd350c4ed62"
+    },
+    {
+      "path": "packages/theme-studio/src/components/catalog/StudioDrawerRail.vue",
+      "bytes": 6223,
+      "sha256": "bfb2b8d6768409e3caf26659a0bb0f03124c285f515bfdf613322b0d93afdd74"
+    },
+    {
+      "path": "packages/theme-studio/src/components/catalog/StudioRequestOptions.vue",
+      "bytes": 2668,
+      "sha256": "bc45cc7fb9e6cc2840658a45361034299a3757b8ff5f6cfb9eec1bfc9060cf7f"
+    },
+    {
+      "path": "packages/theme-studio/src/components/catalog/StudioResults.vue",
+      "bytes": 4860,
+      "sha256": "21d1ba234d859a8309ea994fa29809ae6af5c84a91a15ab2acd90f17161706ed"
+    },
+    {
+      "path": "packages/theme-studio/src/components/catalog/StudioSearch.vue",
+      "bytes": 3673,
+      "sha256": "08c52e07f4f8048d1f6c5f06604ef362595f0300e4b5fb423260cf059c842c4e"
+    },
+    {
+      "path": "packages/theme-studio/src/components/catalog/StudioTrackRow.vue",
+      "bytes": 3501,
+      "sha256": "13a24f062e872c94e540e39b08005356ff0ff1deb547f7939dcfc0450b26fce4"
+    },
+    {
+      "path": "packages/theme-studio/src/components/catalog/use-studio-catalog.ts",
+      "bytes": 2622,
+      "sha256": "7293304288b9d175390d8360a7ff4d6485836952880dd070cece01f260ec6b98"
+    },
+    {
+      "path": "packages/theme-studio/src/components/downloads/StudioDownloads.vue",
+      "bytes": 10405,
+      "sha256": "7847072ff251c5b818f122e0aa3e9be647bd7b56d9073701112c13ba4dea4e11"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioBatchActions.vue",
+      "bytes": 4279,
+      "sha256": "2bea58ca94d9e8648e1bc63b6d3191f0713cdada6c639c5d31f79c3b0a1c2631"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioCollection.vue",
+      "bytes": 3973,
+      "sha256": "1d36028de73a788b46d9282a2f5522b29325c5609620de26284b052bf73ce556"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioCustomTracks.vue",
+      "bytes": 3768,
+      "sha256": "b89e59f0bf4c14ffee92b964826d1ea6b376f8c8f085f040da4aff9ac8db1dbe"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioDisplayControls.vue",
+      "bytes": 2830,
+      "sha256": "a311581693fe15f8459035cefc81c2de84c47c42646f8ca2bf60ecb68113e2dc"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioFavoriteFilters.vue",
+      "bytes": 2468,
+      "sha256": "d95121157146f8d49fc71010e881f981aafb83648b7ffb88ba4b1a1a29f9bb44"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioFavorites.vue",
+      "bytes": 2272,
+      "sha256": "e4063397e60c3d4e734415d2562eff43bc164ccb13e8bfa0640d798ec84c3b36"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioFilters.vue",
+      "bytes": 8733,
+      "sha256": "0b72bfb164d05e114055d7bd60901f7996f2ceeeaa8425ed827d88326cc9e042"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioHistory.vue",
+      "bytes": 3712,
+      "sha256": "bbcddb75b22128ae7773b9598d8730c8d9fadc7335ed43ca471d0ed11c74e8cc"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioPlaylists.vue",
+      "bytes": 4149,
+      "sha256": "5f4dd76cd360d351f5577a0a1d1b58a63f8c2e0c9510db7d3ddff589d9c0cc2e"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioQueue.vue",
+      "bytes": 537,
+      "sha256": "f6575fc06559e42415dd4afdcf3e69aafdf58c9c81af4ffb92b34d4f49a56135"
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioTrackTable.vue",
+      "bytes": 3631,
+      "sha256": "81f8f40227f9ebb7fd44218ab523fff24fe49b5ebca2e7270e5980fb7434d64e"
+    },
+    {
+      "path": "packages/theme-studio/src/components/overlays/StudioOverlays.vue",
+      "bytes": 1414,
+      "sha256": "0407f385221b96be52fe5512decb5e60651639c81203b315c1af0b9190cbab12"
+    },
+    {
+      "path": "packages/theme-studio/src/components/overlays/StudioTrackDialog.vue",
+      "bytes": 3006,
+      "sha256": "72b7e93d7492c458bfeb1a7762d6b7d1418572578f806d358443352eaa83fb14"
+    },
+    {
+      "path": "packages/theme-studio/src/components/player/StudioPlayer.vue",
+      "bytes": 6042,
+      "sha256": "adde37fda2e511eeba9011ab5cc1ac52558dc822db1a37c7b7bf8bef003e1dfe"
+    },
+    {
+      "path": "packages/theme-studio/src/components/plugins/StudioPlugins.vue",
+      "bytes": 1503,
+      "sha256": "4fea4b886fcf6b95b8166b439aefb5e81225ccefe7d0b7cf7236c2a4731b7110"
+    },
+    {
+      "path": "packages/theme-studio/src/components/settings/StudioAppearance.vue",
+      "bytes": 4332,
+      "sha256": "8547078bef31149d3b9b90cae1a69b0b3f5742dfca85f4e38c83af06c6cf2da4"
+    },
+    {
+      "path": "packages/theme-studio/src/components/settings/StudioFilterHistory.vue",
+      "bytes": 2232,
+      "sha256": "0ef12c79c1de7aeb549b9e0a46db803276695f637a2af9b42e23e3c3ab7bd914"
+    },
+    {
+      "path": "packages/theme-studio/src/components/settings/StudioSettings.vue",
+      "bytes": 7646,
+      "sha256": "6ee07a19215fce094d5295ecee5535dbf008460a6ad421dccd15e86bc14f2a33"
+    },
+    {
+      "path": "packages/theme-studio/src/components/shell/StudioNavigation.vue",
+      "bytes": 1344,
+      "sha256": "52bdc4b6328270da132b834a444f57e417866a810d6cd60396b196d0cc2eeb03"
+    },
+    {
+      "path": "packages/theme-studio/src/components/shell/StudioShell.vue",
+      "bytes": 2438,
+      "sha256": "bbb8004a37a879d03402d78633fc09bdd1db07638c8ba62028774fa62960fa13"
+    },
+    {
+      "path": "packages/theme-studio/src/components/specialists/StudioComposer.vue",
+      "bytes": 838,
+      "sha256": "d664e6d079d7d6ebaf21ad5492725aef6a011a0971a0c1816bf4078aecc41be6"
+    },
+    {
+      "path": "packages/theme-studio/src/components/specialists/StudioCreationPage.vue",
+      "bytes": 1531,
+      "sha256": "82dc4dfa0b1c259a917457206047cd13e33d36f872264a0b3bb9b74eacd01580"
+    },
+    {
+      "path": "packages/theme-studio/src/components/specialists/StudioMaterialBrowser.vue",
+      "bytes": 1869,
+      "sha256": "fe0fe324f026a1f871646e2c79d32c36bcc1f228a7d3d46dc700e7fa81998499"
+    },
+    {
+      "path": "packages/theme-studio/src/components/specialists/StudioTagPage.vue",
+      "bytes": 3482,
+      "sha256": "f05dc8c14839fbe29f67250e9ccf0341eb05d9f903870df31a785e10e9326a01"
+    },
+    {
+      "path": "packages/theme-studio/src/components/specialists/StudioTags.vue",
+      "bytes": 795,
+      "sha256": "808d5da8b7931b6e678a620ae3e302f216f82ef979640357479cba5e851b6130"
+    },
+    {
+      "path": "packages/theme-studio/src/components/specialists/StudioTimeline.vue",
+      "bytes": 2077,
+      "sha256": "03e571bb232ec68dc099d8907efd2ab801a97559fd3df120981b25af5d6f12d4"
+    },
+    {
+      "path": "packages/theme-studio/src/composables/use-studio-activity.ts",
+      "bytes": 1114,
+      "sha256": "c366012cfcecd5a630b8cdfb8507dfcb377c224d4ece2a40b9e9aea9ecbcea0a"
+    },
+    {
+      "path": "packages/theme-studio/src/composables/use-studio-settings.ts",
+      "bytes": 2428,
+      "sha256": "42ad3fe2aec6574033337dee07bfc23cea13e416b873917fcfd3cd2b3b5495ca"
+    },
+    {
+      "path": "packages/theme-studio/src/index.ts",
+      "bytes": 326,
+      "sha256": "3a51a32af5f8db3a20196925e673edd4f7358311bd72173b87b050928d0b148e"
+    },
+    {
+      "path": "packages/theme-studio/src/styles/index.scss",
+      "bytes": 10037,
+      "sha256": "82a470582a19a7a4e40e286880c07dba7d5f343d7ac4d09b5c573985c849c83c"
+    },
+    {
+      "path": "packages/theme-studio/src/vite-env.d.ts",
+      "bytes": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "packages/theme-studio/src/vue.ts",
+      "bytes": 1804,
+      "sha256": "8f1c8a997836fdd70c11c15e29615d43b4291a83bd09cd16bfb82d3529ff8aad"
+    },
+    {
+      "path": "packages/ui/package.json",
+      "bytes": 829,
+      "sha256": "aa2c731d64565116bb8efca89c62fc13c79835659cdaf12a88d3507d00c4832b"
+    },
+    {
+      "path": "packages/ui/src/catalog.ts",
+      "bytes": 2200,
+      "sha256": "d0c4f00182836e47e66679bf08e7a1b02489b96f581226d7dacee622e656c853"
+    },
+    {
+      "path": "packages/ui/src/components/AppDialog.vue",
+      "bytes": 9371,
+      "sha256": "42bb86a0c6f54722eb71dbc53fafb5b76704308a289162769cdf7426f0fd0005"
+    },
+    {
+      "path": "packages/ui/src/components/AppIcon.vue",
+      "bytes": 1391,
+      "sha256": "8c7bff5def79c1b826a6040ada58e29749f78c8f8e620b1c6d01ae56e0aee6ce"
+    },
+    {
+      "path": "packages/ui/src/components/AppToast.vue",
+      "bytes": 3638,
+      "sha256": "7a811ca95b45b091cbc084a67a3522d9271211b74bd3183db28c31e6fa5e67ff"
+    },
+    {
+      "path": "packages/ui/src/components/BottomSheet.vue",
+      "bytes": 10700,
+      "sha256": "500f8f669d2100b4372407109ce77354acc4342afd3b373fa54940c939f0879f"
+    },
+    {
+      "path": "packages/ui/src/components/CollectionBreadcrumbs.vue",
+      "bytes": 2723,
+      "sha256": "cb76045baf04fa6a3895f9b832d7f86236bd6c0f1b58e43224beaa05767a6e06"
+    },
+    {
+      "path": "packages/ui/src/components/CollectionCard.vue",
+      "bytes": 4418,
+      "sha256": "f042f36c37279ca33e1bce98b57e1ac3f79664fe2d816f580e3510e35c5f4b05"
+    },
+    {
+      "path": "packages/ui/src/components/CollectionGrid.vue",
+      "bytes": 627,
+      "sha256": "c4523240cdf96bd2729686f52f6485bfe26297e03aa6094fa18a80910ea90567"
+    },
+    {
+      "path": "packages/ui/src/components/MobileBottomNavigation.vue",
+      "bytes": 3451,
+      "sha256": "bc217f849c0a3e9d0b28806c76ce6baa7ef5c88c296225266ae96bc23aad7635"
+    },
+    {
+      "path": "packages/ui/src/components/MusicAppShell.vue",
+      "bytes": 12946,
+      "sha256": "b206e2d0ce6b01a8f7d82934dc525b5160a9aaab98aa0113e9a98f84aa9b326c"
+    },
+    {
+      "path": "packages/ui/src/components/NavigationRail.vue",
+      "bytes": 3885,
+      "sha256": "c0605338a827e078a4320056614f816d32f8f15fd1bf3475654e7c52c72afec6"
+    },
+    {
+      "path": "packages/ui/src/components/PanelShell.vue",
+      "bytes": 611,
+      "sha256": "7a2c1d0cbe1a223d29a7beca8686f90f343ce3f7909517917374efc76db302ca"
+    },
+    {
+      "path": "packages/ui/src/components/SidePanel.vue",
+      "bytes": 8117,
+      "sha256": "45fd1ce25bf80097944c28f4207b8f7a20a38c604bed667cc7e456a64363e500"
+    },
+    {
+      "path": "packages/ui/src/components/app-icon.ts",
+      "bytes": 4305,
+      "sha256": "b1adb0abfd853b3899935d199268d0a703373c1699f8258f4ed15cfbf3067c2c"
+    },
+    {
+      "path": "packages/ui/src/components/modal-focus.ts",
+      "bytes": 3897,
+      "sha256": "024b6e6ecc10d34cf7cf5f2f1cebdbc02f1fd4d0943878abdb7a9f4c1eb2d9c6"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogRequestAccount.vue",
+      "bytes": 1119,
+      "sha256": "c75a9cd3a6f53bf09b39e7793a2fc4fc1a99709292338d52b60ab501623bc330"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CompactAudioSeekBar.vue",
+      "bytes": 3916,
+      "sha256": "91a719e17e32143a5362cdbe0c9924d321bca4ef60b839cec3ea3550a659e81a"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/FeatureModuleLoadError.vue",
+      "bytes": 563,
+      "sha256": "6221ed23aa8d9f0597795f75ec87eaefde1456e0f9c8087490eddb6d25cfafe0"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/FeatureModuleLoading.vue",
+      "bytes": 383,
+      "sha256": "2ddea2dcc2431388c58741b84188af716b388d05b73a1151602cd25c18c8eadf"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/MusicListEmptyState.vue",
+      "bytes": 2302,
+      "sha256": "3ba4aa1cf9e7f71cc6059735bb83a2b6978f6b83acb61dbdc7df5e3f380e57be"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/PlaybackModeChoices.vue",
+      "bytes": 2013,
+      "sha256": "603c6ed2f661df4ac323dc07a9b7fb34bdeda26013a8dbb82057aa2a3f25ccc3"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/PlayerControlPager.vue",
+      "bytes": 7901,
+      "sha256": "7d77e6624b38d1da17e8f939592ab2417bc5e34e6c1ccda8a9b6c9bc9b7d8bcc"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/PrecisionAudioSeekBar.vue",
+      "bytes": 3989,
+      "sha256": "e7f96d9ddd09a0edb095286b4f51eddb96d32574acf04a0c5864d95ae4740a74"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/RemoteImage.vue",
+      "bytes": 1621,
+      "sha256": "3c8b23e5251b0025a130d371a1eeccd3891cced2dbf92f88463a2efacd23f1ba"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/SessionBadge.vue",
+      "bytes": 6996,
+      "sha256": "bb5fe52ca070678282d4650d56fc0819ba2713881c9fde10a72c0577960c1d68"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/TrackCardGrid.vue",
+      "bytes": 1834,
+      "sha256": "307e9a573678fd18ccfb4114cd10a02b1d9414558aac16b98bb7db9048781bb0"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/async-feature-component.ts",
+      "bytes": 2151,
+      "sha256": "490d1a780ea3e533d4d9d8566fb77251e016a7085f30f61d07773a5a3bc8e6a6"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/catalog-drawer-presentation.ts",
+      "bytes": 10183,
+      "sha256": "9912416a3005d694eb202ed57ac383986950f33fa795d79fc32fa0799c1a1d67"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/catalog-track-display-mode.ts",
+      "bytes": 699,
+      "sha256": "99be45250330c7778313ecf84413ab42455053d16413761379f84adb0e0a197b"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/catalog-track-filter-presentation.ts",
+      "bytes": 9425,
+      "sha256": "88d8c367a1825f7671f89aafe4f42d12a98b75fb14ace0ef00c22ffac1447075"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/playback-mode-options.ts",
+      "bytes": 883,
+      "sha256": "9d298279669d4e3152e40cfe840e9c3b3d34cd315f51c9130165cb15c51d9663"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/source-input-hints.ts",
+      "bytes": 955,
+      "sha256": "ed03dc82af485008d81620673f2ea82bdb33e6342f808ac514f7bc6ffc6c0830"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/source-input-validation.ts",
+      "bytes": 775,
+      "sha256": "3df3b01ba5b135807f115899d6740a726076ee8edb75a2ca0bdad6739cd87aca"
+    },
+    {
+      "path": "packages/ui/src/components/navigation.ts",
+      "bytes": 305,
+      "sha256": "1e13f742b1cee80969955d59bdcc32f983d8fbeabf585ec39f836590cf0a69e7"
+    },
+    {
+      "path": "packages/ui/src/components/plugins/ContributionActions.vue",
+      "bytes": 2564,
+      "sha256": "394175dcb57f48b184afeed6e73084a3471eb5b4bf7093f3f3973d2f2756c92e"
+    },
+    {
+      "path": "packages/ui/src/components/plugins/ModuleRecoveryPanel.vue",
+      "bytes": 2108,
+      "sha256": "82b60107f867e7863556557c51347b70ea2d7948eb708fa7021c655538326783"
+    },
+    {
+      "path": "packages/ui/src/components/plugins/NativePluginAuthorityPanel.vue",
+      "bytes": 7364,
+      "sha256": "0c9d423d450e6bbaf5aa3c2a4c48a60d4133e3d6ae6e904ef62bc556bccaa5be"
+    },
+    {
+      "path": "packages/ui/src/components/plugins/NativePluginCommandResult.vue",
+      "bytes": 2731,
+      "sha256": "fd2e3f10fe8d2b029ec9df38b36f7406e3b6a3fc6c86d4d8001d6d850a482ba0"
+    },
+    {
+      "path": "packages/ui/src/components/plugins/NativePluginInstallList.vue",
+      "bytes": 7556,
+      "sha256": "b47b432b42bb29c00901b0411ebf730d428eed3d7ef00dd04a8125d002d45985"
+    },
+    {
+      "path": "packages/ui/src/components/plugins/PluginPackageConsent.vue",
+      "bytes": 6004,
+      "sha256": "e0af2db465a1dd99ef11cf0e5b647c45e13ec05f91676c5f0fc81d6ffb8154ae"
+    },
+    {
+      "path": "packages/ui/src/components/plugins/PluginPackagePreview.vue",
+      "bytes": 6292,
+      "sha256": "ae9c50d26074e8cf0fd78fdd02339e247fc7604a45f5fc0678291b109c7432cf"
+    },
+    {
+      "path": "packages/ui/src/components/plugins/PluginSettingsSection.vue",
+      "bytes": 1791,
+      "sha256": "1e932e895616b18011fdb7a8c95520a35c955933afb17cdf6839a740f634674f"
+    },
+    {
+      "path": "packages/ui/src/components/product-workbench/ConfirmationDialog.vue",
+      "bytes": 8917,
+      "sha256": "9afa5131230df4bb3370918d625f4090c95cbf314f09aa07c7068130522b4ff5"
+    },
+    {
+      "path": "packages/ui/src/components/settings/ProxyCreateForm.vue",
+      "bytes": 3833,
+      "sha256": "af70c6cddaddb9717666081c118d75760e9c14b0b3d37a2393334d3df902b699"
+    },
+    {
+      "path": "packages/ui/src/components/settings/ProxyManagementList.vue",
+      "bytes": 6821,
+      "sha256": "3acfce31e6fc0cf6be8aceb462f19b933f014a4402f44ccac8653abaf6806b35"
+    },
+    {
+      "path": "packages/ui/src/components/settings/ResourceCacheSettings.vue",
+      "bytes": 5658,
+      "sha256": "669779197c1357f58ee87a94dcbb205e692d3ebf7f7e9781b9aa3326952bacab"
+    },
+    {
+      "path": "packages/ui/src/components/settings/SettingsNumberForm.vue",
+      "bytes": 1505,
+      "sha256": "ec0527f8230d743e83beac070b59d345579deda69cafe681573baa5b93f61b8b"
+    },
+    {
+      "path": "packages/ui/src/components/tracks/TrackCardSummary.vue",
+      "bytes": 3971,
+      "sha256": "73e56d84127a2fbbe1e518f7db52909c139c3f5fb5e002bfa859a2bbff3e9ff1"
+    },
+    {
+      "path": "packages/ui/src/components/tracks/TrackNameEditor.vue",
+      "bytes": 3568,
+      "sha256": "cd6879f72cb238d4f0760fd208b201211f13ca5bf91dbe564c5693ed6f3d0326"
+    },
+    {
+      "path": "packages/ui/src/components/tracks/TrackSourcePageLink.vue",
+      "bytes": 506,
+      "sha256": "e62221ee01e54e60a603454c0a152ab3a31500523d15140e9408997f99d046b0"
+    },
+    {
+      "path": "packages/ui/src/composables/destination-reorder.ts",
+      "bytes": 1954,
+      "sha256": "b64b6840eec1fb7df245308e1eb08b3f6adbdd24e5ba0d4e36c69d009a94edf7"
+    },
+    {
+      "path": "packages/ui/src/composables/downloads/use-download-list-controls.ts",
+      "bytes": 7310,
+      "sha256": "dcb4a88cb57c983c4113683fe4d957ea036a42fbed54ed47b256c9484d5ced15"
+    },
+    {
+      "path": "packages/ui/src/composables/filters/use-filter-draft.ts",
+      "bytes": 2011,
+      "sha256": "b57ec96137e5634ffe359bc3055aea9df3ad1ecafd362ea563a9a572e6f28eb4"
+    },
+    {
+      "path": "packages/ui/src/composables/library/playback-history-filters.ts",
+      "bytes": 591,
+      "sha256": "e769cc6e835cffae0596583208311c45dca95c9e3c77cab0d5e9ded4762ada4e"
+    },
+    {
+      "path": "packages/ui/src/composables/library/playlist-editing-state.ts",
+      "bytes": 359,
+      "sha256": "983399b5b907c4bc5bca9a1b67608a617407320de70b8227f8feccbacbb47a1f"
+    },
+    {
+      "path": "packages/ui/src/composables/library/use-custom-track-panel.ts",
+      "bytes": 3859,
+      "sha256": "af16b4baffd50de4f01f4826751038b3ed22b91d14e0a8ecef2e51a3de4a86df"
+    },
+    {
+      "path": "packages/ui/src/composables/library/use-favorite-filters.ts",
+      "bytes": 10000,
+      "sha256": "3d60f4b00f188f26f45d6bc826f48571491bda67f9150fb1334c87e45d1dc40f"
+    },
+    {
+      "path": "packages/ui/src/composables/library/use-playlist-filters.ts",
+      "bytes": 10261,
+      "sha256": "02d6c23431accbc8d2d5013e62b4bd3cbba48abc84c7a73542cb705f3af19e84"
+    },
+    {
+      "path": "packages/ui/src/composables/library/use-playlist-panel.ts",
+      "bytes": 4162,
+      "sha256": "306abfae3da3166032fe88f5a1f8d1f23b6eba428fd968ab3f023055c0797c5e"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/catalog-filter-calendar.ts",
+      "bytes": 1679,
+      "sha256": "fa4a58ebc6c8fbed83acc3d85152fae85f89458a7a0aa27f34a63b6c85fbad27"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/catalog-filter-editing-state.ts",
+      "bytes": 809,
+      "sha256": "def5eafbbc45514556cd05cdc381eda1a01858923dbf9a51634ba205ab5eebd9"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/catalog-filter-history-settings.ts",
+      "bytes": 3598,
+      "sha256": "60a8f04c7f9861a0281ba7845b5be0ad6a2e88e11bc7e2378896e0f20ffce529"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/catalog-root-editing.ts",
+      "bytes": 911,
+      "sha256": "556b8d671f8e03457b1c87c666c2fa51b282a15b7762b3b9631d35e656dfe918"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/queue-reorder-geometry.ts",
+      "bytes": 1852,
+      "sha256": "b686321eb149358b8889de651506d385ca9f3a6109bb1284388302e778f6c01e"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-context-title.ts",
+      "bytes": 2352,
+      "sha256": "e3a29e7b5dfacd9d8b531457e68553bcda50e89434a5ce41ac386ec935c54230"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-drawer-list.ts",
+      "bytes": 7639,
+      "sha256": "d6b3171de6e425e4ab207fe50b308eebcd3267e7e283703b1294d7ee922467bd"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-drawer-reorder.ts",
+      "bytes": 3265,
+      "sha256": "0de2cb3de05e412c84a05e46256b89c29e14815baa4cda64175bc71bf9357150"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-error-notifications.ts",
+      "bytes": 1789,
+      "sha256": "322089d76b137f749ebcaf6b3090107eedb8e19b69e0db92184b1a312fc6e84b"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-filter-history-settings.ts",
+      "bytes": 7944,
+      "sha256": "688b9aa0690b3a06d3a88587d1f5dd9a0833205360278c5f0d4b4533d3aa0ac6"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-filter-history.ts",
+      "bytes": 9989,
+      "sha256": "3dcdd04f36a93c74969f86ea65c3a1f245b48581b9c4953507ed740e476d0e01"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-heading-collapse.ts",
+      "bytes": 6490,
+      "sha256": "2d2d6cab433c228a1c181eb1941c8f4dbc056836cbf545ee709dc5ad62ca54bc"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-list-controls.ts",
+      "bytes": 3123,
+      "sha256": "a1946fb5f5d06389d7b289f0667c87bdce85e2d151bbd1591f4e4d17c35a0abf"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-operator-scroll.ts",
+      "bytes": 4936,
+      "sha256": "ab2320c50132b5ef93c7127883c42c50096eecd1fbf457bcd3bc841cb550f5c0"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-track-filter-editor.ts",
+      "bytes": 10669,
+      "sha256": "cea6ba5ac84aea24d58c7c2825f2a309767398a5ac53e9a4fb6d3c160756367d"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-track-filters.ts",
+      "bytes": 11318,
+      "sha256": "d7597c1ee6d7c9b7cd0c94b55eaec357ad18381e1c7fff2783b1bac01491aacb"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-queue-list-controls.ts",
+      "bytes": 6978,
+      "sha256": "47198a9b59f8bffaf366e83d5247809a6e9ac25aa058ce66e70ad18d073aa4d5"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-queue-reorder.ts",
+      "bytes": 3540,
+      "sha256": "0a661c5df896e8b8bf62c1ce8b293886a3a8f241c557e8e0ecc2fd11594c8e40"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-queue-view-toolbar.ts",
+      "bytes": 3159,
+      "sha256": "bb947fdbf7bc1e95b827fe6dcb068cceb4f7e793de956609ba5f5a6873f6df79"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-scroll-page-loader.ts",
+      "bytes": 5085,
+      "sha256": "b58d3064f5dee00da722f684b5835beb786cb209d9c3cd8c08207ce76c186c13"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-track-batch-actions.ts",
+      "bytes": 6487,
+      "sha256": "1f8736d456f06955cc39352a84b8d1ace53701468139e31c4c456d3b04553b10"
+    },
+    {
+      "path": "packages/ui/src/composables/player/use-compact-audio-seek.ts",
+      "bytes": 4277,
+      "sha256": "568a84088d9145053f65f117eac1e1366285b69a122f95d7a18b7470e76ba80c"
+    },
+    {
+      "path": "packages/ui/src/composables/player/use-mobile-player-sheet.ts",
+      "bytes": 5031,
+      "sha256": "bd140dff0df8dd59b43ff38b283054bc2f0c475b8dd7cbc29aed62fff1cfb022"
+    },
+    {
+      "path": "packages/ui/src/composables/player/use-player-control-pager.ts",
+      "bytes": 5254,
+      "sha256": "f636839f81c470933ac456636508b9af74d9f5303f1f074dfde61abaedf405c1"
+    },
+    {
+      "path": "packages/ui/src/composables/precision-seek.ts",
+      "bytes": 2354,
+      "sha256": "5184d4e01dd0ee265791989915632f76d132e81801a7a632d9bedfc68a816194"
+    },
+    {
+      "path": "packages/ui/src/composables/tracks/track-action-editing-state.ts",
+      "bytes": 808,
+      "sha256": "95694172fe53c91f8a3579726883691ccd63f0744ce043b06e152006a050202f"
+    },
+    {
+      "path": "packages/ui/src/composables/tracks/use-track-account-name.ts",
+      "bytes": 825,
+      "sha256": "722a6d61a11545c8ba78df79eef057788896a424a4a44afa298cdb95a311efe1"
+    },
+    {
+      "path": "packages/ui/src/composables/tracks/use-track-name.ts",
+      "bytes": 1308,
+      "sha256": "bfb150a2cad7275cd32d9fb9dd12d069d0f5fe09eade1fde90c0d23bc75f286c"
+    },
+    {
+      "path": "packages/ui/src/composables/use-action-feedback.ts",
+      "bytes": 1635,
+      "sha256": "176c45689a88108e20ace24d9a424acdb3d119668520c6363abb08290b83256d"
+    },
+    {
+      "path": "packages/ui/src/composables/use-animated-scroll-to-top.ts",
+      "bytes": 4356,
+      "sha256": "5ea6210d5fe60eade4ae198f80e35b5e1c1766cd223b6f8e815d8ccbb208f911"
+    },
+    {
+      "path": "packages/ui/src/composables/use-app-shell.ts",
+      "bytes": 8554,
+      "sha256": "e73e024b466148ab3c5c889fd32d09ee7f5e9c3352f645d462ea2cb9c32f57ed"
+    },
+    {
+      "path": "packages/ui/src/composables/use-back-navigation.ts",
+      "bytes": 3309,
+      "sha256": "36c186af68ffb0f38c97d0d51067ac9aa1ba351f20ffa641757552caf3be4842"
+    },
+    {
+      "path": "packages/ui/src/composables/use-collection-navigation.ts",
+      "bytes": 3728,
+      "sha256": "9d51494d0d31bad6ee75c88c68ae52db464af1dc5763b88f6bdccceb5eae0e8c"
+    },
+    {
+      "path": "packages/ui/src/composables/use-confirmation-dialog.ts",
+      "bytes": 3904,
+      "sha256": "7efb5c9d0b3c643c3e1c96b934f25e08d8306fa1ec1fa7acf37fca874c5287ab"
+    },
+    {
+      "path": "packages/ui/src/composables/use-copy-text.ts",
+      "bytes": 2033,
+      "sha256": "7c5294639f8bd9e850be8ee38be9ae8dc5661f4c12bb3e67f4c3d7f6a6cff478"
+    },
+    {
+      "path": "packages/ui/src/composables/use-destination-reorder.ts",
+      "bytes": 10221,
+      "sha256": "c36da2c9ca4aee91870991ed914c7bd38c1dedb2285207392d7b0170a4ac115d"
+    },
+    {
+      "path": "packages/ui/src/composables/use-editing-session.ts",
+      "bytes": 2406,
+      "sha256": "41228d8797e7095a88fa2a5180ae906e22bd7e7ba49d9e57fb330c598fb040cf"
+    },
+    {
+      "path": "packages/ui/src/composables/use-element-block-size.ts",
+      "bytes": 1205,
+      "sha256": "4598f223dc358257febf14c655be4f39a9c45c9e858393c57bd739e1f26c8554"
+    },
+    {
+      "path": "packages/ui/src/composables/use-global-settings.ts",
+      "bytes": 8389,
+      "sha256": "ab2a3824769d2aedbf2e5c06d72529cc5d1cf0c6518b1eaaa1ea31943c8c706b"
+    },
+    {
+      "path": "packages/ui/src/composables/use-grid-reorder.ts",
+      "bytes": 17984,
+      "sha256": "85aa416b980752cfaec0916dc90136ec9e621309e71f7f7ef9891038607ff7a0"
+    },
+    {
+      "path": "packages/ui/src/composables/use-long-press-drag.ts",
+      "bytes": 5228,
+      "sha256": "752ca7ab7a49c2615cef45ed9fd0690cb4ac8e412480017d1a0dabd0da9c83a9"
+    },
+    {
+      "path": "packages/ui/src/composables/use-remote-image.ts",
+      "bytes": 2565,
+      "sha256": "26dbed77d7015731c3173df561cadd3d45d9d4d2b4447963b2f7e330a3457e2b"
+    },
+    {
+      "path": "packages/ui/src/composables/use-settings-feedback.ts",
+      "bytes": 427,
+      "sha256": "94126291f29f54c472155adac0584f1cf7a57d21dea55b556705cccd5c7c8bee"
+    },
+    {
+      "path": "packages/ui/src/composables/use-settings-navigation.ts",
+      "bytes": 5263,
+      "sha256": "1a585176e2ff5f52558c229eaa8ea9490c4b72e0ad8187bfb8bfc38e9aafa9e2"
+    },
+    {
+      "path": "packages/ui/src/composables/use-toast-notice.ts",
+      "bytes": 1233,
+      "sha256": "cfe97600e30e44b95755adaf10e7f311902df7c36d284a0dc2903d23d8751367"
+    },
+    {
+      "path": "packages/ui/src/index.ts",
+      "bytes": 9768,
+      "sha256": "d14377a567fc72cb6884375873063cdbafb1ed534c2aeebf96196482b72c552e"
+    },
+    {
+      "path": "packages/ui/src/library.ts",
+      "bytes": 1629,
+      "sha256": "b7b093da0b756f41f09430478860a66bf811b36cbd45012fbcf3beec85c2ab36"
+    },
+    {
+      "path": "packages/ui/src/product/action-feedback.ts",
+      "bytes": 5343,
+      "sha256": "a18403b674ea21bf3779b18c2f4422615c62b08514a3b0cc9b8dda60fb03d5ac"
+    },
+    {
+      "path": "packages/ui/src/product/app-shell-preferences.ts",
+      "bytes": 2910,
+      "sha256": "afcc931f56aa171c3d814c10fc891261cb6a51ce6144eca2dcd87c8b87cc3cf4"
+    },
+    {
+      "path": "packages/ui/src/product/audio-export-format.ts",
+      "bytes": 163,
+      "sha256": "ee9e66ac13dba9f5a2b70c74c0ca7709c8350d792217a4bb94f3b76097c5f6e7"
+    },
+    {
+      "path": "packages/ui/src/product/catalog-drawer.ts",
+      "bytes": 2102,
+      "sha256": "8e24e8f5e031531cf8c38d4d1123bca17f96723391e8d921561ef689b06dbb17"
+    },
+    {
+      "path": "packages/ui/src/product/catalog-presentation.ts",
+      "bytes": 6291,
+      "sha256": "2ef1237752a8776e61d166fd0c23a91c0dbf17c6ccdcc04c7d2b7561eb6cd91f"
+    },
+    {
+      "path": "packages/ui/src/product/clipboard.ts",
+      "bytes": 1230,
+      "sha256": "21cf14298896701a61409411feb929283e28d65749fb5150cae8254993e60d84"
+    },
+    {
+      "path": "packages/ui/src/product/filter-history-settings.ts",
+      "bytes": 1765,
+      "sha256": "e524fa2374790777bceff8039276212da4ab67d8ff591bbd0250cd48f5b2e3fe"
+    },
+    {
+      "path": "packages/ui/src/product/library-presentation.ts",
+      "bytes": 3443,
+      "sha256": "93102dc1597d2f9615f68dae240c4fa1fb5e730124e1d79e7d923f8de4d38cb4"
+    },
+    {
+      "path": "packages/ui/src/product/music-creation.ts",
+      "bytes": 2433,
+      "sha256": "ce12c8c8e2ad9cf09a48dea18a06ec76184f9ee780cf9f28e1b87b6699c82398"
+    },
+    {
+      "path": "packages/ui/src/product/native-plugin-authority.ts",
+      "bytes": 987,
+      "sha256": "6ae173c38dca45da050fed5c50e0960394d5e90a785adab4cc2929fc35d5b776"
+    },
+    {
+      "path": "packages/ui/src/product/native-plugin-result.ts",
+      "bytes": 1271,
+      "sha256": "8de19030c9e163d81f389d3b8e13a57f0cbd977a4618af4082f75180b2b41142"
+    },
+    {
+      "path": "packages/ui/src/product/ordinary-overlays.ts",
+      "bytes": 584,
+      "sha256": "38a4959538bc4ed7ab41237dccb52ceaf44f58760d38b79ccc25d74fa200acfa"
+    },
+    {
+      "path": "packages/ui/src/product/plugin-view-reference.ts",
+      "bytes": 609,
+      "sha256": "6a9a14693fb732b402efcfe332a102c49b241b47ade1ff33ccb8e7f1394961fb"
+    },
+    {
+      "path": "packages/ui/src/product/product-navigation.ts",
+      "bytes": 2394,
+      "sha256": "81b7e547e613a2badf13e205a1303eedf18d132d92a7f3ee6affe1fbc3c3ce0d"
+    },
+    {
+      "path": "packages/ui/src/product/resource-cache.ts",
+      "bytes": 434,
+      "sha256": "86c2cfd2a5760023e415a86a1a2e8e906531fa186d1c24814593e0255e0dd3ce"
+    },
+    {
+      "path": "packages/ui/src/product/settings-detail-context.ts",
+      "bytes": 267,
+      "sha256": "4de989ba9cec069ef2538f61ec3c23fa61bf6809c1a495ba5491a75f87a102e2"
+    },
+    {
+      "path": "packages/ui/src/product/settings-navigation.ts",
+      "bytes": 764,
+      "sha256": "f4398409694b0a4cc26f4f37447a8a377c58d6b9f70b54cbf08677f47c0b15d6"
+    },
+    {
+      "path": "packages/ui/src/product/settings-presentation.ts",
+      "bytes": 1311,
+      "sha256": "fa003c91a6a22bf6f5872e9c3d3ab5aaedacbd69b528ebf7989f5677e6c3d3f0"
+    },
+    {
+      "path": "packages/ui/src/product/specialist-presentation.ts",
+      "bytes": 7097,
+      "sha256": "d519c9997282f2cef0092dac36c4833628ad1217ea8d35bb5eb5087894327775"
+    },
+    {
+      "path": "packages/ui/src/product/tag-management.ts",
+      "bytes": 1140,
+      "sha256": "0a02bdb5d95a748494be5882bd4a8456cf2f372d8ba2ba9a6910587a23d91263"
+    },
+    {
+      "path": "packages/ui/src/product/theme-contracts.ts",
+      "bytes": 3176,
+      "sha256": "53b4bde357da1056afe748e3219ece1988c3bc5915fce2ebddf58570162b6ca2"
+    },
+    {
+      "path": "packages/ui/src/product/theme-features.ts",
+      "bytes": 14284,
+      "sha256": "ed57de61ac9de7870986d1a667500aa44486f0624e8438270a41f3ab6e1c94dc"
+    },
+    {
+      "path": "packages/ui/src/product/theme-metadata.ts",
+      "bytes": 2015,
+      "sha256": "f905fe414f8d0663087a4a3f99c1b472394ff21ff1d7ce7bd8fe283c89ba8e25"
+    },
+    {
+      "path": "packages/ui/src/product/theme-selection.ts",
+      "bytes": 380,
+      "sha256": "fc949fa9aad34a3f9b1935e1c97c6799df454056ad78cbf6c33f3819668f9f53"
+    },
+    {
+      "path": "packages/ui/src/product/track-collection.ts",
+      "bytes": 2422,
+      "sha256": "6884d7bed784b7a3a9bb35f520b93fbcb675fe2e5c78cd6251c4c72e37eb0952"
+    },
+    {
+      "path": "packages/ui/src/product/track-display-preferences.ts",
+      "bytes": 684,
+      "sha256": "677b1a948fef8185a3b5851a3908bfae88be6778ac9184a9e1464fc12454c1ee"
+    },
+    {
+      "path": "packages/ui/src/product/track-playback-state.ts",
+      "bytes": 211,
+      "sha256": "6595ece54bdde72ad3c12d44a746eca3aaf517e1ffe4d7b36a5a53d21a9c0b82"
+    },
+    {
+      "path": "packages/ui/src/product/ui-contributions.ts",
+      "bytes": 1873,
+      "sha256": "818bfe918ab30f41768774a0027bdf7183579b0d97fa7f2de7ce65cc267b5f04"
+    },
+    {
+      "path": "packages/ui/src/product/workbench-chrome.ts",
+      "bytes": 2811,
+      "sha256": "578f07f72f5e84b661831323c7d1373576b2d910d27be5c29d954f134628cc72"
+    },
+    {
+      "path": "packages/ui/src/styles/_controls.scss",
+      "bytes": 13529,
+      "sha256": "09d58c384ba29fb2f9205517b156e81a194c4409b7b7a7aa566d0926bbf18eee"
+    },
+    {
+      "path": "packages/ui/src/styles/_custom-plugins.scss",
+      "bytes": 26729,
+      "sha256": "eda4def71f866341d95c0e7cdee3e7ef9208da1b194bab4986d7a3ddf759d41b"
+    },
+    {
+      "path": "packages/ui/src/styles/_settings.scss",
+      "bytes": 5234,
+      "sha256": "492ad50d2128f593a18f2b1fae449505f045bb367464f9a3609530d178430ec0"
+    },
+    {
+      "path": "packages/ui/src/styles/index.scss",
+      "bytes": 8890,
+      "sha256": "282f7fcb65aa1f201bb3accc753a691f96fcd2ef5fac071fcf6a337893a5c1fd"
+    },
+    {
+      "path": "packages/ui/src/theme.ts",
+      "bytes": 527,
+      "sha256": "0be76b29e5c8fdb453feaafbb1a6291aa8c6e633a9ed408a307fe22daec06cf5"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 129713,
+      "sha256": "60e5d02173946e97d8f4138476beb7e2a9d376128d3479e4b5956e77f97825ac"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "bytes": 813,
+      "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e"
+    },
+    {
+      "path": "scripts/vite/retryable-theme-imports.ts",
+      "bytes": 2168,
+      "sha256": "fb0cc0654d585993a34dcbed524278c7a910bdee33bdec5dd090d192ca2eb539"
+    },
+    {
+      "path": "scripts/vite/theme-style-resources.ts",
+      "bytes": 6360,
+      "sha256": "5bbd88f80c1e4ba2a484a3702faf27e78c92036bcc01546255c8de0808be4c67"
+    },
+    {
+      "path": "apps/userscript/tsconfig.app.json",
+      "bytes": 303,
+      "sha256": "51cb5efb6380290cb6105ead471f82dace4d77c5da59cdfc9996bb0a15f79bce"
+    },
+    {
+      "path": "apps/userscript/tsconfig.json",
+      "bytes": 159,
+      "sha256": "5531770701c29131aba5c07dfeee109f6fc0c1561af3e28d43fe184a49711f72"
+    },
+    {
+      "path": "apps/userscript/tsconfig.node.json",
+      "bytes": 150,
+      "sha256": "ef79fd4a34bb89d27f99ff5991725ad5e63a013bf9c79028aaece134c9e6936b"
+    },
+    {
+      "path": "packages/account-pool/tsconfig.json",
+      "bytes": 134,
+      "sha256": "0b2a2cdf3f317e31b247203408b460557553db45d9b0c997d078e91fa03b627f"
+    },
+    {
+      "path": "packages/audio-composition/tsconfig.json",
+      "bytes": 163,
+      "sha256": "31ba791d33b9136b6294608123010a7f7a9415270b331895226c046c20c74b89"
+    },
+    {
+      "path": "packages/core/tsconfig.json",
+      "bytes": 171,
+      "sha256": "d57fb9c620a6b107339e892b34ebb33907c728c9d14c7b8f35c7d77a735f6d86"
+    },
+    {
+      "path": "packages/music-workbench/tsconfig.json",
+      "bytes": 281,
+      "sha256": "a51ba24f04f6a63dea399930183c097cdb0d566d39d047903eddede77dd50184"
+    },
+    {
+      "path": "packages/network-routing/tsconfig.json",
+      "bytes": 134,
+      "sha256": "0b2a2cdf3f317e31b247203408b460557553db45d9b0c997d078e91fa03b627f"
+    },
+    {
+      "path": "packages/plugin-center/tsconfig.json",
+      "bytes": 140,
+      "sha256": "7938a0fb99f066b49a12310d72118090cbd07127ba0afdd5ac1bb7e648848e73"
+    },
+    {
+      "path": "packages/plugin-music-creation/tsconfig.json",
+      "bytes": 215,
+      "sha256": "ae80ad5f5cc9436f3a6010a24a57d8f3a465fd20de249c5f42aa4dcc9234ca22"
+    },
+    {
+      "path": "packages/plugin-sandbox-browser/tsconfig.json",
+      "bytes": 160,
+      "sha256": "23e3bd2f88e27133f9a95e55f146cb3e3338524a8cd39a32e5d38083f91773e0"
+    },
+    {
+      "path": "packages/plugin-sdk/tsconfig.build.json",
+      "bytes": 227,
+      "sha256": "0ae223e20b2ede9be0a963a6f069d881bf1e1da52edd37900aaa525f3c1133d3"
+    },
+    {
+      "path": "packages/plugin-sdk/tsconfig.json",
+      "bytes": 151,
+      "sha256": "04bc760472f28399499a61dad9698a701ca147cf2f95e7827cad66c46103208a"
+    },
+    {
+      "path": "packages/plugin-source-bilibili/tsconfig.json",
+      "bytes": 163,
+      "sha256": "31ba791d33b9136b6294608123010a7f7a9415270b331895226c046c20c74b89"
+    },
+    {
+      "path": "packages/plugin-source-douyin/tsconfig.json",
+      "bytes": 163,
+      "sha256": "31ba791d33b9136b6294608123010a7f7a9415270b331895226c046c20c74b89"
+    },
+    {
+      "path": "packages/plugin-source-netease/tsconfig.json",
+      "bytes": 157,
+      "sha256": "33899a6ca5a5cf507ffb5a7d3005fcf8dd0f89a1fdaaf6151904d9a6ddc2697a"
+    },
+    {
+      "path": "packages/plugin-tag-management/tsconfig.json",
+      "bytes": 215,
+      "sha256": "ae80ad5f5cc9436f3a6010a24a57d8f3a465fd20de249c5f42aa4dcc9234ca22"
+    },
+    {
+      "path": "packages/plugin-testkit/tsconfig.json",
+      "bytes": 160,
+      "sha256": "23e3bd2f88e27133f9a95e55f146cb3e3338524a8cd39a32e5d38083f91773e0"
+    },
+    {
+      "path": "packages/plugin-ui-vue/tsconfig.json",
+      "bytes": 193,
+      "sha256": "92c61f4399bd80a0c03ddeabd9f0fcf93e990df1ffc25b276216d6d953002adb"
+    },
+    {
+      "path": "packages/plugin-vm/tsconfig.json",
+      "bytes": 160,
+      "sha256": "23e3bd2f88e27133f9a95e55f146cb3e3338524a8cd39a32e5d38083f91773e0"
+    },
+    {
+      "path": "packages/theme-default/tsconfig.json",
+      "bytes": 193,
+      "sha256": "92c61f4399bd80a0c03ddeabd9f0fcf93e990df1ffc25b276216d6d953002adb"
+    },
+    {
+      "path": "packages/theme-studio/tsconfig.json",
+      "bytes": 193,
+      "sha256": "92c61f4399bd80a0c03ddeabd9f0fcf93e990df1ffc25b276216d6d953002adb"
+    },
+    {
+      "path": "packages/ui/tsconfig.json",
+      "bytes": 215,
+      "sha256": "ae80ad5f5cc9436f3a6010a24a57d8f3a465fd20de249c5f42aa4dcc9234ca22"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "bytes": 446,
+      "sha256": "a54d24214863db254a94db67f8ded43f5cf6465184be18799d88bdc02087ffa1"
+    }
+  ]
+}

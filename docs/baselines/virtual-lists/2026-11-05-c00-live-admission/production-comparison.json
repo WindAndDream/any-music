@@ -1,0 +1,41 @@
+{
+  "baseline": "../2026-11-05-c00-continuation/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "method": "Production frontend JS/CSS/Wasm totals; per-file gzip level9; native executable excluded. Dirty workspace identity recorded separately, not a frame-performance comparison.",
+  "runtimeResults": [
+    {
+      "runtime": "userscript",
+      "payloadBytesDelta": 550,
+      "payloadGzipBytesDelta": 140,
+      "audit": {
+        "file": "apps/userscript/dist/theme-build-audit.json",
+        "metadataVirtualizerPresent": false,
+        "startupVirtualizerPresent": false,
+        "startupCandidateStyleResources": [
+          "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue?vue&type=style&index=0&scoped=92ed64e5&inline&lang.css",
+          "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue?vue&type=style&index=0&scoped=0b64f2ed&inline&lang.css",
+          "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=style&index=0&scoped=dc9e5970&inline&lang.css"
+        ],
+        "documentStartVirtualizerPresent": false,
+        "eagerVirtualizerPresent": false,
+        "renderedVirtualizerPresent": true
+      }
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytesDelta": 335,
+      "payloadGzipBytesDelta": 94,
+      "audit": {
+        "file": "apps/tauri/dist/theme-build-audit.json",
+        "metadataVirtualizerPresent": false,
+        "startupVirtualizerPresent": false,
+        "startupCandidateStyleResources": [
+          "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue?vue&type=style&index=0&scoped=92ed64e5&inline&lang.css",
+          "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue?vue&type=style&index=0&scoped=0b64f2ed&inline&lang.css",
+          "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue?vue&type=style&index=0&scoped=dc9e5970&inline&lang.css"
+        ],
+        "documentStartVirtualizerPresent": null
+      }
+    }
+  ]
+}

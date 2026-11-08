@@ -1,0 +1,336 @@
+{
+  "batchId": "T10",
+  "status": "complete",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "scope": "Independent Studio complete feature presentation and shared real-root behavior/continuity; production complete-root composition remains T11.",
+  "environment": {
+    "os": "Windows",
+    "shell": "PowerShell",
+    "node": "24.11.1",
+    "pnpm": "10.23.0",
+    "tests": "Node Vue renderer and in-memory Vite consumer; fake source/media/encoder ports in real-controller tests. No product UI launch."
+  },
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "startSnapshot": "T10-workspace-start.txt",
+    "preserved": "T00-T09 and native/download changes were present at resume. No reset, revert, commit or push. Measurements/checks describe the combined worktree."
+  },
+  "prerequisites": {
+    "T08": "complete; observed T08.json before implementation",
+    "T09": "complete; observed T09.json before implementation"
+  },
+  "files": [
+    ".agents/skills/any-music-ui-delivery/SKILL.md",
+    "docs/en/README.md",
+    "docs/en/cross-platform/README.md",
+    "docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md",
+    "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+    "docs/en/cross-platform/architecture/project-architecture.md",
+    "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+    "docs/zh-cn/文档索引.md",
+    "docs/zh-cn/跨平台/文档索引.md",
+    "docs/zh-cn/跨平台/架构/可复用包边界.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+    "docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md",
+    "docs/zh-cn/跨平台/架构/项目架构.md",
+    "packages/music-workbench/AGENTS.md",
+    "packages/music-workbench/test/features/workbench/theme-action-contracts.test.ts",
+    "packages/music-workbench/test/features/workbench/theme-feature-coverage.test.ts",
+    "packages/music-workbench/test/features/workbench/use-workbench-controller.test.ts",
+    "packages/theme-default/AGENTS.md",
+    "packages/theme-default/src/components/library/ClassicFavorites.vue",
+    "packages/theme-default/src/components/library/ClassicQueue.vue",
+    "packages/theme-default/src/components/music-sources/catalog-root-editing.ts",
+    "packages/theme-default/src/components/music-sources/use-classic-catalog.ts",
+    "packages/theme-default/src/composables/use-classic-downloads.ts",
+    "packages/theme-studio/AGENTS.md",
+    "packages/theme-studio/src/StudioRoot.vue",
+    "packages/theme-studio/src/components/catalog/StudioCatalog.vue",
+    "packages/theme-studio/src/components/catalog/StudioDrawerRail.vue",
+    "packages/theme-studio/src/components/catalog/StudioRequestOptions.vue",
+    "packages/theme-studio/src/components/catalog/StudioResults.vue",
+    "packages/theme-studio/src/components/downloads/StudioDownloads.vue",
+    "packages/theme-studio/src/components/library/StudioBatchActions.vue",
+    "packages/theme-studio/src/components/library/StudioCollection.vue",
+    "packages/theme-studio/src/components/library/StudioCustomTracks.vue",
+    "packages/theme-studio/src/components/library/StudioFavoriteFilters.vue",
+    "packages/theme-studio/src/components/library/StudioFavorites.vue",
+    "packages/theme-studio/src/components/library/StudioFilters.vue",
+    "packages/theme-studio/src/components/library/StudioHistory.vue",
+    "packages/theme-studio/src/components/library/StudioPlaylists.vue",
+    "packages/theme-studio/src/components/library/StudioQueue.vue",
+    "packages/theme-studio/src/components/library/StudioTrackTable.vue",
+    "packages/theme-studio/src/components/overlays/StudioOverlays.vue",
+    "packages/theme-studio/src/components/overlays/StudioTrackDialog.vue",
+    "packages/theme-studio/src/components/plugins/StudioPlugins.vue",
+    "packages/theme-studio/src/components/settings/StudioAppearance.vue",
+    "packages/theme-studio/src/components/settings/StudioFilterHistory.vue",
+    "packages/theme-studio/src/components/settings/StudioSettings.vue",
+    "packages/theme-studio/src/components/shell/StudioShell.vue",
+    "packages/theme-studio/src/components/specialists/StudioComposer.vue",
+    "packages/theme-studio/src/components/specialists/StudioCreationPage.vue",
+    "packages/theme-studio/src/components/specialists/StudioMaterialBrowser.vue",
+    "packages/theme-studio/src/components/specialists/StudioTagPage.vue",
+    "packages/theme-studio/src/components/specialists/StudioTags.vue",
+    "packages/theme-studio/src/components/specialists/StudioTimeline.vue",
+    "packages/theme-studio/src/composables/use-studio-activity.ts",
+    "packages/theme-studio/src/composables/use-studio-settings.ts",
+    "packages/theme-studio/src/styles/index.scss",
+    "packages/theme-studio/src/vue.ts",
+    "packages/theme-studio/test/metadata.test.ts",
+    "packages/ui/AGENTS.md",
+    "packages/ui/src/catalog.ts",
+    "packages/ui/src/composables/music-sources/catalog-root-editing.ts",
+    "packages/ui/src/composables/music-sources/use-catalog-track-filter-editor.ts",
+    "packages/ui/test/composables/music-sources/use-catalog-track-filter-editor.test.ts"
+  ],
+  "ownership": {
+    "studio": "Own root, catalog batch/filters/request/track dialogs, library, task, ordinary settings/feedback and independent specialist page layouts/styles",
+    "ui": "Neutral validation/editing, explicit scoped range-editor dependency and reset, controls and protected host contracts; neutral catalog/list editing cells moved from classic to the public catalog entry",
+    "plugins": "Existing renderless specialist bindings, neutral controls, rules, drafts/recipes and namespace authority",
+    "workbench": "Test-only real-root composition; stable business/media/source/download/plugin instances; production assembly unchanged",
+    "classic": "Align queue/favorites/download filter editing scopes with the common feature identities"
+  },
+  "coverage": {
+    "requiredViews": [
+      "shell",
+      "navigation",
+      "player",
+      "catalog",
+      "queue",
+      "favorites",
+      "playlists",
+      "custom-tracks",
+      "history",
+      "downloads",
+      "plugins",
+      "settings",
+      "overlays"
+    ],
+    "optionalViews": ["tags", "composer"],
+    "forms": ["desktop", "mobile"],
+    "missingViews": [],
+    "classicFallback": false,
+    "productionSelectable": false,
+    "productionNote": "T11 owns complete-root loaders/style injection; existing partial selector is unchanged."
+  },
+  "targetedVerification": [
+    {
+      "command": "pnpm --filter @any-music/theme-studio test",
+      "exitCode": 0,
+      "files": 2,
+      "tests": 12,
+      "log": "T10-studio-tests.txt",
+      "includes": "All required/optional admission, negative missing-view gates, scoped responsive/reduced-motion CSS and standalone all-view consumer module graph"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/theme-action-contracts.test.ts test/features/workbench/theme-feature-coverage.test.ts test/features/workbench/theme-controller-continuity.test.ts test/features/workbench/use-workbench-controller.test.ts",
+      "exitCode": 0,
+      "files": 4,
+      "tests": 34,
+      "log": "T10-target-tests.txt",
+      "note": "Before eight additional common behavior cases; final root test covers all 42 cases."
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/theme-feature-coverage.test.ts",
+      "exitCode": 0,
+      "files": 1,
+      "tests": 20,
+      "log": "T10-feature-tests.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/theme-action-contracts.test.ts test/features/workbench/theme-feature-coverage.test.ts test/features/workbench/theme-controller-continuity.test.ts test/features/workbench/use-workbench-controller.test.ts",
+      "exitCode": 0,
+      "files": 4,
+      "tests": 43,
+      "log": "T10-final-target-tests.txt",
+      "includes": "Shared request-list filter draft survives Studio -> classic -> Studio and applies only on explicit action."
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-studio --filter @any-music/theme-default --filter @any-music/ui typecheck",
+      "exitCode": 0,
+      "log": "T10-final-target-typecheck.txt"
+    }
+  ],
+  "invariants": [
+    "Both actual complete roots execute the same feature/action contract tests",
+    "Every major destination without a source, on desktop/mobile and bidirectional switching",
+    "Optional-module disablement withdraws editor controls and retains namespace data",
+    "Partial errors retain content; host account/network/save slots remain fixed",
+    "Settings names/numeric validation/unfinished inputs retain shared editing cells; old forms cannot save",
+    "Confirmation stays bound to presentation, request ID and selection; old callbacks do not replay",
+    "Task IDs and command IDs, active/queued order, progress, one scheduler/export and cancellation ownership remain stable",
+    "Real tag input/filters and creation recipe identity/draft survive classic -> Studio -> classic without namespace writes",
+    "Real player/source regressions retain request counts/order/concurrency, pending-read cancellation, precise seek and one-time disposal",
+    "Ordering buttons provide non-drag keyboard/touch alternatives; CSS uses neutral light/dark tokens, narrow containers and reduced-motion rules",
+    "Catalog list applied filters, state groups, multi-selection and unfinished filter drafts share the neutral headless controller across theme replacement without requests.",
+    "Filter dimensions follow each public context; retained dormant tag filters need an explicit restore action after capability returns."
+  ],
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T10-root-test.txt",
+      "note": "Initial root pass; final test-only additions are revalidated separately below."
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T10-root-typecheck.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T10-root-lint.txt"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T10-root-build.txt",
+      "includes": "Both production frontends and Windows release executable"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T10-root-format.txt"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 2,
+      "log": "T10-final-root-typecheck.txt",
+      "attempt": "Before nullable fixture annotation"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 2,
+      "log": "T10-final-root-build.txt",
+      "attempt": "Stopped at the same test-fixture typecheck"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T10-final-root-typecheck-rerun.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T10-closure-root-lint.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-studio typecheck",
+      "exitCode": 0,
+      "log": "T10-studio-typecheck.txt"
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T10-closure-root-test.txt"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T10-final-root-build-rerun.txt"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T10-closure-root-format.txt"
+    }
+  ],
+  "intermediateFindings": [
+    "Initial shared coverage fixture used a specific confirmation title and the first page form; corrected to semantic save-form lookup and action meaning.",
+    "Formatter removed inline multi-statement template separators; replaced those event bodies with named handlers and reran executable compilation.",
+    "Aligned collection filter sessions and injected an explicit range-editor owner so a provider component does not accidentally share a parent editing cell.",
+    "Corrected optional contribution identities and rechecked permission projection at user-event boundaries.",
+    "Final request-list fixture inferred activeDrawerId as string; widened that test field to string|null. Initial closure typecheck/build exits 2 are retained, and full reruns follow."
+  ],
+  "artifacts": {
+    "files": [
+      {
+        "path": "apps/userscript/dist/any-music.user.js",
+        "bytes": 4785532,
+        "sha256": "1b66beb26075f10b51b20a65aeb09a3fb2ae237989f1d2c62df8840aef34ad01"
+      },
+      {
+        "path": "target/release/any-music-tauri.exe",
+        "bytes": 28334592,
+        "sha256": "8d21d604665eaf2bc3523e08525240fa26ea906b61540476e30821d4b68b140c"
+      }
+    ],
+    "directories": [
+      {
+        "path": "apps/userscript/dist",
+        "fileCount": 3,
+        "bytes": 4820629
+      },
+      {
+        "path": "apps/tauri/dist",
+        "fileCount": 67,
+        "bytes": 2852303
+      }
+    ],
+    "limitations": "Combined-worktree production measurements; standalone Studio graph is compiled in memory by package tests. T11 has not adopted these full roots in either product. Existing Tauri large-chunk and Vite plugin-timing warnings remain."
+  },
+  "pendingLiveChecks": [
+    "T11 production complete-root composition and loading/style graph acceptance",
+    "T13 actual light/dark/layout/focus/scroll, keyboard/touch/reduced-motion and mobile-device acceptance",
+    "Installed Userscript GM, desktop Rust HTTP/accounts/media/native-save acceptance; Node tests do not establish runtime evidence"
+  ],
+  "nextBatch": "T11",
+  "moves": [
+    {
+      "from": "packages/theme-default/src/components/music-sources/catalog-root-editing.ts",
+      "to": "packages/ui/src/composables/music-sources/catalog-root-editing.ts",
+      "reason": "Neutral catalog/list editing cells are shared by both independent themes; no cross-theme import."
+    }
+  ],
+  "documentationLinks": {
+    "checkedLocalLinks": 254,
+    "missing": []
+  },
+  "rootTestSummary": {
+    "vitestFiles": 290,
+    "vitestTests": 2137,
+    "rustPassed": 229,
+    "rustIgnored": 1,
+    "protocolCases": 183,
+    "repositoryScriptTests": 32,
+    "cliTests": 21
+  },
+  "rootGates": {
+    "test": {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T10-closure-root-test.txt"
+    },
+    "typecheck": {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T10-final-root-typecheck-rerun.txt"
+    },
+    "lint": {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T10-closure-root-lint.txt"
+    },
+    "format": {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T10-closure-root-format.txt"
+    },
+    "build": {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T10-final-root-build-rerun.txt"
+    }
+  },
+  "exitConditions": {
+    "requiredAndOptionalCoverage": "Both real themes pass all required and both optional view gates on desktop/mobile.",
+    "commonBehavior": "43 shared action/feature/controller tests plus the full package/workspace suites passed.",
+    "sourceAndPluginOwnership": "Preserved; no theme business/runtime fork or classic dependency.",
+    "wholeWorktreeGates": "All five passed.",
+    "productionAndLiveAcceptance": "Deferred to T11 and T13 respectively; not included in T10."
+  }
+}

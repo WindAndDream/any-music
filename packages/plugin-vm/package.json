@@ -1,0 +1,29 @@
+{
+  "name": "@any-music/plugin-vm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./profile": "./src/profile.ts",
+    "./control": "./src/control.ts",
+    "./engine.wasm": "./engine/quickjs-noeval.wasm"
+  },
+  "scripts": {
+    "generate:engine": "python scripts/build-engine.py",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@any-music/plugin-sdk": "workspace:*",
+    "@jitl/quickjs-ffi-types": "0.31.0",
+    "@jitl/quickjs-wasmfile-release-sync": "0.31.0",
+    "quickjs-emscripten-core": "0.31.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

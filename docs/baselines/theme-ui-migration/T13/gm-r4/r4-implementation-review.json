@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-implementation-evidence-review",
+  "runtimeScope": "shared",
+  "date": "2026-10-27",
+  "timezone": "Asia/Shanghai",
+  "status": "reviewed-for-listed-source-test-and-preview-evidence",
+  "scope": "Independent read-only review of saved GM-R4 UI repairs, tests and 32 preview screenshot mappings. Product sources were not changed, browser was not operated and tests were not rerun by this audit.",
+  "findings": [
+    {
+      "id": "R4-F1",
+      "problem": "Modal Tab containment skipped protected Shadow-root controls and retained hidden/inert candidates.",
+      "repair": "Traverse composed Shadow/slot order, resolve deep active control, filter invisible/disabled/inert candidates and recover outside focus.",
+      "source": [
+        "packages/ui/src/components/modal-focus.ts",
+        "packages/ui/src/components/AppDialog.vue",
+        "packages/ui/src/components/BottomSheet.vue",
+        "packages/ui/src/components/product-workbench/ConfirmationDialog.vue"
+      ],
+      "tests": ["packages/ui/test/components/modal-focus.test.ts"],
+      "previewEvidence": [
+        "preview-narrow-studio-protected-proxy.png",
+        "preview-narrow-studio-dark-protected-proxy.png",
+        "preview-wide-studio-dark-protected-proxy.png"
+      ],
+      "limit": "Stub DOM tests establish algorithm branches; preview browser input independently establishes nested-proxy Tab order."
+    },
+    {
+      "id": "R4-F2",
+      "problem": "Theme focus restoration could replace new modal initial focus and lose the settings opener after presentation replacement.",
+      "repair": "Keep visible new-modal initial focus and use the new semantic settings opener when the original trigger is gone.",
+      "source": [
+        "packages/plugin-ui-vue/src/trusted/theme-resources.ts",
+        "packages/theme-default/src/ClassicRoot.vue",
+        "packages/theme-default/src/components/shell/ProductWorkbench.vue",
+        "packages/theme-studio/src/StudioRoot.vue"
+      ],
+      "tests": ["packages/plugin-ui-vue/test/trusted/theme-resources.test.ts"],
+      "limit": "Preview records both theme directions and Escape return. Installed final-source results belong to the parent GM record."
+    },
+    {
+      "id": "R4-F3",
+      "problem": "An unconditional empty account-settings slot advertised an unavailable account section in GM.",
+      "repair": "Forward the account-settings slot only when injected by the runtime.",
+      "source": [
+        "packages/music-workbench/src/components/music-sources/MusicWorkbenchThemeHost.vue"
+      ],
+      "tests": [
+        "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts"
+      ],
+      "limit": "The real-root composition test exercises absent/injected account capabilities, unique controller/audio and a stable protected overlay; it does not establish native account transport."
+    },
+    {
+      "id": "R4-F4",
+      "problem": "Studio required navigation entries appeared hideable.",
+      "repair": "Label required entries, disable their checkbox and guard hide intents while keeping optional entries editable.",
+      "source": ["packages/theme-studio/src/components/settings/StudioAppearance.vue"],
+      "tests": ["packages/theme-studio/test/components/settings/StudioAppearance.test.ts"]
+    },
+    {
+      "id": "R4-F5",
+      "problem": "Library enqueue-only actions advertised removal of existing queue membership.",
+      "repair": "Use explicit add mode in library tables; existing members display a disabled already-queued action. Retain catalog toggle behavior.",
+      "source": [
+        "packages/theme-studio/src/components/catalog/StudioTrackRow.vue",
+        "packages/theme-studio/src/components/library/StudioTrackTable.vue"
+      ],
+      "tests": ["packages/theme-studio/test/components/library/StudioTrackTable.test.ts"]
+    },
+    {
+      "id": "R4-F6",
+      "problem": "Studio platform-order rows ran together visually.",
+      "repair": "Add scoped ordered-list/row spacing while retaining ol/li and explicit up/down buttons.",
+      "source": [
+        "packages/theme-studio/src/components/library/StudioFavorites.vue",
+        "packages/theme-studio/src/styles/index.scss"
+      ],
+      "tests": [],
+      "previewEvidence": ["preview-studio-favorites-fixed.png", "preview-narrow-studio-3.png"]
+    },
+    {
+      "id": "R4-F7",
+      "problem": "Plugin toggle labels had about 17.7 CSS px hit height.",
+      "repair": "Use 44 CSS px minimum label rows in both themes.",
+      "source": [
+        "packages/theme-default/src/components/plugins/ClassicPlugins.vue",
+        "packages/theme-default/src/styles/_specialists.scss",
+        "packages/theme-studio/src/components/plugins/StudioPlugins.vue",
+        "packages/theme-studio/src/styles/index.scss"
+      ],
+      "tests": [],
+      "previewEvidence": [
+        "preview-plugin-targets.json",
+        "preview-classic-plugin-targets-after.json"
+      ],
+      "limit": "Measured label geometry proves browser CSS hit area, not physical-touch execution."
+    },
+    {
+      "id": "R4-F8",
+      "problem": "Material search lacked an accessible name; remounting an unchanged empty collection cleared its unfinished query.",
+      "repair": "Name the material search input and return early for stable collection identity, retaining explicit switch/file resets.",
+      "source": [
+        "packages/plugin-music-creation/src/vue/components/MaterialFilterBar.vue",
+        "packages/plugin-music-creation/src/vue/use-segment-composer.ts"
+      ],
+      "tests": [
+        "packages/plugin-music-creation/test/vue/components/MaterialFilterBar.test.ts",
+        "packages/plugin-music-creation/test/vue/use-segment-composer.test.ts"
+      ],
+      "previewEvidence": [
+        "preview-creation-query-fixed.json",
+        "preview-professional-continuity-fixed.txt"
+      ],
+      "limit": "Retained draft/title/query/collection text is evidence for presentation continuity, not publishing or native saving."
+    },
+    {
+      "id": "R4-F9",
+      "problem": "Rejecting last-source disablement could leave Studio native checkbox unchecked without feedback.",
+      "repair": "Keep the last enabled source checked/disabled with an associated status explanation and restore rejected native change state to the authoritative projection.",
+      "source": ["packages/theme-studio/src/components/settings/StudioSettings.vue"],
+      "tests": ["packages/theme-studio/test/components/settings/StudioSettings.test.ts"],
+      "limit": "Three component cases cover last-source protection, enabling a second source and disabling among multiple sources. This preview record does not claim a live last-source test."
+    }
+  ],
+  "validationBoundary": {
+    "automated": "Use the final combined-workspace test/typecheck/lint/format/build evidence in ../gm-r3/ and ../../T13-gm-r3.json; this audit does not replace those recorded executions.",
+    "preview": "Preview browser inputs/observations are independent of installed GM. See preview-coverage.json.",
+    "installed": "The parent GM-R4 acceptance record owns final installed-production checks.",
+    "native": "No new Tauri/native, physical keyboard/mouse or touch-hardware acceptance is implied."
+  },
+  "evidenceCorrection": {
+    "date": "2026-10-27",
+    "method": "Pillow opens/verifies the original bytes and reports actual format/dimensions; SHA-256 recomputed. Visible page headings independently reviewed from original screenshot contact sheets.",
+    "verifiedFiles": 32,
+    "hashMatches": 32,
+    "filenameLimit": "All 32 recorded .png files contain JPEG bytes returned by the preview browser screenshot API. Filenames and bytes remain unchanged; imageFormat/imageWidth/imageHeight replace invalid PNG-header-derived dimensions.",
+    "pageMapping": "The 32 page/theme mappings match their visible headings. Studio narrow numeric names follow reviewed rendered pages, not the earlier AX destination; preview-narrow-studio-1.png remains excluded as a duplicate catalog frame.",
+    "reviewScope": "No clear clipping/overlap found at contact-sheet inspection scale. This review does not establish contrast ratios, all scroll positions, fine typography or a complete page/color/viewport Cartesian matrix.",
+    "residualSamplingLimit": "Some Classic narrow screenshots retain the prior playlist bottom-navigation highlight during transition; this sample alone does not establish a persistent current-code navigation defect."
+  }
+}

@@ -1,0 +1,39 @@
+Scope: 5 of 23 workspace projects
+packages/ui test$ vitest run
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/ui test:  Test Files  61 passed (61)
+packages/ui test:       Tests  330 passed (330)
+packages/ui test:    Start at  11:23:48
+packages/ui test:    Duration  3.67s (transform 6.42s, setup 0ms, import 17.33s, tests 1.46s, environment 24ms)
+packages/ui test: Done
+packages/plugin-ui-vue test$ vitest run
+packages/theme-default test$ vitest run
+packages/theme-studio test$ vitest run
+packages/plugin-ui-vue test:  RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+packages/theme-studio test:  RUN  v4.1.11 <project-root>/packages/theme-studio
+packages/theme-default test:  RUN  v4.1.11 <project-root>/packages/theme-default
+packages/plugin-ui-vue test:  ❯ test/trusted/root-theme-controller.test.ts (21 tests | 1 failed) 22ms
+packages/plugin-ui-vue test:      × admits an injected third complete theme through the same root slot and recovery path 8ms
+packages/plugin-ui-vue test: ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+packages/plugin-ui-vue test:  FAIL  test/trusted/root-theme-controller.test.ts > complete-root transactions > admits an injected third complete theme through the same root slot and recovery path
+packages/plugin-ui-vue test: AssertionError: expected false to be true // Object.is equality
+packages/plugin-ui-vue test: - Expected
+packages/plugin-ui-vue test: + Received
+packages/plugin-ui-vue test: - true
+packages/plugin-ui-vue test: + false
+packages/plugin-ui-vue test:  ❯ test/trusted/root-theme-controller.test.ts:101:46
+packages/plugin-ui-vue test:      99|       prepareAllocation: async (id) => allocation(id),
+packages/plugin-ui-vue test:     100|     })
+packages/plugin-ui-vue test:     101|     expect(await controller.select('paper')).toBe(true)
+packages/plugin-ui-vue test:        |                                              ^
+packages/plugin-ui-vue test:     102|     expect(controller.current.value.theme).toBe(paper)
+packages/plugin-ui-vue test:     103|     expect(controller.current.value.allocation?.slots).toEqual({ 'them…
+packages/plugin-ui-vue test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+packages/plugin-ui-vue test:  Test Files  1 failed | 7 passed (8)
+packages/plugin-ui-vue test:       Tests  1 failed | 40 passed (41)
+packages/plugin-ui-vue test:    Start at  11:23:52
+packages/plugin-ui-vue test:    Duration  2.53s (transform 5.97s, setup 0ms, import 9.04s, tests 444ms, environment 3ms)
+packages/plugin-ui-vue test: Failed
+<project-root>\packages\plugin-ui-vue:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/plugin-ui-vue@0.0.0 test: `vitest run`
+Exit status 1

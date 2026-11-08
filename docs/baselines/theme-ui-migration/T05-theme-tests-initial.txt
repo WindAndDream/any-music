@@ -1,0 +1,340 @@
+
+> @any-music/theme-default@0.0.0 test <project-root>\packages\theme-default
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/theme-default
+
+stderr | test/components/shell/ProductWorkbench.interactions.test.ts > controlled classic shell events > forwards desktop/mobile navigation and sidebar state, and hides/restores without disposing content
+[Vue warn]: Extraneous non-props attributes (name) were passed to component but could not be automatically inherited because component renders fragment or text or teleport root nodes.
+  at <Anonymous name="am-launcher" >
+  at <ProductWorkbench activeDestination= {
+  id: 'catalog',
+  label: '发现',
+  shortLabel: '发现',
+  icon: 'search',
+  canHide: false,
+  mobileSlot: 'discover'
+} activeDescription="" navigationItems= [
+  {
+    id: 'catalog',
+    label: '发现',
+    shortLabel: '发现',
+    icon: 'search',
+    canHide: false,
+    mobileSlot: 'discover'
+  },
+  {
+    id: 'queue',
+    label: '待听',
+    shortLabel: '待听',
+    icon: 'queue',
+    canHide: true
+  },
+  {
+    id: 'favorites',
+    label: '我的喜欢',
+    shortLabel: '喜欢',
+    icon: 'heart',
+    canHide: false,
+    mobileSlot: 'favorites'
+  },
+  {
+    id: 'playlists',
+    label: '我的歌单',
+    shortLabel: '歌单',
+    icon: 'playlist',
+    canHide: false,
+    mobileSlot: 'playlists'
+  },
+  {
+    id: 'custom-tracks',
+    label: '自定义音乐',
+    shortLabel: '作品',
+    icon: 'waveform',
+    canHide: true
+  },
+  {
+    id: 'tags',
+    label: '标签管理',
+    shortLabel: '标签',
+    icon: 'tag',
+    canHide: true
+  },
+  {
+    id: 'composer',
+    label: '片段创作',
+    shortLabel: '片段',
+    icon: 'segments',
+    canHide: true
+  },
+  {
+    id: 'downloads',
+    label: '下载',
+    shortLabel: '下载',
+    icon: 'download',
+    canHide: true
+  },
+  {
+    id: 'history',
+    label: '播放历史',
+    shortLabel: '历史',
+    icon: 'clock',
+    canHide: true
+  },
+  {
+    id: 'plugins',
+    label: '插件中心',
+    shortLabel: '插件',
+    icon: 'plugin',
+    canHide: true
+  }
+]  ... >
+  at <Anonymous >
+  at <App>
+[Vue warn]: Unhandled error during execution of setup function
+  at <AppDialog open=false suspended=false title="主题"  ... >
+  at <AppShellPreferenceDialog setting=null sidebar-side="right" theme="system"  ... >
+  at <Anonymous presentation="embedded" sidebar-side="right" sidebar-collapsed=false  ... >
+  at <ProductWorkbench activeDestination= {
+  id: 'catalog',
+  label: '发现',
+  shortLabel: '发现',
+  icon: 'search',
+  canHide: false,
+  mobileSlot: 'discover'
+} activeDescription="" navigationItems= [
+  {
+    id: 'catalog',
+    label: '发现',
+    shortLabel: '发现',
+    icon: 'search',
+    canHide: false,
+    mobileSlot: 'discover'
+  },
+  {
+    id: 'queue',
+    label: '待听',
+    shortLabel: '待听',
+    icon: 'queue',
+    canHide: true
+  },
+  {
+    id: 'favorites',
+    label: '我的喜欢',
+    shortLabel: '喜欢',
+    icon: 'heart',
+    canHide: false,
+    mobileSlot: 'favorites'
+  },
+  {
+    id: 'playlists',
+    label: '我的歌单',
+    shortLabel: '歌单',
+    icon: 'playlist',
+    canHide: false,
+    mobileSlot: 'playlists'
+  },
+  {
+    id: 'custom-tracks',
+    label: '自定义音乐',
+    shortLabel: '作品',
+    icon: 'waveform',
+    canHide: true
+  },
+  {
+    id: 'tags',
+    label: '标签管理',
+    shortLabel: '标签',
+    icon: 'tag',
+    canHide: true
+  },
+  {
+    id: 'composer',
+    label: '片段创作',
+    shortLabel: '片段',
+    icon: 'segments',
+    canHide: true
+  },
+  {
+    id: 'downloads',
+    label: '下载',
+    shortLabel: '下载',
+    icon: 'download',
+    canHide: true
+  },
+  {
+    id: 'history',
+    label: '播放历史',
+    shortLabel: '历史',
+    icon: 'clock',
+    canHide: true
+  },
+  {
+    id: 'plugins',
+    label: '插件中心',
+    shortLabel: '插件',
+    icon: 'plugin',
+    canHide: true
+  }
+]  ... >
+  at <Anonymous >
+  at <App>
+
+ ❯ test/components/shell/ProductWorkbench.interactions.test.ts (1 test | 1 failed) 35ms
+     × forwards desktop/mobile navigation and sidebar state, and hides/restores without disposing content 33ms
+ ❯ test/components/shell/ProductWorkbench.layout.test.ts (0 test)
+ ❯ test/metadata.test.ts (3 tests | 1 failed) 365ms
+     × does not admit the unfinished T04 root as a complete selectable theme 7ms
+ ❯ test/components/music-sources/QueuePanel.interactions.test.ts (27 tests | 6 failed) 1808ms
+     × hides cached queue overlays and restores selection, manual closing and unfinished filters 80ms
+     × hides cached favorites overlays and restores selection, manual closing and unfinished filters 72ms
+     × selects matching platform tracks, shares partial state across views, and restores bulk actions 56ms
+     × keeps an empty filtered source detail navigable and leaves after its final track is removed 30ms
+     × keeps the applied list on cancel, applies filters transactionally, and reorders with visible IDs 25ms
+     × queues a favorite, plays the filtered collection and adds selection to a chosen playlist 29ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/components/shell/ProductWorkbench.layout.test.ts [ test/components/shell/ProductWorkbench.layout.test.ts ]
+Error: ENOENT: no such file or directory, open '<project-root>\packages\theme-default\node_modules\@any-music\ui\src\components\music-sources\CatalogDrawerList.vue'
+ ❯ compileSfcStyles test/components/shell/ProductWorkbench.layout.test.ts:17:32
+     15|         ? new URL(`../../../src/components/${path}.vue`, import.meta.u…
+     16|         : new URL(import.meta.resolve(`@any-music/ui/components/${path…
+     17|   const { descriptor } = parse(readFileSync(url, 'utf8'))
+       |                                ^
+     18|   return compileStyle({
+     19|     source: descriptor.styles.map((style) => style.content).join('\n'),
+ ❯ test/components/shell/ProductWorkbench.layout.test.ts:27:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/metadata.test.ts > classic theme admission > does not admit the unfinished T04 root as a complete selectable theme
+AssertionError: expected [ 'catalog', 'shell', …(4) ] to deeply equal [ 'shell', 'navigation', 'player' ]
+
+- Expected
++ Received
+
+  [
++   "catalog",
+    "shell",
+    "navigation",
+    "player",
++   "settings",
++   "overlays",
+  ]
+
+ ❯ test/metadata.test.ts:28:43
+     26|
+     27|   it('does not admit the unfinished T04 root as a complete selectable …
+     28|     expect(Object.keys(definition.views)).toEqual(['shell', 'navigatio…
+       |                                           ^
+     29|     expect(() => assertUiThemeDefinition(descriptor, definition, 'desk…
+     30|       'Incomplete theme definition',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+ FAIL  test/components/music-sources/QueuePanel.interactions.test.ts > QueuePanel controlled interactions > hides cached queue overlays and restores selection, manual closing and unfinished filters
+ FAIL  test/components/music-sources/QueuePanel.interactions.test.ts > QueuePanel controlled interactions > hides cached favorites overlays and restores selection, manual closing and unfinished filters
+Error: Expected catalog element was not rendered
+ ❯ Module.findCatalogElement test/helpers/test-renderer.ts:146:9
+    144|     }
+    145|   }
+    146|   throw new Error('Expected catalog element was not rendered')
+       |         ^
+    147| }
+    148|
+ ❯ Object.find test/components/music-sources/QueuePanel.interactions.test.ts:274:5
+ ❯ test/components/music-sources/QueuePanel.interactions.test.ts:421:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯
+
+ FAIL  test/components/music-sources/QueuePanel.interactions.test.ts > QueuePanel controlled interactions > selects matching platform tracks, shares partial state across views, and restores bulk actions
+Error: Expected catalog element was not rendered
+ ❯ Module.findCatalogElement test/helpers/test-renderer.ts:146:9
+    144|     }
+    145|   }
+    146|   throw new Error('Expected catalog element was not rendered')
+       |         ^
+    147| }
+    148|
+ ❯ Object.find test/components/music-sources/QueuePanel.interactions.test.ts:274:5
+ ❯ test/components/music-sources/QueuePanel.interactions.test.ts:486:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯
+
+ FAIL  test/components/music-sources/QueuePanel.interactions.test.ts > QueuePanel controlled interactions > keeps an empty filtered source detail navigable and leaves after its final track is removed
+Error: Expected catalog element was not rendered
+ ❯ Module.findCatalogElement test/helpers/test-renderer.ts:146:9
+    144|     }
+    145|   }
+    146|   throw new Error('Expected catalog element was not rendered')
+       |         ^
+    147| }
+    148|
+ ❯ Object.find test/components/music-sources/QueuePanel.interactions.test.ts:274:5
+ ❯ test/components/music-sources/QueuePanel.interactions.test.ts:628:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯
+
+ FAIL  test/components/music-sources/QueuePanel.interactions.test.ts > QueuePanel controlled interactions > keeps the applied list on cancel, applies filters transactionally, and reorders with visible IDs
+Error: Expected catalog element was not rendered
+ ❯ Module.findCatalogElement test/helpers/test-renderer.ts:146:9
+    144|     }
+    145|   }
+    146|   throw new Error('Expected catalog element was not rendered')
+       |         ^
+    147| }
+    148|
+ ❯ Object.find test/components/music-sources/QueuePanel.interactions.test.ts:274:5
+ ❯ test/components/music-sources/QueuePanel.interactions.test.ts:1002:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯
+
+ FAIL  test/components/music-sources/QueuePanel.interactions.test.ts > FavoritePanel shared collection interactions > queues a favorite, plays the filtered collection and adds selection to a chosen playlist
+Error: Expected catalog element was not rendered
+ ❯ Module.findCatalogElement test/helpers/test-renderer.ts:146:9
+    144|     }
+    145|   }
+    146|   throw new Error('Expected catalog element was not rendered')
+       |         ^
+    147| }
+    148|
+ ❯ Object.find test/components/music-sources/QueuePanel.interactions.test.ts:274:5
+ ❯ test/components/music-sources/QueuePanel.interactions.test.ts:1082:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯
+
+ FAIL  test/components/shell/ProductWorkbench.interactions.test.ts > controlled classic shell events > forwards desktop/mobile navigation and sidebar state, and hides/restores without disposing content
+ReferenceError: window is not defined
+ ❯ setup ../ui/src/components/AppDialog.vue:148:1
+    146| }
+    147|
+    148| window.addEventListener('keydown', handleKeydown, { capture: true })
+       | ^
+    149| onScopeDispose(() => {
+    150|   window.removeEventListener('keydown', handleKeydown, { capture: true…
+ ❯ callWithErrorHandling ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:200:19
+ ❯ setupStatefulComponent ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:8328:25
+ ❯ setupComponent ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:8290:36
+ ❯ mountComponent ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:6160:7
+ ❯ processComponent ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:6126:9
+ ❯ patch ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:5630:11
+ ❯ ReactiveEffect.componentUpdateFn [as fn] ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:6282:11
+ ❯ ReactiveEffect.run ../../node_modules/.pnpm/@vue+reactivity@3.5.44/node_modules/@vue/reactivity/dist/reactivity.cjs.js:268:19
+ ❯ setupRenderEffect ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:6410:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯
+
+
+ Test Files  4 failed | 41 passed (45)
+      Tests  8 failed | 251 passed (259)
+   Start at  02:04:13
+   Duration  6.52s (transform 14.28s, setup 0ms, import 39.61s, tests 8.84s, environment 21ms)
+
+<project-root>\packages\theme-default:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/theme-default@0.0.0 test: `vitest run`
+Exit status 1

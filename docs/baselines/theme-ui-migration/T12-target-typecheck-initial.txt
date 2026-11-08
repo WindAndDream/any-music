@@ -1,0 +1,11 @@
+Scope: 4 of 23 workspace projects
+packages/ui typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/ui typecheck: Done
+packages/plugin-ui-vue typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/theme-default typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-ui-vue typecheck: Done
+packages/theme-default typecheck: src/components/shell/ProductWorkbench.vue(195,17): error TS2551: Property 'uiPresentation' does not exist on type '{ requestShowProduct: () => void; isShellModalOpen: boolean; emit: ((evt: "closeMobileDrawer") => void) & ((evt: "setSidebarSide", side: SidebarSide) => void) & ((evt: "setTheme", theme: AppThemePreference) => void) & ... 11 more ... & ((evt: "showProduct") => void); ... 61 more ...; $watch<T extends string | ((...a...'. Did you mean 'presentation'?
+packages/theme-default typecheck: Failed
+<project-root>\packages\theme-default:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/theme-default@0.0.0 typecheck: `vue-tsc --noEmit -p tsconfig.json`
+Exit status 2

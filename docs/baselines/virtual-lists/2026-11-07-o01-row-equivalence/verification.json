@@ -1,0 +1,695 @@
+{
+  "documentType": "verification-evidence",
+  "runtimeScope": "shared",
+  "date": "2026-11-07",
+  "taskStartDate": "2026-11-07",
+  "admission": false,
+  "scope": "Focused O01 equivalent-height row reconstruction optimization only. C00 default-closed; O00/O02 runtime, actual O(N) spatial changes, S00, C01/C02 and G gates remain separate/open.",
+  "hypothesis": "Every height publication constructed full row arrays and compared all rows even when spatial geometry was unchanged. Compare bounded non-estimate row sizes first and capture scalar values outside full-row loops.",
+  "beforeSha256": "25458e36c7b89b5d33b8b2718279d0e77daf2445bf7fb1ba4df904b55aeaa495",
+  "sourceSha256": {
+    "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts": "25980b700ae6088db58271c2030e9065520ef88c84128458f93a6b93c5e53ca3",
+    "packages/ui/test/composables/virtual-scroll/use-measured-virtual-grid.test.ts": "98df3762830050fb6fc604ef666378122663b10094c3659cd4e5da2ee1dde5b9",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts": "db013f9d01355de73c43dbd186139f46e6da4d6cdcad92e1110d33aef26bc783",
+    "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue": "5a403bee6a1b9378a635570cfb9f7a64d6a51818524573af7d9eccfc23101613",
+    "packages/theme-default/src/composables/classic-virtual-favorites-canary.ts": "e6e2b920eb0f7a761db6aa0feee8734b7605dd47b8f62420bdf13e67644b3c98",
+    "packages/ui/AGENTS.md": "a71d2b18fa957486fab57c455f8f4bc2bd2f5d555fb86c357c5942af45d237b1"
+  },
+  "implementation": [
+    "Derive immutable bounded non-estimate row maxima from the existing natural-height authority. Reuse identical deviations before O(N) construction.",
+    "Omit estimate-sized cells from aggregate allocation; only a row with every cell measured below the estimate may shrink.",
+    "Real spatial changes still build immutable O(N) geometry and reset the installed engine. No observer, authority, cache-limit, anchor, motion-cause, reorder, storage, transport or production-admission change."
+  ],
+  "automated": {
+    "newRegressions": 5,
+    "redBeforeImplementation": {
+      "path": "logs/2026-11-07-virtual-list-implementation/grid-regression-before.log",
+      "expectedFailures": 3,
+      "existingPassingTests": 18
+    },
+    "finalRootChecks": [
+      {
+        "command": "pnpm test",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/test.log",
+        "sha256": "f9c7b45f2d73afab0484df92360a745cdd9f4e61066f565db65107cfb006d138"
+      },
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/typecheck.log",
+        "sha256": "48e1b3330bdaa8726daebdcc2e6ed3cdc020cfd9a7d81e84fc0ce2fb27d12b18"
+      },
+      {
+        "command": "pnpm lint",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/lint.log",
+        "sha256": "d3abc1f091c5bb7f8d527dcbd0c6f532da4abcc86f1b0c3c36b2807e59c38241"
+      },
+      {
+        "command": "pnpm format:check",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/format-check.log"
+      },
+      {
+        "command": "pnpm build",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/build.log",
+        "sha256": "a5c3107b463e4472ba77b6d0fa8b15f621d00a069c061a69307fbdfdea6a813b"
+      }
+    ],
+    "ui": {
+      "files": 119,
+      "tests": 1061,
+      "result": "passed in final root test"
+    },
+    "consumers": {
+      "themeDefault": {
+        "files": 66,
+        "tests": 557
+      },
+      "themeStudio": {
+        "files": 10,
+        "tests": 28
+      },
+      "musicWorkbench": {
+        "files": 71,
+        "tests": 626
+      },
+      "result": "passed in final root test"
+    },
+    "lint": "exit 0 with existing warnings outside this batch; no warnings in the changed source/test"
+  },
+  "nodeDiagnostic": {
+    "runtime": "v24.11.1",
+    "scope": "Node injected geometry; real Vue/TanStack; not browser/frame acceptance",
+    "command": "pnpm --filter @any-music/ui exec vitest run --config <project-root>/logs/2026-11-07-virtual-list-implementation/grid-hotspot.bench.config.mjs",
+    "method": "Same-process before/candidate comparison using the captured pre-edit module, real Vue/TanStack adapters and injected element boxes. 3 columns, 20px estimate, 12px row/column gaps, 1000px list width, 100px viewport height, default 512-entry cache; no real CSS/DOM, scrolling input, product or OS foreground measurement. One warmup per variant then seven pairs in alternating execution order, 24 measurement operations per sample. Consume total size, virtual window, compressed render rows and motion revision. No concurrent tests/builds.",
+    "counterBudget": "Unchanged geometry: zero complete builds, unchanged DOM reads; resize: preserve checksum and no repeated scalar reactive reads per row. Timing diagnostic only, no FPS or runtime admission.",
+    "sample": {
+      "path": "logs/2026-11-07-virtual-list-implementation/grid-hotspot-benchmark.json",
+      "sha256": "202e38677a50901bd8699d09953ef03246c825de1591228a44a9da4e11f2302d"
+    },
+    "scenarios": [
+      {
+        "count": 80,
+        "scene": "ingress",
+        "steps": 24,
+        "beforeMedianMs": 12.823099999999954,
+        "afterMedianMs": 8.980399999999918,
+        "before": {
+          "builds": 4,
+          "rowSizeReads": 108,
+          "snapshotRowReads": 108,
+          "engineResets": 0,
+          "domReads": 576,
+          "checksum": 21720
+        },
+        "after": {
+          "builds": 0,
+          "rowSizeReads": 0,
+          "snapshotRowReads": 0,
+          "engineResets": 0,
+          "domReads": 576,
+          "checksum": 21720
+        }
+      },
+      {
+        "count": 80,
+        "scene": "below-maximum",
+        "steps": 24,
+        "beforeMedianMs": 0.49339999999995143,
+        "afterMedianMs": 0.34559999999999036,
+        "before": {
+          "builds": 23,
+          "rowSizeReads": 621,
+          "snapshotRowReads": 621,
+          "engineResets": 0,
+          "domReads": 27,
+          "checksum": 22488
+        },
+        "after": {
+          "builds": 0,
+          "rowSizeReads": 0,
+          "snapshotRowReads": 0,
+          "engineResets": 0,
+          "domReads": 27,
+          "checksum": 22488
+        }
+      },
+      {
+        "count": 80,
+        "scene": "resize",
+        "steps": 24,
+        "beforeMedianMs": 1.6222999999999956,
+        "afterMedianMs": 1.3991999999999507,
+        "before": {
+          "builds": 23,
+          "rowSizeReads": 621,
+          "snapshotRowReads": 1136,
+          "engineResets": 23,
+          "domReads": 27,
+          "checksum": 22512
+        },
+        "after": {
+          "builds": 23,
+          "rowSizeReads": 621,
+          "snapshotRowReads": 1136,
+          "engineResets": 23,
+          "domReads": 27,
+          "checksum": 22512
+        }
+      },
+      {
+        "count": 1000,
+        "scene": "ingress",
+        "steps": 24,
+        "beforeMedianMs": 9.179700000000025,
+        "afterMedianMs": 8.195100000000025,
+        "before": {
+          "builds": 24,
+          "rowSizeReads": 8016,
+          "snapshotRowReads": 8016,
+          "engineResets": 0,
+          "domReads": 576,
+          "checksum": 257544
+        },
+        "after": {
+          "builds": 0,
+          "rowSizeReads": 0,
+          "snapshotRowReads": 0,
+          "engineResets": 0,
+          "domReads": 576,
+          "checksum": 257544
+        }
+      },
+      {
+        "count": 1000,
+        "scene": "below-maximum",
+        "steps": 24,
+        "beforeMedianMs": 0.9166999999999916,
+        "afterMedianMs": 0.18209999999999127,
+        "before": {
+          "builds": 23,
+          "rowSizeReads": 7682,
+          "snapshotRowReads": 7682,
+          "engineResets": 0,
+          "domReads": 27,
+          "checksum": 258312
+        },
+        "after": {
+          "builds": 0,
+          "rowSizeReads": 0,
+          "snapshotRowReads": 0,
+          "engineResets": 0,
+          "domReads": 27,
+          "checksum": 258312
+        }
+      },
+      {
+        "count": 1000,
+        "scene": "resize",
+        "steps": 24,
+        "beforeMedianMs": 1.585800000000063,
+        "afterMedianMs": 1.3169000000000324,
+        "before": {
+          "builds": 23,
+          "rowSizeReads": 7682,
+          "snapshotRowReads": 8197,
+          "engineResets": 23,
+          "domReads": 27,
+          "checksum": 258336
+        },
+        "after": {
+          "builds": 23,
+          "rowSizeReads": 7682,
+          "snapshotRowReads": 8197,
+          "engineResets": 23,
+          "domReads": 27,
+          "checksum": 258336
+        }
+      },
+      {
+        "count": 10000,
+        "scene": "ingress",
+        "steps": 24,
+        "beforeMedianMs": 21.222600000000057,
+        "afterMedianMs": 7.327600000000075,
+        "before": {
+          "builds": 24,
+          "rowSizeReads": 80016,
+          "snapshotRowReads": 80016,
+          "engineResets": 0,
+          "domReads": 576,
+          "checksum": 2561568
+        },
+        "after": {
+          "builds": 0,
+          "rowSizeReads": 0,
+          "snapshotRowReads": 0,
+          "engineResets": 0,
+          "domReads": 576,
+          "checksum": 2561568
+        }
+      },
+      {
+        "count": 10000,
+        "scene": "below-maximum",
+        "steps": 24,
+        "beforeMedianMs": 7.574699999999893,
+        "afterMedianMs": 0.17029999999999745,
+        "before": {
+          "builds": 23,
+          "rowSizeReads": 76682,
+          "snapshotRowReads": 76682,
+          "engineResets": 0,
+          "domReads": 27,
+          "checksum": 2562336
+        },
+        "after": {
+          "builds": 0,
+          "rowSizeReads": 0,
+          "snapshotRowReads": 0,
+          "engineResets": 0,
+          "domReads": 27,
+          "checksum": 2562336
+        }
+      },
+      {
+        "count": 10000,
+        "scene": "resize",
+        "steps": 24,
+        "beforeMedianMs": 8.370200000000068,
+        "afterMedianMs": 5.095399999999927,
+        "before": {
+          "builds": 23,
+          "rowSizeReads": 76682,
+          "snapshotRowReads": 77197,
+          "engineResets": 23,
+          "domReads": 27,
+          "checksum": 2562360
+        },
+        "after": {
+          "builds": 23,
+          "rowSizeReads": 76682,
+          "snapshotRowReads": 77197,
+          "engineResets": 23,
+          "domReads": 27,
+          "checksum": 2562360
+        }
+      }
+    ],
+    "equality": "All pairs have identical geometry/window checksums and DOM-read counts. Equivalent scenarios already had zero engine resets before this change; actual-height changes still reset the engine 23 times.",
+    "rejectedIntermediateCost": "Initial bounded comparison still allocated row aggregates for estimate-sized cells. Two diagnostics showed slower 1k ingress (9.34->11.61ms and 11.87->13.74ms). Omit those entries in the final version; final median 9.18->8.20ms. Intermediate raw diagnostics stay in the task logs, not runtime acceptance.",
+    "limits": "Diagnostic times include test-host mocks and full sequences of operations. They do not establish frame budgets, FPS, statistical runtime admission, GM sidebar recovery, native high-velocity performance, or bounded total memory. Complete row construction/engine geometry remain O(N) when actual geometry changes."
+  },
+  "productionArtifacts": {
+    "scope": "Static production build identity only; neither binary launched nor artifact/native permissions admitted.",
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 5940687,
+      "sha256": "9044798e2dfd3cefd1a272797ac996d23510dfd24bca4a8ec72510e777d6d72d",
+      "gzipBytes": 1154739
+    },
+    "tauriFrontend": [
+      {
+        "path": "apps/tauri/dist/assets/ActiveDownloadPanel-DX2gMjcZ.js",
+        "bytes": 9189,
+        "sha256": "6230f34a9a5308c89f4d19acc48e86e855428fa9332931f367c7c0ad73d67a10",
+        "gzipBytes": 3724
+      },
+      {
+        "path": "apps/tauri/dist/assets/AppDialog-DhUNWhOb.js",
+        "bytes": 6349,
+        "sha256": "6a366822233bf076564931ecb5b60ece3d06363dfbf048029a3b0fb60d3f043e",
+        "gzipBytes": 2768
+      },
+      {
+        "path": "apps/tauri/dist/assets/AppIcon-CB0Bazkg.js",
+        "bytes": 4418,
+        "sha256": "9afed489b11ecc29f495f269774cd053d33183003beae2079cf1f203e3d52ea2",
+        "gzipBytes": 2101
+      },
+      {
+        "path": "apps/tauri/dist/assets/CollectionDisplayDialog-CrrfGDAf.js",
+        "bytes": 41480,
+        "sha256": "96aa610a199a2491bb3115b14df23c71c2b99b6da999ace6613801d829112eec",
+        "gzipBytes": 14419
+      },
+      {
+        "path": "apps/tauri/dist/assets/CollectionSelectionToolbar-CPZpYE7p.js",
+        "bytes": 48528,
+        "sha256": "32b66a1894bb1a9dc6652f875ca5722fc3a33d9552463ffa638317bebf8ef151",
+        "gzipBytes": 17798
+      },
+      {
+        "path": "apps/tauri/dist/assets/ContributionActions-BQm82gIQ.js",
+        "bytes": 25035,
+        "sha256": "dd64039f384c6e6910e133736fc6e52f8e6bb511b3eb887972cb1d5ba04e1aca",
+        "gzipBytes": 9449
+      },
+      {
+        "path": "apps/tauri/dist/assets/DownloadTrackRow-BiJ0oAO2.js",
+        "bytes": 10832,
+        "sha256": "6e1f961ab8e9b7b50b7c0eea0a732ecd56e6b687785dba3640cc014cecf191a7",
+        "gzipBytes": 3729
+      },
+      {
+        "path": "apps/tauri/dist/assets/ExternalSourceSettings-kUp9nGz5.js",
+        "bytes": 18567,
+        "sha256": "e46a2d224f97582456eb535e0c826d5def69a622fc3b20c28eba9a57dafae4cf",
+        "gzipBytes": 6165
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueuePanel-CQkFWafo.js",
+        "bytes": 20279,
+        "sha256": "a63dad6e886b854574fedc8959cf40466613d6bfbe54800641a2658b6f56d034",
+        "gzipBytes": 7267
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueuePlatformGridItem-Dt3aShvo.js",
+        "bytes": 1260,
+        "sha256": "54eb8e6847669c76b8c02443f3f7db8d17ed166de6cef2070ae96f7e0e34ad3d",
+        "gzipBytes": 628
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueuePlatformGroup-CYVVTBjL.js",
+        "bytes": 6759,
+        "sha256": "f6a4065ee272752ded6348168856d992fd00cb670a99d4819d2422c8b995ffc6",
+        "gzipBytes": 2582
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueueTrackGrid-Cy2gjowq.js",
+        "bytes": 19683,
+        "sha256": "c64474f7aaa14bc31962d344ec848d89e96e9d7e462fe426f04e8796cb4d5a45",
+        "gzipBytes": 7062
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueueTrackGridItem-W-8xqv2x.js",
+        "bytes": 5101,
+        "sha256": "99d9283e6179c5ec305047d70b4a38fa4b4f6ca318ca77a0ba740fae2e33bd18",
+        "gzipBytes": 1970
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueueViewControls-DRBfvJ_K.js",
+        "bytes": 83368,
+        "sha256": "50ea6ddea816fa1c085f9e7dbbb02539883c635a40374ecc933abdb6a8cc4e37",
+        "gzipBytes": 24048
+      },
+      {
+        "path": "apps/tauri/dist/assets/TrackCardSummary-BTfvLXZi.js",
+        "bytes": 2454,
+        "sha256": "abb2879492c540e41988962881ac42070afc254150a7b697333971cb57dad299",
+        "gzipBytes": 1158
+      },
+      {
+        "path": "apps/tauri/dist/assets/TrackRow-C_YlzXv9.js",
+        "bytes": 7153,
+        "sha256": "84f7d3a7e2db0be43d0dfdb5c2521a70942aa4fd5c3227855e5985b91691716f",
+        "gzipBytes": 2661
+      },
+      {
+        "path": "apps/tauri/dist/assets/VirtualQueuePlatformGrid-BPGq0E7R.js",
+        "bytes": 4524,
+        "sha256": "4a4c179776a4b7fc46cbb77573dd674bc119f1cb832b4d39c3733efa03589f8f",
+        "gzipBytes": 1882
+      },
+      {
+        "path": "apps/tauri/dist/assets/VirtualQueueTrackGrid-CKjbGnTv.js",
+        "bytes": 4806,
+        "sha256": "65f9083966fe21446fe7af40180b4caed2ef2f09bf7397da9cc7fc16b1203f78",
+        "gzipBytes": 2000
+      },
+      {
+        "path": "apps/tauri/dist/assets/__vite-browser-external-8b-sKxde.js",
+        "bytes": 1142,
+        "sha256": "31ef1a57e0dfbf30974fe2940fd488c14433d7a708bde8ebe69a703d7f1bfc5c",
+        "gzipBytes": 643
+      },
+      {
+        "path": "apps/tauri/dist/assets/__vite-browser-external-D3_sD4Dv.js",
+        "bytes": 77,
+        "sha256": "ae53911ef5ad69a049cb94c01283ab7ae5da80e5e0df19f44d8820458d61517a",
+        "gzipBytes": 95
+      },
+      {
+        "path": "apps/tauri/dist/assets/_plugin-vue_export-helper-DycKsNoE.js",
+        "bytes": 85991,
+        "sha256": "86fa276146a115dff16078a9541fbbf786481791bba4c7181e7e992a60f63ca0",
+        "gzipBytes": 33070
+      },
+      {
+        "path": "apps/tauri/dist/assets/app-error-BjZGph4G.js",
+        "bytes": 7448,
+        "sha256": "1f87c8d9b58adfe6647a92b9217e74ddf68c8df27a230e097538342a2c271f9a",
+        "gzipBytes": 2082
+      },
+      {
+        "path": "apps/tauri/dist/assets/audio-exporter-PbUZSpQ-.js",
+        "bytes": 317664,
+        "sha256": "142666fffc0b7319c520c298b49b4fcfe608840dc993992d6f538a004b2b3abe",
+        "gzipBytes": 134263
+      },
+      {
+        "path": "apps/tauri/dist/assets/audio-exporter-SpWRGWO0.js",
+        "bytes": 82,
+        "sha256": "e463949342ecf6a6a7720ac0c7e342e537c7484b5f381aa761c971c5034edd49",
+        "gzipBytes": 87
+      },
+      {
+        "path": "apps/tauri/dist/assets/douyin-request-state-CFbLQ2P_.js",
+        "bytes": 4610,
+        "sha256": "3b3f15fd27074662d2fd37941335beb05bde604798aaedec2d4c52f18c3ed29f",
+        "gzipBytes": 2057
+      },
+      {
+        "path": "apps/tauri/dist/assets/download-archive-aGajjFNI.js",
+        "bytes": 7398,
+        "sha256": "3aaaea66fac5a5656b7ff7c4e9036c3580424c2f10215c2ac7afd7490bd2e495",
+        "gzipBytes": 3128
+      },
+      {
+        "path": "apps/tauri/dist/assets/download-history-ClxXYuGB.js",
+        "bytes": 4519,
+        "sha256": "77ec4b040651faa3ceb139fc971e2dc9840006b217211ca026f9a300146be446",
+        "gzipBytes": 1629
+      },
+      {
+        "path": "apps/tauri/dist/assets/grid-move-animations-BD1jDMub.js",
+        "bytes": 1238,
+        "sha256": "e284c5b25b360cff902585423bc4ee26c97eab494d85fe182b910dd4c4a7aef5",
+        "gzipBytes": 587
+      },
+      {
+        "path": "apps/tauri/dist/assets/http-Bx2BUOLo.js",
+        "bytes": 183,
+        "sha256": "b4441747f73aa575c1dff22a888dd46e26165fa3221b005c7d4f048250286d55",
+        "gzipBytes": 157
+      },
+      {
+        "path": "apps/tauri/dist/assets/index-DHGm4YGD.js",
+        "bytes": 1998426,
+        "sha256": "792f877b6a5f859704549900bc01e139fff8620848f35ccd57ca726188bd79e0",
+        "gzipBytes": 342431
+      },
+      {
+        "path": "apps/tauri/dist/assets/index-duw-FMCM.css",
+        "bytes": 50951,
+        "sha256": "c683673fa6b99daf6e1dbbc4aa4c76c3ae93774c32de5462f1659edc4a0de637"
+      },
+      {
+        "path": "apps/tauri/dist/assets/native-http-CXwOM5um.js",
+        "bytes": 4945,
+        "sha256": "cbb76db178813d52d7fbd775c3964186c4e0b322616865ca1bc98caadb4c308c",
+        "gzipBytes": 2063
+      },
+      {
+        "path": "apps/tauri/dist/assets/native-scroll-anchor-AmDGT_cs.js",
+        "bytes": 531,
+        "sha256": "519eda4df45bb268c526fb58466cc892615bf4dbffdf989322af3da4926bd2a8",
+        "gzipBytes": 261
+      },
+      {
+        "path": "apps/tauri/dist/assets/native-source-plugins-DLjJ8yI0.js",
+        "bytes": 3672,
+        "sha256": "e54bb7f6bb99f4cd3a2be8b46c8f1b204bc348b68a789e72e6a927829b89697a",
+        "gzipBytes": 1516
+      },
+      {
+        "path": "apps/tauri/dist/assets/output-C0ZydUOt.js",
+        "bytes": 444694,
+        "sha256": "3d7cca8b0bd29dcacd6003d58b5ecfeca12e4997299f7866b91742b43432bfc9",
+        "gzipBytes": 112097
+      },
+      {
+        "path": "apps/tauri/dist/assets/plugin-CTPDroLL.js",
+        "bytes": 139,
+        "sha256": "9c2fb1e3430d6277fb82138495240d09207c36c5835ee3e0800b3b54a197a2ca",
+        "gzipBytes": 141
+      },
+      {
+        "path": "apps/tauri/dist/assets/policies-Ca8WcR-N.js",
+        "bytes": 569,
+        "sha256": "d37f4656af824a83aadf43da0d9aa5117fbd017f260b0c0ad9c119d034888f99",
+        "gzipBytes": 358
+      },
+      {
+        "path": "apps/tauri/dist/assets/preload-helper-Czpn1I53.js",
+        "bytes": 1196,
+        "sha256": "aba87f2a53e45ecdc9113fc30387d16e449d1676428cf5f82dd624c1df97d152",
+        "gzipBytes": 675
+      },
+      {
+        "path": "apps/tauri/dist/assets/render-custom-track-media-D4w_CI6y.js",
+        "bytes": 797,
+        "sha256": "64972e3a68cf8b32930d45b2d0b2644a399b8713a809181505212e66963b024a",
+        "gzipBytes": 570
+      },
+      {
+        "path": "apps/tauri/dist/assets/renderers-bzvu1fRW.js",
+        "bytes": 6650,
+        "sha256": "ff7fbb337360d15b7e2052a67924fe93462f5baec9d6972590f07a9ccb32ae04",
+        "gzipBytes": 2805
+      },
+      {
+        "path": "apps/tauri/dist/assets/resolved-media-loader-ocXT3m_V.js",
+        "bytes": 1155,
+        "sha256": "c59fd27c378583becb595e65332a8e1779cb3696c41b5ffb0ee3ad30c429005a",
+        "gzipBytes": 753
+      },
+      {
+        "path": "apps/tauri/dist/assets/runtime-CgS4T0Xi.js",
+        "bytes": 8439,
+        "sha256": "34cec013111b005f430d3594e938ebf37ebd19412e1c8429fd926f627d68a7c5",
+        "gzipBytes": 3745
+      },
+      {
+        "path": "apps/tauri/dist/assets/runtime-D-wjysKE.js",
+        "bytes": 40592,
+        "sha256": "df9d8c5b9bb19ab30c4b536f51ed959dc026a37d9ef7f4d55eb0d6f4e131aa98",
+        "gzipBytes": 13477
+      },
+      {
+        "path": "apps/tauri/dist/assets/runtime-DbAXju5d.js",
+        "bytes": 26550,
+        "sha256": "04f2f6a147d7ad29d8328a72f0607daeacbbe193456a3174088d4d448a07aa94",
+        "gzipBytes": 9542
+      },
+      {
+        "path": "apps/tauri/dist/assets/studio-h5I5pO0N.js",
+        "bytes": 9895,
+        "sha256": "7efb498b9af81fc0ffc57840a82b18ab16d25f5efbc65a1f134492859b004db3",
+        "gzipBytes": 1913
+      },
+      {
+        "path": "apps/tauri/dist/assets/styles-B0gCKNRk.js",
+        "bytes": 21296,
+        "sha256": "1dee93db7e4d564b21be6b27560b100657cb0b3b560e33fa84140e52c9e3175f",
+        "gzipBytes": 3164
+      },
+      {
+        "path": "apps/tauri/dist/assets/track-dgi1syLW.js",
+        "bytes": 575,
+        "sha256": "edb5ea839e9a8b4084bff5c9a7c9fc03dd872892b04d84a011d8e87d614e4e81",
+        "gzipBytes": 318
+      },
+      {
+        "path": "apps/tauri/dist/assets/url-parser-CDWVVYUf.js",
+        "bytes": 3946,
+        "sha256": "766d72c26c5deb4a6395dfd3a4d4db22d8e199dd3df364a90022e7ec60ff4d66",
+        "gzipBytes": 1621
+      },
+      {
+        "path": "apps/tauri/dist/assets/url-parser-kjUb53_w.js",
+        "bytes": 1909,
+        "sha256": "696c1fdbd862fc1e31ae349c9ea4b131ddaebdf0492e80458b305f506d3ea274",
+        "gzipBytes": 973
+      },
+      {
+        "path": "apps/tauri/dist/assets/url-parser-oaXEezhI.js",
+        "bytes": 1283,
+        "sha256": "3b486f92fc76983687ff29dd74f1cd375d2f477774b056e9e1d598502fd9a0df",
+        "gzipBytes": 816
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-action-feedback-Cj2NZ4wC.js",
+        "bytes": 4330,
+        "sha256": "079543161b1e6d2d2032688d37602ef5078ab51d81d07724af3c56d9dce126d8",
+        "gzipBytes": 1789
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-confirmation-dialog-BMAlCKlG.js",
+        "bytes": 1960,
+        "sha256": "92808ac8a323a4a05b9a46f5dd7756d04fa6e53996ed873b8db139c97d78e094",
+        "gzipBytes": 969
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-download-list-controls-ht4d6Kor.js",
+        "bytes": 3564,
+        "sha256": "e8526e12abc384d1df03ddcfe0dbabfb2c85c2d084bef9dfd9ceeccc58ae5333",
+        "gzipBytes": 1523
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-favorite-filters-CloCh8cV.js",
+        "bytes": 4720,
+        "sha256": "addfc4e4b2bd83a7734c1e68acd5235dd9e0b6652f2065dbdf2f9f69a1409511",
+        "gzipBytes": 1781
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-presentation-continuity-TPXQP3h8.js",
+        "bytes": 4796,
+        "sha256": "15ac5c6076569dbb50f6df93bd456c22ee243872e12fafe7e33f0615eb9a20bd",
+        "gzipBytes": 1967
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-track-name-CT8H6CmU.js",
+        "bytes": 2171,
+        "sha256": "35862e87646093251f5e10df3bd91a3c5f6ebf34db4878c2e1441b696e0432a8",
+        "gzipBytes": 1185
+      },
+      {
+        "path": "apps/tauri/dist/assets/virtual-grid-reorder-geometry-gQuCbC-z.js",
+        "bytes": 62963,
+        "sha256": "5f7a85cde9abaad3e15565cffba01b50401327cdc3b5edb4a372c11f69befb16",
+        "gzipBytes": 19751
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-CDoa7JYp.js",
+        "bytes": 39777,
+        "sha256": "ecb4d9a0da51fdbbffcb21cb1d99fc6d6622e03e269ab79ff9391f1dede2b6d4",
+        "gzipBytes": 12901
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-lXX6fP34.js",
+        "bytes": 147225,
+        "sha256": "58c811c594663dd931dae0b21d982fc5671cf8254fcb8b75ec79f1da8c010f79",
+        "gzipBytes": 38384
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-rRZ8A6fv.js",
+        "bytes": 28799,
+        "sha256": "141774bf8ec4571213892deb0792e18468a448684effdb0be21394aefb77aeb1",
+        "gzipBytes": 9664
+      }
+    ],
+    "tauriRelease": {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 29860352,
+      "sha256": "4d52afc5cff4c15e350633de553d3ab7fe38bde82a67baa1d4c18ad1ded3818d"
+    }
+  },
+  "runtimeInspection": {
+    "performed": false,
+    "reason": "No explicit product/browser inspection request in this task."
+  },
+  "remaining": [
+    "O00: freeze per-runtime sidebar/scroll budgets before comparison; GM 80-item sidebar regression remains unresolved.",
+    "O02: current-width behavior and native/GM performance require runtime acceptance; no new width-animation change.",
+    "Actual-height O(N) rebuilds and native 10k high-velocity stress remain unresolved; prior runtime evidence does not accept this build.",
+    "S00 full-generation persistence, consumer input/capture/landing and G01-G03 production/account/media/device gates stay open."
+  ],
+  "nextIndependentCodeBatch": "C01/C02 consumer-specific semantic integration with admission gates closed; no repeat equivalent-height micro-tuning without new evidence.",
+  "minimumReverseScope": "Only this batch delta in measured-grid row derivation/scalar capture, five new tests and the estimate fixture parameter, UI guide and bilingual plan/evidence; preserve the prior untracked modules and every other workspace change.",
+  "committed": false,
+  "pushed": false
+}

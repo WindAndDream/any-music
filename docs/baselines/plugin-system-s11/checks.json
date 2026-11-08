@@ -1,0 +1,204 @@
+{
+  "scope": "S11",
+  "launchedAppOrBrowser": false,
+  "checks": [
+    {
+      "command": "pnpm test",
+      "startedAt": "2026-10-18T09:28:38.830Z",
+      "finishedAt": "2026-10-18T09:29:26.938Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s11/test.log",
+      "sha256": "ef806211589bf0329764b933b975903390558951d12dc73fdeca2d26c08bb114"
+    },
+    {
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-18T09:29:26.948Z",
+      "finishedAt": "2026-10-18T09:30:14.432Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s11/typecheck.log",
+      "sha256": "9598f56569c13b8ebdf2bade90ff1c30302aff2d20b948ff4b4ef927c7cd1e55"
+    },
+    {
+      "command": "pnpm lint",
+      "startedAt": "2026-10-18T09:30:14.440Z",
+      "finishedAt": "2026-10-18T09:30:15.862Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s11/lint.log",
+      "sha256": "1da206b22dc099a5287dd09f9724de956feb5acf3e313fde44e43e165adb745b"
+    },
+    {
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-18T09:30:15.870Z",
+      "finishedAt": "2026-10-18T09:30:19.375Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s11/format-check.log",
+      "sha256": "7189769af17718840331a6b2308163f816e9b7b57ef32876338314b948fd2e39"
+    },
+    {
+      "command": "pnpm build",
+      "startedAt": "2026-10-18T09:30:19.383Z",
+      "finishedAt": "2026-10-18T09:32:05.324Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s11/build.log",
+      "sha256": "0bb5f2734484c1e179f11485966f84b6be71a289b68ff0ad05825bf6b215ffce"
+    },
+    {
+      "command": "pnpm check:plugin:isolation",
+      "startedAt": "2026-10-18T09:32:05.333Z",
+      "finishedAt": "2026-10-18T09:32:16.701Z",
+      "exitCode": 0,
+      "log": ".codex-tmp/s11/check-plugin-isolation.log",
+      "sha256": "ca2ce6d268b4479cf40fcf794b860a39b2857e78789caaafb8b0685358bfd3b7"
+    }
+  ],
+  "recordedAt": "2026-10-18T09:32:32.419Z",
+  "status": "implemented",
+  "verificationScope": "S11 permissionless VM, adapter, testkit and offline checks; no production target approval",
+  "rootVitestTests": 1649,
+  "targetedTests": 57,
+  "targeted": {
+    "command": "pnpm check:plugin:vm",
+    "exitCode": 0,
+    "log": ".codex-tmp/s11/target-delivery-final.log",
+    "sha256": "9986848ffff898c3f2b226ab3925a6d31420c06e593de06ff7c7ad663cdd9b94"
+  },
+  "engine": {
+    "upstreamCommit": "235f6da2fd4f7354fa4765fde4aea880d2a4aef5",
+    "engineVersion": "0.31.0-am1",
+    "emscripten": "3.1.65",
+    "memoryMaximumBytes": 134217728,
+    "dynamicExecution": false,
+    "hashes": {
+      "loader.mjs": "d73c03a30dd4bfdfe21b1f74f7d8ed782d8abc42afb228ba2793c24ab65154b3",
+      "quickjs-noeval.wasm": "5dadb9901b620bf9cbb6e314058e25d8cd2b2a343727f0ed0a2175bd6ade5b10"
+    },
+    "sourceSha256": "7ad82fbee5f827737326462a1ea254ab378f86c90fd453655ab4c9960bf2da98",
+    "patchedSourceSha256": "441cfb12d1f01f4cfe1d40d336e93f925859c3ea32ead41ad1333524832b9636"
+  },
+  "profile": {
+    "profileId": "am-quickjs-noeval-desktop-v1",
+    "profileHash": "f238d186b463b5a4db3f0f3672709ce5fb2ea230a09576237692e04db82b1fde",
+    "sources": {
+      "packages/plugin-sandbox-browser/scripts/build.mjs": "072ae8e29404b427daac46dc5c5c40d6562349d6553fa62609126875ecb4ccd2",
+      "packages/plugin-sandbox-browser/src/browser.ts": "ad6b2054e2099d75dd347614505d29a1d6c40a2f3ccc5dd12b19fb9279307d8f",
+      "packages/plugin-sandbox-browser/src/sandbox-session.ts": "f2b10ce5327f79add53dc45af4119e7eccdcc4913d353a12d2ad68c986d5c773",
+      "packages/plugin-sandbox-browser/src/worker-runtime.ts": "5ee5dd019d07f8f58dd035dc2d685b45b33b5878037517a573fd33d3396278b4",
+      "packages/plugin-sandbox-browser/src/worker.ts": "65153b7ae3124cc50dd2f95944fe99e68f48763145d807d02886ba316b646e94",
+      "packages/plugin-testkit/src/test-host.ts": "62975dd379d8885ee3b5fd18bc6e71a660854a25cd5a42196ae1266f83e61fc5",
+      "packages/plugin-vm/engine/build.json": "fca5303eae02b75947dc3ecd75aaea11c5a658f81bfef31035d53cae76b6d4cc",
+      "packages/plugin-vm/scripts/build-engine.py": "665c81ecbacd2381388c96c2f40a622dba8e10db88760a037df85811543feaa3",
+      "packages/plugin-vm/src/admission.ts": "d8c7b085040ca0798881463e9f7beb0bf11770baf09e541b0a566e67cbc7dc56",
+      "packages/plugin-vm/src/contracts.ts": "a43498d1f9d99907a641dab1c6845cec73614e4fd0ba85338715699a98d1911a",
+      "packages/plugin-vm/src/guest-bootstrap.ts": "3f1e13e334bc81b818d9dd85ae3b1b230b4218995d5a0eb7fcb927a1a0197006",
+      "packages/plugin-vm/src/plugin-vm.ts": "ac22f1ec6bd603efac242f2dc9f4b4d64a93874948718c4212d4d5a0abb836de",
+      "packages/plugin-vm/src/profile.ts": "1babc69bfa98bdc75e0946a20a1f14a5a7f39ba6ac38333dd6ce0f1bc2bceaa3"
+    }
+  },
+  "worker": {
+    "worker": {
+      "bytes": 780246,
+      "sha256": "1cf5f44c4fd3d3f19b3eda134ee59fe6d22ea60578d7f01b2b56c8f22359aa46"
+    },
+    "workerCsp": "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'none'; worker-src 'none'",
+    "productionAdmission": false,
+    "requires": "Native isolated resource serving and accepted target; S12+ authority"
+  },
+  "artifacts": {
+    "packages/plugin-vm/engine/quickjs-noeval.wasm": {
+      "bytes": 517548,
+      "sha256": "5dadb9901b620bf9cbb6e314058e25d8cd2b2a343727f0ed0a2175bd6ade5b10"
+    },
+    "packages/plugin-vm/engine/loader.mjs": {
+      "bytes": 28416,
+      "sha256": "d73c03a30dd4bfdfe21b1f74f7d8ed782d8abc42afb228ba2793c24ab65154b3"
+    },
+    "packages/plugin-sandbox-browser/dist/worker.js": {
+      "bytes": 780246,
+      "sha256": "1cf5f44c4fd3d3f19b3eda134ee59fe6d22ea60578d7f01b2b56c8f22359aa46"
+    },
+    "apps/userscript/dist/userscript-build-audit.json": {
+      "bytes": 30957,
+      "sha256": "4f48dca79a0c264e088818c1f43fe7ddf0e6b358bcade95985f1f635d78a39b4"
+    }
+  },
+  "userscript": {
+    "externalPlugins": "none",
+    "renderedModules": 398,
+    "externalRuntimeIncluded": false
+  },
+  "evidence": {
+    "realS11Webview": false,
+    "cspHeadersObserved": false,
+    "minimumDeviceCalibration": false,
+    "mobile": false,
+    "priorS03": "docs/baselines/plugin-system-s03/target-acceptance.json",
+    "productionCodeAdmission": false,
+    "businessData": false,
+    "network": false,
+    "installation": false
+  },
+  "preservation": {
+    "hashedExistingFiles": 1101,
+    "unchangedHashedFiles": 1087,
+    "intentionallyChangedHashedFiles": [
+      "apps/userscript/scripts/userscript-bundle-boundary.ts",
+      "apps/userscript/test/build/userscript-bundle-boundary.test.ts",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      ".oxfmtrc.json",
+      ".oxlintrc.json",
+      "AGENTS.md",
+      "docs/en/cross-platform/README.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "package.json",
+      "pnpm-lock.yaml",
+      "scripts/check-package-boundaries.mjs",
+      "scripts/test/check-package-boundaries.test.mjs"
+    ],
+    "missingExistingFiles": 0,
+    "inheritedDeletionsPreserved": 44,
+    "initialLocalSnapshot": ".codex-tmp/s11/start-hashes.json",
+    "initialGitStatus": ".codex-tmp/s11/start-status.txt",
+    "coverage": "Existing readable paths returned by initial git ls-files; Git-quoted non-ASCII paths are not in the hash snapshot. Target Chinese document edits preserve prior sections through explicit patches."
+  },
+  "repairedChecks": {
+    "record": ".codex-tmp/s11/checks-before-repair.json",
+    "issues": [
+      "Trusted bootstrap incorrectly consumed short test-guest execution budgets under parallel load; startup now has its separate fixed Profile limits.",
+      "Oversized imported-memory fixture used Buffer where Emscripten options required ArrayBuffer; converted its exact byte range."
+    ]
+  },
+  "dependencyAudit": {
+    "command": "pnpm audit --prod --json",
+    "exitCode": 1,
+    "metadata": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 2,
+      "critical": 0
+    },
+    "advisories": [
+      {
+        "module": "source-map-js",
+        "severity": "high",
+        "advisory": "GHSA-68fv-2mgg-jv7q",
+        "url": "https://github.com/advisories/GHSA-68fv-2mgg-jv7q",
+        "vulnerableVersions": ">=1.0.0 <1.2.2",
+        "patchedVersions": ">=1.2.2"
+      },
+      {
+        "module": "@vue/server-renderer",
+        "severity": "high",
+        "advisory": "GHSA-g2v6-rqmx-r4w6",
+        "url": "https://github.com/advisories/GHSA-g2v6-rqmx-r4w6",
+        "vulnerableVersions": "<3.5.42",
+        "patchedVersions": ">=3.5.42"
+      }
+    ],
+    "scope": "Existing UI dependency advisories; no automatic fixes or ignored advisories. NPM audit is not a custom-engine security assessment."
+  },
+  "gitCommit": false,
+  "gitPush": false
+}

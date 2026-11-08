@@ -1,0 +1,160 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B18-native-delivery-control-tauri-fix",
+  "capturedAt": "2026-10-22T11:31:39.5701925+08:00",
+  "head": "a693165205be0bc321764768d796d7c842f7a446",
+  "originalAuditBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json",
+  "worktree": [
+    " M .agents/skills/music-source-adapter/references/playback.md",
+    " M Cargo.lock",
+    " M apps/tauri/src-tauri/capabilities/main-android.json",
+    " M apps/tauri/src-tauri/src/plugins/control.rs",
+    " M apps/tauri/src-tauri/src/plugins/executor.rs",
+    " M apps/tauri/src-tauri/src/plugins/packages.rs",
+    " M apps/tauri/src-tauri/src/plugins/packages/tests.rs",
+    " M apps/tauri/src-tauri/src/plugins/unavailable_executor.rs",
+    " M crates/am-plugin-package/src/lib.rs",
+    " M crates/am-plugin-runtime/src/authority.rs",
+    " M crates/am-plugin-runtime/src/install.rs",
+    " M crates/am-plugin-runtime/src/install_model.rs",
+    " M crates/am-plugin-runtime/src/lib.rs",
+    " M crates/am-plugin-runtime/tests/offline.rs",
+    " M docs/baselines/plugin-system-s15/toolchain-sbom.json",
+    " M docs/baselines/plugin-system-s15/tools.json",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/development-workflow.md",
+    " M docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+    " M docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+    " M docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+    " M docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+    " M docs/en/desktop/README.md",
+    " M docs/en/desktop/backend-engineering.md",
+    " M docs/en/desktop/douyin-background-login-experiment.md",
+    " M docs/en/desktop/runtime-architecture.md",
+    " M docs/en/desktop/rust-workspace-plan.md",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/Rust\\345\\267\\245\\344\\275\\234\\345\\214\\272\\350\\247\\204\\345\\210\\222.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\345\\220\\216\\347\\253\\257\\345\\267\\245\\347\\250\\213\\350\\247\\204\\350\\214\\203.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\346\\212\\226\\351\\237\\263\\345\\220\\216\\345\\217\\260\\347\\231\\273\\345\\275\\225\\350\\257\\225\\351\\252\\214.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\346\\226\\207\\346\\241\\243\\347\\264\\242\\345\\274\\225.md\"",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\350\\277\\220\\350\\241\\214\\347\\253\\257\\346\\236\\266\\346\\236\\204.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\345\\217\\257\\345\\244\\215\\347\\224\\250\\345\\214\\205\\350\\276\\271\\347\\225\\214.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\345\\274\\200\\345\\217\\221\\345\\267\\245\\344\\275\\234\\346\\265\\201.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204S15\\345\\267\\245\\345\\205\\267\\344\\270\\216\\346\\241\\214\\351\\235\\242\\344\\272\\244\\344\\273\\230.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204\\350\\256\\241\\345\\210\\222.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\351\\237\\263\\344\\271\\220\\346\\272\\220\\346\\217\\222\\344\\273\\266\\346\\236\\266\\346\\236\\204.md\"",
+    " M packages/plugin-cli/src/project.mjs",
+    " M packages/plugin-cli/test/tools.test.mjs",
+    " M packages/plugin-sdk/src/node/package-format.mjs",
+    " M packages/plugin-sdk/test/fixtures/packages/corpus.json",
+    " M packages/plugin-sdk/test/package-corpus-generator.mjs",
+    "?? .gitattributes",
+    "?? apps/tauri/src-tauri/src/plugins/executor/",
+    "?? apps/tauri/src-tauri/src/plugins/packages/rollback_tests.rs",
+    "?? crates/am-plugin-runtime/src/rollback.rs",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri-before-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-ios-capability-boundary-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-mobile-capability-boundaries-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-overview-tauri.md",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/repository-format-tls-fix.json"
+  ],
+  "files": [
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/control.rs",
+      "sha256": "0b629b7e6e06e19104bc17d204e5ce12190da4b7bf3f3ce1fedb0a96cca3d66b"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/packages.rs",
+      "sha256": "ab177c6af90034a2763f1afcb35037c7791c2f7d9fc175419ef86ba9a2ef1d32"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/packages/tests.rs",
+      "sha256": "f675a2297fc824bb349a0840bcad59892ad9480541645e08069cf5121931a873"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins/packages/rollback_tests.rs",
+      "sha256": "bbe85b6555ed77ebb8168304a92c603a7af6879ff2701d313c82092c3608633d"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/install.rs",
+      "sha256": "2daad6db5226d59e024a6ec140283edf1b1548782825beef8ee74fa1b7f8a7fb"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/install_model.rs",
+      "sha256": "b20730905eea79d17436d85cee9608869b96e60d030bf1b455c2fab2a5a735c2"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/lib.rs",
+      "sha256": "d24f10f3135fa849952a6cf3f30aa744a6c24ac7428a9d0aaa1f130471d5a772"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/rollback.rs",
+      "sha256": "1caaedb45b2e52ea677eb29024278d35a2ed454c3f49f0ec824454a77bbeef6a"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+      "sha256": "070a7aba69c2dccc9c6d3c9794b9cf966259f6c31c90217093d634fb8ee4ea5f"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md",
+      "sha256": "ce2a9afedce1b5a190f9d118e20e6f7bebaba0d28f0b6ca41cf55c4be86ecfd1"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "sha256": "721f0ce639f76bf3059fcb62977a318f5e6012b6f4d42997b7d589386b8dbf71"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "sha256": "2708ee039f1d66816076326e4750e8530df0b46210ca74c6e2200404b92e323b"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "89f92fe7a0b6d47c955fa7753bfa4cb19273154795fedc4419a02225204e23c2"
+    },
+    {
+      "path": "target/s15-executor/resources.json",
+      "sha256": "af2d4d264b6817f281b4c545a387a3c10a98a2eddeb78b4e193226c7f01cdb71"
+    },
+    {
+      "path": "packages/plugin-vm/engine/profile.json",
+      "sha256": "931652e192e697933d9f4af2af73c5ecbfbb28be01a6c556c5a9ad42486dca00"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s15/target-admission.json",
+      "sha256": "168e6beb90fbc927123314e30a0d8dd4e01606baaef161bb6b457ad9e5bb5793"
+    }
+  ],
+  "environment": {
+    "os": "Microsoft Windows NT 10.0.26200.0",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+    "pnpm": "10.23.0",
+    "node": "v24.11.1"
+  },
+  "scopeNote": "Existing and concurrent working-tree changes were preserved. The B18 source repair changes only control/packages and native runtime rollback ownership plus permanent tests. Cargo.lock and other board fixes are baseline inputs, not attributed to this repair. Two maintained boundary guides received formatting-only cleanup after the root format gate reported them. No commit, push or application launch."
+}

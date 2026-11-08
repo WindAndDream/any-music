@@ -1,0 +1,198 @@
+{
+  "documentType": "audit-fix-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B17-cli-build-pack-sign",
+  "runtime": "node",
+  "reviewedAt": "2026-10-22T03:36:07.319Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-fix-baseline.json",
+  "originalAudit": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign.json",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "changes": [
+    {
+      "findingId": "B17-C01",
+      "status": "resolved",
+      "implementation": "packages/plugin-cli/src/project.mjs:73",
+      "detail": "Copy the used bytes before returning so the snapshot does not retain the complete file-budget allocation. Existing identity/link/size/change checks and handle cleanup are unchanged.",
+      "regressions": [
+        "packages/plugin-cli/test/tools.test.mjs:150",
+        "packages/plugin-cli/test/tools.test.mjs:180"
+      ],
+      "before": {
+        "assets": 33,
+        "contentBytes": 455,
+        "retainedBackingBytes": 276824097
+      },
+      "after": {
+        "assets": 33,
+        "contentBytes": 455,
+        "retainedBackingBytes": 8192
+      },
+      "measurementLimit": "Unique retained ArrayBuffer.byteLength only, not RSS, peak memory or a new aggregate snapshot budget."
+    },
+    {
+      "findingId": "B17-C02",
+      "status": "resolved",
+      "implementation": "packages/plugin-cli/src/project.mjs:208",
+      "detail": "Require a non-null, non-array object before reading configuration fields. Unsupported shapes consistently produce CONFIG / exit 2.",
+      "regressions": ["packages/plugin-cli/test/tools.test.mjs:195"],
+      "cases": ["null", "[]", "true", "0", "invalid string", "{}"],
+      "commands": ["check", "pack"]
+    }
+  ],
+  "regressionProof": {
+    "before": {
+      "command": "pnpm --filter @any-music/plugin-cli test",
+      "result": "fail",
+      "exitCode": 1,
+      "tests": 21,
+      "passed": 19,
+      "failed": 2,
+      "log": ".codex-tmp/fix-b17-cli/cli-red.log",
+      "detail": "New memory and null-config regressions fail against the old implementation; six other new guard checks pass."
+    },
+    "after": {
+      "command": "pnpm --filter @any-music/plugin-cli test",
+      "result": "pass",
+      "exitCode": 0,
+      "tests": 21,
+      "log": ".codex-tmp/fix-b17-cli/cli-green.log",
+      "detail": "All 21 pass, including original 13 contracts, 32 tiny assets + immutable archive bytes, empty/exact/over-budget reads and six malformed config cases in both check/pack."
+    }
+  },
+  "verification": [
+    {
+      "command": "pnpm check:plugin:tools",
+      "level": "artifact",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:43:17.579Z",
+      "log": ".codex-tmp/fix-b17-cli/tools.log",
+      "logSha256": "2924967db5e7bc6e4d1a75a9b41ad98a456c5385810a7f6d7eb79a58c6350a7e",
+      "detail": "Four off-repository templates; public SDK/CLI/testkit packed with scripts disabled, second frozen install, same-VM/type smoke, deterministic repack and verify. Historical records restored; fresh outputs remain local."
+    },
+    {
+      "command": "pnpm test (npm_config_workspace_concurrency=1, VITEST_MAX_WORKERS=1)",
+      "level": "tests",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-22T03:35:46.508Z",
+      "log": ".codex-tmp/fix-b17-cli/test-resumed.log",
+      "logSha256": "df4b8ed56f34c26da7e72b44cdbcd45f9ae0192eec1360aa5cece94c07a0890d",
+      "detail": "Complete root command rerun on resumption after the production build, with one workspace and one Vitest worker. No test source, assertion or timeout relaxed; all three earlier failed runs and one interrupted run remain recorded below."
+    },
+    {
+      "command": "pnpm typecheck",
+      "level": "static",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:51:00.243Z",
+      "log": ".codex-tmp/fix-b17-cli/typecheck.log",
+      "logSha256": "8414ed05c8707d9f4dd6406eaf73a18eaa37b0e2d7ec30a6ca913d4d3e35584d",
+      "detail": "Standalone workspace typecheck passed. Later concurrent native changes were also covered by the mandatory complete typecheck inside the successful production build; this earlier standalone result is not the sole latest-native proof."
+    },
+    {
+      "command": "pnpm lint",
+      "level": "static",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-22T03:31:27.607Z",
+      "log": ".codex-tmp/fix-b17-cli/lint-resumed.log",
+      "logSha256": "61759e2de68c1bec3b02765f50fe3441b3d9e0b9fcf2f32c12e276520b8aa448",
+      "detail": "Complete repository dependency/isolation/VM/mobile-boundary and lint checks rerun on resumption."
+    },
+    {
+      "command": "pnpm format:check",
+      "level": "static",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-22T03:31:31.829Z",
+      "log": ".codex-tmp/fix-b17-cli/format-resumed.log",
+      "logSha256": "96d8e855fe3315c28490a01da350c7ff53e62dffaa189c945649efeecca6944f",
+      "detail": "Complete repository formatting check rerun on resumption passed on this working tree."
+    },
+    {
+      "command": "pnpm build",
+      "level": "artifact",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T16:02:06.841Z",
+      "log": ".codex-tmp/fix-b17-cli/build.log",
+      "logSha256": "b1e902ff4a2d4002c8ac3c2c8c8a355d34203b8b06a3bf33d72494122c71ef79",
+      "detail": "Complete production build command, including its required typecheck and both runtime artifacts. No product UI launched."
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "level": "tests",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:46:18.519Z",
+      "log": ".codex-tmp/fix-b17-cli/theme-isolated.log",
+      "logSha256": "b7dd1da7063fba475be80a713ed8d48ba849ea99a3a26880d20843c99dc85546",
+      "detail": "The first-run workbench asynchronous assertion failure does not reproduce in this isolated unchanged suite."
+    }
+  ],
+  "earlierFailedVerification": [
+    {
+      "command": "pnpm test",
+      "result": "fail",
+      "exitCode": 1,
+      "log": ".codex-tmp/fix-b17-cli/test.log",
+      "failure": "Unchanged workbench theme asynchronous write-count assertion at test/features/plugins/use-workbench-theme.test.ts:105 (expected 2, observed 1)."
+    },
+    {
+      "command": "pnpm test (npm_config_workspace_concurrency=1)",
+      "result": "fail",
+      "exitCode": 1,
+      "log": ".codex-tmp/fix-b17-cli/test-retry.log",
+      "failure": "Same theme write-count assertion and creation namespace restore/re-enable test timeout at use-music-creation.test.ts:157 (5000 ms)."
+    },
+    {
+      "command": "pnpm test (npm_config_workspace_concurrency=1, VITEST_MAX_WORKERS=2)",
+      "result": "fail",
+      "exitCode": 1,
+      "log": ".codex-tmp/fix-b17-cli/test-bounded.log",
+      "failure": "Workbench 367/367 passes, but Tauri creation module lazy import exceeds its unchanged 20000 ms timeout while native production build is still active."
+    }
+  ],
+  "interruptedVerification": [
+    {
+      "command": "pnpm test (npm_config_workspace_concurrency=1, VITEST_MAX_WORKERS=1)",
+      "result": "not-completed",
+      "exitCode": null,
+      "log": ".codex-tmp/fix-b17-cli/test-final.log",
+      "detail": "Stopped during UI tests when the previous turn was interrupted; no surviving process or completion marker on resumption. Not counted as passed. Complete command rerun as test-resumed.log."
+    }
+  ],
+  "verificationResolution": "The isolated unchanged theme suite and complete root command on resumption after the production build with serialized workspace scheduling plus VITEST_MAX_WORKERS=1 pass. Retries alter scheduling only, not code/expectations/timeouts. This supports scheduling-sensitive failures, not proof of their root cause or a default-scheduler pass.",
+  "verificationFreshness": "On resumption, CLI implementation/tests were unchanged, all three tarball SHA-256 values matched the recorded successful tooling SBOM, and preserved historical S15 files matched the backups. Native source changes were timestamped before the successful production build and its mandatory full typecheck. Lint/format and the complete root test command were rerun on resumption. No interrupted run is counted as passed.",
+  "preservedFiles": [
+    {
+      "path": "docs/baselines/plugin-system-s15/tools.json",
+      "beforeSha256": "52819331237b338a39d8f9d12771c0b724f0dc679c013a62785d2c6335e05657",
+      "afterSha256": "52819331237b338a39d8f9d12771c0b724f0dc679c013a62785d2c6335e05657",
+      "observedOutput": ".codex-tmp/fix-b17-cli/tools.json.observed"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s15/toolchain-sbom.json",
+      "beforeSha256": "3bb86111bb5fa5badf361a1c6d50f30fc83e5987d712b38878f201eeb49afc82",
+      "afterSha256": "3bb86111bb5fa5badf361a1c6d50f30fc83e5987d712b38878f201eeb49afc82",
+      "observedOutput": ".codex-tmp/fix-b17-cli/toolchain-sbom.json.observed"
+    }
+  ],
+  "limits": [
+    "No app/browser/DEV server/emulator was launched.",
+    "This closes the two selected Node CLI findings; SDK/testkit architecture and Tauri DEV pairing/reload/end remain separate unreviewed subbatches.",
+    "No native implementation changed in this repair; standalone native release/MSRV/dependency-advisory checks were not rerun. Root tests/typecheck/build still exercise their configured native checks.",
+    "Full regression checks establish the tested baseline; no claim of universal absence of defects or renewed native target admission."
+  ],
+  "nextBatch": "B17-sdk-node-artifact",
+  "commitOrPush": false
+}

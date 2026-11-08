@@ -1,0 +1,60 @@
+
+> any-music@0.0.0 build <project-root>
+> pnpm build:prod
+
+
+> any-music@0.0.0 build:prod <project-root>
+> pnpm typecheck && pnpm -r --if-present run build:prod
+
+
+> any-music@0.0.0 typecheck <project-root>
+> pnpm -r --if-present run typecheck
+
+Scope: 22 of 23 workspace projects
+packages/audio-composition typecheck$ tsc --noEmit -p tsconfig.json
+packages/network-routing typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-sdk typecheck$ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json
+packages/utils typecheck$ tsc --noEmit -p tsconfig.json
+packages/utils typecheck: Done
+packages/network-routing typecheck: Done
+packages/audio-composition typecheck: Done
+packages/plugin-sdk typecheck: Done
+packages/account-pool typecheck$ tsc --noEmit -p tsconfig.json
+packages/core typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-vm typecheck$ tsc --noEmit -p tsconfig.json
+packages/account-pool typecheck: Done
+packages/core typecheck: Done
+packages/plugin-vm typecheck: Done
+packages/plugin-center typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-sandbox-browser typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-testkit typecheck$ tsc --noEmit -p tsconfig.json
+packages/ui typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-center typecheck: Done
+packages/plugin-testkit typecheck: Done
+packages/plugin-sandbox-browser typecheck: Done
+packages/ui typecheck: Done
+packages/plugin-cli typecheck$ node --check src/cli.mjs && node --check src/project.mjs && node --check src/package.mjs
+packages/plugin-music-creation typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-bilibili typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-source-douyin typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-cli typecheck: Done
+packages/plugin-tag-management typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-bilibili typecheck: Done
+packages/plugin-ui-vue typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-douyin typecheck: Done
+packages/theme-default typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-music-creation typecheck: Done
+packages/theme-studio typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-tag-management typecheck: Done
+packages/plugin-ui-vue typecheck: Done
+packages/theme-studio typecheck: Done
+packages/theme-default typecheck: Done
+packages/music-workbench typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/music-workbench typecheck: test/features/workbench/theme-action-contracts.test.ts(325,5): error TS2322: Type 'null' is not assignable to type 'string'.
+packages/music-workbench typecheck: Failed
+<project-root>\packages\music-workbench:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/music-workbench@0.0.0 typecheck: `vue-tsc --noEmit -p tsconfig.json`
+Exit status 2
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.

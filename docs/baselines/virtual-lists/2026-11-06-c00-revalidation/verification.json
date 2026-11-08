@@ -1,0 +1,122 @@
+{
+  "date": "2026-11-06",
+  "runtimeScope": "shared",
+  "scope": "C00 evidence-led semantic generation and containment corrections, two-runtime partial revalidation; no production admission or downstream migration",
+  "sourceFiles": [
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue",
+      "sha256": "058a2d5fe1e3397657b782e9f075b0db83b75f203737984d3169638aa504051c"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/VirtualQueueTrackGrid.test.ts",
+      "sha256": "df022c9a387ea0bdf59a05e6e685c10385a094cdc9df387088190176ef91a1d2"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "ed5096eaa0f25c8229589deeae7649920f0a443809ce9840f41d9094354979ad"
+    }
+  ],
+  "targetChecks": [
+    {
+      "command": "Theme C00 targeted regressions",
+      "files": 3,
+      "tests": 48,
+      "result": "passed",
+      "log": "measurement-c00-semantic-final.log"
+    },
+    {
+      "command": "Theme typecheck",
+      "result": "passed",
+      "log": "measurement-c00-theme-typecheck.log"
+    },
+    {
+      "command": "UI VirtualTrackCardGrid and reorder regression",
+      "files": 2,
+      "tests": 23,
+      "result": "passed",
+      "log": "contain-motion-tests.log"
+    },
+    {
+      "command": "Independent pre-change measurement audit",
+      "files": 20,
+      "tests": 318,
+      "result": "passed",
+      "log": "measurement-virtual-scroll-tests.log"
+    }
+  ],
+  "rootChecks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "startedAt": "2026-11-05T17:39:17.7471284Z",
+      "endedAt": "2026-11-05T17:40:34.3391530Z",
+      "log": "root-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "startedAt": "2026-11-05T17:40:34.3588891Z",
+      "endedAt": "2026-11-05T17:41:46.6846860Z",
+      "log": "root-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "startedAt": "2026-11-05T17:41:46.6918437Z",
+      "endedAt": "2026-11-05T17:41:50.6336615Z",
+      "log": "root-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "startedAt": "2026-11-05T17:41:50.6367583Z",
+      "endedAt": "2026-11-05T17:41:55.8644774Z",
+      "log": "root-format-check.log"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "startedAt": "2026-11-05T17:41:55.8666944Z",
+      "endedAt": "2026-11-05T17:44:43.8037471Z",
+      "log": "root-build.log"
+    }
+  ],
+  "review": "Three subagents: measurement correction, independent storage/consumer/image and final source review, isolated native revalidation. Parent owns GM, containment change, integration and bilingual status. All existing dirty/untracked work preserved.",
+  "admission": {
+    "passed": false,
+    "gate": "Private default-closed canary unchanged",
+    "notStarted": ["O00", "O01", "O02", "O03", "C01"],
+    "remaining": [
+      "80-item GM sidebar regression against baseline.",
+      "Large-data O(N) complete-generation persistence stalls and real-change semantic Map/cold-mount costs.",
+      "Complete visuals/artwork and native strict pixel parity; IME/touch, interrupted drag/drop/capture and physical mobile.",
+      "Final production script grants/artifacts and active account/playback/download/hide-show/theme continuity."
+    ]
+  },
+  "evidence": {
+    "userscript": "userscript-review.json",
+    "native": "native-review.json",
+    "builds": "build-artifacts.json",
+    "productionComparison": "production-comparison.json"
+  },
+  "logDirectory": "logs/2026-11-06-virtual-list-implementation",
+  "commit": false,
+  "push": false,
+  "postDocumentationChecks": [
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "delivery-format-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "log": "delivery-diff-check.log"
+    },
+    {
+      "command": "python logs/2026-11-06-virtual-list-implementation/check-delivery.py",
+      "result": "passed",
+      "log": "delivery-links-identity.log"
+    }
+  ]
+}

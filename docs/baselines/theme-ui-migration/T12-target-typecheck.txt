@@ -1,0 +1,11 @@
+Scope: 5 of 23 workspace projects
+packages/ui typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/ui typecheck: Done
+packages/plugin-ui-vue typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/theme-default typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/theme-studio typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-ui-vue typecheck: Done
+packages/theme-studio typecheck: Done
+packages/theme-default typecheck: Done
+packages/music-workbench typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/music-workbench typecheck: Done

@@ -1,0 +1,25 @@
+
+> any-music@0.0.0 build:userscript:prod <project-root>
+> pnpm --filter @any-music/userscript run build:prod
+
+
+> @any-music/userscript@0.0.0 build:prod <project-root>\apps\userscript
+> vite build --mode prod
+
+vite v8.2.2 building client environment for prod...
+transforming...
+✓ 737 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/userscript-build-audit.json     34.52 kB │ gzip:   4.19 kB
+dist/any-music.user.js            4,772.53 kB │ gzip: 936.95 kB
+
+✓ built in 6.35s
+[PLUGIN_TIMINGS] Your build spent 94% of 6.3s inside plugin hooks (6.0s).
+Measured inside the callback, so queue time is excluded and time the callback itself awaited is not:
+  - monkey:buildBundle generateBundle (66%, 4.2s, 1 call)
+Those rows are 66% of the build; the rest of the 94% is below.
+Not measurable — 2 hooks whose calls overlap, so elapsed time covers work other calls were doing. Profile with `node --cpu-prof`:
+  - vite:css transform (100 calls)
+  - monkey:css transform (737 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.

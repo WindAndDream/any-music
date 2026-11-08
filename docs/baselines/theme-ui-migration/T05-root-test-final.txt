@@ -1,0 +1,1712 @@
+
+> any-music@0.0.0 test <project-root>
+> node --test scripts/test/*.test.mjs && pnpm -r --if-present run test
+
+✔ mobile theme packages cannot depend on desktop/native APIs, including through a second script block (418.3475ms)
+✔ mobile capabilities separate Android built-in transport from iOS local data (1598.3857ms)
+✔ desktop or remote privilege cannot enter mobile through configuration (134.175ms)
+✔ accepts valid sources and deferred/type-only heavy imports (281.7369ms)
+✔ VM profiles and adapter roots stay engine-free; native imports and production testkit are rejected (383.9468ms)
+✔ trusted build directory discovery cannot eagerly load Vue through the workbench root (295.6267ms)
+✔ theme metadata stays lightweight and Vue adapters cannot import private workbench state (373.7285ms)
+✔ rejects undeclared and forbidden internal dependencies (358.0729ms)
+✔ tag metadata remains lightweight and the feature cannot consume host repositories (338.3922ms)
+✔ rejects app aliases and relative paths outside the package (364.1994ms)
+✔ creation metadata cannot load presentation or access private host state (314.5196ms)
+✔ routing packages reject Node and music dependencies while accepting their public edge (334.8983ms)
+✔ follows the source plugin root barrel to eager codecs (228.0933ms)
+✔ SDK rejects runtime libraries, even through a local barrel (284.3212ms)
+✔ rejects browser audio implementations without a codec import (78.2308ms)
+✔ accepts export patterns and rejects private exports (90.9571ms)
+✔ source metadata cannot load protocols and source plugins cannot access the host (74.3713ms)
+✔ independent themes accept only public metadata, Vue and style entries without eager presentation (123.4581ms)
+✔ theme dependency fixtures reject cross-theme, host, native, SDK, private and cyclic edges (244.1811ms)
+✔ theme metadata follows local barrels; private exports and cross-theme Sass cannot escape checks (177.7744ms)
+✔ built-in themes cannot acquire plugin authority through package imports (532.1974ms)
+✔ the actual registry has complete AppManifest coverage and exact main authority (1012.6217ms)
+✔ new commands, broad capabilities, remote access and relay grants cannot silently bypass review (72.1905ms)
+✔ actual acceptance records fail closed on missing evidence, leaked authority or inconsistent targets (89.0992ms)
+✔ pure protocol/policy dependency closures reject an IO dependency several edges away (235.5194ms)
+✔ Cargo cycle and reverse policy dependency are rejected (105.3814ms)
+✔ anonymous plugin transport cannot acquire native authority or account persistence (225.5865ms)
+✔ standard-library IO and global clocks cannot bypass a dependency-only check (0.8904ms)
+✔ package verification cannot acquire native runtime authority or a transport (91.9868ms)
+✔ Android signing needs an explicit release and complete credentials before any build (3.702ms)
+✔ release verification rejects compiled debug, backup, cleartext and test-harness variants (5.9954ms)
+✔ instrumentation requires completed tests and rejects adb success with failed JUnit (5.6107ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5167.4788
+Scope: 21 of 22 workspace projects
+packages/audio-composition test$ vitest run
+packages/network-routing test$ vitest run
+packages/plugin-sdk test$ pnpm generate:check && vitest run
+packages/network-routing test:  RUN  v4.1.11 <project-root>/packages/network-routing
+packages/audio-composition test:  RUN  v4.1.11 <project-root>/packages/audio-composition
+packages/plugin-sdk test: > @any-music/plugin-sdk@0.1.0 generate:check <project-root>\packages\plugin-sdk
+packages/plugin-sdk test: > node scripts/generate.mjs --check
+packages/network-routing test:  Test Files  2 passed (2)
+packages/network-routing test:       Tests  28 passed (28)
+packages/network-routing test:    Start at  02:20:53
+packages/network-routing test:    Duration  650ms (transform 222ms, setup 0ms, import 430ms, tests 40ms, environment 0ms)
+packages/network-routing test: Done
+packages/audio-composition test:  Test Files  5 passed (5)
+packages/audio-composition test:       Tests  15 passed (15)
+packages/audio-composition test:    Start at  02:20:53
+packages/audio-composition test:    Duration  1.04s (transform 381ms, setup 0ms, import 1.15s, tests 461ms, environment 1ms)
+packages/audio-composition test: Done
+packages/plugin-sdk test: SDK generated artifacts match (47 definitions).
+packages/plugin-sdk test:  RUN  v4.1.11 <project-root>/packages/plugin-sdk
+packages/plugin-sdk test:  Test Files  5 passed (5)
+packages/plugin-sdk test:       Tests  120 passed (120)
+packages/plugin-sdk test:    Start at  02:20:56
+packages/plugin-sdk test:    Duration  1.37s (transform 2.76s, setup 0ms, import 5.27s, tests 167ms, environment 1ms)
+packages/plugin-sdk test: Done
+packages/account-pool test$ vitest run
+packages/core test$ vitest run
+packages/plugin-vm test$ vitest run
+packages/account-pool test:  RUN  v4.1.11 <project-root>/packages/account-pool
+packages/core test:  RUN  v4.1.11 <project-root>/packages/core
+packages/plugin-vm test:  RUN  v4.1.11 <project-root>/packages/plugin-vm
+packages/account-pool test:  Test Files  3 passed (3)
+packages/account-pool test:       Tests  22 passed (22)
+packages/account-pool test:    Start at  02:20:58
+packages/account-pool test:    Duration  640ms (transform 366ms, setup 0ms, import 744ms, tests 45ms, environment 0ms)
+packages/account-pool test: Done
+packages/core test:  Test Files  8 passed (8)
+packages/core test:       Tests  49 passed (49)
+packages/core test:    Start at  02:20:58
+packages/core test:    Duration  824ms (transform 962ms, setup 0ms, import 1.71s, tests 120ms, environment 1ms)
+packages/core test: Done
+packages/plugin-vm test:  Test Files  3 passed (3)
+packages/plugin-vm test:       Tests  39 passed (39)
+packages/plugin-vm test:    Start at  02:20:58
+packages/plugin-vm test:    Duration  1.57s (transform 820ms, setup 0ms, import 1.42s, tests 42ms, environment 0ms)
+packages/plugin-vm test: Done
+packages/plugin-center test$ vitest run
+packages/plugin-sandbox-browser test$ pnpm build && vitest run
+packages/plugin-testkit test$ vitest run
+packages/ui test$ vitest run
+packages/plugin-sandbox-browser test: > @any-music/plugin-sandbox-browser@0.1.0 build <project-root>\packages\plugin-sandbox-browser
+packages/plugin-sandbox-browser test: > node scripts/build.mjs
+packages/plugin-center test:  RUN  v4.1.11 <project-root>/packages/plugin-center
+packages/plugin-testkit test:  RUN  v4.1.11 <project-root>/packages/plugin-testkit
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/plugin-sandbox-browser test: vite v8.2.2 building client environment for production...
+packages/plugin-sandbox-browser test: transforming...
+packages/plugin-sandbox-browser test: ✓ 24 modules transformed.
+packages/plugin-sandbox-browser test: rendering chunks...
+packages/plugin-sandbox-browser test: computing gzip size...
+packages/plugin-sandbox-browser test: dist/worker.js  780.35 kB │ gzip: 333.29 kB
+packages/plugin-sandbox-browser test: ✓ built in 419ms
+packages/plugin-center test:  Test Files  9 passed (9)
+packages/plugin-center test:       Tests  56 passed (56)
+packages/plugin-center test:    Start at  02:21:00
+packages/plugin-center test:    Duration  1.14s (transform 2.58s, setup 0ms, import 4.36s, tests 181ms, environment 1ms)
+packages/plugin-center test: Done
+packages/plugin-sandbox-browser test:  RUN  v4.1.11 <project-root>/packages/plugin-sandbox-browser
+packages/plugin-testkit test:  Test Files  1 passed (1)
+packages/plugin-testkit test:       Tests  33 passed (33)
+packages/plugin-testkit test:    Start at  02:21:00
+packages/plugin-testkit test:    Duration  6.50s (transform 1.33s, setup 0ms, import 2.14s, tests 4.03s, environment 0ms)
+packages/plugin-testkit test: Done
+packages/plugin-sandbox-browser test:  Test Files  3 passed (3)
+packages/plugin-sandbox-browser test:       Tests  18 passed (18)
+packages/plugin-sandbox-browser test:    Start at  02:21:02
+packages/plugin-sandbox-browser test:    Duration  5.21s (transform 4.22s, setup 0ms, import 6.80s, tests 2.52s, environment 0ms)
+packages/plugin-sandbox-browser test: Done
+packages/ui test:  Test Files  61 passed (61)
+packages/ui test:       Tests  328 passed (328)
+packages/ui test:    Start at  02:21:00
+packages/ui test:    Duration  7.09s (transform 12.38s, setup 0ms, import 27.88s, tests 2.37s, environment 39ms)
+packages/ui test: Done
+packages/plugin-cli test$ pnpm --filter @any-music/plugin-testkit build && node --test test/*.test.mjs
+packages/plugin-music-creation test$ vitest run
+packages/plugin-source-bilibili test$ vitest run
+packages/plugin-source-douyin test$ vitest run
+packages/plugin-source-bilibili test:  RUN  v4.1.11 <project-root>/packages/plugin-source-bilibili
+packages/plugin-source-douyin test:  RUN  v4.1.11 <project-root>/packages/plugin-source-douyin
+packages/plugin-cli test: > @any-music/plugin-testkit@0.1.0 build <project-root>\packages\plugin-testkit
+packages/plugin-cli test: > node scripts/build.mjs
+packages/plugin-music-creation test:  RUN  v4.1.11 <project-root>/packages/plugin-music-creation
+packages/plugin-source-bilibili test:  Test Files  3 passed (3)
+packages/plugin-source-bilibili test:       Tests  47 passed (47)
+packages/plugin-source-bilibili test:    Start at  02:21:08
+packages/plugin-source-bilibili test:    Duration  1.29s (transform 1.05s, setup 0ms, import 1.96s, tests 45ms, environment 1ms)
+packages/plugin-source-bilibili test: Done
+packages/plugin-tag-management test$ vitest run
+packages/plugin-source-douyin test:  Test Files  6 passed (6)
+packages/plugin-source-douyin test:       Tests  86 passed (86)
+packages/plugin-source-douyin test:    Start at  02:21:08
+packages/plugin-source-douyin test:    Duration  1.43s (transform 1.33s, setup 0ms, import 2.41s, tests 270ms, environment 1ms)
+packages/plugin-source-douyin test: Done
+packages/plugin-ui-vue test$ vitest run
+packages/plugin-tag-management test:  RUN  v4.1.11 <project-root>/packages/plugin-tag-management
+packages/plugin-ui-vue test:  RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+packages/plugin-cli test: ✔ public source template paginates anonymous catalog responses through named ports and handles denial (1012.5462ms)
+packages/plugin-music-creation test:  Test Files  4 passed (4)
+packages/plugin-music-creation test:       Tests  14 passed (14)
+packages/plugin-music-creation test:    Start at  02:21:09
+packages/plugin-music-creation test:    Duration  3.90s (transform 6.99s, setup 0ms, import 12.90s, tests 67ms, environment 2ms)
+packages/plugin-music-creation test: Done
+packages/theme-default test$ vitest run
+packages/plugin-cli test: ✔ source-code: create → check → same VM tests → reproducible archive → verify → migration (459.3717ms)
+packages/plugin-cli test: ✔ source-declarative: create → check → same VM tests → reproducible archive → verify → migration (94.0299ms)
+packages/plugin-cli test: ✔ tag-suggestion: create → check → same VM tests → reproducible archive → verify → migration (416.5233ms)
+packages/theme-default test:  RUN  v4.1.11 <project-root>/packages/theme-default
+packages/plugin-tag-management test:  Test Files  3 passed (3)
+packages/plugin-tag-management test:       Tests  11 passed (11)
+packages/plugin-tag-management test:    Start at  02:21:11
+packages/plugin-tag-management test:    Duration  3.43s (transform 4.33s, setup 0ms, import 6.97s, tests 49ms, environment 1ms)
+packages/plugin-tag-management test: Done
+packages/plugin-cli test: ✔ export: create → check → same VM tests → reproducible archive → verify → migration (960.0304ms)
+packages/plugin-cli test: ✔ config and pack hooks are inert; sealed source survives path edits (400.775ms)
+packages/plugin-cli test: ✔ small sealed assets retain bounded memory and preserve their original package bytes (306.0285ms)
+packages/plugin-cli test: ✔ sealed reads preserve empty files, exact limits and over-budget rejection (34.8052ms)
+packages/plugin-cli test: ✔ non-config JSON null returns a configuration error (36.5784ms)
+packages/plugin-cli test: ✔ non-config JSON [] returns a configuration error (27.7831ms)
+packages/plugin-cli test: ✔ non-config JSON true returns a configuration error (28.8591ms)
+packages/plugin-cli test: ✔ non-config JSON 0 returns a configuration error (35.9946ms)
+packages/plugin-cli test: ✔ non-config JSON "invalid" returns a configuration error (36.9512ms)
+packages/plugin-cli test: ✔ non-config JSON {} returns a configuration error (25.9274ms)
+packages/plugin-cli test: ✔ static checks reject native globals, dynamic code, network and foreign imports (2.4177ms)
+packages/plugin-cli test: ✔ linked files and escaped graphs are rejected (42.7347ms)
+packages/plugin-cli test: ✔ signatures use raw integrity bytes and an explicit publisher pin (202.3717ms)
+packages/plugin-cli test: ✔ CLI stdout is JSON and failures have stable exit codes (378.0899ms)
+packages/plugin-cli test: ✔ DEV requires host pairing and never creates a server or launches an application (0.8317ms)
+packages/plugin-ui-vue test:  Test Files  9 passed (9)
+packages/plugin-ui-vue test:       Tests  55 passed (55)
+packages/plugin-ui-vue test:    Start at  02:21:11
+packages/plugin-ui-vue test:    Duration  5.18s (transform 9.99s, setup 0ms, import 20.16s, tests 1.20s, environment 5ms)
+packages/plugin-ui-vue test: Done
+packages/plugin-cli test: ✔ pack smoke rejects a malformed continuation and invalid nested completion JSON (378.731ms)
+packages/plugin-cli test: ✔ doctor/check capability matrix rejects required host gaps and permits unavailable optionals (95.6729ms)
+packages/plugin-cli test: ℹ tests 21
+packages/plugin-cli test: ℹ suites 0
+packages/plugin-cli test: ℹ pass 21
+packages/plugin-cli test: ℹ fail 0
+packages/plugin-cli test: ℹ cancelled 0
+packages/plugin-cli test: ℹ skipped 0
+packages/plugin-cli test: ℹ todo 0
+packages/plugin-cli test: ℹ duration_ms 6521.5901
+packages/plugin-cli test: Done
+packages/theme-default test:  Test Files  49 passed (49)
+packages/theme-default test:       Tests  347 passed (347)
+packages/theme-default test:    Start at  02:21:14
+packages/theme-default test:    Duration  7.92s (transform 22.48s, setup 0ms, import 49.30s, tests 9.07s, environment 35ms)
+packages/theme-default test: Done
+packages/music-workbench test$ vitest run
+packages/music-workbench test:  RUN  v4.1.11 <project-root>/packages/music-workbench
+packages/music-workbench test:  ❯ test/components/music-sources/MusicSourceWorkbench.test.ts (12 tests | 1 failed) 26ms
+packages/music-workbench test:      × keeps the responsive back control on the left and names bulk favorite 12ms
+packages/music-workbench test: stderr | test/features/workbench/use-workbench-controller.test.ts > stable workbench lifetime > keeps real classic download and queue views on one scheduler across root presentation replacement
+packages/music-workbench test: [Vue warn]: Unhandled error during execution of setup function
+packages/music-workbench test:   at <ClassicTrackCollection title="待听" state= {
+packages/music-workbench test:   tracks: [
+packages/music-workbench test:     {
+packages/music-workbench test:       id: 'queued',
+packages/music-workbench test:       title: 'queued',
+packages/music-workbench test:       artists: [],
+packages/music-workbench test:       durationMs: 10000,
+packages/music-workbench test:       source: [Object]
+packages/music-workbench test:     }
+packages/music-workbench test:   ],
+packages/music-workbench test:   selectedTrackIds: [],
+packages/music-workbench test:   invalidTrackIds: [],
+packages/music-workbench test:   favoriteTrackIds: [],
+packages/music-workbench test:   queuedTrackIds: [],
+packages/music-workbench test:   downloadedTrackIds: [],
+packages/music-workbench test:   platformNames: Map(0) {},
+packages/music-workbench test:   customNamesByTrackId: Map(0) {},
+packages/music-workbench test:   customTagsByTrackId: Map(0) {},
+packages/music-workbench test:   addedAtMsByTrackId: Map(0) {},
+packages/music-workbench test:   displayMode: 'standard',
+packages/music-workbench test:   mobileColumns: 1,
+packages/music-workbench test:   filters: {
+packages/music-workbench test:     searchFilters: [],
+packages/music-workbench test:     tags: [],
+packages/music-workbench test:     publishedRanges: [],
+packages/music-workbench test:     durationRanges: [],
+packages/music-workbench test:     platformIds: [],
+packages/music-workbench test:     naming: 'all'
+packages/music-workbench test:   },
+packages/music-workbench test:   filterDraft: null,
+packages/music-workbench test:   currentTrackId: null
+packages/music-workbench test: } actions= {
+packages/music-workbench test:   play: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   download: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   toggleFavorite: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   select: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   setFilterDraft: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   applyFilters: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   cancelFilters: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   showTrackActions: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   enqueue: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   rename: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   addToPlaylist: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   useAsMaterial: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   addTag: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   removeTag: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   setDisplayMode: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   setMobileColumns: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   remove: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   reorder: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   },
+packages/music-workbench test:   clear: [Function: Mock] {
+packages/music-workbench test:     _isMockFunction: true,
+packages/music-workbench test:     getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:     mock: {
+packages/music-workbench test:       calls: [],
+packages/music-workbench test:       contexts: [],
+packages/music-workbench test:       instances: [],
+packages/music-workbench test:       invocationCallOrder: [],
+packages/music-workbench test:       settledResults: [],
+packages/music-workbench test:       results: [],
+packages/music-workbench test:       lastCall: [Getter]
+packages/music-workbench test:     },
+packages/music-workbench test:     mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:     mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:     withImplementation: [Function: withImplementation],
+packages/music-workbench test:     mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:     mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:     mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:     mockThrow: [Function: mockThrow],
+packages/music-workbench test:     mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:     mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:     mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:     mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:     mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:     mockClear: [Function: mockClear],
+packages/music-workbench test:     mockReset: [Function: mockReset],
+packages/music-workbench test:     mockRestore: [Function: mockRestore],
+packages/music-workbench test:     mockName: [Function: mockName],
+packages/music-workbench test:     getMockName: [Function: getMockName],
+packages/music-workbench test:     Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:   }
+packages/music-workbench test: }  ... >
+packages/music-workbench test:   at <ClassicQueue feature= {
+packages/music-workbench test:   state: {
+packages/music-workbench test:     tracks: [ [Object] ],
+packages/music-workbench test:     selectedTrackIds: [],
+packages/music-workbench test:     invalidTrackIds: [],
+packages/music-workbench test:     favoriteTrackIds: [],
+packages/music-workbench test:     queuedTrackIds: [],
+packages/music-workbench test:     downloadedTrackIds: [],
+packages/music-workbench test:     platformNames: Map(0) {},
+packages/music-workbench test:     customNamesByTrackId: Map(0) {},
+packages/music-workbench test:     customTagsByTrackId: Map(0) {},
+packages/music-workbench test:     addedAtMsByTrackId: Map(0) {},
+packages/music-workbench test:     displayMode: 'standard',
+packages/music-workbench test:     mobileColumns: 1,
+packages/music-workbench test:     filters: {
+packages/music-workbench test:       searchFilters: [],
+packages/music-workbench test:       tags: [],
+packages/music-workbench test:       publishedRanges: [],
+packages/music-workbench test:       durationRanges: [],
+packages/music-workbench test:       platformIds: [],
+packages/music-workbench test:       naming: 'all'
+packages/music-workbench test:     },
+packages/music-workbench test:     filterDraft: null,
+packages/music-workbench test:     currentTrackId: null
+packages/music-workbench test:   },
+packages/music-workbench test:   actions: {
+packages/music-workbench test:     play: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     download: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     toggleFavorite: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     select: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     setFilterDraft: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     applyFilters: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     cancelFilters: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     showTrackActions: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     enqueue: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     rename: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     addToPlaylist: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     useAsMaterial: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     addTag: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     removeTag: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     setDisplayMode: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     setMobileColumns: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     remove: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     reorder: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     },
+packages/music-workbench test:     clear: [Function: Mock] {
+packages/music-workbench test:       _isMockFunction: true,
+packages/music-workbench test:       getMockImplementation: [Function (anonymous)],
+packages/music-workbench test:       mock: [Object],
+packages/music-workbench test:       mockImplementation: [Function: mockImplementation],
+packages/music-workbench test:       mockImplementationOnce: [Function: mockImplementationOnce],
+packages/music-workbench test:       withImplementation: [Function: withImplementation],
+packages/music-workbench test:       mockReturnThis: [Function: mockReturnThis],
+packages/music-workbench test:       mockReturnValue: [Function: mockReturnValue],
+packages/music-workbench test:       mockReturnValueOnce: [Function: mockReturnValueOnce],
+packages/music-workbench test:       mockThrow: [Function: mockThrow],
+packages/music-workbench test:       mockThrowOnce: [Function: mockThrowOnce],
+packages/music-workbench test:       mockResolvedValue: [Function: mockResolvedValue],
+packages/music-workbench test:       mockResolvedValueOnce: [Function: mockResolvedValueOnce],
+packages/music-workbench test:       mockRejectedValue: [Function: mockRejectedValue],
+packages/music-workbench test:       mockRejectedValueOnce: [Function: mockRejectedValueOnce],
+packages/music-workbench test:       mockClear: [Function: mockClear],
+packages/music-workbench test:       mockReset: [Function: mockReset],
+packages/music-workbench test:       mockRestore: [Function: mockRestore],
+packages/music-workbench test:       mockName: [Function: mockName],
+packages/music-workbench test:       getMockName: [Function: getMockName],
+packages/music-workbench test:       Symbol(Symbol.dispose): [Function (anonymous)]
+packages/music-workbench test:     }
+packages/music-workbench test:   },
+packages/music-workbench test:   availability: { status: 'available' },
+packages/music-workbench test:   status: { status: 'ready' }
+packages/music-workbench test: } >
+packages/music-workbench test:   at <Anonymous>
+packages/music-workbench test:   at <App>
+packages/music-workbench test: [Vue warn]: Unhandled error during execution of component update
+packages/music-workbench test:   at <App>
+packages/music-workbench test:  ❯ test/features/workbench/use-workbench-controller.test.ts (9 tests | 1 failed) 11158ms
+packages/music-workbench test:      × keeps real classic download and queue views on one scheduler across root presentation replacement 10153ms
+packages/music-workbench test:  Test Files  2 failed | 52 passed (54)
+packages/music-workbench test:       Tests  2 failed | 384 passed (386)
+packages/music-workbench test:      Errors  1 error
+packages/music-workbench test:    Start at  02:21:22
+packages/music-workbench test:    Duration  20.45s (transform 23.60s, setup 0ms, import 54.63s, tests 19.85s, environment 23ms)
+packages/music-workbench test: ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+packages/music-workbench test:  FAIL  test/components/music-sources/MusicSourceWorkbench.test.ts > MusicSourceWorkbench view cache boundaries > keeps the responsive back control on the left and names bulk favorite
+packages/music-workbench test: AssertionError: expected '/* Teleport 宿主覆盖应用壳；具体浮层自行接管指针事件和模态语义…' to contain 'grid-template-areas: \'context contex…'
+packages/music-workbench test: - Expected
+packages/music-workbench test: + Received
+packages/music-workbench test: - grid-template-areas: 'context context' 'back actions';
+packages/music-workbench test: + /* Teleport 宿主覆盖应用壳；具体浮层自行接管指针事件和模态语义。 */
+packages/music-workbench test: + .player-overlay-target {
+packages/music-workbench test: +   position: absolute;
+packages/music-workbench test: +   z-index: var(--am-z-dialog);
+packages/music-workbench test: +   inset: 0;
+packages/music-workbench test: +   pointer-events: none;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .settings-overlay-target {
+packages/music-workbench test: +   position: absolute;
+packages/music-workbench test: +   z-index: var(--am-z-dialog);
+packages/music-workbench test: +   inset: 0;
+packages/music-workbench test: +   pointer-events: none;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .product-view {
+packages/music-workbench test: +   container: am-workbench / inline-size;
+packages/music-workbench test: +   flex: 1 0 auto;
+packages/music-workbench test: +   min-block-size: 100%;
+packages/music-workbench test: +   padding: clamp(var(--am-space-4), 2.2cqi, var(--am-space-7));
+packages/music-workbench test: +   background: var(--am-color-background);
+packages/music-workbench test: +   animation: am-view-enter var(--am-motion-normal) var(--am-ease-standard);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .product-view__catalog {
+packages/music-workbench test: +   position: relative;
+packages/music-workbench test: +   display: flex;
+packages/music-workbench test: +   flex: 1 0 auto;
+packages/music-workbench test: +   flex-direction: column;
+packages/music-workbench test: +   inline-size: 100%;
+packages/music-workbench test: +   min-block-size: 0;
+packages/music-workbench test: +   overflow-x: clip;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .product-view[data-active-view='catalog'],
+packages/music-workbench test: + .product-view[data-active-view='queue'],
+packages/music-workbench test: + .product-view[data-active-view='favorites'],
+packages/music-workbench test: + .product-view[data-active-view='downloads'] {
+packages/music-workbench test: +   display: flex;
+packages/music-workbench test: +   flex-direction: column;
+packages/music-workbench test: +   padding: 0;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .product-top-bar__queue-count {
+packages/music-workbench test: +   display: inline-flex;
+packages/music-workbench test: +   min-block-size: 32px;
+packages/music-workbench test: +   align-items: baseline;
+packages/music-workbench test: +   gap: var(--am-space-1);
+packages/music-workbench test: +   padding: var(--am-space-1) var(--am-space-3);
+packages/music-workbench test: +   border-radius: var(--am-radius-control);
+packages/music-workbench test: +   background: var(--am-color-primary-container);
+packages/music-workbench test: +   color: var(--am-color-primary);
+packages/music-workbench test: +   font-size: var(--am-font-size-sm);
+packages/music-workbench test: +   font-variant-numeric: tabular-nums;
+packages/music-workbench test: +   white-space: nowrap;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .product-top-bar__queue-count strong {
+packages/music-workbench test: +   font-size: var(--am-font-size-md);
+packages/music-workbench test: +   font-weight: 750;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + // 迁入的 headless 功能继续使用稳定 DOM 契约；正式层统一覆写为低装饰、内容优先的曲面。
+packages/music-workbench test: + :where(.queue, .favorites, .playlists, .tags, .composer, .custom-tracks, .custom-plugins) {
+packages/music-workbench test: +   min-block-size: 100%;
+packages/music-workbench test: +   padding: 0;
+packages/music-workbench test: +   background: transparent;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + :where(
+packages/music-workbench test: +   .catalog-drawer,
+packages/music-workbench test: +   .favorite-drawer,
+packages/music-workbench test: +   .playlist-drawer,
+packages/music-workbench test: +   .custom-track-drawer,
+packages/music-workbench test: +   .plugin-card,
+packages/music-workbench test: +   .track-card
+packages/music-workbench test: + ) {
+packages/music-workbench test: +   border-color: var(--am-color-border);
+packages/music-workbench test: +   background: var(--am-color-surface);
+packages/music-workbench test: +   box-shadow: var(--am-shadow-control);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + @supports (content-visibility: auto) {
+packages/music-workbench test: +   .track-card,
+packages/music-workbench test: +   .plugin-card {
+packages/music-workbench test: +     content-visibility: auto;
+packages/music-workbench test: +     contain-intrinsic-block-size: 96px;
+packages/music-workbench test: +   }
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + :where(.catalog-drawer, .favorite-drawer, .playlist-drawer, .custom-track-drawer, .plugin-card) {
+packages/music-workbench test: +   border-radius: var(--am-radius-lg);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + :where(
+packages/music-workbench test: +   .queue__header,
+packages/music-workbench test: +   .favorites__header,
+packages/music-workbench test: +   .playlists__toolbar,
+packages/music-workbench test: +   .custom-tracks__toolbar,
+packages/music-workbench test: +   .custom-plugins__summary
+packages/music-workbench test: + ) {
+packages/music-workbench test: +   border-color: var(--am-color-border);
+packages/music-workbench test: +   border-radius: var(--am-radius-lg);
+packages/music-workbench test: +   background: var(--am-color-surface);
+packages/music-workbench test: +   box-shadow: var(--am-shadow-control);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + :where(button, input, select, textarea):disabled {
+packages/music-workbench test: +   cursor: not-allowed;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .feature-module-status,
+packages/music-workbench test: + .feature-module-error {
+packages/music-workbench test: +   min-block-size: 192px;
+packages/music-workbench test: +   border: 1px solid var(--am-color-border);
+packages/music-workbench test: +   border-radius: var(--am-radius-panel);
+packages/music-workbench test: +   background: var(--am-color-surface);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .feature-module-error button {
+packages/music-workbench test: +   min-block-size: var(--am-size-control);
+packages/music-workbench test: +   padding-inline: var(--am-space-4);
+packages/music-workbench test: +   border: 0;
+packages/music-workbench test: +   border-radius: var(--am-radius-control);
+packages/music-workbench test: +   background: var(--am-color-primary);
+packages/music-workbench test: +   color: var(--am-color-on-primary);
+packages/music-workbench test: +   cursor: pointer;
+packages/music-workbench test: +   font-weight: 700;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .session {
+packages/music-workbench test: +   display: flex;
+packages/music-workbench test: +   align-items: center;
+packages/music-workbench test: +   gap: var(--am-space-2);
+packages/music-workbench test: +   min-block-size: var(--am-size-control);
+packages/music-workbench test: +   padding-inline: var(--am-space-3);
+packages/music-workbench test: +   border: 1px solid var(--am-color-border);
+packages/music-workbench test: +   border-radius: var(--am-radius-control);
+packages/music-workbench test: +   background: var(--am-color-surface-subtle);
+packages/music-workbench test: +   color: var(--am-color-text-secondary);
+packages/music-workbench test: +   font-size: var(--am-font-size-xs);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .session__dot {
+packages/music-workbench test: +   inline-size: 8px;
+packages/music-workbench test: +   block-size: 8px;
+packages/music-workbench test: +   border-radius: 50%;
+packages/music-workbench test: +   background: var(--am-color-warning);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .session[data-status='signed-in'] .session__dot,
+packages/music-workbench test: + .session[data-status='not-required'] .session__dot {
+packages/music-workbench test: +   background: var(--am-color-success);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .session[data-status='expired'] .session__dot,
+packages/music-workbench test: + .session[data-status='unavailable'] .session__dot {
+packages/music-workbench test: +   background: var(--am-color-danger);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .session__button {
+packages/music-workbench test: +   padding: 0;
+packages/music-workbench test: +   border: 0;
+packages/music-workbench test: +   background: transparent;
+packages/music-workbench test: +   color: var(--am-color-primary);
+packages/music-workbench test: +   cursor: pointer;
+packages/music-workbench test: +   font-weight: 700;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-seek {
+packages/music-workbench test: +   display: grid;
+packages/music-workbench test: +   grid-template-columns: 52px minmax(0, 1fr) 52px;
+packages/music-workbench test: +   inline-size: 100%;
+packages/music-workbench test: +   align-items: center;
+packages/music-workbench test: +   gap: var(--am-space-2);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-track {
+packages/music-workbench test: +   position: relative;
+packages/music-workbench test: +   display: grid;
+packages/music-workbench test: +   block-size: 28px;
+packages/music-workbench test: +   align-items: center;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-track::before,
+packages/music-workbench test: + .player__precision-buffered,
+packages/music-workbench test: + .player__precision-track::after {
+packages/music-workbench test: +   position: absolute;
+packages/music-workbench test: +   inset-inline-start: 0;
+packages/music-workbench test: +   block-size: 6px;
+packages/music-workbench test: +   border-radius: var(--am-radius-pill);
+packages/music-workbench test: +   content: '';
+packages/music-workbench test: +   pointer-events: none;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-track::before {
+packages/music-workbench test: +   z-index: 0;
+packages/music-workbench test: +   inline-size: 100%;
+packages/music-workbench test: +   background: var(--am-color-player-track);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-buffered {
+packages/music-workbench test: +   z-index: 1;
+packages/music-workbench test: +   inline-size: var(--am-player-buffered, 0%);
+packages/music-workbench test: +   background: var(--am-color-player-buffered);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-track::after {
+packages/music-workbench test: +   z-index: 2;
+packages/music-workbench test: +   inline-size: var(--am-player-progress, 0%);
+packages/music-workbench test: +   background: var(--am-color-primary);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-range {
+packages/music-workbench test: +   appearance: none;
+packages/music-workbench test: +   position: relative;
+packages/music-workbench test: +   z-index: 3;
+packages/music-workbench test: +   inline-size: 100%;
+packages/music-workbench test: +   block-size: 28px;
+packages/music-workbench test: +   margin: 0;
+packages/music-workbench test: +   border: 0;
+packages/music-workbench test: +   background: transparent;
+packages/music-workbench test: +   cursor: pointer;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + /* 进度不可用时，整段指针热区都保持禁止反馈，避免被原生 range 的默认手势覆盖。 */
+packages/music-workbench test: + .player__precision-track:has(.player__precision-range:disabled),
+packages/music-workbench test: + .player__precision-range:disabled {
+packages/music-workbench test: +   cursor: not-allowed;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-range::-webkit-slider-runnable-track {
+packages/music-workbench test: +   block-size: 6px;
+packages/music-workbench test: +   background: transparent;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-range::-webkit-slider-thumb {
+packages/music-workbench test: +   appearance: none;
+packages/music-workbench test: +   inline-size: 16px;
+packages/music-workbench test: +   block-size: 16px;
+packages/music-workbench test: +   margin-block-start: -5px;
+packages/music-workbench test: +   border: 3px solid var(--am-color-surface);
+packages/music-workbench test: +   border-radius: 50%;
+packages/music-workbench test: +   background: var(--am-color-primary);
+packages/music-workbench test: +   box-shadow:
+packages/music-workbench test: +     0 0 0 1px var(--am-color-primary),
+packages/music-workbench test: +     var(--am-shadow-control);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-range::-moz-range-track {
+packages/music-workbench test: +   block-size: 6px;
+packages/music-workbench test: +   background: transparent;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-range::-moz-range-thumb {
+packages/music-workbench test: +   inline-size: 16px;
+packages/music-workbench test: +   block-size: 16px;
+packages/music-workbench test: +   border: 3px solid var(--am-color-surface);
+packages/music-workbench test: +   border-radius: 50%;
+packages/music-workbench test: +   background: var(--am-color-primary);
+packages/music-workbench test: +   box-shadow:
+packages/music-workbench test: +     0 0 0 1px var(--am-color-primary),
+packages/music-workbench test: +     var(--am-shadow-control);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-time,
+packages/music-workbench test: + .player__precision-tooltip {
+packages/music-workbench test: +   color: var(--am-color-text-secondary);
+packages/music-workbench test: +   font-size: var(--am-font-size-xs);
+packages/music-workbench test: +   font-variant-numeric: tabular-nums;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-time--end {
+packages/music-workbench test: +   text-align: end;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .player__precision-tooltip {
+packages/music-workbench test: +   position: absolute;
+packages/music-workbench test: +   z-index: 4;
+packages/music-workbench test: +   inset-block-end: calc(100% + 4px);
+packages/music-workbench test: +   padding: 2px 6px;
+packages/music-workbench test: +   border-radius: var(--am-radius-sm);
+packages/music-workbench test: +   background: var(--am-color-text);
+packages/music-workbench test: +   color: var(--am-color-background);
+packages/music-workbench test: +   pointer-events: none;
+packages/music-workbench test: +   white-space: nowrap;
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .track-card-summary__cover,
+packages/music-workbench test: + .track-card-summary__cover--empty {
+packages/music-workbench test: +   border-radius: var(--am-radius-md);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + .track-source-page-link {
+packages/music-workbench test: +   color: var(--am-color-primary);
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + @keyframes am-view-enter {
+packages/music-workbench test: +   from {
+packages/music-workbench test: +     opacity: 0;
+packages/music-workbench test: +     transform: translateY(5.6px);
+packages/music-workbench test: +   }
+packages/music-workbench test: +
+packages/music-workbench test: +   to {
+packages/music-workbench test: +     opacity: 1;
+packages/music-workbench test: +     transform: translateY(0);
+packages/music-workbench test: +   }
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + @container am-content (max-width: 768px) {
+packages/music-workbench test: +   .product-view {
+packages/music-workbench test: +     padding: var(--am-space-3);
+packages/music-workbench test: +   }
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + @container am-top-bar (max-width: 768px) {
+packages/music-workbench test: +   .product-top-bar__actions .session__label:not(.session__account),
+packages/music-workbench test: +   .product-top-bar__actions .session__button:last-child {
+packages/music-workbench test: +     display: none;
+packages/music-workbench test: +   }
+packages/music-workbench test: +
+packages/music-workbench test: +   // A native identity control remains reachable even when its username is collapsed.
+packages/music-workbench test: +   .product-top-bar__actions .session__account {
+packages/music-workbench test: +     min-inline-size: 44px;
+packages/music-workbench test: +     max-inline-size: 44px;
+packages/music-workbench test: +     justify-content: center;
+packages/music-workbench test: +   }
+packages/music-workbench test: +
+packages/music-workbench test: +   .product-top-bar__actions .session__account > span,
+packages/music-workbench test: +   .product-top-bar__actions .session__account > svg:last-child {
+packages/music-workbench test: +     display: none;
+packages/music-workbench test: +   }
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + @media (max-width: 576px) {
+packages/music-workbench test: +   .player__precision-seek {
+packages/music-workbench test: +     grid-template-columns: 48px minmax(0, 1fr) 48px;
+packages/music-workbench test: +   }
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test: + @media (prefers-reduced-motion: reduce) {
+packages/music-workbench test: +   .product-view {
+packages/music-workbench test: +     animation: none;
+packages/music-workbench test: +   }
+packages/music-workbench test: + }
+packages/music-workbench test: +
+packages/music-workbench test:  ❯ test/components/music-sources/MusicSourceWorkbench.test.ts:218:36
+packages/music-workbench test:     216|   it('keeps the responsive back control on the left and names bulk fav…
+packages/music-workbench test:     217|     expect(productWorkbenchStyles).not.toContain('data-sidebar-side')
+packages/music-workbench test:     218|     expect(productWorkbenchStyles).toContain(
+packages/music-workbench test:        |                                    ^
+packages/music-workbench test:     219|       "grid-template-areas: 'context context' 'back actions';",
+packages/music-workbench test:     220|     )
+packages/music-workbench test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+packages/music-workbench test:  FAIL  test/features/workbench/use-workbench-controller.test.ts > stable workbench lifetime > keeps real classic download and queue views on one scheduler across root presentation replacement
+packages/music-workbench test: AssertionError: expected '' to contain '待听'
+packages/music-workbench test: - Expected
+packages/music-workbench test: + Received
+packages/music-workbench test: - 待听
+packages/music-workbench test:  ❯ vi.waitFor.timeout test/features/workbench/use-workbench-controller.test.ts:758:68
+packages/music-workbench test:     756|         if (next === 'B') {
+packages/music-workbench test:     757|           // eslint-disable-next-line no-await-in-loop
+packages/music-workbench test:     758|           await vi.waitFor(() => expect(f.rootElement.textContent).toC…
+packages/music-workbench test:        |                                                                    ^
+packages/music-workbench test:     759|             timeout: 10_000,
+packages/music-workbench test:     760|           })
+packages/music-workbench test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+packages/music-workbench test: ⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+packages/music-workbench test: Vitest caught 1 unhandled error during the test run.
+packages/music-workbench test: This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+packages/music-workbench test: ⎯⎯⎯⎯ Unhandled Rejection ⎯⎯⎯⎯⎯
+packages/music-workbench test: ReferenceError: remove is not defined
+packages/music-workbench test:  ❯ useClassicTrackCollection ../theme-default/src/composables/use-classic-track-collection.ts:147:5
+packages/music-workbench test:     145|     favoriteSelected,
+packages/music-workbench test:     146|     addToPlaylist,
+packages/music-workbench test:     147|     remove,
+packages/music-workbench test:        |     ^
+packages/music-workbench test:     148|   }
+packages/music-workbench test:     149| }
+packages/music-workbench test:  ❯ setup ../theme-default/src/components/library/ClassicTrackCollection.vue:31:5
+packages/music-workbench test:  ❯ callWithErrorHandling ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:200:19
+packages/music-workbench test:  ❯ setupStatefulComponent ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:8328:25
+packages/music-workbench test:  ❯ setupComponent ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:8290:36
+packages/music-workbench test:  ❯ mountComponent ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:6160:7
+packages/music-workbench test:  ❯ processComponent ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:6126:9
+packages/music-workbench test:  ❯ patch ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:5630:11
+packages/music-workbench test:  ❯ ReactiveEffect.componentUpdateFn [as fn] ../../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:6282:11
+packages/music-workbench test:  ❯ ReactiveEffect.run ../../node_modules/.pnpm/@vue+reactivity@3.5.44/node_modules/@vue/reactivity/dist/reactivity.cjs.js:268:19
+packages/music-workbench test: This error originated in "test/features/workbench/use-workbench-controller.test.ts" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.
+packages/music-workbench test: The latest test that might've caused the error is "keeps real classic download and queue views on one scheduler across root presentation replacement". It might mean one of the following:
+packages/music-workbench test: - The error was thrown, while Vitest was running this test.
+packages/music-workbench test: - If the error occurred after the test had been completed, this was the last documented test before it was thrown.
+packages/music-workbench test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+packages/music-workbench test: Failed
+<project-root>\packages\music-workbench:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/music-workbench@0.0.0 test: `vitest run`
+Exit status 1
+ ELIFECYCLE  Test failed. See above for more details.

@@ -1,0 +1,12 @@
+
+> @any-music/music-workbench@0.0.0 test <project-root>\packages\music-workbench
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/music-workbench
+
+
+ Test Files  57 passed (57)
+      Tests  413 passed (413)
+   Start at  11:12:13
+   Duration  21.63s (transform 90.36s, setup 0ms, import 137.10s, tests 21.51s, environment 22ms)

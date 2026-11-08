@@ -1,0 +1,494 @@
+{
+  "runtimeScope": "shared",
+  "date": "2026-11-07",
+  "status": "Investigation and regression coverage; reported accumulation not reproduced; cause unresolved; no product implementation change or admission",
+  "changes": {
+    "consumerTraversalCases": 25,
+    "sharedTraversalCases": 5,
+    "sharedViewportResizeCases": 1,
+    "launcherModuleGraphCases": 1,
+    "productionGates": "unchanged, default closed",
+    "dragMotion": "unchanged"
+  },
+  "checks": {
+    "targetPackageTests": "passed (UI, Classic, Studio); additional focused resize test passed",
+    "targetPackageTypecheck": "passed",
+    "launcherTests": "7 passed",
+    "rootLint": "passed with existing out-of-scope warnings",
+    "targetFormat": "passed",
+    "build": "not run; only tests and documentation changed"
+  },
+  "native": {
+    "identity": "com.anymusic.virtuallisttest.n80",
+    "method": "Actual test launcher, native WebView and host controller; CDP programmatic navigation/scroll and connected-node checks",
+    "viewport": [1280, 851],
+    "cases": [
+      {
+        "theme": "default",
+        "page": "favorites",
+        "requestedStyle": "default",
+        "requestedMode": "standard",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "favorites",
+        "requestedStyle": "default",
+        "requestedMode": "compact",
+        "head": 16,
+        "maximum": 28,
+        "returned": 16,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "favorites",
+        "requestedStyle": "default",
+        "requestedMode": "comfortable",
+        "head": 10,
+        "maximum": 18,
+        "returned": 10,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "favorites",
+        "requestedStyle": "minimal",
+        "requestedMode": "standard",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "favorites",
+        "requestedStyle": "minimal",
+        "requestedMode": "compact",
+        "head": 16,
+        "maximum": 32,
+        "returned": 16,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "favorites",
+        "requestedStyle": "minimal",
+        "requestedMode": "comfortable",
+        "head": 8,
+        "maximum": 14,
+        "returned": 8,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "queue",
+        "requestedStyle": "default",
+        "requestedMode": "standard",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "queue",
+        "requestedStyle": "default",
+        "requestedMode": "compact",
+        "head": 16,
+        "maximum": 28,
+        "returned": 16,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "queue",
+        "requestedStyle": "default",
+        "requestedMode": "comfortable",
+        "head": 10,
+        "maximum": 18,
+        "returned": 10,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "queue",
+        "requestedStyle": "minimal",
+        "requestedMode": "standard",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "queue",
+        "requestedStyle": "minimal",
+        "requestedMode": "compact",
+        "head": 16,
+        "maximum": 32,
+        "returned": 16,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "queue",
+        "requestedStyle": "minimal",
+        "requestedMode": "comfortable",
+        "head": 8,
+        "maximum": 14,
+        "returned": 8,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "playlists",
+        "requestedStyle": "default",
+        "requestedMode": "standard",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "playlists",
+        "requestedStyle": "default",
+        "requestedMode": "compact",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "playlists",
+        "requestedStyle": "default",
+        "requestedMode": "comfortable",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "playlists",
+        "requestedStyle": "minimal",
+        "requestedMode": "standard",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "playlists",
+        "requestedStyle": "minimal",
+        "requestedMode": "compact",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "default",
+        "page": "playlists",
+        "requestedStyle": "minimal",
+        "requestedMode": "comfortable",
+        "head": 12,
+        "maximum": 21,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "studio",
+        "page": "favorites",
+        "requestedStyle": "default",
+        "requestedMode": "standard",
+        "head": 6,
+        "maximum": 16,
+        "returned": 6,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "studio",
+        "page": "favorites",
+        "requestedStyle": "default",
+        "requestedMode": "compact",
+        "head": 7,
+        "maximum": 19,
+        "returned": 7,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "studio",
+        "page": "favorites",
+        "requestedStyle": "default",
+        "requestedMode": "comfortable",
+        "head": 5,
+        "maximum": 14,
+        "returned": 5,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "studio",
+        "page": "favorites",
+        "requestedStyle": "minimal",
+        "requestedMode": "standard",
+        "head": 12,
+        "maximum": 24,
+        "returned": 12,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "studio",
+        "page": "favorites",
+        "requestedStyle": "minimal",
+        "requestedMode": "compact",
+        "head": 16,
+        "maximum": 32,
+        "returned": 16,
+        "departedNodesDisconnected": true
+      },
+      {
+        "theme": "studio",
+        "page": "favorites",
+        "requestedStyle": "minimal",
+        "requestedMode": "comfortable",
+        "head": 6,
+        "maximum": 14,
+        "returned": 6,
+        "departedNodesDisconnected": true
+      }
+    ]
+  },
+  "nativeResponsive": {
+    "method": "CDP emulated viewport in the actual native test WebView; no OS window/input or performance acceptance",
+    "viewports": [
+      {
+        "viewport": [800, 650],
+        "cases": [
+          {
+            "theme": "default",
+            "page": "favorites",
+            "requestedStyle": "default",
+            "requestedMode": "standard",
+            "head": 6,
+            "maximum": 12,
+            "returned": 6,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "favorites",
+            "requestedStyle": "minimal",
+            "requestedMode": "standard",
+            "head": 6,
+            "maximum": 12,
+            "returned": 6,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "queue",
+            "requestedStyle": "default",
+            "requestedMode": "standard",
+            "head": 6,
+            "maximum": 12,
+            "returned": 6,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "queue",
+            "requestedStyle": "minimal",
+            "requestedMode": "standard",
+            "head": 6,
+            "maximum": 12,
+            "returned": 6,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "playlists",
+            "requestedStyle": "default",
+            "requestedMode": "standard",
+            "head": 6,
+            "maximum": 14,
+            "returned": 6,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "playlists",
+            "requestedStyle": "minimal",
+            "requestedMode": "standard",
+            "head": 6,
+            "maximum": 12,
+            "returned": 6,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "studio",
+            "page": "favorites",
+            "requestedStyle": "default",
+            "requestedMode": "standard",
+            "head": 3,
+            "maximum": 8,
+            "returned": 3,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "studio",
+            "page": "favorites",
+            "requestedStyle": "minimal",
+            "requestedMode": "standard",
+            "head": 3,
+            "maximum": 9,
+            "returned": 3,
+            "departedNodesDisconnected": true
+          }
+        ]
+      },
+      {
+        "viewport": [2195, 1164],
+        "cases": [
+          {
+            "theme": "default",
+            "page": "favorites",
+            "requestedStyle": "default",
+            "requestedMode": "standard",
+            "head": 30,
+            "maximum": 48,
+            "returned": 30,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "favorites",
+            "requestedStyle": "minimal",
+            "requestedMode": "standard",
+            "head": 30,
+            "maximum": 48,
+            "returned": 30,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "queue",
+            "requestedStyle": "default",
+            "requestedMode": "standard",
+            "head": 30,
+            "maximum": 48,
+            "returned": 30,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "queue",
+            "requestedStyle": "minimal",
+            "requestedMode": "standard",
+            "head": 30,
+            "maximum": 48,
+            "returned": 30,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "playlists",
+            "requestedStyle": "default",
+            "requestedMode": "standard",
+            "head": 30,
+            "maximum": 48,
+            "returned": 30,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "default",
+            "page": "playlists",
+            "requestedStyle": "minimal",
+            "requestedMode": "standard",
+            "head": 30,
+            "maximum": 48,
+            "returned": 30,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "studio",
+            "page": "favorites",
+            "requestedStyle": "default",
+            "requestedMode": "standard",
+            "head": 10,
+            "maximum": 20,
+            "returned": 10,
+            "departedNodesDisconnected": true
+          },
+          {
+            "theme": "studio",
+            "page": "favorites",
+            "requestedStyle": "minimal",
+            "requestedMode": "standard",
+            "head": 30,
+            "maximum": 54,
+            "returned": 30,
+            "departedNodesDisconnected": true
+          }
+        ]
+      }
+    ]
+  },
+  "limits": [
+    "No reproduced all-80-connected case; no root-cause fix is claimed.",
+    "Fixture sizes 0/1/1k/10k have injected-geometry consumer coverage, not current native live acceptance.",
+    "Style/density entries record requested host actions; they do not independently accept every resulting skin/density combination.",
+    "Programmatic scrolling and CDP viewport emulation do not accept OS resizing, keyboard/touch/IME, artwork, drag or performance.",
+    "ResizeObserver loop notifications occurred during the repeated layout-change diagnostic; they were not attributed or accepted.",
+    "Installed GM and production artifacts were not exercised."
+  ],
+  "logs": "logs/2026-11-07-virtual-list-dom-fix/",
+  "inputs": [
+    {
+      "path": "scripts/lib/virtual-list-test.mjs",
+      "sha256": "65d99e39c6b8339fc542d2a325ae5f1731253a83fec31acc052bd91498ca2ecf"
+    },
+    {
+      "path": "scripts/test/virtual-list-test.integration.test.mjs",
+      "sha256": "d39297cc9ec3e61b7c639ba1ecb6cfda31dfc1cf6b4af22a4c6df06fa507d097"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "5a403bee6a1b9378a635570cfb9f7a64d6a51818524573af7d9eccfc23101613"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts",
+      "sha256": "25980b700ae6088db58271c2030e9065520ef88c84128458f93a6b93c5e53ca3"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-list.ts",
+      "sha256": "895df904378b13515d1255d8489a9f0ab0c1ee1017947b216866a298aaa4035e"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-retention.ts",
+      "sha256": "ab6b825bd0bb08bc437a218c8a6cdffd2f53bd9f49e38d570ae2b238f0595b88"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+      "sha256": "4c9623315f17f977570793c89372c67ac2b88d391a74d886cc70f0197f8afafc"
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicTrackCollection.virtual.test.ts",
+      "sha256": "56c5354e49f0df939138b262099c226e3bcf3250f92752d9bb8c04fce8d29448"
+    },
+    {
+      "path": "packages/theme-studio/test/components/library/StudioTrackTable.virtual.test.ts",
+      "sha256": "5d76335a2c7804e31555ac8e97d18efefe2ba95384ca8e8ecf412f10f699ee58"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTrackCardGrid.test.ts",
+      "sha256": "d44e3d724df8e7e8f20e7ba7431c3612445a31bd99a24b817011614a08cfd7c2"
+    }
+  ]
+}

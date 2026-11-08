@@ -1,0 +1,44 @@
+{
+  "name": "@any-music/music-workbench",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./theme": "./src/theme.ts",
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/*",
+    "./features/*": "./src/features/*.ts",
+    "./media/*": "./src/media/*.ts",
+    "./storage": "./src/storage/product-storage.ts",
+    "./plugin-data": "./src/plugin-adapters/offline-plugin-data.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@any-music/audio-composition": "workspace:*",
+    "@any-music/core": "workspace:*",
+    "@any-music/plugin-center": "workspace:*",
+    "@any-music/plugin-sdk": "workspace:*",
+    "@any-music/plugin-ui-vue": "workspace:*",
+    "@any-music/ui": "workspace:*",
+    "client-zip": "catalog:",
+    "mediabunny": "catalog:",
+    "pinia": "catalog:",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@any-music/plugin-music-creation": "workspace:*",
+    "@any-music/plugin-tag-management": "workspace:*",
+    "@any-music/theme-default": "workspace:*",
+    "@any-music/theme-studio": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "sass": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

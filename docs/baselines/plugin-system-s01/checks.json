@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "step": "S01",
+  "status": "implemented",
+  "checkedAt": "2026-10-16T08:03:49.034Z",
+  "start": "start.json",
+  "commands": [
+    {
+      "command": "pnpm test",
+      "startedAt": "2026-10-16T07:58:56.8342893Z",
+      "finishedAt": "2026-10-16T07:59:35.9581404Z",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/s01/test.log",
+      "logSha256": "d5b35118064a3c6b9dde4f3c01b146e290795153a772061cbf2a24ba88af023c"
+    },
+    {
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-16T07:58:56.8380448Z",
+      "finishedAt": "2026-10-16T07:59:44.8375524Z",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/s01/typecheck.log",
+      "logSha256": "062cad74d4b84b96e98c48aee0b137967767c8aa966c601a226183ba666ff909"
+    },
+    {
+      "command": "pnpm lint",
+      "startedAt": "2026-10-16T07:58:56.8326621Z",
+      "finishedAt": "2026-10-16T07:58:58.9001453Z",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/s01/lint.log",
+      "logSha256": "cbd4d00ccaf37b32695e49a471f6bfe7547b12ab55c669256e9078279ce54c50"
+    },
+    {
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-16T08:02:50.8181429Z",
+      "finishedAt": "2026-10-16T08:02:54.6013510Z",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/s01/format-check.log",
+      "logSha256": "ce4a07efa3ded30ecf2878e90806c2dc5bf55924f3feb5fde7be314d85df57f7"
+    },
+    {
+      "command": "pnpm build",
+      "startedAt": "2026-10-16T08:00:19.0536159Z",
+      "finishedAt": "2026-10-16T08:01:53.0326320Z",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/s01/build.log",
+      "logSha256": "12e4231ecd0ff30f0c4e9e752dac2b7fc06e9b986b14e3b37a97fce12dd39dc3"
+    }
+  ],
+  "testSummary": {
+    "vitest": 1399,
+    "rootBoundary": 8,
+    "rustPassed": 98,
+    "rustIgnored": 1,
+    "sdk": 53,
+    "workbenchAdapters": 23,
+    "corpusCases": 43
+  },
+  "packageCheck": {
+    "command": "pnpm --filter @any-music/plugin-sdk check:package",
+    "startedAt": "2026-10-16T07:59:07.7243419Z",
+    "finishedAt": "2026-10-16T07:59:17.6951238Z",
+    "exitCode": 0,
+    "logPath": ".codex-tmp/s01/package-check.log",
+    "logSha256": "56dae53875da8ccf0680f7a0d184fece1e43b5acba7ab62afc820dc14a5f927d"
+  },
+  "generationRejections": {
+    "command": "node .codex-tmp/s01/check-generation-rejections.mjs",
+    "checkedAt": "2026-10-16T07:57:40.579Z",
+    "results": [
+      {
+        "case": "drift",
+        "exitCode": 1,
+        "rejection": "Generated artifact drift"
+      },
+      {
+        "case": "remote-ref",
+        "exitCode": 1,
+        "rejection": "Unregistered or remote schema reference"
+      },
+      {
+        "case": "unregistered-ref",
+        "exitCode": 1,
+        "rejection": "Unregistered or remote schema reference"
+      },
+      {
+        "case": "arbitrary-regex",
+        "exitCode": 1,
+        "rejection": "Unsupported schema keyword"
+      }
+    ]
+  },
+  "audit": {
+    "command": "pnpm audit --json",
+    "exitCode": 1,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 2,
+      "high": 7,
+      "critical": 2
+    },
+    "advisories": [
+      {
+        "module": "js-yaml",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-2883-xcg3-v3hh",
+        "versions": [
+          {
+            "version": "4.3.1",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "fast-uri",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-qw65-cvwx-89v3",
+        "versions": [
+          {
+            "version": "3.1.6",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "fast-uri",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-58mr-gqgx-xq4g",
+        "versions": [
+          {
+            "version": "3.1.6",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "fast-uri",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-hrr3-gc8f-f4qj",
+        "versions": [
+          {
+            "version": "3.1.6",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "brace-expansion",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+        "versions": [
+          {
+            "version": "1.1.18",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "brace-expansion",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+        "versions": [
+          {
+            "version": "1.1.18",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "brace-expansion",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+        "versions": [
+          {
+            "version": "1.1.18",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "source-map-js",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-68fv-2mgg-jv7q",
+        "versions": [
+          {
+            "version": "1.2.1",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "@vue/server-renderer",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-g2v6-rqmx-r4w6",
+        "versions": [
+          {
+            "version": "3.5.41",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "tinypool",
+        "severity": "critical",
+        "url": "https://github.com/advisories/GHSA-5gmw-xhrv-c9v3",
+        "versions": [
+          {
+            "version": "2.1.0",
+            "alreadyLocked": true
+          }
+        ]
+      },
+      {
+        "module": "tinypool",
+        "severity": "critical",
+        "url": "https://github.com/advisories/GHSA-85c8-ppgw-ccpr",
+        "versions": [
+          {
+            "version": "2.1.0",
+            "alreadyLocked": true
+          }
+        ]
+      }
+    ],
+    "scope": "Existing locked versions; SDK has no production dependencies. Not a production publication security acceptance."
+  },
+  "artifact": {
+    "path": ".codex-tmp/s01/package/any-music-plugin-sdk-0.1.0.tgz",
+    "bytes": 132266,
+    "sha256": "9bb376eeac6cf7c33af823e7e6037584d91c2bc0dee8c75ce8873089f349eb76"
+  },
+  "protocol": {
+    "schemaPath": "packages/plugin-sdk/schema/v1/protocol.schema.json",
+    "schemaSha256": "2be04f3d8a43c1baa355ed92c2d4010b51160182e755df0066b05f1bc1efb913",
+    "registrySha256": "6fb1feaaa243dbca69a3d12502938ce7b9152887ed486257e504225a482a3c27",
+    "corpusIndexSha256": "63137ad3e763eb6fc5ee966db2631853fa80f64d1b72e479f0b7eff7cb330fed",
+    "generated": [
+      {
+        "path": "packages/plugin-sdk/src/generated/protocol.ts",
+        "sha256": "2facc0c140433448811785f9e42fb73dd6d75684fbeb1863de93f5cb8762f681"
+      },
+      {
+        "path": "packages/plugin-sdk/src/generated/registry.ts",
+        "sha256": "add5498e7b93b1fb7d6401e5bd109e729e627926adf4c9e1acd6eaba10eba260"
+      },
+      {
+        "path": "packages/plugin-sdk/src/generated/schema-types.ts",
+        "sha256": "543f4b51b9fe02808f0a2a9f36b81146185dd76f911d1fab5228d84ad520ac63"
+      },
+      {
+        "path": "packages/plugin-sdk/src/generated/validators.d.ts",
+        "sha256": "755e499d36a37e99c107c4c092ecfc20709e656b5df30d20b6488a00950f6629"
+      },
+      {
+        "path": "packages/plugin-sdk/src/generated/validators.js",
+        "sha256": "42f033af8dc1d08c11f744dd0cae803d43bd416c7033b2ffbf21dcaa14c396c2"
+      }
+    ]
+  },
+  "preservation": {
+    "startingFiles": 184,
+    "unchangedFiles": 172,
+    "intentionallyUpdated": [
+      "docs/en/cross-platform/README.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-baseline.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构基线.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+    ],
+    "unexpectedModified": []
+  },
+  "runtimeAcceptance": {
+    "appLaunched": false,
+    "browserLaunched": false,
+    "webviewIsolation": false,
+    "gmLive": false,
+    "rustPublicNetwork": false,
+    "mobile": false
+  },
+  "applicationArtifactComparison": {
+    "baseline": "S00 deliveryArtifacts",
+    "compared": 57,
+    "unchanged": 57
+  }
+}

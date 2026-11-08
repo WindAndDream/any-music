@@ -1,0 +1,141 @@
+{
+  "batchId": "T12",
+  "status": "complete",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "prerequisites": {
+    "T11": "Waited for the existing T11 chat and T11.json to report complete before modifying files. Preparation while T11 was active was read-only."
+  },
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "initialDirtyPathCount": 403,
+    "snapshot": "T12-workspace-before.txt",
+    "preserved": "Earlier migration and native/download changes remain. Checks and artifacts describe the combined worktree."
+  },
+  "scope": "Remove retired partial theme implementations, dispatch and exports; retain controlled neutral UI, host surfaces and semantic plugin contributions. Strengthen theme boundary fixtures and document third-theme delivery.",
+  "checks": [
+    {
+      "command": "pnpm --filter @any-music/ui --filter @any-music/plugin-ui-vue --filter @any-music/theme-default --filter @any-music/theme-studio --filter @any-music/music-workbench test",
+      "exitCode": 0,
+      "log": "T12-target-tests.txt",
+      "files": 177,
+      "tests": 1140
+    },
+    {
+      "command": "node --test scripts/test/check-package-boundaries.test.mjs scripts/test/theme-style-resources.test.mjs",
+      "exitCode": 0,
+      "log": "T12-boundaries.txt",
+      "tests": 20
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T12-root-typecheck.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T12-root-lint.txt"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T12-root-format.txt",
+      "note": "Final documentation/evidence format verification passed."
+    },
+    {
+      "command": "uv run --no-project --with pyyaml python <user-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py .agents/skills/any-music-ui-delivery",
+      "exitCode": 0,
+      "log": "T12-skill-validation.txt"
+    },
+    {
+      "command": "git -c core.safecrlf=false diff --check",
+      "exitCode": 0,
+      "log": "T12-diff-check.txt"
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T12-root-test.txt"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T12-root-build.txt",
+      "note": "Both production frontends plus Windows release executable; existing chunk-size/plugin-timing warnings."
+    }
+  ],
+  "liveAcceptance": "Not requested; no product UI/browser/application/emulator launch. T13 remains separate.",
+  "git": "No commit or push requested.",
+  "files": "T12-files.json",
+  "environment": {
+    "os": "Windows",
+    "shell": "PowerShell",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "testHost": "Node Vitest/custom component renderer plus existing offline Rust/protocol suites; no product UI"
+  },
+  "implementation": [
+    "Removed partial trusted themes/loaders and /trusted/presentation, UiPresentation/injection, row/list/navigation dispatch, partial workbench composition, extraction runtime ports and chrome/catalog/library maps. Complete definitions are the sole transaction content.",
+    "Moved classic TrackRow into theme-default; retained neutral summary/grid geometry/media primitives and fixed host panels. Moved classic page/row/player skins from UI into scoped theme-default foundation and neutral timeline CSS into the creation plugin.",
+    "Collapsed five theme renderer slots to one theme.root allocation. Preserved semantic navigation, views, track action/detail, batch action/filter points, fallback recovery, stable business/media/editor lifetimes and ui-theme:v1.",
+    "Application-injected theme metadata drives canonical modules. Stable ID validation no longer enumerates the two concrete themes. Third-theme root/module/load/recovery fixtures pass without a theme-specific business branch.",
+    "Package checks and build SFC resources discover theme-* packages, reject forbidden imports/private exports/cycles/cross-theme selectors, prevent neutral UI page/row skins and reject retired import paths. Build audit schema 2 covers all optional themes.",
+    "Added bilingual Independent Theme Development with public entries, scoped resources, app metadata/lazy registration, module admission, shared tests and live-acceptance boundary; refreshed package guides, UI skill, architecture/UI/design/index records."
+  ],
+  "intermediateFindings": [
+    "Initial target typecheck found a remaining classic workspaceClass expression after injection removal; replaced it with the ordinary controlled surface.",
+    "Third-theme execution test demonstrated the old descriptor ID allowlist; replaced it with stable ID syntax validation and explicit app registration. Updated narrow test fixture types.",
+    "First style tests referenced removed feature-panel CSS and a retired host-descendant selector; updated test ownership and removed that obsolete selector. Root transaction and all package interactions then passed.",
+    "SFC resource fixture initially compared a harmless leading newline literally; assertion now compares trimmed module output and separately proves host collection excludes theme styles.",
+    "Initial root typecheck found a test fixture still narrowing IDs to two themes; widened fixture parameters and reran the root check successfully.",
+    "System Python lacked PyYAML for skill validation; uv isolated Python with PyYAML ran quick_validate.py successfully. No repository dependency or runtime capability was added.",
+    "Final artifact review restored lazy standalone queue/download exports instead of importing their full panels eagerly. Root test and build were repeated for the final source; no partial presentation map was restored."
+  ],
+  "rootTestSummary": {
+    "vitestFiles": 290,
+    "vitestTests": 2114,
+    "rustPassed": 229,
+    "rustIgnored": 1,
+    "repositoryScriptTests": 35,
+    "cliTests": 21,
+    "protocolCases": 183
+  },
+  "artifacts": "T12-artifacts.json",
+  "executionGraphs": {
+    "userscript": {
+      "audit": "T12-userscript-theme-build-audit.json",
+      "schemaVersion": 2,
+      "metadataModuleCount": 3,
+      "startupStaticModuleCount": 635,
+      "documentStartStaticModuleCount": 25,
+      "optionalThemes": ["studio"],
+      "optionalThemeExecutedByStaticStartup": false,
+      "retiredImports": false
+    },
+    "tauri": {
+      "audit": "T12-tauri-theme-build-audit.json",
+      "schemaVersion": 2,
+      "metadataModuleCount": 3,
+      "startupStaticModuleCount": 740,
+      "documentStartStaticModuleCount": 0,
+      "optionalThemes": ["studio"],
+      "optionalThemeExecutedByStaticStartup": false,
+      "retiredImports": false
+    }
+  },
+  "completionConditions": {
+    "independentPackagesAreSoleThemeImplementations": true,
+    "partialDispatchLoadersMapsRemoved": true,
+    "neutralAndHostOwnershipRetained": true,
+    "oneCompleteRootAllocation": true,
+    "thirdThemeFixturesAndGuide": true,
+    "allRootGatesPassed": true,
+    "finalDocumentationFormatCheck": "passed",
+    "finalSource": "Final root tests/lint and repeated production build pass after preserving lazy standalone widgets."
+  },
+  "remaining": [
+    "T13 requires an explicit browser/application/device inspection request. Node tests/build graphs do not establish real visual/focus/touch, installed GM transport, native HTTP/save/media or Android/iOS acceptance."
+  ]
+}

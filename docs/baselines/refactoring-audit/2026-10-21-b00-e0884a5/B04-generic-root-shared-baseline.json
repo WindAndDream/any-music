@@ -1,0 +1,170 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B04-generic-root-shared",
+  "capturedAt": "2026-10-21T14:54:34.6667663+08:00",
+  "head": "b87ac45bfb32b9cee89b77c2170b842a69f9f98f",
+  "workingTree": [
+    " M docs/en/README.md",
+    " M docs/en/cross-platform/README.md",
+    " M \"docs/zh-cn/\\346\\226\\207\\346\\241\\243\\347\\264\\242\\345\\274\\225.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\226\\207\\346\\241\\243\\347\\264\\242\\345\\274\\225.md\"",
+    "?? docs/baselines/refactoring-audit/",
+    "?? docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+    "?? \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\351\\207\\215\\346\\236\\204\\345\\210\\206\\346\\235\\277\\345\\235\\227\\346\\216\\222\\346\\237\\245\\350\\256\\241\\345\\210\\222.md\""
+  ],
+  "targetWorkingTree": [],
+  "environment": {
+    "os": "Microsoft Windows NT 10.0.26200.0",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "timezone": "Asia/Shanghai"
+  },
+  "files": [
+    {
+      "path": "<project-root>/packages/plugin-center/AGENTS.md",
+      "sha256": "9da312e706600d97d1994e21ebd7cc0aaa3c38002990171b33c9b7db3a93d973"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/package.json",
+      "sha256": "739a12bd6b5044b13c4a8e8a62d92d9959ce73be30e474b8f666c95969072df2"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/tsconfig.json",
+      "sha256": "7938a0fb99f066b49a12310d72118090cbd07127ba0afdd5ac1bb7e648848e73"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/contribution-allocator.ts",
+      "sha256": "9e325b0ba110ab4a2736855a8cb4834c58946a3c162584d09774f8003d3fb980"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/contribution-registry.ts",
+      "sha256": "0bcf5d6a54a5fff46e1516cf40e51c2a6df78f253576abf7496610737967a750"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/external-plugin-policy.ts",
+      "sha256": "8a7f27b9042c66450e6bba28e02a7d2168a86f80d73220f44143c1c69df89ce4"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/index.ts",
+      "sha256": "b70b455d4d7c19241bb682665fed7632a52f97ee67e7446957bdb3178c0c9de6"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/module-conditions.ts",
+      "sha256": "305eab141a21e53e1d9e0806c16407db7c792690876ab267c8d5fac92168540b"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/module-contracts.ts",
+      "sha256": "d993b5380273fe3e804938efbfc7bb6ac812fd0a566ec26977f6adbd9119f53d"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/module-controller.ts",
+      "sha256": "4b2d717329a96a3c7cdaa3b7f1a8c2f836f71d0226619b64865511fa18a24dae"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/module-dependencies.ts",
+      "sha256": "046ccc934366866fa4cbda25304733aafe0442e90f91cc771f77202f4593ee8a"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/module-recovery.ts",
+      "sha256": "007b3128c8d6c0169eeefeaf56848b93c248cb4f9fa13ce70cf8779f9f5d9e7d"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/plugin-catalog.ts",
+      "sha256": "2653f02df27a0963694360d974489b482b95847d003577767a6b4203c9cd8bc9"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/music-sources/built-in-source-target.ts",
+      "sha256": "198d9deecab663b4f02e553fd05607585e13d0eb25b3465a439737f6298496c7"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/music-sources/index.ts",
+      "sha256": "240ceda1c262f1b11e3808c4422318dc332b09e689ba397a1b0ef09e32e7a174"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts",
+      "sha256": "f99ac67694d0c43893bf41634106409e6ac1ca8cc17483ffd2c003daed9b0d24"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/music-sources/managed-music-source-plugin.ts",
+      "sha256": "9d9ae67853cb8fae8664741040192350aaf8677860139bd4a50580536a515b3b"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/src/music-sources/music-source-registry.ts",
+      "sha256": "d5d29e8d6e8260de3d545cab5c3a80e49f390fecc6aba02811f17110522cf7d7"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/contribution-allocator.test.ts",
+      "sha256": "315cb2a5fe2b85e7e9f5fcfd8e32da4a5936adc904dbd7581607fc8f971bac2a"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/contribution-registry.test.ts",
+      "sha256": "0a89ce1e4ad29c40a4cf3a03105151e689fabbfd10209866b264fbcb6f5b09ec"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/module-controller.test.ts",
+      "sha256": "75618c8d2e36aed8bb4445589edb3a7dddfab804e04412259acc64d96e2ae673"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/module-dependencies.test.ts",
+      "sha256": "c676d90d17bee17f8650ed16685c8caa74733fa0a85a066fc01e1cf4173e5c63"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/module-fixtures.ts",
+      "sha256": "9ba4740db4a14b49de1ccb141bc8c308286415796b36523cee2bf14710f6b426"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/plugin-catalog.test.ts",
+      "sha256": "bbc5119147cb1d50e306e6b536cee6cab2b14d3a2333153222e4ff9736832c2f"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/music-sources/built-in-source-target.test.ts",
+      "sha256": "bcb2145db5612c934fa06ac16b84fc41fb0bb42e9600437dae5ba4968e1683e6"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/music-sources/lazy-music-source-plugin.test.ts",
+      "sha256": "c698c20a9f8c10986ef12bc34c150f2da9e647839fd06a60b2f68746fbf9d1cb"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/music-sources/managed-music-source-plugin.test.ts",
+      "sha256": "6628c396c75de7dc054f6942a343b3f5f4360d9b191c184ee8f52252adf51caa"
+    },
+    {
+      "path": "<project-root>/packages/plugin-center/test/music-sources/music-source-registry.test.ts",
+      "sha256": "f32be9f7ce54892cce07b6bdd62ac8b1d76ce1ebab172fff01ceb3e11d3df959"
+    },
+    {
+      "path": "<project-root>/AGENTS.md",
+      "sha256": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177"
+    },
+    {
+      "path": "<project-root>/package.json",
+      "sha256": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e"
+    },
+    {
+      "path": "<project-root>/pnpm-workspace.yaml",
+      "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e"
+    },
+    {
+      "path": "<project-root>/tsconfig.base.json",
+      "sha256": "a54d24214863db254a94db67f8ded43f5cf6465184be18799d88bdc02087ffa1"
+    },
+    {
+      "path": "<project-root>/docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "sha256": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15"
+    },
+    {
+      "path": "<project-root>/docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "sha256": "9b108401084637dfd5e73864d5b37990661df447ea91d25d2830a4c2bbfdbb2c"
+    }
+  ],
+  "finalInputCheck": {
+    "checkedAt": "2026-10-21T14:57:50.7727996+08:00",
+    "head": "b87ac45bfb32b9cee89b77c2170b842a69f9f98f",
+    "targetWorkingTree": [],
+    "changedInputs": [],
+    "result": "pass"
+  },
+  "hashScopeNote": "All plugin-center source/tests and selected guidance/config are hashed for evidence invalidation. Hashing and running broader tests do not constitute static acceptance of /music-sources or the other B04 candidates."
+}

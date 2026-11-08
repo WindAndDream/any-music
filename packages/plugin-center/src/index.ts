@@ -1,0 +1,10 @@
+// Generic catalog entry has no music, UI, storage or network runtime dependencies.
+export * from './plugin-catalog'
+export * from './external-plugin-policy'
+export * from './module-contracts'
+export * from './module-conditions'
+export * from './module-dependencies'
+export * from './contribution-registry'
+export * from './contribution-allocator'
+export * from './module-recovery'
+export * from './module-controller'

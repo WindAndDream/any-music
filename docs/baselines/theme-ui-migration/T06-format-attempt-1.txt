@@ -1,0 +1,29 @@
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+.agents/skills/any-music-ui-delivery/SKILL.md (20ms)
+docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md (320ms)
+docs/en/cross-platform/features/cross-platform-ui-and-interaction.md (413ms)
+docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md (600ms)
+docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md (1153ms)
+packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts (0ms)
+packages/theme-default/package.json (0ms)
+packages/theme-default/src/components/downloads/ActiveDownloadPanel.vue (300ms)
+packages/theme-default/src/components/downloads/ClassicDownloads.vue (64ms)
+packages/theme-default/src/components/library/ClassicCustomTracks.vue (47ms)
+packages/theme-default/src/components/library/ClassicFavorites.vue (32ms)
+packages/theme-default/src/components/library/ClassicHistory.vue (36ms)
+packages/theme-default/src/components/library/ClassicPlaylists.vue (57ms)
+packages/theme-default/src/components/library/ClassicQueue.vue (11ms)
+packages/theme-default/src/components/library/ClassicTrackCollection.vue (167ms)
+packages/theme-default/test/components/downloads/ActiveDownloadPanel.test.ts (0ms)
+packages/theme-default/test/components/library/HistoryPanel.test.ts (0ms)
+packages/theme-default/test/components/library/PlaylistDrawer.test.ts (0ms)
+packages/theme-default/test/components/music-sources/ClassicCatalog.test.ts (1ms)
+
+Format issues found in above 19 files. Run without `--check` to fix.
+Finished in 3351ms on 1284 files using 12 threads.
+ ELIFECYCLE  Command failed with exit code 1.

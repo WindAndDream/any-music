@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-regression",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R2",
+  "artifactSha256": "fc88355902a82e283665095d290a8cc5b893bb3389f4a8560ddee76b6a40e45a",
+  "failure": {
+    "after": "Closing the owning host tab and reopening the static host after successful downloads and Range/fallback exercises.",
+    "launcher": false,
+    "console": "Unchecked runtime.lastError: Message exceeded maximum allowed size of 64MiB.",
+    "consoleOccurrences": 16,
+    "managerRecordBytes": 69030799,
+    "cacheChargedBytes": 69016252,
+    "cacheEntries": 47,
+    "configuredCapacityBytes": 1073741824
+  },
+  "recovery": {
+    "reason": "Manual test-profile recovery: oversized GM values prevent script injection before application cleanup can run.",
+    "at": 1793030405473,
+    "beforeStorageBytes": 69030799,
+    "removedCacheValues": 48,
+    "afterStorageBytes": 42681,
+    "productBeforeSha256": "5ca018562b947ddf0434338425ea42a695bb1f235eb152b84aa16aa25662ccd3",
+    "productAfterSha256": "5ca018562b947ddf0434338425ea42a695bb1f235eb152b84aa16aa25662ccd3",
+    "productPreserved": true
+  },
+  "fix": {
+    "path": "apps/userscript/src/platform/resource-cache.ts",
+    "effectiveCacheCeilingBytes": 33554432,
+    "configuredPreferenceUnchanged": true,
+    "scope": "Evict through the same LRU before writes/startup checkpoints; count Base64 and per-entry metadata allowances. No product schema or transport changes."
+  }
+}

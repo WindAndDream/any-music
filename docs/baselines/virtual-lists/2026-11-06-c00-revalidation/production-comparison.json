@@ -1,0 +1,22 @@
+{
+  "before": "../2026-11-06-c00-performance-corrections/build-artifacts.json",
+  "after": "build-artifacts.json",
+  "gzipLevel": 9,
+  "builds": [
+    {
+      "runtime": "userscript",
+      "payloadBytes": 5929541,
+      "payloadGzipBytes": 1151814,
+      "rawDelta": 974,
+      "gzipDelta": 137
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytes": 3673290,
+      "payloadGzipBytes": 884758,
+      "rawDelta": 728,
+      "gzipDelta": 147
+    }
+  ],
+  "limits": "Production frontend payload and workspace identities only; not native release, installed production script, transferred bundle size or frame acceptance."
+}

@@ -1,0 +1,186 @@
+{
+  "batchId": "T11",
+  "status": "complete",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "scope": "Production complete-root adoption in Userscript/Tauri, stable controller feature projection and application-owned theme/style build resources. No native authority change.",
+  "prerequisites": {
+    "T10": "Waited for the existing T10 chat and T10.json to report complete before implementation. Read-only preparation only while it was active."
+  },
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "initialDirtyPathCount": 371,
+    "preserved": "Earlier migration/native/download changes retained. Checks and sizes describe the combined worktree, not an isolated T11 comparison. No reset, commit or push."
+  },
+  "implementation": [
+    "Applications inject metadata-only package descriptors, complete-root loaders, explicit preloaded classic fallback and protected host CSS. Studio Vue/styles execute on selection.",
+    "The sole MusicSourceWorkbench retains one controller/audio above MusicWorkbenchThemeHost. Production feature adapters project existing source/library/player/download/settings/plugin instances and stable editing state.",
+    "Shared/SFC/selected-theme CSS is an inert string resource in the stable internal Shadow surface. A build-known collector uses identical scope IDs for templates and CSS. Protected slot CSS/detail-overlay targets stay within independent host surfaces.",
+    "Userscript preserves light document-start, first-expansion composition, GM namespaces and hide/show lifetime. Its artifact remains one file containing optional code. Tauri preserves embedded/capability-driven composition and native storage/authority; external links use composed paths.",
+    "Native-detail target isolation and Studio overlay pointer/position behavior are wired. Player retry reuses the same existing load path and retains upstream AppErrorState.",
+    "Old partial renderer composition is no longer reachable from the production Vue graph; physical legacy code/exports/selectors await T12 cleanup."
+  ],
+  "rootTestSummary": {
+    "vitestFiles": 293,
+    "vitestTests": 2135,
+    "rustPassed": 229,
+    "rustIgnored": 1,
+    "protocolCases": 183
+  },
+  "rootGates": {
+    "test": {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T11-root-test.txt"
+    },
+    "typecheck": {
+      "command": "pnpm typecheck; repeated as the first step of pnpm build after the protected-overlay change",
+      "exitCode": 0,
+      "logs": ["T11-root-typecheck.txt", "T11-root-build.txt"]
+    },
+    "lint": {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T11-root-lint.txt"
+    },
+    "format": {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T11-root-format.txt"
+    },
+    "build": {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T11-root-build.txt"
+    }
+  },
+  "regressions": [
+    "Actual production host: one controller/audio, stable protected component, classic/Studio/classic, one active resource, failed optional import/fallback/retry and unchanged failed-selection preference.",
+    "Both app loaders: metadata without Vue/styles, explicit classic preload and Studio deferred execution/module reuse.",
+    "Real-root source/media/plugin/download continuity fixtures now consume the production feature adapter, including request order/concurrency/cancellation and single disposal.",
+    "Per-drawer editing/selection and old action identity, playlist/settings operations, confirmation request IDs and bounded same-track retry.",
+    "Protected detail-overlay target remains in its host-only Shadow surface; compiled template/CSS scope-ID samples checked in both actual outputs."
+  ],
+  "intermediateFindings": [
+    "Initial SFC inline query placed lang.css before inline and Vite did not classify it as CSS; query order corrected before successful builds.",
+    "Initial adapter checks exposed published-definition versus library-record types and feedback warning/neutral tones; corrected projections and retained existing tones.",
+    "Node fixtures were extended for virtual style imports, mutable style textContent, synchronous listing methods and modal document boundaries; production and full-root tests passed afterward.",
+    "The initial full gates passed. A final protected-overlay target correction added one host-surface regression and triggered fresh root tests/build/typechecking. Initial pass logs are retained separately.",
+    "An explicit-cancel regression showed that pause stops consumption without aborting transport. The production action now calls existing suspend/close-iterator and marks the listing for explicit restart; the test verifies cancellation, late-page rejection, request order [1,2,1] and maximum concurrency one. Root test/build reruns follow.",
+    "Removed a premature title-only filter from the published-work host projection so each theme can search creator/source attribution as well as title. Final workbench suite passed (57 files/413 tests); production build repeated for exact final artifacts."
+  ],
+  "executionGraphs": {
+    "userscript": {
+      "audit": "T11-userscript-theme-build-audit.json",
+      "metadataModuleCount": 3,
+      "startupStaticModuleCount": 645,
+      "documentStartStaticModuleCount": 25,
+      "optionalStudioExecutedByStaticStartup": false,
+      "fallback": "default"
+    },
+    "tauri": {
+      "audit": "T11-tauri-theme-build-audit.json",
+      "metadataModuleCount": 3,
+      "startupStaticModuleCount": 750,
+      "documentStartStaticModuleCount": 0,
+      "optionalStudioExecutedByStaticStartup": false,
+      "fallback": "default"
+    }
+  },
+  "compiledStyleChecks": [
+    {
+      "app": "userscript",
+      "component": "packages/theme-default/src/ClassicRoot.vue",
+      "scopeId": "data-v-8132c9e5",
+      "templateAndCssSelectorPresent": true
+    },
+    {
+      "app": "userscript",
+      "component": "packages/ui/src/components/AppDialog.vue",
+      "scopeId": "data-v-90fdbea9",
+      "templateAndCssSelectorPresent": true
+    },
+    {
+      "app": "userscript",
+      "component": "packages/plugin-ui-vue/src/trusted/ThemeHost.vue",
+      "scopeId": "data-v-eec3f34a",
+      "templateAndCssSelectorPresent": true
+    },
+    {
+      "app": "tauri",
+      "component": "packages/theme-default/src/ClassicRoot.vue",
+      "scopeId": "data-v-8132c9e5",
+      "templateAndCssSelectorPresent": true
+    },
+    {
+      "app": "tauri",
+      "component": "packages/ui/src/components/AppDialog.vue",
+      "scopeId": "data-v-90fdbea9",
+      "templateAndCssSelectorPresent": true
+    },
+    {
+      "app": "tauri",
+      "component": "packages/plugin-ui-vue/src/trusted/ThemeHost.vue",
+      "scopeId": "data-v-eec3f34a",
+      "templateAndCssSelectorPresent": true
+    }
+  ],
+  "artifacts": {
+    "files": [
+      {
+        "path": "apps/userscript/dist/any-music.user.js",
+        "bytes": 4817668,
+        "sha256": "720b1a4b6a12f72541cf106ff1188f34b02c042ee41a129c840fe935449f8fa1",
+        "gzipBytes": 925151
+      },
+      {
+        "path": "target/release/any-music-tauri.exe",
+        "bytes": 28330496,
+        "sha256": "4a05b597c1bb68bbc1aac159ba37f661569b06cf9e22b7e31dd19da11192a517"
+      }
+    ],
+    "directories": [
+      {
+        "path": "apps/userscript/dist",
+        "fileCount": 4,
+        "bytes": 4915356
+      },
+      {
+        "path": "apps/tauri/dist",
+        "fileCount": 35,
+        "bytes": 3019098
+      }
+    ],
+    "limitations": "Actual shared-worktree Windows production outputs. Userscript physically contains both themes as one SystemJS artifact; delayed execution is supported by build graphs and Node application-loader tests, not installed GM timing. Tauri retains its large-chunk warning; Vite reports plugin timing. No product was launched."
+  },
+  "mobileBoundary": {
+    "check": "pnpm lint includes check-mobile-boundaries.mjs",
+    "result": "Offline ACL/package boundary checks passed. Native capabilities/admission unchanged; no Android/iOS build, device, release-media or execution acceptance claimed."
+  },
+  "pendingLiveChecks": [
+    "T13 layout/light/dark/system/focus/scroll/keyboard/touch/reduced-motion in installed runtimes",
+    "Installed Userscript GM/host-page hide/show and Tauri Rust/accounts/media/native-save continuity",
+    "Mobile device/channel and optimized-release acceptance remain separate S16/T13 work"
+  ],
+  "nextBatch": "T12",
+  "documentationLinks": {
+    "checkedLocalLinks": 303,
+    "missing": [],
+    "scope": "Maintained docs/indexes and UI delivery skill changed in T11; file-existence validation only."
+  },
+  "targetFinalRegression": {
+    "command": "pnpm --filter @any-music/music-workbench test",
+    "exitCode": 0,
+    "files": 57,
+    "tests": 413,
+    "log": "T11-workbench-final-test.txt",
+    "reason": "After removing a premature title-only published-work filter; theme-owned rich metadata queries retain all canonical records."
+  },
+  "exitConditions": {
+    "productionComposition": "Both applications use one complete-root host/controller/audio with application-owned registrations and classic fallback.",
+    "styleAndExecution": "Compiled scope checks and production static graph audits passed; loader execution is checked in Node. Userscript remains a physical single-file artifact.",
+    "rootGates": "All five passed; build repeats root typecheck and includes both production frontends/Windows executable. Final workbench regression follows the last narrow projection change.",
+    "remaining": "T12 removes physical legacy partial code; T13 owns explicitly authorized runtime/visual acceptance."
+  }
+}

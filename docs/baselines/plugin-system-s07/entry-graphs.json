@@ -1,0 +1,73 @@
+[
+  {
+    "entry": "packages/plugin-tag-management/src/index.ts",
+    "dynamicFeatureEntryExternalized": true,
+    "modules": ["packages/plugin-tag-management/src/index.ts"],
+    "outputs": [
+      {
+        "fileName": "any-music.js",
+        "bytes": 1457,
+        "sha256": "9ac866fa065216aa010acb1b417183fc937b9902a67573e170557bd9b8cadca4"
+      }
+    ]
+  },
+  {
+    "entry": "packages/music-workbench/src/index.ts",
+    "dynamicFeatureEntryExternalized": true,
+    "modules": [
+      "packages/music-workbench/src/index.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "packages/plugin-center/src/module-contracts.ts",
+      "packages/plugin-ui-vue/src/trusted/theme-directory.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "any-music.js",
+        "bytes": 6187,
+        "sha256": "35d866e6c8597c3e5b91867b411ab73c27b2c6a21f702258abb1f96f792d86e6"
+      }
+    ]
+  },
+  {
+    "entry": "apps/userscript/src/features/plugins/built-in-workbench-modules.ts",
+    "dynamicFeatureEntryExternalized": true,
+    "modules": [
+      "apps/userscript/src/features/plugins/built-in-workbench-modules.ts",
+      "packages/music-workbench/src/index.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts",
+      "packages/plugin-center/src/module-contracts.ts",
+      "packages/plugin-tag-management/src/index.ts",
+      "packages/plugin-ui-vue/src/trusted/theme-directory.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "any-music.js",
+        "bytes": 7925,
+        "sha256": "800c63a9dbc12a53a12a52c001253490c6ca6429f23bc5b34419b2e7a542123a"
+      }
+    ]
+  },
+  {
+    "entry": "apps/tauri/src/features/plugins/built-in-workbench-modules.ts",
+    "dynamicFeatureEntryExternalized": true,
+    "modules": [
+      "apps/tauri/src/features/plugins/built-in-workbench-modules.ts",
+      "packages/music-workbench/src/index.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts",
+      "packages/plugin-center/src/module-contracts.ts",
+      "packages/plugin-tag-management/src/index.ts",
+      "packages/plugin-ui-vue/src/trusted/theme-directory.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "any-music.js",
+        "bytes": 7921,
+        "sha256": "65edeb4ab0354b60e93377389e38535bab85fcbf00c4b096efafa5e028af25bc"
+      }
+    ]
+  }
+]

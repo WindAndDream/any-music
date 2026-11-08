@@ -1,0 +1,161 @@
+{
+  "date": "2026-11-06",
+  "runtimeScope": "shared",
+  "scope": "C00 local performance corrections and persistence-isolation regressions; no production admission",
+  "sourceFiles": [
+    {
+      "path": "packages/music-workbench/src/storage/product-generation-store.ts",
+      "sha256": "fd7fa455dd70e05fc1fac3508f07208f2a421fbb549cbab7cc132e8fc78c1b0b"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/product-generation-store.test.ts",
+      "sha256": "b78c93ea59db167582385548bd66bc01d8454a621ccdfa3ae51b15fa5d2bedfb"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/product-generation-store.performance.test.ts",
+      "sha256": "6a7947096823066b2ddd244188b771d0e234e4fc496f0a87cc0610e48e76b13f"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+      "sha256": "9c8e9e9161d2b8a41d7d55aa16aa34260e2827b181bf72f3a45cda52c81b4ef2"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-measured-virtual-list.test.ts",
+      "sha256": "56c0aa2a04fa3783e0484c78e0e3043e3d4f3dbe82b877ae3ad6ca708653935f"
+    },
+    {
+      "path": "apps/userscript/test/platform/product-storage.test.ts",
+      "sha256": "8d4f5257e67cfc56cf66562b7b778a67f88aac041090b88ed6f3c2d6d695a933"
+    },
+    {
+      "path": "apps/tauri/test/platform/product-storage.test.ts",
+      "sha256": "2079ea38592ea8ca575cdadb394faca986b5a3e813ae99887c9bb9f1859764f7"
+    }
+  ],
+  "changes": [
+    "Shared generation writes detach once, validate complete candidate/staged data and calculate canonical checksums without repeated per-part validation/read-back or unused output cloning.",
+    "Mounted measurement units retain RO/load subscriptions across same-root layout/content generations; stale jobs and hidden/replaced/disposed units remain guarded.",
+    "Deferred GM and native mirror saves preserve immutable generations against subsequent saves and input/read/snapshot mutations, and recover after restart."
+  ],
+  "invariants": [
+    "Current storage schemas/keys and generation write count/order are unchanged.",
+    "Exclusive ownership, stale-writer rejection, complete JSON/namespace/depth/byte validation, canonical checksum verification, atomic commit publication and crash recovery remain.",
+    "GM asynchronous queue snapshot copies remain; runtime implementations, persistence scheduling, animation, media and business lifecycles are unchanged.",
+    "Candidate remains default-closed; O00-O03 and C01 are not started."
+  ],
+  "workCounts": {
+    "fixtureTracks": 10000,
+    "operation": "app-shell:v1 sidebar preference write",
+    "before": {
+      "validationTrackVisits": 50000,
+      "serializationTrackVisits": 140000,
+      "stagedReadsPerPart": 2
+    },
+    "after": {
+      "validationTrackVisits": 20000,
+      "serializationTrackVisits": 70000,
+      "stagedReadsPerPart": 1
+    },
+    "validationReductionPercent": 60,
+    "serializationReductionPercent": 50,
+    "boundary": "Deterministic Node test instrumentation, including memory backend JSON cloning; not live GM/Rust frame-time evidence",
+    "exactAfterCheck": "c00-generation-work-exact-after.log: temporary equality assertion serializedTracks === count * 7 passed; final regression permits fewer passes"
+  },
+  "measurementRegression": {
+    "steps": 12,
+    "changesPerStep": ["width", "font/layout generation", "content generation"],
+    "geometryReadsPerStep": 1,
+    "repeatedRoOrLoadRegistrations": 0,
+    "previousImplementation": "new regression fails on first change (observe count 3 -> 4)",
+    "beforeLog": "c00-layout-regression-before.log",
+    "recoveryCoverage": ["hidden/resumed", "replaced measurement unit", "late load/RO", "dispose"],
+    "scope": "Deterministic Node geometry/lifecycle tests, not browser frame timings"
+  },
+  "targetedChecks": [
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/storage",
+      "result": "passed",
+      "tests": 60,
+      "log": "c00-generation-storage-final.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench typecheck",
+      "result": "passed",
+      "log": "c00-generation-typecheck.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/ui test",
+      "result": "passed",
+      "files": 116,
+      "tests": 1011,
+      "log": "c00-layout-ui-test.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/ui typecheck",
+      "result": "passed",
+      "log": "c00-layout-ui-typecheck.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/userscript exec vitest run test/platform/product-storage.test.ts",
+      "result": "passed",
+      "tests": 16,
+      "log": "c00-gm-storage-shared-review-test.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/userscript typecheck",
+      "result": "passed",
+      "log": "c00-gm-storage-typecheck.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/product-storage.test.ts",
+      "result": "passed",
+      "tests": 11,
+      "log": "c00-tauri-storage-test.log"
+    }
+  ],
+  "rootChecks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "c00-root-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "c00-root-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "c00-root-lint-final.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "c00-root-format-check.log"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "c00-root-build.log"
+    }
+  ],
+  "buildIdentity": "build-artifacts.json",
+  "productionComparison": "production-comparison.json",
+  "review": "Three subagents with nonoverlapping shared-storage, virtual-measurement and GM-test/review ownership; parent reviews both implementation diffs and owns Tauri mirror regression, integration, documentation and root verification.",
+  "admission": {
+    "passed": false,
+    "candidate": "Private gate remains default-closed",
+    "liveInspection": "Not run: current-task browser/application inspection was not explicitly requested.",
+    "remaining": [
+      "Repeat comparable installed-GM and native sidebar/scroll performance, including reliable frame tails; complete O(N) persistence work remains.",
+      "Resolve remaining default-skin raster differences and finish P03 artwork/visual combinations.",
+      "Native drag/capture, real IME/touch/device and production grant/artifact acceptance.",
+      "Graceful native shutdown and active account/playback/download lifecycle acceptance.",
+      "10k native fixture mirror quota admission; prior direct setup failure is not public save-flow acceptance."
+    ]
+  },
+  "logDirectory": "logs/2026-11-06-virtual-list-implementation",
+  "commit": false,
+  "push": false
+}

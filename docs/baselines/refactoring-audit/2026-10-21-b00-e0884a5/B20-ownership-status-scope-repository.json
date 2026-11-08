@@ -1,0 +1,276 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B20-ownership-status-scope-repository",
+  "parentBatch": "B20",
+  "candidate": "B20-ownership-status-scope",
+  "runtime": "repository",
+  "startedAt": "2026-10-22T03:49:43.934Z",
+  "completedAt": "2026-10-22T03:56:30.810Z",
+  "timezone": "Asia/Shanghai",
+  "scope": "One maintained desktop-runtime guide chain: current ownership, storage/account capability descriptions and historical/current/future evidence scope, with its bilingual counterpart and directly referenced current support statements.",
+  "criteria": [
+    "C1 current package/plugin ownership",
+    "C4 current product mirror/recovery description",
+    "C6 consistent account/proxy capabilities",
+    "C5/C6 native authority, exact-target admission and current-versus-future mobile scope",
+    "C6 bilingual metadata and direct references"
+  ],
+  "baseline": {
+    "reference": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository-baseline.json",
+    "head": "0da1183d009ec5898c25c5eb69a5613535cdb1c9",
+    "currentHead": "0c49647f89b6dfe86a047ac75f978c7be6a1ecfc",
+    "workingTree": "Existing staged and unstaged changes retained; only the two selected guides and this batch ledger/report are modified by this audit.",
+    "finalHashes": {
+      "docs/en/desktop/runtime-architecture.md": "38cbc27cbb1f991a6cc8f35291bb8f491ef3203afa83344e0f91306bf06897f1",
+      "docs/zh-cn/桌面端/运行端架构.md": "15f764fb0bbb190c37f60519a6fb541887979e157a518533f1c773bf575b5ec3",
+      "docs/en/desktop/README.md": "d3aba6ab5e43d3beaa4e91e851785391309726bee7ed35195e5ddf2ee4f3134f",
+      "docs/zh-cn/桌面端/文档索引.md": "0953201afa2518948bffb44be3afd3ff6976321121a63f15fa9f6af5ca294faf",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md": "d12f8e600298b66e3dbb416706ff7094b2f79eabaa5a04d91174348eb7adc6d6",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md": "861f442fcb585df7f07f61190570f36df27aacd3ef90b7cf6cbcbd4676136c13",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md": "070a7aba69c2dccc9c6d3c9794b9cf966259f6c31c90217093d634fb8ee4ea5f",
+      "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md": "ce2a9afedce1b5a190f9d118e20e6f7bebaba0d28f0b6ca41cf55c4be86ecfd1",
+      "AGENTS.md": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177",
+      "apps/tauri/AGENTS.md": "b824b3579a0783c66ef8feeed8d235e4303167486fbeec46a980fb57d95518fa",
+      ".agents/skills/any-music-tauri-runtime/SKILL.md": "1eb5c2a442dba52f39f8d8443b7884caa1c5f2cf792778669566d13f93006b86",
+      "apps/tauri/src/platform/product-storage.ts": "96ee86184f93c6c6e43d5f926dfdeffc7ac28e4f062b31a1536ecc9560292dc3",
+      "apps/tauri/src/features/accounts/account-runtime.ts": "8ddcd5903353f1962b11bcc9a9c87286bb5f85fa94835e2627b01642ed75db24",
+      "apps/tauri/src/features/accounts/use-account-settings.ts": "c07d089319a5da8f5ff46323fe4bf46c4f596bce5e976cae6deb4687755ebd75",
+      "package.json": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e",
+      "docs/en/cross-platform/platforms/bilibili/web-api-contract.md": "693ed8d1a2db0a6d90458c6e5b72e614aa2995f8851dd29c12411548cc8b17f7",
+      "docs/zh-cn/跨平台/平台接口/哔哩哔哩/网页接口契约.md": "1b9e27e36c64cb9b95a785b2e22e58768f2439e59f31f43945fb5a3df2d6b6ef",
+      "docs/en/cross-platform/platforms/douyin/web-api-contract.md": "7fb51d60ea4aa3bef35c566cb13f9df38c980a6a549777bd01feadab052c9e20",
+      "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md": "b6d5099c3c7970e259d6f5feec5bceacfe81d37bbd825b42302b28c29d9c71a8"
+    },
+    "unchangedSupportingFiles": true
+  },
+  "declaredStatus": {
+    "claim": "The shared/native implementation exists with explicit runtime capabilities. S15 exact-target acceptance is historical; the current changed Profile remains unadmitted. Mobile externals remain none and S16 has independent incomplete exits.",
+    "references": [
+      "AGENTS.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:56"
+    ],
+    "limits": "These are maintained status statements checked for guide consistency, not new runtime/device acceptance."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "not-applicable",
+    "artifact": "not-run",
+    "live": "not-applicable"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "findingIds": ["B20-S01"],
+      "evidence": [
+        "docs/en/desktop/runtime-architecture.md:36",
+        "docs/zh-cn/桌面端/运行端架构.md:36"
+      ],
+      "detail": "Current root/package boundaries and desktop text agree on workbench, host recipes, plugin namespaces and source owners."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "findingIds": ["B20-S02"],
+      "evidence": [
+        "docs/en/desktop/runtime-architecture.md:38",
+        "docs/zh-cn/桌面端/运行端架构.md:40",
+        "apps/tauri/src/platform/product-storage.ts:72",
+        "apps/tauri/src/platform/product-storage.ts:113",
+        "apps/tauri/src/platform/product-storage.ts:137"
+      ],
+      "detail": "The renderer port uses generation/revision ordering, awaits initial mirror alignment, retains recoverable data and blocks later writes after native failure. No native implementation change or re-audit."
+    },
+    {
+      "criterion": "C6-account-capabilities",
+      "result": "pass",
+      "findingIds": ["B20-S03"],
+      "evidence": [
+        "docs/en/desktop/runtime-architecture.md:44",
+        "docs/zh-cn/桌面端/运行端架构.md:46",
+        "apps/tauri/src/features/accounts/account-runtime.ts:31",
+        "apps/tauri/src/features/accounts/use-account-settings.ts:202"
+      ],
+      "detail": "Opening and detailed account-connection descriptions now agree with backupProxyIds; no proxy connectivity claim is added."
+    },
+    {
+      "criterion": "C5/C6-scope-and-status",
+      "result": "pass",
+      "findingIds": ["B20-S04"],
+      "evidence": [
+        "docs/en/desktop/runtime-architecture.md:184",
+        "docs/zh-cn/桌面端/运行端架构.md:186",
+        "docs/en/desktop/runtime-architecture.md:199",
+        "docs/zh-cn/桌面端/运行端架构.md:201",
+        "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:56"
+      ],
+      "detail": "Current authority and exact-target closure are explicit; target architecture/file/channel/mobile extensions do not imply present installation/execution support. Historical live observations keep their original dates and limits."
+    },
+    {
+      "criterion": "C6-bilingual-structure",
+      "result": "pass",
+      "evidence": ["<user-home>/AppData/Local/Temp/any-music-b20-scope-20261022/checks-after.json"],
+      "detail": "Two selected guides, six direct neighbor documents and three guide/skill reference files pass 117 local-link checks and one heading anchor. Counterparts are reciprocal and metadata agree. All four source-contract files remain byte-identical, including captureDate."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B20-S01",
+      "severity": "P2",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Using Shared behavior and storage to locate tags, creation state or source protocol implementations.",
+      "effect": "The desktop guide assigned all tag/composition state to workbench and protocols to the removed music-sources package, conflicting with the current plugin-owned namespaces and packages.",
+      "repair": "Synchronize shared workbench/host recipe orchestration, tag/creation plugin ownership and independent source packages in both locales.",
+      "evidence": [
+        "docs/en/desktop/runtime-architecture.md:36",
+        "docs/zh-cn/桌面端/运行端架构.md:36"
+      ],
+      "basis": ["AGENTS.md", "docs/en/cross-platform/architecture/reusable-package-boundaries.md"]
+    },
+    {
+      "id": "B20-S02",
+      "severity": "P2",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Implementing native/renderer product startup recovery from the maintained guide.",
+      "effect": "Both locales still selected mirrors by latest timestamp and described failure feedback without the current generation/revision ordering, startup alignment or write barrier.",
+      "repair": "Describe current complete-generation/revision selection, mirror alignment before repositories, recoverable peer restoration, unsupported/unrecoverable failure handling and stop-after-native-failure writes.",
+      "evidence": [
+        "docs/en/desktop/runtime-architecture.md:38",
+        "docs/zh-cn/桌面端/运行端架构.md:40",
+        "apps/tauri/src/platform/product-storage.ts:72",
+        "apps/tauri/src/platform/product-storage.ts:113",
+        "apps/tauri/src/platform/product-storage.ts:137"
+      ],
+      "limits": "Source-level documentation alignment only; no new storage/runtime acceptance or recovery test was executed."
+    },
+    {
+      "id": "B20-S03",
+      "severity": "P3",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Reading the opening account/proxy capability description.",
+      "effect": "The opening described one proxy and future failover foundations, contradicting the later implemented primary/eight-backup connection description and current public backupProxyIds contract.",
+      "repair": "State direct or primary plus up to eight ordered unauthenticated backups. Keep unsupported authentication/group UI and native/live evidence limits explicit.",
+      "evidence": [
+        "docs/en/desktop/runtime-architecture.md:44",
+        "docs/zh-cn/桌面端/运行端架构.md:46",
+        "apps/tauri/src/features/accounts/account-runtime.ts:31",
+        "apps/tauri/src/features/accounts/use-account-settings.ts:202"
+      ]
+    },
+    {
+      "id": "B20-S04",
+      "severity": "P2",
+      "status": "resolved",
+      "owner": "B20",
+      "trigger": "Interpreting the current-plugin-host/mobile-target sections as present target admission or all-platform installation support.",
+      "effect": "The guide presented historical S15 acceptance as current, mixed adopted boundaries with future media/file/iOS entry claims and described mobile native work only as future. It did not carry the S15 matrix warning that the changed Profile is unadmitted.",
+      "repair": "Distinguish historical exact-target evidence, current closed installation/execution pending renewed acceptance, adopted native ownership, current catalog media unavailability, existing Android adapters and inert preview-only mobile policy, and future iOS/acquisition/channel requirements.",
+      "evidence": [
+        "docs/en/desktop/runtime-architecture.md:184",
+        "docs/zh-cn/桌面端/运行端架构.md:186",
+        "docs/en/desktop/runtime-architecture.md:199",
+        "docs/zh-cn/桌面端/运行端架构.md:201",
+        "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:56"
+      ],
+      "limits": "No new Profile/OS/WebView/resource admission or B19 device/runtime review; the maintained S15 matrix and root runtime rules are the status authorities."
+    }
+  ],
+  "openFindingIds": [],
+  "changedFiles": ["docs/en/desktop/runtime-architecture.md", "docs/zh-cn/桌面端/运行端架构.md"],
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node <user-home>/AppData/Local/Temp/any-music-b20-scope-20261022/check-guidance.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T03:53:37.859Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-scope-20261022/references.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm exec oxfmt --check docs/en/desktop/runtime-architecture.md docs/zh-cn/桌面端/运行端架构.md",
+      "exitCode": 0,
+      "time": "2026-10-22T03:56:30.810Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-scope-20261022/format.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "git diff --check -- docs/en/desktop/runtime-architecture.md docs/zh-cn/桌面端/运行端架构.md",
+      "exitCode": 0,
+      "time": "2026-10-22T03:56:30.810Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-scope-20261022/diff-check.log"
+    }
+  ],
+  "readScope": {
+    "content": "Selected ownership/storage/account opening and current-plugin/mobile-target paragraphs of both runtime guides; root/package ownership rules; S15 admission and capability excerpts; implementation-status page and desktop index.",
+    "implementationExcerpts": [
+      "apps/tauri/src/platform/product-storage.ts:1-88,109-143",
+      "apps/tauri/src/features/accounts/account-runtime.ts:1-43 and backupProxyIds references",
+      "apps/tauri/src/features/accounts/use-account-settings.ts:202"
+    ],
+    "structuralOnly": [
+      "docs/en/desktop/README.md",
+      "docs/zh-cn/桌面端/文档索引.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md",
+      ".agents/skills/any-music-tauri-runtime/SKILL.md"
+    ],
+    "limits": "Browser/search/account-lifecycle/live-history paragraphs were not independently re-audited; their existing evidence remains historical."
+  },
+  "unreadPaths": [
+    "Full desktop account/CDP/proxy/native-storage implementation and tests",
+    "S15/S16 full records and fresh exact-target/device/channel acceptance",
+    "Repository-wide bilingual counterpart/index/metadata coverage (next candidate)",
+    "Product legacy installer/compatibility/IPC semantic reachability (final B20 candidate)"
+  ],
+  "missingEvidence": [
+    "No tests/build/native gates were rerun for documentation-only changes; B12/B14/B18/B19 runtime acceptance is not refreshed",
+    "No browser/application/emulator inspection or capture was requested or performed"
+  ],
+  "dependencies": [
+    "Prior B20 reviewed-area report supplies shared guide ownership; only matching current rules were reused",
+    "B18 repair/status and the S15 matrix remain independent native/runtime evidence; this documentation batch does not certify unreviewed native chains",
+    "Current staged/unstaged product and B21 work belongs to other work and was preserved"
+  ],
+  "remainingSubbatches": ["B20-bilingual-counterparts-indexes", "B20-targeted-legacy-check"],
+  "nextBatch": {
+    "batchId": "B20-bilingual-counterparts-indexes-repository",
+    "candidate": "B20-bilingual-counterparts-indexes",
+    "parentBatch": "B20",
+    "runtime": "repository",
+    "status": "pending",
+    "question": "Do maintained documentation pages and repository guidance retain matching locale metadata, reciprocal counterparts, valid local links and reachable index entries?",
+    "allowedPaths": [
+      "README.md",
+      "README.en.md",
+      "docs/en/** and docs/zh-cn/** metadata/counterpart/index/local-link structure only",
+      "AGENTS.md and .agents/skills/** local references",
+      "Only minimal content excerpts needed to resolve a structural mismatch"
+    ],
+    "exclusions": [
+      "Full stage-history/design/source body audits",
+      "Product changes or runtime tests/acceptance",
+      "Changing captureDate or archival status without evidence",
+      "UI/browser/emulator work, commit or push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "docs/en/cross-platform/architecture/development-workflow.md",
+      "docs/en/cross-platform/architecture/refactoring-audit-plan.md (sections 2/3/5 and B20 only)"
+    ],
+    "continuation": "Reuse docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository.json and the prior reviewed-area report after checking hashes. Two of four B20 candidates are closed; scan document structure, then inspect only concrete mismatches. Do not re-audit desktop behavior or infer runtime acceptance."
+  },
+  "handoff": "B20-ownership-status-scope-repository：基线 0da1709 与本批文件哈希。完成桌面运行端架构指南及中英文对应页的职责、状态和范围核对，四类问题已原位修复：工作台/标签/创作/来源归属过时，快照仍按时间戳恢复，账号首段仍只描述单代理，以及历史 S15 准入、当前能力与未来移动获取入口混写。现按完整代次和 revision 描述恢复与失败写屏障，明确主代理加最多八个有序备份，记录 Profile 改变后的外置关闭状态，区分 Android 已有适配、非执行预览和 iOS/渠道待办。两份指南、六份直接邻接文档和三份指南/技能引用共 117 个本地链接及一个锚点通过；格式与差异检查通过，四份来源契约字节未变。仅文档修改，未复跑产品测试或运行验收。本子批次 conformant/pass-scoped；B20 完成二项、余两项。下一批唯一入口 B20-bilingual-counterparts-indexes-repository，先做结构扫描，只展开具体不一致项。"
+}

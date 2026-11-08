@@ -1,0 +1,13 @@
+{
+  "upstreamCommit": "235f6da2fd4f7354fa4765fde4aea880d2a4aef5",
+  "engineVersion": "0.31.0-am1",
+  "emscripten": "3.1.65",
+  "memoryMaximumBytes": 134217728,
+  "dynamicExecution": false,
+  "hashes": {
+    "loader.mjs": "d73c03a30dd4bfdfe21b1f74f7d8ed782d8abc42afb228ba2793c24ab65154b3",
+    "quickjs-noeval.wasm": "5dadb9901b620bf9cbb6e314058e25d8cd2b2a343727f0ed0a2175bd6ade5b10"
+  },
+  "sourceSha256": "7ad82fbee5f827737326462a1ea254ab378f86c90fd453655ab4c9960bf2da98",
+  "patchedSourceSha256": "441cfb12d1f01f4cfe1d40d336e93f925859c3ea32ead41ad1333524832b9636"
+}

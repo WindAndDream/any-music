@@ -1,0 +1,454 @@
+{
+  "step": "S04",
+  "status": "implemented",
+  "date": "2026-10-17",
+  "runtimeScope": ["shared", "userscript", "tauri"],
+  "startingCommit": "976c405b93719755b5879d576fbd836926ccbcdf",
+  "scope": "Trusted internal lifecycle/registration/dependencies/allocation, existing business adapters and independent recovery only",
+  "checks": [
+    {
+      "exitCode": 0,
+      "startedAt": "2026-10-17T10:26:23.3673499Z",
+      "completedAt": "2026-10-17T10:26:58.6856434Z",
+      "command": "pnpm test",
+      "localLogPath": ".codex-tmp/s04/test.log",
+      "logBytes": 23264,
+      "logSha256": "fb1dcaa2a6cb4f7dafb8a15862718f1d7f187a5e62e0cd60553b8dc45d1bb243"
+    },
+    {
+      "exitCode": 0,
+      "startedAt": "2026-10-17T10:26:58.6907805Z",
+      "completedAt": "2026-10-17T10:27:33.9916561Z",
+      "command": "pnpm typecheck",
+      "localLogPath": ".codex-tmp/s04/typecheck.log",
+      "logBytes": 4854,
+      "logSha256": "1c41906c382a6d23808dba0b93d507f52032559eba1733dce90418462c16106f"
+    },
+    {
+      "exitCode": 0,
+      "startedAt": "2026-10-17T10:27:33.9940729Z",
+      "completedAt": "2026-10-17T10:27:35.1934288Z",
+      "command": "pnpm lint",
+      "localLogPath": ".codex-tmp/s04/lint.log",
+      "logBytes": 323,
+      "logSha256": "dbe8fe119f2d07f9ace599a0ea824b6d2f85688d5de582d720974333d5230be2"
+    },
+    {
+      "exitCode": 0,
+      "startedAt": "2026-10-17T10:27:35.1950907Z",
+      "completedAt": "2026-10-17T10:27:38.7856358Z",
+      "command": "pnpm format:check",
+      "localLogPath": ".codex-tmp/s04/format-check.log",
+      "logBytes": 205,
+      "logSha256": "e72af6dfc18e35e89f0c7ce1f11105406a622d8edfc5839b34ec0c9679fc8994"
+    },
+    {
+      "exitCode": 0,
+      "startedAt": "2026-10-17T10:27:38.7880001Z",
+      "completedAt": "2026-10-17T10:29:10.2164654Z",
+      "command": "pnpm build",
+      "localLogPath": ".codex-tmp/s04/build.log",
+      "logBytes": 13251,
+      "logSha256": "8effda174bd1b41df93a4ce7007d1058eee3dfc9970fa5e031ab948d6509135d"
+    }
+  ],
+  "testSummary": {
+    "scriptTests": 14,
+    "vitestTests": 1439,
+    "nativeTestsPassed": 108,
+    "nativeTestsIgnored": 1,
+    "protocolDifferentialCases": 167,
+    "ignoredNativeFixture": "browser::process::desktop::tests::owned_tree_fixture"
+  },
+  "lightweightEntryBuilds": [
+    {
+      "entry": "packages/plugin-center/src/index.ts",
+      "modules": [
+        "packages/plugin-center/src/contribution-allocator.ts",
+        "packages/plugin-center/src/contribution-registry.ts",
+        "packages/plugin-center/src/index.ts",
+        "packages/plugin-center/src/module-conditions.ts",
+        "packages/plugin-center/src/module-contracts.ts",
+        "packages/plugin-center/src/module-controller.ts",
+        "packages/plugin-center/src/module-dependencies.ts",
+        "packages/plugin-center/src/module-recovery.ts",
+        "packages/plugin-center/src/plugin-catalog.ts"
+      ],
+      "outputs": [
+        {
+          "fileName": "entry.js",
+          "bytes": 31888,
+          "sha256": "792289e6e4619d79805340828add266206d56cf152d75363090a3e400d000c40"
+        }
+      ]
+    },
+    {
+      "entry": "packages/music-workbench/src/index.ts",
+      "modules": [
+        "packages/music-workbench/src/index.ts",
+        "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+        "packages/music-workbench/src/runtime/workbench-runtime.ts",
+        "packages/plugin-center/src/contribution-allocator.ts",
+        "packages/plugin-center/src/contribution-registry.ts",
+        "packages/plugin-center/src/index.ts",
+        "packages/plugin-center/src/module-conditions.ts",
+        "packages/plugin-center/src/module-contracts.ts",
+        "packages/plugin-center/src/module-controller.ts",
+        "packages/plugin-center/src/module-dependencies.ts",
+        "packages/plugin-center/src/module-recovery.ts",
+        "packages/plugin-center/src/plugin-catalog.ts"
+      ],
+      "outputs": [
+        {
+          "fileName": "entry.js",
+          "bytes": 3100,
+          "sha256": "b32caab49da4279c4f588e51bbfa4dc921e4ca4e0982585b44bd2d4192212283"
+        }
+      ]
+    }
+  ],
+  "preservation": {
+    "originalChangedPathCount": 337,
+    "byteIdenticalOrStillDeletedCount": 321,
+    "expectedOverlappingPaths": [
+      "docs/en/cross-platform/README.md",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      "packages/music-workbench/AGENTS.md",
+      "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts",
+      "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts",
+      "scripts/check-package-boundaries.mjs",
+      "scripts/test/check-package-boundaries.test.mjs"
+    ],
+    "note": "Only the listed shared integration, guide, boundary and bilingual documentation paths overlap earlier work; edits were applied in place."
+  },
+  "artifacts": [
+    {
+      "path": "apps/tauri/dist/assets/__vite-browser-external-D3JzJRFO.js",
+      "bytes": 77,
+      "sha256": "6c8ab9d6f5e0e1fae12292bd3fd090a0396aa3c115aaa997df71fa3ac8906925"
+    },
+    {
+      "path": "apps/tauri/dist/assets/__vite-browser-external-DisMlCMZ.js",
+      "bytes": 1015,
+      "sha256": "9b3ef04e256342bdcf39d55efb6a4cbd0793b588012548d6215c1d159bfcf74b"
+    },
+    {
+      "path": "apps/tauri/dist/assets/ActiveDownloadPanel-D556Hneu.js",
+      "bytes": 4144,
+      "sha256": "1b51f56eab95f6bff787e1f427505c0b858ba4fda0d211a000deb3da8d6b8bf7"
+    },
+    {
+      "path": "apps/tauri/dist/assets/app-error-BjZGph4G.js",
+      "bytes": 7448,
+      "sha256": "1f87c8d9b58adfe6647a92b9217e74ddf68c8df27a230e097538342a2c271f9a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/AppIcon-D4ck_dDu.css",
+      "bytes": 164,
+      "sha256": "8cc42051a7d3a3628ff5e14d5e526096557a70a91c02b1b7d860906f7debbffe"
+    },
+    {
+      "path": "apps/tauri/dist/assets/AppIcon-DPRv58jr.js",
+      "bytes": 4290,
+      "sha256": "435985742bc78030d2efd816d6c1321e276f7699a55f248e801e4efda794eb77"
+    },
+    {
+      "path": "apps/tauri/dist/assets/audio-exporter-BEev7hla.js",
+      "bytes": 317622,
+      "sha256": "305f90659ffc7b2d355a7abe3dc8819bf2a6f3dacb29a325dbde7f709f11d0bd"
+    },
+    {
+      "path": "apps/tauri/dist/assets/audio-exporter-CjwsS8gv.js",
+      "bytes": 82,
+      "sha256": "77b16b70b915085b19fc8ace4dcc9856415d8ff8214716280f4ff3734c610b01"
+    },
+    {
+      "path": "apps/tauri/dist/assets/bilibili-DVPJPxo8.js",
+      "bytes": 24394,
+      "sha256": "16930931f081ec375a2a092a04b51240efcc3f94ea4842221083bb1c96318b06"
+    },
+    {
+      "path": "apps/tauri/dist/assets/BottomSheet-BNJ4Lggr.css",
+      "bytes": 9108,
+      "sha256": "14626e6ec3c8148598195755c8fe6cfea3ec1a1bf9a5cb596247474c7fc617e0"
+    },
+    {
+      "path": "apps/tauri/dist/assets/BottomSheet-oDKiSgb5.js",
+      "bytes": 6320,
+      "sha256": "d9a56e644b98f1f16f64e0c40a4397884f762beb5f2755a0067a9c25a629e932"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CatalogDisplayModeDialog-18Ts8130.css",
+      "bytes": 67253,
+      "sha256": "54f901f00b0f28b04fd94d8d5231cdcee1d606a1d4ec2187c18b082392c3e789"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CatalogDisplayModeDialog-C6tUbEkY.js",
+      "bytes": 83952,
+      "sha256": "7678001e8481424dca7099e6d4b76baf64dde5f5bf10ba6d5cf26db3f276f652"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CustomPluginPanel-BKtpEssx.js",
+      "bytes": 47526,
+      "sha256": "ccd858fd540e71a0a5c070c1083acaf0855b7bd54e3ce3994ba4725a09c1b1e2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/CustomTrackPanel-DflbH1Ji.js",
+      "bytes": 7961,
+      "sha256": "836373e87dc110308c20940d2fe28f60394a00af7f9c768c5027e2eb33afcb53"
+    },
+    {
+      "path": "apps/tauri/dist/assets/declarative-manifest-EgRPOwBO.js",
+      "bytes": 11254,
+      "sha256": "504ce32a6780b16c8cb67cac1599808694d1615e59cd213a440e7d60441d5ba6"
+    },
+    {
+      "path": "apps/tauri/dist/assets/douyin-Cpik2zqK.js",
+      "bytes": 37411,
+      "sha256": "bb3fe3568c9bd63f971a6a293a2713ecee083c337a163a9f0afeb2ec800a97b2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/douyin-request-state-CFbLQ2P_.js",
+      "bytes": 4610,
+      "sha256": "3b3f15fd27074662d2fd37941335beb05bde604798aaedec2d4c52f18c3ed29f"
+    },
+    {
+      "path": "apps/tauri/dist/assets/download-archive-aGajjFNI.js",
+      "bytes": 7398,
+      "sha256": "3aaaea66fac5a5656b7ff7c4e9036c3580424c2f10215c2ac7afd7490bd2e495"
+    },
+    {
+      "path": "apps/tauri/dist/assets/download-history-CoRpQVKm.js",
+      "bytes": 4298,
+      "sha256": "272f13114e0849fb2183cc0cb23595b87dfc3de08f88f454a3e65c2969ce5d5a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/DownloadHistoryPanel-CMs_dQfz.js",
+      "bytes": 14060,
+      "sha256": "2b181769205e4ca1911923cb016ea2480680aeac136b9457f2a918283a855400"
+    },
+    {
+      "path": "apps/tauri/dist/assets/FavoritePanel-DYFvN4I6.js",
+      "bytes": 2623,
+      "sha256": "43974e60f22432e6139b4e4915952e6d772540e86ea3f71c03b8808490753ec5"
+    },
+    {
+      "path": "apps/tauri/dist/assets/FavoriteTrackRow-XER9evLV.js",
+      "bytes": 3397,
+      "sha256": "58add77c9728c314d613b0f148d9087491c569d6311cb1b8788a6f7d67eb510b"
+    },
+    {
+      "path": "apps/tauri/dist/assets/GlobalSettingsPanel-C6Jw9amT.css",
+      "bytes": 13713,
+      "sha256": "812783a525fcded84c72db0fa56f06c32b25275893b3bd4bd329d5cb5947c6b4"
+    },
+    {
+      "path": "apps/tauri/dist/assets/GlobalSettingsPanel-exJeUO56.js",
+      "bytes": 26577,
+      "sha256": "dc28bdd225d89ae3af2bd0802bc5753f28dbb647a9c9429168584f7389b5c2ee"
+    },
+    {
+      "path": "apps/tauri/dist/assets/HistoryPanel-BJHSqjp0.js",
+      "bytes": 2572,
+      "sha256": "2dc94f6c1e4c969a4eed881a1b1db7835db9d89b0c8222894f05f53d6c7d6bd2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/http-Bx2BUOLo.js",
+      "bytes": 183,
+      "sha256": "b4441747f73aa575c1dff22a888dd46e26165fa3221b005c7d4f048250286d55"
+    },
+    {
+      "path": "apps/tauri/dist/assets/index-CwGrrS02.css",
+      "bytes": 249943,
+      "sha256": "8ed3ffacb203fe3d270349dd310ba312438c80203041ca2ed5b22a6c50fb0c4f"
+    },
+    {
+      "path": "apps/tauri/dist/assets/index-z61Dcneq.js",
+      "bytes": 467118,
+      "sha256": "644246c3efdcaa258f087fc3c308fe6ea8ded36246b59a1a1d63fe3178787637"
+    },
+    {
+      "path": "apps/tauri/dist/assets/output-CpaAufgJ.js",
+      "bytes": 445910,
+      "sha256": "6cbd39264b4551ad6a25bc53fc4a8589efdfb57fa2295befeb1e5f7283f277f8"
+    },
+    {
+      "path": "apps/tauri/dist/assets/playback-history-filters-TtojXpjP.js",
+      "bytes": 193,
+      "sha256": "8000c160be74a669241bf44fa08fad41f711647418517258a5d1ea84e180d676"
+    },
+    {
+      "path": "apps/tauri/dist/assets/PlaylistPanel-BePNFUNB.js",
+      "bytes": 28052,
+      "sha256": "0a6aa4ad91976608736416b1669389beeb13fab2a11b0f4cb919e1656ffee43d"
+    },
+    {
+      "path": "apps/tauri/dist/assets/PlaylistPanel-D8u6BtFN.css",
+      "bytes": 13321,
+      "sha256": "520afc3d9d15722867ec2185f17c69479bc67fa8766239a00cf17a425d886d96"
+    },
+    {
+      "path": "apps/tauri/dist/assets/policies-B5_mwgWi.js",
+      "bytes": 705,
+      "sha256": "75847c1602b048a2fd523f640013902aed3e8b2b0057fb5b395ba0c1cb5a11cf"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-BRbAskaq.css",
+      "bytes": 17506,
+      "sha256": "f377f0773552c5dcc63cfb6caec98a515cb4b437350c0b5ed9402e5e4bf5a5a2"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-D0_vX0M0.js",
+      "bytes": 66,
+      "sha256": "ad22f3cd327ce9426290a7d51e97c16aab7022b47b3912fea8713c792304531a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/QueuePanel-ok7CdI_u.js",
+      "bytes": 35560,
+      "sha256": "12990f91bd9147d4d9b6770bca109f0b0be7b825e9e89c547b827916f14fe049"
+    },
+    {
+      "path": "apps/tauri/dist/assets/render-custom-track-media-D8hNDFU1.js",
+      "bytes": 797,
+      "sha256": "b5be055f73bf2bc20cfe6a040a695e3d0d531b8f02a9f3b27fd7ac205bb0fc1a"
+    },
+    {
+      "path": "apps/tauri/dist/assets/resolved-media-loader-r4Hh--3K.js",
+      "bytes": 1143,
+      "sha256": "677d7a13f68d4e3c91fc052808af6bd9b6cc818d21399e0d181e47c68b2564bb"
+    },
+    {
+      "path": "apps/tauri/dist/assets/runtime-core.esm-bundler-CTS-s628.js",
+      "bytes": 67464,
+      "sha256": "ffb206c07ae8e21465e0c1bf97a7ece448d1e5f4dfb44d2249762466a05defcf"
+    },
+    {
+      "path": "apps/tauri/dist/assets/runtime-dom.esm-bundler-DpXnxeSF.js",
+      "bytes": 15360,
+      "sha256": "0f333e9dfe31edb10493ba3adfc08bb6e78c8e59fe3025ff2fe9561d04adfea4"
+    },
+    {
+      "path": "apps/tauri/dist/assets/SegmentComposer-B4Q1EWMR.js",
+      "bytes": 24029,
+      "sha256": "5ed467667e8b95256f7db8230e4476075ad759d1ec359b0f9894aa220d620969"
+    },
+    {
+      "path": "apps/tauri/dist/assets/SegmentComposer-DFgHPyMp.css",
+      "bytes": 5949,
+      "sha256": "03edb3d699331f55a970deb8c5878b1399f9cb2cd098398b7daffffd774cafa9"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TagManagementPanel-jBsv1YE-.js",
+      "bytes": 14195,
+      "sha256": "b7bf5577544707a7ba275694452510e886b36e891f63b29705997e638ac288ff"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackCardSummary-Cy_W44ZM.js",
+      "bytes": 3465,
+      "sha256": "fc1bb43b89144b8ac47f8523b1e55c6283a73c4352cfd92921886ef82f10ede6"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackCardSummary-gJSrTlII.css",
+      "bytes": 422,
+      "sha256": "b71d3d8c395b5bd6d8c588ada49a3ca3e3c521de2a33f24277f8fb37fbe3a489"
+    },
+    {
+      "path": "apps/tauri/dist/assets/TrackSourcePageLink-DlWXBxuZ.js",
+      "bytes": 423,
+      "sha256": "79ce9b9e1c1cd0748f9b141080453fe2a32a7eaad3ba62240b42063554f92240"
+    },
+    {
+      "path": "apps/tauri/dist/assets/url-parser-BXFKcRPm.js",
+      "bytes": 3948,
+      "sha256": "40f0a2508e3e4bacd55c97d0984c2997abbd1de7e6d99fed10867d9be5875767"
+    },
+    {
+      "path": "apps/tauri/dist/assets/url-parser-CpMzpdTE.js",
+      "bytes": 1503,
+      "sha256": "fa879b72607d143d95785cbc720e8c108480ce50ced72aec35773b4e12d5cf76"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-catalog-filter-history-vZUX-D_N.js",
+      "bytes": 15198,
+      "sha256": "89b743039e35e19d0e2f59302886ba764cb68f67aef50440ebcfad1d8a7d45d0"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-catalog-list-controls-DdTZEBhN.js",
+      "bytes": 1013,
+      "sha256": "bfb069f6db25a34fba0d3943b962b85730f60f5fba2b9d4fbae6c51b78e4339f"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-confirmation-dialog-W2cYpCy7.js",
+      "bytes": 969,
+      "sha256": "bd9522044de5c5d588e3ca0b8b9f970663a04a55d57f18bec0b3b5475144f678"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-favorite-filters-BIlmOPDC.js",
+      "bytes": 247,
+      "sha256": "db57de29e742472f37c126014a9df58a4b195adb2e1692e4f9b4b690888f7253"
+    },
+    {
+      "path": "apps/tauri/dist/assets/use-settings-feedback-B-beOzbi.js",
+      "bytes": 1599,
+      "sha256": "d048ada400ce471a14b16e989f29255f2bfe3ae51be7af6b94e6597c85c051fc"
+    },
+    {
+      "path": "apps/tauri/dist/index.html",
+      "bytes": 2571,
+      "sha256": "75d8aef2ef801a020c0e483803c7fd0f00d283ad55774a0135c0e96902f72ac0"
+    },
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3381811,
+      "sha256": "22214c85218ac85d2a893d578b8983a2c3ac8566da38aad002d137ad7afe0203"
+    },
+    {
+      "path": "apps/userscript/dist/favicon.svg",
+      "bytes": 323,
+      "sha256": "cc0d86ba45aa6d335387275250865b0a8948b2f3f764840558aebb162d1fd671"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 18039296,
+      "sha256": "ee84100257daa4477ab97094bde7617f690b168cf3269fb779b8d097cc0494bf"
+    }
+  ],
+  "runtimeEvidence": {
+    "appLaunched": false,
+    "serverLaunched": false,
+    "browserLaunched": false,
+    "emulatorLaunched": false,
+    "screenshots": false,
+    "liveWebsite": false,
+    "liveGm": false,
+    "nativePublicNetwork": false,
+    "actualWebViewIsolation": false,
+    "mobileDeviceAcceptance": false
+  },
+  "unchangedGates": {
+    "S03": "awaiting acceptance",
+    "S05throughS16": "pending",
+    "newExternalFrameworkEntries": "closed",
+    "legacyDeclarativePath": "unchanged until S10"
+  },
+  "nativeSpecialistChecks": "Not rerun: no Rust/Cargo/native permission/dependency changes in S04; root test/typecheck/build include existing native gates.",
+  "gitPublication": "No commit or push",
+  "postDocumentationFormatCheck": {
+    "command": "pnpm format:check (after final documentation)",
+    "completedAt": "2026-10-17T10:29:47.5089788Z",
+    "exitCode": 0,
+    "startedAt": "2026-10-17T10:29:44.1148807Z",
+    "localLogPath": ".codex-tmp/s04/format-final.log",
+    "logBytes": 205,
+    "logSha256": "c0fc06ef43817bfde4a262a6756308536ea1331a6503c333d292cfda9e4ae6f8"
+  }
+}

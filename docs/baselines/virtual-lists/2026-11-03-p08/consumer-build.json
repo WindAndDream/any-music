@@ -1,0 +1,144 @@
+{
+  "capturedAt": "2026-11-03T13:10:48.026Z",
+  "method": "Isolated Vite production library builds of the actual Node-tested measured, fixed and unwindowed native-list consumers. Vue is external in both, because the product already shares Vue. No product/browser launched.",
+  "buildOptions": {
+    "mode": "production",
+    "minify": "oxc",
+    "target": "es2022",
+    "formats": ["es"],
+    "external": ["vue"],
+    "gzipLevel": 9
+  },
+  "sources": [
+    {
+      "path": "packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts",
+      "sha256": "7acde95cbbc4d308c61f8fd22c2a6b6633ecdbd1a2c1fa0dcb21f485377d868a"
+    },
+    {
+      "path": "packages/ui/test/fixtures/virtual-scroll/measured-list-consumer.ts",
+      "sha256": "e372797de046e8e0da99ef8c772716385a26257d7f656dd037ff21966e810dc6"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-list.ts",
+      "sha256": "fa7e9d2b243b608bb43ad14d37f2cb99fcfb93dcfbc7f2e4305f84ad05bb940b"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+      "sha256": "6a6285fa56808f2d2988f21dce658174d72460695e45e70445d7fa2b69fd3a9f"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-fixed-virtual-list.ts",
+      "sha256": "80458afb4d3fd71361cfc37f4ff8818e4da4ced012359c0fc6e33c0fbf3bef48"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+      "sha256": "4c9623315f17f977570793c89372c67ac2b88d391a74d886cc70f0197f8afafc"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+      "sha256": "334aebb715bb1b8b7dd24d433d5f6949fb138a31c4d9d42d02ce03a5439d3cfc"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+      "sha256": "cfd5fd5ebfa4536b18e1728e226b1f37486f05f1cc10286c791439b0709355fe"
+    },
+    {
+      "path": "packages/ui/src/virtual-scroll.ts",
+      "sha256": "d2e6051ac8e8d9eca0550f5f03f4f33a3d97926c1d7e39b1f44e5331fd54d1e4"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "b7b16fb2241c9d244835e433994a5c1c9e3d235a3193416be9d76bc8a3f03728"
+    }
+  ],
+  "results": [
+    {
+      "name": "FullListConsumer",
+      "entry": "export { FullListConsumer as Consumer } from \"<project-root>/packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 3734,
+          "gzipBytes": 1520,
+          "sha256": "c3becd470b3f0e4eb63ca77847b16c245e61f1c24da07e38a7fe3d11e5fa306e"
+        }
+      ],
+      "modules": [
+        "logs/2026-11-03-virtual-list-implementation/p08-FullListConsumer.entry.mjs",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+        "packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts"
+      ],
+      "bytes": 3734,
+      "gzipBytes": 1520
+    },
+    {
+      "name": "FixedListConsumer",
+      "entry": "export { FixedListConsumer as Consumer } from \"<project-root>/packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 49846,
+          "gzipBytes": 13423,
+          "sha256": "d7bd5c0841c357bb76ad9095966eaf7b8d47d0ab38726bfbb31848b084966103"
+        }
+      ],
+      "modules": [
+        "logs/2026-11-03-virtual-list-implementation/p08-FixedListConsumer.entry.mjs",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/index.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/ios-gesture.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/lazy-measurements.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/scroll-classifier.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/utils.js",
+        "node_modules/.pnpm/@tanstack+vue-virtual@3.13.51_vue@3.5.44_typescript@6.0.3_/node_modules/@tanstack/vue-virtual/dist/esm/index.js",
+        "packages/ui/src/composables/virtual-scroll/use-fixed-virtual-list.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+        "packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts"
+      ],
+      "bytes": 49846,
+      "gzipBytes": 13423
+    },
+    {
+      "name": "MeasuredListConsumer",
+      "entry": "export { MeasuredListConsumer as Consumer } from \"<project-root>/packages/ui/test/fixtures/virtual-scroll/measured-list-consumer.ts\"",
+      "chunks": [
+        {
+          "fileName": "consumer.js",
+          "bytes": 54286,
+          "gzipBytes": 14625,
+          "sha256": "9e8a2c6274e475c4272b1a0c8b6d372c52ccd435cefcd2b613d2c8e39d17b893"
+        }
+      ],
+      "modules": [
+        "logs/2026-11-03-virtual-list-implementation/p08-MeasuredListConsumer.entry.mjs",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/index.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/ios-gesture.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/lazy-measurements.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/scroll-classifier.js",
+        "node_modules/.pnpm/@tanstack+virtual-core@3.19.10/node_modules/@tanstack/virtual-core/dist/esm/utils.js",
+        "node_modules/.pnpm/@tanstack+vue-virtual@3.13.51_vue@3.5.44_typescript@6.0.3_/node_modules/@tanstack/vue-virtual/dist/esm/index.js",
+        "packages/ui/src/composables/virtual-scroll/use-measured-virtual-list.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+        "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+        "packages/ui/test/fixtures/virtual-scroll/measured-list-consumer.ts"
+      ],
+      "bytes": 54286,
+      "gzipBytes": 14625
+    }
+  ],
+  "delta": {
+    "measuredVsFixed": {
+      "bytes": 4440,
+      "gzipBytes": 1202
+    },
+    "measuredVsFull": {
+      "bytes": 50552,
+      "gzipBytes": 13105
+    }
+  },
+  "limits": "This measures a consuming fixture, including its renderer markup differences, not final production integration cost. Production list adoption, actual natural DOM/CSS measurement, grid, drag, anchoring, focus and live runtime/frame acceptance remain separate steps. No comparison to P03 full-product CSS or DOM is implied."
+}

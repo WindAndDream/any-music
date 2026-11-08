@@ -1,0 +1,95 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "batchId": "B02-network-routing-shared",
+  "observedHeadAtEntry": "1fe6a2f0ef3ebaf082741ac2d1d4ffb4beafaac9",
+  "before": {
+    "head": "e75973b4a0419f97ce1dd0acd74f6a9d335104ca",
+    "capturedAt": "2026-10-21T14:09:30.7027787+08:00",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "os": "Microsoft Windows NT 10.0.26200.0",
+    "powershell": "7.6.6",
+    "relevantStatus": [],
+    "hashes": [
+      {
+        "path": "packages/network-routing/AGENTS.md",
+        "sha256": "7697d7cd71999b6f477842d5925bab46b3cdb6bc809f749da9c6a49715e506b0"
+      },
+      {
+        "path": "packages/network-routing/package.json",
+        "sha256": "be7a66706eb369c12da08f98002dcf7192e4cb5e5acdf86cd93359f9e5cfc90d"
+      },
+      {
+        "path": "packages/network-routing/src/attempts.ts",
+        "sha256": "fcb7321632fce33114af4048e001cc9257a56bb393690d23340bb252dc291747"
+      },
+      {
+        "path": "packages/network-routing/src/cancellation.ts",
+        "sha256": "bc3720bbfbe5308c23a41833e3557f6488c637616e9eb26217120258cd82149a"
+      },
+      {
+        "path": "packages/network-routing/src/index.ts",
+        "sha256": "97ef0827364f7a789291e4a6c74f456185ec066d52b5461838553fef1fcc249a"
+      },
+      {
+        "path": "packages/network-routing/src/proxy-pool.ts",
+        "sha256": "bacb65c39a7070a0a809d87ef242885fbf4f4064ae5d4711a4a47305232f75f2"
+      },
+      {
+        "path": "packages/network-routing/test/attempts.test.ts",
+        "sha256": "9aa940505ebd3f66a6abf9f2a15a864aee5e37f99843b448d326800fedd934d8"
+      },
+      {
+        "path": "packages/network-routing/test/fixtures/clock.ts",
+        "sha256": "f6707fe9ee1a8571034bf78c9129582fbe9a40bebc4496803dab4c77d15176a5"
+      },
+      {
+        "path": "packages/network-routing/test/proxy-pool.test.ts",
+        "sha256": "45e58e9bbd5702aa6ffc007b3c4a9b24e7ec4a7ab10e0f8178a4212f558d3e4d"
+      },
+      {
+        "path": "packages/network-routing/tsconfig.json",
+        "sha256": "0b2a2cdf3f317e31b247203408b460557553db45d9b0c997d078e91fa03b627f"
+      }
+    ]
+  },
+  "after": {
+    "head": "1eaaa99e4626b45ffc8a4c0c32738981c637dae7",
+    "capturedAt": "2026-10-21T14:12:04.5578605+08:00",
+    "relevantStatus": [],
+    "hashMismatches": [],
+    "probeRemoved": true,
+    "evidenceHashes": [
+      {
+        "path": "packages/account-pool/AGENTS.md",
+        "sha256": "25d94f4a90822641e50c82089f6cb982fe59c243f0cc74ae5657edd54fa5566c"
+      },
+      {
+        "path": "packages/account-pool/package.json",
+        "sha256": "11f877681c254c4602d7d30349586a55e75774ce6ae2fd71386f1b79e6cbedcb"
+      },
+      {
+        "path": "packages/account-pool/src/requests.ts",
+        "sha256": "88a75b164edbcbda0aa32b58bfc0c7a9644138d40e690e83701490e6ce5c9415"
+      },
+      {
+        "path": "package.json",
+        "sha256": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e"
+      },
+      {
+        "path": "pnpm-workspace.yaml",
+        "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e"
+      },
+      {
+        "path": "tsconfig.base.json",
+        "sha256": "a54d24214863db254a94db67f8ded43f5cf6465184be18799d88bdc02087ffa1"
+      },
+      {
+        "path": "scripts/check-package-boundaries.mjs",
+        "sha256": "18c11924b7b99c9486cbcaf0643f9aff1612f877dbab6ef7689ef57410ca442f"
+      }
+    ]
+  },
+  "note": "HEAD advanced concurrently during the audit. All ten network-routing evidence hashes were unchanged at completion and the relevant working tree was clean. No commit or product implementation change was performed by this audit. The temporary probe was archived locally and removed."
+}

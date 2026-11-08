@@ -1,0 +1,295 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch/commit/tag to build. Publishing requires selecting the matching vVERSION workflow tag and ref.
+        required: false
+        type: string
+      publish:
+        description: Publish to GitHub Releases after all checks pass.
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ inputs.ref || github.ref_name }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  CARGO_INCREMENTAL: '0'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+  AM_RELEASE_ANDROID_SIGNING: ${{ (github.event_name == 'push' || inputs.publish) && 'signed' || 'unsigned' }}
+
+jobs:
+  prepare:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    outputs:
+      publish: ${{ steps.release.outputs.publish }}
+      tag: ${{ steps.release.outputs.tag }}
+      commit: ${{ steps.release.outputs.commit }}
+      desktop: ${{ steps.release.outputs.desktop }}
+      android: ${{ steps.release.outputs.android }}
+      java: ${{ steps.release.outputs.java }}
+      sdk: ${{ steps.release.outputs.sdk }}
+      build-tools: ${{ steps.release.outputs.build-tools }}
+      ndk: ${{ steps.release.outputs.ndk }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+      - name: Validate tag and derive target matrices
+        id: release
+        env:
+          AM_RELEASE_TAG: ${{ github.event_name == 'push' && github.ref_name || (inputs.publish && inputs.ref) || '' }}
+          AM_RELEASE_REQUIRE_TAG: ${{ github.event_name == 'push' || inputs.publish }}
+          AM_RELEASE_WORKFLOW_TAG: ${{ (github.event_name == 'push' || inputs.publish) && (github.ref_type == 'tag' && github.ref_name || 'select-the-version-tag') || '' }}
+        run: node scripts/check-release.mjs
+
+  checks:
+    needs: prepare
+    uses: ./.github/workflows/ci.yml
+    with:
+      ref: ${{ needs.prepare.outputs.commit }}
+
+  userscript:
+    needs: [prepare, checks]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    env:
+      AM_RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+      AM_RELEASE_COMMIT: ${{ needs.prepare.outputs.commit }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.commit }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-workspace
+        with:
+          rust: 'false'
+      - run: pnpm release:build userscript
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: release-userscript
+          overwrite: true
+          path: dist/release/userscript/
+          if-no-files-found: error
+          retention-days: 14
+
+  desktop:
+    name: Desktop (${{ matrix.id }})
+    needs: [prepare, checks]
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare.outputs.desktop) }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    env:
+      AM_RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+      AM_RELEASE_COMMIT: ${{ needs.prepare.outputs.commit }}
+      AM_DESKTOP_TARGET: ${{ matrix.target }}
+      AM_RELEASE_TARGET: ${{ matrix.id }}
+      APPIMAGE_EXTRACT_AND_RUN: '1'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.commit }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-workspace
+        with:
+          linux-desktop: ${{ matrix.platform == 'linux' }}
+          cache-key: release-${{ matrix.id }}
+      - name: Native unit tests
+        run: cargo test --workspace --locked --target "$AM_DESKTOP_TARGET"
+      - name: Build installers
+        run: pnpm release:build "$AM_RELEASE_TARGET"
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: release-${{ matrix.id }}
+          overwrite: true
+          path: dist/release/${{ matrix.id }}/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+  android:
+    name: Android unsigned (${{ matrix.id }})
+    if: needs.prepare.outputs.publish != 'true'
+    needs: [prepare, checks]
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare.outputs.android) }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    env:
+      AM_RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+      AM_RELEASE_COMMIT: ${{ needs.prepare.outputs.commit }}
+      AM_RELEASE_TARGET: ${{ matrix.id }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.commit }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-android-release
+        with:
+          cache-key: release-${{ matrix.id }}
+          target: ${{ matrix.target }}
+          java: ${{ needs.prepare.outputs.java }}
+          sdk: ${{ needs.prepare.outputs.sdk }}
+          build-tools: ${{ needs.prepare.outputs.build-tools }}
+          ndk: ${{ needs.prepare.outputs.ndk }}
+      - name: Check Android native code
+        if: matrix.target == 'aarch64'
+        run: pnpm check:mobile:android
+      - name: Build unsigned release APK and AAB
+        run: pnpm release:build "$AM_RELEASE_TARGET"
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: release-${{ matrix.id }}
+          overwrite: true
+          path: dist/release/${{ matrix.id }}/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+  android-signed:
+    name: Android signed (${{ matrix.id }})
+    if: needs.prepare.outputs.publish == 'true'
+    needs: [prepare, checks]
+    environment: release-signing
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare.outputs.android) }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    env:
+      AM_RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+      AM_RELEASE_COMMIT: ${{ needs.prepare.outputs.commit }}
+      AM_RELEASE_TARGET: ${{ matrix.id }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.commit }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-android-release
+        with:
+          cache-key: release-${{ matrix.id }}
+          target: ${{ matrix.target }}
+          java: ${{ needs.prepare.outputs.java }}
+          sdk: ${{ needs.prepare.outputs.sdk }}
+          build-tools: ${{ needs.prepare.outputs.build-tools }}
+          ndk: ${{ needs.prepare.outputs.ndk }}
+      - name: Check Android native code
+        if: matrix.target == 'aarch64'
+        run: pnpm check:mobile:android
+      - name: Build and verify signed release APK and AAB
+        env:
+          AM_ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          AM_ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          AM_ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          AM_ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: pnpm release:build:android-signed "$AM_RELEASE_TARGET"
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: release-${{ matrix.id }}
+          overwrite: true
+          path: dist/release/${{ matrix.id }}/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+  assemble:
+    name: Release candidate checks
+    if: always() && !cancelled()
+    needs: [prepare, checks, userscript, desktop, android, android-signed]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    env:
+      AM_RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+      AM_RELEASE_COMMIT: ${{ needs.prepare.outputs.commit }}
+    steps:
+      - name: Require every expected build to succeed
+        shell: bash
+        env:
+          AM_RELEASE_JOBS: ${{ toJSON(needs) }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict'
+          const jobs = JSON.parse(process.env.AM_RELEASE_JOBS)
+          const android = jobs.prepare.outputs.publish === 'true' ? 'android-signed' : 'android'
+          for (const id of ['prepare', 'checks', 'userscript', 'desktop', android])
+            assert.equal(jobs[id].result, 'success', `Release job failed or skipped: ${id}`)
+          NODE
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.commit }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          pattern: release-*
+          path: dist/release/incoming/
+      - name: Check matrix, versions, commit and artifact hashes
+        run: node scripts/collect-release.mjs
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: distribution-assets
+          overwrite: true
+          path: dist/release/publish/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+  publish:
+    name: Publish accepted release
+    needs: [prepare, assemble]
+    if: needs.prepare.outputs.publish == 'true'
+    environment: release-publish
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      AM_RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+      AM_RELEASE_COMMIT: ${{ needs.prepare.outputs.commit }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.commit }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: distribution-assets
+          path: dist/release/publish/
+      - name: Publish complete GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/publish-release.mjs

@@ -1,0 +1,286 @@
+{
+  "batchId": "T08",
+  "status": "complete",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "scope": "Tag/creation whole-page presentation separation and complete classic required/optional coverage; production complete-root adoption remains T11.",
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "preserved": "Earlier T00–T07 migration and native-download edits were retained. No reset/revert/commit/push or UI launch.",
+    "concurrentChanges": "T09 theme-studio code and integration tests appeared during this task. Verification describes the combined worktree, not isolated T08 size or runtime acceptance."
+  },
+  "ownership": {
+    "ui": "Type-only deeply readonly specialist presentation models, named actions and bounded control/slot contracts; theme code receives no editing disposer or namespace repository.",
+    "theme-default": [
+      "TagManagementPage and MusicCreationPage own whole-page layout",
+      "ClassicTags/ClassicComposer optional roots and ClassicPlugins required root",
+      "Classic-only specialist page CSS, scoped under .am-theme-default",
+      "Complete 13 required + 2 optional view definition for desktop/mobile"
+    ],
+    "plugin-tag-management": "Rules, associations, namespace/session editing, filter derivation, renderless Panel adapter and neutral specialist controls/styles.",
+    "plugin-music-creation": "Draft/material/recipe editing, namespace/session lifecycle, renderless Composer adapter and neutral controls/timeline/styles.",
+    "music-workbench": "createWorkbenchSpecialistFeatures binds each editor/event to its originating session, supplies current injected partial composition and is exported through /theme for complete roots; host publish/playback/download ownership unchanged."
+  },
+  "coverage": {
+    "requiredViews": [
+      "shell",
+      "navigation",
+      "player",
+      "catalog",
+      "queue",
+      "favorites",
+      "playlists",
+      "custom-tracks",
+      "history",
+      "downloads",
+      "plugins",
+      "settings",
+      "overlays"
+    ],
+    "optionalViews": ["tags", "composer"],
+    "forms": ["desktop", "mobile"],
+    "productionRootSelection": "Deferred to T11; current app composition still injects chrome/catalog/library.",
+    "protectedAuthority": "Account/login/proxy/native consent/recovery/media host remains in existing owners."
+  },
+  "targetedVerification": [
+    {
+      "command": "pnpm --filter @any-music/plugin-tag-management test",
+      "exitCode": 0,
+      "files": 3,
+      "tests": 11
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-music-creation test",
+      "exitCode": 0,
+      "files": 4,
+      "tests": 14
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default test",
+      "exitCode": 0,
+      "files": 50,
+      "tests": 350,
+      "source": "Root recursive test run"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/use-workbench-controller.test.ts test/components/music-sources/MusicSourceWorkbench.test.ts test/features/plugins/use-tag-management.test.ts test/features/plugins/use-music-creation.test.ts",
+      "exitCode": 0,
+      "files": 4,
+      "tests": 31
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default exec vitest run test/metadata.test.ts test/components/specialists/ClassicSpecialists.test.ts",
+      "exitCode": 0,
+      "files": 2,
+      "tests": 6
+    },
+    {
+      "command": "pnpm --filter @any-music/ui --filter @any-music/plugin-tag-management --filter @any-music/plugin-music-creation --filter @any-music/theme-default --filter @any-music/music-workbench typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/check-package-boundaries.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build:userscript:prod",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm --filter @any-music/tauri build:frontend",
+      "exitCode": 0,
+      "warning": "Existing large-chunk warning remains."
+    }
+  ],
+  "regressions": [
+    "Retain tag input/filter and the exact business/editing session across classic presentation remount without namespace writes.",
+    "Retain material filter, unsaved recipe identity/title/draft across remount without replaying persistence.",
+    "Reject callbacks from a replaced editor and pending confirmation after disable/re-enable; old namespace operations never target the new session.",
+    "Withdraw/restore optional pages and named built-in enable/retry operations.",
+    "Publish via named host operation; disabling creation keeps published track/recipe/queue/media resolution and admits its download independently.",
+    "Deep readonly negative type cases disallow direct draft/filter mutation, session disposal and namespace writing from themes."
+  ],
+  "intermediateFindings": [
+    "Updated existing KeepAlive regression to match host-bound editors.",
+    "Corrected test helper export usage, dynamic union rendering type and download-origin fixture.",
+    "Initial full-worktree check also encountered concurrent T09 StudioPlayer import and continuity-test failures; final reruns are recorded below without modifying those files.",
+    "The initial root format check found concurrently edited documentation indexes and Studio tests/components. Only reported files were formatted; final repository formatting and lint passed without warnings.",
+    "A final format scan caught the newly written concurrent T09 evidence file; it was formatted without changing its data. All 158 local documentation links now resolve."
+  ],
+  "rootGates": {
+    "test": {
+      "command": "pnpm test",
+      "exitCode": 0
+    },
+    "typecheck": {
+      "command": "pnpm typecheck",
+      "exitCode": 0
+    },
+    "lint": {
+      "command": "pnpm lint",
+      "exitCode": 0
+    },
+    "format:check": {
+      "command": "pnpm format:check",
+      "exitCode": 0
+    },
+    "build": {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "nativeArtifact": "target/release/any-music-tauri.exe",
+      "warning": "Existing Tauri large-chunk warning remains; no UI launch."
+    }
+  },
+  "exitConditions": {
+    "classicCoverage": "All 13 required and both optional regions pass desktop/mobile admission; T11 production cutover remains separate.",
+    "pluginBehaviorAndNamespaceOwnership": "passed",
+    "sessionAndStaleEventTests": "passed",
+    "T07IntegrationPrerequisite": "Closed with T08 current-worktree revalidation; T05/T06 are complete. See T07.json integrationClosure.",
+    "wholeWorktreeGates": "All five passed.",
+    "liveAcceptance": "Deferred to T13; not requested."
+  },
+  "pendingLiveChecks": [
+    "Real browser layout/focus/scroll, keyboard/touch and light/dark/reduced-motion acceptance.",
+    "Actual Userscript GM transport and desktop Rust/media/native saving continuity.",
+    "Production complete-root adoption in T11, Studio coverage in T09/T10."
+  ],
+  "rootTestSummary": {
+    "frontendPackages": [
+      {
+        "package": "packages/network-routing",
+        "files": 2,
+        "tests": 28
+      },
+      {
+        "package": "packages/audio-composition",
+        "files": 5,
+        "tests": 15
+      },
+      {
+        "package": "packages/plugin-sdk",
+        "files": 5,
+        "tests": 120
+      },
+      {
+        "package": "packages/account-pool",
+        "files": 3,
+        "tests": 22
+      },
+      {
+        "package": "packages/core",
+        "files": 8,
+        "tests": 49
+      },
+      {
+        "package": "packages/plugin-vm",
+        "files": 3,
+        "tests": 39
+      },
+      {
+        "package": "packages/plugin-center",
+        "files": 9,
+        "tests": 56
+      },
+      {
+        "package": "packages/plugin-testkit",
+        "files": 1,
+        "tests": 33
+      },
+      {
+        "package": "packages/plugin-sandbox-browser",
+        "files": 3,
+        "tests": 18
+      },
+      {
+        "package": "packages/ui",
+        "files": 61,
+        "tests": 329
+      },
+      {
+        "package": "packages/plugin-source-bilibili",
+        "files": 3,
+        "tests": 47
+      },
+      {
+        "package": "packages/plugin-source-douyin",
+        "files": 6,
+        "tests": 86
+      },
+      {
+        "package": "packages/plugin-music-creation",
+        "files": 4,
+        "tests": 14
+      },
+      {
+        "package": "packages/plugin-tag-management",
+        "files": 3,
+        "tests": 11
+      },
+      {
+        "package": "packages/plugin-ui-vue",
+        "files": 9,
+        "tests": 55
+      },
+      {
+        "package": "packages/theme-studio",
+        "files": 2,
+        "tests": 12
+      },
+      {
+        "package": "packages/theme-default",
+        "files": 50,
+        "tests": 350
+      },
+      {
+        "package": "packages/music-workbench",
+        "files": 56,
+        "tests": 399
+      },
+      {
+        "package": "apps/tauri",
+        "files": 39,
+        "tests": 352
+      },
+      {
+        "package": "apps/userscript",
+        "files": 17,
+        "tests": 80
+      }
+    ],
+    "vitestFiles": 289,
+    "vitestTests": 2115,
+    "native": "Workspace Cargo tests passed; one existing ignored test; protocol differential passed 183 cases.",
+    "repositoryAndCli": "Repository node:test and CLI suites passed in pnpm test."
+  },
+  "artifacts": {
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 4785482,
+      "sha256": "7b43b715552b2b306cb237a620e8d6ebd20ace921f4d325b934fa90c58041172"
+    },
+    "windowsRelease": {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 28334592,
+      "sha256": "a4bdf224833256508a69c66d15134f46234267eec131fb59e83f3f3d44e98df0"
+    },
+    "frontends": [
+      {
+        "path": "apps/userscript/dist",
+        "fileCount": 3,
+        "bytes": 4820579
+      },
+      {
+        "path": "apps/tauri/dist",
+        "fileCount": 67,
+        "bytes": 2852262
+      }
+    ],
+    "limitation": "Shared-worktree outputs; no isolated T08 size attribution and no live/native acceptance."
+  },
+  "documentationLinks": {
+    "checkedLocalLinks": 158,
+    "missing": [],
+    "gitDiffCheck": "Passed; existing LF/CRLF notices only."
+  }
+}

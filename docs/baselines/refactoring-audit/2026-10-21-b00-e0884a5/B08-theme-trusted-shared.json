@@ -1,0 +1,279 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B08-theme-trusted-shared",
+  "parentBatch": "B08",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T10:23:10.928Z",
+  "scope": {
+    "invariant": "A trusted built-in theme switch must preserve controlled host state, commit only the latest live selection, recover from failure, release resources and report persistence failures truthfully.",
+    "allowedPaths": [
+      "packages/plugin-ui-vue/src/trusted/theme-{controller,resources,contracts,directory}.ts and the two build-known theme modules",
+      "packages/plugin-ui-vue/test/trusted and existing Node renderer helper",
+      "packages/music-workbench/src/features/plugins/use-workbench-theme.ts (direct composition)",
+      "packages/music-workbench/src/features/plugins/use-workbench-modules.ts:298-329 (allocation injection only)",
+      "packages/ui/src/product/ui-presentation.ts and package exports/dependencies (public contracts only)"
+    ],
+    "excluded": [
+      "Controlled component group audit",
+      "Declarative root/session audit",
+      "Independent directory transitive graph acceptance",
+      "Workspace outlet visibility/retry and other independent view assembly chains",
+      "Runtime mounting, GM/Rust transport and native authority",
+      "Product fixes, permanent test changes, live UI, commit, push or publication"
+    ],
+    "budgetNote": "The main chain is the trusted controller and its resource adapter, with the direct workbench theme composable/allocation port. Supporting root/directory exports, public UI contract and existing presentation/outlet tests were inspected without accepting those independent candidates. Additional outlet/boundary implementation excerpts were read but their independent lifecycle was not traced. No plugin-center implementation was read. The 18 hashed inputs include manifests/config and a Node test helper. Stop here rather than expanding to more B08 chains."
+  },
+  "baseline": {
+    "reference": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-baseline.json",
+    "head": "844b5e35b0d6b152350c34043857e042170cbd61",
+    "targetWorkingTree": "All 18 relevant input hashes were captured; product inputs were clean at audit start. Existing unrelated source/test/doc edits were preserved. Final input hash validation and temporary-probe removal are checked separately.",
+    "environment": {
+      "timezone": "Asia/Shanghai",
+      "pnpm": "10.23.0",
+      "node": "v24.11.1",
+      "vitest": "4.1.11",
+      "os": "Windows"
+    },
+    "hashValidation": "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/final-input-check.json",
+    "finalHead": "158da139f0cac80c1c8a3dadfe5c811d4c140cb0",
+    "headChangeAssessment": "Another task advanced HEAD during this audit. All 18 inspected input hashes remain identical, so scoped evidence remains valid. This audit did not commit or push."
+  },
+  "declaredStatus": [
+    {
+      "claim": "The plan separates controlled components, root, directory, trusted themes and live layout into five B08 candidates.",
+      "reference": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:119",
+      "assessment": "Only B08-theme-trusted-shared is accepted as an audited scope; the block is incomplete."
+    },
+    {
+      "claim": "Build-only trusted themes use transactional switching and cleanup while ui consumes controlled values without plugin-framework imports.",
+      "reference": "packages/plugin-ui-vue/AGENTS.md:4",
+      "assessment": "Ownership, fixed loaders and tested renderer continuity conform locally; stale allocation and error feedback violate the selected lifecycle/visible contracts."
+    },
+    {
+      "claim": "Node tests cannot establish real focus/layout or runtime acceptance.",
+      "reference": ".agents/skills/any-music-ui-delivery/SKILL.md",
+      "assessment": "No product, browser, preview, screenshot or emulator was launched. Node element fixtures prove callback/cleanup contracts only."
+    }
+  ],
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Are trusted presentation, controlled UI and business ownership separate and public imports declared?",
+      "evidence": [
+        "packages/plugin-ui-vue/package.json:6",
+        "packages/ui/package.json:12",
+        "packages/plugin-ui-vue/src/trusted/themes/default-theme.ts:1",
+        "packages/music-workbench/src/features/plugins/use-workbench-theme.ts:1"
+      ],
+      "detail": "The trusted adapter consumes public ui component paths and injected resources/allocation; ui manifest has no plugin-framework dependency. Workbench owns persistence/provides; theme switching does not construct player/download/library instances. Repository package-boundary check passes. This is not a full UI or runtime dependency-graph audit."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Are theme loaders build-known and failed loads retryable within the controller?",
+      "evidence": [
+        "packages/plugin-ui-vue/src/trusted/theme-controller.ts:13",
+        "packages/plugin-ui-vue/src/trusted/theme-controller.ts:48",
+        "packages/plugin-ui-vue/src/trusted/theme-directory.ts:1",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/probe.log"
+      ],
+      "detail": "Only default/studio canonical descriptors are accepted, studio uses a literal dynamic import, and the controller does not retain a rejected custom loader promise. The supplemental import-rejection/retry scenario passes. This injected rejection test does not establish recovery from an actual browser module-fetch failure; directory/root graph acceptance stays pending."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Are stale/disposed operations suppressed before entering the host allocation boundary, with resource release preserved?",
+      "evidence": [
+        "packages/plugin-ui-vue/src/trusted/theme-controller.ts:58",
+        "packages/music-workbench/src/features/plugins/use-workbench-modules.ts:298",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/probe.log"
+      ],
+      "detail": "B08-T01: the first generation/disposed check comes after prepareAllocation. A superseded studio import calls the allocation port after default has committed, and a resolved import calls it after dispose. Render snapshots still reject the old result; that does not suppress the callback. Existing and supplemental resource disposal/retry cases pass."
+    },
+    {
+      "criterion": "C4",
+      "result": "fail",
+      "question": "Are theme preferences isolated and failures represented truthfully to the controlled selection UI?",
+      "evidence": [
+        "packages/music-workbench/src/features/plugins/use-workbench-theme.ts:14",
+        "packages/music-workbench/src/features/plugins/use-workbench-theme.ts:66",
+        "packages/music-workbench/src/features/plugins/use-workbench-theme.ts:82",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/probe.log"
+      ],
+      "detail": "Theme preferences store themeId and normalized per-theme settings independently from business snapshots. B08-T02: the same failure boolean covers persistence and activation, so a successful studio selection followed by a thrown write exposes a false default-fallback message."
+    },
+    {
+      "criterion": "C6",
+      "result": "fail",
+      "question": "Do existing failure/race tests cover the selected contracts and distinguish offline evidence?",
+      "evidence": [
+        "packages/plugin-ui-vue/test/trusted/theme-controller.test.ts:63",
+        "packages/plugin-ui-vue/test/trusted/theme-resources.test.ts:24",
+        "packages/plugin-ui-vue/test/trusted/presentation.test.ts:68",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/package-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/consumer-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/probe.log"
+      ],
+      "detail": "Existing package tests pass 26/26 and the direct workbench module test passes 7/7; all three relevant package typechecks pass. Supplemental probes pass 2/5 and fail 3/5: two allocation-lifecycle cases and one visible-error case. Their missing regression coverage prevents scoped acceptance. Temporary source was removed after preserving a local copy."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "node scripts/check-package-boundaries.mjs",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/package-boundaries.log"
+        }
+      ],
+      "detail": "Local source review confirms two findings despite the passing repository package-boundary check."
+    },
+    "tests": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/plugin-ui-vue test",
+          "exitCode": 0,
+          "tests": 26,
+          "passed": 26,
+          "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/package-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-ui-vue typecheck",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/typecheck.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-modules.test.ts",
+          "exitCode": 0,
+          "tests": 7,
+          "passed": 7,
+          "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/consumer-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench --filter @any-music/ui typecheck",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/consumer-typecheck.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-ui-vue exec vitest run test/trusted/b08-theme-audit.probe.test.ts",
+          "exitCode": 1,
+          "tests": 5,
+          "passed": 2,
+          "failed": 3,
+          "log": "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/probe.log"
+        }
+      ],
+      "probeSource": "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/b08-theme-audit.probe.test.ts",
+      "temporaryRepositoryFile": "packages/plugin-ui-vue/test/trusted/b08-theme-audit.probe.test.ts",
+      "temporaryProbeRemoved": true,
+      "harnessNote": "First and only probe run reached all five test bodies. The final pnpm recursive-exec failure trailer is downstream of the Vitest exit 1; Vitest executed and its three assertion failures are the recorded cause."
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "No product/styles/public-export change was made. Production builds, artifact graphs and the full five root gates are reserved for repair/final B21 closeout; no previous baseline build is reused as current acceptance."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "Current audit task does not explicitly authorize browser/application inspection. Real light/dark/system, keyboard focus, Shadow DOM, layout and mobile behavior remain unverified."
+    }
+  },
+  "findings": [
+    {
+      "id": "B08-T01",
+      "severity": "P2",
+      "status": "open",
+      "title": "Check request freshness before invoking host theme allocation",
+      "owner": "packages/plugin-ui-vue/src/trusted/theme-controller.ts",
+      "trigger": "Start a delayed studio import, then commit default or dispose the controller before studio resolves.",
+      "effect": "The stale operation calls prepareAllocation(studio) before being rejected. The production callback awaits module readiness and calls host.controller.activate, so discarded renderer work can still initiate host activation/allocation. In the side-effectful port probe the rendered snapshot remains default while the port records studio after default. This proves the boundary call/order; a real host registry mismatch was not accepted or live-tested.",
+      "evidence": [
+        "packages/plugin-ui-vue/src/trusted/theme-controller.ts:58",
+        "packages/plugin-ui-vue/src/trusted/theme-controller.ts:60",
+        "packages/music-workbench/src/features/plugins/use-workbench-modules.ts:298",
+        "packages/music-workbench/src/features/plugins/use-workbench-modules.ts:315",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/b08-theme-audit.probe.test.ts:45",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/b08-theme-audit.probe.test.ts:81"
+      ],
+      "suggestedNextAction": "Recheck disposed/generation immediately after loading and before allocation; retain the post-allocation guard. Add permanent stale-load/disposal tests. Separately define cancellation/generation or side-effect-free staging for an allocation already in flight if the host boundary requires it; this audit does not claim a complete B05 host transaction review."
+    },
+    {
+      "id": "B08-T02",
+      "severity": "P2",
+      "status": "open",
+      "title": "Distinguish preference write failure from theme fallback",
+      "owner": "packages/music-workbench/src/features/plugins/use-workbench-theme.ts",
+      "trigger": "Select studio successfully while runtime.storage.write throws for the new preference.",
+      "effect": "currentId() remains studio, but the controlled selection error says 界面主题不可用，已使用默认主题。可重新选择主题以重试。 The user is told a fallback occurred when only saving failed and receives no accurate persistence failure explanation.",
+      "evidence": [
+        "packages/music-workbench/src/features/plugins/use-workbench-theme.ts:66",
+        "packages/music-workbench/src/features/plugins/use-workbench-theme.ts:82",
+        "<user-home>/AppData/Local/Temp/any-music-b08-theme-audit/b08-theme-audit.probe.test.ts:137"
+      ],
+      "suggestedNextAction": "Represent persistence/read/activation failure separately or derive feedback from the actual current state; keep the working theme usable and make saving retryable. Add a mounted composable regression that asserts both currentId and exposed error."
+    }
+  ],
+  "unreadPaths": [
+    "Most packages/ui controlled components and their direct black-box tests",
+    "plugin-ui-vue DeclarativePluginView/declarative-session implementation",
+    "Full directory/root production graph",
+    "Independent WorkspaceViewOutlet/WorkspaceViewBoundary lifecycle and actual visibility/focus",
+    "Runtime theme mounting, actual browser module fetch and mobile behavior",
+    "plugin-center activation internals (B05 handoff)"
+  ],
+  "missingEvidence": [
+    "Three failing probes need permanent owner-package regressions and fixes",
+    "No standalone use-workbench-theme owner test existed in the inspected feature test inventory",
+    "No real DOM focus, live layout, runtime or mobile acceptance",
+    "No full root gates or production build evidence for this batch"
+  ],
+  "dependencies": [
+    {
+      "batch": "B05 modules wiring",
+      "boundary": "theme-controller -> use-workbench-theme prepareAllocation -> use-workbench-modules.prepareTheme -> public host.controller.activate",
+      "question": "If allocation has already begun, establish whether host activation supports cancellation or a generation/commit boundary. Do not infer native/plugin authority from this presentation callback."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B08-theme-trusted-shared-fix",
+    "parentBatch": "B08",
+    "runtime": "shared",
+    "status": "pending",
+    "question": "Repair B08-T01 stale host allocation and B08-T02 misleading persistence failure feedback, then preserve permanent regression tests for the three failing audit scenarios.",
+    "allowedPaths": [
+      "packages/plugin-ui-vue/src/trusted/theme-controller.ts and matching test/trusted tests",
+      "packages/music-workbench/src/features/plugins/use-workbench-theme.ts and matching feature tests",
+      "use-workbench-modules.ts prepareTheme boundary only if cancellation or transactional allocation requires it"
+    ],
+    "excluded": [
+      "Other B08 candidates and independent B05 module lifecycle audits",
+      "Product/browser/emulator inspection, commit, push and publication"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "packages/plugin-ui-vue/AGENTS.md",
+      "packages/music-workbench/AGENTS.md",
+      ".agents/skills/any-music-ui-delivery/SKILL.md"
+    ],
+    "continuation": "Audit only is complete; no product implementation was changed. Reuse B08-theme-trusted-shared.json and its baseline after checking relevant hashes. Temporary probe source/logs are retained locally; restore to the exact original package test path to reproduce. Other four B08 candidates remain unreviewed. A repair is a separate task and requires the applicable root gates before delivery."
+  },
+  "handoff": {
+    "summary": "B08-theme-trusted-shared / shared at HEAD 844b5e3. Only the trusted theme switching/resource chain and direct workbench preference/allocation boundary were reviewed. C1/C2 pass; C3/C4/C6 fail. P2 B08-T01 invokes allocation after an import has become stale or disposed; P2 B08-T02 falsely reports default fallback after a successful studio switch whose preference write fails. Existing 26 package and 7 consumer tests pass; supplemental probes pass 2/5 with three failures; plugin-ui-vue/ui/workbench typechecks and package boundaries pass. No product implementation or permanent tests changed. No artifact or live acceptance. Repair these two findings next; controlled components, root, directory and live-layout candidates remain unreviewed.",
+    "reproduction": "Copy the preserved local probe to packages/plugin-ui-vue/test/trusted/b08-theme-audit.probe.test.ts, run the recorded probe command from the repository root, then remove only that temporary file.",
+    "implementationChanged": false,
+    "committed": false,
+    "pushed": false
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B17-cli-build-pack-sign",
+  "capturedAt": "2026-10-21T15:36:38.622Z",
+  "captureNote": "File hashes captured at report creation after verification. Initial HEAD and working-tree observations were recorded in the session before running commands; CLI implementation was not edited.",
+  "head": "a693165205be0bc321764768d796d7c842f7a446",
+  "initialHead": "a693165205be0bc321764768d796d7c842f7a446",
+  "relevantInitialWorkingTreeChanges": [
+    " M packages/plugin-sdk/src/node/package-format.mjs",
+    " M packages/plugin-sdk/test/fixtures/packages/corpus.json",
+    " M packages/plugin-sdk/test/package-corpus-generator.mjs",
+    " M docs/baselines/plugin-system-s15/tools.json",
+    " M docs/baselines/plugin-system-s15/toolchain-sbom.json",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json"
+  ],
+  "initialWorkingTreeNotes": "Other pre-existing changes included Tauri control/executor, native package/runtime and earlier audit reports. They were retained and not audited by this Node subbatch. No CLI/testkit implementation changes existed at entry.",
+  "finalWorkingTree": [
+    "M apps/tauri/src-tauri/src/plugins/control.rs",
+    " M apps/tauri/src-tauri/src/plugins/executor.rs",
+    " M apps/tauri/src-tauri/src/plugins/unavailable_executor.rs",
+    " M crates/am-plugin-package/src/lib.rs",
+    " M crates/am-plugin-runtime/src/authority.rs",
+    " M crates/am-plugin-runtime/tests/offline.rs",
+    " M docs/baselines/plugin-system-s15/toolchain-sbom.json",
+    " M docs/baselines/plugin-system-s15/tools.json",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M packages/plugin-sdk/src/node/package-format.mjs",
+    " M packages/plugin-sdk/test/fixtures/packages/corpus.json",
+    " M packages/plugin-sdk/test/package-corpus-generator.mjs",
+    "?? apps/tauri/src-tauri/src/plugins/executor/",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json"
+  ],
+  "environment": {
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "shell": "PowerShell",
+    "userTimezone": "Asia/Shanghai",
+    "runtime": "Node author tools, no Tauri product execution"
+  },
+  "sourceHashes": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177"
+    },
+    {
+      "path": "packages/plugin-cli/AGENTS.md",
+      "sha256": "cd0ab701715ae2922d7b16abe33510c757c5c79cbb118142fdcd2c03cd093f19"
+    },
+    {
+      "path": "packages/plugin-sdk/AGENTS.md",
+      "sha256": "30bfd9cc8e49eee9d5c0b2f2779eda995c4ce3d0abfd0ec1893d2b79b6d7f76d"
+    },
+    {
+      "path": "packages/plugin-testkit/AGENTS.md",
+      "sha256": "0534e908166ad8d771e46cd22b47031323412df66abb5b7e65d32266280ec704"
+    },
+    {
+      "path": "packages/plugin-cli/package.json",
+      "sha256": "5e26cda1addc65d8a514a965fa2ae27bfed00a0ccaed7f18edaa06627d7dd949"
+    },
+    {
+      "path": "packages/plugin-cli/src/index.mjs",
+      "sha256": "336b1c4aa19286622c3b6b1c5e3e3b7d9010a45bd1d156afbf9390dce0df453d"
+    },
+    {
+      "path": "packages/plugin-cli/src/project.mjs",
+      "sha256": "0b7314b792c632a96e7077a5f195df0bab0b23fa29a6deac2c13424b56f5f943"
+    },
+    {
+      "path": "packages/plugin-cli/src/build.mjs",
+      "sha256": "35c6a7a4b47ac9dd32ac46ccd5def5cfca2425c578334d02aeaa81fb25ebd008"
+    },
+    {
+      "path": "packages/plugin-cli/src/package.mjs",
+      "sha256": "6fe383123e282b41627e84cb0c23c11dff1b453709a997ef9e6a1fd238184a0d"
+    },
+    {
+      "path": "packages/plugin-cli/src/cli.mjs",
+      "sha256": "8409560b072adf7f098adab228340d17717ed59c3a64a7b4a3eb91bc0736286b"
+    },
+    {
+      "path": "packages/plugin-cli/src/diagnostic.mjs",
+      "sha256": "b4c64dd7154fc9b759c5b08e59f8c3274d35edc156f728a62446e264bc611a5b"
+    },
+    {
+      "path": "packages/plugin-cli/src/templates.mjs",
+      "sha256": "f73211f1b0d953a5671d2c12019e428d5ddb74ebfc332e969145433a1f152e8f"
+    },
+    {
+      "path": "packages/plugin-cli/test/tools.test.mjs",
+      "sha256": "88a74936e4d49f40e6804ca4e97990031f40cfa5a4e46e0094c49dd704067931"
+    },
+    {
+      "path": "packages/plugin-cli/README.md",
+      "sha256": "69607f0d161d78ebbbf6e124af77e51ec361f779ff072c8b5f500139d927ca8c"
+    },
+    {
+      "path": "packages/plugin-cli/LICENSE",
+      "sha256": "732d27322bceb38d0c69b5591ef1efc08170dbe14db0f4b3f791400072c87724"
+    },
+    {
+      "path": "packages/plugin-sdk/package.json",
+      "sha256": "b827d149d50b693288984bd7e5b03259d2a20f7e6ee0b1a9beec647dd7ab7def"
+    },
+    {
+      "path": "packages/plugin-sdk/src/node/package-format.mjs",
+      "sha256": "57dd19a344eea8999fc8aa7399b39b21bb9f86e2b6408cb4a174ee5ceb02dd6a"
+    },
+    {
+      "path": "packages/plugin-testkit/package.json",
+      "sha256": "3278513c21fe4ab19f629d5803670966863fdb3a814196d732bbf83feb902cb2"
+    },
+    {
+      "path": "scripts/check-plugin-tools.mjs",
+      "sha256": "11d18e3e95199fa46d508d8f4ae8cb2864e6aa68a99e377acdd52a3f46f80203"
+    },
+    {
+      "path": "scripts/check-package-boundaries.mjs",
+      "sha256": "18c11924b7b99c9486cbcaf0643f9aff1612f877dbab6ef7689ef57410ca442f"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "1088468b37100ccc795f68db947bab7db5a3bf886b8ecf88762bfdc6df656714"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+      "sha256": "7932eb537bba293498ba181b5b6c780e9af38ff44863e48007e8f3ffa5b8adef"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "sha256": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".tmp/s15/packs/any-music-plugin-sdk-0.1.0.tgz",
+      "sha256": "82101999d2eb2b0f411e61df94eab340361bc8577a3a83d3261642e1290b8b18",
+      "bytes": 174518
+    },
+    {
+      "path": ".tmp/s15/packs/any-music-plugin-testkit-0.1.0.tgz",
+      "sha256": "0a50bb15ec53b7296d3e2da180c98f4acd28ae4dbcfee4ab6f65812b40dcf647",
+      "bytes": 276180
+    },
+    {
+      "path": ".tmp/s15/packs/any-music-plugin-cli-0.1.0.tgz",
+      "sha256": "65ed28fbc0cda6bb47d00e2263c49db460583871f4839ab08c42fae4d8c57c8c",
+      "bytes": 17448
+    }
+  ],
+  "preservedHistoricalRecords": [
+    {
+      "path": "docs/baselines/plugin-system-s15/tools.json",
+      "beforeSha256": "52819331237b338a39d8f9d12771c0b724f0dc679c013a62785d2c6335e05657",
+      "afterSha256": "52819331237b338a39d8f9d12771c0b724f0dc679c013a62785d2c6335e05657",
+      "preserved": true,
+      "observedOutput": ".codex-tmp/audit-b17-cli/tools.json.observed"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s15/toolchain-sbom.json",
+      "beforeSha256": "3bb86111bb5fa5badf361a1c6d50f30fc83e5987d712b38878f201eeb49afc82",
+      "afterSha256": "3bb86111bb5fa5badf361a1c6d50f30fc83e5987d712b38878f201eeb49afc82",
+      "preserved": true,
+      "observedOutput": ".codex-tmp/audit-b17-cli/toolchain-sbom.json.observed"
+    }
+  ],
+  "evidenceFreshness": "Current uncommitted SDK verifier bytes were consumed by the tools check; older B16 verifier findings are not presumed current or closed. Reuse requires matching relevant hashes, toolchain and tarballs. The tools script writes a historical fixed date; use this report and log timestamps for this run."
+}

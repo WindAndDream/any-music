@@ -1,0 +1,37 @@
+packages:
+  - apps/*
+  - packages/*
+
+catalog:
+  '@commitlint/cli': ^21.2.2
+  '@commitlint/config-conventional': ^21.2.2
+  '@mediabunny/mp3-encoder': ^1.55.2
+  '@tanstack/vue-virtual': 3.13.51
+  '@types/node': ^24.13.3
+  '@vitejs/plugin-vue': ^6.0.8
+  ajv: ^8.20.0
+  client-zip: ^2.5.0
+  husky: ^9.1.7
+  js-md5: ^0.9.2
+  json-schema-to-typescript: 16.0.0
+  mediabunny: ^1.55.2
+  oxfmt: ^0.64.0
+  oxlint: ^1.79.0
+  pinia: ^3.0.4
+  sass: ^1.103.1
+  typescript: ~6.0.2
+  vite: ^8.2.0
+  vite-plugin-monkey: ^8.1.0
+  vitest: ^4.1.11
+  vue: ^3.5.42
+  vue-tsc: ^3.3.8
+
+disallowWorkspaceCycles: true
+
+# S15 release gate: patch the reviewed advisory ranges without unrelated major upgrades.
+overrides:
+  'js-yaml@>=4 <4.3.2': 4.3.2
+  'fast-uri@>=3 <3.1.8': 3.1.8
+  'brace-expansion@<1.1.21': 1.1.21
+  'source-map-js@<1.2.2': 1.2.2
+  'tinypool@<2.1.2': 2.1.2

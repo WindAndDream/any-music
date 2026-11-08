@@ -1,0 +1,247 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "parentBatch": "B19",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T15:52:40.050Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-mobile-capability-boundaries-tauri-baseline.json",
+  "declaredStatus": {
+    "claim": "S16 remains in progress. Android adapter/reference-device evidence is bounded; iOS has configuration only. Both mobile external policies remain none.",
+    "references": [
+      "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:10-19",
+      "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:28-39"
+    ]
+  },
+  "verification": [
+    {
+      "kind": "static",
+      "result": "pass",
+      "command": "pnpm check:mobile:boundaries",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:43:59.609Z",
+      "log": ".codex-tmp/refactoring-audit-b19/boundaries.log",
+      "scope": "Current Android/iOS ACL, platform selectors, Android API 26 and loopback-only WebView cleartext configuration; offline only."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "node --test scripts/test/check-mobile-boundaries.test.mjs",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:44:00.308Z",
+      "log": ".codex-tmp/refactoring-audit-b19/boundary-tests.log",
+      "scope": "2 tests; includes negative configuration mutations rejecting privilege expansion, remote/wildcard views and weakened minimum/network configuration."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/configure-tauri-workbench.test.ts",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:46:09.895Z",
+      "log": ".codex-tmp/refactoring-audit-b19/renderer-capabilities.log",
+      "scope": "7 tests; unavailable mobile operations, failed discovery, inert Android preview port and provided Android account/media/save composition. IPC/account initialization are mocks."
+    },
+    {
+      "kind": "tests",
+      "result": "fail",
+      "command": "cargo test -p any-music-tauri --lib system::capabilities::tests --locked",
+      "exitCode": 101,
+      "recordedAt": "2026-10-21T15:45:29.339Z",
+      "log": ".codex-tmp/refactoring-audit-b19/native-capabilities.log",
+      "scope": "Initial run did not execute tests: concurrent packages/tests.rs declaration referenced missing packages/rollback_tests.rs. Retained as failed build evidence, not a B19 functional failure."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib system::capabilities::tests --locked",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:51:29.739Z",
+      "log": ".codex-tmp/refactoring-audit-b19/native-capabilities-retry.log",
+      "scope": "Retry after the external file appeared: 3 platform-matrix tests on Windows host; not Android/iOS execution or real IPC denial."
+    },
+    {
+      "kind": "compile",
+      "result": "pass",
+      "command": "pnpm check:mobile:android",
+      "exitCode": 0,
+      "recordedAt": "2026-10-21T15:48:24.173Z",
+      "log": ".codex-tmp/refactoring-audit-b19/android-clippy.log",
+      "scope": "aarch64-linux-android --lib --locked --no-default-features zero-warning Clippy through the existing API 26 NDK helper. No APK/AAB, release execution, Kotlin instrumentation or channel acceptance."
+    },
+    {
+      "kind": "artifact",
+      "result": "not-run",
+      "reason": "Build/signing/resource-artifact verification is a separate B19 candidate; no current APK/AAB or iOS archive was produced or verified by this audit."
+    },
+    {
+      "kind": "live",
+      "result": "not-run",
+      "reason": "The task requests an audit under the plan; it does not explicitly request app/browser/emulator inspection. No product, browser, simulator or emulator was launched."
+    }
+  ],
+  "dependencies": [
+    "B12 owns account/media/native HTTP acceptance; this review checks capability exposure only.",
+    "B18 owns desktop admission/executor behavior; mobile does not inherit its accepted targets.",
+    "Concurrent native/plugin changes invalidate any assumption that HEAD alone identifies the tested tree."
+  ],
+  "batchId": "B19-android-capabilities-acl-tauri",
+  "candidate": "B19-android-capabilities-acl",
+  "platform": "android",
+  "scope": {
+    "invariant": "Android capabilities and exact-main ACL provide only declared built-in/native adapters, with no inherited desktop/external execution authority; product bootstrap requires API 26 and WebView 111+.",
+    "selectedChain": "BootstrapActivity -> MobileWebViewSupport -> MainActivity; lib setup -> runtime_capabilities -> require_main -> native platform matrix -> renderer discovery before account/source/workbench composition; main-android -> named mobile permission groups.",
+    "allowedPaths": [
+      "apps/tauri/src-tauri/src/system/capabilities.rs",
+      "Direct native/renderer composition, caller guard, registry, Android/iOS config and platform ACLs",
+      "Direct Android bootstrap/manifest/minimum/network configuration and existing tests",
+      "scripts/check-mobile-boundaries.mjs and check-mobile-android.mjs"
+    ],
+    "readFiles": [
+      "apps/tauri/src-tauri/src/system/capabilities.rs:1-185",
+      "apps/tauri/src-tauri/capabilities/main-android.json:1-14",
+      "apps/tauri/src-tauri/permissions/mobile.toml:1-50",
+      "apps/tauri/src-tauri/tauri.android.conf.json:1-13",
+      "apps/tauri/src-tauri/tauri.conf.json:1-45",
+      "apps/tauri/src-tauri/capabilities/main.json:1-7",
+      "apps/tauri/src-tauri/src/lib.rs:1-125",
+      "apps/tauri/src-tauri/build.rs:1-88",
+      "apps/tauri/src-tauri/src/ipc.rs:1-68",
+      "apps/tauri/src-tauri/src/browser/verification.rs:41-54",
+      "apps/tauri/src-tauri/src/plugins.rs:1-36",
+      "apps/tauri/src-tauri/src/plugins/unavailable_executor.rs:1-29",
+      "apps/tauri/src-tauri/src/system/android.rs:1-48",
+      "apps/tauri/src/platform/runtime-capabilities.ts:1-32",
+      "apps/tauri/src/platform/configure-tauri-workbench.ts:1-101",
+      "apps/tauri/src/platform/native-plugin-authority.ts:1-85",
+      "apps/tauri/src/main.ts:1-37",
+      "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/BootstrapActivity.kt:1-43",
+      "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobileWebViewSupport.kt:1-8",
+      "apps/tauri/src-tauri/gen/android/app/src/main/AndroidManifest.xml:1-80",
+      "apps/tauri/src-tauri/gen/android/app/build.gradle.kts:19-28 (minimum/target symbols)",
+      "apps/tauri/src-tauri/gen/android/app/src/main/res/xml/network_security_config.xml:1-11",
+      "apps/tauri/src-tauri/gen/android/app/src/main/res/values/strings.xml:1-5",
+      "apps/tauri/src-tauri/gen/android/app/src/main/res/values-zh/strings.xml:1-3",
+      "apps/tauri/test/platform/configure-tauri-workbench.test.ts:1-140 and test-name index; final test behavior also exercised by its existing test run",
+      "scripts/check-mobile-boundaries.mjs:1-146",
+      "scripts/test/check-mobile-boundaries.test.mjs:1-82",
+      "scripts/check-mobile-android.mjs:1-57",
+      "apps/tauri/src-tauri/gen/android/app/src/androidTest/java/com/anymusic/app/MobileWorkbenchTest.kt:1-16"
+    ],
+    "expansionReason": "Only direct neighbors were read to establish effective ACL selection, absence of dynamically added mobile executor capabilities, Rust-only Android bridge registration and pre-Tauri startup gating. The reading limit is reached; independent document/Keystore, lifecycle, media and signing chains were not expanded.",
+    "exclusions": [
+      "Product fixes and commit/push",
+      "Android document/Keystore/save internals",
+      "Suspension, account/proxy/media cancellation and QR lifecycle",
+      "Signing, APK/AAB validation, physical minimum devices, optimized release and channels",
+      "iOS adapter implementation; separately recorded config boundary only"
+    ]
+  },
+  "refactorStatus": "conformant",
+  "verdict": "needs-fix",
+  "statusRationale": "The selected implementation ownership/authority boundary is conformant. A P3 capability description inconsistency requires correction under C6; this verdict does not indicate a demonstrated authority regression or completion of B19 delivery acceptance.",
+  "evidence": {
+    "static": "fail",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1: native capability/permission ownership and unique IPC registry",
+      "result": "pass",
+      "evidence": [
+        "src/system/capabilities.rs:1-124",
+        "src/ipc.rs:1-68",
+        "build.rs:49-77",
+        "src/system/android.rs:36-44"
+      ],
+      "detail": "Native platform matrix and unique registry own discovery. Android bridge registers a Kotlin adapter without a generic JS invoke handler. This is not a full credential/URI data-flow audit."
+    },
+    {
+      "criterion": "C2: discovery before port/source/workbench composition",
+      "result": "pass",
+      "evidence": [
+        "src/platform/runtime-capabilities.ts:22-32",
+        "src/platform/configure-tauri-workbench.ts:28-55",
+        "src/main.ts:23-37",
+        "src-tauri/src/lib.rs:79-91"
+      ],
+      "detail": "Discovery failure stops composition; unavailable operations reject. Android receives only inert package preview controls. Media listener setup precedes capability discovery. Existing 7 renderer tests pass."
+    },
+    {
+      "criterion": "C5: exact platform/main permissions; none policy and closed external executor",
+      "result": "pass",
+      "evidence": [
+        "capabilities/main-android.json:4-13",
+        "permissions/mobile.toml:1-50",
+        "src/system/capabilities.rs:41-105",
+        "src/plugins.rs:14-30",
+        "src/plugins/unavailable_executor.rs:16-29",
+        "src/lib.rs:1-6,37-49"
+      ],
+      "detail": "Android gets explicit Bilibili/account/document capabilities and no browser/CDP, install/rollback/command/DEV/relay grants. Desktop admission cannot change mobile none. Offline negative ACL tests and 3 host-native tests pass; actual IPC denial was not rerun on a device."
+    },
+    {
+      "criterion": "C3/C5: API 26 and pre-Tauri WebView 111 bootstrap",
+      "result": "pass",
+      "evidence": [
+        "tauri.android.conf.json:5",
+        "gen/android/app/build.gradle.kts:27",
+        "gen/android/app/src/main/AndroidManifest.xml:15-20,64-66",
+        "gen/android/app/src/main/java/com/anymusic/app/BootstrapActivity.kt:17-34",
+        "gen/android/app/src/main/java/com/anymusic/app/MobileWebViewSupport.kt:5-7"
+      ],
+      "detail": "Exported bootstrap checks provider before starting private MainActivity. Missing/obsolete provider gets native Chinese/English update text. OS floor aligns in config/Gradle/NDK helper; boundary tests and arm64 Clippy pass. Kotlin instrumentation was inspected but not executed; real minimum-device startup remains deferred."
+    },
+    {
+      "criterion": "C6: effective capability description matches enabled media",
+      "result": "fail",
+      "evidence": [
+        "apps/tauri/src-tauri/capabilities/main-android.json:3",
+        "apps/tauri/src-tauri/permissions/mobile.toml:15-34",
+        "apps/tauri/src-tauri/src/system/capabilities.rs:74-78"
+      ],
+      "detail": "The description says \"No ... media grants\" while allow-android-account-commands grants register_media/release_media and runtime_capabilities advertises media=provided. This misdescribes the effective capability. No unauthorized command or runtime failure was demonstrated."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B19-A01",
+      "severity": "P3",
+      "kind": "metadata-inconsistency",
+      "owner": "apps/tauri/src-tauri/capabilities/main-android.json",
+      "trigger": "Read the main-android capability description after Android account-bound media was enabled.",
+      "effect": "The description says \"No ... media grants\" while allow-android-account-commands grants register_media/release_media and runtime_capabilities advertises media=provided. This misdescribes the effective capability. No unauthorized command or runtime failure was demonstrated.",
+      "evidence": [
+        "apps/tauri/src-tauri/capabilities/main-android.json:3",
+        "apps/tauri/src-tauri/permissions/mobile.toml:15-34",
+        "apps/tauri/src-tauri/src/system/capabilities.rs:74-78"
+      ],
+      "suggestedNextAction": "Update the description to include native account-bound media and retain the desktop-browser/external-execution exclusions. No product change was made during this audit."
+    }
+  ],
+  "openFindingIds": ["B19-A01"],
+  "knownRisksNotReproduced": [
+    {
+      "reference": "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:32,78",
+      "detail": "API 35/WebView 124 software-rendered x86_64 release first cold startup has a recorded Wry canceled GetUrl-reply panic. A warm startup does not close this failure."
+    },
+    {
+      "reference": "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:76",
+      "detail": "Repeated forced Activity recreation has a recorded destroyed-mutex failure. Normal background/process-restart smoke does not accept this path."
+    }
+  ],
+  "missingEvidence": [
+    "Fresh device bootstrap and actual IPC denials",
+    "Kotlin instrumentation execution",
+    "Current signed artifact/resource verification",
+    "Independent document/Keystore, lifecycle, Bilibili account/proxy/media, signing, minimum-device/channel audits"
+  ],
+  "unreadPaths": [
+    "system/android.rs beyond adapter registration and CredentialKey declaration",
+    "Android document/Keystore/save and MainActivity lifecycle internals",
+    "Native account/network/media bodies",
+    "Build/sign/release verification implementations"
+  ],
+  "nextBatch": "B19-android-document-save-keystore"
+}

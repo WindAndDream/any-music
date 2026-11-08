@@ -1,0 +1,92 @@
+{
+  "documentType": "production-input-drift-observation",
+  "runtimeScope": "userscript",
+  "comparedWith": "production-inputs-before-recovery.json",
+  "stage": "After root test/typecheck/lint; second root format check observes concurrent changes",
+  "changedInputs": [
+    {
+      "path": "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "before": "42f767396ec22636c720aa2488e53981b88fb9ca60b1176b976ac51a34008f37",
+      "now": "398e825cbc13f82dfc91e1018d7964bd566739b8663a0a1ee7f7d9fc0444d2a2",
+      "bytes": 2870,
+      "lastModified": 1793092411.9022095
+    },
+    {
+      "path": "packages/music-workbench/src/components/music-sources/MusicWorkbenchThemeHost.vue",
+      "before": "3f271e08d1c8a3e47ab15e62944f6050f8506f47978e29fcb415e3193cd72466",
+      "now": "1cdeb2f21997caef686feb02584124f41f626ed912226f4961f4ae85e1bbfebb",
+      "bytes": 5543,
+      "lastModified": 1793092421.1780472
+    },
+    {
+      "path": "packages/music-workbench/src/features/workbench/use-workbench-controller.ts",
+      "before": "ef51b4a87fa022a396965b4199d2c0589a7dc38eb8d12650c72dc44a758fd0c5",
+      "now": "76ffd3d3544746acb7b2131dd8f59073307fdf9611fd3ce1af6e4b9e12a68867",
+      "bytes": 32872,
+      "lastModified": 1793092411.9016862
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/ThemeHost.vue",
+      "before": "70e8ad134d0ca0642c994769e968e198bc717097e8ea6b43ab7e81676427eb27",
+      "now": "6e71fd3eb5ccf8aab99ef932a7442870620968706534729b25551ac22f943cd1",
+      "bytes": 7302,
+      "lastModified": 1793092128.4489555
+    },
+    {
+      "path": "packages/theme-default/src/ClassicRoot.vue",
+      "before": "34dee717861dc4d832e04e471b3a03a44a1a7270a545606f98dbeecd055424ce",
+      "now": "3aaa48bbc8cb90283413a0b665acd2692eb347518946101d3803ee5cd22214f0",
+      "bytes": 7650,
+      "lastModified": 1793092441.1425152
+    },
+    {
+      "path": "packages/theme-default/src/components/downloads/DownloadOperatorPanel.vue",
+      "before": "5cd4a3e26f33a2f3b93a11cf5f4fffe5b9f2564b9d1110312fa56041f0799f46",
+      "now": "bdb5bbb95380319c881df03d14785db9dc0eca63dd620d02ce4556e59193b144",
+      "bytes": 4903,
+      "lastModified": 1793091675.3914585
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerDetails.vue",
+      "before": "7c2648c965cdde493bdc3a8e3d56383ba31f1d88bca9f7bb8e537021499165a4",
+      "now": "32596aeecc3836ba59604628e9ae7c1d00034f7e338682f4ac35629b726a48eb",
+      "bytes": 9098,
+      "lastModified": 1793091985.2654073
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "before": "51edd2ad0f26fa2f43395513593ba73c927e3c9af094ae86427d58e08bd67d97",
+      "now": "5f628d06297247a8adf3ec882f21305690da775383fc7b968de85aa55390a526",
+      "bytes": 20018,
+      "lastModified": 1793092441.1435926
+    },
+    {
+      "path": "packages/theme-default/src/components/overlays/ClassicTrackDialog.vue",
+      "before": "861ef5bad137bd72c0af7ddd87f88b6e937ee256e8bd00d91fd67f94b5a50049",
+      "now": "9c95eb27a640439c4c5cc00b7631691787ccdf5481fc3ac8a6ee6dba42f2e1ae",
+      "bytes": 2744,
+      "lastModified": 1793092441.1445918
+    },
+    {
+      "path": "packages/ui/src/components/AppDialog.vue",
+      "before": "2330c286163b1c43118d16d2c34b14316e6b5d27ada89fcc24b0014c7476a01f",
+      "now": "42bb86a0c6f54722eb71dbc53fafb5b76704308a289162769cdf7426f0fd0005",
+      "bytes": 9371,
+      "lastModified": 1793092441.1425152
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/SessionBadge.vue",
+      "before": "e7d06df1b53941da71ff65ea091279c5cc4a6dc7ed6833d8a5ebdb3fb76b70ac",
+      "now": "fc476e6a23146e0f4fae64b38bac66681e5d93ca30699366501dbbdb0984bae2",
+      "bytes": 6918,
+      "lastModified": 1793092447.7898748
+    },
+    {
+      "path": "packages/ui/src/components/plugins/ModuleRecoveryPanel.vue",
+      "before": "71aa9b693762a406f0959b8836408cdcd10c1a605e0cddbdcee97181dad15f29",
+      "now": "82b60107f867e7863556557c51347b70ea2d7948eb708fa7021c655538326783",
+      "bytes": 2108,
+      "lastModified": 1793091971.624481
+    }
+  ]
+}

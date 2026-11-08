@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-evidence",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R1",
+  "date": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "status": "passed-for-recorded-production-artifact",
+  "overallT13Status": "in-progress",
+  "scope": "GM-R1 production identity/permissions/startup, public playback, both complete-root replacements, both hide/show paths, sole writer and preference reload. GM-R2/R3/R4 remain open.",
+  "workspace": {
+    "baseCommit": "c24ff542a663fd7266808323c730cb3b50a9fcc9",
+    "alreadyDirtyAtStart": true,
+    "preservedEarlierChanges": true,
+    "productSourceChanged": false,
+    "commitOrPush": false,
+    "inputManifest": "T13/gm-revalidation-production-inputs.json",
+    "recordedInputFiles": 609,
+    "aggregateSha256": "964e6d870ad6aad61b564a80c01147f3434b25e1d5a2e9b3bcb3b05082505e36",
+    "recordedInputsUnchangedBeforeAndAfterLiveRun": true
+  },
+  "artifact": {
+    "path": "apps/userscript/dist/any-music.user.js",
+    "bytes": 5021592,
+    "sha256": "fc88355902a82e283665095d290a8cc5b893bb3389f4a8560ddee76b6a40e45a",
+    "managerEditorSourceSha256": "fc88355902a82e283665095d290a8cc5b893bb3389f4a8560ddee76b6a40e45a",
+    "managerEditorSourceBytes": 5021592,
+    "installed": true,
+    "installedScript": "Any Music",
+    "metadata": {
+      "grants": [
+        "GM.deleteValue",
+        "GM.getTab",
+        "GM.getTabs",
+        "GM.getValue",
+        "GM.listValues",
+        "GM.saveTab",
+        "GM.setValue",
+        "GM_addValueChangeListener",
+        "GM_cookie",
+        "GM_deleteValue",
+        "GM_getValue",
+        "GM_openInTab",
+        "GM_removeValueChangeListener",
+        "GM_setValue",
+        "GM_xmlhttpRequest",
+        "unsafeWindow"
+      ],
+      "connect": [
+        "126.net",
+        "api.bilibili.com",
+        "bilivideo.cn",
+        "bilivideo.com",
+        "byteimg.com",
+        "douyinpic.com",
+        "douyinvod.com",
+        "hdslb.com",
+        "music.126.net",
+        "music.163.com",
+        "pstatp.com",
+        "www-hj.douyin.com",
+        "www.douyin.com",
+        "www.iesdouyin.com"
+      ],
+      "matchesSourceConfiguration": true,
+      "match": ["*://*/*"],
+      "runAt": ["document-start"],
+      "noframes": true,
+      "externalRequireOrResources": false
+    },
+    "preflight": "T13-gm-production-preflight.json",
+    "staticAudit": "T13/gm-revalidation-artifact-audit.json",
+    "automaticEvidenceReused": "The preflight's 144 targeted tests, Userscript typecheck and production build apply to the same unchanged recorded inputs. No new source edit or root-wide gate run is claimed."
+  },
+  "environment": {
+    "runtime": "installed production Userscript with real Tampermonkey APIs",
+    "browser": "Chrome 156.0.0.0",
+    "operatingSystem": "Windows",
+    "manager": "Tampermonkey 5.5.0",
+    "managerEvidence": "Actual manager UI and chrome.runtime.getManifest; stored editor code hash matches candidate.",
+    "viewport": {
+      "width": 935,
+      "height": 871,
+      "devicePixelRatio": 1.75
+    },
+    "hostPage": "http://127.0.0.1:18865/gm-r1.html",
+    "hostType": "Plain static HTML without product entry, scripts or GM substitutes.",
+    "pageGlobalGm": "undefined",
+    "pageGlobalGmXhr": "undefined",
+    "previewStorageKeys": [],
+    "externalPlugins": "none",
+    "developmentScripts": [
+      {
+        "name": "server:Any Music",
+        "enabled": false
+      },
+      {
+        "name": "server:Any Music 功能测试台",
+        "enabled": false
+      }
+    ],
+    "productionEnabled": true
+  },
+  "workflow": {
+    "browserBlockerResolved": true,
+    "resolution": "User explicitly authorized restarting only the dedicated chrome-devtools-mcp/chrome-profile browser. PID 36528 was revalidated and stopped; daily browser profiles were untouched.",
+    "installation": "Standard Tampermonkey reinstall UI from a loopback server serving the frozen exact candidate; manager editor was then independently hashed. Existing production library state survived.",
+    "hostServer": {
+      "origin": "http://127.0.0.1:18865",
+      "execSessionId": 12784,
+      "leftRunning": true,
+      "servesOnly": "Frozen /any-music.user.js and plain / or /gm-r1.html; other paths return 404."
+    },
+    "inspectionMethods": [
+      "Browser-tool pointer clicks, text entry, select-by-visible-label and Escape for product interactions.",
+      "Read-only DOM/audio/reference/event probes and temporary manager webRequest observer for assertions.",
+      "DOM click used only for manager enable/disable toggles; no DOM click substituted for the tested product actions.",
+      "A temporary hidden same-origin iframe checks noframes and is removed immediately."
+    ]
+  },
+  "cases": [
+    {
+      "id": "GM-R1-01",
+      "status": "passed",
+      "name": "Installed production identity, permissions, lazy startup and sole writer",
+      "observations": [
+        "Stored installed code is 5,021,592 bytes with the exact candidate SHA-256; 16 grants and 14 connect domains match the packaged configuration.",
+        "Production Any Music is enabled and both development scripts are disabled.",
+        "Manager loader registrations run at document_start. These are generic manager loaders; actual script metadata and frame test establish the individual script's noframes boundary.",
+        "Before first expansion: one launcher host, zero audio nodes, no host script elements, no page-global GM APIs and no preview storage keys. First expansion mounts one product root and one idle audio.",
+        "Existing three production request rows load without an implicit import/play request. After the explicit new import there are four rows.",
+        "While the original workbench is hidden and playing, another tab's expansion is refused visibly with AM-1900 and retry guidance; the original audio continues.",
+        "The top document has one launcher host and a loaded same-origin iframe has zero; the fixture iframe is removed."
+      ]
+    },
+    {
+      "id": "GM-R1-02",
+      "status": "passed",
+      "name": "Public import and native playback",
+      "sourceUrl": "https://www.bilibili.com/video/BV1xx411c7mD/",
+      "trackId": "bilibili:video:BV1xx411c7mD",
+      "observations": [
+        "One explicit import produces one loaded track and one page via one manager-initiated /x/web-interface/view request.",
+        "One explicit track playback produces one manager-initiated /x/player/playurl request and browser-native HTTPS CDN streaming.",
+        "The audio has readyState 4, duration 2055.591701 seconds and advancing currentTime; it is explicitly paused at 456.481108 seconds."
+      ]
+    },
+    {
+      "id": "GM-R1-03",
+      "status": "passed",
+      "name": "Both theme directions and hide/show continuity",
+      "themeSequence": ["default", "studio", "default", "studio"],
+      "observations": [
+        "Default -> Studio -> Default retains the sole identical audio element and currentSrc with advancing time: baseline 42.010542, Studio 74.752971 and committed Default 158.548763 seconds.",
+        "Default hide/show retains the same audio/source: hidden 185.237873, restored after second-writer refusal 205.627833 seconds.",
+        "The later Studio hide/show also retains the same audio/source: hidden 409.428239, restored 418.535924 seconds.",
+        "Selected track and one loaded page remain across both root replacements. Returning to the list overview later is an explicit navigation and is not treated as a theme-induced selection loss.",
+        "Unsubmitted search draft GM-R1 draft 2026-10-26 and the independent import URL survive both roots; the draft also returns after Studio hide/show.",
+        "The observer records no additional view or playurl request across these replacements/hide/show operations. Native media does make two GETs during sustained streaming; no zero-media-request assertion is made.",
+        "Audio event observation begins at 42.010542 seconds and contains no loadstart, emptied, play, ended, error or abort event. Its only pause event is the explicit final player pause.",
+        "Every sampled state has one active complete root and one audio node. No product --am-* style element appears in the host document.",
+        "Escape from the classic search dialog returns deep focus to its Discover button; this is a bounded keyboard smoke case, not full R4 acceptance."
+      ]
+    },
+    {
+      "id": "GM-R1-04",
+      "status": "passed",
+      "name": "Reload restores stable preferences without implicit playback",
+      "observations": [
+        "After choosing Studio again and explicitly pausing, reload returns to the lightweight launcher with zero audio nodes.",
+        "Expanding restores Studio, the unsubmitted search draft and the same four canonical request row IDs.",
+        "The new sole audio is paused at zero with readyState 0, no currentSrc, no src attribute and no srcObject; Play is disabled until an explicit new track choice.",
+        "The reload adds only the expected account nav refresh. Import/playurl/native media counts do not increase, and no warning/error console messages are observed after reload."
+      ],
+      "limit": "Observed empty media reinitialization and no replay; this pass does not dump every persisted product/cache value or claim a full storage-schema audit."
+    }
+  ],
+  "requests": {
+    "method": "Temporary read-only chrome.webRequest.onBeforeRequest observer in the manager service worker; records sanitized ID/time/host/path/method/type/initiator provenance only.",
+    "counts": {
+      "/x/web-interface/nav": 2,
+      "/x/web-interface/view": 1,
+      "/x/player/playurl": 1
+    },
+    "managerInitiatedView": true,
+    "managerInitiatedPlayurl": true,
+    "nativeCdnRequests": 2,
+    "noImportOrResolveIncreaseAcrossThemeHideShowAndReload": true,
+    "observerRemoved": true,
+    "raw": "T13/gm-r1-live-observations.json"
+  },
+  "findings": {
+    "productDefectsFound": [],
+    "repairsRequired": false,
+    "accountSession": "The product reported 状态不可用 for account status while public import/playback succeeded. Authenticated/private/source-host behavior belongs to GM-R3 and is not accepted here.",
+    "tooling": [
+      "Browser file upload rejected the workspace path; exact candidate was installed through the bounded loopback server instead.",
+      "One immediate settings-picker click timed out; a fresh DOM/snapshot check and subsequent pointer click succeeded. Select controls use visible labels. No fallback DOM-driven product action was counted as native input acceptance.",
+      "No screenshot was retained; full visual/layout/input acceptance remains GM-R4."
+    ]
+  },
+  "handoff": {
+    "currentBatch": "GM-R1 complete for this candidate and exercised public-source environment",
+    "nextBatch": "GM-R2",
+    "nextCase": "Use the same unchanged production candidate for active/queued downloads, both theme directions, explicit cancellation/retry, final ZIP/save receipt and cold-start duplicate-save checks.",
+    "currentBrowserState": "Dedicated acceptance Chrome retains production Any Music enabled, development scripts disabled and Studio expanded after reload. The new player is idle; no audio is left playing. The second-writer tab was closed and temporary frame/network observer removed.",
+    "changesRequiringRegression": "Changed production inputs, metadata or rebuilt artifact require new hash evidence and appropriate related R1 regression; do not apply this pass to a later changed artifact."
+  },
+  "verification": {
+    "productionInputs": {
+      "files": 609,
+      "changedRecordedInputs": 0,
+      "artifactStillMatchesInstalledSource": true
+    },
+    "evidenceConsistency": {
+      "exitCode": 0,
+      "checks": "Four passing cases, 14 audio-reference samples, committed theme IDs, one explicit pause, canonical row restoration, API/media counts, idle reload, observer cleanup and bilingual evidence links."
+    },
+    "documentsFormat": {
+      "command": "pnpm exec oxfmt --check docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md docs/zh-cn/文档索引.md docs/en/README.md docs/baselines/theme-ui-migration/T13-gm-r1.json docs/baselines/theme-ui-migration/T13/gm-r1-live-observations.json",
+      "exitCode": 0
+    },
+    "scopedGitDiffCheck": {
+      "exitCode": 0
+    },
+    "rootGatesRerun": false
+  },
+  "remainingLimits": [
+    "Public Bilibili native streaming only; no signed-in/private, Douyin/NetEase/source-host matrix.",
+    "Downloads, request concurrency/cancellation/retry/fallback and final saving remain GM-R2.",
+    "Full visual/touch/keyboard/semantic-scroll/protected/specialist matrix remains GM-R4.",
+    "No Windows/Android/iOS/native transport evidence is added and no platform captureDate changed.",
+    "Root-wide tests/typecheck/lint/format/build were not rerun or inferred for the dirty repository."
+  ]
+}

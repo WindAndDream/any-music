@@ -1,0 +1,125 @@
+{
+  "samples": [
+    {
+      "label": "observer-installed",
+      "at": 1793090504122,
+      "origin": "http://127.0.0.1:18869",
+      "theme": "studio",
+      "source": "douyin",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "unavailable",
+          "error": "列表使用的音乐源已停用，加载已中止。请在设置中启用后重试。（错误码：AM-1005）"
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "final-netease-static-search-retry",
+      "at": 1793090515834,
+      "origin": "http://127.0.0.1:18869",
+      "theme": "studio",
+      "source": "netease",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "signed-out",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "final-netease-explicit-next-page",
+      "at": 1793090568063,
+      "origin": "http://127.0.0.1:18869",
+      "theme": "studio",
+      "source": "netease",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "signed-out",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    }
+  ],
+  "searchResult": {
+    "at": 1793090548577,
+    "query": "童声",
+    "trackCount": 30,
+    "hasInvalidResponse": false
+  },
+  "searchNext": {
+    "label": "final-netease-explicit-next-page",
+    "at": 1793090568063,
+    "origin": "http://127.0.0.1:18869",
+    "theme": "studio",
+    "source": "netease",
+    "sourceOrder": ["bilibili", "douyin", "netease"],
+    "session": [
+      {
+        "status": "signed-out",
+        "error": null
+      }
+    ],
+    "audioCount": 1,
+    "audio": [
+      {
+        "paused": true,
+        "time": 0,
+        "readyState": 0,
+        "duration": null,
+        "urlKind": "empty",
+        "host": ""
+      }
+    ],
+    "roots": 1,
+    "hostProductStyleCount": 0,
+    "trackCount": 30
+  },
+  "capturedAt": 1793090568554,
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R3",
+  "artifactSha256": "c944e1c9518b25e193a7aab9ebc35400b604df8970ad7ced4f7ff5906b907134",
+  "measurementLimit": "The immediate next-page sample still showed 30 while the request was pending. Its completed second request and the following reload confirmation independently establish 60 tracks/two pages; do not use that immediate sample to claim a failed next page."
+}

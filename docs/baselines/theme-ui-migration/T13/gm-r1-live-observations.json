@@ -1,0 +1,925 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R1",
+  "date": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "playback": {
+    "samples": [
+      {
+        "label": "classic-playing-before-switch",
+        "at": 1793028298706,
+        "theme": ["default"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 42.010542,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["取消选择歌曲 字幕君交流场所"],
+        "drafts": [],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions-inline"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:favorite"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:download"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "studio-after-switch-settings-open",
+        "at": 1793028331448,
+        "theme": ["studio"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 74.752971,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["全选可见歌曲", "选择歌曲 字幕君交流场所"],
+        "drafts": [
+          {
+            "placeholder": "",
+            "value": "https://www.bilibili.com/video/BV1xx411c7mD/"
+          }
+        ],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "catalog:source"
+          },
+          {
+            "focus": "catalog:import"
+          },
+          {
+            "scroll": "catalog:requests"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f94887e5-8720-48d5-ad58-8e4b5c4838e3"
+          },
+          {
+            "focus": "catalog:drawer:drawer:787c0ed3-ca8b-4fb6-884e-fb182d857a11"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f1a25732-de32-4cd3-aed1-e39618e21704"
+          },
+          {
+            "focus": "catalog:drawer:drawer:771739ea-7643-4258-8cc3-f5c0e0ae224f"
+          },
+          {
+            "scroll": "catalog:tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "studio-search-draft-and-selection",
+        "at": 1793028353448,
+        "theme": ["studio"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 96.742189,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["全选可见歌曲", "选择歌曲 字幕君交流场所"],
+        "drafts": [
+          {
+            "placeholder": "",
+            "value": "GM-R1 draft 2026-10-26"
+          }
+        ],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "catalog:source"
+          },
+          {
+            "focus": "catalog:search"
+          },
+          {
+            "scroll": "catalog:requests"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f94887e5-8720-48d5-ad58-8e4b5c4838e3"
+          },
+          {
+            "focus": "catalog:drawer:drawer:787c0ed3-ca8b-4fb6-884e-fb182d857a11"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f1a25732-de32-4cd3-aed1-e39618e21704"
+          },
+          {
+            "focus": "catalog:drawer:drawer:771739ea-7643-4258-8cc3-f5c0e0ae224f"
+          },
+          {
+            "scroll": "catalog:tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "classic-after-return-settings-open",
+        "at": 1793028381827,
+        "theme": ["studio"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 125.128376,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["全选可见歌曲", "选择歌曲 字幕君交流场所", "启用手机底部导航"],
+        "drafts": [
+          {
+            "placeholder": "",
+            "value": "GM-R1 draft 2026-10-26"
+          }
+        ],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "catalog:source"
+          },
+          {
+            "focus": "catalog:search"
+          },
+          {
+            "scroll": "catalog:requests"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f94887e5-8720-48d5-ad58-8e4b5c4838e3"
+          },
+          {
+            "focus": "catalog:drawer:drawer:787c0ed3-ca8b-4fb6-884e-fb182d857a11"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f1a25732-de32-4cd3-aed1-e39618e21704"
+          },
+          {
+            "focus": "catalog:drawer:drawer:771739ea-7643-4258-8cc3-f5c0e0ae224f"
+          },
+          {
+            "scroll": "catalog:tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "classic-return-committed",
+        "at": 1793028415242,
+        "theme": ["default"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 158.548763,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["取消选择歌曲 字幕君交流场所"],
+        "drafts": [],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions-inline"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:favorite"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:download"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "classic-return-content",
+        "at": 1793028431880,
+        "theme": ["default"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 175.183657,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["取消选择歌曲 字幕君交流场所"],
+        "drafts": [],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions-inline"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:favorite"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:download"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "classic-hidden",
+        "at": 1793028441931,
+        "theme": ["default"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 185.237873,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["取消选择歌曲 字幕君交流场所"],
+        "drafts": [],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions-inline"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:favorite"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:download"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "hidden-while-second-tab-open",
+        "at": 1793028447652,
+        "theme": ["default"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 190.950993,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["取消选择歌曲 字幕君交流场所"],
+        "drafts": [],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions-inline"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:favorite"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:download"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "classic-restored-after-single-writer-refusal",
+        "at": 1793028462322,
+        "theme": ["default"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 205.627833,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": ["取消选择歌曲 字幕君交流场所"],
+        "drafts": [],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:select"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions-inline"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:play"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:favorite"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:download"
+          },
+          {
+            "focus": "track:bilibili:video:BV1xx411c7mD:actions"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "classic-search-draft-after-roundtrip",
+        "at": 1793028501170,
+        "theme": ["default"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 244.471672,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": [],
+        "drafts": [
+          {
+            "placeholder": "歌曲、UP 主或关键词…",
+            "value": "GM-R1 draft 2026-10-26"
+          },
+          {
+            "placeholder": "合集 / UP 投稿 / 收藏夹 / 视频 URL…",
+            "value": "https://www.bilibili.com/video/BV1xx411c7mD/"
+          }
+        ],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "studio-second-selection-before-reload",
+        "at": 1793028644095,
+        "theme": ["studio"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 387.401233,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": [],
+        "drafts": [
+          {
+            "placeholder": "",
+            "value": "GM-R1 draft 2026-10-26"
+          }
+        ],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "catalog:source"
+          },
+          {
+            "focus": "catalog:search"
+          },
+          {
+            "scroll": "catalog:requests"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f94887e5-8720-48d5-ad58-8e4b5c4838e3"
+          },
+          {
+            "focus": "catalog:drawer:drawer:787c0ed3-ca8b-4fb6-884e-fb182d857a11"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f1a25732-de32-4cd3-aed1-e39618e21704"
+          },
+          {
+            "focus": "catalog:drawer:drawer:771739ea-7643-4258-8cc3-f5c0e0ae224f"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "studio-hidden",
+        "at": 1793028666118,
+        "theme": ["studio"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 409.428239,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": [],
+        "drafts": [],
+        "contextKeys": [],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "studio-restored",
+        "at": 1793028675232,
+        "theme": ["studio"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": false,
+        "timeSeconds": 418.535924,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": [],
+        "drafts": [
+          {
+            "placeholder": "",
+            "value": "GM-R1 draft 2026-10-26"
+          }
+        ],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "catalog:source"
+          },
+          {
+            "focus": "catalog:search"
+          },
+          {
+            "scroll": "catalog:requests"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f94887e5-8720-48d5-ad58-8e4b5c4838e3"
+          },
+          {
+            "focus": "catalog:drawer:drawer:787c0ed3-ca8b-4fb6-884e-fb182d857a11"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f1a25732-de32-4cd3-aed1-e39618e21704"
+          },
+          {
+            "focus": "catalog:drawer:drawer:771739ea-7643-4258-8cc3-f5c0e0ae224f"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": []
+      },
+      {
+        "label": "explicit-pause-before-reload",
+        "at": 1793028713544,
+        "theme": ["studio"],
+        "activeRoots": 1,
+        "audioCount": 1,
+        "sameAudio": true,
+        "sameSource": true,
+        "paused": true,
+        "timeSeconds": 456.481108,
+        "durationSeconds": 2055.591701,
+        "readyState": 4,
+        "sourceScheme": "https:",
+        "errorCode": null,
+        "selected": [],
+        "drafts": [
+          {
+            "placeholder": "",
+            "value": "GM-R1 draft 2026-10-26"
+          }
+        ],
+        "contextKeys": [
+          {
+            "focus": "navigation:catalog"
+          },
+          {
+            "focus": "navigation:custom-tracks"
+          },
+          {
+            "focus": "catalog:source"
+          },
+          {
+            "focus": "catalog:search"
+          },
+          {
+            "scroll": "catalog:requests"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f94887e5-8720-48d5-ad58-8e4b5c4838e3"
+          },
+          {
+            "focus": "catalog:drawer:drawer:787c0ed3-ca8b-4fb6-884e-fb182d857a11"
+          },
+          {
+            "focus": "catalog:drawer:drawer:f1a25732-de32-4cd3-aed1-e39618e21704"
+          },
+          {
+            "focus": "catalog:drawer:drawer:771739ea-7643-4258-8cc3-f5c0e0ae224f"
+          }
+        ],
+        "hostProductStyleElements": 0,
+        "events": [
+          {
+            "type": "pause",
+            "time": 456.481108,
+            "at": 1793028713247
+          }
+        ]
+      }
+    ],
+    "events": [
+      {
+        "type": "pause",
+        "time": 456.481108,
+        "at": 1793028713247
+      }
+    ]
+  },
+  "beforeReloadNetwork": {
+    "id": "GM-R1-2026-10-26",
+    "startedAt": 1793028059311,
+    "records": [
+      {
+        "id": "35",
+        "at": 1793028090604.794,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "managerInitiated": true
+      },
+      {
+        "id": "36",
+        "at": 1793028180855.956,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/view",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "managerInitiated": true
+      },
+      {
+        "id": "40",
+        "at": 1793028254804.469,
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "managerInitiated": true
+      },
+      {
+        "id": "41",
+        "at": 1793028254968.526,
+        "host": "cn-sccd-ct-02-18.bilivideo.com",
+        "path": "[media-path-redacted]",
+        "method": "GET",
+        "type": "media",
+        "managerInitiated": false
+      },
+      {
+        "id": "45",
+        "at": 1793028503100.375,
+        "host": "cn-sccd-ct-02-18.bilivideo.com",
+        "path": "[media-path-redacted]",
+        "method": "GET",
+        "type": "media",
+        "managerInitiated": false
+      }
+    ]
+  },
+  "afterReload": {
+    "phase": "reload-expanded-stable",
+    "at": 1793028790117,
+    "themes": ["studio"],
+    "appearance": ["light"],
+    "activeRoots": 1,
+    "audio": [
+      {
+        "paused": true,
+        "timeSeconds": 0,
+        "readyState": 0,
+        "hasCurrentSrc": false,
+        "hasSourceAttribute": false,
+        "hasSrcObject": false,
+        "errorCode": null
+      }
+    ],
+    "drafts": [
+      {
+        "value": "GM-R1 draft 2026-10-26"
+      }
+    ],
+    "drawerKeys": [
+      "catalog:drawer:drawer:f94887e5-8720-48d5-ad58-8e4b5c4838e3",
+      "catalog:drawer:drawer:787c0ed3-ca8b-4fb6-884e-fb182d857a11",
+      "catalog:drawer:drawer:f1a25732-de32-4cd3-aed1-e39618e21704",
+      "catalog:drawer:drawer:771739ea-7643-4258-8cc3-f5c0e0ae224f"
+    ],
+    "playButtons": [
+      {
+        "disabled": true
+      }
+    ],
+    "hostProductStyleElements": 0,
+    "pageGlobalGm": "undefined",
+    "pageGlobalGmXhr": "undefined",
+    "previewStorageKeys": []
+  },
+  "afterReloadNetwork": {
+    "id": "GM-R1-2026-10-26",
+    "startedAt": 1793028059311,
+    "records": [
+      {
+        "id": "35",
+        "at": 1793028090604.794,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "managerInitiated": true
+      },
+      {
+        "id": "36",
+        "at": 1793028180855.956,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/view",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "managerInitiated": true
+      },
+      {
+        "id": "40",
+        "at": 1793028254804.469,
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "managerInitiated": true
+      },
+      {
+        "id": "41",
+        "at": 1793028254968.526,
+        "host": "cn-sccd-ct-02-18.bilivideo.com",
+        "path": "[media-path-redacted]",
+        "method": "GET",
+        "type": "media",
+        "managerInitiated": false
+      },
+      {
+        "id": "45",
+        "at": 1793028503100.375,
+        "host": "cn-sccd-ct-02-18.bilivideo.com",
+        "path": "[media-path-redacted]",
+        "method": "GET",
+        "type": "media",
+        "managerInitiated": false
+      },
+      {
+        "id": "47",
+        "at": 1793028729221.885,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "managerInitiated": true
+      }
+    ]
+  },
+  "finalNetwork": {
+    "state": {
+      "id": "GM-R1-2026-10-26",
+      "startedAt": 1793028059311,
+      "records": [
+        {
+          "id": "35",
+          "at": 1793028090604.794,
+          "host": "api.bilibili.com",
+          "path": "/x/web-interface/nav",
+          "method": "GET",
+          "type": "xmlhttprequest",
+          "managerInitiated": true
+        },
+        {
+          "id": "36",
+          "at": 1793028180855.956,
+          "host": "api.bilibili.com",
+          "path": "/x/web-interface/view",
+          "method": "GET",
+          "type": "xmlhttprequest",
+          "managerInitiated": true
+        },
+        {
+          "id": "40",
+          "at": 1793028254804.469,
+          "host": "api.bilibili.com",
+          "path": "/x/player/playurl",
+          "method": "GET",
+          "type": "xmlhttprequest",
+          "managerInitiated": true
+        },
+        {
+          "id": "41",
+          "at": 1793028254968.526,
+          "host": "cn-sccd-ct-02-18.bilivideo.com",
+          "path": "[media-path-redacted]",
+          "method": "GET",
+          "type": "media",
+          "managerInitiated": false
+        },
+        {
+          "id": "45",
+          "at": 1793028503100.375,
+          "host": "cn-sccd-ct-02-18.bilivideo.com",
+          "path": "[media-path-redacted]",
+          "method": "GET",
+          "type": "media",
+          "managerInitiated": false
+        },
+        {
+          "id": "47",
+          "at": 1793028729221.885,
+          "host": "api.bilibili.com",
+          "path": "/x/web-interface/nav",
+          "method": "GET",
+          "type": "xmlhttprequest",
+          "managerInitiated": true
+        }
+      ]
+    },
+    "observerRemoved": true,
+    "finishedAt": 1793028976539
+  },
+  "finalUi": {
+    "viewport": {
+      "width": 935,
+      "height": 871,
+      "devicePixelRatio": 1.75
+    },
+    "playingAudioInOpenProduct": 0
+  },
+  "notes": [
+    "Samples read actual DOM/audio properties and retain reference equality against the same original audio and currentSrc. Raw media URLs, query strings and credentials are omitted.",
+    "The early sample labeled classic-after-return-settings-open still has actual theme studio: it precedes the successful select-by-label commit. Use classic-return-committed for the completed reverse replacement.",
+    "Returning to the music-list overview was an explicit navigation after selection continuity had been checked. Later empty selected arrays do not indicate implicit deselection by a theme replacement.",
+    "The second native CDN GET is ordinary browser media traffic during the sustained run. No no-media-request claim is made; import and playurl API counts stay one each.",
+    "Only the explicit player pause at 456.481108 seconds appears in the audio event observation window, which starts at the 42.010542-second baseline.",
+    "Studio hide removes some presented input/list nodes; its search draft and stable list IDs return on showing the UI again."
+  ]
+}

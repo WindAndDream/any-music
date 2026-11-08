@@ -1,0 +1,1207 @@
+// 插件编辑器运行在 Shadow Root 中；这里由 app.scss 统一注入，不能依赖宿主页面 head 中的 SFC 样式。
+.custom-plugins {
+  display: grid;
+  height: 100%;
+  gap: 12px;
+  overflow: auto;
+  padding: 12px;
+  background: var(--am-color-surface-subtle);
+}
+
+.custom-plugins__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 11px;
+  background: var(--am-color-surface);
+}
+
+.custom-plugins__summary p,
+.custom-plugins__summary ul,
+.custom-plugins__error,
+.custom-plugins__empty,
+.plugin-card p,
+.plugin-card dl,
+.plugin-card dd {
+  margin: 0;
+}
+
+.custom-plugins__summary p,
+.custom-plugins__summary li,
+.custom-plugins__list > header span,
+.plugin-card__header span,
+.plugin-card__description,
+.plugin-card__contract {
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+}
+
+.custom-plugins__summary strong {
+  display: block;
+  font-size: 14px;
+}
+
+.custom-plugins__summary ul {
+  display: grid;
+  gap: 3px;
+  padding-left: 18px;
+}
+
+.custom-plugins__summary-guide {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.custom-plugins__specification-button,
+.plugin-specification button {
+  min-height: 32px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 8px;
+  background: var(--am-color-surface);
+  color: var(--am-color-text);
+  font: 700 10px var(--am-font-family);
+  cursor: pointer;
+}
+
+.custom-plugins__specification-button {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 6px;
+  padding: 0 10px;
+  border-color: color-mix(in srgb, var(--am-color-accent) 32%, var(--am-color-border));
+  background: color-mix(in srgb, var(--am-color-accent) 7%, var(--am-color-surface));
+  color: color-mix(in srgb, var(--am-color-accent) 82%, var(--am-color-text));
+}
+
+.custom-plugins__specification-button svg,
+.plugin-specification button svg,
+.plugin-specification summary svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.custom-plugins__specification-button:hover,
+.plugin-specification button:hover {
+  border-color: color-mix(in srgb, var(--am-color-accent) 55%, var(--am-color-border));
+  background: color-mix(in srgb, var(--am-color-accent) 11%, var(--am-color-surface));
+}
+
+.custom-plugins__specification-button:focus-visible,
+.plugin-specification button:focus-visible,
+.plugin-specification summary:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--am-color-accent) 38%, transparent);
+  outline-offset: 2px;
+}
+
+.custom-plugins__error {
+  padding: 9px 10px;
+  border: 1px solid color-mix(in srgb, var(--am-color-danger) 25%, var(--am-color-border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--am-color-danger) 7%, var(--am-color-surface));
+  color: var(--am-color-danger);
+  font-size: 11px;
+}
+
+.custom-plugins__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.custom-plugins__list {
+  display: grid;
+  position: sticky;
+  top: 0;
+  gap: 8px;
+  min-width: 0;
+}
+
+.custom-plugins__list > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.custom-plugins__empty {
+  padding: 18px;
+  border: 1px dashed var(--am-color-border);
+  border-radius: 9px;
+  color: var(--am-color-text-secondary);
+  text-align: center;
+}
+
+.plugin-card {
+  display: grid;
+  gap: 9px;
+  padding: 11px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 9px;
+  background: var(--am-color-surface);
+}
+
+.plugin-card__header,
+.plugin-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+.plugin-card__header div,
+.plugin-card__contract div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.plugin-card__status {
+  flex: 0 0 auto;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: var(--am-color-surface-subtle);
+  font-weight: 700;
+}
+
+.plugin-card__status[data-status='available'] {
+  color: var(--am-color-success);
+}
+
+.plugin-card__status[data-status='invalid'],
+.plugin-card__status[data-status='unavailable'],
+.plugin-card__warning {
+  color: var(--am-color-danger);
+}
+
+.plugin-card__contract {
+  display: grid;
+  gap: 7px;
+}
+
+.plugin-card__contract div {
+  grid-template-columns: 58px minmax(0, 1fr);
+}
+
+.plugin-card__contract dt {
+  font-weight: 700;
+}
+
+.plugin-card__contract dd span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.plugin-card__actions {
+  justify-content: flex-end;
+}
+
+.plugin-card__actions button {
+  min-height: 29px;
+  padding: 0 8px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 7px;
+  background: var(--am-color-surface-subtle);
+  color: var(--am-color-text);
+  font: 600 10px var(--am-font-family);
+  cursor: pointer;
+}
+
+.plugin-card__actions button:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--am-color-accent) 45%, var(--am-color-border));
+  background: color-mix(in srgb, var(--am-color-accent) 7%, var(--am-color-surface));
+}
+
+.plugin-card__actions button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--am-color-accent) 35%, transparent);
+  outline-offset: 2px;
+}
+
+.plugin-card__actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.plugin-card__danger {
+  color: var(--am-color-danger) !important;
+}
+
+.plugin-editor {
+  display: grid;
+  min-width: 0;
+  gap: 12px;
+}
+
+.plugin-editor__header,
+.plugin-editor__section {
+  border: 1px solid var(--am-color-border);
+  border-radius: 9px;
+  background: var(--am-color-surface);
+}
+
+.plugin-editor__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.plugin-editor__eyebrow,
+.plugin-editor__header p,
+.plugin-editor__note {
+  margin: 3px 0 0;
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+}
+
+.plugin-editor__eyebrow {
+  display: block;
+  margin: 0 0 2px;
+  color: var(--am-color-accent);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.plugin-editor__header strong {
+  display: block;
+  font-size: 14px;
+}
+
+.plugin-editor__header button {
+  min-height: 31px;
+  flex: 0 0 auto;
+  padding: 0 11px;
+  border: 1px solid var(--am-color-accent);
+  border-radius: 7px;
+  background: var(--am-color-accent);
+  color: var(--am-color-on-accent);
+  font: 700 11px var(--am-font-family);
+  cursor: pointer;
+}
+
+.plugin-editor__header button:hover {
+  background: color-mix(in srgb, var(--am-color-accent) 88%, var(--am-color-text));
+}
+
+.plugin-file-importer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 11px 13px;
+  border: 1px dashed color-mix(in srgb, var(--am-color-accent) 40%, var(--am-color-border));
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--am-color-accent) 5%, var(--am-color-surface));
+}
+
+.plugin-file-importer strong {
+  display: block;
+  font-size: 12px;
+}
+
+.plugin-file-importer p {
+  margin: 3px 0 0;
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+}
+
+.plugin-file-importer__button {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  gap: 6px;
+  padding: 0 11px;
+  border: 1px solid var(--am-color-accent);
+  border-radius: 7px;
+  background: var(--am-color-accent);
+  color: var(--am-color-on-accent);
+  font: 700 11px var(--am-font-family);
+  cursor: pointer;
+}
+
+.plugin-file-importer__button:hover:not([data-disabled]) {
+  background: color-mix(in srgb, var(--am-color-accent) 88%, var(--am-color-text));
+}
+
+.plugin-file-importer__button:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--am-color-accent) 35%, transparent);
+  outline-offset: 2px;
+}
+
+.plugin-file-importer__button[data-disabled] {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.plugin-file-importer__button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.plugin-file-importer__button svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.plugin-file-importer .plugin-file-importer__error {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--am-color-danger);
+}
+
+.plugin-editor__section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+}
+
+.plugin-editor__section-title {
+  // 普通网格标题不会触发 legend 的原生跨边框布局，确保 Shadow DOM 内外表现一致。
+  grid-column: 1 / -1;
+  margin: 0 0 2px;
+  padding: 0;
+  color: var(--am-color-text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.plugin-editor__section label {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+}
+
+.plugin-editor__section input,
+.plugin-editor__section textarea,
+.plugin-editor__section select {
+  min-width: 0;
+  min-height: 31px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 7px;
+  background: var(--am-color-surface-subtle);
+  color: var(--am-color-text);
+  font: 11px var(--am-font-family);
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease;
+}
+
+.plugin-editor__section input::placeholder,
+.plugin-editor__section textarea::placeholder {
+  color: color-mix(in srgb, var(--am-color-text-secondary) 72%, transparent);
+  opacity: 1;
+}
+
+.plugin-editor__section input,
+.plugin-editor__section select {
+  padding: 0 8px;
+}
+
+.plugin-editor__section textarea {
+  width: 100%;
+  min-height: 64px;
+  padding: 7px 8px;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.plugin-editor__section input:hover,
+.plugin-editor__section textarea:hover,
+.plugin-editor__section select:hover {
+  border-color: color-mix(in srgb, var(--am-color-accent) 35%, var(--am-color-border));
+}
+
+.plugin-editor__section input:focus-visible,
+.plugin-editor__section textarea:focus-visible,
+.plugin-editor__section select:focus-visible,
+.plugin-editor__header button:focus-visible,
+.plugin-editor__preview summary:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--am-color-accent) 35%, transparent);
+  outline-offset: 2px;
+}
+
+.plugin-editor__section small {
+  color: var(--am-color-text-secondary);
+}
+
+.plugin-editor__wide {
+  grid-column: 1 / -1;
+}
+
+.plugin-editor__error {
+  margin: 0;
+  padding: 9px 10px;
+  border: 1px solid color-mix(in srgb, var(--am-color-danger) 25%, var(--am-color-border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--am-color-danger) 7%, var(--am-color-surface));
+  color: var(--am-color-danger);
+  font-size: 11px;
+}
+
+.plugin-editor__preview {
+  border: 1px dashed var(--am-color-border);
+  border-radius: 8px;
+  background: var(--am-color-surface);
+}
+
+.plugin-editor__preview summary {
+  padding: 9px 10px;
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.plugin-editor__preview pre {
+  max-height: 260px;
+  margin: 0;
+  overflow: auto;
+  padding: 0 10px 10px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  font:
+    10px/1.5 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+
+// 规范作为插件板块内的完整阅读视图，使用共享样式以确保内容全部注入 Shadow Root。
+.plugin-specification {
+  display: grid;
+  min-width: 0;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
+.plugin-specification h2,
+.plugin-specification h3,
+.plugin-specification p,
+.plugin-specification pre,
+.plugin-specification dl,
+.plugin-specification dd,
+.plugin-specification ul,
+.plugin-specification ol {
+  margin: 0;
+}
+
+.plugin-specification__hero,
+.plugin-specification__getting-started,
+.plugin-specification__example,
+.plugin-specification__dictionary,
+.plugin-specification__resolver-section,
+.plugin-specification__rules,
+.plugin-specification__complete-example,
+.plugin-specification__footer {
+  border: 1px solid var(--am-color-border);
+  border-radius: 11px;
+  background: var(--am-color-surface);
+}
+
+.plugin-specification__hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  overflow: hidden;
+  padding: 20px;
+  border-color: color-mix(in srgb, var(--am-color-accent) 25%, var(--am-color-border));
+  background:
+    radial-gradient(
+      circle at 92% 10%,
+      color-mix(in srgb, var(--am-color-accent) 14%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--am-color-accent) 6%, var(--am-color-surface)),
+      var(--am-color-surface) 56%
+    );
+}
+
+.plugin-specification__eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--am-color-accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plugin-specification__hero h2 {
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.plugin-specification__hero p {
+  max-width: 700px;
+  margin-top: 7px;
+  color: var(--am-color-text-secondary);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.plugin-specification__back {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 6px;
+  padding: 0 11px;
+}
+
+.plugin-specification__getting-started,
+.plugin-specification__example,
+.plugin-specification__dictionary,
+.plugin-specification__resolver-section,
+.plugin-specification__rules {
+  display: grid;
+  gap: 12px;
+  padding: 15px;
+}
+
+.plugin-specification__section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.plugin-specification__section-heading > span {
+  min-width: 62px;
+  padding-top: 2px;
+  color: var(--am-color-accent);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.plugin-specification__section-heading h3 {
+  font-size: 14px;
+}
+
+.plugin-specification__section-heading p {
+  margin-top: 2px;
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+}
+
+.plugin-specification__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.plugin-specification__steps li {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--am-color-border);
+  border-radius: 9px;
+  background: var(--am-color-surface-subtle);
+}
+
+.plugin-specification__steps li > span {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--am-color-accent) 13%, var(--am-color-surface));
+  color: var(--am-color-accent);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.plugin-specification__steps div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.plugin-specification__steps strong {
+  font-size: 11px;
+}
+
+.plugin-specification__steps small {
+  color: var(--am-color-text-secondary);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.plugin-specification__notice {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-left: 3px solid var(--am-color-warning);
+  border-radius: 0 8px 8px 0;
+  background: color-mix(in srgb, var(--am-color-warning) 7%, var(--am-color-surface));
+}
+
+.plugin-specification__notice strong {
+  color: color-mix(in srgb, var(--am-color-warning) 86%, var(--am-color-text));
+  font-size: 10px;
+}
+
+.plugin-specification__notice p {
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+}
+
+.plugin-specification__request-line,
+.plugin-specification__mapped-result {
+  display: grid;
+  gap: 7px;
+  padding: 10px 11px;
+  border: 1px solid color-mix(in srgb, var(--am-color-accent) 20%, var(--am-color-border));
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--am-color-accent) 4%, var(--am-color-surface-subtle));
+}
+
+.plugin-specification__request-line > span,
+.plugin-specification__mapped-result > span {
+  color: var(--am-color-accent);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.plugin-specification__request-line code {
+  overflow-wrap: anywhere;
+  color: var(--am-color-text);
+  font:
+    10px/1.5 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+
+.plugin-specification__example-grid,
+.plugin-specification__mini-examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.plugin-specification__code-card {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--am-color-border);
+  border-radius: 9px;
+  background: var(--am-color-surface-subtle);
+}
+
+.plugin-specification__code-card header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--am-color-border);
+  background: var(--am-color-surface);
+}
+
+.plugin-specification__code-card header > span {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--am-color-accent) 12%, var(--am-color-surface));
+  color: var(--am-color-accent);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.plugin-specification__code-card header strong {
+  font-size: 10px;
+}
+
+.plugin-specification__code-card header small {
+  margin-left: auto;
+  color: var(--am-color-text-secondary);
+  font-size: 9px;
+}
+
+.plugin-specification pre {
+  max-width: 100%;
+  overflow: auto;
+  padding: 10px;
+  color: color-mix(in srgb, var(--am-color-text) 92%, var(--am-color-text-secondary));
+  font:
+    9.5px/1.55 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  tab-size: 2;
+}
+
+.plugin-specification__example-grid pre {
+  max-height: 320px;
+}
+
+.plugin-specification__mini-examples pre {
+  max-height: 190px;
+}
+
+.plugin-specification__mapped-result dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.plugin-specification__mapped-result dl > div {
+  display: grid;
+  gap: 2px;
+  padding: 7px 8px;
+  border-radius: 7px;
+  background: var(--am-color-surface);
+}
+
+.plugin-specification__mapped-result dt {
+  color: var(--am-color-text-secondary);
+  font-size: 9px;
+}
+
+.plugin-specification__mapped-result dd {
+  overflow-wrap: anywhere;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.plugin-specification__field-group {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--am-color-border);
+  border-radius: 9px;
+  background: var(--am-color-surface);
+}
+
+.plugin-specification__field-group summary,
+.plugin-specification__complete-example summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 8px 11px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.plugin-specification__field-group summary::-webkit-details-marker,
+.plugin-specification__complete-example summary::-webkit-details-marker {
+  display: none;
+}
+
+.plugin-specification__field-group summary > span {
+  color: var(--am-color-accent);
+  font:
+    800 10px ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+
+.plugin-specification__field-group summary > div,
+.plugin-specification__complete-example summary > div {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.plugin-specification__field-group summary strong,
+.plugin-specification__complete-example summary strong {
+  font-size: 11px;
+}
+
+.plugin-specification__field-group summary small,
+.plugin-specification__complete-example summary small {
+  color: var(--am-color-text-secondary);
+  font-size: 9px;
+}
+
+.plugin-specification__field-group summary svg,
+.plugin-specification__complete-example summary svg {
+  margin-left: auto;
+  transition: transform 140ms ease;
+}
+
+.plugin-specification__field-group[open] summary,
+.plugin-specification__complete-example[open] summary {
+  border-bottom: 1px solid var(--am-color-border);
+  background: var(--am-color-surface-subtle);
+}
+
+.plugin-specification__field-group[open] summary svg,
+.plugin-specification__complete-example[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.plugin-specification__table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.plugin-specification table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 9.5px;
+  line-height: 1.5;
+}
+
+.plugin-specification th,
+.plugin-specification td {
+  padding: 8px 9px;
+  border-bottom: 1px solid color-mix(in srgb, var(--am-color-border) 72%, transparent);
+  text-align: left;
+  vertical-align: top;
+}
+
+.plugin-specification th:nth-child(1) {
+  width: 23%;
+}
+
+.plugin-specification th:nth-child(2) {
+  width: 24%;
+}
+
+.plugin-specification th:nth-child(3) {
+  width: 34%;
+}
+
+.plugin-specification th:nth-child(4) {
+  width: 19%;
+}
+
+.plugin-specification thead th {
+  background: var(--am-color-surface-subtle);
+  color: var(--am-color-text-secondary);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.plugin-specification tbody th {
+  font-weight: 600;
+}
+
+.plugin-specification tbody tr:last-child th,
+.plugin-specification tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.plugin-specification td {
+  color: var(--am-color-text-secondary);
+}
+
+.plugin-specification td code,
+.plugin-specification tbody th code,
+.plugin-specification__rules code {
+  overflow-wrap: anywhere;
+  color: color-mix(in srgb, var(--am-color-accent) 70%, var(--am-color-text));
+  font:
+    9px/1.5 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+
+.plugin-specification__requirement {
+  display: inline-block;
+  margin: 0 4px 2px 0;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--am-color-accent) 10%, var(--am-color-surface));
+  color: var(--am-color-accent);
+  font-size: 8px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.plugin-specification__requirement[data-required='可选'] {
+  background: var(--am-color-surface-subtle);
+  color: var(--am-color-text-secondary);
+}
+
+.plugin-specification__requirement[data-required='按类型必填'] {
+  background: color-mix(in srgb, var(--am-color-warning) 11%, var(--am-color-surface));
+  color: color-mix(in srgb, var(--am-color-warning) 84%, var(--am-color-text));
+}
+
+.plugin-specification__resolver-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.plugin-specification__resolver-grid > article {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--am-color-border);
+  border-radius: 9px;
+  background: var(--am-color-surface-subtle);
+}
+
+.plugin-specification__resolver-grid header {
+  display: grid;
+  gap: 3px;
+  padding: 10px 10px 0;
+}
+
+.plugin-specification__resolver-grid header code {
+  color: var(--am-color-accent);
+  font:
+    800 9px ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+
+.plugin-specification__resolver-grid header strong {
+  font-size: 11px;
+}
+
+.plugin-specification__resolver-grid p {
+  min-height: 58px;
+  padding: 5px 10px 9px;
+  color: var(--am-color-text-secondary);
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.plugin-specification__resolver-grid pre {
+  max-height: 255px;
+  border-top: 1px solid var(--am-color-border);
+  background: var(--am-color-surface);
+}
+
+.plugin-specification__rules ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 18px;
+  padding-left: 18px;
+  color: var(--am-color-text-secondary);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.plugin-specification__rules strong {
+  color: var(--am-color-text);
+}
+
+.plugin-specification__complete-example {
+  overflow: hidden;
+}
+
+.plugin-specification__complete-example pre {
+  max-height: 540px;
+  background: var(--am-color-surface-subtle);
+}
+
+.plugin-specification__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.plugin-specification__footer div {
+  display: grid;
+  gap: 2px;
+}
+
+.plugin-specification__footer strong {
+  font-size: 11px;
+}
+
+.plugin-specification__footer span {
+  color: var(--am-color-text-secondary);
+  font-size: 9px;
+}
+
+.plugin-specification__footer button {
+  padding: 0 11px;
+  border-color: var(--am-color-accent);
+  background: var(--am-color-accent);
+  color: var(--am-color-on-accent);
+}
+
+.plugin-specification__footer button:hover {
+  background: color-mix(in srgb, var(--am-color-accent) 88%, var(--am-color-text));
+}
+
+@media (max-width: 900px) {
+  .custom-plugins__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-plugins__list {
+    position: static;
+  }
+
+  .plugin-specification__steps,
+  .plugin-specification__mapped-result dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plugin-specification__resolver-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plugin-specification__resolver-grid p {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .plugin-editor__header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .plugin-file-importer {
+    grid-template-columns: 1fr;
+  }
+
+  .plugin-file-importer__button {
+    width: 100%;
+  }
+
+  .plugin-editor__section {
+    grid-template-columns: 1fr;
+  }
+
+  .plugin-editor__wide {
+    grid-column: 1;
+  }
+
+  .custom-plugins__summary-guide,
+  .plugin-specification__hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .custom-plugins__specification-button,
+  .plugin-specification__back {
+    justify-content: center;
+  }
+
+  .plugin-specification__example-grid,
+  .plugin-specification__mini-examples,
+  .plugin-specification__rules ul {
+    grid-template-columns: 1fr;
+  }
+
+  .plugin-specification table {
+    min-width: 760px;
+  }
+}
+
+@media (max-width: 620px) {
+  .custom-plugins {
+    padding: 9px;
+  }
+
+  .custom-plugins__summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .custom-plugins__summary-guide {
+    width: 100%;
+  }
+
+  .plugin-card__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .plugin-specification__hero,
+  .plugin-specification__getting-started,
+  .plugin-specification__example,
+  .plugin-specification__dictionary,
+  .plugin-specification__resolver-section,
+  .plugin-specification__rules {
+    padding: 12px;
+  }
+
+  .plugin-specification__hero h2 {
+    font-size: 17px;
+  }
+
+  .plugin-specification__steps,
+  .plugin-specification__mapped-result dl {
+    grid-template-columns: 1fr;
+  }
+
+  .plugin-specification__notice {
+    grid-template-columns: 1fr;
+  }
+
+  .plugin-specification__section-heading > span {
+    min-width: 54px;
+  }
+
+  .plugin-specification__code-card header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .plugin-specification__code-card header small {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .plugin-specification__footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plugin-editor__section input,
+  .plugin-editor__section textarea,
+  .plugin-editor__section select {
+    transition-duration: 0ms;
+  }
+
+  .plugin-specification summary svg {
+    transition-duration: 0ms;
+  }
+}

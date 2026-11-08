@@ -1,0 +1,263 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B05-music-sources-shared",
+  "parentBatch": "B05",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T07:19:26.854Z",
+  "scope": {
+    "invariant": "Switching the selected music source must project only that source identity through the injected session port, retain latest-request ownership, normalize failures, allow retry and reject late publication after invalidation or disposal.",
+    "allowedPaths": [
+      "packages/music-workbench manifest, root entry and runtime contract",
+      "src/features/music-sources/use-music-source-workbench.ts (initialization, source invalidation, source selection and cleanup excerpts)",
+      "src/features/music-sources/use-music-source-registry.ts and use-plugin-session.ts",
+      "src/features/music-sources/use-music-source-workspace.ts (enabled/available projection and selectPlugin excerpts only)",
+      "src/components/music-sources/MusicSourceWorkbench.vue (composable setup and session prop/event bindings)",
+      "test/features/music-sources and the source-contract MusicSourceWorkbench component test",
+      "packages/ui/src/components/music-sources/SessionBadge.vue (direct controlled projection only)"
+    ],
+    "selectedChain": "Source selection -> useMusicSourceWorkbench.activatePlugin -> workspace.selectPlugin -> injected registry activation -> activePluginId watcher -> usePluginSession.refresh -> injected MusicSourcePlugin.getSession -> controlled SessionBadge props; generation, invalidation, error and disposal return paths.",
+    "expansionReasons": [
+      "The workspace selection guard is the direct consumer required to determine whether a selection commits.",
+      "SessionBadge was read and rendered through the public UI export to determine whether refreshing masks the stale identity. Its same-source preservation rule makes the cross-source defect visible.",
+      "Module composition and module-directory initialization/import excerpts establish the explicit injection boundary only; their implementations are not audited."
+    ],
+    "exclusions": [
+      "Product implementation edits and permanent regression tests",
+      "Other B05 feature/runtime/store/plugin-adapter audits and the remaining search/import/listing operations within music-sources",
+      "Storage generation/recovery and namespace transactions (B06)",
+      "Media resolution/transport/download internals (B07), source protocols (B10) and plugin-center implementation (B04)",
+      "GM, Rust, native identity/permissions and real UI/runtime acceptance (B11/B12/B18)",
+      "Browser/app/server/preview/emulator activity, captureDate changes, commit/push"
+    ],
+    "scopeRule": "One B05 candidate at the bounded source-selection/session boundary. A passing test directory does not accept the full feature or the other six B05 candidates."
+  },
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+  "declaredStatus": {
+    "claim": "Shared browser-renderer workbench receives explicit runtime capabilities, owns cross-view async orchestration and must preserve source lifecycle and controlled UI contracts.",
+    "references": [
+      "packages/music-workbench/AGENTS.md:5",
+      "packages/music-workbench/AGENTS.md:7",
+      "packages/music-workbench/AGENTS.md:15",
+      "docs/en/cross-platform/architecture/refactoring-audit-plan.md:100",
+      "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md:203"
+    ],
+    "evidenceLimit": "This report checks shared source/session composition only and does not accept either production transport/runtime."
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Is the inspected composition owned by the shared workbench without runtime or specialist implementation imports?",
+      "evidence": [
+        "packages/music-workbench/package.json:7",
+        "packages/music-workbench/src/runtime/workbench-runtime.ts:35",
+        "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts:130",
+        "packages/music-workbench/src/features/music-sources/use-music-source-registry.ts:24",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/import-scan.log"
+      ],
+      "detail": "All six internal production dependencies use workspace:*. A TypeScript runtime-import scan of 68 workbench source files finds no app, Node, GM/Tauri/Electron or tag/creation/source implementation imports in the tested import allowlist. The inspected orchestration calls injected source/session capabilities and supplies controlled props/events. SFC and external-package transitive graphs were not exhaustively scanned."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Are source/session capabilities explicitly injected and the root entry separated from renderer feature execution?",
+      "evidence": [
+        "packages/music-workbench/src/index.ts:1",
+        "packages/music-workbench/src/runtime/workbench-runtime.ts:67",
+        "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts:137",
+        "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts:467",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:28",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/import-scan.log"
+      ],
+      "detail": "The runtime contract injects sources, HTTP/storage/login/media and optional native capabilities. The local root runtime graph reaches four workbench files with no eager Vue/Pinia/codec/source implementation edge; external package internals and production artifacts are not accepted. Probe request counters show one session call per explicit source selection and a second call on explicit retry. Source implementation dynamic-import retry is deferred to B10."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Does selecting a source maintain identity ownership through pending, failure, retry, invalidation and disposal?",
+      "evidence": [
+        "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts:467",
+        "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts:839",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:22",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:25",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:33",
+        "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue:900",
+        "packages/ui/src/components/music-sources/SessionBadge.vue:32",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/probe.log"
+      ],
+      "detail": "B05-M01 fails: refresh starts the new request without clearing or replacing the displayed session when its source identity changes. Node rendering confirms the new selection still projects source A username and signed-in status until source B completes. Five controls pass: same-source refresh preserves identity, switching back suppresses late B publication, operational failure supports explicit retry, invalidation withdraws identity, and scope disposal suppresses completion. The probe reproduces the real source-ID watcher connection rather than mounting the full workbench or testing native cancellation."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Do inspected session failures use serializable errors and retain per-source cache ownership?",
+      "evidence": [
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:36",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:43",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:67",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/probe.test.ts",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/probe.log"
+      ],
+      "detail": "Failure is normalized with toAppErrorState; the retry probe retains network-error and moves to signed-out after retry. Settled session cache entries are keyed by source ID; stale completion/invalidation/disposal do not publish new entries. This does not inspect stable snapshots, native credentials or storage isolation (B06/B12), and does not negate the transient displayed-identity defect in C3."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Are tests owned correctly and findings bounded by current reproducible evidence?",
+      "evidence": [
+        "packages/music-workbench/test/features/music-sources/use-music-source-workbench.test.ts:178",
+        "packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts:25",
+        "packages/music-workbench/test/features/music-sources/use-music-source-registry.test.ts:22",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/target-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/typecheck.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/probe.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/final-input-check.json"
+      ],
+      "detail": "The 104 existing targeted tests in 11 files and workbench typecheck pass. Six supplemental behavioral scenarios produce five passes and one confirmed failure. UI source-contract tests do not prove layout, and Node SSR does not prove browser behavior. The temporary probe was copied to local evidence storage and removed; all 17 hashed inputs and the product working tree remain unchanged."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "node <user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b05-music-sources\\import-scan.cjs",
+          "startedAt": "2026-10-21T15:16:55.6080180+08:00",
+          "finishedAt": "2026-10-21T15:16:56.3682853+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/import-scan.log"
+        }
+      ],
+      "detail": "Import scan passes. Source review plus the behavioral reproduction establish the identity projection failure."
+    },
+    "tests": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/music-sources test/components/music-sources/MusicSourceWorkbench.test.ts",
+          "startedAt": "2026-10-21T15:12:24.3653289+08:00",
+          "finishedAt": "2026-10-21T15:12:32.1115481+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/target-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench typecheck",
+          "startedAt": "2026-10-21T15:12:24.3652426+08:00",
+          "finishedAt": "2026-10-21T15:12:36.9549745+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/typecheck.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/music-sources/b05-session-audit.probe.test.ts --reporter=verbose",
+          "startedAt": "2026-10-21T15:15:32.7724217+08:00",
+          "finishedAt": "2026-10-21T15:15:38.4092933+08:00",
+          "exitCode": 1,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/probe.log"
+        }
+      ],
+      "detail": "Existing targeted suite: 104/104 pass. Typecheck exits 0. Supplemental probe: 5 pass, 1 fails, exit 1. The trailing pnpm recursive-exec error is wrapper output after the Vitest assertion; Vitest did start and run all six scenarios."
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "No product, public entry, export or dependency change. Production artifact inspection belongs to later acceptance/B21."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "Current task authorizes an audit, not browser/application inspection. Node SSR is tests evidence only; no GM/Rust/runtime claim."
+    },
+    "rootGates": {
+      "result": "not-run",
+      "reason": "This bounded audit changes records only and creates no commit. Full root gates are retained for B21 or a subsequent authorized fix/commit."
+    },
+    "records": {
+      "result": "pass",
+      "validation": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/records-validation.json",
+      "formatting": {
+        "command": "pnpm exec oxfmt --check <B05 report, B05 baseline, summary.json>",
+        "startedAt": "2026-10-21T15:19:56.4059019+08:00",
+        "finishedAt": "2026-10-21T15:19:56.9062133+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/records-format.log"
+      },
+      "detail": "JSON/evidence references and unchanged inputs validated. Other batch records and prior continuation tasks are preserved. HEAD advanced between initial inventory and baseline capture; no audited source changed from inventory through final verification."
+    }
+  },
+  "findings": [
+    {
+      "id": "B05-M01",
+      "severity": "P2",
+      "status": "open",
+      "owner": "packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+      "title": "Switching sources temporarily displays the previous source account identity",
+      "trigger": "A has a settled signed-in session. Select B with session capability while B.getSession() remains pending. Observe the controlled session badge without an overriding accountLabel, as in the Userscript composition.",
+      "effect": "The selected source/account controls refer to B while session state and the rendered username still belong to A. This is transient incorrect account/login presentation; no native grant, credential exposure or cross-account request has been demonstrated.",
+      "evidence": [
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:22",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:25",
+        "packages/music-workbench/src/features/music-sources/use-plugin-session.ts:33",
+        "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts:467",
+        "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue:900",
+        "packages/ui/src/components/music-sources/SessionBadge.vue:32",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/probe.test.ts:54",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/probe.log"
+      ],
+      "suggestedNextAction": "Track which source owns the displayed session. On a source change, show that source cached session or checking before starting its refresh. Preserve known identity for same-source refresh, retain generation/error/invalidation/disposal behavior and add a permanent regression test. Keep the controlled badge presentation rule unchanged unless a separate requirement is established.",
+      "reproduction": {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/music-sources/b05-session-audit.probe.test.ts --reporter=verbose",
+        "savedProbe": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b05-music-sources/probe.test.ts",
+        "note": "Restore the saved probe at packages/music-workbench/test/features/music-sources/b05-session-audit.probe.test.ts before running, then remove it. The probe uses actual usePluginSession and public SessionBadge; full workbench activation and production transports are not mounted."
+      }
+    }
+  ],
+  "unreadPaths": [
+    "B05-library, B05-plugins, B05-settings, B05-runtime, B05-stores, B05-plugin-adapters implementations",
+    "Remaining music-sources search/import/catalog operations beyond the selection excerpts",
+    "B06 storage implementation, B07 media internals, B04 registry internals, B10 sources and apps runtime implementations"
+  ],
+  "missingEvidence": [
+    "Permanent cross-source pending-session regression coverage and a fix",
+    "Full workbench source-switch integration beyond the watcher/session connection",
+    "Production artifact and exact Userscript/Tauri UI/transport acceptance"
+  ],
+  "dependencies": [
+    {
+      "caller": "WorkbenchRuntime.builtInMusicSources",
+      "contract": "MusicSourcePlugin.getSession",
+      "callee": "App-injected source runtime",
+      "ownerBatch": "B10/B11/B12",
+      "openQuestion": "Owning source lazy-load retry and actual GM/Rust account/session transport acceptance are not established by the shared injected fixture."
+    },
+    {
+      "caller": "workspace.selectPlugin",
+      "contract": "store.setActivePluginId/persistNow",
+      "callee": "music-source-workspace-store/storage",
+      "ownerBatch": "B05-stores/B06",
+      "openQuestion": "Selection persistence/recovery and stable-only snapshot evidence are deferred."
+    }
+  ],
+  "nextBatch": "B05-music-sources-shared-fix",
+  "handoffZh": "批次为 B05-music-sources-shared，基线为 c38a247，工作台产品文件无未提交改动。本次按计划只排查来源切换到会话投影这一条链，涵盖显式注入、等待状态、失败重试、过期响应及卸载清理；其余六个 B05 子批次和搜索/导入操作仍未排查。确认 P2 B05-M01：来源 A 已登录时切到 B，B 的会话请求等待期间仍显示 A 的用户名及 signed-in 状态。现有定向测试 104 项和类型检查通过；临时行为复现 6 项中 5 项通过、1 项失败，已保留脱敏日志和复现文件，临时仓库文件已删除。重构状态 violating，结论 needs-fix。未改产品代码，未启动 UI，未提交；静态和 Node 测试不能代表 GM/Rust 实测。下一唯一入口是单独修复跨来源会话归属并补回归，之后再推进其余 B05 子批次。",
+  "baselineRevalidation": {
+    "checkedAt": "2026-10-21T07:21:35.919Z",
+    "result": "pass",
+    "initialObservedHead": "9a39965a10c285f8eca718898f34bd951cfd131a",
+    "baselineHead": "c38a2479d669ca788ddac958a3b19cd08223817b",
+    "finalHead": "c38a2479d669ca788ddac958a3b19cd08223817b",
+    "sourceHashesUnchanged": 17,
+    "sourceChangedAcrossConcurrentCommits": false,
+    "priorBatchesAndContinuationsPreserved": true,
+    "evidenceReferencesExist": 39,
+    "productWorkingTreeClean": true,
+    "temporaryProbeRemoved": true
+  }
+}

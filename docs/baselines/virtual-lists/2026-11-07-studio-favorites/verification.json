@@ -1,0 +1,275 @@
+{
+  "documentType": "verification-evidence",
+  "runtimeScope": "shared",
+  "date": "2026-11-07",
+  "admission": false,
+  "scope": "C03 Studio Favorites table/styled-grid candidate and optional UI native-table interaction ports. C04/C05 and all production admission remain open. No UI/server/executable launched.",
+  "source": [
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTable.vue",
+      "sha256": "d0a215abca302efd4b378fae6f8ae77ce1850e733ee69f76990337a1d1db0146",
+      "bytes": 7983
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue",
+      "sha256": "fddc63f1689ad275557046eef45387c2ca9931d29a07e019c53988a13e32690c",
+      "bytes": 2726
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTable.test.ts",
+      "sha256": "a0d66519b9d3120ad48f6c00b9f6e6ef8a34287ad5bf2ef8ac41d571a5b40299",
+      "bytes": 15363
+    },
+    {
+      "path": "packages/theme-studio/src/StudioRoot.vue",
+      "sha256": "56e9fc5cddc537bf49cbaca1a839d9683d99c639a2cdec1ee99733d178af9cb8",
+      "bytes": 4866
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioFavorites.vue",
+      "sha256": "45ab6f589c7502f62e26db6267df662c7b3d90e061dd27d38a5a8f3ddafe46c3",
+      "bytes": 3329
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioCollection.vue",
+      "sha256": "3c7653f292065e5c875f5f74124b88a840f04e290c179142aaaf59ca3e5ed7f9",
+      "bytes": 4110
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioTrackTable.vue",
+      "sha256": "9084ad86819a37e279309eaeca64f93a980c22551d9c1aa931d3382e161db5ce",
+      "bytes": 4736
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioTrackCollectionLayout.vue",
+      "sha256": "315797548a17a03fbfb9c728de6fdbe10af8c48f8ce2031371620dbd3db544ca",
+      "bytes": 3181
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/StudioVirtualTrackLayout.vue",
+      "sha256": "066ef37c20e528dbfa19e9cf58bcab24f3284b79d31ed5c06c688ede4abe5f7c",
+      "bytes": 5461
+    },
+    {
+      "path": "packages/theme-studio/src/components/library/studio-track-layout-contracts.ts",
+      "sha256": "7bc6aa45c623265d5dff7973c16e713d626b00b543001588eeace26c74ef4a98",
+      "bytes": 633
+    },
+    {
+      "path": "packages/theme-studio/src/composables/use-studio-overlays.ts",
+      "sha256": "9d282d0fb14132172b92af89e81f9f328b73ae7244cbd43c1c87f09de32fbbb6",
+      "bytes": 1180
+    },
+    {
+      "path": "packages/theme-studio/src/composables/use-studio-collection-viewport.ts",
+      "sha256": "c915ac6b233138621e9d8abe44879fe48b90f368b217bcc46576594c93d7e8e1",
+      "bytes": 1241
+    },
+    {
+      "path": "packages/theme-studio/src/composables/studio-virtual-favorites-canary.ts",
+      "sha256": "d3df0cddd1061a4f40c22ee18013828d344ddd33cddb446019e295de8a52cf66",
+      "bytes": 243
+    },
+    {
+      "path": "packages/theme-studio/test/components/library/StudioTrackTable.virtual.test.ts",
+      "sha256": "8f3fe98eb741a8e88d4ed063425361885c10ea5f28e57654b6af5378258e441c",
+      "bytes": 11778
+    },
+    {
+      "path": "packages/theme-studio/test/components/library/StudioFavorites.admission.test.ts",
+      "sha256": "887af8543619190fa72698fe949025d46e8a4d9fc7ef625c57f393394f5a3a84",
+      "bytes": 2496
+    },
+    {
+      "path": "packages/theme-studio/test/helpers/measured-collection-renderer.ts",
+      "sha256": "330d3a8764e8f71d98f6a936e81fd6b7e86a0d6921869b0fed05f34c3eeea6db",
+      "bytes": 8058
+    },
+    {
+      "path": "packages/theme-studio/test/helpers/studio-track-fixtures.ts",
+      "sha256": "7b1c5a4dfd759fbcec562dbb251ab0f26709b31d704ccf67cd0b169c48219f8d",
+      "bytes": 2519
+    }
+  ],
+  "implementation": [
+    "Full and virtual surfaces consume the same Studio native-row/styled-card slots. Only Favorites reads its private default-false key; queue/playlist remain full-rendered.",
+    "VirtualTable opts into existing bounded retention and anchor helpers; natural tbody units register only mounted interaction targets, including context handoff and cleanup.",
+    "Parent continuity waits for its lazy delegate; the virtual surface supplies complete geometry, temporary anchor suspension and bounded mount-before-focus retention. Root-owned track dialogs retain their opener.",
+    "Viewport selection follows Studio content/desk overflow styles and bounded resize observation, without changing scroll containers or host business/storage/media ownership."
+  ],
+  "automated": {
+    "newRegressions": 27,
+    "candidateCases": 22,
+    "independentGateCases": 4,
+    "tableInteractionCases": 1,
+    "collectionSizes": [0, 1, 80, 1000, 10000],
+    "coverage": [
+      "bounded mounted rows/cards and observer disposal",
+      "complete host-filtered selection/removal and table playback",
+      "styled cover keeps selection behavior",
+      "empty/offscreen/cleared results",
+      "action opener survives distant scroll",
+      "first lazy render and settled offscreen mount-before-focus",
+      "disposed adapter rejection",
+      "responsive root switching and density-change keyed identity",
+      "no business action on mount/restore",
+      "default Favorites and foreign consumer gates never load the throwing candidate",
+      "tbody focus/composition retention and disable/re-enable cleanup"
+    ],
+    "checks": [
+      {
+        "command": "pnpm test",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c03-test-root-final.log",
+        "sha256": "3f57986f549a220e079e1c893d1f135e89ef46faabd0e1adc57e8cf1cf4dae55",
+        "bytes": 55815
+      },
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c03-typecheck-root-final.log",
+        "sha256": "70a848fcc30875bcd6c9c99086db2b7775186632389877d4bcfa7d54df8fb47d",
+        "bytes": 7003
+      },
+      {
+        "command": "pnpm lint",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c03-lint-root-after-tests.log",
+        "sha256": "1753b7fa9e751f61a719c4303f4a09573ecda9855c6c74350030dea255db74f7",
+        "bytes": 6048
+      },
+      {
+        "command": "pnpm build",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c03-build-root.log",
+        "sha256": "9808d3e155e89b96fe4bad40c2036e7b090d6a416e32fa722b4f5c2aaef36e66",
+        "bytes": 19018
+      },
+      {
+        "command": "pnpm --filter @any-music/theme-studio test",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c03-studio-test-final.log",
+        "sha256": "77200bf34f04ddac8ec5815417da068a03d4c8ae07336491be1feb14473d40e7",
+        "bytes": 360
+      },
+      {
+        "command": "pnpm --filter @any-music/theme-studio typecheck",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c03-studio-typecheck-final.log",
+        "sha256": "48c5e87876098871cc0cc054ced89e206616f1cf6b19d65bf5df89e70b243919",
+        "bytes": 136
+      },
+      {
+        "command": "pnpm format:check",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c03-format-check-root.log",
+        "sha256": "5d947c36d118c0ee91421beefe87bc39e17d79a941282b1be6d697e49b9e91c9",
+        "bytes": 206
+      },
+      {
+        "command": "C03 relative documentation links and final source hashes",
+        "exitCode": 0,
+        "path": "logs/2026-11-07-virtual-list-implementation/c03-doc-check.log",
+        "sha256": "334c42ff7f80ac9e0feecac6f552aaeba7ae7b3be3095c6db8e2a67b17431171",
+        "bytes": 101
+      }
+    ],
+    "finalStudio": {
+      "files": 12,
+      "tests": 54,
+      "note": "Root test had 52 Studio cases; two additional lazy-restoration cases passed in the final package recheck. Final package typecheck and root lint followed those additions."
+    },
+    "rootUi": {
+      "files": 119,
+      "tests": 1062
+    },
+    "method": "Compiled Vue components in Node with injected geometry, observer delivery and simulated focus/events. Tests do not establish native layout, IME, accessibility tree, OS input or frame-time acceptance.",
+    "warnings": "Existing out-of-scope lint/build warnings retained; no new warning in touched source/tests."
+  },
+  "productionArtifacts": {
+    "scope": "Static production build identities, none executed or admitted. Gzip uses level 9 per file.",
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "sha256": "c4fbb3667200982ea6474bb3769e8250d9416ff5a22f225cae6c932c81523c57",
+      "bytes": 5970293,
+      "gzipBytes": 1155111
+    },
+    "tauriJavaScript": {
+      "files": 63,
+      "bytes": 3644725,
+      "gzipBytes": 885848,
+      "manifestSha256": "ba7defd5d4df294a60e74360cab21c4e5d9f6faf28a940e6d6efeb7169bfe3a1"
+    },
+    "affectedChunks": [
+      {
+        "path": "apps/tauri/dist/assets/studio-h5I5pO0N.js",
+        "sha256": "7efb498b9af81fc0ffc57840a82b18ab16d25f5efbc65a1f134492859b004db3",
+        "bytes": 9895,
+        "gzipBytes": 1927
+      },
+      {
+        "path": "apps/tauri/dist/assets/StudioVirtualTrackLayout-BdBhMMgi.js",
+        "sha256": "088408fe04bbfe0ff6a013f653bddeb0a6e260d6362eb8bfeddbabe68e9701b5",
+        "bytes": 12382,
+        "gzipBytes": 4284
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-studio-overlays-7cJSIzJ5.js",
+        "sha256": "9aa6350fd79b2e9ec4ccf1cb8fe141cb6d100a034efd3df6c6085e5ce160115e",
+        "bytes": 460,
+        "gzipBytes": 328
+      }
+    ],
+    "native": {
+      "path": "target/release/any-music-tauri.exe",
+      "sha256": "74ef5f39f5ce4f09e56aabf3a9cd93f19de5743dbecaf91b60c5894aa4044269",
+      "bytes": 29868544
+    },
+    "themeAudits": [
+      {
+        "path": "apps/userscript/dist/theme-build-audit.json",
+        "sha256": "9b00425be9ed34acd43f7ee9c5c22da08e195cd8e7f9a07d98e321488150ebe3",
+        "bytes": 81130,
+        "graphs": {
+          "metadata": {
+            "virtualExecutableHits": 0
+          },
+          "startup": {
+            "virtualExecutableHits": 0
+          },
+          "documentStart": {
+            "virtualExecutableHits": 0
+          }
+        }
+      },
+      {
+        "path": "apps/tauri/dist/theme-build-audit.json",
+        "sha256": "2f521ecb810bb493e1dda551547c0f5d60dc8a5a427ae2447a59afa44f3925cb",
+        "bytes": 89055,
+        "graphs": {
+          "metadata": {
+            "virtualExecutableHits": 0
+          },
+          "startup": {
+            "virtualExecutableHits": 0
+          }
+        }
+      }
+    ],
+    "comparison": {
+      "baseline": "docs/baselines/virtual-lists/2026-11-07-classic-queue-playlist/verification.json",
+      "userscriptDeltaBytes": 28678,
+      "userscriptDeltaGzipBytes": 106,
+      "tauriJavaScriptDeltaBytes": 16619,
+      "tauriJavaScriptDeltaGzipBytes": 7358,
+      "claim": "Build cost only; no runtime performance benefit or admission."
+    }
+  },
+  "openGates": [
+    "Installed GM and native desktop layout/columns/artwork/genuine row-height changes",
+    "Native table/accessibility semantics and browser focus/IME",
+    "Escape/dialog focus return, responsive root handoff, theme replacement and reduced motion",
+    "C00/O00-O02 runtime performance, S00 persistence and remaining consumers/G matrix"
+  ],
+  "reverseScope": "Only this batch's Studio gate/layout/viewport/overlay wiring, optional UI table ports, focused test support and guide/plan/evidence deltas. Preserve all prior modified/untracked code; no commit or push."
+}

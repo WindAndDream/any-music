@@ -1,0 +1,7 @@
+
+> any-music@0.0.0 lint <project-root>
+> node scripts/check-package-boundaries.mjs && node scripts/check-plugin-isolation.mjs && node scripts/check-plugin-vm.mjs && node scripts/check-mobile-boundaries.mjs && oxlint .
+
+packages\theme-default: themes expose only metadata ., /vue and /styles at their canonical public entries
+packages\theme-default\src\components\downloads\download-track-presentation.ts: theme core dependencies must be public types only
+ ELIFECYCLE  Command failed with exit code 1.

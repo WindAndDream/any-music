@@ -1,0 +1,33 @@
+{
+  "documentType": "intermediate-verification-record",
+  "runtimeScope": "repository",
+  "status": "superseded-by-pending-final-source-freeze",
+  "reason": "Two independently user-authorized tasks continued editing the same checkout after the first test/typecheck/lint phase. These passing commands are not attributed to the later final artifact.",
+  "checks": {
+    "test": {
+      "exitCode": 0,
+      "vitestFiles": 314,
+      "vitestTests": 2383,
+      "rustPassed": 253,
+      "protocolDifferentialCases": 200
+    },
+    "typecheck": {
+      "exitCode": 0
+    },
+    "lint": {
+      "exitCode": 0,
+      "diagnosticScriptWarnings": 12
+    },
+    "format": {
+      "exitCode": 1,
+      "firstFailure": "GM-R4 evidence formatting and a concurrently changing ClassicRoot.vue. Evidence formatting was corrected; ClassicRoot formatting produced no byte change in the captured file.",
+      "secondFailure": "Five other concurrently changing application/shared presentation files."
+    }
+  },
+  "logsPrefix": "recovery-before-concurrent-",
+  "formatFirstFailureLog": "recovery-final-format-initial.log",
+  "formatConcurrentFailureLog": "recovery-final-format-concurrent.log",
+  "inputDriftObservation": "recovery-final-concurrent-inputs.json",
+  "productLogicEditedByVerifier": false,
+  "formatOnlyAuthorization": "Parent authorized oxfmt on ClassicRoot.vue; before/after bytes were identical. No external task logic was changed."
+}

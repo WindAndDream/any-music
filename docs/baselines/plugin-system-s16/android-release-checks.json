@@ -1,0 +1,584 @@
+{
+  "documentType": "verification-evidence",
+  "runtimeScope": "tauri",
+  "recordedAtUtc": "2026-10-20T04:40:28.823Z",
+  "status": "partial-s16-android-release-and-reference-device-verification",
+  "s16Implemented": false,
+  "configuration": {
+    "host": "Windows",
+    "minimumApi": 26,
+    "compileTargetSdk": 37,
+    "productMinimumWebviewMajor": 111,
+    "ndk": "30.0.16248370",
+    "rust": "1.91.1"
+  },
+  "policy": {
+    "externalPlugins": "none",
+    "declarativeAdmitted": false,
+    "codeAdmitted": false,
+    "productionPublisherAccepted": false,
+    "storeChannelAccepted": false
+  },
+  "rootChecks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "startedUtc": "2026-10-20T03:37:39.2163117Z",
+      "finishedUtc": "2026-10-20T03:38:54.7357405Z",
+      "log": ".codex-tmp\\s16-android-release\\test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "startedUtc": "2026-10-20T03:38:54.7673106Z",
+      "finishedUtc": "2026-10-20T03:39:50.6169797Z",
+      "log": ".codex-tmp\\s16-android-release\\typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "startedUtc": "2026-10-20T03:39:50.6205728Z",
+      "finishedUtc": "2026-10-20T03:39:52.1208116Z",
+      "log": ".codex-tmp\\s16-android-release\\lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "startedUtc": "2026-10-20T03:39:52.1227767Z",
+      "finishedUtc": "2026-10-20T03:39:56.1166452Z",
+      "log": ".codex-tmp\\s16-android-release\\format-check.log"
+    },
+    {
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "startedUtc": "2026-10-20T03:39:56.1188373Z",
+      "finishedUtc": "2026-10-20T03:40:15.0273746Z",
+      "log": ".codex-tmp\\s16-android-release\\check-native.log"
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "startedUtc": "2026-10-20T03:40:15.0289808Z",
+      "finishedUtc": "2026-10-20T03:40:22.6351559Z",
+      "log": ".codex-tmp\\s16-android-release\\check-rust-msrv.log"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "exitCode": 0,
+      "startedUtc": "2026-10-20T03:40:22.6366367Z",
+      "finishedUtc": "2026-10-20T03:40:33.8879490Z",
+      "log": ".codex-tmp\\s16-android-release\\check-rust-deny.log"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "startedUtc": "2026-10-20T03:40:33.8891661Z",
+      "finishedUtc": "2026-10-20T03:42:49.9292316Z",
+      "log": ".codex-tmp\\s16-android-release\\build.log"
+    }
+  ],
+  "counts": {
+    "rootScriptTests": 27,
+    "cliNodeTests": 13,
+    "vitest": 1728,
+    "rust": 193,
+    "rustIgnored": 1,
+    "protocolDifferentialCases": 183
+  },
+  "releases": [
+    {
+      "runtimeScope": "tauri",
+      "recordedAtUtc": "2026-10-20T04:36:52.159Z",
+      "target": "aarch64",
+      "buildTools": "36.0.0",
+      "signerSha256": "10336282357619a26ac35066e29b3bca05018d7a0e571d7b889afc838acf48e0",
+      "signed": true,
+      "debuggable": false,
+      "backup": false,
+      "cleartext": false,
+      "apk16KiBAlignment": true,
+      "bundlePayloadSignatures": true,
+      "native16KiBAlignment": true,
+      "nativeLibraryCount": 1,
+      "externalPlugins": "none",
+      "executionAdmitted": false,
+      "storeChannelAccepted": false,
+      "artifacts": [
+        {
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/arm64/release/app-arm64-release.apk",
+          "bytes": 25445589,
+          "sha256": "6176bb64978752d25a39da3cf3787bdff220711fadfe796006c67b4dd80bac68"
+        },
+        {
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/bundle/arm64Release/app-arm64-release.aab",
+          "bytes": 10752031,
+          "sha256": "9812a2a5fbf02c18b5cc32c1439c2550000f56fa239c51c41bd122722ad6da4b"
+        }
+      ]
+    },
+    {
+      "runtimeScope": "tauri",
+      "recordedAtUtc": "2026-10-20T04:24:26.592Z",
+      "target": "x86_64",
+      "buildTools": "36.0.0",
+      "signerSha256": "10336282357619a26ac35066e29b3bca05018d7a0e571d7b889afc838acf48e0",
+      "signed": true,
+      "debuggable": false,
+      "backup": false,
+      "cleartext": false,
+      "apk16KiBAlignment": true,
+      "bundlePayloadSignatures": true,
+      "native16KiBAlignment": true,
+      "nativeLibraryCount": 1,
+      "externalPlugins": "none",
+      "executionAdmitted": false,
+      "storeChannelAccepted": false,
+      "artifacts": [
+        {
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/x86_64/release/app-x86_64-release.apk",
+          "bytes": 25234306,
+          "sha256": "42bea2f2f533849d77360c2b1dbb69466b806d140be0bbea4ae475ebad08c19b"
+        },
+        {
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/bundle/x86_64Release/app-x86_64-release.aab",
+          "bytes": 10901824,
+          "sha256": "a2e853297d2da301e185c68528ede14598d7fea673bfc7a890fce075d5f6ebfe"
+        }
+      ]
+    }
+  ],
+  "signingIdentity": {
+    "purpose": "task-local validation only",
+    "publicCertificateSha256": "10336282357619a26ac35066e29b3bca05018d7a0e571d7b889afc838acf48e0",
+    "privateMaterialTracked": false,
+    "productionIdentity": false
+  },
+  "emulatorChecks": [
+    {
+      "runtimeScope": "tauri",
+      "startedAtUtc": "2026-10-20T04:08:35.851Z",
+      "serial": "emulator-5580",
+      "passed": true,
+      "physicalDevice": false,
+      "externalPlugins": "none",
+      "executionAdmitted": false,
+      "channelAccepted": false,
+      "instrumentationTests": 11,
+      "keystoreHardwareBacked": false,
+      "keystoreNonextractable": true,
+      "skippedTests": 0,
+      "api": 34,
+      "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys",
+      "pageSize": 4096,
+      "workbenchChecked": true,
+      "bootstrapOnly": false,
+      "workbench": {
+        "caps": {
+          "platform": "android",
+          "form": "mobile",
+          "externalPlugins": "none",
+          "accountTransport": "unavailable",
+          "systemBrowser": "unavailable",
+          "secureCredentials": "provided",
+          "media": "unavailable",
+          "nativeSave": "provided",
+          "packageFiles": "provided",
+          "packageSharing": "provided",
+          "packageDeepLinks": "provided",
+          "backgroundExecution": "unavailable"
+        },
+        "denials": {
+          "http_request": true,
+          "plugin_package_install": true,
+          "plugin_command_run": true,
+          "plugin_dev_begin": true,
+          "plugin:mobile-platform|credentialKey": true
+        },
+        "privateTargetRejected": true,
+        "contentIntentForwarding": true,
+        "previewContentSha256": "c74a63a90153ad806e2becb8488b7487049d13da2954dc0eb1f3af402c6af616",
+        "previewCanInstall": false,
+        "mounted": true,
+        "backgroundRecovery": true,
+        "processRestartRecovery": true,
+        "committedDataSha256": "72e79460c11c4e865bd917345425531ceb7a1864c31dd41e5ea739420dc15d60",
+        "forcedActivityRecreationAccepted": false
+      },
+      "artifacts": [
+        {
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/x86_64/debug/app-x86_64-debug.apk",
+          "sha256": "965fbfa3883cc90cc2ae177c34b3d2f5dd5902c32c0e66b06ffc9abdc60bd7d8"
+        },
+        {
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/androidTest/x86_64/debug/app-x86_64-debug-androidTest.apk",
+          "sha256": "5e1f191aa0129e7d9d16e536d4423b5404f820043f9206f52798040209e7be75"
+        }
+      ],
+      "testApkRemoved": true,
+      "finishedAtUtc": "2026-10-20T04:09:16.916Z"
+    },
+    {
+      "runtimeScope": "tauri",
+      "startedAtUtc": "2026-10-20T03:37:28.042Z",
+      "serial": "emulator-5584",
+      "passed": true,
+      "physicalDevice": false,
+      "externalPlugins": "none",
+      "executionAdmitted": false,
+      "channelAccepted": false,
+      "instrumentationTests": 10,
+      "skippedTests": 0,
+      "api": 26,
+      "fingerprint": "Android/sdk_phone_x86_64/generic_x86_64:8.0.0/OSR1.180418.004/4931640:userdebug/test-keys",
+      "pageSize": 4096,
+      "workbenchChecked": false,
+      "bootstrapOnly": true,
+      "nativeUpdateMessage": true,
+      "artifacts": [
+        {
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/x86_64/debug/app-x86_64-debug.apk",
+          "sha256": "67e69852a5465369ab26667b1321fad67f53e67c65ae28c867bf8c4e294f0e84"
+        },
+        {
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/androidTest/x86_64/debug/app-x86_64-debug-androidTest.apk",
+          "sha256": "a1e37a15b55fcd0dc1176fcab0a684e3e18e08059bb279ec5c60ccca61fdadff"
+        }
+      ],
+      "testApkRemoved": true,
+      "finishedAtUtc": "2026-10-20T03:37:49.890Z"
+    }
+  ],
+  "unsupportedApi24": {
+    "installationRejected": true,
+    "error": "INSTALL_FAILED_OLDER_SDK",
+    "originalApi24ConfigurationFailed": true,
+    "cause": "Tauri Jackson dependency references missing java.lang.BootstrapMethodError"
+  },
+  "softwareRenderedReleaseEmulator": {
+    "api": 35,
+    "architecture": "x86_64",
+    "webview": "124.0.6367.219",
+    "ramMiB": 2048,
+    "virtualCores": 2,
+    "pageSize": 4096,
+    "firstColdStartupAccepted": false,
+    "secondProcessStartupDisplayedWorkbench": true,
+    "failure": "Wry 0.57.0 main_pipe.rs:421 GetUrl reply SendError panic during slow cold startup"
+  },
+  "physicalReference": {
+    "manufacturer": "Xiaomi",
+    "model": "23113RKC6C",
+    "android": "15",
+    "api": 35,
+    "architecture": "arm64-v8a",
+    "webview": "153.0.8010.36",
+    "firstActivityLaunchMs": 503,
+    "firstLaunchWorkbenchScreenshotConfirmed": true,
+    "releaseMatchesVerifiedApk": true,
+    "nativeAdapterHarness": {
+      "runtimeScope": "tauri",
+      "startedAtUtc": "2026-10-20T04:36:52.985Z",
+      "deviceIdSha256Prefix": "41a897343baa5a28",
+      "passed": true,
+      "physicalDevice": true,
+      "releaseApkSha256": "6176bb64978752d25a39da3cf3787bdff220711fadfe796006c67b4dd80bac68",
+      "signerSha256": "10336282357619a26ac35066e29b3bca05018d7a0e571d7b889afc838acf48e0",
+      "externalPlugins": "none",
+      "executionAdmitted": false,
+      "channelAccepted": false,
+      "adapterTestsIsolatedFromProduct": true,
+      "preparedArtifacts": true,
+      "releaseInstrumentation": false,
+      "forcedActivityRecreationAccepted": false,
+      "workbenchIpcChecked": false,
+      "fixtureProviderInitializedByShell": true,
+      "instrumentationTests": 11,
+      "skippedTests": 0,
+      "keystoreNonextractable": true,
+      "keystoreHardwareBacked": true,
+      "manufacturer": "Xiaomi",
+      "model": "23113RKC6C",
+      "api": "35",
+      "android": "15",
+      "pageSize": 4096,
+      "webview": "Current WebView package (name, version): (com.google.android.webview, 153.0.8010.36)",
+      "releaseProcessLifecycleSmoke": true,
+      "releaseProcessStarted": true,
+      "testArtifacts": [
+        {
+          "sha256": "9b9f20c0306a5c30789641cf9b1f4e66db0b620cfd5c59ff6794c35f2ee62a8d",
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/arm64/debug/app-arm64-debug.apk"
+        },
+        {
+          "sha256": "1715d4adf157261230e50e468c5655e6e5f54d3ca718d2f9459b185666a258f3",
+          "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/androidTest/arm64/debug/app-arm64-debug-androidTest.apk"
+        }
+      ],
+      "testApksRemoved": true,
+      "finishedAtUtc": "2026-10-20T04:37:11.531Z"
+    },
+    "earlierFailedAdapterAttempt": {
+      "testsRun": 11,
+      "failures": 5,
+      "cause": "Freshly installed fixture APK remained stopped; queries alone did not initialize its provider",
+      "resolvedByTestOnlyProviderInitialization": true
+    },
+    "fixtureSetup": {
+      "fixtureWasStoppedBeforeProbe": true,
+      "fixtureProviderInitializedByShell": true,
+      "productProviderPrimed": false
+    },
+    "postLifecycleWorkbenchScreenshotConfirmed": true,
+    "minimumDeviceAccepted": false,
+    "releaseIpcInspected": false,
+    "realOomOrPowerLossAccepted": false
+  },
+  "failedOptimizedReleaseInstrumentation": {
+    "passed": false,
+    "cause": "AndroidJUnitRunner failed before tests: missing androidx.tracing.Trace after shrinking",
+    "productionShrinkRulesWeakened": false
+  },
+  "unresolved": [
+    "Forced Activity destruction/recreation: pthread_mutex_lock on destroyed mutex; not fixed or accepted",
+    "Software-rendered API 35 release first cold startup: canceled GetUrl reply panic; warm success does not accept cold startup",
+    "Account/authentication/proxy and media/audio-focus/Range/seek adapters remain unavailable",
+    "Mobile declarative/code installation, isolated execution, consent/recovery and budgets are not admitted",
+    "Minimum physical devices, real OOM/storage/power-loss, cross-device transfer and 16 KiB device execution remain unaccepted",
+    "Publisher-owned signing/Play privacy and channel acceptance remain incomplete",
+    "iOS project/adapters/device/distribution remain outside this Windows-only implementation"
+  ],
+  "deliveryValidation": {
+    "finalFormatCheckExitCode": 0,
+    "diffWhitespaceCheckExitCode": 0
+  },
+  "inspectionCleanup": {
+    "taskOwnedEmulatorsStopped": true,
+    "avdDataPreserved": true,
+    "testPackagesRemoved": true,
+    "productReleaseRetainedOnPhone": true
+  },
+  "logHashes": [
+    {
+      "localPath": ".codex-tmp/s16-android-release/root-checks.json",
+      "sha256": "185ced5732958d63a20eb2a4b978a0998bff8191f48489b30bdd983d9ee1256f"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/test.log",
+      "sha256": "d8411cc7a1b632d928eb99163f9ce01b51c4fea342d5026d0384969d15ec1850"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/typecheck.log",
+      "sha256": "7f092229ada8ba26c1b27c594348d5084ec644c62c756396be588befb6672245"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/lint.log",
+      "sha256": "f7f3878f7b62359127276f7e27e87a37336e864b4f8bcea5358833536f7217f6"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/format-check.log",
+      "sha256": "31f87481a87f810e1b08baf9f0585c76a5e211a9f3aa7e2b0825e6458130be2b"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/check-native.log",
+      "sha256": "431999f1452fd8231259f1829b956cb8cfe992b9a7b6724965afc9e4c03867d7"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/check-rust-msrv.log",
+      "sha256": "2083cfa16b4a16fc84295c497e6db6e9c00ee6473758b467fa83129e865a6c13"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/check-rust-deny.log",
+      "sha256": "aa9b1476db446615ecdff6d63f4540567f83dd83160b8b445b521808377fc233"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/build.log",
+      "sha256": "0f420d92e819fd311781057f49fd438c3c44015548f4bff210f5ebf057d38fd1"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/android-clippy-final.log",
+      "sha256": "ca20d99a92b9a698a24cd77580516c41794a53526290a0a568d631a651695404"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/build-x86_64-release-final.log",
+      "sha256": "bf8e45028439938400214092a5038985e19171e85822b5c90d7aa5cd43fd6f8e"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/build-aarch64-release-final.log",
+      "sha256": "655b5eaaed55f0fe5904e69f4e747454dac882b3140d719d74fd1d6c74afc961"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/release-final-reassembly.log",
+      "sha256": "8874a5ad3fe988e1ffbad72e7ff188862b7738d8e6f08d1a8e85f7fd22205dc6"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/api24-install-rejection.log",
+      "sha256": "6a7390c33f905f47aed4ea23e0aa2c8c4366b6ad77adb71d97a0382222a10a48"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/api24-original-crash.log",
+      "sha256": "8b11a97585684effdad9d70502aee516640831b492ef04ba026947af7661a2c9"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/api26-update-message.png",
+      "sha256": "d013e84b6b032a72c14c3c3bf37714c612376084881de597b135d27dc86c0f9a"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/forced-activity-crash.log",
+      "sha256": "83723b32ed12296a82065b39c624c6b65f77e826bbdcd5b7ad5f7c59caad5a9b"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/release-crash.txt",
+      "sha256": "5278c486f5ab37d468f5542452235b0af9c03e35fc80e7d31c9378ad20b177f5"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/release-process.log",
+      "sha256": "70efe3d8f2e46a10a91e292e5b07f09c96f13297a767c020e657f05b08eca094"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/release-running.png",
+      "sha256": "fd6947c0926672b6d2a343e42d78be4a217144d059bed10cf80454b5982d1cb3"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/physical-running.png",
+      "sha256": "b4cfd5be1b8f96844f4fd6994ea177ac9ce4b8e52e19832e395019dac472a329"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/physical-webview.txt",
+      "sha256": "834d08708d5e39ab25c1d343784e6660b228b8f6ee4c8563cd24d09a8739546d"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/physical-running-final.png",
+      "sha256": "1312a7424ce666e45eba018de1863d1cd7018774ee0079c6c0d6ade7d40e2f33"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/physical-release-instrumentation-failed.log",
+      "sha256": "f3ca40e0a3bf20eaf9ab861db129a85ecafc52160588fc2089c7bb0239bc1d94"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/physical-test-crash.log",
+      "sha256": "9ce3694935dcd8e587c725162fe8422e224a02561d6573d06e61ac54b8589eac"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/physical-provider-visibility-failed.log",
+      "sha256": "c48c1a57731b02b6d2b2c9b5b4968fdf61fac7bed630ebe0a2108deac6a2192b"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/physical-adapter-tests.log",
+      "sha256": "88b3928dc7e45a45fdee8f3a7585f22f018b19d0faf94724eb6e9f582c2280b7"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/emulator-final-tests.log",
+      "sha256": "98a3473f5509ac484c716e2a23143793c3eb188a0b724167c550474c52762777"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/device-delivery-checks.json",
+      "sha256": "7996d534a9256ef1390000bd933a345a2fb8d9bc61a9fbd43f9293a00ae7af20"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/device-delivery-lint.log",
+      "sha256": "f7f3878f7b62359127276f7e27e87a37336e864b4f8bcea5358833536f7217f6"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/device-delivery-script-tests.log",
+      "sha256": "9b7c4259c54470e33608c9ec1f7c5e3d793e64597205effbda0022b83fb208bc"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/delivery-checks.json",
+      "sha256": "57bf29a3a3d3951bfcf1bfb621ca6844baf2c30251e515a17483ddd0e3ad568d"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/delivery-lint.log",
+      "sha256": "f7f3878f7b62359127276f7e27e87a37336e864b4f8bcea5358833536f7217f6"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/delivery-format.log",
+      "sha256": "3971bb1e3bce9d73f6201c205671d681082611c7040ce348c8f7e4b1859e782f"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/delivery-format-final.log",
+      "sha256": "b72fcfe0dbff463d6810cbffcc7fff674733e33ab6f1d6cbf2784c399c3cb832"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/delivery-script-tests.log",
+      "sha256": "d6cb71b8a71bb058fbbb5fddfc6da5049597dba80ad6b3643733418f843095b3"
+    },
+    {
+      "localPath": ".codex-tmp/s16-android-release/diff-check-final.log",
+      "sha256": "9d3046cfee355a54f07732c953c6fe403089603e8a7895ed438af095a146442a"
+    },
+    {
+      "localPath": ".codex-tmp/s16-accept/physical-41a897343baa5a28/test-package.txt",
+      "sha256": "038d4e4010842b5056cda9ce505fd76924187f1b5e318b558bb40cf37360244f"
+    },
+    {
+      "localPath": ".codex-tmp/s16-accept/physical-41a897343baa5a28/fixture-probe.log",
+      "sha256": "790c1cb860d27055b6b2be629498655f6dac7e3756bffe7f555e7047af3a7660"
+    },
+    {
+      "localPath": ".codex-tmp/s16-accept/physical-41a897343baa5a28/instrumentation.log",
+      "sha256": "254b467b1caf1cbabb5dcf6a621d943bc4a4dd6ef03f49214ec0d9bf327cb205"
+    },
+    {
+      "localPath": ".codex-tmp/s16-accept/emulator-5580/acceptance.json",
+      "sha256": "efa415093a44c56bdaa232030747e6eda1f82862724e009345a521ceb5328c33"
+    },
+    {
+      "localPath": ".codex-tmp/s16-accept/emulator-5580/instrumentation.log",
+      "sha256": "e7438bd2b2c78728b385428ed222f02232e73a3fe279c06b9eafbdc969ffc808"
+    },
+    {
+      "localPath": ".codex-tmp/s16-accept/emulator-5584/acceptance.json",
+      "sha256": "b26a21f535b856db38df7feef80a0b53a05f56f9b5c7066781e11066c8667a4d"
+    },
+    {
+      "localPath": ".codex-tmp/s16-accept/physical-41a897343baa5a28/acceptance.json",
+      "sha256": "931d54314d04640a3201e045b69f43195615a8ee6b25cc3d83db6f45794ca5fa"
+    }
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false
+  },
+  "deliveryChecks": [
+    {
+      "command": "pnpm lint",
+      "log": ".codex-tmp/s16-android-release/delivery-lint.log",
+      "startedAtUtc": "2026-10-20T04:25:50.207Z",
+      "finishedAtUtc": "2026-10-20T04:28:58.5152818Z",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "pnpm format:check",
+      "log": ".codex-tmp/s16-android-release/delivery-format.log",
+      "startedAtUtc": "2026-10-20T04:25:50.216Z",
+      "finishedAtUtc": "2026-10-20T04:25:55.809Z",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "pnpm exec node --test scripts/test/*.test.mjs",
+      "log": ".codex-tmp/s16-android-release/delivery-script-tests.log",
+      "startedAtUtc": "2026-10-20T04:25:50.216Z",
+      "finishedAtUtc": "2026-10-20T04:25:55.669Z",
+      "exitCode": 0,
+      "output": ""
+    }
+  ],
+  "deviceDeliveryChecks": [
+    {
+      "command": "pnpm lint",
+      "log": ".codex-tmp/s16-android-release/device-delivery-lint.log",
+      "startedAtUtc": "2026-10-20T04:39:40.202Z",
+      "finishedAtUtc": "2026-10-20T04:39:42.834Z",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm exec node --test scripts/test/*.test.mjs",
+      "log": ".codex-tmp/s16-android-release/device-delivery-script-tests.log",
+      "startedAtUtc": "2026-10-20T04:39:40.203Z",
+      "finishedAtUtc": "2026-10-20T04:39:42.682Z",
+      "exitCode": 0
+    }
+  ]
+}

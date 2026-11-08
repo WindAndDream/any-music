@@ -1,0 +1,247 @@
+{
+  "files": [
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 4811276,
+      "sha256": "56901d231343cb603c2e96a4898a66a1eda6a82fd78e12a666d54276c5570ada",
+      "gzipBytes": 934520
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 28355072,
+      "sha256": "ff218b3160532178f27ae4d4aee8b82cfbe407dce4b802cd41e0e36f6361a390"
+    }
+  ],
+  "tauriFrontend": {
+    "fileCount": 45,
+    "totalBytes": 3049815,
+    "files": [
+      {
+        "path": "apps/tauri/dist/assets/ActiveDownloadPanel-DqjxBV1S.js",
+        "bytes": 12558,
+        "sha256": "4644bbe45373da4c4e8408ed861fd089ef72f4d7a076ad6d21ea1456fb95b715"
+      },
+      {
+        "path": "apps/tauri/dist/assets/app-error-BjZGph4G.js",
+        "bytes": 7448,
+        "sha256": "1f87c8d9b58adfe6647a92b9217e74ddf68c8df27a230e097538342a2c271f9a"
+      },
+      {
+        "path": "apps/tauri/dist/assets/AppIcon-CTF0HW1A.js",
+        "bytes": 87639,
+        "sha256": "173c7a19db978fee04c8cccde858afc6e0023de45a8331a892a423d4f509a43a"
+      },
+      {
+        "path": "apps/tauri/dist/assets/audio-exporter-PbUZSpQ-.js",
+        "bytes": 317664,
+        "sha256": "142666fffc0b7319c520c298b49b4fcfe608840dc993992d6f538a004b2b3abe"
+      },
+      {
+        "path": "apps/tauri/dist/assets/audio-exporter-SpWRGWO0.js",
+        "bytes": 82,
+        "sha256": "e463949342ecf6a6a7720ac0c7e342e537c7484b5f381aa761c971c5034edd49"
+      },
+      {
+        "path": "apps/tauri/dist/assets/CatalogTrackActionsDialog-B3Mi1DBx.js",
+        "bytes": 61838,
+        "sha256": "eeff8d17077781e3c105991fedf403a00fb1cd048e5e0efdecfcf91eebeaacfb"
+      },
+      {
+        "path": "apps/tauri/dist/assets/CatalogTrackOperatorPanel-Dup6dDsW.js",
+        "bytes": 18197,
+        "sha256": "606a59feb6f0030b8bbe2ce889dbc28a5f7c0beb8c7ec4613c0098ecff3e7734"
+      },
+      {
+        "path": "apps/tauri/dist/assets/douyin-request-state-CFbLQ2P_.js",
+        "bytes": 4610,
+        "sha256": "3b3f15fd27074662d2fd37941335beb05bde604798aaedec2d4c52f18c3ed29f"
+      },
+      {
+        "path": "apps/tauri/dist/assets/download-archive-aGajjFNI.js",
+        "bytes": 7398,
+        "sha256": "3aaaea66fac5a5656b7ff7c4e9036c3580424c2f10215c2ac7afd7490bd2e495"
+      },
+      {
+        "path": "apps/tauri/dist/assets/download-history-BEKzmkgW.js",
+        "bytes": 5049,
+        "sha256": "4cab7f78b6b5a476e92b6ee9ef968f0953a0183dbd6e6400a6cb43742d9e79b6"
+      },
+      {
+        "path": "apps/tauri/dist/assets/DownloadTrackRow-BijssMwZ.js",
+        "bytes": 3215,
+        "sha256": "fc0246cc413615104614d483078771706c57ba660a5a0796e1f2d3f8b9401b78"
+      },
+      {
+        "path": "apps/tauri/dist/assets/ExternalSourceSettings-CSxeXjeu.js",
+        "bytes": 22122,
+        "sha256": "b923981fb698ab785739a68ae6768c3f82bd54fd6638c8a19c0c924b78e9dadf"
+      },
+      {
+        "path": "apps/tauri/dist/assets/http-Bx2BUOLo.js",
+        "bytes": 183,
+        "sha256": "b4441747f73aa575c1dff22a888dd46e26165fa3221b005c7d4f048250286d55"
+      },
+      {
+        "path": "apps/tauri/dist/assets/index-DE2a6edR.js",
+        "bytes": 1611959,
+        "sha256": "f2376e9c438810b22bc1ae3fe1662b5a2f8796f613fbb41b100180805a31e2a2"
+      },
+      {
+        "path": "apps/tauri/dist/assets/index-j7Lg-h-W.css",
+        "bytes": 50048,
+        "sha256": "b157c26040a09ef5935871f87fc5bccf39a84cd9fb0d1ff6f8897979ce3d00fe"
+      },
+      {
+        "path": "apps/tauri/dist/assets/native-http-CZsR900D.js",
+        "bytes": 4900,
+        "sha256": "348bc7b955de64896859070baf824ece13d9a18e9d7de500efbdd7d579ce39ce"
+      },
+      {
+        "path": "apps/tauri/dist/assets/native-source-plugins-CLI4SZ1r.js",
+        "bytes": 3162,
+        "sha256": "7833d1480fc2dc5da76967a7a531ec75e2ec530a21e9a0ab74060044cdc98a98"
+      },
+      {
+        "path": "apps/tauri/dist/assets/output-C0ZydUOt.js",
+        "bytes": 444694,
+        "sha256": "3d7cca8b0bd29dcacd6003d58b5ecfeca12e4997299f7866b91742b43432bfc9"
+      },
+      {
+        "path": "apps/tauri/dist/assets/plugin-CTPDroLL.js",
+        "bytes": 139,
+        "sha256": "9c2fb1e3430d6277fb82138495240d09207c36c5835ee3e0800b3b54a197a2ca"
+      },
+      {
+        "path": "apps/tauri/dist/assets/policies-Ca8WcR-N.js",
+        "bytes": 569,
+        "sha256": "d37f4656af824a83aadf43da0d9aa5117fbd017f260b0c0ad9c119d034888f99"
+      },
+      {
+        "path": "apps/tauri/dist/assets/preload-helper-Czpn1I53.js",
+        "bytes": 1196,
+        "sha256": "aba87f2a53e45ecdc9113fc30387d16e449d1676428cf5f82dd624c1df97d152"
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueuePanel-CNLzbPns.js",
+        "bytes": 38222,
+        "sha256": "044c151c9d607a4d0b56b00d79a6772124d60647bdc00dadd1a3297a87ca0e00"
+      },
+      {
+        "path": "apps/tauri/dist/assets/QueueViewControls-XaeGRDIk.js",
+        "bytes": 2023,
+        "sha256": "d20cabb40e15320d67cbb2d6afdbd7786067a21706984147c9455999c6c4b0da"
+      },
+      {
+        "path": "apps/tauri/dist/assets/render-custom-track-media-D4w_CI6y.js",
+        "bytes": 797,
+        "sha256": "64972e3a68cf8b32930d45b2d0b2644a399b8713a809181505212e66963b024a"
+      },
+      {
+        "path": "apps/tauri/dist/assets/resolved-media-loader-ocXT3m_V.js",
+        "bytes": 1155,
+        "sha256": "c59fd27c378583becb595e65332a8e1779cb3696c41b5ffb0ee3ad30c429005a"
+      },
+      {
+        "path": "apps/tauri/dist/assets/runtime-D-4MfbVr.js",
+        "bytes": 39397,
+        "sha256": "5b518a0a629881b58b4e0944d39be4ba28610d4b06a6d58c6c8ee33987260a28"
+      },
+      {
+        "path": "apps/tauri/dist/assets/runtime-ed0Noo7_.js",
+        "bytes": 25287,
+        "sha256": "ca47e21e2f1077e04f6adffe31378591e3118f1fa264803441fff5a4f14262b5"
+      },
+      {
+        "path": "apps/tauri/dist/assets/SettingsNumberForm-DJ_e0ZwS.js",
+        "bytes": 22126,
+        "sha256": "3ad8d2a304ba8078202a253b8a16c97b3f6f06d1edb35809716c31c95aca57a1"
+      },
+      {
+        "path": "apps/tauri/dist/assets/studio-Cvl5TjoP.js",
+        "bytes": 40,
+        "sha256": "596a6746390b27347199a1926840ab4d3e3af34fda20461ab7bbd9097ed6cf8d"
+      },
+      {
+        "path": "apps/tauri/dist/assets/styles-D6HkvH4D.js",
+        "bytes": 10304,
+        "sha256": "289c818753425466b132befbaf33f58bba1ed4e415466802605515b55adccd5a"
+      },
+      {
+        "path": "apps/tauri/dist/assets/TrackCardSummary-D06oyCBZ.js",
+        "bytes": 2410,
+        "sha256": "85be155e045ee1c166dc3a07e52e2d2c447783d922fdf94c89200768aa9d570a"
+      },
+      {
+        "path": "apps/tauri/dist/assets/TrackNameEditor-BggxORah.js",
+        "bytes": 25544,
+        "sha256": "973556be9d6b6222e181ea452cf5aa918f7abc07de3ee81f4a464ab3dd617a0e"
+      },
+      {
+        "path": "apps/tauri/dist/assets/url-parser-BgMrwjwU.js",
+        "bytes": 1679,
+        "sha256": "ede89b1c681949c7e0c5a9108049e3974501bde08229a8ae49be2395b9a134b5"
+      },
+      {
+        "path": "apps/tauri/dist/assets/url-parser-CDWVVYUf.js",
+        "bytes": 3946,
+        "sha256": "766d72c26c5deb4a6395dfd3a4d4db22d8e199dd3df364a90022e7ec60ff4d66"
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-action-feedback-CHb_Pi4t.js",
+        "bytes": 3907,
+        "sha256": "80fc234c28b75c127fa2bcb840c4ac2ff09d50f09d23facd4060f7381cccebb5"
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-confirmation-dialog-CDMV-sGc.js",
+        "bytes": 3023,
+        "sha256": "fed3c51879d44c9de5ebfab5ec73d39af5ef74d9420309a4df70386531b562b5"
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-download-list-controls-B-QN1Br-.js",
+        "bytes": 3029,
+        "sha256": "62c80be8d9a5eef1ca0a0e82d5af5b9723ffe61853ebf259c683c1aea7662f7d"
+      },
+      {
+        "path": "apps/tauri/dist/assets/use-favorite-filters-BaBDq9fT.js",
+        "bytes": 4702,
+        "sha256": "c295c1bdac6b23e7d1241cb7d49988ab999df15f2c47734d8dfa772c215e0d2b"
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-C7a7Ckdt.js",
+        "bytes": 85293,
+        "sha256": "e2d9318669fddc0d92345851edd87b707a426ba51d48efb4822bd436e019c2f2"
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-CSZPk7CD.js",
+        "bytes": 28551,
+        "sha256": "a0bdc8f04626a16284ef7ddb01d705b3ff760059ee12e1822f65a46f36c7bfd1"
+      },
+      {
+        "path": "apps/tauri/dist/assets/vue-xINpioqU.js",
+        "bytes": 14892,
+        "sha256": "0984959d5c956366b3ae35659a291091e4afb6ebf368ea5dc1df587ae34d929e"
+      },
+      {
+        "path": "apps/tauri/dist/assets/__vite-browser-external-8b-sKxde.js",
+        "bytes": 1142,
+        "sha256": "31ef1a57e0dfbf30974fe2940fd488c14433d7a708bde8ebe69a703d7f1bfc5c"
+      },
+      {
+        "path": "apps/tauri/dist/assets/__vite-browser-external-D3_sD4Dv.js",
+        "bytes": 77,
+        "sha256": "ae53911ef5ad69a049cb94c01283ab7ae5da80e5e0df19f44d8820458d61517a"
+      },
+      {
+        "path": "apps/tauri/dist/index.html",
+        "bytes": 2206,
+        "sha256": "899c0afcc333a6a0c9a8efe6fcd1153fd220784d2afc7350596864b4aa9ca7b6"
+      },
+      {
+        "path": "apps/tauri/dist/theme-build-audit.json",
+        "bytes": 65393,
+        "sha256": "5193494e2cab43716f324a4eed8efb95f40293e3681502e841ab54b4ec578da1"
+      }
+    ]
+  },
+  "interpretation": "Measured actual combined-worktree artifacts after T12 cleanup; pre-existing migration/native/download changes are retained, so these are not isolated per-batch performance claims."
+}

@@ -1,0 +1,1118 @@
+{
+  "capturedAt": "2026-10-16T08:08:55.023Z",
+  "head": "976c405b93719755b5879d576fbd836926ccbcdf",
+  "files": [
+    {
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/import.rs",
+      "sha256": "2b6647049a4f45b0ebf8f8896677cfb09b35c2c76a285979255c816778456f6a"
+    },
+    {
+      "path": "apps/userscript/test/platform/dom/shadow-style-registry.test.ts",
+      "sha256": "da9b9221b859c2d0836a2c14afbff6bef0d5c5ff8ead627cf9104d87ef1fee20"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s00/checks.json",
+      "sha256": "6ee9cdf8b64e920315f605eacefe780a2fd31ee7e37dbec1537100471141b88a"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s00/start.json",
+      "sha256": "52a977d29272182b9330fa261069f0ce31ad1bac39e7d9ea596d6c44212bee25"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s01/checks.json",
+      "sha256": "4d17323aa20d78fb2254393357a20da4aec6a1cdabe7388b385c3fd5fb7e50ca"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s01/start.json",
+      "sha256": "4d7d4098a0705a0c215653571db95acdcba3cd1184beb13a2221f00f41f2186a"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "sha256": "68a8bd81d05341bed6c13a04b3f645754d8f1ab6a84f2d968443de5e2a6b62da"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-refactoring-baseline.md",
+      "sha256": "b99fc7271eb44ca1f644656aac12f3354dc7dba0f2cc7896e1bd402128ca6ab5"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "sha256": "4d6bfb544fbf927a6199e179b40a3b582356e80bb4f6eaf5f1cbd60a994d0112"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-s01-contracts.md",
+      "sha256": "c0f767f3ff451125a6c63361a2f8a1b66143a41d5e9293875169dc458e314781"
+    },
+    {
+      "path": "docs/en/desktop/rust-workspace-plan.md",
+      "sha256": "65264115581c73aa2298631d5dc0c123a64be56a1afa0d138f5b8a1e8263b746"
+    },
+    {
+      "path": "docs/zh-cn/桌面端/Rust工作区规划.md",
+      "sha256": "d0432e87152b4ffcc03013cb7d33e97d835f906dc072acd99412a713fb8d7ca5"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/插件系统重构S01契约.md",
+      "sha256": "cc960c5a0af27952a912c17f7f921fe55027c2f49f1a0f50aefff09531d1ba84"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/插件系统重构基线.md",
+      "sha256": "f7c918546650225c0cbdc2612428fe0c754279ac36dd8105c53a30c2304d5580"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "sha256": "3e7d8d2ffbbf18cca3f4709a466a4570656e9df0fcd7cca122f8f40c86b67e7f"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "sha256": "c0e0e5629f89c1a86666fd4d02ce9a47f1f21c23fb470c21e16f70168ba72d34"
+    },
+    {
+      "path": "packages/core/test/fixtures/download/download-history-v1.json",
+      "sha256": "e79c29ba47cd935470cce5dbd09dc305d61b3f09663d22f52a41a6d5447493b6"
+    },
+    {
+      "path": "packages/core/test/fixtures/download/download-history-v2.json",
+      "sha256": "b7b5dfdd280d73900f50d9f3283b2f6843a3f490ad3d264f09c74fa3d01a663c"
+    },
+    {
+      "path": "packages/core/test/fixtures/music-source/declarative-v2.json",
+      "sha256": "92115bd6a8986a55d6de4029a8ef7c7fa08ec1e1ce7039f98e19e8712a45368f"
+    },
+    {
+      "path": "packages/core/test/fixtures/music-source/declarative-v3.json",
+      "sha256": "a86de7e72ed500aef0d171a6607c7197ff8adf3a16234ff59e73aba4b8634554"
+    },
+    {
+      "path": "packages/music-workbench/src/features/library/use-favorite-collection.ts",
+      "sha256": "c8d82364667b4448d0da5c1f8bcd792ad7cdcb1437642d3fd0dc124640dbbde5"
+    },
+    {
+      "path": "packages/music-workbench/src/features/library/use-track-collection-view.ts",
+      "sha256": "ad3b920d0bed0ced9e27c52f13bc1cd6a5dab347d7b5eb22369a13d89488c091"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-catalog-scroll-restoration.ts",
+      "sha256": "5d5fc8addd1f3a657332f513b249ec9de5f2267d620e663c1d28611b4f0323cd"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/core-music-source-provider.ts",
+      "sha256": "7608d8164a6ce78ef745439d08d3427560653e861f786549d217bc9fd9b61508"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/music-source-values.ts",
+      "sha256": "50bb92063e2139f89d9fea2080fd39511976cb20d9b5aa75119323ff117b2153"
+    },
+    {
+      "path": "packages/music-workbench/src/plugin-adapters/wire-track-listing.ts",
+      "sha256": "755b577f78a6e4f02203ec61eb72f2862f96f519ec623131be450e10d8b0fae0"
+    },
+    {
+      "path": "packages/music-workbench/test/features/library/use-favorite-collection.test.ts",
+      "sha256": "6fa3b670bcbefdfbf8742fc9ce91646bf9b6a693a06ca441f61561ceecbfdd76"
+    },
+    {
+      "path": "packages/music-workbench/test/features/library/use-track-collection-view.test.ts",
+      "sha256": "fe14c774b3b06771b2e83f42835acc0d0ebeae20b8a1669bbc44cfab2680abd3"
+    },
+    {
+      "path": "packages/music-workbench/test/features/music-sources/use-catalog-scroll-restoration.test.ts",
+      "sha256": "7d40e1194dec5bde695e9d3d78d97dcfd7368c61c224de6bb29e986a98ddc51a"
+    },
+    {
+      "path": "packages/music-workbench/test/fixtures/storage/local-library-v1.json",
+      "sha256": "54382ba742204bb3cb1281cd4dad91ede99a07772222eb19f7eb683117fcf07a"
+    },
+    {
+      "path": "packages/music-workbench/test/fixtures/storage/local-library-v2.json",
+      "sha256": "1783f6cb029a27336341c700491a0c9541cf1e02adc429f30ca2fd36f40d6154"
+    },
+    {
+      "path": "packages/music-workbench/test/fixtures/storage/local-library-v3.json",
+      "sha256": "bc01dbf82158bd10cfdf43a6c100d493be9b322f060c4949dc95fd40753d69f2"
+    },
+    {
+      "path": "packages/music-workbench/test/fixtures/storage/local-library-v4.json",
+      "sha256": "3ad4cd94dcadd8f843de7730092de12243f0bc1ba735c14e2d555b0c196ada72"
+    },
+    {
+      "path": "packages/music-workbench/test/fixtures/storage/local-library-v5.json",
+      "sha256": "b0d9fda9deb8a11e5d9ca8361bec3765ebf74b6ba264a98e7c27705120a4d35f"
+    },
+    {
+      "path": "packages/music-workbench/test/fixtures/storage/local-library-v6.json",
+      "sha256": "7476a80ac7f21bbaaaa6edfab1302c76dc88fb62e2322c0aef92c4966c71b949"
+    },
+    {
+      "path": "packages/music-workbench/test/fixtures/storage/repositories.json",
+      "sha256": "23ee01f3d1ce550f52bdaac91511c760048be3f27559d216477c6f1b086980fb"
+    },
+    {
+      "path": "packages/music-workbench/test/plugin-adapters/core-music-source-provider.test.ts",
+      "sha256": "4ac14dfde7cc070d2c8d006f481404a6695e502d36a91f38b3bad49a6cc19464"
+    },
+    {
+      "path": "packages/music-workbench/test/plugin-adapters/music-source-values.test.ts",
+      "sha256": "76fba61e6d36047b131aca2a92b846b9ca8d2ba5bf978bca889f957bbf82cbcb"
+    },
+    {
+      "path": "packages/music-workbench/test/plugin-adapters/wire-track-listing.test.ts",
+      "sha256": "06dc417c88fdce4e0454c6f45cf2909f2e8f9923a4b8fe2b351435ceead6a354"
+    },
+    {
+      "path": "packages/plugin-sdk/AGENTS.md",
+      "sha256": "ebdfc0ee47e08db5ca1122eedcae83d3f1febc331708ab6af73ca1a986b335a8"
+    },
+    {
+      "path": "packages/plugin-sdk/README.md",
+      "sha256": "c647d755d80812abf43148858b095b10b78514f865a2ad2c55ce8b57dc1a7ced"
+    },
+    {
+      "path": "packages/plugin-sdk/examples/public-page.ts",
+      "sha256": "9f3d37fbaacf9285ce40c35f6040da13da0fcf8d0b536121c430a545f84ac52f"
+    },
+    {
+      "path": "packages/plugin-sdk/examples/title-summary/main.ts",
+      "sha256": "c2d87162beabcf58830ed580d8763207f7f566afb430dd9dd14b48d0e4c5636c"
+    },
+    {
+      "path": "packages/plugin-sdk/examples/title-summary/plugin-manifest.schema.json",
+      "sha256": "023de50bcb91058d3301ff2427d4c958ef6a8ff382cd37afc897cdb7bb1dede4"
+    },
+    {
+      "path": "packages/plugin-sdk/examples/title-summary/plugin.json",
+      "sha256": "acee72c09c81cd7162a7698b8cb105817a717a04bb911c58e9b93dff9a881aff"
+    },
+    {
+      "path": "packages/plugin-sdk/package.json",
+      "sha256": "945d481e94cf244384335229be3587fd583961a8ec45537b0afe35b29ffc7b6d"
+    },
+    {
+      "path": "packages/plugin-sdk/schema/registry.json",
+      "sha256": "6fb1feaaa243dbca69a3d12502938ce7b9152887ed486257e504225a482a3c27"
+    },
+    {
+      "path": "packages/plugin-sdk/schema/v1/protocol.schema.json",
+      "sha256": "2be04f3d8a43c1baa355ed92c2d4010b51160182e755df0066b05f1bc1efb913"
+    },
+    {
+      "path": "packages/plugin-sdk/scripts/build.mjs",
+      "sha256": "cda2b03eac0b886736690492d504cf3717098f4fed7ff2404a87d795f0e20fed"
+    },
+    {
+      "path": "packages/plugin-sdk/scripts/check-package.mjs",
+      "sha256": "21ce35f8efe1ee54382a30aa845b14c643cad599ea73249292eb1a8a1d4cc1ee"
+    },
+    {
+      "path": "packages/plugin-sdk/scripts/generate.mjs",
+      "sha256": "b54eac0eeb4d62d466d42f44bbe18814a87945e96191d6c55a8a17520e7a3101"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/protocol.ts",
+      "sha256": "2facc0c140433448811785f9e42fb73dd6d75684fbeb1863de93f5cb8762f681"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/registry.ts",
+      "sha256": "add5498e7b93b1fb7d6401e5bd109e729e627926adf4c9e1acd6eaba10eba260"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/schema-types.ts",
+      "sha256": "543f4b51b9fe02808f0a2a9f36b81146185dd76f911d1fab5228d84ad520ac63"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/validators.d.ts",
+      "sha256": "755e499d36a37e99c107c4c092ecfc20709e656b5df30d20b6488a00950f6629"
+    },
+    {
+      "path": "packages/plugin-sdk/src/generated/validators.js",
+      "sha256": "42f033af8dc1d08c11f744dd0cae803d43bd416c7033b2ffbf21dcaa14c396c2"
+    },
+    {
+      "path": "packages/plugin-sdk/src/index.ts",
+      "sha256": "0e312f7a7865967afefeff07aa3b74963391299776cdcaa38633b98ec3f21aed"
+    },
+    {
+      "path": "packages/plugin-sdk/src/music.ts",
+      "sha256": "c0ec0d0a06a65464c0021fbdc4e472999c8115a099e28c09f2674368dd9802d0"
+    },
+    {
+      "path": "packages/plugin-sdk/src/negotiate.ts",
+      "sha256": "78a45c695e7ced9cffd57c1394fbc51fbe16b8f7ff3e0b9c8a72bfd7b82694f8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/plugin-call-error.ts",
+      "sha256": "f0987a9dc20c552bdfa246cd1b923bd16e17917997b85af445726028a15b7854"
+    },
+    {
+      "path": "packages/plugin-sdk/src/ports.ts",
+      "sha256": "fbfdba28a73b5b91e8d38d8759860df84b282bc1ce12f4868eb1042c56c7bee8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/README.md",
+      "sha256": "b440129dbe98dbfab52153ee1a38e156f85d57935920ee7c452b9b65c29f5cd8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/index.ts",
+      "sha256": "d5be189abcd146e59570eff5e1230de192f452c96d9addd416738afee448490e"
+    },
+    {
+      "path": "packages/plugin-sdk/src/schema/json-boundary.ts",
+      "sha256": "9045ff32a95a656a1a29c1aedbe159a0f4ac3a641fd62829d33a465849970a98"
+    },
+    {
+      "path": "packages/plugin-sdk/test/examples.test.ts",
+      "sha256": "5729e6d968e814d5458cf30fa38d7a272b85f7b9fb13c46f5ff6868d38098031"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/code-ui.txt",
+      "sha256": "101baaf743076c3e9ddb58ca26ff6587a969edd660eb997f7b0dbaab6d090725"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/dangerous-key.txt",
+      "sha256": "c41410f63f12184b0267818cfd73628577017f115f2629342a63d26bdf5a3e40"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/deep-json.txt",
+      "sha256": "afe82d317ffec17b64d315dcac87c4aad708708fa7a7b155300d785f49011c86"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/duplicate-contribution.txt",
+      "sha256": "df5ea0c1d5ded6b4345318353406fa64cde063336889de3199b83f8599f5900a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/duplicate-escaped-key.txt",
+      "sha256": "0afe7a2b4ae7459cbd3799895ade4de2a4647ce083ca142e1cc4f3a925e83678"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/duplicate-key.txt",
+      "sha256": "5a312998bddb7c3d2f5fdf186b674ba8553c0007db3599484aba906837583bc1"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/event-invalid-task.txt",
+      "sha256": "de1e1e566cb7371ab5251505c55d140b24c5849901b73c62644b23060830661a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/event-missing-task.txt",
+      "sha256": "94503501ca6f4ded02e79f41adf773bbff18407537d87cd326bc30332c98f4b2"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/event-wrong-payload.txt",
+      "sha256": "7584b4cbc7ad90cce23660044fdeab624c09f996913ba3790613b21fed34198d"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/exponent-number.txt",
+      "sha256": "f3e001e64ddcc4aa58d3250b52b01ac24207ca7113ebd76526e5e3d2b1c34eae"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/host.json",
+      "sha256": "24cfac115f2001862d209343240bd1614d4441eca809e81c0bc1ab2ae426ab0c"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/index.json",
+      "sha256": "63137ad3e763eb6fc5ee966db2631853fa80f64d1b72e479f0b7eff7cb330fed"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/invalid-task.txt",
+      "sha256": "d9999a1a29d698e2c401f0357d0a435938097ec227c236b1fd9e3065780cf104"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/lone-surrogate.txt",
+      "sha256": "e57fff0dd51316daeaff6417a237bb7a11e27021ca6d8f2ea0bde903f533665b"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/manifest-declarative.txt",
+      "sha256": "b21d65142db173f96ae5189bd6be742463749851b5354b7048963e6972be2d94"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/manifest-valid.txt",
+      "sha256": "8e1fff0d4393b8c26f93b927d5fe8a3e9efd7d9ee48291079c2ebbd60cb075fa"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/mismatched-response.txt",
+      "sha256": "09e0dd65417952715c492056d34fc7a0b1e64aad4f9f367002acd135e2556022"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/negative-zero.txt",
+      "sha256": "cccabfc33b51318cb72428ec3839d008b4d45642c91225568461a0fd948f72ac"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/nested-dangerous-key.txt",
+      "sha256": "77417069f02cdcf2a85c66521ce19bd8d63014e9ca343ed0e994153a3cc2cbfa"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/oversized-message.txt",
+      "sha256": "8c13c710d452eb4d0549d3bad662c1ae591dbf18ed4bf025c247a3cabaed8ceb"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/oversized-string.txt",
+      "sha256": "04cf249bcd22016c7800e4298b7a3c73c7bf6b9b4ec8980df11d607be2501b42"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/page-size-range.txt",
+      "sha256": "772c4855ffb7053150009e4aefabff7d831a0936f3d9ff0bf6b0df4cff98b81c"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/spoofed-identity.txt",
+      "sha256": "853cebbc90f915a269d82175e9a979be6c7c59bf55c5188a6329aa41b19edd8a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/too-many-nodes.txt",
+      "sha256": "f0cc91ceab43677031fe7e23c944f2c81a28443a3b2cc80f2cfe4a7981884e85"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/trusted-extension.txt",
+      "sha256": "697dc5afda60e46a5719df928f41d3adc2f36dbed4db7e0edd5e5e4062eb0b49"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/trusted-field.txt",
+      "sha256": "e530dcb6359a467aa2945e700c9e81976c95081942e52fa62e25f257a3a563e1"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/undeclared-command.txt",
+      "sha256": "1b84857d2ee42796c79515afc7106f7122dc3744e0fd29c50f1d39bd605a04a2"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-capability-version.txt",
+      "sha256": "65e7b06639868e61b05beb03c8aa7020b1c611b2a9222780d961c770f1eb9cbb"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-contributionVersion.txt",
+      "sha256": "fef7e25bf68d6077d44b3c6d9c5164b55a4136e5e3361a71c2848b63bd8b8d74"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-dataSchemaVersion.txt",
+      "sha256": "5cf4bd80915003de0ea3fa045c6d4284f31f4cb89556b90f00c93fcf71af6cb6"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-manifestVersion.txt",
+      "sha256": "a464c88c03131eecd0d790064806c3c200280de1d135f21e67ca990c496ac894"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-operation.txt",
+      "sha256": "3894cc78fafc1443d8f4b7496e00ead1eb789d51ba4bfef964689786194aea70"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-optional-capability.txt",
+      "sha256": "566e7f63250c493d4a63373ca1f3d53c9cb3a3be796f8be7dabdab9dc6bfca0a"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-packageFormatVersion.txt",
+      "sha256": "3e9a4102ecdbc6e4a596a734289a1513111faba903028dfdac38e84efc2ddb84"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-required-capability.txt",
+      "sha256": "fd3ac19411b586e31eb7f4564e996e48dc67996b1d494bb66edb6ad39450e105"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-runtimeProfileVersion.txt",
+      "sha256": "0d195ba0021b2b69007abadad8087e0a531aece386e3cf1bfee8b86ba6f0c81c"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-sdk.txt",
+      "sha256": "215047c3a1781d4d1ff6a7a560925532d21472bd03b8f3b1aa3aaef792036eb3"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unknown-wire.txt",
+      "sha256": "63605c22b6fc9a494fd45b3a24e33808e8f54c7e5adcbe0ec0d61d40d807b21e"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/unsafe-integer.txt",
+      "sha256": "6def10acf385ec4b3f02e1a551a72c2f49b74e9b77bf67cd6282bfe15cf07caa"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-event.txt",
+      "sha256": "8d3de744a1810e2fb08383a5c10a612c170faeefe87c80869d03d46050c9d121"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-host-request.txt",
+      "sha256": "5cba27e00b35804d79c01ce1f75a0793c644c71adc8d2406aaca2c8ac8433265"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-response.txt",
+      "sha256": "b86fb4f96bb5a500f64a23de0fe59b9018c79dbe6556c6e2b27966f2dcfaac3d"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-task.txt",
+      "sha256": "73b69064e200e9330d8ae9a4dcc8e3d82908ef6f3bedc42e4096d8f8af66259e"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-ui.txt",
+      "sha256": "f101482b851e3d0acf914eb9f249ec176229b92ab4709f167ae3da8e0905a233"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/corpus/valid-unicode.txt",
+      "sha256": "8dead6485088aae629e62c27f1c9ccdbef31c580d0e8451d49b26751a0f2b9b8"
+    },
+    {
+      "path": "packages/plugin-sdk/test/fixtures/sdk-only-host.ts",
+      "sha256": "c3e21fb2de05b7a5fbb005760feedb192fbc35a0ae8342ecd89696ecccb1b388"
+    },
+    {
+      "path": "packages/plugin-sdk/test/negotiate.test.ts",
+      "sha256": "8635c604497af04ec1d4a013c96c6fa16980a313a55192caf21a84cb3c109332"
+    },
+    {
+      "path": "packages/plugin-sdk/test/schema/index.test.ts",
+      "sha256": "1be42ab02d961e039e68aabce7eb5ffdd414ca3c7fa5354a71b5bd46672414a3"
+    },
+    {
+      "path": "packages/plugin-sdk/tsconfig.build.json",
+      "sha256": "0ae223e20b2ede9be0a963a6f069d881bf1e1da52edd37900aaa525f3c1133d3"
+    },
+    {
+      "path": "packages/plugin-sdk/tsconfig.json",
+      "sha256": "04bc760472f28399499a61dad9698a701ca147cf2f95e7827cad66c46103208a"
+    },
+    {
+      "path": "packages/plugin-sdk/tsconfig.test.json",
+      "sha256": "6a0e382a098aaf29a85993cf72bb955cd62e0311de8bb3f4928de9b50dc10bcb"
+    },
+    {
+      "path": "packages/ui/src/components/CollectionBreadcrumbs.vue",
+      "sha256": "cb76045baf04fa6a3895f9b832d7f86236bd6c0f1b58e43224beaa05767a6e06"
+    },
+    {
+      "path": "packages/ui/src/components/CollectionCard.vue",
+      "sha256": "e11ae655a3ec876069b3c6aa8832966b44fc2614aba669d21a57531844b8ae30"
+    },
+    {
+      "path": "packages/ui/src/components/CollectionGrid.vue",
+      "sha256": "c4523240cdf96bd2729686f52f6485bfe26297e03aa6094fa18a80910ea90567"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerListHeader.vue",
+      "sha256": "0c865a066674b7fac45d2a043b8b2eb1e39a404edb5766e3ec9d102e8ffe3360"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/MusicListEmptyState.vue",
+      "sha256": "3ba4aa1cf9e7f71cc6059735bb83a2b6978f6b83acb61dbdc7df5e3f380e57be"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/QueuePlatformGroup.vue",
+      "sha256": "a8123a48b2871317bfa2e0b7ff13c38d089a92ccb27a919ae47b47cdf9203c6d"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/QueuePlatformHeading.vue",
+      "sha256": "42a0c059c5c2348355a74cfcd80c3f43da07cd2089ce8e56222835c02d6bc016"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/QueueTrackActionsDialog.vue",
+      "sha256": "faf27b207ec50f167f9cc3fe78ba6395df265a5eea14618fdc648aaf56cd37a6"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/QueueTrackGrid.vue",
+      "sha256": "ca7c10e50e3d97b0225e5b11c0cda94683fe5f484659777523902716b9cd09c1"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/QueueViewControls.vue",
+      "sha256": "f5bf804bc4ce1cb421f4a170fcb21a98e926036cab8c208f7e762cb05c9a9596"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/TrackActionButton.vue",
+      "sha256": "3567aee2aebc1be85af40f21c90becfe4eb43acad6518649656edb84222ca616"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/TrackCardGrid.vue",
+      "sha256": "a6bb62c971df206636cf9ac18da5a2462b10a884a3e6977f73839449260c88ae"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/queue-reorder-geometry.ts",
+      "sha256": "b686321eb149358b8889de651506d385ca9f3a6109bb1284388302e778f6c01e"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-drawer-reorder.ts",
+      "sha256": "62194d2d5b4bd5dfaa8462c4fca6c142082fca3e20bdda2dea086614190d941f"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-queue-list-controls.ts",
+      "sha256": "e21ae644e0b732a671fa21af33ea14d588630af407da4d371605cd9643bcf3d1"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-queue-view-toolbar.ts",
+      "sha256": "bb947fdbf7bc1e95b827fe6dcb068cceb4f7e793de956609ba5f5a6873f6df79"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-track-batch-actions.ts",
+      "sha256": "912871ba7ae323b144084b5f817b13791008c680ab4c5382f7281d7ba9000691"
+    },
+    {
+      "path": "packages/ui/src/composables/use-collection-navigation.ts",
+      "sha256": "068d71064f8d2b42d9c2c1ef02bd5ee6dcae9f9f04ca4df28fe9952fc4d217f5"
+    },
+    {
+      "path": "packages/ui/src/composables/use-copy-text.ts",
+      "sha256": "7c5294639f8bd9e850be8ee38be9ae8dc5661f4c12bb3e67f4c3d7f6a6cff478"
+    },
+    {
+      "path": "packages/ui/src/composables/use-grid-reorder.ts",
+      "sha256": "166c20b5579cf76dcad7f75f458a2c015f3a30baca840d3bb24dfb5b6df0097a"
+    },
+    {
+      "path": "packages/ui/src/composables/use-long-press-drag.ts",
+      "sha256": "752ca7ab7a49c2615cef45ed9fd0690cb4ac8e412480017d1a0dabd0da9c83a9"
+    },
+    {
+      "path": "packages/ui/src/product/clipboard.ts",
+      "sha256": "21cf14298896701a61409411feb929283e28d65749fb5150cae8254993e60d84"
+    },
+    {
+      "path": "packages/ui/src/product/track-collection.ts",
+      "sha256": "6884d7bed784b7a3a9bb35f520b93fbcb675fe2e5c78cd6251c4c72e37eb0952"
+    },
+    {
+      "path": "packages/ui/src/product/track-playback-state.ts",
+      "sha256": "6595ece54bdde72ad3c12d44a746eca3aaf517e1ffe4d7b36a5a53d21a9c0b82"
+    },
+    {
+      "path": "packages/ui/test/components/library/FavoritePanel.test.ts",
+      "sha256": "6e360436168c03e015b9cf9a809024898e507a7e9f42818905abab5094c57c3d"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/CatalogDrawer.activity.test.ts",
+      "sha256": "40ca548a170bd920177c13b135f916da59d232cc2d1867951b6043e02347a7af"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/QueuePanel.interactions.test.ts",
+      "sha256": "95ec0eb617f16129c35e788cbcd82ecf41fcab2863123f2d3d33f7c3a0024365"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/QueuePlatformGroup.test.ts",
+      "sha256": "d6f124b6f8d129dbcf2498571e64ac359f3052e80307b4220293e0f2c008bb94"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/QueueTrackGrid.test.ts",
+      "sha256": "503301f8ce9b85ec00c32552104f9d259bdf66c0e307050ef496af9b57969bb3"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/queue-reorder-geometry.test.ts",
+      "sha256": "a0be886658765e49a9805da42e0f40a6ed473cc34ca66ee4b0e54ee8aa34bd18"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-catalog-drawer-reorder.test.ts",
+      "sha256": "38c2617d3b0c268a36b1a4b696f42aa8cb815c0fddf150b39c2f09a87b06c54f"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-queue-list-controls.test.ts",
+      "sha256": "96e894ec3cb3765fbf2dbe1e4392d21e90a7f0fadab042791a54f95ad0f73897"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-queue-view-toolbar.test.ts",
+      "sha256": "dae67d849bd1206a3bdf0eac1ffb3efa83cb1fa44c48c07635d4d5df4c7aebe9"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-track-batch-actions.test.ts",
+      "sha256": "02362b160bb4121bdf0092fb0614c461bd5f255901cec791f795d23a3a25ee67"
+    },
+    {
+      "path": "packages/ui/test/composables/use-collection-navigation.test.ts",
+      "sha256": "305d7665a4911299be308453e53462c78011f94d5b9400901a71aec08900d1d3"
+    },
+    {
+      "path": "packages/ui/test/composables/use-copy-text.test.ts",
+      "sha256": "d7cd34c10122916d87348bca21df4beec5f02e05b6eaa2326696b2bd49db3bc1"
+    },
+    {
+      "path": "packages/ui/test/composables/use-long-press-drag.test.ts",
+      "sha256": "a0c7e95e3204c2a12d75ac9cf7d8a21eb8ede8252f56c7f284ed40905b9a1579"
+    },
+    {
+      "path": "packages/ui/test/product/clipboard.test.ts",
+      "sha256": "cfea7bcc2daac5d3c3fa4de8301f126bfa9e738c1b4eac976cc2671fad2a0a0c"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "ffba20ece55575ae1db83033b4b996dde7efe2b2c3a2f6a94dc0a2a70caf14f0"
+    },
+    {
+      "path": "apps/tauri/AGENTS.md",
+      "sha256": "659edf931ad7f42ffde6d56f6fa101b20b53c91d1b7034796accd1641c6cef9c"
+    },
+    {
+      "path": "apps/tauri/src-tauri/AGENTS.md",
+      "sha256": "4ab21c224f92fcf7a714bc7b986c7526b3df410a11b28466b59b2ea670cb8435"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/browser/cdp.rs",
+      "sha256": "1448ecdeef0e4f6e4dfcce4b0ace072bbb1c2a4b0aa1d3642678d405a0d720d6"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser.rs",
+      "sha256": "06b9f2dba852a2eb81094d7c1b897ba51ff7cdc1b6592d3c69fc8e1a17cb8159"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/commands.rs",
+      "sha256": "734b3b4313400a0bcbdb3b66d7a9d5ac336d15a9daad9f8f932060137a90d94a"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/detail.rs",
+      "sha256": "14033997ba38e065203ae216aaf677326806841043b2c3f11f217996726d3741"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/scroll-page.js",
+      "sha256": "660daa99f03c4e67920cd56b050738f61327b2a8db50ae152f1fb942d32c99a6"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/search.rs",
+      "sha256": "c30998221f9e33f802bdf4203ef9d89aae3969e371507acda32705816504f766"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/search/cache.rs",
+      "sha256": "a870ded043cde18ebc244445d3a1254adcd842a6e8dba343eda1c227e9536aac"
+    },
+    {
+      "path": "apps/tauri/src/platform/douyin-browser-catalog.ts",
+      "sha256": "f5d2888aa7343e9ff39382c94d65938d289b7c32cdd5696aa0e8882ccada40d2"
+    },
+    {
+      "path": "apps/tauri/test/platform/douyin-browser-catalog.test.ts",
+      "sha256": "92e08999a555a9d02261745e63e4c1c62947a3e08f474bac2e78f2b33b846251"
+    },
+    {
+      "path": "apps/userscript/src/platform/dom/shadow-style-registry.ts",
+      "sha256": "985b5cddab91a0b9e1ee114166083fb288a26efe4bf97e8cecefd4c83bfd1316"
+    },
+    {
+      "path": "docs/en/cross-platform/README.md",
+      "sha256": "b7530ab5e4a342af19ce7f62c9e495d01001ef89e647e6de8a264ab4b8c152b5"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+      "sha256": "1c1e78d13f7a86de2526d9bcaea362798e4c9e46eb8b83f28c7a5151a74d2ae8"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/project-architecture.md",
+      "sha256": "a6a4ae184a1c7c3bbe95f8bec68149618490d152fd00cec1ee0a76648e30ddfa"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "sha256": "66f1bb9db2b6d603daf64b8584cccfa4aa82290788455398f1f078a16631be8d"
+    },
+    {
+      "path": "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+      "sha256": "1eecc54c7d45f850b0b9b78c69e1a42c1b414d7f64f50c9d4eefad8d45b46c74"
+    },
+    {
+      "path": "docs/en/cross-platform/features/local-library-and-custom-plugins.md",
+      "sha256": "e9d4df878a2a99f28b039310363cf0b82a731d1ded3aa990c67e105ab0cf6292"
+    },
+    {
+      "path": "docs/en/cross-platform/planning/feature-requirements-and-roadmap.md",
+      "sha256": "637399389c67725a0ada034a967a5111f159d2856e718e1e80d670989dc06673"
+    },
+    {
+      "path": "docs/en/cross-platform/platforms/douyin/web-api-contract.md",
+      "sha256": "debe9b1c0ee1a20d9fb82a2e9a6b643d5164712e5a95750a7e354447ece2f001"
+    },
+    {
+      "path": "docs/en/desktop/README.md",
+      "sha256": "748a659d4499ae3ad958da64e5d667604138115bbd0fe8259663a70454e16df9"
+    },
+    {
+      "path": "docs/en/desktop/development.md",
+      "sha256": "141ed06d0efd7fd8360e7d40abc20a3cef1238f8c13c5336be62d85ca3449b68"
+    },
+    {
+      "path": "docs/en/desktop/runtime-architecture.md",
+      "sha256": "970799195e6a0fbe44474db478fe3997a71a4d0863514879396f25863ced187c"
+    },
+    {
+      "path": "docs/en/userscript/development.md",
+      "sha256": "808876769188668b83deefe0ecb7b6890166b4cda04c9b84e2a30fe2f5342a5c"
+    },
+    {
+      "path": "docs/zh-cn/桌面端/开发规范.md",
+      "sha256": "1829b04c1748a938e2d714d64a1246cacf21151f206559a77934a4eed478cc5e"
+    },
+    {
+      "path": "docs/zh-cn/桌面端/文档索引.md",
+      "sha256": "2dba32d425bcc193ffebba5ba3818de2af856c0ab2291ff44d71108dc6154304"
+    },
+    {
+      "path": "docs/zh-cn/桌面端/运行端架构.md",
+      "sha256": "04506a7056365463fc44ee227531e3b46e06a133b717a7d8829ca8dc2c53c9c6"
+    },
+    {
+      "path": "docs/zh-cn/用户脚本/开发规范.md",
+      "sha256": "4d0424f083555301bc8735a1e67638dc9287df6f4b709711a56385e78b720fd8"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/产品规划/功能需求与路线图.md",
+      "sha256": "47eb3692eea3413dc83a31f2afb0c94852b4393abcc35aeee4061de0acefc9b4"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md",
+      "sha256": "2a459d937759bd1bffd673ef0957d782e6d97290227b6c15d0a98b242e6aa1f3"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+      "sha256": "3872f3fb4cb15fd64f11cc6e444ea17268d67a43bee5b723bdfda5f18130521c"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md",
+      "sha256": "4d08a38ed4b0e6ef8fb42655823bcc6471d47d95afcdafbac775b58af58e6bbd"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/文档索引.md",
+      "sha256": "c42128a5ee274cf8b4ec0a60c0a50d66037f735cf24731ba02daaa468cebcf78"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "sha256": "8674e83ad93fd4932a55001b2a63bc02758bf3dc45d12f067b73a0e3aa7b4d6d"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+      "sha256": "45e5962474bbe2ad4b0ed1aada458dd3c2c904aca18baaa74a1a552f2ca5f0af"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/项目架构.md",
+      "sha256": "2d9ada333aaaa89de2a2b749db24534f94ee70a173d8a543bfe2d5ed2ed7a08c"
+    },
+    {
+      "path": "packages/core/test/download/download-history.test.ts",
+      "sha256": "483a707a74aebe3132c96bc573372a1b21be2d7527eb9e7d118cdc3b3acc4ef7"
+    },
+    {
+      "path": "packages/core/test/music-source/declarative-manifest.test.ts",
+      "sha256": "8b83f2cb9755a2fd74683c964396418a6282976492c76fe90b3272a1511337bf"
+    },
+    {
+      "path": "packages/music-sources/src/douyin/douyin-api.ts",
+      "sha256": "e277d2d9a407248e93b0765d9658887694b88cabed62b1ae73cefaac2603af09"
+    },
+    {
+      "path": "packages/music-sources/src/douyin/douyin-plugin.ts",
+      "sha256": "ea1127bea19292b890b777da95a81dec75a86b6882f69f3924f2b29846255d6e"
+    },
+    {
+      "path": "packages/music-sources/src/douyin/runtime-contracts.ts",
+      "sha256": "7a714fc47ae618dfdf392500ca115b19f83aaa1885050c8a6c32dcd44da7bb74"
+    },
+    {
+      "path": "packages/music-sources/src/douyin/url-parser.ts",
+      "sha256": "5e593c775db6d4ff65067669ce0adbd0d28e5ef52a36f37285fa1f83ebee6061"
+    },
+    {
+      "path": "packages/music-sources/test/douyin/douyin-api.test.ts",
+      "sha256": "69d1f428511dbd16b61ca10f57447ee467adad97916db9514ce30c3eac5a9968"
+    },
+    {
+      "path": "packages/music-sources/test/douyin/douyin-plugin.test.ts",
+      "sha256": "584c8a0ee9560b33694d417d7a71e80a9696efe03d772ded76f7f41d266d9acb"
+    },
+    {
+      "path": "packages/music-sources/test/douyin/url-parser.test.ts",
+      "sha256": "3f9458805a40f133edd994f115815c57ca9af5fdad76f6cc6f7cb083c2c53a5b"
+    },
+    {
+      "path": "packages/music-workbench/AGENTS.md",
+      "sha256": "8e45174a74e27f12ffa30dc1bb01f3862f44a9efbbc1d7b3845dedda5a6f1219"
+    },
+    {
+      "path": "packages/music-workbench/package.json",
+      "sha256": "5a416c3be9275958e62eb1acf3593147e29a4684bb22c68bbbcc3c90f8c22a2b"
+    },
+    {
+      "path": "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "sha256": "c1cacf42046830353129108c7a5bf1710b30381a16e087af7865d089ba72d361"
+    },
+    {
+      "path": "packages/music-workbench/src/components/music-sources/PlayerBar.vue",
+      "sha256": "a26657c0029487411b02effb2127131485d242d07585e68f59a0f8b76c3559e1"
+    },
+    {
+      "path": "packages/music-workbench/src/features/downloads/use-player-download.ts",
+      "sha256": "eb04d330ed7687ae1d19f7042d6fa78926fa6576c574da3566a7934af42cabe4"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts",
+      "sha256": "045ee1a6af612c7a5cc5e141b7d6e0a3099be810135ea4aa4fca3c4f6b6018a4"
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts",
+      "sha256": "18a6b9e8f5c28fe5199d71a4bc5ab635a30200d5a1b316e4796bd9d0e1c8b177"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/playback-queue-state.ts",
+      "sha256": "856200a4df387ad4ea841c31d2f612160a2a84a6514d63745a77cb4144710403"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/use-audio-player.ts",
+      "sha256": "a5d3c3baba50b0df6abbe16bf80a3125ad282013acc3b233a60d15061039762c"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/use-playback-queue.ts",
+      "sha256": "a68e565dbd055f63865bcffb9fd726af3b53cd8cd721214529f08e0df2d0942f"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/playback-queue-repository.ts",
+      "sha256": "53eecb01fc6c1df4bd1058a44e46cdda18e8f52ce561807788c9d48e69c830fc"
+    },
+    {
+      "path": "packages/music-workbench/src/stores/music-source-workspace-store.ts",
+      "sha256": "36a798f187d40dacc0af4b11d75753cc69057cda087f2292de3f745956410cee"
+    },
+    {
+      "path": "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts",
+      "sha256": "f9547dcb5df255d666797c5b7f27af8b09fc37bf94a1b3772d7942fcf368bb47"
+    },
+    {
+      "path": "packages/music-workbench/test/features/downloads/use-player-download.test.ts",
+      "sha256": "640fb21cae0b101aa15b50d3a09f47aa7c1c759122e4f5889f9c3176a81774f6"
+    },
+    {
+      "path": "packages/music-workbench/test/features/music-sources/use-music-source-workbench.test.ts",
+      "sha256": "0c14e1f4a1fb987677feeec7957271f6500b792a464c91f63d23ee21d37f621b"
+    },
+    {
+      "path": "packages/music-workbench/test/features/music-sources/use-music-source-workspace.test.ts",
+      "sha256": "1500decda95d511f091ae996b6ceca9dfcec39b2b14b2f7388f8431ec4fe34ac"
+    },
+    {
+      "path": "packages/music-workbench/test/features/player/playback-queue-state.test.ts",
+      "sha256": "c9918c8a775e1453b9fed75c66d7458b2f7eaea9c799994ed1f1d93f013e20cb"
+    },
+    {
+      "path": "packages/music-workbench/test/features/player/use-audio-player.test.ts",
+      "sha256": "806fae87c38e446952dba7721f265bbdc234cf84bde6f3cc2367769ab389fd28"
+    },
+    {
+      "path": "packages/music-workbench/test/features/player/use-playback-queue.test.ts",
+      "sha256": "9966aeaf39caab4a8c13bbc6809ee4bcf2076f077202926cc20600f927773127"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/local-music-library-repository.test.ts",
+      "sha256": "34892fa46479da251a2a4c1907376851e16ac5fd777fde5d092466e7c0a68081"
+    },
+    {
+      "path": "packages/music-workbench/test/storage/storage-repository-keys.test.ts",
+      "sha256": "41d522b1f59108656bfaa2979831e89284477d29b1380c4b7a8f5722404a937f"
+    },
+    {
+      "path": "packages/ui/src/components/MusicAppShell.vue",
+      "sha256": "4f1472d47ae56ec4f93a631389c1756499be209c3e66aa7c6aa05f53dec75bf9"
+    },
+    {
+      "path": "packages/ui/src/components/SidePanel.vue",
+      "sha256": "e0dbc523700925a67b4bbf223c11cfd8b2b361d7b7914dfdebe1257515d8bd91"
+    },
+    {
+      "path": "packages/ui/src/components/app-icon.ts",
+      "sha256": "d83029ff0b8b035c5a243528583c13ecff88839763a8e2152542d7f772d98bbc"
+    },
+    {
+      "path": "packages/ui/src/components/library/FavoritePanel.vue",
+      "sha256": "96961b606ad335b3829d4f83595832965b67fdd812e2f59569710257d2241ffd"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogDrawer.vue",
+      "sha256": "9f10c71e66dcf3692746d98d7b64ea4fb9209ec6dd3e4b4f9d22b868530b9e21"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+      "sha256": "287a1383a50543a1323b03c5dd6a44c85cb17ef6a2c4852fe70736c88bc43654"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerCard.vue",
+      "sha256": "fd2dacd1f1904385bfd34e5433061911da66fc1a54dd5d8b157e77d281e399dd"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerDetails.vue",
+      "sha256": "733543068c5ea7fcb348e9de23715754afc1bc975d1cfcb77c298a34def750f9"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerList.vue",
+      "sha256": "d09cee57c3e0944fe00d2e9f1a95a288bc5b8a3e4bbc60f81e8776eb1eb4db57"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerOperatorPanel.vue",
+      "sha256": "f06bf89374e4c47c1cce2872c37c74de26328772eacab2048d4a180a8b7a8bee"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogOperatorActions.vue",
+      "sha256": "f03c6602b859b5d97e85ace924a81715686f93dee427f2c070130245d1521e95"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "sha256": "59a8096b7b83698a202f3b0bebb4a29aed549463c55483e9efeb53cce828d1cf"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogTrackFilterEditor.vue",
+      "sha256": "181b9ff2ea082d0867f8c9e8bb85d000d4cf87924cc7904f162a30031918f153"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue",
+      "sha256": "d19ea939bf4366869d87ab48f42cd09e285adf5b9f112de98cd20a5553dc5624"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+      "sha256": "fcc20d3d83a9ca9244adb514553cbe9ddc0c3873534b1178b699ab2f96ed74cc"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/PlayerControlPager.vue",
+      "sha256": "23c1c1e4cb25f60cd1fe4b793f44bfd822483314551f65f228f9a11f588cf1b8"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/QueuePanel.vue",
+      "sha256": "b0ff65f39ad4bb172d5139c8c7de814ad5fb15bbcdec95ea7bea216d0d8ec383"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/QueueTrackRow.vue",
+      "sha256": "b7a07fa02be86c4209cdcda3108061bf9bf4fec6705a6c335d624a44d0fa49fc"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/SourceToolbar.vue",
+      "sha256": "9cae675cd2161122055954d7ff80e43b94d83f46be7c436efce894fbe9aa3959"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/TrackList.vue",
+      "sha256": "cb78fe2f3b443025be44ae1f0758ae2173a4d28363954e69a3003f1a88af578f"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/TrackRow.vue",
+      "sha256": "ae16b2c1e8322648e7e4d00961fee516402c3a5e9a33efaf824bcfb10e56df4e"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/catalog-drawer-presentation.ts",
+      "sha256": "cac08966f55f8f72ea2c1eb9c227fb535a8cd5254e10befbce23f40f1bda347f"
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/catalog-track-filter-presentation.ts",
+      "sha256": "1ef256f8416c53aa66115b8154a4b283e8de9672ddcc2365410addff6424c685"
+    },
+    {
+      "path": "packages/ui/src/components/product-workbench/ProductTopBar.vue",
+      "sha256": "4d6b77d60580cbf346ef91be9aa18d96300638df20aa94c5d8bd2127d35b53fd"
+    },
+    {
+      "path": "packages/ui/src/components/product-workbench/ProductWorkbench.vue",
+      "sha256": "ce6484326f9de73949ab401e73185dbc8715ef0473c910c15f764cff435fb8b3"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/catalog-filter-history-settings.ts",
+      "sha256": "760abdaf65f9b41678c20489194471f9a3ce3dc381c9a93ad643f7d2909328d0"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-drawer-list.ts",
+      "sha256": "74075415ccc280466159b54ac4dd545d3d2cd54c720e5a70bae19bb0c6022159"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-catalog-filter-history-settings.ts",
+      "sha256": "8c91b171c72e7b4e79606575495f0d8724c26321f6a9e7aa4b41854d56d9306a"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-queue-reorder.ts",
+      "sha256": "fa328e21735c4d95f289ee3ddaa3bf462f7d017848205721e2926e2b549285ad"
+    },
+    {
+      "path": "packages/ui/src/composables/player/use-player-control-pager.ts",
+      "sha256": "f636839f81c470933ac456636508b9af74d9f5303f1f074dfde61abaedf405c1"
+    },
+    {
+      "path": "packages/ui/src/index.ts",
+      "sha256": "1b99f9c62fdb7f38f29e205466d783210099756131eec61392c404972543cbba"
+    },
+    {
+      "path": "packages/ui/src/product/action-feedback.ts",
+      "sha256": "e34849a742e0ddb8d29dd47f6e20b31e9897c80ef357e86734ed058bbc54af81"
+    },
+    {
+      "path": "packages/ui/src/product/catalog-drawer.ts",
+      "sha256": "8e24e8f5e031531cf8c38d4d1123bca17f96723391e8d921561ef689b06dbb17"
+    },
+    {
+      "path": "packages/ui/src/product/filter-history-settings.ts",
+      "sha256": "e2e468cce4247bba41ac3885e2f36c6aaf0d1462de33352b41712369cc14448a"
+    },
+    {
+      "path": "packages/ui/src/styles/_feature-panels.scss",
+      "sha256": "d0cba2d9417e472de9703e97a521dcca0efcfb7a7b49ac07ec5b988c99920afc"
+    },
+    {
+      "path": "packages/ui/src/styles/_product-workbench.scss",
+      "sha256": "079f7b0c5b5dcef7b141b824e7c9fe15f9abc1a931b0514e143f32645d5ee57d"
+    },
+    {
+      "path": "packages/ui/src/styles/index.scss",
+      "sha256": "089535b2de8a64782908faaf339abe2b8ee867c3d1951100fbcf1703d1dc3b6a"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/CatalogDrawer.test.ts",
+      "sha256": "d452eaea370fedaba4d1407f1bfa1a9da81a4868ba38397cf9a412ae50ecb118"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/CatalogDrawerActionsDialog.test.ts",
+      "sha256": "68b4f6f904408c3f14a83f8f764d0c6c782f175e81add6cfec88755feb24c58e"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/CatalogDrawerCard.test.ts",
+      "sha256": "f22250e14918ee657586f81a152494a1a7b81cd5e4a12dd44f32d81398fab972"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/CatalogDrawerList.test.ts",
+      "sha256": "a01178db625d40e63703cbe4f445bcfb7b16a84d83804b377bd17087f53dcec5"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/CatalogTrackActionsDialog.test.ts",
+      "sha256": "2ff26187827923c8ba56afe5778946d9a888a0cf72c4780f57341c5e2c8e162a"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/CatalogTrackOperatorPanel.test.ts",
+      "sha256": "be73a0b6c8bfecff7aac7c0aebda437dc7ba7d065fa70628d5a694da06ee00c4"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/PlayerControlPager.test.ts",
+      "sha256": "74116ff5f5a82dd9de86ec6e78eb19356d1cebb10aaded32541433eb169ec3ee"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/QueuePanel.test.ts",
+      "sha256": "f041bbbf82f74d082798767a01ecea6cd8997a1f66f854473ac658d51a65b408"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/catalog-drawer-presentation.test.ts",
+      "sha256": "44907f38a163ab6285907ae8cb0ea484ad0a73f600c75c34c2e58c2325c7030a"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/catalog-selection-markup.test.ts",
+      "sha256": "08411290f98edcc5d83f45bbaaf635172e124ba8b8bc13b6b013414ff67a9b54"
+    },
+    {
+      "path": "packages/ui/test/components/music-sources/catalog-test-renderer.ts",
+      "sha256": "b5684bbb74bcba825c36b75e9a4c788632cd12ea875eadeeb63d865215d961fc"
+    },
+    {
+      "path": "packages/ui/test/components/product-workbench/ProductWorkbench.layout.test.ts",
+      "sha256": "1476943634b2d9480dad76da980b1c1507d73fbd2a8bd4dea4f44b26a15bee05"
+    },
+    {
+      "path": "packages/ui/test/components/product-workbench/ProductWorkbench.test.ts",
+      "sha256": "b7f37c59c429cb92067fd2f5a5d2c8c1be22ef5fcd46c4cacc894bac6f7f2f9b"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-catalog-filter-history.test.ts",
+      "sha256": "ec55d130f8e309310f6ad390538be2bbb7f99e71e44aa2941d7cdef4b28908fd"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-queue-reorder.test.ts",
+      "sha256": "8eebb5ae474f36f952e969a3ececd03f03ef1adea7aad9ac4cdc900692998502"
+    },
+    {
+      "path": "packages/ui/test/composables/player/use-player-control-pager.test.ts",
+      "sha256": "f045224293bae8a432355057dfc25c2e5c381f23abfb56d6f788d97987c1840f"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "54a6994af56d48d2b1e0217b08c38aff489874dff3151e7f1b79960c1153d96a"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "sha256": "6887a9cf8f2c8837b5379b134ffa784fe82f101363ffce4fca48a381318314b8"
+    },
+    {
+      "path": "scripts/check-package-boundaries.mjs",
+      "sha256": "e254e42979ece75920fc23034f8ba7bd4ef199f3fe1bb18b6d9744f518cf1757"
+    },
+    {
+      "path": "scripts/test/check-package-boundaries.test.mjs",
+      "sha256": "5c32dd9e75c286c70c397623ce6b50ab24fe67a86cf452081cee0c8149179015"
+    }
+  ]
+}

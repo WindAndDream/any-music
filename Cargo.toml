@@ -1,0 +1,31 @@
+[workspace]
+resolver = "3"
+members = [
+  "apps/tauri/src-tauri",
+  "crates/am-plugin-protocol",
+  "crates/am-plugin-policy",
+  "crates/am-plugin-runtime",
+  "crates/am-plugin-net",
+  "crates/am-plugin-package",
+]
+default-members = ["apps/tauri/src-tauri"]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.90"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+# Product generation checksums require exact JavaScript f64 round trips through IPC and disk.
+serde_json = { version = "1", features = ["float_roundtrip"] }
+am-plugin-protocol = { path = "crates/am-plugin-protocol", version = "0.1.0" }
+am-plugin-policy = { path = "crates/am-plugin-policy", version = "0.1.0" }
+am-plugin-runtime = { path = "crates/am-plugin-runtime", version = "0.1.0" }
+am-plugin-net = { path = "crates/am-plugin-net", version = "0.1.0" }
+am-plugin-package = { path = "crates/am-plugin-package", version = "0.1.0" }
+
+[workspace.lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+
+[workspace.lints.clippy]
+await_holding_lock = "deny"

@@ -1,0 +1,584 @@
+{
+  "documentType": "audit-fix-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B10-bilibili-descriptor-shared",
+  "parentBatch": "B10",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T11:01:00.418Z",
+  "scope": {
+    "invariant": "Bilibili stable metadata and local URL preflight remain available without loading runtime protocols; import preflight agrees with the descriptor exact origin/path scopes; implementation loading is demand-driven, shared, retryable and does not start a listing after cancellation.",
+    "repairedFindingIds": ["B10-B01"],
+    "allowedPaths": [
+      "packages/plugin-source-bilibili/src/url-parser.ts",
+      "packages/plugin-source-bilibili/test/url-parser.test.ts"
+    ],
+    "exclusions": [
+      "Other B10 source/function audits",
+      "UI/workbench/runtime implementation changes",
+      "Real browser/GM/Rust playback acceptance or website recapture",
+      "Unrelated concurrent workspace work, commit and push"
+    ],
+    "detail": "The requested repair changes only source-owned preflight and its regression tests. Original audit/failure evidence is retained. No compatibility layer, public API rename, new dependency, storage or transport change is introduced."
+  },
+  "baseline": {
+    "originalReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared.json",
+    "originalBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-baseline.json",
+    "fixStart": {
+      "capturedAt": "2026-10-21T18:46:25.8882069+08:00",
+      "head": "cdbd92dd17652ec2fad5f65a921dcc18547bfe8c",
+      "workingTree": [
+        " M apps/tauri/src/platform/product-storage.ts",
+        " M apps/tauri/test/platform/product-storage.test.ts",
+        " M apps/userscript/src/App.vue",
+        " M apps/userscript/src/bootstrap-userscript-app.ts",
+        " M apps/userscript/src/platform/configure-userscript-workbench.ts",
+        " M apps/userscript/src/platform/dev/install-dev-userscript-runtime.ts",
+        " M apps/userscript/test/platform/product-storage.test.ts",
+        " M apps/userscript/vite.config.ts",
+        " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+        " M docs/en/cross-platform/architecture/plugin-data-ownership.md",
+        " M docs/en/desktop/development.md",
+        " M docs/en/userscript/development.md",
+        " M docs/zh-cn/桌面端/开发规范.md",
+        " M docs/zh-cn/用户脚本/开发规范.md",
+        " M docs/zh-cn/跨平台/架构/插件数据归属.md",
+        " M packages/core/src/download/download-history.ts",
+        " M packages/core/src/index.ts",
+        " M packages/core/src/models/track.ts",
+        " M packages/music-workbench/src/storage/local-music-library-repository.ts",
+        " M packages/music-workbench/src/storage/product-generation-store.ts",
+        " M packages/music-workbench/src/storage/product-storage.ts",
+        " M packages/music-workbench/test/storage/product-generation-store.test.ts",
+        " M packages/music-workbench/test/storage/product-storage-fixtures.ts",
+        "?? apps/userscript/src/platform/product-storage.ts",
+        "?? apps/userscript/src/platform/use-product-storage-notice.ts",
+        "?? apps/userscript/test/bootstrap-userscript-app.test.ts",
+        "?? apps/userscript/test/platform/use-product-storage-notice.test.ts",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-baseline.json",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared.json",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-baseline.json",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared.json",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-baseline.json",
+        "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared.json"
+      ],
+      "targetWorkingTree": [],
+      "parserSha256": "13a5ab4c5d7a2a44e8ea81c5bbe72a7e0fe8dc129b0d546f3f46b04f91ff580f",
+      "descriptorSha256": "1d0bd2e06544bb34767dfd26b0b64535f1962373c70a0b466c3aecc23f68f693"
+    },
+    "headAtVerification": "9dc061654ba30a74f595c5ce5201fa2270cd5cf5",
+    "fixedFileHashes": [
+      {
+        "path": "packages/plugin-source-bilibili/src/url-parser.ts",
+        "sha256": "dc07c5810d7eea05c19e886fd0f11c956edb14559890f9f79a35ad310bc3fcc6"
+      },
+      {
+        "path": "packages/plugin-source-bilibili/test/url-parser.test.ts",
+        "sha256": "9691e677ea86f23f7f650bcce94b66c1ec7a49217eb361b02728f62c405f98a9"
+      }
+    ],
+    "staticMetadataGraph": {
+      "result": "pass",
+      "visitedCount": 23,
+      "fileHashes": [
+        {
+          "path": "packages/plugin-source-bilibili/src/index.ts",
+          "sha256": "c04eb33120a48b27857d3ef654f6dea38cff100a06e0610f5356b342517350ce"
+        },
+        {
+          "path": "packages/plugin-source-bilibili/src/descriptor.ts",
+          "sha256": "1d0bd2e06544bb34767dfd26b0b64535f1962373c70a0b466c3aecc23f68f693"
+        },
+        {
+          "path": "packages/plugin-source-bilibili/src/url-parser.ts",
+          "sha256": "dc07c5810d7eea05c19e886fd0f11c956edb14559890f9f79a35ad310bc3fcc6"
+        },
+        {
+          "path": "packages/core/src/index.ts",
+          "sha256": "bbed35f40f47d50364fb1f1b15e09ca6ca4ce7bb3c8d69952c9665439be34580"
+        },
+        {
+          "path": "packages/core/src/library/track-name.ts",
+          "sha256": "4ce9cc5eeaeae461c2812a1ddbc127e04888c6b587e12dfc9e406e70b827b462"
+        },
+        {
+          "path": "packages/core/src/errors/app-error.ts",
+          "sha256": "9dda4aeb158118e6c4ea902485f126c7d3aa9f38c08af67b0f439c992e2ba43e"
+        },
+        {
+          "path": "packages/core/src/download/download-queue.ts",
+          "sha256": "219bc655c259973f08dbe0f0fd2244d7559480d09444dfcc80f7c205f30bde72"
+        },
+        {
+          "path": "packages/core/src/download/download-history.ts",
+          "sha256": "476bd46eb214d80224e57a4c862ff7a7d8cc0b56726b5bb9895c13555de6845f"
+        },
+        {
+          "path": "packages/core/src/models/track.ts",
+          "sha256": "e08560223fdfc9dc4bbff619c206fac5ec1c71c4d3c211c37388463475cd52d7"
+        },
+        {
+          "path": "packages/core/src/music-source/plugin.ts",
+          "sha256": "c594d641189504e8dade3fd9411e47cb86fc4cc8a36170b61d733dc22b545c86"
+        },
+        {
+          "path": "packages/core/src/library/models.ts",
+          "sha256": "9500c12ad4198624f93ae34069a12d3af6dee5c643c2237b271fb592a31ffc3e"
+        },
+        {
+          "path": "packages/core/src/library/material-collection.ts",
+          "sha256": "cba13b7130d4b993b4c315eecfdabd9fe25a1f4ea10844884d54f5ab0c19c8c5"
+        },
+        {
+          "path": "packages/core/src/library/favorites.ts",
+          "sha256": "b7d7c626e477ce187bc5e1ea6339c1f5d040522fa32c31a5c8c68228064ca471"
+        },
+        {
+          "path": "packages/core/src/library/segment-recipe.ts",
+          "sha256": "8e405edc59a51da0e40c3aae587607f1af686843a758c3e7a7157dd090b462f9"
+        },
+        {
+          "path": "packages/audio-composition/src/index.ts",
+          "sha256": "e80425e13d95ef1d61ec88897bec8255d40a68d350a3dbcb41826d21bbc5ab38"
+        },
+        {
+          "path": "packages/audio-composition/src/models.ts",
+          "sha256": "050ad5fec92bc2a18151b74e155d18ba1b6471b70556b8fb911480eb0964602c"
+        },
+        {
+          "path": "packages/audio-composition/src/segment-recipe.ts",
+          "sha256": "07c7cd93665f4aa639962652173252ae41d00c16b15417e80736b894eb943f64"
+        },
+        {
+          "path": "packages/audio-composition/src/virtual-playback-plan.ts",
+          "sha256": "c11c42cf16537636b3b943398a162c8476363740e066719456e9d972035169dc"
+        },
+        {
+          "path": "packages/audio-composition/src/virtual-audio-preload.ts",
+          "sha256": "9c7970bcdb5834a8b8372003cb0ea22f05509b9a8573ec3fa9f5f82eb7393282"
+        },
+        {
+          "path": "packages/core/src/music-source/policies.ts",
+          "sha256": "770f19554ffd3025626454e6d83ba9f68badea3434381b0f50c401f475e34a59"
+        },
+        {
+          "path": "packages/core/src/player/normalize-progress.ts",
+          "sha256": "2b4afcbec4d075547f60172d61d706552bd971de699a546fbcb5f409bb134b73"
+        },
+        {
+          "path": "packages/utils/src/index.ts",
+          "sha256": "dc6a6654cd22c697e8d4eeab59af262a1d5672e630284223b1105baa5db63bd5"
+        },
+        {
+          "path": "packages/utils/src/number/clamp.ts",
+          "sha256": "c991ffa6dd6c69054605448a5704f3c44f02812ccc0a6af6a6db082a405c4eb5"
+        }
+      ],
+      "detail": "Transpiled static imports only; this is separate from production build evidence."
+    },
+    "workspaceNote": "Other chats changed unrelated workspace tests during verification. Two root build attempts failed on transient theme/B11 audit-test type errors; those inputs were corrected or removed outside this repair. The final root build, including complete workspace typechecking, succeeds. The scoped metadata graph remained unchanged after the fix."
+  },
+  "declaredStatus": {
+    "claim": "Source roots are lightweight, URL imports are rejected locally against exact scopes, successful lazy modules are reused and failed imports permit retry.",
+    "references": [
+      "packages/plugin-source-bilibili/AGENTS.md:4",
+      "packages/plugin-source-bilibili/AGENTS.md:6",
+      "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:56",
+      "packages/core/src/music-source/plugin.ts:13"
+    ],
+    "evidenceLimit": "Shared descriptor and injected lazy-adapter acceptance only. Real GM/Rust transports and actual browser dynamic-import caching are not accepted."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "changes": [
+    {
+      "path": "packages/plugin-source-bilibili/src/url-parser.ts",
+      "detail": "After URL construction, require a matching descriptor origin and pathname prefix before parsing resource identity. This reuses the lightweight metadata rather than duplicating domain or transport policy. The existing unsupported-url message and malformed-URL cause are preserved."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/test/url-parser.test.ts",
+      "detail": "41 permanent cases cover six supported targets, normalization/query/fragment/default HTTPS ports, unsupported resources and deceptive/undeclared origins, both loaded and lazy plugin preflight, zero HTTP/runtime loads on rejection, lazy accepted listings and successful runtime reuse with included credentials after rejection."
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "evidence": [
+        "packages/plugin-source-bilibili/src/url-parser.ts:3",
+        "packages/plugin-source-bilibili/src/descriptor.ts:1"
+      ],
+      "detail": "The source package remains the sole preflight owner and imports its lightweight local descriptor. Exports and dependency manifests are unchanged. Root lint boundary checks pass."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "evidence": [
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/metadata-graph.json",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/lazy-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/target-tests.log"
+      ],
+      "detail": "Root static graph still contains 23 files and zero external runtime dependencies. Metadata does not load protocol implementations. Existing shared-import retry/concurrency tests pass; accepted listing creation and rejected URL handling do not load the runtime."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "evidence": [
+        "packages/plugin-source-bilibili/src/url-parser.ts:22",
+        "packages/plugin-source-bilibili/test/url-parser.test.ts:1",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/target-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/workbench-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/ui-tests.log"
+      ],
+      "detail": "HTTP/FTP/non-default ports and deceptive/undeclared paths are rejected before any lazy or loaded listing/HTTP work. Six supported resource kinds, default 443, queries/fragments and normalization retain their behavior. Direct workbench and UI validation tests pass. Source pagination/cursor and real transport acceptance remain outside this repair."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "evidence": [
+        "packages/plugin-source-bilibili/src/url-parser.ts:17",
+        "packages/plugin-source-bilibili/src/url-parser.ts:27",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/target-tests.log"
+      ],
+      "detail": "Malformed URL input still carries invalid-input with its TypeError cause; undeclared URLs use unsupported-url. No persistence, ephemeral media or credential storage changed. The injected HTTP recovery test retains credentials: include."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "evidence": [
+        "packages/plugin-source-bilibili/test/url-parser.test.ts:1",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/regression-before-fix.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/target-tests.log"
+      ],
+      "detail": "The new owner regression suite first failed with 13 failures/28 passes before the implementation repair, then all 41 cases passed. All 47 source tests and 41 direct-neighbor tests pass. Existing failed audit evidence remains historical; no captureDate or maintained contract was changed."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B10-B01",
+      "severity": "P2",
+      "status": "resolved",
+      "owner": "B10 / packages/plugin-source-bilibili/src/url-parser.ts",
+      "title": "URL preflight accepts origins excluded by the descriptor",
+      "trigger": "Import http://www.bilibili.com/video/BV1xx411c7mD/ or ftp://www.bilibili.com/video/BV1xx411c7mD/ or https://www.bilibili.com:444/video/BV1xx411c7mD/; equivalent space.bilibili.com upload URLs reproduce the same issue.",
+      "cause": "The source parser compares URL.hostname only. Neither its exported parser nor LazyMusicSourcePlugin.importFromUrl enforces URL.origin against descriptor.importUrlScopes.",
+      "effect": "Public plugin validation succeeds and creates a listing carrying a URL outside the declared import scope. The workbench final preflight calls this validator; UI immediate feedback applies stricter exact-origin rules, so the two layers disagree. This is a local contract/validation defect; no arbitrary target transport, credential leak or real UI/network exploit is asserted.",
+      "evidence": [
+        "packages/plugin-source-bilibili/src/descriptor.ts:10",
+        "packages/plugin-source-bilibili/src/url-parser.ts:20",
+        "packages/plugin-source-bilibili/src/url-parser.ts:25",
+        "packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts:60",
+        "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts:161",
+        "packages/ui/src/components/music-sources/source-input-validation.ts:21",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/b10-descriptor-audit.probe.test.ts:79",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/probe.log"
+      ],
+      "reproduction": {
+        "expected": "All six inputs outside the declared exact origins throw unsupported-url before a listing or runtime load.",
+        "observed": "All six return normally from lazy importFromUrl; the six toThrow assertions fail.",
+        "testExitCode": 1
+      },
+      "suggestedNextAction": "Retain the permanent exact-origin/path and loaded/lazy preflight regression coverage. Continue with the independent Bilibili session audit after checking the fixed-file hashes; no further B10-B01 repair is pending.",
+      "resolution": {
+        "resolvedAt": "2026-10-21T10:56:06.472Z",
+        "implementation": "packages/plugin-source-bilibili/src/url-parser.ts:22",
+        "tests": "packages/plugin-source-bilibili/test/url-parser.test.ts:1",
+        "detail": "Descriptor exact-origin and path checks now precede resource parsing for both plugin preflight paths. The reported six rejection cases and valid HTTPS/default-port counterparts pass."
+      }
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "pass",
+      "metadataGraph": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/metadata-graph.json",
+      "commands": [
+        {
+          "command": "pnpm lint",
+          "startedAt": "2026-10-21T18:49:42.4509766+08:00",
+          "finishedAt": "2026-10-21T18:49:46.6227479+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-lint.log"
+        }
+      ],
+      "detail": "Scoped metadata graph and repository dependency/isolation/mobile/lint checks pass. Full lint initially caught a helper-scoping warning in the new test; it was fixed before the final source-suite/lint run. A warning observed in a concurrently authored theme test is unrelated to these two files."
+    },
+    "tests": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/plugin-source-bilibili test",
+          "startedAt": "2026-10-21T18:49:42.5828844+08:00",
+          "finishedAt": "2026-10-21T18:49:46.1476679+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/target-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-center exec vitest run test/music-sources/lazy-music-source-plugin.test.ts",
+          "startedAt": "2026-10-21T18:48:08.9007625+08:00",
+          "finishedAt": "2026-10-21T18:48:10.3831515+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/lazy-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/music-sources/use-music-source-workspace.test.ts",
+          "startedAt": "2026-10-21T18:48:08.9211677+08:00",
+          "finishedAt": "2026-10-21T18:48:14.6934174+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/workbench-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/ui exec vitest run test/components/music-sources/source-input-validation.test.ts",
+          "startedAt": "2026-10-21T18:48:08.9170874+08:00",
+          "finishedAt": "2026-10-21T18:48:10.3466368+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/ui-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-source-bilibili --filter @any-music/plugin-center typecheck",
+          "startedAt": "2026-10-21T18:51:21.1354688+08:00",
+          "finishedAt": "2026-10-21T18:51:33.7208155+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/source-typecheck.log"
+        },
+        {
+          "command": "pnpm test",
+          "startedAt": "2026-10-21T18:48:25.0423734+08:00",
+          "finishedAt": "2026-10-21T18:49:48.7587755+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-test.log"
+        }
+      ],
+      "targetedCounts": {
+        "source": 47,
+        "lazy": 5,
+        "workbench": 32,
+        "ui": 4,
+        "total": 88
+      },
+      "redBeforeGreen": {
+        "command": "pnpm --filter @any-music/plugin-source-bilibili exec vitest run test/url-parser.test.ts",
+        "exitCode": 1,
+        "passed": 28,
+        "failed": 13,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/regression-before-fix.log",
+        "timeEvidence": "Vitest timestamp is retained in the log; separate shell timestamps were not captured for this initial reproduction."
+      },
+      "detail": "Root pnpm test completed successfully, including package tests, Tauri Rust workspace tests and TS/Rust differential protocol checks. Source/plugin-center targeted typechecks pass. These are offline tests, not browser or native product playback acceptance."
+    },
+    "artifact": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm build:userscript",
+          "startedAt": "2026-10-21T18:50:37.4010355+08:00",
+          "finishedAt": "2026-10-21T18:50:48.7129261+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/userscript-build.log"
+        },
+        {
+          "command": "pnpm build:tauri",
+          "startedAt": "2026-10-21T18:50:37.4088395+08:00",
+          "finishedAt": "2026-10-21T18:53:38.4115941+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/tauri-build.log"
+        },
+        {
+          "command": "pnpm build",
+          "startedAt": "2026-10-21T18:57:06.6816071+08:00",
+          "finishedAt": "2026-10-21T19:00:50.11201+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-build.log"
+        }
+      ],
+      "detail": "Both explicit production app builds and the final aggregate root build pass, including complete workspace typechecking and the Tauri native release binary. Builds use the existing explicit target/features commands. No application was launched; runtime playback remains unverified."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "No browser/application inspection was requested. No website recapture, GM/Rust product playback or actual network behavior is claimed."
+    },
+    "rootGates": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "pnpm test",
+          "startedAt": "2026-10-21T18:48:25.0423734+08:00",
+          "finishedAt": "2026-10-21T18:49:48.7587755+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-test.log"
+        },
+        {
+          "command": "pnpm typecheck",
+          "startedAt": "2026-10-21T18:48:25.0982178+08:00",
+          "finishedAt": "2026-10-21T18:50:19.3587253+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-typecheck.log"
+        },
+        {
+          "command": "pnpm lint",
+          "startedAt": "2026-10-21T18:49:42.4509766+08:00",
+          "finishedAt": "2026-10-21T18:49:46.6227479+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-lint.log"
+        },
+        {
+          "command": "pnpm format:check",
+          "startedAt": "2026-10-21T18:48:25.094517+08:00",
+          "finishedAt": "2026-10-21T18:48:31.4010814+08:00",
+          "exitCode": 1,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-format.log"
+        },
+        {
+          "command": "pnpm build",
+          "startedAt": "2026-10-21T18:57:06.6816071+08:00",
+          "finishedAt": "2026-10-21T19:00:50.11201+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-build.log"
+        }
+      ],
+      "detail": "Root test, typecheck, lint and final build exit 0. The final root build reruns complete workspace typechecking after unrelated concurrent test corrections/cleanup. Root format:check retains 12 pre-existing documentation issues unchanged relative to HEAD; all four current repair source/test/report/ledger files pass formatting. No fully green root-gate claim because of that formatting debt.",
+      "formattingDebt": {
+        "checkedAt": "2026-10-21T18:50:12.2424223+08:00",
+        "count": 12,
+        "workingTreeChanges": [],
+        "fileHashes": [
+          {
+            "path": "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+            "sha256": "ae08a106e26a89a0a57bf3353e2fbeac9b72b55ea55b8b0e4e652f2326d657a1"
+          },
+          {
+            "path": "docs/en/desktop/README.md",
+            "sha256": "8c728a6a2ffa96f41ace381241aa3f27cd9be821f7c53a152387a5c09915ff8d"
+          },
+          {
+            "path": "docs/en/desktop/backend-engineering.md",
+            "sha256": "a140ffb5a4ed91334ab5f31380e1cda4089ead612a3fd97e3298f7115d82ea61"
+          },
+          {
+            "path": "docs/en/desktop/douyin-background-login-experiment.md",
+            "sha256": "b0be90cbeb4ee1bcc16448e7bd9da1cf99874983108afa9471be8a53c3d22600"
+          },
+          {
+            "path": "docs/en/desktop/runtime-architecture.md",
+            "sha256": "a9fd56637726264708d533f34eba2e883139185e4fa9cc4375fc94ade2463b95"
+          },
+          {
+            "path": "docs/en/desktop/rust-workspace-plan.md",
+            "sha256": "87d2d2c36d32aa5800c86cd127b428a6bb3027a9896696a758c715965e90665c"
+          },
+          {
+            "path": "docs/zh-cn/桌面端/Rust工作区规划.md",
+            "sha256": "a1dca0c60551ffc2f3e9bd6e1a6aea1b59f851f383561ebad8e495364b278df2"
+          },
+          {
+            "path": "docs/zh-cn/桌面端/后端工程规范.md",
+            "sha256": "2b22c8c7cf7cc783e6435d75b8312cd71f352cfdf515cdc9d338c18eadc78d82"
+          },
+          {
+            "path": "docs/zh-cn/桌面端/抖音后台登录试验.md",
+            "sha256": "45787b6e8b4f39e16c0057af49235f116ad6f00e844384046b1f02f56858d75b"
+          },
+          {
+            "path": "docs/zh-cn/桌面端/文档索引.md",
+            "sha256": "b37f853d428e62b24b16461aabf252da9e198e15589149b614ecf87fdde1c15a"
+          },
+          {
+            "path": "docs/zh-cn/桌面端/运行端架构.md",
+            "sha256": "40c1459221268cbba27f24a4a1254af91abde69f6c115eb2e28e0cf5179a6b56"
+          },
+          {
+            "path": "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+            "sha256": "5e9ef7a9caccb1b969c6566f1b78f53df198c856e8d2567cf46fbb26e901e4ad"
+          }
+        ]
+      },
+      "transientBuildFailure": {
+        "command": {
+          "command": "pnpm build",
+          "startedAt": "2026-10-21T18:48:59.1581838+08:00",
+          "finishedAt": "2026-10-21T18:50:07.0269255+08:00",
+          "exitCode": 2,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-build-initial.log"
+        },
+        "reason": "A concurrently added theme test imported a type missing from the UI root; other workspace activity corrected that import before the second root build. No theme code or test was modified by this repair."
+      },
+      "resolvedConcurrentAuditTestFailure": {
+        "command": {
+          "command": "pnpm build",
+          "startedAt": "2026-10-21T18:52:39.9744618+08:00",
+          "finishedAt": "2026-10-21T18:54:46.1473366+08:00",
+          "exitCode": 2,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/root-build-audit-tests.log"
+        },
+        "path": "apps/userscript/test/platform/dom/b11-launcher.audit.test.ts",
+        "lines": [18, 43],
+        "code": "TS1294",
+        "reason": "Concurrent temporary audit test uses TypeScript syntax rejected by erasableSyntaxOnly; outside B10 production changes.",
+        "status": "removed-outside-this-repair-before-successful-root-build"
+      }
+    },
+    "records": {
+      "result": "pass",
+      "validation": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/records-validation.json",
+      "formatLog": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor-fix/changed-files-format.log",
+      "detail": "References/line numbers, 25 scoped hash entries and ledger/history checked. Formatting is limited to the two source/test files and the current B10 report/ledger; unchanged documentation-format debt is retained separately."
+    }
+  },
+  "unreadPaths": [
+    "packages/plugin-source-bilibili/src/bilibili-api.ts, wbi-signature.ts, types.ts, track-mappers.ts, media-quality.ts implementations",
+    "Bilibili session/search/pagination/media bodies not part of this preflight chain",
+    "All packages/plugin-source-douyin implementation and tests",
+    "Actual built-in runtime loaders and GM/Rust composition"
+  ],
+  "missingEvidence": [
+    "Real browser/GM/Rust operation acceptance remains unperformed.",
+    "The other nine B10 source/function candidates remain unaudited.",
+    "Root formatting retains 12 pre-existing documentation issues; no fully green root-gate claim."
+  ],
+  "dependencies": [
+    {
+      "owner": "B11",
+      "item": "Userscript build-known source runtime loader and GM bindings."
+    },
+    {
+      "owner": "B12",
+      "item": "Tauri build-known source runtime loader, native account HTTP and cancellation."
+    },
+    {
+      "owner": "B04",
+      "item": "Managed registry generations, disable/re-enable and stale task/media authority; only lazy import/iteration is accepted here."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B10-bilibili-session-shared",
+    "parentBatch": "B10",
+    "runtime": "shared",
+    "status": "pending",
+    "question": "Trace Bilibili session checking through injected HTTP: request count, error/login semantics and retry, without expanding into search, listing, media or runtime transports.",
+    "allowedPaths": [
+      "packages/plugin-source-bilibili/src/bilibili-plugin.ts (getSession only)",
+      "packages/plugin-source-bilibili/src/bilibili-api.ts (getNav and directly used request/error helpers)",
+      "Matching package tests; one core session/error/HTTP contract as needed"
+    ],
+    "excluded": [
+      "Product fixes and permanent tests",
+      "Other source operations, Douyin, GM/Rust/browser transports",
+      "Live browser/application inspection, commit and push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "packages/plugin-source-bilibili/AGENTS.md",
+      ".agents/skills/music-source-adapter/SKILL.md"
+    ],
+    "continuation": "Reuse B10-bilibili-descriptor-shared-fix.json after checking scoped hashes. B10-B01 is resolved with permanent regression coverage. Session/request-count/error/retry behavior remains unaudited; descriptor evidence does not establish source pagination or GM/Rust runtime acceptance."
+  },
+  "handoff": "B10-B01 is resolved; the descriptor/preflight/lazy subbatch is conformant and pass-scoped. The repair reuses descriptor scope metadata and adds 41 permanent regression cases. All 88 target/neighbor tests, scoped and root typechecks, root tests/lint, explicit app builds and the final aggregate root build pass. Two transient failures from unrelated concurrent audit tests were corrected/cleaned up outside this repair before the successful final build; their logs remain historical. Root formatting still fails on 12 unchanged documentation files. Real runtime acceptance and the other nine B10 candidates remain unreviewed. Check scoped hashes before reuse."
+}

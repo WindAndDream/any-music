@@ -1,0 +1,35 @@
+{
+  "method": "Vue Node custom renderer; TrackCardGrid with TrackCardSummary slots; standard density, one mobile column; no browser, CSS layout, image decode or timing",
+  "samples": [
+    {
+      "count": 0,
+      "slotScopes": 0,
+      "hostElements": 2,
+      "releasedScopes": 0
+    },
+    {
+      "count": 1,
+      "slotScopes": 1,
+      "hostElements": 11,
+      "releasedScopes": 1
+    },
+    {
+      "count": 80,
+      "slotScopes": 80,
+      "hostElements": 812,
+      "releasedScopes": 80
+    },
+    {
+      "count": 1000,
+      "slotScopes": 1000,
+      "hostElements": 10166,
+      "releasedScopes": 1000
+    },
+    {
+      "count": 10000,
+      "slotScopes": 10000,
+      "hostElements": 101666,
+      "releasedScopes": 10000
+    }
+  ]
+}

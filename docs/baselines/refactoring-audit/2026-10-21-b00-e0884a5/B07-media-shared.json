@@ -1,0 +1,319 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B07-media-shared",
+  "parentBatch": "B07",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T07:30:28.275Z",
+  "scope": {
+    "invariant": "The session-owned media reader must return only validated requested bytes through injected bounded HTTP, bound request fanout and suppress results after cancellation or disposal.",
+    "allowedPaths": [
+      "packages/music-workbench/src/media",
+      "packages/music-workbench/test/media",
+      "packages/music-workbench/src/runtime/http.ts and workbench-runtime.ts (HTTP injection only)",
+      "packages/music-workbench/src/features/player/native-compatible-audio.ts:431-492 and virtual-audio-buffer-loader.ts:86-160 (direct Range consumers only)",
+      "packages/core/src/ports/http-client.ts (public contract only)",
+      "Installed mediabunny src/source.ts (CustomSource callback, worker and cache contracts only)"
+    ],
+    "excluded": [
+      "Full player startup/fallback/seek/MSE state machines",
+      "Downloads, queue scheduling, deduplication and export/encoding orchestration",
+      "GM/IPC/Rust/native media grants, account/proxy and file-save implementations",
+      "Source resolution protocols, external-plugin authority and mobile acceptance",
+      "Product fixes, permanent test changes, live UI, commit, push or publication"
+    ],
+    "budgetNote": "Reviewed three media implementations, two existing test files, HTTP injection/port contracts, root/manifest/config metadata and excerpts from two direct consumers. The installed dependency was inspected to distinguish its two callback workers and cache limit from HTTP subrequest fanout. No second independent feature chain was expanded."
+  },
+  "baseline": {
+    "reference": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-baseline.json",
+    "head": "c38a2479d669ca788ddac958a3b19cd08223817b",
+    "targetWorkingTree": "music-workbench is clean before and after audit; temporary probe removed. Unrelated contribution-registry source/test edits and B06 report files appeared during the audit and were preserved without review.",
+    "existingChangesPreserved": [
+      "Modified summary.json",
+      "Untracked B05-music-sources-shared.json",
+      "Untracked B05-music-sources-shared-baseline.json"
+    ],
+    "environment": {
+      "os": "Windows",
+      "node": "v24.11.1",
+      "pnpm": "10.23.0",
+      "vitest": "4.1.11",
+      "timezone": "Asia/Shanghai"
+    },
+    "hashValidation": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/final-input-check.json"
+  },
+  "declaredStatus": [
+    {
+      "claim": "B07 requires bounded Range reads, cancellation/retry and resource lifetime evidence; its media, player, downloads, audio-export and runtime wiring candidates are separate subbatches.",
+      "reference": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:112",
+      "assessment": "Only B07-media-shared was inspected; no block-level acceptance."
+    },
+    {
+      "claim": "Native streaming precedes Range/MSE, with complete reads as the final playback fallback; runtime-specific transport evidence remains independent.",
+      "reference": "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:110",
+      "assessment": "Not accepted in this batch: complete startup ordering and MSE ownership belong to B07-player; native/GM transport is unreviewed."
+    }
+  ],
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Does shared media have one owner and consume only declared shared/browser dependencies?",
+      "evidence": [
+        "packages/music-workbench/AGENTS.md:3",
+        "packages/music-workbench/package.json:6",
+        "packages/music-workbench/src/media/range-media-source.ts:1",
+        "packages/music-workbench/src/media/resolved-media-loader.ts:1"
+      ],
+      "detail": "Both readers and their matching tests live in music-workbench, with core and the browser codec declared dependencies. No runtime app, GM, Tauri, Node or host-fetch import is present in the inspected media module. This is a local import review, not a whole production dependency-graph acceptance."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Is HTTP injected, and are media codecs excluded from the inspected workbench root entry?",
+      "evidence": [
+        "packages/music-workbench/src/index.ts:1",
+        "packages/music-workbench/src/runtime/http.ts:5",
+        "packages/music-workbench/src/runtime/workbench-runtime.ts:49",
+        "packages/music-workbench/src/media/range-media-source.ts:138"
+      ],
+      "detail": "runtimeHttpClient delegates to configured WorkbenchRuntime.http; the root does not statically import either media reader or Mediabunny. Range codec construction occurs in the explicit media subpath. Transitive root graph and failed dynamic-import retry are outside this subbatch."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Are Range bytes verifiable, fanout bounded and cancelled sessions prevented from publishing?",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:57",
+        "packages/music-workbench/src/media/range-media-source.ts:80",
+        "packages/music-workbench/src/media/range-media-source.ts:104",
+        "packages/music-workbench/src/media/resolved-media-loader.ts:33",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts:30",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.log"
+      ],
+      "detail": "Seven supplemental expectations fail across three confirmed P2 findings: unbounded eager chunk fanout/no sibling cancellation in the reader, acceptance of unverifiable 206 ranges and byte delivery after cancellation/disposal. Coalesced size probes, one-only redirected-URL retry and full-read pre-cancellation pass. Existing tests additionally cover per-request bounds/headers, small complete-response reuse, backup selection and forwarding disposal to HTTP."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Does the inspected shared layer retain transport/account authority behind injected ports?",
+      "evidence": [
+        "packages/music-workbench/src/runtime/http.ts:5",
+        "packages/music-workbench/src/runtime/workbench-runtime.ts:49",
+        "packages/music-workbench/src/media/range-media-source.ts:144",
+        "packages/music-workbench/src/media/resolved-media-loader.ts:37",
+        "packages/core/src/ports/http-client.ts:19"
+      ],
+      "detail": "Requests use bytes, explicit include for built-ins and omit for the existing custom-* branch, response byte limits, timeouts and the portable cancellation contract. No raw account credentials or storage writes occur in these readers. Native enforcement and actual GM/Rust cancellation/limits are unknown; the custom-* branch is not evidence of supported S15 external media."
+    },
+    {
+      "criterion": "C6",
+      "result": "fail",
+      "question": "Do owner tests provide matching behavioral evidence for the selected contract?",
+      "evidence": [
+        "packages/music-workbench/test/media/range-media-source.test.ts:30",
+        "packages/music-workbench/test/media/resolved-media-loader.test.ts:19",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/target-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/typecheck.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.log"
+      ],
+      "detail": "The two existing files pass 7/7 and workbench typecheck passes. The corrected supplemental probe passes 3/10 and fails 7/10, revealing gaps in the original suite. Probe source/logs are retained locally and its temporary repository file was removed. No product implementation or permanent test was changed."
+    }
+  ],
+  "callChain": [
+    {
+      "stage": "Entry/consumer",
+      "evidence": [
+        "packages/music-workbench/src/features/player/native-compatible-audio.ts:448",
+        "packages/music-workbench/src/features/player/virtual-audio-buffer-loader.ts:115"
+      ],
+      "detail": "Two direct consumers construct a session-scoped Mediabunny Input using createRangeMediaSource and a cancellation signal; failure paths dispose Input. Full player control flow was not reviewed."
+    },
+    {
+      "stage": "Business owner",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:183",
+        "packages/music-workbench/src/media/range-media-source.ts:52",
+        "packages/music-workbench/src/media/range-media-source.ts:57"
+      ],
+      "detail": "CustomSource owns the session reader with a 16 MiB codec cache. getSize coalesces a one-byte Range probe; reads split into 2 MiB HTTP requests. Small HTTP 200 probe results are reused in session memory."
+    },
+    {
+      "stage": "Injected port",
+      "evidence": [
+        "packages/music-workbench/src/runtime/http.ts:5",
+        "packages/core/src/ports/http-client.ts:24"
+      ],
+      "detail": "Media requests delegate to runtime.http; adapter is responsible for honoring byte caps, timeout and cancellation. The owning GM/Rust adapter was not followed."
+    },
+    {
+      "stage": "Return/cancel",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:67",
+        "packages/music-workbench/src/media/range-media-source.ts:83",
+        "packages/music-workbench/src/media/range-media-source.ts:104",
+        "packages/music-workbench/src/media/resolved-media-loader.ts:46"
+      ],
+      "detail": "Range assembly and full-file fallback return bytes. dispose aborts the signal, but post-settlement result validation and cache invalidation are incomplete. Caller-level stale playback takeover has not been demonstrated."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "fail",
+      "detail": "Local owner/import/call-chain review confirms the three findings. All 16 captured source/config/dependency inputs remained unchanged."
+    },
+    "tests": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/media",
+          "exitCode": 0,
+          "startedAt": "2026-10-21T07:23:09.6696980Z",
+          "finishedAt": "2026-10-21T07:23:11.2923118Z",
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/target-tests.log",
+          "result": "2 files, 7 tests pass."
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench typecheck",
+          "exitCode": 0,
+          "startedAt": "2026-10-21T07:23:09.6946438Z",
+          "finishedAt": "2026-10-21T07:23:20.7689660Z",
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/typecheck.log",
+          "result": "vue-tsc passes; no implementation changes followed."
+        },
+        {
+          "command": "pnpm --filter @any-music/music-workbench exec vitest run test/media/b07-media-audit.probe.test.ts --reporter=verbose",
+          "exitCode": 1,
+          "startedAt": "2026-10-21T07:27:08.5046359Z",
+          "finishedAt": "2026-10-21T07:27:10.3780855Z",
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.log",
+          "result": "10 supplemental scenarios: 3 pass, 7 assertion failures. Vitest ran successfully; trailing pnpm recursive-exec wrapper text saying vitest was not found does not describe the actual test execution."
+        }
+      ],
+      "harnessNote": "An initial probe mistakenly returned a mock from beforeEach; Vitest treated it as teardown and produced extra hook failures. The hook was corrected to return nothing, and all reported results use the clean rerun. Superseded log is retained as probe-initial-harness.log."
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "No public export/dependency/production source changes; consumer builds, emitted graphs and root B21 gates are outside this audit."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "This task did not explicitly request browser/application inspection. GM and Rust runtime behavior remains unaccepted."
+    }
+  },
+  "findings": [
+    {
+      "id": "B07-M01",
+      "severity": "P2",
+      "status": "open",
+      "title": "Range reads fan out every chunk before any result, without a reader-owned concurrency bound",
+      "owner": "packages/music-workbench/src/media/range-media-source.ts",
+      "criterion": "C3",
+      "trigger": "A decoder requests a large byte interval; read(0, 32 MiB) is the deterministic reproduction.",
+      "effect": "The loop starts ceil(intervalBytes / 2 MiB) requests immediately: 16 requests before any settlement in the probe. The per-request 2 MiB cap and codec 16 MiB cache do not limit aggregate in-flight bytes or request count. If one fails, the reader does not cancel siblings; downstream Input disposal can terminate them, so a production leak beyond consumer cleanup is not established.",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:63",
+        "packages/music-workbench/src/media/range-media-source.ts:67",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts:44",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts:61",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.log"
+      ],
+      "suggestedNextAction": "Use a reader-owned bounded chunk scheduler with cancellation of the failed read group. Preserve chunk order and per-response byte limits; test large spans, out-of-order completion, failure stopping new work and cancellation. Do not interpret Mediabunny's two callback workers as an HTTP chunk limit."
+    },
+    {
+      "id": "B07-M02",
+      "severity": "P2",
+      "status": "open",
+      "title": "206 range validation accepts missing or internally contradictory Content-Range",
+      "owner": "packages/music-workbench/src/media/range-media-source.ts",
+      "criterion": "C3",
+      "trigger": "read(10,14) receives four bytes with HTTP 206 and either no Content-Range or Content-Range: bytes 10-99/50.",
+      "effect": "Both responses are returned successfully. responseStart is optional, and the declared end/total are never checked in requestRange. Bytes whose requested identity cannot be verified may reach the decoder as if they were the correct interval; playback/decode corruption or unnecessary fallback is possible. No real upstream server exhibiting these responses was tested.",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:104",
+        "packages/music-workbench/src/media/range-media-source.ts:106",
+        "packages/music-workbench/src/media/range-media-source.ts:230",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts:30",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts:37",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.log"
+      ],
+      "suggestedNextAction": "Parse a required complete Content-Range for 206 responses and validate safe integer start/end/total, requested interval and body length; bind total to the known probe size as appropriate. Reject malformed/missing/mismatched ranges with media-range-invalid."
+    },
+    {
+      "id": "B07-M03",
+      "severity": "P2",
+      "status": "open",
+      "title": "Cancellation does not reject settled HTTP results or disposed-reader cached bytes",
+      "owner": "packages/music-workbench/src/media (RangeMediaReader and loadResolvedMediaFile)",
+      "criterion": "C3",
+      "trigger": "HTTP has already fulfilled, then abort/dispose occurs synchronously before the reader await continuation; alternatively dispose after a successful small complete-response probe and read its cache.",
+      "effect": "Range reads and complete-file loading still fulfill with bytes after cancellation; a disposed reader also serves cached bytes. This does not require an HTTP adapter to ignore cancellation: its promise was fulfilled before abort. The reader has no post-await cancellation check and dispose does not clear cached bytes. The probe establishes a media-port lifecycle violation; it does not prove that a higher-level player or exporter lacks its own freshness guard.",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:61",
+        "packages/music-workbench/src/media/range-media-source.ts:80",
+        "packages/music-workbench/src/media/range-media-source.ts:153",
+        "packages/music-workbench/src/media/resolved-media-loader.ts:33",
+        "packages/music-workbench/src/media/resolved-media-loader.ts:46",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts:78",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts:86",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts:94",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.log"
+      ],
+      "suggestedNextAction": "Reject reads at entry and after asynchronous transport settlement when the session is cancelled; check before returning cached bytes, and release session caches on dispose. Add cancellation-before-continuation and disposed-cache regressions without relying only on transport abort notifications."
+    }
+  ],
+  "unreadPaths": [
+    "B07-player: ordinary native/Range/MSE/complete-fallback ordering, latest seek ownership, custom leaf budgets and release semantics",
+    "B07-downloads: singleton manager per runtime, queue failures/retry, cancellation and repeated-asset deduplication",
+    "B07-audio-export: lazy encoder, full pipeline, memory budgets, URL/grant release and controlled saving",
+    "B07-userscript-media-wiring: GM credentials/limits/abort, metadata and actual installed-script evidence",
+    "B07-tauri-media-wiring: native account-bound grants, HTTP/Range/IPC cancellation and save dialogs"
+  ],
+  "missingEvidence": [
+    "No production artifact/consumer graph was rebuilt.",
+    "No GM, Rust, device or live playback acceptance.",
+    "No complete media-startup or custom-song prefetch acceptance.",
+    "Same-reader rejected sizePromise recovery and error-cause aggregation were observed but not behaviorally accepted; review during the scoped fix or a later media continuation.",
+    "No claim that malformed responses occur on current source CDNs, or that lower-level late results replace newer playback."
+  ],
+  "dependencies": [
+    {
+      "batch": "B07-player",
+      "question": "Verify upper-level freshness checks and disposal after read failures, plus startup/seek/MSE and bounded leaf behavior."
+    },
+    {
+      "batch": "B11 / B07-userscript-media-wiring",
+      "question": "Prove the GM adapter honors include/omit, limits and cancellation in its own runtime."
+    },
+    {
+      "batch": "B12 / B07-tauri-media-wiring",
+      "question": "Prove Rust account-bound media grants, request cancellation and byte/Range delivery independently."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B07-media-shared-fix",
+    "runtime": "shared",
+    "question": "In a separately requested fix, address B07-M01/M02/M03 only, convert local probes into permanent owner regressions and preserve this failing audit baseline.",
+    "allowedPaths": [
+      "packages/music-workbench/src/media",
+      "packages/music-workbench/test/media",
+      "B07 audit reports and ledger"
+    ],
+    "stopRule": "Do not expand to player, downloads, export or runtime implementations; unresolved integration questions remain assigned to their own batches."
+  },
+  "handoff": {
+    "summary": "B07-media-shared has three open P2 findings and is violating/needs-fix. Original 7 tests and typecheck pass, while 7 of 10 corrected supplemental expectations fail. The shared injection boundary and bounded per-request options are present, but aggregate fanout, exact 206 validation and post-cancellation delivery are incomplete. All 16 hashed inputs remain unchanged and this audit changed no product files. Unrelated contribution-registry edits and B06 report files appeared concurrently and were preserved. Other five B07 candidates, production artifacts and both runtime acceptances remain unreviewed.",
+    "savedProbe": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media/probe.test.ts",
+    "reproduction": "Copy saved probe to packages/music-workbench/test/media/b07-media-audit.probe.test.ts; run the exact probe command above; remove only that temporary file afterward.",
+    "temporaryProbeRemoved": true
+  }
+}

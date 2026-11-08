@@ -1,0 +1,19 @@
+{
+  "documentType": "ui-runtime-acceptance-consistency",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R3",
+  "status": "passed",
+  "artifactSha256": "c944e1c9518b25e193a7aab9ebc35400b604df8970ad7ced4f7ff5906b907134",
+  "recordedProductionInputs": 606,
+  "changedInputs": [],
+  "observationHashMismatches": [],
+  "privacyFindings": [],
+  "brokenDocumentationLinks": [],
+  "rootChecks": {
+    "test": 0,
+    "typecheck": 0,
+    "lint": 0,
+    "format": 0,
+    "build": 0
+  }
+}

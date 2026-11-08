@@ -1,0 +1,94 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-authority-storage-tauri",
+  "capturedAt": "2026-10-21T21:30:53.0212823+08:00",
+  "recordedAt": "2026-10-21T13:40:22.441Z",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "initialWorkingTree": [
+    " M apps/tauri/src-tauri/src/network/http.rs",
+    " M apps/tauri/src/platform/native-http.ts",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204S15\\345\\267\\245\\345\\205\\267\\344\\270\\216\\346\\241\\214\\351\\235\\242\\344\\272\\244\\344\\273\\230.md\"",
+    " M packages/plugin-vm/engine/profile.json",
+    " M packages/plugin-vm/src/profile-identity.ts",
+    " M packages/plugin-vm/src/profile.ts",
+    "?? apps/tauri/src-tauri/src/network/http/",
+    "?? apps/tauri/test/fixtures/native-http-response.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? packages/plugin-vm/test/profile.test.ts"
+  ],
+  "sourceHashes": [
+    {
+      "path": "apps/tauri/AGENTS.md",
+      "sha256": "b824b3579a0783c66ef8feeed8d235e4303167486fbeec46a980fb57d95518fa"
+    },
+    {
+      "path": "apps/tauri/src-tauri/AGENTS.md",
+      "sha256": "84aca77100c43018f388b0d4e9d139f79c6e9aed82ae1a40cb7ffa072a90259e"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/storage/plugins.rs",
+      "sha256": "8b9cb58ebbb42119cae1c74b139af7c2e5d9e9281f18b5e3c67cd044ae9a04fd"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/storage/plugins/tests.rs",
+      "sha256": "511ce0f1e3b88ce236f16ceaa5cb70e27e834b2857e5d7aa089b9548ca2ea7f1"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/plugins.rs",
+      "sha256": "2b0369646cf81524daa32e5297b944059bb7a6784c22510fe98cb24fb606e6c4"
+    },
+    {
+      "path": "apps/tauri/src-tauri/Cargo.toml",
+      "sha256": "97f0e00eba58dff07c5722447e482240c3a4f84e5c92b1f99d7914b670e90137"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/model.rs",
+      "sha256": "39019af1c04b3472b6e275193c9031a2724e0e2ce94a7a5bc5814744b7ef9e09"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/authority.rs",
+      "sha256": "c5b0cf7d7d9f9da3ef3c9f7ea6f3ec5ff4d0dbd6c3130cf0c83c700755a0a96e"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "53212780b8821b735b6fd386c3edff8713c73827ba57a173d93f1fa53bd6f273"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "3e9da041cf8d454d57c4fb0bbe0d5f72c424739f9d213abcc6a0db4087ce7f13"
+    }
+  ],
+  "environment": {
+    "os": "Windows",
+    "shell": "PowerShell",
+    "timezone": "Asia/Shanghai",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+    "pnpm": "10.23.0"
+  },
+  "previousEvidence": {
+    "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "matchingInputs": 14,
+    "openFindingIds": ["B14-R01"],
+    "assessment": "Runtime-port evidence remains valid; its expiry-order finding is not repaired by this storage audit."
+  }
+}

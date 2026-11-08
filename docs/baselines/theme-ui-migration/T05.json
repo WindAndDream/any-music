@@ -1,0 +1,635 @@
+{
+  "batchId": "T05",
+  "status": "complete",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "scope": "Classic source/search/catalog presentation extraction, stable UI editing and pagination admission; no source protocol or native transport changes.",
+  "workspaceBefore": "T05-workspace-before.json",
+  "moves": "T05-moves.json",
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "concurrentChanges": [
+      "T06 classic library/queue/history/download presentation",
+      "T07 ordinary settings and global overlays",
+      "Existing native download work"
+    ],
+    "preservation": "No reset, revert, commit or push. Direct caller integration follows current public ports. Root commands and artifacts describe the shared worktree, not an isolated T05 checkout.",
+    "verificationAttribution": "Commands record the worktree at their individual execution times. Later concurrent specialist/T08 edits are outside this T05 delivery; the measured artifacts correspond to T05-root-build.txt."
+  },
+  "ownership": {
+    "theme-default": [
+      "32 moved catalog/source/filter/ordinary-dialog components",
+      "ClassicCatalog full-root adapter and presentation composable",
+      "Scoped classic catalog styles and moved component tests"
+    ],
+    "ui": [
+      "Public /catalog headless interactions and controlled presentation contract",
+      "Stable pagination admission in the owning editing session",
+      "Neutral track row/grid/image primitives and protected request-account UI retained"
+    ],
+    "music-workbench": [
+      "Stable request/media/controller ownership retained",
+      "Application-injected catalog component composition",
+      "Real controller/iterator cancellation, race and remount tests"
+    ],
+    "applications": [
+      "Build-known catalog injection in both existing renderer composition functions"
+    ],
+    "plugin-ui-vue": [
+      "Partial-presentation test now exercises neutral grid/row directly; classic pagination is tested with its moved owner"
+    ]
+  },
+  "coverage": {
+    "catalogView": "implemented using readonly UiThemeFeatureMap.catalog and named actions",
+    "definitionAdmission": "Still rejects incomplete required coverage; full-root production selection remains T11",
+    "pageAdmission": "Retained by request-scoped editing session; listeners are view-scoped",
+    "liveAcceptance": "Not performed; requires explicit T13 request"
+  },
+  "commands": [
+    {
+      "command": "pnpm --filter @any-music/theme-default --filter @any-music/ui --filter @any-music/music-workbench test",
+      "exitCode": 1,
+      "log": "T05-baseline-tests.txt",
+      "note": "Initial shared worktree had settings files moving concurrently; old test path failed.",
+      "logSha256": "b7228458c898f6284f2106e4fbbb3d5fd8cd77f1fc243f92341855aa765bf80f"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default exec vitest run test/components/music-sources/CatalogDrawer.test.ts test/components/music-sources/CatalogDrawer.activity.test.ts test/components/music-sources/CatalogDrawerList.test.ts test/components/music-sources/CatalogTrackFilterPanel.test.ts test/components/music-sources/CatalogTrackActionsDialog.test.ts test/components/music-sources/catalog-selection-markup.test.ts",
+      "exitCode": 0,
+      "log": "T05-catalog-regressions.txt",
+      "files": 6,
+      "tests": 48,
+      "logSha256": "05e2c8938466b2b6e2a33ac4b9b22681e5d1dcdd5614bf82b9c23ec98f7dd6bb"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default exec vitest run test/components/music-sources/ClassicCatalog.test.ts",
+      "exitCode": 0,
+      "log": "T05-root-tests.txt",
+      "files": 1,
+      "tests": 3,
+      "logSha256": "839431e265c8cde68c5cddaeff6bb0db0408070cc8b07bbcaa82dcdc466667f3"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/use-workbench-controller.test.ts",
+      "exitCode": 0,
+      "log": "T05-controller-tests.txt",
+      "files": 1,
+      "tests": 8,
+      "logSha256": "bc4dd8146e93d8c06e3416c6b0e96768a61008637166e19c7afb86970fedf379"
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-ui-vue exec vitest run test/trusted/presentation.test.ts",
+      "exitCode": 0,
+      "log": "T05-presentation-tests.txt",
+      "logSha256": "e130fc72326b523b43e1777d6b225576a1fed0556060b6895e114ed76dfb6900"
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T05-root-test-4.txt",
+      "repairedAttempts": ["T05-root-test.txt", "T05-root-test-final.txt", "T05-root-test-3.txt"],
+      "logSha256": "068778af97761aca0af553e0a53581e0de7b07c14c154fa3056d71ac60de14ff"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T05-root-typecheck-4.txt",
+      "repairedAttempts": [
+        "T05-root-typecheck.txt",
+        "T05-root-typecheck-final.txt",
+        "T05-root-typecheck-3.txt"
+      ],
+      "logSha256": "285948eb40c275eae395fbb75dc1cb52de4a5b20ad5a32756d47979c34f729a7"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T05-root-build.txt",
+      "note": "Both production renderer builds and Windows release executable completed. Existing Tauri large-chunk and userscript plugin timing notices retained.",
+      "logSha256": "04f96a685d1411e88bf792191d6cffc322d9ec7b4f2bbaccfdf75798318242e3"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T05-lint-delivery.txt",
+      "repairedAttempts": ["T05-root-lint.txt", "T05-root-lint-final.txt"],
+      "logSha256": "fbae28b3f80cc22ededab034205b88c1e7fef972d695369c60fba9158bfa4f49"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T05-format-delivery-final.txt",
+      "repairedAttempts": [
+        "T05-format-initial.txt",
+        "T05-format-latest.txt",
+        "T05-format-delivery.txt"
+      ],
+      "note": "Formatting-only integration over concurrently updated files preserves parsed values/behavior.",
+      "logSha256": "c0afd772ecf0405be7e5633d89cdefecf158a4e6acf90c0556613f11bee1c886"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "log": "T05-format-closed.txt",
+      "repairedAttempts": ["T05-format-confirmation.txt"],
+      "note": "After the passing T05 snapshot, concurrent work added theme-studio sources and a T06 final-audit file. Latest whole-worktree formatting recheck fails on those subsequent files; T05 implementation/source verification remains the recorded snapshot.",
+      "logSha256": "ca55552d8b32ddf07d248e52bc87fff52a94ae07499516bb77a1f11a14f0e63b"
+    }
+  ],
+  "artifacts": {
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 4774107,
+      "sha256": "92b60a871d4f07d58b690332e376265d0efd34d66c351b1130186a644afd0454"
+    },
+    "windowsRelease": {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 28334592,
+      "sha256": "af50c2e0b7547ad11e08c3e08abab600e64c370c2f25023b6141bb615119fabc"
+    },
+    "tauriFrontend": {
+      "path": "apps/tauri/dist",
+      "files": 67,
+      "bytes": 2843926
+    },
+    "attribution": "Current shared worktree with concurrent T06/T07 and existing native download changes; not an isolated T05 size comparison. Build completion does not establish live acceptance."
+  },
+  "remaining": [
+    "T06/T07 independently owned prerequisite/integration closure; this T05 delivery does not mark those batches complete.",
+    "T08 specialist coverage, T09/T10 independent Studio, T11 production full-root cutover, T12 cleanup.",
+    "T13 explicit live inspection: actual layout/focus/scroll, installed GM transport and Tauri/native playback/saving; no live/browser/device acceptance performed.",
+    "Later concurrent theme-studio/T06 file formatting is failing the post-delivery whole-worktree check; see postDeliveryWorktreeCheck. The earlier T05 five-gate snapshot remains recorded."
+  ],
+  "noCommitOrPush": true,
+  "noProductUiLaunch": true,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "testRuntime": "Node component/logic, offline boundary/VM checks, Cargo tests and protocol checks; no product UI"
+  },
+  "testSummary": {
+    "vitestFiles": 284,
+    "vitestTests": 2087,
+    "rustTests": 229,
+    "rustIgnored": 1,
+    "protocolCases": 183,
+    "themePackage": {
+      "files": 49,
+      "tests": 347
+    },
+    "uiPackage": {
+      "files": 61,
+      "tests": 329
+    },
+    "workbenchPackage": {
+      "files": 54,
+      "tests": 386
+    },
+    "targetedControllerTests": 8
+  },
+  "integrationRepairs": [
+    "Moved catalog source/test/style import references follow their new owner; partial-presentation tests use neutral row/grid directly.",
+    "Settings dialog mock and layout source assertions follow concurrently moved T07/T05 files.",
+    "Fixed removeSelected naming alignment in concurrent ClassicTrackCollection component/composable; no library behavior change.",
+    "Stable pagination admission avoids repeat same-page requests after remount; old scroll listeners still clean up.",
+    "Batch confirmation now rechecks request context even when two requests contain the same track IDs."
+  ],
+  "completedAt": "2026-10-23T19:41:13.235749+00:00",
+  "timezone": "Asia/Shanghai",
+  "completionConditions": {
+    "classicCatalogCoverage": "Source selection/search/import/list context/paging/filters/batch/ordinary-track dialogs extracted; full-root catalog adapter registered.",
+    "businessOwnership": "Requests/cancellation/source/account identity, filter predicates and media resolution remain in current host/headless owners.",
+    "remountContinuity": "Real controller + classic views retain pending iterator, cross-page selection and unfinished filter, with request count/order/max concurrency and no additional media resolution.",
+    "cancellationAndRaces": "Explicit retry cancels the old iterator; late old page is rejected. Source invalidation cancels a pending page across root replacement.",
+    "automatedDelivery": "Five root gates passed; both renderer builds and Windows release artifact recorded.",
+    "productionAdmission": "Complete-root production selection remains T11; incomplete required coverage continues to fail admission."
+  },
+  "nextBatch": "T06 independent integration closure",
+  "files": [
+    {
+      "path": ".agents/skills/any-music-ui-delivery/SKILL.md",
+      "sha256": "29a9c656f8f85a0edb5c94fecd70c8042a1d66167ff809c42d2de70cce192664"
+    },
+    {
+      "path": "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "sha256": "ea64d28dacaad593d26f9bd9986868945d1efd74dbe2f8e82b58c12a30774c29"
+    },
+    {
+      "path": "apps/userscript/src/platform/configure-userscript-workbench.ts",
+      "sha256": "09da0c7dd51bd377b66869e4eca6c686b7f985c8ec2673aa436ef3e1475ebae6"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md",
+      "sha256": "efc2ff2395fb53815d5862f062818243be1613f968f26537d35f4ca74319cb2f"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "sha256": "aa9bfe6ee9c84309c57e240307f5fd93ef567924dc3bca40986076c04af2b4d1"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/project-architecture.md",
+      "sha256": "4517ade9c1b83ed9791feeb1b46a4ba8317fe9f8166fbbb6da1985402a619748"
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "sha256": "41f944460136bf561e790e4c3d0e90eb3ac8e3c285e93591928ce45c6efe4fb5"
+    },
+    {
+      "path": "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+      "sha256": "ebf37c5691ab41718799b753e1804b474379be39a9c9a97031c7f8fb5d3524b7"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+      "sha256": "15844c2cd8c731865b8f3f6a52887ce83bb6f2909abbf72b6e91a4bc0ec3859f"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "sha256": "761f12b145efe2623d1204325402a6c4fa44e98922416c76fdfc05e5fc2db27c"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "sha256": "a1bf5496b65a51f0c6cafeed81f49a32c12f7daaddabc3d69b4b28d898a3c19a"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md",
+      "sha256": "d396da4b677e6b52cfd8a12fdf7e2f7999c9f8ebca0df92d79afa57c2dcf7d06"
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/项目架构.md",
+      "sha256": "491d38e00fb4892c90f0dcfc52b8453f8c5d94451d690127c06c86fc2fcf8313"
+    },
+    {
+      "path": "packages/music-workbench/src/components/music-sources/MusicWorkbenchPresentation.vue",
+      "sha256": "6bb54b7c6c971957f60aa12250a4d723c240830dec36ec40be385c88c0e5bd59"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "sha256": "e22d940132feeb33e9ea57b84cddec0e759c240502c8871c7544b9ace9bc9acb"
+    },
+    {
+      "path": "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts",
+      "sha256": "d17abb0420e89fd117f2e82d1a1cd2013e1f42ae800c26546db93c43b7fe4aff"
+    },
+    {
+      "path": "packages/music-workbench/test/features/workbench/use-workbench-controller.test.ts",
+      "sha256": "e610bb0a598c4049540fc599fcea8260c7e50d3ade58e94bb03c82b99bbd5e2b"
+    },
+    {
+      "path": "packages/plugin-ui-vue/test/trusted/presentation.test.ts",
+      "sha256": "e3304a0bbebebb2e9a45dd91b6cffc06ba987d7b9913488a433db9c1661d3268"
+    },
+    {
+      "path": "packages/theme-default/AGENTS.md",
+      "sha256": "f1984046e0e59b299998cd2d777e1d32910fc2d7570ec8997cfd17b21f74a308"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogContextDetailsDialog.vue",
+      "sha256": "635cd1076f7c844a14a02d2eb8060defa6d8498e972183103b020440c203000f"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogContextTitle.vue",
+      "sha256": "264478f9088c0a3847954cd44e2953a5a572e0005cced41611c6c3e7b20b660f"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDisplayModeDialog.vue",
+      "sha256": "a736f16f6f4c0b7c68a4ed566b329bfd880c6723e3492cf5fb5e7fe21c7d8cb1"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawer.vue",
+      "sha256": "bfdc987d7bdc528b40b02d62d9c1ff49ff9ec552b204299feeb1a1591e2a1ebe"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+      "sha256": "60d2f540ac328b2540ead40aabc9243b3a09be01ec506ccd19fd49b4e71d939e"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerCard.vue",
+      "sha256": "01fbdaf7557d1ee7ec65b7c9517376769ebfc81ebb515dd8d6a7daa18b9dae3f"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerDetails.vue",
+      "sha256": "7c2648c965cdde493bdc3a8e3d56383ba31f1d88bca9f7bb8e537021499165a4"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerList.vue",
+      "sha256": "9397d90582d8b195550e29e1e81315e70cb1c97d14c6370ce433e198cdbcfc7a"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerListHeader.vue",
+      "sha256": "882ba572c3152a1de7d8ba134ee6ae05dbde1b5e2e8db1f90c6f12c3a8816278"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogDrawerOperatorPanel.vue",
+      "sha256": "7c435f3a3c73e9dfd80afa4194d2e74f094aac1c371c096e037f32c7f437a4fe"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogErrorDetails.vue",
+      "sha256": "c87bc3807b241db87cedfb788ee42fa98b6d9efa2f3c87fb155c55a992848132"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogErrorNotice.vue",
+      "sha256": "f64902b061fe03be6636ff3b68be52fb1bf53c869c5821a6b0ae40fae95c29cc"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterCalendar.vue",
+      "sha256": "a19b7b02a1af08a5d8ba46229964cb029d4b7fe947a844f6806a34c8b43e6598"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterDateControls.vue",
+      "sha256": "9deb0d464feaee55ac2a1e0c6d8d2e754174f5e987a5e7a7594d42e09dc34653"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterDateRange.vue",
+      "sha256": "84b8e195cdba7fda12892435b91c614ea9c4f52139ee024c40d30911acb97416"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterHistoryList.vue",
+      "sha256": "8985c602ac2ebcec42b663a5c0039ea284af82a5853fe7150aee3d38554f4950"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterPreview.vue",
+      "sha256": "db7fa74fbbc0669f6936fe3c21c03512f53ff9dad876479f245e88c325055290"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogFilterRangeList.vue",
+      "sha256": "26da295f5befc6804f8350c2cd7c5d31346c5e6ccc7408ce59aba7192cfbdcb2"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogHeadingHandle.vue",
+      "sha256": "11a101ed813250c5052bd9f8fe99c48525a7041261f148b31a35a0c2fffb3bf2"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogNamingFilterControls.vue",
+      "sha256": "4fd66eeefe126b14058f1ea6f05db937d7e441cba36b330bc1ce7a16c0cc2545"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogOperatorActions.vue",
+      "sha256": "1ab734b49222476e6f6157fca2242d2134b1e304c2000e07a511ff2e2432d2d8"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogPlaylistPickerDialog.vue",
+      "sha256": "bb0fc4e0bec7d3d3b5ad9fafbb7dacaf0db2d1bb97223c4cde4dcb4a4df638e3"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "sha256": "1618f6d95a0edb9b9a465fb4a5ff539be569621dc78230234b0abb221776d558"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackFilterEditor.vue",
+      "sha256": "857a6b4ecdd694d03163cce0746831e86ae7d6d0ede3cb5242f74b2a9d01861c"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackFilterPanel.vue",
+      "sha256": "1f9add49d67fa994b6a2edde490cd861ffb14bd711eba900e02e4c5fd9500bf6"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackFilterSummary.vue",
+      "sha256": "a8429b1f84015c2fe269f715696d161f233f88083ba32ce253b1413d883edbdb"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+      "sha256": "4b8fdecf72b9ff0acf24e1ff3a9787fb66a46b52599599f839263a86138c647f"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/ClassicCatalog.vue",
+      "sha256": "6968192acd4533d0b889751dd9ef8bfdc62fb90dbe421cf1379c0ff7551da25c"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/MusicSourcePickerButton.vue",
+      "sha256": "a231874ff4edaedddaa2f1801b7fc64f8b90caa98a6a119ff285d352fbb1b117"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/MusicSourcePickerDialog.vue",
+      "sha256": "9718aa7c46fc41e9b5b7d5ccb57ab7d8682d6da1b2e19181bdf2bf6b25c1c088"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/SourceToolbar.vue",
+      "sha256": "b55529c054fd45e414430d976da3e5150ab3ad9b67ea8a34c5333a052a68a2ba"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/TrackActionButton.vue",
+      "sha256": "098f4485144a09d027c3df73ebe5399e119be2c5b5a78fcd6a9ad40040c9b485"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/TrackList.vue",
+      "sha256": "76c8c46b699aca531c588f6bf90bc9ab622b43057d54ffc6074bb7454d5a9014"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/catalog-root-editing.ts",
+      "sha256": "36a37ef7b8a891e8660d437cea266f42dae3dfcdc1e28a3e006b3b2c91eff719"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/source-toolbar-state.ts",
+      "sha256": "64cdb8545763681775b99e5f807dc1bddf514fc939b4bf0f2d70eeabe4320151"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/use-classic-catalog.ts",
+      "sha256": "0a2ce2d2091a8d88efee8fddbad02c8d1102e7937a11a41315ecb58945ab5452"
+    },
+    {
+      "path": "packages/theme-default/src/styles/_catalog.scss",
+      "sha256": "ccb81e636c32dc777c3c1a027b31c88c8dbda8692920f60c4c4b408274aab8f9"
+    },
+    {
+      "path": "packages/theme-default/src/styles/index.scss",
+      "sha256": "a3e64223edf755b93f8797999d34235aa912cf755e340eb8a49f0e1a1dd51fa9"
+    },
+    {
+      "path": "packages/theme-default/src/vue.ts",
+      "sha256": "505b84b35b63fd3ac35739708ad29498758536dfe0d8f97d264e4435274c356b"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogContextDetailsDialog.test.ts",
+      "sha256": "9c4c459c0c94e5d5a864ea0c9e58bb0eac2aa3807f3ce4668e6167c56d89d5ac"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogContextTitle.test.ts",
+      "sha256": "18fca469f80f89619cd6e2383972514cbb9433030f19d00f3d65291e2be414f9"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogDrawer.activity.test.ts",
+      "sha256": "31d33c85e1f166d5038ceefdfa788c890477c1af00c48c1a2e3ed88470aba5a8"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogDrawer.test.ts",
+      "sha256": "a9d15ed4fcce1797c7682f5cb00e78fb73e21379917f739c7791fc54e6c6ccf3"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogDrawerActionsDialog.test.ts",
+      "sha256": "788313c84bc925543c705590b136d5d79578728e9ae50b90ea5fc90b1291c624"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogDrawerCard.test.ts",
+      "sha256": "b81df825c12d4ddcdd2f51edeb7bf73e9a836910a6946937567528c3bc61b0e1"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogDrawerList.test.ts",
+      "sha256": "cd89448a3864b24924497ff01620b4271325d90dbfd43f5724217a57482b0806"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogErrorDetails.test.ts",
+      "sha256": "00c83e2b9cc899ee8a8ca928ba3b56f0848bf820e583af820c157270ce6de7ce"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogErrorNotice.test.ts",
+      "sha256": "ab9e33d1391654585de346be6cd650b3fa4549a6c2360c0519871b9be54da48a"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogHeadingHandle.test.ts",
+      "sha256": "15f115306720fcfc0405a4a48fb4a937405341f56a42c939f2d26de95ed42957"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogTrackActionsDialog.test.ts",
+      "sha256": "b74340711f32cbcf4fa688119bc626c89b09304d358df779dcf3e4bac9b19ceb"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogTrackFilterEditor.test.ts",
+      "sha256": "9927522b361a90b58b78c8402c3f64200ddfa584d07d0f4c7495b060172d4fb3"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogTrackFilterPanel.test.ts",
+      "sha256": "413a99bc3c89fea58ece279e1cf02f03c8187882dac3b00f56fb4b26c10d4823"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/CatalogTrackOperatorPanel.test.ts",
+      "sha256": "308b3a3eb157c58a63ed070003ab878b55630f4ba6da05212f9f428a8d36b823"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/ClassicCatalog.test.ts",
+      "sha256": "f07ace6bc256825adb86418160cd584c214f143f0d779eeaac5374704e69e2b8"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/MusicSourcePickerDialog.test.ts",
+      "sha256": "c27bf09ff1ee5d10e44ff8f63b4e49298c208131f5524794e87228713cd824d2"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/catalog-selection-markup.test.ts",
+      "sha256": "efd033c595151ae84ed61aee894f4be85d56febe2f856c670d405786d871bdc4"
+    },
+    {
+      "path": "packages/theme-default/test/components/shell/ProductWorkbench.interactions.test.ts",
+      "sha256": "d2c271128c7e2a1eee2c7742b139605a87002d4c62c07615e2c7cbbb197071f7"
+    },
+    {
+      "path": "packages/theme-default/test/components/shell/ProductWorkbench.layout.test.ts",
+      "sha256": "ba1d5813aae93a65d51da38c8d85d73961d2ab176c77c7e4c3ced7d6f4f2fca0"
+    },
+    {
+      "path": "packages/theme-default/test/metadata.test.ts",
+      "sha256": "349ef06c2407beb50dc7bf430f30e99eeffd6ffe20852f56e99a6b005af53a1f"
+    },
+    {
+      "path": "packages/ui/AGENTS.md",
+      "sha256": "f4543a538b0f88b79afeaeb57df8c2b089e6e201bdbd42288b73fed2407fb510"
+    },
+    {
+      "path": "packages/ui/package.json",
+      "sha256": "aa2c731d64565116bb8efca89c62fc13c79835659cdaf12a88d3507d00c4832b"
+    },
+    {
+      "path": "packages/ui/src/catalog.ts",
+      "sha256": "53fc0ef1fd0c241e3163a57e7cf6ab7c7f3600a6bca914f76bb7689e26290629"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-scroll-page-loader.ts",
+      "sha256": "12a35d4c1ca2f9ce2f7471bed021f5dc0cbd4362760e721fab0547a903fa4ac1"
+    },
+    {
+      "path": "packages/ui/src/composables/music-sources/use-track-batch-actions.ts",
+      "sha256": "1f8736d456f06955cc39352a84b8d1ace53701468139e31c4c456d3b04553b10"
+    },
+    {
+      "path": "packages/ui/src/index.ts",
+      "sha256": "7a65649b67ffd5351291909ce253c725e8b31e81c797b8942a169dffbce3bab4"
+    },
+    {
+      "path": "packages/ui/src/product/catalog-presentation.ts",
+      "sha256": "fb8da79824ac074b44013af1c1aac7330f2aa564f8aacb3eb3c49758e223c6a7"
+    },
+    {
+      "path": "packages/ui/src/product/theme-features.ts",
+      "sha256": "121249a570c5bd3394c2b5b7d2b029166c024991a9006fb9b99f1216bdb623c0"
+    },
+    {
+      "path": "packages/ui/src/styles/_feature-panels.scss",
+      "sha256": "02d749d937fdff0e8144409c3fba6b70779481d992f28e131c8e4654c93b4f2a"
+    },
+    {
+      "path": "packages/ui/src/styles/_product-workbench.scss",
+      "sha256": "fdff1e06bd0650b45b0b0b0f4e93a5b284149d1a2dc9b901ca08b3835fbabc67"
+    },
+    {
+      "path": "packages/ui/src/theme.ts",
+      "sha256": "c8c92335965d4b7015245a4ecda84f757c23a40b21552e8eb891b8e890ac9b53"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-scroll-page-loader.test.ts",
+      "sha256": "8cbffb2f2e9d8cff6fc380ec8d067bdb76166af2255d78c27c0829e8d25bde36"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-track-batch-actions.test.ts",
+      "sha256": "8ab3691a2332d05283d0e52a0916c840fe2237463e6ba2a0cad01eebf685bcc2"
+    },
+    {
+      "path": "packages/ui/test/fixtures/themes/theme-features.ts",
+      "sha256": "1b695f3748895920a3a1c5691220784c8877516f683190d5a998a61124b4df11"
+    }
+  ],
+  "removedImplementationPaths": [
+    "packages/ui/src/components/music-sources/CatalogContextDetailsDialog.vue",
+    "packages/ui/src/components/music-sources/CatalogContextTitle.vue",
+    "packages/ui/src/components/music-sources/CatalogDisplayModeDialog.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawer.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawerCard.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawerDetails.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawerList.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawerListHeader.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawerOperatorPanel.vue",
+    "packages/ui/src/components/music-sources/CatalogErrorDetails.vue",
+    "packages/ui/src/components/music-sources/CatalogErrorNotice.vue",
+    "packages/ui/src/components/music-sources/CatalogFilterCalendar.vue",
+    "packages/ui/src/components/music-sources/CatalogFilterDateControls.vue",
+    "packages/ui/src/components/music-sources/CatalogFilterDateRange.vue",
+    "packages/ui/src/components/music-sources/CatalogFilterHistoryList.vue",
+    "packages/ui/src/components/music-sources/CatalogFilterPreview.vue",
+    "packages/ui/src/components/music-sources/CatalogFilterRangeList.vue",
+    "packages/ui/src/components/music-sources/CatalogHeadingHandle.vue",
+    "packages/ui/src/components/music-sources/CatalogNamingFilterControls.vue",
+    "packages/ui/src/components/music-sources/CatalogOperatorActions.vue",
+    "packages/ui/src/components/music-sources/CatalogPlaylistPickerDialog.vue",
+    "packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue",
+    "packages/ui/src/components/music-sources/CatalogTrackFilterEditor.vue",
+    "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue",
+    "packages/ui/src/components/music-sources/CatalogTrackFilterSummary.vue",
+    "packages/ui/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+    "packages/ui/src/components/music-sources/MusicSourcePickerButton.vue",
+    "packages/ui/src/components/music-sources/MusicSourcePickerDialog.vue",
+    "packages/ui/src/components/music-sources/SourceToolbar.vue",
+    "packages/ui/src/components/music-sources/TrackActionButton.vue",
+    "packages/ui/src/components/music-sources/TrackList.vue"
+  ],
+  "sharedIntegrationFiles": [
+    "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+    "packages/theme-default/src/composables/use-classic-track-collection.ts",
+    "packages/theme-default/test/components/library/ClassicLibrary.test.ts (format only)",
+    "packages/ui/src/product/specialist-presentation.ts (format only after a concurrent addition)"
+  ],
+  "postDeliveryWorktreeCheck": {
+    "command": "pnpm format:check",
+    "exitCode": 1,
+    "log": "T05-format-closed.txt",
+    "issues": [
+      "docs/baselines/theme-ui-migration/T06-final-audit.json",
+      "packages/theme-studio/package.json",
+      "packages/theme-studio/src/components/StudioFeatureStatus.vue",
+      "packages/theme-studio/src/components/player/StudioPlayer.vue",
+      "packages/theme-studio/src/components/shell/StudioNavigation.vue",
+      "packages/theme-studio/src/components/shell/StudioShell.vue",
+      "packages/theme-studio/src/vue.ts"
+    ],
+    "attribution": "These files appeared or changed after the recorded T05 checks. This task did not implement theme-studio or close other batches."
+  }
+}

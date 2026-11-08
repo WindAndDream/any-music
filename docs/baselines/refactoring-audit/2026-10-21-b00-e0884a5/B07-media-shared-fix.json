@@ -1,0 +1,328 @@
+{
+  "documentType": "audit-repair",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B07-media-shared-fix",
+  "parentBatch": "B07",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T07:58:14.118Z",
+  "scope": "Repair only B07-M01/M02/M03 in shared media and add permanent owner regressions; verify direct player/download/export consumers and repository gates. No runtime transport or native source implementation was changed by this repair.",
+  "historicalReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared.json",
+  "historicalBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-baseline.json",
+  "baseline": {
+    "before": {
+      "head": "844b5e35b0d6b152350c34043857e042170cbd61",
+      "capturedAt": "2026-10-21T15:37:45.2360754+08:00",
+      "files": [
+        {
+          "path": "packages/music-workbench/src/media/range-media-source.ts",
+          "sha256": "ba19991d9266aa02a3acfd44f521fafd9c3adb9add1de46f6206aa1a9267a35c"
+        },
+        {
+          "path": "packages/music-workbench/src/media/resolved-media-loader.ts",
+          "sha256": "7a4eda8311d5d89537868d5f0966acacfc07ef77569d2147fbe81dcdeb8e255b"
+        },
+        {
+          "path": "packages/music-workbench/test/media/range-media-source.test.ts",
+          "sha256": "86b4f1f50ba56e4c8fed73c76160dc07cd028cfa7f8f8512462a833d76782773"
+        },
+        {
+          "path": "packages/music-workbench/test/media/resolved-media-loader.test.ts",
+          "sha256": "8278c1a3bfe77b73b6f027caf35303b4ebe59b6a8b058af4ab9596cfb07363f3"
+        }
+      ]
+    },
+    "finalHead": "844b5e35b0d6b152350c34043857e042170cbd61",
+    "initialWorkingTree": [
+      "M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      " M packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+      " M packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared.json"
+    ],
+    "concurrentWork": "Unrelated B04/B05/B06 and runtime storage work changed HEAD and other files during this repair. Those edits and reports were preserved. Each gate records its own time and the final repair inputs are hashed; this is not repository-wide audit acceptance.",
+    "environment": {
+      "os": "Windows",
+      "node": "v24.11.1",
+      "pnpm": "10.23.0",
+      "timezone": "Asia/Shanghai"
+    },
+    "fileHashes": [
+      {
+        "path": "packages/music-workbench/src/media/range-media-source.ts",
+        "sha256": "94c0a40f228987b2e02534939113a14a6f434fda67f59c1525a6d285578d49b3"
+      },
+      {
+        "path": "packages/music-workbench/src/media/resolved-media-loader.ts",
+        "sha256": "9ecad045ef893ec3f9c804e04132853f2efefef9406049914c0816fb601ba0fe"
+      },
+      {
+        "path": "packages/music-workbench/test/media/range-media-source.test.ts",
+        "sha256": "8a627f7ef00b271185a0dfd779e42735d2eee7d437fdf2176d739832618013e4"
+      },
+      {
+        "path": "packages/music-workbench/test/media/resolved-media-loader.test.ts",
+        "sha256": "9a7ef415c8761100261b4713052cf596af8d7d7ddffffbeaca7807b160970f17"
+      },
+      {
+        "path": "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+        "sha256": "7dcbe68c54943dd0825b74fd7febdb8633ffc9ff5d6373bbcb464772b5da4af0"
+      },
+      {
+        "path": "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+        "sha256": "c62d83e2525a01c2d48ae0842b070ea666fce0b8607796e39968a71e66de2a43"
+      },
+      {
+        "path": "packages/music-workbench/package.json",
+        "sha256": "98a74b0beff51fe56c81f8ec2118eaea6ad138dd8a54b7024ae6a68c37775155"
+      },
+      {
+        "path": "packages/music-workbench/AGENTS.md",
+        "sha256": "1c73c5188fabf882082e7e2d08dfa7fe3f0abb03e5d926b11f96a203525c7d8f"
+      },
+      {
+        "path": "packages/music-workbench/src/runtime/http.ts",
+        "sha256": "9ac4d1224177da40f0c013b4995664749e6ebef850311ccdf0468d470b4b998a"
+      },
+      {
+        "path": "packages/core/src/ports/http-client.ts",
+        "sha256": "1631d32d2d260c747476dabeacbbc3d0a681d072e8877ad212df7f681927b0f7"
+      },
+      {
+        "path": "packages/core/src/music-source/plugin.ts",
+        "sha256": "c594d641189504e8dade3fd9411e47cb86fc4cc8a36170b61d733dc22b545c86"
+      }
+    ]
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "findings": [
+    {
+      "id": "B07-M01",
+      "severity": "P2",
+      "status": "resolved",
+      "change": "Three reader-wide slots cover all simultaneous reads and size probes. Each read uses bounded workers, writes chunks by byte offset and cancels its group before releasing a failed slot. Independent groups remain usable.",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:11",
+        "packages/music-workbench/src/media/range-media-source.ts:226",
+        "packages/music-workbench/test/media/range-media-source.test.ts:244",
+        "packages/music-workbench/test/media/range-media-source.test.ts:277",
+        "packages/music-workbench/test/media/range-media-source.test.ts:331",
+        "packages/music-workbench/test/media/range-media-source.test.ts:299"
+      ],
+      "validation": "32 MiB read completes with 16 requests and a peak of three, including reverse-order completions. Concurrent reads/probes share that budget; both transport and protocol failures cancel siblings, start no further chunks and permit another read."
+    },
+    {
+      "id": "B07-M02",
+      "severity": "P2",
+      "status": "resolved",
+      "change": "Require a complete safe-integer Content-Range for HTTP 206, exact requested start/end/body length and a consistent resource total. Apply the same validation to probes; clear rejected size promises for explicit retry.",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:189",
+        "packages/music-workbench/src/media/range-media-source.ts:358",
+        "packages/music-workbench/test/media/range-media-source.test.ts:141",
+        "packages/music-workbench/test/media/range-media-source.test.ts:180",
+        "packages/music-workbench/test/media/range-media-source.test.ts:198",
+        "packages/music-workbench/test/media/range-media-source.test.ts:223"
+      ],
+      "validation": "Missing, contradictory, mismatched, unknown-total and unsafe-integer headers reject. Truncated probe/read bodies and changing totals reject. Concurrent probes coalesce, and both protocol and transport failures allow a fresh probe."
+    },
+    {
+      "id": "B07-M03",
+      "severity": "P2",
+      "status": "resolved",
+      "change": "Check cancellation at entry, after transport and asynchronous operation settlement, and before returning bytes. External abort disposes the reader, clears size/byte caches and rejects queued work. Complete-file loading checks cancellation after HTTP settlement.",
+      "evidence": [
+        "packages/music-workbench/src/media/range-media-source.ts:69",
+        "packages/music-workbench/src/media/range-media-source.ts:132",
+        "packages/music-workbench/src/media/range-media-source.ts:213",
+        "packages/music-workbench/src/media/resolved-media-loader.ts:43",
+        "packages/music-workbench/test/media/range-media-source.test.ts:351",
+        "packages/music-workbench/test/media/range-media-source.test.ts:375",
+        "packages/music-workbench/test/media/range-media-source.test.ts:396",
+        "packages/music-workbench/test/media/resolved-media-loader.test.ts:97"
+      ],
+      "validation": "Settled-but-not-delivered range/probe/full-file responses reject after cancellation. Cached reads, queued work and redirected retries cannot continue after disposal. No transport request is sent for pre-cancelled full reads."
+    }
+  ],
+  "tests": {
+    "originalMediaTests": 7,
+    "newPermanentRegressions": 27,
+    "finalMediaTests": 34,
+    "finalConsumerTestFiles": 18,
+    "finalConsumerTests": 124,
+    "detail": "All 34 media tests and 124 selected media/player/audio-export/download tests pass. Existing native-compatible tests use real local MP3 fixture bytes and cover hedged CDN cancellation. Root pnpm test passes, including its selected Cargo/protocol checks; the Rust output retains one ignored test."
+  },
+  "checks": [
+    {
+      "criterion": "C1/C2",
+      "result": "pass",
+      "detail": "The same public media interfaces, package exports, runtime HTTP injection and dependencies remain in place. No new framework/runtime authority was introduced."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "detail": "All three findings have permanent behavioral regressions; the reader owns request slots, read-group cancellation, exact byte validation, retry and cache disposal."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "detail": "Built-in include and custom omit credentials, request headers, 1 MiB probe/2 MiB chunk caps and existing timeout budgets remain. Complete reads retain their 512 MiB/120-second budget. Runtime enforcement is not established by mocks."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "detail": "Tests mirror the media owner; both language architecture pages describe the actual limits and cancellation behavior. Root tests/typecheck/lint/build pass; pre-existing root formatting debt is reported separately."
+    }
+  ],
+  "verification": {
+    "commands": [
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/media --reporter=verbose",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T07:49:58.2748353Z",
+        "finishedAt": "2026-10-21T07:50:00.4462767Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/media-tests.log"
+      },
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/media test/features/player test/features/audio-export test/features/downloads",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T07:45:34.6966677Z",
+        "finishedAt": "2026-10-21T07:45:40.5777482Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/target-tests.log"
+      },
+      {
+        "command": "pnpm test",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T07:48:38.9361178Z",
+        "finishedAt": "2026-10-21T07:49:45.0549907Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/root-test.log"
+      },
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T07:53:37.5850274Z",
+        "finishedAt": "2026-10-21T07:54:56.2967648Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/root-typecheck.log"
+      },
+      {
+        "command": "pnpm lint",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T07:50:34.2737896Z",
+        "finishedAt": "2026-10-21T07:50:35.8810062Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/root-lint.log"
+      },
+      {
+        "command": "pnpm build",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T07:53:37.5727330Z",
+        "finishedAt": "2026-10-21T07:56:27.0656786Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/root-build.log"
+      },
+      {
+        "command": "pnpm build:userscript",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T07:52:21.3301409Z",
+        "finishedAt": "2026-10-21T07:52:36.7589775Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/userscript-build.log"
+      },
+      {
+        "command": "pnpm --filter @any-music/tauri build:frontend",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T07:52:21.3169454Z",
+        "finishedAt": "2026-10-21T07:52:27.9418827Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/tauri-frontend-build.log"
+      },
+      {
+        "command": "pnpm format:check",
+        "exitCode": 1,
+        "startedAt": "2026-10-21T07:52:21.3489841Z",
+        "finishedAt": "2026-10-21T07:52:26.0039074Z",
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b07-media-fix/root-format.log"
+      }
+    ],
+    "static": {
+      "result": "pass",
+      "detail": "Reviewed scheduler release/abort ordering, group failure isolation, all response validation paths, cache lifetime and public consumer compatibility. git diff --check passes for owned source/tests/docs."
+    },
+    "tests": {
+      "result": "pass"
+    },
+    "artifact": {
+      "result": "pass",
+      "detail": "Root production build, Userscript production build and Tauri frontend build pass. These are offline artifact checks, not live playback acceptance."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "Browser/application inspection was not explicitly requested; no product UI was launched."
+    },
+    "rootFormatting": {
+      "result": "fail",
+      "paths": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/en/desktop/README.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/en/desktop/runtime-architecture.md",
+        "docs/en/desktop/rust-workspace-plan.md",
+        "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "docs/zh-cn/桌面端/后端工程规范.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/桌面端/文档索引.md",
+        "docs/zh-cn/桌面端/运行端架构.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      ],
+      "unchangedAgainstHead": true,
+      "detail": "Only the listed pre-existing documentation-format debt remains; owned files are checked separately after report generation."
+    },
+    "supersededFailures": "Initial type-check failures in the new fixture/types were corrected. An initial storage test failure and Userscript storage type mismatch occurred during concurrent edits; subsequent root test/typecheck/build pass without this repair modifying storage. Superseded logs are retained locally."
+  },
+  "ownedChanges": [
+    "packages/music-workbench/src/media/range-media-source.ts",
+    "packages/music-workbench/src/media/resolved-media-loader.ts",
+    "packages/music-workbench/test/media/range-media-source.test.ts",
+    "packages/music-workbench/test/media/resolved-media-loader.test.ts",
+    "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+    "docs/zh-cn/跨平台/架构/音乐源插件架构.md"
+  ],
+  "limitations": [
+    "No live GM/Tauri/Android/iOS playback evidence.",
+    "Player startup/seek/custom leaf orchestration, download manager ownership/deduplication and export authority remain separate B07 candidates.",
+    "Complete-file failure-cause aggregation was not changed or accepted in this repair.",
+    "Repository root format:check remains failing on unchanged documentation; no overall project acceptance is claimed."
+  ],
+  "nextBatch": {
+    "batchId": "B07-player-shared",
+    "parentBatch": "B07",
+    "runtime": "shared",
+    "status": "pending",
+    "question": "Audit ordinary-track startup ordering from lightweight description through native streaming, Range/MSE and complete fallback, including cancellation during that operation.",
+    "allowedPaths": [
+      "packages/music-workbench/src/features/player/use-audio-player.ts",
+      "packages/music-workbench/src/features/player/native-compatible-audio.ts",
+      "Matching player tests and at most one direct injected source/media boundary"
+    ],
+    "excluded": [
+      "Custom-song prefetch and independent seek audits",
+      "Downloads/audio-export and runtime transport implementation audits",
+      "Product UI/live inspection, commit or push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "packages/music-workbench/AGENTS.md",
+      ".agents/skills/music-source-adapter/SKILL.md"
+    ],
+    "continuation": "Reuse B07-media-shared-fix.json after checking hashes. The three media findings are resolved; the other five B07 candidates remain unaudited. Do not infer GM/Rust acceptance from shared tests or production builds."
+  },
+  "handoff": "The three B07 media findings are resolved. Keep the original failing report/baseline as historical evidence. Continue with the bounded ordinary-track player audit only; the rest of B07 remains pending. No commit or push was performed."
+}

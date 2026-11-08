@@ -1,0 +1,39 @@
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+packages/music-workbench/src/components/music-sources/MusicWorkbenchPresentation.vue (325ms)
+packages/plugin-music-creation/src/vue/components/SegmentComposer.vue (160ms)
+packages/plugin-music-creation/src/vue/use-material-library-filters.ts (0ms)
+packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue (64ms)
+packages/plugin-tag-management/src/vue/use-tag-management-filters.ts (0ms)
+packages/theme-default/src/components/plugins/ClassicPlugins.vue (27ms)
+packages/theme-default/src/components/specialists/ClassicComposer.vue (15ms)
+packages/theme-default/src/components/specialists/ClassicTags.vue (25ms)
+packages/theme-default/src/components/specialists/MusicCreationPage.vue (452ms)
+packages/theme-default/src/components/specialists/TagManagementPage.vue (136ms)
+packages/theme-default/src/vue.ts (0ms)
+packages/theme-studio/package.json (0ms)
+packages/theme-studio/src/components/StudioFeatureStatus.vue (24ms)
+packages/theme-studio/src/components/catalog/StudioCatalog.vue (12ms)
+packages/theme-studio/src/components/catalog/StudioDrawerRail.vue (48ms)
+packages/theme-studio/src/components/catalog/StudioResults.vue (267ms)
+packages/theme-studio/src/components/catalog/StudioSearch.vue (61ms)
+packages/theme-studio/src/components/catalog/StudioTrackRow.vue (39ms)
+packages/theme-studio/src/components/catalog/use-studio-catalog.ts (0ms)
+packages/theme-studio/src/components/player/StudioPlayer.vue (157ms)
+packages/theme-studio/src/components/shell/StudioNavigation.vue (33ms)
+packages/theme-studio/src/components/shell/StudioShell.vue (22ms)
+packages/theme-studio/src/styles/index.scss (0ms)
+packages/theme-studio/src/vue.ts (0ms)
+packages/ui/src/product/specialist-presentation.ts (0ms)
+packages/ui/src/product/theme-features.ts (0ms)
+packages/ui/src/product/workbench-chrome.ts (0ms)
+packages/ui/src/theme.ts (0ms)
+packages/ui/test/fixtures/themes/theme-features.ts (0ms)
+
+Format issues found in above 29 files. Run without `--check` to fix.
+Finished in 3759ms on 1312 files using 12 threads.
+ ELIFECYCLE  Command failed with exit code 1.

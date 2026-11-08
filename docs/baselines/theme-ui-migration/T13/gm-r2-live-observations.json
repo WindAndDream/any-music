@@ -1,0 +1,4761 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R2",
+  "date": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "page": {
+    "samples": [
+      {
+        "label": "initial-cold-start",
+        "at": 1793029549001,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [""],
+        "tasks": [
+          {
+            "id": "选择下载任务 download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+            "text": "排序We Never (Remix) (若如初见)\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载"
+          },
+          {
+            "id": "选择下载任务 download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+            "text": "排序沧海恨水碧悠悠，至今已过百万秋…\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载"
+          },
+          {
+            "id": "选择下载任务 download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+            "text": "排序神总是忧郁的——《幻昼》降调版\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载"
+          }
+        ],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 0\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载\n排序神总是忧郁的——《幻昼》降调版\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载"
+      },
+      {
+        "label": "studio-two-active-one-queued",
+        "at": 1793029582443,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [""],
+        "tasks": [
+          {
+            "id": "选择下载任务 download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+            "text": "排序We Never (Remix) (若如初见)\n\n下载中\n\n正在解析素材：We Never (Remix) (若如初见)\n\n播放\n喜欢\n歌曲操作\n暂停"
+          },
+          {
+            "id": "选择下载任务 download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+            "text": "排序沧海恨水碧悠悠，至今已过百万秋…\n\n下载中\n\n正在解析素材：沧海恨水碧悠悠，至今已过百万秋…\n\n播放\n喜欢\n歌曲操作\n暂停"
+          },
+          {
+            "id": "选择下载任务 download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+            "text": "排序神总是忧郁的——《幻昼》降调版\n\n下载中\n\n等待继续下载\n\n播放\n喜欢\n歌曲操作\n暂停"
+          }
+        ],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 3\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n下载中\n\n正在解析素材：We Never (Remix) (若如初见)\n\n播放\n喜欢\n歌曲操作\n暂停\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n下载中\n\n正在解析素材：沧海恨水碧悠悠，至今已过百万秋…\n\n播放\n喜欢\n歌曲操作\n暂停\n排序神总是忧郁的——《幻昼》降调版\n\n下载中\n\n等待继续下载\n\n播放\n喜欢\n歌曲操作\n暂停"
+      },
+      {
+        "label": "classic-after-studio-switch",
+        "at": 1793029612380,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [""],
+        "tasks": [],
+        "text": "下载\n2\n并发\n·\n0\n已下载\n\n集中管理下载任务，支持暂停、继续与失败重试。\n\n全部\n3\n下载中\n3\n已暂停\n0\n已下载\n0\n下载失败\n0\n展示方式"
+      },
+      {
+        "label": "classic-stable-downloads",
+        "at": 1793029620360,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [],
+        "taskNodes": [],
+        "text": "下载\n2\n并发\n·\n0\n已下载\n\n集中管理下载任务，支持暂停、继续与失败重试。\n\n全部\n3\n下载中\n3\n已暂停\n0\n已下载\n0\n下载失败\n0\n展示方式\n播放 — · 弹幕 —\n播放 — · 弹幕 —\nWe Never (Remix) (若如初见)\n\n哔哩哔哩 · 我无记忆 · 3:10 · 正在解析素材：We Never (Remix) (若如初见)\n\n播放\n已喜欢\n下载中\n操作\n播放 — · 弹幕 —\n播放 — · 弹幕 —\n沧海恨水碧悠悠，至今已过百万秋…\n\n哔哩哔哩 · 易安不爱古风 · 2:58 · 正在解析素材：沧海恨水碧悠悠，至今已过百万秋…\n\n播放\n已喜欢\n下载中\n操作\n播放 — · 弹幕 —\n播放 — · 弹幕 —\n神总是忧郁的——《幻昼》降调版\n\n哔哩哔哩 · 瀟巅 · 2:31 · 等待继续下载\n\n播放\n已喜欢\n排队中\n操作"
+      },
+      {
+        "label": "studio-after-return",
+        "at": 1793029652620,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": ["studio"],
+        "taskNodes": [],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 3\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n下载中\n\n正在解析素材：We Never (Remix) (若如初见)\n\n播放\n喜欢\n歌曲操作\n暂停\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n下载中\n\n正在解析素材：沧海恨水碧悠悠，至今已过百万秋…\n\n播放\n喜欢\n歌曲操作\n暂停\n排序神总是忧郁的——《幻昼》降调版\n\n下载中\n\n等待继续下载\n\n播放\n喜欢\n歌曲操作\n暂停"
+      },
+      {
+        "label": "cancel-all-active-and-queued",
+        "at": 1793029675102,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [],
+        "taskNodes": [],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 3\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n已暂停\n\n已取消，可重新下载\n\n用户中止了本次下载。（错误码：AM-1005）\n\n播放\n喜欢\n歌曲操作\n继续\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载\n排序神总是忧郁的——《幻昼》降调版\n\n已暂停\n\n已取消，可重新下载\n\n用户中止了本次下载。（错误码：AM-1005）\n\n播放\n喜欢\n歌曲操作\n继续"
+      },
+      {
+        "label": "cancel-queued-only-before-admission",
+        "at": 1793029747857,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [],
+        "taskNodes": [],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 1\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n下载中\n\n正在解析素材：We Never (Remix) (若如初见)\n\n播放\n喜欢\n歌曲操作\n暂停\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n下载中\n\n正在解析素材：沧海恨水碧悠悠，至今已过百万秋…\n\n播放\n喜欢\n歌曲操作\n暂停\n排序神总是忧郁的——《幻昼》降调版\n\n已暂停\n\n已取消，可重新下载\n\n用户中止了本次下载。（错误码：AM-1005）\n\n播放\n喜欢\n歌曲操作\n继续"
+      },
+      {
+        "label": "failure-stays-failed-after-network-restored",
+        "at": 1793029856177,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [],
+        "taskNodes": [],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 1\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载\n排序神总是忧郁的——《幻昼》降调版\n\n下载失败\n\n已达到最大重试次数\n\n所有媒体节点均下载失败：无法连接音乐源，请检查网络或代理设置后重试。（错误码：AM-7001）\n\n播放\n喜欢\n歌曲操作\n重试下载"
+      },
+      {
+        "label": "final-retry-running",
+        "at": 1793029909350,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [],
+        "taskNodes": [],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 3\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n下载中\n\n正在解析素材：We Never (Remix) (若如初见)\n\n播放\n喜欢\n歌曲操作\n暂停\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n下载中\n\n正在解析素材：沧海恨水碧悠悠，至今已过百万秋…\n\n播放\n喜欢\n歌曲操作\n暂停\n排序神总是忧郁的——《幻昼》降调版\n\n下载中\n\n等待继续下载\n\n播放\n喜欢\n歌曲操作\n暂停"
+      },
+      {
+        "label": "final-running-observation",
+        "at": 1793029957804,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [],
+        "taskNodes": [],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 3\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n下载中\n\n正在解析素材：We Never (Remix) (若如初见)\n\n播放\n喜欢\n歌曲操作\n暂停\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n下载中\n\n正在解析素材：沧海恨水碧悠悠，至今已过百万秋…\n\n播放\n喜欢\n歌曲操作\n暂停\n排序神总是忧郁的——《幻昼》降调版\n\n下载中\n\n等待继续下载\n\n播放\n喜欢\n歌曲操作\n暂停"
+      },
+      {
+        "label": "final-batch-observation",
+        "at": 1793029987689,
+        "audioCount": 1,
+        "sameAudio": true,
+        "theme": [],
+        "taskNodes": [],
+        "text": "下载 2 并发\n全部\n下载中\n已暂停\n已下载\n下载失败\n全选匹配任务\n已选 3\n展示方式\n筛选歌曲\n暂停已选\n继续已选\n取消已选\n重试已选\n移除已选\n排序We Never (Remix) (若如初见)\n\n下载中 正在保存…\n\n歌曲文件已生成，等待批次保存\n\n播放\n喜欢\n歌曲操作\n暂停\n排序沧海恨水碧悠悠，至今已过百万秋…\n\n下载中 正在保存…\n\n歌曲文件已生成，等待批次保存\n\n播放\n喜欢\n歌曲操作\n暂停\n排序神总是忧郁的——《幻昼》降调版\n\n下载中\n\n正在解析素材：神总是忧郁的——《幻昼》降调版\n\n播放\n喜欢\n歌曲操作\n暂停"
+      }
+    ],
+    "media": [
+      {
+        "label": "before-playback-cases",
+        "at": 1793029932752,
+        "sameAudio": true,
+        "scheme": null,
+        "paused": true,
+        "position": 0,
+        "duration": null,
+        "readyState": 0,
+        "theme": "studio"
+      },
+      {
+        "label": "native-direct-first-sample",
+        "at": 1793030007896,
+        "sameAudio": true,
+        "scheme": "https",
+        "paused": true,
+        "position": 0,
+        "duration": null,
+        "readyState": 0,
+        "theme": "studio"
+      },
+      {
+        "label": "native-direct-playing-before-forced-fallback",
+        "at": 1793030008380,
+        "sameAudio": true,
+        "scheme": "https",
+        "paused": false,
+        "position": 0.007093,
+        "duration": 189.850313,
+        "readyState": 4,
+        "theme": "studio"
+      },
+      {
+        "label": "range-fallback-first-sample",
+        "at": 1793030011832,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": true,
+        "position": 0,
+        "duration": null,
+        "readyState": 0,
+        "theme": "studio"
+      },
+      {
+        "label": "range-fallback-playing",
+        "at": 1793030019938,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": false,
+        "position": 7.172771,
+        "duration": 177.911,
+        "readyState": 4,
+        "theme": "studio"
+      },
+      {
+        "label": "switch-away-from-range-case",
+        "at": 1793030053220,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": true,
+        "position": 0,
+        "duration": null,
+        "readyState": 0,
+        "theme": "studio"
+      },
+      {
+        "label": "latest-track-after-rapid-range-switch",
+        "at": 1793030055291,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": true,
+        "position": 0,
+        "duration": null,
+        "readyState": 0,
+        "theme": "studio"
+      },
+      {
+        "label": "dom-driven-rapid-switch-begin",
+        "at": 1793030085377,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": false,
+        "position": 29.112531,
+        "duration": 150.366,
+        "readyState": 4,
+        "theme": "studio"
+      },
+      {
+        "label": "dom-driven-rapid-switch-end",
+        "at": 1793030086083,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": true,
+        "position": 0,
+        "duration": null,
+        "readyState": 0,
+        "theme": "studio"
+      },
+      {
+        "label": "full-read-fallback-first-sample",
+        "at": 1793030090110,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": true,
+        "position": 0,
+        "duration": null,
+        "readyState": 0,
+        "theme": "studio"
+      },
+      {
+        "label": "full-read-fallback-playing",
+        "at": 1793030128384,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": false,
+        "position": 14.681732,
+        "duration": 150.366625,
+        "readyState": 4,
+        "theme": "studio"
+      },
+      {
+        "label": "latest-track-after-request-triggered-dom-switch",
+        "at": 1793030147399,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": false,
+        "position": 13.154774,
+        "duration": 177.911,
+        "readyState": 4,
+        "theme": "studio"
+      },
+      {
+        "label": "large-range-switch-pending",
+        "at": 1793030178928,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": true,
+        "position": 0,
+        "duration": null,
+        "readyState": 0,
+        "theme": "studio"
+      },
+      {
+        "label": "large-range-switch-latest-track",
+        "at": 1793030192977,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": false,
+        "position": 11.233575,
+        "duration": 177.911,
+        "readyState": 4,
+        "theme": "studio"
+      },
+      {
+        "label": "paused-before-cold-workbench-start",
+        "at": 1793030219721,
+        "sameAudio": true,
+        "scheme": "blob",
+        "paused": true,
+        "position": 37.350718,
+        "duration": 177.911,
+        "readyState": 4,
+        "theme": "studio"
+      }
+    ],
+    "final": {
+      "label": "paused-before-cold-workbench-start",
+      "at": 1793030219721,
+      "sameAudio": true,
+      "scheme": "blob",
+      "paused": true,
+      "position": 37.350718,
+      "duration": 177.911,
+      "readyState": 4,
+      "theme": "studio"
+    },
+    "host": {
+      "url": "http://127.0.0.1:18865/gm-r1.html",
+      "pageGm": "undefined",
+      "pageXhr": "undefined",
+      "hostScripts": [],
+      "productLocalStorageKeys": []
+    }
+  },
+  "storage": {
+    "samples": [
+      {
+        "label": "during-cdn-failure",
+        "at": 1793029834711,
+        "sequence": 972,
+        "batches": [
+          {
+            "id": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+            "status": "completed",
+            "concurrency": 2,
+            "startedAtMs": 1792914493814,
+            "completedAtMs": 1793029827000,
+            "archive": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 8838824
+            },
+            "items": [
+              {
+                "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+                "trackId": "bilibili:video:BV134Ho6qENu",
+                "title": "We Never (Remix) (若如初见)",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793029827000,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 8838824
+                },
+                "file": {
+                  "fileName": "We Never (Remix) (若如初见).mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4556981
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792910474509,
+                    "completedAtMs": 1792910582965,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1792911086182,
+                    "completedAtMs": 1792911206318,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1792914392848,
+                    "completedAtMs": 1792914461993,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1792914493857,
+                    "completedAtMs": 1792914609506,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029573509,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029738526,
+                    "completedAtMs": 1793029826897,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+                "trackId": "bilibili:video:BV1NXab6GEYA",
+                "title": "沧海恨水碧悠悠，至今已过百万秋…",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793029827000,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 8838824
+                },
+                "file": {
+                  "fileName": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4270726
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914493888,
+                    "completedAtMs": 1792914576369,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029573544,
+                    "completedAtMs": 1793029657747,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029712385,
+                    "completedAtMs": 1793029770597,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+                "trackId": "bilibili:video:BV1nsRFBBEeW",
+                "title": "神总是忧郁的——《幻昼》降调版",
+                "status": "failed",
+                "progressMessage": "已达到最大重试次数",
+                "errorCode": "media-unavailable",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12444147
+                },
+                "file": {
+                  "fileName": "神总是忧郁的——《幻昼》降调版.mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 3609475
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914576400,
+                    "completedAtMs": 1792914665561,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029657779,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029813053,
+                    "completedAtMs": 1793029813578,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029814392,
+                    "completedAtMs": 1793029815027,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029816570,
+                    "completedAtMs": 1793029817087,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029820126,
+                    "completedAtMs": 1793029820633,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "explicit-retry-all-three-after-failure",
+        "at": 1793029878357,
+        "sequence": 979,
+        "batches": [
+          {
+            "id": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+            "status": "running",
+            "concurrency": 2,
+            "startedAtMs": 1792914493814,
+            "archive": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 8838824
+            },
+            "items": [
+              {
+                "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+                "trackId": "bilibili:video:BV134Ho6qENu",
+                "title": "We Never (Remix) (若如初见)",
+                "status": "downloading",
+                "progressMessage": "正在解析素材：We Never (Remix) (若如初见)",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 8838824
+                },
+                "file": {
+                  "fileName": "We Never (Remix) (若如初见).mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4556981
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792910474509,
+                    "completedAtMs": 1792910582965,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1792911086182,
+                    "completedAtMs": 1792911206318,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1792914392848,
+                    "completedAtMs": 1792914461993,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1792914493857,
+                    "completedAtMs": 1792914609506,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029573509,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029738526,
+                    "completedAtMs": 1793029826897,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029877770,
+                    "status": "running"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+                "trackId": "bilibili:video:BV1NXab6GEYA",
+                "title": "沧海恨水碧悠悠，至今已过百万秋…",
+                "status": "downloading",
+                "progressMessage": "正在解析素材：沧海恨水碧悠悠，至今已过百万秋…",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 8838824
+                },
+                "file": {
+                  "fileName": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4270726
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914493888,
+                    "completedAtMs": 1792914576369,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029573544,
+                    "completedAtMs": 1793029657747,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029712385,
+                    "completedAtMs": 1793029770597,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029877808,
+                    "status": "running"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+                "trackId": "bilibili:video:BV1nsRFBBEeW",
+                "title": "神总是忧郁的——《幻昼》降调版",
+                "status": "queued",
+                "progressMessage": "等待继续下载",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12444147
+                },
+                "file": {
+                  "fileName": "神总是忧郁的——《幻昼》降调版.mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 3609475
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914576400,
+                    "completedAtMs": 1792914665561,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029657779,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029813053,
+                    "completedAtMs": 1793029813578,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029814392,
+                    "completedAtMs": 1793029815027,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029816570,
+                    "completedAtMs": 1793029817087,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029820126,
+                    "completedAtMs": 1793029820633,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "final-download-progress",
+        "at": 1793029944066,
+        "sequence": 979,
+        "batches": [
+          {
+            "id": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+            "status": "running",
+            "concurrency": 2,
+            "startedAtMs": 1792914493814,
+            "archive": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 8838824
+            },
+            "items": [
+              {
+                "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+                "trackId": "bilibili:video:BV134Ho6qENu",
+                "title": "We Never (Remix) (若如初见)",
+                "status": "downloading",
+                "progressMessage": "正在解析素材：We Never (Remix) (若如初见)",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 8838824
+                },
+                "file": {
+                  "fileName": "We Never (Remix) (若如初见).mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4556981
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792910474509,
+                    "completedAtMs": 1792910582965,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1792911086182,
+                    "completedAtMs": 1792911206318,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1792914392848,
+                    "completedAtMs": 1792914461993,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1792914493857,
+                    "completedAtMs": 1792914609506,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029573509,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029738526,
+                    "completedAtMs": 1793029826897,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029877770,
+                    "status": "running"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+                "trackId": "bilibili:video:BV1NXab6GEYA",
+                "title": "沧海恨水碧悠悠，至今已过百万秋…",
+                "status": "downloading",
+                "progressMessage": "正在解析素材：沧海恨水碧悠悠，至今已过百万秋…",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 8838824
+                },
+                "file": {
+                  "fileName": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4270726
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914493888,
+                    "completedAtMs": 1792914576369,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029573544,
+                    "completedAtMs": 1793029657747,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029712385,
+                    "completedAtMs": 1793029770597,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029877808,
+                    "status": "running"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+                "trackId": "bilibili:video:BV1nsRFBBEeW",
+                "title": "神总是忧郁的——《幻昼》降调版",
+                "status": "queued",
+                "progressMessage": "等待继续下载",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12444147
+                },
+                "file": {
+                  "fileName": "神总是忧郁的——《幻昼》降调版.mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 3609475
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914576400,
+                    "completedAtMs": 1792914665561,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029657779,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029813053,
+                    "completedAtMs": 1793029813578,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029814392,
+                    "completedAtMs": 1793029815027,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029816570,
+                    "completedAtMs": 1793029817087,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029820126,
+                    "completedAtMs": 1793029820633,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "final-batch-admission",
+        "at": 1793029988122,
+        "sequence": 986,
+        "batches": [
+          {
+            "id": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+            "status": "running",
+            "concurrency": 2,
+            "startedAtMs": 1792914493814,
+            "archive": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 8838824
+            },
+            "items": [
+              {
+                "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+                "trackId": "bilibili:video:BV134Ho6qENu",
+                "title": "We Never (Remix) (若如初见)",
+                "status": "succeeded",
+                "progressMessage": "歌曲文件已生成，等待批次保存",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 8838824
+                },
+                "file": {
+                  "fileName": "We Never (Remix) (若如初见).mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4556981
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792910474509,
+                    "completedAtMs": 1792910582965,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1792911086182,
+                    "completedAtMs": 1792911206318,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1792914392848,
+                    "completedAtMs": 1792914461993,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1792914493857,
+                    "completedAtMs": 1792914609506,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029573509,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029738526,
+                    "completedAtMs": 1793029826897,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029877770,
+                    "completedAtMs": 1793029983323,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+                "trackId": "bilibili:video:BV1NXab6GEYA",
+                "title": "沧海恨水碧悠悠，至今已过百万秋…",
+                "status": "succeeded",
+                "progressMessage": "歌曲文件已生成，等待批次保存",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 8838824
+                },
+                "file": {
+                  "fileName": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4270726
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914493888,
+                    "completedAtMs": 1792914576369,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029573544,
+                    "completedAtMs": 1793029657747,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029712385,
+                    "completedAtMs": 1793029770597,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029877808,
+                    "completedAtMs": 1793029972981,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+                "trackId": "bilibili:video:BV1nsRFBBEeW",
+                "title": "神总是忧郁的——《幻昼》降调版",
+                "status": "downloading",
+                "progressMessage": "正在解析素材：神总是忧郁的——《幻昼》降调版",
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12444147
+                },
+                "file": {
+                  "fileName": "神总是忧郁的——《幻昼》降调版.mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 3609475
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914576400,
+                    "completedAtMs": 1792914665561,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029657779,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029813053,
+                    "completedAtMs": 1793029813578,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029814392,
+                    "completedAtMs": 1793029815027,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029816570,
+                    "completedAtMs": 1793029817087,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029820126,
+                    "completedAtMs": 1793029820633,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029973020,
+                    "status": "running"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "final-zip-progress",
+        "at": 1793030055601,
+        "sequence": 1042,
+        "batches": [
+          {
+            "id": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+            "status": "completed",
+            "concurrency": 2,
+            "startedAtMs": 1792914493814,
+            "completedAtMs": 1793030044484,
+            "archive": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 12448714
+            },
+            "items": [
+              {
+                "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+                "trackId": "bilibili:video:BV134Ho6qENu",
+                "title": "We Never (Remix) (若如初见)",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "We Never (Remix) (若如初见).mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4556981
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792910474509,
+                    "completedAtMs": 1792910582965,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1792911086182,
+                    "completedAtMs": 1792911206318,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1792914392848,
+                    "completedAtMs": 1792914461993,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1792914493857,
+                    "completedAtMs": 1792914609506,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029573509,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029738526,
+                    "completedAtMs": 1793029826897,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029877770,
+                    "completedAtMs": 1793029983323,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+                "trackId": "bilibili:video:BV1NXab6GEYA",
+                "title": "沧海恨水碧悠悠，至今已过百万秋…",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4270726
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914493888,
+                    "completedAtMs": 1792914576369,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029573544,
+                    "completedAtMs": 1793029657747,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029712385,
+                    "completedAtMs": 1793029770597,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029877808,
+                    "completedAtMs": 1793029972981,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+                "trackId": "bilibili:video:BV1nsRFBBEeW",
+                "title": "神总是忧郁的——《幻昼》降调版",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "神总是忧郁的——《幻昼》降调版.mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 3609475
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914576400,
+                    "completedAtMs": 1792914665561,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029657779,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029813053,
+                    "completedAtMs": 1793029813578,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029814392,
+                    "completedAtMs": 1793029815027,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029816570,
+                    "completedAtMs": 1793029817087,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029820126,
+                    "completedAtMs": 1793029820633,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029973020,
+                    "completedAtMs": 1793030044370,
+                    "status": "succeeded"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "final-save-receipts",
+        "at": 1793030149135,
+        "sequence": 1111,
+        "batches": [
+          {
+            "id": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+            "status": "completed",
+            "concurrency": 2,
+            "startedAtMs": 1792914493814,
+            "completedAtMs": 1793030044484,
+            "archive": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 12448714
+            },
+            "items": [
+              {
+                "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+                "trackId": "bilibili:video:BV134Ho6qENu",
+                "title": "We Never (Remix) (若如初见)",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "We Never (Remix) (若如初见).mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4556981
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792910474509,
+                    "completedAtMs": 1792910582965,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1792911086182,
+                    "completedAtMs": 1792911206318,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1792914392848,
+                    "completedAtMs": 1792914461993,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1792914493857,
+                    "completedAtMs": 1792914609506,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029573509,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029738526,
+                    "completedAtMs": 1793029826897,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029877770,
+                    "completedAtMs": 1793029983323,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+                "trackId": "bilibili:video:BV1NXab6GEYA",
+                "title": "沧海恨水碧悠悠，至今已过百万秋…",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4270726
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914493888,
+                    "completedAtMs": 1792914576369,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029573544,
+                    "completedAtMs": 1793029657747,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029712385,
+                    "completedAtMs": 1793029770597,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029877808,
+                    "completedAtMs": 1793029972981,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+                "trackId": "bilibili:video:BV1nsRFBBEeW",
+                "title": "神总是忧郁的——《幻昼》降调版",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "神总是忧郁的——《幻昼》降调版.mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 3609475
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914576400,
+                    "completedAtMs": 1792914665561,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029657779,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029813053,
+                    "completedAtMs": 1793029813578,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029814392,
+                    "completedAtMs": 1793029815027,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029816570,
+                    "completedAtMs": 1793029817087,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029820126,
+                    "completedAtMs": 1793029820633,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029973020,
+                    "completedAtMs": 1793030044370,
+                    "status": "succeeded"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "before-cold-workbench-start",
+        "at": 1793030221530,
+        "sequence": 1180,
+        "batches": [
+          {
+            "id": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+            "status": "completed",
+            "concurrency": 2,
+            "startedAtMs": 1792914493814,
+            "completedAtMs": 1793030044484,
+            "archive": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 12448714
+            },
+            "items": [
+              {
+                "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+                "trackId": "bilibili:video:BV134Ho6qENu",
+                "title": "We Never (Remix) (若如初见)",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "We Never (Remix) (若如初见).mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4556981
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792910474509,
+                    "completedAtMs": 1792910582965,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1792911086182,
+                    "completedAtMs": 1792911206318,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1792914392848,
+                    "completedAtMs": 1792914461993,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1792914493857,
+                    "completedAtMs": 1792914609506,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029573509,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029738526,
+                    "completedAtMs": 1793029826897,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029877770,
+                    "completedAtMs": 1793029983323,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+                "trackId": "bilibili:video:BV1NXab6GEYA",
+                "title": "沧海恨水碧悠悠，至今已过百万秋…",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 4270726
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914493888,
+                    "completedAtMs": 1792914576369,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029573544,
+                    "completedAtMs": 1793029657747,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029712385,
+                    "completedAtMs": 1793029770597,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029877808,
+                    "completedAtMs": 1793029972981,
+                    "status": "succeeded"
+                  }
+                ]
+              },
+              {
+                "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+                "trackId": "bilibili:video:BV1nsRFBBEeW",
+                "title": "神总是忧郁的——《幻昼》降调版",
+                "status": "succeeded",
+                "progressMessage": "已下载",
+                "savedAtMs": 1793030044484,
+                "savedFile": {
+                  "fileName": "any-music-download-20261025-154813.zip",
+                  "extension": "zip",
+                  "mimeType": "application/zip",
+                  "sizeBytes": 12448714
+                },
+                "file": {
+                  "fileName": "神总是忧郁的——《幻昼》降调版.mp3",
+                  "extension": "mp3",
+                  "mimeType": "audio/mpeg",
+                  "sizeBytes": 3609475
+                },
+                "attempts": [
+                  {
+                    "attemptNumber": 1,
+                    "startedAtMs": 1792914576400,
+                    "completedAtMs": 1792914665561,
+                    "status": "succeeded"
+                  },
+                  {
+                    "attemptNumber": 2,
+                    "startedAtMs": 1793029657779,
+                    "completedAtMs": 1793029674777,
+                    "status": "cancelled",
+                    "errorCode": "operation-cancelled"
+                  },
+                  {
+                    "attemptNumber": 3,
+                    "startedAtMs": 1793029813053,
+                    "completedAtMs": 1793029813578,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 4,
+                    "startedAtMs": 1793029814392,
+                    "completedAtMs": 1793029815027,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 5,
+                    "startedAtMs": 1793029816570,
+                    "completedAtMs": 1793029817087,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 6,
+                    "startedAtMs": 1793029820126,
+                    "completedAtMs": 1793029820633,
+                    "status": "failed",
+                    "errorCode": "media-unavailable"
+                  },
+                  {
+                    "attemptNumber": 7,
+                    "startedAtMs": 1793029973020,
+                    "completedAtMs": 1793030044370,
+                    "status": "succeeded"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "network": {
+    "events": [
+      {
+        "at": 1793029573821.825,
+        "id": "9",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029573822.606,
+        "id": "9",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029573907.327,
+        "id": "9",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029573914.96,
+        "id": "10",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029573915.545,
+        "id": "10",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029574001.702,
+        "id": "10",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029574056.874,
+        "id": "13",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029574057.408,
+        "id": "13",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029574205.093,
+        "id": "14",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029574206.221,
+        "id": "14",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029574698.168,
+        "id": "14",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029588708.358,
+        "id": "13",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029657992.421,
+        "id": "17",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029657993.275,
+        "id": "17",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029658114.61,
+        "id": "17",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029658272.481,
+        "id": "20",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029658273.029,
+        "id": "20",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029674778.976,
+        "id": "20",
+        "stage": "error",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_ABORTED",
+        "tabId": -1
+      },
+      {
+        "stage": "fault-enabled",
+        "at": 1793029710137
+      },
+      {
+        "at": 1793029712605.388,
+        "id": "21",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029712606.045,
+        "id": "21",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029712701.832,
+        "id": "21",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029712824.822,
+        "id": "22",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029712825.348,
+        "id": "22",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029713296.562,
+        "id": "22",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029738737.657,
+        "id": "23",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029738738.433,
+        "id": "23",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029738827.002,
+        "id": "23",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029738958.457,
+        "id": "24",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029738959.029,
+        "id": "24",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029753908.004,
+        "id": "24",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029801285,
+        "stage": "dnr-cdn-block-enabled"
+      },
+      {
+        "at": 1793029813278.425,
+        "id": "25",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029813279.352,
+        "id": "25",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029813392.308,
+        "id": "25",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029813526.07,
+        "id": "26",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029813526.338,
+        "id": "26",
+        "stage": "error",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": -1
+      },
+      {
+        "at": 1793029814766.594,
+        "id": "27",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029814767.321,
+        "id": "27",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029814851.868,
+        "id": "27",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029814983.707,
+        "id": "28",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029814984.026,
+        "id": "28",
+        "stage": "error",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": -1
+      },
+      {
+        "at": 1793029816800.682,
+        "id": "29",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029816801.398,
+        "id": "29",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029816896.718,
+        "id": "29",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029817035.369,
+        "id": "30",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029817035.624,
+        "id": "30",
+        "stage": "error",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": -1
+      },
+      {
+        "at": 1793029820351.93,
+        "id": "31",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029820352.609,
+        "id": "31",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029820442.44,
+        "id": "31",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029820589.098,
+        "id": "32",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029820589.359,
+        "id": "32",
+        "stage": "error",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-05.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": -1
+      },
+      {
+        "at": 1793029855840,
+        "stage": "dnr-cdn-block-removed"
+      },
+      {
+        "at": 1793029878118.734,
+        "id": "33",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029878119.508,
+        "id": "33",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029878215.782,
+        "id": "33",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029878223.074,
+        "id": "34",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029878223.835,
+        "id": "34",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029878334.835,
+        "id": "34",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029878341.874,
+        "id": "35",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029878342.89,
+        "id": "35",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029878523.384,
+        "id": "36",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029878524.487,
+        "id": "36",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029886198.321,
+        "id": "36",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029892913.11,
+        "id": "35",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029973252.938,
+        "id": "37",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029973253.664,
+        "id": "37",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793029973364.519,
+        "id": "37",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793029973523.556,
+        "id": "40",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029973524.161,
+        "id": "40",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793029996964.99,
+        "id": "40",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030005069,
+        "stage": "playback-cases-begin"
+      },
+      {
+        "at": 1793030007655.107,
+        "id": "41",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030007655.683,
+        "id": "41",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030007737.096,
+        "id": "41",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030007759.991,
+        "id": "42",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-jsnt-ct-01-07.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030007760.27,
+        "id": "42",
+        "stage": "headers",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-jsnt-ct-01-07.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": 472489289,
+        "range": "bytes=0-"
+      },
+      {
+        "at": 1793030008235,
+        "stage": "native-media-only-block-enabled"
+      },
+      {
+        "at": 1793030011636.369,
+        "id": "42",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-jsnt-ct-01-07.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_FAILED",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030011661.793,
+        "id": "44",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030011662.448,
+        "id": "44",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030011749.635,
+        "id": "44",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030011770.422,
+        "id": "45",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030011771.049,
+        "id": "45",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030011929.134,
+        "id": "46",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030011929.688,
+        "id": "46",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030012130.867,
+        "id": "46",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030012299.927,
+        "id": "47",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030012300.413,
+        "id": "47",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-524287"
+      },
+      {
+        "at": 1793030012587.984,
+        "id": "47",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030012775.362,
+        "id": "48",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030012775.883,
+        "id": "48",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=524288-1048575"
+      },
+      {
+        "at": 1793030012931.21,
+        "id": "48",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030013122.779,
+        "id": "49",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030013123.351,
+        "id": "49",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=1048576-2097151"
+      },
+      {
+        "at": 1793030013311.329,
+        "id": "49",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030013516.586,
+        "id": "50",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030013517.15,
+        "id": "50",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=2097152-4194303"
+      },
+      {
+        "at": 1793030013709.738,
+        "id": "50",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030014021.51,
+        "id": "51",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030014022.058,
+        "id": "51",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=4194304-6291455"
+      },
+      {
+        "at": 1793030014380.429,
+        "id": "52",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030014381.138,
+        "id": "52",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=6291456-7973471"
+      },
+      {
+        "at": 1793030014415.827,
+        "id": "51",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030015541.505,
+        "id": "52",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030052950.845,
+        "id": "53",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030052951.705,
+        "id": "53",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030053039.694,
+        "id": "53",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030053046.73,
+        "id": "54",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030053047.004,
+        "id": "54",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030053239.344,
+        "id": "55",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030053240.045,
+        "id": "55",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030053359.308,
+        "id": "55",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030053551.08,
+        "id": "56",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030053551.748,
+        "id": "56",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-524287"
+      },
+      {
+        "at": 1793030054080.66,
+        "id": "56",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030054234.727,
+        "id": "57",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030054235.372,
+        "id": "57",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=524288-1048575"
+      },
+      {
+        "at": 1793030054768.769,
+        "id": "57",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-jsnt-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030054982.989,
+        "id": "58",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030054983.853,
+        "id": "58",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030055064.968,
+        "id": "58",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030055071.957,
+        "id": "59",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030055072.366,
+        "id": "59",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030055269.547,
+        "id": "60",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030055270.104,
+        "id": "60",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030055413.501,
+        "id": "60",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030055611.994,
+        "id": "61",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030055612.844,
+        "id": "61",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-524287"
+      },
+      {
+        "at": 1793030056147.418,
+        "id": "61",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030056392.798,
+        "id": "63",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030056393.36,
+        "id": "63",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=524288-655359"
+      },
+      {
+        "at": 1793030056536.961,
+        "id": "63",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030056684.329,
+        "id": "64",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030056684.874,
+        "id": "64",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=655360-2097151"
+      },
+      {
+        "at": 1793030058117.214,
+        "id": "64",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030058396.05,
+        "id": "65",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030058396.541,
+        "id": "65",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=2097152-4194303"
+      },
+      {
+        "at": 1793030060555.496,
+        "id": "65",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030060893.832,
+        "id": "66",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030060894.416,
+        "id": "66",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=4194304-6291455"
+      },
+      {
+        "at": 1793030061069.452,
+        "id": "67",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030061070.078,
+        "id": "67",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=6291456-8388607"
+      },
+      {
+        "at": 1793030062987.722,
+        "id": "66",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030063211.992,
+        "id": "67",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030063555.359,
+        "id": "68",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030063555.933,
+        "id": "68",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=8388608-10485759"
+      },
+      {
+        "at": 1793030063624.815,
+        "id": "69",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030063625.493,
+        "id": "69",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=10485760-12582911"
+      },
+      {
+        "at": 1793030063677.148,
+        "id": "70",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030063677.952,
+        "id": "70",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=12582912-14680063"
+      },
+      {
+        "at": 1793030065691.06,
+        "id": "68",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030065777.981,
+        "id": "69",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030065817.585,
+        "id": "70",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030065932.266,
+        "id": "71",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030065933.011,
+        "id": "71",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=14680064-16777215"
+      },
+      {
+        "at": 1793030068037.445,
+        "id": "71",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030078080.215,
+        "id": "72",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030078080.947,
+        "id": "72",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=16777216-18874367"
+      },
+      {
+        "at": 1793030078155.569,
+        "id": "73",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030078156.105,
+        "id": "73",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=18874368-20971519"
+      },
+      {
+        "at": 1793030078209.997,
+        "id": "74",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030078210.561,
+        "id": "74",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=20971520-23068671"
+      },
+      {
+        "at": 1793030080157.759,
+        "id": "72",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030080232.631,
+        "id": "73",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030080276.812,
+        "id": "74",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030080682.504,
+        "id": "75",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030080683.069,
+        "id": "75",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=23068672-23239854"
+      },
+      {
+        "at": 1793030080877.091,
+        "id": "75",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-02.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030085686.233,
+        "id": "76",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030085686.938,
+        "id": "76",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030085773.207,
+        "id": "76",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030085793.473,
+        "id": "77",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-mirrorhwo1.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030085793.75,
+        "id": "77",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-mirrorhwo1.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030085917.47,
+        "id": "78",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorhwo1.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030085917.971,
+        "id": "78",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorhwo1.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030086001.795,
+        "id": "78",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorhwo1.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030086212.813,
+        "id": "79",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030086213.415,
+        "id": "79",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030086295.35,
+        "id": "79",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030086301.827,
+        "id": "80",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030086302.139,
+        "id": "80",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030086678,
+        "stage": "range-header-removal-enabled"
+      },
+      {
+        "at": 1793030086683.39,
+        "id": "81",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030086685.644,
+        "id": "81",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030088034.531,
+        "id": "81",
+        "stage": "error",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_ABORTED",
+        "tabId": -1
+      },
+      {
+        "at": 1793030088342.624,
+        "id": "82",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030088343.111,
+        "id": "82",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030088893.837,
+        "id": "82",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estgcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 200,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030090190.041,
+        "id": "83",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030090190.858,
+        "id": "83",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030090275.741,
+        "id": "83",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030090281.996,
+        "id": "84",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030090282.215,
+        "id": "84",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030090411.059,
+        "id": "85",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030090411.564,
+        "id": "85",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030090455.156,
+        "id": "85",
+        "stage": "error",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_ABORTED",
+        "tabId": -1
+      },
+      {
+        "at": 1793030090583.616,
+        "id": "86",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030090584.142,
+        "id": "86",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030113489.799,
+        "id": "86",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "cn-hbyc-ct-01-01.bilivideo.com",
+        "path": "/upgcxcode/07/63/38058266307/38058266307-1-192.mp4",
+        "status": 200,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030128906,
+        "stage": "range-header-removal-disabled"
+      },
+      {
+        "at": 1793030131895.997,
+        "id": "87",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030131897.552,
+        "id": "87",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030131982.027,
+        "id": "87",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030131988.52,
+        "id": "88",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030131988.806,
+        "id": "88",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030132110.4,
+        "id": "89",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030132110.895,
+        "id": "89",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030132185.673,
+        "id": "89",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030132610.009,
+        "id": "90",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030132610.63,
+        "id": "90",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-524287"
+      },
+      {
+        "at": 1793030132611,
+        "stage": "range-switch-trigger",
+        "id": "90"
+      },
+      {
+        "at": 1793030132684.1,
+        "id": "90",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030132898,
+        "stage": "range-switch-dom-click-completed"
+      },
+      {
+        "at": 1793030133012.598,
+        "id": "91",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030133013.393,
+        "id": "91",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030133094.862,
+        "id": "91",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030133102.292,
+        "id": "92",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030133102.671,
+        "id": "92",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030133227.673,
+        "id": "93",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030133228.265,
+        "id": "93",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030133376.438,
+        "id": "93",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030133506.687,
+        "id": "94",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030133507.196,
+        "id": "94",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-524287"
+      },
+      {
+        "at": 1793030134047.053,
+        "id": "94",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030134466.336,
+        "id": "95",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030134466.934,
+        "id": "95",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=524288-1048575"
+      },
+      {
+        "at": 1793030134639.775,
+        "id": "95",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030134802.321,
+        "id": "96",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030134803.079,
+        "id": "96",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=1048576-2097151"
+      },
+      {
+        "at": 1793030135531.001,
+        "id": "96",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030136063.461,
+        "id": "97",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030136064.044,
+        "id": "97",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=2097152-4194303"
+      },
+      {
+        "at": 1793030137785.568,
+        "id": "97",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030138033.061,
+        "id": "98",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030138033.688,
+        "id": "98",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=4194304-6291455"
+      },
+      {
+        "at": 1793030138168.911,
+        "id": "99",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030138169.474,
+        "id": "99",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=6291456-7973471"
+      },
+      {
+        "at": 1793030139439.256,
+        "id": "99",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030139804.955,
+        "id": "98",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030178142.958,
+        "id": "100",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030178143.76,
+        "id": "100",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030178229.966,
+        "id": "100",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030178238.308,
+        "id": "101",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030178238.535,
+        "id": "101",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030178363.653,
+        "id": "102",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030178364.194,
+        "id": "102",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030178392.458,
+        "id": "102",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030179041.315,
+        "id": "103",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030179042.066,
+        "id": "103",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-524287"
+      },
+      {
+        "at": 1793030179101.55,
+        "id": "103",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030179581.18,
+        "id": "104",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030179581.9,
+        "id": "104",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=524288-1048575"
+      },
+      {
+        "at": 1793030179656.731,
+        "id": "104",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030179805.7,
+        "id": "105",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030179806.199,
+        "id": "105",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=1048576-2097151"
+      },
+      {
+        "at": 1793030179929.689,
+        "id": "105",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030180114.082,
+        "id": "106",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030180114.721,
+        "id": "106",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=2097152-4194303"
+      },
+      {
+        "at": 1793030180115,
+        "stage": "range-switch-trigger",
+        "id": "106"
+      },
+      {
+        "at": 1793030180223.523,
+        "id": "106",
+        "stage": "error",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-estghw.bilivideo.com",
+        "path": "/upgcxcode/39/76/42496427639/42496427639-1-192.mp4",
+        "fromCache": true,
+        "error": "net::ERR_ABORTED",
+        "tabId": -1
+      },
+      {
+        "at": 1793030180234,
+        "stage": "range-switch-dom-click-completed"
+      },
+      {
+        "at": 1793030180344.608,
+        "id": "107",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030180345.273,
+        "id": "107",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "tabId": -1
+      },
+      {
+        "at": 1793030180427.326,
+        "id": "107",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "api.bilibili.com",
+        "path": "/x/player/playurl",
+        "status": 200,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030180435.809,
+        "id": "108",
+        "stage": "start",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030180436.157,
+        "id": "108",
+        "stage": "error",
+        "method": "GET",
+        "type": "media",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "fromCache": false,
+        "error": "net::ERR_BLOCKED_BY_CLIENT",
+        "tabId": 472489289
+      },
+      {
+        "at": 1793030181032.901,
+        "id": "109",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030181033.458,
+        "id": "109",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-0"
+      },
+      {
+        "at": 1793030181053.509,
+        "id": "109",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030181478.048,
+        "id": "110",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030181478.588,
+        "id": "110",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=0-524287"
+      },
+      {
+        "at": 1793030181628.585,
+        "id": "110",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030181787.452,
+        "id": "111",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030181787.972,
+        "id": "111",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=524288-1048575"
+      },
+      {
+        "at": 1793030182338.216,
+        "id": "111",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030183401.688,
+        "id": "112",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030183402.381,
+        "id": "112",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=1048576-2097151"
+      },
+      {
+        "at": 1793030184848.234,
+        "id": "112",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030185449.329,
+        "id": "113",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030185449.889,
+        "id": "113",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=2097152-4194303"
+      },
+      {
+        "at": 1793030187478.094,
+        "id": "113",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030187714.078,
+        "id": "114",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030187714.586,
+        "id": "114",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=4194304-6291455"
+      },
+      {
+        "at": 1793030187754.348,
+        "id": "115",
+        "stage": "start",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1
+      },
+      {
+        "at": 1793030187754.923,
+        "id": "115",
+        "stage": "headers",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "tabId": -1,
+        "range": "bytes=6291456-7973471"
+      },
+      {
+        "at": 1793030189064.001,
+        "id": "115",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": false,
+        "tabId": -1
+      },
+      {
+        "at": 1793030189323.149,
+        "id": "114",
+        "stage": "completed",
+        "method": "GET",
+        "type": "xmlhttprequest",
+        "host": "upos-sz-mirrorcos.bilivideo.com",
+        "path": "/upgcxcode/65/87/42237888765/42237888765-1-192.mp4",
+        "status": 206,
+        "fromCache": true,
+        "tabId": -1
+      },
+      {
+        "at": 1793030219489,
+        "stage": "all-faults-and-action-hooks-removed"
+      }
+    ]
+  }
+}

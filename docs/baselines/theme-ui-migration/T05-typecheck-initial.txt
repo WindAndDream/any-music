@@ -1,0 +1,18 @@
+
+> @any-music/theme-default@0.0.0 typecheck <project-root>\packages\theme-default
+> vue-tsc --noEmit -p tsconfig.json
+
+src/components/downloads/ActiveDownloadPanel.vue(3,1): error TS6133: 'Track' is declared but its value is never read.
+src/components/music-sources/CatalogContextDetailsDialog.vue(3,1): error TS6133: 'CatalogDrawerView' is declared but its value is never read.
+src/components/music-sources/CatalogDrawer.vue(3,1): error TS6192: All imports in import declaration are unused.
+src/components/music-sources/CatalogDrawer.vue(19,15): error TS6196: 'CatalogDrawerView' is declared but never used.
+src/components/music-sources/CatalogDrawer.vue(22,1): error TS6192: All imports in import declaration are unused.
+src/components/music-sources/CatalogDrawerActionsDialog.vue(10,1): error TS6133: 'CatalogDrawerView' is declared but its value is never read.
+src/components/music-sources/CatalogDrawerList.vue(6,1): error TS6133: 'CatalogDrawerListSummary' is declared but its value is never read.
+src/components/music-sources/CatalogDrawerList.vue(12,1): error TS6133: 'CatalogDrawerView' is declared but its value is never read.
+src/components/music-sources/CatalogErrorDetails.vue(5,1): error TS6133: 'CatalogDrawerView' is declared but its value is never read.
+src/components/music-sources/CatalogErrorNotice.vue(5,1): error TS6133: 'CatalogDrawerView' is declared but its value is never read.
+src/components/music-sources/SourceToolbar.vue(3,1): error TS6133: 'MusicSourceImportUrlScope' is declared but its value is never read.
+<project-root>\packages\theme-default:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/theme-default@0.0.0 typecheck: `vue-tsc --noEmit -p tsconfig.json`
+Exit status 2

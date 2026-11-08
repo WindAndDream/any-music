@@ -1,0 +1,220 @@
+{
+  "batch": "T06",
+  "status": "complete",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "baseCommit": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "workingTreeBefore": "T06-workspace-before.json",
+  "moves": "T06-moves.json",
+  "scope": [
+    "Classic favorites, playlists, Listen Later/queue, playback history, published custom works and downloads",
+    "Current UI page and test extraction; reusable headless interactions stay in ui/library",
+    "UiWorkbenchLibrary controlled contract and application-injected controlled view factories through theme-default/vue",
+    "Theme-scoped library styles and stale-confirmation guards",
+    "Six full-root adapters consume readonly UiThemeFeatureMap state and named actions; selection/drafts are externally controlled, with no business factories."
+  ],
+  "ownership": {
+    "theme": "25 presentation/helper files and 12 existing component suites moved from UI, preserving current download edits",
+    "sharedUi": "Typed public presentation contract plus existing selection/filter/editing helpers; no theme imports",
+    "workbench": "Stable repositories, queue, player, download manager and scheduler; receives controlled components",
+    "runtime": "Existing file saving/verification and native/GM transport unchanged"
+  },
+  "prerequisites": {
+    "T05": "Complete in independently maintained T05.json by handoff; initial concurrent import/test failures retained in T06 logs.",
+    "T07": "Concurrent implementation already delivered. T06 completion does not independently close the T07 stage record."
+  },
+  "validation": [
+    {
+      "command": "pnpm --filter @any-music/theme-default exec vitest run test/components/library test/components/downloads test/components/music-sources/QueuePanel.interactions.test.ts",
+      "result": "passed",
+      "files": 10,
+      "tests": 61,
+      "log": "T06-target-tests.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/use-workbench-controller.test.ts",
+      "result": "passed",
+      "files": 1,
+      "tests": 9,
+      "log": "T06-continuity.txt"
+    },
+    {
+      "command": "pnpm test",
+      "result": "failed initial attempt; superseded by passing final gates below",
+      "log": "T06-test-attempt-1.txt"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "failed initial attempt; superseded by passing final gates below",
+      "log": "T06-typecheck-attempt-1.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with warnings in concurrent code; local shadowed test variable subsequently renamed",
+      "log": "T06-lint-attempt-1.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default exec vitest run test/components/library/ClassicLibrary.test.ts",
+      "result": "passed",
+      "files": 1,
+      "tests": 7,
+      "log": "T06-root-views-tests.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default typecheck",
+      "result": "passed",
+      "log": "T06-root-views-typecheck.txt"
+    },
+    {
+      "command": "pnpm test (final repeat concurrent with build)",
+      "result": "failed attempt: Userscript built-in-source one-second wait for first mock HTTP call expired; superseded by passing final test with workspace concurrency 2, without source-production changes",
+      "log": "T06-test-final.txt"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed; includes pnpm typecheck and both frontend builds plus Windows release executable",
+      "log": "T06-build-final.txt"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "log": "T06-typecheck-final.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with no lint warnings",
+      "log": "T06-lint-final.txt"
+    },
+    {
+      "command": "pnpm format:check (before final documentation)",
+      "result": "passed",
+      "log": "T06-format.txt"
+    },
+    {
+      "command": "node manifest audit",
+      "result": "passed; 37 moves checked and no old implementations retained",
+      "log": "T06-final-audit.json"
+    },
+    {
+      "command": "pnpm test",
+      "environment": {
+        "npm_config_workspace_concurrency": "2"
+      },
+      "result": "passed",
+      "vitestFiles": 284,
+      "vitestTests": 2087,
+      "rustTests": 229,
+      "rustIgnored": 1,
+      "repositoryScriptTests": 32,
+      "cliTests": 21,
+      "protocolCases": 183,
+      "log": "T06-test-verified.txt"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "T06-format-verified.txt"
+    }
+  ],
+  "continuityEvidence": [
+    "Real classic download/queue pages remount on the real workbench controller with active and queued task identities, FIFO concurrency 1, progress 42%, one export invocation and no media resolution",
+    "Download work aborts only on actual controller disposal",
+    "Playlist batch selection/order and host-owned membership edits survive replacement",
+    "History custom-name/platform/time filtering and explicit confirmation; stale history/playlist/download removal events rejected",
+    "Published works render with creation disabled; no-source labels and unavailable-native-save error snapshots remain visible"
+  ],
+  "completeRootAdmission": "Six T06 UiThemeFeatureMap adapters are registered in definition.views: queue, favorites, playlists, custom-tracks, history and downloads. Remaining plugin/specialist coverage and T11 production admission stay pending. No incomplete root is selectable.",
+  "liveAcceptance": {
+    "executed": false,
+    "reason": "User requested code migration only; no product UI/browser/emulator launched. GM/Rust transport, native saving, focus/layout and actual media continuity remain T13."
+  },
+  "git": {
+    "commit": false,
+    "push": false
+  },
+  "artifacts": {
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 4774295,
+      "sha256": "c32f6f3cb13a9e21daf3e442d281da0349da41e8df4aa45d7d509b902ab0f4e5"
+    },
+    "windowsRelease": {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 28334592,
+      "sha256": "01a2d3117058e63690652673258c2464fe76b50b5753a75427774b0243350a2d"
+    },
+    "tauriFrontend": {
+      "path": "apps/tauri/dist",
+      "files": 67,
+      "bytes": 2843954
+    },
+    "attribution": "Measurements cover the concurrent shared worktree; no isolated T06 bundle-size comparison or live-acceptance claim. Existing Tauri large-chunk warning retained."
+  },
+  "next": "Close independently maintained T07 integration evidence, then execute T08 specialist presentation/coverage. T11 production full-root adoption and T13 live acceptance remain separate.",
+  "newRootViews": ["queue", "favorites", "playlists", "custom-tracks", "history", "downloads"],
+  "finalVerificationPending": [],
+  "completionCriteria": {
+    "controlledClassicViews": "implemented: favorites, playlists, Listen Later/queue, history, published works, downloads; registered complete-root adapters plus current app-injected page bindings",
+    "noBusinessFactoriesInTheme": "passed package/plugin/mobile boundary gates; themes use public UI contracts and core types only",
+    "continuity": "real-controller test covers injected and feature-root download/queue pages; one scheduler, no extra media resolution, stable active/queued identities/concurrency/progress; actual host disposal cancels",
+    "publishedWorksWithoutCreation": "passed current and complete-root views with empty optional contributions",
+    "confirmations": "explicit accept/cancel, stale-event rejection after unmount or playlist replacement",
+    "orderingAndSelection": "controlled reorder, platform order, playlist original order, selection retention and task identities; latest per-song download snapshot reused from shared projection",
+    "liveAcceptance": "pending T13 explicit runtime inspection; no live claim"
+  },
+  "newFiles": [
+    "packages/ui/src/library.ts",
+    "packages/ui/src/product/library-presentation.ts",
+    "packages/theme-default/src/library.ts",
+    "packages/theme-default/src/styles/_library.scss",
+    "packages/theme-default/src/components/downloads/ClassicDownloads.vue",
+    "packages/theme-default/src/components/library/ClassicFeatureStatus.vue",
+    "packages/theme-default/src/components/library/ClassicTrackFilters.vue",
+    "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+    "packages/theme-default/src/components/library/ClassicQueue.vue",
+    "packages/theme-default/src/components/library/ClassicFavorites.vue",
+    "packages/theme-default/src/components/library/ClassicFavoriteFilters.vue",
+    "packages/theme-default/src/components/library/ClassicPlaylists.vue",
+    "packages/theme-default/src/components/library/ClassicHistory.vue",
+    "packages/theme-default/src/components/library/ClassicCustomTracks.vue",
+    "packages/theme-default/src/composables/use-classic-downloads.ts",
+    "packages/theme-default/src/composables/use-classic-track-collection.ts",
+    "packages/theme-default/src/composables/use-presentation-activity.ts",
+    "packages/theme-default/test/components/library/ClassicLibrary.test.ts",
+    "packages/theme-default/test/components/library/HistoryPanel.test.ts",
+    "packages/theme-default/test/components/library/PlaylistDrawer.test.ts",
+    "packages/music-workbench/test/helpers/test-renderer.ts"
+  ],
+  "directCallerAndContractChanges": [
+    "packages/ui/package.json",
+    "packages/ui/src/index.ts",
+    "packages/ui/src/theme.ts",
+    "packages/ui/src/product/theme-features.ts",
+    "packages/ui/src/composables/downloads/use-download-list-controls.ts",
+    "packages/ui/src/styles/_feature-panels.scss",
+    "packages/ui/src/styles/_product-workbench.scss",
+    "packages/theme-default/src/vue.ts",
+    "packages/theme-default/src/styles/index.scss",
+    "packages/music-workbench/src/runtime/workbench-runtime.ts",
+    "packages/music-workbench/src/plugin-adapters/workbench-view-components.ts",
+    "packages/music-workbench/src/components/music-sources/MusicWorkbenchPresentation.vue",
+    "packages/music-workbench/test/features/workbench/use-workbench-controller.test.ts",
+    "packages/theme-default/test/components/shell/ProductWorkbench.layout.test.ts",
+    "apps/userscript/src/platform/configure-userscript-workbench.ts",
+    "apps/tauri/src/platform/configure-tauri-workbench.ts"
+  ],
+  "verificationScope": "The final root test/build/typecheck/lint results cover the shared worktree at their recorded execution times, including T05/T07 integration. Subsequent concurrent T08 specialist and T09 Studio implementation began before the final format recheck; their semantics/admission are not certified by T06. Preserve each stage record and the verified integration-input hashes in T06-final-audit.json.",
+  "formattingOnlyConcurrentChanges": "Final repository formatting found and formatted current T08/T09 files without changing their semantics. The last format:check passed across 1,313 files; these later-stage implementations remain independently owned.",
+  "exitConditions": {
+    "hostLibraryDownloadPagesControlled": true,
+    "sixFeatureRootsRegistered": true,
+    "continuityPassed": true,
+    "noThemeTaskOrRepositoryAuthority": true,
+    "fiveRootGatesPassedAtRecordedSnapshots": true,
+    "liveAcceptanceRequiredByT06": false
+  },
+  "finalArtifactHashCheck": {
+    "apps/userscript/dist/any-music.user.js": "c32f6f3cb13a9e21daf3e442d281da0349da41e8df4aa45d7d509b902ab0f4e5",
+    "target/release/any-music-tauri.exe": "01a2d3117058e63690652673258c2464fe76b50b5753a75427774b0243350a2d"
+  }
+}

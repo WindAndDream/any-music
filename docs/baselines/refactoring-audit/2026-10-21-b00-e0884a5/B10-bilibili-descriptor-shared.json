@@ -1,0 +1,393 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B10-bilibili-descriptor-shared",
+  "parentBatch": "B10",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T10:27:34.932Z",
+  "scope": {
+    "invariant": "Bilibili stable metadata and local URL preflight remain available without loading runtime protocols; import preflight agrees with the descriptor exact origin/path scopes; implementation loading is demand-driven, shared, retryable and does not start a listing after cancellation.",
+    "selectedChain": "Public source root -> Bilibili descriptor/local URL parser -> injected LazyMusicSourcePlugin -> first consumer next() -> shared module load -> source listing delegation -> iterator close/cancel. The runtime loader is a deterministic injected double.",
+    "allowedPaths": [
+      "packages/plugin-source-bilibili manifest/root/descriptor/url-parser/runtime exports",
+      "packages/plugin-center public lazy adapter and its matching tests",
+      "Core descriptor/listing/cancellation type excerpts and direct workbench/UI preflight call sites"
+    ],
+    "expansionReasons": [
+      "The source root exports metadata but does not construct lazy instances; plugin-center is the one implementation neighbor needed for load/retry/cancellation evidence.",
+      "Core public scope/listing contracts define the exact-origin invariant. No core implementation or other domain audit is performed.",
+      "After reproducing the mismatch, direct workbench preflight and UI scope-feedback excerpts were inspected solely to establish caller impact. No second feature call chain was followed.",
+      "The dependency checker excerpt identified the static-graph rule. A bounded standalone script checks this metadata entry graph without scanning unrelated application implementations."
+    ],
+    "exclusions": [
+      "Product implementation changes and permanent tests",
+      "Bilibili session/search/import pagination/media implementations beyond root/export or class preflight excerpts",
+      "All Douyin operations and optional browser/contracts entries",
+      "Production app lazy-loader composition, GM/Rust HTTP/account/media acceptance (B11/B12)",
+      "Signing/API website-contract recapture, captureDate changes, product/browser/server/emulator/UI activity",
+      "Root final acceptance, commit and push"
+    ],
+    "readingLimit": "The initial chain was narrowed to descriptor/preflight/lazy behavior. Additional reads were contract/caller excerpts for the confirmed mismatch; no further source operation was opened. Automatic graph traversal is static evidence, not a claim that every visited implementation was manually audited."
+  },
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-baseline.json",
+  "declaredStatus": {
+    "claim": "Source roots are lightweight, URL imports are rejected locally against exact scopes, successful lazy modules are reused and failed imports permit retry.",
+    "references": [
+      "packages/plugin-source-bilibili/AGENTS.md:4",
+      "packages/plugin-source-bilibili/AGENTS.md:6",
+      "docs/en/cross-platform/architecture/music-source-plugin-architecture.md:56",
+      "packages/core/src/music-source/plugin.ts:13"
+    ],
+    "evidenceLimit": "Shared descriptor and injected lazy-adapter acceptance only. Real GM/Rust transports and actual browser dynamic-import caching are not accepted."
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Are metadata, local parsing and implementation exports owned by the source package and consumed through public interfaces?",
+      "evidence": [
+        "packages/plugin-source-bilibili/package.json:7",
+        "packages/plugin-source-bilibili/package.json:16",
+        "packages/plugin-source-bilibili/src/index.ts:2",
+        "packages/plugin-source-bilibili/src/index.ts:14",
+        "packages/plugin-source-bilibili/src/runtime.ts:1"
+      ],
+      "detail": "Only root and /runtime are public; internal dependencies use workspace:*. Module source.bilibili, provider bilibili and local contribution provider remain distinct. Target source/plugin-center files have no working-tree modifications."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Does metadata avoid eager runtime imports and does the lazy adapter share successful/pending work and retry rejected imports?",
+      "evidence": [
+        "packages/plugin-source-bilibili/src/index.ts:1",
+        "packages/plugin-source-bilibili/src/descriptor.ts:1",
+        "packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts:114",
+        "packages/plugin-center/test/music-sources/lazy-music-source-plugin.test.ts:16",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/metadata-graph.json",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/probe.log"
+      ],
+      "detail": "Transpiled static root graph: 23 files, zero external runtime imports, no protocol/runtime/signing, Vue or codec dependency. Existing 5 lazy tests plus the Bilibili-specific injected-loader probe establish demand loading, shared pending/successful loads and rejected-load retry. Production application loader composition remains B11/B12."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Does the preflight reject undeclared URLs locally while preserving bounded demand, cancellation and close behavior?",
+      "evidence": [
+        "packages/plugin-source-bilibili/src/descriptor.ts:10",
+        "packages/plugin-source-bilibili/src/url-parser.ts:20",
+        "packages/plugin-source-bilibili/src/url-parser.ts:25",
+        "packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts:60",
+        "packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts:99",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/probe.log"
+      ],
+      "detail": "B10-B01: six URL cases outside the declared origins return a lazy listing instead of throwing. Separately, six supported URL classes and five malformed/unsupported inputs pass; iterator creation performs zero loads, first next loads once, early return consumes one page and closes once, and cancellation during a pending load prevents source-listing creation. These observations use a deterministic delegated iterator, not Bilibili API pagination."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Do inspected local parser failures use shared semantic errors and preserve parse causes without introducing storage or credentials?",
+      "evidence": [
+        "packages/plugin-source-bilibili/src/url-parser.ts:14",
+        "packages/plugin-source-bilibili/src/url-parser.ts:25",
+        "packages/plugin-source-bilibili/src/url-parser.ts:59"
+      ],
+      "detail": "Malformed URL errors use MusicSourceError invalid-input with the original cause; unsupported host/path errors use unsupported-url. The selected root/preflight/lazy slice adds no persistence or credential authority. Runtime HTTP failures and cross-layer AppErrorState conversion are deferred."
+    },
+    {
+      "criterion": "C6",
+      "result": "fail",
+      "question": "Do owner tests establish the descriptor/preflight contract and are evidence levels reported accurately?",
+      "evidence": [
+        "packages/plugin-source-bilibili/test/bilibili-api.test.ts:1",
+        "packages/plugin-source-bilibili/test/bilibili-plugin.test.ts:1",
+        "packages/plugin-center/test/music-sources/lazy-music-source-plugin.test.ts:16",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/source-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/lazy-tests.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/probe.log"
+      ],
+      "detail": "The 6 existing source tests and 5 lazy-adapter tests pass, but source-root/URL exact-origin behavior has no existing regression coverage. Temporary probe: 16 passed, 6 failed for B10-B01. Probe source/logs are local and the package probe is removed. No contract/captureDate or maintained architecture content was changed."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B10-B01",
+      "severity": "P2",
+      "status": "open",
+      "owner": "B10 / packages/plugin-source-bilibili/src/url-parser.ts",
+      "title": "URL preflight accepts origins excluded by the descriptor",
+      "trigger": "Import http://www.bilibili.com/video/BV1xx411c7mD/ or ftp://www.bilibili.com/video/BV1xx411c7mD/ or https://www.bilibili.com:444/video/BV1xx411c7mD/; equivalent space.bilibili.com upload URLs reproduce the same issue.",
+      "cause": "The source parser compares URL.hostname only. Neither its exported parser nor LazyMusicSourcePlugin.importFromUrl enforces URL.origin against descriptor.importUrlScopes.",
+      "effect": "Public plugin validation succeeds and creates a listing carrying a URL outside the declared import scope. The workbench final preflight calls this validator; UI immediate feedback applies stricter exact-origin rules, so the two layers disagree. This is a local contract/validation defect; no arbitrary target transport, credential leak or real UI/network exploit is asserted.",
+      "evidence": [
+        "packages/plugin-source-bilibili/src/descriptor.ts:10",
+        "packages/plugin-source-bilibili/src/url-parser.ts:20",
+        "packages/plugin-source-bilibili/src/url-parser.ts:25",
+        "packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts:60",
+        "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts:161",
+        "packages/ui/src/components/music-sources/source-input-validation.ts:21",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/b10-descriptor-audit.probe.test.ts:79",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/probe.log"
+      ],
+      "reproduction": {
+        "expected": "All six inputs outside the declared exact origins throw unsupported-url before a listing or runtime load.",
+        "observed": "All six return normally from lazy importFromUrl; the six toThrow assertions fail.",
+        "testExitCode": 1
+      },
+      "suggestedNextAction": "In a separate fix, enforce exact origin/path scope in source-owned local preflight before target parsing. Add permanent tests for both hosts, HTTP/FTP/non-default ports, valid HTTPS/default 443 and all six supported URL classes. Preserve the current dependency direction and re-run source plus direct lazy/consumer tests."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "node <user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/metadata-graph.cjs <project-root>",
+          "startedAt": "2026-10-21T18:24:45.7668148+08:00",
+          "finishedAt": "2026-10-21T18:24:46.912588+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/metadata-graph.log",
+          "resultArtifact": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/metadata-graph.json"
+        }
+      ],
+      "detail": "Metadata dependency graph passes; manual public-contract and call-site inspection plus the behavioral probe establish B10-B01."
+    },
+    "tests": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/plugin-source-bilibili test",
+          "startedAt": "2026-10-21T18:22:45.3351916+08:00",
+          "finishedAt": "2026-10-21T18:22:53.3970308+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/source-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-center exec vitest run test/music-sources/lazy-music-source-plugin.test.ts",
+          "startedAt": "2026-10-21T18:22:45.861191+08:00",
+          "finishedAt": "2026-10-21T18:22:53.5502588+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/lazy-tests.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-source-bilibili --filter @any-music/plugin-center typecheck",
+          "startedAt": "2026-10-21T18:22:45.9613944+08:00",
+          "finishedAt": "2026-10-21T18:22:57.6764908+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/typecheck.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-source-bilibili exec vitest run test/b10-descriptor-audit.probe.test.ts --reporter=verbose",
+          "startedAt": "2026-10-21T18:23:43.882823+08:00",
+          "finishedAt": "2026-10-21T18:23:45.2282411+08:00",
+          "exitCode": 1,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/probe.log",
+          "probeSource": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/b10-descriptor-audit.probe.test.ts",
+          "cleanup": "Temporary probe removed from package test directory"
+        }
+      ],
+      "detail": "Existing suites: 11/11 pass. Both package typechecks pass. Temporary Bilibili descriptor/lazy probe: 16/22 pass, six exact-origin rejection cases fail. The trailing pnpm error is wrapper text after Vitest ran; this is an assertion failure, not a missing Vitest installation."
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "No product, public export or dependency change. The standalone metadata graph is static evidence, not an inspected production build."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "This task requests a bounded audit, without browser/application inspection. No website recapture, GM/Rust transport or real dynamic-import retry acceptance is claimed."
+    },
+    "rootGates": {
+      "result": "not-run",
+      "reason": "Audit records only, no product changes or commit. Root test/typecheck/lint/format/build final acceptance remains B21; previous unrelated results are not relabeled as current B10 evidence."
+    },
+    "records": {
+      "result": "pass",
+      "validation": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/records-validation.json",
+      "formatting": {
+        "command": "pnpm exec oxfmt --check <B10 report, baseline, summary.json>",
+        "startedAt": "2026-10-21T18:28:19.5992836+08:00",
+        "finishedAt": "2026-10-21T18:28:20.088126+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b10-bilibili-descriptor/records-format.log"
+      },
+      "detail": "JSON/evidence paths and source line numbers validated; 46 recorded hash entries unchanged. No source/plugin-center product diff, temporary probe removed, and existing unrelated ledger entries/continuations preserved."
+    }
+  },
+  "readFiles": [
+    {
+      "path": "packages/plugin-source-bilibili/package.json",
+      "sha256": "d52c2a562a336fc732242dbe9c9e425ae82f1d75b4d960ee04396df6bdc71526",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/AGENTS.md",
+      "sha256": "b7c0e59fdb5fddf39de456603c4e9c8c4c1fcad40bf715d1c1069c5870d4f42b",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/index.ts",
+      "sha256": "c04eb33120a48b27857d3ef654f6dea38cff100a06e0610f5356b342517350ce",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/descriptor.ts",
+      "sha256": "1d0bd2e06544bb34767dfd26b0b64535f1962373c70a0b466c3aecc23f68f693",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/url-parser.ts",
+      "sha256": "13a5ab4c5d7a2a44e8ea81c5bbe72a7e0fe8dc129b0d546f3f46b04f91ff580f",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/runtime.ts",
+      "sha256": "9894c5fc9a0d2a4cd3beab31803a7be256784a357de4e12dc4e68bc12c5ef437",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/src/bilibili-plugin.ts",
+      "sha256": "005b655972426780d7bd0646233d6cae4803773f10dffdea73ee2734a84bd362",
+      "reading": "Class imports/constructor/validateImportUrl and getSession/search prefix excerpt only; independent operations not audited."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/test/bilibili-plugin.test.ts",
+      "sha256": "fdf97e409e32705b71a9b407b5f5a5a77255ae55bf0bd5a01029787b9bba0d1e",
+      "reading": "Imports/test names and full suite execution only; no protocol or media implementation acceptance."
+    },
+    {
+      "path": "packages/plugin-source-bilibili/test/bilibili-api.test.ts",
+      "sha256": "8fa9b5180804af5c85f369030ddf6431a59f489743d16aec45760f1e9768ec13",
+      "reading": "Imports/test names and full suite execution only; no protocol or media implementation acceptance."
+    },
+    {
+      "path": "packages/plugin-center/AGENTS.md",
+      "sha256": "9da312e706600d97d1994e21ebd7cc0aaa3c38002990171b33c9b7db3a93d973",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-center/package.json",
+      "sha256": "739a12bd6b5044b13c4a8e8a62d92d9959ce73be30e474b8f666c95969072df2",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/index.ts",
+      "sha256": "240ceda1c262f1b11e3808c4422318dc332b09e689ba397a1b0ef09e32e7a174",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/lazy-music-source-plugin.ts",
+      "sha256": "f99ac67694d0c43893bf41634106409e6ac1ca8cc17483ffd2c003daed9b0d24",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-center/src/music-sources/managed-music-source-plugin.ts",
+      "sha256": "9d9ae67853cb8fae8664741040192350aaf8677860139bd4a50580536a515b3b",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/plugin-center/test/music-sources/lazy-music-source-plugin.test.ts",
+      "sha256": "c698c20a9f8c10986ef12bc34c150f2da9e647839fd06a60b2f68746fbf9d1cb",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/core/src/music-source/plugin.ts",
+      "sha256": "c594d641189504e8dade3fd9411e47cb86fc4cc8a36170b61d733dc22b545c86",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/core/src/music-source/policies.ts",
+      "sha256": "770f19554ffd3025626454e6d83ba9f68badea3434381b0f50c401f475e34a59",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "scripts/check-package-boundaries.mjs",
+      "sha256": "18c11924b7b99c9486cbcaf0643f9aff1612f877dbab6ef7689ef57410ca442f",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+      "sha256": "7dcbe68c54943dd0825b74fd7febdb8633ffc9ff5d6373bbcb464772b5da4af0",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "sha256": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15",
+      "reading": "Relevant entry/contract/test excerpts or guide sections."
+    },
+    {
+      "path": "packages/core/AGENTS.md",
+      "sha256": "1ee3bb17f954e71a8550de9b6dc72a0d9b5931a83866f4bd8afbf38f6ebb93af",
+      "capturedAt": "2026-10-21T10:27:34.932Z",
+      "reading": "Contract or direct preflight excerpt only; no independent UI/workbench implementation audit."
+    },
+    {
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts",
+      "sha256": "22158e6c1c8bd37e33ae0eea63a9976bc5c9c1ceaa6d02fee557622a34d46241",
+      "capturedAt": "2026-10-21T10:27:34.932Z",
+      "reading": "Contract or direct preflight excerpt only; no independent UI/workbench implementation audit."
+    },
+    {
+      "path": "packages/ui/src/components/music-sources/source-input-validation.ts",
+      "sha256": "3df3b01ba5b135807f115899d6740a726076ee8edb75a2ca0bdad6739cd87aca",
+      "capturedAt": "2026-10-21T10:27:34.932Z",
+      "reading": "Contract or direct preflight excerpt only; no independent UI/workbench implementation audit."
+    }
+  ],
+  "unreadPaths": [
+    "packages/plugin-source-bilibili/src/bilibili-api.ts, wbi-signature.ts, types.ts, track-mappers.ts, media-quality.ts implementations",
+    "Bilibili session/search/pagination/media bodies not part of this preflight chain",
+    "All packages/plugin-source-douyin implementation and tests",
+    "Actual built-in runtime loaders and GM/Rust composition"
+  ],
+  "missingEvidence": [
+    "B10-B01 has no repaired implementation or permanent regression tests.",
+    "Source-specific request counts/order/concurrency, credentials: include, real pagination dedupe/cursors and runtime cancellation require their own operation subbatches.",
+    "Metadata artifact chunks and exact runtime/website acceptance remain unverified."
+  ],
+  "dependencies": [
+    {
+      "owner": "B11",
+      "item": "Userscript build-known source runtime loader and GM bindings."
+    },
+    {
+      "owner": "B12",
+      "item": "Tauri build-known source runtime loader, native account HTTP and cancellation."
+    },
+    {
+      "owner": "B04",
+      "item": "Managed registry generations, disable/re-enable and stale task/media authority; only lazy import/iteration is accepted here."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B10-bilibili-session-shared",
+    "parentBatch": "B10",
+    "runtime": "shared",
+    "status": "pending",
+    "question": "Trace Bilibili session checking through injected HTTP: request count, error/login semantics and retry, without expanding into search, listing, media or runtime transports.",
+    "allowedPaths": [
+      "packages/plugin-source-bilibili/src/bilibili-plugin.ts (getSession only)",
+      "packages/plugin-source-bilibili/src/bilibili-api.ts (getNav and directly used request/error helpers)",
+      "Matching package tests; one core session/error/HTTP contract as needed"
+    ],
+    "excluded": [
+      "Product fixes and permanent tests",
+      "Other source operations, Douyin, GM/Rust/browser transports",
+      "Live browser/application inspection, commit and push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "packages/plugin-source-bilibili/AGENTS.md",
+      ".agents/skills/music-source-adapter/SKILL.md"
+    ],
+    "continuation": "Reuse B10-bilibili-descriptor-shared.json only after checking hashes. B10-B01 is open; repair it separately before B10 acceptance. The descriptor audit does not accept session, pagination, credentials or production runtime behavior."
+  },
+  "handoff": "B10-bilibili-descriptor-shared is violating / needs-fix due to B10-B01. Root metadata ownership and lazy graph/retry behavior conform. Existing 11 tests and two typechecks pass; the supplemental probe yields 16 passes and six origin-rejection failures. Evidence is static/tests only. Product code is unchanged and the temporary probe was removed. Recheck hashes before reuse because HEAD advanced concurrently, while all audited inputs remained unchanged. Continue with B10-bilibili-session-shared; keep B10-B01 open until a separately scoped fix. Nine other B10 candidates and both production runtimes remain unreviewed."
+}

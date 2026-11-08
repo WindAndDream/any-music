@@ -1,0 +1,29 @@
+Scope: 4 of 22 workspace projects
+packages/ui test$ vitest run
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/ui test:  Test Files  92 passed (92)
+packages/ui test:       Tests  619 passed (619)
+packages/ui test:    Start at  19:05:20
+packages/ui test:    Duration  9.13s (transform 19.90s, setup 0ms, import 53.23s, tests 7.64s, environment 41ms)
+packages/ui test: Done
+packages/plugin-tag-management test$ vitest run
+packages/plugin-music-creation test$ vitest run
+packages/plugin-tag-management test:  RUN  v4.1.11 <project-root>/packages/plugin-tag-management
+packages/plugin-music-creation test:  RUN  v4.1.11 <project-root>/packages/plugin-music-creation
+packages/plugin-tag-management test:  Test Files  3 passed (3)
+packages/plugin-tag-management test:       Tests  10 passed (10)
+packages/plugin-tag-management test:    Start at  19:05:30
+packages/plugin-tag-management test:    Duration  5.58s (transform 5.61s, setup 0ms, import 11.06s, tests 68ms, environment 1ms)
+packages/plugin-music-creation test:  Test Files  4 passed (4)
+packages/plugin-music-creation test:       Tests  13 passed (13)
+packages/plugin-music-creation test:    Start at  19:05:30
+packages/plugin-music-creation test:    Duration  5.62s (transform 10.59s, setup 0ms, import 20.85s, tests 113ms, environment 1ms)
+packages/plugin-tag-management test: Done
+packages/plugin-music-creation test: Done
+packages/music-workbench test$ vitest run
+packages/music-workbench test:  RUN  v4.1.11 <project-root>/packages/music-workbench
+packages/music-workbench test:  Test Files  53 passed (53)
+packages/music-workbench test:       Tests  377 passed (377)
+packages/music-workbench test:    Start at  19:05:37
+packages/music-workbench test:    Duration  10.48s (transform 33.65s, setup 0ms, import 76.73s, tests 9.88s, environment 26ms)
+packages/music-workbench test: Done

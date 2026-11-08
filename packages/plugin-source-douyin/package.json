@@ -1,0 +1,25 @@
+{
+  "name": "@any-music/plugin-source-douyin",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./runtime": "./src/runtime.ts",
+    "./browser": "./src/douyin-request-state.ts",
+    "./contracts": "./src/runtime-contracts.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@any-music/core": "workspace:*",
+    "@any-music/plugin-center": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

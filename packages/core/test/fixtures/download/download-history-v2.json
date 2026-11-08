@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "id": "batch:fixture",
+      "origin": {
+        "kind": "queue",
+        "label": "Fixture queue"
+      },
+      "status": "running",
+      "startedAtMs": 10,
+      "concurrency": 1,
+      "items": [
+        {
+          "id": "item:fixture",
+          "track": {
+            "id": "fixture:audio:a",
+            "title": "Fixture a",
+            "artists": [
+              {
+                "id": "artist:fixture",
+                "name": "Fixture artist"
+              }
+            ],
+            "durationMs": 10000,
+            "sourceTags": ["source-tag"],
+            "source": {
+              "pluginId": "fixture",
+              "mediaKind": "audio",
+              "resourceId": "a"
+            }
+          },
+          "status": "downloading",
+          "requestedAtMs": 10,
+          "startedAtMs": 11,
+          "maxRetryCount": 2,
+          "attempts": [
+            {
+              "attemptNumber": 1,
+              "startedAtMs": 10,
+              "completedAtMs": 11,
+              "status": "failed",
+              "error": {
+                "code": "download-failed",
+                "statusCode": "AM-7201",
+                "message": "Fixture failure"
+              }
+            },
+            {
+              "attemptNumber": 2,
+              "startedAtMs": 12,
+              "status": "running"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

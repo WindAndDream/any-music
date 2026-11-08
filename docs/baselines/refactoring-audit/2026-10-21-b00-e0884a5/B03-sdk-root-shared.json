@@ -1,0 +1,237 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B03-sdk-root-shared",
+  "parentBatch": "B03",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T14:46:54.5854379+08:00",
+  "scope": {
+    "invariant": "The public SDK root provides framework-free DTO types, named injected ports and compatibility negotiation, loads only lightweight metadata/helpers, and refuses unsupported required versions/capabilities without granting runtime authority.",
+    "allowedPaths": [
+      "packages/plugin-sdk/package.json",
+      "packages/plugin-sdk/src/{index,negotiate,ports,plugin-call-error}.ts",
+      "packages/plugin-sdk/test/negotiate.test.ts",
+      "packages/plugin-sdk/schema/registry.json",
+      "packages/plugin-sdk/schema/v1/protocol.schema.json (Manifest/ContributionDescriptor excerpts only)",
+      "packages/plugin-sdk/scripts/{build,check-package}.mjs and package tsconfigs",
+      "packages/plugin-sdk/test/fixtures/corpus/{manifest-valid,manifest-declarative,host} (probe inputs)",
+      "scripts/check-plugin-protocol.mjs (direct public-root consumer)"
+    ],
+    "exclusions": [
+      "Full /music, /schema, /guest, /host and /node implementation acceptance",
+      "Rust protocol implementation audit, native authorization and Tauri production/browser graphs",
+      "VM start/cancellation/termination implementation, host transport and persistence",
+      "Product code changes, permanent regression tests, UI/live inspection, commit/push"
+    ],
+    "selectedChain": "SDK root -> generated registry + negotiatePluginContract -> version intersections / capability and contribution negotiation -> NegotiatedContract or PluginCallError. HostPort/ExecutorPort/ExecutorSession remain type-only injected contracts.",
+    "expansionReason": "Read the direct cross-language checker and bounded Schema/fixture excerpts to distinguish a schema-valid negotiation failure from an invalid probe input. Package checks execute broader SDK exports but do not constitute static acceptance of the other six subbatches.",
+    "scopeRule": "The referenced plan and existing ledger require one subbatch per conversation; this is the first of seven B03 candidates."
+  },
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B03-sdk-root-shared-baseline.json",
+  "declaredStatus": {
+    "claim": "The SDK root is a dependency-free shared ESM entry containing DTOs, compatibility and explicit ports; Schema validators and Node verification have separate entries. S11-S15 are declared implemented, while native target admission is separate from compatibility.",
+    "references": [
+      "packages/plugin-sdk/AGENTS.md:3",
+      "packages/plugin-sdk/README.md:5",
+      "packages/plugin-sdk/README.md:15",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md:10"
+    ],
+    "evidenceLimit": "Only root ownership, import graph and negotiation are accepted here; declarations about other SDK entries or native execution remain unreviewed."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-applicable"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Does the root expose public DTOs/ports without reverse package/runtime dependencies?",
+      "evidence": [
+        "packages/plugin-sdk/package.json:13",
+        "packages/plugin-sdk/src/index.ts:1",
+        "packages/plugin-sdk/src/ports.ts:1",
+        "packages/plugin-sdk/tsconfig.json:3",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/sdk-typecheck.log"
+      ],
+      "detail": "No production dependency is declared. Root runtime imports are local registry/negotiate/error modules; DTOs, ports and the music provider reference are type-only. ES2023/types=[] compilation and independent installed-consumer typing pass. No source/core/UI/app/framework runtime is imported."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Is the emitted and installed root entry lightweight?",
+      "evidence": [
+        "packages/plugin-sdk/src/index.ts:2",
+        "packages/plugin-sdk/scripts/check-package.mjs:67",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/root-probe.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/sdk-package.log"
+      ],
+      "detail": "Installed root/music imports pass with dynamic string code generation disabled. The dedicated emitted-root graph contains exactly index.js, generated/registry.js, negotiate.js and plugin-call-error.js; no Schema validator, Node verifier, Vue, source implementation or VM engine is loaded. Full production application graphs remain separate evidence."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "question": "Does compatibility negotiation reject incompatible required inputs and distinguish optional omissions?",
+      "evidence": [
+        "packages/plugin-sdk/src/negotiate.ts:38",
+        "packages/plugin-sdk/src/negotiate.ts:71",
+        "packages/plugin-sdk/src/negotiate.ts:89",
+        "packages/plugin-sdk/src/negotiate.ts:105",
+        "packages/plugin-sdk/test/negotiate.test.ts:12",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/root-probe.log"
+      ],
+      "detail": "Four retained negotiation tests and the 30-case temporary probe pass. The latter checks SDK inclusive/exclusive bounds and invalid semver, six host version dimensions, current wire intersection, required/optional capability availability and unknown/future capabilities even when advertised by the host, required/optional contributions, forms and execution policy. Inputs are decoded/validated before negotiation. VM lifecycle implementation is outside this pure synchronous chain."
+    },
+    {
+      "criterion": "C4/C5",
+      "result": "pass",
+      "question": "Are errors and named ports independent from core/business/native authority?",
+      "evidence": [
+        "packages/plugin-sdk/src/plugin-call-error.ts:3",
+        "packages/plugin-sdk/src/ports.ts:25",
+        "packages/plugin-sdk/src/ports.ts:36",
+        "packages/plugin-sdk/src/ports.ts:42",
+        "packages/plugin-sdk/src/negotiate.ts:33",
+        "packages/plugin-sdk/src/negotiate.ts:98"
+      ],
+      "detail": "PluginCallError carries the generated WireError DTO without importing core. Named state/network/digest and executor session methods are injected; there is no arbitrary invoke bridge, transport or authority implementation. Negotiation returns version/capability metadata, with nonretryable refusal errors. Native identity/epoch/authorization is explicitly a trusted channel responsibility. This does not prove native authorization or actual termination."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Do current automated and artifact results support this bounded conclusion?",
+      "evidence": [
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/sdk-test.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/protocol-generated.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/protocol-cross-language.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/sdk-package.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/final-input-check.json"
+      ],
+      "detail": "SDK generation checks match 47 definitions; SDK suite 107/107 and typecheck pass. Rust generation matches 47 definitions; the direct TS/Rust checker matches 47 raw fixtures plus 136 boundary/schema/negotiation mutations (183 total). Independent tarball/type/light-entry checks pass. These broader checks are supplementary evidence, not static/native acceptance of the other B03 subbatches. Input hashes remained unchanged despite a concurrent HEAD change."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "pass",
+      "chain": "root exports -> local metadata/negotiation/error helpers; type-only injected ports",
+      "evidence": "checks C1-C5"
+    },
+    "tests": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/plugin-sdk test",
+          "startedAt": "2026-10-21T14:44:10.5179015+08:00",
+          "finishedAt": "2026-10-21T14:44:14.7530023+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/sdk-test.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-sdk typecheck",
+          "startedAt": "2026-10-21T14:44:10.5169895+08:00",
+          "finishedAt": "2026-10-21T14:44:12.9832557+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/sdk-typecheck.log"
+        },
+        {
+          "command": "pnpm check:protocol:generated",
+          "startedAt": "2026-10-21T14:44:10.5479909+08:00",
+          "finishedAt": "2026-10-21T14:44:11.4300431+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/protocol-generated.log"
+        },
+        {
+          "command": "pnpm check:protocol",
+          "startedAt": "2026-10-21T14:44:10.5480019+08:00",
+          "finishedAt": "2026-10-21T14:44:11.7302808+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/protocol-cross-language.log"
+        }
+      ],
+      "probe": {
+        "command": "node --disallow-code-generation-from-strings <user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/root-probe.mjs",
+        "startedAt": "2026-10-21T14:46:03.6161267+08:00",
+        "finishedAt": "2026-10-21T14:46:03.7697105+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/root-probe.log"
+      },
+      "counts": {
+        "sdkTests": 107,
+        "retainedNegotiationTests": 4,
+        "probeScenarios": 30,
+        "sharedRawFixtures": 47,
+        "additionalCrossLanguageCases": 136,
+        "totalCrossLanguageCases": 183
+      },
+      "probeSource": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/root-probe.mjs",
+      "probeHarnessCorrection": {
+        "initialExitCode": 1,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/root-probe-initial.log",
+        "reason": "The initial declarative probe incorrectly retained the sandbox-code entry field and was rejected during Schema decoding. Removing entry, matching the SDK-owned declarative fixture, produced the recorded 30/30 passing run. This was a probe input error, not a product finding."
+      }
+    },
+    "artifact": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/plugin-sdk check:package",
+          "startedAt": "2026-10-21T14:44:25.762434+08:00",
+          "finishedAt": "2026-10-21T14:44:30.5577114+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b03-sdk-root-1eaaa99/sdk-package.log"
+        }
+      ],
+      "artifact": {
+        "path": ".codex-tmp/s01/package/any-music-plugin-sdk-0.1.0.tgz",
+        "bytes": 174434,
+        "sha256": "daf95821319c4445213b45aa32d4d66fc5b223f3a1533474ad34c0bf216e1733"
+      },
+      "scope": "Real SDK tarball exports/types and lightweight import checks only; userscript/Tauri production app bundles not built."
+    },
+    "live": {
+      "result": "not-applicable",
+      "reason": "The selected root chain is pure shared TypeScript. No product/browser/emulator inspection was requested or performed. Rust corpus execution is offline testing, not Tauri live acceptance."
+    },
+    "rootGates": {
+      "result": "not-run",
+      "reason": "Audit records only; no product/interface/dependency changes or commit. This is not B21 or full B03 completion."
+    }
+  },
+  "findings": [],
+  "unreadPaths": [
+    "packages/plugin-sdk/src/music.ts (named provider import observed only; implementation not read)",
+    "packages/plugin-sdk/src/schema/** (only the entry-mismatch diagnostic line located; bounded parser/semantics not audited)",
+    "packages/plugin-sdk/src/guest.ts",
+    "packages/plugin-sdk/src/host.ts",
+    "packages/plugin-sdk/src/node/**",
+    "packages/plugin-sdk/scripts/generate.mjs and scripts/generate-plugin-protocol.mjs implementations",
+    "crates/am-plugin-protocol/src/** and tests/contracts.rs",
+    "All Tauri runtime/authority and production graph implementations"
+  ],
+  "missingEvidence": [
+    "Six remaining B03 static subbatch audits; successful broader SDK tests/differential checks do not replace them.",
+    "Rust DTO/boundary/semantic ownership, contract tests and complete native dependency-closure acceptance belong to B03-native-protocol.",
+    "Production browser exclusion of /node belongs to its entry audit and runtime production graph checks."
+  ],
+  "dependencies": [
+    {
+      "target": "B03-sdk-schema-shared",
+      "kind": "boundary-precondition",
+      "status": "pending",
+      "note": "Root negotiation consumes validated DTOs. Bounded raw-byte parsing and semantic validation are queued for /schema; this root report does not claim them."
+    },
+    {
+      "target": "B03-native-protocol-tauri",
+      "kind": "cross-language-follow-up",
+      "status": "pending",
+      "note": "Generation and differential commands pass; Rust implementation acceptance has not been performed."
+    }
+  ],
+  "nextBatch": "B03-sdk-music-shared",
+  "handoff": "B03-sdk-root-shared is conformant/pass-scoped with no confirmed findings. Public root ownership, four-module lightweight runtime graph, type-only named ports and schema-valid compatibility negotiation pass. SDK 107 tests/typechecks, 30 supplemental root scenarios, generated TS/Rust consistency and 183 cross-language cases pass; the independently packed SDK exports/types/light-entry check also passes. An initial probe used an invalid declarative entry field; the harness was corrected, with both logs retained. HEAD changed from 1eaaa99e4626b45ffc8a4c0c32738981c637dae7 to b87ac45bfb32b9cee89b77c2170b842a69f9f98f during unrelated concurrent work, while every target input hash stayed unchanged and SDK/protocol status remained clean. No product source, retained tests, live UI, commits or pushes were changed. Other B03 entries and Rust implementation remain unreviewed. Continue with B03-sdk-music-shared; previous B01/B02 queues remain pending."
+}

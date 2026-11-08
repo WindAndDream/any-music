@@ -1,0 +1,9 @@
+
+> @any-music/theme-default@0.0.0 typecheck <project-root>\packages\theme-default
+> vue-tsc --noEmit -p tsconfig.json
+
+src/components/music-sources/use-classic-catalog.ts(11,1): error TS6133: 'AppDialog' is declared but its value is never read.
+src/components/music-sources/use-classic-catalog.ts(12,1): error TS6133: 'BottomSheet' is declared but its value is never read.
+<project-root>\packages\theme-default:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/theme-default@0.0.0 typecheck: `vue-tsc --noEmit -p tsconfig.json`
+Exit status 2

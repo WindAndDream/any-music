@@ -1,0 +1,1686 @@
+{
+  "documentType": "platform-interface-capture",
+  "platform": "douyin",
+  "captureDate": "2026-10-03",
+  "eventOrder": "response-completion, deduplicated by path/code/QR status",
+  "scope": "User-designated test Chrome; user reported clearing Douyin site data in Chrome settings before navigation; user performed QR and SMS verification; observed confirmed. Browser-wide cache and all storage partitions were not independently verified.",
+  "events": [
+    {
+      "method": "GET",
+      "host": "www.douyin.com",
+      "path": "/passport/general/login_guiding_strategy/",
+      "query": [
+        {
+          "key": "passport_jssdk_version",
+          "value": "3.4.9"
+        },
+        {
+          "key": "passport_jssdk_type",
+          "value": "normal"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "language",
+          "value": "zh"
+        },
+        {
+          "key": "account_app_language",
+          "value": "zh-CN"
+        },
+        {
+          "key": "ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "account_sdk_source",
+          "value": "web"
+        },
+        {
+          "key": "account_sdk_source_info",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_v",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_t",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_zt",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "request_host",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_bd",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_no",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "biz_trace_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "device_platform",
+          "value": "web_app"
+        },
+        {
+          "key": "sign",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "qs",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": {
+        "type": "object"
+      },
+      "headerNames": [
+        "Accept",
+        "x-tt-passport-csrf-token",
+        "x-tt-passport-aid-sign",
+        "x-tt-passport-trace-id"
+      ],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "expire_time": "number",
+          "login_methods": {
+            "full_login_panel": {
+              "scenes": {
+                "cold_start": "object"
+              },
+              "frequency_control": {
+                "range_interval": "number",
+                "range_type": "string",
+                "max_count": "number",
+                "max_time_in_range": "number"
+              },
+              "fail_remit_strategy": {
+                "counts": "number",
+                "days": "number"
+              },
+              "extra": {}
+            },
+            "login_guide_panel": {
+              "scenes": {
+                "comment_detail": "object",
+                "comment_feed": "object"
+              },
+              "frequency_control": {
+                "range_interval": "number",
+                "range_type": "string",
+                "max_count": "number",
+                "max_time_in_range": "number"
+              },
+              "fail_remit_strategy": {
+                "counts": "number",
+                "days": "number"
+              },
+              "extra": {}
+            }
+          },
+          "strategy_str": "string"
+        },
+        "message": "string"
+      },
+      "message": "success",
+      "hasCaptcha": false
+    },
+    {
+      "method": "POST",
+      "host": "www.douyin.com",
+      "path": "/passport/ticket_guard/get_client_cert/",
+      "query": [
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": [
+        {
+          "key": "server_data",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "headerNames": ["Content-Type", "Accept", "x-tt-session-dtrait", "x-secsdk-csrf-token"],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "server_cert": "string",
+          "server_sn": "string"
+        },
+        "message": "string"
+      },
+      "message": "success",
+      "hasCaptcha": false
+    },
+    {
+      "method": "POST",
+      "host": "login.douyin.com",
+      "path": "/passport/web/challenge/",
+      "query": [
+        {
+          "key": "passport_jssdk_version",
+          "value": "3.4.9"
+        },
+        {
+          "key": "passport_jssdk_type",
+          "value": "normal"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "language",
+          "value": "zh"
+        },
+        {
+          "key": "account_app_language",
+          "value": "zh-CN"
+        },
+        {
+          "key": "ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "request_host",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "skip_c",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ca",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ca_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "fp",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "verifyFp",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "account_sdk_source",
+          "value": "web"
+        },
+        {
+          "key": "account_sdk_source_info",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_v",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_t",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_zt",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_bd",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_no",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "biz_trace_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "device_platform",
+          "value": "web_app"
+        },
+        {
+          "key": "sign",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "qs",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": [
+        {
+          "key": "sign",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "sk",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "headerNames": [
+        "Accept",
+        "Content-Type",
+        "x-tt-passport-csrf-token",
+        "web-sdk-version",
+        "x-tt-passport-verify-portrait",
+        "x-tt-passport-aid-sign",
+        "x-tt-passport-trace-id",
+        "x-tt-session-dtrait"
+      ],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "passportiv": "string",
+          "template": "string",
+          "ts": "number"
+        },
+        "message": "string"
+      },
+      "message": "success",
+      "hasCaptcha": false
+    },
+    {
+      "method": "GET",
+      "host": "login.douyin.com",
+      "path": "/passport/web/get_qrcode/",
+      "query": [
+        {
+          "key": "passport_jssdk_version",
+          "value": "3.4.9"
+        },
+        {
+          "key": "passport_jssdk_type",
+          "value": "normal"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "language",
+          "value": "zh"
+        },
+        {
+          "key": "account_app_language",
+          "value": "zh-CN"
+        },
+        {
+          "key": "ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "next",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "need_short_url",
+          "value": "true"
+        },
+        {
+          "key": "need_logo",
+          "value": "false"
+        },
+        {
+          "key": "is_new_login",
+          "value": "1"
+        },
+        {
+          "key": "is_from_iesaccountsaas",
+          "value": "1"
+        },
+        {
+          "key": "p_ui",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "account_sdk_source",
+          "value": "web"
+        },
+        {
+          "key": "account_sdk_source_info",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_v",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_t",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_zt",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "request_host",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_bd",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_no",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "biz_trace_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "device_platform",
+          "value": "web_app"
+        },
+        {
+          "key": "sign",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "qs",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": {
+        "type": "object"
+      },
+      "headerNames": [
+        "Accept",
+        "x-tt-passport-csrf-token",
+        "web-sdk-version",
+        "x-tt-passport-verify-portrait",
+        "x-tt-passport-aid-sign",
+        "x-tt-passport-trace-id",
+        "x-tt-session-dtrait"
+      ],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "app_name": "string",
+          "captcha": "string",
+          "copywriting": "string",
+          "desc_url": "string",
+          "description": "string",
+          "error_code": "number",
+          "expire_time": "number",
+          "frontier_params": {
+            "access_key": "string",
+            "frontier_device": "string",
+            "method": "number",
+            "product_id": "number",
+            "service_id": "number"
+          },
+          "is_frontier": "boolean",
+          "qrcode": "string",
+          "qrcode_index_url": "string",
+          "token": "string",
+          "web_name": "string"
+        },
+        "message": "string"
+      },
+      "code": 0,
+      "message": "success",
+      "hasCaptcha": false
+    },
+    {
+      "method": "POST",
+      "host": "login.douyin.com",
+      "path": "/passport/web/check_qrconnect/",
+      "query": [
+        {
+          "key": "passport_jssdk_version",
+          "value": "3.4.9"
+        },
+        {
+          "key": "passport_jssdk_type",
+          "value": "normal"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "language",
+          "value": "zh"
+        },
+        {
+          "key": "account_app_language",
+          "value": "zh-CN"
+        },
+        {
+          "key": "ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "is_from_iesaccountsaas",
+          "value": "1"
+        },
+        {
+          "key": "p_ui",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ca",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ca_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "fp",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "verifyFp",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "account_sdk_source",
+          "value": "web"
+        },
+        {
+          "key": "account_sdk_source_info",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_v",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_t",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_zt",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "request_host",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_bd",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_no",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "biz_trace_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "device_platform",
+          "value": "web_app"
+        },
+        {
+          "key": "sign",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "qs",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": [
+        {
+          "key": "need_logo",
+          "value": "false"
+        },
+        {
+          "key": "is_frontier",
+          "value": "true"
+        },
+        {
+          "key": "token",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "is_new_login",
+          "value": "1"
+        },
+        {
+          "key": "next",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "need_short_url",
+          "value": "true"
+        }
+      ],
+      "headerNames": [
+        "Accept",
+        "Content-Type",
+        "x-tt-passport-csrf-token",
+        "web-sdk-version",
+        "x-tt-passport-verify-portrait",
+        "x-tt-passport-aid-sign",
+        "x-tt-passport-trace-id",
+        "x-tt-session-dtrait"
+      ],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "captcha": "string",
+          "desc_url": "string",
+          "description": "string",
+          "error_code": "number",
+          "extra": "string",
+          "scan_app_id": "number",
+          "status": "string"
+        },
+        "message": "string"
+      },
+      "code": 0,
+      "qrStatus": "new",
+      "message": "success",
+      "hasCaptcha": false
+    },
+    {
+      "method": "POST",
+      "host": "login.douyin.com",
+      "path": "/passport/web/check_qrconnect/",
+      "query": [
+        {
+          "key": "passport_jssdk_version",
+          "value": "3.4.9"
+        },
+        {
+          "key": "passport_jssdk_type",
+          "value": "normal"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "language",
+          "value": "zh"
+        },
+        {
+          "key": "account_app_language",
+          "value": "zh-CN"
+        },
+        {
+          "key": "ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "is_from_iesaccountsaas",
+          "value": "1"
+        },
+        {
+          "key": "p_ui",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ca",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ca_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "fp",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "verifyFp",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "account_sdk_source",
+          "value": "web"
+        },
+        {
+          "key": "account_sdk_source_info",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_v",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_t",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_zt",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "request_host",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_bd",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_no",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "biz_trace_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "device_platform",
+          "value": "web_app"
+        },
+        {
+          "key": "sign",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "qs",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": [
+        {
+          "key": "need_logo",
+          "value": "false"
+        },
+        {
+          "key": "is_frontier",
+          "value": "true"
+        },
+        {
+          "key": "token",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "is_new_login",
+          "value": "1"
+        },
+        {
+          "key": "next",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "need_short_url",
+          "value": "true"
+        }
+      ],
+      "headerNames": [
+        "Accept",
+        "Content-Type",
+        "x-tt-passport-csrf-token",
+        "web-sdk-version",
+        "x-tt-passport-verify-portrait",
+        "x-tt-passport-aid-sign",
+        "x-tt-passport-trace-id",
+        "x-tt-session-dtrait"
+      ],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "account_flow": "string",
+          "biz_params": {
+            "passport_mfa_retry_tag": "string",
+            "std_verify_flow_id": "string",
+            "std_verify_scene": "string",
+            "std_verify_template": "string",
+            "std_verify_token": "string",
+            "std_verify_type": "string",
+            "std_verify_way": "string"
+          },
+          "captcha": "string",
+          "common_params": {
+            "copywriting": "string",
+            "copywriting_key": "string",
+            "ies_safety_diversion_tag": "string",
+            "new_verify_flow": "string",
+            "std_verify_flow_id": "string",
+            "std_verify_scene": "string",
+            "std_verify_template": "string",
+            "std_verify_token": "string",
+            "std_verify_type": "string",
+            "std_verify_way": "string"
+          },
+          "desc_url": "string",
+          "description": "string",
+          "encrypt_uid": "string",
+          "error_code": "number",
+          "event_params": {
+            "is_oper_staff": "string",
+            "log_id": "string",
+            "std_verify_flow_id": "string",
+            "std_verify_scene": "string",
+            "std_verify_template": "string",
+            "std_verify_token": "string",
+            "std_verify_type": "string",
+            "std_verify_way": "string",
+            "verify_reason": "string",
+            "verify_scene": "string"
+          },
+          "extra_params": {
+            "fold_verify_way": "string",
+            "log_id": "string",
+            "use_server_sort": "string"
+          },
+          "pack_verify_way": "boolean",
+          "passport_scene": "string",
+          "schema": "string",
+          "url": "string",
+          "user_info": {
+            "avatar_url": "string",
+            "nickname": "string",
+            "mobile_info": "null"
+          },
+          "verify_scene_desc": "string",
+          "verify_ways": [
+            {
+              "act_type": "string",
+              "mobile": "string",
+              "verify_way": "string"
+            },
+            {
+              "auth_ticket": "string",
+              "avatar_url": "string",
+              "cert_app_id": "string",
+              "flow": "string",
+              "identity_name": "string",
+              "is_auth_verify": "string",
+              "nick_name": "string",
+              "scene": "string",
+              "verify_way": "string"
+            },
+            {
+              "channel_mobile": "string",
+              "mobile": "string",
+              "sms_content": "string",
+              "verify_way": "string"
+            }
+          ]
+        },
+        "message": "string"
+      },
+      "code": 2046,
+      "message": "error",
+      "hasCaptcha": false,
+      "ways": ["mobile_sms_verify", "face_verify", "mobile_up_sms_verify"]
+    },
+    {
+      "method": "POST",
+      "host": "www.douyin.com",
+      "path": "/passport/web/send_code/",
+      "query": [
+        {
+          "key": "passport_jssdk_version",
+          "value": "5.1.2"
+        },
+        {
+          "key": "passport_jssdk_type",
+          "value": "lite"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "language",
+          "value": "zh"
+        },
+        {
+          "key": "account_app_language",
+          "value": "zh-CN"
+        },
+        {
+          "key": "new_authn_sdk_version",
+          "value": "1.0.0.428-web"
+        },
+        {
+          "key": "device_platform",
+          "value": "web_app"
+        },
+        {
+          "key": "biz_trace_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": [
+        {
+          "key": "mix_mode",
+          "value": "1"
+        },
+        {
+          "key": "type",
+          "value": "3737"
+        },
+        {
+          "key": "encrypt_uid",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "verify_ticket",
+          "type": "string",
+          "present": false
+        },
+        {
+          "key": "copywriting_key",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "ies_safety_diversion_tag",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "new_verify_flow",
+          "type": "string",
+          "present": false
+        },
+        {
+          "key": "std_verify_flow_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_scene",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_template",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_token",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_type",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_way",
+          "value": "mobile_sms_verify"
+        },
+        {
+          "key": "is6Digits",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "new_authn_sdk_version",
+          "value": "1.0.0.428-web"
+        }
+      ],
+      "headerNames": [
+        "Content-Type",
+        "Accept",
+        "x-tt-passport-csrf-token",
+        "x-tt-passport-verify-portrait",
+        "x-tt-passport-trace-id",
+        "x-tt-session-dtrait",
+        "x-secsdk-csrf-token"
+      ],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "log_id": "string",
+          "mobile": "string",
+          "mobile_ticket": "string",
+          "retry_time": "number"
+        },
+        "message": "string"
+      },
+      "message": "success",
+      "hasCaptcha": false
+    },
+    {
+      "method": "POST",
+      "host": "www.douyin.com",
+      "path": "/passport/web/validate_code/",
+      "query": [
+        {
+          "key": "passport_jssdk_version",
+          "value": "5.1.2"
+        },
+        {
+          "key": "passport_jssdk_type",
+          "value": "lite"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "language",
+          "value": "zh"
+        },
+        {
+          "key": "account_app_language",
+          "value": "zh-CN"
+        },
+        {
+          "key": "new_authn_sdk_version",
+          "value": "1.0.0.428-web"
+        },
+        {
+          "key": "device_platform",
+          "value": "web_app"
+        },
+        {
+          "key": "biz_trace_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": [
+        {
+          "key": "mix_mode",
+          "value": "1"
+        },
+        {
+          "key": "type",
+          "value": "3737"
+        },
+        {
+          "key": "encrypt_uid",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "verify_ticket",
+          "type": "string",
+          "present": false
+        },
+        {
+          "key": "copywriting_key",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "ies_safety_diversion_tag",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "new_verify_flow",
+          "type": "string",
+          "present": false
+        },
+        {
+          "key": "std_verify_flow_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_scene",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_template",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_token",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_type",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_way",
+          "value": "mobile_sms_verify"
+        },
+        {
+          "key": "code",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "new_authn_sdk_version",
+          "value": "1.0.0.428-web"
+        }
+      ],
+      "headerNames": [
+        "Content-Type",
+        "Accept",
+        "x-tt-passport-csrf-token",
+        "x-tt-passport-verify-portrait",
+        "x-tt-passport-trace-id",
+        "x-tt-session-dtrait",
+        "x-secsdk-csrf-token"
+      ],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "ticket": "string"
+        },
+        "message": "string"
+      },
+      "message": "success",
+      "hasCaptcha": false
+    },
+    {
+      "method": "POST",
+      "host": "login.douyin.com",
+      "path": "/passport/web/check_qrconnect/",
+      "query": [
+        {
+          "key": "passport_jssdk_version",
+          "value": "3.4.9"
+        },
+        {
+          "key": "passport_jssdk_type",
+          "value": "normal"
+        },
+        {
+          "key": "is_from_ttaccountsdk",
+          "value": "1"
+        },
+        {
+          "key": "aid",
+          "value": "6383"
+        },
+        {
+          "key": "language",
+          "value": "zh"
+        },
+        {
+          "key": "account_app_language",
+          "value": "zh-CN"
+        },
+        {
+          "key": "ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "is_from_iesaccountsaas",
+          "value": "1"
+        },
+        {
+          "key": "p_ui",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ca",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ca_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "fp",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "verifyFp",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "account_sdk_source",
+          "value": "web"
+        },
+        {
+          "key": "account_sdk_source_info",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_v",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_js_t",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_zt",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ver_real",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "request_host",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_bd",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_ts",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "p_no",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "biz_trace_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "device_platform",
+          "value": "web_app"
+        },
+        {
+          "key": "sign",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "qs",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "msToken",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "a_bogus",
+          "type": "string",
+          "present": true
+        }
+      ],
+      "body": [
+        {
+          "key": "need_logo",
+          "value": "false"
+        },
+        {
+          "key": "is_frontier",
+          "value": "true"
+        },
+        {
+          "key": "token",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "is_new_login",
+          "value": "1"
+        },
+        {
+          "key": "next",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "need_short_url",
+          "value": "true"
+        },
+        {
+          "key": "passport_mfa_retry_tag",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_flow_id",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_scene",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_template",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_token",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_type",
+          "type": "string",
+          "present": true
+        },
+        {
+          "key": "std_verify_way",
+          "value": "mobile_sms_verify"
+        }
+      ],
+      "headerNames": [
+        "Accept",
+        "Content-Type",
+        "x-tt-passport-csrf-token",
+        "web-sdk-version",
+        "x-tt-passport-verify-portrait",
+        "x-tt-passport-aid-sign",
+        "x-tt-passport-trace-id",
+        "x-tt-session-dtrait"
+      ],
+      "status": 200,
+      "responseShape": {
+        "data": {
+          "captcha": "string",
+          "desc_url": "string",
+          "description": "string",
+          "error_code": "number",
+          "extra": "string",
+          "redirect_url": "string",
+          "scan_app_id": "number",
+          "status": "string",
+          "user_data": {
+            "app_id": "number",
+            "user_id": "number",
+            "user_id_str": "string",
+            "odin_user_type": "number",
+            "name": "string",
+            "screen_name": "string",
+            "avatar_url": "string",
+            "user_verified": "boolean",
+            "email_collected": "boolean",
+            "phone_collected": "boolean",
+            "verified_content": "string",
+            "verified_agency": "string",
+            "is_blocked": "number",
+            "is_blocking": "number",
+            "bg_img_url": "string",
+            "gender": "number",
+            "media_id": "number",
+            "user_auth_info": "string",
+            "industry": "string",
+            "area": "string",
+            "can_be_found_by_phone": "number",
+            "mobile": "string",
+            "birthday": "string",
+            "description": "string",
+            "new_user": "number",
+            "first_login_app": "number",
+            "session_key": "string",
+            "is_recommend_allowed": "number",
+            "recommend_hint_message": "string",
+            "connects": [],
+            "followings_count": "number",
+            "followers_count": "number",
+            "visit_count_recent": "number",
+            "skip_edit_profile": "number",
+            "is_manual_set_user_info": "boolean",
+            "device_id": "number",
+            "country_code": "number",
+            "has_password": "number",
+            "share_to_repost": "number",
+            "user_decoration": "string",
+            "user_privacy_extend": "number",
+            "old_user_id": "number",
+            "old_user_id_str": "string",
+            "sec_user_id": "string",
+            "sec_old_user_id": "string",
+            "vcd_account": "number",
+            "vcd_relation": "number",
+            "can_bind_visitor_account": "boolean",
+            "is_visitor_account": "boolean",
+            "is_only_bind_ins": "boolean",
+            "user_device_record_status": "number",
+            "is_kids_mode": "number",
+            "source": "string",
+            "is_employee": "boolean",
+            "passport_enterprise_user_type": "number",
+            "business_identity_name": "string",
+            "need_device_create": "number",
+            "need_ttwid_migration": "number",
+            "user_auth_status": "number",
+            "user_safe_mobile_2fa": "string",
+            "safe_mobile_country_code": "number",
+            "lite_user_info_string": "string",
+            "lite_user_info_demotion": "number",
+            "app_user_info": {
+              "assist_register": "boolean"
+            },
+            "need_check_bind_status": "boolean",
+            "oper_staff_relation_info": {
+              "has_password": "number",
+              "mobile": "string",
+              "sec_oper_staff_user_id": "string",
+              "relation_mobile_country_code": "number"
+            },
+            "use_hm_region": "boolean",
+            "hm_region": "number",
+            "redirect_conf": {
+              "url": "string",
+              "freq_cnt": "number",
+              "freq_name_space": "string",
+              "popup_interval": "number"
+            },
+            "assist_user_register_from": "number"
+          }
+        },
+        "message": "string"
+      },
+      "code": 0,
+      "qrStatus": "confirmed",
+      "message": "success",
+      "hasCaptcha": false
+    }
+  ]
+}

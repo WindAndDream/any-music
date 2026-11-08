@@ -1,0 +1,140 @@
+Browser tab: 1, Title: "Any Music", URL: "http://127.0.0.1:18766/index.html?preview=gm-r4".
+0 AXWebArea Any Music, URL: 127.0.0.1:18766/index.html?preview=gm-r4
+	1 container
+		2 container Any Music 工作室
+			3 container
+				4 text Any Music
+				5 text 工作室
+				6 button 打开全局设置
+				7 button 隐藏 Any Music
+			8 container 功能导航
+				9 button 发现
+				10 button 待听
+				11 button 我的喜欢
+				12 button 我的歌单
+				13 button 自定义音乐
+				14 button 标签管理
+				15 button 片段创作
+				16 button 下载
+				17 button 播放历史
+				18 button 插件中心
+			19 container 素材合集与自定义音乐创作
+				20 heading 创作工作室, Value: 1
+					21 text 创作工作室
+				22 container
+					23 container 素材合集管理
+						24 text 素材合集
+						25 text 一次创作只能使用同一合集内的素材，自定义歌曲也可以再次加入合集。
+						26 text 0 个合集
+						27 pop up button (collapsed, settable) Description: 当前素材合集, Value: 选择素材合集, Secondary Actions: Expand
+							28 menu
+								29 (selected) 选择素材合集
+						30 button (disabled) 删除合集
+						31 container
+							32 checkbox (settable, integer) Description: 级联删除本合集创建的自定义歌曲，并清理独占素材记录；共享或仍有用途的记录会保留, Value: 0
+							33 text 级联删除本合集创建的自定义歌曲，并清理独占素材记录；共享或仍有用途的记录会保留
+						34 container
+							35 text field (settable) Description: 新素材合集名称, Value: GM-R4 未创建合集
+							36 button 创建合集
+					37 button 清空创作数据（保留已发布作品）
+				38 container 作品时间线
+					39 container
+						40 text 自定义歌曲名称
+						41 text field (settable) 自定义歌曲名称, Value: GM-R4 专业草稿 — 未发布
+					42 container
+						43 text 导出格式
+						44 pop up button (collapsed, settable) 导出格式, Value: MP3 · 192 kbps, Secondary Actions: Expand
+							45 menu
+								46 (selected) MP3 · 192 kbps
+								47 WAV · PCM 16-bit
+					48 text 成品时长 0:00
+					49 container 自定义歌曲时间线
+						50 container
+							51 text 创作时间线 0 个片段 · 0:00.00
+							52 container 时间线显示模式
+								53 checkbox 排列, Value: 1
+								54 checkbox 剪辑轨道, Value: 0
+						55 text 从素材列表设置范围并加入时间线。自定义音乐也可以作为一个直接素材。
+					56 button (disabled) 下载当前成品
+					57 button 保存为自定义歌曲
+				58 container
+					59 heading 待整理素材, Value: 2
+						60 text 待整理素材
+					61 container 待整理素材存储区
+						62 container
+							63 text 待整理素材 先选择或创建合集，再整理这些素材；切换板块或刷新页面都不会丢失。 0 首
+						64 text 在音乐列表、我的喜欢、歌单或自定义音乐中点击“截取”，歌曲会先存到这里。
+				65 container 可用音乐素材
+					66 heading 未选择合集, Value: 2
+						67 text 未选择合集
+					68 text 先创建一个素材合集，再从资料库加入普通音乐或已有自定义音乐。
+					69 container 素材筛选
+						70 text field (settable) Description: 搜索歌曲、作者或标签, Value: GM-R4 素材筛选草稿
+						71 pop up button (collapsed, settable) Description: 素材合集成员筛选, Value: 仅当前合集素材, Secondary Actions: Expand
+							72 menu
+								73 全部资料库音乐
+								74 (selected) 仅当前合集素材
+								75 仅未加入当前合集
+						76 pop up button (collapsed, settable) Description: 素材类型筛选, Value: 普通 + 自定义音乐, Secondary Actions: Expand
+							77 menu
+								78 (selected) 普通 + 自定义音乐
+								79 仅普通音乐
+								80 仅自定义音乐
+						81 pop up button (collapsed, settable) Description: 素材平台筛选, Value: 全部平台, Secondary Actions: Expand
+							82 menu
+								83 (selected) 全部平台
+								84 哔哩哔哩 (0)
+								85 抖音 (0)
+								86 网易云音乐 (0)
+								87 自定义拼接音乐 (0)
+						88 pop up button (collapsed, settable) Description: 素材标签筛选, Value: 全部标签, Secondary Actions: Expand
+							89 menu
+								90 (selected) 全部标签
+						91 pop up button (collapsed, settable) Description: 素材排序, Value: 最近维护, Secondary Actions: Expand
+							92 menu
+								93 (selected) 最近维护
+								94 歌曲名称
+								95 时长从长到短
+					96 text 显示 0 / 资料库 0 首
+					97 text 没有匹配的音乐素材。
+			98 container 播放控制台
+				99 container 音乐播放器
+					100 text 正在播放
+					101 heading 选择一首音乐, Value: 2
+						102 text 选择一首音乐
+					103 text 从列表选择一首音乐
+					104 button (disabled) 上一首
+					105 button (disabled) 播放
+					106 button (disabled) 下一首
+					107 container
+						108 text 精确播放进度
+						109 slider (disabled, settable, integer) Description: 精确播放进度, Value: 0
+					110 text 0:00 0:00
+					111 progress indicator Description: 缓冲进度, Value: 0
+					112 container
+						113 text 音量
+						114 slider (settable, integer) Description: 音量, Value: 1
+					115 container
+						116 text 播放速度
+						117 pop up button (collapsed, settable) Description: 播放速度, Value: 1×, Secondary Actions: Expand
+							118 menu
+								119 0.5×
+								120 0.75×
+								121 (selected) 1×
+								122 1.25×
+								123 1.5×
+								124 2×
+					125 container
+						126 text 播放模式
+						127 pop up button (collapsed, settable) Description: 播放模式, Value: 顺序播放, Secondary Actions: Expand
+							128 menu
+								129 (selected) 顺序播放
+								130 单曲循环
+								131 随机播放
+								132 随机不重复
+					133 container
+						134 text 音质
+						135 pop up button (disabled, collapsed, settable) Description: 音质, Secondary Actions: Expand
+					136 button (disabled) 下载当前歌曲
+
+The focused UI element is 6 button 打开全局设置

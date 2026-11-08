@@ -1,0 +1,254 @@
+html,
+body,
+#app {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+}
+.native-app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.native-content {
+  flex: 1;
+  min-height: 0;
+}
+
+// Desktop extensions reuse the shared settings cards, fields, tokens and focus treatment.
+.native-settings {
+  container: native-settings / inline-size;
+}
+.native-settings__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--am-space-4);
+}
+.native-settings__heading {
+  display: grid;
+  gap: var(--am-space-1);
+  min-inline-size: 0;
+}
+.native-settings__heading h4 {
+  margin: 0;
+  font-size: var(--am-font-size-sm);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.native-settings__heading--row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--am-space-3);
+}
+.native-settings__heading--row > div {
+  display: grid;
+  gap: var(--am-space-1);
+  min-inline-size: 0;
+}
+.native-settings .account-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.native-settings__button,
+.native-settings .account-row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--am-space-2);
+  min-block-size: 44px;
+  padding: var(--am-space-2) var(--am-space-4);
+  border: 1px solid var(--am-color-border-strong);
+  border-radius: var(--am-radius-control);
+  background: var(--am-color-background);
+  color: var(--am-color-text);
+  font: inherit;
+  cursor: pointer;
+}
+.native-settings__button--danger {
+  color: var(--am-color-danger);
+}
+// Grid forms keep standalone actions compact; full-width navigation rows remain separate.
+.native-settings__button,
+.native-settings .settings-form__save {
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  justify-self: start;
+  flex: 0 0 auto;
+}
+.native-settings .settings-form__save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--am-space-2);
+}
+.native-settings .settings-form__footer {
+  gap: var(--am-space-2);
+}
+.native-settings__button:hover:not(:disabled),
+.native-settings .account-row button:hover:not(:disabled) {
+  background: var(--am-color-surface-hover);
+}
+.native-settings__button:focus-visible {
+  outline: var(--am-focus-ring);
+  outline-offset: var(--am-focus-offset);
+}
+.native-settings__button:disabled,
+.native-settings .settings-form__save:disabled,
+.native-settings .account-row button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.native-settings__confirmation {
+  display: grid;
+  gap: var(--am-space-3);
+  padding-block-start: var(--am-space-3);
+}
+.native-settings__empty {
+  margin: 0;
+  padding: var(--am-space-5);
+  border: 1px dashed var(--am-color-border-strong);
+  border-radius: var(--am-radius-card);
+  color: var(--am-color-text-secondary);
+}
+.native-settings summary {
+  font-weight: 650;
+  cursor: pointer;
+}
+.native-settings__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--am-space-2);
+  min-block-size: 44px;
+}
+.native-settings__checkbox input {
+  accent-color: var(--am-color-primary);
+}
+.native-settings__choices {
+  display: grid;
+  gap: var(--am-space-2);
+  margin: 0;
+  padding: var(--am-space-3);
+  border: 1px solid var(--am-color-border);
+  border-radius: var(--am-radius-control);
+}
+.native-settings .account-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--am-space-2);
+  align-items: center;
+}
+.native-settings .login-panel {
+  display: grid;
+  gap: var(--am-space-3);
+}
+.native-settings .login-panel h3,
+.native-settings .login-panel p {
+  margin: 0;
+}
+.native-settings .login-panel p {
+  color: var(--am-color-text-secondary);
+  font-size: var(--am-font-size-sm);
+  line-height: 1.7;
+}
+.native-settings .account-row label {
+  display: grid;
+  gap: var(--am-space-2);
+}
+.native-settings .account-row input {
+  min-block-size: 44px;
+  padding: var(--am-space-2) var(--am-space-3);
+  border: 1px solid var(--am-color-border-strong);
+  border-radius: var(--am-radius-control);
+  background: var(--am-color-background);
+  color: var(--am-color-text);
+  font: inherit;
+}
+@container native-settings (max-width: 520px) {
+  .native-settings__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.native-settings__entries {
+  display: grid;
+  border: 1px solid var(--am-color-border);
+  border-radius: var(--am-radius-card);
+  overflow: hidden;
+}
+.native-settings__entry {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  inline-size: 100%;
+  min-block-size: 72px;
+  gap: var(--am-space-3);
+  padding: var(--am-space-4);
+  border: 0;
+  background: var(--am-color-surface);
+  color: var(--am-color-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.native-settings__entry + .native-settings__entry {
+  border-block-start: 1px solid var(--am-color-border);
+}
+.native-settings__entry > span {
+  display: grid;
+  gap: var(--am-space-1);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.native-settings__entry small {
+  color: var(--am-color-text-secondary);
+  font-size: var(--am-font-size-xs);
+  line-height: 1.6;
+}
+.native-settings__entry > :first-child {
+  color: var(--am-color-primary);
+}
+.native-settings__entry > :last-child {
+  color: var(--am-color-text-secondary);
+}
+.native-settings__entry:hover:not(:disabled) {
+  background: var(--am-color-hover);
+}
+.native-settings__entry:focus-visible {
+  outline: var(--am-focus-ring);
+  outline-offset: -3px;
+}
+.native-settings__entry:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.native-settings__identity {
+  display: flex;
+  align-items: center;
+  gap: var(--am-space-3);
+  padding: var(--am-space-4);
+  background: var(--am-color-primary-soft);
+  border-radius: var(--am-radius-card);
+  overflow-wrap: anywhere;
+}
+.native-settings__identity > svg {
+  flex: 0 0 auto;
+  color: var(--am-color-primary);
+}
+.native-settings__section-title {
+  margin: 0;
+  font-size: var(--am-font-size-sm);
+}
+.native-settings__section-title small {
+  margin-inline-start: var(--am-space-2);
+  color: var(--am-color-text-secondary);
+  font-weight: 400;
+}
+.native-settings__group {
+  display: grid;
+  gap: var(--am-space-3);
+}

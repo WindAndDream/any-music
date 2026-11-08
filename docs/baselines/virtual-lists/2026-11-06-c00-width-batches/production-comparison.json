@@ -1,0 +1,17 @@
+{
+  "baseline": "2026-11-06-c00-revalidation/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "limits": "Combined dirty-workspace payload delta against an older recorded build, including intervening card-motion work; not isolated cost of this continuation and not frame-time benefit. Gzip is the sum of separately compressed payload files.",
+  "deltas": [
+    {
+      "runtime": "userscript",
+      "rawBytes": 9419,
+      "gzipBytes": 2521
+    },
+    {
+      "runtime": "tauri",
+      "rawBytes": 4736,
+      "gzipBytes": 1825
+    }
+  ]
+}

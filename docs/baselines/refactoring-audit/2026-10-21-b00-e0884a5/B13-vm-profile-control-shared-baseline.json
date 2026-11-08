@@ -1,0 +1,47 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B13-vm-profile-control-shared",
+  "capturedAt": "2026-10-21T13:15:19.029Z",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "workingTree": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json"
+  ],
+  "relevantWorkingTreeChanges": "",
+  "environment": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "platform": "win32",
+    "arch": "x64",
+    "timezone": "Asia/Shanghai"
+  },
+  "hashes": {
+    "AGENTS.md": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177",
+    "package.json": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e",
+    "pnpm-workspace.yaml": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e",
+    "docs/zh-cn/跨平台/架构/重构分板块排查计划.md": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15",
+    "docs/en/cross-platform/architecture/plugin-system-s11-permissionless-sandbox.md": "f6de5b53c2a59188bab49c61e289243d232efce288236666db05a18a40c11a4f",
+    "packages/plugin-vm/AGENTS.md": "7dbe141b141eda2ae0020820a76f3452f642c13e746e2b3d935899f76b949078",
+    "packages/plugin-vm/package.json": "8d976de9b87ef5d00e86a59cfd8042995cb90b4fdac6807a0bf38625d7aaa153",
+    "packages/plugin-vm/src/profile.ts": "1babc69bfa98bdc75e0946a20a1f14a5a7f39ba6ac38333dd6ce0f1bc2bceaa3",
+    "packages/plugin-vm/src/profile-identity.ts": "14fe9f3fa1b3a7c3153235d242fb218501a7e06a60b5c3c6528c7f3cba7339e4",
+    "packages/plugin-vm/src/control.ts": "3c70c407f026f8ad3980c0a90c0b56a7f12052fd050206cf7bc80be182970059",
+    "packages/plugin-vm/src/contracts.ts": "a43498d1f9d99907a641dab1c6845cec73614e4fd0ba85338715699a98d1911a",
+    "packages/plugin-vm/src/admission.ts": "d8c7b085040ca0798881463e9f7beb0bf11770baf09e541b0a566e67cbc7dc56",
+    "packages/plugin-vm/src/index.ts": "d508ba12eab0055a8487b9af8367937253e6cc7210de8d991127d5c55769153e",
+    "packages/plugin-vm/src/plugin-vm.ts": "ac22f1ec6bd603efac242f2dc9f4b4d64a93874948718c4212d4d5a0abb836de",
+    "packages/plugin-vm/test/admission.test.ts": "7bf8b0291767810e31926c366b27d9cf79eab859fe35c87d8994b419ac1a26b4",
+    "packages/plugin-vm/test/engine.test.ts": "9f0dde4ba3d7d21760900e2408c73da071ac59a32eed200725116a80c6905e49",
+    "packages/plugin-vm/src/engine-hashes.ts": "d950818b7ae77aafb2f480f114c7e16c433789e9d3b465e1bd323e22153654ca",
+    "packages/plugin-vm/engine/profile.json": "f783df7ff6d0090a15abb4a1018b3a7a327022546a1312dad7969de6521e7e00",
+    "packages/plugin-vm/engine/build.json": "fca5303eae02b75947dc3ecd75aaea11c5a658f81bfef31035d53cae76b6d4cc",
+    "scripts/check-plugin-vm.mjs": "64664c951f09bfc42e081335a0016759877cc50209952066b19bc8099ef0a87e",
+    "scripts/check-package-boundaries.mjs": "18c11924b7b99c9486cbcaf0643f9aff1612f877dbab6ef7689ef57410ca442f",
+    "packages/plugin-sandbox-browser/package.json": "3ff753d4362dcc4e72d7949a81afb3011b4e699dc2cc8ba04a1a21be8a31ed2a",
+    "packages/plugin-testkit/package.json": "3278513c21fe4ab19f629d5803670966863fdb3a814196d732bbf83feb902cb2"
+  },
+  "evidenceLimit": "Full file hashes establish reproducibility; hashing is not a claim to have reviewed every file body. Product source remains unchanged."
+}

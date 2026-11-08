@@ -1,0 +1,34 @@
+{
+  "sdkVersion": "0.1.0",
+  "manifestVersion": 1,
+  "wireVersion": 1,
+  "contributionVersion": 1,
+  "runtimeProfileVersion": 1,
+  "packageFormatVersion": 1,
+  "dataSchemaVersion": 1,
+  "budgetProfileVersion": 1,
+  "schemaId": "urn:any-music:plugin:protocol:1",
+  "limits": {
+    "messageBytes": 262144,
+    "depth": 32,
+    "nodes": 10000,
+    "stringCodePoints": 65536
+  },
+  "capabilities": [
+    "state.read",
+    "state.write",
+    "network.publicHttps",
+    "crypto.sha256",
+    "source.authentication"
+  ],
+  "extensionPoints": [
+    "navigation.sidebar",
+    "workspace.views",
+    "track.actions.secondary",
+    "track.details",
+    "trackList.operator.actions",
+    "trackList.filters",
+    "settings.sections",
+    "music.sources"
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "batchId": "T09",
+  "status": "complete",
+  "date": "2026-10-24",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "scope": "Independent Studio shell/navigation/player/catalog. Remaining Studio feature coverage is T10; production complete-root assembly is T11.",
+  "environment": {
+    "os": "Windows",
+    "shell": "PowerShell",
+    "packageManager": "pnpm 10.23.0",
+    "testRuntime": "Node Vue renderer; deferred fake transport and media element; Vite consumer compilation; no product UI launch"
+  },
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "startSnapshot": "T09-workspace-start.txt",
+    "snapshotNote": "Recorded after copying initial package test/config scaffold, before Studio implementation.",
+    "concurrentChanges": "T08 specialist migration and documentation closed during this task; prior T00-T07 and native/download changes retained. All root checks and consumer measurements describe the combined working tree.",
+    "preserved": "No reset, revert, commit, push, browser/product/emulator or development-server launch."
+  },
+  "prerequisites": {
+    "T07": "Complete in T07.json, revalidated by T08",
+    "T08": "Complete in T08.json; all classic required/optional views implemented. Observed before closing T09."
+  },
+  "files": [
+    "packages/theme-studio/AGENTS.md",
+    "packages/theme-studio/package.json",
+    "packages/theme-studio/tsconfig.json",
+    "packages/theme-studio/vitest.config.ts",
+    "packages/theme-studio/src/index.ts",
+    "packages/theme-studio/src/StudioRoot.vue",
+    "packages/theme-studio/src/vite-env.d.ts",
+    "packages/theme-studio/src/vue.ts",
+    "packages/theme-studio/src/components/StudioFeatureStatus.vue",
+    "packages/theme-studio/src/components/catalog/StudioCatalog.vue",
+    "packages/theme-studio/src/components/catalog/StudioDrawerRail.vue",
+    "packages/theme-studio/src/components/catalog/StudioResults.vue",
+    "packages/theme-studio/src/components/catalog/StudioSearch.vue",
+    "packages/theme-studio/src/components/catalog/StudioTrackRow.vue",
+    "packages/theme-studio/src/components/catalog/use-studio-catalog.ts",
+    "packages/theme-studio/src/components/player/StudioPlayer.vue",
+    "packages/theme-studio/src/components/shell/StudioNavigation.vue",
+    "packages/theme-studio/src/components/shell/StudioShell.vue",
+    "packages/theme-studio/src/styles/index.scss",
+    "packages/theme-studio/test/metadata.test.ts",
+    "packages/theme-studio/test/components/StudioFeatureStatus.test.ts",
+    "packages/theme-studio/test/fixtures/consumer.ts",
+    "packages/music-workbench/test/fixtures/theme-features.ts",
+    "packages/music-workbench/test/features/workbench/controller-theme-fixture.ts",
+    "packages/music-workbench/test/features/workbench/theme-action-contracts.test.ts",
+    "packages/music-workbench/test/features/workbench/theme-controller-continuity.test.ts",
+    "packages/music-workbench/package.json",
+    "packages/music-workbench/AGENTS.md",
+    "pnpm-lock.yaml",
+    ".agents/skills/any-music-ui-delivery/SKILL.md",
+    "docs/en/README.md",
+    "docs/en/cross-platform/README.md",
+    "docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md",
+    "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+    "docs/en/cross-platform/architecture/project-architecture.md",
+    "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+    "docs/zh-cn/文档索引.md",
+    "docs/zh-cn/跨平台/文档索引.md",
+    "docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+    "docs/zh-cn/跨平台/架构/项目架构.md",
+    "docs/zh-cn/跨平台/架构/可复用包边界.md"
+  ],
+  "ownership": {
+    "themeStudio": "Metadata, root, horizontal shell/navigation, player console, inline search/import, request rail/results table/own track rows, required states and scoped responsive styles",
+    "workbench": "Test-only dependency and common real-root action/controller fixtures; no production source import or duplicate business construction",
+    "ui": "Existing readonly feature contracts, neutral AppIcon/RemoteImage and pure filtering/mode helpers remain authoritative",
+    "host": "Media, runtime ports, credentials, persistence, source requests, account identity and protected authority remain in existing owners"
+  },
+  "coverage": {
+    "declaredViews": ["shell", "navigation", "player", "catalog"],
+    "incompleteViews": [
+      "queue",
+      "favorites",
+      "playlists",
+      "custom-tracks",
+      "history",
+      "downloads",
+      "plugins",
+      "settings",
+      "overlays",
+      "tags",
+      "composer"
+    ],
+    "catalogRemainingT10": [
+      "Advanced filter regions/history",
+      "Complete batch and playlist operations",
+      "Ordinary track/list dialogs"
+    ],
+    "productionSelectable": false,
+    "completeAdmissionRejected": ["desktop", "mobile"]
+  },
+  "targetedVerification": [
+    {
+      "command": "pnpm --filter @any-music/theme-studio test",
+      "exitCode": 0,
+      "files": 2,
+      "tests": 12,
+      "log": "T09-studio-tests.txt",
+      "includes": "Standalone Vite consumer build; no classic/business/runtime module graph; scoped CSS; feature states; incomplete admission"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/theme-action-contracts.test.ts test/features/workbench/theme-controller-continuity.test.ts",
+      "exitCode": 0,
+      "files": 2,
+      "tests": 11,
+      "log": "T09-workbench-tests.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-studio --filter @any-music/music-workbench typecheck",
+      "exitCode": 0,
+      "log": "T09-target-typecheck.txt"
+    }
+  ],
+  "invariants": [
+    "Both real roots execute the same action fixture assertions",
+    "One real controller/library/source/player/download factory across root replacement",
+    "One explicit search, ordered page reads [1,2], maximum page-read concurrency 1",
+    "Same request identity and selected track IDs; unfinished search/import/filter values survive",
+    "No implicit submits, resolution, cancellation, preference/namespace/storage writes or subscription duplication on replacement",
+    "Pause/resume and 4000ms precise seek operate the stable media controller; no duplicate media load",
+    "Source invalidation cancels pending reads and rejects the late second page",
+    "Actual controller disposal releases media and every source subscription exactly once",
+    "No classic pages/classes/DefaultTrackRow or theme-ID business branches introduced"
+  ],
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T09-root-test.txt",
+      "vitestFiles": 289,
+      "vitestTests": 2115,
+      "rustPassed": 229,
+      "rustIgnored": 1,
+      "repositoryScriptTests": 32,
+      "cliTests": 21,
+      "protocolCases": 183
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T09-root-typecheck.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T09-root-lint.txt",
+      "includes": "Package/plugin/VM/mobile boundaries and oxlint; final run has no T09 warnings"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T09-root-format.txt"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T09-root-build.txt",
+      "includes": "Both production frontends and Windows release executable; new incomplete Studio root is intentionally not in production composition"
+    }
+  ],
+  "intermediateFindings": [
+    "First common fixture lacked importUrlScopes; fixed",
+    "Classic cover label shares checkbox aria-label: fixture now targets the input semantic focus key, with asynchronous render waits",
+    "Test AppErrorState construction, Sass import declarations, bundle asset narrowing, public .ts export path and optional duration projection corrected",
+    "Own shadowed test names fixed after initial lint warnings",
+    "Added no-source/import/filter/invalid-track regressions and reran full root tests plus affected package typecheck/build tests"
+  ],
+  "artifacts": {
+    "directories": [
+      {
+        "path": "apps/userscript/dist",
+        "fileCount": 3,
+        "bytes": 4820579.0
+      },
+      {
+        "path": "apps/tauri/dist",
+        "fileCount": 67,
+        "bytes": 2852262.0
+      }
+    ],
+    "files": [
+      {
+        "path": "apps/userscript/dist/any-music.user.js",
+        "bytes": 4785482,
+        "sha256": "7b43b715552b2b306cb237a620e8d6ebd20ace921f4d325b934fa90c58041172"
+      },
+      {
+        "path": "target/release/any-music-tauri.exe",
+        "bytes": 28334592,
+        "sha256": "a4bdf224833256508a69c66d15134f46234267eec131fb59e83f3f3d44e98df0"
+      }
+    ],
+    "standaloneStudio": "Vite builds test/fixtures/consumer.ts in memory and asserts its module/CSS graph; no product launched",
+    "limitations": "Shared-worktree measurements; no isolated T09 growth attribution. Existing Tauri large-chunk and Vite plugin-timing warnings remain."
+  },
+  "remainingLimits": [
+    "T10 feature coverage and T11 production root/style injection remain unimplemented by this batch",
+    "T13 visual/focus/scroll/keyboard-touch/device acceptance was not run",
+    "Node fake transport/media does not establish installed GM, Rust HTTP/accounts/grants, native saving or actual playback continuity",
+    "No changes to external-plugin admission or native authority"
+  ],
+  "nextBatch": "T10"
+}

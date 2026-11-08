@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "documentType": "production-artifact-audit",
+  "runtimeScope": "userscript",
+  "passed": true,
+  "artifact": {
+    "path": "apps/userscript/dist/any-music.user.js",
+    "bytes": 5021592,
+    "sha256": "fc88355902a82e283665095d290a8cc5b893bb3389f4a8560ddee76b6a40e45a"
+  },
+  "metadata": {
+    "grants": [
+      "GM.deleteValue",
+      "GM.getTab",
+      "GM.getTabs",
+      "GM.getValue",
+      "GM.listValues",
+      "GM.saveTab",
+      "GM.setValue",
+      "GM_addValueChangeListener",
+      "GM_cookie",
+      "GM_deleteValue",
+      "GM_getValue",
+      "GM_openInTab",
+      "GM_removeValueChangeListener",
+      "GM_setValue",
+      "GM_xmlhttpRequest",
+      "unsafeWindow"
+    ],
+    "connect": [
+      "126.net",
+      "api.bilibili.com",
+      "bilivideo.cn",
+      "bilivideo.com",
+      "byteimg.com",
+      "douyinpic.com",
+      "douyinvod.com",
+      "hdslb.com",
+      "music.126.net",
+      "music.163.com",
+      "pstatp.com",
+      "www-hj.douyin.com",
+      "www.douyin.com",
+      "www.iesdouyin.com"
+    ],
+    "matchesSourceConfiguration": true,
+    "match": ["*://*/*"],
+    "runAt": ["document-start"],
+    "noframes": true,
+    "externalRequireOrResources": false
+  },
+  "graph": {
+    "externalPlugins": "none",
+    "eagerModules": 25,
+    "renderedModules": 523,
+    "noEagerPresentation": true,
+    "noExternalExecutionRuntime": true,
+    "fallback": "default",
+    "optionalThemes": ["studio"],
+    "studioStartup": ["packages/theme-studio/src/index.ts"],
+    "studioExecutableStartup": false
+  },
+  "limit": "Static packaged-output and build-graph evidence only. Installed Tampermonkey permissions/startup, actual GM calls and browser interaction remain unverified.",
+  "auditCorrection": "The initial ad hoc assertion incorrectly excluded the allowed Studio metadata entry. It was corrected after inspecting startup: only theme-studio/src/index.ts is present; executable entries remain excluded. No product change was required."
+}

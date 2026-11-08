@@ -1,0 +1,60 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B16-package-verification-tauri-fix",
+  "capturedAt": "2026-10-21T23:23:53.8778435+08:00",
+  "head": "a693165205be0bc321764768d796d7c842f7a446",
+  "workingTreeAtCapture": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M packages/plugin-sdk/test/package-corpus-generator.mjs",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json"
+  ],
+  "captureNote": "Generator table has just been added; implementation and raw corpus remain pre-fix at this capture.",
+  "originalSourceHashes": [
+    {
+      "sha256": "0c08c167d11b4f56ad0b6483c17cb82bff06944c2aac08e699bf3c60754952c4",
+      "path": "crates/am-plugin-package/src/lib.rs",
+      "normalization": "Git UTF-8 source with LF"
+    },
+    {
+      "sha256": "775a264cb7b059b8d5b1267516a05ae9200d57a1f5ff6f30651fae173a8f1526",
+      "path": "packages/plugin-sdk/src/node/package-format.mjs",
+      "normalization": "Git UTF-8 source with LF"
+    },
+    {
+      "sha256": "9e9830bb27d1b0bb9653d961ac65273cc4aea37ddfbc85352df2201a18d993e3",
+      "path": "packages/plugin-sdk/test/package-corpus-generator.mjs",
+      "normalization": "Git UTF-8 source with LF"
+    },
+    {
+      "sha256": "f5dd9c507a199c9bbd9ceb9c200c9f114539fb8ddaf01a569e07cc60ea319c1e",
+      "path": "packages/plugin-sdk/test/fixtures/packages/corpus.json",
+      "normalization": "Git UTF-8 source with LF"
+    }
+  ],
+  "auditBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+  "environment": {
+    "timezone": "Asia/Shanghai",
+    "node": "v24.11.1",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+    "architecture": "x64",
+    "platform": "win32",
+    "pnpm": "10.23.0"
+  }
+}

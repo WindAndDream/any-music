@@ -1,0 +1,228 @@
+{
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R3",
+  "privacy": "No cookie values, account names/IDs, private folder IDs/titles, signed media URLs or signature values.",
+  "samples": [
+    {
+      "label": "observer-installed",
+      "at": 1793071915926,
+      "origin": "https://www.bilibili.com",
+      "theme": "studio",
+      "source": "bilibili",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "unavailable",
+          "error": "列表使用的音乐源已停用，加载已中止。请在设置中启用后重试。（错误码：AM-1005）"
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "bilibili-host-signed-in-private-restored",
+      "at": 1793071933150,
+      "origin": "https://www.bilibili.com",
+      "theme": "studio",
+      "source": "bilibili",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "bilibili-host-private-play-requested",
+      "at": 1793071946410,
+      "origin": "https://www.bilibili.com",
+      "theme": "studio",
+      "source": "bilibili",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "bilibili-host-reload-confirmation-not-yet-accepted",
+      "at": 1793071979475,
+      "origin": "https://www.bilibili.com",
+      "theme": "studio",
+      "source": "bilibili",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "bilibili-host-private-first-page-fresh",
+      "at": 1793072047998,
+      "origin": "https://www.bilibili.com",
+      "theme": "studio",
+      "source": "bilibili",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": false,
+          "time": 0,
+          "readyState": 4,
+          "duration": 1560.533333,
+          "urlKind": "https",
+          "host": "cn-jsnt-ct-01-06.bilivideo.com"
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "bilibili-host-private-playing-advanced",
+      "at": 1793072072123,
+      "origin": "https://www.bilibili.com",
+      "theme": "studio",
+      "source": "bilibili",
+      "sourceOrder": ["bilibili", "douyin", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": false,
+          "time": 24.030208,
+          "readyState": 4,
+          "duration": 1560.533333,
+          "urlKind": "https",
+          "host": "cn-jsnt-ct-01-06.bilivideo.com"
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    }
+  ],
+  "privateFresh": {
+    "label": "bilibili-host-private-first-page-fresh",
+    "at": 1793072047998,
+    "origin": "https://www.bilibili.com",
+    "theme": "studio",
+    "source": "bilibili",
+    "sourceOrder": ["bilibili", "douyin", "netease"],
+    "session": [
+      {
+        "status": "signed-in",
+        "error": null
+      }
+    ],
+    "audioCount": 1,
+    "audio": [
+      {
+        "paused": false,
+        "time": 0,
+        "readyState": 4,
+        "duration": 1560.533333,
+        "urlKind": "https",
+        "host": "cn-jsnt-ct-01-06.bilivideo.com"
+      }
+    ],
+    "roots": 1,
+    "hostProductStyleCount": 0,
+    "visibleTrackCount": 28
+  },
+  "privatePlaying": {
+    "label": "bilibili-host-private-playing-advanced",
+    "at": 1793072072123,
+    "origin": "https://www.bilibili.com",
+    "theme": "studio",
+    "source": "bilibili",
+    "sourceOrder": ["bilibili", "douyin", "netease"],
+    "session": [
+      {
+        "status": "signed-in",
+        "error": null
+      }
+    ],
+    "audioCount": 1,
+    "audio": [
+      {
+        "paused": false,
+        "time": 24.030208,
+        "readyState": 4,
+        "duration": 1560.533333,
+        "urlKind": "https",
+        "host": "cn-jsnt-ct-01-06.bilivideo.com"
+      }
+    ],
+    "roots": 1,
+    "hostProductStyleCount": 0,
+    "mediaExtension": ".m4s"
+  },
+  "actions": [],
+  "capturedAt": 1793072076182
+}

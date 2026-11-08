@@ -1,0 +1,12 @@
+
+> @any-music/theme-default@0.0.0 test <project-root>\packages\theme-default
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/theme-default
+
+
+ Test Files  11 passed (11)
+      Tests  101 passed (101)
+   Start at  19:22:49
+   Duration  4.86s (transform 18.04s, setup 0ms, import 41.65s, tests 572ms, environment 4ms)

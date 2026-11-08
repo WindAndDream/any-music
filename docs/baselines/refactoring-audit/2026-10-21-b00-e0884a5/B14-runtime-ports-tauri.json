@@ -1,0 +1,260 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-runtime-ports-tauri",
+  "parentBatch": "B14",
+  "candidate": "B14-runtime-ports",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T21:29:02.4390087+08:00",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+  "scope": {
+    "invariant": "An injected Store serializes native context/identity/epoch/expiry checks; injected time must be sampled after transaction admission, and selected data is returned only after provenance/history successfully commits.",
+    "selectedChain": "Runtime::recover -> host_session/create_session -> host_context -> check_context/check_capability and selected read -> Store::transaction -> bound_context/check_session -> policy/combination -> result; injected InstallFiles contract and host_package_session proof handoff inspected without expanding package recovery.",
+    "allowedPaths": [
+      "crates/am-plugin-runtime public ports, authority and selected read helpers",
+      "crates/am-plugin-runtime/tests/offline.rs (fixtures and relevant tests)",
+      "apps/tauri/src-tauri/src/plugins/executor.rs (direct guard call sites only)"
+    ],
+    "readFiles": [
+      "crates/am-plugin-runtime/Cargo.toml",
+      "crates/am-plugin-runtime/src/lib.rs",
+      "crates/am-plugin-runtime/src/model.rs:1-145,166-315",
+      "crates/am-plugin-runtime/src/install_model.rs:1-45,121-161",
+      "crates/am-plugin-runtime/src/authority.rs:1-310,338-625",
+      "crates/am-plugin-runtime/src/data.rs:1-88,205-260",
+      "crates/am-plugin-runtime/src/egress.rs:1-58 (plus tail audit helper excerpt)",
+      "crates/am-plugin-runtime/tests/offline.rs:1-164,386-483,571-640",
+      "apps/tauri/src-tauri/src/plugins/executor.rs:141-185,568-615,697-741"
+    ],
+    "expansionReasons": [
+      "Selected read helpers show how the same public Store/Clock contract is safely applied and how history commits before data return.",
+      "The guard implementation samples time before Store admission; one direct executor neighbor establishes concrete bootstrap/final-result and broker-capability uses. SQLite and executor lifecycle internals remain outside this batch."
+    ],
+    "exclusions": [
+      "Product fixes and permanent tests",
+      "SQLite adapter schema/transaction/permit behavior",
+      "Independent named commit/revoke/version/idempotency audit",
+      "InstallFiles filesystem implementation, install/rollback/recovery and anonymous transport",
+      "Complete production IPC/admission/caller provenance audit",
+      "App/browser/emulator inspection, root final acceptance, commit and push"
+    ]
+  },
+  "declaredStatus": {
+    "claim": "Runtime uses only protocol/policy/serde/serde_json with injected Store/Clock/Ids/InstallFiles; every operation rechecks actual native identity, epoch and lifetime.",
+    "references": [
+      "crates/AGENTS.md:10",
+      "crates/am-plugin-runtime/AGENTS.md:3",
+      "crates/am-plugin-runtime/AGENTS.md:7",
+      "crates/am-plugin-runtime/src/model.rs:22",
+      "docs/en/desktop/backend-engineering.md:87"
+    ],
+    "assessment": "Dependency and port ownership conform; two context/capability guard paths violate the lifetime-check ordering under Store contention."
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Does runtime own native orchestration without concrete IO, DB or global-clock dependencies?",
+      "evidence": [
+        "crates/am-plugin-runtime/Cargo.toml:12",
+        "crates/am-plugin-runtime/src/lib.rs:1",
+        ".codex-tmp/audit-b14-runtime-ports/rust-boundaries.log"
+      ],
+      "detail": "Only protocol/policy/serialization dependencies are declared; complete closure passes the existing metadata boundary check. No concrete filesystem/network/database/framework/global-clock implementation is imported by runtime."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Are authority inputs and durability/time/ID/file ports explicit and native-only?",
+      "evidence": [
+        "crates/am-plugin-runtime/src/model.rs:22",
+        "crates/am-plugin-runtime/src/model.rs:46",
+        "crates/am-plugin-runtime/src/authority.rs:6",
+        "crates/am-plugin-runtime/src/install_model.rs:134",
+        "crates/am-plugin-runtime/src/authority.rs:59"
+      ],
+      "detail": "Caller has no Deserialize; runtime is generic over Store/Clock/Ids and accepts InstallFiles explicitly. verify_pair returns owned verified bytes; session proof binds identity and epoch. Actual native caller construction, filesystem durability and package-recovery ordering are not accepted here."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Do context and capability checks evaluate expiry against transaction-admission time?",
+      "evidence": [
+        "crates/am-plugin-runtime/src/authority.rs:303",
+        "crates/am-plugin-runtime/src/authority.rs:311",
+        ".codex-tmp/audit-b14-runtime-ports/probes.rs:94",
+        ".codex-tmp/audit-b14-runtime-ports/probes.log"
+      ],
+      "findingIds": ["B14-R01"],
+      "detail": "Both guards capture now_ms before Store::transaction. Six independent grant/session/context deadline probes return Ok after time advances to expiry at Store admission; each is valid before waiting and must return Expired after admission."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Do selected-data reads and recovery stop on failed durable commits without leaking data or partial epoch changes?",
+      "evidence": [
+        "crates/am-plugin-runtime/src/data.rs:13",
+        "crates/am-plugin-runtime/src/data.rs:49",
+        "crates/am-plugin-runtime/src/authority.rs:14",
+        ".codex-tmp/audit-b14-runtime-ports/probes.rs:102",
+        ".codex-tmp/audit-b14-runtime-ports/probes.rs:113"
+      ],
+      "detail": "Memory-Store failure injection proves read returns Storage and retains no partial delivery/history; read samples the clock inside admission. Recovery returns no runtime on commit failure, and a second-install epoch overflow rolls back the first increment. These are injected-Store proofs, not SQLite durability evidence."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Are actual session/caller identities, epoch and selected object versions checked against the current ledger?",
+      "evidence": [
+        "crates/am-plugin-runtime/src/authority.rs:525",
+        "crates/am-plugin-runtime/src/authority.rs:543",
+        "crates/am-plugin-runtime/src/data.rs:16",
+        "crates/am-plugin-runtime/tests/offline.rs:402",
+        "crates/am-plugin-runtime/tests/offline.rs:572"
+      ],
+      "detail": "Bound context checks real channel/document/account; session checks full install identity, enabled flag and epoch. Selected read checks object versions before projection. Existing replacement, restart, context closure, forged caller and corruption regressions pass. The separate expiry-order defect remains open."
+    }
+  ],
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "cargo clippy -p am-plugin-runtime --all-targets --locked -- -D warnings",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:26:28.0528971+08:00",
+      "finishedAt": "2026-10-21T21:26:30.2504756+08:00",
+      "log": ".codex-tmp/audit-b14-runtime-ports/cargo-clippy.log",
+      "logSha256": "9fcc421055210c695258ab973b14c9dbbfa4903b1a556fb77f19f7917c91ee1e"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "cargo fmt -p am-plugin-runtime -- --check",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:26:27.4744296+08:00",
+      "finishedAt": "2026-10-21T21:26:28.0007652+08:00",
+      "log": ".codex-tmp/audit-b14-runtime-ports/cargo-fmt.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p am-plugin-runtime --locked",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:22:49.1213553+08:00",
+      "finishedAt": "2026-10-21T21:22:55.5126991+08:00",
+      "log": ".codex-tmp/audit-b14-runtime-ports/cargo-test.log",
+      "logSha256": "05f14d3963ee33cced1caa1b763d8495c8844fd7f20afc9f8a6926161ef91576"
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "rustc --edition=2024 --test .codex-tmp/audit-b14-runtime-ports/probes.rs --extern am_plugin_runtime=<Cargo artifact> --extern serde_json=<Cargo artifact> -L dependency=target/debug/deps -o .codex-tmp/audit-b14-runtime-ports/probes.exe; .codex-tmp/audit-b14-runtime-ports/probes.exe audit_ports:: --nocapture",
+      "exitCode": 101,
+      "startedAt": "2026-10-21T21:25:58.6362281+08:00",
+      "finishedAt": "2026-10-21T21:26:00.2302326+08:00",
+      "log": ".codex-tmp/audit-b14-runtime-ports/probes.log",
+      "logSha256": "06bffb5a936dde9c0ce03f63dc26c19d4035d5cb8d20af6d6ff6a57b6848a03f"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm check:rust:boundaries",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:26:30.2611133+08:00",
+      "finishedAt": "2026-10-21T21:26:31.5174248+08:00",
+      "log": ".codex-tmp/audit-b14-runtime-ports/rust-boundaries.log",
+      "logSha256": "87e867acabb052c25c566d6de6a9aedb0397e02fe3cbe1ea8aeca848c23f7093"
+    }
+  ],
+  "testSummary": {
+    "permanentRuntimeTests": {
+      "passed": 24,
+      "failed": 0
+    },
+    "auditOnlyProbes": {
+      "passed": 5,
+      "failed": 6,
+      "total": 11
+    },
+    "expiryFailureMatrix": "2 guard methods x 3 independent expiration bounds",
+    "expectedFailure": "The failing public-API probes demonstrate B14-R01 and are not suppressed.",
+    "productImplementationChanged": false
+  },
+  "findings": [
+    {
+      "id": "B14-R01",
+      "priority": 2,
+      "severity": "P2",
+      "status": "open",
+      "title": "Sample authorization time after entering the Store transaction",
+      "owner": "crates/am-plugin-runtime/src/authority.rs",
+      "locations": [
+        {
+          "path": "crates/am-plugin-runtime/src/authority.rs",
+          "start": 303,
+          "end": 306
+        },
+        {
+          "path": "crates/am-plugin-runtime/src/authority.rs",
+          "start": 317,
+          "end": 319
+        }
+      ],
+      "trigger": "Call check_context or check_capability while now < the grant/session/context expiry, then let Store acquisition wait until now >= that expiry before invoking the transaction closure.",
+      "observed": "All six guard/expiry combinations return Ok(()) instead of Err(Expired). Positive controls succeed before the wait; already-expired controls and read with transaction-local time deny correctly.",
+      "effect": "Expired context/capability checks can authorize after Store contention. Direct executor callers use check_context before guest bootstrap/final-output delivery and check_capability before broker operations.",
+      "evidence": [
+        ".codex-tmp/audit-b14-runtime-ports/probes.rs:94",
+        ".codex-tmp/audit-b14-runtime-ports/probes.log",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:167",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:578",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:719",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:728"
+      ],
+      "limit": "Reproduced against the unchanged runtime with a deterministic injected Store/Clock, not a live native SQLite queue. Native epoch/revocation checks still use current ledger state; this finding does not establish unauthorized persisted writes. No executor exploit or live runtime acceptance is claimed.",
+      "suggestedAction": "Borrow self.clock before transaction, then call clock.now_ms() inside each transaction closure before bound_context, matching read/create_session/host_context. Add permanent delayed-admission regressions for both methods and all expiry sources; rerun runtime and direct executor tests."
+    }
+  ],
+  "probeEvidence": {
+    "source": ".codex-tmp/audit-b14-runtime-ports/probes.rs",
+    "sourceSha256": "3312aed51b681c4e6019f119dd35ddf60ab50aec7b17a666504c2c17d04d545f",
+    "implementation": "Audit-only module includes existing test-owned fixtures, then wraps Memory::transaction to advance the injected clock immediately after admission. A native-only seeded PackageRecord supplies the exact crypto.sha256 grant for capability controls; no production seed was added.",
+    "retention": "Ignored local source, compile/build artifacts and logs; permanent product tests remain unchanged.",
+    "recoveredHarnessIssues": "Initial standalone compilation assumed a nonexistent top-level serde_json rlib; use of the Cargo-emitted artifact fixed compilation. Final audit_ports:: filter runs only the 11 local tests; six runtime failures remain. Initial compile and first run are retained separately."
+  },
+  "missingEvidence": [
+    "B14-R01 has not been repaired or given permanent regressions.",
+    "Application Store/Clock/Ids implementations, schema 3, persistence/corruption, cancellation and blocking-pool permits remain B14-authority-storage.",
+    "Named commit/revoke atomic values/provenance/receipts/version/idempotency and real multi-connection competition remain B14-named-commit-revoke.",
+    "InstallFiles behavior beyond its public owned-byte/proof handoff, verified install/rollback/recovery and precise target admission are not accepted.",
+    "Direct executor excerpts establish call sites only; complete production IPC/caller/consent and executor lifecycle remain separate.",
+    "Production artifacts, live app/browser checks and repository-wide final gates were not run for this audit without implementation changes."
+  ],
+  "unreadPaths": [
+    "crates/am-plugin-runtime/src/install.rs implementation",
+    "crates/am-plugin-runtime/src/data.rs prepare/commit/check_write implementation",
+    "crates/am-plugin-runtime/src/egress.rs transport/exit lifecycle beyond the directly used combination helper",
+    "apps/tauri/src-tauri/src/storage/plugins*",
+    "apps/tauri/src-tauri/src/plugins.rs composition and IPC/ACL registration",
+    "Native SQLite/permit/commit race and package-recovery tests"
+  ],
+  "nextBatch": {
+    "batchId": "B14-authority-storage-tauri",
+    "candidate": "B14-authority-storage",
+    "runtime": "tauri",
+    "entry": "apps/tauri/src-tauri/src/storage/plugins.rs",
+    "question": "Verify independent plugins.sqlite3 schema 3, serialized durable Store transactions, fail-closed schema/grants and blocking-job permit ownership after canceled waits.",
+    "openDependency": "Keep B14-R01 open; a storage audit does not repair pre-transaction clock sampling."
+  },
+  "handoffZh": "B14-runtime-ports-tauri 已完成排查，基线 acf455c，结论 violating / needs-fix。Store/Clock/Ids/InstallFiles 注入与纯依赖符合约定，Caller 不可从 DTO 反序列化，身份/epoch/通道重检及选中读取的事务失败路径通过。发现 P2 B14-R01：check_context/check_capability 在 Store 事务前取时；等待跨越授权、会话或上下文期限后仍返回成功。11 项本地探针中 6 项失败、5 项通过，原有 24 项测试全过，依赖边界、fmt 和零警告 Clippy 通过。原生 executor 的 bootstrap/最终结果/能力代理使用这些检查，但本次没有执行真实 SQLite 等待或应用验收，也未证明越权落盘。未修改产品或永久测试，未启动 UI、提交或推送。B14 累计排查 2/4，只有纯策略通过；缺陷仍待修复。下一批唯一入口为 B14-authority-storage-tauri，从 storage/plugins.rs 核查 schema 3、持久化事务和取消许可，不重复展开策略或安装恢复。"
+}

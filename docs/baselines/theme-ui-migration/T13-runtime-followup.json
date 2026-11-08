@@ -1,0 +1,1638 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-evidence",
+  "runtimeScope": "shared",
+  "batchId": "T13-runtime-followup",
+  "date": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "status": "partial-live-acceptance-delivered",
+  "overallT13Status": "in-progress",
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "preservedEarlierChanges": true,
+    "concurrentDiscoveryChangesIncludedInDelivery": true,
+    "commitOrPush": false
+  },
+  "repairs": [
+    {
+      "path": "packages/plugin-music-creation/src/vue/components/MaterialFilterBar.vue",
+      "problem": "Nested native v-model assignments attempted to mutate readonly host projections; native selects changed their displayed values without recomputing the material list.",
+      "change": "Six writable computed fields replace the complete model and emit through the existing host/session action. Readonly projection regression executes all six compiled assignments."
+    },
+    {
+      "path": "packages/theme-default/src/styles/index.scss",
+      "problem": "Specialist pages lacked the am-workbench content query container. Narrow collection creation overflowed and clipped its action.",
+      "change": "Preserve am-content and add am-workbench on the actual Classic content owner with specificity above the neutral scoped component rule."
+    },
+    {
+      "path": "packages/theme-studio/src/styles/index.scss",
+      "change": "Provide the same named content-width query contract to neutral specialist controls inside Studio."
+    }
+  ],
+  "freshness": {
+    "productionBefore": {
+      "files": 776,
+      "sha256": "388a7d7651980da12785af45de41f90f5b21837bb65d9489f5fff41796ae48f9"
+    },
+    "productionAfter": {
+      "files": 776,
+      "sha256": "388a7d7651980da12785af45de41f90f5b21837bb65d9489f5fff41796ae48f9"
+    },
+    "matches": true,
+    "latestSourcesUnchangedAtFinalAudit": false,
+    "artifacts": {
+      "userscript": {
+        "bytes": 4918861,
+        "installedSha256": "3664629825ca85846587c279bc29b53aa8df427c6dade8bb0a72f2a20fb62914",
+        "localSha256": "3664629825ca85846587c279bc29b53aa8df427c6dade8bb0a72f2a20fb62914",
+        "matches": true,
+        "manager": "Tampermonkey 5.5.0",
+        "install": "Built production file through manager installer; editor source digest checked. Hash-qualified URL avoids manager same-URL source caching."
+      },
+      "windows": {
+        "sha256": "e4dbf5440b650b6d84236c326bcc0feadf3c238c8737ffc3ad58afb851898373",
+        "bytes": 28362240,
+        "entry": "index-D6QKmYAW.js",
+        "scope": "Independent com.anymusic.t13-completion partition; embedded optimized release"
+      },
+      "android": {
+        "installedSha256": "4662943a031563d904ee458f4a727bfd4c15677547580b43646ab69ad60fbd13",
+        "matches": true,
+        "productionBefore": {
+          "files": 776,
+          "sha256": "388a7d7651980da12785af45de41f90f5b21837bb65d9489f5fff41796ae48f9"
+        },
+        "productionAfter": {
+          "files": 776,
+          "sha256": "388a7d7651980da12785af45de41f90f5b21837bb65d9489f5fff41796ae48f9"
+        },
+        "verification": {
+          "runtimeScope": "tauri",
+          "recordedAtUtc": "2026-10-25T07:52:00.031Z",
+          "target": "aarch64",
+          "buildTools": "36.0.0",
+          "signerSha256": "10336282357619a26ac35066e29b3bca05018d7a0e571d7b889afc838acf48e0",
+          "signed": true,
+          "debuggable": false,
+          "backup": false,
+          "cleartext": false,
+          "apk16KiBAlignment": true,
+          "bundlePayloadSignatures": true,
+          "native16KiBAlignment": true,
+          "nativeLibraryCount": 1,
+          "externalPlugins": "none",
+          "executionAdmitted": false,
+          "storeChannelAccepted": false,
+          "artifacts": [
+            {
+              "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/arm64/release/app-arm64-release.apk",
+              "bytes": 26185129,
+              "sha256": "4662943a031563d904ee458f4a727bfd4c15677547580b43646ab69ad60fbd13"
+            },
+            {
+              "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/bundle/arm64Release/app-arm64-release.aab",
+              "bytes": 10992691,
+              "sha256": "baaec7190e90cbd873784627064335ecc95fb6ceeb3e4a8e58d3a5bd42091744"
+            }
+          ]
+        }
+      }
+    },
+    "scope": "Historical follow-up snapshot; see unifiedAcceptance.freshness for the final combined source."
+  },
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "environment": "npm_config_workspace_concurrency=1",
+      "log": ".codex-tmp/t13-completion/delivery-test.txt"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-completion/delivery-typecheck.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-completion/delivery-lint.txt"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-completion/delivery-format-check.txt"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-completion/delivery-build.txt"
+    }
+  ],
+  "testTotals": {
+    "vitestFiles": 294,
+    "vitestTests": 2167,
+    "repositoryScriptTests": 36,
+    "rustPassed": 229,
+    "rustIgnored": 1,
+    "protocolCases": 183
+  },
+  "targeted": {
+    "creationPlugin": {
+      "files": 5,
+      "tests": 15
+    },
+    "classicTheme": {
+      "files": 50,
+      "tests": 357,
+      "scope": "Targeted styling snapshot before concurrent discovery tests; final root uses the final combined tree."
+    },
+    "studioTheme": {
+      "files": 2,
+      "tests": 12
+    }
+  },
+  "runtimeEvidence": {
+    "userscript": {
+      "manager": "Tampermonkey 5.5.0",
+      "host": "https://example.com/",
+      "productionArtifact": true,
+      "gmSubstitute": false,
+      "latestArtifactDigestVerifiedInManagerEditor": true,
+      "observed": [
+        "Real source URL imports, playback and download resolution through installed GM transport on a foreign host.",
+        "Same sole audio node during Classic to Studio playback; elapsed time 127.887664 to 147.458409 seconds.",
+        "1280x850 light and 411x864 system dark/reduced-motion layouts; no collection toolbar overflow at 411px.",
+        "Host button !important magenta/37px style affects a temporary host sentinel while internal button computed background remains unchanged. Sentinel/styles removed.",
+        "Hide/show preserves the sole audio node and mounted theme.",
+        "Explicit three-track batch traverses two active/one queued state and Classic/Studio replacement; one ZIP saves, CRC passes and the installed script restores three completed tasks after reload without a second matching file.",
+        "Latest artifact is installed with a hash-qualified URL; manager source bytes match the current production file. Latest reload restores the completed tasks with one root/audio and no any-music product keys in host localStorage."
+      ],
+      "batchArtifactSha256": "ec12b98771fa362d8d3010bdab066fc90f6d032791c2a37d132169d5f7f9c34b",
+      "batchSave": {
+        "fileName": "any-music-download-20261025-154813.zip",
+        "sizeBytes": 12444147,
+        "sha256": "8b036064859c0d41629c612b3fde25098ddf885939d1fbf4eb1682d5c3ef7388",
+        "mp3Bytes": [4556981, 4270726, 3609475],
+        "mp3Count": 3,
+        "crcPassed": true,
+        "matchingExportCount": 1
+      },
+      "restart": {
+        "matchingExportCount": 1,
+        "observation": "Reloaded installed-script page and expanded the real GM-backed product; three imported source lists and completed download tasks recover; host localStorage has no any-music product keys."
+      },
+      "limits": [
+        "No signed-in Bilibili or Douyin account is available in this test profile; authenticated/private-source and source-host acceptance remain open.",
+        "This script has no GM_download grant; evidence is its installed-script browser Blob/anchor file-save path, not a claim about an unused manager API.",
+        "Exact GM request/scheduler IPC counts and the complete source/host/capability matrix are not established."
+      ]
+    },
+    "windows": {
+      "partition": "com.anymusic.t13-completion",
+      "originalDesktopDataChanged": false,
+      "latestPlayback": {
+        "sha256": "e4dbf5440b650b6d84236c326bcc0feadf3c238c8737ffc3ad58afb851898373",
+        "before": {
+          "t": 0.111001,
+          "p": false,
+          "audioCount": 1
+        },
+        "studio": {
+          "theme": "studio",
+          "t": 4.80322,
+          "p": false,
+          "same": true,
+          "audioCount": 1
+        },
+        "back": {
+          "theme": "default",
+          "t": 57.203014,
+          "p": false,
+          "same": true,
+          "audioCount": 1
+        }
+      },
+      "focus": {
+        "focusedSearch": [
+          {
+            "name": "music-source-search",
+            "type": "search"
+          }
+        ],
+        "focusedReturn": [
+          {
+            "tag": "DIV",
+            "cls": "",
+            "name": null,
+            "text": ""
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "catalog-drawers__discover",
+            "name": null,
+            "text": "发现"
+          }
+        ],
+        "mechanism": "Actual CDP mouse + Escape key in foreground native WebView"
+      },
+      "themeFailure": {
+        "failed": {
+          "theme": "default",
+          "notice": true,
+          "interactiveRoots": 1,
+          "audioCount": 1
+        },
+        "retried": {
+          "theme": "studio",
+          "interactiveRoots": 1,
+          "audioCount": 1
+        },
+        "injection": "CDP Network blocks only the bundled optional Studio resource; no runtime or storage doubles"
+      },
+      "batch": {
+        "artifactSha256": "9d3d7a43f64cb8f4586160b125c3441759ca6686892b48be52cb82dfc03b3d23",
+        "before": {
+          "id": "download-batch:f35ef2de-9955-44dd-88be-22edd2e15363",
+          "status": "running",
+          "items": [
+            {
+              "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+              "trackId": "bilibili:video:BV1nsRFBBEeW",
+              "status": "downloading"
+            },
+            {
+              "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+              "trackId": "bilibili:video:BV134Ho6qENu",
+              "status": "downloading"
+            },
+            {
+              "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+              "trackId": "bilibili:video:BV1NXab6GEYA",
+              "status": "queued"
+            }
+          ]
+        },
+        "studio": {
+          "id": "download-batch:f35ef2de-9955-44dd-88be-22edd2e15363",
+          "status": "running",
+          "items": [
+            {
+              "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+              "trackId": "bilibili:video:BV1nsRFBBEeW",
+              "status": "downloading"
+            },
+            {
+              "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+              "trackId": "bilibili:video:BV134Ho6qENu",
+              "status": "downloading"
+            },
+            {
+              "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+              "trackId": "bilibili:video:BV1NXab6GEYA",
+              "status": "queued"
+            }
+          ]
+        },
+        "back": {
+          "id": "download-batch:f35ef2de-9955-44dd-88be-22edd2e15363",
+          "status": "running",
+          "items": [
+            {
+              "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+              "trackId": "bilibili:video:BV1nsRFBBEeW",
+              "status": "downloading"
+            },
+            {
+              "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+              "trackId": "bilibili:video:BV134Ho6qENu",
+              "status": "downloading"
+            },
+            {
+              "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+              "trackId": "bilibili:video:BV1NXab6GEYA",
+              "status": "queued"
+            }
+          ]
+        },
+        "final": {
+          "id": "download-batch:f35ef2de-9955-44dd-88be-22edd2e15363",
+          "status": "completed",
+          "items": [
+            {
+              "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+              "trackId": "bilibili:video:BV1nsRFBBEeW",
+              "status": "succeeded"
+            },
+            {
+              "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+              "trackId": "bilibili:video:BV134Ho6qENu",
+              "status": "succeeded"
+            },
+            {
+              "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+              "trackId": "bilibili:video:BV1NXab6GEYA",
+              "status": "succeeded"
+            }
+          ],
+          "archive": {
+            "fileName": "any-music-download-20261025-154509.zip",
+            "extension": "zip",
+            "mimeType": "application/zip",
+            "sizeBytes": 12444958,
+            "sha256": "2c58a2d6cbd16188aa8582c312e0fc371494c630692c0f021bcdc3325831eef5"
+          }
+        },
+        "save": {
+          "fileName": "any-music-download-20261025-154509.zip",
+          "sizeBytes": 12444958,
+          "sha256": "2c58a2d6cbd16188aa8582c312e0fc371494c630692c0f021bcdc3325831eef5",
+          "mp3Bytes": [3609475, 4556981, 4270726],
+          "mp3Count": 3,
+          "crcPassed": true,
+          "matchingExportCount": 1
+        },
+        "restart": {
+          "sameBatches": true,
+          "completed": true,
+          "matchingExportCount": 1
+        }
+      },
+      "longCreationSession": {
+        "elapsedSeconds": 640,
+        "before": {
+          "theme": "studio",
+          "title": "T13 retained two-leaf draft",
+          "two": true,
+          "query": "We Never"
+        },
+        "after": {
+          "theme": "default",
+          "title": "T13 retained two-leaf draft",
+          "two": true,
+          "query": "We Never",
+          "libraryUnchanged": true
+        },
+        "scope": "Two real 2–7 second leaves, unsaved title and separate material/tag queries; no publish. Not an endurance or memory-leak proof."
+      },
+      "latestColdEditor": {
+        "theme": "default",
+        "title": "T13 retained two-leaf draft",
+        "two": true,
+        "materialQuery": "",
+        "artifactSha256": "e4dbf5440b650b6d84236c326bcc0feadf3c238c8737ffc3ad58afb851898373"
+      },
+      "sourceFailureRecovery": "Anonymous account absence produced AM-2003; creating a dedicated anonymous account and explicitly retrying loads the same public video. Anonymous search returns AM-2001; this is not an authenticated-transport pass.",
+      "scroll": {
+        "result": "insufficient-scroll-range",
+        "details": {
+          "before": [
+            {
+              "key": "workspace",
+              "top": 4.5714287757873535,
+              "max": 5
+            }
+          ],
+          "studio": [
+            {
+              "key": "navigation",
+              "top": 0,
+              "max": 0
+            },
+            {
+              "key": "workspace",
+              "top": 0,
+              "max": 0
+            },
+            {
+              "key": "workspace",
+              "top": 0,
+              "max": 0
+            },
+            {
+              "key": "library:tracks",
+              "top": 0,
+              "max": 0
+            }
+          ],
+          "back": [
+            {
+              "key": "workspace",
+              "top": 0,
+              "max": 5
+            },
+            {
+              "key": "settings:overview",
+              "top": 0,
+              "max": 303
+            },
+            {
+              "key": "settings:appearance",
+              "top": 0,
+              "max": 0
+            }
+          ]
+        },
+        "limit": "Only about 5px of Classic overflow; Studio has no destination range. This verifies clamping only and does not close nontrivial Windows scroll restoration."
+      },
+      "limits": [
+        "Complete native wide/narrow/light/dark/focus/protected-surface/capability matrix remains open.",
+        "Original desktop core-generation recovery is separate and was not attempted.",
+        "The three-track live cycle uses the stated prior optimized artifact. Latest optimized build repeats playback, failure/retry, focus and persistence; the batch is not relabeled as a full latest-artifact rerun."
+      ]
+    },
+    "android": {
+      "device": {
+        "serial": "d8a1c6c3",
+        "model": "23113RKC6C",
+        "android": "15",
+        "abi": "arm64-v8a",
+        "webView": "153.0.8010.36"
+      },
+      "userAuthorizedFreshReinstall": true,
+      "installedBuild": "Signed optimized release, non-debuggable; externalPlugins none",
+      "priorRelease": {
+        "apkSha256": "f0c53610ca952d47b78479cc6b8a6d43457d74779f42c25269d0511bc499446b",
+        "proxy": {
+          "apkSha256": "f0c53610ca952d47b78479cc6b8a6d43457d74779f42c25269d0511bc499446b",
+          "transport": "Actual native account-bound HTTPS CONNECT via adb reverse and loopback-only Bilibili tunnel; no HTTP/IPC doubles",
+          "connectHosts": ["api.bilibili.com", "cn-jsnt-ct-01-07.bilivideo.com"],
+          "connectCount": 2,
+          "audioEvidence": [
+            {
+              "desc": "暂停",
+              "bounds": "[480,2014][598,2134]"
+            }
+          ]
+        },
+        "observation": "Native API and CDN HTTPS CONNECT through account proxy; actual foreground audio and native MP3 system save. No runtime shims."
+      },
+      "latestRelease": {
+        "apkSha256": "4662943a031563d904ee458f4a727bfd4c15677547580b43646ab69ad60fbd13",
+        "creationSession": {
+          "apkSha256": "4662943a031563d904ee458f4a727bfd4c15677547580b43646ab69ad60fbd13",
+          "firstObservedAt": "2026-10-25T07:12:45.460Z",
+          "observedAt": "2026-10-25T07:56:59.653Z",
+          "elapsedSeconds": 2654,
+          "nodes": [
+            {
+              "text": "T13AndroidDraft",
+              "bounds": "[21,1843][669,1932]"
+            },
+            {
+              "text": "2 个片段 · 1:00.00",
+              "bounds": "[23,2079][291,2127]"
+            }
+          ],
+          "restoredAfterColdStart": true,
+          "notes": "Two 30-second leaves and unpublished title survive Classic/Studio visits and a fresh optimized-release update/cold start. This is a bounded editing session, not a memory endurance claim."
+        },
+        "compositionSave": {
+          "apkSha256": "4662943a031563d904ee458f4a727bfd4c15677547580b43646ab69ad60fbd13",
+          "filename": "T13AndroidDraft.mp3",
+          "sizeBytes": 1440805,
+          "sha256": "1272da579219027f7487b6a31a4b42b31f1a33c5fc0a4fb7b963e16f09c4eace",
+          "header": "ID3",
+          "recipe": {
+            "segments": 2,
+            "startMs": 0,
+            "endMs": 30000,
+            "expectedDurationMs": 60000
+          },
+          "nativeSystemSave": true,
+          "matchingExportCount": 1,
+          "probe": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "sample_rate": "48000",
+                "channels": 2
+              }
+            ],
+            "format": {
+              "duration": "60.048000",
+              "size": "1440805"
+            }
+          }
+        },
+        "observed": "Cold start retains unpublished T13AndroidDraft with two 30-second leaves. Latest native composition export saves a single ID3 MP3. Actual AAudio player start is observed in the latest application process."
+      },
+      "interruptions": {
+        "background": {
+          "after": ["暂停"],
+          "scope": "HOME with several seconds offscreen before explicit return; UI state only, not audible output or a native cancellation trace"
+        },
+        "audioFocus": {
+          "result": "not-accepted",
+          "details": "A temporary native foreground service acquired transient focus on an earlier run, but synchronized active media loss/resume was not established. The repeat on the final artifact was rejected with INSTALL_FAILED_USER_RESTRICTED; no service started. The device reports mIgnrMusicFocusReq=true. No success is inferred from a retained pause icon or an unsynchronized trace."
+        }
+      },
+      "cleanup": {
+        "latestApkHash": "4662943a031563d904ee458f4a727bfd4c15677547580b43646ab69ad60fbd13",
+        "probeAbsent": true,
+        "reverseRemoved": true,
+        "stayonRestored": true,
+        "temporaryProxyRemoved": true,
+        "accountDirectRestored": true
+      },
+      "limits": [
+        "Full synchronized transient/permanent audio-focus, call/Bluetooth/headset and background interruption matrix remains open.",
+        "Final current-source media/proxy/save evidence is split by exact artifact above; it is not an exhaustive release provider/minimum-device matrix.",
+        "Tag editing long-session/disable-reenable and the remaining capability combinations remain open."
+      ]
+    }
+  },
+  "repairAttempts": [
+    {
+      "failure": "Studio standalone build test timed out at its existing 5-second deadline under concurrent compilation.",
+      "resolution": "Kept test/deadline unchanged; full final root suite passed with workspace concurrency 1."
+    },
+    {
+      "failure": "The first content-container selector lost to the scoped neutral shell declaration.",
+      "resolution": "Raised the theme-owned selector specificity, rebuilt and verified the full create button at 411px and on the optimized device."
+    },
+    {
+      "failure": "Inspection executable was still running during a rebuild (Windows access denied).",
+      "resolution": "Closed only the task-owned inspection process, rebuilt successfully and repeated final optimized checks."
+    },
+    {
+      "failure": "Tampermonkey reused the previous source for the same installation URL.",
+      "resolution": "Installed with a source-hash query and no-store response, reloaded manager editor and checked exact bytes/SHA-256."
+    },
+    {
+      "failure": "Audio helper install/restart and native window transform instrumentation could not establish complete focus/scroll scenarios.",
+      "resolution": "Recorded failures and limits; removed helper/proxy/USB forwarding, restored device setting and left those exits open."
+    }
+  ],
+  "remainingAcceptance": [
+    {
+      "runtime": "userscript",
+      "items": [
+        "Latest installed GM repeat, signed-in/private/source-host/capability and request-count/failure matrix."
+      ]
+    },
+    {
+      "runtime": "windows",
+      "items": [
+        "Remaining physical mouse/keyboard/focus, semantic scroll and protected/capability combinations; the final queued/save loop is now accepted on the final artifact."
+      ]
+    },
+    {
+      "runtime": "android",
+      "items": [
+        "Synchronized focus/call/headset/Bluetooth/background interruption, full media/provider/minimum-device matrix and remaining specialist/capability combinations."
+      ]
+    },
+    {
+      "runtime": "ios",
+      "items": ["Native acceptance requires macOS/Xcode and a supported device."]
+    }
+  ],
+  "scope": "No native source/command/credentials/schema/target admission changes; UI/session editing and theme CSS only. Public source observations do not count as authenticated transport.",
+  "localEvidenceDirectory": ".codex-tmp/t13-completion",
+  "git": {
+    "commit": false,
+    "push": false
+  },
+  "runtimeEvidenceScope": "Earlier follow-up snapshots retain their exact artifact hashes. unifiedAcceptance owns the final combined-source artifacts.",
+  "unifiedAcceptance": {
+    "date": "2026-10-25",
+    "runtimeScope": "shared",
+    "overallT13Status": "in-progress",
+    "userDecisions": {
+      "waitForOtherChatsAndRebuildLatest": true,
+      "androidReplacementAuthorized": true,
+      "installedGmRepeatDeferred": true,
+      "finalPhoneControlReturned": true
+    },
+    "freshness": {
+      "before": {
+        "recordedAt": "2026-10-25T12:52:03.355Z",
+        "files": 966,
+        "sha256": "7ee269630dfae55d4b1e08fafc70858f6191bb65194319bdad83e3d93401618c",
+        "scope": "Application/package/crate production inputs, Android main Kotlin/XML, build scripts and root dependency locks; excludes tests and build output"
+      },
+      "afterChecks": {
+        "recordedAt": "2026-10-25T12:57:23.315Z",
+        "files": 966,
+        "sha256": "7ee269630dfae55d4b1e08fafc70858f6191bb65194319bdad83e3d93401618c",
+        "scope": "Application/package/crate production inputs, Android main Kotlin/XML, build scripts and root dependency locks; excludes tests and build output"
+      },
+      "afterConsumerBuilds": {
+        "recordedAt": "2026-10-25T13:15:18.037Z",
+        "files": 966,
+        "sha256": "7ee269630dfae55d4b1e08fafc70858f6191bb65194319bdad83e3d93401618c",
+        "scope": "Application/package/crate production inputs, Android main Kotlin/XML, build scripts and root dependency locks; excludes tests and build output"
+      },
+      "afterAcceptance": {
+        "recordedAt": "2026-10-25T13:54:36.198Z",
+        "files": 966,
+        "sha256": "7ee269630dfae55d4b1e08fafc70858f6191bb65194319bdad83e3d93401618c",
+        "scope": "Application/package/crate production inputs, Android main Kotlin/XML, build scripts and root dependency locks; excludes tests and build output"
+      },
+      "scope": "966 production inputs across apps/packages/crates, Android main Kotlin/XML, scripts and root dependency locks. Tests and build output excluded. Source hash equality is checked; earlier changing-source attempts are not counted as this acceptance."
+    },
+    "checks": {
+      "vitestFiles": 297,
+      "vitestTests": 2196,
+      "rustPassed": 229,
+      "rustIgnored": 1,
+      "protocolCases": 183,
+      "checks": [
+        {
+          "exitCode": 0,
+          "command": "pnpm build"
+        },
+        {
+          "exitCode": 0,
+          "command": "pnpm test"
+        },
+        {
+          "exitCode": 0,
+          "command": "pnpm typecheck"
+        },
+        {
+          "exitCode": 0,
+          "command": "pnpm lint"
+        },
+        {
+          "exitCode": 0,
+          "command": "pnpm format:check"
+        }
+      ]
+    },
+    "finalRecordChecks": {
+      "format": {
+        "command": "pnpm format:check",
+        "exitCode": 0,
+        "log": ".codex-tmp/t13-completion/latest-final-format-check.txt"
+      },
+      "links": {
+        "checked": 140,
+        "missing": []
+      },
+      "whitespace": "git diff --check passed for task-owned tracked files; only the existing LF-to-CRLF conversion warning was emitted"
+    },
+    "windows": {
+      "sha256": "b8b21c23b2ca9db2b7459a38eac351c820ca32b975b07e43989b8a84161c4b05",
+      "optimized": true,
+      "identifier": "com.anymusic.t13-completion",
+      "originalDesktopDataMutated": false,
+      "interactionScope": "Public DOM controls in the actual native WebView; real Rust HTTP, accounts and saving. DOM activation is not relabeled as physical mouse or complete keyboard acceptance.",
+      "playback": {
+        "mechanism": "Public DOM controls in optimized native WebView; real Rust media; temporary audio identity observer removed after capture",
+        "observations": [
+          {
+            "stage": "classic",
+            "at": "2026-10-25T13:20:40.290Z",
+            "theme": ["default"],
+            "roots": 1,
+            "audioCount": 1,
+            "sameAudio": true,
+            "time": 1.028043,
+            "paused": false,
+            "readyState": 4
+          },
+          {
+            "stage": "studio",
+            "at": "2026-10-25T13:20:41.479Z",
+            "theme": ["studio"],
+            "roots": 1,
+            "audioCount": 1,
+            "sameAudio": true,
+            "time": 2.21226,
+            "paused": false,
+            "readyState": 4
+          },
+          {
+            "stage": "classic-return",
+            "at": "2026-10-25T13:20:42.495Z",
+            "theme": ["default"],
+            "roots": 1,
+            "audioCount": 1,
+            "sameAudio": true,
+            "time": 3.227309,
+            "paused": false,
+            "readyState": 4
+          }
+        ],
+        "editor": {
+          "at": "2026-10-25T13:20:43.044Z",
+          "title": "T13 retained two-leaf draft",
+          "twoLeaves": true
+        },
+        "passed": true
+      },
+      "downloads": {
+        "mechanism": "Public WebView DOM controls; real Rust HTTP and native archive saving. No mouse/keyboard claim.",
+        "snapshots": [
+          {
+            "stage": "started",
+            "at": "2026-10-25T13:16:06.576Z",
+            "theme": ["default"],
+            "batches": [
+              {
+                "id": "download-batch:f35ef2de-9955-44dd-88be-22edd2e15363",
+                "status": "completed",
+                "concurrency": 2,
+                "archive": {
+                  "extension": "zip",
+                  "fileName": "any-music-download-20261025-154509.zip",
+                  "mimeType": "application/zip",
+                  "sha256": "2c58a2d6cbd16188aa8582c312e0fc371494c630692c0f021bcdc3325831eef5",
+                  "sizeBytes": 12444958
+                },
+                "items": [
+                  {
+                    "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+                    "status": "succeeded",
+                    "requestedAtMs": 1792914309855,
+                    "savedAtMs": 1792914351307,
+                    "attempts": 2
+                  },
+                  {
+                    "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+                    "status": "succeeded",
+                    "requestedAtMs": 1792914309855,
+                    "savedAtMs": 1792914351307,
+                    "attempts": 2
+                  },
+                  {
+                    "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+                    "status": "succeeded",
+                    "requestedAtMs": 1792914309855,
+                    "savedAtMs": 1792914351307,
+                    "attempts": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "stage": "studio",
+            "at": "2026-10-25T13:16:07.284Z",
+            "theme": ["studio"],
+            "batches": [
+              {
+                "id": "download-batch:93558c14-cd6e-4765-b07d-603136aa52b1",
+                "status": "running",
+                "concurrency": 2,
+                "items": [
+                  {
+                    "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+                    "status": "downloading",
+                    "requestedAtMs": 1792934166327,
+                    "attempts": 3
+                  },
+                  {
+                    "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+                    "status": "queued",
+                    "requestedAtMs": 1792934166327,
+                    "attempts": 1
+                  },
+                  {
+                    "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+                    "status": "downloading",
+                    "requestedAtMs": 1792934166327,
+                    "attempts": 3
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "stage": "classic",
+            "at": "2026-10-25T13:16:07.990Z",
+            "theme": ["default"],
+            "batches": [
+              {
+                "id": "download-batch:93558c14-cd6e-4765-b07d-603136aa52b1",
+                "status": "running",
+                "concurrency": 2,
+                "items": [
+                  {
+                    "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+                    "status": "downloading",
+                    "requestedAtMs": 1792934166327,
+                    "attempts": 3
+                  },
+                  {
+                    "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+                    "status": "queued",
+                    "requestedAtMs": 1792934166327,
+                    "attempts": 1
+                  },
+                  {
+                    "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+                    "status": "downloading",
+                    "requestedAtMs": 1792934166327,
+                    "attempts": 3
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "stage": "final",
+            "at": "2026-10-25T13:16:54.522Z",
+            "theme": ["default"],
+            "batches": [
+              {
+                "id": "download-batch:93558c14-cd6e-4765-b07d-603136aa52b1",
+                "status": "completed",
+                "concurrency": 2,
+                "archive": {
+                  "extension": "zip",
+                  "fileName": "any-music-download-20261025-211606.zip",
+                  "mimeType": "application/zip",
+                  "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+                  "sizeBytes": 12445838
+                },
+                "items": [
+                  {
+                    "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+                    "status": "succeeded",
+                    "requestedAtMs": 1792934166327,
+                    "savedAtMs": 1792934213890,
+                    "attempts": 3
+                  },
+                  {
+                    "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+                    "status": "succeeded",
+                    "requestedAtMs": 1792934166327,
+                    "savedAtMs": 1792934213890,
+                    "attempts": 2
+                  },
+                  {
+                    "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+                    "status": "succeeded",
+                    "requestedAtMs": 1792934166327,
+                    "savedAtMs": 1792934213890,
+                    "attempts": 3
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "batch": {
+          "archive": {
+            "extension": "zip",
+            "fileName": "any-music-download-20261025-211606.zip",
+            "mimeType": "application/zip",
+            "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+            "sizeBytes": 12445838
+          },
+          "completedAtMs": 1792934213890,
+          "concurrency": 2,
+          "id": "download-batch:93558c14-cd6e-4765-b07d-603136aa52b1",
+          "items": [
+            {
+              "attempts": [
+                {
+                  "attemptNumber": 1,
+                  "completedAtMs": 1792911397242,
+                  "startedAtMs": 1792911377645,
+                  "status": "succeeded"
+                },
+                {
+                  "attemptNumber": 2,
+                  "completedAtMs": 1792914330497,
+                  "startedAtMs": 1792914309917,
+                  "status": "succeeded"
+                },
+                {
+                  "attemptNumber": 3,
+                  "completedAtMs": 1792934187306,
+                  "startedAtMs": 1792934166437,
+                  "status": "succeeded"
+                }
+              ],
+              "completedAtMs": 1792934187306,
+              "creatorName": "本地用户",
+              "file": {
+                "extension": "mp3",
+                "fileName": "We Never (Remix) (若如初见).mp3",
+                "mimeType": "audio/mpeg",
+                "sizeBytes": 4556981
+              },
+              "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+              "maxRetryCount": 3,
+              "progressMessage": "已下载",
+              "recipe": [
+                {
+                  "endMs": 190000,
+                  "sourceTrackId": "bilibili:video:BV134Ho6qENu",
+                  "startMs": 0
+                }
+              ],
+              "requestedAtMs": 1792934166327,
+              "savedAtMs": 1792934213890,
+              "savedFile": {
+                "extension": "zip",
+                "fileName": "any-music-download-20261025-211606.zip",
+                "mimeType": "application/zip",
+                "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+                "sizeBytes": 12445838
+              },
+              "startedAtMs": 1792934166437,
+              "status": "succeeded",
+              "track": {
+                "acquisition": {
+                  "accountId": "0f758e24-4247-4e9a-8e30-ea9d27c2693c",
+                  "accountName": "T13 anonymous acceptance",
+                  "acquiredAtMs": 1792911195131
+                },
+                "artists": [
+                  {
+                    "id": "3537110015412443",
+                    "name": "我无记忆"
+                  }
+                ],
+                "artworkUrl": "https://i0.hdslb.com/bfs/archive/b17fc8726dccef327573ca514dcbc560c6dc196a.jpg",
+                "description": "Vibe知识大赏. BGM：We Never (Remix) (若如初见)-Hi Noise/秋成",
+                "durationMs": 190000,
+                "id": "bilibili:video:BV134Ho6qENu",
+                "publishedAtMs": 1791263700000,
+                "source": {
+                  "mediaKind": "video",
+                  "pageUrl": "https://www.bilibili.com/video/BV134Ho6qENu",
+                  "partId": "42496427639",
+                  "pluginId": "bilibili",
+                  "resourceId": "BV134Ho6qENu"
+                },
+                "sourceTags": [],
+                "title": "We Never (Remix) (若如初见)"
+              }
+            },
+            {
+              "attempts": [
+                {
+                  "attemptNumber": 1,
+                  "completedAtMs": 1792914343701,
+                  "startedAtMs": 1792914330516,
+                  "status": "succeeded"
+                },
+                {
+                  "attemptNumber": 2,
+                  "completedAtMs": 1792934204521,
+                  "startedAtMs": 1792934187325,
+                  "status": "succeeded"
+                }
+              ],
+              "completedAtMs": 1792934204521,
+              "creatorName": "本地用户",
+              "file": {
+                "extension": "mp3",
+                "fileName": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+                "mimeType": "audio/mpeg",
+                "sizeBytes": 4270726
+              },
+              "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+              "maxRetryCount": 3,
+              "progressMessage": "已下载",
+              "recipe": [
+                {
+                  "endMs": 178000,
+                  "sourceTrackId": "bilibili:video:BV1NXab6GEYA",
+                  "startMs": 0
+                }
+              ],
+              "requestedAtMs": 1792934166327,
+              "savedAtMs": 1792934213890,
+              "savedFile": {
+                "extension": "zip",
+                "fileName": "any-music-download-20261025-211606.zip",
+                "mimeType": "application/zip",
+                "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+                "sizeBytes": 12445838
+              },
+              "startedAtMs": 1792934187325,
+              "status": "succeeded",
+              "track": {
+                "acquisition": {
+                  "accountId": "0f758e24-4247-4e9a-8e30-ea9d27c2693c",
+                  "accountName": "T13 anonymous acceptance",
+                  "acquiredAtMs": 1792913862314
+                },
+                "artists": [
+                  {
+                    "id": "3546938808994527",
+                    "name": "易安不爱古风"
+                  }
+                ],
+                "artworkUrl": "https://i2.hdslb.com/bfs/archive/13dc169e5bc8cfd5a7806c51cce25a4b3adb1ea7.jpg",
+                "description": "",
+                "durationMs": 178000,
+                "id": "bilibili:video:BV1NXab6GEYA",
+                "publishedAtMs": 1790480267000,
+                "source": {
+                  "mediaKind": "video",
+                  "pageUrl": "https://www.bilibili.com/video/BV1NXab6GEYA",
+                  "partId": "42237888765",
+                  "pluginId": "bilibili",
+                  "resourceId": "BV1NXab6GEYA"
+                },
+                "sourceTags": [],
+                "title": "沧海恨水碧悠悠，至今已过百万秋…"
+              }
+            },
+            {
+              "attempts": [
+                {
+                  "attemptNumber": 1,
+                  "completedAtMs": 1792914053178,
+                  "startedAtMs": 1792914032344,
+                  "status": "succeeded"
+                },
+                {
+                  "attemptNumber": 2,
+                  "completedAtMs": 1792914331172,
+                  "startedAtMs": 1792914309899,
+                  "status": "succeeded"
+                },
+                {
+                  "attemptNumber": 3,
+                  "completedAtMs": 1792934187854,
+                  "startedAtMs": 1792934166419,
+                  "status": "succeeded"
+                }
+              ],
+              "completedAtMs": 1792934187854,
+              "creatorName": "本地用户",
+              "file": {
+                "extension": "mp3",
+                "fileName": "神总是忧郁的——《幻昼》降调版.mp3",
+                "mimeType": "audio/mpeg",
+                "sizeBytes": 3609475
+              },
+              "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+              "maxRetryCount": 3,
+              "progressMessage": "已下载",
+              "recipe": [
+                {
+                  "endMs": 151000,
+                  "sourceTrackId": "bilibili:video:BV1nsRFBBEeW",
+                  "startMs": 0
+                }
+              ],
+              "requestedAtMs": 1792934166327,
+              "savedAtMs": 1792934213890,
+              "savedFile": {
+                "extension": "zip",
+                "fileName": "any-music-download-20261025-211606.zip",
+                "mimeType": "application/zip",
+                "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+                "sizeBytes": 12445838
+              },
+              "startedAtMs": 1792934166419,
+              "status": "succeeded",
+              "track": {
+                "acquisition": {
+                  "accountId": "0f758e24-4247-4e9a-8e30-ea9d27c2693c",
+                  "accountName": "T13 anonymous acceptance",
+                  "acquiredAtMs": 1792913874139
+                },
+                "artists": [
+                  {
+                    "id": "1052723289",
+                    "name": "瀟巅"
+                  }
+                ],
+                "artworkUrl": "https://i2.hdslb.com/bfs/archive/b5113d32852a2cf29f3e277d64967a9c8df8fda9.jpg",
+                "description": "-",
+                "durationMs": 151000,
+                "id": "bilibili:video:BV1nsRFBBEeW",
+                "publishedAtMs": 1777795657000,
+                "source": {
+                  "mediaKind": "video",
+                  "pageUrl": "https://www.bilibili.com/video/BV1nsRFBBEeW",
+                  "partId": "38058266307",
+                  "pluginId": "bilibili",
+                  "resourceId": "BV1nsRFBBEeW"
+                },
+                "sourceTags": [],
+                "title": "神总是忧郁的——《幻昼》降调版"
+              }
+            }
+          ],
+          "origin": {
+            "kind": "favorites",
+            "label": "我的喜欢"
+          },
+          "startedAtMs": 1792934166327,
+          "status": "completed"
+        },
+        "newBatchId": "download-batch:93558c14-cd6e-4765-b07d-603136aa52b1"
+      },
+      "zip": {
+        "file": "<user-home>\\Downloads\\any-music-download-20261025-211606.zip",
+        "bytes": 12445838,
+        "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+        "crcOK": true,
+        "mp3": [
+          {
+            "name": "We Never (Remix) (若如初见).mp3",
+            "bytes": 4556981
+          },
+          {
+            "name": "沧海恨水碧悠悠,至今已过百万秋....mp3",
+            "bytes": 4270726
+          },
+          {
+            "name": "神总是忧郁的——《幻昼》降调版.mp3",
+            "bytes": 3609475
+          }
+        ]
+      },
+      "classicVisual": [
+        {
+          "mode": "light",
+          "viewport": {
+            "width": 411,
+            "height": 864
+          },
+          "roots": 1,
+          "audioCount": 1,
+          "horizontalOverflow": false,
+          "schemeDark": false,
+          "reducedMotion": false,
+          "theme": "default",
+          "contentContainer": "am-content am-workbench",
+          "create": {
+            "left": 328.8571472167969,
+            "right": 390.00000762939453,
+            "top": 219.50001525878906,
+            "bottom": 251.50001525878906,
+            "inside": true
+          },
+          "color": "rgb(26, 26, 31)",
+          "background": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "mode": "dark-reduced-motion",
+          "viewport": {
+            "width": 411,
+            "height": 864
+          },
+          "roots": 1,
+          "audioCount": 1,
+          "horizontalOverflow": false,
+          "schemeDark": true,
+          "reducedMotion": true,
+          "theme": "default",
+          "contentContainer": "am-content am-workbench",
+          "create": {
+            "left": 328.8571472167969,
+            "right": 390.00000762939453,
+            "top": 219.50001525878906,
+            "bottom": 251.50001525878906,
+            "inside": true
+          },
+          "color": "rgb(243, 240, 234)",
+          "background": "rgba(0, 0, 0, 0)"
+        }
+      ],
+      "studioVisual": [
+        {
+          "mode": "light",
+          "viewport": {
+            "width": 411,
+            "height": 864
+          },
+          "roots": 1,
+          "audioCount": 1,
+          "horizontalOverflow": false,
+          "schemeDark": false,
+          "reducedMotion": false,
+          "theme": "studio",
+          "contentContainer": "am-workbench",
+          "create": {
+            "left": 326.5714416503906,
+            "right": 383.7143020629883,
+            "top": 379.8750305175781,
+            "bottom": 423.8750343322754,
+            "inside": true
+          },
+          "color": "rgb(26, 26, 31)",
+          "background": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "mode": "dark-reduced-motion",
+          "viewport": {
+            "width": 411,
+            "height": 864
+          },
+          "roots": 1,
+          "audioCount": 1,
+          "horizontalOverflow": false,
+          "schemeDark": true,
+          "reducedMotion": true,
+          "theme": "studio",
+          "contentContainer": "am-workbench",
+          "create": {
+            "left": 326.5714416503906,
+            "right": 383.7143020629883,
+            "top": 379.8750305175781,
+            "bottom": 423.8750343322754,
+            "inside": true
+          },
+          "color": "rgb(243, 240, 234)",
+          "background": "rgba(0, 0, 0, 0)"
+        }
+      ],
+      "visualScope": "Actual 411x864 native window; light/dark and reduced-motion media overrides, named content containers, sole root/audio and horizontally contained create actions. Media overrides were cleared.",
+      "moduleRetention": {
+        "before": {
+          "library": "be171f462157ee08326f329eb8ac2118a095575b3b1c9bc4178eddf03dec712e",
+          "namespaces": "a74898438520a92de92c6643d4cce1c13960431097cc32df1e300746e1e15a3f"
+        },
+        "disabled": {
+          "data": {
+            "library": "be171f462157ee08326f329eb8ac2118a095575b3b1c9bc4178eddf03dec712e",
+            "namespaces": "a74898438520a92de92c6643d4cce1c13960431097cc32df1e300746e1e15a3f"
+          },
+          "checked": false,
+          "navigationWithdrawn": true
+        },
+        "after": {
+          "library": "be171f462157ee08326f329eb8ac2118a095575b3b1c9bc4178eddf03dec712e",
+          "namespaces": "a74898438520a92de92c6643d4cce1c13960431097cc32df1e300746e1e15a3f"
+        },
+        "restoredTag": true,
+        "libraryUnchanged": true,
+        "namespacesUnchanged": true
+      },
+      "tagSession": {
+        "start": {
+          "at": "2026-10-25T13:39:34.831Z",
+          "theme": "studio",
+          "inputs": [
+            {
+              "placeholder": "新名称；同名时自动合并",
+              "value": "T13LatestPending"
+            },
+            {
+              "placeholder": "搜索歌曲名、歌手或用户 ID",
+              "value": "We"
+            }
+          ],
+          "hasTag": true,
+          "roots": 1,
+          "audioCount": 1
+        },
+        "end": {
+          "at": "2026-10-25T13:50:28.124Z",
+          "theme": "default",
+          "inputs": [
+            {
+              "placeholder": "搜索歌曲名、歌手或用户 ID",
+              "value": "We"
+            },
+            {
+              "placeholder": "新名称；同名时自动合并",
+              "value": "T13LatestPending"
+            }
+          ],
+          "hasTag": true,
+          "roots": 1,
+          "audioCount": 1
+        },
+        "observations": [
+          {
+            "at": "2026-10-25T13:40:05.125Z",
+            "theme": "default",
+            "inputs": [
+              {
+                "placeholder": "搜索歌曲名、歌手或用户 ID",
+                "value": "We"
+              },
+              {
+                "placeholder": "新名称；同名时自动合并",
+                "value": "T13LatestPending"
+              }
+            ],
+            "hasTag": true,
+            "roots": 1,
+            "audioCount": 1
+          },
+          {
+            "at": "2026-10-25T13:45:04.156Z",
+            "theme": "default",
+            "inputs": [
+              {
+                "placeholder": "搜索歌曲名、歌手或用户 ID",
+                "value": "We"
+              },
+              {
+                "placeholder": "新名称；同名时自动合并",
+                "value": "T13LatestPending"
+              }
+            ],
+            "hasTag": true,
+            "roots": 1,
+            "audioCount": 1
+          },
+          {
+            "at": "2026-10-25T13:46:15.456Z",
+            "theme": "studio",
+            "inputs": [
+              {
+                "placeholder": "新名称；同名时自动合并",
+                "value": "T13LatestPending"
+              },
+              {
+                "placeholder": "搜索歌曲名、歌手或用户 ID",
+                "value": "We"
+              }
+            ],
+            "hasTag": true,
+            "roots": 1,
+            "audioCount": 1
+          },
+          {
+            "at": "2026-10-25T13:49:03.364Z",
+            "theme": "default",
+            "inputs": [
+              {
+                "placeholder": "搜索歌曲名、歌手或用户 ID",
+                "value": "We"
+              },
+              {
+                "placeholder": "新名称；同名时自动合并",
+                "value": "T13LatestPending"
+              }
+            ],
+            "hasTag": true,
+            "roots": 1,
+            "audioCount": 1
+          }
+        ],
+        "retained": true,
+        "elapsedSeconds": 653,
+        "scope": "Bounded editor session with view/theme changes and unrelated work between observations; no memory/endurance claim"
+      },
+      "displayRegions": {
+        "mechanism": "Public native-WebView DOM controls at 411px; All Songs versus By Platform display regions",
+        "allBefore": [
+          "歌曲展示方式\n\n卡片数量会随内容区宽度调整，播放与已选歌曲保持不变。\n\n一行一个\n大卡片，适合逐首查看\n选择\n一行两个\n快速浏览，操作收进卡片菜单\n已选"
+        ],
+        "platform": [
+          "歌曲展示方式\n\n卡片数量会随内容区宽度调整，播放与已选歌曲保持不变。\n\n一行一个\n大卡片，适合逐首查看\n已选\n一行两个\n快速浏览，操作收进卡片菜单\n选择"
+        ],
+        "allAfter": [
+          "歌曲展示方式\n\n卡片数量会随内容区宽度调整，播放与已选歌曲保持不变。\n\n一行一个\n大卡片，适合逐首查看\n选择\n一行两个\n快速浏览，操作收进卡片菜单\n已选"
+        ],
+        "allUnchanged": true
+      },
+      "restart": {
+        "before": {
+          "at": "2026-10-25T13:52:14.196Z",
+          "batches": [
+            {
+              "id": "download-batch:93558c14-cd6e-4765-b07d-603136aa52b1",
+              "status": "completed",
+              "archive": {
+                "extension": "zip",
+                "fileName": "any-music-download-20261025-211606.zip",
+                "mimeType": "application/zip",
+                "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+                "sizeBytes": 12445838
+              },
+              "items": [
+                {
+                  "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+                  "status": "succeeded",
+                  "savedAtMs": 1792934213890
+                },
+                {
+                  "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+                  "status": "succeeded",
+                  "savedAtMs": 1792934213890
+                },
+                {
+                  "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+                  "status": "succeeded",
+                  "savedAtMs": 1792934213890
+                }
+              ]
+            }
+          ],
+          "disk": {
+            "mtimeMs": 1792934213803.8625,
+            "bytes": 12445838,
+            "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+            "matchingFiles": 1
+          }
+        },
+        "downloadUi": {
+          "text": "Any Music\n跨来源音乐工作台\n发现\n待听\n我的喜欢\n我的歌单\n自定义音乐\n标签管理\n片段创作\n下载\n播放历史\n插件中心\n设置\n收起侧栏\n\nANY MUSIC\n\n下载\n\n管理下载、暂停与失败重试。\n\n下载\n2\n并发\n·\n3\n已下载\n\n集中管理下载任务，支持暂停、继续与失败重试。\n\n全部\n3\n下载中\n0\n已暂停\n0\n已下载\n3\n下载失败\n0\n展示方式\n播放 — · 弹幕 —\n播放 — · 弹幕 —\nWe Never (Remix) (若如初见)\n\n哔哩哔哩 · 我无记忆 · 3:10 · 已下载 · We Never (Remix) (若如初见).mp3\n\n播放\n已喜欢\n重新下载\n操作\n播放 — · 弹幕 —\n播放 — · 弹幕 —\n沧海恨水碧悠悠，至今已过百万秋…\n\n哔哩哔哩 · 易安不爱古风 · 2:58 · 已下载 · 沧海恨水碧悠悠,至今已过百万秋....mp3\n\n播放\n已喜欢\n重新下载\n操作\n播放 — · 弹幕 —\n播放 — · 弹幕 —\n神总是忧郁的——《幻昼》降调版\n\n哔哩哔哩 · 瀟巅 · 2:31 · 已下载 · 神总是忧郁的——《幻昼》降调版.mp3\n\n播放\n已喜欢\n重新下载\n操作\n已选 0 · 共 3\n筛选器\n操作器\n未选择音乐\n选择一首音乐开始播放\n从列表选择一首音乐\n0:00.0\n0:00.0\n顺序\n音质\n1×",
+          "roots": 1,
+          "audioCount": 1
+        },
+        "tagRestored": true,
+        "recipeRestored": {
+          "title": true,
+          "twoLeaves": true
+        },
+        "after": {
+          "at": "2026-10-25T13:52:17.311Z",
+          "batches": [
+            {
+              "id": "download-batch:93558c14-cd6e-4765-b07d-603136aa52b1",
+              "status": "completed",
+              "archive": {
+                "extension": "zip",
+                "fileName": "any-music-download-20261025-211606.zip",
+                "mimeType": "application/zip",
+                "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+                "sizeBytes": 12445838
+              },
+              "items": [
+                {
+                  "id": "download-item:f529798c-7439-4ad5-b694-1112c5f29e34",
+                  "status": "succeeded",
+                  "savedAtMs": 1792934213890
+                },
+                {
+                  "id": "download-item:aa7bec79-d4e1-4db3-8a4d-21accd7565ac",
+                  "status": "succeeded",
+                  "savedAtMs": 1792934213890
+                },
+                {
+                  "id": "download-item:1b0d3168-3794-49e2-8a8a-789862a40950",
+                  "status": "succeeded",
+                  "savedAtMs": 1792934213890
+                }
+              ]
+            }
+          ],
+          "disk": {
+            "mtimeMs": 1792934213803.8625,
+            "bytes": 12445838,
+            "sha256": "114cc69fef74e7542f2c73a3e1a177640507ed53bf8260efaf06b3a0074533b5",
+            "matchingFiles": 1
+          }
+        },
+        "batchStateUnchanged": true,
+        "noDuplicateSave": true
+      },
+      "keyboardAttempt": {
+        "mechanism": "DOM initial focus on the public settings button, followed by native CDP Enter/Escape; no complete Tab-order claim",
+        "opened": false,
+        "closed": true,
+        "focusReturned": true
+      },
+      "keyboardLimit": "Foreground acquisition returned false; injected Enter did not open settings. The following Escape/no-dialog/focus value is not a valid focus-return pass. Earlier measured keyboard evidence retains its earlier build scope."
+    },
+    "android": {
+      "verification": {
+        "runtimeScope": "tauri",
+        "recordedAtUtc": "2026-10-25T13:01:01.654Z",
+        "target": "aarch64",
+        "buildTools": "36.0.0",
+        "signerSha256": "10336282357619a26ac35066e29b3bca05018d7a0e571d7b889afc838acf48e0",
+        "signed": true,
+        "debuggable": false,
+        "backup": false,
+        "cleartext": false,
+        "apk16KiBAlignment": true,
+        "bundlePayloadSignatures": true,
+        "native16KiBAlignment": true,
+        "nativeLibraryCount": 1,
+        "externalPlugins": "none",
+        "executionAdmitted": false,
+        "storeChannelAccepted": false,
+        "artifacts": [
+          {
+            "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/arm64/release/app-arm64-release.apk",
+            "bytes": 26189577,
+            "sha256": "ecee5294ca7ca0d4b2a3987906419a19c779f50dcb2e36844b06f118bdfec96d"
+          },
+          {
+            "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/bundle/arm64Release/app-arm64-release.aab",
+            "bytes": 10995154,
+            "sha256": "f78ce953230393322619f1e9772339f26476862f2f5aa362a2f06453c5f157e1"
+          }
+        ]
+      },
+      "installedApkSha256": "ecee5294ca7ca0d4b2a3987906419a19c779f50dcb2e36844b06f118bdfec96d",
+      "localDeviceHashesMatch": true,
+      "device": {
+        "model": "23113RKC6C",
+        "android": 15,
+        "api": 35,
+        "abi": "arm64-v8a",
+        "webview": "153.0.8010.36"
+      },
+      "nativeProxy": {
+        "account": "T13R",
+        "temporaryProxy": "T13Proxy",
+        "transport": "Rust account-bound HTTP through a loopback Bilibili-only TLS CONNECT tunnel; no TLS decryption/credential logging",
+        "connections": [
+          {
+            "host": "api.bilibili.com",
+            "at": "2026-10-25T13:15:19.312Z"
+          },
+          {
+            "host": "api.bilibili.com",
+            "at": "2026-10-25T13:16:39.877Z"
+          },
+          {
+            "host": "cn-jsnt-ct-01-07.bilivideo.com",
+            "at": "2026-10-25T13:16:40.081Z"
+          },
+          {
+            "host": "api.bilibili.com",
+            "at": "2026-10-25T13:18:21.825Z"
+          },
+          {
+            "host": "cn-jsnt-ct-01-07.bilivideo.com",
+            "at": "2026-10-25T13:18:22.018Z"
+          },
+          {
+            "host": "api.bilibili.com",
+            "at": "2026-10-25T13:24:22.322Z"
+          },
+          {
+            "host": "cn-jsnt-ct-01-07.bilivideo.com",
+            "at": "2026-10-25T13:24:22.477Z"
+          }
+        ],
+        "audio": {
+          "uid": 10486,
+          "pid": 9198,
+          "playerId": 390047,
+          "type": "AAudio",
+          "state": "started",
+          "sampleRate": 44100,
+          "mutedState": "streamVolume"
+        },
+        "scope": "Native API/CDN and player-output startup evidence, not audible comparison or competing-focus acceptance"
+      },
+      "editor": {
+        "title": "T13AndroidDraft",
+        "leaves": 2,
+        "leafSeconds": 30,
+        "restoredAfterOptimizedUpdateAndColdStart": true,
+        "saveCancellation": "The first system-picker save was cancelled while the device was used elsewhere; AM-1005 was displayed and the two-leaf draft remained. A later controlled retry succeeded."
+      },
+      "composition": {
+        "devicePath": "/sdcard/Download/T13LatestFinal.mp3",
+        "bytes": 1440805,
+        "sha256": "1272da579219027f7487b6a31a4b42b31f1a33c5fc0a4fb7b963e16f09c4eace",
+        "probe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_rate": "48000",
+              "channels": 2
+            }
+          ],
+          "format": {
+            "duration": "60.048000",
+            "size": "1440805"
+          }
+        },
+        "scope": "Actual system-document picker, native async file completion and pulled-file codec verification. An immediate zero-byte observation was retried after native completion; only the complete file is accepted."
+      },
+      "cleanup": {
+        "temporaryProxyRemoved": true,
+        "accountDirectRestored": true,
+        "usbReverseRemoved": true,
+        "tunnelStopped": true,
+        "stayAwakeRestored": 0,
+        "inputMethodRestored": "com.iflytek.inputmethod.miui/.FlyIME",
+        "latestOptimizedReleaseRetained": true
+      },
+      "exploratoryInterruptionArtifactSha256": "5deea85c3787dae1755e97cad284f9c1b533b134af2b95a3f116cd30439d5c08",
+      "interruptionLimits": [
+        "On the earlier exploratory optimized artifact identified above, the timer attempt did not establish synchronized active-player focus loss/regain; OEM DISMISS_TIMER was unresolved and the timer UI showed no running countdown. No focus pass is inferred. That trace reports mIgnrMusicFocusReq=true; its meaning is not used as a product pass.",
+        "On the final artifact, media traces reported streamVolume mute and a Home sample showed native output stopped; foreground recovery was not synchronized. Call/Bluetooth/headset/background interruption matrix remains open.",
+        "The earlier exploratory optimized artifact displayed AM-7001 near 3:05.5/3:09.8; public-network/interacting-device observations do not establish its cause. Subsequent final-release proxy/output and composition-save passes do not close full playback/provider acceptance."
+      ]
+    },
+    "userscript": {
+      "builtSha256": "f7b542fcd16df475362013931537cd57c706bb1d2bd29f3faeea170555d31587",
+      "lastVerifiedInstalledSha256": "3664629825ca85846587c279bc29b53aa8df427c6dade8bb0a72f2a20fb62914",
+      "latestInstalledRepeat": "deferred-by-user",
+      "scope": "Latest production artifact built; no latest installed-GM acceptance. Previous installed GM observations keep their earlier artifact scope."
+    },
+    "remainingAcceptance": {
+      "userscript": [
+        "Latest installed GM repeat, signed-in/private/source-host/capability and request-count/failure matrix."
+      ],
+      "windows": [
+        "Remaining physical mouse/keyboard/focus, semantic scroll and protected/capability combinations; the final queued/save loop is now accepted on the final artifact."
+      ],
+      "android": [
+        "Synchronized focus/call/headset/Bluetooth/background interruption, full media/provider/minimum-device matrix and remaining specialist/capability combinations."
+      ],
+      "ios": ["Native acceptance requires macOS/Xcode and a supported device."]
+    },
+    "scope": "No new production source changes after the documented readonly-model/content-container repairs; no native authority, credentials, schema or target-admission changes by this task. No commit/push."
+  }
+}

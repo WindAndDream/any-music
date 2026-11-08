@@ -1,0 +1,3845 @@
+{
+  "artifact": "c944e1c9518b25e193a7aab9ebc35400b604df8970ad7ced4f7ff5906b907134",
+  "observations": [
+    {
+      "label": "installed-initial",
+      "at": "2026-10-27T09:08:38.400Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-professional-drafts-round-trip",
+      "at": "2026-10-27T09:08:45.483Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 1187,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-system-dark-reduced-second-session",
+      "at": "2026-10-27T09:08:45.894Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "dom-matrix-950-default-light-catalog",
+      "at": "2026-10-27T09:09:35.292Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 2181,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "slot",
+          "styles": 1
+        },
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-queue",
+      "at": "2026-10-27T09:09:35.408Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 994,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-favorites",
+      "at": "2026-10-27T09:09:35.514Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 994,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-playlists",
+      "at": "2026-10-27T09:09:35.543Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-custom-tracks",
+      "at": "2026-10-27T09:09:35.584Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-tags",
+      "at": "2026-10-27T09:09:35.616Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-composer",
+      "at": "2026-10-27T09:09:35.651Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-downloads",
+      "at": "2026-10-27T09:09:35.963Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 980,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-history",
+      "at": "2026-10-27T09:09:36.030Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 9073,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-light-plugins",
+      "at": "2026-10-27T09:09:36.057Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-catalog",
+      "at": "2026-10-27T09:09:36.398Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 2181,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "slot",
+          "styles": 1
+        },
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-queue",
+      "at": "2026-10-27T09:09:36.497Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 994,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-favorites",
+      "at": "2026-10-27T09:09:36.590Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 994,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-playlists",
+      "at": "2026-10-27T09:09:36.615Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-custom-tracks",
+      "at": "2026-10-27T09:09:36.639Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-tags",
+      "at": "2026-10-27T09:09:36.662Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-composer",
+      "at": "2026-10-27T09:09:36.698Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-downloads",
+      "at": "2026-10-27T09:09:37.022Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 980,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-history",
+      "at": "2026-10-27T09:09:37.087Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 9073,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-dark-plugins",
+      "at": "2026-10-27T09:09:37.110Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-default-system-catalog",
+      "at": "2026-10-27T09:09:37.435Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 2181,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "slot",
+          "styles": 1
+        },
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-queue",
+      "at": "2026-10-27T09:09:37.532Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 994,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-favorites",
+      "at": "2026-10-27T09:09:37.632Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 994,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-playlists",
+      "at": "2026-10-27T09:09:37.657Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-custom-tracks",
+      "at": "2026-10-27T09:09:37.681Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-tags",
+      "at": "2026-10-27T09:09:37.710Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-composer",
+      "at": "2026-10-27T09:09:37.745Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-downloads",
+      "at": "2026-10-27T09:09:38.046Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 980,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-history",
+      "at": "2026-10-27T09:09:38.136Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 9073,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-default-system-plugins",
+      "at": "2026-10-27T09:09:38.168Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 847,
+          "totalWidth": 847
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-catalog",
+      "at": "2026-10-27T09:09:38.843Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 1032,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 416,
+          "total": 416,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "slot",
+          "styles": 1
+        },
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-queue",
+      "at": "2026-10-27T09:09:39.209Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 907,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 634,
+          "total": 634,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-favorites",
+      "at": "2026-10-27T09:09:39.312Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 932,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 428,
+          "total": 428,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-playlists",
+      "at": "2026-10-27T09:09:39.345Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-custom-tracks",
+      "at": "2026-10-27T09:09:39.374Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 640,
+          "totalWidth": 640
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-tags",
+      "at": "2026-10-27T09:09:39.398Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-composer",
+      "at": "2026-10-27T09:09:39.443Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 1187,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-downloads",
+      "at": "2026-10-27T09:09:39.475Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-history",
+      "at": "2026-10-27T09:09:39.509Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 2142,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-light-plugins",
+      "at": "2026-10-27T09:09:39.534Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "light"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-catalog",
+      "at": "2026-10-27T09:09:39.877Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 1032,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 416,
+          "total": 416,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "slot",
+          "styles": 1
+        },
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-queue",
+      "at": "2026-10-27T09:09:40.241Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 907,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 634,
+          "total": 634,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-favorites",
+      "at": "2026-10-27T09:09:40.336Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 932,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 428,
+          "total": 428,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-playlists",
+      "at": "2026-10-27T09:09:40.368Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-custom-tracks",
+      "at": "2026-10-27T09:09:40.398Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 640,
+          "totalWidth": 640
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-tags",
+      "at": "2026-10-27T09:09:40.433Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-composer",
+      "at": "2026-10-27T09:09:40.468Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 1187,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-downloads",
+      "at": "2026-10-27T09:09:40.498Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-history",
+      "at": "2026-10-27T09:09:40.539Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 2142,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-dark-plugins",
+      "at": "2026-10-27T09:09:40.562Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "dark"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-catalog",
+      "at": "2026-10-27T09:09:40.900Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 1032,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 416,
+          "total": 416,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "slot",
+          "styles": 1
+        },
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-queue",
+      "at": "2026-10-27T09:09:41.068Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 907,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 634,
+          "total": 634,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-favorites",
+      "at": "2026-10-27T09:09:41.339Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 932,
+          "width": 675,
+          "totalWidth": 675
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 428,
+          "total": 428,
+          "width": 635,
+          "totalWidth": 635
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-playlists",
+      "at": "2026-10-27T09:09:41.369Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-custom-tracks",
+      "at": "2026-10-27T09:09:41.410Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 640,
+          "totalWidth": 640
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-tags",
+      "at": "2026-10-27T09:09:41.445Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-composer",
+      "at": "2026-10-27T09:09:41.480Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 1187,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-downloads",
+      "at": "2026-10-27T09:09:41.515Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-history",
+      "at": "2026-10-27T09:09:41.551Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 2142,
+          "width": 675,
+          "totalWidth": 675
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    },
+    {
+      "label": "dom-matrix-950-studio-system-plugins",
+      "at": "2026-10-27T09:09:41.580Z",
+      "viewport": {
+        "width": 950,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BUTTON",
+        "key": "settings:open",
+        "label": "打开全局设置"
+      },
+      "audio": {
+        "count": 1,
+        "sameReference": true,
+        "paused": true,
+        "hasSource": false,
+        "time": 0
+      },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 950,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 950,
+          "totalWidth": 950
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 757,
+          "total": 757,
+          "width": 680,
+          "totalWidth": 680
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        {
+          "type": "protected"
+        },
+        {
+          "type": "slot",
+          "styles": 1
+        }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "method": "DOM-driven public presentation actions; geometry only, no screenshot/physical input claim",
+      "requestedAppearance": "system"
+    }
+  ],
+  "measurementLimit": "The appearance field comes from an initial projection captured by the observer and stays system; it is not a current preference observation. Matrix labels record the public action argument and resolved records the actual theme-root attribute. Final installed matrix uses a live ThemeHost props getter."
+}

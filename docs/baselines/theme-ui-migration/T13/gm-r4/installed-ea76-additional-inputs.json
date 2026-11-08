@@ -1,0 +1,1711 @@
+{
+  "artifact": "ea76bbf97f9e795f8494f2277319fe8fc33c421f36f4029071d3190f3598fc63",
+  "observations": [
+    {
+      "label": "installed-initial",
+      "at": "2026-10-27T15:09:22.634Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "key": "settings:open", "label": "打开全局设置" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-native-launcher-enter-tab",
+      "at": "2026-10-27T15:09:22.768Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "key": "settings:open", "label": "打开全局设置" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-narrow-controlled-recovery-initial",
+      "at": "2026-10-27T15:09:23.041Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "appearance": "system",
+      "focus": { "tag": "SECTION", "label": "系统模块恢复" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-recovery" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 0
+    },
+    {
+      "label": "final-recovery-tab-first",
+      "at": "2026-10-27T15:09:28.201Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "重新加载" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-recovery" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 0
+    },
+    {
+      "label": "final-recovery-reverse-wrap-last",
+      "at": "2026-10-27T15:09:28.559Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "恢复默认主题" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-recovery" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 0
+    },
+    {
+      "label": "final-recovery-forward-wrap-first",
+      "at": "2026-10-27T15:09:28.922Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "重新加载" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-recovery" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 0
+    },
+    {
+      "label": "final-recovery-escape-keeps-host-surface",
+      "at": "2026-10-27T15:09:29.284Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "重新加载" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-recovery" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 0
+    },
+    {
+      "label": "final-narrow-recovery-retry-returned",
+      "at": "2026-10-27T15:11:53.784Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-recovery-after-click-settled",
+      "at": "2026-10-27T15:12:14.622Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-recovery-native-keyboard-retry",
+      "at": "2026-10-27T15:12:20.498Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-system-light",
+      "at": "2026-10-27T15:13:11.122Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-settings-initial-focus",
+      "at": "2026-10-27T15:13:11.552Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "关闭" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:appearance",
+          "top": 0,
+          "height": 635,
+          "total": 635,
+          "width": 781,
+          "totalWidth": 781
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-nested-picker-escape",
+      "at": "2026-10-27T15:13:21.666Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "界面主题：经典" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:appearance",
+          "top": 0,
+          "height": 635,
+          "total": 635,
+          "width": 781,
+          "totalWidth": 781
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-proxy-host-to-username",
+      "at": "2026-10-27T15:13:28.972Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "INPUT", "label": "用户名（可选）" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:proxy",
+          "top": 0,
+          "height": 635,
+          "total": 722,
+          "width": 775,
+          "totalWidth": 775
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-proxy-username-to-host",
+      "at": "2026-10-27T15:13:29.330Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "INPUT", "label": "主机" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:proxy",
+          "top": 0,
+          "height": 635,
+          "total": 722,
+          "width": 775,
+          "totalWidth": 775
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-proxy-username",
+      "at": "2026-10-27T15:13:29.687Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "INPUT", "label": "用户名（可选）" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:proxy",
+          "top": 0,
+          "height": 635,
+          "total": 722,
+          "width": 775,
+          "totalWidth": 775
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-proxy-password",
+      "at": "2026-10-27T15:13:30.048Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "INPUT", "label": "密码（可选）" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:proxy",
+          "top": 0,
+          "height": 635,
+          "total": 722,
+          "width": 775,
+          "totalWidth": 775
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-proxy-save",
+      "at": "2026-10-27T15:13:30.404Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "保存代理配置" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:proxy",
+          "top": 42.85714340209961,
+          "height": 635,
+          "total": 722,
+          "width": 775,
+          "totalWidth": 775
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-proxy-wrap-close",
+      "at": "2026-10-27T15:13:30.761Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "关闭" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:proxy",
+          "top": 42.85714340209961,
+          "height": 635,
+          "total": 722,
+          "width": 775,
+          "totalWidth": 775
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-studio-settings-after-replacement",
+      "at": "2026-10-27T15:13:31.425Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "关闭" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 792.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-studio-settings-escape-opener",
+      "at": "2026-10-27T15:14:00.595Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": false,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "key": "settings:open", "label": "打开全局设置" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-studio-narrow-proxy-tab-username",
+      "at": "2026-10-27T15:14:18.421Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "INPUT", "label": "用户名（可选）" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 395.4285888671875, "height": 848.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-studio-narrow-proxy-shifttab-host",
+      "at": "2026-10-27T15:14:18.776Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "INPUT", "label": "主机" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 395.4285888671875, "height": 848.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-proxy-replacement-focus",
+      "at": "2026-10-27T15:14:19.466Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "关闭" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 577,
+          "total": 2850,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 791,
+          "total": 849,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "settings:proxy",
+          "top": 0,
+          "height": 791,
+          "total": 931,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 411.4285888671875, "height": 864.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-classic-settings-escape-opener",
+      "at": "2026-10-27T15:14:43.920Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 577,
+          "total": 2850,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "final-long-scroll-geometry-classic-1150",
+      "at": "2026-10-27T15:14:44.109Z",
+      "viewport": {
+        "width": 1150,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "BODY",
+        "label": "GM-R4 static acceptance hostNo product imports or GM su"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 592,
+          "total": 2181,
+          "width": 871,
+          "totalWidth": 871
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "ea76-classic-1150-long-pagedown",
+      "at": "2026-10-27T15:16:36.820Z",
+      "viewport": {
+        "width": 1150,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "全部 11" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 1489.7142333984375,
+          "height": 592,
+          "total": 2181,
+          "width": 871,
+          "totalWidth": 871
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "ea76-studio-1150-long-restoration",
+      "at": "2026-10-27T15:16:37.508Z",
+      "viewport": {
+        "width": 1150,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1150,
+          "totalWidth": 1150
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1150,
+          "totalWidth": 1150
+        },
+        {
+          "key": "workspace",
+          "top": 105.14286041259766,
+          "height": 763,
+          "total": 868,
+          "width": 875,
+          "totalWidth": 875
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 364,
+          "total": 364,
+          "width": 835,
+          "totalWidth": 835
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "ea76-classic-real-long-scroll-1440x600",
+      "at": "2026-10-27T15:16:59.067Z",
+      "viewport": {
+        "width": 1440,
+        "height": 600,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "label": "全部 11" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 1118.857177734375,
+          "height": 307,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "ea76-studio-real-long-scroll-1440x600",
+      "at": "2026-10-27T15:16:59.713Z",
+      "viewport": {
+        "width": 1440,
+        "height": 600,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 463,
+          "total": 463,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 1118.857177734375,
+          "height": 463,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "ea76-classic-real-long-scroll-return-1440x600",
+      "at": "2026-10-27T15:17:00.536Z",
+      "viewport": {
+        "width": 1440,
+        "height": 600,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 1118.857177734375,
+          "height": 307,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "ea76-last-source-guard",
+      "at": "2026-10-27T15:17:25.072Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "BUTTON", "key": "settings:section:sources", "label": "音乐源管理" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 818.8571166992188,
+          "height": 763,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 792.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "ea76-last-source-guard-confirmed",
+      "at": "2026-10-27T15:17:34.904Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "INPUT", "label": "抖音" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 945.1428833007812,
+          "height": 763,
+          "total": 3396,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 3097,
+          "total": 3097,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 792.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    }
+  ],
+  "lastSourceGuard": {
+    "sample": {
+      "label": "ea76-last-source-guard-confirmed",
+      "at": "2026-10-27T15:17:34.904Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": { "tag": "INPUT", "label": "抖音" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 945.1428833007812,
+          "height": 763,
+          "total": 3396,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 3097,
+          "total": 3097,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 792.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    "sources": [
+      {
+        "label": "哔哩哔哩",
+        "checked": false,
+        "disabled": false,
+        "description": null,
+        "hitHeight": 44.000003814697266
+      },
+      {
+        "label": "抖音",
+        "checked": false,
+        "disabled": false,
+        "description": null,
+        "hitHeight": 44.000003814697266
+      },
+      {
+        "label": "网易云音乐",
+        "checked": true,
+        "disabled": true,
+        "description": "v-407-last-source",
+        "hitHeight": 44.000003814697266
+      }
+    ],
+    "notice": ["至少需要保留一个已启用的音乐源。"]
+  },
+  "restoredSourceCount": 3,
+  "pointerEvents": [
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true },
+    { "type": "pointerdown", "pointerType": "mouse", "trusted": true }
+  ]
+}

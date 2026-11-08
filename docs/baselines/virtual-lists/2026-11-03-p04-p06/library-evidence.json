@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-03",
+  "method": "pnpm registry metadata plus installed, lockfile-verified packages; raw ESM bytes are not application bundle cost",
+  "sources": [
+    "https://tanstack.com/virtual/latest/docs/framework/vue/vue-virtual",
+    "https://tanstack.com/virtual/latest/docs/api/virtualizer"
+  ],
+  "packages": [
+    {
+      "name": "@tanstack/vue-virtual",
+      "version": "3.13.51",
+      "license": "MIT",
+      "sideEffects": false,
+      "peerDependencies": {
+        "vue": "^2.7.0 || ^3.0.0"
+      },
+      "dependencies": {
+        "@tanstack/virtual-core": "3.19.10"
+      },
+      "esmFile": "dist/esm/index.js",
+      "unminifiedEsmBytes": 1782,
+      "unminifiedEsmGzipBytes": 608,
+      "licenseSha256": "a405ee70c632bb938acb7ac5f210e814409b3760ea9d2329d8ed8ffcfd11a0e7"
+    },
+    {
+      "name": "@tanstack/virtual-core",
+      "version": "3.19.10",
+      "license": "MIT",
+      "sideEffects": false,
+      "esmFile": "dist/esm/index.js",
+      "unminifiedEsmBytes": 61763,
+      "unminifiedEsmGzipBytes": 13812,
+      "licenseSha256": "a405ee70c632bb938acb7ac5f210e814409b3760ea9d2329d8ed8ffcfd11a0e7"
+    }
+  ]
+}

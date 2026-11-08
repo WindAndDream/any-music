@@ -1,0 +1,524 @@
+{
+  "observations": [
+    {
+      "label": "installed-initial",
+      "at": "2026-10-27T08:56:09.961Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": false,
+        "reduced": false
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "focus": { "tag": "BUTTON", "key": "settings:section:appearance", "label": "外观与布局" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 778.0714721679688 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-system-dark-reduced",
+      "at": "2026-10-27T08:56:10.122Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "focus": { "tag": "BUTTON", "key": "settings:section:appearance", "label": "外观与布局" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 778.0714721679688 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-last-source-guard",
+      "at": "2026-10-27T08:56:19.821Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "focus": { "tag": "INPUT", "label": "" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 3396,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 3097,
+          "total": 3097,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 792.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-proxy-host-tab-username",
+      "at": "2026-10-27T08:56:35.694Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "focus": { "tag": "INPUT", "label": "" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 792.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "studio-proxy-shifttab-host",
+      "at": "2026-10-27T08:56:36.047Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "focus": { "tag": "INPUT", "label": "" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 792.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-theme-switch-settings-initial-focus",
+      "at": "2026-10-27T08:56:45.629Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "focus": { "tag": "BUTTON", "key": "settings:section:appearance", "label": "外观与布局" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 763,
+          "width": 1440,
+          "totalWidth": 1440
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 763,
+          "total": 2479,
+          "width": 1164,
+          "totalWidth": 1164
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 2180,
+          "total": 2180,
+          "width": 220,
+          "totalWidth": 220
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 960.0000610351562, "height": 778.0714721679688 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-theme-switch-settings-confirmed",
+      "at": "2026-10-27T08:56:50.814Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "focus": { "tag": "BUTTON", "label": "关闭" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1519,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:appearance",
+          "top": 0,
+          "height": 635,
+          "total": 635,
+          "width": 781,
+          "totalWidth": 781
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-settings-escape-opener",
+      "at": "2026-10-27T08:56:51.198Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "focus": { "tag": "BUTTON", "label": "关闭" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 635,
+          "total": 827,
+          "width": 251,
+          "totalWidth": 251
+        },
+        {
+          "key": "settings:appearance",
+          "top": 0,
+          "height": 635,
+          "total": 635,
+          "width": 781,
+          "totalWidth": 781
+        }
+      ],
+      "dialogs": [{ "label": null, "width": 1040, "height": 738.0000610351562 }],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "theme-selection" },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-escape-settled",
+      "at": "2026-10-27T08:56:53.758Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "focus": { "tag": "BUTTON", "key": "settings:open", "label": "设置" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    },
+    {
+      "label": "classic-wide-dark-catalog",
+      "at": "2026-10-27T08:57:06.717Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000447034836,
+        "touch": 10,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "focus": { "tag": "BUTTON", "key": "navigation:catalog", "label": "发现" },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 607,
+          "total": 1426,
+          "width": 1161,
+          "totalWidth": 1161
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1
+    }
+  ]
+}

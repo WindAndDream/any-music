@@ -1,0 +1,101 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B21-b17-cli-revalidation",
+  "parentBatch": "B17",
+  "triggerBatch": "B21",
+  "candidate": "B17-cli-build-pack-sign",
+  "runtime": "repository",
+  "reviewedAt": "2026-10-22T03:36:44.940Z",
+  "scope": "Minimal current-source revalidation of B17-C01/C02 only. Existing CLI repairs are inspected; no product implementation is changed by B21.",
+  "originalReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign.json",
+  "baseline": {
+    "head": "a693165205be0bc321764768d796d7c842f7a446",
+    "sourceHashes": [
+      {
+        "path": "packages/plugin-cli/src/project.mjs",
+        "sha256": "41ea8e5f77a3103d1120e95439084a5d4fe9826cafc4a92ad2ec3d329298a865"
+      },
+      {
+        "path": "packages/plugin-cli/test/tools.test.mjs",
+        "sha256": "2a8159f4295655f84d9a478ead4ba7d36286b61333068646b04a68b1123ba81e"
+      },
+      {
+        "path": "packages/plugin-cli/AGENTS.md",
+        "sha256": "cd0ab701715ae2922d7b16abe33510c757c5c79cbb118142fdcd2c03cd093f19"
+      },
+      {
+        "path": "packages/plugin-cli/README.md",
+        "sha256": "69607f0d161d78ebbbf6e124af77e51ec361f779ff072c8b5f500139d927ca8c"
+      }
+    ]
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-applicable"
+  },
+  "checks": [
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "evidence": "packages/plugin-cli/src/project.mjs:72",
+      "detail": "The sealed reader copies used bytes into a content-sized Buffer. The permanent multi-asset regression checks retained backing storage, immutable original contents and packed contents; empty/exact/over-budget reads remain covered."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "evidence": "packages/plugin-cli/src/project.mjs:208",
+      "detail": "Non-object/null/array configuration is rejected before key enumeration. Six malformed JSON shapes are checked through both public check and pack for CONFIG/exit 2."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "evidence": "packages/plugin-cli/test/tools.test.mjs:150",
+      "detail": "All 21 current CLI tests pass in the fresh root run. Independent tarballs complete four templates, same-VM tests and reproducible packaging. This does not audit Windows DEV."
+    }
+  ],
+  "verification": [
+    {
+      "command": "pnpm test",
+      "result": "pass",
+      "exitCode": 0,
+      "environment": {
+        "npm_config_workspace_concurrency": "1"
+      },
+      "startedAt": "2026-10-22T03:31:19.9224345+00:00",
+      "finishedAt": "2026-10-22T03:34:47.6062567+00:00",
+      "logPath": ".codex-tmp/b21-final/test-retry.log",
+      "logSha256": "49cfc8dbeb88290c9254f6da27a537ec192d426d34dd0f3daf2fc778aa57a407",
+      "level": "tests",
+      "scope": "Reused fresh root log: all 21 plugin-cli tests, including all new failure regressions, pass."
+    },
+    {
+      "command": "pnpm check:plugin:tools",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:33:42.9190752+00:00",
+      "finishedAt": "2026-10-22T03:34:33.7712646+00:00",
+      "logPath": ".codex-tmp/b21-final/plugin-tools.log",
+      "logSha256": "2924967db5e7bc6e4d1a75a9b41ad98a456c5385810a7f6d7eb79a58c6350a7e",
+      "detail": "Fresh independent tarball consumer and four templates; generated historical S15 evidence restored byte-for-byte, current observed outputs retained locally.",
+      "level": "artifact"
+    }
+  ],
+  "resolvedFindingIds": ["B17-C01", "B17-C02"],
+  "openFindingIds": [],
+  "findings": [],
+  "missingEvidence": [
+    "Five remaining B17 candidate audits, including Windows DEV, are outside this revalidation."
+  ],
+  "unreadPaths": [
+    "packages/plugin-cli/src/dev.mjs",
+    "Windows native DEV pairing/reload/end implementation"
+  ],
+  "dependencies": [],
+  "nextBatch": "B17-sdk-node-artifact"
+}

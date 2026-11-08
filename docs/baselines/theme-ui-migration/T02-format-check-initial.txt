@@ -1,0 +1,36 @@
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+apps/tauri/package.json (0ms)
+apps/tauri/src/platform/configure-tauri-workbench.ts (0ms)
+apps/userscript/package.json (0ms)
+apps/userscript/src/platform/configure-userscript-workbench.ts (0ms)
+docs/baselines/theme-ui-migration/T03-workspace-before.json (0ms)
+packages/music-workbench/src/features/player/player-presentation.ts (0ms)
+packages/music-workbench/test/features/player/player-presentation.test.ts (0ms)
+packages/theme-default/package.json (0ms)
+packages/theme-default/src/ClassicRoot.vue (367ms)
+packages/theme-default/src/components/player/ClassicPlayer.vue (172ms)
+packages/theme-default/src/components/player/PlayerBar.vue (1362ms)
+packages/theme-default/src/components/shell/ClassicNavigation.vue (102ms)
+packages/theme-default/src/components/shell/ClassicShell.vue (56ms)
+packages/theme-default/src/components/shell/ProductWorkbench.vue (484ms)
+packages/theme-default/src/styles/index.scss (3ms)
+packages/theme-default/test/components/player/PlayerBar.interactions.test.ts (0ms)
+packages/theme-default/test/components/player/PlayerControlActions.test.ts (0ms)
+packages/theme-default/test/components/player/PlayerSettingsDialog.test.ts (0ms)
+packages/theme-default/test/components/shell/ClassicRoot.test.ts (0ms)
+packages/theme-default/test/components/shell/ProductWorkbench.preferences.test.ts (0ms)
+packages/theme-default/test/components/shell/ProductWorkbench.test.ts (0ms)
+packages/theme-default/test/metadata.test.ts (0ms)
+packages/theme-default/tsconfig.json (0ms)
+packages/ui/src/product/workbench-chrome.ts (0ms)
+packages/ui/src/styles/_product-workbench.scss (1ms)
+packages/ui/test/components/product-workbench/ProductWorkbench.layout.test.ts (2ms)
+
+Format issues found in above 26 files. Run without `--check` to fix.
+Finished in 6166ms on 1231 files using 12 threads.
+ ELIFECYCLE  Command failed with exit code 1.

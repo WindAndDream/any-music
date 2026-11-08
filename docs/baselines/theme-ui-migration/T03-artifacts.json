@@ -1,0 +1,57 @@
+{
+  "batchId": "T03",
+  "measuredAt": "2026-10-23T19:27:22.8705182+08:00",
+  "scope": "Final successful pnpm build artifacts from the shared concurrent workspace. No artifact was launched; no isolated T03 size comparison claimed.",
+  "frontends": [
+    {
+      "directory": "apps/userscript/dist",
+      "fileCount": 3,
+      "totalBytes": 4790892.0,
+      "largest": [
+        {
+          "name": "any-music.user.js",
+          "bytes": 4757098,
+          "sha256": "10c48a59383cc46af962d28b066fd68522955265b29ec0efd0efa8aec53a5100"
+        },
+        {
+          "name": "userscript-build-audit.json",
+          "bytes": 33471,
+          "sha256": "1c9d2e9859cf7dc2b3865837154a0646edf4bc4b2a085c49d4ef50ad49833648"
+        },
+        {
+          "name": "favicon.svg",
+          "bytes": 323,
+          "sha256": "cc0d86ba45aa6d335387275250865b0a8948b2f3f764840558aebb162d1fd671"
+        }
+      ]
+    },
+    {
+      "directory": "apps/tauri/dist",
+      "fileCount": 69,
+      "totalBytes": 2831318.0,
+      "largest": [
+        {
+          "name": "index-D1ZYZ2om.js",
+          "bytes": 1161042,
+          "sha256": "e06dcf97c8a31b0a1cbe669f6838820d2a4d46d108bb18d9a2242b8e1ac2558e"
+        },
+        {
+          "name": "output-C0ZydUOt.js",
+          "bytes": 444694,
+          "sha256": "3d7cca8b0bd29dcacd6003d58b5ecfeca12e4997299f7866b91742b43432bfc9"
+        },
+        {
+          "name": "audio-exporter-PbUZSpQ-.js",
+          "bytes": 317664,
+          "sha256": "142666fffc0b7319c520c298b49b4fcfe608840dc993992d6f538a004b2b3abe"
+        }
+      ]
+    }
+  ],
+  "native": {
+    "path": "target/release/any-music-tauri.exe",
+    "bytes": 28334592,
+    "sha256": "9d704c7857e7f8d04ef702b7e653ec31110251a91e50e0938942c6305b0a49f2",
+    "executed": false
+  }
+}

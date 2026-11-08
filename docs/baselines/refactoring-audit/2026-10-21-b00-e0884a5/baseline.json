@@ -1,0 +1,624 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "runId": "2026-10-21-b00-e0884a5",
+  "capturedAt": "2026-10-21T13:41:28+08:00",
+  "timezone": "Asia/Shanghai",
+  "git": {
+    "head": "e0884a5189d6ef10a68c3ca054f2d01e84d05acd",
+    "branch": "develop",
+    "initialWorktree": [
+      {
+        "status": " M",
+        "path": "README.en.md",
+        "sha256": "766cfa404aca9480cec6087791162eaf9c80662835da0a09731fddbd9b62482b"
+      },
+      {
+        "status": " M",
+        "path": "README.md",
+        "sha256": "5570da4f2cde2fd9edc044e47260dd11d33b4fb55ec30522fab1310d169df949"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/README.md",
+        "sha256": "688d7d435ff42125f26b881e485794e65ac46fcdb5ccd554fb539f973b42a718"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/README.md",
+        "sha256": "7dab1c9c058497158d8a5521f46ceb01aafbf7cf4c9a7623596d43e394241ee4"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/文档索引.md",
+        "sha256": "2cc2b0b60dc35a90f79da0a6e94fe3a52cf57fc2ce4babffd57e63ac18aca830"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/文档索引.md",
+        "sha256": "d2d3c4c9e8c662eb328d1ba2676dd75766c14ae70b38e04db6a8861b89bcda14"
+      },
+      {
+        "status": "??",
+        "path": "docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+        "sha256": "89725843eb7277992fd5106f0d548a8c3360c493b2d520781864ce79c880b6a5"
+      },
+      {
+        "status": "??",
+        "path": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+        "sha256": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15"
+      }
+    ],
+    "stagedNumstat": "",
+    "trackedNumstat": "149\t20\tREADME.en.md\n145\t24\tREADME.md\n2\t0\tdocs/en/README.md\n1\t0\tdocs/en/cross-platform/README.md\n2\t0\tdocs/zh-cn/文档索引.md\n1\t0\tdocs/zh-cn/跨平台/文档索引.md",
+    "trackedDiff": {
+      "files": 6,
+      "insertions": 300,
+      "deletions": 44
+    },
+    "untrackedCount": 2,
+    "note": "Pre-existing work is preserved. The two untracked plans are part of this baseline, not audit outputs. README bodies were not reviewed; only their change statistics and hashes were recorded.",
+    "worktreeObservations": [
+      {
+        "observedAt": "2026-10-21T13:44:35+08:00",
+        "additionalFiles": [
+          {
+            "status": " M",
+            "path": "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+            "sha256": "4916db223cd44bd26b532b1fbdb538a039fd2c5dfb8bd8e07a8ba4986f35c91f"
+          },
+          {
+            "status": " M",
+            "path": "docs/en/desktop/README.md",
+            "sha256": "9f752e3f6fe430be03c02f38cdaa796af4bcc8c8b04c6a7713a7a264e61a0f1c"
+          },
+          {
+            "status": " M",
+            "path": "docs/en/desktop/backend-engineering.md",
+            "sha256": "3d03241ddaea786cac2500a00ef1f4a0bd69443b666b52f164521697916dec4f"
+          },
+          {
+            "status": " D",
+            "path": "docs/en/desktop/douyin-background-login-experiment.md",
+            "sha256": null
+          },
+          {
+            "status": " M",
+            "path": "docs/en/desktop/runtime-architecture.md",
+            "sha256": "82958fbf219fb2ba6120cc2c28faa15d6d0f0b7b7ab6080f0bab11e273d6078d"
+          },
+          {
+            "status": " D",
+            "path": "docs/en/desktop/rust-workspace-plan.md",
+            "sha256": null
+          },
+          {
+            "status": " D",
+            "path": "docs/zh-cn/桌面端/Rust工作区规划.md",
+            "sha256": null
+          },
+          {
+            "status": " M",
+            "path": "docs/zh-cn/桌面端/后端工程规范.md",
+            "sha256": "23e54ac4d026ac5ac0728965b12ca92cd1a2e5d13f93c78c4ca054ad3d7517a1"
+          },
+          {
+            "status": " D",
+            "path": "docs/zh-cn/桌面端/抖音后台登录试验.md",
+            "sha256": null
+          },
+          {
+            "status": " M",
+            "path": "docs/zh-cn/桌面端/文档索引.md",
+            "sha256": "9b99f37f1b2c4f60d56fe3596055672ecce282f40a06481e41667f4fa376f457"
+          },
+          {
+            "status": " M",
+            "path": "docs/zh-cn/桌面端/运行端架构.md",
+            "sha256": "4b929d5859c1453e88051b157f27d60a5852eff1b6d37813c2b311f3d98f78cf"
+          },
+          {
+            "status": " M",
+            "path": "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+            "sha256": "596980646e5b48a54073f2c8ce717422366373ae9b9729953b2b1cdac2637073"
+          }
+        ],
+        "interpretation": "Independent documentation edits/removals appeared during B00. These are observations, not audit-authored changes or implementation findings; their contents were not reviewed. The initial snapshot remains unchanged. Concurrent edits may continue, so compare the current worktree at each future batch start.",
+        "relatedBatches": ["B12", "B20"]
+      }
+    ]
+  },
+  "environment": {
+    "repositoryRoot": "<project-root>",
+    "platform": "win32",
+    "osRelease": "10.0.26200",
+    "architecture": "x64",
+    "versions": {
+      "git": "git version 2.55.0.windows.2",
+      "node": "v24.11.1",
+      "pnpm": "10.23.0",
+      "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+      "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+      "rustup": "stable-x86_64-pc-windows-msvc (default)\n1.88.0-x86_64-pc-windows-msvc\n1.90.0-x86_64-pc-windows-msvc\n1.91.1-x86_64-pc-windows-msvc (active)",
+      "powershell": "7.6.6"
+    },
+    "expectedPackageManager": "pnpm@10.23.0",
+    "pnpmMatchesManifest": true,
+    "rootRustEdition": "2024",
+    "rootRustVersion": "1.90",
+    "msrvToolchainListed": true,
+    "limitations": [
+      "Installed toolchains do not establish MSRV, native compilation or dependency-security acceptance.",
+      "Android/Xcode/WebView/SDK/NDK and device readiness were not probed.",
+      "Ignored files, installed dependencies and generated outputs were not fingerprinted."
+    ]
+  },
+  "workspaceInventory": {
+    "jsTsProjectCount": 20,
+    "applications": [
+      {
+        "name": "@any-music/tauri",
+        "path": "apps/tauri",
+        "manifestSha256": "d5ef5958e1a344ed2a0e98c412fd465e6d8077d616b16ce8017f16d2a2f35a6b",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/userscript",
+        "path": "apps/userscript",
+        "manifestSha256": "a33183d9e9c535ba8d3a82dba25234b32014f85762ba534c57bcec2ab4da61e6",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      }
+    ],
+    "packages": [
+      {
+        "name": "@any-music/account-pool",
+        "path": "packages/account-pool",
+        "manifestSha256": "11f877681c254c4602d7d30349586a55e75774ce6ae2fd71386f1b79e6cbedcb",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/audio-composition",
+        "path": "packages/audio-composition",
+        "manifestSha256": "aba6b620d32fa7c88df878f0322b277c119261145e9951ad41deb6a64f75ce42",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/core",
+        "path": "packages/core",
+        "manifestSha256": "573644b47c3809b86f277cafc2e1ac7d45074143d23dfb21a661ddd277009ae1",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/music-workbench",
+        "path": "packages/music-workbench",
+        "manifestSha256": "98a74b0beff51fe56c81f8ec2118eaea6ad138dd8a54b7024ae6a68c37775155",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/network-routing",
+        "path": "packages/network-routing",
+        "manifestSha256": "be7a66706eb369c12da08f98002dcf7192e4cb5e5acdf86cd93359f9e5cfc90d",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-center",
+        "path": "packages/plugin-center",
+        "manifestSha256": "739a12bd6b5044b13c4a8e8a62d92d9959ce73be30e474b8f666c95969072df2",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-cli",
+        "path": "packages/plugin-cli",
+        "manifestSha256": "5e26cda1addc65d8a514a965fa2ae27bfed00a0ccaed7f18edaa06627d7dd949",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-music-creation",
+        "path": "packages/plugin-music-creation",
+        "manifestSha256": "5591481bcef08ed5038b75419a9319c3a8f6716137e38335ca38975693f6c739",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-sandbox-browser",
+        "path": "packages/plugin-sandbox-browser",
+        "manifestSha256": "3ff753d4362dcc4e72d7949a81afb3011b4e699dc2cc8ba04a1a21be8a31ed2a",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-sdk",
+        "path": "packages/plugin-sdk",
+        "manifestSha256": "b827d149d50b693288984bd7e5b03259d2a20f7e6ee0b1a9beec647dd7ab7def",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-source-bilibili",
+        "path": "packages/plugin-source-bilibili",
+        "manifestSha256": "d52c2a562a336fc732242dbe9c9e425ae82f1d75b4d960ee04396df6bdc71526",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-source-douyin",
+        "path": "packages/plugin-source-douyin",
+        "manifestSha256": "71f4218c2b1e56bf7969568414ac7a991d2473c011667c36532048bf45b7a1f7",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-tag-management",
+        "path": "packages/plugin-tag-management",
+        "manifestSha256": "47c859967288f5701488d67cd5ed2cf9e659b28d7cca89c464739bd5eed76dc0",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-testkit",
+        "path": "packages/plugin-testkit",
+        "manifestSha256": "3278513c21fe4ab19f629d5803670966863fdb3a814196d732bbf83feb902cb2",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-ui-vue",
+        "path": "packages/plugin-ui-vue",
+        "manifestSha256": "4825bc534f642604becf2f9734330838313f99039f4a985f2da24a8527037bea",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/plugin-vm",
+        "path": "packages/plugin-vm",
+        "manifestSha256": "8d976de9b87ef5d00e86a59cfd8042995cb90b4fdac6807a0bf38625d7aaa153",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/ui",
+        "path": "packages/ui",
+        "manifestSha256": "d3fe0a16fed8ee803aea0d5be2c64d5b2b0183c1500f2d57075f1e0a3a75416b",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      },
+      {
+        "name": "@any-music/utils",
+        "path": "packages/utils",
+        "manifestSha256": "5abbc0d6d1e1dce952143cecd2e51317a20b6cda101c361f0c75d948deee395f",
+        "inspected": "name-only; implementation, scripts, exports and dependencies unreviewed"
+      }
+    ],
+    "cargoMemberCount": 6,
+    "cargoMembers": [
+      "apps/tauri/src-tauri",
+      "crates/am-plugin-protocol",
+      "crates/am-plugin-policy",
+      "crates/am-plugin-runtime",
+      "crates/am-plugin-net",
+      "crates/am-plugin-package"
+    ],
+    "cargoDefaultMembers": ["apps/tauri/src-tauri"],
+    "workspacePatterns": ["apps/*", "packages/*"],
+    "descendantGuides": [
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      "apps/userscript/AGENTS.md",
+      "crates/AGENTS.md",
+      "crates/am-plugin-net/AGENTS.md",
+      "crates/am-plugin-package/AGENTS.md",
+      "crates/am-plugin-runtime/AGENTS.md",
+      "packages/account-pool/AGENTS.md",
+      "packages/audio-composition/AGENTS.md",
+      "packages/core/AGENTS.md",
+      "packages/music-workbench/AGENTS.md",
+      "packages/network-routing/AGENTS.md",
+      "packages/plugin-center/AGENTS.md",
+      "packages/plugin-cli/AGENTS.md",
+      "packages/plugin-music-creation/AGENTS.md",
+      "packages/plugin-sandbox-browser/AGENTS.md",
+      "packages/plugin-sdk/AGENTS.md",
+      "packages/plugin-source-bilibili/AGENTS.md",
+      "packages/plugin-source-douyin/AGENTS.md",
+      "packages/plugin-tag-management/AGENTS.md",
+      "packages/plugin-testkit/AGENTS.md",
+      "packages/plugin-ui-vue/AGENTS.md",
+      "packages/plugin-vm/AGENTS.md",
+      "packages/ui/AGENTS.md",
+      "packages/utils/AGENTS.md"
+    ],
+    "descendantGuideContentsRead": []
+  },
+  "fileHashes": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177",
+      "algorithm": "sha256",
+      "bytes": 17093
+    },
+    {
+      "path": "docs/en/README.md",
+      "sha256": "688d7d435ff42125f26b881e485794e65ac46fcdb5ccd554fb539f973b42a718",
+      "algorithm": "sha256",
+      "bytes": 3657
+    },
+    {
+      "path": "docs/en/cross-platform/README.md",
+      "sha256": "7dab1c9c058497158d8a5521f46ceb01aafbf7cf4c9a7623596d43e394241ee4",
+      "algorithm": "sha256",
+      "bytes": 2922
+    },
+    {
+      "path": "docs/zh-cn/文档索引.md",
+      "sha256": "2cc2b0b60dc35a90f79da0a6e94fe3a52cf57fc2ce4babffd57e63ac18aca830",
+      "algorithm": "sha256",
+      "bytes": 3022
+    },
+    {
+      "path": "docs/zh-cn/跨平台/文档索引.md",
+      "sha256": "d2d3c4c9e8c662eb328d1ba2676dd75766c14ae70b38e04db6a8861b89bcda14",
+      "algorithm": "sha256",
+      "bytes": 2609
+    },
+    {
+      "path": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "sha256": "2650cd8548d8291f0660c9aa4e16b4b2c655d07020855f257d48ed45e7485b15",
+      "algorithm": "sha256",
+      "bytes": 31443
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+      "sha256": "89725843eb7277992fd5106f0d548a8c3360c493b2d520781864ce79c880b6a5",
+      "algorithm": "sha256",
+      "bytes": 32421
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "sha256": "d12f8e600298b66e3dbb416706ff7094b2f79eabaa5a04d91174348eb7adc6d6",
+      "algorithm": "sha256",
+      "bytes": 4374
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+      "sha256": "c4a136533a82c49bdb01ed4160c2eb665a79f8c73e5c10d51a2481408513057a",
+      "algorithm": "sha256",
+      "bytes": 10396
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md",
+      "sha256": "e3bce31bde01e3891aa79b4a444863ea016cb91428f7e30f4801ea5b370e608d",
+      "algorithm": "sha256",
+      "bytes": 25340
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/project-architecture.md",
+      "sha256": "865beeb0a89911cc969a5962537d348fde83292cffb11c26c103da5ce6f83498",
+      "algorithm": "sha256",
+      "bytes": 29720
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "sha256": "9b108401084637dfd5e73864d5b37990661df447ea91d25d2830a4c2bbfdbb2c",
+      "algorithm": "sha256",
+      "bytes": 14530
+    },
+    {
+      "path": "docs/en/cross-platform/architecture/development-workflow.md",
+      "sha256": "3e8edc5c234f5bf2a8e65bbd2db26bb39db9730e620055289319ece9fa1e2fad",
+      "algorithm": "sha256",
+      "bytes": 11779
+    },
+    {
+      "path": "README.en.md",
+      "sha256": "766cfa404aca9480cec6087791162eaf9c80662835da0a09731fddbd9b62482b",
+      "algorithm": "sha256",
+      "bytes": 15253
+    },
+    {
+      "path": "README.md",
+      "sha256": "5570da4f2cde2fd9edc044e47260dd11d33b4fb55ec30522fab1310d169df949",
+      "algorithm": "sha256",
+      "bytes": 13314
+    },
+    {
+      "path": "package.json",
+      "sha256": "7763080ab4ae876adb54faa783fff17e321de7296895e9d42e75aa7f2651066e",
+      "algorithm": "sha256",
+      "bytes": 4564
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e",
+      "algorithm": "sha256",
+      "bytes": 813
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "1088468b37100ccc795f68db947bab7db5a3bf886b8ecf88762bfdc6df656714",
+      "algorithm": "sha256",
+      "bytes": 127955
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "53212780b8821b735b6fd386c3edff8713c73827ba57a173d93f1fa53bd6f273",
+      "algorithm": "sha256",
+      "bytes": 895
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff",
+      "algorithm": "sha256",
+      "bytes": 155778
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "3e9da041cf8d454d57c4fb0bbe0d5f72c424739f9d213abcc6a0db4087ce7f13",
+      "algorithm": "sha256",
+      "bytes": 86
+    }
+  ],
+  "rootScripts": {
+    "build": "pnpm build:prod",
+    "build:dev": "pnpm typecheck && pnpm -r --if-present run build:dev",
+    "build:staging": "pnpm typecheck && pnpm -r --if-present run build:staging",
+    "build:prod": "pnpm typecheck && pnpm -r --if-present run build:prod",
+    "build:userscript": "pnpm build:userscript:prod",
+    "dev:tauri": "pnpm --filter @any-music/tauri dev",
+    "start:tauri": "node scripts/start-tauri.mjs",
+    "build:tauri": "pnpm build:tauri:prod",
+    "build:tauri:dev": "pnpm --filter @any-music/tauri build:dev",
+    "build:tauri:staging": "pnpm --filter @any-music/tauri build:staging",
+    "build:tauri:prod": "pnpm --filter @any-music/tauri build:prod",
+    "bundle:tauri": "pnpm --filter @any-music/tauri bundle",
+    "build:userscript:dev": "pnpm --filter @any-music/userscript run build:dev",
+    "build:userscript:staging": "pnpm --filter @any-music/userscript run build:staging",
+    "build:userscript:prod": "pnpm --filter @any-music/userscript run build:prod",
+    "dev": "pnpm dev:dev",
+    "dev:dev": "pnpm --filter @any-music/userscript run dev:dev",
+    "dev:staging": "pnpm --filter @any-music/userscript run dev:staging",
+    "dev:prod": "pnpm --filter @any-music/userscript run dev:prod",
+    "dev:userscript": "pnpm dev:userscript:dev",
+    "dev:userscript:dev": "pnpm --filter @any-music/userscript run dev:dev",
+    "dev:userscript:staging": "pnpm --filter @any-music/userscript run dev:staging",
+    "dev:userscript:prod": "pnpm --filter @any-music/userscript run dev:prod",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "lint": "node scripts/check-package-boundaries.mjs && node scripts/check-plugin-isolation.mjs && node scripts/check-plugin-vm.mjs && node scripts/check-mobile-boundaries.mjs && oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "test": "node --test scripts/test/*.test.mjs && pnpm -r --if-present run test",
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "generate:protocol": "node scripts/generate-plugin-protocol.mjs",
+    "check:protocol:generated": "node scripts/generate-plugin-protocol.mjs --check",
+    "check:protocol": "node scripts/check-plugin-protocol.mjs",
+    "check:rust:boundaries": "node scripts/check-rust-workspace.mjs",
+    "check:rust:release": "node scripts/check-rust-release.mjs",
+    "check:rust:msrv": "cargo +1.90.0 check --workspace --all-targets --locked --target-dir target/msrv",
+    "check:rust:deny": "cargo deny --locked check",
+    "check:rust:deny:pure": "cargo deny --locked --exclude any-music-tauri --exclude am-plugin-net check",
+    "check:native": "pnpm --filter @any-music/tauri check:native",
+    "prepare": "husky",
+    "accept:plugin:isolation": "pnpm --filter @any-music/tauri build:isolation-probe && cargo build -p any-music-tauri --example plugin-isolation-probe --features s03-isolation-probe --locked && node apps/tauri/scripts/accept-isolation-probe.mjs",
+    "check:plugin:isolation": "node scripts/check-plugin-isolation.mjs && pnpm --filter @any-music/tauri exec vitest run test/isolation-probe && cargo check -p any-music-tauri --locked && pnpm --filter @any-music/tauri build:isolation-probe && cargo test -p any-music-tauri --features s03-isolation-probe --lib isolation --locked && cargo check -p any-music-tauri --example plugin-isolation-probe --features s03-isolation-probe --locked",
+    "check:plugin:vm": "node scripts/check-plugin-vm.mjs && pnpm --filter @any-music/plugin-vm --filter @any-music/plugin-sandbox-browser --filter @any-music/plugin-testkit test",
+    "check:plugin:package": "node scripts/check-plugin-package.mjs && cargo test -p am-plugin-package --locked && cargo test -p any-music-tauri --lib plugins::packages --locked",
+    "check:plugin:tools": "node scripts/check-plugin-tools.mjs",
+    "check:mobile:boundaries": "node scripts/check-mobile-boundaries.mjs",
+    "check:mobile:android": "node scripts/check-mobile-android.mjs",
+    "build:mobile:android": "node scripts/build-mobile-android.mjs",
+    "check:mobile:release": "node scripts/check-mobile-release.mjs",
+    "accept:mobile:android": "node scripts/accept-mobile-android.mjs",
+    "accept:mobile:android:device": "node scripts/accept-mobile-android-device.mjs"
+  },
+  "localLogs": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5",
+  "commands": [
+    {
+      "id": "git-head",
+      "command": "git rev-parse HEAD",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:26+08:00",
+      "completedAt": "2026-10-21T13:41:26+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\git-head.log"
+    },
+    {
+      "id": "git-branch",
+      "command": "git branch --show-current",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:26+08:00",
+      "completedAt": "2026-10-21T13:41:26+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\git-branch.log"
+    },
+    {
+      "id": "git-status",
+      "command": "git -c core.quotepath=false status --porcelain=v1 -z --untracked-files=all",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:26+08:00",
+      "completedAt": "2026-10-21T13:41:26+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\git-status.log"
+    },
+    {
+      "id": "git-diff-numstat",
+      "command": "git -c core.quotepath=false diff --numstat",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:26+08:00",
+      "completedAt": "2026-10-21T13:41:26+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\git-diff-numstat.log"
+    },
+    {
+      "id": "git-staged-numstat",
+      "command": "git diff --cached --numstat",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:26+08:00",
+      "completedAt": "2026-10-21T13:41:26+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\git-staged-numstat.log"
+    },
+    {
+      "id": "index-diff",
+      "command": "git -c core.quotepath=false diff --unified=0 -- docs/en/README.md docs/en/cross-platform/README.md docs/zh-cn/文档索引.md docs/zh-cn/跨平台/文档索引.md",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:26+08:00",
+      "completedAt": "2026-10-21T13:41:26+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\index-diff.log"
+    },
+    {
+      "id": "version-git",
+      "command": "git --version",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:26+08:00",
+      "completedAt": "2026-10-21T13:41:27+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\version-git.log"
+    },
+    {
+      "id": "version-node",
+      "command": "node --version",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:27+08:00",
+      "completedAt": "2026-10-21T13:41:27+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\version-node.log"
+    },
+    {
+      "id": "version-pnpm",
+      "command": "pnpm --version",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:27+08:00",
+      "completedAt": "2026-10-21T13:41:27+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\version-pnpm.log"
+    },
+    {
+      "id": "version-cargo",
+      "command": "cargo --version",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:27+08:00",
+      "completedAt": "2026-10-21T13:41:27+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\version-cargo.log"
+    },
+    {
+      "id": "version-rustc",
+      "command": "rustc --version",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:27+08:00",
+      "completedAt": "2026-10-21T13:41:28+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\version-rustc.log"
+    },
+    {
+      "id": "version-rustup",
+      "command": "rustup toolchain list",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:28+08:00",
+      "completedAt": "2026-10-21T13:41:28+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\version-rustup.log"
+    },
+    {
+      "id": "version-powershell",
+      "command": "$PSVersionTable.PSVersion.ToString()",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:28+08:00",
+      "completedAt": "2026-10-21T13:41:28+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\version-powershell.log"
+    },
+    {
+      "id": "guide-inventory",
+      "command": "rg --files apps packages crates -g AGENTS.md",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T13:41:28+08:00",
+      "completedAt": "2026-10-21T13:41:28+08:00",
+      "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b00-e0884a5\\guide-inventory.log"
+    }
+  ],
+  "reusePolicy": [
+    "Compare HEAD, dirty paths and byte hashes before reusing evidence; unchanged HEAD alone is insufficient.",
+    "At each subbatch capture hashes of its implementation/tests/direct neighbors and the relevant manifest/lock/schema/profile/resource inputs.",
+    "Invalidate only affected checks when interfaces, dependencies, generated protocol, engine/profile/resources, toolchain or exact target change.",
+    "Historical S00-S16 reports are declared evidence references only; no historical pass is imported into this run."
+  ]
+}

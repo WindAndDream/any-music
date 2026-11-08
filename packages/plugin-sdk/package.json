@@ -1,0 +1,67 @@
+{
+  "name": "@any-music/plugin-sdk",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "schema",
+    "examples",
+    "README.md"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./music": "./src/music.ts",
+    "./guest": "./src/guest.ts",
+    "./host": "./src/host.ts",
+    "./schema": "./src/schema/index.ts",
+    "./node": "./src/node/package-format.mjs",
+    "./schema/v1/protocol.schema.json": "./schema/v1/protocol.schema.json",
+    "./schema/registry.json": "./schema/registry.json"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./music": {
+        "types": "./dist/music.d.ts",
+        "import": "./dist/music.js"
+      },
+      "./guest": {
+        "types": "./dist/guest.d.ts",
+        "import": "./dist/guest.js"
+      },
+      "./host": {
+        "types": "./dist/host.d.ts",
+        "import": "./dist/host.js"
+      },
+      "./schema": {
+        "types": "./dist/schema/index.d.ts",
+        "import": "./dist/schema/index.js"
+      },
+      "./node": "./dist/node/package-format.mjs",
+      "./schema/v1/protocol.schema.json": "./schema/v1/protocol.schema.json",
+      "./schema/registry.json": "./schema/registry.json"
+    }
+  },
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "generate:check": "node scripts/generate.mjs --check",
+    "check:package": "node scripts/check-package.mjs",
+    "build": "node scripts/build.mjs",
+    "prepack": "pnpm build",
+    "test": "pnpm generate:check && vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "ajv": "catalog:",
+    "json-schema-to-typescript": "catalog:",
+    "oxfmt": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B12-renderer-platform-tauri-fix",
+  "candidate": "B12-renderer-platform",
+  "parentBatch": "B12",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T13:49:02.535Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix-baseline.json",
+  "previousReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri.json",
+  "scope": {
+    "invariant": "Cancelled ordinary HTTP never exposes late native failures, and ordinary text/byte responses cross native IPC as bounded metadata plus raw bytes while preserving account/Range/budget/error contracts.",
+    "changedPaths": [
+      "apps/tauri/src/platform/native-http.ts",
+      "apps/tauri/src-tauri/src/network/http.rs",
+      "apps/tauri/src-tauri/src/network/http/response.rs",
+      "apps/tauri/test/platform/native-http.test.ts",
+      "apps/tauri/test/fixtures/native-http-response.json",
+      "docs/en/desktop/development.md",
+      "docs/zh-cn/桌面端/开发规范.md"
+    ],
+    "exclusions": [
+      "Independent B12 network/account/vault/proxy/CDP/media-grant/download/ACL audits",
+      "Shared source protocols, Userscript implementations and external plugin Gate",
+      "Live product/browser/device inspection, commit and push"
+    ]
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "resolvedFindingIds": ["B12-R01", "B12-R02"],
+  "openFindingIds": [],
+  "findings": [
+    {
+      "id": "B12-R01",
+      "status": "resolved",
+      "severity": "P2",
+      "change": "The catch path rechecks the cancellation signal before preserving/mapping any native failure. Success keeps its existing cancellation check and all settlements detach the subscription.",
+      "evidence": [
+        "apps/tauri/src/platform/native-http.ts",
+        "apps/tauri/test/platform/native-http.test.ts",
+        ".codex-tmp/repair-b12/targeted-final.log"
+      ],
+      "regressions": "Late network, timeout, size-recovery and AppError failures normalize to operation-cancelled. Non-cancelled failures retain their original code/detail; normal resolve/reject detach once. Already-cancelled work opens no IPC request."
+    },
+    {
+      "id": "B12-R02",
+      "status": "resolved",
+      "severity": "P2",
+      "change": "Ordinary http_request now returns tauri::ipc::Response containing a four-byte big-endian JSON metadata length, metadata capped at 1 MiB, and unchanged raw body bytes. The renderer validates the frame, preserves the request body budget, and returns a Uint8Array view for bytes or lossy UTF-8 text preserving BOM.",
+      "evidence": [
+        "apps/tauri/src-tauri/src/network/http/response.rs",
+        "apps/tauri/src-tauri/src/network/http.rs",
+        "apps/tauri/src/platform/native-http.ts",
+        "apps/tauri/test/fixtures/native-http-response.json"
+      ],
+      "regressions": "One shared fixture binds Rust raw output and renderer decoding, including Unicode metadata/non-UTF-8 bytes. Tests check buffer identity, 1 MiB binary linear framing overhead, oversized/malformed metadata and bodies, text/empty/BOM/error responses, native 100-999 status compatibility and immutable sent-request decoding. Controlled native HTTP checks both bytes/text modes with real CookieStore and Range, Set-Cookie filtering, declared/chunked size recovery, cancellation/timeout socket closure and registry release.",
+      "boundary": "Command name/ACL, account session/proxy routing and body budgets are unchanged. model::HttpResponse remains the browser-verification DTO; no compatibility reader/alias or shared protocol is added."
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "detail": "Both codecs remain in apps/tauri. No dependency, source protocol, public shared export or IPC alias was added."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "detail": "Cancellation precedence, subscription detach, immutable sent settings, fixed account IDs/fresh request IDs, native total timeout, size recovery and registry finish are exercised."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "detail": "Status, headers, UTF-8 text and byte identity are retained. Credential headers remain rejected/filtered; request/response changes add no persistence. TLS dependency advisories are recorded as separate repository blockers below."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "detail": "Existing require_main/account session/generic omit-loopback guards are preserved. Native fixtures bind CookieStore and Range; exact ACL/live grant acceptance is not inferred. Root lint checks current isolation/mobile boundaries."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "detail": "Permanent owner tests, shared wire fixture, native local transport tests, bilingual maintained guide updates and production builds cover the repaired scope. Whole-repository formatting and dependency-policy failures are reported separately; this is not full delivery acceptance."
+    }
+  ],
+  "verification": [
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/native-http.test.ts test/features/accounts/source-cancellation.test.ts test/platform/douyin-browser-catalog.test.ts test/platform/configure-tauri-workbench.test.ts",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/targeted-final.log",
+      "detail": "75 tests pass, including 30 ordinary native HTTP regressions."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib network::http --locked",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/native-http.log",
+      "detail": "Initial native-specific run: 10 pass. Final full pnpm test also executes the final native source, including both HTTP response modes."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "$env:npm_config_workspace_concurrency='1'; pnpm test",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/root-test-final.log",
+      "detail": "Full repository test gate; same test inventory with sequential workspace scheduling to reduce contention. Includes complete Tauri frontend, Cargo workspace and protocol differential tests."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/root-typecheck.log",
+      "detail": "Root typecheck passed after native Clippy fixes. pnpm build on the final frontend source repeats root typecheck, including Rust fmt/all-target Clippy."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/root-lint-final.log",
+      "detail": "Package/VM/isolation/mobile boundary checks and oxlint; no added lint exceptions."
+    },
+    {
+      "kind": "artifact",
+      "result": "pass",
+      "command": "pnpm build",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/root-build-final.log",
+      "detail": "Final root production build: Windows native executable, Tauri frontend and Userscript output. No product was launched."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/check-native.log",
+      "detail": "Workspace all-target check and explicit accepted Windows release target/features; no all-features substitution."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/check-msrv.log",
+      "detail": "Root MSRV 1.90.0 workspace/all-target compilation passes."
+    },
+    {
+      "kind": "tests",
+      "result": "fail",
+      "command": "pnpm check:rust:deny",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/repair-b12/check-deny.log",
+      "detail": "Existing locked rustls-webpki 0.103.15 / webpki-roots 1.0.9 trigger RUSTSEC-2026-0382 / RUSTSEC-2026-0381. Bans/licenses/sources pass; duplicate-version warnings remain. This repair makes no Cargo manifest/lockfile change."
+    },
+    {
+      "kind": "tests",
+      "result": "fail",
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "logPath": ".codex-tmp/repair-b12/root-format-final.log",
+      "detail": "The same 12 pre-existing documentation format failures remain. All files changed by B12 and its audit records pass targeted formatting."
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm exec oxfmt --check apps/tauri/src/platform/native-http.ts apps/tauri/test/platform/native-http.test.ts apps/tauri/test/fixtures/native-http-response.json docs/en/desktop/development.md docs/zh-cn/桌面端/开发规范.md docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix-baseline.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/repair-b12/scoped-format-final.log",
+      "detail": "Rust formatting is included in root typecheck."
+    },
+    {
+      "kind": "live",
+      "result": "not-run",
+      "command": null,
+      "exitCode": null,
+      "reason": "No current-task application/browser inspection request. Native tests use local backends, not real platform accounts or WebView IPC. Real account/loopback playback/seek/save and mobile acceptance remain separate."
+    }
+  ],
+  "priorAttempts": [
+    {
+      "result": "fail",
+      "command": "pnpm test",
+      "logPath": ".codex-tmp/repair-b12/root-test.log",
+      "detail": "A Userscript lazy-import test exceeded its 1 s waitFor under concurrent gates. Its isolated retry and serialized full runs pass without a Userscript implementation change. Load contention is an inference, not a proven root cause."
+    },
+    {
+      "result": "pass",
+      "command": "pnpm --filter @any-music/userscript exec vitest run test/features/music-sources/built-in-music-sources.test.ts",
+      "logPath": ".codex-tmp/repair-b12/userscript-retry.log",
+      "detail": "All 3 cases pass."
+    },
+    {
+      "result": "fail",
+      "command": "pnpm --filter @any-music/tauri typecheck",
+      "logPath": ".codex-tmp/repair-b12/tauri-typecheck.log",
+      "detail": "Initial Clippy reported test-module ordering and two unchecked read lengths. All three were fixed without allow attributes; subsequent root typecheck/build pass."
+    }
+  ],
+  "remainingGateFailures": [
+    {
+      "kind": "repository-format-debt",
+      "owner": "B20/B21",
+      "count": 12,
+      "logPath": ".codex-tmp/repair-b12/root-format-final.log",
+      "relation": "No changed B12 file is in the failure list. These files are unchanged from HEAD."
+    },
+    {
+      "kind": "existing-native-dependency-advisories",
+      "owner": "Repository native dependency maintenance",
+      "ids": ["RUSTSEC-2026-0382", "RUSTSEC-2026-0381"],
+      "logPath": ".codex-tmp/repair-b12/check-deny.log",
+      "relation": "Cargo manifests and Cargo.lock are unchanged from HEAD. Separate dependency remediation remains required; no complete delivery/security acceptance is claimed."
+    }
+  ],
+  "artifactPaths": [
+    "target/release/any-music-tauri.exe",
+    "apps/tauri/dist",
+    "apps/userscript/dist/any-music.user.js"
+  ],
+  "missingEvidence": [
+    "Real Windows WebView raw-IPC/account/network/playback acceptance",
+    "Live mobile and other independent B12 subbatches",
+    "Measured process peak memory; linear frame length is tested, not end-to-end memory usage",
+    "Closure of the repository formatting and native dependency advisory gates"
+  ],
+  "nextBatch": {
+    "batchId": "B12-native-network-tauri",
+    "runtime": "tauri",
+    "question": "Continue the independent native built-in request lifecycle audit, reusing these transport fixtures and checking the current hashes. Other seven B12 candidates remain unreviewed."
+  },
+  "handoff": "B12 两项已确认问题均已修复：取消后迟到错误归一为 operation-cancelled；普通 HTTP 使用有界元数据加原始正文的 IPC 帧，字节正文在渲染端使用 buffer view。增加永久回归、跨语言夹具与本地原生 HTTP 验证，保留账号 CookieStore、Range、错误恢复、取消/超时及请求释放。最终定向 75 项通过，完整测试、类型检查、lint、两端生产构建、原生与 MSRV 检查通过。全量格式仍有 12 份原有文档失败，依赖审计仍报当前锁文件两项 TLS 安全告警；这两类未通过项独立保留，不宣称全仓门禁全绿。状态 conformant / pass-scoped，未启动产品或进行真实账号/播放实测；其余七个 B12 候选仍未排查。"
+}

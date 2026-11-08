@@ -1,0 +1,330 @@
+{
+  "documentType": "verification-evidence",
+  "runtimeScope": "tauri",
+  "recordedAtUtc": "2026-10-19T17:49:53.008Z",
+  "status": "partial-s16-android-local-verification",
+  "s16Implemented": false,
+  "environment": {
+    "host": "Windows",
+    "avd": "AnyMusicS16_API34",
+    "serial": "emulator-5580",
+    "androidVersion": "14",
+    "api": 34,
+    "architecture": "x86_64",
+    "configuredRamMiB": 2048,
+    "virtualCores": 2,
+    "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys",
+    "webviewPackage": "com.google.android.webview",
+    "webviewVersion": "113.0.5672.136",
+    "rust": "1.91.1",
+    "ndk": "30.0.16248370",
+    "configuredMinimumApi": 24,
+    "compileTargetSdk": 37,
+    "physicalDevice": false
+  },
+  "policy": {
+    "externalPlugins": "none",
+    "declarativeAdmitted": false,
+    "codeAdmitted": false,
+    "signedRelease": false,
+    "storeChannelAccepted": false,
+    "debugSignerVerified": true
+  },
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "startedUtc": "2026-10-19T17:12:00.5164406Z",
+      "finishedUtc": "2026-10-19T17:13:11.4787299Z",
+      "log": "test-final.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "startedUtc": "2026-10-19T17:13:11.5049008Z",
+      "finishedUtc": "2026-10-19T17:14:32.4548422Z",
+      "log": "typecheck-final.log"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "startedUtc": "2026-10-19T17:14:32.4575611Z",
+      "finishedUtc": "2026-10-19T17:14:34.2032779Z",
+      "log": "lint-final.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "startedUtc": "2026-10-19T17:14:34.2054024Z",
+      "finishedUtc": "2026-10-19T17:14:38.8031793Z",
+      "log": "format-check-final.log"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "startedUtc": "2026-10-19T17:14:38.8050250Z",
+      "finishedUtc": "2026-10-19T17:17:07.6409178Z",
+      "log": "build-final.log"
+    },
+    {
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "startedUtc": "2026-10-19T17:08:57.7592490Z",
+      "finishedUtc": "2026-10-19T17:09:21.0622254Z",
+      "log": "check-native.log"
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "startedUtc": "2026-10-19T17:09:21.0644602Z",
+      "finishedUtc": "2026-10-19T17:09:43.7273054Z",
+      "log": "check-rust-msrv.log"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "exitCode": 0,
+      "startedUtc": "2026-10-19T17:09:43.7295454Z",
+      "finishedUtc": "2026-10-19T17:09:56.6537506Z",
+      "log": "check-rust-deny.log"
+    }
+  ],
+  "counts": {
+    "rootScriptTests": 24,
+    "cliNodeTests": 13,
+    "vitest": 1728,
+    "rust": 193,
+    "rustIgnored": 1,
+    "protocolDifferentialCases": 183,
+    "androidInstrumentation": 9
+  },
+  "runtimeChecks": {
+    "workbenchMounted": true,
+    "previewVisible": true,
+    "pickerVerifiedBytes": true,
+    "fileAssociationVerified": true,
+    "systemSharesheetVerified": true,
+    "samePackageContentHash": "3dda34b3d2b316199dbb7139910339e653895ff00ec2c87ad5cd60b3cf1bbbc5",
+    "previewCanInstall": false,
+    "devControlAdvertised": false,
+    "saveSucceeded": true,
+    "saveCancellationReturnedFalse": true,
+    "savedByteCount": 32,
+    "privateHttpsTargetRejected": true,
+    "ipcDenials": {
+      "plugin_package_install": true,
+      "http_request": true,
+      "plugin_command_run": true,
+      "plugin_dev_begin": true,
+      "plugin:mobile-platform|credentialKey": true
+    },
+    "nativeOnlyRestore": {
+      "webviewMirrorRemoved": true,
+      "manifestVersion": 2,
+      "disabledModulesRetained": true,
+      "profileIdentityRetained": true,
+      "stalePreviewRestored": false,
+      "installCountAfterRestart": 0,
+      "trimWasSimulated": true,
+      "physicalOomAcceptance": false
+    }
+  },
+  "capabilities": {
+    "platform": "android",
+    "form": "mobile",
+    "externalPlugins": "none",
+    "accountTransport": "unavailable",
+    "systemBrowser": "unavailable",
+    "secureCredentials": "provided",
+    "media": "unavailable",
+    "nativeSave": "provided",
+    "packageFiles": "provided",
+    "packageSharing": "provided",
+    "packageDeepLinks": "provided",
+    "backgroundExecution": "unavailable"
+  },
+  "preservation": {
+    "baselinePaths": 888,
+    "unchanged": 802,
+    "modifiedWithinS16": 42,
+    "retainedPreexistingDeletions": 44,
+    "unexpectedMissing": []
+  },
+  "limitations": [
+    "No macOS/Xcode or iOS project/device acceptance",
+    "No physical minimum-device, OOM, storage-pressure or cross-device portable-data acceptance",
+    "Mobile account, media and background execution unavailable",
+    "No admitted mobile declarative/code installation, update, rollback or executor",
+    "Debug APKs only; no signed release/store approval"
+  ],
+  "artifacts": [
+    {
+      "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/arm64/debug/app-arm64-debug.apk",
+      "bytes": 236650033,
+      "sha256": "27a30c975a98015332ea9a8c522193471f8b6a7358fcca5b766336cb87566a47"
+    },
+    {
+      "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/x86_64/debug/app-x86_64-debug.apk",
+      "bytes": 238113209,
+      "sha256": "3e9528c9680c0e493ed1f7f3a04a0a9ed4fcdb9aa217f9206a14f5554e349abf"
+    },
+    {
+      "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/androidTest/x86_64/debug/app-x86_64-debug-androidTest.apk",
+      "bytes": 672780,
+      "sha256": "12df2a8b4c668dcaf86349f52ac2f74c3f2589a9aa0b9fd26a73480a8bc5874b"
+    },
+    {
+      "path": "apps/tauri/src-tauri/gen/android/app/src/main/jniLibs/arm64-v8a/libany_music_tauri_lib.so",
+      "bytes": 228533976,
+      "sha256": "9cc6a201bbded93811524a1e1d9f5d6afec366dd9bf8b9cec56eb96c745d79cf"
+    },
+    {
+      "path": "apps/tauri/src-tauri/gen/android/app/src/main/jniLibs/x86_64/libany_music_tauri_lib.so",
+      "bytes": 229997152,
+      "sha256": "47155cb4f296cde1c5da5ec84c2436d2d80fb0864a9763a9e86bb6e7c3338872"
+    }
+  ],
+  "logs": [
+    {
+      "localPath": ".codex-tmp/s16-live/test-final.log",
+      "sha256": "af8799cd9d85d19e813380dc1c9d9be60fd2936e4bdaa8e7ad71da60fffec601"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/typecheck-final.log",
+      "sha256": "a518e6f492a3e1269fdc2d12ac13e7e6cf2a48c948ab1d65c706d2736e22e8bd"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/lint-final.log",
+      "sha256": "f7f3878f7b62359127276f7e27e87a37336e864b4f8bcea5358833536f7217f6"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/format-check-final.log",
+      "sha256": "bf8ae857322132cbb85b2425d182803069406ef54ee0763d749ff0b4afebe113"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/build-final.log",
+      "sha256": "45ab55a5667255ea389a676ec2526d0debb05853d025cd294bfef9a191118238"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/check-native.log",
+      "sha256": "d11a6e8b36fa7bc32cf3bcbe47b1b07d82becd26ffe9212720c1867be6c473b3"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/check-rust-msrv.log",
+      "sha256": "75cdbac9551a434a7d0faf450fe47effa11c0531c34504208f52d55859421a47"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/check-rust-deny.log",
+      "sha256": "aa9b1476db446615ecdff6d63f4540567f83dd83160b8b445b521808377fc233"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/android-clippy.log",
+      "sha256": "dda8009f6c3432355eb3e5cb31491988947b998b22761b503cce7fe9a51ba580"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/build-x86-final.log",
+      "sha256": "3780c5c6b295f3a3312e27a975ef0b68aec5a58e3ee9e126262e48b8a6e4da87"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/build-arm64-final.log",
+      "sha256": "c1e78abf83c92210ac5c3835c653b9ab8447a7b6bdc103557ed30c59b35c7078"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/android-final-assembly.log",
+      "sha256": "db4e5fa4e23a1d9842983172a9d01ac08bf7c41e6b37fb71d9b08510d8a166d7"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/instrumentation-final.log",
+      "sha256": "e4c5e1686fc12ee680b17ecc0eeb98c1724e53c702b4ffe0784c793c6fca809e"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/picker-final.json",
+      "sha256": "6bcae97d8abc75896caf97d13cd6ef92fa9bdf1e3c749adfc26d13f02a70b838"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/file-association.json",
+      "sha256": "13d3a2e59e4ee605320735ac9ac20f2c0f1d1949a59b96eee600b29d7b23621c"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/system-share.json",
+      "sha256": "12c25b2e5ef5897e5792a68e28af7618db5bbcdbb2d3b6e7b4a9b3c1ee83d804"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/save-final.json",
+      "sha256": "7b102f30d3c82fa38c499d71e524e478dfec08651aed9064151a8d892510e176"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/save-cancel-final.json",
+      "sha256": "d7840894c6f857be7c17524e64026a7b971f41ddb3f149c87f1395cd4a0a1209"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/ipc-denials.json",
+      "sha256": "274916bd6553bf2f9de0746b5632008c185ed71ea3f3707f47f78e0cf4a020a2"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/recovery-before.json",
+      "sha256": "a73444467a181e02381e14633c48adf0199746d6afa81e5195eb65e5f993c782"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/recovery-after.json",
+      "sha256": "386d0ceb49c89d6de21b64dba4ef1cd2858a0853cedcf797ac4f00439cf6089a"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/deep-link-denial.json",
+      "sha256": "5b3252f1efd24cff79deb8017faf99c70ed7aa2e825354fdcd42160009032b30"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/webview.log",
+      "sha256": "850c241d590b1e4b57a9b27d8eed16671f58078c809b53a0384243855fe32425"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/device-fingerprint.log",
+      "sha256": "6dfd34a45676a96abe1cb15cfc870709401aa2f0ac69c324d35f546756088a50"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/apk-signature.log",
+      "sha256": "f5259d2ed3b8b35c7321b2801fc117a8b7587c004c9190d3acd6100d7919bbc3"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/apk-badging.log",
+      "sha256": "726babd997948fe513be0c89c3028d34d5daf79e142f9d8156fadc9f1e1a66c2"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/trim.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/meminfo.log",
+      "sha256": "86576d338fcbe9be6b45673f4fcc3ba0d987519b6308ec629d62cf5328dcac98"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/final-app.png",
+      "sha256": "e2b9609043f2165a294418c1ae881715f3b0eda0d695eb7c402354805ab21758"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/format-delivery.log",
+      "sha256": "7e3ea0168d9660209a2b81b216ea50f85831d3b1745d780ab60a26a9245138ea"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "localPath": ".codex-tmp/s16-live/cleanup.log",
+      "sha256": "85f37afcd99760e32d8c150c99144987a3c3411934d0e65ef2c69282491bfb24"
+    }
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false
+  },
+  "deliveryValidation": {
+    "formatCheckExitCode": 0,
+    "diffCheckExitCode": 0
+  },
+  "inspectionCleanup": {
+    "testApkRemoved": true,
+    "adbForwardRemoved": true,
+    "emulatorStopped": true,
+    "avdDataPreserved": true
+  }
+}

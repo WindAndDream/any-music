@@ -1,0 +1,38 @@
+{
+  "name": "@any-music/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "**/*.scss"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme": "./src/theme.ts",
+    "./virtual-scroll": "./src/virtual-scroll.ts",
+    "./components/*": "./src/components/*",
+    "./styles": "./src/styles/index.scss",
+    "./library": "./src/library.ts",
+    "./catalog": "./src/catalog.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@any-music/audio-composition": "workspace:*",
+    "@any-music/core": "workspace:*",
+    "@tanstack/vue-virtual": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "sass": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
+  },
+  "peerDependencies": {
+    "vue": "catalog:"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-03",
+  "compression": "Per-file gzip level 9; JS/CSS/Wasm payload; identical method to P03",
+  "baselineSourceDigest": "9d594fc3a6a32eac76b20a5f744fdbb66d4e0e8c6a1d557c542996dbeb351a87",
+  "currentSourceDigest": "775fc9a404b6181403b490a7f11fbe604d147e5c6413a961d307e15813f54ea1",
+  "interpretation": "P04 installs the dependency; P05/P06 add an unconsumed public UI subpath. No production virtualizer is wired yet, so these deltas cannot predict P07 engine cost. Full production builds and build-owned graph audits were used; no product/browser was launched.",
+  "comparisons": [
+    {
+      "runtime": "userscript",
+      "before": {
+        "payloadBytes": 5741770,
+        "payloadGzipBytes": 1107443
+      },
+      "after": {
+        "payloadBytes": 5741770,
+        "payloadGzipBytes": 1107443
+      },
+      "delta": {
+        "payloadBytes": 0,
+        "payloadGzipBytes": 0
+      },
+      "changedCodeArtifacts": [],
+      "engineInThemeBuildGraph": false,
+      "engineInUserscriptBuildGraph": false
+    },
+    {
+      "runtime": "tauri",
+      "before": {
+        "payloadBytes": 3571287,
+        "payloadGzipBytes": 848608
+      },
+      "after": {
+        "payloadBytes": 3571287,
+        "payloadGzipBytes": 848608
+      },
+      "delta": {
+        "payloadBytes": 0,
+        "payloadGzipBytes": 0
+      },
+      "changedCodeArtifacts": [],
+      "engineInThemeBuildGraph": false,
+      "engineInUserscriptBuildGraph": null
+    }
+  ]
+}
