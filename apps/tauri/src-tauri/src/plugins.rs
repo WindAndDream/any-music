@@ -151,6 +151,14 @@ impl PluginAuthority {
     }
 }
 
+pub(super) fn product_origin(url: &tauri::Url) -> String {
+    if url.scheme() == "tauri" && url.host_str() == Some("localhost") && url.port().is_none() {
+        "tauri://localhost".into()
+    } else {
+        url.origin().ascii_serialization()
+    }
+}
+
 fn check_product(window: &str, webview: &str, origin: &str) -> Result<(), String> {
     let local = matches!(
         origin,
@@ -173,7 +181,7 @@ pub(crate) async fn plugin_authority_snapshot(
     check_product(
         webview.window().label(),
         webview.label(),
-        &url.origin().ascii_serialization(),
+        &product_origin(&url),
     )?;
     let authority = state.inner().clone();
     let permit = authority
@@ -203,7 +211,7 @@ pub(crate) async fn plugin_authority_revoke(
     check_product(
         webview.window().label(),
         webview.label(),
-        &url.origin().ascii_serialization(),
+        &product_origin(&url),
     )?;
     if install_id.len() > 200 {
         return Err("安装标识无效。".into());
@@ -255,6 +263,10 @@ mod tests {
     #[test]
     fn rejects_executor_remote_and_child_callers() {
         assert!(check_product("main", "main", "http://tauri.localhost").is_ok());
+        let macos_url = tauri::Url::parse("tauri://localhost/index.html").unwrap();
+        assert!(check_product("main", "main", &product_origin(&macos_url)).is_ok());
+        let spoofed_tauri = tauri::Url::parse("tauri://evil.invalid/index.html").unwrap();
+        assert!(check_product("main", "main", &product_origin(&spoofed_tauri)).is_err());
         for (window, view, origin) in [
             ("main", "executor", "http://tauri.localhost"),
             ("executor", "main", "http://tauri.localhost"),
