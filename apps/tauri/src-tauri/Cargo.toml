@@ -70,7 +70,8 @@ hkdf = "0.12"
 axum = "0.8"
 futures-util = "0.3"
 tokio-tungstenite = "0.28"
-rusqlite = { version = "=0.37.0", features = ["bundled"] }
+# Keep the statement cache while bundling patched SQLite, without the default WASM backend.
+rusqlite = { version = "=0.41.1", default-features = false, features = ["bundled", "cache"] }
 tauri-plugin-deep-link = "2"
 
 [target.'cfg(target_os = "windows")'.dependencies]
