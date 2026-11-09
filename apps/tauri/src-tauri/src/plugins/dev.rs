@@ -351,7 +351,7 @@ pub(crate) async fn plugin_dev_begin(
     super::check_product(
         webview.window().label(),
         webview.label(),
-        &url.origin().ascii_serialization(),
+        &super::product_origin(&url),
     )?;
     #[cfg(not(windows))]
     {
@@ -475,7 +475,7 @@ pub(crate) async fn plugin_dev_end(
     super::check_product(
         webview.window().label(),
         webview.label(),
-        &url.origin().ascii_serialization(),
+        &super::product_origin(&url),
     )?;
     sessions.stop();
     webview
