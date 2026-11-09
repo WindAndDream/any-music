@@ -285,7 +285,7 @@ pub(crate) async fn plugin_package_discard_preview(
     super::check_product(
         webview.window().label(),
         webview.label(),
-        &url.origin().ascii_serialization(),
+        &super::product_origin(&url),
     )?;
     if token.len() > 200 {
         return Err("预览标识无效。".into());
@@ -337,7 +337,7 @@ pub(crate) async fn plugin_package_preview(
     super::check_product(
         webview.window().label(),
         webview.label(),
-        &url.origin().ascii_serialization(),
+        &super::product_origin(&url),
     )?;
     if bytes.len() > am_plugin_package::MAX_ARCHIVE_BYTES {
         return Err("插件包超过 16 MiB。".into());
@@ -369,7 +369,7 @@ pub(crate) async fn plugin_package_current_preview(
     super::check_product(
         webview.window().label(),
         webview.label(),
-        &url.origin().ascii_serialization(),
+        &super::product_origin(&url),
     )?;
     #[cfg(target_os = "android")]
     if state.preview.lock().map_err(|_| "预览不可用。")?.is_none()

@@ -85,7 +85,7 @@ fn check(webview: &tauri::Webview) -> Result<(), String> {
     super::check_product(
         webview.window().label(),
         webview.label(),
-        &url.origin().ascii_serialization(),
+        &super::product_origin(&url),
     )
 }
 /// File associations and native drag/drop carry OS-selected paths. They only stage one

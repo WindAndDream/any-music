@@ -14,13 +14,17 @@ import {
   releaseTargets,
 } from './lib/release.mjs'
 
-assert.equal(process.argv.length, 3, 'Usage: pnpm release:build TARGET_ID')
+assert.equal(process.argv.length, 3, 'Usage: pnpm release:build <TARGET_ID | --list>')
+const targetId = process.argv[2]
 const config = readReleaseConfig()
+if (targetId === '--list') {
+  for (const target of releaseTargets(config))
+    console.log(`${target.id}: ${target.extensions.join(', ')}`)
+  process.exit(0)
+}
 const context = releaseContext()
-const target = releaseTargets(config, context.androidSigning).find(
-  (entry) => entry.id === process.argv[2],
-)
-assert(target, 'Unknown release target')
+const target = releaseTargets(config, context.androidSigning).find((entry) => entry.id === targetId)
+assert(target, 'Unknown release target. Run pnpm release:build --list to see supported targets.')
 if (process.env.AM_RELEASE_COMMIT)
   assert.equal(context.sourceDirty, false, 'Release build checkout has uncommitted source changes')
 assert(process.env.npm_execpath, 'Run through pnpm release:build from the repository root')
@@ -33,7 +37,7 @@ const pnpm = (args, env) => {
 const sources = {}
 
 if (target.kind === 'userscript') {
-  pnpm(['build:userscript:prod'])
+  pnpm(['build:userscript'])
   sources['user.js'] = resolve(releaseRoot, 'apps/userscript/dist/any-music.user.js')
 } else if (target.kind === 'android') {
   const options = [target.target, '--release', ...(target.signing === 'signed' ? ['--signed'] : [])]

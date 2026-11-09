@@ -24,14 +24,11 @@ struct Output {
     text: String,
 }
 pub(super) fn product(view: &tauri::Webview) -> Result<(), String> {
+    let url = view.url().map_err(|_| "调用来源不可用。")?;
     super::check_product(
         view.window().label(),
         view.label(),
-        &view
-            .url()
-            .map_err(|_| "调用来源不可用。")?
-            .origin()
-            .ascii_serialization(),
+        &super::product_origin(&url),
     )
 }
 pub(super) fn selected(

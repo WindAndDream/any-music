@@ -84,7 +84,7 @@ Reopen the terminal, IDE or Codex after installation so processes load the new e
 ### Userscript
 
 ```bash
-pnpm dev:userscript       # Start development in dev mode; pnpm dev is equivalent
+pnpm dev                  # Start Userscript development in dev mode
 pnpm build:userscript     # Build only the userscript in prod mode
 ```
 
@@ -121,15 +121,15 @@ The following is the complete Windows setup. First finish the common environment
 
 | Tool                           | Version or components used by the current project                                                 |
 | ------------------------------ | ------------------------------------------------------------------------------------------------- |
-| Full JDK                       | **17**, including `java`, `javac` and `keytool`                                                   |
+| Full JDK                       | **21** (CI), including `java`, `javac` and `keytool`                                              |
 | Android SDK Platform           | **37**, plus **36** for the locked Tauri Android libraries                                        |
 | Android SDK Build-Tools        | **36.0.0**                                                                                        |
-| Android NDK                    | **28.2.13676358** (r28c)                                                                          |
+| Android NDK                    | **30.0.16248370**                                                                                 |
 | Other SDK components           | Platform-Tools and Command-line Tools (latest)                                                    |
 | Gradle / Android Gradle Plugin | **9.6.1 / 9.3.1**, downloaded through project configuration; no global Gradle installation needed |
 | Rust Android targets           | `aarch64-linux-android` (phones), `x86_64-linux-android` (emulators)                              |
 
-JDK 17 meets the current [AGP 9.3 build requirements](https://developer.android.com/build/releases/agp-9-3-0-release-notes#compatibility). The application's Java/Kotlin bytecode target of 1.8 does not mean JDK 8 should be installed. Use a standalone JDK or a compatible Android Studio JDK; `JAVA_HOME` must point to the actual JDK root.
+Use JDK 21 to match release CI. `JAVA_HOME` points to the JDK root. See the [AGP 9.3 compatibility table](https://developer.android.com/build/releases/agp-9-3-0-release-notes#compatibility).
 
 Install the listed components through [Android Studio's SDK Manager](https://developer.android.com/studio/intro/update#sdk-manager), using **Show Package Details** to select exact versions. Alternatively, download Command-line Tools from the [Android download page](https://developer.android.com/studio#command-line-tools-only) and extract them into `<SDK>/cmdline-tools/latest/`, containing `bin/` and `lib/`.
 
@@ -139,9 +139,9 @@ This PowerShell example uses `software/programming/compiler` under the current u
 
 ```powershell
 $toolchainRoot = Join-Path $env:USERPROFILE 'software/programming/compiler'
-$env:JAVA_HOME = Join-Path $toolchainRoot 'temurin-17'
+$env:JAVA_HOME = Join-Path $toolchainRoot 'temurin-21'
 $env:ANDROID_HOME = Join-Path $toolchainRoot 'android-sdk'
-$env:NDK_HOME = Join-Path $env:ANDROID_HOME 'ndk/28.2.13676358'
+$env:NDK_HOME = Join-Path $env:ANDROID_HOME 'ndk/30.0.16248370'
 
 # Persist user variables for newly started terminals, IDEs and Codex.
 foreach ($variableName in @('JAVA_HOME', 'ANDROID_HOME', 'NDK_HOME')) {
@@ -166,14 +166,14 @@ Saving environment variables does not update other running processes; check them
 If SDK Manager already installed the components, proceed to installing Rust targets. With newer Command-line Tools that include `android.exe`, these commands also install the SDK packages; follow any license prompts:
 
 ```powershell
-& "$env:ANDROID_HOME/cmdline-tools/latest/bin/android.exe" sdk --sdk="$env:ANDROID_HOME" install platforms/android-37.0 platforms/android-36 build-tools/36.0.0 ndk/28.2.13676358 platform-tools
+& "$env:ANDROID_HOME/cmdline-tools/latest/bin/android.exe" sdk --sdk="$env:ANDROID_HOME" install platforms/android-37.0 platforms/android-36 build-tools/36.0.0 ndk/30.0.16248370 platform-tools
 rustup target add --toolchain 1.91.1 aarch64-linux-android x86_64-linux-android
 ```
 
 Older Command-line Tools without `android.exe` use [sdkmanager](https://developer.android.com/tools/sdkmanager). Keep the two package identifier formats separate:
 
 ```powershell
-& "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --sdk_root="$env:ANDROID_HOME" "platforms;android-37" "platforms;android-36" "build-tools;36.0.0" "ndk;28.2.13676358" "platform-tools"
+& "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --sdk_root="$env:ANDROID_HOME" "platforms;android-37.0" "platforms;android-36" "build-tools;36.0.0" "ndk;30.0.16248370" "platform-tools"
 & "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --sdk_root="$env:ANDROID_HOME" --licenses
 ```
 
@@ -239,12 +239,12 @@ For an x86_64 emulator, use its APK from the table instead. Replacement installs
 
 The repository supports `dev`, `staging` and `prod`, configured in root `.env.<mode>` files:
 
-| Purpose                | Commands                                                                                     |
-| ---------------------- | -------------------------------------------------------------------------------------------- |
-| Userscript development | `pnpm dev:userscript:dev` / `pnpm dev:userscript:staging` / `pnpm dev:userscript:prod`       |
-| Userscript-only build  | `pnpm build:userscript:dev` / `pnpm build:userscript:staging` / `pnpm build:userscript:prod` |
-| Desktop-only build     | `pnpm build:tauri:dev` / `pnpm build:tauri:staging` / `pnpm build:tauri:prod`                |
-| Repository-wide build  | `pnpm build:dev` / `pnpm build:staging` / `pnpm build:prod`                                  |
+| Purpose                | Commands                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| Userscript development | `pnpm dev` / `pnpm dev:staging` / `pnpm dev:prod`                                       |
+| Userscript-only build  | `pnpm build:userscript:dev` / `pnpm build:userscript:staging` / `pnpm build:userscript` |
+| Desktop-only build     | `pnpm build:tauri:dev` / `pnpm build:tauri:staging` / `pnpm build:tauri`                |
+| Repository-wide build  | `pnpm build:dev` / `pnpm build:staging` / `pnpm build`                                  |
 
 `pnpm dev` defaults to `dev`; `pnpm build` defaults to `prod`. Application code reads `import.meta.env.VITE_APP_ENV` (`'dev' | 'staging' | 'prod'`) and `VITE_APP_DEBUG` (`'true' | 'false'`). All `VITE_` values enter client output, so environment files must contain no secrets.
 

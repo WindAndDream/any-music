@@ -84,7 +84,7 @@ pnpm privacy:setup
 ### 用户脚本
 
 ```bash
-pnpm dev:userscript       # 启动 dev 环境开发入口，pnpm dev 为等价入口
+pnpm dev                  # 启动用户脚本的 dev 环境
 pnpm build:userscript     # 仅构建 prod 环境用户脚本
 ```
 
@@ -111,7 +111,7 @@ pnpm bundle:tauri         # 生成当前平台的安装包
 
 构建安装包不代表已完成签名、自动更新或分发验收；其他操作系统仍需各自的构建依赖与验证。详见[桌面运行端](docs/zh-cn/桌面端/运行端架构.md)。
 
-自动候选构建、已签名 Android 发布和 Tag 触发的 GitHub Release 见[GitHub Actions 构建与发布](docs/zh-cn/跨平台/架构/GitHubActions构建与发布.md)。手动运行默认只构建。
+各平台构建命令、iOS 构建检查、Android 签名与 Tag 触发的 GitHub Release 见[GitHub Actions 构建与发布](docs/zh-cn/跨平台/架构/GitHubActions构建与发布.md)。手动运行默认只构建。
 
 ### Android 开发
 
@@ -121,15 +121,15 @@ pnpm bundle:tauri         # 生成当前平台的安装包
 
 | 工具                           | 当前工程使用的版本或组件                                          |
 | ------------------------------ | ----------------------------------------------------------------- |
-| 完整 JDK                       | **17**，需要同时包含 `java`、`javac` 和 `keytool`                 |
+| 完整 JDK                       | **21**（与 CI 一致），包含 `java`、`javac` 和 `keytool`           |
 | Android SDK Platform           | **37**，另装 **36** 供锁定的 Tauri Android 库使用                 |
 | Android SDK Build-Tools        | **36.0.0**                                                        |
-| Android NDK                    | **28.2.13676358**（r28c）                                         |
+| Android NDK                    | **30.0.16248370**                                                 |
 | 其他 SDK 组件                  | Platform-Tools、Command-line Tools（latest）                      |
 | Gradle / Android Gradle Plugin | **9.6.1 / 9.3.1**，由工程配置自动下载，无需全局安装 Gradle        |
 | Rust Android 目标              | `aarch64-linux-android`（手机）、`x86_64-linux-android`（模拟器） |
 
-JDK 17 满足当前 [AGP 9.3 的构建要求](https://developer.android.com/build/releases/agp-9-3-0-release-notes#compatibility)；应用的 Java/Kotlin 字节码目标为 1.8，不表示应安装 JDK 8。可使用独立 JDK，或符合版本要求的 Android Studio JDK；`JAVA_HOME` 必须指向实际 JDK 根目录。
+使用 JDK 21 与发布 CI 保持一致。`JAVA_HOME` 指向 JDK 根目录。见 [AGP 9.3 兼容性表](https://developer.android.com/build/releases/agp-9-3-0-release-notes#compatibility)。
 
 通过 [Android Studio 的 SDK Manager](https://developer.android.com/studio/intro/update#sdk-manager) 安装表中组件，勾选 **Show Package Details** 选择具体版本；也可从 [Android 下载页](https://developer.android.com/studio#command-line-tools-only) 获取 Command-line Tools，解压为 `<SDK>/cmdline-tools/latest/`，确保其中包含 `bin/` 和 `lib/`。
 
@@ -139,9 +139,9 @@ JDK 17 满足当前 [AGP 9.3 的构建要求](https://developer.android.com/buil
 
 ```powershell
 $toolchainRoot = Join-Path $env:USERPROFILE 'software/programming/compiler'
-$env:JAVA_HOME = Join-Path $toolchainRoot 'temurin-17'
+$env:JAVA_HOME = Join-Path $toolchainRoot 'temurin-21'
 $env:ANDROID_HOME = Join-Path $toolchainRoot 'android-sdk'
-$env:NDK_HOME = Join-Path $env:ANDROID_HOME 'ndk/28.2.13676358'
+$env:NDK_HOME = Join-Path $env:ANDROID_HOME 'ndk/30.0.16248370'
 
 # 同时保存到用户环境，供下次启动的终端、IDE 和 Codex 使用。
 foreach ($variableName in @('JAVA_HOME', 'ANDROID_HOME', 'NDK_HOME')) {
@@ -166,14 +166,14 @@ $env:Path = ($androidPathEntries -join ';') + ';' + $env:Path
 通过 SDK Manager 安装完组件后可直接安装 Rust 目标。使用带有 `android.exe` 的新版 Command-line Tools 时，也可用下面的命令安装 SDK 包，并按提示处理许可：
 
 ```powershell
-& "$env:ANDROID_HOME/cmdline-tools/latest/bin/android.exe" sdk --sdk="$env:ANDROID_HOME" install platforms/android-37.0 platforms/android-36 build-tools/36.0.0 ndk/28.2.13676358 platform-tools
+& "$env:ANDROID_HOME/cmdline-tools/latest/bin/android.exe" sdk --sdk="$env:ANDROID_HOME" install platforms/android-37.0 platforms/android-36 build-tools/36.0.0 ndk/30.0.16248370 platform-tools
 rustup target add --toolchain 1.91.1 aarch64-linux-android x86_64-linux-android
 ```
 
 旧版 Command-line Tools 没有 `android.exe` 时，使用其 [sdkmanager](https://developer.android.com/tools/sdkmanager)，不要混用两种包标识格式：
 
 ```powershell
-& "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --sdk_root="$env:ANDROID_HOME" "platforms;android-37" "platforms;android-36" "build-tools;36.0.0" "ndk;28.2.13676358" "platform-tools"
+& "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --sdk_root="$env:ANDROID_HOME" "platforms;android-37.0" "platforms;android-36" "build-tools;36.0.0" "ndk;30.0.16248370" "platform-tools"
 & "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --sdk_root="$env:ANDROID_HOME" --licenses
 ```
 
@@ -239,12 +239,12 @@ x86_64 模拟器改用上表对应的 APK。覆盖安装需要与已有应用的
 
 支持 `dev`、`staging`、`prod` 三种模式，配置位于根目录 `.env.<mode>`：
 
-| 用途           | 命令                                                                                         |
-| -------------- | -------------------------------------------------------------------------------------------- |
-| 用户脚本开发   | `pnpm dev:userscript:dev` / `pnpm dev:userscript:staging` / `pnpm dev:userscript:prod`       |
-| 仅构建用户脚本 | `pnpm build:userscript:dev` / `pnpm build:userscript:staging` / `pnpm build:userscript:prod` |
-| 仅构建桌面端   | `pnpm build:tauri:dev` / `pnpm build:tauri:staging` / `pnpm build:tauri:prod`                |
-| 全仓库构建     | `pnpm build:dev` / `pnpm build:staging` / `pnpm build:prod`                                  |
+| 用途           | 命令                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------- |
+| 用户脚本开发   | `pnpm dev` / `pnpm dev:staging` / `pnpm dev:prod`                                       |
+| 仅构建用户脚本 | `pnpm build:userscript:dev` / `pnpm build:userscript:staging` / `pnpm build:userscript` |
+| 仅构建桌面端   | `pnpm build:tauri:dev` / `pnpm build:tauri:staging` / `pnpm build:tauri`                |
+| 全仓库构建     | `pnpm build:dev` / `pnpm build:staging` / `pnpm build`                                  |
 
 `pnpm dev` 默认使用 `dev`，`pnpm build` 默认使用 `prod`。业务代码通过 `import.meta.env.VITE_APP_ENV`（`'dev' | 'staging' | 'prod'`）与 `VITE_APP_DEBUG`（`'true' | 'false'`）读取环境。所有 `VITE_` 值会进入客户端产物，环境文件中不要保存密钥。
 

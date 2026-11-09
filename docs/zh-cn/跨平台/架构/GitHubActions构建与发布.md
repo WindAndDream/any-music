@@ -7,7 +7,7 @@ runtimeScope: repository
 
 英文对应页：[GitHub Actions Builds and Releases](../../../en/cross-platform/architecture/github-actions-release.md)。
 
-仓库提供 Windows 全仓检查工作流，以及 Userscript、Windows x64、macOS arm64/x64、Linux x64、Android arm64/x64 的构建发布工作流。正式发布要求 Android 正式签名；当前不接入 iOS。这些配置声明构建组合，运行能力和插件执行准入仍分别由[桌面运行端指南](../../桌面端/运行端架构.md)与 [S16 矩阵](插件系统重构S16手机交付.md)维护。
+仓库提供 Windows 全仓检查工作流，以及 Userscript、Windows x64、macOS arm64/x64、Linux x64、Android arm64/x64 的构建发布工作流。正式发布要求 Android 正式签名。iOS 有独立的模拟器构建检查。运行能力、插件执行准入和待验收事项由[桌面运行端指南](../../桌面端/运行端架构.md)与 [S16 矩阵](插件系统重构S16手机交付.md)维护。
 
 ## 工作流与产物
 
@@ -17,7 +17,7 @@ runtimeScope: repository
 
 目标为 `main` 的 PR 会自动基于 PR merge Commit 构建完整的未签名候选矩阵。只有全部预期构建和产物校验成功，`Release candidate checks` 才成功；依赖失败或跳过不能让此门禁通过。普通 feature/fix 合入 `develop` 的 PR 运行 CI，不逐个平台生成安装包。推送附注 `v*` Tag 后构建已签名 Android 产物，再进入受保护的发布 job。在 GitHub 页面手动创建 Release 不会触发此工作流。
 
-Android job 先安装固定版本的 SDK 命令行工具，再安装声明的平台、build-tools 和 NDK。平台版本采用 Google 的包版本号（API 37 对应 `37.0`）。
+Android job 先安装固定版本的 SDK 命令行工具，再安装声明的平台、build-tools 和 NDK，并额外为锁定的 Tauri Android 库安装 API 36。应用平台使用 Google 的包版本号（API 37 对应 `37.0`）。
 
 | 目标              | 产物                | 签名                                      |
 | ----------------- | ------------------- | ----------------------------------------- |
@@ -27,7 +27,7 @@ Android job 先安装固定版本的 SDK 命令行工具，再安装声明的平
 | Linux x64         | `.AppImage`、`.deb` | 未签名                                    |
 | Android arm64/x64 | 各自的 APK/AAB      | 候选未签名（`-unsigned`）；正式发布已签名 |
 
-未签名 Android APK 需要签名后才能安装。已签名 APK/AAB 会执行既有的签名、签名者一致性、manifest、归档和对齐检查。按 ABI 分开的 AAB 仍需分发渠道验收；签名不代表已验证 Play 提交。缺少签名密钥时发布失败，不回退到 debug 签名或未签名模式。本地原有的显式 `build:mobile:android --release --signed` 流程继续独立使用。
+未签名 Android APK 需要签名后才能安装。已签名 APK/AAB 会执行既有的签名、签名者一致性、manifest、归档和对齐检查。按 ABI 分开的 AAB 仍需分发渠道验收；签名不代表已验证 Play 提交。缺少签名密钥时发布失败，不回退到 debug 签名或未签名模式。本地配置签名环境后，可用 `pnpm build:mobile:android aarch64 --release --signed` 构建 arm64 签名包。
 
 ## 接受贡献前配置 GitHub
 
@@ -51,6 +51,33 @@ Windows 本地 Android 签名材料可保存在 `%USERPROFILE%\.android\any-musi
 工作流合并到 GitHub 默认分支后，进入 **Actions → Release → Run workflow**，保持 `publish` 关闭。`ref` 可以填分支、Commit 或 Tag，留空时采用所选工作流分支。各目标产物和汇总后的 `distribution-assets` 保留 14 天，这条路径不需要 Git Tag。
 
 所有 job 都构建解析后的同一个 Commit。只构建模式使用该 Commit 的产品版本命名和记录产物，即使对应 Tag 尚不存在；正式发布始终要求已存在且一致的产品 Tag，以及干净的源码检出。本地源码尚未提交时，产物会记录 `sourceDirty: true`，这些产物不能通过此工作流发布。
+
+### 本地构建单个目标
+
+在仓库根目录运行 `pnpm release:build --list` 查看目标和产物格式。传入一个目标 ID 后，产物会按 CI 的命名规则写入 `dist/release/<target>/`。
+
+| 命令                               | 构建环境或工具链                                |
+| ---------------------------------- | ----------------------------------------------- |
+| `pnpm release:build userscript`    | 安装 Node 和 pnpm 的任意主机                    |
+| `pnpm release:build windows-x64`   | Windows 和 x64 MSVC Rust 工具链                 |
+| `pnpm release:build macos-arm64`   | Apple Silicon Mac、Xcode 和 arm64 Rust 工具链   |
+| `pnpm release:build macos-x64`     | Intel Mac、Xcode 和 x64 Rust 工具链             |
+| `pnpm release:build linux-x64`     | Linux x64、WebKitGTK 4.1 和 Tauri 打包依赖      |
+| `pnpm release:build android-arm64` | Android SDK/NDK 和 `aarch64-linux-android` 目标 |
+| `pnpm release:build android-x64`   | Android SDK/NDK 和 `x86_64-linux-android` 目标  |
+
+Linux CI 使用 Ubuntu 22.04。本机需安装 [Tauri 系统依赖](https://v2.tauri.app/start/prerequisites/#linux)、AppImage 打包工具 `patchelf`，以及原生密钥环所需的 `libkeyutils-dev` 和 `libdbus-1-dev`。在无法使用 FUSE 的容器中构建时，设置 `APPIMAGE_EXTRACT_AND_RUN=1`。[Android 环境配置](../../../../README.md#android-开发)列出了 SDK 组件和本地签名命令。
+
+### 在 macOS 构建 iOS
+
+在 **Actions → iOS build check → Run workflow** 选择 ref，即可构建未签名的 arm64 模拟器 `.app`，ZIP 产物独立保存在 Actions。在已安装 Xcode 和 iOS 模拟器运行时的 Apple Silicon Mac 上，以下命令会生成 Xcode 工程并构建应用，无需启动模拟器。
+
+```sh
+pnpm --filter @any-music/tauri tauri ios init
+pnpm --filter @any-music/tauri tauri ios build --target aarch64-sim --no-sign -- --locked --no-default-features
+```
+
+真机分发需使用符合 [Apple 提交要求](https://developer.apple.com/news/upcoming-requirements/)的 Xcode 和 iOS SDK。为 `com.anymusic.app` 配置 Apple Developer 团队、分发证书和描述文件后，在仓库根目录运行 `pnpm build:mobile:ios`。命令以 App Store Connect 模式导出 arm64 IPA 到 `apps/tauri/src-tauri/gen/apple/build/arm64/`。iOS 尚无纳入维护的 Xcode 工程、签名构建证据或渠道验收，目前未进入 GitHub Release 矩阵。签名配置见 [Tauri iOS 签名指南](https://v2.tauri.app/distribute/sign/ios/)。
 
 ## 准备版本并发布
 
