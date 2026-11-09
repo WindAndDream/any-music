@@ -261,7 +261,7 @@ test('complete collection records all targets and checksums and is repeatable', 
       assert(notes.includes(`| \`${filename}\` |`), `Missing release note asset: ${filename}`)
     }
   }
-  assert.doesNotMatch(notes, /\\| ios \\|/i)
+  assert(!notes.includes('| ios |'))
   assert.match(checksum, /  any-music\.user\.js\n/)
   assert.match(checksum, /  release-manifest\.json\n/)
   collectReleaseArtifacts(context, directory)
