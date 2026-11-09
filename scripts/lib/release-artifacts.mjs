@@ -153,8 +153,7 @@ export function collectReleaseArtifacts(context, directory = releaseRoot) {
     '| --- | --- | --- | --- |',
     ...manifests.flatMap((entry) =>
       entry.files.map(
-        (file) =>
-          `| ${entry.platform} | ${entry.arch} | \`${file.name}\` | ${entry.signing} |`,
+        (file) => `| ${entry.platform} | ${entry.arch} | \`${file.name}\` | ${entry.signing} |`,
       ),
     ),
     '',

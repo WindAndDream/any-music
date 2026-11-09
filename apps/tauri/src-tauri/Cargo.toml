@@ -71,7 +71,11 @@ axum = "0.8"
 futures-util = "0.3"
 tokio-tungstenite = "0.28"
 # Keep SQLite bundled, statement caching, and checked u64 conversion for resource-cache columns.
-rusqlite = { version = "=0.41.1", default-features = false, features = ["bundled", "cache", "fallible_uint"] }
+rusqlite = { version = "=0.41.1", default-features = false, features = [
+  "bundled",
+  "cache",
+  "fallible_uint",
+] }
 tauri-plugin-deep-link = "2"
 
 [target.'cfg(target_os = "windows")'.dependencies]
