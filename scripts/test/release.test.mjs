@@ -254,6 +254,14 @@ test('complete collection records all targets and checksums and is repeatable', 
   const first = collectReleaseArtifacts(context, directory)
   assert.equal(first.manifest.targets.length, targets.length)
   const checksum = readFileSync(resolve(first.output, 'SHA256SUMS'), 'utf8')
+  const notes = readFileSync(resolve(first.output, 'release-notes.md'), 'utf8')
+  for (const target of targets) {
+    for (const extension of target.extensions) {
+      const filename = assetName(target, context.version, extension)
+      assert(notes.includes(`| \`${filename}\` |`), `Missing release note asset: ${filename}`)
+    }
+  }
+  assert(!notes.includes('| ios |'))
   assert.match(checksum, /  any-music\.user\.js\n/)
   assert.match(checksum, /  release-manifest\.json\n/)
   collectReleaseArtifacts(context, directory)

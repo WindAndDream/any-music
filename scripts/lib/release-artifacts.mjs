@@ -147,9 +147,15 @@ export function collectReleaseArtifacts(context, directory = releaseRoot) {
   const notes = [
     `Product version: ${context.version}. Commit: ${context.commit}.`,
     '',
-    '| Platform | Architecture | Signing |',
-    '| --- | --- | --- |',
-    ...manifests.map((entry) => `| ${entry.platform} | ${entry.arch} | ${entry.signing} |`),
+    '## Downloads',
+    '',
+    '| Platform | Architecture | Package | Signing |',
+    '| --- | --- | --- | --- |',
+    ...manifests.flatMap((entry) =>
+      entry.files.map(
+        (file) => `| ${entry.platform} | ${entry.arch} | \`${file.name}\` | ${entry.signing} |`,
+      ),
+    ),
     '',
     context.androidSigning === 'signed'
       ? 'Android APK/AAB files use the release signing key. Per-ABI AABs still require distribution-channel acceptance. iOS is excluded.'
