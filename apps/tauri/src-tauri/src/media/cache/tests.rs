@@ -57,16 +57,13 @@ async fn dropping_a_stream_saves_only_already_received_bytes() {
     let mut stream = Box::pin(stream);
     assert_eq!(stream.next().await.unwrap().unwrap().as_ref(), b"partial");
     drop(stream);
-    let piece = tokio::time::timeout(std::time::Duration::from_secs(3), async {
-        loop {
-            if let Some(piece) = cache.read("media".into(), 0).await {
-                break piece;
-            }
-            tokio::time::sleep(std::time::Duration::from_millis(10)).await;
-        }
-    })
-    .await
-    .unwrap();
+    // Dropping the stream reserves a deferred-write permit synchronously.
+    // Wait for that write instead of racing the disk worker with timed polling.
+    cache.wait_deferred_writes().await;
+    let piece = cache
+        .read("media".into(), 0)
+        .await
+        .expect("already received bytes should be cached after the deferred write");
     assert_eq!(piece.bytes, b"partial");
     assert_eq!(piece.total, 12);
     backend.await.unwrap();
