@@ -203,7 +203,7 @@ test(
 )
 
 test(
-  'forced ignored data, private identity and missing scanner all fail closed',
+  'forced ignored data and missing scanner still fail closed with personal Git identity',
   { skip: !cacheReady },
   (t) => {
     const f = fixture(t)
@@ -216,8 +216,7 @@ test(
     f.git('rm', '--cached', '.env')
     f.git('config', 'user.email', personalEmail)
     result = f.run('staged')
-    assert.equal(result.status, 1)
-    assert.match(result.stderr, /noreply/u)
+    assert.equal(result.status, 0, result.stderr)
     assert(!result.stderr.includes(personalEmail))
     const target = gitleaksPaths(f.directory)
     rmSync(join(target.directory, 'executable.sha256'))
@@ -225,6 +224,30 @@ test(
     assert.equal(result.status, 1)
     assert.match(result.stderr, /scanner is missing/u)
     assert.throws(() => requireGitleaks(f.directory))
+  },
+)
+
+test(
+  'pushed commits accept personal author and committer addresses without weakening message scanning',
+  { skip: !cacheReady },
+  (t) => {
+    const f = fixture(t)
+    const base = f.commit()
+    f.git('config', 'user.email', personalEmail)
+    f.write('safe.txt', 'safe public content\n')
+    const head = f.commit()
+    const update = (sha) =>
+      `refs/heads/fix/privacy-fixture ${sha} refs/heads/fix/privacy-fixture ${base}\n`
+    let result = f.run('push', update(head))
+    assert.equal(result.status, 0, result.stderr)
+    assert(!result.stderr.includes(personalEmail))
+
+    f.write('safe.txt', 'still safe\n')
+    const messageHead = f.commit('test: contact ' + personalEmail)
+    result = f.run('push', update(messageHead))
+    assert.equal(result.status, 1)
+    assert.match(result.stderr, /personal-email/u)
+    assert(!result.stderr.includes(personalEmail))
   },
 )
 

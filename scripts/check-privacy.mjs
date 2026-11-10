@@ -12,7 +12,7 @@ import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { requireGitleaks } from './lib/gitleaks.mjs'
-import { inspectPrivacyFile, inspectPrivacyText, isPublicCommitEmail } from './lib/privacy.mjs'
+import { inspectPrivacyFile, inspectPrivacyText } from './lib/privacy.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const mode = process.argv[2] ?? 'worktree'
@@ -86,18 +86,6 @@ function report(findings) {
     throw new Error(
       `Privacy check rejected ${findings.length} finding(s); sanitize the data before committing`,
     )
-}
-
-function validateLocalIdentity() {
-  for (const kind of ['AUTHOR', 'COMMITTER']) {
-    const identity = git(['var', `GIT_${kind}_IDENT`]).toString('utf8')
-    const email = /<([^<>]+)>/u.exec(identity)?.[1]
-    if (!email || !isPublicCommitEmail(email)) {
-      throw new Error(
-        `Use your GitHub noreply address for Git ${kind.toLowerCase()} email; see CONTRIBUTING.md`,
-      )
-    }
-  }
 }
 
 function cleanTemporary(directory, base) {
@@ -176,16 +164,11 @@ function inspectCommits(revisions, scanner) {
   const commits = lines(git(['rev-list', ...revisions]))
   const entries = new Map()
   for (const commit of commits) {
-    const [author, committer, ...message] = lines(
-      git(['show', '-s', '--format=%ae%n%ce%n%B', commit]),
-    )
-    if (!isPublicCommitEmail(author) || !isPublicCommitEmail(committer)) {
-      throw new Error(
-        `Commit ${commit.slice(0, 12)} contains a personal author/committer email; use GitHub noreply`,
-      )
-    }
+    // Git commit author/committer email is public metadata, not repository content.
+    // Continue scanning commit messages, changed blobs, and full history for secrets.
+    const message = git(['show', '-s', '--format=%B', commit]).toString('utf8')
     report(
-      inspectPrivacyText(`<commit ${commit.slice(0, 12)}>`, message.join('\n'), {
+      inspectPrivacyText(`<commit ${commit.slice(0, 12)}>`, message, {
         repositoryRoot: root,
       }),
     )
@@ -240,7 +223,6 @@ try {
       inspectCommits(revisions, scanner)
     }
   } else if (['worktree', 'staged', 'ci'].includes(mode)) {
-    if (mode === 'staged') validateLocalIdentity()
     const files = snapshot()
     report(
       files.flatMap((file) => inspectPrivacyFile(file.path, file.bytes, { repositoryRoot: root })),
