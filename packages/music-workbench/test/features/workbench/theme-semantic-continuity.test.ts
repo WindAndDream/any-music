@@ -11,7 +11,10 @@ import { defineComponent, h, nextTick, provide, shallowRef } from 'vue'
 import { createThemeFeatures } from '../../fixtures/theme-features'
 import { createSemanticThemeRenderer } from '../../helpers/semantic-theme-renderer'
 
-const lazyRenderer = vi.hoisted(() => ({ wait: undefined as Promise<void> | undefined }))
+const lazyRenderer = vi.hoisted(() => ({
+  wait: undefined as Promise<void> | undefined,
+  release: undefined as (() => void) | undefined,
+}))
 
 // The canary stays private and default-closed in production. This test-only injected value
 // exercises the actual candidate through the themes' public complete definitions.
@@ -43,8 +46,16 @@ vi.mock('vue', async (load) => {
   }
 })
 const cleanups: (() => void)[] = []
-afterEach(() => {
+const restorationAborts: AbortController[] = []
+afterEach(async () => {
+  // Cancel pending semantic restores before removing the mock HTMLElement globals.
+  restorationAborts.splice(0).forEach((controller) => controller.abort())
+  // A timed-out lazy-loading test must not block later tests in this file.
+  lazyRenderer.release?.()
+  lazyRenderer.release = undefined
+  lazyRenderer.wait = undefined
   cleanups.splice(0).forEach((cleanup) => cleanup())
+  await nextTick()
   vi.unstubAllGlobals()
 })
 async function settle() {
@@ -135,7 +146,23 @@ function setup(
   const scroll = () => env.root.children[0]! as unknown as HTMLElement
   const adapter = () => getPresentationContinuity(region())!
   const resources = createThemeResources(() => env.root as unknown as HTMLElement)
-  return { ...env, theme, region, adapter, scroll, resources, actions }
+  return {
+    ...env,
+    theme,
+    region,
+    adapter,
+    scroll,
+    resources: {
+      ...resources,
+      capture(signal?: AbortSignal) {
+        if (signal) return resources.capture(signal)
+        const controller = new AbortController()
+        restorationAborts.push(controller)
+        return resources.capture(controller.signal)
+      },
+    },
+    actions,
+  }
 }
 
 describe('C00 cross-theme semantic handoff through real compiled consumers', () => {
@@ -144,6 +171,7 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
     lazyRenderer.wait = new Promise<void>((resolve) => {
       ready = resolve
     })
+    lazyRenderer.release = ready
     const test = setup('default', 'studio')
     await settle()
     test.scroll().scrollTop = 54_093
@@ -166,6 +194,7 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
     ready()
     await pending
     lazyRenderer.wait = undefined
+    lazyRenderer.release = undefined
     expect(test.adapter().capture()!.anchor).toEqual({ key: 'track:900', offset: 13 })
     expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
       'track:track:900:play',
