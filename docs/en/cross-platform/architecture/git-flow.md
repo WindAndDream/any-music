@@ -41,6 +41,8 @@ All PRs use **Create a merge commit**. Squash/rebase merging is disabled by poli
 
 PR titles follow the commit format. Include problem/result, runtime scope, commit batches, executed commands/results, omitted live/device acceptance, risks and related issues. Use the repository PR template. Required checks must run on docs-only PRs too; do not use path filters that leave protected checks pending. The CI policy validates routes and non-merge commit messages; reviewers verify branch ancestry, freeze scope and acceptance.
 
+GitHub Dependabot security updates target the default branch, `main`. CI accepts `dependabot/* -> main` for the GitHub Dependabot bot when both branches belong to the same repository. Commit and title checks, privacy scans, build and release checks, independent review, and the `main -> develop` back-merge apply to these PRs.
+
 ## Commits and checks
 
 New commits and PR titles follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/): `type: imperative subject` or `type(scope): imperative subject`. Use an English ASCII header of at most 100 characters with no final period. The optional scope identifies the affected package, runtime or subsystem in kebab-case, for example `music-workbench`, `tauri`, `userscript`, `player` or `release`. Omit it for changes spanning the repository. Preserve identifier casing such as IPC and AppErrorState in the subject.

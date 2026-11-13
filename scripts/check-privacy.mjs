@@ -160,6 +160,15 @@ function scanSecrets(scanner, args, input) {
   }
 }
 
+function inspectCommitMessage(path, message) {
+  // GitHub adds this public sign-off to Dependabot commits. Keep scanning all other text.
+  return inspectPrivacyText(
+    path,
+    message.replace(/^Signed-off-by: dependabot\[bot\] <support@github\.com>$/gmu, ''),
+    { repositoryRoot: root },
+  )
+}
+
 function inspectCommits(revisions, scanner) {
   const commits = lines(git(['rev-list', ...revisions]))
   const entries = new Map()
@@ -167,11 +176,7 @@ function inspectCommits(revisions, scanner) {
     // Git commit author/committer email is public metadata, not repository content.
     // Continue scanning commit messages, changed blobs, and full history for secrets.
     const message = git(['show', '-s', '--format=%B', commit]).toString('utf8')
-    report(
-      inspectPrivacyText(`<commit ${commit.slice(0, 12)}>`, message, {
-        repositoryRoot: root,
-      }),
-    )
+    report(inspectCommitMessage(`<commit ${commit.slice(0, 12)}>`, message))
     const changes = git([
       'diff-tree',
       '--root',
@@ -205,7 +210,7 @@ try {
   const scanner = requireGitleaks(root)
   if (mode === 'message') {
     const message = readFileSync(process.argv[3], 'utf8')
-    report(inspectPrivacyText('<commit-message>', message, { repositoryRoot: root }))
+    report(inspectCommitMessage('<commit-message>', message))
     scanSecrets(scanner, ['stdin'], message)
   } else if (mode === 'history') {
     scanSecrets(scanner, ['git', root, '--log-opts=--all --full-history -m'])
