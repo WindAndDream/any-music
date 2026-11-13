@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-03",
+  "compression": "Per-file gzip level 9; JS/CSS/Wasm payload; identical method to P03/P04-P06",
+  "baselineSourceDigest": "775fc9a404b6181403b490a7f11fbe604d147e5c6413a961d307e15813f54ea1",
+  "currentSourceDigest": "7cd15984c1097128b8bf4b2ea1d728fb0fa593843d5cf7e2691b36bcc69c2608",
+  "interpretation": "P07 adds a public fixed-list primitive and tested rendering fixture; production lists have not adopted it. Isolated consuming cost is recorded separately in consumer-build.json. Production payload differences also reflect any concurrent workspace changes and are not attributable to this primitive alone. Full production builds and build-owned graph audits were used; no product/browser launched.",
+  "comparisons": [
+    {
+      "runtime": "userscript",
+      "before": {
+        "payloadBytes": 5741770,
+        "payloadGzipBytes": 1107443
+      },
+      "after": {
+        "payloadBytes": 5741770,
+        "payloadGzipBytes": 1107443
+      },
+      "delta": {
+        "payloadBytes": 0,
+        "payloadGzipBytes": 0
+      },
+      "changedCodeArtifacts": [],
+      "engineInThemeBuildGraph": false,
+      "engineInUserscriptBuildGraph": false
+    },
+    {
+      "runtime": "tauri",
+      "before": {
+        "payloadBytes": 3571287,
+        "payloadGzipBytes": 848608
+      },
+      "after": {
+        "payloadBytes": 3571287,
+        "payloadGzipBytes": 848608
+      },
+      "delta": {
+        "payloadBytes": 0,
+        "payloadGzipBytes": 0
+      },
+      "changedCodeArtifacts": [],
+      "engineInThemeBuildGraph": false,
+      "engineInUserscriptBuildGraph": null
+    }
+  ]
+}

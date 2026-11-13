@@ -1,0 +1,1638 @@
+{
+  "date": "2026-11-05",
+  "runtimeScope": "shared",
+  "admission": false,
+  "userscript": {
+    "runtime": "Installed Tampermonkey development script and actual Shadow host,1000 deterministic fixture favorites/records, no artwork",
+    "method": "Baseline/candidate static screenshots after render and transition settling. Nine completed pairs retained. Later attempts interrupted by foreground/occlusion waits are excluded; no complete matrix claimed.",
+    "cases": [
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "minimal",
+          "density": "comfortable",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": true,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "537.027px 537.027px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 650.8214721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 650.8214721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1003.7589721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 1003.7589721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1356.696533203125,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 1356.696533203125,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "36be2d59493cf7b4cc529da87bffaf42af735282d14eec71b2bac1ecae61bff0",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-minimal-comfortable-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 8,
+            "columns": "537.027px 537.027px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 650.8214721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 650.8214721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1003.7589721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 1003.7589721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1356.696533203125,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 1356.696533203125,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "36be2d59493cf7b4cc529da87bffaf42af735282d14eec71b2bac1ecae61bff0",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-minimal-comfortable-1440-1-candidate.png"
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "minimal",
+          "density": "standard",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": true,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "354.018px 354.018px 354.018px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 923.7589721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 923.7589721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "c1a40aba58526e0232df60a97d0079833338e406c0eee3d185aefbefe591e0fc",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-minimal-standard-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 12,
+            "columns": "354.018px 354.018px 354.018px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 923.7589721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 923.7589721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "c1a40aba58526e0232df60a97d0079833338e406c0eee3d185aefbefe591e0fc",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-minimal-standard-1440-1-candidate.png"
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "minimal",
+          "density": "compact",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": true,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "262.509px 262.518px 262.509px 262.518px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 572.625,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 559.1785888671875,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 572.625,
+                  "y": 559.1785888671875,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 559.1785888671875,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 559.1785888671875,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "0a7bc90127d2b9943e5b8eedd46fd67cb7a38296465c2acc0a862e74f904c84c",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-minimal-compact-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 20,
+            "columns": "262.509px 262.518px 262.509px 262.518px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 572.625,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 559.1785888671875,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 572.625,
+                  "y": 559.1785888671875,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 559.1785888671875,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 559.1785888671875,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "0a7bc90127d2b9943e5b8eedd46fd67cb7a38296465c2acc0a862e74f904c84c",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-minimal-compact-1440-1-candidate.png"
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "default",
+          "density": "comfortable",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": false,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "537.027px 537.027px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 463.02679443359375,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 463.02679443359375,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 628.169677734375,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 628.169677734375,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 793.3125610351562,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 793.3125610351562,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "b5b6fb61433101062908c50bdfb837e0efce95b2948b34ede535ae138dda892c",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-default-comfortable-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 12,
+            "columns": "537.027px 537.027px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 463.02679443359375,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 463.02679443359375,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 628.169677734375,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 628.169677734375,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 793.3125610351562,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 793.3125610351562,
+                  "width": 537.0267944335938,
+                  "height": 153.1428680419922
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "1a2883c6eb007001b6c0d115f21bef5b5214cb5439fcdc8d4e3c07a5a23557bf",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-default-comfortable-1440-1-candidate.png"
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "default",
+          "density": "standard",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": false,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "354.018px 354.018px 354.018px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 660.9107666015625,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 660.9107666015625,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 660.9107666015625,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1023.9375610351562,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 1023.9375610351562,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "44ad665f8d72c574549305f8524610a02eea069bc9338e951e616462d0e857d1",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-default-standard-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 12,
+            "columns": "354.018px 354.018px 354.018px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 660.9107666015625,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 660.9107666015625,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 660.9107666015625,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1023.9375610351562,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 1023.9375610351562,
+                  "width": 354.01788330078125,
+                  "height": 351.02679443359375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "4aecdf1746a5164e3b28a5ad1ac3ce4145c8733f347b6ec707618091bb26086a",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-default-standard-1440-1-candidate.png"
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "theme": "light",
+          "style": "default",
+          "density": "compact",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": false,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "262.509px 262.518px 262.509px 262.518px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 572.625,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 597.9375,
+                  "width": 262.5089416503906,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 572.625,
+                  "y": 597.9375,
+                  "width": 262.51788330078125,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 597.9375,
+                  "width": 262.5089416503906,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 597.9375,
+                  "width": 262.51788330078125,
+                  "height": 288.0535888671875
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "12749cae950e617239c3379cd074feb1f9e53e0e9accb015cd45e1868408125f",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-default-compact-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 16,
+            "columns": "262.509px 262.518px 262.509px 262.518px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 572.625,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 597.9375,
+                  "width": 262.5089416503906,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 572.625,
+                  "y": 597.9375,
+                  "width": 262.51788330078125,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 597.9375,
+                  "width": 262.5089416503906,
+                  "height": 288.0535888671875
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 597.9375,
+                  "width": 262.51788330078125,
+                  "height": 288.0535888671875
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "650c9c784524448666f93e0b5b5e5cbb7490d570645039d31d3c83f9416f6efb",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-light-default-compact-1440-1-candidate.png"
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "minimal",
+          "density": "comfortable",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": true,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "537.027px 537.027px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 650.8214721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 650.8214721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1003.7589721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 1003.7589721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1356.696533203125,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 1356.696533203125,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "b9b8ff05b6d5c540d48f62416fcc1f2ca77692abc062b76233f4bdde17dee273",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-dark-minimal-comfortable-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 8,
+            "columns": "537.027px 537.027px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 650.8214721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 650.8214721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1003.7589721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 1003.7589721679688,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 1356.696533203125,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 1356.696533203125,
+                  "width": 537.0267944335938,
+                  "height": 340.9375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "b9b8ff05b6d5c540d48f62416fcc1f2ca77692abc062b76233f4bdde17dee273",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-dark-minimal-comfortable-1440-1-candidate.png"
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "minimal",
+          "density": "standard",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": true,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "354.018px 354.018px 354.018px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 923.7589721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 923.7589721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "a85ac7a6b9503d6f280075d5b82a0a8b919ae2fa064d10137dd407b1663a26c4",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-dark-minimal-standard-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 12,
+            "columns": "354.018px 354.018px 354.018px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 297.8839416503906,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 1030.15185546875,
+                  "y": 610.8214721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 923.7589721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 664.1339721679688,
+                  "y": 923.7589721679688,
+                  "width": 354.01788330078125,
+                  "height": 300.9375
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "a85ac7a6b9503d6f280075d5b82a0a8b919ae2fa064d10137dd407b1663a26c4",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-dark-minimal-standard-1440-1-candidate.png"
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "theme": "dark",
+          "style": "minimal",
+          "density": "compact",
+          "width": 1440,
+          "columns": 1
+        },
+        "identicalScreenshot": true,
+        "rectangleMismatches": 0,
+        "pair": [
+          {
+            "candidate": false,
+            "mounted": 1000,
+            "columns": "262.509px 262.518px 262.509px 262.518px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 572.625,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 559.1785888671875,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 572.625,
+                  "y": 559.1785888671875,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 559.1785888671875,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 559.1785888671875,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "c4ee3f567204df732d6b2cc9017e3310dd8a34d6a567b8190b6fe75ebdee7757",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-dark-minimal-compact-1440-1-baseline.png"
+          },
+          {
+            "candidate": true,
+            "mounted": 20,
+            "columns": "262.509px 262.518px 262.509px 262.518px",
+            "cells": [
+              {
+                "id": "c00-live:0",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:1",
+                "box": {
+                  "x": 572.625,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:2",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 297.8839416503906,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:3",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 297.8839416503906,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:4",
+                "box": {
+                  "x": 298.1160888671875,
+                  "y": 559.1785888671875,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:5",
+                "box": {
+                  "x": 572.625,
+                  "y": 559.1785888671875,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:6",
+                "box": {
+                  "x": 847.1428833007812,
+                  "y": 559.1785888671875,
+                  "width": 262.5089416503906,
+                  "height": 249.29464721679688
+                }
+              },
+              {
+                "id": "c00-live:7",
+                "box": {
+                  "x": 1121.65185546875,
+                  "y": 559.1785888671875,
+                  "width": 262.51788330078125,
+                  "height": 249.29464721679688
+                }
+              }
+            ],
+            "recordedScreenshotSha256": "c4ee3f567204df732d6b2cc9017e3310dd8a34d6a567b8190b6fe75ebdee7757",
+            "localScreenshotStillMatches": true,
+            "localScreenshot": "logs/2026-11-05-virtual-list-implementation/c00-session-gm-dark-minimal-compact-1440-1-candidate.png"
+          }
+        ]
+      }
+    ],
+    "cleanup": {
+      "cleanup": true,
+      "removedSyntheticKeys": 13,
+      "fixtureTracks": 1000,
+      "preservedBrowserProfile": true,
+      "preservedExtension": true
+    },
+    "limitations": [
+      "Remaining dark/default and narrow/mobile-column combinations not completed in retained run.",
+      "Default skin screenshot pixels differ despite equal measured card rectangles; pixel parity unaccepted.",
+      "No true IME, physical touch/mobile, active playback/download or final production grant acceptance."
+    ]
+  },
+  "desktop": {
+    "runtime": "Current full production native lib.rs composition, isolated build-time app identifier and WebView dataDirectory, debug Rust build with current Vite development frontend. Closed gate enabled only by transient test app.provide.",
+    "pairs": 12,
+    "identicalScreenshotPairs": 6,
+    "geometry": true,
+    "defaultSkin": "Six screenshot pairs differ; first-card descendants all have exact equal rectangles in follow-up descendants.json. Pixel/raster parity remains open.",
+    "drag": "Unaccepted. Baseline same-row move succeeded once; candidate captures then loses capture before first move. No explicit release/ancestor DOM move/invalid geometry in final instrumented trace. Native HWND foreground verified immediately before trace but after-tool follow-up found Chrome foreground, so foreground continuity not established; cannot attribute source defect.",
+    "quota": "10k setup failed at localStorage.setItem; 10k UI/performance not executed. Reseeded canonical1000 mirror in both native+renderer with later revision and reloaded before visual tests.",
+    "cleanup": {
+      "nativeApps": "All exact-isolated roots and WebView processes now absent. Root8316 required force-stop after graceful close and bounded wait; see cleanup-final.json.",
+      "frontend": "Owned Vite PID34324 and pnpm wrapper29496 stopped after inspecting exact command lines.",
+      "isolatedData": "Exact unique temp/native roots retained for reproducibility by parent instruction; browser profiles/source/logs preserved.",
+      "debugExecutable": "Copied binary retained under tempRoot/c00-production-debug.exe; target/debug build used unique identifier until subsequent normal build restores config.",
+      "noCommitPush": true,
+      "finalAudit": "c00-desktop-session-cleanup-final.json",
+      "forcedRootPids": [8316],
+      "confirmedRemainingRootCount": 0,
+      "confirmedRemainingWebViewCount": 0,
+      "confirmedRemainingListeners": []
+    }
+  },
+  "logDirectory": "logs/2026-11-05-virtual-list-implementation"
+}

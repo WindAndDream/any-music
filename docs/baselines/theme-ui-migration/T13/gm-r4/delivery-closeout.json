@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-delivery-closeout",
+  "runtimeScope": "userscript",
+  "checkedAt": "2026-10-27T15:39:32.583567+00:00",
+  "artifactSha256": "3ec503f70b3694fe0170879ebacc76cbb4ccd3666f6b0cd22df64f8ada234d71",
+  "bytes": 5029624,
+  "productionInputFiles": 630,
+  "inputDrift": [],
+  "managerSourceMatches": true,
+  "managerDataUnchangedDuringUpdate": true,
+  "mainEvidenceFileTargetsChecked": 24,
+  "maintainedPlanLocalLinksChecked": 98,
+  "missingFileTargets": [],
+  "fragmentAnchorValidation": false,
+  "jsonRecordsValidatedBeforeGeneratingThisFile": 66,
+  "finalMatrix": [
+    {
+      "file": "installed-final-matrix-411.json",
+      "samples": 60,
+      "errors": []
+    },
+    {
+      "file": "installed-final-matrix-1440.json",
+      "samples": 60,
+      "errors": []
+    }
+  ],
+  "narrowVisibleFocusTarget": true,
+  "sameRangeLongScroll": [1118.857177734375, 1118.857177734375, 1118.857177734375],
+  "recoveryKeyboardRetryReturnsFocus": true,
+  "privacyMarkersFound": [],
+  "rootGates": "narrow-final-* and build-audit.json",
+  "finalDocumentationFormatLog": "closeout-format.log",
+  "finalDocumentationFormatExitCode": 0,
+  "formatBoundary": "Root format is rerun after this record is written and formatted; documentation-only changes do not trigger another source test/build.",
+  "cleanup": {
+    "dedicatedBrowserEmulationReset": true,
+    "previewBrowserViewportReset": true,
+    "staticHostStopped": true,
+    "productPresentationRestored": "Studio/system/catalog; three sources; idle audio",
+    "commitOrPush": false
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-27T03:25:41.943Z",
+  "inputCount": 606,
+  "aggregateSha256": "d4496bc031029fef0a37729d94e69d40288a7163e7637a85a488cac4a5b3b364",
+  "changedAfterRecordedBuildInputs": [],
+  "artifact": {
+    "path": "apps/userscript/dist/any-music.user.js",
+    "bytes": 5023211,
+    "sha256": "2cd841733a348a0baf589d11a87b33f260c8522959af87a4233f9b571e5ee080"
+  },
+  "buildLog": "root-build.log"
+}

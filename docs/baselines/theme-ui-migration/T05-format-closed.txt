@@ -1,0 +1,17 @@
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+docs/baselines/theme-ui-migration/T06-final-audit.json (11ms)
+packages/theme-studio/package.json (0ms)
+packages/theme-studio/src/components/StudioFeatureStatus.vue (17ms)
+packages/theme-studio/src/components/player/StudioPlayer.vue (536ms)
+packages/theme-studio/src/components/shell/StudioNavigation.vue (17ms)
+packages/theme-studio/src/components/shell/StudioShell.vue (175ms)
+packages/theme-studio/src/vue.ts (0ms)
+
+Format issues found in above 7 files. Run without `--check` to fix.
+Finished in 4941ms on 1300 files using 12 threads.
+ ELIFECYCLE  Command failed with exit code 1.

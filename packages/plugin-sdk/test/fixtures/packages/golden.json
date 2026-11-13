@@ -1,0 +1,12 @@
+{
+  "domain": "416e794d757369632e616d706c7567696e2e696e746567726974792e763100",
+  "raw": "eyJ2ZXJzaW9uIjoxLCJmaWxlcyI6W3sicGF0aCI6Im1hbmlmZXN0Lmpzb24iLCJzaXplIjo2NTksInNoYTI1NiI6IjAwZmM3Zjk1MTU5MzNhMDY4MzIyNDE4OTYwNTNjZTllMjAzM2MyYTIxYTJiNjE2MTAwYTdlZTE3OWYwMmJlYmIifSx7InBhdGgiOiJkaXN0L21haW4uanMiLCJzaXplIjozMiwic2hhMjU2IjoiZjNkNmRhYjc2ZmIzYjVhZDJlYjQzMjFlMTM3OWRmMjI2YmUxMmRjM2U2ZjBmNWIzNDk0NjMzNTM5MzAwODY0OCJ9XX0=",
+  "envelope": {
+    "version": 1,
+    "algorithm": "Ed25519",
+    "keyId": "ephemeral-test-publisher",
+    "publicKey": "868d73c5195f9c86df4a75faab6d5049a3310b7fd29799892afc73149bcfc05f",
+    "fingerprint": "d6e7ddf8deb3bf9284b3bd6d763718ab39431332853afba80182f8a7b7c45f6e",
+    "signature": "1c2085ee380bd3a162f0d612b89ab60bb8a56a628484691e132bce0811176c1593150668cb6182ee70b15b89ece3006a90883c84d9c47ad2fd02456f32d5fb03"
+  }
+}

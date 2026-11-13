@@ -1,0 +1,172 @@
+{
+  "batchId": "T03",
+  "status": "complete",
+  "date": "2026-10-23",
+  "runtimeScope": "shared",
+  "runtimes": ["userscript", "tauri"],
+  "scope": "Injected complete-root host and switching transactions. Production remains on partial presentation; no concrete theme packages or production cutover are introduced by T03.",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "workspaceBefore": "T03-workspace-before.json",
+  "prerequisites": {
+    "T01": "T01.json",
+    "T02": "T02.json; complete, with real-controller lifetime/editing regressions passing"
+  },
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "concurrentChangesObserved": [
+      "T02 business/editor extraction",
+      "T04 classic chrome/player extraction and consumer style wiring",
+      "Existing native download work"
+    ],
+    "preservation": "No reset, revert, commit or push. Substantive edits are limited to T03 transaction/host/preference/public-entry/test/guidance files. A final formatting-only pass over concurrent T04.json preserved all parsed values. Root commands and artifacts describe the concurrent shared worktree, not an isolated T03 checkout.",
+    "formatOnlySharedFiles": ["docs/baselines/theme-ui-migration/T04.json"]
+  },
+  "files": [
+    "packages/plugin-ui-vue/AGENTS.md",
+    "packages/plugin-ui-vue/package.json",
+    "packages/plugin-ui-vue/src/trusted/index.ts",
+    "packages/plugin-ui-vue/src/trusted/theme-contracts.ts",
+    "packages/plugin-ui-vue/src/trusted/theme-controller.ts",
+    "packages/plugin-ui-vue/src/trusted/theme-resources.ts",
+    "packages/plugin-ui-vue/src/trusted/themes/index.ts",
+    "packages/plugin-ui-vue/src/trusted/ThemeHost.vue",
+    "packages/plugin-ui-vue/src/trusted/ThemeRootBoundary.vue",
+    "packages/plugin-ui-vue/src/trusted/ThemeHostSurface.vue",
+    "packages/plugin-ui-vue/test/trusted/theme-controller.test.ts",
+    "packages/plugin-ui-vue/test/trusted/theme-resources.test.ts",
+    "packages/plugin-ui-vue/test/trusted/presentation.test.ts",
+    "packages/plugin-ui-vue/test/trusted/root-theme-fixture.ts",
+    "packages/plugin-ui-vue/test/trusted/root-theme-controller.test.ts",
+    "packages/plugin-ui-vue/test/trusted/ThemeHost.test.ts",
+    "packages/plugin-ui-vue/test/trusted/generic-theme-host.test.ts",
+    "packages/music-workbench/AGENTS.md",
+    "packages/music-workbench/package.json",
+    "packages/music-workbench/src/theme.ts",
+    "packages/music-workbench/src/features/plugins/use-workbench-theme.ts",
+    "packages/music-workbench/src/features/plugins/use-workbench-theme-session.ts",
+    "packages/music-workbench/src/features/plugins/use-workbench-root-theme.ts",
+    "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts",
+    "packages/music-workbench/test/features/plugins/use-workbench-root-theme.test.ts",
+    "docs/en/README.md",
+    "docs/en/cross-platform/README.md",
+    "docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md",
+    "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+    "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+    "docs/zh-cn/文档索引.md",
+    "docs/zh-cn/跨平台/文档索引.md",
+    "docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md",
+    "docs/zh-cn/跨平台/架构/可复用包边界.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md"
+  ],
+  "publicEntries": {
+    "@any-music/plugin-ui-vue/trusted": "Generic injected root host/controller/resources; no concrete-theme graph",
+    "@any-music/plugin-ui-vue/trusted/presentation": "Current partial production mappings, using the same transaction; removed during T11/T12",
+    "@any-music/music-workbench/theme": "Renderer-only injected root and preference composition; metadata root stays lightweight"
+  },
+  "verification": {
+    "themeHostTests": {
+      "command": "pnpm --filter @any-music/plugin-ui-vue test",
+      "exitCode": 0,
+      "files": 9,
+      "tests": 55,
+      "log": "T03-plugin-ui-tests.txt"
+    },
+    "workbenchLifecycleTests": {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts test/features/plugins/use-workbench-root-theme.test.ts test/features/workbench/use-workbench-controller.test.ts",
+      "exitCode": 0,
+      "files": 3,
+      "tests": 15,
+      "log": "T03-workbench-tests.txt"
+    },
+    "rootTest": {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T03-test.txt",
+      "reason": "Final rerun passed all workspace tests, Cargo tests and 183 TS/Rust protocol cases; earlier concurrent player/style regressions are preserved in attempt logs.",
+      "vitestFiles": 276,
+      "vitestTests": 2054
+    },
+    "rootTypecheck": {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T03-typecheck.txt"
+    },
+    "rootLint": {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T03-lint.txt"
+    },
+    "rootFormatCheck": {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T03-format.txt",
+      "reason": "Final root formatting check passed."
+    },
+    "rootBuild": {
+      "command": "pnpm build",
+      "status": "passed",
+      "log": "T03-build.txt",
+      "exitCode": 0,
+      "reason": "Final rerun passed frontend and Windows native release builds after concurrent T04 test repairs. Native executable was built but never launched."
+    },
+    "userscriptBuild": {
+      "command": "pnpm build:userscript:prod",
+      "exitCode": 0,
+      "log": "T03-build-userscript.txt"
+    },
+    "tauriFrontendBuild": {
+      "command": "pnpm --filter @any-music/tauri build:frontend",
+      "exitCode": 0,
+      "log": "T03-build-tauri-frontend.txt",
+      "warning": "Existing chunk larger than 500 kB"
+    },
+    "earlierAttempts": [
+      "T03-test-attempt-1.txt",
+      "T03-typecheck-attempt-1.txt",
+      "T03-build-attempt-1.txt",
+      "T03-target-tests.txt",
+      "T03-target-typecheck.txt",
+      "T03-test-attempt-2.txt",
+      "T03-build-attempt-3.txt"
+    ],
+    "targetTypecheck": {
+      "command": "pnpm --filter @any-music/plugin-ui-vue --filter @any-music/music-workbench typecheck",
+      "exitCode": 0,
+      "log": "T03-target-typecheck.txt"
+    },
+    "diffCheck": {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  },
+  "testEnvironment": {
+    "os": "Windows",
+    "shell": "PowerShell",
+    "componentHost": "Vue custom Node renderer; no product/browser launch",
+    "resources": "Deterministic style/resource/focus/scroll fixtures; actual Shadow DOM/style/focus behavior remains T13",
+    "businessLifetime": "Real workbench factories/source/player/download/plugin lifecycles in T02 controller tests; generic host tests also verify one stable parent setup. This is not live GM/Rust transport or native media/save acceptance."
+  },
+  "exitConditions": {
+    "oneCommittedRootDefinition": true,
+    "genericHostHasNoConcreteThemeImport": true,
+    "coverageFormVersionBeforeCommit": true,
+    "generationGuardsIncludingFallbackAndRenderErrors": true,
+    "independentRecoveryWhenFallbackFails": true,
+    "queuedResourcesReleasedOnDisposal": true,
+    "onlyLatestRenderedSelectionPersists": true,
+    "preferenceErrorsDoNotInvalidateWorkingRoot": true,
+    "protectedHostStyleBoundaries": "Separate Shadow targets and fixed sibling topology verified in Node; no browser styling claim",
+    "focusScrollRestoration": "Semantic/fallback/clamping contract verified with fixtures; real focus/layout pending T13",
+    "productionCompleteRootCutover": false,
+    "repositoryDeliveryGate": true
+  },
+  "pending": [
+    "T04 and later feature coverage/production adoption",
+    "T13 explicitly authorized visual/runtime acceptance"
+  ],
+  "nextBatch": "T04",
+  "artifacts": "T03-artifacts.json",
+  "committed": false,
+  "pushed": false,
+  "productUiLaunched": false
+}

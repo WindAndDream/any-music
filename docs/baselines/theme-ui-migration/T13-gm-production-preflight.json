@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-preflight",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R1-preflight",
+  "date": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "status": "automated-preflight-passed-live-tool-unavailable",
+  "overallT13Status": "in-progress",
+  "scope": "Current production Userscript candidate and shared complete-theme continuity. This is not installed GM acceptance or an audit of every GM product capability.",
+  "workspace": {
+    "baseCommit": "c24ff542a663fd7266808323c730cb3b50a9fcc9",
+    "alreadyDirtyAtStart": true,
+    "preservedEarlierChanges": true,
+    "productSourceChangedInThisPass": false,
+    "commitOrPush": false,
+    "productionInputManifest": "T13/gm-revalidation-production-inputs.json",
+    "productionInputFiles": 609,
+    "productionInputAggregateSha256": "964e6d870ad6aad61b564a80c01147f3434b25e1d5a2e9b3bcb3b05082505e36",
+    "unchangedAcrossRecordedBuild": true,
+    "limit": "Manifest scope is declared in its file. It excludes tests/docs and Tauri app source; no whole-repository stability or root-gate pass is claimed."
+  },
+  "artifact": {
+    "path": "apps/userscript/dist/any-music.user.js",
+    "bytes": 5021592,
+    "sha256": "fc88355902a82e283665095d290a8cc5b893bb3389f4a8560ddee76b6a40e45a",
+    "build": "pnpm --filter @any-music/userscript build:prod",
+    "matchesArtifactPresentBeforeThisBuild": true,
+    "installedInThisPass": false,
+    "currentInstalledScriptIdentity": "unknown; browser/manager could not be inspected",
+    "recheckBeforeInstallation": true,
+    "staticAudit": "T13/gm-revalidation-artifact-audit.json",
+    "userscriptBuildAudit": "T13/gm-revalidation-userscript-build-audit.json",
+    "themeBuildAudit": "T13/gm-revalidation-theme-build-audit.json"
+  },
+  "verification": [
+    {
+      "command": "pnpm --filter @any-music/userscript test",
+      "exitCode": 0,
+      "files": 20,
+      "tests": 92,
+      "log": "T13/gm-revalidation-userscript-test.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/userscript typecheck",
+      "exitCode": 0,
+      "log": "T13/gm-revalidation-userscript-typecheck.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/userscript build:prod",
+      "exitCode": 0,
+      "log": "T13/gm-revalidation-userscript-build.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/theme-controller-continuity.test.ts test/features/workbench/theme-action-contracts.test.ts test/features/plugins/use-workbench-root-theme.test.ts test/components/music-sources/MusicSourceWorkbench.test.ts",
+      "exitCode": 0,
+      "files": 4,
+      "tests": 25,
+      "log": "T13/gm-revalidation-workbench-theme-tests.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-ui-vue exec vitest run test/trusted/root-theme-controller.test.ts test/trusted/ThemeHost.test.ts test/trusted/ThemeHostSurface.test.ts test/trusted/theme-resources.test.ts",
+      "exitCode": 0,
+      "files": 4,
+      "tests": 27,
+      "log": "T13/gm-revalidation-theme-host-tests.log"
+    }
+  ],
+  "automatedFindings": {
+    "productFailureObserved": false,
+    "coverage": [
+      "Current Userscript GM HTTP/storage/bootstrap/launcher/bridge/composition regression suite.",
+      "Actual classic and Studio roots preserve one shared business controller, source/page cancellation and explicit operations; these use test adapters rather than real GM APIs.",
+      "Root preference races/failures, theme transactions/resources, protected surfaces and sole stable workbench host remain covered by targeted Node tests.",
+      "Packaged grants/connect match source configuration, document-start/noframes remain, and there are no external require/resource entries.",
+      "Actual build graph keeps externalPlugins none, excludes external execution runtimes and eager presentation, and includes only allowed Studio metadata at startup."
+    ],
+    "limit": "No real browser focus, layout, streaming, authenticated request or manager permission behavior is established by these results."
+  },
+  "liveInspection": {
+    "authorizedByCurrentUserRequest": true,
+    "status": "not-executed-tool-connection-blocked",
+    "tool": "chrome_devtools.list_pages",
+    "attempts": 2,
+    "error": "The browser is already running for the dedicated chrome-devtools-mcp/chrome-profile; use a different userDataDir or stop the running browser first.",
+    "availableFallback": "Computer-use inventory exposed only in-app/MCP Apps browsers, with no GM-enabled Chrome.",
+    "existingBrowserClosedOrReconfigured": false,
+    "extensionOrScriptInstalled": false,
+    "browserTabOpenedByThisPass": false,
+    "liveCasesExecuted": 0,
+    "screenshotsCaptured": 0,
+    "browserOrManagerVersionAccepted": false,
+    "resolution": "Reconnect the dedicated GM acceptance browser; preserve any ongoing sessions. Then inspect the manager and installed script before proceeding."
+  },
+  "batchHandoff": {
+    "GM-R1": "Automated/artifact preflight passed; installed permissions/startup/public playback/theme/hide-show/draft/preference continuity remain pending.",
+    "GM-R2": "Pending: current-artifact active/queued downloads, final save/receipt/cold-start, cancellation/retry and reachable media request/fallback paths.",
+    "GM-R3": "Pending: authenticated/private/source-host/capability matrix, split by Bilibili/Douyin/NetEase when useful.",
+    "GM-R4": "Pending: both-theme full visual/input/focus/semantic-scroll/protected/specialist matrix with evidence methods identified.",
+    "nextCase": {
+      "id": "GM-R1-01",
+      "action": "Reconnect the GM inspection browser, recompute candidate hash, inspect production Any Music identity/exact grants and isolate the single intended writer from development/other expanded instances.",
+      "passCriteria": "Installed production code matches the accepted candidate; manager version and exact permissions are recorded; startup uses real GM without preview doubles or conflicting active scripts/writers.",
+      "followingCases": [
+        "GM-R1-02: one intentional public import and playback; record GM request counts, media startup and audio identity.",
+        "GM-R1-03: classic -> Studio -> classic plus hide/show; retain media/request identity, advancing playback, page/query/selection and unsubmitted drafts without action replay.",
+        "GM-R1-04: reload; restore stable preferences without persisting ephemeral media bytes/URLs or implicitly restarting previous operations."
+      ]
+    },
+    "requiredNextChatContext": [
+      "GM batches/handoff section of the bilingual independent-theme migration plan.",
+      "This evidence and its linked candidate/input/build records.",
+      "Relevant app/package AGENTS.md and runtime/UI skill instructions; open historical evidence only for cases being compared."
+    ]
+  },
+  "remainingLimits": [
+    "GM-R1 and T13 remain open; this pass adds no installed development or production GM success.",
+    "Historical installed-GM/download and development-GM records retain their original artifact, runtime and input-method scope.",
+    "No root-wide test/typecheck/lint/format/build or native acceptance is inferred from this targeted pass.",
+    "No Windows/Android/iOS evidence or platform captureDate was changed."
+  ]
+}

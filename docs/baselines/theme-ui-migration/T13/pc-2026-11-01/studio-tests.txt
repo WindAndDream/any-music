@@ -1,0 +1,12 @@
+
+> @any-music/theme-studio@0.0.0 test <project-root>\packages\theme-studio
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/theme-studio
+
+
+ Test Files  9 passed (9)
+      Tests  26 passed (26)
+   Start at  20:10:38
+   Duration  4.23s (transform 6.81s, setup 0ms, import 14.18s, tests 1.28s, environment 3ms)

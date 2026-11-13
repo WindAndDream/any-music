@@ -1,0 +1,172 @@
+{
+  "date": "2026-11-04",
+  "runtimeScope": "shared renderer; default-closed C00 candidate, not admitted production rendering",
+  "logDirectory": "logs/2026-11-04-virtual-list-implementation",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "result": "passed; UI 115 files / 962 tests, Classic 65 files / 530 tests, includes Rust workspace and TS/Rust protocol differential",
+      "log": "c00-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed; repeated in final production build after final source/test edits",
+      "log": "c00-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with unrelated existing warnings; own fixture warning corrected",
+      "log": "c00-lint-final.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed; final evidence/docs check recorded separately",
+      "log": "c00-format-check-final.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed: both production frontends and Tauri release executable",
+      "log": "c00-build.log"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/ui/src/composables/music-sources/use-queue-reorder.ts",
+      "sha256": "3440044afda28aaff16a4f45cadec1c52c514423222de047e7bd2ed15c193697"
+    },
+    {
+      "path": "packages/ui/src/virtual-scroll.ts",
+      "sha256": "b219467aaf710286ac67707c1c6a7dd5621b766bd8592fea984b358e2acb5464"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "9de71c3f672c6c8c072c0365285e1e40d45d2b54645810b02eac669fe5475667"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+      "sha256": "4d30007ed2bc64e42cf5a680c14c900bfed90c732801cbf8f714218dc98614dd"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTrackCardGrid.test.ts",
+      "sha256": "8147fba9dd8e6e1bc7b24214a5e784873db14dcd6f96fe3f120f645db282deef"
+    },
+    {
+      "path": "packages/ui/test/composables/music-sources/use-queue-reorder.test.ts",
+      "sha256": "3f010acce1ecf5a7ba4cd8b61a539ba7d37644359df3f094f57b2b481e4aa52c"
+    },
+    {
+      "path": "packages/theme-default/src/ClassicRoot.vue",
+      "sha256": "2d1b5a6b93b8535e72aa9c995538150f264083d6118a0c5bf2d8c4764dd9f7a9"
+    },
+    {
+      "path": "packages/theme-default/src/composables/classic-virtual-favorites-canary.ts",
+      "sha256": "798c7b9f41f26a5ae815985da0b6cc02d15bfd951aa45b38ccdacd6e71ddae4d"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-collection-presentation.ts",
+      "sha256": "674b9716be10775046f8ba9ba22bcf05ce64764983f342dcc1246a7f79d5de2f"
+    },
+    {
+      "path": "packages/theme-default/src/composables/use-classic-overlays.ts",
+      "sha256": "9a59f745f30b7d20114647ebd5c09d49ce3fec1cc09881d667556a5e7f43c603"
+    },
+    {
+      "path": "packages/theme-default/src/components/library/ClassicCollectionContent.vue",
+      "sha256": "1855837540c28e8be0542ef1c1adbf6a887cdc987b5399e460682895e8498ea3"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueueTrackGrid.vue",
+      "sha256": "f9f9f4d66f7d5d091fcf0251f85d8a42a667b419c9f946d939be19b3af3dfb41"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueueTrackGridItem.vue",
+      "sha256": "611711f47b233e2917fec777cb669dccd2b9663838896d67cf126abd9df9b926"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/QueueTrackRow.vue",
+      "sha256": "5ba9d842c4356592ca11784a2bc4e4144e65ac820b2253b18c9d78fc4290c560"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue",
+      "sha256": "55824797d3d7fb4370e39f67682d1e422ddfc62e812f4085dde6f8ed904a8ebd"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/queue-track-grid-contracts.ts",
+      "sha256": "3c21e147d55d84ae96b699399bd8294219ee766c606e33a240bac9eee960d5bc"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "sha256": "c9e95c61f2aef83b4df561bb2322d3597b5c0aebd16b3a8612709755c2bc419c"
+    },
+    {
+      "path": "packages/theme-default/src/components/overlays/ClassicTrackDialog.vue",
+      "sha256": "f2927a1ee5baf1c25ce7de46cbefb9caf746b9550d0632ad0cf3f13320eb0e91"
+    },
+    {
+      "path": "packages/theme-default/test/components/library/ClassicFavorites.admission.test.ts",
+      "sha256": "a03668f7558c482fac2a5ef42ba8cc0554da148d601f3805aef5526e08b16473"
+    },
+    {
+      "path": "packages/theme-default/test/components/music-sources/VirtualQueueTrackGrid.test.ts",
+      "sha256": "5afb13a8c38e6a37b2ffbf273ffa9296411f032c36f69c991136f3d7151fa74e"
+    },
+    {
+      "path": "packages/theme-default/test/components/overlays/ClassicTrackDialogLifecycle.test.ts",
+      "sha256": "53629ea0cc5b21fb7a8c9675e90903d658941f9430cce229705c90e1f8022792"
+    },
+    {
+      "path": "packages/theme-default/test/helpers/virtual-grid-renderer.ts",
+      "sha256": "bf9002bf78db7b24be564d225dc4c5bc003b1e3e8ab675fb4b4a986a51d3c7af"
+    }
+  ],
+  "assessment": {
+    "C00": "In progress. Candidate and shared bridge automatically checked; no production provider or promotion. Flat Favorites and platform track details have a lazy candidate. Platform overview, other consumers and runtime acceptance remain open.",
+    "closureRegressions": 10,
+    "candidateRegressions": 11,
+    "rootOpenerLifecycle": "Retain through after-leave and return-focus ticks; cancel stale same-track close and clear on navigation.",
+    "structure": {
+      "method": "Real Classic QueueTrackGridItem/QueueTrackRow/TrackRow in a Vue Node renderer; injected 300px viewport, three resolved columns, 100px natural boxes, 12px gaps. No CSS/browser layout computation.",
+      "initialSamples": [
+        {
+          "count": 0,
+          "mounted": 0
+        },
+        {
+          "count": 1,
+          "mounted": 1
+        },
+        {
+          "count": 80,
+          "mounted": 15
+        },
+        {
+          "count": 1000,
+          "mounted": 15
+        },
+        {
+          "count": 10000,
+          "mounted": 15
+        }
+      ],
+      "distantWindowMountedUpperInclusive": 24,
+      "openerRetentionMountedUpperExclusive": 30,
+      "skins": ["default", "minimal"],
+      "densities": ["standard", "compact", "comfortable"],
+      "limits": "These counts are candidate slots, not total product Vue instances or FPS. Offscreen focus is synthetic. Equal-geometry window drag checks use 144px boxes matching the estimate; a separate differing-height case rejects the stale geometry snapshot."
+    }
+  },
+  "initialTargetFailures": [
+    "New test expectations initially assumed 18 rather than the measured 15 mounted cells, default-skin tag text that is not displayed, and the wrong nearest identity in the final partial row. Expectations corrected against existing presentation and geometry contracts.",
+    "New tests initially inferred Set<unknown>; explicit string sets fixed their typecheck.",
+    "A window introducing 100px measurements against a 144px estimate invalidated the drag snapshot. Retained as an explicit stale-snapshot regression and open continuous-drag admission issue; not accepted as continuous dragging."
+  ],
+  "openGates": [
+    "P14 neutral cross-theme stable occurrence / intra-item offset restoration and mounting before focus",
+    "C00 growing platform overview remains nonvirtual",
+    "C00 continuous bidirectional drag across windows whose natural heights differ from estimates",
+    "P03 actual layout/visual/frame baseline; browser Find/text selection and native focus/IME",
+    "Installed Userscript, Tauri WebView, supported mobile targets and G01-G03"
+  ],
+  "noProductBrowserLaunch": true,
+  "noCommitPush": true
+}

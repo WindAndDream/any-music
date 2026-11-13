@@ -1,0 +1,198 @@
+{
+  "documentType": "audit-fix-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B18-native-delivery-control-tauri-fix",
+  "parentBatch": "B18-native-delivery-control-tauri",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-22",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix-baseline.json",
+  "originalReports": [
+    "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri.json",
+    "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json"
+  ],
+  "scope": "Repair P2 B18-D01 only: manual desktop rollback must consume a verified native preview and explicit native approval under current target policy, with no mutation on declined/stale/unadmitted requests. Preserve recovery, security history, grant clearing and monotonic generations/epochs. Other B18 candidates remain unaudited.",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": { "static": "pass", "tests": "pass", "artifact": "pass", "live": "not-run" },
+  "fixedFindingIds": ["B18-D01"],
+  "openFindingIds": [],
+  "changes": [
+    {
+      "owner": "crates/am-plugin-runtime/src/{rollback,install_model}.rs",
+      "change": "Replace the raw-installId manual rollback primitive with preview_rollback and a consuming rollback_package operation. RollbackPreview has private fields and no Clone/serde implementation. It binds current identity, epoch, retained verified candidate/data hash, revocation revision and a five-minute deadline. Commit rechecks bindings/policy/integrity and cancellation/deadline again after file reads, within the serialized Store transaction before mutation. Reuse the existing grant/session/context/task/exit cleanup owner."
+    },
+    {
+      "owner": "apps/tauri/src-tauri/src/plugins/{control,packages}.rs",
+      "change": "Keep the named IPC and renderer port unchanged: installId requests a native preview, never directly authorizes rollback. The main caller must approve the exact preview in a native Ok/Cancel dialog. Cancellation returns without commit or executor shutdown. The helper requires native confirmation and rejects ended sessions; runtime policy is rechecked on commit. Stop executors/cancel network only after a successful commit. Mobile explicitly rejects manual rollback and receives no new permissions."
+    },
+    {
+      "owner": "apps/tauri/src-tauri/src/plugins/packages/{tests,rollback_tests}.rs",
+      "change": "Add eight permanent native regressions using real SQLite and package files, including a controllable Clock. Adapt the two prior manual-rollback tests to consume native previews. Existing migration/recovery/revocation behavior remains covered."
+    },
+    {
+      "owner": "S15 maintained delivery guides, both locales",
+      "change": "Document native preview/approval/rechecks and unchanged automatic crash recovery. Format the two pre-existing reusable-package-boundaries guide failures reported by the root format gate, without semantic changes."
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "Unadmitted target, including admission changing after preview, rejects without changing the complete native ledger",
+      "result": "pass",
+      "evidence": [
+        "crates/am-plugin-runtime/src/rollback.rs:8",
+        "crates/am-plugin-runtime/src/rollback.rs:44",
+        "packages/rollback_tests.rs:unadmitted_rollback_preview_and_commit_preserve_the_entire_ledger"
+      ]
+    },
+    {
+      "criterion": "Only native approval can consume the opaque preview; decline, ended session, absent/unknown rollback and concurrent confirmation do not commit",
+      "result": "pass",
+      "evidence": [
+        "apps/tauri/src-tauri/src/plugins/control.rs:152",
+        "apps/tauri/src-tauri/src/plugins/packages.rs:242",
+        "packages/rollback_tests.rs:declining_confirmation_and_ending_the_session_cannot_commit",
+        "packages/rollback_tests.rs:concurrent_confirmation_cannot_replay_a_completed_rollback",
+        "packages/rollback_tests.rs:absent_or_unknown_rollback_does_not_disable_the_current_installation"
+      ],
+      "limits": "Dialog input/output comes from the installed native dialog API and is inspected in source; the actual application/dialog was not opened."
+    },
+    {
+      "criterion": "Updates, revokes, revocation revision, retained-byte tampering, expiry and cancellation before/during commit invalidate confirmation without mutation",
+      "result": "pass",
+      "evidence": [
+        "crates/am-plugin-runtime/src/rollback.rs:57",
+        "packages/rollback_tests.rs:update_revoke_and_revocation_revision_invalidate_an_open_confirmation",
+        "packages/rollback_tests.rs:tampered_retained_code_is_reverified_before_preview_and_commit",
+        "packages/rollback_tests.rs:expiry_and_cancellation_before_or_during_commit_preserve_the_ledger"
+      ]
+    },
+    {
+      "criterion": "Approved rollback retains history, restores matching code/data and provenance, disables the installation, clears grants and advances generation/epoch; recovery remains independent",
+      "result": "pass",
+      "evidence": [
+        "crates/am-plugin-runtime/src/rollback.rs:78",
+        "packages/rollback_tests.rs:approved_rollback_keeps_security_history_and_revokes_current_authority",
+        "packages/tests.rs:migration_only_changes_own_copy_and_rollback_restores_matching_data",
+        "packages/tests.rs:revoked_permissions_survive_failed_update_restart_rollback_and_reinstall",
+        "packages/tests.rs:every_directory_db_cut_recovers_whole_pair_without_resurrecting_sessions"
+      ]
+    },
+    {
+      "criterion": "Direct consumers, dependency/ACL boundaries, native release/MSRV and production builds remain valid",
+      "result": "pass",
+      "evidence": [
+        "Full root tests including all eight new rollback tests",
+        "Root typecheck/lint/build/native/MSRV/deny",
+        "Android arm64 Clippy",
+        "Final root format check"
+      ],
+      "limits": "Offline compilation/testing is separate from fresh exact-target acceptance, executor/resource-filter review and real application behavior."
+    }
+  ],
+  "verification": [
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib plugins::packages --locked",
+      "exitCode": 0,
+      "tests": 25,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/native-packages.log",
+      "note": "Initial targeted pass; the final deadline-after-read refinement is also exercised by the later full-root run."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm test",
+      "environment": { "npm_config_workspace_concurrency": "1", "VITEST_MAX_WORKERS": "2" },
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/test-serial.log",
+      "note": "Same test logic and timeouts, scheduling-only retry. Includes all eight final rollback regressions, 344 Tauri frontend tests, 80 Userscript tests and native workspace/protocol tests. Native app suite reports 174 passed and one explicitly ignored subprocess fixture (owned_tree_fixture), which is invoked by its owner regression rather than independently."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/typecheck.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/lint.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/format-check-final.log"
+    },
+    {
+      "level": "artifact",
+      "result": "pass",
+      "command": "pnpm build",
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/build.log",
+      "note": "Includes Userscript production output and optimized Tauri application; build does not launch it or renew target admission."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/check-native.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/check-rust-msrv.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm check:rust:deny",
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/check-rust-deny.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:mobile:android",
+      "exitCode": 0,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/android-compile.log",
+      "note": "Android arm64 compile/Clippy and mobile boundary compatibility only; no emulator/device launch or mobile external authority."
+    },
+    {
+      "level": "live",
+      "result": "not-run",
+      "reason": "No explicit application/browser inspection request. Native dialog, real main-view IPC and fresh exact-target execution acceptance remain separate."
+    }
+  ],
+  "initialGateFailures": [
+    {
+      "command": "pnpm test",
+      "exitCode": 1,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/test.log",
+      "resolution": "First run had two Userscript timeout failures and one request-count failure. A complete scheduling-only serial repeat passed without modifying test timeouts or Userscript logic. Keep the original failure visible as concurrency-sensitive evidence."
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "logPath": "target/refactoring-audit/2026-10-21-b18-fix/format-check.log",
+      "resolution": "Two existing bilingual reusable-package-boundaries formatting failures were formatted; the full root format check then passed."
+    }
+  ],
+  "remainingLimits": [
+    "No application/browser was launched; native dialog rendering and real main-view IPC have no fresh live evidence.",
+    "Historical target-admission.json does not match current Profile/resources. Installation/execution stay closed until separately authorized fresh acceptance; the accepted record was not changed.",
+    "Executor/relay, production resource filtering and command/catalog/save operation audits remain pending.",
+    "Root results describe the current shared worktree, including independently changed Cargo.lock and other board fixes; those repairs are not attributed to B18."
+  ],
+  "nextBatch": "B18-executor-relay-tauri",
+  "delivery": "B18-D01 is resolved within native delivery/control. All required offline root gates and Android compile checks pass after the documented retries/format cleanup. No commit/push occurred. Preserve the original failing audit as historical evidence; do not mark the whole B18 board or exact runtime acceptance complete."
+}

@@ -1,0 +1,197 @@
+{
+  "documentType": "audit-remediation",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B02-network-routing-shared",
+  "parentBatch": "B02",
+  "findingId": "B02-N01",
+  "authorization": "The user requested repair of the reported defect and regression verification.",
+  "baseline": {
+    "head": "1eaaa99e4626b45ffc8a4c0c32738981c637dae7",
+    "capturedAt": "2026-10-21T14:19:57.910343+08:00",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "files": [
+      {
+        "path": "packages/network-routing/src/attempts.ts",
+        "sha256": "854c91d4e08906557d38f267c0cb6cb99dea05a86de08f6fa1a29785674345da"
+      },
+      {
+        "path": "packages/network-routing/test/attempts.test.ts",
+        "sha256": "4d74bad68684976442768a049e3204c965ce5e46e534168d8d160d29f93204cf"
+      },
+      {
+        "path": "packages/account-pool/test/requests.test.ts",
+        "sha256": "06020f855a89b094d0a30cc1eadc6cc378b8c16deaf64fc63223f2ab28423ed0"
+      }
+    ],
+    "initialWorkingTree": "The four modified documentation indexes and untracked audit-plan/baseline documents predated this repair and were preserved.",
+    "evidencePolicy": "Source hashes must match this snapshot before reusing gate results. The historical audit report remains unchanged."
+  },
+  "historicalReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared.json",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-applicable"
+  },
+  "changes": [
+    {
+      "path": "packages/network-routing/src/attempts.ts:125",
+      "detail": "After isAvailable returns, recheck the operation's terminal state before reserving an attempt, scheduling its timer or invoking transport. Synchronous cancellation therefore cannot create new work after finish()."
+    },
+    {
+      "path": "packages/network-routing/src/attempts.ts:136",
+      "detail": "After aborting a failed attempt, recheck terminal state before calling onFailure. An abort subscriber that cancels the parent cannot trigger failure-classifier side effects after cancellation."
+    },
+    {
+      "path": "packages/network-routing/test/attempts.test.ts:132",
+      "detail": "Four permanent cases cover both defects in serial and parallel modes, including timer cleanup, cancellation of parallel peers, suppression of queued work and late completion."
+    },
+    {
+      "path": "packages/account-pool/test/requests.test.ts:76",
+      "detail": "Two consumer regression cases cover nested serial/parallel account executors. Reentrant parent cancellation preserves ready account state, releases timers, skips runtime classification and starts no queued accounts; assertions respect the random selection policy."
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "detail": "Terminal cancellation now prevents new attempts and post-cancellation failure callbacks. Routing and direct account consumer tests pass with all timers released. Existing request order, concurrency, replay-safety, proxy-health and stale-result tests remain passing."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "detail": "The four new routing cases were first run against the original implementation: 24 existing cases passed and all four new cases failed. After the fix, 28 routing and 22 account-pool cases pass, including six new retained regression cases."
+    }
+  ],
+  "verification": [
+    {
+      "level": "tests",
+      "result": "expected-fail",
+      "command": "pnpm --filter @any-music/network-routing test",
+      "exitCode": 1,
+      "phase": "before product fix, after retaining regression tests",
+      "summary": "4 new regression cases failed; 24 existing tests passed.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/regression-before-fix.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/network-routing --filter @any-music/account-pool test",
+      "exitCode": 0,
+      "summary": "28 routing + 22 account-pool tests passed.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/target-tests.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/network-routing --filter @any-music/account-pool typecheck",
+      "exitCode": 0,
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/target-typecheck.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm test",
+      "exitCode": 0,
+      "summary": "Root scripts and workspace tests passed, including Userscript/Tauri tests, Rust workspace tests and the 183-case TS/Rust protocol differential. The Rust subprocess fixture retains its existing ignored annotation; no live product acceptance is claimed.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/root-test.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "summary": "Workspace TypeScript/Vue checks and Tauri's Rust boundary/fmt/clippy checks passed.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/root-typecheck.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "summary": "Package boundaries, plugin isolation/VM, mobile ACL boundaries and oxlint passed.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/root-lint.log"
+    },
+    {
+      "level": "static",
+      "result": "fail",
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "summary": "Twelve pre-existing maintained documentation files fail formatting. All twelve files are byte-identical to HEAD as verified by Git blob hashes. None of the three source/test changes was reported by this full check.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/root-format.log",
+      "baselineEvidence": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/format-baseline.json"
+    },
+    {
+      "level": "artifact",
+      "result": "pass",
+      "command": "pnpm build",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/root-build.log",
+      "exitCode": 0,
+      "summary": "Root production build passed for Userscript and Tauri desktop; the optimized desktop executable was produced. Compilation/bundling is artifact evidence only, not live transport acceptance."
+    },
+    {
+      "level": "live",
+      "result": "not-applicable",
+      "reason": "Pure shared-algorithm repair. The task does not authorize product/browser/emulator launches. Tauri/GM runtime acceptance remains a separate B12/B11 responsibility."
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm exec oxfmt --check packages/network-routing/src/attempts.ts packages/network-routing/test/attempts.test.ts packages/account-pool/test/requests.test.ts docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-fix.json docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "exitCode": 0,
+      "summary": "All files changed by this repair pass formatting; repository-wide baseline failures remain separately recorded.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/changed-files-format.log"
+    }
+  ],
+  "findings": [
+    {
+      "id": "B02-N01",
+      "status": "resolved",
+      "resolution": "Two terminal-state guards plus six permanent owner/consumer regression cases. The original audit report remains historical evidence."
+    }
+  ],
+  "repositoryGateStatus": "test/typecheck/lint/build passed; repository format gate fails on 12 unchanged documentation files",
+  "preExistingIssues": [
+    {
+      "id": "B02-fix-format-baseline",
+      "severity": "maintenance",
+      "owner": "B20 repository formatting",
+      "status": "open",
+      "trigger": "pnpm format:check on current HEAD",
+      "effect": "Repository-wide formatting gate is not green; this is not a regression introduced by the routing repair.",
+      "paths": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/en/desktop/README.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/en/desktop/runtime-architecture.md",
+        "docs/en/desktop/rust-workspace-plan.md",
+        "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "docs/zh-cn/桌面端/后端工程规范.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/桌面端/文档索引.md",
+        "docs/zh-cn/桌面端/运行端架构.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      ],
+      "evidence": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-fix-1eaaa99/format-baseline.json",
+      "suggestedNextAction": "Normalize these maintained documents in a separate documentation-maintenance change and rerun the repository formatting gate."
+    }
+  ],
+  "unreadPaths": [
+    "Account catalog and selection implementation acceptance (B02-account-pool-shared)",
+    "Tauri native/renderer clock, HTTP, lease and AppErrorState integration (B12)",
+    "Userscript GM integration (B11)"
+  ],
+  "missingEvidence": [
+    "Full account-pool audit remains pending; its passing consumer tests do not replace that review.",
+    "No live transport/device/browser acceptance is included.",
+    "Repository formatting gate remains failed on pre-existing documents."
+  ],
+  "nextBatch": "B02-account-pool-shared",
+  "handoff": "B02-N01 已修复，改动为两处回调返回后的终态检查；新增路由 4 项、账号池 2 项永久回归用例。修复前 4 项路由新测试全部失败，修复后两包共 50 项测试及类型检查通过，全量测试、typecheck、lint 已通过。全仓格式检查的 12 项文档失败与 HEAD 完全一致，属于既有维护问题。Userscript 与 Tauri 生产构建均通过；本次修改文件格式检查单独记录。账号池完整排查及 B12 运行端验收仍未执行，不将 B02 整体记为通过。",
+  "reviewedAt": "2026-10-21T14:23:49+08:00"
+}

@@ -1,0 +1,80 @@
+{
+  "documentType": "implementation-checks",
+  "runtimeScope": "repository",
+  "step": "S08",
+  "reviewDate": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "scriptTests": 17,
+  "vitestTests": 1528,
+  "rustTests": 109,
+  "rustIgnored": 1,
+  "protocolDifferentialCases": 171,
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s08/test.log",
+      "sha256": "0658f203155b94b9d1c40b90e74abc413e590e7e4563c73cce008482868c22e3"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s08/typecheck.log",
+      "sha256": "5911a0c65096a45efd771faebdc8e500271022fb110404fd692269c1165bdeee"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s08/lint.log",
+      "sha256": "dbe8fe119f2d07f9ace599a0ea824b6d2f85688d5de582d720974333d5230be2"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s08/format-check.log",
+      "sha256": "7937c57c3cdd7bd2c209ccafdb975d82f2618628a839cd08d4cd277deb175c7c"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s08/build.log",
+      "sha256": "7b83704ad745ad9377e8a77e646ec6c488265a7d434f1adddff23df30d1828f2"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3465170,
+      "sha256": "27919d41aab026d6498eddb78f953838c3aee0de4f31812ece2b57bdc39bfe19"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 18046976,
+      "sha256": "ae488b84669818dd1706258b67d09432d1f3461708bf7a668747e7ad9a24f869"
+    },
+    {
+      "path": "apps/tauri/dist/assets/vue-B6AvWAnE.css",
+      "bytes": 15124,
+      "sha256": "8cbf829eee0f634569d6b7210a29b9ab2cb705f4e5e5530788b06634dd96ada8"
+    },
+    {
+      "path": "apps/tauri/dist/assets/vue-Dm-ycft5.js",
+      "bytes": 30421,
+      "sha256": "95ed1cae1ff8ba04749badd53c937bd202546d9bd33d4f7de623b146c2b38c48"
+    }
+  ],
+  "evidence": {
+    "metadata": "Dependency/lightweight graph negative tests reject Vue, styles and private host imports.",
+    "tauri": "Separate creation JS/CSS resources; no creation selectors remain in host shared styles.",
+    "userscript": "Single production script; built-in metadata and deferred Vue module remain separate in the source/dependency graph, not separate network chunks.",
+    "host": "Migrated published works exercise player controller and download scheduler with zero creation loader calls; encoding and file saving use test doubles.",
+    "migration": "Synthetic sanitized legacy v1-v6 fixtures retained; no real user backup was read.",
+    "workingTree": "Existing dirty work retained; local start hashes and task delta are under .codex-tmp/s08/."
+  },
+  "notPerformed": [
+    "application/browser/dev-server/emulator launch",
+    "website/GM/Rust public-network/visual/focus/device acceptance",
+    "additional native/MSRV/deny checks (no Rust implementation change)",
+    "Git commit or push"
+  ]
+}

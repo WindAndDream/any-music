@@ -1,0 +1,26 @@
+// 重置从第三方页面继承到 Shadow Host 的属性，建立可预测的样式基线。
+:host {
+  all: initial;
+  position: fixed;
+  z-index: 2147483647;
+  inset: 0 0 auto auto;
+  display: block;
+  width: 0;
+  height: 0;
+  color-scheme: light;
+  font-size: 16px;
+  line-height: normal;
+  pointer-events: none;
+}
+
+// Shadow DOM 不会自动改变盒模型，因此在隔离边界内统一使用 border-box。
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// 零尺寸宿主和组合根不拦截页面点击，真正的应用曲面会显式恢复交互能力。
+.am-root {
+  pointer-events: none;
+}

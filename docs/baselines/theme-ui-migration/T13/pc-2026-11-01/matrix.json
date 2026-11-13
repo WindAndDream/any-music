@@ -1,0 +1,5762 @@
+[
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["发现", "发现\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["发现"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["发现"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "未选择合集", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "未选择合集", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "未选择合集", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["发现"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "待听\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "我的喜欢\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "我的歌单\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载", "下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "播放历史\n0\n条"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "插件中心\n内置 5 个\n·\n外置 0 个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["发现", "发现\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "待听\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "我的喜欢\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "我的歌单\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载", "下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "播放历史\n0\n条"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "插件中心\n内置 5 个\n·\n外置 0 个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["发现", "发现\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "待听\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "我的喜欢\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "我的歌单\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载", "下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "播放历史\n0\n条"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "插件中心\n内置 5 个\n·\n外置 0 个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "未选择合集", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "未选择合集", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "未选择合集", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "gm",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 0,
+      "contentWidth": 0,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 1
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["发现"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "light",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["发现"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["发现"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "default",
+    "appearance": "system",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "T13 uncreated collection", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "T13 uncreated collection", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "T13 uncreated collection", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 760,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 760,
+      "contentWidth": 760,
+      "viewportWidth": 760,
+      "rootRight": 760.0000610351562,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["发现", "发现\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "待听\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "我的喜欢\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "我的歌单\n36\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载", "下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "播放历史\n0\n条"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "light",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "插件中心\n内置 5 个\n·\n外置 0 个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["发现", "发现\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "待听\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "我的喜欢\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "我的歌单\n36\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载", "下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "播放历史\n0\n条"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "dark",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "插件中心\n内置 5 个\n·\n外置 0 个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["发现", "发现\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "待听\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "我的喜欢\n0\n首"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "我的歌单\n36\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["自定义音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签管理", "标签管理\n0\n个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["片段创作"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载", "下载"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "播放历史\n0\n条"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "default",
+    "appearance": "system",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "插件中心\n内置 5 个\n·\n外置 0 个"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "T13 uncreated collection", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "light",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "T13 uncreated collection", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "dark",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "catalog",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "catalog",
+      "headings": ["寻找下一首音乐", "音乐列表 0", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "queue",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "queue",
+      "headings": ["待听", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "favorites",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "favorites",
+      "headings": ["我的喜欢", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "playlists",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "playlists",
+      "headings": ["我的歌单", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "custom-tracks",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "custom-tracks",
+      "headings": ["全部自定义音乐列表", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "tags",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "tags",
+      "headings": ["标签工作台", "标签管理", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "composer",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "composer",
+      "headings": ["创作工作室", "待整理素材", "T13 uncreated collection", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "downloads",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "downloads",
+      "headings": ["下载 2 并发", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "history",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "history",
+      "headings": ["播放历史", "选择一首音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  },
+  {
+    "runtime": "windows-delivered",
+    "width": 1440,
+    "theme": "studio",
+    "appearance": "system",
+    "page": "plugins",
+    "pass": true,
+    "bounds": {
+      "rootWidth": 1440,
+      "contentWidth": 1440,
+      "viewportWidth": 1440,
+      "rootRight": 1440.0001220703125,
+      "activeView": "plugins",
+      "headings": ["插件中心", "哔哩哔哩", "抖音", "网易云音乐"]
+    },
+    "audio": {
+      "count": 1,
+      "sameReference": true,
+      "paused": true,
+      "hasSource": false,
+      "time": 0
+    },
+    "hostStyleCount": 2
+  }
+]

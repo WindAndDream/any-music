@@ -1,0 +1,415 @@
+
+ RUN  v4.1.11 <project-root>/packages/music-workbench
+
+ ❯ test/components/music-sources/MusicSourceWorkbench.test.ts (12 tests | 1 failed) 21ms
+     × keeps the responsive back control on the left and names bulk favorite 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/components/music-sources/MusicSourceWorkbench.test.ts > MusicSourceWorkbench view cache boundaries > keeps the responsive back control on the left and names bulk favorite
+AssertionError: expected '/* Teleport 宿主覆盖应用壳；具体浮层自行接管指针事件和模态语义…' to contain 'grid-template-areas: \'context contex…'
+
+- Expected
++ Received
+
+- grid-template-areas: 'context context' 'back actions';
++ /* Teleport 宿主覆盖应用壳；具体浮层自行接管指针事件和模态语义。 */
++ .player-overlay-target {
++   position: absolute;
++   z-index: var(--am-z-dialog);
++   inset: 0;
++   pointer-events: none;
++ }
++
++ .settings-overlay-target {
++   position: absolute;
++   z-index: var(--am-z-dialog);
++   inset: 0;
++   pointer-events: none;
++ }
++
++
++ .product-view {
++   container: am-workbench / inline-size;
++   flex: 1 0 auto;
++   min-block-size: 100%;
++   padding: clamp(var(--am-space-4), 2.2cqi, var(--am-space-7));
++   background: var(--am-color-background);
++   animation: am-view-enter var(--am-motion-normal) var(--am-ease-standard);
++ }
++
++
++ .product-view__catalog {
++   position: relative;
++   display: flex;
++   flex: 1 0 auto;
++   flex-direction: column;
++   inline-size: 100%;
++   min-block-size: 0;
++   overflow-x: clip;
++ }
++
++
++ .product-view[data-active-view='catalog'],
++ .product-view[data-active-view='queue'],
++ .product-view[data-active-view='favorites'],
++ .product-view[data-active-view='downloads'] {
++   display: flex;
++   flex-direction: column;
++   padding: 0;
++ }
++
++
++ .product-top-bar__queue-count {
++   display: inline-flex;
++   min-block-size: 32px;
++   align-items: baseline;
++   gap: var(--am-space-1);
++   padding: var(--am-space-1) var(--am-space-3);
++   border-radius: var(--am-radius-control);
++   background: var(--am-color-primary-container);
++   color: var(--am-color-primary);
++   font-size: var(--am-font-size-sm);
++   font-variant-numeric: tabular-nums;
++   white-space: nowrap;
++ }
++
++ .product-top-bar__queue-count strong {
++   font-size: var(--am-font-size-md);
++   font-weight: 750;
++ }
++
++
++ // 迁入的 headless 功能继续使用稳定 DOM 契约；正式层统一覆写为低装饰、内容优先的曲面。
++ :where(.queue, .favorites, .playlists, .tags, .composer, .custom-tracks, .custom-plugins) {
++   min-block-size: 100%;
++   padding: 0;
++   background: transparent;
++ }
++
++
++ :where(
++   .catalog-drawer,
++   .favorite-drawer,
++   .playlist-drawer,
++   .custom-track-drawer,
++   .plugin-card,
++   .track-card
++ ) {
++   border-color: var(--am-color-border);
++   background: var(--am-color-surface);
++   box-shadow: var(--am-shadow-control);
++ }
++
++
++ @supports (content-visibility: auto) {
++   .track-card,
++   .plugin-card {
++     content-visibility: auto;
++     contain-intrinsic-block-size: 96px;
++   }}
++
++
++ :where(.catalog-drawer, .favorite-drawer, .playlist-drawer, .custom-track-drawer, .plugin-card) {
++   border-radius: var(--am-radius-lg);
++ }
++
++
++ :where(
++   .queue__header,
++   .favorites__header,
++   .playlists__toolbar,
++   .custom-tracks__toolbar,
++   .custom-plugins__summary
++ ) {
++   border-color: var(--am-color-border);
++   border-radius: var(--am-radius-lg);
++   background: var(--am-color-surface);
++   box-shadow: var(--am-shadow-control);
++ }
++
++
++ :where(button, input, select, textarea):disabled {
++   cursor: not-allowed;
++ }
++
++
++ .feature-module-status,
++ .feature-module-error {
++   min-block-size: 192px;
++   border: 1px solid var(--am-color-border);
++   border-radius: var(--am-radius-panel);
++   background: var(--am-color-surface);
++ }
++
++
++ .feature-module-error button {
++   min-block-size: var(--am-size-control);
++   padding-inline: var(--am-space-4);
++   border: 0;
++   border-radius: var(--am-radius-control);
++   background: var(--am-color-primary);
++   color: var(--am-color-on-primary);
++   cursor: pointer;
++   font-weight: 700;
++ }
++
++
++ .session {
++   display: flex;
++   align-items: center;
++   gap: var(--am-space-2);
++   min-block-size: var(--am-size-control);
++   padding-inline: var(--am-space-3);
++   border: 1px solid var(--am-color-border);
++   border-radius: var(--am-radius-control);
++   background: var(--am-color-surface-subtle);
++   color: var(--am-color-text-secondary);
++   font-size: var(--am-font-size-xs);
++ }
++
++
++ .session__dot {
++   inline-size: 8px;
++   block-size: 8px;
++   border-radius: 50%;
++   background: var(--am-color-warning);
++ }
++
++
++ .session[data-status='signed-in'] .session__dot,
++ .session[data-status='not-required'] .session__dot {
++   background: var(--am-color-success);
++ }
++
++
++ .session[data-status='expired'] .session__dot,
++ .session[data-status='unavailable'] .session__dot {
++   background: var(--am-color-danger);
++ }
++
++
++ .session__button {
++   padding: 0;
++   border: 0;
++   background: transparent;
++   color: var(--am-color-primary);
++   cursor: pointer;
++   font-weight: 700;
++ }
++
++
++ .player__precision-seek {
++   display: grid;
++   grid-template-columns: 52px minmax(0, 1fr) 52px;
++   inline-size: 100%;
++   align-items: center;
++   gap: var(--am-space-2);
++ }
++
++
++ .player__precision-track {
++   position: relative;
++   display: grid;
++   block-size: 28px;
++   align-items: center;
++ }
++
++
++ .player__precision-track::before,
++ .player__precision-buffered,
++ .player__precision-track::after {
++   position: absolute;
++   inset-inline-start: 0;
++   block-size: 6px;
++   border-radius: var(--am-radius-pill);
++   content: '';
++   pointer-events: none;
++ }
++
++
++ .player__precision-track::before {
++   z-index: 0;
++   inline-size: 100%;
++   background: var(--am-color-player-track);
++ }
++
++
++ .player__precision-buffered {
++   z-index: 1;
++   inline-size: var(--am-player-buffered, 0%);
++   background: var(--am-color-player-buffered);
++ }
++
++
++ .player__precision-track::after {
++   z-index: 2;
++   inline-size: var(--am-player-progress, 0%);
++   background: var(--am-color-primary);
++ }
++
++
++ .player__precision-range {
++   appearance: none;
++   position: relative;
++   z-index: 3;
++   inline-size: 100%;
++   block-size: 28px;
++   margin: 0;
++   border: 0;
++   background: transparent;
++   cursor: pointer;
++ }
++
++
++ /* 进度不可用时，整段指针热区都保持禁止反馈，避免被原生 range 的默认手势覆盖。 */
++ .player__precision-track:has(.player__precision-range:disabled),
++ .player__precision-range:disabled {
++   cursor: not-allowed;
++ }
++
++
++ .player__precision-range::-webkit-slider-runnable-track {
++   block-size: 6px;
++   background: transparent;
++ }
++
++
++ .player__precision-range::-webkit-slider-thumb {
++   appearance: none;
++   inline-size: 16px;
++   block-size: 16px;
++   margin-block-start: -5px;
++   border: 3px solid var(--am-color-surface);
++   border-radius: 50%;
++   background: var(--am-color-primary);
++   box-shadow:
++     0 0 0 1px var(--am-color-primary),
++     var(--am-shadow-control);
++ }
++
++
++ .player__precision-range::-moz-range-track {
++   block-size: 6px;
++   background: transparent;
++ }
++
++
++ .player__precision-range::-moz-range-thumb {
++   inline-size: 16px;
++   block-size: 16px;
++   border: 3px solid var(--am-color-surface);
++   border-radius: 50%;
++   background: var(--am-color-primary);
++   box-shadow:
++     0 0 0 1px var(--am-color-primary),
++     var(--am-shadow-control);
++ }
++
++
++ .player__precision-time,
++ .player__precision-tooltip {
++   color: var(--am-color-text-secondary);
++   font-size: var(--am-font-size-xs);
++   font-variant-numeric: tabular-nums;
++ }
++
++
++ .player__precision-time--end {
++   text-align: end;
++ }
++
++
++ .player__precision-tooltip {
++   position: absolute;
++   z-index: 4;
++   inset-block-end: calc(100% + 4px);
++   padding: 2px 6px;
++   border-radius: var(--am-radius-sm);
++   background: var(--am-color-text);
++   color: var(--am-color-background);
++   pointer-events: none;
++   white-space: nowrap;
++ }
++
++
++ .track-card-summary__cover,
++ .track-card-summary__cover--empty {
++   border-radius: var(--am-radius-md);
++ }
++
++
++ .track-source-page-link {
++   color: var(--am-color-primary);
++ }
++
++
++ @keyframes am-view-enter {
++   from {
++     opacity: 0;
++     transform: translateY(5.6px);
++   }
++
++   to {
++     opacity: 1;
++     transform: translateY(0);
++   }
++ }
++
++
++ @container am-content (max-width: 768px) {
++   .product-view {
++     padding: var(--am-space-3);
++   }}
++
++
++ @container am-top-bar (max-width: 768px) {
++   .product-top-bar__actions .session__label:not(.session__account),
++   .product-top-bar__actions .session__button:last-child {
++     display: none;
++   }
++
++   // A native identity control remains reachable even when its username is collapsed.
++   .product-top-bar__actions .session__account {
++     min-inline-size: 44px;
++     max-inline-size: 44px;
++     justify-content: center;
++   }
++
++   .product-top-bar__actions .session__account > span,
++   .product-top-bar__actions .session__account > svg:last-child {
++     display: none;
++   }}
++
++
++ @media (max-width: 576px) {
++   .player__precision-seek {
++     grid-template-columns: 48px minmax(0, 1fr) 48px;
++   }}
++
++
++ @media (prefers-reduced-motion: reduce) {
++   .product-view {
++     animation: none;
++   }}
++
+
+ ❯ test/components/music-sources/MusicSourceWorkbench.test.ts:218:36
+    216|   it('keeps the responsive back control on the left and names bulk fav…
+    217|     expect(productWorkbenchStyles).not.toContain('data-sidebar-side')
+    218|     expect(productWorkbenchStyles).toContain(
+       |                                    ^
+    219|       "grid-template-areas: 'context context' 'back actions';",
+    220|     )
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 16 passed (17)
+   Start at  02:07:12
+   Duration  7.26s (transform 3.21s, setup 0ms, import 6.17s, tests 1.04s, environment 0ms)
+
+undefined
+<project-root>\packages\music-workbench:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command "vitest" not found

@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-regression-evidence",
+  "runtimeScope": "tauri",
+  "batchId": "T13-android-followup",
+  "date": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "status": "complete-for-recorded-scope",
+  "overallT13Status": "in-progress",
+  "baselineCommit": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "preservedEarlierChanges": true,
+    "commitOrPush": false
+  },
+  "freshness": {
+    "initialInstalledApkSha256": "7cf7bc3f52aea737dcf819d2767efeffc0e872074b99aa69c561e539dd9d6668",
+    "initialInstallPredatedClassicParity": true,
+    "oldUiObservationsExcluded": true,
+    "sha256": "e469421aaeb297316c75d484c69bfbe2f36cd1c60f0675fa0c0cf6c5a96538ec",
+    "installedSha256": "e469421aaeb297316c75d484c69bfbe2f36cd1c60f0675fa0c0cf6c5a96538ec",
+    "matches": true,
+    "bytes": 244712715,
+    "model": "23113RKC6C",
+    "android": "15",
+    "abi": "arm64-v8a",
+    "buildLog": ".codex-tmp/t13-followup/android-workspace-latest.txt",
+    "buildFlavor": "debug; production application sources",
+    "webView": "153.0.8010.36",
+    "currentSourceEntry": {
+      "localFile": "index-DCGRorlZ.js",
+      "localSha256": "59cce17566e64452fce1450b01e249f02987bbcda513ff5d3c2960fc6e0174bf",
+      "installed": {
+        "file": "index-DCGRorlZ.js",
+        "sha256": "59cce17566e64452fce1450b01e249f02987bbcda513ff5d3c2960fc6e0174bf"
+      },
+      "matches": true
+    },
+    "sourceBefore": {
+      "sha256": "7cd4d0466117dd7d422bad83d6285402781b84b8485d2a580c6579ba1d7c27c6",
+      "files": 740
+    },
+    "sourceAfter": {
+      "sha256": "7cd4d0466117dd7d422bad83d6285402781b84b8485d2a580c6579ba1d7c27c6",
+      "files": 740
+    }
+  },
+  "repairs": [
+    "Use the same workspace scroll key in Classic and Studio, collecting offsets from nested responsive scroll owners and clamping each destination.",
+    "Project host theme loading/preference errors into both complete settings views instead of losing them in the Classic adapter.",
+    "Give only build-owned optional Tauri theme module entries retry URLs; share in-flight/successful imports and evict rejected promises, preserving chunk hashes through renderChunk."
+  ],
+  "runtimeEvidence": {
+    "parity": {
+      "favoriteExtraFilterAbsent": true,
+      "theme": "default",
+      "unsavedProfileDraftRetained": true,
+      "profileSaveRequested": false,
+      "sha256": "e469421aaeb297316c75d484c69bfbe2f36cd1c60f0675fa0c0cf6c5a96538ec"
+    },
+    "scroll": {
+      "before": [
+        {
+          "key": "workspace",
+          "top": 338.6666564941406,
+          "height": 578,
+          "total": 916
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 791,
+          "total": 922
+        },
+        {
+          "key": "settings:appearance",
+          "top": 0,
+          "height": 791,
+          "total": 791
+        }
+      ],
+      "studio": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60
+        },
+        {
+          "key": "workspace",
+          "top": 338.6666564941406,
+          "height": 721,
+          "total": 1937
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1353,
+          "total": 1353
+        }
+      ],
+      "classic": [
+        {
+          "key": "workspace",
+          "top": 338.6666564941406,
+          "height": 578,
+          "total": 916
+        },
+        {
+          "key": "settings:overview",
+          "top": 0,
+          "height": 791,
+          "total": 922
+        },
+        {
+          "key": "settings:appearance",
+          "top": 0,
+          "height": 791,
+          "total": 791
+        }
+      ]
+    },
+    "playback": {
+      "before": {
+        "count": 1,
+        "time": 29.931285,
+        "paused": false
+      },
+      "studio": {
+        "count": 1,
+        "time": 31.199211,
+        "paused": false,
+        "sameAudio": true
+      },
+      "classic": {
+        "count": 1,
+        "time": 31.694931,
+        "paused": false,
+        "sameAudio": true
+      }
+    },
+    "optionalImportFailure": {
+      "failed": {
+        "theme": "default",
+        "notice": true,
+        "interactiveRoots": 1,
+        "audioCount": 1
+      },
+      "retried": {
+        "theme": "studio",
+        "interactiveRoots": 1,
+        "audioCount": 1
+      },
+      "injection": "CDP Network blocks only the bundled optional Studio resource; no runtime or storage doubles",
+      "apkSha256": "e469421aaeb297316c75d484c69bfbe2f36cd1c60f0675fa0c0cf6c5a96538ec",
+      "successfulImportResourceCountBefore": 3,
+      "successfulImportResourceCountAfter": 3
+    },
+    "downloads": {
+      "concurrency": 2,
+      "statesBeforeSwitch": ["downloading", "downloading", "queued"],
+      "identityBefore": {
+        "batchId": "download-batch:d2b78860-333e-491c-a6d6-796afa0cc3ad",
+        "itemIds": [
+          "download-item:486c417c-e693-49a7-a142-f2243a41450e",
+          "download-item:15f0c3b3-1d5a-4295-908e-0dbd7933b49d",
+          "download-item:acea1183-08cd-47c9-bb84-5cd29c138c6f"
+        ]
+      },
+      "sameIdentityInStudio": true,
+      "sameIdentityAfterReturning": true,
+      "finalStatus": "completed",
+      "itemStatuses": ["succeeded", "succeeded", "succeeded"],
+      "outputBytes": 12447558,
+      "outputSha256": "8431e13f91ad3edfef6addbc03eda1e68954fd2674a1407ab7838f24b8de6d11",
+      "matchingExportCount": 1,
+      "mp3Bytes": [4556981, 4270726, 3609475],
+      "mp3Count": 3,
+      "crcPassed": true,
+      "originalRecordCountRetained": 2,
+      "limit": "One explicit three-track batch and controlled Android system save; this is not an exhaustive scheduler/IPC call-count, background-media or provider matrix.",
+      "apkSha256": "e469421aaeb297316c75d484c69bfbe2f36cd1c60f0675fa0c0cf6c5a96538ec",
+      "interruptedPendingSaveOnResumption": true,
+      "explicitRetryAfterInterruption": true,
+      "sameBatchAndItemIdentitiesAfterExplicitRetry": true
+    },
+    "restart": {
+      "sameBatches": true,
+      "completedBatchStillCompleted": true,
+      "matchingExportCount": 1,
+      "theme": "default"
+    }
+  },
+  "checks": [
+    {
+      "command": "pnpm test",
+      "environment": "npm_config_workspace_concurrency=2",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-followup/root-test-clean.txt",
+      "vitestFiles": 291,
+      "vitestTests": 2149,
+      "repositoryScriptTests": 36,
+      "protocolCases": 183
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-followup/root-typecheck-latest.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-followup/root-lint-latest.txt"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-followup/root-build-verified.txt"
+    },
+    {
+      "command": "pnpm build:mobile:android aarch64",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-followup/android-workspace-latest.txt"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": ".codex-tmp/t13-followup/root-format-delivery.txt"
+    }
+  ],
+  "repairAttempts": [
+    {
+      "stage": "Root integration",
+      "failure": "Two controller-lifetime test doubles lacked the newly projected error ref.",
+      "resolution": "Updated those test-only session doubles; 17 targeted tests and the final full suite pass."
+    },
+    {
+      "stage": "Parallel root verification",
+      "failure": "An existing VM interrupt-budget test exceeded its 5-second harness deadline during concurrent compilation.",
+      "resolution": "Kept the test and deadline unchanged; reran the complete root suite with workspace concurrency 2."
+    },
+    {
+      "stage": "Native failure injection",
+      "failure": "Fallback initially hid its diagnostic; retry then reused the WebView failed-module cache.",
+      "resolution": "Repaired the projection and build-owned loader, then repeated the actual blocked-resource/fallback/retry scenario successfully."
+    },
+    {
+      "stage": "Final freshness audit",
+      "failure": "Classic collection source changed during acceptance, after the previous APK build; its installed entry differed from the latest production build.",
+      "resolution": "Rebuilt and installed the current workspace, checked the same fingerprint for 740 source files before/after, matched installed/local APK and frontend entry bytes, and repeated native theme failure/retry, playback, download switching, explicit save recovery and restart."
+    }
+  ],
+  "remainingAcceptance": [
+    {
+      "runtime": "userscript",
+      "items": [
+        "Installed GM artifact on a foreign host, Shadow isolation, hide/resume, authenticated GM transport and manager downloads."
+      ]
+    },
+    {
+      "runtime": "tauri-Windows",
+      "items": [
+        "Repeat the complete current-build download/save/failure/focus/scroll matrix; earlier Windows evidence keeps its original artifact scope.",
+        "Original desktop core-data recovery remains a separate reviewed task; this pass did not reset or rewrite it."
+      ]
+    },
+    {
+      "runtime": "tauri-Android",
+      "items": [
+        "Optimized release media/proxy/save and interruption/audio-focus acceptance; provider/minimum-device matrix.",
+        "Long tag/creation editing sessions, capability combinations and the remaining visual/focus variants."
+      ]
+    },
+    {
+      "runtime": "tauri-iOS",
+      "items": ["Native device acceptance requires macOS/Xcode and a supported iOS device."]
+    }
+  ],
+  "scope": "No native command, credential, source protocol, storage schema, external-plugin policy or mobile admission changes in this pass.",
+  "localEvidenceDirectory": ".codex-tmp/t13-followup",
+  "screenshots": [
+    ".codex-tmp/t13-followup/import-fallback.png",
+    ".codex-tmp/t13-followup/android-workspace-latest.png"
+  ],
+  "verificationLimits": [
+    "Reverse scroll offsets can adjust as the destination layout resolves its variable-height rows; this records nonzero clamped restoration, not identical row geometry.",
+    "Final live checks use the installed debug APK above. Optimized Android release and other runtimes are not inferred from it."
+  ]
+}

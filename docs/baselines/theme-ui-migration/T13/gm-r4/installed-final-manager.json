@@ -1,0 +1,11 @@
+{
+  "scripts": [
+    { "name": "Any Music", "enabled": true, "grantCount": 16, "connectCount": 15 },
+    { "name": "server:Any Music", "enabled": false, "grantCount": 60, "connectCount": 14 },
+    { "name": "server:Any Music 功能测试台", "enabled": false, "grantCount": 60, "connectCount": 8 }
+  ],
+  "bytes": 5029624,
+  "sha256": "3ec503f70b3694fe0170879ebacc76cbb4ccd3666f6b0cd22df64f8ada234d71",
+  "storageUnchanged": true,
+  "date": "2026-10-27T15:24:40.433Z"
+}

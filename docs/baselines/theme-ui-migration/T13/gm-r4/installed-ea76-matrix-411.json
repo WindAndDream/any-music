@@ -1,0 +1,2829 @@
+{
+  "artifact": "ea76bbf97f9e795f8494f2277319fe8fc33c421f36f4029071d3190f3598fc63",
+  "observations": [
+    {
+      "label": "final-dom-matrix-411-default-light-catalog",
+      "at": "2026-10-27T15:12:32.591Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 577,
+          "total": 2850,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-queue",
+      "at": "2026-10-27T15:12:32.797Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 616,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-favorites",
+      "at": "2026-10-27T15:12:32.964Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 616,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-playlists",
+      "at": "2026-10-27T15:12:32.988Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-custom-tracks",
+      "at": "2026-10-27T15:12:33.017Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-tags",
+      "at": "2026-10-27T15:12:33.070Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-composer",
+      "at": "2026-10-27T15:12:33.123Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-downloads",
+      "at": "2026-10-27T15:12:33.319Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 600,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-history",
+      "at": "2026-10-27T15:12:33.385Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 4999,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-light-plugins",
+      "at": "2026-10-27T15:12:33.417Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-catalog",
+      "at": "2026-10-27T15:12:33.700Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 577,
+          "total": 2850,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-queue",
+      "at": "2026-10-27T15:12:33.853Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 616,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-favorites",
+      "at": "2026-10-27T15:12:34.179Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 616,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-playlists",
+      "at": "2026-10-27T15:12:34.201Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-custom-tracks",
+      "at": "2026-10-27T15:12:34.223Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-tags",
+      "at": "2026-10-27T15:12:34.246Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-composer",
+      "at": "2026-10-27T15:12:34.270Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-downloads",
+      "at": "2026-10-27T15:12:34.406Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 600,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-history",
+      "at": "2026-10-27T15:12:34.460Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 4999,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-dark-plugins",
+      "at": "2026-10-27T15:12:34.488Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-catalog",
+      "at": "2026-10-27T15:12:34.757Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 577,
+          "total": 2850,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-queue",
+      "at": "2026-10-27T15:12:34.897Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 616,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-favorites",
+      "at": "2026-10-27T15:12:35.143Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 616,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-playlists",
+      "at": "2026-10-27T15:12:35.164Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-custom-tracks",
+      "at": "2026-10-27T15:12:35.187Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-tags",
+      "at": "2026-10-27T15:12:35.211Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-composer",
+      "at": "2026-10-27T15:12:35.241Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-downloads",
+      "at": "2026-10-27T15:12:35.388Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 578,
+          "total": 600,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-history",
+      "at": "2026-10-27T15:12:35.458Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 4999,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-default-system-plugins",
+      "at": "2026-10-27T15:12:35.482Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "default",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music跨来源音乐工作台发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中心设置收"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 648,
+          "total": 648,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-catalog",
+      "at": "2026-10-27T15:12:36.047Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-queue",
+      "at": "2026-10-27T15:12:36.160Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 2015,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1463,
+          "total": 1463,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 1102,
+          "total": 1102,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-favorites",
+      "at": "2026-10-27T15:12:36.198Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1988,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1436,
+          "total": 1436,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 896,
+          "total": 896,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-playlists",
+      "at": "2026-10-27T15:12:36.223Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 903,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 351,
+          "total": 351,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-custom-tracks",
+      "at": "2026-10-27T15:12:36.247Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1104,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 552,
+          "total": 552,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-tags",
+      "at": "2026-10-27T15:12:36.270Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1353,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 801,
+          "total": 801,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-composer",
+      "at": "2026-10-27T15:12:36.294Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1898,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1346,
+          "total": 1346,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-downloads",
+      "at": "2026-10-27T15:12:36.332Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1432,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 880,
+          "total": 880,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-history",
+      "at": "2026-10-27T15:12:36.370Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 3663,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 3111,
+          "total": 3111,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-light-plugins",
+      "at": "2026-10-27T15:12:36.395Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "light",
+      "appearance": "light",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 807,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 255,
+          "total": 255,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "light",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-catalog",
+      "at": "2026-10-27T15:12:36.654Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-queue",
+      "at": "2026-10-27T15:12:36.689Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 2015,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1463,
+          "total": 1463,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 1102,
+          "total": 1102,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-favorites",
+      "at": "2026-10-27T15:12:36.728Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1988,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1436,
+          "total": 1436,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 896,
+          "total": 896,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-playlists",
+      "at": "2026-10-27T15:12:36.750Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 903,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 351,
+          "total": 351,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-custom-tracks",
+      "at": "2026-10-27T15:12:36.770Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1104,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 552,
+          "total": 552,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-tags",
+      "at": "2026-10-27T15:12:36.793Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1353,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 801,
+          "total": 801,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-composer",
+      "at": "2026-10-27T15:12:36.817Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1898,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1346,
+          "total": 1346,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-downloads",
+      "at": "2026-10-27T15:12:36.840Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1432,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 880,
+          "total": 880,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-history",
+      "at": "2026-10-27T15:12:36.864Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 3663,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 3111,
+          "total": 3111,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-dark-plugins",
+      "at": "2026-10-27T15:12:36.881Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "dark",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 807,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 255,
+          "total": 255,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "dark",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-catalog",
+      "at": "2026-10-27T15:12:37.151Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1620,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1068,
+          "total": 1068,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "catalog:requests",
+          "top": 0,
+          "height": 468,
+          "total": 468,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [
+        { "type": "slot", "styles": 1 },
+        { "type": "protected" },
+        { "type": "slot", "styles": 1 }
+      ],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "catalog",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-queue",
+      "at": "2026-10-27T15:12:37.239Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 2015,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1463,
+          "total": 1463,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 1102,
+          "total": 1102,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "queue",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-favorites",
+      "at": "2026-10-27T15:12:37.279Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1988,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1436,
+          "total": 1436,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 896,
+          "total": 896,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "favorites",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-playlists",
+      "at": "2026-10-27T15:12:37.305Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 903,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 351,
+          "total": 351,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "playlists",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-custom-tracks",
+      "at": "2026-10-27T15:12:37.328Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1104,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 552,
+          "total": 552,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "library:tracks",
+          "top": 0,
+          "height": 67,
+          "total": 67,
+          "width": 382,
+          "totalWidth": 382
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "custom-tracks",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-tags",
+      "at": "2026-10-27T15:12:37.346Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1353,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 801,
+          "total": 801,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "tags",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-composer",
+      "at": "2026-10-27T15:12:37.370Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1898,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 1346,
+          "total": 1346,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "composer",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-downloads",
+      "at": "2026-10-27T15:12:37.387Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 1432,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 880,
+          "total": 880,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "downloads",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-history",
+      "at": "2026-10-27T15:12:37.411Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 3663,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 3111,
+          "total": 3111,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "history",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    },
+    {
+      "label": "final-dom-matrix-411-studio-system-plugins",
+      "at": "2026-10-27T15:12:37.429Z",
+      "viewport": {
+        "width": 411,
+        "height": 864,
+        "dpr": 1.0000000447034836,
+        "touch": 1,
+        "dark": true,
+        "reduced": true
+      },
+      "theme": "studio",
+      "resolved": "dark",
+      "appearance": "system",
+      "focus": {
+        "tag": "DIV",
+        "label": "Any Music 工作室 设置  隐藏 发现待听我的喜欢我的歌单自定义音乐标签管理片段创作下载播放历史插件中"
+      },
+      "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+      "scroll": [
+        {
+          "key": "navigation",
+          "top": 0,
+          "height": 60,
+          "total": 60,
+          "width": 411,
+          "totalWidth": 1045
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 721,
+          "total": 807,
+          "width": 406,
+          "totalWidth": 406
+        },
+        {
+          "key": "workspace",
+          "top": 0,
+          "height": 255,
+          "total": 255,
+          "width": 406,
+          "totalWidth": 406
+        }
+      ],
+      "dialogs": [],
+      "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+      "hostStyleCount": 1,
+      "themeRootCount": 1,
+      "requestedAppearance": "system",
+      "pageId": "plugins",
+      "method": "DOM-driven public presentation actions; two rendered frames"
+    }
+  ],
+  "instrumentation": "Live ThemeHost props getter; resolved from actual theme root"
+}

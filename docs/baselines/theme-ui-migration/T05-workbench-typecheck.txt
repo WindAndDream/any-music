@@ -1,0 +1,3 @@
+
+> @any-music/music-workbench@0.0.0 typecheck <project-root>\packages\music-workbench
+> vue-tsc --noEmit -p tsconfig.json

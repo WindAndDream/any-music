@@ -1,0 +1,312 @@
+{
+  "documentType": "platform-interface-capture",
+  "platform": "douyin",
+  "captureDate": "2026-10-03",
+  "scope": "Live observation of the second-verification (error_code 2046) challenge on the chrome-devtools-mcp Chrome profile, immediately after the user scanned the QR rendered by the official login panel. Only method, path, parameter keys, public constants, field types and the sequence of verify_way identifiers are recorded. No token, ticket, uid, mobile number, nickname, avatar URL or log id is kept.",
+  "trigger": {
+    "endpoint": "POST https://login.douyin.com/passport/web/check_qrconnect/",
+    "requestBodyKeys": [
+      "need_logo",
+      "is_frontier",
+      "token",
+      "is_new_login",
+      "next",
+      "need_short_url"
+    ],
+    "requestQueryKeysPresent": [
+      "passport_jssdk_version",
+      "passport_jssdk_type",
+      "is_from_ttaccountsdk",
+      "aid",
+      "language",
+      "account_app_language",
+      "ts",
+      "is_from_iesaccountsaas",
+      "p_ui",
+      "p_ca",
+      "p_ca_real",
+      "fp",
+      "verifyFp",
+      "account_sdk_source",
+      "account_sdk_source_info",
+      "p_js_v",
+      "p_js_t",
+      "p_zt",
+      "p_ver",
+      "p_ver_real",
+      "request_host",
+      "p_bd",
+      "p_ts",
+      "p_no",
+      "biz_trace_id",
+      "device_platform",
+      "sign",
+      "qs",
+      "msToken",
+      "a_bogus"
+    ],
+    "requestHeaderNames": [
+      "web-sdk-version",
+      "x-tt-passport-aid-sign",
+      "x-tt-passport-csrf-token",
+      "x-tt-passport-trace-id",
+      "x-tt-passport-verify-portrait",
+      "x-tt-session-dtrait",
+      "origin",
+      "referer"
+    ],
+    "responseHeaderSignal": "bd-tt-error-code: 2046"
+  },
+  "challengeResponse": {
+    "data.error_code": 2046,
+    "data.account_flow": "verify",
+    "data.description": "public copy instructing the user to finish verification in the Douyin app before signing in",
+    "data.captcha": "empty string (this challenge is not a CAPTCHA)",
+    "data.common_params.keys": [
+      "copywriting",
+      "copywriting_key",
+      "ies_safety_diversion_tag",
+      "new_verify_flow",
+      "std_verify_flow_id",
+      "std_verify_scene",
+      "std_verify_template",
+      "std_verify_token",
+      "std_verify_type",
+      "std_verify_way"
+    ],
+    "data.biz_params.keys": [
+      "passport_mfa_retry_tag",
+      "std_verify_flow_id",
+      "std_verify_scene",
+      "std_verify_template",
+      "std_verify_token",
+      "std_verify_type",
+      "std_verify_way"
+    ],
+    "data.extra_params.keys": ["fold_verify_way", "log_id", "use_server_sort"],
+    "data.event_params.keys": [
+      "is_oper_staff",
+      "log_id",
+      "std_verify_flow_id",
+      "std_verify_scene",
+      "std_verify_template",
+      "std_verify_token",
+      "std_verify_type",
+      "std_verify_way",
+      "verify_reason",
+      "verify_scene"
+    ],
+    "observedConstants": {
+      "copywriting_key": "qr_connect",
+      "ies_safety_diversion_tag": "mfa",
+      "std_verify_scene": "account_login",
+      "std_verify_template": "ato_web",
+      "std_verify_type": "MFA",
+      "passport_scene": "login",
+      "pack_verify_way": true,
+      "std_verify_flow_id": "the per-login UUID that also appears in the x-tt-passport-verify-portrait header with a .login suffix",
+      "std_verify_way": "empty in the challenge; the completed method is filled in later",
+      "std_verify_token": "short-lived per-challenge token, distinct between common_params and biz_params",
+      "encrypt_uid": "80-character opaque string"
+    },
+    "data.verify_ways": [
+      {
+        "verify_way": "face_verify",
+        "fields": [
+          "auth_ticket",
+          "avatar_url",
+          "cert_app_id",
+          "flow",
+          "identity_name",
+          "is_auth_verify",
+          "nick_name",
+          "scene"
+        ],
+        "notes": "in-app identity verification; flow was auth_multi_panel and scene was mfa"
+      },
+      {
+        "verify_way": "mobile_sms_verify",
+        "fields": ["act_type", "mobile", "verify_way"],
+        "notes": "act_type was 22; mobile arrives masked"
+      },
+      {
+        "verify_way": "mobile_up_sms_verify",
+        "fields": ["channel_mobile", "mobile", "sms_content", "verify_way"],
+        "notes": "user sends an SMS to a channel number; sms_content arrives as a short literal"
+      }
+    ],
+    "data.user_info.keys": ["avatar_url", "nickname", "mobile_info"],
+    "data.url": {
+      "host": "auth.zijieapi.com",
+      "path": "/ucenter_web/app/second_verification_web/dist/index.umd.production.js",
+      "queryKeys": [
+        "error_code",
+        "std_verify_flow_id",
+        "std_verify_scene",
+        "std_verify_template",
+        "std_verify_token",
+        "std_verify_type",
+        "std_verify_way",
+        "verify_ways"
+      ]
+    },
+    "data.schema": "sslocal://webview/... deep link carrying the same std_verify_* parameters plus common/global props"
+  },
+  "followUpEndpoints": {
+    "source": "Read from the live second-verification bundle https://auth.zijieapi.com/ucenter_web/app/second_verification_web/dist/index.umd.production.js (546,885 bytes) rather than from a recording of the calls themselves.",
+    "sendCode": {
+      "builder": "POST {baseURL}/passport/web/send_code/",
+      "data": "the caller object with `type` forced to the number 22, then mixed",
+      "mixedFields": ["type"],
+      "encryptFields": "empty"
+    },
+    "validateCode": {
+      "builder": "POST {baseURL}{path}",
+      "pathWhenUseValidatePath": "/passport/web/validate_code/",
+      "pathOtherwise": "/passport/web/mobile/check_code/",
+      "data": "the caller object with `type` forced to 22, then mixed",
+      "mixedFields": ["type", "code"],
+      "encryptFields": "empty"
+    },
+    "hostSwitch": {
+      "default": "same origin as the page (www.douyin.com)",
+      "whenUseVerifyHost": "https://verify.zijieapi.com",
+      "note": "Neither the verify.zijieapi.com host nor the /passport/web/mobile/check_code/ path appears in the earlier login capture, so a native implementation pinned to www.douyin.com would be assuming one of two supported shapes."
+    },
+    "mixEncoding": "The mixed value is the per-byte XOR 5 hexadecimal form: `type` 22 becomes 3737, and a six-digit code becomes twelve hex characters. This matches the values seen in the earlier recorded requests.",
+    "liveCapture": {
+      "recorderCaveat": "The in-page recorder hooks the caller layer, so msToken, a_bogus and x-tt-session-dtrait — which the transport appends afterwards — never appear in these records. Their absence below does NOT mean they are absent on the wire.",
+      "sendCode": {
+        "target": "POST https://www.douyin.com/passport/web/send_code/ over xhr",
+        "queryKeysInOrder": [
+          "passport_jssdk_version",
+          "passport_jssdk_type",
+          "is_from_ttaccountsdk",
+          "aid",
+          "language",
+          "account_app_language",
+          "new_authn_sdk_version",
+          "device_platform",
+          "biz_trace_id"
+        ],
+        "queryValues": {
+          "passport_jssdk_version": "5.1.2",
+          "passport_jssdk_type": "lite",
+          "is_from_ttaccountsdk": "1",
+          "aid": "6383",
+          "language": "zh",
+          "account_app_language": "zh-CN",
+          "new_authn_sdk_version": "1.0.0.428-web",
+          "device_platform": "web_app",
+          "biz_trace_id": "eight hex characters, session scoped"
+        },
+        "callerHeaderNames": [
+          "Accept",
+          "Content-Type",
+          "x-tt-passport-csrf-token",
+          "x-tt-passport-trace-id",
+          "x-tt-passport-verify-portrait"
+        ],
+        "absentCallerHeaders": ["x-tt-passport-aid-sign", "web-sdk-version"],
+        "bodyKeysInOrder": [
+          "mix_mode",
+          "type",
+          "encrypt_uid",
+          "verify_ticket",
+          "copywriting_key",
+          "ies_safety_diversion_tag",
+          "new_verify_flow",
+          "std_verify_flow_id",
+          "std_verify_scene",
+          "std_verify_template",
+          "std_verify_token",
+          "std_verify_type",
+          "std_verify_way",
+          "is6Digits",
+          "aid",
+          "new_authn_sdk_version"
+        ],
+        "bodyValues": {
+          "mix_mode": "1",
+          "type": "3737, the mix of 22",
+          "verify_ticket": "empty",
+          "copywriting_key": "qr_connect",
+          "ies_safety_diversion_tag": "mfa",
+          "new_verify_flow": "empty",
+          "std_verify_scene": "account_login",
+          "std_verify_template": "ato_web",
+          "std_verify_type": "MFA",
+          "std_verify_way": "mobile_sms_verify",
+          "is6Digits": "1",
+          "aid": "6383",
+          "new_authn_sdk_version": "1.0.0.428-web"
+        },
+        "responseShape": {
+          "data": ["log_id", "mobile (masked)", "mobile_ticket", "retry_time"],
+          "message": "success",
+          "observedRetryTime": 60
+        }
+      },
+      "validateCode": {
+        "target": "POST https://www.douyin.com/passport/web/validate_code/ over xhr",
+        "queryKeysInOrder": "identical to send_code",
+        "callerHeaderNames": "identical to send_code",
+        "bodyKeysInOrder": "identical to send_code except that is6Digits is replaced by code",
+        "codeValue": "twelve hex characters, the per-byte XOR 5 of the six typed digits",
+        "responseShape": { "data": ["ticket"], "message": "success" },
+        "note": "A successful validate carries only a ticket; the login is not complete until a later poll confirms."
+      },
+      "mfaRetryPoll": {
+        "target": "POST https://login.douyin.com/passport/web/check_qrconnect/",
+        "queryKeysInOrder": "the full 28-key poll set",
+        "bodyKeysInOrder": [
+          "need_logo",
+          "is_frontier",
+          "token",
+          "is_new_login",
+          "next",
+          "need_short_url",
+          "passport_mfa_retry_tag",
+          "std_verify_flow_id",
+          "std_verify_scene",
+          "std_verify_template",
+          "std_verify_token",
+          "std_verify_type",
+          "std_verify_way"
+        ],
+        "note": "The six ordinary QR fields keep their order and the seven challenge fields are appended, with std_verify_way carrying the method actually completed. This is exactly what douyin_login.rs already builds.",
+        "response": "A reissued QR (error_code 0 with a new token and image) rather than confirmed, because the original QR token expired during verification. It is the refreshedQrInPoll shape recorded in the risk fixture, which also re-confirms that fix."
+      },
+      "challengeRefired": {
+        "target": "POST https://login.douyin.com/passport/web/challenge/",
+        "bodyKeys": ["sign", "sk"],
+        "responseLength": 88270,
+        "note": "About 88 KB, which is why the 3000-character recorder cap made this response unparseable and why the round-30 challenge census was inconclusive."
+      },
+      "confirmedNotObserved": "The browser flow did not reach confirmed because the QR expired mid-verification, so that response still rests on the earlier fixture."
+    },
+    "status": "RECAPTURED LIVE. send_code, validate_code, the challenge re-fire and the biz_params retry poll were all observed directly; see liveCapture."
+  },
+  "crossCheckAgainstEarlierCapture": {
+    "why": "The repository already ships apps/tauri/test/fixtures/douyin-login-capture.json from an earlier session. Because stale captures were explicitly called out as a risk, this round compared its claims against today's independent observation instead of trusting it.",
+    "independentlyConfirmed": [
+      "The check_qrconnect request body field set and order (need_logo, is_frontier, token, is_new_login, next, need_short_url) matches today's live request byte for byte, including next carrying no trailing slash.",
+      "The poll query carries the QR SDK constants (passport_jssdk_version 3.4.9, passport_jssdk_type normal, is_from_ttaccountsdk, aid 6383, language, account_app_language, ts, is_from_iesaccountsaas) exactly as recorded earlier.",
+      "The p_ui / p_ca / p_ca_real / p_js_* / p_zt / p_ver* / p_bd / request_host metadata block is present on the poll, as recorded earlier.",
+      "The 2046 response key set matches the earlier responseShape exactly: account_flow, biz_params, captcha, common_params, desc_url, description, encrypt_uid, error_code, event_params, extra_params, pack_verify_way, passport_scene, schema, url, user_info, verify_scene_desc, verify_ways.",
+      "The three verify_way identifiers and their per-way field lists match the earlier record: face_verify (auth_ticket/avatar_url/cert_app_id/flow/identity_name/is_auth_verify/nick_name/scene), mobile_sms_verify (act_type/mobile), mobile_up_sms_verify (channel_mobile/mobile/sms_content).",
+      "The multi-way challenge genuinely occurs: this account was offered all three, so the earlier record was not describing a single-account quirk."
+    ],
+    "notConfirmedToday": [
+      "SUPERSEDED for send_code and validate_code: both were recaptured live later in the session, see followUpEndpoints.liveCapture. The two SMS shapes now have two independent sources and agree.",
+      "SUPERSEDED for the biz_params retry poll: its request shape was captured live; only its confirmed response is still single-source, because the QR expired mid-verification.",
+      "The earlier claim that is_new_login appears only in the QR-generation query and only in the check form was still not re-derived from today's samples."
+    ],
+    "verdict": "For the QR challenge and its 2046 payload, the earlier fixture is corroborated by independent live evidence and can be relied on. The post-challenge SMS calls remain single-source and should be re-observed before any implementation depends on their details."
+  },
+  "outstanding": [
+    "send_code and validate_code were not re-observed; their form and query contract still rests on the earlier capture in douyin-login-capture.json.",
+    "The final check_qrconnect retry that appends biz_params and returns confirmed was not re-observed.",
+    "Which verify_way a given account is offered varies: this account exposed all three, while the earlier capture exercised mobile_sms_verify only."
+  ]
+}

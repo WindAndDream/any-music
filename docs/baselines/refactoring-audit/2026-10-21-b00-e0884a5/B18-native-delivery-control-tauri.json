@@ -1,0 +1,217 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B18-native-delivery-control-tauri",
+  "parentBatch": "B18",
+  "candidate": "B18-native-delivery-control",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T23:37:01+08:00",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json",
+  "scope": {
+    "invariant": "Product delivery mutations require native verified state, explicit approval and exact target admission; a renderer identifier or hidden UI control cannot replace these native checks.",
+    "selectedChain": "Named delivery/control -> main caller validation -> native PreviewSession/token -> InstallConsent -> commit_preview -> native installation policy and Runtime install transaction; compare the sibling rollback control against the same admission invariant.",
+    "allowedPaths": [
+      "apps/tauri/src-tauri/src/plugins/{delivery,control,target,packages}.rs and packages/tests.rs",
+      "Direct PluginAuthority composition, renderer authority port and test, registry/product ACL/main capability",
+      "Direct runtime install.rs acceptance/consent/rollback and InstallSnapshot contract excerpts"
+    ],
+    "readFiles": [
+      "apps/tauri/src-tauri/src/plugins/delivery.rs:1-279",
+      "apps/tauri/src-tauri/src/plugins/control.rs:1-172",
+      "apps/tauri/src-tauri/src/plugins/target.rs:1-85",
+      "apps/tauri/src-tauri/src/plugins/packages.rs:1-239 (remaining preview command symbols only)",
+      "apps/tauri/src-tauri/src/plugins/packages/tests.rs:1-133,502-539,812-831 (remaining test names and relevant assertions indexed)",
+      "apps/tauri/src-tauri/src/plugins.rs:35-160,218-257",
+      "apps/tauri/src/platform/native-plugin-authority.ts:1-77",
+      "apps/tauri/test/platform/native-plugin-authority.test.ts:1-26",
+      "crates/am-plugin-runtime/src/install.rs:1-46,47-193,478-516",
+      "crates/am-plugin-runtime/src/model.rs:291-303",
+      "apps/tauri/src-tauri/src/ipc.rs:29-30 (registry symbols)",
+      "apps/tauri/src-tauri/permissions/product.toml:57-58 (permission symbols)",
+      "apps/tauri/src-tauri/capabilities/main.json:1-7"
+    ],
+    "exclusions": [
+      "Product repairs, permanent regression changes, commit/push and final B21 root gates",
+      "Executor/relay, all-source filter, Worker CSP and production resource-graph audit",
+      "Command/catalog execution and result/diagnostic save epoch checks",
+      "Independent B14 authority, B15 transport, B16 install/recovery and B17 DEV audits",
+      "Application/browser/emulator launch, UI interaction and fresh target acceptance"
+    ],
+    "expansionReason": "The rollback handler delegates directly to Runtime::rollback_package. Inspecting that one direct runtime operation and its public snapshot was necessary to determine whether target/token checks occur below the handler. Registry/ACL excerpts establish that the handler remains reachable from the main view even when renderer composition hides its control."
+  },
+  "declaredStatus": {
+    "claim": "S15 delivery is implemented, with native previews/consent and exact target/resource admission. Current Profile changes invalidate the historical accepted target; installation/execution must remain closed until fresh acceptance.",
+    "references": [
+      "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:178-182",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:36-54",
+      "apps/tauri/src-tauri/AGENTS.md:20-21"
+    ]
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": { "static": "fail", "tests": "fail", "artifact": "not-run", "live": "not-run" },
+  "checks": [
+    {
+      "criterion": "C1/C5: Native owner and exact product caller/ACL",
+      "result": "pass",
+      "evidence": [
+        "plugins.rs:144-153",
+        "control.rs:26-35,113,157",
+        "ipc.rs:29-30",
+        "permissions/product.toml:57-58",
+        "capabilities/main.json:3-6"
+      ],
+      "tests": "plugins::tests::rejects_executor_remote_and_child_callers passes. The ACL exposes these named commands only to the main WebView; this is source/test evidence, not a live IPC denial sweep."
+    },
+    {
+      "criterion": "C3/C4/C5: Acquisition remains inert; install uses a single native-owned verified snapshot and consent",
+      "result": "pass",
+      "evidence": [
+        "delivery.rs:20-81,94-155,172-226",
+        "packages.rs:131-203,207-238",
+        "control.rs:105-148",
+        "crates/am-plugin-runtime/src/install.rs:112-188"
+      ],
+      "tests": "17 package tests, two delivery tests and two renderer port tests pass, including closed-target preview, stale-token preservation, immutable snapshot, cancellation and selected permission/data-confirmation regressions. Token is removed under its mutex and consent/policy are rechecked by installation; acquisition does not activate a package. Full URL/DNS/redirect transport acceptance belongs to B15/B17."
+    },
+    {
+      "criterion": "C5: Exact target and unknown required capability/contribution refusal",
+      "result": "pass",
+      "evidence": [
+        "target.rs:6-50",
+        "packages.rs:41-62,151-158",
+        "crates/am-plugin-runtime/src/install.rs:5-16,121-126,172-188"
+      ],
+      "tests": "b18_probe_changed_target_is_closed passes against the actual native predicate without launching a WebView. Existing package tests reject unsupported required capability versions. Required unknown contribution/provider/contract and capability IDs are refused by the inspected predicates; this batch did not inject every matrix dimension independently.",
+      "limits": "The historical record has accepted=true but Profile f238d186b463b5a4db3f0f3672709ce5fb2ea230a09576237692e04db82b1fde differs from current ccec9d23283bd9fcf31572499461d81371e3e42d669015c08e196c71041497b3; all three recorded resource fingerprints also differ. Existing target resources were inspected as static inputs, not accepted as a newly verified production artifact."
+    },
+    {
+      "criterion": "C3/C5: Rollback obeys native preview/approval and target admission before mutation",
+      "result": "fail",
+      "findingId": "B18-D01",
+      "evidence": [
+        "control.rs:152-171",
+        "native-plugin-authority.ts:17",
+        "crates/am-plugin-runtime/src/install.rs:478-515"
+      ],
+      "tests": "The negative rollback probe fails: admitted=false, no pending preview, result=Ok(()), generation 2 -> 3, permission epoch 4 -> 5. The probe invokes the exact native authority operation used by the handler; actual IPC/window invocation was not performed."
+    },
+    {
+      "criterion": "C6: Keep static/tests/artifact/live proof and remaining B18 scope separate",
+      "result": "pass",
+      "evidence": [
+        "B18-native-delivery-control-tauri-baseline.json",
+        "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:54"
+      ],
+      "tests": "32 existing regression executions pass. Two local probes yield one pass and one expected contract failure. Source and metadata hashes were unchanged after temporary test injection was removed. No product code was repaired, no live acceptance was run, and no whole-board completion is claimed."
+    }
+  ],
+  "verification": [
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib plugins::packages --locked",
+      "exitCode": 0,
+      "tests": 17,
+      "date": "2026-10-21",
+      "logPath": "target/refactoring-audit/2026-10-21-b18-native-delivery-control-tauri/native-packages.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/native-plugin-authority.test.ts",
+      "exitCode": 0,
+      "tests": 2,
+      "date": "2026-10-21",
+      "logPath": "target/refactoring-audit/2026-10-21-b18-native-delivery-control-tauri/frontend-port.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib plugins::delivery::tests --locked",
+      "exitCode": 0,
+      "tests": 2,
+      "date": "2026-10-21",
+      "logPath": "target/refactoring-audit/2026-10-21-b18-native-delivery-control-tauri/native-delivery.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib plugins::tests --locked",
+      "exitCode": 0,
+      "tests": 11,
+      "date": "2026-10-21",
+      "logPath": "target/refactoring-audit/2026-10-21-b18-native-delivery-control-tauri/native-callers.log",
+      "note": "Cargo substring filtering also executes nine storage::plugins::tests; only two tests belong to the product caller/composition module."
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "cargo test -p any-music-tauri --lib b18_probe --locked -- --nocapture",
+      "exitCode": 101,
+      "tests": 2,
+      "passed": 1,
+      "failed": 1,
+      "date": "2026-10-21",
+      "logPath": "target/refactoring-audit/2026-10-21-b18-native-delivery-control-tauri/native-probes.log",
+      "probeSource": "target/refactoring-audit/2026-10-21-b18-native-delivery-control-tauri/probes.rs",
+      "note": "Local probe appended temporarily to the native package test module, then restored byte-for-byte in finally. No temporary test remains in product sources. The failure is the required rejection assertion for B18-D01."
+    },
+    {
+      "level": "artifact",
+      "result": "not-run",
+      "reason": "Production resource graph/filter is a separate B18 candidate. No source implementation changes or final B21 collection occurred."
+    },
+    {
+      "level": "live",
+      "result": "not-run",
+      "reason": "The audit plan does not authorize product/browser launch. Fresh exact-target acceptance remains necessary after Profile/resource changes."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B18-D01",
+      "severity": "P2",
+      "owner": "apps/tauri native plugins/control delivery admission",
+      "title": "Rollback mutates an existing installation on an unadmitted target without a native preview token",
+      "trigger": "An existing installation has a rollback generation, then the current OS/WebView/Profile/resources are no longer admitted. A main-view caller invokes plugin_package_rollback with its installId. The handler accepts no preview/approval token and does not inspect authority.policy()/target admission before invoking rollback_package.",
+      "effect": "The native rollback succeeds and changes the selected generation and permission epoch despite the preview-only target boundary. Runtime rollback can also replace the namespace with the verified previous data. Hiding the renderer rollback port is insufficient to reject this still-permitted main-view IPC. Runtime does disable the installation and clear grants; this evidence does not demonstrate external execution or permission restoration on an unadmitted target.",
+      "evidence": [
+        "apps/tauri/src-tauri/src/plugins/control.rs:152-171",
+        "apps/tauri/src-tauri/src/plugins.rs:107-109",
+        "apps/tauri/src/platform/native-plugin-authority.ts:17,63-77",
+        "apps/tauri/src-tauri/permissions/product.toml:58",
+        "crates/am-plugin-runtime/src/install.rs:478-515",
+        "native-probes.log: result=Ok(()) generation=2->3 epoch=4->5 enabled=false"
+      ],
+      "reproduction": [
+        "Test-only admit an independent temporary PluginAuthority and install unsigned-store twice through native previews/commit_preview.",
+        "Set that authority's admission false to model a changed/unaccepted target; verify both execution modes are denied and no preview remains.",
+        "Invoke authority.with(runtime.rollback_package(installId, PackageFiles)) exactly as dispatched by control.rs.",
+        "Expect rejection without state mutation. Actual result is success with generation/epoch changed, causing the negative assertion to fail."
+      ],
+      "suggestedNextAction": "Add a native rollback preview/confirmation bound to the verified retained candidate and current installation/epoch. Consume its opaque single-use token, check current target policy before any mutation and reject stale or unadmitted requests. Preserve verified recovery, monotonic epochs and grant clearing. Add permanent regressions for unadmitted targets, stale/replayed confirmation and an admitted explicitly approved rollback.",
+      "status": "open",
+      "productRepairPerformed": false
+    }
+  ],
+  "unreadPaths": [
+    "plugins/executor.rs and executor/*",
+    "Production all-source filtering and independent Worker CSP",
+    "Command/catalog execution, result saving and diagnostic export",
+    "Full DEV/network/package recovery internals"
+  ],
+  "missingEvidence": [
+    "Fresh exact Windows OS/WebView/Profile/resource acceptance",
+    "Current production resource graph and all-source-filter audit",
+    "Full live IPC negative sweep",
+    "Permanent rollback-admission regression and product repair"
+  ],
+  "dependencies": [
+    "B13 changed Profile requires fresh admission, not reuse of the historical record",
+    "Independent B14/B15/B16/B17 findings and remaining candidates are not closed by this audit"
+  ],
+  "nextBatch": "B18-executor-relay-tauri",
+  "handoff": "B18 native delivery/control only, tauri, HEAD a693165205be0bc321764768d796d7c842f7a446 plus hashed existing worktree changes. Inert acquisition, opaque install token, consent and current target refusal are supported by static evidence and existing tests. P2 B18-D01 is confirmed by a negative native rollback probe: an unadmitted authority without a preview still accepts rollback and changes generation/epoch. Verdict needs-fix; no product repair. 32 existing tests pass; two local probes produce one pass/one failure (101). Temporary injection was restored, baseline hashes match, and logs remain local under target/refactoring-audit. Artifact/live acceptance was not run. Three remaining B18 candidates are unread; next audit entry is executor/relay."
+}

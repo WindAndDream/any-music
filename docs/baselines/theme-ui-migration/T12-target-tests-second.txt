@@ -1,0 +1,2689 @@
+Scope: 5 of 23 workspace projects
+packages/ui test$ vitest run
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/ui test:  Test Files  61 passed (61)
+packages/ui test:       Tests  330 passed (330)
+packages/ui test:    Start at  11:25:13
+packages/ui test:    Duration  3.70s (transform 5.85s, setup 0ms, import 16.81s, tests 1.60s, environment 26ms)
+packages/ui test: Done
+packages/plugin-ui-vue test$ vitest run
+packages/theme-default test$ vitest run
+packages/theme-studio test$ vitest run
+packages/theme-default test:  RUN  v4.1.11 <project-root>/packages/theme-default
+packages/theme-studio test:  RUN  v4.1.11 <project-root>/packages/theme-studio
+packages/plugin-ui-vue test:  RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+packages/plugin-ui-vue test:  Test Files  8 passed (8)
+packages/plugin-ui-vue test:       Tests  41 passed (41)
+packages/plugin-ui-vue test:    Start at  11:25:18
+packages/plugin-ui-vue test:    Duration  2.57s (transform 3.50s, setup 0ms, import 6.22s, tests 320ms, environment 3ms)
+packages/plugin-ui-vue test: Done
+packages/theme-default test:  ❯ test/metadata.test.ts (3 tests | 1 failed) 683ms
+packages/theme-default test:      × scopes extracted chrome CSS and preserves reduced motion without copying tokens or host rules 674ms
+packages/theme-default test:  ❯ test/components/music-sources/catalog-selection-markup.test.ts (0 test)
+packages/theme-studio test:  Test Files  2 passed (2)
+packages/theme-studio test:       Tests  12 passed (12)
+packages/theme-studio test:    Start at  11:25:17
+packages/theme-studio test:    Duration  7.17s (transform 2.66s, setup 0ms, import 5.40s, tests 2.24s, environment 1ms)
+packages/theme-studio test: Done
+packages/theme-default test: ⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+packages/theme-default test:  FAIL  test/components/music-sources/catalog-selection-markup.test.ts [ test/components/music-sources/catalog-selection-markup.test.ts ]
+packages/theme-default test: Error: ENOENT: no such file or directory, open '<project-root>\packages\ui\src\styles\_feature-panels.scss'
+packages/theme-default test:  ❯ test/components/music-sources/catalog-selection-markup.test.ts:29:28
+packages/theme-default test:      27|   'utf8',
+packages/theme-default test:      28| )
+packages/theme-default test:      29| const featurePanelStyles = readFileSync(
+packages/theme-default test:        |                            ^
+packages/theme-default test:      30|   new URL('./_feature-panels.scss', import.meta.resolve('@any-music/ui…
+packages/theme-default test:      31|   'utf8',
+packages/theme-default test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+packages/theme-default test: ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+packages/theme-default test:  FAIL  test/metadata.test.ts > classic theme admission > scopes extracted chrome CSS and preserves reduced motion without copying tokens or host rules
+packages/theme-default test: AssertionError: expected '@charset "UTF-8";\n:where(.am-theme-d…' not to match /--am-color-[\w-]+:|\.session|\.settin…/
+packages/theme-default test: - Expected:
+packages/theme-default test: /--am-color-[\w-]+:|\.session|\.settings|\.module-recovery/
+packages/theme-default test: + Received:
+packages/theme-default test: "@charset \"UTF-8\";
+packages/theme-default test: :where(.am-theme-default) .global-settings {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   gap: var(--am-space-4);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__group p {
+packages/theme-default test:   margin: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__group {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 12px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 10px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   box-shadow: var(--am-shadow-control);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__group legend {
+packages/theme-default test:   padding: 0 4px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   font-size: 12px;
+packages/theme-default test:   font-weight: 700;
+packages/theme-default test:   line-height: 1.4;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__group > strong {
+packages/theme-default test:   font-size: 12px;
+packages/theme-default test:   line-height: 1.4;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__group > p {
+packages/theme-default test:   margin-bottom: 8px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr) auto auto;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test:   border-radius: 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option:hover {
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option label {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   align-items: flex-start;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option input {
+packages/theme-default test:   margin: 3px 0 0;
+packages/theme-default test:   accent-color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__status {
+packages/theme-default test:   padding: 2px 6px;
+packages/theme-default test:   border-radius: 999px;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 9px;
+packages/theme-default test:   font-weight: 700;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__status[data-status=available] {
+packages/theme-default test:   color: var(--am-color-success);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__status[data-status=invalid],
+packages/theme-default test: :where(.am-theme-default) .global-settings__status[data-status=unavailable] {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option button {
+packages/theme-default test:   min-height: 27px;
+packages/theme-default test:   padding: 0 7px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 9px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option button:disabled {
+packages/theme-default test:   cursor: wait;
+packages/theme-default test:   opacity: 0.5;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option button:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__option input:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy input:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy select:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy button:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads input:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads button:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history input:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history button:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile input:focus-visible,
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile button:focus-visible {
+packages/theme-default test:   outline: 2px solid color-mix(in srgb, var(--am-color-accent) 35%, transparent);
+packages/theme-default test:   outline-offset: 2px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__empty {
+packages/theme-default test:   padding: 7px;
+packages/theme-default test:   border: 1px dashed var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   text-align: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option span,
+packages/theme-default test: :where(.am-theme-default) .global-settings__option strong,
+packages/theme-default test: :where(.am-theme-default) .global-settings__option small {
+packages/theme-default test:   display: block;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: 1fr 1fr auto;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   align-items: end;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr) auto;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   align-items: end;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   gap: 9px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy-fields {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr) minmax(90px, 0.65fr);
+packages/theme-default test:   gap: 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy-fields label {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   gap: 4px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy-host {
+packages/theme-default test:   grid-column: 1/-1;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy-toggle {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   font-weight: 700;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy-toggle input {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   accent-color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy input,
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy select,
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy button {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 31px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy-toggle input {
+packages/theme-default test:   min-height: auto;
+packages/theme-default test:   padding: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy input:disabled,
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy select:disabled {
+packages/theme-default test:   cursor: not-allowed;
+packages/theme-default test:   opacity: 0.55;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy button {
+packages/theme-default test:   justify-self: end;
+packages/theme-default test:   font-weight: 700;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy-notice {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 9px;
+packages/theme-default test:   line-height: 1.45;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__proxy > .global-settings__proxy-error {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile > strong,
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile > p,
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads > strong,
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads > p,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history > strong,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history > p {
+packages/theme-default test:   grid-column: 1/-1;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile label,
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads label,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history label {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   gap: 4px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile input,
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile button,
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads input,
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads button,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history input,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history button {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 31px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__profile button,
+packages/theme-default test: :where(.am-theme-default) .global-settings__downloads button,
+packages/theme-default test: :where(.am-theme-default) .global-settings__history button {
+packages/theme-default test:   font-weight: 700;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option strong {
+packages/theme-default test:   font-size: 12px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .global-settings__option small {
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__select input {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   accent-color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track {
+packages/theme-default test:   position: relative;
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr);
+packages/theme-default test:   gap: var(--am-space-3);
+packages/theme-default test:   align-content: start;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__select {
+packages/theme-default test:   position: absolute;
+packages/theme-default test:   z-index: 3;
+packages/theme-default test:   inset-block-start: 0;
+packages/theme-default test:   inset-inline-end: 0;
+packages/theme-default test:   display: inline-flex;
+packages/theme-default test:   inline-size: 44px;
+packages/theme-default test:   min-block-size: 44px;
+packages/theme-default test:   box-sizing: border-box;
+packages/theme-default test:   align-items: flex-start;
+packages/theme-default test:   justify-content: flex-end;
+packages/theme-default test:   padding: 6px;
+packages/theme-default test:   border: 0;
+packages/theme-default test:   background: transparent;
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__checkbox {
+packages/theme-default test:   inline-size: 18px;
+packages/theme-default test:   block-size: 18px;
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   accent-color: var(--am-color-primary);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test:   /* 鼠标勾选不保留原生蓝框；键盘焦点由下方的父级 focus-visible 环接管。 */
+packages/theme-default test:   outline: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__select:has(input:checked) {
+packages/theme-default test:   color: var(--am-color-primary);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__select:has(.track__checkbox:focus-visible) {
+packages/theme-default test:   outline: var(--am-focus-ring);
+packages/theme-default test:   outline-offset: var(--am-focus-offset);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track + .track {
+packages/theme-default test:   margin-top: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track--active {
+packages/theme-default test:   border-color: color-mix(in srgb, var(--am-color-accent) 45%, transparent);
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 5%, var(--am-color-surface));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track--selected {
+packages/theme-default test:   border-color: var(--am-color-primary);
+packages/theme-default test:   box-shadow: 0 0 0 1px var(--am-color-primary), var(--am-shadow-control);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track--invalid {
+packages/theme-default test:   opacity: 0.64;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__cover-select {
+packages/theme-default test:   position: absolute;
+packages/theme-default test:   z-index: 1;
+packages/theme-default test:   inset: 0;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__statistics {
+packages/theme-default test:   position: absolute;
+packages/theme-default test:   z-index: 2;
+packages/theme-default test:   inset-block-end: var(--am-space-2);
+packages/theme-default test:   inset-inline-end: var(--am-space-2);
+packages/theme-default test:   max-inline-size: calc(100% - 2 * var(--am-space-2));
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   padding: 2px var(--am-space-2);
+packages/theme-default test:   border-radius: var(--am-radius-sm);
+packages/theme-default test:   background: var(--am-color-media-caption);
+packages/theme-default test:   color: var(--am-color-on-media-caption);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   font-weight: 650;
+packages/theme-default test:   line-height: 1.4;
+packages/theme-default test:   pointer-events: none;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__meta-row {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-1);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__meta-row .track-card-summary__meta {
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   flex: 1 1 auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__inline-actions {
+packages/theme-default test:   display: none;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__tags,
+packages/theme-default test: :where(.am-theme-default) .track__tag-form {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   gap: 4px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   margin-top: 4px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__tags {
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__tag,
+packages/theme-default test: :where(.am-theme-default) .track__tag-form button {
+packages/theme-default test:   display: inline-flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-1);
+packages/theme-default test:   min-height: 22px;
+packages/theme-default test:   padding: 0 7px;
+packages/theme-default test:   border: 1px solid color-mix(in srgb, var(--am-color-accent) 24%, transparent);
+packages/theme-default test:   border-radius: 999px;
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 10%, var(--am-color-surface));
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test:   font: 600 10px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__tag-form input {
+packages/theme-default test:   width: min(150px, 100%);
+packages/theme-default test:   min-height: 24px;
+packages/theme-default test:   padding: 0 7px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__actions {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: repeat(2, minmax(0, 1fr));
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track--compact .track-card-summary__meta--detail {
+packages/theme-default test:   display: none;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__button,
+packages/theme-default test: :where(.am-theme-default) .track__link {
+packages/theme-default test:   display: inline-flex;
+packages/theme-default test:   min-height: 36px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-content: center;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: var(--am-radius-md);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 650 var(--am-font-size-xs)/1 var(--am-font-family);
+packages/theme-default test:   text-align: center;
+packages/theme-default test:   text-decoration: none;
+packages/theme-default test:   touch-action: manipulation;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test:   transition: border-color var(--am-motion-fast) var(--am-ease-standard), background-color var(--am-motion-fast) var(--am-ease-standard), color var(--am-motion-fast) var(--am-ease-standard);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__button {
+packages/theme-default test:   gap: var(--am-space-1);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__button:hover:not(:disabled):not(.track__button--primary) {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__button:hover:not(:disabled):not(.track__button--primary) {
+packages/theme-default test:   background: var(--am-color-surface-hover);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__button--primary {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   background: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-on-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__button--primary:hover:not(:disabled) {
+packages/theme-default test:   filter: brightness(1.06);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__button[aria-pressed=true] {
+packages/theme-default test:   border-color: var(--am-color-primary);
+packages/theme-default test:   background: var(--am-color-primary-container);
+packages/theme-default test:   color: var(--am-color-primary);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__button:disabled {
+packages/theme-default test:   cursor: not-allowed;
+packages/theme-default test:   filter: grayscale(1);
+packages/theme-default test:   opacity: 0.55;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .track__link {
+packages/theme-default test:   grid-column: 1/-1;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(170px, 230px) minmax(0, 1fr);
+packages/theme-default test:   gap: 12px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   padding: 10px calc(12px + var(--am-workbench-inline-inset));
+packages/theme-default test:   border-top: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__info {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__title,
+packages/theme-default test: :where(.am-theme-default) .player__status {
+packages/theme-default test:   display: block;
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__title {
+packages/theme-default test:   font-size: 12px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__status {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__transport {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   gap: 6px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__transport-controls {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__audio {
+packages/theme-default test:   width: clamp(320px, 38vw, 620px);
+packages/theme-default test:   min-width: 320px;
+packages/theme-default test:   height: 32px;
+packages/theme-default test:   flex: 1 1 440px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__audio--segmented {
+packages/theme-default test:   display: none;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__button,
+packages/theme-default test: :where(.am-theme-default) .player__quality,
+packages/theme-default test: :where(.am-theme-default) .player__rate {
+packages/theme-default test:   min-height: 30px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__button {
+packages/theme-default test:   padding: 0 7px;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__quality {
+packages/theme-default test:   min-width: 118px;
+packages/theme-default test:   max-width: 190px;
+packages/theme-default test:   padding: 0 7px;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .player__quality:disabled {
+packages/theme-default test:   opacity: 0.65;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__toolbar,
+packages/theme-default test: :where(.am-theme-default) .library__collection-form {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 9px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__toolbar {
+packages/theme-default test:   justify-content: space-between;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__input,
+packages/theme-default test: :where(.am-theme-default) .library-track__input {
+packages/theme-default test:   min-height: 31px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__input,
+packages/theme-default test: :where(.am-theme-default) .library-track__input {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__toolbar > .library__input:first-child,
+packages/theme-default test: :where(.am-theme-default) .library__collection-form > .library__input {
+packages/theme-default test:   flex: 1 1 auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__primary,
+packages/theme-default test: :where(.am-theme-default) .library__danger,
+packages/theme-default test: :where(.am-theme-default) .library-track__button,
+packages/theme-default test: :where(.am-theme-default) .library-track__actions button {
+packages/theme-default test:   min-height: 29px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 11px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__primary {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   background: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-on-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__danger {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__message {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 12px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test:   text-align: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__message--error {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library__items {
+packages/theme-default test:   padding: 0 8px 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(180px, 1.3fr) minmax(140px, 1fr) auto;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track--active {
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 8%, var(--am-color-surface));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track__main,
+packages/theme-default test: :where(.am-theme-default) .library-track__title,
+packages/theme-default test: :where(.am-theme-default) .library-track__artist {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track__title,
+packages/theme-default test: :where(.am-theme-default) .library-track__artist {
+packages/theme-default test:   display: block;
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track__title {
+packages/theme-default test:   font-size: 12px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track__artist {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track__tags,
+packages/theme-default test: :where(.am-theme-default) .library-track__inline,
+packages/theme-default test: :where(.am-theme-default) .library-track__actions {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   gap: 4px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track__tags {
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test:   margin-top: 3px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track__tag {
+packages/theme-default test:   padding: 1px 5px;
+packages/theme-default test:   border: 0;
+packages/theme-default test:   border-radius: 999px;
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 12%, var(--am-color-surface));
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test:   font: 10px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .library-track__actions {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: repeat(2, auto);
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 900px) {
+packages/theme-default test:   :where(.am-theme-default) .player {
+packages/theme-default test:     grid-template-columns: minmax(0, 1fr);
+packages/theme-default test:     gap: 7px;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .player__transport-controls {
+packages/theme-default test:     flex-wrap: wrap;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .player__audio {
+packages/theme-default test:     min-width: 0;
+packages/theme-default test:     flex: 1 1 240px;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 760px) {
+packages/theme-default test:   :where(.am-theme-default) .player {
+packages/theme-default test:     grid-template-columns: 1fr;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .library-track {
+packages/theme-default test:     grid-template-columns: 1fr;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .global-settings__profile,
+packages/theme-default test:   :where(.am-theme-default) .global-settings__proxy-fields {
+packages/theme-default test:     grid-template-columns: 1fr;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .global-settings__profile > strong,
+packages/theme-default test:   :where(.am-theme-default) .global-settings__profile > p {
+packages/theme-default test:     grid-column: 1;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .global-settings__proxy-host {
+packages/theme-default test:     grid-column: 1;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .global-settings__option {
+packages/theme-default test:     grid-template-columns: minmax(0, 1fr) auto;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .global-settings__option button {
+packages/theme-default test:     grid-column: 2;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 480px) {
+packages/theme-default test:   :where(.am-theme-default) .global-settings {
+packages/theme-default test:     max-height: calc(100dvh - 62px);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .player__transport-controls {
+packages/theme-default test:     flex-wrap: wrap;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .player {
+packages/theme-default test:     gap: 7px;
+packages/theme-default test:     padding: 8px calc(8px + var(--am-workbench-inline-inset));
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .player__audio {
+packages/theme-default test:     width: 100%;
+packages/theme-default test:     min-width: 0;
+packages/theme-default test:     flex-basis: 100%;
+packages/theme-default test:     order: -1;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-track-card (min-width: 520px) {
+packages/theme-default test:   :where(.am-theme-default) .track__actions {
+packages/theme-default test:     grid-template-columns: repeat(4, minmax(0, 1fr));
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-track-card (max-width: 300px) {
+packages/theme-default test:   :where(.am-theme-default) .track {
+packages/theme-default test:     gap: var(--am-space-2);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .track__actions {
+packages/theme-default test:     gap: var(--am-space-1);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .track__button {
+packages/theme-default test:     min-inline-size: 0;
+packages/theme-default test:     min-block-size: 36px;
+packages/theme-default test:     padding-inline: var(--am-space-1);
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-track-card (max-width: 220px) {
+packages/theme-default test:   :where(.am-theme-default) .track__actions {
+packages/theme-default test:     grid-template-columns: minmax(0, 1fr);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .track__actions > :not(.track__button--more) {
+packages/theme-default test:     display: none;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @media (max-width: 600px) {
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"1\"] .track__select,
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track__select {
+packages/theme-default test:     inset-block-start: 0;
+packages/theme-default test:     inset-inline-start: auto;
+packages/theme-default test:     inset-inline-end: 0;
+packages/theme-default test:     justify-content: flex-end;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"1\"] .track__statistics,
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track__statistics {
+packages/theme-default test:     inset-block-end: var(--am-space-1);
+packages/theme-default test:     inset-inline-start: var(--am-space-1);
+packages/theme-default test:     inset-inline-end: auto;
+packages/theme-default test:     max-inline-size: calc(100% - 2 * var(--am-space-1));
+packages/theme-default test:     padding-inline: var(--am-space-1);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"1\"] .track__statistics {
+packages/theme-default test:     font-size: 9px;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"1\"] .track__actions {
+packages/theme-default test:     grid-template-columns: repeat(4, minmax(0, 1fr));
+packages/theme-default test:     gap: var(--am-space-1);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"1\"] .track__button {
+packages/theme-default test:     min-inline-size: 0;
+packages/theme-default test:     min-block-size: 36px;
+packages/theme-default test:     padding-inline: var(--am-space-1);
+packages/theme-default test:     border-radius: var(--am-radius-md);
+packages/theme-default test:     font-size: 10px;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track__actions {
+packages/theme-default test:     display: none;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track__inline-actions {
+packages/theme-default test:     display: inline-flex;
+packages/theme-default test:     min-inline-size: 64px;
+packages/theme-default test:     min-block-size: 36px;
+packages/theme-default test:     flex: 0 0 auto;
+packages/theme-default test:     align-items: center;
+packages/theme-default test:     justify-content: center;
+packages/theme-default test:     gap: var(--am-space-1);
+packages/theme-default test:     padding-inline: var(--am-space-2);
+packages/theme-default test:     border: 1px solid var(--am-color-border);
+packages/theme-default test:     border-radius: var(--am-radius-md);
+packages/theme-default test:     background: var(--am-color-surface);
+packages/theme-default test:     color: var(--am-color-text);
+packages/theme-default test:     cursor: pointer;
+packages/theme-default test:     font: 650 10px/1 var(--am-font-family);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track__inline-actions:focus-visible {
+packages/theme-default test:     outline: var(--am-focus-ring);
+packages/theme-default test:     outline-offset: var(--am-focus-offset);
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-view {
+packages/theme-default test:   container: am-workbench/inline-size;
+packages/theme-default test:   flex: 1 0 auto;
+packages/theme-default test:   min-block-size: 100%;
+packages/theme-default test:   padding: clamp(var(--am-space-4), 2.2cqi, var(--am-space-7));
+packages/theme-default test:   background: var(--am-color-background);
+packages/theme-default test:   animation: am-view-enter var(--am-motion-normal) var(--am-ease-standard);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-view__catalog {
+packages/theme-default test:   position: relative;
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex: 1 0 auto;
+packages/theme-default test:   flex-direction: column;
+packages/theme-default test:   inline-size: 100%;
+packages/theme-default test:   min-block-size: 0;
+packages/theme-default test:   overflow-x: clip;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-view[data-active-view=catalog] {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex-direction: column;
+packages/theme-default test:   padding: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-top-bar__queue-count {
+packages/theme-default test:   display: inline-flex;
+packages/theme-default test:   min-block-size: 32px;
+packages/theme-default test:   align-items: baseline;
+packages/theme-default test:   gap: var(--am-space-1);
+packages/theme-default test:   padding: var(--am-space-1) var(--am-space-3);
+packages/theme-default test:   border-radius: var(--am-radius-control);
+packages/theme-default test:   background: var(--am-color-primary-container);
+packages/theme-default test:   color: var(--am-color-primary);
+packages/theme-default test:   font-size: var(--am-font-size-sm);
+packages/theme-default test:   font-variant-numeric: tabular-nums;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-top-bar__queue-count strong {
+packages/theme-default test:   font-size: var(--am-font-size-md);
+packages/theme-default test:   font-weight: 750;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) :where(.tags, .composer, .custom-plugins) {
+packages/theme-default test:   min-block-size: 100%;
+packages/theme-default test:   padding: 0;
+packages/theme-default test:   background: transparent;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) :where(.catalog-drawer, .plugin-card, .track-card) {
+packages/theme-default test:   border-color: var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   box-shadow: var(--am-shadow-control);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) :where(.catalog-drawer, .plugin-card) {
+packages/theme-default test:   border-radius: var(--am-radius-lg);
+packages/theme-default test: }
+packages/theme-default test: @keyframes am-view-enter {
+packages/theme-default test:   from {
+packages/theme-default test:     opacity: 0;
+packages/theme-default test:     transform: translateY(5.6px);
+packages/theme-default test:   }
+packages/theme-default test:   to {
+packages/theme-default test:     opacity: 1;
+packages/theme-default test:     transform: translateY(0);
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-content (max-width: 768px) {
+packages/theme-default test:   :where(.am-theme-default) .product-view {
+packages/theme-default test:     padding: var(--am-space-3);
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-top-bar (max-width: 768px) {
+packages/theme-default test:   :where(.am-theme-default) .product-top-bar__actions .session__label:not(.session__account),
+packages/theme-default test:   :where(.am-theme-default) .product-top-bar__actions .session__button:last-child {
+packages/theme-default test:     display: none;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .product-top-bar__actions .session__account {
+packages/theme-default test:     min-inline-size: 44px;
+packages/theme-default test:     max-inline-size: 44px;
+packages/theme-default test:     justify-content: center;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .product-top-bar__actions .session__account > span,
+packages/theme-default test:   :where(.am-theme-default) .product-top-bar__actions .session__account > svg:last-child {
+packages/theme-default test:     display: none;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @media (prefers-reduced-motion: reduce) {
+packages/theme-default test:   :where(.am-theme-default) .product-view {
+packages/theme-default test:     animation: none;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .list .track {
+packages/theme-default test:   grid-template-rows: minmax(0, 1fr) auto;
+packages/theme-default test:   align-content: stretch;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .list .track__actions {
+packages/theme-default test:   align-self: end;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .list .track-card {
+packages/theme-default test:   border-radius: var(--am-radius-card);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .list .track-card-summary__cover {
+packages/theme-default test:   border-radius: var(--am-radius-sm);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .list .track__statistics,
+packages/theme-default test: :where(.am-theme-default) .list .track-card-summary__badge {
+packages/theme-default test:   border-radius: var(--am-radius-detail);
+packages/theme-default test: }
+packages/theme-default test: @supports (content-visibility: auto) {
+packages/theme-default test:   :where(.am-theme-default) .list .track-card {
+packages/theme-default test:     /* 歌曲网格有封面，不能复用普通列表行的 96px 占位；auto 保留实际渲染高度。 */
+packages/theme-default test:     contain-intrinsic-block-size: auto 320px;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .list .list__items .track__button,
+packages/theme-default test: :where(.am-theme-default) .list .list__items .track__inline-actions,
+packages/theme-default test: :where(.am-theme-default) .list__more {
+packages/theme-default test:   border-radius: var(--am-radius-control);
+packages/theme-default test: }
+packages/theme-default test: @media (max-width: 600px) {
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"1\"] .track-card {
+packages/theme-default test:     /* 手机横向摘要比桌面封面卡片矮，初次滚入前使用对应布局的高度估算。 */
+packages/theme-default test:     contain-intrinsic-block-size: auto 140px;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track {
+packages/theme-default test:     grid-template-rows: minmax(0, 1fr);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track-card-summary {
+packages/theme-default test:     grid-template-rows: auto minmax(0, 1fr);
+packages/theme-default test:     align-content: stretch;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track-card-summary__body {
+packages/theme-default test:     display: flex;
+packages/theme-default test:     flex-direction: column;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .list__items[data-mobile-columns=\"2\"] .track__meta-row {
+packages/theme-default test:     margin-block-start: auto;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management {
+packages/theme-default test:   height: 100%;
+packages/theme-default test:   overflow-x: hidden;
+packages/theme-default test:   overflow-y: auto;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__header {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: stretch;
+packages/theme-default test:   flex-direction: column;
+packages/theme-default test:   gap: 10px;
+packages/theme-default test:   padding: 9px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__header small {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__platforms,
+packages/theme-default test: :where(.am-theme-default) .tag-management__arrangement {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__arrangement > span {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__platforms button,
+packages/theme-default test: :where(.am-theme-default) .tag-management__arrangement button {
+packages/theme-default test:   min-height: 29px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 11px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__platforms button[aria-pressed=true],
+packages/theme-default test: :where(.am-theme-default) .tag-management__arrangement button[aria-pressed=true] {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 9%, var(--am-color-surface));
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__platforms .tag-management__selection-action {
+packages/theme-default test:   border-style: dashed;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-weight: 500;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__message {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 24px 12px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test:   text-align: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__message--error {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .tag-management__items,
+packages/theme-default test: :where(.am-theme-default) .tag-drawers {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer {
+packages/theme-default test:   height: 100%;
+packages/theme-default test:   overflow-x: hidden;
+packages/theme-default test:   overflow-y: auto;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__header,
+packages/theme-default test: :where(.am-theme-default) .composer__source {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 9px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__header {
+packages/theme-default test:   justify-content: space-between;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__input,
+packages/theme-default test: :where(.am-theme-default) .composer__number {
+packages/theme-default test:   min-height: 31px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__input,
+packages/theme-default test: :where(.am-theme-default) .composer__number {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__source > .composer__input {
+packages/theme-default test:   flex: 1 1 auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer button {
+packages/theme-default test:   min-height: 29px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 11px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__save {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   background: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-on-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__error {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 12px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test:   text-align: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__error {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__header span {
+packages/theme-default test:   display: block;
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__source label {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__number {
+packages/theme-default test:   display: block;
+packages/theme-default test:   width: 88px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__segments {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 0 10px 8px 36px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__segments li {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr) repeat(3, 29px);
+packages/theme-default test:   gap: 4px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   padding: 5px 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__segments span {
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__save {
+packages/theme-default test:   display: block;
+packages/theme-default test:   margin: 0 auto 12px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__project input,
+packages/theme-default test: :where(.am-theme-default) .composer__project select {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 32px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__final-actions button {
+packages/theme-default test:   min-height: 30px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 10px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__final-actions .composer__save {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   background: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-on-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__final-actions button:disabled {
+packages/theme-default test:   cursor: not-allowed;
+packages/theme-default test:   opacity: 0.5;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__workflow {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: repeat(4, minmax(0, 1fr));
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 9px 10px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 5%, var(--am-color-surface));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__workflow span {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 6px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__workflow b {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   width: 20px;
+packages/theme-default test:   height: 20px;
+packages/theme-default test:   flex: 0 0 auto;
+packages/theme-default test:   place-items: center;
+packages/theme-default test:   border-radius: 50%;
+packages/theme-default test:   background: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-on-accent);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__workspace {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   min-height: 500px;
+packages/theme-default test:   grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .material-browser,
+packages/theme-default test: :where(.am-theme-default) .composer__timeline-column {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .material-browser {
+packages/theme-default test:   border-right: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .material-browser__header {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-content: space-between;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   padding: 9px 10px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .material-browser__header strong,
+packages/theme-default test: :where(.am-theme-default) .material-browser__header small {
+packages/theme-default test:   display: block;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .material-browser__header strong {
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .material-browser__header small {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .material-browser__items {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   max-height: 470px;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   overflow: auto;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__project label {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 9px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__project input,
+packages/theme-default test: :where(.am-theme-default) .composer__project select {
+packages/theme-default test:   display: block;
+packages/theme-default test:   width: 100%;
+packages/theme-default test:   margin-top: 3px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__timeline-column {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex-direction: column;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__project {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(150px, 1fr) minmax(125px, auto);
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   align-items: end;
+packages/theme-default test:   padding: 9px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__project > span {
+packages/theme-default test:   grid-column: 1/-1;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__empty,
+packages/theme-default test: :where(.am-theme-default) .composer__export-status {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 18px 12px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   text-align: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__error,
+packages/theme-default test: :where(.am-theme-default) .composer__export-status {
+packages/theme-default test:   padding: 7px 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__export-status {
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__final-actions {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   justify-content: flex-end;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 9px;
+packages/theme-default test:   border-top: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .composer__final-actions .composer__save {
+packages/theme-default test:   display: inline-block;
+packages/theme-default test:   margin: 0;
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 760px) {
+packages/theme-default test:   :where(.am-theme-default) .composer__workspace,
+packages/theme-default test:   :where(.am-theme-default) .composer__workflow {
+packages/theme-default test:     grid-template-columns: 1fr;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .material-browser {
+packages/theme-default test:     border-right: 0;
+packages/theme-default test:     border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers {
+packages/theme-default test:   min-height: 100%;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__toolbar {
+packages/theme-default test:   position: sticky;
+packages/theme-default test:   z-index: 2;
+packages/theme-default test:   top: 0;
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(150px, 1fr) auto auto auto;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   margin-bottom: 8px;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 9px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__query,
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__track-query {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 30px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__select-all {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test:   min-height: 44px;
+packages/theme-default test:   padding-inline: var(--am-space-2);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__select-all input {
+packages/theme-default test:   inline-size: 20px;
+packages/theme-default test:   block-size: 20px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__select-all input {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   accent-color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__count {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__remove-selected {
+packages/theme-default test:   min-height: 30px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test:   font: 600 10px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__remove-selected:disabled {
+packages/theme-default test:   cursor: not-allowed;
+packages/theme-default test:   opacity: 0.5;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer {
+packages/theme-default test:   overflow: clip;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 10px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer + .catalog-drawer {
+packages/theme-default test:   margin-top: 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer--selected {
+packages/theme-default test:   border-color: color-mix(in srgb, var(--am-color-accent) 52%, var(--am-color-border));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer[data-status=invalid] {
+packages/theme-default test:   border-color: color-mix(in srgb, var(--am-color-danger) 42%, var(--am-color-border));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__header {
+packages/theme-default test:   position: sticky;
+packages/theme-default test:   z-index: 3;
+packages/theme-default test:   top: 0;
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: auto minmax(0, 1fr) auto auto;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   box-shadow: var(--am-shadow-control);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer:not(.catalog-drawer--selectable) .catalog-drawer__header {
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr) auto auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__select {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   width: 22px;
+packages/theme-default test:   height: 22px;
+packages/theme-default test:   place-items: center;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__toggle {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 0;
+packages/theme-default test:   border: 0;
+packages/theme-default test:   background: transparent;
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: inherit;
+packages/theme-default test:   text-align: left;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__chevron {
+packages/theme-default test:   flex: 0 0 auto;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__heading,
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__heading strong,
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__heading small {
+packages/theme-default test:   display: block;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__heading strong,
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__heading small {
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__heading strong {
+packages/theme-default test:   font-size: 12px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__heading small {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__status {
+packages/theme-default test:   padding: 2px 7px;
+packages/theme-default test:   border-radius: 999px;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer[data-status=invalid] .catalog-drawer__status,
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer[data-status=error] .catalog-drawer__status,
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer[data-status=missing] .catalog-drawer__status {
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-danger) 10%, var(--am-color-surface));
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer[data-status=restoring] .catalog-drawer__status {
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 10%, var(--am-color-surface));
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__actions {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   gap: 4px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__actions button,
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__rename button {
+packages/theme-default test:   min-height: 27px;
+packages/theme-default test:   padding: 0 7px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 10px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__actions .catalog-drawer__favorite {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__actions button:disabled {
+packages/theme-default test:   cursor: not-allowed;
+packages/theme-default test:   opacity: 0.55;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__rename {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test:   padding: 0 8px 8px 27px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__rename input {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 29px;
+packages/theme-default test:   flex: 1 1 auto;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__panel {
+packages/theme-default test:   border-top: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__message {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-danger) 5%, var(--am-color-surface));
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test:   font-size: var(--am-font-size-sm);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__message > button {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   inline-size: 100%;
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   min-block-size: 44px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test:   padding: var(--am-space-3) var(--am-space-4);
+packages/theme-default test:   border: 0;
+packages/theme-default test:   background: transparent;
+packages/theme-default test:   color: inherit;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test:   font: inherit;
+packages/theme-default test:   text-align: start;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__message > button span {
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   flex: 1 1 auto;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__message > button:hover {
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-danger) 6%, transparent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__message > button:focus-visible {
+packages/theme-default test:   outline: var(--am-focus-ring);
+packages/theme-default test:   outline-offset: calc(-1 * var(--am-focus-offset));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__message--disconnected {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test:   min-block-size: 44px;
+packages/theme-default test:   padding: var(--am-space-3) var(--am-space-4);
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-drawer__message--disconnected > span {
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   overflow-wrap: anywhere;
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 760px) {
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawer__header {
+packages/theme-default test:     grid-template-columns: auto minmax(0, 1fr) auto;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawer__actions {
+packages/theme-default test:     grid-column: 2/-1;
+packages/theme-default test:     justify-content: flex-end;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawers__toolbar {
+packages/theme-default test:     grid-template-columns: 1fr 1fr;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawers__count {
+packages/theme-default test:     white-space: normal;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 480px) {
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawers {
+packages/theme-default test:     padding-right: 8px;
+packages/theme-default test:     padding-left: 8px;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawers__toolbar {
+packages/theme-default test:     grid-template-columns: minmax(0, 1fr);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawers__toolbar > * {
+packages/theme-default test:     grid-column: 1;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawer__header {
+packages/theme-default test:     grid-template-columns: auto minmax(0, 1fr);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawer__status,
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawer__actions {
+packages/theme-default test:     grid-column: 2;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawer__actions {
+packages/theme-default test:     flex-wrap: wrap;
+packages/theme-default test:     justify-content: flex-start;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-player-stage {
+packages/theme-default test:   position: relative;
+packages/theme-default test:   padding-block-start: 0px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   /* 真实空间必须参与壳层 Grid：与操作条滑入同步让出滚动高度，播放器始终贴住底边。 */
+packages/theme-default test:   transition: padding-block-start var(--am-motion-slow) var(--am-ease-emphasized);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-player-stage--operator-open {
+packages/theme-default test:   padding-block-start: max(0px, 92px + var(--am-space-2) * 3 - var(--am-player-block-size, 0px) - var(--am-shell-mobile-navigation-offset));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-operator-overlay-target {
+packages/theme-default test:   position: absolute;
+packages/theme-default test:   z-index: var(--am-z-operator);
+packages/theme-default test:   inset: 0;
+packages/theme-default test:   pointer-events: none;
+packages/theme-default test: }
+packages/theme-default test: @media (max-width: 768px) {
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-overlay-target {
+packages/theme-default test:     inset-block-end: auto;
+packages/theme-default test:     block-size: calc(100% + var(--am-shell-mobile-navigation-offset));
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-modal-overlay-target {
+packages/theme-default test:   position: absolute;
+packages/theme-default test:   z-index: var(--am-z-dialog);
+packages/theme-default test:   inset: 0;
+packages/theme-default test:   pointer-events: none;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page {
+packages/theme-default test:   --am-catalog-page-padding: clamp(var(--am-space-4), 2.2cqi, var(--am-space-7));
+packages/theme-default test:   inline-size: 100%;
+packages/theme-default test:   min-block-size: 100%;
+packages/theme-default test:   padding: var(--am-catalog-page-padding);
+packages/theme-default test:   /* 壳层会收缩内容视口；尾部呼吸空间让最后一项及其操作始终能够完整滚入。 */
+packages/theme-default test:   padding-block-end: max(var(--am-catalog-page-padding), var(--am-space-6));
+packages/theme-default test:   background: var(--am-color-background);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page--tracks {
+packages/theme-default test:   padding-block-start: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page--lists {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex: 1 0 auto;
+packages/theme-default test:   flex-direction: column;
+packages/theme-default test:   min-block-size: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page--lists > .catalog-drawers {
+packages/theme-default test:   /* 空态可沿弹性链铺满；页面背景与四周留白由外层 catalog-page 保留。 */
+packages/theme-default test:   inline-size: 100%;
+packages/theme-default test:   min-block-size: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__sticky-header {
+packages/theme-default test:   container: am-catalog-heading/inline-size;
+packages/theme-default test:   position: sticky;
+packages/theme-default test:   z-index: var(--am-z-sticky);
+packages/theme-default test:   inset-block-start: 0;
+packages/theme-default test:   margin-inline: calc(-1 * var(--am-catalog-page-padding));
+packages/theme-default test:   margin-block-end: var(--am-space-4);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   box-shadow: var(--am-shadow-control);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading {
+packages/theme-default test:   /* 标题与统计始终独占上排，超宽工作区也不把文本挪到返回按钮旁。 */
+packages/theme-default test:   position: relative;
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-areas: \"context context\" \"back actions\";
+packages/theme-default test:   grid-template-columns: auto minmax(0, 1fr);
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-2) var(--am-space-4);
+packages/theme-default test:   padding: var(--am-space-3) var(--am-catalog-page-padding);
+packages/theme-default test:   border-block-end: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: var(--am-font-size-sm);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading--collapsed {
+packages/theme-default test:   grid-template-areas: \"back actions\";
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading[data-mobile-layout=true] {
+packages/theme-default test:   /* 非控件后代继承抓取光标；按下时保留原生选择，纵向移动后再接管拖动。 */
+packages/theme-default test:   touch-action: pan-x;
+packages/theme-default test:   cursor: grab;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading[data-mobile-layout=true]:active {
+packages/theme-default test:   cursor: grabbing;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading button {
+packages/theme-default test:   display: inline-flex;
+packages/theme-default test:   min-block-size: 44px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-content: center;
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test:   padding-inline: var(--am-space-3);
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: var(--am-radius-control);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test:   font: 650 var(--am-font-size-xs) var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading button:hover:not(:disabled) {
+packages/theme-default test:   border-color: var(--am-color-border-strong);
+packages/theme-default test:   background: var(--am-color-surface-hover);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading button:focus-visible {
+packages/theme-default test:   outline: var(--am-focus-ring);
+packages/theme-default test:   outline-offset: var(--am-focus-offset);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading button:disabled {
+packages/theme-default test:   cursor: not-allowed;
+packages/theme-default test:   opacity: 0.5;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__back {
+packages/theme-default test:   grid-area: back;
+packages/theme-default test:   justify-self: start;
+packages/theme-default test:   align-self: center;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__context {
+packages/theme-default test:   grid-area: context;
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-items: stretch;
+packages/theme-default test:   gap: var(--am-space-3);
+packages/theme-default test:   text-align: start;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__context > * {
+packages/theme-default test:   max-inline-size: 100%;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__context-title {
+packages/theme-default test:   grid-column: 1;
+packages/theme-default test:   justify-self: start;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__heading .catalog-page__context-platform {
+packages/theme-default test:   display: block;
+packages/theme-default test:   inline-size: 100%;
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   min-block-size: 44px;
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   border-color: transparent;
+packages/theme-default test:   background: transparent;
+packages/theme-default test:   font-size: var(--am-font-size-md);
+packages/theme-default test:   font-weight: 700;
+packages/theme-default test:   text-align: start;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__context-summary {
+packages/theme-default test:   grid-column: 2;
+packages/theme-default test:   justify-self: end;
+packages/theme-default test:   font-size: var(--am-font-size-xs);
+packages/theme-default test:   text-align: end;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__actions {
+packages/theme-default test:   grid-area: actions;
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   max-inline-size: 100%;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   align-self: start;
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test:   justify-self: end;
+packages/theme-default test:   justify-content: flex-end;
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page__actions button:first-child:not(.catalog-page__display) {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page--tracks .catalog-drawer {
+packages/theme-default test:   /* 与待听共用内嵌表面和歌曲边距，网格本身不再叠加第二层留白。 */
+packages/theme-default test:   padding: var(--am-space-4) var(--am-space-3);
+packages/theme-default test:   border: 0;
+packages/theme-default test:   border-radius: 0;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test:   box-shadow: none;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page--tracks .catalog-drawer__panel {
+packages/theme-default test:   border: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page--tracks .catalog-drawer__panel > .list {
+packages/theme-default test:   padding: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page-forward-enter-active,
+packages/theme-default test: :where(.am-theme-default) .catalog-page-forward-leave-active,
+packages/theme-default test: :where(.am-theme-default) .catalog-page-back-enter-active,
+packages/theme-default test: :where(.am-theme-default) .catalog-page-back-leave-active {
+packages/theme-default test:   transition: transform var(--am-motion-slow) var(--am-ease-emphasized), opacity var(--am-motion-slow) var(--am-ease-standard);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page-forward-leave-active,
+packages/theme-default test: :where(.am-theme-default) .catalog-page-back-leave-active {
+packages/theme-default test:   position: absolute;
+packages/theme-default test:   inset-block-start: 0;
+packages/theme-default test:   inset-inline-start: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page-forward-enter-from,
+packages/theme-default test: :where(.am-theme-default) .catalog-page-back-leave-to {
+packages/theme-default test:   opacity: 0;
+packages/theme-default test:   transform: translateX(100%);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-page-forward-leave-to,
+packages/theme-default test: :where(.am-theme-default) .catalog-page-back-enter-from {
+packages/theme-default test:   opacity: 0;
+packages/theme-default test:   transform: translateX(-100%);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-operator-launcher {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-block-size: 56px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-content: space-between;
+packages/theme-default test:   gap: var(--am-space-3);
+packages/theme-default test:   padding: var(--am-space-2) var(--am-space-4);
+packages/theme-default test:   border-block-start: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: var(--am-font-size-xs);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-operator-launcher__actions {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test:   margin-inline-start: auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-operator-launcher__count,
+packages/theme-default test: :where(.am-theme-default) .catalog-drawers__count {
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: var(--am-font-size-xs);
+packages/theme-default test:   font-weight: 650;
+packages/theme-default test:   line-height: 1.5;
+packages/theme-default test:   font-variant-numeric: tabular-nums;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-operator-launcher button {
+packages/theme-default test:   display: inline-flex;
+packages/theme-default test:   min-block-size: 36px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-content: center;
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test:   padding-inline: var(--am-space-4);
+packages/theme-default test:   border: 0;
+packages/theme-default test:   border-radius: var(--am-radius-control);
+packages/theme-default test:   background: var(--am-color-primary);
+packages/theme-default test:   color: var(--am-color-on-primary);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test:   font: inherit;
+packages/theme-default test:   font-weight: 700;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-operator-launcher button.catalog-operator-launcher__filter {
+packages/theme-default test:   border: 1px solid var(--am-color-border-strong);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-operator-launcher__filter b {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   min-inline-size: 20px;
+packages/theme-default test:   block-size: 20px;
+packages/theme-default test:   place-items: center;
+packages/theme-default test:   padding-inline: 4px;
+packages/theme-default test:   border-radius: var(--am-radius-detail);
+packages/theme-default test:   background: var(--am-color-primary);
+packages/theme-default test:   color: var(--am-color-on-primary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .catalog-operator-launcher button.catalog-operator-launcher__top {
+packages/theme-default test:   display: none;
+packages/theme-default test: }
+packages/theme-default test: @container am-catalog-heading (max-width: 600px) {
+packages/theme-default test:   :where(.am-theme-default) .catalog-page__heading {
+packages/theme-default test:     gap: var(--am-space-2);
+packages/theme-default test:     padding-block: var(--am-space-2);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-page__context {
+packages/theme-default test:     grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-page__context-title {
+packages/theme-default test:     text-align: start;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-page__context-summary {
+packages/theme-default test:     line-height: 1.35;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-page__actions {
+packages/theme-default test:     gap: var(--am-space-2);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-page__actions button {
+packages/theme-default test:     min-inline-size: 0;
+packages/theme-default test:     min-block-size: 44px;
+packages/theme-default test:     padding-inline: var(--am-space-2);
+packages/theme-default test:     font-size: var(--am-font-size-xs);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-page__back {
+packages/theme-default test:     inline-size: 44px;
+packages/theme-default test:     min-block-size: 44px;
+packages/theme-default test:     padding: 0;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-page__back-label {
+packages/theme-default test:     display: none;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-player (max-width: 600px) {
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-launcher {
+packages/theme-default test:     display: grid;
+packages/theme-default test:     min-block-size: 64px;
+packages/theme-default test:     grid-template-columns: minmax(0, 1fr) auto 36px;
+packages/theme-default test:     align-content: center;
+packages/theme-default test:     gap: var(--am-space-2);
+packages/theme-default test:     padding: var(--am-space-3);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-launcher__actions {
+packages/theme-default test:     gap: var(--am-space-1);
+packages/theme-default test:     margin-inline-start: 0;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-launcher__count,
+packages/theme-default test:   :where(.am-theme-default) .catalog-drawers__count {
+packages/theme-default test:     overflow: hidden;
+packages/theme-default test:     font-size: 10px;
+packages/theme-default test:     font-weight: 650;
+packages/theme-default test:     text-overflow: ellipsis;
+packages/theme-default test:     white-space: nowrap;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-launcher button {
+packages/theme-default test:     inline-size: auto;
+packages/theme-default test:     min-block-size: 36px;
+packages/theme-default test:     border-radius: var(--am-radius-control);
+packages/theme-default test:     padding-inline: var(--am-space-3);
+packages/theme-default test:     font-size: var(--am-font-size-xs);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-launcher__actions button {
+packages/theme-default test:     padding-inline: var(--am-space-2);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-launcher button.catalog-operator-launcher__top {
+packages/theme-default test:     display: inline-flex;
+packages/theme-default test:     inline-size: 36px;
+packages/theme-default test:     padding: 0;
+packages/theme-default test:     border: 1px solid var(--am-color-border);
+packages/theme-default test:     background: var(--am-color-surface);
+packages/theme-default test:     color: var(--am-color-text);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-launcher button:focus-visible {
+packages/theme-default test:     outline: var(--am-focus-ring);
+packages/theme-default test:     outline-offset: var(--am-focus-offset);
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @media (max-width: 576px) {
+packages/theme-default test:   :where(.am-theme-default) .catalog-operator-launcher {
+packages/theme-default test:     /* 44px 进度热区保持完整；36px 按钮在上方约 48px 区域居中，保留约 6px 防误触间距。 */
+packages/theme-default test:     min-block-size: calc(48px + var(--am-size-player-edge-seek, 44px) / 2);
+packages/theme-default test:     padding-block-start: var(--am-space-1);
+packages/theme-default test:     padding-block-end: calc(var(--am-space-1) + var(--am-size-player-edge-seek, 44px) / 2);
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @media (prefers-reduced-motion: reduce) {
+packages/theme-default test:   :where(.am-theme-default) .catalog-player-stage,
+packages/theme-default test:   :where(.am-theme-default) .catalog-page-forward-enter-active,
+packages/theme-default test:   :where(.am-theme-default) .catalog-page-forward-leave-active,
+packages/theme-default test:   :where(.am-theme-default) .catalog-page-back-enter-active,
+packages/theme-default test:   :where(.am-theme-default) .catalog-page-back-leave-active {
+packages/theme-default test:     transition-duration: 1ms;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .workbench__content > .queue {
+packages/theme-default test:   height: 100%;
+packages/theme-default test:   border-left: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-height: 0;
+packages/theme-default test:   flex-direction: column;
+packages/theme-default test:   border-left: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__header {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-content: space-between;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   padding: 10px;
+packages/theme-default test:   font-size: 12px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__select,
+packages/theme-default test: :where(.am-theme-default) .queue__search {
+packages/theme-default test:   min-height: 30px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__search {
+packages/theme-default test:   margin: 0 9px 8px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__button.queue__remove-selected {
+packages/theme-default test:   margin-left: auto;
+packages/theme-default test:   border-color: var(--am-color-danger);
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__items {
+packages/theme-default test:   min-height: 0;
+packages/theme-default test:   flex: 1 1 auto;
+packages/theme-default test:   overflow: auto;
+packages/theme-default test:   padding: 0 7px 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__item {
+packages/theme-default test:   cursor: grab;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__item + .queue__item {
+packages/theme-default test:   margin-top: 6px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__actions {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__action {
+packages/theme-default test:   min-height: 27px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 11px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__action--primary,
+packages/theme-default test: :where(.am-theme-default) .favorite-track__actions .favorite-track__action--primary {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   background: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-on-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track__source-link {
+packages/theme-default test:   grid-column: 1/-1;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__empty {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 24px 8px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test:   text-align: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .queue__empty--error {
+packages/theme-default test:   padding: 0 10px 8px;
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlists,
+packages/theme-default test: :where(.am-theme-default) .favorites,
+packages/theme-default test: :where(.am-theme-default) .custom-tracks,
+packages/theme-default test: :where(.am-theme-default) .history {
+packages/theme-default test:   height: 100%;
+packages/theme-default test:   overflow-x: hidden;
+packages/theme-default test:   overflow-y: auto;
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__header {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: stretch;
+packages/theme-default test:   flex-direction: column;
+packages/theme-default test:   gap: 10px;
+packages/theme-default test:   padding: 9px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__header small {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__platforms,
+packages/theme-default test: :where(.am-theme-default) .favorites__arrangement,
+packages/theme-default test: :where(.am-theme-default) .favorites__playback {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__playback > span {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__playback-select {
+packages/theme-default test:   min-height: 30px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__platforms button,
+packages/theme-default test: :where(.am-theme-default) .favorites__arrangement button,
+packages/theme-default test: :where(.am-theme-default) .favorite-drawer__toggle,
+packages/theme-default test: :where(.am-theme-default) .favorite-track__actions button,
+packages/theme-default test: :where(.am-theme-default) .favorite-track__tag-form button {
+packages/theme-default test:   min-height: 29px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 11px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__platforms button[aria-pressed=true],
+packages/theme-default test: :where(.am-theme-default) .favorites__arrangement button[aria-pressed=true] {
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 9%, var(--am-color-surface));
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__platforms .favorites__selection-action {
+packages/theme-default test:   border-style: dashed;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-weight: 500;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__arrangement > span {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites-filter {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: repeat(4, minmax(105px, 1fr));
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 9px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites-filter__input,
+packages/theme-default test: :where(.am-theme-default) .favorites-filter__date input,
+packages/theme-default test: :where(.am-theme-default) .favorite-track__tag-form input {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 31px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites-filter__date {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites-filter__date input {
+packages/theme-default test:   width: auto;
+packages/theme-default test:   max-width: 100%;
+packages/theme-default test:   flex: 1 1 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__message {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 24px 12px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test:   text-align: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__message--error {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__items {
+packages/theme-default test:   padding: 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 6px;
+packages/theme-default test:   padding: 8px 9px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites__playlist-toolbar {
+packages/theme-default test:   position: sticky;
+packages/theme-default test:   z-index: 4;
+packages/theme-default test:   top: 0;
+packages/theme-default test:   box-shadow: var(--am-shadow-control);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__select-all {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-height: 44px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__select-all input,
+packages/theme-default test: :where(.am-theme-default) .favorite-track__select input {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   accent-color: var(--am-color-accent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__select-all input {
+packages/theme-default test:   inline-size: 20px;
+packages/theme-default test:   block-size: 20px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__count {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__actions {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   flex: 1 1 260px;
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-content: flex-end;
+packages/theme-default test:   gap: 6px;
+packages/theme-default test:   margin-left: auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__select,
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__button {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 30px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 10px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__select {
+packages/theme-default test:   max-width: 180px;
+packages/theme-default test:   padding: 0 7px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__button {
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border-color: var(--am-color-accent);
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__button--danger {
+packages/theme-default test:   border-color: var(--am-color-danger);
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__button:disabled,
+packages/theme-default test: :where(.am-theme-default) .playlist-add-toolbar__select:disabled {
+packages/theme-default test:   cursor: not-allowed;
+packages/theme-default test:   opacity: 0.55;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-drawers {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-drawer {
+packages/theme-default test:   overflow: clip;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 9px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-drawer__toggle {
+packages/theme-default test:   position: sticky;
+packages/theme-default test:   z-index: 3;
+packages/theme-default test:   top: 0;
+packages/theme-default test:   display: grid;
+packages/theme-default test:   width: 100%;
+packages/theme-default test:   grid-template-columns: auto minmax(0, 1fr) auto;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   border: 0;
+packages/theme-default test:   border-radius: 0;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   box-shadow: var(--am-shadow-control);
+packages/theme-default test:   text-align: left;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorites > .favorite-drawers .favorite-drawer__toggle {
+packages/theme-default test:   top: var(--am-favorites-playlist-toolbar-height, 47px);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-drawer__toggle small {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   font-weight: 400;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-drawer__panel {
+packages/theme-default test:   padding: 8px;
+packages/theme-default test:   border-top: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(240px, 1fr) auto;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track + .favorite-track {
+packages/theme-default test:   margin-top: 6px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track--selectable {
+packages/theme-default test:   grid-template-columns: auto minmax(240px, 1fr) auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track--selected {
+packages/theme-default test:   border-color: color-mix(in srgb, var(--am-color-accent) 38%, transparent);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track__select {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   width: 22px;
+packages/theme-default test:   min-height: 42px;
+packages/theme-default test:   place-items: center;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track--active {
+packages/theme-default test:   border-color: color-mix(in srgb, var(--am-color-accent) 45%, transparent);
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 8%, var(--am-color-surface));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track__tags,
+packages/theme-default test: :where(.am-theme-default) .favorite-track__actions {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   gap: 4px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track__tags {
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test:   margin-top: 4px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track__tag {
+packages/theme-default test:   padding: 1px 5px;
+packages/theme-default test:   border: 0;
+packages/theme-default test:   border-radius: 999px;
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 12%, var(--am-color-surface));
+packages/theme-default test:   color: var(--am-color-accent);
+packages/theme-default test:   font: 10px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track__actions {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: repeat(2, auto);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track__actions .favorite-track__unfavorite {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .favorite-track__actions .favorite-track__remove-playlist {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__toolbar {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(240px, 1fr) auto auto;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   padding: 10px;
+packages/theme-default test:   border-bottom: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__toolbar input,
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__toolbar select {
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   min-height: 32px;
+packages/theme-default test:   padding: 0 9px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 7px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 11px var(--am-font-family);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__toolbar > span,
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__toolbar label {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__toolbar label {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: 6px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__message {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 16px;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test:   text-align: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__message--error {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-tracks__items {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   padding: 9px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer {
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 10px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__header {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr) auto;
+packages/theme-default test:   align-items: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__toggle {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   min-width: 0;
+packages/theme-default test:   grid-template-columns: auto minmax(0, 1fr);
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   padding: 7px 10px;
+packages/theme-default test:   border: 0;
+packages/theme-default test:   background: transparent;
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   text-align: left;
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__actions {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test:   gap: 5px;
+packages/theme-default test:   justify-content: flex-end;
+packages/theme-default test:   padding: 8px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__actions button,
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__source-heading button {
+packages/theme-default test:   min-height: 29px;
+packages/theme-default test:   padding: 0 8px;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: 6px;
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: 600 10px var(--am-font-family);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__actions button:disabled {
+packages/theme-default test:   cursor: wait;
+packages/theme-default test:   opacity: 0.55;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__actions .custom-track-drawer__delete {
+packages/theme-default test:   color: var(--am-color-danger);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__panel {
+packages/theme-default test:   border-top: 1px solid var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface-subtle);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__source-heading {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   justify-content: space-between;
+packages/theme-default test:   gap: 8px;
+packages/theme-default test:   padding: 9px 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__source-heading strong,
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__source-heading small {
+packages/theme-default test:   display: block;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__source-heading strong {
+packages/theme-default test:   font-size: 11px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__source-heading small,
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__ranges {
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: 10px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__sources {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   gap: 7px;
+packages/theme-default test:   padding: 0 9px 9px;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .custom-track-drawer__ranges {
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 4px 8px;
+packages/theme-default test:   border-radius: 6px 6px 0 0;
+packages/theme-default test:   background: color-mix(in srgb, var(--am-color-accent) 7%, var(--am-color-surface));
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .history__item {
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr) auto;
+packages/theme-default test:   cursor: default;
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 900px) {
+packages/theme-default test:   :where(.am-theme-default) .favorites-filter {
+packages/theme-default test:     grid-template-columns: repeat(2, minmax(0, 1fr));
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .playlist-add-toolbar {
+packages/theme-default test:     flex-wrap: wrap;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 760px) {
+packages/theme-default test:   :where(.am-theme-default) .favorite-track {
+packages/theme-default test:     grid-template-columns: 1fr;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .queue__actions {
+packages/theme-default test:     grid-column: 2;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .custom-tracks__toolbar,
+packages/theme-default test:   :where(.am-theme-default) .custom-track-drawer__header {
+packages/theme-default test:     grid-template-columns: 1fr;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .custom-tracks__toolbar label {
+packages/theme-default test:     justify-content: space-between;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .custom-track-drawer__actions {
+packages/theme-default test:     border-top: 1px solid var(--am-color-border);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .favorite-track--selectable {
+packages/theme-default test:     grid-template-columns: auto minmax(0, 1fr);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .favorite-track--selectable .favorite-track__actions {
+packages/theme-default test:     grid-column: 2;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .favorites__header {
+packages/theme-default test:     align-items: flex-start;
+packages/theme-default test:     flex-direction: column;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .favorites-filter {
+packages/theme-default test:     grid-template-columns: 1fr 1fr;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .playlist-add-toolbar {
+packages/theme-default test:     flex-wrap: wrap;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .playlist-add-toolbar__select {
+packages/theme-default test:     max-width: none;
+packages/theme-default test:     flex: 1 1 140px;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: @container am-workbench (max-width: 480px) {
+packages/theme-default test:   :where(.am-theme-default) .favorites-filter {
+packages/theme-default test:     grid-template-columns: minmax(0, 1fr);
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .favorites-filter > * {
+packages/theme-default test:     grid-column: 1;
+packages/theme-default test:   }
+packages/theme-default test:   :where(.am-theme-default) .favorite-track--selectable .favorite-track__actions {
+packages/theme-default test:     grid-template-columns: repeat(2, minmax(0, 1fr));
+packages/theme-default test:     justify-content: stretch;
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .classic-library {
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   padding: var(--am-space-4);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .classic-library fieldset {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   gap: var(--am-space-3);
+packages/theme-default test:   margin: 0;
+packages/theme-default test:   padding: 0;
+packages/theme-default test:   border: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .classic-library__toolbar,
+packages/theme-default test: :where(.am-theme-default) .classic-library__order {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex-wrap: wrap;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .classic-library button,
+packages/theme-default test: :where(.am-theme-default) .classic-library input,
+packages/theme-default test: :where(.am-theme-default) .classic-library select {
+packages/theme-default test:   min-block-size: 40px;
+packages/theme-default test:   max-inline-size: 100%;
+packages/theme-default test:   border: 1px solid var(--am-color-border);
+packages/theme-default test:   border-radius: var(--am-radius-control);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test:   font: inherit;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .classic-library input[type=checkbox] {
+packages/theme-default test:   min-block-size: auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .classic-library button {
+packages/theme-default test:   padding-inline: var(--am-space-3);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .classic-library button:disabled {
+packages/theme-default test:   cursor: default;
+packages/theme-default test:   opacity: 0.55;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-view[data-active-view=queue],
+packages/theme-default test: :where(.am-theme-default) .product-view[data-active-view=favorites],
+packages/theme-default test: :where(.am-theme-default) .product-view[data-active-view=downloads] {
+packages/theme-default test:   display: flex;
+packages/theme-default test:   flex-direction: column;
+packages/theme-default test:   padding: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) :where(.queue, .favorites, .playlists, .custom-tracks) {
+packages/theme-default test:   min-block-size: 100%;
+packages/theme-default test:   padding: 0;
+packages/theme-default test:   background: transparent;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) :where(.favorite-drawer, .playlist-drawer, .custom-track-drawer) {
+packages/theme-default test:   border-color: var(--am-color-border);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   box-shadow: var(--am-shadow-control);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) :where(.favorite-drawer, .playlist-drawer, .custom-track-drawer) {
+packages/theme-default test:   border-radius: var(--am-radius-lg);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) :where(.queue__header, .favorites__header, .playlists__toolbar, .custom-tracks__toolbar) {
+packages/theme-default test:   border-color: var(--am-color-border);
+packages/theme-default test:   border-radius: var(--am-radius-lg);
+packages/theme-default test:   background: var(--am-color-surface);
+packages/theme-default test:   box-shadow: var(--am-shadow-control);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default).product-workbench {
+packages/theme-default test:   --am-workbench-inline-inset: 0px;
+packages/theme-default test:   position: relative;
+packages/theme-default test:   inline-size: 100%;
+packages/theme-default test:   block-size: 100%;
+packages/theme-default test:   min-block-size: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default).product-workbench--overlay {
+packages/theme-default test:   position: fixed;
+packages/theme-default test:   inset: 0;
+packages/theme-default test:   pointer-events: none;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .music-app-shell,
+packages/theme-default test: :where(.am-theme-default) .product-reopen {
+packages/theme-default test:   pointer-events: auto;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-reopen {
+packages/theme-default test:   position: fixed;
+packages/theme-default test:   inset-block-start: 50%;
+packages/theme-default test:   inset-inline-end: var(--am-space-2);
+packages/theme-default test:   display: grid;
+packages/theme-default test:   inline-size: 48px;
+packages/theme-default test:   block-size: 48px;
+packages/theme-default test:   place-items: center;
+packages/theme-default test:   padding: 0;
+packages/theme-default test:   border: 1px solid var(--am-color-primary);
+packages/theme-default test:   border-radius: var(--am-radius-card);
+packages/theme-default test:   background: var(--am-color-primary);
+packages/theme-default test:   box-shadow: 0 10px 30px var(--am-color-primary-shadow);
+packages/theme-default test:   color: var(--am-color-on-primary);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test:   transform: translateY(-50%);
+packages/theme-default test: }
+packages/theme-default test: @supports (border-color: color-mix(in srgb, white 50%, transparent)) {
+packages/theme-default test:   :where(.am-theme-default) .product-reopen {
+packages/theme-default test:     border-color: color-mix(in srgb, var(--am-color-primary) 78%, white);
+packages/theme-default test:   }
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: minmax(0, 1fr);
+packages/theme-default test:   grid-template-rows: auto minmax(0, 1fr) auto;
+packages/theme-default test:   block-size: 100%;
+packages/theme-default test:   min-block-size: 0;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__brand {
+packages/theme-default test:   /* 固定图标列和单行文字，收起时不改变品牌行高度或重新居中图标。 */
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: 44px minmax(0, 1fr);
+packages/theme-default test:   min-block-size: var(--am-size-top-bar);
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-3);
+packages/theme-default test:   padding: var(--am-space-3);
+packages/theme-default test:   border-block-end: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__mark {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   inline-size: 44px;
+packages/theme-default test:   block-size: 44px;
+packages/theme-default test:   place-items: center;
+packages/theme-default test:   border-radius: var(--am-radius-card);
+packages/theme-default test:   background: var(--am-color-brand);
+packages/theme-default test:   box-shadow: 0 8px 22px var(--am-color-primary-shadow);
+packages/theme-default test:   color: var(--am-color-on-brand);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__brand-copy {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__brand-copy strong {
+packages/theme-default test:   font-size: var(--am-font-size-md);
+packages/theme-default test:   letter-spacing: -0.02em;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__brand-copy small {
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   font-size: var(--am-font-size-xs);
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar > .navigation-rail {
+packages/theme-default test:   min-block-size: 0;
+packages/theme-default test:   overflow-x: hidden;
+packages/theme-default test:   overflow-y: auto;
+packages/theme-default test:   overscroll-behavior: contain;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__footer {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   gap: var(--am-space-1);
+packages/theme-default test:   padding: var(--am-space-2);
+packages/theme-default test:   border-block-start: 1px solid var(--am-color-border);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__footer button {
+packages/theme-default test:   display: grid;
+packages/theme-default test:   grid-template-columns: 40px minmax(0, 1fr);
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   min-block-size: 44px;
+packages/theme-default test:   align-items: center;
+packages/theme-default test:   gap: var(--am-space-2);
+packages/theme-default test:   padding: 0 var(--am-space-3) 0 var(--am-space-2);
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   border: 0;
+packages/theme-default test:   border-radius: var(--am-radius-control);
+packages/theme-default test:   background: transparent;
+packages/theme-default test:   color: var(--am-color-text-secondary);
+packages/theme-default test:   cursor: pointer;
+packages/theme-default test:   text-align: start;
+packages/theme-default test:   transition: background-color var(--am-motion-fast) var(--am-ease-standard), color var(--am-motion-fast) var(--am-ease-standard), transform var(--am-motion-fast) var(--am-ease-standard);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__footer button > :first-child {
+packages/theme-default test:   justify-self: center;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__footer button:hover {
+packages/theme-default test:   background: var(--am-color-surface-hover);
+packages/theme-default test:   color: var(--am-color-text);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__footer button span {
+packages/theme-default test:   min-inline-size: 0;
+packages/theme-default test:   overflow: hidden;
+packages/theme-default test:   text-overflow: ellipsis;
+packages/theme-default test:   white-space: nowrap;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__brand-copy,
+packages/theme-default test: :where(.am-theme-default) .product-sidebar__footer button span {
+packages/theme-default test:   transition: opacity var(--am-motion-fast) var(--am-ease-standard), visibility 0s;
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .music-app-shell--sidebar-collapsed .product-sidebar__brand-copy,
+packages/theme-default test: :where(.am-theme-default) .music-app-shell--sidebar-collapsed .product-sidebar__footer button span {
+packages/theme-default test:   opacity: 0;
+packages/theme-default test:   visibility: hidden;
+packages/theme-default test:   transition-delay: 0s, var(--am-motion-fast);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .am-launcher-enter-active,
+packages/theme-default test: :where(.am-theme-default) .am-launcher-leave-active {
+packages/theme-default test:   transition: opacity var(--am-motion-normal) var(--am-ease-standard), transform var(--am-motion-slow) var(--am-ease-emphasized);
+packages/theme-default test: }
+packages/theme-default test: :where(.am-theme-default) .am-launcher-enter-from,
+packages/theme-default test: :where(.am-theme-default) .am-launcher-leave-to {
+packages/theme-default test:   opacity: 0;
+packages/theme-default test:   transform: translateX(16px) scale(0.98);
+packages/theme-default test: }
+packages/theme-default test: @media (prefers-reduced-motion: reduce) {
+packages/theme-default test:   :where(.am-theme-default) .product-sidebar__brand-copy,
+packages/theme-default test:   :where(.am-theme-default) .product-sidebar__footer button span {
+packages/theme-default test:     transition: none;
+packages/theme-default test:   }
+packages/theme-default test: }"
+packages/theme-default test:  ❯ test/metadata.test.ts:48:21
+packages/theme-default test:      46|     expect(css).toContain(':where(.am-theme-default).product-workbench…
+packages/theme-default test:      47|     expect(css).toContain('prefers-reduced-motion: reduce')
+packages/theme-default test:      48|     expect(css).not.toMatch(/--am-color-[\w-]+:|\.session|\.settings|\…
+packages/theme-default test:        |                     ^
+packages/theme-default test:      49|   })
+packages/theme-default test:      50| })
+packages/theme-default test: ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+packages/theme-default test:  Test Files  2 failed | 48 passed (50)
+packages/theme-default test:       Tests  1 failed | 343 passed (344)
+packages/theme-default test:    Start at  11:25:17
+packages/theme-default test:    Duration  7.50s (transform 19.81s, setup 0ms, import 45.68s, tests 8.14s, environment 20ms)
+packages/theme-default test: Failed
+<project-root>\packages\theme-default:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/theme-default@0.0.0 test: `vitest run`
+Exit status 1

@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-evidence",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R3",
+  "date": "2026-10-27",
+  "timezone": "Asia/Shanghai",
+  "status": "passed-for-recorded-production-artifacts-and-cases",
+  "overallT13Status": "in-progress",
+  "scope": "Installed production Tampermonkey Bilibili signed-in/private-folder reads, Douyin/NetEase auth/bridge/errors/cancellation/playback and source-host/capability combinations. Case/artifact boundaries remain explicit; this batch does not claim a full account/entitlement/device Cartesian matrix.",
+  "workspace": {
+    "preservedUnrelatedChanges": true,
+    "productionFilesChangedThisBatch": [
+      "apps/userscript/vite.config.ts",
+      "packages/plugin-source-bilibili/src/bilibili-plugin.ts",
+      "packages/plugin-source-netease/src/types.ts"
+    ],
+    "testsChanged": [
+      "packages/plugin-source-bilibili/test/session.test.ts",
+      "packages/plugin-source-netease/test/netease-plugin.test.ts"
+    ],
+    "commitOrPush": false
+  },
+  "artifacts": {
+    "inherited": {
+      "sha256": "0886a79eb011945df2d343226b92aa875750a085496fa2defe884ce857778f21",
+      "bytes": 5021753,
+      "managerSourceVerified": true,
+      "scope": "Initial static-host Bilibili/private and NetEase both-theme playback; Douyin media permission failure."
+    },
+    "repairedIntermediate": {
+      "sha256": "2cd841733a348a0baf589d11a87b33f260c8522959af87a4233f9b571e5ee080",
+      "bytes": 5023211,
+      "managerSourceVerified": true,
+      "grants": 16,
+      "connectDomains": 15,
+      "newConnect": "aweme.snssdk.com",
+      "productionEnabled": true,
+      "developmentScriptsEnabled": false,
+      "scope": "Bilibili expired/login recovery and source-host private-folder/DASH playback; Douyin GM Range/MSE playback and theme/hide continuity; NetEase source-host playback, cancellation/error/retry and artist-zero defect."
+    },
+    "final": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "sha256": "c944e1c9518b25e193a7aab9ebc35400b604df8970ad7ced4f7ff5906b907134",
+      "bytes": 5024444,
+      "managerSourceSha256": "c944e1c9518b25e193a7aab9ebc35400b604df8970ad7ced4f7ff5906b907134",
+      "managerSourceBytes": 5024444,
+      "productionInstalled": true,
+      "metadata": {
+        "grants": [
+          "GM.deleteValue",
+          "GM.getTab",
+          "GM.getTabs",
+          "GM.getValue",
+          "GM.listValues",
+          "GM.saveTab",
+          "GM.setValue",
+          "GM_addValueChangeListener",
+          "GM_cookie",
+          "GM_deleteValue",
+          "GM_getValue",
+          "GM_openInTab",
+          "GM_removeValueChangeListener",
+          "GM_setValue",
+          "GM_xmlhttpRequest",
+          "unsafeWindow"
+        ],
+        "connect": [
+          "hdslb.com",
+          "byteimg.com",
+          "douyinpic.com",
+          "pstatp.com",
+          "126.net",
+          "music.163.com",
+          "music.126.net",
+          "api.bilibili.com",
+          "bilivideo.cn",
+          "bilivideo.com",
+          "www.douyin.com",
+          "www-hj.douyin.com",
+          "www.iesdouyin.com",
+          "aweme.snssdk.com",
+          "douyinvod.com"
+        ],
+        "grantCount": 16,
+        "connectCount": 15,
+        "runAt": "document-start",
+        "noframes": true,
+        "externalRequireOrResources": false
+      },
+      "inputManifest": "T13/gm-r3/final-production-inputs.json",
+      "inputFiles": 606,
+      "aggregateSha256": "132d7e77af9bdf583eefc4e6dfcfc2e5751e2b09dfa10db2e02b49d4d24574cb",
+      "inputsUnchangedAfterBuildAndAcceptance": true,
+      "scope": "Final installed regression of the NetEase zero-artist-ID repair: unrelated static host 30 tracks, explicit next page to 60/two retained pages, fresh source-host reload 30 tracks, one request per page. Other source/theme cases retain their intermediate artifact scope."
+    }
+  },
+  "environment": {
+    "os": "Windows",
+    "browser": "Chrome 156.0.8078.47",
+    "manager": "Tampermonkey 5.5.0",
+    "runtime": "Installed production script with real GM APIs; no preview GM doubles.",
+    "hosts": [
+      "http://127.0.0.1:18867",
+      "http://127.0.0.1:18868",
+      "https://www.bilibili.com",
+      "https://www.douyin.com",
+      "https://music.163.com"
+    ],
+    "externalPlugins": "none"
+  },
+  "findings": [
+    {
+      "id": "GM-R3-F1",
+      "problem": "Expired Bilibili authentication was shown as unavailable without the login action.",
+      "repair": "Map not-authenticated to expired, retain transport failures as unavailable.",
+      "tests": 3,
+      "installedIntermediateRegression": "Controlled request-cookie removal produces AM-2001/登录已失效 and 登录 action; remove rule, explicitly refresh, returns signed-in. No account cookies deleted."
+    },
+    {
+      "id": "GM-R3-F2",
+      "problem": "Tampermonkey refuses the official aweme.snssdk.com media entry because production metadata omitted that exact host.",
+      "repair": "Add only aweme.snssdk.com to production @connect.",
+      "installedIntermediateRegression": "Manager shows 15 connect domains; real GM follows 302 to douyinvod CDN, receives 206 and reaches playing MSE blob audio."
+    },
+    {
+      "id": "GM-R3-F3",
+      "problem": "NetEase search results may have named artists with numeric id=0; rejecting them discards the entire page with AM-3003.",
+      "repair": "Keep their names with undefined artist IDs, retaining strict positive song IDs and rejection of malformed artist IDs.",
+      "tests": 5,
+      "diagnosticBoundary": "The real GM failure is separate from a website-only response diagnostic that confirmed numeric-zero artist IDs. Final installed-GM regression remains pending in this rolling record.",
+      "installedFinalRegression": "The same 童声 query returns 30 tracks through installed GM on both unrelated and NetEase hosts; an explicit next page retains 60 tracks/two pages. Three search requests return HTTP 200: initial static page, explicit static next page, explicit source-host reload."
+    }
+  ],
+  "acceptedIntermediateCases": [
+    {
+      "id": "R3-B1",
+      "result": "passed",
+      "behavior": "User completes Bilibili homepage QR login. Static-host GM checks include target session cookies and identify signed-in. Official website marks the current folder private (38 entries); GM loads 28 mapped first-page tracks, then 36 mapped tracks over two pages. Private IDs/titles are redacted."
+    },
+    {
+      "id": "R3-B2",
+      "result": "passed-with-boundary",
+      "behavior": "Precision DOM cancellation retains 28 existing tracks and ignores a completed late second-page response. Explicit continuation loads the second page to 36 tracks. No wire abort was observed, so this case does not claim ERR_ABORTED."
+    },
+    {
+      "id": "R3-B3",
+      "result": "passed",
+      "behavior": "Fresh GM private-folder read on the Bilibili source host returns 28 tracks; one explicit playurl resolution starts native .m4s audio and advances to 24.03 seconds before an explicit pause. This is private-folder access, not a claim of paid/private-video entitlement."
+    },
+    {
+      "id": "R3-D1",
+      "result": "passed",
+      "behavior": "Static-host GM session/search succeeds with included target cookies. Signing-only bridge produces signatures without a duplicate API request. One result returns AM-2002; another exposes the missing media permission and succeeds after repair."
+    },
+    {
+      "id": "R3-D2",
+      "result": "passed",
+      "behavior": "Intermediate repaired production artifact reaches playing Range/MSE audio; Studio→classic→Studio retains the identical audio/currentSrc, with time 13.08→41.55→62.16 seconds. Hide/show retains it at 76.33→86.84 seconds. No extra detail resolve across presentation changes."
+    },
+    {
+      "id": "R3-D3",
+      "result": "passed-for-cancel-error-and-explicit-recovery",
+      "behavior": "On the Douyin source host, signature-triggered precision DOM cancellation stops a new search before GM dispatch; its signing wait cancels after the bounded 5s interval. Explicit retry sends one GM search, which returns the upstream verification-required state AM-3005. The corresponding official search page requires a user-completed CAPTCHA; no success is inferred from website requests. A later official search-page visit presents no CAPTCHA; the installed source is re-hashed as 2cd84173…ee080, its page SDK returns a signature and one explicit real-GM retry returns 10 tracks. This does not assert a new user CAPTCHA completion that was not observed."
+    },
+    {
+      "id": "R3-N1",
+      "result": "passed",
+      "behavior": "Signed-out NetEase GM session is explicit. Song 33894312 imports through GM and resolves once to native CDN playback; initial artifact survives both theme directions (9.64→22.37→54.56 seconds). Repaired intermediate source-host playback advances to 39.89 seconds."
+    },
+    {
+      "id": "R3-N2",
+      "result": "passed-after-final-repair",
+      "behavior": "Precision DOM cancellation stops search before dispatch. Blocking the real GM search produces AM-4001; removing the fault does not replay it. Explicit retry sends a new GM request and reveals the artist-zero schema error, now fixed with deterministic tests. Final installed c944e1c9…907134 returns 30 tracks for that query on both static and source hosts; explicit continuation reaches 60 retained tracks/two pages with no AM-3003."
+    },
+    {
+      "id": "R3-H1",
+      "result": "passed-with-policy-boundary",
+      "behavior": "Matching source-host option order is Bilibili/Douyin/NetEase first respectively; saved source selection remains respected. One product audio/root is observed, host receives no product CSS, and three same-origin NetEase iframes contain no product root. Two-source disable stops active NetEase playback; restoration does not auto-play, and the core favorites view remains usable. Settings protect the last enabled source, so no zero-source pass is claimed."
+    }
+  ],
+  "inspectionMethods": [
+    "Browser-tool clicks/selects for ordinary actions.",
+    "Read-only DOM/audio samples and sanitized manager webRequest observers.",
+    "Explicitly labeled precision DOM cancellation; no claim of physical input coverage.",
+    "Temporary DNR faults remove Bilibili nav request cookies or block NetEase search, without response substitution or persistent cookie changes."
+  ],
+  "privacy": {
+    "cookieValuesRecorded": false,
+    "accountOrPrivateFolderIdentifiersRecorded": false,
+    "privateTrackTitlesRecorded": false,
+    "signedMediaUrlsRecorded": false,
+    "signatureValuesRecorded": false
+  },
+  "observations": [
+    {
+      "path": "T13/gm-r3/0886-static-observations.json",
+      "sha256": "be6dc6065ae3518412a7ac7e05247bf516fd2474575fa13edda6aa7532221f29"
+    },
+    {
+      "path": "T13/gm-r3/2cd8-bilibili-host.json",
+      "sha256": "6b210081750338b6e53a147096c172886302cabfc6863eba4ab4c0b5a581f68a"
+    },
+    {
+      "path": "T13/gm-r3/2cd8-douyin-host.json",
+      "sha256": "d345dc7eb1de5e7a8ebcc7bc8f20f6ebb862eea931b0f9d2f93493aa165f790d"
+    },
+    {
+      "path": "T13/gm-r3/2cd8-douyin-searchhost.json",
+      "sha256": "46087639995872ae16082354a059dca861c8b6086ecd0d00273ac3279ad84cc9"
+    },
+    {
+      "path": "T13/gm-r3/2cd8-netease-host.json",
+      "sha256": "d3aeb549a37de0a9b7833ee2dec5258b3a5782eecb97a92d8a676ebb89f5a8b6"
+    },
+    {
+      "path": "T13/gm-r3/2cd8-network.json",
+      "sha256": "442e8dcfb000171f21b753d8319647735669aa2cb0cf74ac7f52d8b951f54075"
+    },
+    {
+      "path": "T13/gm-r3/2cd8-searchhost-network.json",
+      "sha256": "1b22fedb6f949f7ee6885023185407b06625f37351dd69bbb07ad3be679c58b7"
+    },
+    {
+      "path": "T13/gm-r3/2cd8-static-observations.json",
+      "sha256": "2d60a066f970a2cc129c10931af1c9bc9c0c572c158b143304a53e1b5fb215f6"
+    },
+    {
+      "path": "T13/gm-r3/c944-netease-host.json",
+      "sha256": "3db5b8595648ec82b2f0dc2490434e337deaba39c9f5fb63ed37ed9163da39b3"
+    },
+    {
+      "path": "T13/gm-r3/c944-network.json",
+      "sha256": "67668072245fa0615303710ad49ff9c8749a03dceef36027124bb626a6713a63"
+    },
+    {
+      "path": "T13/gm-r3/c944-static-observations.json",
+      "sha256": "d0c4ec479dceb3e313718711317cfe5a1d84b723d3a8fe1ffe740bc7aea57a30"
+    }
+  ],
+  "verification": {
+    "initialTargetTests": 291,
+    "bilibiliAfterRepair": 68,
+    "neteaseAfterRepair": 47,
+    "userscriptTypecheck": 0,
+    "neteaseTypecheck": 0,
+    "finalRootChecks": {
+      "test": {
+        "exitCode": 0,
+        "vitestFiles": 314,
+        "vitestTests": 2365,
+        "rustPassed": 253,
+        "protocolDifferentialCases": 200
+      },
+      "typecheck": {
+        "exitCode": 0
+      },
+      "lint": {
+        "exitCode": 0
+      },
+      "format": {
+        "exitCode": 0
+      },
+      "build": {
+        "exitCode": 0,
+        "includes": "Both production frontends and optimized Windows application build; no native app launched."
+      }
+    },
+    "finalInputManifest": "T13/gm-r3/final-production-inputs.json",
+    "earlierFailure": "The first root format check rejected the generated exit-code JSON formatting only. Formatting it and rerunning the root check passed.",
+    "scope": "These are independent GM-R3 runs after source freeze on the combined dirty workspace, not an inferred GM-R4 pass."
+  },
+  "remainingLimits": [
+    "Bilibili private-folder access is accepted; no new paid/private-video-entitlement claim. NetEase account login/paid qualities and Douyin private collection/page-fallback completion were outside the exercised representative cases.",
+    "Bilibili second-page UI cancellation discards the late result but does not prove a wire ERR_ABORTED. Douyin/NetEase precision cancellation is DOM-driven and occurs before business request dispatch.",
+    "Douyin homepage and search-page SDK/security states differ; the homepage verification-required error and later search-page real-GM recovery are separate observations, not a guarantee against future upstream verification.",
+    "No Firefox GM proxy, other manager/browser or native transport/device acceptance. GM-R4 full visual/input/protected-surface coverage remains separate.",
+    "Earlier sessions reset between user continuations; artifacts are re-hashed per recorded session. The initial temporary network observer was not retained wholesale; only sanitized recorded observations/counts are used.",
+    "No source captureDate changes, commit or push."
+  ],
+  "websitePrivateObservation": {
+    "method": "Sanitized transcription of the read-only website DOM observation, separately from GM request observations.",
+    "privateLabelObserved": true,
+    "declaredEntries": 38,
+    "accountAndFolderIdentifiers": "redacted"
+  },
+  "sourceHostRecovery": {
+    "artifactSha256": "2cd841733a348a0baf589d11a87b33f260c8522959af87a4233f9b571e5ee080",
+    "context": "Douyin official search page",
+    "signedIn": true,
+    "signedBridgeResult": true,
+    "realGmSearchRequests": 1,
+    "gmResultTracks": 10,
+    "evidence": "T13/gm-r3/2cd8-douyin-searchhost.json",
+    "network": "T13/gm-r3/2cd8-searchhost-network.json"
+  },
+  "cleanup": {
+    "testDnrRuleIds": [903301, 903302],
+    "testDnrRulesRemaining": 0,
+    "networkObserversRemoved": true,
+    "pageObservationListenersRemoved": true,
+    "developmentScriptsEnabled": false,
+    "finalAudio": {
+      "count": 1,
+      "paused": true,
+      "source": "empty"
+    },
+    "managerTabClosed": true
+  },
+  "handoff": {
+    "currentBatch": "GM-R3 complete for recorded source/host/error/cancellation cases.",
+    "nextBatch": "GM-R4 only when the user chooses to continue it.",
+    "browserState": "Final production c944e1c9…907134 enabled; sole expanded workbench on music.163.com, Studio, NetEase signed-out search 童声 with 30 freshly loaded results; sole audio idle without a media source.",
+    "noR4ContinuationDispatched": true
+  }
+}

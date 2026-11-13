@@ -1,0 +1,28 @@
+✔ accepts valid sources and deferred/type-only heavy imports (107.8362ms)
+✔ VM profiles and adapter roots stay engine-free; native imports and production testkit are rejected (78.8751ms)
+✔ trusted build directory discovery cannot eagerly load Vue through the workbench root (74.2763ms)
+✔ theme metadata stays lightweight and Vue adapters cannot import private workbench state (62.8383ms)
+✔ rejects undeclared and forbidden internal dependencies (61.1757ms)
+✔ tag metadata remains lightweight and the feature cannot consume host repositories (62.9561ms)
+✔ rejects app aliases and relative paths outside the package (61.311ms)
+✔ creation metadata cannot load presentation or access private host state (55.6168ms)
+✔ routing packages reject Node and music dependencies while accepting their public edge (73.9818ms)
+✔ follows the source plugin root barrel to eager codecs (61.6753ms)
+✔ SDK rejects runtime libraries, even through a local barrel (47.2296ms)
+✔ rejects browser audio implementations without a codec import (48.746ms)
+✔ accepts export patterns and rejects private exports (55.9368ms)
+✔ source metadata cannot load protocols and source plugins cannot access the host (70.863ms)
+✔ independent themes accept only public metadata, Vue and style entries without eager presentation (81.1135ms)
+✔ theme dependency fixtures reject cross-theme, host, native, SDK, private and cyclic edges (208.7042ms)
+✔ theme metadata follows local barrels; private exports and cross-theme Sass cannot escape checks (106.4889ms)
+✔ third themes inherit metadata, dependency, selector and runtime boundaries (210.2977ms)
+✔ neutral UI rejects hidden theme skins and retired dispatch imports (131.9484ms)
+✔ third theme styles load as inert values with the same scope ID as their templates (77.7744ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2580.6729

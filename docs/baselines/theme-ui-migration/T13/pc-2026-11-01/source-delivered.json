@@ -1,0 +1,6 @@
+{
+  "recordedAt": "2026-11-01T12:19:48.168Z",
+  "files": 1110,
+  "sha256": "df00a7e7f7d0e22c0d7763ad0a1dfd50c8400d30fcd6d190bb6d2ef0da71405b",
+  "scope": "Application/package/crate production inputs, Android main Kotlin/XML, build scripts and root dependency locks; excludes tests and build output"
+}

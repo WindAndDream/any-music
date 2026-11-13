@@ -1,0 +1,6 @@
+apps/tauri test: test storage::resource_cache::tests::persists_chunks_and_settings_without_urls_and_clear_rejects_late_writes ... FAILED
+apps/tauri test: ---- storage::resource_cache::tests::persists_chunks_and_settings_without_urls_and_clear_rejects_late_writes stdout ----
+apps/tauri test: thread 'storage::resource_cache::tests::persists_chunks_and_settings_without_urls_and_clear_rejects_late_writes' (63028) panicked at apps\tauri\src-tauri\src\storage\resource_cache\tests.rs:191:49:
+apps/tauri test: called `Option::unwrap()` on a `None` value
+apps/tauri test:     storage::resource_cache::tests::persists_chunks_and_settings_without_urls_and_clear_rejects_late_writes
+apps/tauri test: test result: FAILED. 209 passed; 1 failed; 1 ignored; 0 measured; 0 filtered out; finished in 5.07s

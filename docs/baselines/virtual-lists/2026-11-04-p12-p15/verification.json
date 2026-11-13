@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-04",
+  "runtimeScope": "shared renderer; both production frontend builds checked separately",
+  "logDirectory": "logs/2026-11-04-virtual-list-implementation",
+  "checks": [
+    {
+      "command": "pnpm --filter @any-music/ui exec vitest run test/composables/virtual-scroll test/components/virtual-scroll test/fixtures/virtual-scroll test/composables/music-sources/use-scroll-page-loader.test.ts",
+      "result": "passed: 21 files / 280 tests",
+      "log": "p12-p15-target-test.log"
+    },
+    {
+      "command": "pnpm test",
+      "result": "passed",
+      "log": "p12-p15-test.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "log": "p12-p15-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with pre-existing warnings outside this batch",
+      "log": "p12-p15-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "p12-p15-format-check-final.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed: both production frontends and Tauri release executable",
+      "log": "p12-p15-build.log"
+    },
+    {
+      "command": "node logs/2026-11-04-virtual-list-implementation/p12-consumer-build.mjs",
+      "result": "passed: isolated production ESM consuming builds, external Vue",
+      "log": "p12-consumer-build.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-ui-vue exec vitest run test/trusted/root-theme-controller.test.ts test/trusted/theme-resources.test.ts test/trusted/ThemeHost.test.ts",
+      "result": "passed: 3 files / 35 tests",
+      "log": "p14-host-continuity-test.log"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/workbench/theme-controller-continuity.test.ts",
+      "result": "passed: 1 file / 16 tests",
+      "log": "p14-workbench-continuity-test.log"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTable.vue",
+      "sha256": "08ab3ec4cb326016b37e85b1e18558653d725aa988c974f411884c21f1596776"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTableBody.vue",
+      "sha256": "64b80f388d940212f46fd37cd15e649795ef8915d0452c636bca367fa5092dde"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-table.ts",
+      "sha256": "8bf3c47e7f5ccf9f4d052014294ee15f8321caa5fbb8fcb0cee40026f32c5b7c"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/virtual-table-layout.ts",
+      "sha256": "0cb1f530f75a788199242466ceefd68326324bf320735c215df97c14904b086d"
+    },
+    {
+      "path": "packages/ui/src/virtual-scroll.ts",
+      "sha256": "4b574211ef3d0bd0a8760aa2a3ea327e5f737c85f6f4b3c2adc8c4c9d39b42e1"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTable.test.ts",
+      "sha256": "1441bf2316a6e9586193461a5dfe4feb82c8202ff8c2ed8d07f343f98f587736"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-measured-virtual-table.test.ts",
+      "sha256": "31432627156a1fc47042bbdfb8210bfda9f41fcb8b9904d50022308154a5dbad"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-scroll-lifecycle.test.ts",
+      "sha256": "b75b34e232c1ed0c297470a60b645a8f4c85011e5ccb52a30d5394189a821971"
+    }
+  ],
+  "foundationAssessment": {
+    "P12": "implemented / automated checks passed",
+    "P14": "assessed; no current foundation host extension; semantic consumer restoration remains pre-admission gate",
+    "P15": "implemented / automated checks passed"
+  },
+  "resourceEvidence": {
+    "lifecycleRegressions": 4,
+    "listAndGridCyclesEach": 18,
+    "noResizeObserverMountDisposeCycles": 6,
+    "cacheLimitTested": 64,
+    "maximumRetainedOccurrencesTested": 4,
+    "afterDisposal": {
+      "listeners": 0,
+      "observationTargets": 0,
+      "frames": 0,
+      "cache": 0,
+      "retainedOccurrences": 0,
+      "liveSlotScopes": 0
+    },
+    "actionReplay": "Actual controlled-grid slot remounted occurrence 0 seven times; explicit Load/Play/Save handlers each called once only.",
+    "tableCleanup": "Multi-tr row scopes release on disable/recovery/unmount; late observer delivery ignored."
+  },
+  "openGates": [
+    "R00-R08 complete drag path and every production consumer",
+    "P14 consumer-specific offscreen semantic scroll/focus restoration before relevant consumer admission",
+    "P03 actual layout/visual/frame baseline and native table column/sticky-header/accessibility-tree behavior",
+    "Browser Find/text selection, native focus/IME/overlays and visual equivalence",
+    "Installed Userscript, Tauri WebView and mobile / G01-G03"
+  ],
+  "noProductBrowserLaunch": true,
+  "noCommitPush": true
+}

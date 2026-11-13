@@ -1,0 +1,239 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-authority-storage-tauri",
+  "parentBatch": "B14",
+  "candidate": "B14-authority-storage",
+  "runtime": "tauri",
+  "reviewedAt": "2026-10-21T13:40:22.443Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+  "scope": {
+    "invariant": "Independent schema-3 native storage admits only supported durable ledger transactions, atomically preserves values/provenance/receipts and revocation state, rejects damaged/bounded data, and keeps a running blocking job permit after its asynchronous waiter is cancelled.",
+    "selectedChain": "PluginAuthority::new/with -> PluginStore::open -> BEGIN IMMEDIATE -> schema/read bounds -> injected runtime change -> bounded table writes -> COMMIT -> return; product snapshot/revoke command dispatch tails move owned capacity permits into blocking closures.",
+    "allowedPaths": [
+      "apps/tauri/src-tauri/src/storage/plugins.rs",
+      "apps/tauri/src-tauri/src/storage/plugins/tests.rs",
+      "apps/tauri/src-tauri/src/plugins.rs (direct composition/dispatch)",
+      "Previously audited runtime Store contract and authority identity/epoch validation"
+    ],
+    "readFiles": [
+      "apps/tauri/src-tauri/src/storage/plugins.rs:1-232",
+      "apps/tauri/src-tauri/src/storage/plugins/tests.rs:1-385",
+      "apps/tauri/src-tauri/src/plugins.rs:1-257",
+      "apps/tauri/src-tauri/Cargo.toml (SQLite/Tokio dependencies)",
+      "apps/tauri/src-tauri/build.rs:1-60 (harness link troubleshooting only)"
+    ],
+    "exclusions": [
+      "Product fixes and permanent tests",
+      "Independent named broker commit/revoke/version/idempotency and complete IPC/ACL audit",
+      "PackageFiles recovery/filesystem durability, native consent and exact target admission",
+      "All S15 command schedulers/executor/network barrier implementations",
+      "Actual WebView invocation/cancellation, application/browser/emulator launch, crash/power-loss and device/filesystem durability acceptance",
+      "Root final gates, commit and push"
+    ]
+  },
+  "declaredStatus": {
+    "claim": "Application storage owns an independent plugins.sqlite3 schema 3; Store transactions serialize durable ledger changes, reject unknown schemas/damaged authority and keep executing blocking-task permits across canceled waits.",
+    "references": [
+      "apps/tauri/AGENTS.md:21",
+      "apps/tauri/src-tauri/AGENTS.md:14",
+      "apps/tauri/src-tauri/AGENTS.md:19",
+      "docs/en/desktop/backend-engineering.md:87"
+    ],
+    "evidenceLimit": "Actual native SQLite adapter tests plus scoped headless dispatch evidence. Historical stage counts are not used as current acceptance."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Is installation authority stored independently under the native application owner?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/storage/plugins.rs:1",
+        "apps/tauri/src-tauri/src/plugins.rs:76",
+        "apps/tauri/src-tauri/src/plugins.rs:110",
+        ".codex-tmp/audit-b14-storage/composition-test.log"
+      ],
+      "detail": "PluginAuthority chooses plugins.sqlite3 and plugin-packages below its native directory, initializes lazily and composes PluginStore/NativeClock/NativeIds. Its independent empty-directory creation/recovery test passes. Product/accounts/credentials are not imported by this adapter."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "question": "Do running snapshot/revoke blocking jobs retain the sole owned permit if their async waiter is aborted?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/plugins.rs:169",
+        "apps/tauri/src-tauri/src/plugins.rs:203",
+        ".codex-tmp/audit-b14-storage/probes.rs:190",
+        ".codex-tmp/audit-b14-storage/dispatch.generated.rs"
+      ],
+      "detail": "Both production dispatch tails capture OwnedSemaphorePermit inside spawn_blocking. Headless tests abort an active waiter, observe no available permit while the controlled job remains blocked, then release it and reacquire only after completion. Revoke persists the disabled/grantless state and calls network cancellation before its job releases capacity.",
+      "limit": "The exact dispatch tails and real tauri::async_runtime are used with a headless authority/action adapter. No real WebView command, OS process cancellation, network teardown or complete S15 scheduler coverage is claimed."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "question": "Are authority changes, values, labels and receipts committed atomically before returning success?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/storage/plugins.rs:91",
+        "apps/tauri/src-tauri/src/storage/plugins.rs:135",
+        "apps/tauri/src-tauri/src/storage/plugins.rs:168",
+        "apps/tauri/src-tauri/src/storage/plugins/tests.rs:161",
+        "apps/tauri/src-tauri/src/storage/plugins/tests.rs:253",
+        "apps/tauri/src-tauri/src/storage/plugins/tests.rs:350",
+        ".codex-tmp/audit-b14-storage/probes.rs:110",
+        ".codex-tmp/audit-b14-storage/probes.rs:134"
+      ],
+      "detail": "BEGIN IMMEDIATE encloses load/change/all table replacement/COMMIT; synchronous FULL and DELETE journal are configured. Return happens only after COMMIT. Existing before-commit failures and a new payload-budget failure preserve the old generation; two real SQLite connections serialize updates without losing either writer. Durable revocation and restart receipt/history behavior pass.",
+      "limit": "No power-loss, disk-full/fsync fault, process-kill or supported-device storage-medium acceptance was performed; named-operation semantics remain the next batch."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Do current-only schema, malformed authority and resource budgets fail closed while preserving existing data?",
+      "evidence": [
+        "apps/tauri/src-tauri/src/storage/plugins.rs:50",
+        "apps/tauri/src-tauri/src/storage/plugins.rs:98",
+        "apps/tauri/src-tauri/src/storage/plugins.rs:173",
+        "apps/tauri/src-tauri/src/storage/plugins/tests.rs:9",
+        "apps/tauri/src-tauri/src/storage/plugins/tests.rs:303",
+        "apps/tauri/src-tauri/src/storage/plugins/tests.rs:374",
+        ".codex-tmp/audit-b14-storage/probes.rs:47"
+      ],
+      "detail": "Fresh databases directly create schema 3 and the revocation authority row. Versions 1/2/99, nonempty schema 0, runtime schema changes, missing tables, malformed or identity-mismatched grants, missing revocation authority and row/payload exhaustion reject operations without overwriting retained records. No callback runs after read-time schema/table/row rejection. PluginAuthority caches failures as unavailable without deleting the DB."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Does the current evidence exercise the actual owner with explicit limits?",
+      "evidence": [
+        ".codex-tmp/audit-b14-storage/storage-tests.log",
+        ".codex-tmp/audit-b14-storage/composition-test.log",
+        ".codex-tmp/audit-b14-storage/probes.log",
+        ".codex-tmp/audit-b14-storage/rustfmt.log"
+      ],
+      "detail": "Nine current SQLite tests and one native composition test pass through the production application test target. Ten additional local probes pass: eight use the unchanged native SQLite adapter and two use unchanged production dispatch tails. Scoped formatting passes; all source hashes remain unchanged. Root final gates, production builds and live UI evidence are not substituted for these checks."
+    }
+  ],
+  "verification": [
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib storage::plugins::tests --locked",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:30:54.0136636+08:00",
+      "finishedAt": "2026-10-21T21:30:55.3710166+08:00",
+      "log": ".codex-tmp/audit-b14-storage/storage-tests.log",
+      "logSha256": "8fda871a1c39d1ce50d4859eb28ca77bb1a433167fbf032b49215dfa4a748e86"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p any-music-tauri --lib plugins::tests::creates_and_recovers_an_independent_empty_authority_directory --locked -- --exact",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:35:39.8710351+08:00",
+      "finishedAt": "2026-10-21T21:36:35.9488608+08:00",
+      "log": ".codex-tmp/audit-b14-storage/composition-test.log",
+      "logSha256": "481e4966727683221c8e4b2253ad7808b5b7c6b3e70eaf404a4b67ab6230955b"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "node .codex-tmp/audit-b14-storage/prepare-probes.mjs; rustc <PowerShell argument array loaded from probe-rustc-args.json>; .codex-tmp/audit-b14-storage/probes.exe audit_ --nocapture",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:36:23.4463633+08:00",
+      "finishedAt": "2026-10-21T21:36:33.9069096+08:00",
+      "log": ".codex-tmp/audit-b14-storage/probes.log",
+      "compileLog": ".codex-tmp/audit-b14-storage/probe-compile.log",
+      "arguments": ".codex-tmp/audit-b14-storage/probe-rustc-args.json",
+      "recoveredHarnessIssues": "Added an absolute owner-test-module path for source relocation, then excluded the unrelated application build-data search directory which shadowed the real msvcrt.lib during standalone linking. No product/build source was changed.",
+      "logSha256": "59f1f848922d06012a65558f2a1cd170f88969ff6e3b29ba2bb2f0a32c1c56d0"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "rustfmt --check --edition 2024 --config skip_children=true apps/tauri/src-tauri/src/storage/plugins.rs apps/tauri/src-tauri/src/storage/plugins/tests.rs apps/tauri/src-tauri/src/plugins.rs",
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:37:36.5981635+08:00",
+      "finishedAt": "2026-10-21T21:37:37.0473320+08:00",
+      "log": ".codex-tmp/audit-b14-storage/rustfmt.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "testSummary": {
+    "permanentStorageTests": 9,
+    "permanentCompositionTests": 1,
+    "additionalSQLiteProbes": 8,
+    "additionalCancellationProbes": 2,
+    "additionalProbeFailures": 0,
+    "productImplementationChanged": false
+  },
+  "probeEvidence": {
+    "localFiles": [
+      {
+        "path": ".codex-tmp/audit-b14-storage/probes.rs",
+        "sha256": "5990b7451f3d77e25912284a251d7dc058e856d061698459a1e06a0298fca411"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-storage/prepare-probes.mjs",
+        "sha256": "e5bae9217dc708d6f136dff6bcbddd996519a8963be0afb29299656e4a762807"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-storage/store-module.generated.rs",
+        "sha256": "22d8cae968b45e312480d14164f89dbaef90db02b90d8cb6fb1410989a4e734d"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-storage/dispatch.generated.rs",
+        "sha256": "b12a0f21d90d07b6b05e3a2fe81d05f3d1fc6b268d3925bbcf252665e4e44bc0"
+      },
+      {
+        "path": ".codex-tmp/audit-b14-storage/probe-rustc-args.json",
+        "sha256": "907cfa977a35dd20ed02c5acd69b552714c41e0c9ee567a657f3485d7dfd27d4"
+      }
+    ],
+    "method": "The generator reads the real PluginStore implementation without changing its body; only an absolute #[path] for the existing child test module is added inside a local wrapper. It copies the snapshot/revoke dispatch tails verbatim from permit acquisition through await. The headless action wrapper runs real runtime/SQLite operations and controlled barriers without creating an application or WebView.",
+    "reproduction": "$auditArgs = @(Get-Content -Raw -LiteralPath '.codex-tmp/audit-b14-storage/probe-rustc-args.json' | ConvertFrom-Json); & rustc @auditArgs; & '.codex-tmp/audit-b14-storage/probes.exe' audit_ --nocapture",
+    "retention": "Ignored local probes/logs only; no permanent test, manifest, lockfile or product source was changed.",
+    "recoveredHarnessIssues": "Initial external module relocation could not find its owner test module; an absolute child-module path fixes it. Forwarding all Cargo native search paths also included an unrelated application build-data directory containing a shadow msvcrt.lib; excluding that unused directory fixes standalone linking. Both initial logs remain local; these are harness issues, not product findings."
+  },
+  "findings": [],
+  "inheritedFindings": [
+    {
+      "id": "B14-R01",
+      "owner": "B14-runtime-ports-tauri",
+      "status": "open",
+      "severity": "P2",
+      "detail": "check_context/check_capability still sample time before Store transaction admission. This storage pass neither repairs nor clears the finding."
+    }
+  ],
+  "missingEvidence": [
+    "B14-R01 remains unresolved and blocks overall B14 acceptance.",
+    "Named commit/revoke needs its own caller -> named operation -> runtime commit/revoke -> return/cancel verification, including production IPC and absence of arbitrary fixture/grant/session/data-relay entry points.",
+    "All S15 named/DEV/executor/network scheduler and final-sink barriers are not accepted by the two snapshot/revoke dispatch probes.",
+    "Crash/power-loss/device filesystem durability and actual WebView command cancellation are not exercised.",
+    "No product implementation was changed; complete root/native/MSRV/deny/build release gates are reserved for final collection or implementation fixes."
+  ],
+  "unreadPaths": [
+    "apps/tauri/src-tauri/src/plugins/control.rs named operations",
+    "apps/tauri/src-tauri/src/plugins/executor.rs broker/final delivery",
+    "apps/tauri/src-tauri/src/plugins/network.rs final dispatch/byte barriers",
+    "apps/tauri/src-tauri/src/plugins/package_files.rs and package recovery",
+    "apps/tauri/src-tauri/src/ipc.rs and production permissions/ACLs"
+  ],
+  "nextBatch": {
+    "batchId": "B14-named-commit-revoke-tauri",
+    "candidate": "B14-named-commit-revoke",
+    "runtime": "tauri",
+    "entry": "apps/tauri/src-tauri/src/plugins/executor.rs:568",
+    "question": "Trace one named state.set operation and durable revocation through real native caller/context, expectedVersion/operationId, atomic provenance/receipt commit and ordered cancellation. Verify production IPC has no arbitrary fixture/grant/session/general data relay.",
+    "openFindingIds": ["B14-R01"]
+  },
+  "handoffZh": "B14-authority-storage-tauri 已完成，基线 acf455c，目标源码哈希未变，结论 conformant / pass-scoped，无新增缺陷。已核查 plugins.sqlite3 独立归属、schema 3 直接初始化、BEGIN IMMEDIATE/FULL、全账本原子提交、schema/坏授权/缺表/预算拒绝和失败保留。原生 9 项 SQLite 测试、1 项独立权威目录恢复测试，以及 10 项本地探针全部通过；探针覆盖真实双连接竞争、超预算回滚、缺表/运行中 schema 变化，两个取消等待测试使用原样调度尾段及真实 tauri async runtime，动作适配为无界面的受控 SQLite 操作，不代表真实 WebView IPC。作用域 rustfmt 通过，未修改产品和永久测试，未启动应用/浏览器、提交或推送。B14 累计排查 3/4，其中纯策略和存储通过，runtime 端口 P2 B14-R01 仍开放；不能宣布板块验收完成。下一批唯一入口 B14-named-commit-revoke-tauri，从 executor::broker 的 state.set 与原生 revoke 路径继续，复用存储证据，核对调用身份、版本/幂等、原子结果和撤权顺序及生产 IPC 边界。"
+}

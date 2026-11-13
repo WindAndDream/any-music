@@ -1,0 +1,794 @@
+{
+  "documentType": "verification-evidence",
+  "runtimeScope": "tauri",
+  "date": "2026-11-07",
+  "taskStartDate": "2026-11-06",
+  "admission": false,
+  "scope": "Current shared C00 corrections on retained isolated full native debug binary plus current development frontend. Separate from release artifact/native rebuild and complete C00 production admission.",
+  "buildIdentity": {
+    "retainedNative": {
+      "date": "2026-11-06",
+      "identifier": "com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533",
+      "tempRoot": "<user-home>/AppData/Local/Temp/any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533",
+      "nativeRoot": "<user-home>/AppData/Local/com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533",
+      "nativeDebugPort": 24361,
+      "frontendPort": 21420,
+      "binary": "<user-home>/AppData/Local/Temp/any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533/c00-production-debug.exe",
+      "binarySha256": "E3482197064ABC1AF3EDF0619584E427355F59CC31962DC6022AF01510BEC339",
+      "currentNativeCompositionSha256": "DB2AEA496E057B5A648FD54B277BD37FD64599774B3951B428CFBF093D9DA8A8",
+      "notes": "Previously-built isolated full native debug composition, current Vite frontend. Not release/native-rebuild admission. Original native lib.rs SHA matches retained build identity."
+    },
+    "frontendSource": {
+      "recordedAt": "2026-11-06T10:59:20.0729588Z",
+      "scope": "Final integrated shared frontend source subset used by current native development delivery; retained native binary identified separately",
+      "sourceSha256": {
+        "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts": "25458e36c7b89b5d33b8b2718279d0e77daf2445bf7fb1ba4df904b55aeaa495",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts": "db013f9d01355de73c43dbd186139f46e6da4d6cdcad92e1110d33aef26bc783",
+        "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue": "5a403bee6a1b9378a635570cfb9f7a64d6a51818524573af7d9eccfc23101613",
+        "packages/ui/src/composables/virtual-scroll/use-virtual-grid-move-transition.ts": "b0196c5b0915728be874fef4b937c58c9823120e89097a4e48fd93b9c130067e",
+        "packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue": "4d0d17491291f62ff6dee59eafd7de3d23d20eabd3eec2745f34cf415aaae13e",
+        "packages/music-workbench/src/storage/product-data.ts": "3f2b0c80865d043529b434e54c9ec4e8ad5ee8234db5c591d73ae014b37f11db",
+        "packages/music-workbench/src/storage/product-generation-store.ts": "fd7fa455dd70e05fc1fac3508f07208f2a421fbb549cbab7cc132e8fc78c1b0b",
+        "apps/tauri/src-tauri/src/lib.rs": "db2aea496e057b5a648fd54b277bd37fd64599774b3951b428cfbf093d9da8a8"
+      }
+    },
+    "launch": {
+      "startedAt": "2026-11-07T03:17:18.4325116Z",
+      "nativePid": 10408,
+      "frontendPid": 4668,
+      "identity": {
+        "date": "2026-11-06",
+        "identifier": "com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533",
+        "tempRoot": "<user-home>/AppData/Local/Temp/any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533",
+        "nativeRoot": "<user-home>/AppData/Local/com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533",
+        "nativeDebugPort": 24361,
+        "frontendPort": 21420,
+        "binary": "<user-home>/AppData/Local/Temp/any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533/c00-production-debug.exe",
+        "binarySha256": "E3482197064ABC1AF3EDF0619584E427355F59CC31962DC6022AF01510BEC339",
+        "currentNativeCompositionSha256": "DB2AEA496E057B5A648FD54B277BD37FD64599774B3951B428CFBF093D9DA8A8",
+        "notes": "Previously-built isolated full native debug composition, current Vite frontend. Not release/native-rebuild admission. Original native lib.rs SHA matches retained build identity."
+      },
+      "scope": "Retained isolated full debug binary and current development frontend, not release/production-artifact admission"
+    },
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Edg/156.0.4314.58",
+      "revision": "@7806b68d20d1c1273d5b07b4f4de18e8f5852581",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "jsVersion": "15.6.12.10"
+    }
+  },
+  "functional": {
+    "record": {
+      "path": "logs/2026-11-06-virtual-list-implementation/session-native-functional-current.json",
+      "sha256": "ae5f05332dfe1e08b1b5566241409cc5f83944c0f31b551d71c565edfc50ba7c"
+    },
+    "menuOrigin": "c00-native:0",
+    "menuRetainedOffscreen": true,
+    "escapeReturnedTo": "c00-native:0",
+    "responsive": [
+      {
+        "width": 1440,
+        "mounted": 12,
+        "stableFirst": true,
+        "columns": "362.036px 362.036px 362.036px"
+      },
+      {
+        "width": 900,
+        "mounted": 8,
+        "stableFirst": true,
+        "columns": "375.054px 375.054px"
+      },
+      {
+        "width": 375,
+        "mounted": 6,
+        "stableFirst": true,
+        "columns": "313.714px"
+      },
+      {
+        "width": 900,
+        "mounted": 8,
+        "stableFirst": true,
+        "columns": "375.054px 375.054px"
+      },
+      {
+        "width": 1280,
+        "mounted": 12,
+        "stableFirst": true,
+        "columns": "311.045px 311.045px 311.045px"
+      }
+    ],
+    "rapidSidebar": {
+      "toggles": 12,
+      "allPositive": true,
+      "finalMounted": 12
+    }
+  },
+  "geometry": {
+    "record": {
+      "path": "logs/2026-11-06-virtual-list-implementation/session-native-80-structure.json",
+      "sha256": "e810528dc1ca0f444ee7f919393dc6412cbe07365b9059f0af51929ba49cc20d"
+    },
+    "comparisons": [
+      {
+        "skin": "minimal",
+        "baselineMounted": 80,
+        "candidateMounted": 12,
+        "differences": 0
+      },
+      {
+        "skin": "default",
+        "baselineMounted": 80,
+        "candidateMounted": 12,
+        "differences": 0
+      }
+    ],
+    "tail": {
+      "target": "c00-native:79",
+      "okay": true,
+      "snapshot": {
+        "top": 6017.71435546875,
+        "scrollHeight": 6641,
+        "clientHeight": 583,
+        "count": 11,
+        "first": "c00-native:69",
+        "last": "c00-native:79",
+        "nodes": 678
+      },
+      "active": "c00-native:79",
+      "ariaSetSize": "80",
+      "ariaPosInSet": "80"
+    },
+    "returned": {
+      "top": 0,
+      "scrollHeight": 6641,
+      "clientHeight": 583,
+      "count": 14,
+      "first": "c00-native:0",
+      "last": "c00-native:79",
+      "nodes": 801
+    }
+  },
+  "artwork": {
+    "record": {
+      "path": "logs/2026-11-06-virtual-list-implementation/session-native-artwork.json",
+      "sha256": "4de36c98736f177a4cd0ecd259b7f8595314f8a2a6da843b1c4b92a32ad021cf"
+    },
+    "scope": "Retained isolated debug binary with current development frontend, local deterministic 640x360 PNG; smoke check only, no remote-CDN/decode-performance/production-artifact admission",
+    "fixture": {
+      "count": 80,
+      "compact": false,
+      "revision": 28977,
+      "characters": 77106,
+      "utf8Bytes": 78098
+    },
+    "comparisons": [
+      {
+        "skin": "minimal",
+        "headGeometryDifferenceIds": [],
+        "baselineImages": 80,
+        "candidateImages": 8
+      },
+      {
+        "skin": "default",
+        "headGeometryDifferenceIds": [],
+        "baselineImages": 80,
+        "candidateImages": 6
+      }
+    ],
+    "cases": [
+      {
+        "candidate": false,
+        "skin": "minimal",
+        "headDecoded": 4,
+        "tailDecoded": 4,
+        "allDecoded": true,
+        "errors": 0
+      },
+      {
+        "candidate": false,
+        "skin": "default",
+        "headDecoded": 2,
+        "tailDecoded": 2,
+        "allDecoded": true,
+        "errors": 0
+      },
+      {
+        "candidate": true,
+        "skin": "minimal",
+        "headDecoded": 4,
+        "tailDecoded": 4,
+        "allDecoded": true,
+        "errors": 0
+      },
+      {
+        "candidate": true,
+        "skin": "default",
+        "headDecoded": 2,
+        "tailDecoded": 2,
+        "allDecoded": true,
+        "errors": 0
+      }
+    ],
+    "systemTheme": [
+      {
+        "scheme": "dark",
+        "state": {
+          "matchesDark": true,
+          "snapshot": {
+            "top": 16273.142578125,
+            "scrollHeight": 16856,
+            "clientHeight": 583,
+            "count": 8,
+            "first": "c00-native:72",
+            "last": "c00-native:79",
+            "nodes": 537
+          },
+          "bodyBackground": "rgb(18, 17, 22)"
+        }
+      },
+      {
+        "scheme": "light",
+        "state": {
+          "matchesDark": false,
+          "snapshot": {
+            "top": 16273.142578125,
+            "scrollHeight": 16856,
+            "clientHeight": 583,
+            "count": 8,
+            "first": "c00-native:72",
+            "last": "c00-native:79",
+            "nodes": 537
+          },
+          "bodyBackground": "rgb(247, 246, 242)"
+        }
+      }
+    ]
+  },
+  "motion": [
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-motion-density-reverse.json",
+        "sha256": "5ee73708a30691298de719cf4ece7215ea3e94b6fadbcaa31bf2c09588713111"
+      },
+      "label": "session-native-motion-density-reverse",
+      "action": "density-reverse",
+      "skin": "default",
+      "direction": 1,
+      "screencastFrames": 64,
+      "probeFrames": 243,
+      "fullOrderChanged": false,
+      "sourceBefore": [
+        "c00-native:1",
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "sourceAfter": [
+        "c00-native:1",
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "documentForeground": true,
+      "osForeground": {
+        "samples": 37,
+        "notOwned": 18
+      },
+      "sourceMarked": false,
+      "landingMarked": false,
+      "allProbedNodesConnected": false,
+      "nativeExceptions": [],
+      "observationScope": "Order/render observation only; OS foreground lost, excluded from capture/motion admission"
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-motion-drag-default-forward.json",
+        "sha256": "5d9cf14e563b3559f00fde90716c2d5101e9f7d978c0c1da3929f23b52dc4626"
+      },
+      "label": "session-native-motion-drag-default-forward",
+      "action": "drag-cross",
+      "skin": "default",
+      "direction": 1,
+      "screencastFrames": 43,
+      "probeFrames": 307,
+      "fullOrderChanged": true,
+      "sourceBefore": [
+        "c00-native:1",
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "sourceAfter": [
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:1",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "documentForeground": true,
+      "osForeground": {
+        "samples": 37,
+        "notOwned": 2
+      },
+      "sourceMarked": true,
+      "landingMarked": false,
+      "allProbedNodesConnected": true,
+      "nativeExceptions": [],
+      "observationScope": "Order/render observation only; OS foreground lost, excluded from capture/motion admission"
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-motion-drag-minimal-backward.json",
+        "sha256": "bc61a5f34ac6af4cb167f4ee32119de7e22319d6e0987b700dbfb39ccc3919db"
+      },
+      "label": "session-native-motion-drag-minimal-backward",
+      "action": "drag-cross",
+      "skin": "minimal",
+      "direction": -1,
+      "screencastFrames": 66,
+      "probeFrames": 301,
+      "fullOrderChanged": true,
+      "sourceBefore": [
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:1",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "sourceAfter": [
+        "c00-native:1",
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "documentForeground": true,
+      "osForeground": {
+        "samples": 37,
+        "notOwned": 16
+      },
+      "sourceMarked": true,
+      "landingMarked": false,
+      "allProbedNodesConnected": true,
+      "nativeExceptions": [],
+      "observationScope": "Order/render observation only; OS foreground lost, excluded from capture/motion admission"
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-motion-keyboard-default-forward.json",
+        "sha256": "a84f39519960c34fdc5c901b0265da297c9caeea4f68f5c0ecd54305f02a6249"
+      },
+      "label": "session-native-motion-keyboard-default-forward",
+      "action": "keyboard",
+      "skin": "default",
+      "direction": 1,
+      "screencastFrames": 16,
+      "probeFrames": 153,
+      "fullOrderChanged": true,
+      "sourceBefore": [
+        "c00-native:0",
+        "c00-native:1",
+        "c00-native:2",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "sourceAfter": [
+        "c00-native:1",
+        "c00-native:0",
+        "c00-native:2",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "documentForeground": true,
+      "osForeground": {
+        "samples": 28,
+        "notOwned": 0
+      },
+      "sourceMarked": false,
+      "landingMarked": false,
+      "allProbedNodesConnected": true,
+      "nativeExceptions": [],
+      "observationScope": "Selected foreground CDP observation only; no whole-matrix admission"
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-motion-keyboard-minimal-backward.json",
+        "sha256": "784529883a1c6d52de2dc9cd104e17ff1cfedbaf726bb8f4be18974b21e924f7"
+      },
+      "label": "session-native-motion-keyboard-minimal-backward",
+      "action": "keyboard",
+      "skin": "minimal",
+      "direction": -1,
+      "screencastFrames": 20,
+      "probeFrames": 152,
+      "fullOrderChanged": true,
+      "sourceBefore": [
+        "c00-native:1",
+        "c00-native:0",
+        "c00-native:2",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "sourceAfter": [
+        "c00-native:1",
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "documentForeground": true,
+      "osForeground": {
+        "samples": 28,
+        "notOwned": 0
+      },
+      "sourceMarked": false,
+      "landingMarked": false,
+      "allProbedNodesConnected": true,
+      "nativeExceptions": [],
+      "observationScope": "Selected foreground CDP observation only; no whole-matrix admission"
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-motion-reduced.json",
+        "sha256": "f599571a5a742e27ca6d7c3477727f3936c9952457330b89331c99848d423188"
+      },
+      "label": "session-native-motion-reduced",
+      "action": "reduce",
+      "skin": "minimal",
+      "direction": 1,
+      "screencastFrames": 6,
+      "probeFrames": 153,
+      "fullOrderChanged": false,
+      "sourceBefore": [
+        "c00-native:1",
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "sourceAfter": [
+        "c00-native:1",
+        "c00-native:2",
+        "c00-native:0",
+        "c00-native:3",
+        "c00-native:4",
+        "c00-native:5",
+        "c00-native:6",
+        "c00-native:7"
+      ],
+      "documentForeground": true,
+      "osForeground": {
+        "samples": 28,
+        "notOwned": 14
+      },
+      "sourceMarked": false,
+      "landingMarked": false,
+      "allProbedNodesConnected": true,
+      "nativeExceptions": [],
+      "observationScope": "Order/render observation only; OS foreground lost, excluded from capture/motion admission"
+    }
+  ],
+  "timing": [
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-1000-candidate-scroll-1.json",
+        "sha256": "5b7e32d5238c6f832679ec1bf7572f4b24aa17cbb750efbea152edc473e59d33"
+      },
+      "count": 1000,
+      "candidate": true,
+      "kind": "scroll",
+      "round": 1,
+      "startedAt": "2026-11-07T03:20:27.747Z",
+      "endedAt": "2026-11-07T03:20:39.181Z",
+      "durationMs": 10000,
+      "frameMs": {
+        "samples": 1371,
+        "mean": 7.293946024799406,
+        "min": 5.699999999998909,
+        "p50": 5.899999999999636,
+        "p95": 11.800000000001091,
+        "p99": 11.900000000001455,
+        "max": 23.5,
+        "over16_7": 13,
+        "over33_4": 0
+      },
+      "longTaskCount": 0,
+      "longTaskMaxMs": 0,
+      "metrics": {
+        "LayoutCount": 702,
+        "RecalcStyleCount": 11020,
+        "LayoutDuration": 0.349174,
+        "RecalcStyleDuration": 1.717083,
+        "ScriptDuration": 0.176899,
+        "TaskDuration": 5.540786
+      },
+      "maxScrollTop": 75288,
+      "mountedBefore": 12,
+      "mountedAfter": 13,
+      "lastMountedAfter": "c00-native:999",
+      "osForeground": {
+        "samples": 109,
+        "notOwned": 0
+      },
+      "documentForeground": true
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-10000-candidate-scroll-1.json",
+        "sha256": "c8f3e83272fb6e0e9efab128e62c25f5eabb7a01c04985d2014bc0afffd058b6"
+      },
+      "count": 10000,
+      "candidate": true,
+      "kind": "scroll",
+      "round": 1,
+      "startedAt": "2026-11-07T03:20:49.711Z",
+      "endedAt": "2026-11-07T03:21:01.207Z",
+      "durationMs": 10000,
+      "frameMs": {
+        "samples": 187,
+        "mean": 53.50695187165776,
+        "min": 5.799999999999272,
+        "p50": 53,
+        "p95": 88.29999999999927,
+        "p99": 106,
+        "max": 117.70000000000073,
+        "over16_7": 168,
+        "over33_4": 167
+      },
+      "longTaskCount": 146,
+      "longTaskMaxMs": 107,
+      "metrics": {
+        "LayoutCount": 653,
+        "RecalcStyleCount": 19112,
+        "LayoutDuration": 1.022923,
+        "RecalcStyleDuration": 2.569546,
+        "ScriptDuration": 0.048267,
+        "TaskDuration": 10.135088000000001
+      },
+      "maxScrollTop": 540578.3125,
+      "mountedBefore": 12,
+      "mountedAfter": 21,
+      "lastMountedAfter": "n:9962",
+      "osForeground": {
+        "samples": 110,
+        "notOwned": 0
+      },
+      "documentForeground": true
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-10000-candidate-scroll-constant-1.json",
+        "sha256": "72a7b7f620ba2e329231d0254fc1c29cfb2d0b9907a040bcd146ec17df906e8b"
+      },
+      "count": 10000,
+      "candidate": true,
+      "kind": "scroll-constant",
+      "round": 1,
+      "startedAt": "2026-11-07T03:21:01.959Z",
+      "endedAt": "2026-11-07T03:21:13.402Z",
+      "durationMs": 10000,
+      "frameMs": {
+        "samples": 1659,
+        "mean": 6.02766726943942,
+        "min": 5.700000000000728,
+        "p50": 5.899999999997817,
+        "p95": 6,
+        "p99": 11.799999999999272,
+        "max": 11.900000000001455,
+        "over16_7": 0,
+        "over33_4": 0
+      },
+      "longTaskCount": 0,
+      "longTaskMaxMs": 0,
+      "metrics": {
+        "LayoutCount": 121,
+        "RecalcStyleCount": 1611,
+        "LayoutDuration": 0.051675,
+        "RecalcStyleDuration": 0.308074,
+        "ScriptDuration": 0.165707,
+        "TaskDuration": 2.2502429999999998
+      },
+      "maxScrollTop": 11998.857421875,
+      "cssPixelsPerSecond": 1200,
+      "mountedBefore": 21,
+      "mountedAfter": 21,
+      "lastMountedAfter": "n:134",
+      "osForeground": {
+        "samples": 110,
+        "notOwned": 0
+      },
+      "documentForeground": true
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-10000-candidate-sidebar-1.json",
+        "sha256": "c44591084cc8193c77a0433f18570e490461b2b2cad6cfb3717191815fa9d74e"
+      },
+      "count": 10000,
+      "candidate": true,
+      "kind": "sidebar",
+      "round": 1,
+      "startedAt": "2026-11-07T03:21:14.077Z",
+      "endedAt": "2026-11-07T03:21:25.501Z",
+      "durationMs": 10000,
+      "frameMs": {
+        "samples": 332,
+        "mean": 30.1198795180723,
+        "min": 5.69999999999709,
+        "p50": 5.900000000001455,
+        "p95": 117.59999999999854,
+        "p99": 482.40000000000146,
+        "max": 505.8000000000029,
+        "over16_7": 63,
+        "over33_4": 45
+      },
+      "longTaskCount": 17,
+      "longTaskMaxMs": 501,
+      "metrics": {
+        "LayoutCount": 142,
+        "RecalcStyleCount": 1430,
+        "LayoutDuration": 0.110187,
+        "RecalcStyleDuration": 0.445996,
+        "ScriptDuration": 0.026639,
+        "TaskDuration": 8.666228
+      },
+      "maxScrollTop": 0,
+      "mountedBefore": 21,
+      "mountedAfter": 12,
+      "lastMountedAfter": "n:11",
+      "osForeground": {
+        "samples": 110,
+        "notOwned": 0
+      },
+      "documentForeground": true
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-80-candidate-sidebar-1.json",
+        "sha256": "d85b5bab711543536170f265d5c38e28c0240d916ba70c577eb6c82b26b769d3"
+      },
+      "count": 80,
+      "candidate": true,
+      "kind": "sidebar",
+      "round": 1,
+      "startedAt": "2026-11-07T03:19:57.919Z",
+      "endedAt": "2026-11-07T03:20:09.348Z",
+      "durationMs": 10000,
+      "frameMs": {
+        "samples": 1365,
+        "mean": 7.325860805860808,
+        "min": 5.69999999999709,
+        "p50": 5.900000000001455,
+        "p95": 17.69999999999709,
+        "p99": 23.599999999998545,
+        "max": 29.400000000001455,
+        "over16_7": 128,
+        "over33_4": 0
+      },
+      "longTaskCount": 0,
+      "longTaskMaxMs": 0,
+      "metrics": {
+        "LayoutCount": 644,
+        "RecalcStyleCount": 5509,
+        "LayoutDuration": 0.459463,
+        "RecalcStyleDuration": 1.338847,
+        "ScriptDuration": 0.041595,
+        "TaskDuration": 3.4068840000000002
+      },
+      "maxScrollTop": 0,
+      "mountedBefore": 12,
+      "mountedAfter": 12,
+      "lastMountedAfter": "c00-native:11",
+      "osForeground": {
+        "samples": 110,
+        "notOwned": 0
+      },
+      "documentForeground": true
+    }
+  ],
+  "rejectedTiming": [
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-80-baseline-sidebar-1.json",
+        "sha256": "d9b4206fded5a3223c08ee55b6ceb13e78ffb79ee8daca226d05a5151919cc13"
+      },
+      "reason": "Operating-system/document foreground guard not held continuously; excluded from timing conclusions",
+      "osNonOwnedSamples": 110
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-80-baseline-sidebar-2.json",
+        "sha256": "c4d7004313e702cdb9fd28d07a5e6b2bda8ff0ca622abe6e6c5e9be2a2332b7a"
+      },
+      "reason": "Operating-system/document foreground guard not held continuously; excluded from timing conclusions",
+      "osNonOwnedSamples": 89
+    },
+    {
+      "record": {
+        "path": "logs/2026-11-06-virtual-list-implementation/session-native-80-candidate-sidebar-2.json",
+        "sha256": "f85fda2de23584f07c15c60e6efa47b898d1070536269e11ff8db0783dfb8f65"
+      },
+      "reason": "Operating-system/document foreground guard not held continuously; excluded from timing conclusions",
+      "osNonOwnedSamples": 92
+    }
+  ],
+  "cleanup": {
+    "at": "2026-11-07T03:26:35.636499Z",
+    "osCloseRequested": true,
+    "normalNativeExit": false,
+    "forcedNativeExit": true,
+    "exitCode": -1,
+    "nativePid": 10408,
+    "frontendPid": 4668,
+    "remainingProcesses": [],
+    "remainingListeners": [],
+    "preserved": "Retained isolated native fixture, ordinary production data untouched",
+    "closeRoute": "Verified Process.CloseMainWindow / operating-system WM_CLOSE; no renderer ACL or product changes"
+  },
+  "method": {
+    "timing": "No concurrent tests/builds/GM phases during final timing. Native OS foreground sampled about100ms; document focus/visibility checked each native rAF. 10s phases, sidebar12 reversals at750ms; constant-speed1200CSSpx/s; full-span scroll uses normalized current scroll extent and can skip logical rows. rAF intervals are not presented-frame/CPU-time measurements. Screenshots/motion probes/profile run separately.",
+    "functional": "Real isolated WebView and current Vue components; responsive and system color scheme use CDP emulation, and keyboard/mouse input uses CDP. Local raster images use Vite /@fs over loopback. No physical touch/IME/device or remote-CDN admission."
+  },
+  "earlierAttempts": [
+    {
+      "record": "logs/2026-11-06-virtual-list-implementation/session-native-80-setup.log",
+      "issue": "Cold imported seed evaluation exceeded existing CDP15s timeout while root checks/frontend compilation ran; settled frontend retry passed."
+    },
+    {
+      "record": "logs/2026-11-06-virtual-list-implementation/session-native-artwork.log",
+      "issue": "Harness initially demanded decode for artwork above viewport in a partially visible card; corrected test to actual image intersection. Expected lazy no-src state was not a product error."
+    },
+    {
+      "record": "logs/2026-11-06-virtual-list-implementation/session-native-artwork-hover-diagnosis.json",
+      "issue": "Only one minimal-skin IMG rectangle differed while hover scaling transitioned. Pointer moved outside cards and settled, both skin comparisons then exact. Failure records retained."
+    }
+  ],
+  "limits": [
+    "C00 remains default-closed; no O00/C01 consumer promotion.",
+    "Retained native debug binary is separately identified; current frontend production build does not establish release installation/permissions/artifact acceptance.",
+    "Height caches/DOM are bounded; complete identity/row geometry and semantic metadata remain O(N). This evidence does not establish bounded total memory/frame cost or nonblocking complete persistence.",
+    "Local deterministic raster image smoke and emulated system colors do not accept remote image failure/decode performance, physical device, OS theme switching, IME or touch.",
+    "Motion samples are selected valid CDP input cases, not the complete capture/interruption/drop/physical input matrix.",
+    "No authenticated account/browser/source/media playback/download lifecycle or sustained theme/hide-show admission.",
+    "Three current native80 sidebar records lost OS foreground and are excluded. Initial and repeat failures remain in local logs. Only the retained candidate80 round1 and1k/10k phases continuously satisfied OS/document foreground guards.",
+    "Pointer recordings committed order and kept tracked nodes connected, but lost OS foreground and did not record landing markers; they do not establish capture/drop handoff. Normal OS WM_CLOSE did not exit the host within8s; verified isolated host was force-stopped. Normal shutdown remains open."
+  ],
+  "logDirectory": "logs/2026-11-06-virtual-list-implementation"
+}

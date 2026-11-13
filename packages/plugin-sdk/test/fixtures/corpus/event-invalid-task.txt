@@ -1,0 +1,1 @@
+{"wireVersion":1,"eventId":"event-1","eventVersion":1,"contextRef":"ctx-1","event":"task.changed","sequence":1,"task":{"taskId":"task-1","contextRef":"ctx-1","deadlineMs":1000,"state":"failed","completed":1,"total":2}}

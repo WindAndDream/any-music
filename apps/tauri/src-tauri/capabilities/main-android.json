@@ -1,0 +1,13 @@
+{
+  "identifier": "main-android",
+  "description": "Android main host: native Bilibili QR accounts, account proxies, HTTP and account-bound media, local data and bounded package preview/document saving. No desktop browsers or external execution.",
+  "platforms": ["android"],
+  "webviews": ["main"],
+  "permissions": [
+    "core:default",
+    "core:app:allow-exit",
+    "allow-mobile-commands",
+    "allow-android-account-commands",
+    "allow-android-delivery-commands"
+  ]
+}

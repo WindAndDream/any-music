@@ -1,0 +1,2160 @@
+{
+  "documentType": "audit-ledger",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "runId": "2026-10-21-b00-e0884a5",
+  "updatedAt": "2026-10-22T11:08:53.874Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/baseline.json",
+  "scope": "B00 baseline and 25/112 B01-B20 candidate audits are recorded; 87 candidates remain unreviewed. B21-T01 is repaired and validated with a controlled cold-import red/green, ten independent theme runs and all five root gates under the default scheduler. Historical failing records are preserved. Whole-repository architecture and exact runtime/device/channel acceptance remain incomplete. B20 now closes all four scoped candidates: nine documentation findings repaired, no further structural/legacy entry defects, separate Userscript/Tauri reports and 25 targeted checks pass. No whole-project or live acceptance is implied; reconcile the new closure with B21.",
+  "declaredClaims": [
+    {
+      "id": "D01",
+      "claim": "Shared plugin architecture and S11-S15 are declared implemented.",
+      "reference": "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:22",
+      "assessment": "unreviewed",
+      "owners": ["B01-B18"]
+    },
+    {
+      "id": "D02",
+      "claim": "S16 remains in progress; existing Android adapters and selected reference-device evidence are bounded claims.",
+      "reference": "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:10",
+      "assessment": "unreviewed",
+      "owners": ["B19"]
+    },
+    {
+      "id": "D03",
+      "claim": "Userscript built-ins only; externalPlugins is none. Mobile external execution is not admitted.",
+      "reference": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md:15",
+      "additionalReference": "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:28",
+      "category": "declared-unsupported",
+      "assessment": "unreviewed",
+      "owners": ["B11", "B19"],
+      "rejectionPathsChecked": false
+    },
+    {
+      "id": "D04",
+      "claim": "Desktop install/execute requires native consent and exact accepted Windows/WebView/Profile/resource/native-host hashes; current host admission was not checked.",
+      "reference": "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:54",
+      "assessment": "unreviewed",
+      "owners": ["B18"]
+    },
+    {
+      "id": "D05",
+      "claim": "External catalogs have no media resolution; unknown required capabilities/contributions/targets fail.",
+      "reference": "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:29",
+      "additionalReference": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md:25",
+      "category": "declared-unsupported",
+      "assessment": "unreviewed",
+      "owners": ["B17", "B18"],
+      "rejectionPathsChecked": false
+    },
+    {
+      "id": "D06",
+      "claim": "Registry publication, OS installer registration and mobile channel acceptance remain separate, incomplete exits.",
+      "reference": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md:25",
+      "additionalReference": "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:38",
+      "assessment": "unreviewed",
+      "owners": ["B17", "B18", "B19"]
+    },
+    {
+      "id": "D07",
+      "claim": "Optimized-release Android media/proxy/audio interruptions, physical minimum devices and iOS account/media/distribution remain pending. The matrix also records x86_64 release first cold startup as not accepted.",
+      "reference": "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:10",
+      "additionalReference": "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md:32",
+      "category": "declared-open-gap",
+      "assessment": "unreviewed",
+      "owners": ["B19"]
+    }
+  ],
+  "batches": [
+    {
+      "batchId": "B00",
+      "title": "Baseline and scope",
+      "runtime": ["repository"],
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B00.json",
+      "scope": "Repository baseline and audit queue only; no implementation acceptance."
+    },
+    {
+      "batchId": "B01",
+      "title": "Pure utilities, audio algorithms and core domain",
+      "runtime": ["shared"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/utils", "packages/audio-composition", "packages/core"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B01-utils",
+        "B01-audio-recipes",
+        "B01-audio-prefetch",
+        "B01-audio-browser",
+        "B01-core-errors",
+        "B01-core-library",
+        "B01-core-download",
+        "B01-core-ports"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+        "docs/en/cross-platform/architecture/development-workflow.md"
+      ],
+      "verificationGroups": ["targetPackage", "consumers"],
+      "relatedBatches": [],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B01-utils-shared",
+          "candidate": "B01-utils",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-fix.json",
+          "findingIds": ["B01-U01"],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          },
+          "resolvedFindingIds": ["B01-U01"],
+          "openFindingIds": [],
+          "history": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-baseline.json"
+          ]
+        }
+      ],
+      "remainingSubbatches": [
+        "B01-audio-recipes",
+        "B01-audio-prefetch",
+        "B01-audio-browser",
+        "B01-core-errors",
+        "B01-core-library",
+        "B01-core-download",
+        "B01-core-ports"
+      ],
+      "completion": "1 of 8 candidate subbatches reviewed and passing after B01-U01 repair. B01 remains pending because seven candidates are unreviewed; block-level evidence does not aggregate partial coverage into acceptance."
+    },
+    {
+      "batchId": "B02",
+      "title": "Account selection and network routing",
+      "runtime": ["shared"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/network-routing", "packages/account-pool"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": ["B02-network-routing", "B02-account-pool"],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md"
+      ],
+      "verificationGroups": ["targetPackage"],
+      "relatedBatches": ["B12"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B02-network-routing-shared",
+          "candidate": "B02-network-routing",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-fix.json",
+          "findingIds": ["B02-N01"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          },
+          "resolvedFindingIds": ["B02-N01"],
+          "history": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-baseline.json"
+          ]
+        }
+      ],
+      "remainingSubbatches": ["B02-account-pool"],
+      "completion": "1 of 2 shared candidate subbatches audited and passing after B02-N01 repair. Full account-pool acceptance remains unreviewed; its consumer regression tests do not replace that audit. Desktop integration is a separate B12 handoff. Root test/typecheck/lint/build pass; format:check fails on 12 unchanged documentation files, recorded in the repair report."
+    },
+    {
+      "batchId": "B03",
+      "title": "SDK, Schema and native protocol",
+      "runtime": ["shared", "tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/plugin-sdk", "crates/am-plugin-protocol"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B03-sdk-root",
+        "B03-sdk-music",
+        "B03-sdk-schema",
+        "B03-sdk-guest",
+        "B03-sdk-host",
+        "B03-sdk-node",
+        "B03-native-protocol"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md"
+      ],
+      "verificationGroups": ["targetPackage", "protocol", "nativeTarget"],
+      "relatedBatches": [],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B03-sdk-root-shared",
+          "candidate": "B03-sdk-root",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B03-sdk-root-shared.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B03-sdk-root-shared-baseline.json",
+          "findingIds": [],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          }
+        }
+      ],
+      "remainingSubbatches": [
+        "B03-sdk-music",
+        "B03-sdk-schema",
+        "B03-sdk-guest",
+        "B03-sdk-host",
+        "B03-sdk-node",
+        "B03-native-protocol"
+      ],
+      "completion": "1 of 7 candidates audited. SDK root is conformant/pass-scoped with no confirmed findings. The other five SDK entries and Rust protocol remain unreviewed; broader passing commands do not close their static or runtime acceptance."
+    },
+    {
+      "batchId": "B04",
+      "title": "Plugin lifecycle and contributions",
+      "runtime": ["shared"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/plugin-center"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B04-generic-root",
+        "B04-music-sources",
+        "B04-dependencies",
+        "B04-enable-disable",
+        "B04-availability"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md"
+      ],
+      "verificationGroups": ["targetPackage"],
+      "relatedBatches": [],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B04-generic-root-shared",
+          "candidate": "B04-generic-root",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-fix.json",
+          "findingIds": ["B04-G01"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          },
+          "resolvedFindingIds": ["B04-G01"],
+          "history": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-baseline.json"
+          ]
+        }
+      ],
+      "remainingSubbatches": [
+        "B04-music-sources",
+        "B04-dependencies",
+        "B04-enable-disable",
+        "B04-availability"
+      ],
+      "completion": "1 of 5 candidates audited and passing after B04-G01 repair. Generic root cleanup retains captured owner identity and token/generation protection. Other four candidates remain unreviewed; package/repository tests do not close their static/runtime acceptance."
+    },
+    {
+      "batchId": "B05",
+      "title": "Shared workbench orchestration",
+      "runtime": ["shared"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/music-workbench"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B05-library",
+        "B05-music-sources",
+        "B05-plugins",
+        "B05-settings",
+        "B05-runtime",
+        "B05-stores",
+        "B05-plugin-adapters"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/project-architecture.md",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md"
+      ],
+      "verificationGroups": ["targetPackage", "consumers"],
+      "relatedBatches": ["B06", "B07"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B05-music-sources-shared",
+          "candidate": "B05-music-sources",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+          "findingIds": ["B05-M01"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          },
+          "resolvedFindingIds": ["B05-M01"],
+          "history": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json"
+          ]
+        }
+      ],
+      "remainingSubbatches": [
+        "B05-library",
+        "B05-plugins",
+        "B05-settings",
+        "B05-runtime",
+        "B05-stores",
+        "B05-plugin-adapters"
+      ],
+      "completion": "1 of 7 candidates audited at the source-selection/session boundary and passing after B05-M01 repair. Nine permanent regressions and the original rendering probe pass. Six other candidates and the remaining source operations stay unreviewed. Full test/typecheck/lint/build pass; existing documentation-format debt remains separate."
+    },
+    {
+      "batchId": "B06",
+      "title": "Data ownership, persistence and recovery",
+      "runtime": ["shared", "userscript", "tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "pass",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/music-workbench/src/storage", "apps/userscript", "apps/tauri"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B06-shared-storage",
+        "B06-userscript-generation",
+        "B06-tauri-renderer-mirror",
+        "B06-tauri-native-product-mirror",
+        "B06-plugin-portable-namespaces"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-data-ownership.md"
+      ],
+      "verificationGroups": ["targetPackage", "tauriFrontend", "nativeTarget"],
+      "relatedBatches": ["B14", "B16"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B06-workbench-storage-shared",
+          "candidate": "B06-shared-storage",
+          "runtime": "shared",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-baseline.json",
+          "findingIds": ["B06-S01", "B06-S02"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          },
+          "fixReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+          "resolvedFindingIds": ["B06-S01", "B06-S02"],
+          "originalReportPolicy": "The original failing audit remains historical. Current scoped status is defined by the fixReport and source hashes, without accepting the other B06 candidates.",
+          "history": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared.json"
+          ]
+        }
+      ],
+      "remainingSubbatches": [
+        "B06-userscript-generation",
+        "B06-tauri-renderer-mirror",
+        "B06-tauri-native-product-mirror",
+        "B06-plugin-portable-namespaces"
+      ],
+      "remainingWithinReviewedCandidate": [
+        "Other repository normalizers and restore/error handling beyond the inspected generation/host-track chain",
+        "Tag/composer actual projection withdrawal is handed to B09"
+      ],
+      "completion": "B06-S01 (P1 competing-update loss) and B06-S02 (P2 persisted Blob artwork URL) are fixed with permanent regression tests and passing final root test/typecheck/lint/production-build evidence. Userscript explicitly permits one expanded workbench session, with acknowledged persistence and visible failure feedback. The original failing audit is preserved. The four independent GM/Tauri/portable audit candidates and unread shared paths remain pending; no live acceptance or full B06 acceptance is claimed. Existing unrelated documentation-format debt remains.",
+      "nextBatch": {
+        "batchId": "B06-userscript-generation",
+        "parentBatch": "B06",
+        "runtime": "userscript",
+        "status": "pending",
+        "question": "Independently audit the final Userscript GM single-writer adapter, namespaced current-only initialization and acknowledged persistence/recovery.",
+        "allowedPaths": [
+          "apps/userscript/src/platform/product-storage.ts and direct configuration/bootstrap disposal",
+          "apps/userscript/test/platform/product-storage.test.ts",
+          "packages/music-workbench/src/storage/product-generation-store.ts as the audited direct dependency",
+          "B06 audit records"
+        ],
+        "excluded": [
+          "Product fixes and permanent tests",
+          "Tauri renderer/native mirrors, portable-data internals, native plugin SQLite/code-data transactions",
+          "Live browser/application inspection, commit and push"
+        ],
+        "requiredGuidance": [
+          "AGENTS.md",
+          "apps/userscript/AGENTS.md",
+          "docs/en/userscript/development.md",
+          ".agents/skills/any-music-userscript-runtime/SKILL.md",
+          "docs/en/cross-platform/architecture/plugin-data-ownership.md"
+        ],
+        "criteria": [
+          "C1 GM adapter ownership and storage prefix",
+          "C3 failure/restart and concurrent-writer behavior",
+          "C4 current-only startup, namespace isolation and runtime-secret separation",
+          "C6 GM-double evidence and explicit missing live acceptance"
+        ],
+        "intendedCommands": [
+          "pnpm --filter @any-music/userscript exec vitest run test/platform/product-storage.test.ts",
+          "pnpm --filter @any-music/userscript typecheck"
+        ],
+        "stopRule": "One GM storage boundary only. The two shared findings are fixed; retain live Tampermonkey as not-run unless explicitly authorized. Do not expand into Tauri or portable-data.",
+        "continuation": "B06-S01/S02 are resolved by B06-workbench-storage-shared-fix.json; verify its source hashes. Audit the final manager-owned single-writer session, current-only async hydration, ordered GM failure recovery and disposal, preserving runtime credential isolation. Final root tests/typecheck/lint/build pass; full format debt is separately recorded. Live Tampermonkey remains not-run. Do not infer full Tauri native mirroring or portable-data acceptance."
+      },
+      "evidenceScope": "Evidence covers only B06-workbench-storage-shared-fix and its direct runtime adapters; parent B06 remains pending."
+    },
+    {
+      "batchId": "B07",
+      "title": "Playback, Range, downloads and export",
+      "runtime": ["shared", "userscript", "tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/music-workbench", "apps/userscript", "apps/tauri"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B07-media",
+        "B07-player",
+        "B07-downloads",
+        "B07-audio-export",
+        "B07-userscript-media-wiring",
+        "B07-tauri-media-wiring"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md"
+      ],
+      "verificationGroups": ["targetPackage", "tauriFrontend", "nativeTarget", "consumers"],
+      "relatedBatches": ["B11", "B12"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B07-media-shared",
+          "candidate": "B07-media",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+          "findingIds": ["B07-M01", "B07-M02", "B07-M03"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          },
+          "history": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-baseline.json"
+          ],
+          "resolvedFindingIds": ["B07-M01", "B07-M02", "B07-M03"]
+        }
+      ],
+      "remainingSubbatches": [
+        "B07-player",
+        "B07-downloads",
+        "B07-audio-export",
+        "B07-userscript-media-wiring",
+        "B07-tauri-media-wiring"
+      ],
+      "completion": "1 of 6 candidates audited and passing after B07-M01/M02/M03 repair. All 34 media tests, 124 direct-consumer tests and root test/typecheck/lint/build pass. Root formatting retains 12 unchanged documentation issues. Other five B07 candidates and both runtime acceptances remain unreviewed; subbatch evidence does not establish whole-board acceptance."
+    },
+    {
+      "batchId": "B08",
+      "title": "Controlled UI, themes and view assembly",
+      "runtime": ["shared"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "pass",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/ui", "packages/plugin-ui-vue"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B08-controlled-components",
+        "B08-theme-root",
+        "B08-theme-directory",
+        "B08-theme-trusted",
+        "B08-layout-live"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/development-workflow.md"
+      ],
+      "verificationGroups": ["targetPackage", "consumers"],
+      "relatedBatches": ["B05"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B08-theme-trusted-shared",
+          "candidate": "B08-theme-trusted",
+          "runtime": "shared",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-fix.json",
+          "findingIds": ["B08-T01", "B08-T02"],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          },
+          "existingTests": {
+            "passed": 33,
+            "failed": 0
+          },
+          "supplementalTests": {
+            "passed": 13,
+            "failed": 0
+          },
+          "caveat": "Both trusted-theme findings are repaired. Complete tests/typecheck/lint and production builds pass. Root formatting retains 12 unchanged documentation failures. Other candidates and live UI remain unreviewed.",
+          "historicalReports": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared.json"
+          ],
+          "originalBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-baseline.json",
+          "resolvedFindingIds": ["B08-T01", "B08-T02"],
+          "permanentRegressions": 13,
+          "totalDistinctTargetTests": 46
+        }
+      ],
+      "remainingSubbatches": [
+        "B08-controlled-components",
+        "B08-theme-root",
+        "B08-theme-directory",
+        "B08-layout-live"
+      ],
+      "completion": "1 of 5 candidates reviewed and passing after B08-T01/T02 repair. 13 permanent regressions were added; all 46 distinct target tests, complete repository tests, full root typechecks, lint and production builds pass. Root formatting retains 12 untouched documentation failures. Other four B08 candidates and live UI acceptance remain unreviewed; scoped evidence does not establish block-level acceptance.",
+      "openValidationFindingIds": [],
+      "validationQualification": "B21-T01 is repaired with real-theme suite initialization. Controlled slow-import reproduction, ten independent repeats and default-scheduler root tests pass; four independent B08 candidates and live UI acceptance remain unreviewed.",
+      "resolvedValidationFindingIds": ["B21-T01"],
+      "validationRepair": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-theme-test-stability-fix.json"
+    },
+    {
+      "batchId": "B09",
+      "title": "Built-in tag and creation plugins",
+      "runtime": ["shared", "userscript", "tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": [
+        "packages/plugin-tag-management",
+        "packages/plugin-music-creation",
+        "apps/userscript",
+        "apps/tauri"
+      ],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B09-tag-management",
+        "B09-music-creation",
+        "B09-userscript-injection",
+        "B09-tauri-injection"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-data-ownership.md",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md"
+      ],
+      "verificationGroups": ["targetPackage", "tauriFrontend"],
+      "relatedBatches": ["B06"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B09-tag-management-shared",
+          "candidate": "B09-tag-management",
+          "runtime": "shared",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+          "findingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        }
+      ],
+      "remainingSubbatches": [
+        "B09-music-creation",
+        "B09-userscript-injection",
+        "B09-tauri-injection"
+      ],
+      "completion": "1 of 4 candidates audited: tag ownership and disable/restore pass with 36 tests and two scoped typechecks. Creation and both application injection candidates remain unreviewed. Whole-board status remains unreviewed/pending; no product/runtime acceptance claim."
+    },
+    {
+      "batchId": "B10",
+      "title": "Source protocols and lazy loading",
+      "runtime": ["shared"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["packages/plugin-source-bilibili", "packages/plugin-source-douyin"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B10-bilibili-descriptor",
+        "B10-bilibili-session",
+        "B10-bilibili-search",
+        "B10-bilibili-import-listing",
+        "B10-bilibili-media",
+        "B10-douyin-descriptor",
+        "B10-douyin-session",
+        "B10-douyin-search",
+        "B10-douyin-import-listing",
+        "B10-douyin-media"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/music-source-plugin-architecture.md"
+      ],
+      "verificationGroups": ["targetPackage", "consumers"],
+      "relatedBatches": ["B11", "B12"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B10-bilibili-descriptor-shared",
+          "candidate": "B10-bilibili-descriptor",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-fix.json",
+          "findingIds": ["B10-B01"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          },
+          "resolvedFindingIds": ["B10-B01"],
+          "history": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-baseline.json"
+          ]
+        }
+      ],
+      "remainingSubbatches": [
+        "B10-bilibili-session",
+        "B10-bilibili-search",
+        "B10-bilibili-import-listing",
+        "B10-bilibili-media",
+        "B10-douyin-descriptor",
+        "B10-douyin-session",
+        "B10-douyin-search",
+        "B10-douyin-import-listing",
+        "B10-douyin-media"
+      ],
+      "completion": "1 of 10 candidates audited and passing after B10-B01 repair. All 88 targeted/neighbor tests, scoped and root typechecks, root tests/lint, explicit app builds and the final aggregate root build pass. Historical transient failures from unrelated concurrent audit tests are retained. Root formatting has 12 unchanged documentation issues. Nine other B10 candidates and GM/Rust acceptance remain unreviewed; no whole-board acceptance is claimed."
+    },
+    {
+      "batchId": "B11",
+      "title": "Userscript runtime",
+      "runtime": ["userscript"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["apps/userscript"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B11-document-start-launcher",
+        "B11-shadow-dom",
+        "B11-gm-http",
+        "B11-page-bridges",
+        "B11-gm-storage",
+        "B11-single-proxy",
+        "B11-production-graph"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/userscript/development.md"
+      ],
+      "verificationGroups": ["targetPackage", "consumers"],
+      "relatedBatches": ["B06", "B07", "B10"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B11-document-start-launcher-userscript",
+          "candidate": "B11-document-start-launcher",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript-baseline.json",
+          "findingIds": [],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ],
+      "remainingSubbatches": [
+        "B11-shadow-dom",
+        "B11-gm-http",
+        "B11-page-bridges",
+        "B11-gm-storage",
+        "B11-single-proxy",
+        "B11-production-graph"
+      ],
+      "completion": "1 of 7 candidates reviewed: document-start/launcher passes its offline scope with no confirmed findings. Six candidates, hide/show lifecycle, actual GM and installed Tampermonkey acceptance remain pending. The bounded eager-graph check does not complete B11-production-graph."
+    },
+    {
+      "batchId": "B12",
+      "title": "Tauri built-ins, accounts and media",
+      "runtime": ["tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["apps/tauri"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B12-renderer-platform",
+        "B12-native-network",
+        "B12-request-registry",
+        "B12-accounts-vault-proxy",
+        "B12-browser-cdp-operation",
+        "B12-media-grants",
+        "B12-system-download",
+        "B12-ipc-acl"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/desktop/development.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/runtime-architecture.md"
+      ],
+      "verificationGroups": ["tauriFrontend", "nativeTarget", "consumers"],
+      "relatedBatches": ["B02", "B06", "B07", "B10"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "reviewCoverage": "Only the B12-renderer-platform subbatch is conformant after R01/R02 repair. All seven other candidates remain unreviewed. Production builds pass, but live account/media and complete repository delivery acceptance remain open.",
+      "subbatches": [
+        {
+          "batchId": "B12-renderer-platform-tauri",
+          "candidate": "B12-renderer-platform",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix-baseline.json",
+          "findingIds": ["B12-R01", "B12-R02"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          },
+          "verificationSummary": "R01/R02 fixed with permanent regressions/native fixtures. Targeted 75 cases, complete tests/typecheck/lint/build/native/MSRV pass. Existing 12 documentation format failures and two locked TLS advisories keep full delivery gates incomplete; live remains not-run.",
+          "nextBatch": "B12-native-network-tauri",
+          "previousReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri.json",
+          "resolvedFindingIds": ["B12-R01", "B12-R02"]
+        }
+      ],
+      "remainingGateFailures": [
+        {
+          "kind": "repository-format-debt",
+          "owner": "B20/B21",
+          "count": 12,
+          "logPath": ".codex-tmp/repair-b12/root-format-final.log",
+          "relation": "No changed B12 file is in the failure list. These files are unchanged from HEAD."
+        },
+        {
+          "kind": "existing-native-dependency-advisories",
+          "owner": "Repository native dependency maintenance",
+          "ids": ["RUSTSEC-2026-0382", "RUSTSEC-2026-0381"],
+          "logPath": ".codex-tmp/repair-b12/check-deny.log",
+          "relation": "Cargo manifests and Cargo.lock are unchanged from HEAD. Separate dependency remediation remains required; no complete delivery/security acceptance is claimed."
+        }
+      ],
+      "remainingSubbatches": [
+        "B12-native-network",
+        "B12-request-registry",
+        "B12-accounts-vault-proxy",
+        "B12-browser-cdp-operation",
+        "B12-media-grants",
+        "B12-system-download",
+        "B12-ipc-acl"
+      ],
+      "completion": "Only renderer-platform is reviewed and passes; seven independent candidates remain unreviewed. Scoped child evidence is preserved and does not constitute whole-board acceptance."
+    },
+    {
+      "batchId": "B13",
+      "title": "Permissionless VM, Worker and same-engine tests",
+      "runtime": ["shared"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": [
+        "packages/plugin-vm",
+        "packages/plugin-sandbox-browser",
+        "packages/plugin-testkit"
+      ],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B13-vm-profile-control",
+        "B13-vm-engine-bridge",
+        "B13-browser-adapter",
+        "B13-same-engine-testkit"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s11-permissionless-sandbox.md"
+      ],
+      "verificationGroups": ["targetPackage", "vm"],
+      "relatedBatches": ["B03"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B13-vm-profile-control-shared",
+          "candidate": "B13-vm-profile-control",
+          "runtime": "shared",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          },
+          "findings": [],
+          "resolvedFindings": ["B13-P01"],
+          "historicalReports": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared-baseline.json"
+          ],
+          "fixReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+          "originalBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared-baseline.json"
+        }
+      ],
+      "remainingSubbatches": [
+        "B13-vm-engine-bridge",
+        "B13-browser-adapter",
+        "B13-same-engine-testkit"
+      ],
+      "completion": "1 of 4 candidates reviewed and passing after B13-P01 repair: 33 permanent regressions, 90 VM-gate tests, 10 original probes and built testkit smoke pass. Root test/typecheck/lint/production build pass; 12 pre-existing format issues and two unchanged Rust TLS dependency advisories remain. The other three B13 candidates are unreviewed. Current Profile/resources require fresh B18 live admission; no whole-B13 or desktop-runtime acceptance is claimed.",
+      "nextBatch": {
+        "batchId": "B18-profile-reacceptance-tauri",
+        "parentBatch": "B18",
+        "runtime": "tauri",
+        "status": "pending",
+        "question": "Reaccept the current Windows/WebView/Profile/resource combination using the existing isolated native acceptance harness after repository delivery blockers are resolved.",
+        "allowedPaths": [
+          "apps/tauri/scripts/accept-plugin-delivery.mjs",
+          "The existing s15-acceptance example and exact target/resource evidence",
+          "Bilingual S15 admission status"
+        ],
+        "requiresExplicitRuntimeInspectionRequest": true,
+        "requiredGuidance": [
+          "AGENTS.md",
+          "apps/tauri/AGENTS.md",
+          "apps/tauri/src-tauri/AGENTS.md",
+          ".agents/skills/any-music-tauri-runtime/SKILL.md"
+        ],
+        "continuation": "The budget repair is complete and offline-tested. Current Profile/resources differ from the previously accepted target, so native installation/execution correctly remain closed. Do not copy the new hash into acceptance records without a fresh authorized live run. Existing Rust TLS advisories are a separate repository release blocker; retain all other concurrent audit/product work."
+      }
+    },
+    {
+      "batchId": "B14",
+      "title": "Native policy, authority and transactions",
+      "runtime": ["tauri"],
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "pass",
+        "live": "not-run"
+      },
+      "allowedRoots": [
+        "crates/am-plugin-policy",
+        "crates/am-plugin-runtime",
+        "apps/tauri/src-tauri"
+      ],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B14-pure-policy",
+        "B14-runtime-ports",
+        "B14-authority-storage",
+        "B14-named-commit-revoke"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s12-native-authority-and-offline-data.md"
+      ],
+      "verificationGroups": ["nativeTarget"],
+      "relatedBatches": ["B03"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B14-pure-policy-tauri",
+          "candidate": "B14-pure-policy",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+          "findingIds": [],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-applicable"
+          },
+          "originalAuditVerdict": "pass-scoped",
+          "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json"
+        },
+        {
+          "batchId": "B14-runtime-ports-tauri",
+          "candidate": "B14-runtime-ports",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+          "findingIds": ["B14-R01"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          },
+          "originalAuditVerdict": "needs-fix",
+          "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json"
+        },
+        {
+          "batchId": "B14-authority-storage-tauri",
+          "candidate": "B14-authority-storage",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+          "findingIds": [],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          },
+          "originalAuditVerdict": "pass-scoped",
+          "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json"
+        },
+        {
+          "batchId": "B14-named-commit-revoke-tauri",
+          "candidate": "B14-named-commit-revoke",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+          "findingIds": ["B14-N01"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          },
+          "originalAuditVerdict": "needs-fix",
+          "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json"
+        }
+      ],
+      "remainingSubbatches": [],
+      "completion": "4 of 4 candidates reviewed and both P2 findings repaired. Seven permanent regressions establish the original failures and fixed behavior; full tests/typecheck/lint/native/MSRV/Android checks and production build pass. Pre-existing dependency-advisory and 12-document format debt remain separate, as does live runtime acceptance.",
+      "openFindingIds": [],
+      "auditComplete": true,
+      "acceptanceComplete": false,
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri.json",
+      "resolvedFindingIds": ["B14-R01", "B14-N01"],
+      "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+      "implementationReviewComplete": true,
+      "nextAction": "The two B14 implementation defects are repaired. Track dependency-advisory and pre-existing document-format debt independently, and perform explicitly authorized live runtime acceptance if required for release."
+    },
+    {
+      "batchId": "B15",
+      "title": "Anonymous network and revocation barriers",
+      "runtime": ["tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["crates/am-plugin-net", "apps/tauri/src-tauri"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B15-public-target-bounded-transport",
+        "B15-native-gate",
+        "B15-network-ledger",
+        "B15-final-byte-delivery"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s13-anonymous-networking-and-exits.md"
+      ],
+      "verificationGroups": ["nativeTarget"],
+      "relatedBatches": ["B14"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B15-public-target-bounded-transport-tauri",
+          "candidate": "B15-public-target-bounded-transport",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+          "findingIds": [],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          }
+        }
+      ],
+      "remainingSubbatches": ["B15-native-gate", "B15-network-ledger", "B15-final-byte-delivery"],
+      "completion": "1 of 4 candidates reviewed: public-target/bounded transport passes its scoped static/tests review with no confirmed findings. NativeGate, persistent ledger and final-byte delivery remain unreviewed; B14 authority and B18 production admission/live evidence are not certified. Parent B15 remains unreviewed/pending until remaining candidates close."
+    },
+    {
+      "batchId": "B16",
+      "title": "Package verification, installation and recovery",
+      "runtime": ["tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": [
+        "crates/am-plugin-package",
+        "crates/am-plugin-runtime",
+        "apps/tauri/src-tauri"
+      ],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B16-package-verification",
+        "B16-runtime-install-files",
+        "B16-application-package-files",
+        "B16-package-transactions",
+        "B16-revocations-recovery"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md"
+      ],
+      "verificationGroups": ["nativeTarget", "package"],
+      "relatedBatches": ["B14"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B16-package-verification-tauri",
+          "candidate": "B16-package-verification",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix-baseline.json",
+          "findingIds": ["B16-P01"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          },
+          "fixReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+          "previousReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri.json",
+          "originalBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-baseline.json",
+          "resolvedFindingIds": ["B16-P01"]
+        }
+      ],
+      "auditComplete": false,
+      "openFindingIds": [],
+      "remainingSubbatches": [
+        "B16-runtime-install-files",
+        "B16-application-package-files",
+        "B16-package-transactions",
+        "B16-revocations-recovery"
+      ],
+      "completion": "1 of 5 candidates reviewed and repaired: package verification passes its bounded scope after B16-P01 complete-reference validation and 13 shared regressions. Whole-root tests (retry), typecheck, lint, production build, native checks and MSRV pass; the earlier Markdown line-ending and TLS advisory failures are resolved by repository-format-tls-fix.json. Runtime InstallFiles, application files/durability, package transactions and persisted revocations/recovery remain unreviewed. Passing regression tests do not certify those audits or live acceptance.",
+      "resolvedFindingIds": ["B16-P01"]
+    },
+    {
+      "batchId": "B17",
+      "title": "Author tools, public artifacts and DEV",
+      "runtime": ["repository", "tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "pass",
+        "live": "not-run"
+      },
+      "allowedRoots": [
+        "packages/plugin-cli",
+        "packages/plugin-sdk",
+        "packages/plugin-testkit",
+        "apps/tauri/src-tauri"
+      ],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B17-cli-build-pack-sign",
+        "B17-sdk-node-artifact",
+        "B17-testkit-artifact",
+        "B17-windows-dev-pairing",
+        "B17-windows-dev-reload",
+        "B17-windows-dev-end"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md"
+      ],
+      "verificationGroups": ["targetPackage", "tools", "nativeTarget"],
+      "relatedBatches": ["B03", "B13", "B16"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B17-cli-build-pack-sign",
+          "candidate": "B17-cli-build-pack-sign",
+          "runtime": "node",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-baseline.json",
+          "findingIds": ["B17-C01", "B17-C02"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-applicable"
+          },
+          "fixReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-fix.json",
+          "fixBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-fix-baseline.json",
+          "resolvedFindingIds": ["B17-C01", "B17-C02"],
+          "history": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign.json"
+          ]
+        }
+      ],
+      "remainingSubbatches": [
+        "B17-sdk-node-artifact",
+        "B17-testkit-artifact",
+        "B17-windows-dev-pairing",
+        "B17-windows-dev-reload",
+        "B17-windows-dev-end"
+      ],
+      "nextBatch": {
+        "batchId": "B17-sdk-node-artifact",
+        "parentBatch": "B17",
+        "runtime": "node",
+        "status": "pending",
+        "question": "Does packed SDK /node use only its public standalone schema closure, retain the license and stay absent from browser root/music/schema entry graphs?",
+        "allowedPaths": [
+          "packages/plugin-sdk/package.json",
+          "packages/plugin-sdk/scripts/build.mjs",
+          "packages/plugin-sdk/scripts/check-package.mjs",
+          "packages/plugin-sdk/src/node/package-format.mjs",
+          "matching public package tests"
+        ],
+        "requiredGuidance": [
+          "AGENTS.md",
+          "packages/plugin-sdk/AGENTS.md",
+          "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md"
+        ],
+        "continuation": "B17-C01/C02 are resolved; reuse the fix report/source hashes/public artifact evidence after checking changes. SDK/testkit internals and all three Tauri DEV candidates remain separate audits. No app/browser launch or admission renewal is authorized by this repair."
+      },
+      "completion": "The CLI build/pack/sign candidate passes after B21 current-source revalidation of B17-C01/C02. Five independent candidates remain unreviewed; no full B17 acceptance is claimed."
+    },
+    {
+      "batchId": "B18",
+      "title": "Desktop external execution and admission",
+      "runtime": ["tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "not-run",
+        "tests": "not-run",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["apps/tauri"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B18-native-delivery-control",
+        "B18-executor-relay",
+        "B18-resource-filter",
+        "B18-command-catalog-save-operation"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md"
+      ],
+      "verificationGroups": ["tauriFrontend", "nativeTarget"],
+      "relatedBatches": ["B13", "B14", "B15", "B16", "B17"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B18-native-delivery-control-tauri",
+          "candidate": "B18-native-delivery-control",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix-baseline.json",
+          "findingIds": ["B18-D01"],
+          "openFindingIds": [],
+          "fixedFindingIds": ["B18-D01"],
+          "originalReports": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-baseline.json"
+          ],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "pass",
+            "live": "not-run"
+          }
+        }
+      ],
+      "auditComplete": false,
+      "openFindingIds": [],
+      "fixedFindingIds": ["B18-D01"],
+      "remainingSubbatches": [
+        "B18-executor-relay",
+        "B18-resource-filter",
+        "B18-command-catalog-save-operation"
+      ],
+      "completion": "1 of 4 candidates reviewed and repaired. B18-D01 is resolved by a consuming native rollback preview, native confirmation and transaction-time policy/identity/epoch/revocation/deadline/integrity checks. Eight permanent regressions pass. Full root tests pass on a scheduling-only retry; typecheck/lint/format/production build/native/MSRV/deny and Android arm64 Clippy pass. The original failing report is retained. Executor/relay, resource filtering and a command/catalog/save operation remain unreviewed; application/dialog and fresh exact-target acceptance remain pending. No whole-board completion is claimed."
+    },
+    {
+      "batchId": "B19",
+      "title": "Mobile engineering and delivery exits",
+      "runtime": ["tauri"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "allowedRoots": ["apps/tauri"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B19-android-capabilities-acl",
+        "B19-android-document-save-keystore",
+        "B19-android-lifecycle",
+        "B19-android-bilibili-accounts-proxy-media",
+        "B19-android-build-signing",
+        "B19-android-minimum-device-channel",
+        "B19-ios-adapters"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md"
+      ],
+      "verificationGroups": ["tauriFrontend", "nativeTarget", "mobile"],
+      "relatedBatches": ["B12", "B14", "B16", "B18"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B19-android-capabilities-acl-tauri",
+          "candidate": "B19-android-capabilities-acl",
+          "platform": "android",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "candidateComplete": true,
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri-fix.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-mobile-capability-boundaries-tauri-baseline.json",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          },
+          "openFindingIds": [],
+          "originalReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri.json",
+          "resolvedFindingIds": ["B19-A01"]
+        },
+        {
+          "batchId": "B19-ios-capability-boundary-tauri",
+          "candidate": "B19-ios-adapters",
+          "platform": "ios",
+          "runtime": "tauri",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "candidateComplete": false,
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-ios-capability-boundary-tauri.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-mobile-capability-boundaries-tauri-baseline.json",
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-run"
+          },
+          "openFindingIds": []
+        }
+      ],
+      "auditComplete": false,
+      "openFindingIds": [],
+      "remainingSubbatches": [
+        "B19-android-document-save-keystore",
+        "B19-android-lifecycle",
+        "B19-android-bilibili-accounts-proxy-media",
+        "B19-android-build-signing",
+        "B19-android-minimum-device-channel",
+        "B19-ios-adapters"
+      ],
+      "nextBatch": "B19-android-document-save-keystore",
+      "completion": "Android capabilities/ACL implementation review passes its scoped boundary after B19-A01 metadata correction on 2026-10-22. The repair changes only the capability description; JSON authority is deeply equal before/after, mobile boundary check and 2 existing rejection tests pass. Original 12-test/arm64-Clippy evidence and the failing metadata report are retained historically. No new artifact/live acceptance is claimed. iOS local configuration boundary remains checked separately; iOS engineering/adapters and the other six B19 candidates remain incomplete. S16 cold-start/forced-recreation failures remain documented, not reproduced or closed.",
+      "resolvedFindingIds": ["B19-A01"]
+    },
+    {
+      "batchId": "B20",
+      "title": "Documentation, guidance, skills and legacy cleanup",
+      "runtime": ["repository"],
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "not-run",
+        "live": "not-applicable"
+      },
+      "allowedRoots": ["AGENTS.md", ".agents/skills", "docs", "README.md", "README.en.md"],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B20-reviewed-area-guidance",
+        "B20-ownership-status-scope",
+        "B20-bilingual-counterparts-indexes",
+        "B20-targeted-legacy-check"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/development-workflow.md",
+        "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md"
+      ],
+      "verificationGroups": ["documentation"],
+      "relatedBatches": ["B01-B19"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "subbatches": [
+        {
+          "batchId": "B20-reviewed-area-guidance-repository",
+          "candidate": "B20-reviewed-area-guidance",
+          "runtime": "repository",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository-baseline.json",
+          "findingIds": ["B20-G01", "B20-G02", "B20-G03", "B20-G04", "B20-G05"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "not-applicable",
+            "artifact": "not-run",
+            "live": "not-applicable"
+          }
+        },
+        {
+          "batchId": "B20-ownership-status-scope-repository",
+          "candidate": "B20-ownership-status-scope",
+          "runtime": "repository",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository-baseline.json",
+          "findingIds": ["B20-S01", "B20-S02", "B20-S03", "B20-S04"],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "not-applicable",
+            "artifact": "not-run",
+            "live": "not-applicable"
+          }
+        },
+        {
+          "batchId": "B20-bilingual-counterparts-indexes-repository",
+          "candidate": "B20-bilingual-counterparts-indexes",
+          "runtime": "repository",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-bilingual-counterparts-indexes-repository.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-bilingual-counterparts-indexes-repository-baseline.json",
+          "findingIds": [],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "not-applicable",
+            "artifact": "not-run",
+            "live": "not-applicable"
+          }
+        },
+        {
+          "batchId": "B20-targeted-legacy-check-repository",
+          "candidate": "B20-targeted-legacy-check",
+          "runtime": "repository",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-repository.json",
+          "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-repository-baseline.json",
+          "runtimeReports": [
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-userscript.json",
+            "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-tauri.json"
+          ],
+          "findingIds": [],
+          "openFindingIds": [],
+          "evidence": {
+            "static": "pass",
+            "tests": "pass",
+            "artifact": "not-run",
+            "live": "not-applicable"
+          }
+        }
+      ],
+      "remainingSubbatches": [],
+      "auditComplete": true,
+      "completion": "4 of 4 B20 candidates reviewed and scoped acceptance is complete. Earlier guidance batches repaired nine findings; counterpart/index and targeted legacy batches found no additional defect. Two runtime entry reports, 21 manifests, 18 composition files, 669 imports, 198 owner inventory files, canonical IPC/permission checks and generated protocol consistency pass. Twenty-five targeted tests pass. Prior relevant guidance/structure hashes are unchanged. No product files were changed by the final two candidates. This closes repository documentation/guidance/targeted entry cleanup scope only; optional Python skill validation, external URLs, full translation semantics and product/native/live acceptance retain their explicit limits.",
+      "nextBatch": {
+        "batchId": "B21-repository-final-reconciliation",
+        "parentBatch": "B21",
+        "runtime": "repository",
+        "status": "pending",
+        "question": "Reconcile the completed scoped B20 reports with the existing B21 final report and current hashes, preserving all other unreviewed/live/unsupported limits and reusing only still-valid gates.",
+        "allowedPaths": [
+          "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+          "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-*.json",
+          "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-*.json",
+          "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.*.md",
+          "Only necessary final diff/hash/verification inputs"
+        ],
+        "exclusions": [
+          "Re-reading or accepting all product implementations",
+          "Unrequested product fixes, app/browser/emulator work, recapture, commit or push"
+        ],
+        "continuation": "B20 now has four closed scoped candidates and nine resolved documentation findings. Reconcile its new evidence with existing B21 coverage; do not infer whole-project acceptance. Run root/native final gates only when their earlier inputs have changed or the current final scope requires them."
+      },
+      "openFindingIds": []
+    },
+    {
+      "batchId": "B21",
+      "title": "Summary, regression and final status",
+      "runtime": ["repository"],
+      "refactorStatus": "unreviewed",
+      "verdict": "pending",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "pass",
+        "live": "not-run"
+      },
+      "allowedRoots": [
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5",
+        "package.json",
+        "scripts"
+      ],
+      "scopeRule": "Candidate roots only. Select exactly one subbatch, one invariant and one runtime; narrow to its module plus at most one direct neighbor before reading implementation. Candidate operations may require further splits.",
+      "candidateSubbatches": [
+        "B21-coverage-evidence-summary",
+        "B21-applicable-final-gates",
+        "B21-remaining-gaps-handoff"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "nearest owner AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+        "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+        "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md"
+      ],
+      "verificationGroups": ["final", "nativeFinal"],
+      "relatedBatches": ["B01-B20"],
+      "declaredStatus": "See declaredClaims; implementation and runtime evidence must be reviewed independently.",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json",
+      "auditExecutionComplete": true,
+      "acceptanceComplete": false,
+      "completion": "B21 aggregation and B21-T01 repair are complete in scope. All five root gates pass, including the unchanged default test scheduler. Planned implementation coverage and exact live runtime/device/channel evidence are still incomplete.",
+      "remainingSubbatches": [],
+      "subbatches": [
+        {
+          "batchId": "B21-coverage-evidence-summary-repository",
+          "candidate": "B21-coverage-evidence-summary",
+          "runtime": "repository",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json",
+          "scope": "This B21 audit activity was executed and documented; downstream implementation/runtime acceptance remains open."
+        },
+        {
+          "batchId": "B21-applicable-final-gates-repository",
+          "candidate": "B21-applicable-final-gates",
+          "runtime": "repository",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json",
+          "scope": "This B21 audit activity was executed and documented; downstream implementation/runtime acceptance remains open."
+        },
+        {
+          "batchId": "B21-remaining-gaps-handoff-repository",
+          "candidate": "B21-remaining-gaps-handoff",
+          "runtime": "repository",
+          "refactorStatus": "conformant",
+          "verdict": "pass-scoped",
+          "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json",
+          "scope": "This B21 audit activity was executed and documented; downstream implementation/runtime acceptance remains open."
+        }
+      ],
+      "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-theme-test-stability-fix.json",
+      "openFindingIds": [],
+      "resolvedFindingIds": ["B21-T01"]
+    }
+  ],
+  "queue": [
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "B11",
+    "B12",
+    "B13",
+    "B14",
+    "B15",
+    "B16",
+    "B17",
+    "B18",
+    "B19",
+    "B20",
+    "B21"
+  ],
+  "queueRule": "Top-level order follows the plan. Candidates within a block are separate future subbatches, not one authorized broad audit. Related-batch links are handoffs, not all hard prerequisites.",
+  "commandGroups": {
+    "targetPackage": {
+      "commands": [
+        "pnpm --filter <confirmed-package-name> test",
+        "pnpm --filter <confirmed-package-name> typecheck"
+      ],
+      "kind": "template",
+      "condition": "Read the owner guide and scripts first; retain build/generate prerequisites. utils has no test script according to the plan; verify during B01 and use real consumer tests."
+    },
+    "tauriFrontend": {
+      "commands": ["pnpm --filter @any-music/tauri exec vitest run <confirmed-test-path>"],
+      "kind": "template",
+      "condition": "Select one test path and confirm its prerequisites. Do not expand through the application test script into Cargo unintentionally."
+    },
+    "consumers": {
+      "commands": ["pnpm build:userscript", "pnpm build:tauri"],
+      "kind": "root-script",
+      "condition": "After relevant public-entry/interface changes; build success is artifact evidence only."
+    },
+    "protocol": {
+      "commands": ["pnpm check:protocol:generated", "pnpm check:protocol"],
+      "kind": "root-script"
+    },
+    "vm": {
+      "commands": ["pnpm check:plugin:vm"],
+      "kind": "root-script",
+      "condition": "Offline build/same-engine evidence only."
+    },
+    "nativeTarget": {
+      "commands": [
+        "cargo test -p <confirmed-crate> --locked",
+        "cargo test -p any-music-tauri --lib <confirmed-module-filter> --locked"
+      ],
+      "kind": "template",
+      "condition": "Read crates and application-native guides; preserve explicit release combinations; never substitute all-features."
+    },
+    "package": {
+      "commands": ["pnpm check:plugin:package"],
+      "kind": "root-script"
+    },
+    "tools": {
+      "commands": ["pnpm check:plugin:tools"],
+      "kind": "root-script"
+    },
+    "mobile": {
+      "commands": [
+        "pnpm check:mobile:boundaries",
+        "pnpm check:mobile:android",
+        "pnpm check:mobile:release"
+      ],
+      "kind": "root-script",
+      "condition": "Android check needs its actual toolchain; release check needs matching artifacts. No accept:* commands or device launches in ordinary static review."
+    },
+    "final": {
+      "commands": ["pnpm test", "pnpm typecheck", "pnpm lint", "pnpm format:check", "pnpm build"],
+      "kind": "root-script",
+      "condition": "B21/final closure and before any requested commit; not required for baseline-only B00."
+    },
+    "nativeFinal": {
+      "commands": ["pnpm check:native", "pnpm check:rust:msrv", "pnpm check:rust:deny"],
+      "kind": "root-script",
+      "condition": "Required when native implementation changes."
+    },
+    "report": {
+      "commands": [
+        "pnpm exec oxfmt --check docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5"
+      ],
+      "kind": "report-only",
+      "condition": "Formatting of this run only; not a product acceptance gate."
+    },
+    "documentation": {
+      "commands": ["pnpm exec oxfmt --check <changed-document-paths>"],
+      "kind": "template",
+      "condition": "Select only changed documentation for B20 and check metadata/counterpart/index/local links. This is not the B00 report-format command."
+    }
+  },
+  "nextBatch": {
+    "batchId": "B21-repository-final-reconciliation",
+    "parentBatch": "B21",
+    "runtime": "repository",
+    "status": "pending",
+    "question": "Reconcile the completed scoped B20 reports with the existing B21 final report and current hashes, preserving all other unreviewed/live/unsupported limits and reusing only still-valid gates.",
+    "allowedPaths": [
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-*.json",
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-*.json",
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.*.md",
+      "Only necessary final diff/hash/verification inputs"
+    ],
+    "exclusions": [
+      "Re-reading or accepting all product implementations",
+      "Unrequested product fixes, app/browser/emulator work, recapture, commit or push"
+    ],
+    "continuation": "B20 now has four closed scoped candidates and nine resolved documentation findings. Reconcile its new evidence with existing B21 coverage; do not infer whole-project acceptance. Run root/native final gates only when their earlier inputs have changed or the current final scope requires them."
+  },
+  "globalExclusions": [
+    "Product-code fixes",
+    "All full historical diffs and broad source scans",
+    "Development servers, product previews, app/browser/emulator launches, screenshots, clicks and live acceptance",
+    "Platform recapture/captureDate changes",
+    "Commit, push, publishing or system associations"
+  ],
+  "evidencePolicy": "A document claim is not this run's static/tests/artifact/live evidence. Unsupported-by-design requires its rejection path to be reviewed; pending declared capabilities are not accepted automatically.",
+  "baselineObservations": [
+    {
+      "reference": "baseline.json: git.worktreeObservations",
+      "affectedBatches": ["B12", "B20"],
+      "action": "Recheck independently changing desktop/architecture guides and removed proposals at batch start. No content verdict is made by B00."
+    }
+  ],
+  "pendingContinuations": [
+    {
+      "batchId": "B02-account-pool-shared",
+      "parentBatch": "B02",
+      "runtime": "shared",
+      "status": "pending",
+      "question": "Do account identity changes, selection policies and racing account leases preserve cancellation, replay safety and public credential isolation?",
+      "allowedPaths": [
+        "packages/account-pool/**",
+        "packages/network-routing public exports and the existing B02 report only",
+        "at most one direct desktop composition reference for a B12 handoff"
+      ],
+      "excluded": [
+        "network-routing implementation re-audit or product fixes",
+        "native transport acceptance",
+        "all product UI/live activity"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "packages/account-pool/AGENTS.md",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md"
+      ],
+      "criteria": [
+        "C1 public portable dependency boundaries",
+        "C3 selection, lease competition, cancellation and release",
+        "C4/C5 public identity and no write replay",
+        "C6 matching owner tests"
+      ],
+      "intendedCommands": [
+        "pnpm --filter @any-music/account-pool test",
+        "pnpm --filter @any-music/account-pool typecheck"
+      ],
+      "stopRule": "Review one account-pool selection/request lease chain and record B12 runtime questions without expanding into native implementation.",
+      "continuation": "Reuse B02-network-routing-shared-fix.json and its source hashes. B02-N01 is resolved with six permanent regression cases and passing root test/typecheck/lint/build; the earlier documentation-format debt is resolved by repository-format-tls-fix.json. Execute only B02-account-pool-shared; prior B01 continuation remains pending in the queue. No UI, commit, push or publication."
+    },
+    {
+      "batchId": "B03-sdk-music-shared",
+      "parentBatch": "B03",
+      "runtime": "shared",
+      "status": "pending",
+      "question": "Are serializable music DTOs and named provider ports framework-free, separated from core/wire conversion, and available through a lightweight public /music entry?",
+      "allowedPaths": [
+        "packages/plugin-sdk/src/music.ts",
+        "packages/plugin-sdk/schema/v1/protocol.schema.json (music definitions only)",
+        "packages/plugin-sdk/package.json and matching test/ fixtures",
+        "at most one direct music-workbench conversion consumer"
+      ],
+      "excluded": [
+        "Other SDK entry implementation audits",
+        "Native protocol and runtime authority",
+        "Product code fixes and any UI/live inspection"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "packages/plugin-sdk/AGENTS.md",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md"
+      ],
+      "criteria": [
+        "C1 DTO and conversion ownership",
+        "C2 lightweight public entry",
+        "C3/C4 named operations, serialization and error contracts",
+        "C6 matching tests and generation evidence"
+      ],
+      "intendedCommands": [
+        "pnpm --filter @any-music/plugin-sdk test",
+        "pnpm --filter @any-music/plugin-sdk typecheck"
+      ],
+      "stopRule": "Review only the /music DTO/provider contract chain and one direct consumer; retain other B03 candidates as pending.",
+      "continuation": "Reuse B03-sdk-root-shared.json after verifying relevant hashes. Root static/tests/SDK artifact pass with 107 SDK tests, 30 supplemental scenarios and 183 TS/Rust cases. Other SDK entries and Rust implementation were not accepted. The user selected B03; previous B01/B02 continuation data remains in pendingContinuations and owner batches. No live UI, commit or push."
+    },
+    {
+      "batchId": "B04-music-sources-shared",
+      "parentBatch": "B04",
+      "runtime": "shared",
+      "status": "pending",
+      "question": "Does the separately exported music-source adapter preserve injected ownership, generation-bound removal/reinstall and teardown without adding authority to the generic root?",
+      "allowedPaths": [
+        "packages/plugin-center/src/music-sources/**",
+        "Matching packages/plugin-center/test/music-sources/**",
+        "At most one direct consumer/public core contract"
+      ],
+      "excluded": [
+        "Other B04 candidate audits",
+        "GM/Rust transport and native authorization",
+        "UI/live inspection, commit or push unless explicitly requested"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "packages/plugin-center/AGENTS.md",
+        "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+        ".agents/skills/music-source-adapter/SKILL.md"
+      ],
+      "intendedCommands": [
+        "pnpm --filter @any-music/plugin-center test",
+        "pnpm --filter @any-music/plugin-center typecheck"
+      ],
+      "continuation": "B04-G01 is repaired with five red-to-green permanent cases, 56 package tests and five original audit probes passing. The generic root subbatch is pass-scoped; four other B04 candidates remain unreviewed. Preserve unrelated audit work and retain separate runtime acceptance boundaries."
+    },
+    {
+      "batchId": "B06-userscript-generation",
+      "parentBatch": "B06",
+      "runtime": "userscript",
+      "status": "pending",
+      "question": "Independently audit the final Userscript GM single-writer adapter, namespaced current-only initialization and acknowledged persistence/recovery.",
+      "allowedPaths": [
+        "apps/userscript/src/platform/product-storage.ts and direct configuration/bootstrap disposal",
+        "apps/userscript/test/platform/product-storage.test.ts",
+        "packages/music-workbench/src/storage/product-generation-store.ts as the audited direct dependency",
+        "B06 audit records"
+      ],
+      "excluded": [
+        "Product fixes and permanent tests",
+        "Tauri renderer/native mirrors, portable-data internals, native plugin SQLite/code-data transactions",
+        "Live browser/application inspection, commit and push"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "apps/userscript/AGENTS.md",
+        "docs/en/userscript/development.md",
+        ".agents/skills/any-music-userscript-runtime/SKILL.md",
+        "docs/en/cross-platform/architecture/plugin-data-ownership.md"
+      ],
+      "criteria": [
+        "C1 GM adapter ownership and storage prefix",
+        "C3 failure/restart and concurrent-writer behavior",
+        "C4 current-only startup, namespace isolation and runtime-secret separation",
+        "C6 GM-double evidence and explicit missing live acceptance"
+      ],
+      "intendedCommands": [
+        "pnpm --filter @any-music/userscript exec vitest run test/platform/product-storage.test.ts",
+        "pnpm --filter @any-music/userscript typecheck"
+      ],
+      "stopRule": "One GM storage boundary only. The two shared findings are fixed; retain live Tampermonkey as not-run unless explicitly authorized. Do not expand into Tauri or portable-data.",
+      "continuation": "B06-S01/S02 are resolved by B06-workbench-storage-shared-fix.json; verify its source hashes. Audit the final manager-owned single-writer session, current-only async hydration, ordered GM failure recovery and disposal, preserving runtime credential isolation. Final root tests/typecheck/lint/build pass; earlier format debt is resolved by repository-format-tls-fix.json. Live Tampermonkey remains not-run. Do not infer full Tauri native mirroring or portable-data acceptance."
+    },
+    {
+      "batchId": "B07-player-shared",
+      "parentBatch": "B07",
+      "runtime": "shared",
+      "status": "pending",
+      "question": "Audit ordinary-track startup ordering from lightweight description through native streaming, Range/MSE and complete fallback, including cancellation during that operation.",
+      "allowedPaths": [
+        "packages/music-workbench/src/features/player/use-audio-player.ts",
+        "packages/music-workbench/src/features/player/native-compatible-audio.ts",
+        "Matching player tests and at most one direct injected source/media boundary"
+      ],
+      "excluded": [
+        "Custom-song prefetch and independent seek audits",
+        "Downloads/audio-export and runtime transport implementation audits",
+        "Product UI/live inspection, commit or push"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "packages/music-workbench/AGENTS.md",
+        ".agents/skills/music-source-adapter/SKILL.md"
+      ],
+      "continuation": "Reuse B07-media-shared-fix.json after checking hashes. The three media findings are resolved; the other five B07 candidates remain unaudited. Do not infer GM/Rust acceptance from shared tests or production builds."
+    },
+    {
+      "batchId": "B09-music-creation-shared",
+      "parentBatch": "B09",
+      "runtime": "shared",
+      "status": "pending",
+      "question": "Verify creation draft/material namespace ownership and disable/restore; published host recipes must remain executable when creation is disabled, and disabled leaf sources must fail explicitly.",
+      "allowedPaths": [
+        "packages/plugin-music-creation",
+        "packages/music-workbench/src/features/plugins/use-music-creation.ts and its matching test",
+        "At most one directly required named host/storage/public contract"
+      ],
+      "excluded": [
+        "B09 Userscript/Tauri injection audits",
+        "Product-code fixes, independent playback/transport implementation audits",
+        "Product UI/live inspection, commit and push"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "packages/plugin-music-creation/AGENTS.md",
+        "packages/music-workbench/AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-data-ownership.md"
+      ],
+      "continuation": "Reuse the B09 tag report only after checking relevant hashes. Tag and creation are separate candidates; the tag pass does not establish creation or runtime injection acceptance."
+    },
+    {
+      "batchId": "B10-bilibili-session-shared",
+      "parentBatch": "B10",
+      "runtime": "shared",
+      "status": "pending",
+      "question": "Trace Bilibili session checking through injected HTTP: request count, error/login semantics and retry, without expanding into search, listing, media or runtime transports.",
+      "allowedPaths": [
+        "packages/plugin-source-bilibili/src/bilibili-plugin.ts (getSession only)",
+        "packages/plugin-source-bilibili/src/bilibili-api.ts (getNav and directly used request/error helpers)",
+        "Matching package tests; one core session/error/HTTP contract as needed"
+      ],
+      "excluded": [
+        "Product fixes and permanent tests",
+        "Other source operations, Douyin, GM/Rust/browser transports",
+        "Live browser/application inspection, commit and push"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "packages/plugin-source-bilibili/AGENTS.md",
+        ".agents/skills/music-source-adapter/SKILL.md"
+      ],
+      "continuation": "Reuse B10-bilibili-descriptor-shared-fix.json after checking scoped hashes. B10-B01 is resolved with permanent regression coverage. Session/request-count/error/retry behavior remains unaudited; descriptor evidence does not establish source pagination or GM/Rust runtime acceptance."
+    },
+    {
+      "batchId": "B11-shadow-dom-userscript",
+      "candidate": "B11-shadow-dom",
+      "runtime": "userscript",
+      "question": "Verify the same Shadow Host is retained through expand/hide/show, shared inline/generated styles stay scoped, and intentional unmount releases the host, styles and keyboard listeners.",
+      "allowedPaths": [
+        "apps/userscript/src/platform/dom/mount-userscript-app.ts",
+        "apps/userscript/src/platform/dom/shadow-style-registry.ts",
+        "apps/userscript/src/App.vue hide/show composition and its directly injected UI-state contract",
+        "Matching owner tests only"
+      ],
+      "exclusions": [
+        "Product fixes",
+        "GM HTTP, bridge internals, full storage or proxy audit",
+        "Browser/application inspection, commit and push"
+      ],
+      "parentBatch": "B11",
+      "status": "pending",
+      "continuation": "Reuse docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript.json after checking its source hashes. One Shadow DOM lifecycle chain only; no product or live changes.",
+      "requiredGuidance": [
+        "AGENTS.md",
+        "apps/userscript/AGENTS.md",
+        "docs/en/userscript/development.md",
+        ".agents/skills/any-music-userscript-runtime/SKILL.md"
+      ]
+    },
+    {
+      "batchId": "B15-native-gate-tauri",
+      "candidate": "B15-native-gate",
+      "parentBatch": "B15",
+      "runtime": "tauri",
+      "status": "pending",
+      "question": "Does NativeGate bind trusted caller/context/exit/permit and serialize durable epoch checks, task cancellation and revoke acknowledgement without borrowing account clients?",
+      "allowedPaths": [
+        "apps/tauri/src-tauri/src/plugins/network.rs",
+        "apps/tauri/src-tauri/src/plugins.rs authority barrier/revoke excerpts only",
+        "One directly required am-plugin-runtime exit authority contract and matching owner tests"
+      ],
+      "exclusions": [
+        "Independent persistent ledger and final executor response delivery chains",
+        "Built-in account HTTP/media implementation audit, package installation and other runtimes",
+        "Product fixes, live app/browser inspection, commit and push"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "crates/AGENTS.md",
+        "apps/tauri/AGENTS.md",
+        "apps/tauri/src-tauri/AGENTS.md",
+        ".agents/skills/any-music-tauri-runtime/SKILL.md"
+      ],
+      "continuation": "Reuse docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json after checking scoped hashes. This report proves the transport-side Gate contract only; NativeGate, durable ledger and final guest delivery remain independent unreviewed candidates."
+    },
+    {
+      "batchId": "B18-profile-reacceptance-tauri",
+      "parentBatch": "B18",
+      "runtime": "tauri",
+      "status": "pending",
+      "question": "Reaccept the current Windows/WebView/Profile/resource combination using the existing isolated native acceptance harness after repository delivery blockers are resolved.",
+      "allowedPaths": [
+        "apps/tauri/scripts/accept-plugin-delivery.mjs",
+        "The existing s15-acceptance example and exact target/resource evidence",
+        "Bilingual S15 admission status"
+      ],
+      "requiresExplicitRuntimeInspectionRequest": true,
+      "requiredGuidance": [
+        "AGENTS.md",
+        "apps/tauri/AGENTS.md",
+        "apps/tauri/src-tauri/AGENTS.md",
+        ".agents/skills/any-music-tauri-runtime/SKILL.md"
+      ],
+      "continuation": "The budget repair is complete and offline-tested. Current Profile/resources differ from the previously accepted target, so native installation/execution correctly remain closed. Do not copy the new hash into acceptance records without a fresh authorized live run. Earlier Rust TLS advisory failures are resolved by repository-format-tls-fix.json; retain all other concurrent audit/product work."
+    },
+    {
+      "batchId": "B16-runtime-install-files-tauri",
+      "candidate": "B16-runtime-install-files",
+      "parentBatch": "B16",
+      "runtime": "tauri",
+      "status": "pending",
+      "question": "Does runtime InstallFiles orchestration prepare, publish and recover paired code/data generations before committed pointers, preserve monotonic epochs across upgrade/rollback, and constrain migration to owned copies?",
+      "allowedPaths": [
+        "crates/am-plugin-runtime/src/install.rs",
+        "crates/am-plugin-runtime/src/install_model.rs",
+        "Matching runtime install tests and at most one necessary application adapter excerpt"
+      ],
+      "exclusions": [
+        "Full application filesystem/SQLite/revocation/GC chains",
+        "Verifier repair or independent B14/B15/B18 implementation",
+        "App/browser/live acceptance, commit and push"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "crates/AGENTS.md",
+        "crates/am-plugin-runtime/AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md"
+      ],
+      "continuation": "Reuse docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json after checking its scoped hashes. B16-P01 is resolved in Rust and Node; the original failing report is historical. Runtime InstallFiles and the other three installation/recovery candidates remain unreviewed. Existing offline regression success does not certify their independent audit or live acceptance."
+    },
+    {
+      "batchId": "B17-sdk-node-artifact",
+      "parentBatch": "B17",
+      "runtime": "node",
+      "status": "pending",
+      "question": "Does packed SDK /node use only its public standalone schema closure, retain the license and stay absent from browser root/music/schema entry graphs?",
+      "allowedPaths": [
+        "packages/plugin-sdk/package.json",
+        "packages/plugin-sdk/scripts/build.mjs",
+        "packages/plugin-sdk/scripts/check-package.mjs",
+        "packages/plugin-sdk/src/node/package-format.mjs",
+        "matching public package tests"
+      ],
+      "requiredGuidance": [
+        "AGENTS.md",
+        "packages/plugin-sdk/AGENTS.md",
+        "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md"
+      ],
+      "continuation": "B17-C01/C02 are resolved; reuse the fix report/source hashes/public artifact evidence after checking changes. SDK/testkit internals and all three Tauri DEV candidates remain separate audits. No app/browser launch or admission renewal is authorized by this repair."
+    },
+    "B08-theme-preference-test-stability-shared",
+    {
+      "batchId": "B21-repository-final-reconciliation",
+      "parentBatch": "B21",
+      "runtime": "repository",
+      "status": "pending",
+      "question": "Reconcile the completed scoped B20 reports with the existing B21 final report and current hashes, preserving all other unreviewed/live/unsupported limits and reusing only still-valid gates.",
+      "allowedPaths": [
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-*.json",
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-*.json",
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.*.md",
+        "Only necessary final diff/hash/verification inputs"
+      ],
+      "exclusions": [
+        "Re-reading or accepting all product implementations",
+        "Unrequested product fixes, app/browser/emulator work, recapture, commit or push"
+      ],
+      "continuation": "B20 now has four closed scoped candidates and nine resolved documentation findings. Reconcile its new evidence with existing B21 coverage; do not infer whole-project acceptance. Run root/native final gates only when their earlier inputs have changed or the current final scope requires them."
+    }
+  ],
+  "repositoryMaintenance": {
+    "maintenanceId": "repository-format-tls-fix",
+    "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/repository-format-tls-fix.json",
+    "verdict": "pass-scoped",
+    "resolvedIssues": ["repository-markdown-crlf", "RUSTSEC-2026-0381", "RUSTSEC-2026-0382"],
+    "rootFormat": "pass",
+    "rustDeny": "pass",
+    "nativeCheck": "pass",
+    "rootTests": "pass",
+    "rootTypecheck": "pass",
+    "rootLint": "pass",
+    "rootBuild": "pass",
+    "rustMsrv": "pass",
+    "remainingGateFailuresInScope": [],
+    "note": "Older batch reports retain command-time failure evidence; use this follow-up for the current resolution of Markdown line endings and the two TLS advisories only."
+  },
+  "finalAudit": {
+    "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json",
+    "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final-baseline.json",
+    "chineseSummary": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.zh-cn.md",
+    "englishSummary": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.en.md",
+    "counts": {
+      "candidates": 112,
+      "reviewed": 25,
+      "unreviewed": 87
+    },
+    "verdict": "pending",
+    "auditExecutionComplete": true,
+    "acceptanceComplete": false,
+    "latestFollowUp": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-theme-test-stability-fix.json",
+    "remainingConfirmedFindingIds": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "baseline": "../2026-11-04-r02-r03/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "method": "Production frontend JS/CSS/Wasm totals; per-file gzip level 9; native executable excluded from payload totals.",
+  "changedBuildSources": [
+    "packages/ui/AGENTS.md",
+    "packages/ui/src/composables/use-grid-reorder.ts"
+  ],
+  "runtimeResults": [
+    {
+      "runtime": "userscript",
+      "payloadBytesDelta": 3006,
+      "payloadGzipBytesDelta": 485,
+      "audits": [
+        {
+          "path": "apps/userscript/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false
+        },
+        {
+          "path": "apps/userscript/dist/userscript-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false
+        }
+      ]
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytesDelta": 1172,
+      "payloadGzipBytesDelta": 374,
+      "audits": [
+        {
+          "path": "apps/tauri/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false
+        }
+      ]
+    }
+  ],
+  "limits": "Shared landing guards also enter existing nonvirtual consumers. No production list switched to virtual rendering. Combined dirty-workspace artifact deltas do not establish isolated feature cost, native parity or frame-time improvement."
+}

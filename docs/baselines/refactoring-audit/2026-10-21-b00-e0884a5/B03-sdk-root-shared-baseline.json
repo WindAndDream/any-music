@@ -1,0 +1,101 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B03-sdk-root-shared",
+  "capturedAt": "2026-10-21T14:43:35.4423126+08:00",
+  "head": "1eaaa99e4626b45ffc8a4c0c32738981c637dae7",
+  "status": [
+    " M docs/en/README.md",
+    " M docs/en/cross-platform/README.md",
+    " M \"docs/zh-cn/\\346\\226\\207\\346\\241\\243\\347\\264\\242\\345\\274\\225.md\"",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\226\\207\\346\\241\\243\\347\\264\\242\\345\\274\\225.md\"",
+    "M  packages/account-pool/test/requests.test.ts",
+    "M  packages/network-routing/src/attempts.ts",
+    "M  packages/network-routing/test/attempts.test.ts",
+    "?? docs/baselines/refactoring-audit/",
+    "?? docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+    "?? \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\351\\207\\215\\346\\236\\204\\345\\210\\206\\346\\235\\277\\345\\235\\227\\346\\216\\222\\346\\237\\245\\350\\256\\241\\345\\210\\222.md\""
+  ],
+  "environment": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+    "shell": "PowerShell",
+    "os": "Windows",
+    "timezone": "Asia/Shanghai"
+  },
+  "files": [
+    {
+      "path": "packages/plugin-sdk/package.json",
+      "sha256": "b827d149d50b693288984bd7e5b03259d2a20f7e6ee0b1a9beec647dd7ab7def"
+    },
+    {
+      "path": "packages/plugin-sdk/AGENTS.md",
+      "sha256": "30bfd9cc8e49eee9d5c0b2f2779eda995c4ce3d0abfd0ec1893d2b79b6d7f76d"
+    },
+    {
+      "path": "packages/plugin-sdk/src/index.ts",
+      "sha256": "6c2fa9700fd6d445bf13ed5d2135aae6387f182b1d2bd4b30a013e220d50baf7"
+    },
+    {
+      "path": "packages/plugin-sdk/src/negotiate.ts",
+      "sha256": "78a45c695e7ced9cffd57c1394fbc51fbe16b8f7ff3e0b9c8a72bfd7b82694f8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/ports.ts",
+      "sha256": "fbfdba28a73b5b91e8d38d8759860df84b282bc1ce12f4868eb1042c56c7bee8"
+    },
+    {
+      "path": "packages/plugin-sdk/src/plugin-call-error.ts",
+      "sha256": "f0987a9dc20c552bdfa246cd1b923bd16e17917997b85af445726028a15b7854"
+    },
+    {
+      "path": "packages/plugin-sdk/test/negotiate.test.ts",
+      "sha256": "8635c604497af04ec1d4a013c96c6fa16980a313a55192caf21a84cb3c109332"
+    },
+    {
+      "path": "packages/plugin-sdk/schema/registry.json",
+      "sha256": "6fb1feaaa243dbca69a3d12502938ce7b9152887ed486257e504225a482a3c27"
+    },
+    {
+      "path": "packages/plugin-sdk/schema/v1/protocol.schema.json",
+      "sha256": "e79b519cdc0d317d9b8a780b1c39869fedcd759ade3d9db543257c754ccdb578"
+    },
+    {
+      "path": "packages/plugin-sdk/scripts/check-package.mjs",
+      "sha256": "21ce35f8efe1ee54382a30aa845b14c643cad599ea73249292eb1a8a1d4cc1ee"
+    },
+    {
+      "path": "packages/plugin-sdk/scripts/build.mjs",
+      "sha256": "3ffe2062425995f87d635a67bd57d22a0588cff4487c2b23758386cfcbfbda0d"
+    },
+    {
+      "path": "packages/plugin-sdk/tsconfig.json",
+      "sha256": "04bc760472f28399499a61dad9698a701ca147cf2f95e7827cad66c46103208a"
+    },
+    {
+      "path": "packages/plugin-sdk/tsconfig.build.json",
+      "sha256": "0ae223e20b2ede9be0a963a6f069d881bf1e1da52edd37900aaa525f3c1133d3"
+    },
+    {
+      "path": "scripts/check-plugin-protocol.mjs",
+      "sha256": "0602bd8fd0914e258994ab6e281208434983121f5616f097ce6a4889d8118e7b"
+    },
+    {
+      "path": "scripts/generate-plugin-protocol.mjs",
+      "sha256": "d5e75cc5818fd164c4e41dd58853b1792ee64024f06ad7996c74d922eedd17d8"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e"
+    }
+  ],
+  "finalInputCheck": {
+    "checkedAt": "2026-10-21T14:46:54.5854379+08:00",
+    "head": "b87ac45bfb32b9cee89b77c2170b842a69f9f98f",
+    "changedInputs": [],
+    "packageStatus": []
+  },
+  "comparison": "HEAD changed during concurrent unrelated work; every recorded target input hash stayed unchanged and SDK/protocol git status remained clean. Evidence is bound to these file hashes, not HEAD alone."
+}

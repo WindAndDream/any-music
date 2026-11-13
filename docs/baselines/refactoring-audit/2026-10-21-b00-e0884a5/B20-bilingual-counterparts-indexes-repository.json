@@ -1,0 +1,304 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B20-bilingual-counterparts-indexes-repository",
+  "parentBatch": "B20",
+  "candidate": "B20-bilingual-counterparts-indexes",
+  "runtime": "repository",
+  "startedAt": "2026-10-22T10:52:01.564Z",
+  "completedAt": "2026-10-22T10:55:18.206Z",
+  "timezone": "Asia/Shanghai",
+  "scope": "Repository documentation structure only: locale metadata and reciprocal counterparts, root language switches, direct index coverage/reachability, local file paths/casing and Markdown heading anchors; include local references from repository AGENTS and skills.",
+  "criteria": [
+    "C6 runtimeScope/documentType/platform/captureDate and paired metadata",
+    "C6 reciprocal locale counterparts and root language switches",
+    "C6 direct index coverage and reachability from documented roots",
+    "C6 valid local files, exact path case and heading anchors",
+    "C6 preserve historical metadata, accepted/archival declarations and observed capture dates"
+  ],
+  "baseline": {
+    "reference": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-bilingual-counterparts-indexes-repository-baseline.json",
+    "head": "0dde162342c43725fd022c6ff8f34c250b344f5f",
+    "currentHead": "0dde162342c43725fd022c6ff8f34c250b344f5f",
+    "finalHashesMatchBaseline": true,
+    "unchangedDocumentAndGuidanceFiles": 101,
+    "initialWorkingTree": "Existing staged/unstaged changes retained. No documentation, guide, skill, product or historical artifact contents were changed by this batch."
+  },
+  "declaredStatus": {
+    "claim": "Documentation declares separate runtime scopes, paired locales/indexes and source-observation dates. Those declarations and their structural links are checked here; product support and historical/current acceptance claims are not re-certified.",
+    "reference": "docs/en/README.md:20-30"
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "not-applicable",
+    "artifact": "not-run",
+    "live": "not-applicable"
+  },
+  "coverage": {
+    "documents": 68,
+    "localeDocuments": 66,
+    "localePairs": 33,
+    "rootLanguageSwitches": 2,
+    "indexDocuments": 8,
+    "guideAndSkillFiles": 33,
+    "localLinks": 713,
+    "headingAnchors": 16,
+    "reachableDocuments": 68,
+    "documentsWithoutDirectIndexEntry": [],
+    "externalLinksExcluded": 150,
+    "protectedCaptureFiles": [
+      "docs/en/cross-platform/platforms/bilibili/web-api-contract.md",
+      "docs/en/cross-platform/platforms/douyin/web-api-contract.md",
+      "docs/en/desktop/douyin-background-login-experiment.md",
+      "docs/zh-cn/桌面端/抖音后台登录试验.md",
+      "docs/zh-cn/跨平台/平台接口/哔哩哔哩/网页接口契约.md",
+      "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md"
+    ],
+    "declaredStatuses": [
+      {
+        "p": "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "status": "accepted"
+      },
+      {
+        "p": "docs/en/desktop/rust-workspace-plan.md",
+        "status": "accepted"
+      },
+      {
+        "p": "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "status": "accepted"
+      },
+      {
+        "p": "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+        "status": "accepted"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "criterion": "C6-metadata",
+      "result": "pass",
+      "evidence": [
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-bilingual-counterparts-indexes-repository-baseline.json:metadata",
+        "<user-home>/AppData/Local/Temp/any-music-b20-links-20261022/checks-after.json"
+      ],
+      "detail": "66 locale pages declare runtimeScope/documentType; root READMEs declare repository scope. All 33 locale pairs match documentType/runtimeScope/documentStatus/platform/captureDate. Four platform-interface pages retain valid source/platform/date fields."
+    },
+    {
+      "criterion": "C6-counterparts",
+      "result": "pass",
+      "evidence": ["<user-home>/AppData/Local/Temp/any-music-b20-links-20261022/checks-after.json"],
+      "detail": "All 33 locale counterpart mappings are reciprocal and both root README language switches exist. No missing or ambiguous counterpart candidates were found."
+    },
+    {
+      "criterion": "C6-indexes",
+      "result": "pass",
+      "evidence": [
+        "docs/en/README.md",
+        "docs/zh-cn/文档索引.md",
+        "docs/en/cross-platform/README.md",
+        "docs/zh-cn/跨平台/文档索引.md",
+        "docs/en/userscript/README.md",
+        "docs/zh-cn/用户脚本/文档索引.md",
+        "docs/en/desktop/README.md",
+        "docs/zh-cn/桌面端/文档索引.md"
+      ],
+      "detail": "All 68 scanned documentation/root README pages are reachable. Every non-index locale page also has a direct entry from a root README or documentation index; no orphan or indirect-only page was found."
+    },
+    {
+      "criterion": "C6-local-links",
+      "result": "pass",
+      "evidence": [
+        "<user-home>/AppData/Local/Temp/any-music-b20-links-20261022/references-final.log"
+      ],
+      "detail": "713 local links resolve with exact path casing, including references from 26 AGENTS files and seven skill/reference files. Sixteen Markdown heading anchors resolve. Fenced code and HTML comments are excluded; inline/reference-style Markdown and explicit HTML href/src destinations are supported."
+    },
+    {
+      "criterion": "C6-evidence-preservation",
+      "result": "pass",
+      "evidence": [
+        "docs/en/cross-platform/platforms/bilibili/web-api-contract.md",
+        "docs/en/cross-platform/platforms/douyin/web-api-contract.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/跨平台/平台接口/哔哩哔哩/网页接口契约.md",
+        "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md"
+      ],
+      "detail": "All 101 scanned document/guidance files remain byte-identical to this batch baseline, including six captureDate-bearing platform-contract/experiment pages. Two accepted design pairs keep their existing accepted status. No header-declared archived proposal is present in this locale inventory; historical stage records were not reclassified."
+    }
+  ],
+  "findings": [],
+  "openFindingIds": [],
+  "changedFiles": [],
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node <user-home>/AppData/Local/Temp/any-music-b20-links-20261022/check-docs.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T10:53:19.172Z",
+      "checkerSha256": "b24aabd66d552fa59fa6ef91f127ea84a44a23b4537cffff4e02c78ed9005ee0",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-links-20261022/references-final.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "Local SHA-256 comparison of every baseline document/guide/skill before report creation",
+      "exitCode": 0,
+      "time": "2026-10-22T10:55:18.206Z",
+      "detail": "101 of 101 files unchanged."
+    }
+  ],
+  "readScope": {
+    "inventory": [
+      "README.en.md",
+      "README.md",
+      "docs/en/README.md",
+      "docs/en/cross-platform/README.md",
+      "docs/en/cross-platform/architecture/development-workflow.md",
+      "docs/en/cross-platform/architecture/error-and-state-model.md",
+      "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+      "docs/en/cross-platform/architecture/plugin-data-ownership.md",
+      "docs/en/cross-platform/architecture/plugin-runtime-policy.md",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/en/cross-platform/architecture/plugin-system-s03-isolation-prototype.md",
+      "docs/en/cross-platform/architecture/plugin-system-s11-permissionless-sandbox.md",
+      "docs/en/cross-platform/architecture/plugin-system-s12-native-authority-and-offline-data.md",
+      "docs/en/cross-platform/architecture/plugin-system-s13-anonymous-networking-and-exits.md",
+      "docs/en/cross-platform/architecture/plugin-system-s14-package-validation-and-recovery.md",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+      "docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+      "docs/en/cross-platform/features/local-library-and-custom-plugins.md",
+      "docs/en/cross-platform/planning/feature-requirements-and-roadmap.md",
+      "docs/en/cross-platform/platforms/bilibili/web-api-contract.md",
+      "docs/en/cross-platform/platforms/douyin/web-api-contract.md",
+      "docs/en/desktop/README.md",
+      "docs/en/desktop/backend-engineering.md",
+      "docs/en/desktop/development.md",
+      "docs/en/desktop/douyin-background-login-experiment.md",
+      "docs/en/desktop/runtime-architecture.md",
+      "docs/en/desktop/rust-workspace-plan.md",
+      "docs/en/userscript/README.md",
+      "docs/en/userscript/architecture/edge-cases.md",
+      "docs/en/userscript/development.md",
+      "docs/zh-cn/文档索引.md",
+      "docs/zh-cn/桌面端/Rust工作区规划.md",
+      "docs/zh-cn/桌面端/后端工程规范.md",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "docs/zh-cn/桌面端/抖音后台登录试验.md",
+      "docs/zh-cn/桌面端/文档索引.md",
+      "docs/zh-cn/桌面端/运行端架构.md",
+      "docs/zh-cn/用户脚本/开发规范.md",
+      "docs/zh-cn/用户脚本/文档索引.md",
+      "docs/zh-cn/用户脚本/架构/边界情况.md",
+      "docs/zh-cn/跨平台/产品规划/功能需求与路线图.md",
+      "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md",
+      "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+      "docs/zh-cn/跨平台/平台接口/哔哩哔哩/网页接口契约.md",
+      "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "docs/zh-cn/跨平台/架构/开发工作流.md",
+      "docs/zh-cn/跨平台/架构/插件数据归属.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S03隔离原型.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S11无权限沙盒.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S12原生权威与离线数据.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S13匿名联网与出口.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S14包校验与安装恢复.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构S16手机交付.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "docs/zh-cn/跨平台/架构/插件运行策略.md",
+      "docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "docs/zh-cn/跨平台/架构/错误与状态模型.md",
+      "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      ".agents/skills/any-music-tauri-runtime/SKILL.md",
+      ".agents/skills/any-music-ui-delivery/SKILL.md",
+      ".agents/skills/any-music-userscript-runtime/SKILL.md",
+      ".agents/skills/bilibili-contract-capture/SKILL.md",
+      ".agents/skills/douyin-contract-capture/SKILL.md",
+      ".agents/skills/music-source-adapter/SKILL.md",
+      ".agents/skills/music-source-adapter/references/playback.md",
+      "AGENTS.md",
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      "apps/userscript/AGENTS.md",
+      "crates/AGENTS.md",
+      "crates/am-plugin-net/AGENTS.md",
+      "crates/am-plugin-package/AGENTS.md",
+      "crates/am-plugin-runtime/AGENTS.md",
+      "packages/account-pool/AGENTS.md",
+      "packages/audio-composition/AGENTS.md",
+      "packages/core/AGENTS.md",
+      "packages/music-workbench/AGENTS.md",
+      "packages/network-routing/AGENTS.md",
+      "packages/plugin-center/AGENTS.md",
+      "packages/plugin-cli/AGENTS.md",
+      "packages/plugin-music-creation/AGENTS.md",
+      "packages/plugin-sandbox-browser/AGENTS.md",
+      "packages/plugin-sdk/AGENTS.md",
+      "packages/plugin-source-bilibili/AGENTS.md",
+      "packages/plugin-source-douyin/AGENTS.md",
+      "packages/plugin-tag-management/AGENTS.md",
+      "packages/plugin-testkit/AGENTS.md",
+      "packages/plugin-ui-vue/AGENTS.md",
+      "packages/plugin-vm/AGENTS.md",
+      "packages/ui/AGENTS.md",
+      "packages/utils/AGENTS.md"
+    ],
+    "content": "Only metadata, headings, counterpart/index/link structures and minimal platform-interface header/status examples were inspected. Full prose was not loaded for a translation or support-claim audit.",
+    "bounds": "docs/en, docs/zh-cn, root README pair and repository AGENTS/skill references; baselines and public package READMEs are not locale page targets, though any local links pointing to them were checked for existence."
+  },
+  "unreadPaths": [
+    "Translation completeness and semantic equivalence outside the earlier two B20 content audits",
+    "External URL availability/content (150 links)",
+    "Full accepted-design/stage-history bodies and proposal-disposition semantics outside declared metadata",
+    "Production legacy reachability and moved implementation/test/fixture/generated ownership (next candidate)",
+    "Native/GM/browser/device/channel acceptance"
+  ],
+  "missingEvidence": [
+    "This is structural static acceptance only; no product tests/build/native/runtime gates are refreshed",
+    "No external browsing, app/browser/emulator inspection or recapture was requested or performed"
+  ],
+  "dependencies": [
+    "Earlier B20 content/ownership reports remain separate and retain their own limitations",
+    "The first B20 optional Python skill-validator limitation is unchanged; this batch makes no new skill-selection or Python validation claim"
+  ],
+  "remainingSubbatches": ["B20-targeted-legacy-check"],
+  "nextBatch": {
+    "batchId": "B20-targeted-legacy-check-repository",
+    "candidate": "B20-targeted-legacy-check",
+    "parentBatch": "B20",
+    "runtime": "repository",
+    "status": "pending",
+    "question": "Do production entry graphs retain an old source JSON installer, previous-architecture compatibility package or duplicate IPC alias, and do public entries/tests/fixtures/generated artifacts follow current ownership?",
+    "allowedPaths": [
+      "Root/app/package manifests and workspace exports",
+      "Userscript/Tauri source/plugin composition entries and their direct public imports only",
+      "Tauri IPC registry and explicit permissions, without native business-chain re-audit",
+      "Existing dependency/isolation checks and matching ownership-test/fixture inventory"
+    ],
+    "exclusions": [
+      "Deleting files merely because their names include legacy",
+      "Removing current plugin upgrade/rollback/crash recovery",
+      "Independent source/media/native authority implementation audits",
+      "Browser/application/emulator work, commit or push"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "Nearest owner guide for each selected entry",
+      "docs/en/cross-platform/architecture/refactoring-audit-plan.md (sections 2/3/5 and B20 only)"
+    ],
+    "continuation": "Reuse docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-bilingual-counterparts-indexes-repository.json after checking hashes. Three of four B20 candidates are closed. Inspect one direct composition entry per runtime and keep Userscript/Tauri findings separate; do not infer behavior from names or historical test counts. Run only necessary offline graph/registry checks. Record product defects for their owner instead of silently expanding into implementation fixes."
+  },
+  "handoff": "B20-bilingual-counterparts-indexes-repository：基线 0dde162 与本批 SHA-256 清单。已完成仓库文档结构核对，未发现新问题，未修改文档或技能正文。66 份语言文档组成 33 组互相对应页，另有两份根 README 语言切换；68 个入口目标全部可达，八份索引覆盖全部非索引页面，无孤立或仅间接收录页面。713 个本地链接的文件存在性和路径大小写通过，16 个标题锚点通过；26 份 AGENTS 与七个技能/参考文件的本地引用一并核对。runtimeScope/documentType 及双语 platform/captureDate/documentStatus 一致，四份平台契约和两份带日期实验页保持字节不变，两组 accepted 设计未重分类。101 份文档/指南文件均与基线相同。150 个外链、翻译全文语义、阶段历史正文及运行验收不在本批范围。本子批次 conformant/pass-scoped；B20 完成三项、余一项。下一批唯一入口 B20-targeted-legacy-check-repository，按运行端分别检查产品装配和 IPC 静态可达性，保留当前升级/回退/恢复。"
+}

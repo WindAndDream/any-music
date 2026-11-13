@@ -1,0 +1,112 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B16-package-verification-tauri",
+  "capturedAt": "2026-10-21T21:53:54.8146694+08:00",
+  "head": "ce7dcb6f03a06e66430c6022a61568a474e60bdd",
+  "initialWorkingTree": [
+    "M  apps/tauri/src-tauri/src/network/http.rs",
+    "A  apps/tauri/src-tauri/src/network/http/response.rs",
+    "M  apps/tauri/src/platform/native-http.ts",
+    "A  apps/tauri/test/fixtures/native-http-response.json",
+    "M  apps/tauri/test/platform/native-http.test.ts",
+    "A  docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+    "A  docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix-baseline.json",
+    "A  docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix.json",
+    "A  docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri.json",
+    "MM docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "M  docs/en/desktop/development.md",
+    "M  \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\345\\274\\200\\345\\217\\221\\350\\247\\204\\350\\214\\203.md\"",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json"
+  ],
+  "relevantWorkingTreeChanges": [],
+  "environment": {
+    "pnpm": "10.23.0",
+    "userTimezone": "Asia/Shanghai",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "v24.11.1",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+    "shell": "PowerShell"
+  },
+  "sourceHashes": [
+    {
+      "sha256": "7e855cefcfd6c3e6ea2ede763e8b27821c7b23f66792292f7fa643f6e0068177",
+      "path": "AGENTS.md"
+    },
+    {
+      "sha256": "aec1b1d8587da76c626726f0b50328a54d80ff8524812775f6d6c2116782274b",
+      "path": "crates/AGENTS.md"
+    },
+    {
+      "sha256": "ead2f09150ce3a9a35f7ff2eeb619eb3e770a2e2c6c5d93e2fed4d57b44d69d3",
+      "path": "crates/am-plugin-package/AGENTS.md"
+    },
+    {
+      "sha256": "ff4eeb558d7613d7fde56d25fb8631bde19eed620058fdc60891b57d1ef7e2a1",
+      "path": "crates/am-plugin-package/Cargo.toml"
+    },
+    {
+      "sha256": "0c08c167d11b4f56ad0b6483c17cb82bff06944c2aac08e699bf3c60754952c4",
+      "path": "crates/am-plugin-package/src/lib.rs"
+    },
+    {
+      "sha256": "495f620fb580d5108cab83676a82b9d8c503ff472a591fdc4d5f1137edcf1b4f",
+      "path": "crates/am-plugin-package/src/paths.rs"
+    },
+    {
+      "sha256": "13b7782cd334d0cb73da25db4657926bf730a588c75cab42bf07154703fc0b5e",
+      "path": "crates/am-plugin-package/src/signature.rs"
+    },
+    {
+      "sha256": "4a839eb4ab644d018a5e4b90bb867992d3e76c528a549eb8233eda8c2a55fdd7",
+      "path": "crates/am-plugin-package/src/zip_boundary.rs"
+    },
+    {
+      "sha256": "9a4016177e7c3f3e55d5ffb90129646e220bad28fa2e7437d63584827f0fcd4e",
+      "path": "crates/am-plugin-package/tests/corpus.rs"
+    },
+    {
+      "sha256": "7d5a34961f491cbea3fe1b68e8d550d95f058728413bf8190c827953773cee8b",
+      "path": "crates/am-plugin-package/tests/revocations.rs"
+    },
+    {
+      "sha256": "f5dd9c507a199c9bbd9ceb9c200c9f114539fb8ddaf01a569e07cc60ea319c1e",
+      "path": "packages/plugin-sdk/test/fixtures/packages/corpus.json"
+    },
+    {
+      "sha256": "84e52417954f1a6792d5d8494922fd9d4dff6fbd4b0ab938b2d94202a1169583",
+      "path": "packages/plugin-sdk/test/fixtures/packages/golden.json"
+    },
+    {
+      "sha256": "810f6f9eefb55e5789a389c1ff0fd522f9da83f58d1e090c0e7fcf9becca9bd3",
+      "path": "apps/tauri/src-tauri/src/plugins/package_files.rs"
+    },
+    {
+      "sha256": "72f1a815c2bb010778922361d5aa342e4280e8e875d9ad9343fb22730cd90917",
+      "path": "apps/tauri/src-tauri/src/plugins/packages.rs"
+    },
+    {
+      "sha256": "a1472911738e354f2c4bde5950c8e778eabb50dcdba9270e845ed828bffc2dc2",
+      "path": "scripts/check-plugin-package.mjs"
+    },
+    {
+      "sha256": "775a264cb7b059b8d5b1267516a05ae9200d57a1f5ff6f30651fae173a8f1526",
+      "path": "packages/plugin-sdk/src/node/package-format.mjs"
+    }
+  ]
+}

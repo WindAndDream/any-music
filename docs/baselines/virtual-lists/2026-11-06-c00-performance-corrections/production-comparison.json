@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-06",
+  "runtimeScope": "shared",
+  "baseline": "../2026-11-05-c00-acceptance-review/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "sourceDigest": "0a09489a2d1e5cc30b3d298420937aa39f1efa02f97e436ea4f1972545f75e07",
+  "changedInputsSinceBaseline": [
+    "packages/music-workbench/src/storage/product-generation-store.ts",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts"
+  ],
+  "frontends": [
+    {
+      "runtime": "userscript",
+      "beforeBytes": 5927878,
+      "afterBytes": 5928567,
+      "differenceBytes": 689,
+      "beforeGzipBytes": 1151478,
+      "afterGzipBytes": 1151677,
+      "differenceGzipBytes": 199
+    },
+    {
+      "runtime": "tauri",
+      "beforeBytes": 3672381,
+      "afterBytes": 3672562,
+      "differenceBytes": 181,
+      "beforeGzipBytes": 884530,
+      "afterGzipBytes": 884611,
+      "differenceGzipBytes": 81
+    }
+  ],
+  "limits": "Production executable/style payload sums, including WASM where present; gzip is a per-file sum. No runtime, frame-time, visual, image-decoding or transport acceptance is established."
+}

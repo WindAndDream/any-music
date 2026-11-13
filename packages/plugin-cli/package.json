@@ -1,0 +1,33 @@
+{
+  "name": "@any-music/plugin-cli",
+  "version": "0.1.0",
+  "license": "MIT",
+  "bin": {
+    "am-plugin": "src/cli.mjs"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "scripts": {
+    "test": "pnpm --filter @any-music/plugin-testkit build && node --test test/*.test.mjs",
+    "typecheck": "node --check src/cli.mjs && node --check src/project.mjs && node --check src/package.mjs"
+  },
+  "dependencies": {
+    "@any-music/plugin-sdk": "workspace:*",
+    "@any-music/plugin-testkit": "workspace:*",
+    "chokidar": "5.0.0",
+    "commander": "15.0.0",
+    "fflate": "0.8.3",
+    "typescript": "6.0.3",
+    "vite": "8.2.2"
+  },
+  "engines": {
+    "node": ">=24.11.0"
+  }
+}

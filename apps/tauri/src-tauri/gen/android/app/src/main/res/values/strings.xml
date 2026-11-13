@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">"Any Music"</string>
+    <string name="main_activity_title">"Any Music"</string>
+    <string name="webview_unavailable">Update Android System WebView or Chrome to version 111 or later, then reopen Any Music. Saved data remains on this device.</string>
+</resources>

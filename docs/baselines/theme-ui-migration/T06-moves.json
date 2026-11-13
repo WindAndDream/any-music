@@ -1,0 +1,150 @@
+[
+  {
+    "from": "packages/ui/src/components/library/CustomTrackDrawer.vue",
+    "to": "packages/theme-default/src/components/library/CustomTrackDrawer.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/CustomTrackPanel.vue",
+    "to": "packages/theme-default/src/components/library/CustomTrackPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/FavoriteFilterBar.vue",
+    "to": "packages/theme-default/src/components/library/FavoriteFilterBar.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/FavoritePanel.vue",
+    "to": "packages/theme-default/src/components/library/FavoritePanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/FavoritePlatformDrawer.vue",
+    "to": "packages/theme-default/src/components/library/FavoritePlatformDrawer.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/FavoriteTrackRow.vue",
+    "to": "packages/theme-default/src/components/library/FavoriteTrackRow.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/HistoryOperatorPanel.vue",
+    "to": "packages/theme-default/src/components/library/HistoryOperatorPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/HistoryPanel.vue",
+    "to": "packages/theme-default/src/components/library/HistoryPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/PlaylistAddToolbar.vue",
+    "to": "packages/theme-default/src/components/library/PlaylistAddToolbar.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/PlaylistCard.vue",
+    "to": "packages/theme-default/src/components/library/PlaylistCard.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/PlaylistDrawer.vue",
+    "to": "packages/theme-default/src/components/library/PlaylistDrawer.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/PlaylistFilterSheet.vue",
+    "to": "packages/theme-default/src/components/library/PlaylistFilterSheet.vue"
+  },
+  {
+    "from": "packages/ui/src/components/library/PlaylistPanel.vue",
+    "to": "packages/theme-default/src/components/library/PlaylistPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/downloads/ActiveDownloadPanel.vue",
+    "to": "packages/theme-default/src/components/downloads/ActiveDownloadPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/downloads/download-track-presentation.ts",
+    "to": "packages/theme-default/src/components/downloads/download-track-presentation.ts"
+  },
+  {
+    "from": "packages/ui/src/components/downloads/DownloadOperatorPanel.vue",
+    "to": "packages/theme-default/src/components/downloads/DownloadOperatorPanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/downloads/DownloadTrackActionsDialog.vue",
+    "to": "packages/theme-default/src/components/downloads/DownloadTrackActionsDialog.vue"
+  },
+  {
+    "from": "packages/ui/src/components/downloads/DownloadTrackRow.vue",
+    "to": "packages/theme-default/src/components/downloads/DownloadTrackRow.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/QueuePanel.vue",
+    "to": "packages/theme-default/src/components/music-sources/QueuePanel.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/QueuePlatformGroup.vue",
+    "to": "packages/theme-default/src/components/music-sources/QueuePlatformGroup.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/QueuePlatformHeading.vue",
+    "to": "packages/theme-default/src/components/music-sources/QueuePlatformHeading.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/QueueTrackActionsDialog.vue",
+    "to": "packages/theme-default/src/components/music-sources/QueueTrackActionsDialog.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/QueueTrackGrid.vue",
+    "to": "packages/theme-default/src/components/music-sources/QueueTrackGrid.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/QueueTrackRow.vue",
+    "to": "packages/theme-default/src/components/music-sources/QueueTrackRow.vue"
+  },
+  {
+    "from": "packages/ui/src/components/music-sources/QueueViewControls.vue",
+    "to": "packages/theme-default/src/components/music-sources/QueueViewControls.vue"
+  },
+  {
+    "from": "packages/ui/test/components/library/CustomTrackPanel.test.ts",
+    "to": "packages/theme-default/test/components/library/CustomTrackPanel.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/library/FavoritePanel.test.ts",
+    "to": "packages/theme-default/test/components/library/FavoritePanel.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/library/PlaylistAddToolbar.test.ts",
+    "to": "packages/theme-default/test/components/library/PlaylistAddToolbar.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/downloads/ActiveDownloadPanel.test.ts",
+    "to": "packages/theme-default/test/components/downloads/ActiveDownloadPanel.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/downloads/DownloadOperatorPanel.test.ts",
+    "to": "packages/theme-default/test/components/downloads/DownloadOperatorPanel.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/downloads/DownloadTrackActionsDialog.test.ts",
+    "to": "packages/theme-default/test/components/downloads/DownloadTrackActionsDialog.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/downloads/DownloadTrackRow.test.ts",
+    "to": "packages/theme-default/test/components/downloads/DownloadTrackRow.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/music-sources/QueuePanel.interactions.test.ts",
+    "to": "packages/theme-default/test/components/music-sources/QueuePanel.interactions.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/music-sources/QueuePanel.test.ts",
+    "to": "packages/theme-default/test/components/music-sources/QueuePanel.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/music-sources/QueuePlatformGroup.test.ts",
+    "to": "packages/theme-default/test/components/music-sources/QueuePlatformGroup.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/music-sources/QueueTrackGrid.test.ts",
+    "to": "packages/theme-default/test/components/music-sources/QueueTrackGrid.test.ts"
+  },
+  {
+    "from": "packages/ui/test/components/music-sources/QueueTrackRow.test.ts",
+    "to": "packages/theme-default/test/components/music-sources/QueueTrackRow.test.ts"
+  }
+]

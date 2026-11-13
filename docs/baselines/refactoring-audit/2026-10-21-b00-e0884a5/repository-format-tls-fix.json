@@ -1,0 +1,258 @@
+{
+  "documentType": "maintenance-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "maintenanceId": "repository-format-tls-fix",
+  "reviewedAt": "2026-10-21T15:57:21.869Z",
+  "baseline": {
+    "head": "a693165205be0bc321764768d796d7c842f7a446",
+    "capturedAt": "2026-10-21T23:41:43.0556540+08:00",
+    "localEvidence": ".codex-tmp/fix-format-tls/baseline.json"
+  },
+  "scope": {
+    "changedPaths": [".gitattributes", "Cargo.lock"],
+    "normalizedMarkdownPaths": [
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/desktop/README.md",
+      "docs/en/desktop/backend-engineering.md",
+      "docs/en/desktop/douyin-background-login-experiment.md",
+      "docs/en/desktop/runtime-architecture.md",
+      "docs/en/desktop/rust-workspace-plan.md",
+      "docs/zh-cn/桌面端/Rust工作区规划.md",
+      "docs/zh-cn/桌面端/后端工程规范.md",
+      "docs/zh-cn/桌面端/抖音后台登录试验.md",
+      "docs/zh-cn/桌面端/文档索引.md",
+      "docs/zh-cn/桌面端/运行端架构.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+    ],
+    "exclusions": [
+      "Other open audit findings or B16/B18 acceptance claims",
+      "Business code changes or native permission/admission changes",
+      "Public-network/app/browser/device inspection, commit and push"
+    ]
+  },
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "issues": [
+    {
+      "id": "repository-markdown-crlf",
+      "status": "resolved",
+      "effect": "The formatter explicitly requires LF, while local Git core.autocrlf=true checked out 12 maintained Markdown files with CRLF. Wording/Markdown content already matched the committed files; these were line-ending failures only.",
+      "repair": "Normalize the 12 working copies to LF and add *.md text eol=lf in .gitattributes so future Windows checkouts retain the required line endings. No global/local Git setting was changed.",
+      "evidence": [
+        ".gitattributes:1",
+        ".oxfmtrc.json:9",
+        ".codex-tmp/fix-format-tls/scope-verification.json",
+        ".codex-tmp/fix-format-tls/root-format.log"
+      ],
+      "wordingChanged": false
+    },
+    {
+      "id": "RUSTSEC-2026-0382",
+      "status": "resolved",
+      "package": "rustls-webpki",
+      "from": "0.103.15",
+      "to": "0.103.16",
+      "effect": "Affected versions may accept certificate paths containing distrusted emSign intermediate public keys when trust anchors permit those paths. The patched verifier rejects those public keys.",
+      "officialSource": "https://rustsec.org/advisories/RUSTSEC-2026-0382.html",
+      "repair": "Minimal stable patch-version lockfile update; reqwest/rustls versions and features unchanged."
+    },
+    {
+      "id": "RUSTSEC-2026-0381",
+      "status": "resolved",
+      "package": "webpki-roots",
+      "from": "1.0.9",
+      "to": "1.0.10",
+      "effect": "The old root set included emSign ECC Root CA - G3, which could permit chains through distrusted emSign intermediates. Version 1.0.10 removes that root. The 0.26.11 compatibility package delegates to the separately resolved 1.x root set.",
+      "officialSource": "https://rustsec.org/advisories/RUSTSEC-2026-0381.html",
+      "repair": "Minimal patch-version lockfile update; no certificate bypass or advisory suppression."
+    }
+  ],
+  "verification": [
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "node .codex-tmp/fix-format-tls/verify-scope.mjs",
+      "startedAt": "2026-10-21T23:51:56.4282609+08:00",
+      "completedAt": "2026-10-21T23:52:00.1025359+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/scope-verification.log",
+      "detail": "All 12 original Markdown files differed only by CRLF; their LF bytes exactly match Git. Markdown LF attributes apply despite core.autocrlf=true. Cargo.lock has exactly two version/checksum updates; manifests and audit policy are unchanged."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo update -p rustls-webpki@0.103.15 --precise 0.103.16",
+      "startedAt": "2026-10-21T23:42:05.5964393+08:00",
+      "completedAt": "2026-10-21T23:42:13.3333252+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/update-webpki.log",
+      "detail": "Precisely update rustls-webpki 0.103.15 to stable patched 0.103.16, without other package updates."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo update -p webpki-roots@1.0.9 --precise 1.0.10",
+      "startedAt": "2026-10-21T23:42:23.1852445+08:00",
+      "completedAt": "2026-10-21T23:42:29.6958914+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/update-roots.log",
+      "detail": "Precisely update webpki-roots 1.0.9 to patched 1.0.10, without other package updates."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:rust:deny",
+      "startedAt": "2026-10-21T23:42:58.4573906+08:00",
+      "completedAt": "2026-10-21T23:43:07.3145977+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/rust-deny.log",
+      "detail": "Current complete dependency advisory, license, ban and source checks pass, with no ignored or waived advisory. Existing non-fatal duplicate-version warnings remain."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "cargo test -p am-plugin-net --locked",
+      "startedAt": "2026-10-21T23:44:00.1442849+08:00",
+      "completedAt": "2026-10-21T23:44:38.9412284+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/transport-tests.log",
+      "detail": "12 anonymous transport/target tests pass, including real local TLS, original-hostname certificate validation, redirects, budgets, cancellation and revocation. These tests do not make public-network/live product claims."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-21T23:42:59.2958492+08:00",
+      "completedAt": "2026-10-21T23:43:09.5027244+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/root-format.log",
+      "detail": "Initial complete formatter check passes after the 12 line-ending normalizations."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm lint",
+      "startedAt": "2026-10-21T23:44:45.9661467+08:00",
+      "completedAt": "2026-10-21T23:44:54.4152031+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/root-lint.log",
+      "detail": "Complete boundary/isolation/VM/mobile/lint checks pass."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-21T23:44:00.1364075+08:00",
+      "completedAt": "2026-10-21T23:51:00.0721112+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/root-typecheck.log",
+      "detail": "Entire workspace TypeScript/Vue, generated protocol, Rust formatting and all-target Clippy checks pass."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:rust:msrv",
+      "startedAt": "2026-10-21T23:44:00.0945512+08:00",
+      "completedAt": "2026-10-21T23:46:11.2426925+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/rust-msrv.log",
+      "detail": "Workspace/all-target compilation passes on MSRV Rust 1.90.0 with both patched dependencies."
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "pnpm check:native",
+      "startedAt": "2026-10-21T23:44:54.6063933+08:00",
+      "completedAt": "2026-10-21T23:47:18.6096719+08:00",
+      "exitCode": 101,
+      "logPath": ".codex-tmp/fix-format-tls/native-check.log",
+      "detail": "First all-target native check overlapped an unrelated rollback-test file write and observed its module declaration before rollback_tests.rs existed. The file subsequently appeared; no TLS incompatibility was reported."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm check:native",
+      "startedAt": "2026-10-21T23:52:38.8831956+08:00",
+      "completedAt": "2026-10-21T23:57:13.3328735+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/native-check-retry.log",
+      "detail": "After the independent file write completed, workspace all-target native and exact release-feature checks pass."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm test",
+      "startedAt": "2026-10-21T23:45:30.7285908+08:00",
+      "completedAt": "2026-10-21T23:56:15.6283307+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/root-tests.log",
+      "detail": "Complete root tests pass with npm_config_workspace_concurrency=1; no test thresholds/assertions changed.",
+      "environment": {
+        "npm_config_workspace_concurrency": "1"
+      }
+    },
+    {
+      "level": "artifact",
+      "result": "pass",
+      "command": "pnpm build",
+      "startedAt": "2026-10-21T23:45:30.6517071+08:00",
+      "completedAt": "2026-10-21T23:56:32.9511417+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/root-build.log",
+      "detail": "Complete Userscript and Tauri production build passes with the updated TLS dependencies; no product was launched."
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-21T23:57:23.2454263+08:00",
+      "completedAt": "2026-10-21T23:57:35.4787198+08:00",
+      "exitCode": 0,
+      "logPath": ".codex-tmp/fix-format-tls/root-format-final.log",
+      "detail": "Final full-repository format check passes after maintenance records and resolution links are written."
+    }
+  ],
+  "lockfileChanges": [
+    {
+      "name": "rustls-webpki",
+      "from": "0.103.15",
+      "to": "0.103.16"
+    },
+    {
+      "name": "webpki-roots",
+      "from": "1.0.9",
+      "to": "1.0.10"
+    }
+  ],
+  "unchangedPolicies": ["Cargo.toml", "deny.toml"],
+  "observations": [
+    {
+      "kind": "concurrent-workspace",
+      "detail": "Preserved all earlier source/audit changes and independent in-progress rollback tests. The initial native-check missing-file failure is retained above and superseded by the successful retry."
+    },
+    {
+      "kind": "historical-evidence",
+      "detail": "Earlier audit reports retain their original failed gate outputs. This report resolves the two global gate failure classes; it does not close other batches, replace live evidence or claim full project acceptance."
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "89f92fe7a0b6d47c955fa7753bfa4cb19273154795fedc4419a02225204e23c2"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "c5a82cef800e68f3013f6fd7ef37f95bdcb56ab2cb1fe7e324bb119bbce6c4cc"
+    }
+  ],
+  "remainingGateFailuresInScope": [],
+  "missingEvidence": [
+    "No application/browser/device launch or public-network handshake was requested or performed. Exact product/live target acceptance remains independent."
+  ]
+}

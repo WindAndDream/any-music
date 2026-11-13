@@ -1,0 +1,8 @@
+
+ RUN  v4.1.11 <project-root>/packages/ui
+
+
+ Test Files  6 passed (6)
+      Tests  19 passed (19)
+   Start at  02:13:02
+   Duration  2.78s (transform 4.37s, setup 0ms, import 7.33s, tests 194ms, environment 2ms)

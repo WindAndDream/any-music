@@ -1,0 +1,62 @@
+# Device-dependent capabilities stay unavailable until their own target acceptance.
+[[permission]]
+identifier = "allow-mobile-commands"
+description = "Mobile local library and public capability discovery only."
+commands.allow = [
+  "runtime_capabilities",
+  "resource_cache_snapshot",
+  "resource_cache_configure",
+  "resource_cache_clear",
+  "account_snapshot",
+  "load_product_data",
+  "save_product_data",
+  "login_capabilities",
+  "cancel_request",
+]
+
+[[permission]]
+identifier = "allow-android-account-commands"
+description = "Android native Bilibili accounts, proxies, HTTP, account-bound media and scoped QR app handoff; no system browser or plugin execution."
+commands.allow = [
+  "create_account",
+  "update_account",
+  "remove_account",
+  "account_usage",
+  "acquire_account_usage",
+  "release_account_usage",
+  "cancel_platform_requests",
+  "http_request",
+  "begin_qr_login",
+  "poll_qr_login",
+  "cancel_qr_login",
+  "open_qr_login",
+  "save_proxy",
+  "remove_proxy",
+  "register_media",
+  "register_artwork",
+  "release_media",
+]
+
+[[permission]]
+identifier = "allow-android-delivery-commands"
+description = "Android system-selected bounded documents and inert native package previews; no desktop or code executor authority."
+commands.allow = [
+  "save_download",
+  "verify_download",
+  "open_download_schedule",
+  "acquire_download_slot",
+  "release_download_slot",
+  "close_download_schedule",
+  "get_download_directory",
+  "choose_download_directory",
+  "reset_download_directory",
+  "plugin_authority_snapshot",
+  "plugin_authority_revoke",
+  "plugin_package_preview",
+  "plugin_package_pick_preview",
+  "plugin_package_url_preview",
+  "plugin_package_current_preview",
+  "plugin_package_discard_preview",
+  "plugin_diagnostics",
+  "plugin_diagnostics_export",
+]

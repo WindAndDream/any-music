@@ -1,0 +1,45 @@
+{
+  "documentType": "platform-interface-capture",
+  "platform": "douyin",
+  "captureDate": "2026-10-03",
+  "scope": "Isolation of the error_code 2156 wall that stops the desktop client's native QR sign-in. A standalone Node session — no application code involved — generated its own QR, published it as a local page for a human to scan, and recorded every poll. No cookie, token or signature value is recorded here.",
+  "why": "The desktop client reported 抖音拒绝查询二维码状态 after a scan, and an in-app probe showed two accepted polls followed by twenty-two consecutive 2156 responses. An application bug and a platform decision look identical from the client side, so the session had to be reproduced outside the application.",
+  "method": {
+    "session": "Plain Node HTTP with the minted a_bogus, the full captured parameter surface, the passport CSRF and trace headers and its own cookie jar. No browser, no SecSDK, no TLS impersonation.",
+    "interaction": "The generated QR was written into a self-contained local HTML page; a human scanned it with the Douyin app and confirmed on the phone.",
+    "measured": "Token generation time, its expire_time, and every poll response with a timestamp."
+  },
+  "timeline": {
+    "generated": "05:27:51, expire_time 1791005331 = 05:28:51",
+    "polls": [
+      "05:27:51 to 05:28:03 — seven polls, error_code 0, status new",
+      "05:28:05 — error_code 0, status scanned",
+      "05:28:08 and onwards — error_code 2156, description 系统繁忙，请重启应用或刷新页面后重试"
+    ],
+    "untilEnd": "2156 repeated for every remaining poll, and never recovered"
+  },
+  "findings": [
+    "A purely native session DOES observe status scanned, so the scan itself reaches the server and the native request surface is accepted at that stage.",
+    "The first 2156 arrived at 05:28:08, which is forty-three seconds BEFORE that token's own expire_time, so 2156 is not an expiry artefact in this run.",
+    "2156 is therefore the platform ending the session at the moment the user confirms on the phone, which is exactly when the browser receives the 2046 second-verification challenge instead.",
+    "The same code also follows a token that has simply expired: an earlier run of the same experiment produced 2156 only after expire_time had passed. The platform uses one code for both endings.",
+    "status scanned lasted about three seconds, so a client polling every two seconds can step over it entirely — which is what the application's own probe showed."
+  ],
+  "conclusion": {
+    "statement": "The desktop application cannot complete a Douyin sign-in through the native QR flow. The wall is platform-side and is reached at the second-verification boundary, after a successful scan.",
+    "notTheCause": [
+      "Not the minted a_bogus as such: it was accepted for QR generation and for every pre-scan poll, and an identical payload reused six times in a row was accepted six times.",
+      "Not a header subset: removing the portrait, trace, csrf or cookie headers individually changed nothing.",
+      "Not the application's own state machine or UI: the standalone Node session reproduces the identical outcome."
+    ],
+    "sameFamily": "The error_code 22 非法应用 seen earlier from a native client is the same kind of decision: the platform wants client attestation that a minted a_bogus does not provide.",
+    "untestedRemaining": "Whether a genuine Web SecSDK a_bogus together with its x-tt-session-dtrait, or the ticket-guard and client-cert flows the browser runs, would satisfy the post-scan stage. That is the one possibility this evidence does not exclude."
+  },
+  "implementationChange": {
+    "where": "apps/tauri/src-tauri/src/douyin_login.rs",
+    "what": "error_code 2156 previously fell into the generic 抖音拒绝查询二维码状态 error, and briefly into a silent waiting state. It now reports the session as terminated and stops polling, with a message naming the code and telling the user to regenerate or use the system browser.",
+    "reason": "Both earlier behaviours were wrong in a way the user could not act on: one blamed the client for a platform decision, the other polled a dead session forever without saying anything.",
+    "test": "a_terminated_qr_session_is_reported_instead_of_polled_forever asserts the blocked status, that the message names 2156, and that an unrecognised code is still a hard error."
+  },
+  "recommendation": "The repository's own Tauri guidance says platforms without a verified native login contract should use that account's system Chrome or Edge rather than having the protocol invented for them. This evidence puts Douyin in that category for the verification stage, so the native QR flow should hand off to the system browser for the actual sign-in unless someone first proves that SecSDK attestation can be reproduced."
+}

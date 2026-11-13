@@ -1,0 +1,119 @@
+{
+  "samples": [
+    {
+      "label": "observer-installed",
+      "at": 1793090289029,
+      "origin": "https://www.douyin.com",
+      "theme": "studio",
+      "source": "douyin",
+      "sourceOrder": ["douyin", "bilibili", "netease"],
+      "session": [
+        {
+          "status": "unavailable",
+          "error": "列表使用的音乐源已停用，加载已中止。请在设置中启用后重试。（错误码：AM-1005）"
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "douyin-searchhost-explicit-retry",
+      "at": 1793090302111,
+      "origin": "https://www.douyin.com",
+      "theme": "studio",
+      "source": "douyin",
+      "sourceOrder": ["douyin", "bilibili", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "douyin-searchhost-retry-result",
+      "at": 1793090339326,
+      "origin": "https://www.douyin.com",
+      "theme": "studio",
+      "source": "douyin",
+      "sourceOrder": ["douyin", "bilibili", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    }
+  ],
+  "bridge": [
+    {
+      "stage": "result",
+      "at": 1793090301070,
+      "id": "am-mvqfo32c-2",
+      "hasSignature": true
+    },
+    {
+      "stage": "cancel",
+      "at": 1793090301071,
+      "id": "am-mvqfo32c-2",
+      "hasSignature": false
+    },
+    {
+      "stage": "begin",
+      "at": 1793090301071,
+      "id": "am-mvqfo32c-2",
+      "path": "/aweme/v1/web/general/search/stream/",
+      "hasSignature": false
+    }
+  ],
+  "actions": [],
+  "recovery": {
+    "at": 1793090382174,
+    "websiteCaptchaVisible": false,
+    "gmTrackCount": 10,
+    "sourceHost": "https://www.douyin.com/search/<query>",
+    "mechanism": "Actual page SDK signing with real GM business transport; website success itself is not the GM assertion."
+  },
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R3",
+  "artifactSha256": "2cd841733a348a0baf589d11a87b33f260c8522959af87a4233f9b571e5ee080",
+  "artifactBytes": 5023211
+}

@@ -1,0 +1,267 @@
+{
+  "documentType": "audit-remediation",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "runId": "2026-10-21-b00-e0884a5",
+  "batchId": "B01-utils-shared",
+  "repairId": "B01-U01-fix",
+  "findingIds": ["B01-U01"],
+  "runtime": "shared",
+  "supersedes": {
+    "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared.json",
+    "reason": "Preserve the original failing audit as historical evidence; this record closes B01-U01 after an authorized product fix and revalidation."
+  },
+  "scope": "Repair only the NaN domain-normalization policy and retain its regression tests. Do not expand B01 into audio/core subbatches.",
+  "baseline": {
+    "head": "1fe6a2f0ef3ebaf082741ac2d1d4ffb4beafaac9",
+    "capturedAt": "2026-10-21T14:02:31.0070337+08:00",
+    "environment": {
+      "node": "v24.11.1",
+      "pnpm": "10.23.0",
+      "vitest": "4.1.11",
+      "timezone": "Asia/Shanghai"
+    },
+    "workingTree": [
+      " M docs/en/README.md",
+      " M docs/en/cross-platform/README.md",
+      " M docs/zh-cn/文档索引.md",
+      " M docs/zh-cn/跨平台/文档索引.md",
+      " M packages/core/src/player/normalize-progress.ts",
+      "?? docs/baselines/refactoring-audit/",
+      "?? docs/en/cross-platform/architecture/refactoring-audit-plan.md",
+      "?? docs/zh-cn/跨平台/架构/重构分板块排查计划.md",
+      "?? packages/core/test/player/"
+    ],
+    "fileHashes": [
+      {
+        "path": "packages/core/src/player/normalize-progress.ts",
+        "sha256": "2b4afcbec4d075547f60172d61d706552bd971de699a546fbcb5f409bb134b73"
+      },
+      {
+        "path": "packages/core/test/player/normalize-progress.test.ts",
+        "sha256": "fa537e29e8a86589e914f713c0b2f5136d11f44c312216a54fd977e5cd9ed0e5"
+      },
+      {
+        "path": "packages/core/package.json",
+        "sha256": "573644b47c3809b86f277cafc2e1ac7d45074143d23dfb21a661ddd277009ae1"
+      },
+      {
+        "path": "packages/utils/src/number/clamp.ts",
+        "sha256": "c991ffa6dd6c69054605448a5704f3c44f02812ccc0a6af6a6db082a405c4eb5"
+      },
+      {
+        "path": "packages/utils/src/index.ts",
+        "sha256": "dc6a6654cd22c697e8d4eeab59af262a1d5672e630284223b1105baa5db63bd5"
+      },
+      {
+        "path": "packages/utils/src/number/index.ts",
+        "sha256": "e145333604c66d3b3e6bf43fc9ebf418ffb06e951f0b8f6b61d4b968e1f0f35e"
+      },
+      {
+        "path": "packages/utils/package.json",
+        "sha256": "5abbc0d6d1e1dce952143cecd2e51317a20b6cda101c361f0c75d948deee395f"
+      },
+      {
+        "path": "packages/utils/tsconfig.json",
+        "sha256": "ff4934c8780ead0236d5337e17466540d4d9e3bab2d5226a7fac9440025daafb"
+      },
+      {
+        "path": "tsconfig.base.json",
+        "sha256": "a54d24214863db254a94db67f8ded43f5cf6465184be18799d88bdc02087ffa1"
+      },
+      {
+        "path": "pnpm-workspace.yaml",
+        "sha256": "be47fa3114868ef23613abe69da47f354c331ca978d45c05dad2628ce61dcd4e"
+      },
+      {
+        "path": "pnpm-lock.yaml",
+        "sha256": "1088468b37100ccc795f68db947bab7db5a3bf886b8ecf88762bfdc6df656714"
+      }
+    ],
+    "validationHead": "1fe6a2f0ef3ebaf082741ac2d1d4ffb4beafaac9"
+  },
+  "changes": [
+    {
+      "path": "packages/core/src/player/normalize-progress.ts:3-5",
+      "description": "Document NaN as unknown progress and return 0. Every non-NaN number still uses the original clamp(progress, 0, 1)."
+    },
+    {
+      "path": "packages/core/test/player/normalize-progress.test.ts:1",
+      "description": "Retain 15 behavioral cases for NaN, fractional values, endpoints, signed zero, floating-point extremes, out-of-range values and both infinities."
+    }
+  ],
+  "behaviorPreservation": "The guard only changes NaN. For every other supported numeric input, the same clamp implementation receives exactly the same arguments. Utility implementation, exports, signatures and dependencies are unchanged.",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "evidence": [
+        "The fix stays in core's domain normalizer; no dependency or public-export changes.",
+        "The utility files/manifests remain byte-identical to the audited baseline."
+      ]
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "evidence": [
+        "Only Number.isNaN was added; no framework/runtime imports or effects.",
+        "The repository dependency/lightweight-entry checks passed under pnpm lint."
+      ]
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "evidence": [
+        "Before the implementation change: 14 preserved numeric cases passed and the NaN case failed.",
+        "After the change: all 15 permanent cases passed, as did the original 26-case public-export audit probe."
+      ]
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "evidence": [
+        "The regression test is retained under core/test/player, mirroring src/player.",
+        "The core suite increased from 32 to 47 passing tests in 8 files."
+      ]
+    }
+  ],
+  "resolution": {
+    "id": "B01-U01",
+    "status": "fixed",
+    "policy": "normalizeProgress(Number.NaN) returns positive zero; negative infinity maps to 0 and positive infinity to 1 as before.",
+    "regressionTest": "packages/core/test/player/normalize-progress.test.ts:6"
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "pnpm --filter @any-music/core exec vitest run test/player/b01-utils-shared.audit.test.ts",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T13:59:55.5498161+08:00",
+        "completedAt": "2026-10-21T13:59:56.8305298+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\audit-probe-after.log",
+        "stage": "after-fix"
+      },
+      {
+        "command": "pnpm --filter @any-music/core test",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T13:59:30.6654701+08:00",
+        "completedAt": "2026-10-21T13:59:32.0920881+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\core-tests-after.log",
+        "stage": "after-fix"
+      },
+      {
+        "command": "pnpm --filter @any-music/core typecheck",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T13:59:30.6655896+08:00",
+        "completedAt": "2026-10-21T13:59:31.9466126+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\core-typecheck-after.log",
+        "stage": "after-fix"
+      },
+      {
+        "command": "pnpm --filter @any-music/core exec vitest run test/player/normalize-progress.test.ts",
+        "exitCode": 1,
+        "startedAt": "2026-10-21T13:59:12.3367731+08:00",
+        "completedAt": "2026-10-21T13:59:13.45819+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\regression-before.log",
+        "stage": "before-fix"
+      },
+      {
+        "command": "pnpm build",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T14:01:58.5558479+08:00",
+        "completedAt": "2026-10-21T14:04:16.5596053+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\root-build.log",
+        "stage": "after-fix"
+      },
+      {
+        "command": "pnpm format:check",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T14:01:26.038835+08:00",
+        "completedAt": "2026-10-21T14:01:30.2708912+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\root-format-check.log",
+        "stage": "after-fix"
+      },
+      {
+        "command": "pnpm lint",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T14:00:36.0303292+08:00",
+        "completedAt": "2026-10-21T14:00:38.8049941+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\root-lint.log",
+        "stage": "after-fix"
+      },
+      {
+        "command": "pnpm test",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T14:00:10.6779678+08:00",
+        "completedAt": "2026-10-21T14:01:06.4718582+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\root-test.log",
+        "stage": "after-fix"
+      },
+      {
+        "command": "pnpm typecheck",
+        "exitCode": 0,
+        "startedAt": "2026-10-21T14:00:36.0302975+08:00",
+        "completedAt": "2026-10-21T14:01:36.9902626+08:00",
+        "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-u01-fix\\root-typecheck.log",
+        "stage": "after-fix"
+      }
+    ],
+    "static": {
+      "result": "pass",
+      "evidence": [
+        "git diff --check -- packages/core passed",
+        "All utils source/config/manifest hashes match the original audit baseline",
+        "Review confirms every non-NaN numeric input still uses the identical clamp call"
+      ]
+    },
+    "tests": {
+      "result": "pass",
+      "permanentCoreSuite": {
+        "passed": 47,
+        "files": 8
+      },
+      "originalAuditProbe": {
+        "passed": 26,
+        "removedAfterRun": true
+      },
+      "regressionBeforeFix": {
+        "passed": 14,
+        "failed": 1,
+        "intentionalFailure": true
+      }
+    },
+    "artifact": {
+      "result": "pass",
+      "command": "pnpm build",
+      "scope": [
+        "Userscript production bundle",
+        "Tauri production frontend",
+        "Tauri native optimized release application"
+      ],
+      "outputs": [
+        "apps/userscript/dist/any-music.user.js",
+        "apps/tauri/dist",
+        "target/release/any-music-tauri.exe"
+      ],
+      "warning": "Tauri frontend emitted a minified-chunk-size warning (>500 kB). The build succeeded; unrelated chunk configuration was not changed."
+    },
+    "live": {
+      "result": "not-applicable",
+      "reason": "Pure numeric function; no browser, product app or emulator inspection was requested."
+    },
+    "rootGates": {
+      "result": "pass",
+      "commands": ["pnpm test", "pnpm typecheck", "pnpm lint", "pnpm format:check", "pnpm build"],
+      "note": "These gates ran after the source/test fix. Subsequent changes are audit-record updates only; their final formatting/consistency is checked separately."
+    }
+  },
+  "limitations": [
+    "Automated tests, static checks and production builds establish their covered scope; no live UI/device acceptance is claimed.",
+    "Seven other B01 candidate subbatches remain unreviewed. This fix does not complete B01.",
+    "No Rust implementation changed; additional native-only release/MSRV/deny gates are outside this fix's requirements."
+  ],
+  "nextBatch": "B01-audio-recipes-shared",
+  "completedAt": "2026-10-21T14:04:45.9149157+08:00"
+}

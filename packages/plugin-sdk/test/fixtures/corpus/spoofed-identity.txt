@@ -1,0 +1,1 @@
+{"wireVersion":1,"requestId":"req-1","contextRef":"ctx-1","deadlineMs":1000,"operation":"state.get","input":{"key":"summary"},"pluginId":"bilibili"}

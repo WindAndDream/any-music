@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R2",
+  "date": "2026-10-27",
+  "browserFullyRestarted": true,
+  "productTabClosedBeforeRestart": true,
+  "cacheRetained": true,
+  "page": {
+    "at": 1793031181268,
+    "theme": "studio",
+    "audioCount": 1,
+    "source": null,
+    "currentSrc": "",
+    "paused": true,
+    "readyState": 0,
+    "downloadRows": [
+      {
+        "id": "选择下载任务 download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+        "text": "排序We Never (Remix) (若如初见)\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载"
+      },
+      {
+        "id": "选择下载任务 download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+        "text": "排序沧海恨水碧悠悠，至今已过百万秋…\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载"
+      },
+      {
+        "id": "选择下载任务 download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+        "text": "排序神总是忧郁的——《幻昼》降调版\n\n已下载\n\n已下载\n\n播放\n喜欢\n歌曲操作\n重试下载"
+      }
+    ],
+    "pageGm": "undefined",
+    "pageGmXhr": "undefined",
+    "hostScripts": 0,
+    "productLocalStorageKeys": []
+  },
+  "manager": {
+    "at": 1793031181932,
+    "storageBytes": 33117402,
+    "cacheChargedBytes": 33072536,
+    "cacheEntries": 20,
+    "batch": [
+      {
+        "id": "download-batch:62fd3074-eb42-4a13-8e8f-4fa17fc35caf",
+        "status": "completed",
+        "archive": {
+          "fileName": "any-music-download-20261025-154813.zip",
+          "extension": "zip",
+          "mimeType": "application/zip",
+          "sizeBytes": 12456527
+        },
+        "items": [
+          {
+            "id": "download-item:d4084641-126d-4407-bd7e-29d999d7c09b",
+            "status": "succeeded",
+            "savedAtMs": 1793031030176,
+            "savedFile": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 12456527
+            },
+            "attemptCount": 13,
+            "lastAttempt": {
+              "attemptNumber": 13,
+              "startedAtMs": 1793030811597,
+              "completedAtMs": 1793030955215,
+              "status": "succeeded"
+            }
+          },
+          {
+            "id": "download-item:4b81d7fd-201f-4c63-a480-38063e6a7f00",
+            "status": "succeeded",
+            "savedAtMs": 1793031030176,
+            "savedFile": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 12456527
+            },
+            "attemptCount": 10,
+            "lastAttempt": {
+              "attemptNumber": 10,
+              "startedAtMs": 1793030811662,
+              "completedAtMs": 1793030932584,
+              "status": "succeeded"
+            }
+          },
+          {
+            "id": "download-item:785ee8a6-024e-4741-b2e9-d778887249bb",
+            "status": "succeeded",
+            "savedAtMs": 1793031030176,
+            "savedFile": {
+              "fileName": "any-music-download-20261025-154813.zip",
+              "extension": "zip",
+              "mimeType": "application/zip",
+              "sizeBytes": 12456527
+            },
+            "attemptCount": 12,
+            "lastAttempt": {
+              "attemptNumber": 12,
+              "startedAtMs": 1793030932683,
+              "completedAtMs": 1793031029943,
+              "status": "succeeded"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "network": {
+    "at": 1793031227704,
+    "requests": [
+      {
+        "at": 1793031143427.629,
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/nav",
+        "type": "xmlhttprequest"
+      }
+    ]
+  },
+  "saveFileCountBeforeAndAfter": 4,
+  "finalZipFileName": "any-music-download-20261025-154813 (4).zip",
+  "notes": [
+    "Count covers only this batch's suffixed files; three older baseline ZIPs were already present.",
+    "No implicit media resolution, import or CDN read after the new browser/workbench starts. Platform account-status nav is expected.",
+    "The new player is idle and the three completed item identities, attempts and save dispatch metadata persist.",
+    "One static-host HTTP 404 console error remains; the previous GM 64 MiB injection error does not recur."
+  ]
+}

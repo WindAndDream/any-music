@@ -1,0 +1,1 @@
+{"wireVersion":1,"requestId":"req-1","operation":"state.get","ok":true,"result":{"responseRef":"res-1","status":200,"sizeBytes":0,"expiresAtMs":1000}}

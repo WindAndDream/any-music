@@ -1,0 +1,264 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B20-targeted-legacy-check-repository",
+  "parentBatch": "B20",
+  "candidate": "B20-targeted-legacy-check",
+  "runtime": "repository",
+  "startedAt": "2026-10-22T11:02:12.789Z",
+  "completedAt": "2026-10-22T11:08:53.874Z",
+  "timezone": "Asia/Shanghai",
+  "scope": "Final bounded B20 candidate: production source/module/runtime entries, internal package closures, removed source package/subpath/installer identifiers, canonical IPC names and selected moved test/fixture/generated ownership. Userscript and Tauri evidence is split into separate reports.",
+  "criteria": [
+    "C1/C2 no old source JSON installer/forwarding package in selected production entries",
+    "C5 one canonical IPC registry and no targeted former source aliases",
+    "C6 tests/fixtures/generated protocol ownership and public package exports",
+    "C3/C4 preserve current installation/upgrade/rollback/recovery",
+    "C6 validate reuse before closing all four B20 candidates"
+  ],
+  "baseline": {
+    "reference": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-repository-baseline.json",
+    "head": "eaaf5e7ab5dfb2699a7b3ccd6ea40d14827ac12d",
+    "currentHead": "eaaf5e7ab5dfb2699a7b3ccd6ea40d14827ac12d",
+    "allSelectedSourceAndFixtureHashesUnchanged": true,
+    "hashedFiles": 260,
+    "workingTree": "Existing staged/unstaged work retained. This batch changes audit reports and summary only."
+  },
+  "declaredStatus": {
+    "claim": "The unreleased product uses current packages and generation/native installation formats, without previous source-JSON installation or compatibility entries. Current plugin upgrade/rollback/crash recovery remain supported.",
+    "references": ["AGENTS.md:11", "apps/userscript/AGENTS.md", "apps/tauri/src-tauri/AGENTS.md"],
+    "limits": "This is a scoped entry/ownership review, not whole-runtime or whole-project acceptance."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-applicable"
+  },
+  "runtimeReports": [
+    "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-userscript.json",
+    "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-tauri.json"
+  ],
+  "checks": [
+    {
+      "criterion": "C1/C2 selected production reachability",
+      "result": "pass",
+      "evidence": [
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-userscript.json",
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-tauri.json"
+      ],
+      "detail": "21 root/app/package manifests and both production closures have no old @any-music/music-sources package, plugin-center/declarative export or production CLI/testkit dependency. Eighteen composition files and 669 imports across selected entries/tests have no targeted former source installer/import identifier."
+    },
+    {
+      "criterion": "C5 targeted IPC alias cleanup",
+      "result": "pass",
+      "evidence": [
+        "apps/tauri/src-tauri/src/ipc.rs",
+        "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/isolation.log"
+      ],
+      "detail": "Canonical registration and exact permission checks pass; 61 command names are unique and no targeted old source-install/archive alias occurs. Current .amplugin install and manual rollback are retained. Distinct legitimate operations such as load/save, preview/install and cancel/release are not collapsed."
+    },
+    {
+      "criterion": "C6 implementation/test/fixture/generated ownership",
+      "result": "pass",
+      "evidence": [
+        "apps/userscript/test/features/music-sources/built-in-music-sources.test.ts",
+        "apps/tauri/test/features/music-sources/built-in-source-directory.test.ts",
+        "apps/tauri/test/platform/native-plugin-authority.test.ts",
+        "packages/plugin-center/test/music-sources/music-source-registry.test.ts",
+        "packages/music-workbench/test/storage/product-generation-store.test.ts",
+        "packages/plugin-source-bilibili/test",
+        "packages/plugin-source-douyin/test",
+        "packages/plugin-sdk/test/fixtures/packages/corpus.json",
+        "crates/am-plugin-protocol/src/generated.rs"
+      ],
+      "detail": "198 owned inventory files include 128 TypeScript/test sources in their current source/app/SDK owners. No selected app test retains the old source protocol test stems or old package imports. Generated Rust serde/field checks match the SDK source (47 definitions). Existing dependency/lightweight/public export checks pass."
+    },
+    {
+      "criterion": "C3/C4 supported recovery preservation",
+      "result": "pass",
+      "evidence": [
+        "crates/am-plugin-runtime/src/install.rs",
+        "crates/am-plugin-runtime/src/rollback.rs",
+        "apps/tauri/src/platform/native-plugin-authority.ts"
+      ],
+      "detail": "All selected source/test/fixture/generated files retain their baseline hashes; no production file is deleted or rewritten. Current .amplugin archive validation, native preview/consent/manual rollback and crash-recovery ownership are preserved. Fixture identifiers such as legacy:leaf are not classified as previous-schema readers."
+    },
+    {
+      "criterion": "C6 prior evidence reuse",
+      "result": "pass",
+      "evidence": [
+        {
+          "batchId": "B20-reviewed-area-guidance-repository",
+          "checkedFiles": 9,
+          "changedFiles": [],
+          "result": "pass"
+        },
+        {
+          "batchId": "B20-ownership-status-scope-repository",
+          "checkedFiles": 4,
+          "changedFiles": [],
+          "result": "pass"
+        },
+        {
+          "batchId": "B20-bilingual-counterparts-indexes-repository",
+          "checkedFiles": 101,
+          "changedFiles": [],
+          "result": "pass"
+        }
+      ],
+      "detail": "All nine previously edited guidance files, the two supporting native-renderer storage/account contracts, and all 101 files in the counterpart/index baseline remain unchanged. Prior B20 scoped conclusions remain valid for this closure."
+    }
+  ],
+  "findings": [],
+  "openFindingIds": [],
+  "changedFiles": [],
+  "coverage": {
+    "manifests": 21,
+    "compositionFiles": 18,
+    "ownedInventoryFiles": 198,
+    "testSourceFiles": 128,
+    "importsChecked": 669,
+    "ipcCommands": 61,
+    "passedTests": 25,
+    "guardTests": 17,
+    "userscriptTests": 3,
+    "tauriTests": 5
+  },
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node <user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/check-entries.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T11:06:29.562Z",
+      "checkerSha256": "cfa9c832bcf445238d0a5158633a1b8b4ca3c1e7cc497674fe7e235be8b791b7",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/entries-final.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node scripts/check-package-boundaries.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T11:08:53.874Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/boundaries.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node scripts/check-plugin-isolation.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T11:08:53.874Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/isolation.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node scripts/generate-plugin-protocol.mjs --check",
+      "exitCode": 0,
+      "time": "2026-10-22T11:08:53.874Z",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/generated.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "node --test scripts/test/check-package-boundaries.test.mjs scripts/test/check-plugin-isolation.test.mjs",
+      "exitCode": 0,
+      "time": "2026-10-22T11:08:53.874Z",
+      "passed": 17,
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/guard-tests.log"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/userscript exec vitest run --config vitest.config.ts test/features/music-sources/built-in-music-sources.test.ts",
+      "exitCode": 0,
+      "passed": 3,
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/userscript-tests.log",
+      "time": "2026-10-22T11:08:53.874Z"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/tauri exec vitest run test/features/music-sources/built-in-source-directory.test.ts test/platform/native-plugin-authority.test.ts",
+      "exitCode": 0,
+      "passed": 5,
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/tauri-tests.log",
+      "time": "2026-10-22T11:08:53.874Z"
+    }
+  ],
+  "readScope": {
+    "entryFiles": [
+      "apps/userscript/src/platform/configure-userscript-workbench.ts",
+      "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "apps/tauri/src/platform/runtime-capabilities.ts",
+      "apps/tauri/src/platform/native-plugin-authority.ts",
+      "apps/tauri/src-tauri/src/ipc.rs",
+      "apps/tauri/src-tauri/src/lib.rs",
+      "apps/tauri/src-tauri/build.rs",
+      "apps/tauri/src-tauri/permissions/product.toml"
+    ],
+    "compositionRoots": [
+      "apps/userscript/src/features/music-sources",
+      "apps/userscript/src/features/plugins",
+      "apps/tauri/src/features/music-sources",
+      "apps/tauri/src/features/plugins",
+      "packages/music-workbench/src/features/plugins",
+      "packages/plugin-center/src/music-sources"
+    ],
+    "inventoryRoots": [
+      "apps/userscript/test",
+      "apps/tauri/test",
+      "packages/plugin-center/test",
+      "packages/music-workbench/test",
+      "packages/plugin-source-bilibili/test",
+      "packages/plugin-source-douyin/test",
+      "packages/plugin-sdk/test/fixtures",
+      "crates/am-plugin-protocol/src"
+    ],
+    "sharedBoundary": [
+      "packages/plugin-center/src/music-sources/music-source-registry.ts:15-30",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts:45-71"
+    ],
+    "limits": "AST/manifest/registry inventories are not a full semantic audit of all code. Entry graph evidence is static, without a new production bundle. Runtime report live evidence is not-run."
+  },
+  "unreadPaths": [
+    "Full native and GM transport/business chains",
+    "Semantic equivalence of every arbitrary IPC body and every non-selected repository file",
+    "Full implementation duplication or migration review outside the selected owner inventory",
+    "Fresh production builds and exact native/GM/device/channel acceptance"
+  ],
+  "missingEvidence": [
+    "No full-root test/typecheck/lint/build/native/MSRV/deny rerun for this report-only batch; existing B21 results need their own hash reconciliation.",
+    "The first B20 optional Python skill validator still lacks PyYAML, and actual skill-selection evals remain unexecuted; neither is recorded as passing.",
+    "External URLs and complete prose translation semantics remain outside the earlier structural B20 candidate."
+  ],
+  "dependencies": [
+    "All earlier B20 evidence was checked for relevant file drift before closure",
+    "Other B01-B19 unreviewed/native/live items remain owned by their reports; B20 completion does not close them"
+  ],
+  "remainingSubbatches": [],
+  "nextBatch": {
+    "batchId": "B21-repository-final-reconciliation",
+    "parentBatch": "B21",
+    "runtime": "repository",
+    "status": "pending",
+    "question": "Reconcile the completed scoped B20 reports with the existing B21 final report and current hashes, preserving all other unreviewed/live/unsupported limits and reusing only still-valid gates.",
+    "allowedPaths": [
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-*.json",
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-*.json",
+      "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.*.md",
+      "Only necessary final diff/hash/verification inputs"
+    ],
+    "exclusions": [
+      "Re-reading or accepting all product implementations",
+      "Unrequested product fixes, app/browser/emulator work, recapture, commit or push"
+    ],
+    "continuation": "B20 now has four closed scoped candidates and nine resolved documentation findings. Reconcile its new evidence with existing B21 coverage; do not infer whole-project acceptance. Run root/native final gates only when their earlier inputs have changed or the current final scope requires them."
+  },
+  "handoff": "B20-targeted-legacy-check-repository：基线 0dde162 与输入哈希。本批完成两端独立入口和所有权检查，未发现新问题，未修改产品代码或删除文件。Userscript 只装配构建已知来源并固定 none；Tauri 从原生能力装配来源及安装/预览端口。21 份清单、18 个装配文件和 669 个导入未命中旧来源包/解释器安装入口；61 个 IPC 名称唯一，旧来源安装/归档别名未命中。当前包安装、原生确认回退和崩溃恢复保持原样。198 个测试/夹具/生成归属条目及公开依赖检查通过，SDK 生成 Rust 校验一致。17 个边界回归、Userscript 三项和 Tauri 五项，共 25 项通过。前两批九份修订文档及相关存储契约、第三批 101 份结构输入哈希均未变。B20 四个候选均完成，九项文档问题已修复；当前范围 conformant/pass-scoped。无新构建或运行验收，原 PyYAML 辅助校验缺口仍单列。下一入口为 B21-repository-final-reconciliation，仅与现有汇总和有效门禁对账，不宣称全项目验收。"
+}

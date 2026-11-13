@@ -1,0 +1,114 @@
+[
+  {
+    "entry": "packages/plugin-center/src/index.ts",
+    "modules": [
+      "packages/plugin-center/src/contribution-allocator.ts",
+      "packages/plugin-center/src/contribution-registry.ts",
+      "packages/plugin-center/src/index.ts",
+      "packages/plugin-center/src/module-conditions.ts",
+      "packages/plugin-center/src/module-contracts.ts",
+      "packages/plugin-center/src/module-controller.ts",
+      "packages/plugin-center/src/module-dependencies.ts",
+      "packages/plugin-center/src/module-recovery.ts",
+      "packages/plugin-center/src/plugin-catalog.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "entry.js",
+        "bytes": 31888,
+        "sha256": "792289e6e4619d79805340828add266206d56cf152d75363090a3e400d000c40"
+      }
+    ]
+  },
+  {
+    "entry": "packages/music-workbench/src/index.ts",
+    "modules": [
+      "packages/music-workbench/src/index.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "packages/plugin-center/src/contribution-allocator.ts",
+      "packages/plugin-center/src/contribution-registry.ts",
+      "packages/plugin-center/src/index.ts",
+      "packages/plugin-center/src/module-conditions.ts",
+      "packages/plugin-center/src/module-contracts.ts",
+      "packages/plugin-center/src/module-controller.ts",
+      "packages/plugin-center/src/module-dependencies.ts",
+      "packages/plugin-center/src/module-recovery.ts",
+      "packages/plugin-center/src/plugin-catalog.ts",
+      "packages/plugin-ui-vue/src/trusted/theme-directory.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "entry.js",
+        "bytes": 6605,
+        "sha256": "c10feb7e0dac11dd491a9f195eb952c2f10f2b6b6179194cc77ddc954201faac"
+      }
+    ]
+  },
+  {
+    "entry": "packages/plugin-ui-vue/src/trusted/theme-directory.ts",
+    "modules": ["packages/plugin-ui-vue/src/trusted/theme-directory.ts"],
+    "outputs": [
+      {
+        "fileName": "entry.js",
+        "bytes": 1110,
+        "sha256": "8d62c63b561b46ebf1123407add470d40571c4706cbc4e46dcc838bc0a92ff44"
+      }
+    ]
+  },
+  {
+    "entry": "apps/userscript/src/features/plugins/built-in-workbench-modules.ts",
+    "modules": [
+      "apps/userscript/src/features/plugins/built-in-workbench-modules.ts",
+      "packages/music-workbench/src/index.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "packages/plugin-center/src/contribution-allocator.ts",
+      "packages/plugin-center/src/contribution-registry.ts",
+      "packages/plugin-center/src/index.ts",
+      "packages/plugin-center/src/module-conditions.ts",
+      "packages/plugin-center/src/module-contracts.ts",
+      "packages/plugin-center/src/module-controller.ts",
+      "packages/plugin-center/src/module-dependencies.ts",
+      "packages/plugin-center/src/module-recovery.ts",
+      "packages/plugin-center/src/plugin-catalog.ts",
+      "packages/plugin-ui-vue/src/trusted/theme-directory.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "entry.js",
+        "bytes": 6704,
+        "sha256": "d0253664881bc9fcd5515e9a3c62edc36db4bb943ebfb9bd83e4c797bd0613fc"
+      }
+    ]
+  },
+  {
+    "entry": "apps/tauri/src/features/plugins/built-in-workbench-modules.ts",
+    "modules": [
+      "apps/tauri/src/features/plugins/built-in-workbench-modules.ts",
+      "packages/music-workbench/src/index.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts",
+      "packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "packages/plugin-center/src/contribution-allocator.ts",
+      "packages/plugin-center/src/contribution-registry.ts",
+      "packages/plugin-center/src/index.ts",
+      "packages/plugin-center/src/module-conditions.ts",
+      "packages/plugin-center/src/module-contracts.ts",
+      "packages/plugin-center/src/module-controller.ts",
+      "packages/plugin-center/src/module-dependencies.ts",
+      "packages/plugin-center/src/module-recovery.ts",
+      "packages/plugin-center/src/plugin-catalog.ts",
+      "packages/plugin-ui-vue/src/trusted/theme-directory.ts"
+    ],
+    "outputs": [
+      {
+        "fileName": "entry.js",
+        "bytes": 6705,
+        "sha256": "57342a364f9e01f0d7c35a641f93a34e3d72fb4accd43204a14231c639629d56"
+      }
+    ]
+  }
+]

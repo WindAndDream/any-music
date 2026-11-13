@@ -1,0 +1,3 @@
+
+> @any-music/theme-studio@0.0.0 typecheck <project-root>\packages\theme-studio
+> vue-tsc --noEmit -p tsconfig.json

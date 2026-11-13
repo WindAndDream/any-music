@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-03",
+  "compression": "Per-file gzip level 9; JS/CSS/Wasm payload; same method as P07",
+  "baselineSourceDigest": "7cd15984c1097128b8bf4b2ea1d728fb0fa593843d5cf7e2691b36bcc69c2608",
+  "currentSourceDigest": "d0f06179b55caa6f10fdf6940f5da145eb7bbc6346f0b7b0f66775efdf6dd632",
+  "interpretation": "Combined P08/P13 workspace production frontends. P08 remains unused by production lists; P13 extends the loader already consumed by production. Changes cannot be assigned to P08 alone. Isolated measured-consumer cost is in consumer-build.json; this is not live layout, frame timing or native installer acceptance.",
+  "comparisons": [
+    {
+      "runtime": "userscript",
+      "before": {
+        "payloadBytes": 5741770,
+        "payloadGzipBytes": 1107443
+      },
+      "after": {
+        "payloadBytes": 5744004,
+        "payloadGzipBytes": 1107847
+      },
+      "delta": {
+        "payloadBytes": 2234,
+        "payloadGzipBytes": 404
+      },
+      "changedCodeArtifacts": [
+        {
+          "path": "apps/userscript/dist/any-music.user.js",
+          "beforeSha256": "550d061f1edc767fa233db729ebf452654bfe24eb80f6dcf70917b26ba87cfaa",
+          "afterSha256": "3b91d48dfed124cf10cb292145f69ea0bc5823983d6b912009cd4be275d8c361"
+        }
+      ],
+      "engineInThemeBuildGraph": false,
+      "engineInUserscriptBuildGraph": false
+    },
+    {
+      "runtime": "tauri",
+      "before": {
+        "payloadBytes": 3571287,
+        "payloadGzipBytes": 848608
+      },
+      "after": {
+        "payloadBytes": 3572474,
+        "payloadGzipBytes": 848996
+      },
+      "delta": {
+        "payloadBytes": 1187,
+        "payloadGzipBytes": 388
+      },
+      "changedCodeArtifacts": [
+        {
+          "path": "apps/tauri/dist/assets/CollectionSelectionToolbar-C7NELIh7.js",
+          "beforeSha256": null,
+          "afterSha256": "cac81834ca6877345348caad5e4ae0481d02599c0c19f35f82fade831e1dee1d"
+        },
+        {
+          "path": "apps/tauri/dist/assets/CollectionSelectionToolbar-CNywtBkL.js",
+          "beforeSha256": "d878c93ae46d5df790a378e52f6c6b26eb8c5cbd17582e233dbed1769f570d23",
+          "afterSha256": null
+        },
+        {
+          "path": "apps/tauri/dist/assets/index-BSUSSQzX.js",
+          "beforeSha256": null,
+          "afterSha256": "7365775278533cfafee50fcb8e3231fe5c375689904e81cf1a2db3784e982b12"
+        },
+        {
+          "path": "apps/tauri/dist/assets/index-Cm016SFL.js",
+          "beforeSha256": "e8b5331f66f293b6d23a646096fa8202f6d1158a3761398774f275a21db744b2",
+          "afterSha256": null
+        },
+        {
+          "path": "apps/tauri/dist/assets/vue-BsCaIJuP.js",
+          "beforeSha256": null,
+          "afterSha256": "a5913927465dcb15961b7cdc5e0abafeb69b21c49e5536d1d70a7c2e2a4307c5"
+        },
+        {
+          "path": "apps/tauri/dist/assets/vue-D-dUtwmq.js",
+          "beforeSha256": "33bcba6f0ba4b73403af35c7ad515dba68cd000fdc40bef33189687b7ab20300",
+          "afterSha256": null
+        }
+      ],
+      "engineInThemeBuildGraph": false,
+      "engineInUserscriptBuildGraph": null
+    }
+  ]
+}

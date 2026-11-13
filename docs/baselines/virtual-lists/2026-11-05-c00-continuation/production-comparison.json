@@ -1,0 +1,50 @@
+{
+  "baseline": "../2026-11-04-c00-preparation/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "method": "Production frontend JS/CSS/Wasm totals; per-file gzip level 9. Native executable excluded from frontend payload totals.",
+  "runtimeResults": [
+    {
+      "runtime": "userscript",
+      "payloadBytesDelta": 37522,
+      "payloadGzipBytesDelta": 8955,
+      "audits": [
+        {
+          "path": "apps/userscript/dist/theme-build-audit.json",
+          "startupVirtualizerPresent": false,
+          "startupCandidateStyleResources": [
+            "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue?vue&type=style&index=0&scoped=92ed64e5&inline&lang.css"
+          ],
+          "metadataVirtualizerPresent": false,
+          "documentStartVirtualizerPresent": false,
+          "renderedVirtualizerPresent": null
+        },
+        {
+          "path": "apps/userscript/dist/userscript-build-audit.json",
+          "startupVirtualizerPresent": null,
+          "startupCandidateStyleResources": [],
+          "metadataVirtualizerPresent": null,
+          "documentStartVirtualizerPresent": null,
+          "renderedVirtualizerPresent": true
+        }
+      ]
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytesDelta": 21899,
+      "payloadGzipBytesDelta": 9087,
+      "audits": [
+        {
+          "path": "apps/tauri/dist/theme-build-audit.json",
+          "startupVirtualizerPresent": false,
+          "startupCandidateStyleResources": [
+            "packages/theme-default/src/components/music-sources/VirtualQueuePlatformGrid.vue?vue&type=style&index=0&scoped=92ed64e5&inline&lang.css"
+          ],
+          "metadataVirtualizerPresent": false,
+          "documentStartVirtualizerPresent": null,
+          "renderedVirtualizerPresent": null
+        }
+      ]
+    }
+  ],
+  "limits": "Combined dirty-workspace output costs, not frame-time or native parity. The candidate remains default-closed with no production provider; its lazy code can be physically included in the single Userscript artifact without startup execution."
+}

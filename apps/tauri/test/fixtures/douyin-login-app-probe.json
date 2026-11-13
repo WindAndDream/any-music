@@ -1,0 +1,43 @@
+{
+  "documentType": "platform-interface-capture",
+  "platform": "douyin",
+  "captureDate": "2026-10-03",
+  "scope": "Diagnosis of the rejection the packaged desktop client reported during a real QR sign-in attempt, using a temporary in-app probe that logged the outgoing Passport request and the raw response. The probe was removed in the same session and its log file deleted. No cookie, token or signature value is recorded here.",
+  "symptom": {
+    "userFacing": "抖音拒绝查询二维码状态，请使用系统浏览器。",
+    "reportedBy": "the desktop app during a real scan attempt"
+  },
+  "probeMethod": {
+    "what": "A temporary diagnostic wrote the assembled outgoing request and the raw response body to a file under the system temp directory, then the app was rebuilt and the flow reproduced.",
+    "why": "The generic rejection message is produced by any non-zero error code that is not 4031 and not a captcha, so the actual business code could not be inferred from the message alone. The desktop app's own traffic is not visible to the chrome-devtools protocol because it is native HTTP rather than a page fetch.",
+    "removed": "The probe, its call sites and its log file were all deleted after the diagnosis; a search of the source for probe remnants returns zero."
+  },
+  "observed": {
+    "polls": [
+      "check_qrconnect -> error_code 0, status new",
+      "check_qrconnect -> error_code 0, status new",
+      "check_qrconnect -> error_code 0, status new",
+      "check_qrconnect -> error_code 0, status new",
+      "check_qrconnect -> error_code 2156, description 系统繁忙，请重启应用或刷新页面后重试"
+    ],
+    "reading": "The client was working correctly: four consecutive polls were accepted by the server. The single failure was a transient server-side busy code, not a risk decision and not a signature problem.",
+    "requestSurface": {
+      "parameterCount": 30,
+      "aBogus": "present, 184 characters, beginning DfsfDEDD (the minted token), so the shipped build does carry the mint",
+      "signAndQs": "both present",
+      "absent": "account_sdk_source_info, fp, p_ts — the browser-only fields the native builder deliberately omits",
+      "conclusion": "The live server accepted this exact native surface, which also confirms that omitting the browser-only fields is safe."
+    }
+  },
+  "defect": {
+    "where": "apps/tauri/src-tauri/src/douyin_login.rs, the poll result mapping",
+    "what": "Every non-zero error code that was not 4031 or a captcha became the hard error 抖音拒绝查询二维码状态，请使用系统浏览器, so a transient 系统繁忙 told the user to abandon the in-app flow even though the QR token was still valid.",
+    "fix": "error_code 2156 now returns the ordinary waiting state so polling continues, while any unrecognised code stays fatal. A regression test asserts both halves: 2156 yields status waiting with the token untouched, and an unknown code such as 12345 is still an error.",
+    "deliberatelyNarrow": "Only 2156 was observed, so only 2156 is tolerated. Widening the tolerance should follow an observation, not a guess."
+  },
+  "outstanding": [
+    "2156 was seen once; whether it recurs or carries other meanings is unknown.",
+    "The mobile_sms_verify path is the only verification route exercised end to end.",
+    "The confirmed response body of the successful sign-in was lost to the post-login navigation."
+  ]
+}

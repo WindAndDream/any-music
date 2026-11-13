@@ -1,0 +1,86 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "userscript",
+  "batchId": "B20-targeted-legacy-check-userscript",
+  "runtime": "userscript",
+  "schemaVersion": 1,
+  "parentBatch": "B20-targeted-legacy-check-repository",
+  "startedAt": "2026-10-22T11:02:12.789Z",
+  "completedAt": "2026-10-22T11:08:53.874Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-targeted-legacy-check-repository-baseline.json",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "findings": [],
+  "openFindingIds": [],
+  "changedFiles": [],
+  "scope": "Production Userscript direct source/module/runtime composition and its internal production dependency closure; no GM/browser acceptance.",
+  "checks": [
+    {
+      "criterion": "C1/C2 old package and installer reachability",
+      "result": "pass",
+      "evidence": [
+        "apps/userscript/src/platform/configure-userscript-workbench.ts:21",
+        "apps/userscript/src/features/music-sources/built-in-source-directory.ts:60",
+        "apps/userscript/src/features/plugins/built-in-workbench-modules.ts:8"
+      ],
+      "detail": "The application injects only the build-owned source/module directories, lazy source factories and GM/storage ports. No raw source-JSON manifest/archive input is present at the inspected entry or public registry options."
+    },
+    {
+      "criterion": "C1 production dependencies and owner tests",
+      "result": "pass",
+      "evidence": [
+        "apps/userscript/package.json",
+        "apps/userscript/test/features/music-sources/built-in-music-sources.test.ts"
+      ],
+      "detail": "The 13-package internal production closure excludes old music-sources, CLI/testkit and VM/Worker adapter packages. Source protocol dependencies use current public plugin-source exports; runtime bridge fixtures remain in the application."
+    }
+  ],
+  "productionClosure": [
+    "@any-music/audio-composition",
+    "@any-music/core",
+    "@any-music/music-workbench",
+    "@any-music/plugin-center",
+    "@any-music/plugin-music-creation",
+    "@any-music/plugin-sdk",
+    "@any-music/plugin-source-bilibili",
+    "@any-music/plugin-source-douyin",
+    "@any-music/plugin-tag-management",
+    "@any-music/plugin-ui-vue",
+    "@any-music/ui",
+    "@any-music/userscript",
+    "@any-music/utils"
+  ],
+  "verification": [
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node <user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/check-entries.mjs",
+      "exitCode": 0,
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/entries-final.log",
+      "time": "2026-10-22T11:06:29.562Z"
+    },
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/userscript exec vitest run --config vitest.config.ts test/features/music-sources/built-in-music-sources.test.ts",
+      "exitCode": 0,
+      "passed": 3,
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-b20-legacy-20261022/userscript-tests.log",
+      "time": "2026-10-22T11:08:53.874Z"
+    }
+  ],
+  "missingEvidence": [
+    "No fresh userscript build/eager artifact graph or real Tampermonkey/GM acceptance. Manifest closure is dependency evidence, not emitted-bundle evidence."
+  ],
+  "unreadPaths": [
+    "GM HTTP/cookie/storage/bridge implementation internals",
+    "Shared source protocol and playback behavior"
+  ],
+  "nextBatch": null
+}

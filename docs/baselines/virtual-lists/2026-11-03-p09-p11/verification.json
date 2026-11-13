@@ -1,0 +1,225 @@
+{
+  "date": "2026-11-03",
+  "runtimeScope": "shared",
+  "implemented": ["P09", "P10", "P11"],
+  "next": "P12",
+  "ownership": {
+    "P09": "Measured row-major grid, CSS-resolved layout, controlled renderer, tests and Node fixture; primary reviewed legacy skin aliases, hidden layout and row-group cache invalidation.",
+    "P10": "Opt-in semantic anchor helper and standalone/grid composition tests; primary integrated lazy immutable list geometry.",
+    "P11": "Bounded interaction/focus helper and tests; primary integrated shared max32 raw retained range and installed-list composition tests.",
+    "primary": "Public exports, list geometry/range integration, cross-module review, combined checks, bilingual maintained docs and evidence."
+  },
+  "checks": [
+    {
+      "command": "pnpm --filter @any-music/ui test test/composables/virtual-scroll test/components/virtual-scroll test/composables/music-sources/use-scroll-page-loader.test.ts",
+      "result": "passed",
+      "tests": 254,
+      "addedSinceP08P13": 118,
+      "log": "p09-p11-target-final.log"
+    },
+    {
+      "command": "pnpm test",
+      "result": "passed",
+      "log": "p09-p11-test-retry.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed standalone and again inside final pnpm build",
+      "logs": ["p09-p11-typecheck.log", "p09-p11-build.log"]
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with warnings in pre-existing unrelated files only",
+      "log": "p09-p11-lint-final.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "p09-p11-format-check.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed; both production frontends and Tauri release executable",
+      "log": "p09-p11-build.log"
+    },
+    {
+      "command": "node logs/2026-11-03-virtual-list-implementation/p09-p11-consumer-build.mjs",
+      "result": "passed; production ESM and controlled grid CSS, external Vue, gzip level 9",
+      "log": "p09-p11-consumer-build-retry.log"
+    }
+  ],
+  "retryEvidence": {
+    "firstFullTest": {
+      "result": "passed before final bounded-range hardening",
+      "log": "p09-p11-test.log"
+    },
+    "concurrentFullTest": {
+      "result": "Studio standalone-consumer build exceeded existing 5000ms timeout while other verification/build jobs were active",
+      "log": "p09-p11-test-final.log"
+    },
+    "isolatedStudioTest": {
+      "command": "pnpm --filter @any-music/theme-studio test test/metadata.test.ts",
+      "result": "3 tests passed with unchanged timeout",
+      "log": "p09-p11-studio-build-test-isolated.log"
+    },
+    "finalFullTest": {
+      "result": "passed after production build completed, with unchanged tests/timeouts",
+      "log": "p09-p11-test-retry.log"
+    }
+  },
+  "logDirectory": "logs/2026-11-03-virtual-list-implementation",
+  "sourceFiles": [
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+      "sha256": "b0fd5f6b1cba9dcc890e2351ab5ae14973e3e325e291059a421d1208fe6556b7"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "d70343fbb0f09dd863a3f81508d928cb41151c27238b5bda2a5d0020d78a57de"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-fixed-virtual-list.ts",
+      "sha256": "834a218aa757f0f92c7a8bffe584e8b3a2177f443c9cd74bb9bb53c0cd775b0a"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts",
+      "sha256": "0c13d73b40a4b6bab0184ba770a1593a3cea2f5113e45f1f05494e34483738a6"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-list.ts",
+      "sha256": "895df904378b13515d1255d8489a9f0ab0c1ee1017947b216866a298aaa4035e"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-grid-css-layout.ts",
+      "sha256": "639a9dc8bead9a81f6b0ec8b757d34002d4bb1a6f3dc418666c230dd04a807e7"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-retention.ts",
+      "sha256": "6412c36efe4467f828ad2d30cc85ee8f2dd08c7565c0291943e36c7f0562b0d9"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-anchor.ts",
+      "sha256": "9a9e9596179ab0d11941859daf21f5d38ea25c48b746763d201492bd0eea9cde"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/virtual-list-geometry.ts",
+      "sha256": "1142ad66a4f75e2c7cf187cb859d3f0255bef68dd3cb1f5d3cd6f5747fd018f3"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/virtual-retained-range.ts",
+      "sha256": "a8429c061611cc9993f47b56cd68d7baeba5573298c9dbaf9aa71055717a8fbe"
+    },
+    {
+      "path": "packages/ui/src/virtual-scroll.ts",
+      "sha256": "c22e66c385829a553ec72bfb43338b08551ead4a3f894ad5c15ccdf0a940226d"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/FixedListConsumer.test.ts",
+      "sha256": "4dc9fd333ebd8d695eb4b6d4ce6b120733a57886e92ec76728c5adbc0f776bdd"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/MeasuredListConsumer.test.ts",
+      "sha256": "e89e5065af1b8d52c084c9bb2ea42cb2b8439bcae8db680e2452bc3f4daff28c"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTrackCardGrid.test.ts",
+      "sha256": "f748c5fcb77c4b7e3ba32f73e235b081cd255b909b3f6336b738fe9c9110293d"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/measured-list-pagination.test.ts",
+      "sha256": "2184f2b7c9efd5293b7d93a8c2ed38e63db1411ece81065a8db4fd5ca5a48d45"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-fixed-virtual-list.test.ts",
+      "sha256": "1a8193d3a793b2ed543800a79cdde6fd721ccdbe2e8140c709b59ad8343a9e7a"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-measured-virtual-grid.test.ts",
+      "sha256": "2294335afcff396bb9e3a4902dc6c31bdbe57d9cb370a5b09f1e37f64b8906ae"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-measured-virtual-list.test.ts",
+      "sha256": "f196b66ee18d63597df135176b3ea3f77b2d5fc0fc4a68c128f0300dc2bb8d10"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-grid-css-layout.test.ts",
+      "sha256": "8692723f4fc794c654b071d9d53991e35436a966f02316e6b96e002756a7f93d"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-item-retention.test.ts",
+      "sha256": "f5f411ea4da923e838926fd182f428f97122c627ff384e9229fd0ca4ffc4eb3c"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-scroll-anchor.test.ts",
+      "sha256": "34ac529b8cf85ec228756cd2a3f2bce4bde5db329b6767e6f9353e703509c699"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-scroll-context.test.ts",
+      "sha256": "8fc724219921fd79388c7ca331bb46e88286aba96574e51076d7f78be6ce9016"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-grid-interactions.test.ts",
+      "sha256": "ce7eb106444ff153556d63ec593a6e627486155b55f84dc089688c780d3d7f8c"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-list-interactions.test.ts",
+      "sha256": "a5150867108ce9750ccfdbd1211b9b079584fb4b4917e5ae02c1e8e583918ed7"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-row-geometry.test.ts",
+      "sha256": "3a27fab65c1fd4a83cec9eb595ca55c3d9bce75111cbc0ad44de54dc1d4dc7a2"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-scroll-resize-observer.test.ts",
+      "sha256": "d4cda69f30db99a3a7d180c76c6482b38a8340f59fba9e54def2fb8d798e7abf"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtualizer-engine.test.ts",
+      "sha256": "8fec59fe6cfb871abebe52804025705f5ebd907c897f215a8ab8fb0f42ea2332"
+    },
+    {
+      "path": "packages/ui/test/fixtures/virtual-scroll/collection-data.test.ts",
+      "sha256": "e9618adf35a77bcb0c01511671a276a3507b55e143d633471032364102c97c49"
+    },
+    {
+      "path": "packages/ui/test/fixtures/virtual-scroll/collection-data.ts",
+      "sha256": "008a272af21b8b1763beada71ffd1ebea86c984751777ca0c75fc0763ffbb16a"
+    },
+    {
+      "path": "packages/ui/test/fixtures/virtual-scroll/fixed-list-consumer.ts",
+      "sha256": "7acde95cbbc4d308c61f8fd22c2a6b6633ecdbd1a2c1fa0dcb21f485377d868a"
+    },
+    {
+      "path": "packages/ui/test/fixtures/virtual-scroll/grid-test-renderer.ts",
+      "sha256": "9a872c9019be9f750ce315e6668ec348d086141096ad06c6a407de887d998262"
+    },
+    {
+      "path": "packages/ui/test/fixtures/virtual-scroll/measured-list-consumer.ts",
+      "sha256": "e372797de046e8e0da99ef8c772716385a26257d7f656dd037ff21966e810dc6"
+    },
+    {
+      "path": "packages/ui/test/fixtures/virtual-scroll/resize-observer.ts",
+      "sha256": "0dc311f095950cf9668cd60d1a1bba917dc5c35aee1369e20f2296ef9419eb15"
+    }
+  ],
+  "unchangedFoundationSources": [
+    "packages/ui/src/composables/virtual-scroll/use-virtual-scroll-context.ts",
+    "packages/ui/src/composables/virtual-scroll/virtual-scroll-resize-observer.ts",
+    "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+    "packages/ui/src/composables/virtual-scroll/virtual-row-geometry.ts",
+    "pnpm-lock.yaml"
+  ],
+  "openGates": [
+    "P12 semantic tables",
+    "P14 host continuity",
+    "P15 whole-foundation repeated resource acceptance",
+    "R00-R08 drag",
+    "All production collection consumers",
+    "P03 actual CSS/layout/visual/frame baseline",
+    "Browser Find and text selection",
+    "Native focus/IME/popover/RTL and natural CSS Grid behavior",
+    "Userscript and Tauri WebView acceptance / G01-G03"
+  ],
+  "noProductBrowserLaunch": true,
+  "noCommitPush": true
+}

@@ -1,0 +1,96 @@
+{
+  "documentType": "runtime-acceptance",
+  "runtimeScope": "tauri",
+  "recordedDate": "2026-10-20",
+  "device": {
+    "model": "Xiaomi 23113RKC6C",
+    "api": 35,
+    "abi": "arm64-v8a",
+    "webview": "153.0.8010.36"
+  },
+  "profile": "debug",
+  "artifactSha256": "f908e30b45dbf4dd5796cb271af723dcc8fb403d293bf617ed5a8fa2c48b2d75",
+  "playing": {
+    "playing": true,
+    "timeStart": 94.433092,
+    "timeEnd": 95.931973,
+    "readyState": 4,
+    "localGrant": true,
+    "error": null
+  },
+  "seek": {
+    "before": {
+      "time": 106.016729,
+      "paused": false
+    },
+    "after": {
+      "time": 67.693144,
+      "paused": false,
+      "readyState": 4
+    },
+    "sourceChanged": false,
+    "error": null
+  },
+  "trustedAudioCodec": {
+    "wasm": true,
+    "worker": true,
+    "errors": []
+  },
+  "savedMp3": {
+    "bytes": 5610491,
+    "expectedBytes": 5610491,
+    "sizeMatches": true,
+    "magicHex": "49 44 33"
+  },
+  "downloadBatchCompleted": true,
+  "proxy": {
+    "artifactSha256": "77acd4bc8c71c06e425998ca7d37f63397e990c9726fba8196e717f4cfbe5739",
+    "artifactScope": "Preceding debug build with the same native proxy implementation; codec CSP fixed afterward",
+    "configuredThroughProductUi": true,
+    "nativeRequest": {
+      "status": 200,
+      "receivedJson": true,
+      "accountBound": true
+    },
+    "targetHost": "api.bilibili.com",
+    "tlsTunnelObserved": true,
+    "account": "Separate temporary anonymous Bilibili account; no credential copying"
+  },
+  "cleanup": {
+    "capabilities": {
+      "platform": "android",
+      "form": "mobile",
+      "externalPlugins": "none",
+      "accountTransport": "provided",
+      "accountProxy": "provided",
+      "systemBrowser": "unavailable",
+      "secureCredentials": "provided",
+      "media": "provided",
+      "nativeSave": "provided",
+      "packageFiles": "provided",
+      "packageSharing": "provided",
+      "packageDeepLinks": "provided",
+      "backgroundExecution": "unavailable"
+    },
+    "authenticatedAccounts": 1,
+    "temporaryAccounts": 0,
+    "temporaryProxies": 0
+  },
+  "checksPassed": [
+    "pnpm test",
+    "pnpm typecheck",
+    "pnpm lint",
+    "pnpm format:check",
+    "pnpm build",
+    "pnpm check:native",
+    "pnpm check:rust:msrv",
+    "pnpm check:rust:deny",
+    "pnpm check:mobile:android",
+    "pnpm build:mobile:android aarch64"
+  ],
+  "limits": [
+    "Reference debug device only; no optimized Android release media acceptance",
+    "No background audio/audio-focus/interruption or minimum-device acceptance",
+    "No mobile external-plugin execution admission; policy remains none"
+  ]
+}

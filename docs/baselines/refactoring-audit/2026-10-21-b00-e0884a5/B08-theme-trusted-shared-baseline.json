@@ -1,0 +1,131 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B08-theme-trusted-shared",
+  "head": "844b5e35b0d6b152350c34043857e042170cbd61",
+  "workingTree": [
+    " M apps/tauri/src/platform/product-storage.ts",
+    " M apps/tauri/test/platform/product-storage.test.ts",
+    " M apps/userscript/src/bootstrap-userscript-app.ts",
+    " M apps/userscript/src/platform/configure-userscript-workbench.ts",
+    " M apps/userscript/src/platform/dev/install-dev-userscript-runtime.ts",
+    " M apps/userscript/test/platform/product-storage.test.ts",
+    " M apps/userscript/vite.config.ts",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+    " M docs/en/cross-platform/architecture/plugin-data-ownership.md",
+    " M docs/en/desktop/development.md",
+    " M docs/en/userscript/development.md",
+    " M docs/zh-cn/桌面端/开发规范.md",
+    " M docs/zh-cn/用户脚本/开发规范.md",
+    " M docs/zh-cn/跨平台/架构/插件数据归属.md",
+    " M docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+    " M packages/core/src/download/download-history.ts",
+    " M packages/core/src/index.ts",
+    " M packages/core/src/models/track.ts",
+    " M packages/music-workbench/src/features/music-sources/use-plugin-session.ts",
+    " M packages/music-workbench/src/media/range-media-source.ts",
+    " M packages/music-workbench/src/media/resolved-media-loader.ts",
+    " M packages/music-workbench/src/storage/local-music-library-repository.ts",
+    " M packages/music-workbench/src/storage/product-generation-store.ts",
+    " M packages/music-workbench/src/storage/product-storage.ts",
+    " M packages/music-workbench/test/features/music-sources/use-plugin-session.test.ts",
+    " M packages/music-workbench/test/media/range-media-source.test.ts",
+    " M packages/music-workbench/test/media/resolved-media-loader.test.ts",
+    " M packages/music-workbench/test/storage/product-generation-store.test.ts",
+    " M packages/music-workbench/test/storage/product-storage-fixtures.ts",
+    "?? apps/userscript/src/platform/product-storage.ts",
+    "?? apps/userscript/test/bootstrap-userscript-app.test.ts",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared.json"
+  ],
+  "targetHashes": [
+    {
+      "path": "packages/plugin-ui-vue/package.json",
+      "sha256": "4825bc534f642604becf2f9734330838313f99039f4a985f2da24a8527037bea"
+    },
+    {
+      "path": "packages/ui/package.json",
+      "sha256": "d3fe0a16fed8ee803aea0d5be2c64d5b2b0183c1500f2d57075f1e0a3a75416b"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/index.ts",
+      "sha256": "b4d3e1763730f0ea493d4d291ba3d2d0ee1b0cab91a522f3442aece78a3d9d00"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/index.ts",
+      "sha256": "c44ad5eedb01697df24f919db8f39f06f5c0e62eb2b1009ec04b40a0e6a862c5"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-directory.ts",
+      "sha256": "d4f2495ea4e89d95d61dd413d072fd3f01713ab3b88077481dbc0ce93c923739"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-contracts.ts",
+      "sha256": "90601eaead7bee72701001917c8d029fa99e291636f90fab4680f1abcdf986f7"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-controller.ts",
+      "sha256": "5bf2f32dae48b25a25c524e7ac489ff48dec7c3373eb6e9afbf1a59f504bc751"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/theme-resources.ts",
+      "sha256": "42f2ae2de5cbf7a322cdf7de6de967386600180f45944a0360b0c3a77ba6f12b"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/themes/default-theme.ts",
+      "sha256": "900139d3cce0455544d091386406f5c7a5dcf6245b68ee51fa85cca9431d8249"
+    },
+    {
+      "path": "packages/plugin-ui-vue/src/trusted/themes/studio-theme.ts",
+      "sha256": "5064fc4f236f27ebece4bb0002c675aecf035002cd9a5e89021aca26b66eae61"
+    },
+    {
+      "path": "packages/plugin-ui-vue/test/trusted/theme-controller.test.ts",
+      "sha256": "3fd8aad55d35cee49558a6c3c3b4076b3083d6339d1b185c8e9491e503f21b35"
+    },
+    {
+      "path": "packages/plugin-ui-vue/test/trusted/theme-resources.test.ts",
+      "sha256": "cb5ed074aea90008f939c561ece81a2f85234c185e424a88cb283eddccd909a2"
+    },
+    {
+      "path": "packages/plugin-ui-vue/test/trusted/presentation.test.ts",
+      "sha256": "4510d85eed4595145fe2b73f3951f18aa73778005d5f2fcc786312cec7de38b5"
+    },
+    {
+      "path": "packages/plugin-ui-vue/test/helpers/test-renderer.ts",
+      "sha256": "b5684bbb74bcba825c36b75e9a4c788632cd12ea875eadeeb63d865215d961fc"
+    },
+    {
+      "path": "packages/plugin-ui-vue/vitest.config.ts",
+      "sha256": "cd1c6ec6d1df3d3dcb70040faff62e6957c1d145fcd1da4fb5ee75140ae4f674"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-workbench-theme.ts",
+      "sha256": "d292c498eac43c9815696757d3c19f00cb56532ab6e518cdd544b0fdf90808c3"
+    },
+    {
+      "path": "packages/music-workbench/src/features/plugins/use-workbench-modules.ts",
+      "sha256": "790e3eb4fc57f0555f8d0e4bbfe1f160950288ff814f0d126b787931dde4f0cd"
+    },
+    {
+      "path": "packages/ui/src/product/ui-presentation.ts",
+      "sha256": "fbc795fd9a9d42d15ed5d758550266a774086575d0719cc7b1aef2d277af1762"
+    }
+  ],
+  "capturedAt": "2026-10-21T10:19:19.4457679+00:00",
+  "environment": {
+    "timezone": "Asia/Shanghai",
+    "pnpm": "10.23.0",
+    "node": "v24.11.1",
+    "vitest": "4.1.11",
+    "os": "Windows"
+  }
+}

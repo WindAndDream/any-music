@@ -1,0 +1,3275 @@
+{
+  "schemaVersion": 1,
+  "runtimeScope": "shared",
+  "date": "2026-11-03",
+  "method": "Enumerate every src Vue v-for; resolve direct relative/workspace public imports; manually classify collection/control/inline branches and follow complete-theme/protected-slot/renderless plugin composition. Direct import edges include public exports; they do not alone prove live runtime rendering. Scroll roots are source/CSS contracts, not measured browser geometry.",
+  "productionChains": [
+    "apps/{userscript,tauri}/src/main.ts -> application built-in-themes -> MusicSourceWorkbench -> MusicWorkbenchThemeHost -> plugin-ui-vue/trusted ThemeHost -> theme definition.Root -> definition.views[activeViewId]",
+    "ClassicFavorites/ClassicQueue/ClassicPlaylists -> ClassicTrackCollection -> ClassicCollectionContent -> QueueTrackGrid -> TrackCardGrid slot; platform overview branch -> CollectionGrid. Non-collection fallback is separately recorded.",
+    "StudioFavorites/StudioQueue/StudioPlaylists -> StudioCollection -> StudioTrackTable -> native tr plus companion detail/control tr OR TrackCardGrid -> StudioStyledTrack.",
+    "createWorkbenchSpecialistFeatures -> injected renderless plugin Panel/Composer -> neutral controls -> each theme specialist view; TagDetailsPanel associations are slots supplied by TagManagementDialogs/StudioTagDialogs -> ReadonlyTrackCollection/StudioReadonlyTracks and ReadonlyPlaylistCollection/StudioReadonlyPlaylists (C24).",
+    "MusicWorkbenchThemeHost protected settings slots -> ExternalSourceSettings -> NativePluginInstallList and command result; apps/tauri App -> AccountSettingsPanel/AccountSettingsOverlay -> AccountList/platform/policy/connection/switch forms. Themes receive no account authority."
+  ],
+  "renderFunctions": [
+    "ClassicRoot.ActivePage/PlayerView/SettingsView and StudioRoot.ActivePage/SettingsView each render a single selected definition view, not a collection.",
+    "createWorkbenchSpecialistFeatures renders one bound injected editor per specialist; growing children are in the inventoried controls/themes.",
+    "ui async-feature-component renders one resolved/loading/error view. TrackCardGrid and CollectionGrid render caller slots: inventory every slot producer, not only the wrapper."
+  ],
+  "openEquivalenceGates": [
+    "Browser find-in-page and cross-window text selection after offscreen DOM removal (all virtual consumers).",
+    "Actual browser scroll-root resolution, focus, layout and all G01/G02/G03 runtime comparisons remain unmeasured."
+  ],
+  "surfaces": [
+    {
+      "file": "apps/tauri/src/components/accounts/AccountBreadcrumbs.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "93afafefe12bb2100700adbf98341fa17b21f11ae38377d4fe5619767b7f9343",
+      "directConsumers": ["apps/tauri/src/components/accounts/AccountSettingsOverlay.vue"],
+      "loops": [
+        {
+          "line": 10,
+          "expression": "(item, index) in items",
+          "tag": "li",
+          "key": "item.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed platform/account detail/connection navigation depth (three levels).",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/AccountConnectionForm.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "6b17db5edc5cb359c5b66d41ecac08c1fdbeaf7b38e0deb644f030013c7c3d91",
+      "directConsumers": ["apps/tauri/src/components/accounts/AccountSettingsOverlay.vue"],
+      "loops": [
+        {
+          "line": 62,
+          "expression": "proxy in proxies",
+          "tag": "label",
+          "key": "proxy.id",
+          "consumerIds": ["C43"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        },
+        {
+          "line": 92,
+          "expression": "(id, index) in backups",
+          "tag": "li",
+          "key": "id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Selected backup proxies have an enforced maximum of eight; selectable proxy directories remain C43/C44.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        },
+        {
+          "line": 132,
+          "expression": "proxy in available",
+          "tag": "button",
+          "key": "proxy.id",
+          "consumerIds": ["C44"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/AccountCredentialForm.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "1e34c9a6a7f5b9c4068b7c3ad30e265b25e75a31e23c077cef2f571d3afc4420",
+      "directConsumers": ["apps/tauri/src/components/accounts/AccountLoginPanel.vue"],
+      "loops": [
+        {
+          "line": 28,
+          "expression": "field in fields",
+          "tag": "label",
+          "key": "field.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Built-in credential schema fields, not the account directory.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/AccountList.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "e60cccd8cf2285ef8c241c3705585c19d2aee12b9d3d30acd733472fc45352f0",
+      "directConsumers": ["apps/tauri/src/components/accounts/AccountSettingsOverlay.vue"],
+      "loops": [
+        {
+          "line": 31,
+          "expression": "account in accounts",
+          "tag": "li",
+          "key": "account.id",
+          "consumerIds": ["C33"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/AccountLoginPanel.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "be95e489df873d80b55514a3851be3e86ee3f2966cd31ce26ff34e31c149f1c2",
+      "directConsumers": ["apps/tauri/src/components/accounts/AccountSettingsOverlay.vue"],
+      "loops": [
+        {
+          "line": 104,
+          "expression": "(item, index) in steps",
+          "tag": "li",
+          "key": "item.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Finite login steps for the active login attempt; not login history.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/AccountPlatformList.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "251581c3f5192b0673bdaa8efc8d4e48c4d927b6b0c7bab4d28a992aefebbc31",
+      "directConsumers": [
+        "apps/tauri/src/components/accounts/AccountSettingsOverlay.vue",
+        "apps/tauri/src/components/accounts/AccountSettingsPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 44,
+          "expression": "platform in platforms",
+          "tag": "button",
+          "key": "platform.id",
+          "consumerIds": ["C67"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/AccountPolicyForm.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "0d14b826865ac4ea662cfba8c1bb583fe2fcb4c423d276aefaa9b79fd2bfc537",
+      "directConsumers": [],
+      "loops": [
+        {
+          "line": 58,
+          "expression": "source in ACCOUNT_PLATFORMS",
+          "tag": "option",
+          "key": "source.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Built-in ACCOUNT_PLATFORMS from the two build-known sources.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        },
+        {
+          "line": 95,
+          "expression": "account in available",
+          "tag": "label",
+          "key": "account.id",
+          "consumerIds": ["C42"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/AccountSwitchDialog.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "04f13b2a34a305017df110f51d4486da485bdf178cea44910e6ee461d285e973",
+      "directConsumers": ["apps/tauri/src/App.vue"],
+      "loops": [
+        {
+          "line": 62,
+          "expression": "row in rows",
+          "tag": "button",
+          "key": "row.account.id",
+          "consumerIds": ["C41"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/AccountVerificationPanel.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "8d2d668643159c16a1e35cfecc639c0af6b817be80c996d0d07206ac00387a04",
+      "directConsumers": [
+        "apps/tauri/src/components/accounts/AccountLoginPanel.vue",
+        "apps/tauri/src/components/accounts/LoginExperimentPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 53,
+          "expression": "method in verification.methods",
+          "tag": "button",
+          "key": "method.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Native method enum for the current source; no accumulated records.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "apps/tauri/src/components/accounts/LoginExperimentPanel.vue",
+      "owner": "apps/tauri",
+      "runtimeScope": "tauri",
+      "sha256": "0063ae1fe520774008e8fa8db480f5eb8847d754ad2ba1fa5dd0a187e3046ce9",
+      "directConsumers": [],
+      "loops": [
+        {
+          "line": 84,
+          "expression": "result in trial.results.value",
+          "tag": "tr",
+          "key": "result.runId",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-music-creation/src/vue/components/MaterialCollectionToolbar.vue",
+      "owner": "packages/plugin-music-creation",
+      "runtimeScope": "shared",
+      "sha256": "8040479dabc958bda082612eba3445304426788764c6c3eddf3b156b3e2a5107",
+      "directConsumers": ["packages/plugin-music-creation/src/vue/components/SegmentComposer.vue"],
+      "loops": [
+        {
+          "line": 79,
+          "expression": "collection in props.collections",
+          "tag": "option",
+          "key": "collection.id",
+          "consumerIds": ["C55"],
+          "classification": "native-select-investigation",
+          "constraint": "Growing native select options. Preserve the native control; investigate cost/limits before choosing an adapter.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-music-creation/src/vue/components/MaterialFilterBar.vue",
+      "owner": "packages/plugin-music-creation",
+      "runtimeScope": "shared",
+      "sha256": "ef2c83340e2db6299075c7204c9442f70f75df32a6fb0d11d55b7f0e3d07eb2e",
+      "directConsumers": ["packages/plugin-music-creation/src/vue/components/SegmentComposer.vue"],
+      "loops": [
+        {
+          "line": 57,
+          "expression": "platform in platforms",
+          "tag": "option",
+          "key": "platform.id",
+          "consumerIds": ["C53"],
+          "classification": "native-select-investigation",
+          "constraint": "Growing native select options. Preserve the native control; investigate cost/limits before choosing an adapter.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        },
+        {
+          "line": 63,
+          "expression": "tag in tagStats",
+          "tag": "option",
+          "key": "tag.name",
+          "consumerIds": ["C54"],
+          "classification": "native-select-investigation",
+          "constraint": "Growing native select options. Preserve the native control; investigate cost/limits before choosing an adapter.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-music-creation/src/vue/components/MaterialTrackRow.vue",
+      "owner": "packages/plugin-music-creation",
+      "runtimeScope": "shared",
+      "sha256": "f1f4bd83b033fe2089b63972419c02b2750e1248177df6f736c36d67c9ee052e",
+      "directConsumers": ["packages/plugin-music-creation/src/vue/components/SegmentComposer.vue"],
+      "loops": [
+        {
+          "line": 91,
+          "expression": "tag in props.record.customTags",
+          "tag": "span",
+          "key": "tag",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Inline custom tags participate in material card height.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-music-creation/src/vue/components/PendingMaterialStorage.vue",
+      "owner": "packages/plugin-music-creation",
+      "runtimeScope": "shared",
+      "sha256": "e7b685c9aaf03a24d8bb9e954c3982a6f6bcbaaa07a3c5ef05215a60599eaa5a",
+      "directConsumers": ["packages/plugin-music-creation/src/vue/components/SegmentComposer.vue"],
+      "loops": [
+        {
+          "line": 60,
+          "expression": "record in props.records",
+          "tag": "article",
+          "key": "record.track.id",
+          "consumerIds": ["C27"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".pending-materials__items (max-height: 230px), inside the owning specialist page"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-music-creation/src/vue/components/SegmentTimeline.vue",
+      "owner": "packages/plugin-music-creation",
+      "runtimeScope": "shared",
+      "sha256": "b2d8def54165c209c2735cadcca019b253238053eb0f6c2fdca33361a7b8624a",
+      "directConsumers": ["packages/plugin-music-creation/src/vue/components/SegmentComposer.vue"],
+      "loops": [
+        {
+          "line": 96,
+          "expression": "(segment, index) in props.segments",
+          "tag": "li",
+          "key": "`${segment.sourceTrackId}:${segment.startMs}:${segment.endMs}:${index}`",
+          "consumerIds": ["C51"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".segment-timeline__items (max-height: 280px, vertical arrangement); .segment-editor__viewport (horizontal editor)"
+        },
+        {
+          "line": 154,
+          "expression": "(segment, index) in props.segments",
+          "tag": "li",
+          "key": "`${segment.sourceTrackId}:${segment.startMs}:${segment.endMs}:${index}`",
+          "consumerIds": ["C52"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".segment-timeline__items (max-height: 280px, vertical arrangement); .segment-editor__viewport (horizontal editor)"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-tag-management/src/vue/components/TagDetailsPanel.vue",
+      "owner": "packages/plugin-tag-management",
+      "runtimeScope": "shared",
+      "sha256": "e3ec26452261c587dd7f76af3bc9e9cf8aa4b0735fbdb2dec7fff7546e1415dd",
+      "directConsumers": [
+        "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 137,
+          "expression": "entry in entries",
+          "tag": "button",
+          "key": "entry.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Three tag detail navigation entries; associations are theme slots C06/C07/C18/C19 under C24.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        },
+        {
+          "line": 168,
+          "expression": "platform in platforms",
+          "tag": "div",
+          "key": "platform.id",
+          "consumerIds": ["C66"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-tag-management/src/vue/components/TagFilterBar.vue",
+      "owner": "packages/plugin-tag-management",
+      "runtimeScope": "shared",
+      "sha256": "47f8dd64758dec8bd252911e4c19749f277905034b32aff0eb42fb15671553b2",
+      "directConsumers": [
+        "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 121,
+          "expression": "dimension in dimensions",
+          "tag": "button",
+          "key": "dimension.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed filter enum/dimension or parent summary text, not the growing platform choices.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        },
+        {
+          "line": 163,
+          "expression": "label in summary",
+          "tag": "p",
+          "key": "label",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Fixed filter enum/dimension or parent summary text, not the growing platform choices.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        },
+        {
+          "line": 190,
+          "expression": "platform in platformOptions",
+          "tag": "button",
+          "key": "platform.id",
+          "consumerIds": ["C57"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        },
+        {
+          "line": 216,
+          "expression": "option in usageOptions",
+          "tag": "button",
+          "key": "option.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed filter enum/dimension or parent summary text, not the growing platform choices.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        },
+        {
+          "line": 239,
+          "expression": "option in scopeOptions",
+          "tag": "button",
+          "key": "option.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed filter enum/dimension or parent summary text, not the growing platform choices.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        },
+        {
+          "line": 257,
+          "expression": "option in sortOptions",
+          "tag": "button",
+          "key": "option.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed filter enum/dimension or parent summary text, not the growing platform choices.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-tag-management/src/vue/components/TagMaintenanceToolbar.vue",
+      "owner": "packages/plugin-tag-management",
+      "runtimeScope": "shared",
+      "sha256": "3dd2acceb9d23aa407ac4e8b71bc4a85870a18dc386d1e60f642681005cb4ac3",
+      "directConsumers": [
+        "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 99,
+          "expression": "tag in visibleTags",
+          "tag": "button",
+          "key": "tag.name",
+          "consumerIds": ["C56"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".tag-maintenance__options (max-block-size: 240px), inside the existing maintenance dialog"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-tag-management/src/vue/components/TagPlatformDrawer.vue",
+      "owner": "packages/plugin-tag-management",
+      "runtimeScope": "shared",
+      "sha256": "f8d18a74a985b8789c06e8f657660ae545f6648db65df9f935b0e7316b9c5349",
+      "directConsumers": [
+        "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 45,
+          "expression": "record in props.records",
+          "tag": "TagTrackCard",
+          "key": "record.track.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-tag-management/src/vue/components/TagTrackCard.vue",
+      "owner": "packages/plugin-tag-management",
+      "runtimeScope": "shared",
+      "sha256": "065bd7f1efa0f44ef4eddf08c441dc1aa1d98a2c6378958dff123d7b8ae42652",
+      "directConsumers": [
+        "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue",
+        "packages/plugin-tag-management/src/vue/components/TagPlatformDrawer.vue"
+      ],
+      "loops": [
+        {
+          "line": 50,
+          "expression": "tag in props.record.customTags",
+          "tag": "button",
+          "key": "tag",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Inline custom tags participate in parent card height.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-ui-vue/src/DeclarativePluginView.vue",
+      "owner": "packages/plugin-ui-vue",
+      "runtimeScope": "shared",
+      "sha256": "1caeab13ae0ff8a00b6663b575ea53884b140d319ed0a55bd97fc5cd2b747613",
+      "directConsumers": ["packages/plugin-ui-vue/src/index.ts"],
+      "loops": [
+        {
+          "line": 52,
+          "expression": "view in document ? [document] : []",
+          "tag": "div",
+          "key": "view.viewRevision",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 56,
+          "expression": "node in view.nodes",
+          "tag": "template",
+          "key": "node.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 67,
+          "expression": "field in node.fields",
+          "tag": "label",
+          "key": "field.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-ui-vue/src/trusted/WorkspaceViewOutlet.vue",
+      "owner": "packages/plugin-ui-vue",
+      "runtimeScope": "shared",
+      "sha256": "89fb98d31b7e35134895bd634387d4f54968df5244b9db7285470a8dd111e07e",
+      "directConsumers": ["packages/plugin-ui-vue/src/trusted/index.ts"],
+      "loops": [
+        {
+          "line": 22,
+          "expression": "view in props.views",
+          "tag": "template",
+          "key": "view.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/downloads/ActiveDownloadPanel.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "a1eefc61c3ba52aa7bb1bae38c650b3bde10337bd81f49283adeebe0ac6a680c",
+      "directConsumers": ["packages/theme-default/src/vue.ts"],
+      "loops": [
+        {
+          "line": 166,
+          "expression": "state in states",
+          "tag": "button",
+          "key": "state.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 204,
+          "expression": "entry in visibleEntries",
+          "tag": "DownloadTrackRow",
+          "key": "entry.item.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/downloads/ClassicDownloads.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "a418f8b5ecffaecadac502da6483b05a8766a5e0f42f302eafc03bb704f92c31",
+      "directConsumers": ["packages/theme-default/src/vue.ts"],
+      "loops": [
+        {
+          "line": 106,
+          "expression": "entry in visible",
+          "tag": "DownloadTrackRow",
+          "key": "entry.item.id",
+          "consumerIds": ["C12"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/downloads/DownloadCollectionContent.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "9ead55e5e25a101736de600238a6906ad94f7885fa3f070c5623a492e0fabbcb",
+      "directConsumers": ["packages/theme-default/src/components/downloads/ClassicDownloads.vue"],
+      "loops": [
+        {
+          "line": 69,
+          "expression": "entry in statuses",
+          "tag": "button",
+          "key": "entry.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed task status controls; dynamic entries are in ClassicDownloads C12.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ClassicCollectionContent.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "b3361084e996d28bed19e6b05c74fe4ac9ba84be77d0e49342cebf9e6414dcde",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/ClassicTrackCollection.vue"
+      ],
+      "loops": [
+        {
+          "line": 193,
+          "expression": "group in presentation.groups.value",
+          "tag": "QueuePlatformGroup",
+          "key": "group.id",
+          "consumerIds": ["C00", "C01", "C02"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content, found by useClassicCollectionPresentation; .listen-queue clips horizontally without owning vertical scrolling"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ClassicCollectionSurface.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "2f9cc972cc80aae983482462b4879c65667bcee7c74d8c9317e1940a3260cebe",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/ClassicCollectionContent.vue",
+        "packages/theme-default/src/components/library/ClassicHistoryContent.vue",
+        "packages/theme-default/src/components/library/ClassicPlaylistOverview.vue",
+        "packages/theme-default/src/components/plugins/ClassicPlugins.vue",
+        "packages/theme-default/src/components/specialists/TagManagementOverview.vue"
+      ],
+      "loops": [
+        {
+          "line": 39,
+          "expression": "badge in counts ?? [{ label: '', count: totalCount }]",
+          "tag": "span",
+          "key": "badge.label",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Count badges: default one, existing callers supply fixed collection status counts.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ClassicCustomTracks.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "d5d39389400b2385a57c1c14ac239a7bbeee90bf2417b4cd64e6b508b9b0e237",
+      "directConsumers": ["packages/theme-default/src/vue.ts"],
+      "loops": [
+        {
+          "line": 84,
+          "expression": "entry in visible",
+          "tag": "CustomTrackDrawer",
+          "key": "entry.record.track.id",
+          "consumerIds": ["C28"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ClassicFeatureStatus.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "8ec57183d304359b91e3818eaa540e7ddb2ef5042bcdd286617f53944928bf7e",
+      "directConsumers": [
+        "packages/theme-default/src/components/downloads/ClassicDownloads.vue",
+        "packages/theme-default/src/components/library/ClassicCustomTracks.vue",
+        "packages/theme-default/src/components/library/ClassicHistory.vue",
+        "packages/theme-default/src/components/library/ClassicPlaylists.vue",
+        "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+        "packages/theme-default/src/components/plugins/ClassicPlugins.vue",
+        "packages/theme-default/src/components/specialists/ClassicComposer.vue",
+        "packages/theme-default/src/components/specialists/ClassicTags.vue"
+      ],
+      "loops": [
+        {
+          "line": 14,
+          "expression": "(error, index) in status.errors",
+          "tag": "li",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "One action-owned status/error projection; track problem directories use C58.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ClassicHistoryContent.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "d5117414d4a575ce2020a88dd53e7104b774b8963cf4b58b0791058bfeb96294",
+      "directConsumers": ["packages/theme-default/src/components/library/ClassicHistory.vue"],
+      "loops": [
+        {
+          "line": 105,
+          "expression": "group in groups",
+          "tag": "QueuePlatformGroup",
+          "key": "group.id",
+          "consumerIds": ["C10"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 129,
+          "expression": "{ entry, track } in history.visible.value",
+          "tag": "div",
+          "key": "entry.id",
+          "consumerIds": ["C10"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ClassicPlaylistOverview.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "4176a8276f2b7e49d8b66678c45c57022d9e482785919afb1bd3a433cd297dda",
+      "directConsumers": ["packages/theme-default/src/components/library/ClassicPlaylists.vue"],
+      "loops": [
+        {
+          "line": 120,
+          "expression": "(playlist, index) in collection.visible.value",
+          "tag": "div",
+          "key": "playlist.id",
+          "consumerIds": ["C14"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content, found by useClassicCollectionPresentation; .listen-queue clips horizontally without owning vertical scrolling"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ClassicTrackCollection.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "baa8521fbb58e4d54b7bcc2062c465fdb159ec8c561d8264a67639b4067440b1",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/ClassicFavorites.vue",
+        "packages/theme-default/src/components/library/ClassicPlaylists.vue",
+        "packages/theme-default/src/components/library/ClassicQueue.vue"
+      ],
+      "loops": [
+        {
+          "line": 117,
+          "expression": "(track, index) in state.tracks",
+          "tag": "div",
+          "key": "track.id",
+          "consumerIds": ["C00", "C01", "C02"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content, found by useClassicCollectionPresentation; .listen-queue clips horizontally without owning vertical scrolling"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/CustomTrackDrawer.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "a631722b969a278f5294f065b92a529a6b1d442b98fc752636fa091254457256",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/ClassicCustomTracks.vue",
+        "packages/theme-default/src/components/library/CustomTrackPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 156,
+          "expression": "sourceRecord in props.sourceRecords",
+          "tag": "div",
+          "key": "sourceRecord.track.id",
+          "consumerIds": ["C68"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/CustomTrackPanel.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "c3eb0b0302fec1df0ef679bb9b3b764249cae5aad85cfff7c893b64496742920",
+      "directConsumers": [],
+      "loops": [
+        {
+          "line": 49,
+          "expression": "entry in visibleEntries",
+          "tag": "CustomTrackDrawer",
+          "key": "entry.record.track.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/FavoriteFilterBar.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "73918b452c15ea8522bf2dcd6cb93d80b36ae560204c16e43a661572b3d156dc",
+      "directConsumers": ["packages/theme-default/src/components/library/PlaylistFilterSheet.vue"],
+      "loops": [
+        {
+          "line": 76,
+          "expression": "tag in props.tagStats",
+          "tag": "option",
+          "key": "tag.name",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/FavoritePlatformDrawer.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "c555bb314a22c3630cbb5e2f48e3d054648fabd21710239691e6501b859840ea",
+      "directConsumers": ["packages/theme-default/src/components/library/PlaylistDrawer.vue"],
+      "loops": [
+        {
+          "line": 56,
+          "expression": "record in props.records",
+          "tag": "FavoriteTrackRow",
+          "key": "record.track.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/FavoriteTrackRow.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "eb28e2b08f6f6f3fde246c6674519209bec26f116aa4105a27ecc1da9e057d1a",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/CustomTrackDrawer.vue",
+        "packages/theme-default/src/components/library/FavoritePlatformDrawer.vue",
+        "packages/theme-default/src/components/library/PlaylistDrawer.vue"
+      ],
+      "loops": [
+        {
+          "line": 104,
+          "expression": "tag in props.record.customTags",
+          "tag": "span",
+          "key": "tag",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Inline tags participate in parent card height.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/HistoryOperatorPanel.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "3a96ee3822ba322450f01fe352ed98148d5082a8961cae05c3d07680d96d05b4",
+      "directConsumers": [],
+      "loops": [
+        {
+          "line": 72,
+          "expression": "platform in props.platforms",
+          "tag": "option",
+          "key": "platform.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/HistoryPanel.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "f8221fbc241b748e686800ae621720bd2fef38f6ef2f6038beada6527062c93d",
+      "directConsumers": [],
+      "loops": [
+        {
+          "line": 80,
+          "expression": "row in historyRows",
+          "tag": "article",
+          "key": "row.entry.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/PlaylistCard.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "3ba28938eca93a70586ad5199c6edc21ee06dfd6f4a3944527549345ac5f24c5",
+      "directConsumers": ["packages/theme-default/src/components/library/PlaylistPanel.vue"],
+      "loops": [
+        {
+          "line": 59,
+          "expression": "(title, titleIndex) in preview",
+          "tag": "span",
+          "key": "titleIndex",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/PlaylistDrawer.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "da5e9ff59eddfa459352c12779cf45c97ced6a4d5c4edf1b7442f80dddb4a5ea",
+      "directConsumers": ["packages/theme-default/src/components/library/PlaylistPanel.vue"],
+      "loops": [
+        {
+          "line": 230,
+          "expression": "drawer in visiblePlatformDrawers",
+          "tag": "FavoritePlatformDrawer",
+          "key": "drawer.platform.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 255,
+          "expression": "record in visibleRecords",
+          "tag": "FavoriteTrackRow",
+          "key": "record.track.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/PlaylistEditorDialog.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "20f3c3a40b0213451b8eb78737bc57f0bcdef04f6ea9cb4894998453e41db1d2",
+      "directConsumers": ["packages/theme-default/src/components/library/ClassicPlaylists.vue"],
+      "loops": [
+        {
+          "line": 338,
+          "expression": "action in primaryActions",
+          "tag": "TrackActionButton",
+          "key": "action.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "At most four editor field entries and two primary actions.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        },
+        {
+          "line": 350,
+          "expression": "entry in entries",
+          "tag": "button",
+          "key": "entry.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "At most four editor field entries and two primary actions.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        },
+        {
+          "line": 405,
+          "expression": "tag in tags",
+          "tag": "button",
+          "key": "tag",
+          "consumerIds": ["C60"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/PlaylistFilterSheet.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "383c1bbf56bdaedfb3a927d9a89ca7f272b98611d5d91689dc7ffde34e6dcc8e",
+      "directConsumers": ["packages/theme-default/src/components/library/PlaylistDrawer.vue"],
+      "loops": [
+        {
+          "line": 71,
+          "expression": "platform in props.platformOptions",
+          "tag": "button",
+          "key": "platform.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/PlaylistOverviewFilterEditor.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "7cf7e282927faf967f0446fdc89ee09520659e849356ab282ec67fbf1fd4cc74",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/PlaylistOverviewFilters.vue"
+      ],
+      "loops": [
+        {
+          "line": 114,
+          "expression": "tag in visibleTagStats",
+          "tag": "label",
+          "key": "tag.name",
+          "consumerIds": ["C50"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".catalog-filters__detail-content in the existing BottomSheet filter panel; tags/platforms are content, not additional scroll roots"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/PlaylistOverviewFilters.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "1a9f676283cf3c1b6147376717175bb131250febcc65b942df10fc10e92677de",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/ClassicPlaylistOverview.vue",
+        "packages/theme-default/src/components/library/PlaylistPickerPanel.vue",
+        "packages/theme-default/src/components/library/ReadonlyPlaylistCollection.vue"
+      ],
+      "loops": [
+        {
+          "line": 66,
+          "expression": "dimension in dimensions",
+          "tag": "button",
+          "key": "dimension.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed filter dimension enum.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/PlaylistPanel.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "33bc1e97e6cad164497c627628221ec8805b6f8a387e3f683f5a6b17667d3b13",
+      "directConsumers": [],
+      "loops": [
+        {
+          "line": 136,
+          "expression": "(playlist, index) in visiblePlaylists",
+          "tag": "PlaylistCard",
+          "key": "playlist.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/PlaylistPickerPanel.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "7f397cbea9c5a13b903dcf4e3bc9b82292492af2c5c1290913484354b8db25f2",
+      "directConsumers": [
+        "packages/theme-default/src/components/music-sources/CatalogPlaylistPickerDialog.vue",
+        "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue"
+      ],
+      "loops": [
+        {
+          "line": 103,
+          "expression": "playlist in visible",
+          "tag": "PlaylistPickerItem",
+          "key": "playlist.id",
+          "consumerIds": ["C16"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".playlist-picker__viewport inside the existing picker dialog; explicit viewport ref drives visible height"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ReadonlyPlaylistCollection.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "81bd94194ad9ddd6e7a570f37724f6bacc26b7c699d332e369a27546808afe83",
+      "directConsumers": [
+        "packages/theme-default/src/components/specialists/TagManagementDialogs.vue"
+      ],
+      "loops": [
+        {
+          "line": 65,
+          "expression": "record in visible",
+          "tag": "PlaylistPickerItem",
+          "key": "record.playlist.id",
+          "consumerIds": ["C18"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".readonly-playlists__viewport inside the existing tag-details dialog"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/library/ReadonlyTrackCollection.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "f64296ad0ae342fa9a35e9a16d7557314d0a4b4a66838b5b96408f12da2ae37b",
+      "directConsumers": [
+        "packages/theme-default/src/components/specialists/TagManagementDialogs.vue"
+      ],
+      "loops": [
+        {
+          "line": 88,
+          "expression": "track in visibleTracks",
+          "tag": "div",
+          "key": "track.id",
+          "consumerIds": ["C06"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".readonly-tracks__viewport inside the tag-details AppDialog; useReadonlyTrackViewport sizes it"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogDrawerDetails.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "52e400040e6a6f032afb230d7b14623d0d33c14d5b5c21bee3facd82cf74b4e1",
+      "directConsumers": [
+        "packages/theme-default/src/components/music-sources/CatalogDrawerActionsDialog.vue"
+      ],
+      "loops": [
+        {
+          "line": 151,
+          "expression": "(feedback, index) in copyFeedback",
+          "tag": "p",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed copy buttons feedback, reset with the active drawer.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogDrawerList.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "d96dddb5a1af50b3e0ed6105f0bd836aaf00d35daf37f08ed9f0a19e49952ca8",
+      "directConsumers": ["packages/theme-default/src/components/music-sources/ClassicCatalog.vue"],
+      "loops": [
+        {
+          "line": 177,
+          "expression": "drawer in controls.visibleItems.value",
+          "tag": "div",
+          "key": "drawer.id",
+          "consumerIds": ["C20"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content (catalog); .app-dialog__content when consumed by a dialog"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogErrorDetails.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "6e1e61c6518eade4f0a81f0fc4d4353624f5b9c97aec58b3cd89f1aa9d6954f7",
+      "directConsumers": ["packages/theme-default/src/components/music-sources/ClassicCatalog.vue"],
+      "loops": [
+        {
+          "line": 122,
+          "expression": "step in guide.steps",
+          "tag": "li",
+          "key": "step",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Error-code-owned troubleshooting text, not accumulated errors.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogFilterCalendar.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "3638417372236c853f1c2984c1952511d74df270c8c100077f24f31c4e5e0cdc",
+      "directConsumers": [
+        "packages/theme-default/src/components/music-sources/CatalogTrackFilterEditor.vue"
+      ],
+      "loops": [
+        {
+          "line": 292,
+          "expression": "weekday in ['一', '二', '三', '四', '五', '六', '日']",
+          "tag": "span",
+          "key": "weekday",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Seven weekday labels, at most 42 day cells, 12 months, fixed 12-year page.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 298,
+          "expression": "(day, index) in days",
+          "tag": "button",
+          "key": "day.date",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Seven weekday labels, at most 42 day cells, 12 months, fixed 12-year page.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 328,
+          "expression": "value in 12",
+          "tag": "button",
+          "key": "value",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Seven weekday labels, at most 42 day cells, 12 months, fixed 12-year page.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 349,
+          "expression": "value in years",
+          "tag": "button",
+          "key": "value",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Seven weekday labels, at most 42 day cells, 12 months, fixed 12-year page.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogFilterHistoryList.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "8985c602ac2ebcec42b663a5c0039ea284af82a5853fe7150aee3d38554f4950",
+      "directConsumers": [
+        "packages/theme-default/src/components/music-sources/CatalogTrackFilterEditor.vue"
+      ],
+      "loops": [
+        {
+          "line": 73,
+          "expression": "(item, itemIndex) in visibleItems",
+          "tag": "div",
+          "key": "item.key",
+          "consumerIds": ["C35"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".catalog-filter-history__entries--expanded when expanded; otherwise the owning filter detail content scrolls"
+        },
+        {
+          "line": 95,
+          "expression": "(range, index) in item.entry.filters.publishedRanges",
+          "tag": "CatalogFilterDateRange",
+          "key": "index",
+          "consumerIds": ["C35"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".catalog-filter-history__entries--expanded when expanded; otherwise the owning filter detail content scrolls"
+        },
+        {
+          "line": 105,
+          "expression": "(label, index) in item.labels",
+          "tag": "span",
+          "key": "index",
+          "consumerIds": ["C35"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".catalog-filter-history__entries--expanded when expanded; otherwise the owning filter detail content scrolls"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogFilterRangeList.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "26da295f5befc6804f8350c2cd7c5d31346c5e6ccc7408ce59aba7192cfbdcb2",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/PlaylistOverviewFilterEditor.vue",
+        "packages/theme-default/src/components/music-sources/CatalogTrackFilterEditor.vue"
+      ],
+      "loops": [
+        {
+          "line": 18,
+          "expression": "(label, index) in labels",
+          "tag": "div",
+          "key": "`${index}:${label}`",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Filter range labels belong to the parent filter summary.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "66f087498a7836dedd9dcb56c6cd926e0fdd6e1ee558b48eb8c5902c514fa82b",
+      "directConsumers": [
+        "packages/theme-default/src/components/downloads/DownloadTrackActionsDialog.vue",
+        "packages/theme-default/src/components/library/HistoryTrackActionsDialog.vue",
+        "packages/theme-default/src/components/music-sources/ClassicCatalog.vue",
+        "packages/theme-default/src/components/music-sources/QueueTrackActionsDialog.vue",
+        "packages/theme-default/src/components/overlays/ClassicTrackDialog.vue"
+      ],
+      "loops": [
+        {
+          "line": 416,
+          "expression": "option in tagOptions",
+          "tag": "button",
+          "key": "option.value",
+          "consumerIds": ["C59"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogTrackFilterEditor.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "1a2df753b4d71921ddf2dd0a9551c022487b1a000fcc8a161a21279c62f5e3d7",
+      "directConsumers": [
+        "packages/theme-default/src/components/music-sources/CatalogTrackFilterPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 208,
+          "expression": "tag in visibleTagStats",
+          "tag": "label",
+          "key": "tag.name",
+          "consumerIds": ["C36"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".catalog-filters__detail-content in the existing BottomSheet filter panel; tags/platforms are content, not additional scroll roots"
+        },
+        {
+          "line": 248,
+          "expression": "platform in props.platformStats",
+          "tag": "label",
+          "key": "platform.id",
+          "consumerIds": ["C37"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".catalog-filters__detail-content in the existing BottomSheet filter panel; tags/platforms are content, not additional scroll roots"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CatalogTrackFilterPanel.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "4d6da84084b214c282f982e847fd41ac63b2e1ea8d9525ebf88364111884779e",
+      "directConsumers": [
+        "packages/theme-default/src/components/downloads/ActiveDownloadPanel.vue",
+        "packages/theme-default/src/components/library/ClassicHistory.vue",
+        "packages/theme-default/src/components/library/ClassicTrackFilters.vue",
+        "packages/theme-default/src/components/library/ReadonlyTrackCollection.vue",
+        "packages/theme-default/src/components/music-sources/CatalogDrawer.vue",
+        "packages/theme-default/src/components/music-sources/CatalogDrawerList.vue",
+        "packages/theme-default/src/components/music-sources/ClassicCatalog.vue",
+        "packages/theme-default/src/components/music-sources/QueuePanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 314,
+          "expression": "dimension in dimensions",
+          "tag": "button",
+          "key": "dimension.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed filter dimension enum; growing options live in the editor.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CollectionFilterChoices.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "9f35e14c267b4ceb04bd7e7342493cbc0c2b40062f1151bf5010bda252583f5e",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/PlaylistOverviewFilterEditor.vue",
+        "packages/theme-default/src/components/music-sources/CatalogNamingFilterControls.vue",
+        "packages/theme-default/src/components/plugins/PluginFilters.vue",
+        "packages/theme-default/src/components/specialists/TagManagementFilters.vue"
+      ],
+      "loops": [
+        {
+          "line": 50,
+          "expression": "option in options",
+          "tag": "label",
+          "key": "option.value",
+          "consumerIds": ["C69"],
+          "classification": "consumer",
+          "constraint": "TagManagementFilters platformOptions is dynamic; other callers pass fixed enums. Audit this caller separately.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/CollectionFilterSummary.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "8d06fc9e6de6dafc736a25b14c51840f5e87a9847581c184d57a4f61e9599fb7",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/PlaylistOverviewFilters.vue",
+        "packages/theme-default/src/components/music-sources/CatalogTrackFilterSummary.vue",
+        "packages/theme-default/src/components/plugins/PluginFilters.vue",
+        "packages/theme-default/src/components/specialists/TagManagementFilters.vue"
+      ],
+      "loops": [
+        {
+          "line": 55,
+          "expression": "group in groups",
+          "tag": "section",
+          "key": "group.dimension",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Fixed dimension groups; variable text/ranges belong to the parent summary measurement.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 72,
+          "expression": "(label, filterIndex) in group.labels",
+          "tag": "div",
+          "key": "`${group.dimension}:${label}:${filterIndex}`",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Fixed dimension groups; variable text/ranges belong to the parent summary measurement.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/MusicSourcePickerDialog.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "9718aa7c46fc41e9b5b7d5ccb57ab7d8682d6da1b2e19181bdf2bf6b25c1c088",
+      "directConsumers": ["packages/theme-default/src/components/music-sources/ClassicCatalog.vue"],
+      "loops": [
+        {
+          "line": 71,
+          "expression": "group in groups",
+          "tag": "section",
+          "key": "group.label",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two current built-in/external source group headings; their growing source members remain C62/C63.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        },
+        {
+          "line": 78,
+          "expression": "source in group.sources",
+          "tag": "button",
+          "key": "source.id",
+          "consumerIds": ["C62"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/QueuePanel.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "5bd2ecf1467746b717e1ff4d3095e48c29f74bd7133f5b54151c5aa03cdb10bf",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/FavoritePanel.vue",
+        "packages/theme-default/src/vue.ts"
+      ],
+      "loops": [
+        {
+          "line": 500,
+          "expression": "group in matchingPlatforms",
+          "tag": "QueuePlatformGroup",
+          "key": "group.id",
+          "consumerIds": [],
+          "classification": "not-consumed",
+          "constraint": "No current complete-theme/application call path. May remain a public standalone widget or renderless control; direct import/export edges are listed, and style-only build inclusion is not a rendering call. Re-audit on admission of a caller.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/QueueTrackGrid.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "79671b3b417cb1e7ab4d32e31e46b21d2ea3887821db09f9cc56996d0aafa7d8",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/ClassicCollectionContent.vue",
+        "packages/theme-default/src/components/music-sources/QueuePanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 53,
+          "expression": "track in tracks",
+          "tag": "QueueTrackRow",
+          "key": "track.id",
+          "consumerIds": ["C00", "C01", "C02"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content, found by useClassicCollectionPresentation; .listen-queue clips horizontally without owning vertical scrolling"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/TrackList.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "f863b846d0eed9c3bf859aaa8659a6ba9489b2a90a40c28eb72f44b50437da58",
+      "directConsumers": [
+        "packages/theme-default/src/components/music-sources/CatalogDrawer.vue",
+        "packages/theme-default/src/components/music-sources/ClassicCatalog.vue"
+      ],
+      "loops": [
+        {
+          "line": 71,
+          "expression": "track in tracks",
+          "tag": "div",
+          "key": "track.id",
+          "consumerIds": ["C08"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content (catalog); .app-dialog__content when consumed by a dialog"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/music-sources/TrackTagList.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "7f201d6693c4e79e3c96184f61c983ed1f87b9d6ecd6011b87d2e1ea37247dca",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/PlaylistEditorDialog.vue",
+        "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue"
+      ],
+      "loops": [
+        {
+          "line": 16,
+          "expression": "tag in tags",
+          "tag": "span",
+          "key": "tag",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Inline source/custom tags participate in parent card height.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/player/PlayerSettingsDialog.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "dde9891e8f547fffdc5457dfd5f07206fe2c9d0d48421ae24c4b68f0e9858d03",
+      "directConsumers": ["packages/theme-default/src/components/player/PlayerBar.vue"],
+      "loops": [
+        {
+          "line": 80,
+          "expression": "quality in props.qualityOptions",
+          "tag": "button",
+          "key": "quality.id",
+          "consumerIds": ["C70"],
+          "classification": "consumer",
+          "constraint": "Source-projected quality choices have no enforced count limit; preserve radio semantics and actual playback selection.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 103,
+          "expression": "rate in playbackRateOptions",
+          "tag": "button",
+          "key": "rate",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed playback-rate choices.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/plugins/ClassicPlugins.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "e6906f0ca5a240731faafb3294f0263f59105e38984d3f7ce4f3b3c4715f8e27",
+      "directConsumers": ["packages/theme-default/src/vue.ts"],
+      "loops": [
+        {
+          "line": 115,
+          "expression": "option in filters",
+          "tag": "button",
+          "key": "option.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed plugin status filter enum.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 164,
+          "expression": "item in visible",
+          "tag": "ClassicPluginCard",
+          "key": "item.id",
+          "consumerIds": ["C30"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/plugins/PluginFilters.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "9bb84e19d0a7c02c6aaf03d7d76a9b7c24e20d9f7beb5532225afb6fc5d7e0c7",
+      "directConsumers": ["packages/theme-default/src/components/plugins/ClassicPlugins.vue"],
+      "loops": [
+        {
+          "line": 62,
+          "expression": "dimension in dimensions",
+          "tag": "button",
+          "key": "dimension.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static filter dimensions; option arrays use fixed status/origin/capability enums.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/settings/AppShellPreferenceDialog.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "193c309d81cd012dd7e720ae9f9d1d114d3ae4f6728d0c16e02b2dfd12ded24e",
+      "directConsumers": [
+        "packages/theme-default/src/components/settings/ClassicSettings.vue",
+        "packages/theme-default/src/components/shell/ProductWorkbench.vue"
+      ],
+      "loops": [
+        {
+          "line": 67,
+          "expression": "option in sidebarSideOptions",
+          "tag": "button",
+          "key": "option.value",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two application build-known themes; host-known navigation, sidebar-side and light/dark/system enums. External plugin themes are not admitted.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        },
+        {
+          "line": 94,
+          "expression": "choice in uiThemeSelection?.choices ?? []",
+          "tag": "button",
+          "key": "choice.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two application build-known themes; host-known navigation, sidebar-side and light/dark/system enums. External plugin themes are not admitted.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        },
+        {
+          "line": 119,
+          "expression": "option in themeOptions",
+          "tag": "button",
+          "key": "option.value",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two application build-known themes; host-known navigation, sidebar-side and light/dark/system enums. External plugin themes are not admitted.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/settings/CatalogFilterHistoryRegionSettings.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "84ecc989ac6516e57ea38d52c06b4da9b623aad7b1048c36d9c98229156d566f",
+      "directConsumers": [
+        "packages/theme-default/src/components/settings/CatalogFilterHistoryRegionDialog.vue"
+      ],
+      "loops": [
+        {
+          "line": 44,
+          "expression": "dimension in dimensions",
+          "tag": "label",
+          "key": "dimension.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static filter dimensions for each known region.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/settings/CatalogFilterHistorySettings.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "6874d60b87429c33fcf824bc468be12241f62ff6cd5589aafdf2771c8217dac8",
+      "directConsumers": ["packages/theme-default/src/components/settings/GlobalSettingsPanel.vue"],
+      "loops": [
+        {
+          "line": 73,
+          "expression": "group in FILTER_HISTORY_SETTINGS_GROUPS",
+          "tag": "section",
+          "key": "group.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static settings groups and region definitions.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 103,
+          "expression": "region in group.regions",
+          "tag": "button",
+          "key": "region.context",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static settings groups and region definitions.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/settings/ClassicSettings.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "96ba62c6a5e57b61bf0b7a1b782fdc9fcbac92a0ff2054a0119e0f8b96cb0c27",
+      "directConsumers": ["packages/theme-default/src/vue.ts"],
+      "loops": [
+        {
+          "line": 72,
+          "expression": "(error, index) in feature.status.errors",
+          "tag": "li",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "One action-owned error projection, not an accumulated log.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/settings/CollectionDisplaySettings.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "319542d5fa292d4a620fd7e3c088efa00ec9ff8e6466d3a2186c2cfd29bcd206",
+      "directConsumers": ["packages/theme-default/src/components/settings/GlobalSettingsPanel.vue"],
+      "loops": [
+        {
+          "line": 55,
+          "expression": "group in groups",
+          "tag": "section",
+          "key": "group.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static collection/region definitions.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 85,
+          "expression": "entry in group.regions",
+          "tag": "button",
+          "key": "entry.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static collection/region definitions.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/settings/MusicSourceSettings.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "d32a74771a9da23ca102c710192972a9058c5ab2b79769b7179173f7e4129f3b",
+      "directConsumers": ["packages/theme-default/src/components/settings/GlobalSettingsPanel.vue"],
+      "loops": [
+        {
+          "line": 37,
+          "expression": "group in props.groups",
+          "tag": "section",
+          "key": "group.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two current built-in/external source group headings; their growing source members remain C62/C63.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 49,
+          "expression": "plugin in group.plugins",
+          "tag": "li",
+          "key": "plugin.descriptor.id",
+          "consumerIds": ["C63"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/settings/NavigationOrderList.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "6a94169434324b7a578c74ef51336a99844894b6e79047f9bf21a33ca67bc31a",
+      "directConsumers": [
+        "packages/theme-default/src/components/settings/AppShellPreferencesPanel.vue"
+      ],
+      "loops": [
+        {
+          "line": 75,
+          "expression": "(destination, index) in displayedDestinations",
+          "tag": "li",
+          "key": "destination.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Host-known product destination set.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/settings/SettingsNavigation.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "4f0f3d8d7a74fbbd699b287975ba316deaf7cd8276159f4b85a9efccbfbdb6d3",
+      "directConsumers": ["packages/theme-default/src/components/settings/GlobalSettingsPanel.vue"],
+      "loops": [
+        {
+          "line": 49,
+          "expression": "group in props.groups",
+          "tag": "section",
+          "key": "group.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed host settings sections and their visited subset, not plugin-provided settings pages.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 57,
+          "expression": "entry in group.entries",
+          "tag": "button",
+          "key": "entry.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed host settings sections and their visited subset, not plugin-provided settings pages.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 115,
+          "expression": "sectionId in visitedSectionIds",
+          "tag": "div",
+          "key": "sectionId",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed host settings sections and their visited subset, not plugin-provided settings pages.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/specialists/MusicCreationPage.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "48fe0ceb97ff0cdf69211a74ee0fa7faf2f6a85206be1f4d75f10ef57e9b5e2d",
+      "directConsumers": ["packages/theme-default/src/components/specialists/ClassicComposer.vue"],
+      "loops": [
+        {
+          "line": 72,
+          "expression": "record in state.visibleRecords",
+          "tag": "component",
+          "key": "record.track.id",
+          "consumerIds": ["C25"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".material-browser__items (max-height: 470px), nested inside .composer"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/specialists/TagManagementDialogs.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "cbcc40cedd507915b1e9039853b8fac8d72a7a7d5cf5aece8cedea536e907cfc",
+      "directConsumers": [
+        "packages/theme-default/src/components/specialists/TagManagementPage.vue"
+      ],
+      "loops": [
+        {
+          "line": 50,
+          "expression": "mode in modes",
+          "tag": "button",
+          "key": "mode.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two arrangement modes.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/specialists/TagManagementFilters.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "85f68172c51da248bf1fe4b22ff606e46d48c27c20b2545544d713beebdb06fd",
+      "directConsumers": [
+        "packages/theme-default/src/components/specialists/TagManagementDialogs.vue"
+      ],
+      "loops": [
+        {
+          "line": 56,
+          "expression": "dimension in dimensions",
+          "tag": "button",
+          "key": "dimension.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static filter dimensions; dynamic source options are classified through CollectionFilterChoices.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-default/src/components/specialists/TagManagementResults.vue",
+      "owner": "packages/theme-default",
+      "runtimeScope": "shared",
+      "sha256": "05ed549f881e9d86cec41cdb7530b48e2d34a7090b8a52e976002989303db3de",
+      "directConsumers": [
+        "packages/theme-default/src/components/specialists/TagManagementPage.vue"
+      ],
+      "loops": [
+        {
+          "line": 48,
+          "expression": "tag in editor.state.tagOptions",
+          "tag": "TagManagementTag",
+          "key": "tag.key",
+          "consumerIds": ["C22"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/catalog/StudioDrawerRail.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "979e596c683f254bf74f8c1cdab64ce5abb8c9a0f9c12bbc0c6c6e2731a2531a",
+      "directConsumers": ["packages/theme-studio/src/components/catalog/StudioCatalog.vue"],
+      "loops": [
+        {
+          "line": 74,
+          "expression": "[id, title] in statuses",
+          "tag": "button",
+          "key": "id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed task/request status enum.",
+          "scrollRoot": ".studio-content vertical page on desktop / .studio-desk below 760px; .studio-request-list owns horizontal overflow in the existing narrow request layout"
+        },
+        {
+          "line": 114,
+          "expression": "drawer in visible",
+          "tag": "li",
+          "key": "drawer.id",
+          "consumerIds": ["C21"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content vertical page on desktop / .studio-desk below 760px; .studio-request-list owns horizontal overflow in the existing narrow request layout"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/catalog/StudioResults.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "0788842f6d147c404d18dbfa28b1ebf4c286c45aeb5e8e0778abae85e70a92cd",
+      "directConsumers": ["packages/theme-studio/src/components/catalog/StudioCatalog.vue"],
+      "loops": [
+        {
+          "line": 112,
+          "expression": "track in state.tracks",
+          "tag": "div",
+          "key": "track.id",
+          "consumerIds": ["C09"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-table-scroll owns horizontal overflow only; vertical scroll stays in .studio-content (desktop), .studio-desk (container <=760px), or .app-dialog__content"
+        },
+        {
+          "line": 149,
+          "expression": "(track, index) in state.tracks",
+          "tag": "StudioTrackRow",
+          "key": "track.id",
+          "consumerIds": ["C09"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-table-scroll owns horizontal overflow only; vertical scroll stays in .studio-content (desktop), .studio-desk (container <=760px), or .app-dialog__content"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/catalog/StudioSearch.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "08c52e07f4f8048d1f6c5f06604ef362595f0300e4b5fb423260cf059c842c4e",
+      "directConsumers": ["packages/theme-studio/src/components/catalog/StudioCatalog.vue"],
+      "loops": [
+        {
+          "line": 39,
+          "expression": "item in feature.state.sources",
+          "tag": "option",
+          "key": "item.id",
+          "consumerIds": ["C65"],
+          "classification": "native-select-investigation",
+          "constraint": "Growing native select options. Preserve the native control; investigate cost/limits before choosing an adapter.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        },
+        {
+          "line": 84,
+          "expression": "scope in source?.importUrlScopes",
+          "tag": "small",
+          "key": "`${scope.origin}${scope.pathnamePrefix}`",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Current source declarative import help strings; no independently growing directory.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/downloads/StudioDownloads.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "4caca5a4f83d53c88d491ed58d310327770358af1887cbff5ecb88a3383de365",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 145,
+          "expression": "[id, title] in statuses",
+          "tag": "button",
+          "key": "id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed task/request status enum.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 197,
+          "expression": "entry in visible",
+          "tag": "div",
+          "key": "entry.item.id",
+          "consumerIds": ["C13"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 226,
+          "expression": "entry in visible",
+          "tag": "article",
+          "key": "entry.item.id",
+          "consumerIds": ["C13"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioCustomTracks.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "b89e59f0bf4c14ffee92b964826d1ea6b376f8c8f085f040da4aff9ac8db1dbe",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 70,
+          "expression": "(credit, index) in definitions.get(trackId)?.sourceCredits ?? []",
+          "tag": "p",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Credits/recipe details belong to the measured parent logical track, not a separate scrolling list.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 74,
+          "expression": "(segment, index) in definitions.get(trackId)?.recipe ?? []",
+          "tag": "li",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Credits/recipe details belong to the measured parent logical track, not a separate scrolling list.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioFavoriteFilters.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "d95121157146f8d49fc71010e881f981aafb83648b7ffb88ba4b1a1a29f9bb44",
+      "directConsumers": ["packages/theme-studio/src/components/library/StudioFavorites.vue"],
+      "loops": [
+        {
+          "line": 30,
+          "expression": "[id, name] in feature.state.platformNames",
+          "tag": "label",
+          "key": "id",
+          "consumerIds": ["C49"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Existing Studio filter fieldset or AppDialog .app-dialog__content, according to caller"
+        },
+        {
+          "line": 49,
+          "expression": "[key, title] in fields",
+          "tag": "label",
+          "key": "key",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed title/artist keyword fields.",
+          "scrollRoot": "Existing Studio filter fieldset or AppDialog .app-dialog__content, according to caller"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioFavorites.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "e4063397e60c3d4e734415d2562eff43bc164ccb13e8bfa0640d798ec84c3b36",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 46,
+          "expression": "(id, index) in feature.state.platformOrder",
+          "tag": "li",
+          "key": "id",
+          "consumerIds": ["C03"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioFilters.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "f056513e7ca62b1780084962d29f942ff3ab01b08868f25f69604ec5bee16245",
+      "directConsumers": [
+        "packages/theme-studio/src/StudioRoot.vue",
+        "packages/theme-studio/src/components/catalog/StudioDrawerRail.vue",
+        "packages/theme-studio/src/components/catalog/StudioResults.vue",
+        "packages/theme-studio/src/components/downloads/StudioDownloads.vue",
+        "packages/theme-studio/src/components/library/StudioCollection.vue",
+        "packages/theme-studio/src/components/library/StudioHistory.vue",
+        "packages/theme-studio/src/components/library/StudioReadonlyTracks.vue"
+      ],
+      "loops": [
+        {
+          "line": 178,
+          "expression": "[id, name] in state.platformNames",
+          "tag": "label",
+          "key": "id",
+          "consumerIds": ["C40"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Existing Studio filter fieldset or AppDialog .app-dialog__content, according to caller"
+        },
+        {
+          "line": 196,
+          "expression": "tag in tags",
+          "tag": "label",
+          "key": "tag.name",
+          "consumerIds": ["C38"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Existing Studio filter fieldset or AppDialog .app-dialog__content, according to caller"
+        },
+        {
+          "line": 218,
+          "expression": "(range, index) in draft.publishedRanges",
+          "tag": "p",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Editable range summaries inside this filter editor; include in C38/C39 measured content.",
+          "scrollRoot": "Existing Studio filter fieldset or AppDialog .app-dialog__content, according to caller"
+        },
+        {
+          "line": 236,
+          "expression": "(range, index) in draft.durationRanges",
+          "tag": "p",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Editable range summaries inside this filter editor; include in C38/C39 measured content.",
+          "scrollRoot": "Existing Studio filter fieldset or AppDialog .app-dialog__content, according to caller"
+        },
+        {
+          "line": 246,
+          "expression": "(entry, index) in history.entries.value",
+          "tag": "div",
+          "key": "index",
+          "consumerIds": ["C39"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Existing Studio filter fieldset or AppDialog .app-dialog__content, according to caller"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioHistory.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "0d78928fde28c281714b7722ddf645760555682036dfee4eb3494419494ccdf1",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 200,
+          "expression": "group in groups",
+          "tag": "div",
+          "key": "group.id",
+          "consumerIds": ["C11"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 223,
+          "expression": "{ entry, track } in history.visible.value",
+          "tag": "div",
+          "key": "entry.id",
+          "consumerIds": ["C11"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 271,
+          "expression": "{ entry, track } in history.visible.value",
+          "tag": "tr",
+          "key": "entry.id",
+          "consumerIds": ["C11"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioPlaylistActions.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "9b206949e922cf68d9ab82546df9e8bd52702d846c5459db5b46009146e538f3",
+      "directConsumers": ["packages/theme-studio/src/components/library/StudioPlaylists.vue"],
+      "loops": [
+        {
+          "line": 279,
+          "expression": "tag in tags",
+          "tag": "button",
+          "key": "tag",
+          "consumerIds": ["C61"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioPlaylistPicker.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "e0ce2d103b3a7634cb8b9ae900df1a1508433104d148c0da670e2adb160da1d3",
+      "directConsumers": [
+        "packages/theme-studio/src/components/library/StudioPlaylistPickerDialog.vue",
+        "packages/theme-studio/src/components/overlays/StudioTrackDialog.vue"
+      ],
+      "loops": [
+        {
+          "line": 108,
+          "expression": "playlist in visible",
+          "tag": "StudioPlaylistPickerItem",
+          "key": "playlist.id",
+          "consumerIds": ["C17"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-playlist-picker__viewport inside the existing picker dialog"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioPlaylists.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "2b30a35eaf0bfc7ed5fa61c77b1efc522e8ab5445b5662d4cd536b53d36bac17",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 152,
+          "expression": "(playlist, index) in visible",
+          "tag": "div",
+          "key": "playlist.id",
+          "consumerIds": ["C15"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioReadonlyPlaylists.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "268492824220382c81e9f9e819eb100f602b74da64070890164236c5c8c4554b",
+      "directConsumers": ["packages/theme-studio/src/components/specialists/StudioTagDialogs.vue"],
+      "loops": [
+        {
+          "line": 54,
+          "expression": "record in visible",
+          "tag": "StudioPlaylistPickerItem",
+          "key": "record.playlist.id",
+          "consumerIds": ["C19"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-readonly-playlists__viewport inside the existing tag-details dialog"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioReadonlyTracks.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "f26f10591a14bb2740c4283ba354de409a8dba570976f427065abe559cb96cf3",
+      "directConsumers": ["packages/theme-studio/src/components/specialists/StudioTagDialogs.vue"],
+      "loops": [
+        {
+          "line": 73,
+          "expression": "track in visibleTracks",
+          "tag": "div",
+          "key": "track.id",
+          "consumerIds": ["C07"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-readonly-tracks__viewport inside the tag-details AppDialog"
+        },
+        {
+          "line": 107,
+          "expression": "(track, index) in visibleTracks",
+          "tag": "StudioTrackRow",
+          "key": "track.id",
+          "consumerIds": ["C07"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-readonly-tracks__viewport inside the tag-details AppDialog"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/library/StudioTrackTable.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "0c2f4f987e334836b40189c225be28ac3b3796dc8d4afa7cd6ffb6ab7f6c400e",
+      "directConsumers": ["packages/theme-studio/src/components/library/StudioCollection.vue"],
+      "loops": [
+        {
+          "line": 41,
+          "expression": "track in state.tracks",
+          "tag": "div",
+          "key": "track.id",
+          "consumerIds": ["C03", "C04", "C05", "C29"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-table-scroll owns horizontal overflow only; vertical scroll stays in .studio-content (desktop), .studio-desk (container <=760px), or .app-dialog__content"
+        },
+        {
+          "line": 86,
+          "expression": "(track, index) in state.tracks",
+          "tag": "template",
+          "key": "track.id",
+          "consumerIds": ["C03", "C04", "C05", "C29"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-table-scroll owns horizontal overflow only; vertical scroll stays in .studio-content (desktop), .studio-desk (container <=760px), or .app-dialog__content"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/overlays/StudioTrackDialog.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "ed3810b052df203ee18685cdbf57b9275c315b4a1084ff22527b0c15389d828c",
+      "directConsumers": [
+        "packages/theme-studio/src/StudioRoot.vue",
+        "packages/theme-studio/src/components/downloads/StudioDownloads.vue",
+        "packages/theme-studio/src/components/library/StudioHistory.vue"
+      ],
+      "loops": [
+        {
+          "line": 157,
+          "expression": "name in state.customTagsByTrackId.get(trackId) ?? []",
+          "tag": "li",
+          "key": "name",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Current track inline tag chips; bounded by the edited track, measure dialog content.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/player/StudioPlayer.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "adde37fda2e511eeba9011ab5cc1ac52558dc822db1a37c7b7bf8bef003e1dfe",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 119,
+          "expression": "rate in [0.5, 0.75, 1, 1.25, 1.5, 2]",
+          "tag": "option",
+          "key": "rate",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed rate and playback mode enums.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        },
+        {
+          "line": 135,
+          "expression": "mode in playbackModeOptions",
+          "tag": "option",
+          "key": "mode.value",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed rate and playback mode enums.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        },
+        {
+          "line": 147,
+          "expression": "quality in feature.state.qualities",
+          "tag": "option",
+          "key": "quality.id",
+          "consumerIds": ["C71"],
+          "classification": "native-select-investigation",
+          "constraint": "Source-projected quality choices have no enforced count limit; preserve native select until cost/limits are established.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/plugins/StudioPlugins.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "abd453830ee9cb5ac4a9a4cd5363a2f2f5eab2425335e58263ef69e403072d7c",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 71,
+          "expression": "option in filters",
+          "tag": "button",
+          "key": "option.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed plugin status filter enum.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 97,
+          "expression": "item in visible",
+          "tag": "StudioPluginCard",
+          "key": "item.id",
+          "consumerIds": ["C31"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/settings/StudioAppearance.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "8547078bef31149d3b9b90cae1a69b0b3f5742dfca85f4e38c83af06c6cf2da4",
+      "directConsumers": ["packages/theme-studio/src/components/settings/StudioSettings.vue"],
+      "loops": [
+        {
+          "line": 61,
+          "expression": "choice in state.themes",
+          "tag": "option",
+          "key": "choice.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two application build-known themes; host-known navigation, sidebar-side and light/dark/system enums. External plugin themes are not admitted.",
+          "scrollRoot": "Native select popup (browser/OS-owned); surrounding control stays in its current page/dialog."
+        },
+        {
+          "line": 89,
+          "expression": "(id, index) in state.preferences.destinationOrder",
+          "tag": "li",
+          "key": "id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two application build-known themes; host-known navigation, sidebar-side and light/dark/system enums. External plugin themes are not admitted.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/settings/StudioDisplaySettings.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "be07a6d1b2be30a207ecc303732eef424112d34c65bf233272de67a94ea8f2a0",
+      "directConsumers": ["packages/theme-studio/src/components/settings/StudioSettings.vue"],
+      "loops": [
+        {
+          "line": 57,
+          "expression": "group in groups",
+          "tag": "section",
+          "key": "group.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static collection/region definitions.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 67,
+          "expression": "entry in group.regions",
+          "tag": "button",
+          "key": "entry.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static collection/region definitions.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/settings/StudioFilterHistory.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "0ef12c79c1de7aeb549b9e0a46db803276695f637a2af9b42e23e3c3ab7bd914",
+      "directConsumers": ["packages/theme-studio/src/components/settings/StudioSettings.vue"],
+      "loops": [
+        {
+          "line": 26,
+          "expression": "group in FILTER_HISTORY_SETTINGS_GROUPS",
+          "tag": "section",
+          "key": "group.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static settings regions and filter dimensions.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 29,
+          "expression": "region in group.regions",
+          "tag": "form",
+          "key": "region.context",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static settings regions and filter dimensions.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 37,
+          "expression": "dimension in getCatalogFilterDimensions(region.context)",
+          "tag": "label",
+          "key": "dimension.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static settings regions and filter dimensions.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/settings/StudioSettings.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "c18ddfd15b09a5d5a9bb07965b6817fb52b0b6f2152a05bfa60b1bd57d57888f",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 74,
+          "expression": "section in sections",
+          "tag": "button",
+          "key": "section.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed host settings section enum.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        },
+        {
+          "line": 111,
+          "expression": "source in state.sources",
+          "tag": "article",
+          "key": "source.id",
+          "consumerIds": ["C64"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/shell/StudioNavigation.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "52bdc4b6328270da132b834a444f57e417866a810d6cd60396b196d0cc2eeb03",
+      "directConsumers": ["packages/theme-studio/src/vue.ts"],
+      "loops": [
+        {
+          "line": 28,
+          "expression": "item in destinations",
+          "tag": "button",
+          "key": "item.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Host-known product destination set.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/specialists/StudioMaterialBrowser.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "fe0fe324f026a1f871646e2c79d32c36bcc1f228a7d3d46dc700e7fa81998499",
+      "directConsumers": [
+        "packages/theme-studio/src/components/specialists/StudioCreationPage.vue"
+      ],
+      "loops": [
+        {
+          "line": 24,
+          "expression": "record in state.visibleRecords",
+          "tag": "component",
+          "key": "record.track.id",
+          "consumerIds": ["C26"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content / .studio-content (desktop) / .studio-desk (narrow) on specialist pages; .app-dialog__content for detail/maintenance/filter dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/specialists/StudioTagDialogs.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "af5c2652e84c20f04cd5b14ab4cdf5d80d9da7d0ee2c95f55896a6283dbbb368",
+      "directConsumers": ["packages/theme-studio/src/components/specialists/StudioTagPage.vue"],
+      "loops": [
+        {
+          "line": 45,
+          "expression": "mode in modes",
+          "tag": "button",
+          "key": "mode.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two arrangement modes.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/specialists/StudioTagResults.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "e2c113778d1e2256605096b0f679653046fd4679a1d7a695f8aafbd70b6f1486",
+      "directConsumers": ["packages/theme-studio/src/components/specialists/StudioTagPage.vue"],
+      "loops": [
+        {
+          "line": 38,
+          "expression": "tag in editor.state.tagOptions",
+          "tag": "component",
+          "key": "tag.key",
+          "consumerIds": ["C23"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/theme-studio/src/components/StudioFeatureStatus.vue",
+      "owner": "packages/theme-studio",
+      "runtimeScope": "shared",
+      "sha256": "2cffdd824a22a1127928a1ad06379a4c1e64a63df5a5a07282f02025449e6580",
+      "directConsumers": [
+        "packages/theme-studio/src/components/catalog/StudioCatalog.vue",
+        "packages/theme-studio/src/components/downloads/StudioDownloads.vue",
+        "packages/theme-studio/src/components/library/StudioCollection.vue",
+        "packages/theme-studio/src/components/library/StudioHistory.vue",
+        "packages/theme-studio/src/components/library/StudioPlaylists.vue",
+        "packages/theme-studio/src/components/player/StudioPlayer.vue",
+        "packages/theme-studio/src/components/plugins/StudioPlugins.vue",
+        "packages/theme-studio/src/components/settings/StudioSettings.vue",
+        "packages/theme-studio/src/components/specialists/StudioComposer.vue",
+        "packages/theme-studio/src/components/specialists/StudioTags.vue"
+      ],
+      "loops": [
+        {
+          "line": 14,
+          "expression": "(error, index) in status.errors",
+          "tag": "p",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "One action-owned status/error projection; track problem directories use C58.",
+          "scrollRoot": ".studio-content (desktop) / .studio-desk (container <=760px) on pages; .app-dialog__content in settings/dialogs; .studio-console (desktop) for player quality"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/AppIcon.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "8c7bff5def79c1b826a6040ada58e29749f78c8f8e620b1c6d01ae56e0aee6ce",
+      "directConsumers": [
+        "packages/card-styles/src/components/CoverPlaylistCard.vue",
+        "packages/card-styles/src/components/MinimalTrackCard.vue",
+        "packages/plugin-music-creation/src/vue/components/SegmentTimeline.vue",
+        "packages/plugin-tag-management/src/vue/components/TagDetailsEditor.vue",
+        "packages/plugin-tag-management/src/vue/components/TagDetailsHeading.vue",
+        "packages/plugin-tag-management/src/vue/components/TagDetailsPanel.vue",
+        "packages/plugin-tag-management/src/vue/components/TagFilterBar.vue",
+        "packages/plugin-tag-management/src/vue/components/TagMaintenanceToolbar.vue",
+        "packages/plugin-tag-management/src/vue/components/TagPlatformDrawer.vue",
+        "packages/plugin-tag-management/src/vue/components/TagTrackCard.vue",
+        "packages/theme-default/src/components/downloads/ActiveDownloadPanel.vue",
+        "packages/theme-default/src/components/downloads/DownloadCollectionContent.vue",
+        "packages/theme-default/src/components/downloads/DownloadOperatorPanel.vue",
+        "packages/theme-default/src/components/downloads/DownloadTrackRow.vue",
+        "packages/theme-default/src/components/library/ClassicCollectionControls.vue",
+        "packages/theme-default/src/components/library/ClassicHistory.vue",
+        "packages/theme-default/src/components/library/ClassicPlaylistOverview.vue",
+        "packages/theme-default/src/components/library/ClassicPlaylists.vue",
+        "packages/theme-default/src/components/library/CustomTrackDrawer.vue",
+        "packages/theme-default/src/components/library/FavoritePlatformDrawer.vue",
+        "packages/theme-default/src/components/library/HistoryOperatorPanel.vue",
+        "packages/theme-default/src/components/library/PlaylistCard.vue",
+        "packages/theme-default/src/components/library/PlaylistCoverField.vue",
+        "packages/theme-default/src/components/library/PlaylistDrawer.vue",
+        "packages/theme-default/src/components/library/PlaylistEditorDialog.vue",
+        "packages/theme-default/src/components/library/PlaylistOverviewFilters.vue",
+        "packages/theme-default/src/components/library/PlaylistOverviewOperator.vue",
+        "packages/theme-default/src/components/library/PlaylistPanel.vue",
+        "packages/theme-default/src/components/library/PlaylistPickerPanel.vue",
+        "packages/theme-default/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+        "packages/theme-default/src/components/music-sources/CatalogDrawerCard.vue",
+        "packages/theme-default/src/components/music-sources/CatalogDrawerDetails.vue",
+        "packages/theme-default/src/components/music-sources/CatalogDrawerListHeader.vue",
+        "packages/theme-default/src/components/music-sources/CatalogDrawerOperatorPanel.vue",
+        "packages/theme-default/src/components/music-sources/CatalogErrorDetails.vue",
+        "packages/theme-default/src/components/music-sources/CatalogErrorNotice.vue",
+        "packages/theme-default/src/components/music-sources/CatalogFilterCalendar.vue",
+        "packages/theme-default/src/components/music-sources/CatalogFilterDateRange.vue",
+        "packages/theme-default/src/components/music-sources/CatalogFilterHistoryList.vue",
+        "packages/theme-default/src/components/music-sources/CatalogFilterRangeList.vue",
+        "packages/theme-default/src/components/music-sources/CatalogOperatorActions.vue",
+        "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue",
+        "packages/theme-default/src/components/music-sources/CatalogTrackFilterPanel.vue",
+        "packages/theme-default/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+        "packages/theme-default/src/components/music-sources/ClassicCatalog.vue",
+        "packages/theme-default/src/components/music-sources/CollectionFilterSummary.vue",
+        "packages/theme-default/src/components/music-sources/MusicSourcePickerDialog.vue",
+        "packages/theme-default/src/components/music-sources/QueuePlatformHeading.vue",
+        "packages/theme-default/src/components/music-sources/QueueViewControls.vue",
+        "packages/theme-default/src/components/music-sources/SourceToolbar.vue",
+        "packages/theme-default/src/components/music-sources/TrackActionButton.vue",
+        "packages/theme-default/src/components/music-sources/TrackRow.vue",
+        "packages/theme-default/src/components/plugins/ClassicPluginCard.vue",
+        "packages/theme-default/src/components/plugins/ClassicPlugins.vue",
+        "packages/theme-default/src/components/plugins/PluginDetailsDialog.vue",
+        "packages/theme-default/src/components/plugins/PluginFilters.vue",
+        "packages/theme-default/src/components/plugins/PluginOperator.vue",
+        "packages/theme-default/src/components/settings/AppShellPreferenceDialog.vue",
+        "packages/theme-default/src/components/settings/AppShellPreferencesPanel.vue",
+        "packages/theme-default/src/components/settings/CatalogFilterHistorySettings.vue",
+        "packages/theme-default/src/components/settings/CollectionDisplaySettings.vue",
+        "packages/theme-default/src/components/settings/MusicSourceSettings.vue",
+        "packages/theme-default/src/components/settings/NavigationOrderList.vue",
+        "packages/theme-default/src/components/settings/SettingsNavigation.vue",
+        "packages/theme-default/src/components/specialists/TagEntitySwitch.vue",
+        "packages/theme-default/src/components/specialists/TagManagementFilters.vue",
+        "packages/theme-default/src/components/specialists/TagManagementOperator.vue",
+        "packages/theme-default/src/components/specialists/TagManagementOverview.vue",
+        "packages/theme-default/src/components/specialists/TagManagementPage.vue",
+        "packages/theme-default/src/components/specialists/TagManagementResults.vue",
+        "packages/theme-default/src/components/specialists/TagManagementTag.vue",
+        "packages/theme-studio/src/components/catalog/StudioTrackRow.vue",
+        "packages/theme-studio/src/components/library/StudioDisplayControls.vue",
+        "packages/theme-studio/src/components/library/StudioPlaylistActions.vue",
+        "packages/theme-studio/src/components/library/StudioPlaylistPicker.vue",
+        "packages/theme-studio/src/components/overlays/StudioTrackDialog.vue",
+        "packages/theme-studio/src/components/player/StudioPlayer.vue",
+        "packages/theme-studio/src/components/plugins/StudioPluginCard.vue",
+        "packages/theme-studio/src/components/plugins/StudioPlugins.vue",
+        "packages/theme-studio/src/components/shell/StudioNavigation.vue",
+        "packages/theme-studio/src/components/shell/StudioShell.vue",
+        "packages/theme-studio/src/components/specialists/StudioTagPage.vue",
+        "packages/theme-studio/src/components/specialists/StudioTagResults.vue",
+        "packages/ui/src/components/AppDialog.vue",
+        "packages/ui/src/components/AppToast.vue",
+        "packages/ui/src/components/BottomSheet.vue",
+        "packages/ui/src/components/CollectionBreadcrumbs.vue",
+        "packages/ui/src/components/CollectionCard.vue",
+        "packages/ui/src/components/CollectionSelectionToolbar.vue",
+        "packages/ui/src/components/DisplayOptionsDialog.vue",
+        "packages/ui/src/components/MobileBottomNavigation.vue",
+        "packages/ui/src/components/NameEditor.vue",
+        "packages/ui/src/components/NavigationRail.vue",
+        "packages/ui/src/components/PlaylistCoverCropDialog.vue",
+        "packages/ui/src/components/PlaylistValidationNotice.vue",
+        "packages/ui/src/components/SidePanel.vue",
+        "packages/ui/src/components/music-sources/CatalogRequestAccount.vue",
+        "packages/ui/src/components/music-sources/MusicListEmptyState.vue",
+        "packages/ui/src/components/music-sources/PlayerControlPager.vue",
+        "packages/ui/src/components/music-sources/RemoteImage.vue",
+        "packages/ui/src/components/music-sources/SessionBadge.vue",
+        "packages/ui/src/components/plugins/ContributionInputDialog.vue",
+        "packages/ui/src/components/plugins/PluginDisplayOptions.vue",
+        "packages/ui/src/components/settings/ResourceCacheHelpButton.vue",
+        "packages/ui/src/components/settings/ResourceCacheSettings.vue",
+        "packages/ui/src/components/tracks/TrackCardSummary.vue",
+        "packages/ui/src/index.ts"
+      ],
+      "loops": [
+        {
+          "line": 41,
+          "expression": "path in paths",
+          "tag": "path",
+          "key": "path",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Static icon path definitions; not data rows.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/CollectionTagSummary.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "1f30b97e76232b7beada5603874845762f942f164467eb1f5cf773e2e8772dfc",
+      "directConsumers": [
+        "packages/card-styles/src/components/CoverPlaylistCard.vue",
+        "packages/card-styles/src/components/MinimalTrackCard.vue"
+      ],
+      "loops": [
+        {
+          "line": 17,
+          "expression": "tag in visible",
+          "tag": "span",
+          "key": "tag",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "At most two tags in multi-line mode; single-line mode clips its inline tags. Measure with its parent.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/DisplayOptionsDialog.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "6bf04f5769633077972957306b051f60c6e8871fdd8d2c8d85681d13c8cf4376",
+      "directConsumers": [
+        "packages/theme-default/src/components/settings/CollectionDisplaySettings.vue",
+        "packages/theme-studio/src/components/settings/StudioDisplaySettings.vue",
+        "packages/ui/src/components/CollectionDisplayDialog.vue"
+      ],
+      "loops": [
+        {
+          "line": 134,
+          "expression": "section in sections",
+          "tag": "button",
+          "key": "section.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Production CollectionDisplayDialog supplies at most two categories, three densities/two mobile column choices, and build-known card styles. Settings layout choices are static; preview icons are at most four.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        },
+        {
+          "line": 150,
+          "expression": "option in active.options",
+          "tag": "button",
+          "key": "option.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Production CollectionDisplayDialog supplies at most two categories, three densities/two mobile column choices, and build-known card styles. Settings layout choices are static; preview icons are at most four.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        },
+        {
+          "line": 164,
+          "expression": "index in option.columns ?? 1",
+          "tag": "i",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Production CollectionDisplayDialog supplies at most two categories, three densities/two mobile column choices, and build-known card styles. Settings layout choices are static; preview icons are at most four.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/MobileBottomNavigation.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "bc217f849c0a3e9d0b28806c76ce6baa7ef5c88c296225266ae96bc23aad7635",
+      "directConsumers": ["packages/ui/src/index.ts"],
+      "loops": [
+        {
+          "line": 23,
+          "expression": "item in props.items",
+          "tag": "button",
+          "key": "item.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Host-known product destination set.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/music-sources/PlaybackModeChoices.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "603c6ed2f661df4ac323dc07a9b7fb34bdeda26013a8dbb82057aa2a3f25ccc3",
+      "directConsumers": ["packages/ui/src/index.ts"],
+      "loops": [
+        {
+          "line": 14,
+          "expression": "option in playbackModeOptions",
+          "tag": "button",
+          "key": "option.value",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed playback mode enum.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/NavigationRail.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "c0605338a827e078a4320056614f816d32f8f15fd1bf3475654e7c52c72afec6",
+      "directConsumers": ["packages/ui/src/index.ts"],
+      "loops": [
+        {
+          "line": 29,
+          "expression": "item in props.items",
+          "tag": "button",
+          "key": "item.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Host-known product destination set; no external navigation admission.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/PlaylistValidationNotice.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "06d94215ee6cd6dd36c4735a8b37c1d13da3fe794b5f86522f4435bd6e0e707b",
+      "directConsumers": [
+        "packages/theme-default/src/components/library/ClassicPlaylists.vue",
+        "packages/theme-studio/src/components/library/StudioPlaylists.vue"
+      ],
+      "loops": [
+        {
+          "line": 61,
+          "expression": "(issue, index) in issues",
+          "tag": "li",
+          "key": "`${issue.trackId}:${index}`",
+          "consumerIds": ["C58"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/plugins/ContributionActions.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "ce3525205032460343042218edca777ce0920170a17f96bc20f10ab747f77e48",
+      "directConsumers": [
+        "packages/theme-default/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+        "packages/theme-studio/src/components/library/StudioBatchActions.vue"
+      ],
+      "loops": [
+        {
+          "line": 65,
+          "expression": "item in items",
+          "tag": "template",
+          "key": "item.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Production useWorkbenchModules only gives a title to batch-tags; one titled built-in action per point. Its growing inputOptions are C45.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/plugins/ContributionInputDialog.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "b9e06f8f88c16ba06f25910cd6a14023b21cdceace3ebae51057c79c53a214e0",
+      "directConsumers": ["packages/ui/src/components/plugins/ContributionActions.vue"],
+      "loops": [
+        {
+          "line": 112,
+          "expression": "option in filteredOptions",
+          "tag": "button",
+          "key": "option.value",
+          "consumerIds": ["C45"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".contribution-input__choices (max-block-size: 45dvh), nested in AppDialog"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/plugins/NativePluginCommandResult.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "a72a46a0e90da367ad4dd63207acc7d9e96ee5b4297566e989dfbb00a225f00d",
+      "directConsumers": ["packages/ui/src/components/plugins/NativePluginAuthorityPanel.vue"],
+      "loops": [
+        {
+          "line": 26,
+          "expression": "(title, index) in output.items",
+          "tag": "li",
+          "key": "index",
+          "consumerIds": ["C46"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 29,
+          "expression": "item in output.suggestions",
+          "tag": "li",
+          "key": "item.id",
+          "consumerIds": ["C47"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/plugins/NativePluginInstallList.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "ea94d2c0f928d8dba0a294c9ffe41ec9c7928e7245d515bcaab5e6b32fc2acc3",
+      "directConsumers": ["packages/ui/src/components/plugins/NativePluginAuthorityPanel.vue"],
+      "loops": [
+        {
+          "line": 45,
+          "expression": "track in tracks.slice(0, 20)",
+          "tag": "label",
+          "key": "track.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Native catalog preview explicitly slices to 20 text-only titles, no controls or media.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 57,
+          "expression": "install in installs",
+          "tag": "li",
+          "key": "install.installId",
+          "consumerIds": ["C32"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        },
+        {
+          "line": 84,
+          "expression": "command in install.commands",
+          "tag": "button",
+          "key": "command.id",
+          "consumerIds": ["C48"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/plugins/PluginDisplayOptions.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "724852b88f9ebaac43a664cbe7acf9f8da148be23251574ee674a7c7dc38aff6",
+      "directConsumers": [
+        "packages/theme-default/src/components/plugins/ClassicPlugins.vue",
+        "packages/theme-studio/src/components/plugins/StudioPlugins.vue"
+      ],
+      "loops": [
+        {
+          "line": 21,
+          "expression": "option in options",
+          "tag": "button",
+          "key": "option.id",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Two presentation choices.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/plugins/PluginPackageConsent.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "f1cf9ec87003621c6f4c994486b70e888fb14b8525922b04c0e4905ab863f208",
+      "directConsumers": ["packages/ui/src/components/plugins/PluginPackagePreview.vue"],
+      "loops": [
+        {
+          "line": 77,
+          "expression": "permission in preview.permissions",
+          "tag": "label",
+          "key": "permission",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "Fixed known capability enum; preview cannot introduce arbitrary capability names.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/product-workbench/ConfirmationDialog.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "66e909a0f7e78aadc374b82fe72f32af60ab911f537e2e292db2d8d5ea280d86",
+      "directConsumers": [
+        "packages/ui/src/components/plugins/ContributionInputDialog.vue",
+        "packages/ui/src/index.ts"
+      ],
+      "loops": [
+        {
+          "line": 93,
+          "expression": "(detail, index) in props.request.details",
+          "tag": "div",
+          "key": "index",
+          "consumerIds": [],
+          "classification": "fixed",
+          "constraint": "No current production caller supplies ConfirmationRequest.details; optional contract only, not a growing production directory.",
+          "scrollRoot": "Owning AppDialog .app-dialog__content; selection/filter children must use that existing scroll root"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/settings/ProxyManagementList.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "603f5e18d1a25d448c104f2b534070de7e36bc495585aac36af07fcff6ef349d",
+      "directConsumers": ["apps/tauri/src/components/accounts/ProxySettingsPanel.vue"],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "proxy in proxies",
+          "tag": "li",
+          "key": "proxy.id",
+          "consumerIds": ["C34"],
+          "classification": "consumer",
+          "constraint": "Data-dependent; no small-list exclusion. Full business collection remains host-owned.",
+          "scrollRoot": "Protected host AppDialog .app-dialog__content (account detail) / .settings-navigation__detail (settings)"
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/src/components/tracks/TrackCardSummary.vue",
+      "owner": "packages/ui",
+      "runtimeScope": "shared",
+      "sha256": "73e56d84127a2fbbe1e518f7db52909c139c3f5fb5e002bfa859a2bbff3e9ff1",
+      "directConsumers": [
+        "packages/plugin-music-creation/src/vue/components/MaterialTrackRow.vue",
+        "packages/plugin-music-creation/src/vue/components/PendingMaterialStorage.vue",
+        "packages/plugin-tag-management/src/vue/components/TagTrackCard.vue",
+        "packages/theme-default/src/components/library/CustomTrackDrawer.vue",
+        "packages/theme-default/src/components/library/FavoriteTrackRow.vue",
+        "packages/theme-default/src/components/library/HistoryPanel.vue",
+        "packages/theme-default/src/components/music-sources/CatalogTrackActionsDialog.vue",
+        "packages/theme-default/src/components/music-sources/TrackRow.vue",
+        "packages/ui/src/index.ts"
+      ],
+      "loops": [
+        {
+          "line": 102,
+          "expression": "(line, lineIndex) in props.detailLines",
+          "tag": "p",
+          "key": "`${lineIndex}:${line}`",
+          "consumerIds": [],
+          "classification": "inline-content",
+          "constraint": "Caller-owned detail text participates in the measured logical card.",
+          "scrollRoot": ".music-app-shell__content on classic pages / .settings-navigation__detail and .app-dialog__content in settings/dialogs"
+        }
+      ]
+    }
+  ]
+}

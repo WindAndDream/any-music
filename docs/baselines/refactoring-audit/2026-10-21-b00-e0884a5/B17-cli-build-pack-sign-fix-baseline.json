@@ -1,0 +1,92 @@
+{
+  "documentType": "audit-fix-baseline",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B17-cli-build-pack-sign",
+  "capturedAt": "2026-10-22T03:36:07.319Z",
+  "head": "a693165205be0bc321764768d796d7c842f7a446",
+  "initialWorkingTreeLog": ".codex-tmp/fix-b17-cli/initial-status.txt",
+  "originalAuditBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-baseline.json",
+  "scope": "Two Node CLI findings only; other concurrent native/SDK/audit edits retained.",
+  "sourceHashes": [
+    {
+      "path": "packages/plugin-cli/src/project.mjs",
+      "sha256": "41ea8e5f77a3103d1120e95439084a5d4fe9826cafc4a92ad2ec3d329298a865"
+    },
+    {
+      "path": "packages/plugin-cli/test/tools.test.mjs",
+      "sha256": "2a8159f4295655f84d9a478ead4ba7d36286b61333068646b04a68b1123ba81e"
+    },
+    {
+      "path": "packages/plugin-cli/package.json",
+      "sha256": "5e26cda1addc65d8a514a965fa2ae27bfed00a0ccaed7f18edaa06627d7dd949"
+    },
+    {
+      "path": "packages/plugin-cli/src/build.mjs",
+      "sha256": "35c6a7a4b47ac9dd32ac46ccd5def5cfca2425c578334d02aeaa81fb25ebd008"
+    },
+    {
+      "path": "packages/plugin-cli/src/package.mjs",
+      "sha256": "6fe383123e282b41627e84cb0c23c11dff1b453709a997ef9e6a1fd238184a0d"
+    },
+    {
+      "path": "packages/plugin-cli/src/cli.mjs",
+      "sha256": "8409560b072adf7f098adab228340d17717ed59c3a64a7b4a3eb91bc0736286b"
+    },
+    {
+      "path": "packages/plugin-sdk/src/node/package-format.mjs",
+      "sha256": "57dd19a344eea8999fc8aa7399b39b21bb9f86e2b6408cb4a174ee5ceb02dd6a"
+    },
+    {
+      "path": "packages/plugin-sdk/package.json",
+      "sha256": "b827d149d50b693288984bd7e5b03259d2a20f7e6ee0b1a9beec647dd7ab7def"
+    },
+    {
+      "path": "packages/plugin-testkit/package.json",
+      "sha256": "3278513c21fe4ab19f629d5803670966863fdb3a814196d732bbf83feb902cb2"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "1088468b37100ccc795f68db947bab7db5a3bf886b8ecf88762bfdc6df656714"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "89f92fe7a0b6d47c955fa7753bfa4cb19273154795fedc4419a02225204e23c2"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".tmp/s15/packs/any-music-plugin-cli-0.1.0.tgz",
+      "sha256": "c49f4ff970620d8257032cef14efa1bce84b01c60964e51e2b0a5ec9473a74a6"
+    },
+    {
+      "path": ".tmp/s15/packs/any-music-plugin-sdk-0.1.0.tgz",
+      "sha256": "82101999d2eb2b0f411e61df94eab340361bc8577a3a83d3261642e1290b8b18"
+    },
+    {
+      "path": ".tmp/s15/packs/any-music-plugin-testkit-0.1.0.tgz",
+      "sha256": "0a50bb15ec53b7296d3e2da180c98f4acd28ae4dbcfee4ab6f65812b40dcf647"
+    }
+  ],
+  "preservedHistoricalRecords": [
+    {
+      "path": "docs/baselines/plugin-system-s15/tools.json",
+      "beforeSha256": "52819331237b338a39d8f9d12771c0b724f0dc679c013a62785d2c6335e05657",
+      "afterSha256": "52819331237b338a39d8f9d12771c0b724f0dc679c013a62785d2c6335e05657",
+      "observedOutput": ".codex-tmp/fix-b17-cli/tools.json.observed"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s15/toolchain-sbom.json",
+      "beforeSha256": "3bb86111bb5fa5badf361a1c6d50f30fc83e5987d712b38878f201eeb49afc82",
+      "afterSha256": "3bb86111bb5fa5badf361a1c6d50f30fc83e5987d712b38878f201eeb49afc82",
+      "observedOutput": ".codex-tmp/fix-b17-cli/toolchain-sbom.json.observed"
+    }
+  ],
+  "environment": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "userTimezone": "Asia/Shanghai"
+  }
+}

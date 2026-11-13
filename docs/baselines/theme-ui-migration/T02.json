@@ -1,0 +1,2185 @@
+{
+  "batchId": "T02",
+  "status": "complete",
+  "date": "2026-10-23",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "scope": "Stable workbench business/media lifetime and controller/plugin-owned editing state. Complete-root transactions and theme package extraction remain separately owned batches.",
+  "files": [
+    "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+    "packages/music-workbench/src/components/music-sources/MusicWorkbenchPresentation.vue",
+    "packages/music-workbench/src/features/workbench/use-workbench-controller.ts",
+    "packages/music-workbench/src/features/workbench/use-workbench-presentation.ts",
+    "packages/music-workbench/src/features/player/use-audio-player.ts",
+    "packages/music-workbench/src/features/settings/use-network-proxy-settings-form.ts",
+    "packages/music-workbench/src/components/settings/NetworkProxySettingsForm.vue",
+    "packages/music-workbench/src/features/plugins/use-music-creation.ts",
+    "packages/music-workbench/src/features/plugins/use-tag-management.ts",
+    "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts",
+    "packages/music-workbench/test/features/workbench/use-workbench-controller.test.ts",
+    "packages/ui/src/index.ts",
+    "packages/ui/src/composables/use-editing-session.ts",
+    "packages/ui/src/composables/use-settings-navigation.ts",
+    "packages/ui/src/composables/use-global-settings.ts",
+    "packages/ui/src/composables/use-collection-navigation.ts",
+    "packages/ui/src/composables/filters/use-filter-draft.ts",
+    "packages/ui/src/composables/downloads/use-download-list-controls.ts",
+    "packages/ui/src/composables/library/use-playlist-panel.ts",
+    "packages/ui/src/composables/library/use-playlist-filters.ts",
+    "packages/ui/src/composables/library/playlist-editing-state.ts",
+    "packages/ui/src/composables/library/use-custom-track-panel.ts",
+    "packages/ui/src/composables/music-sources/use-catalog-list-controls.ts",
+    "packages/ui/src/composables/music-sources/use-catalog-track-filters.ts",
+    "packages/ui/src/composables/music-sources/use-catalog-track-filter-editor.ts",
+    "packages/ui/src/composables/music-sources/catalog-filter-editing-state.ts",
+    "packages/ui/src/composables/music-sources/use-catalog-drawer-list.ts",
+    "packages/ui/src/composables/music-sources/use-queue-list-controls.ts",
+    "packages/ui/src/composables/tracks/track-action-editing-state.ts",
+    "packages/ui/src/components/music-sources/CatalogDrawer.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawerList.vue",
+    "packages/ui/src/components/music-sources/QueuePanel.vue",
+    "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue",
+    "packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue",
+    "packages/ui/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+    "packages/ui/src/components/tracks/TrackNameEditor.vue",
+    "packages/ui/src/components/library/PlaylistDrawer.vue",
+    "packages/ui/src/components/downloads/ActiveDownloadPanel.vue",
+    "packages/ui/src/product/music-creation.ts",
+    "packages/ui/src/product/tag-management.ts",
+    "packages/ui/test/composables/use-editing-session.test.ts",
+    "packages/plugin-music-creation/src/creation-session.ts",
+    "packages/plugin-music-creation/src/vue/use-segment-composer.ts",
+    "packages/plugin-music-creation/src/vue/use-material-library-filters.ts",
+    "packages/plugin-music-creation/src/vue/components/SegmentComposer.vue",
+    "packages/plugin-music-creation/src/vue/components/MaterialCollectionToolbar.vue",
+    "packages/plugin-music-creation/src/vue/components/MaterialTrackRow.vue",
+    "packages/plugin-music-creation/src/vue/collection-toolbar-state.ts",
+    "packages/plugin-music-creation/src/vue/material-range-state.ts",
+    "packages/plugin-music-creation/test/vue/use-segment-composer.test.ts",
+    "packages/plugin-tag-management/src/tag-session.ts",
+    "packages/plugin-tag-management/src/vue/use-tag-management-filters.ts",
+    "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue",
+    "packages/plugin-tag-management/src/vue/components/TagMaintenanceToolbar.vue",
+    "packages/plugin-tag-management/src/vue/components/TagTrackCard.vue",
+    "packages/plugin-tag-management/src/vue/tag-maintenance-state.ts",
+    "packages/plugin-tag-management/src/vue/tag-track-state.ts",
+    "packages/plugin-tag-management/test/vue/use-tag-management-filters.test.ts",
+    "packages/plugin-music-creation/test/creation-session.test.ts",
+    "packages/plugin-music-creation/src/vue/components/SegmentTimeline.vue",
+    "packages/plugin-music-creation/src/vue/timeline-state.ts",
+    "packages/music-workbench/AGENTS.md",
+    "packages/ui/AGENTS.md",
+    "packages/plugin-music-creation/AGENTS.md",
+    "packages/plugin-tag-management/AGENTS.md",
+    "docs/en/README.md",
+    "docs/en/cross-platform/README.md",
+    "docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md",
+    "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+    "docs/zh-cn/文档索引.md",
+    "docs/zh-cn/跨平台/文档索引.md",
+    "docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md",
+    "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md"
+  ],
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "initialStatusRead": true,
+    "initialSnapshotSaved": false,
+    "concurrentChangesObserved": [
+      "plugin-ui-vue theme transactions (T03)",
+      "theme-default/chrome extraction and app composition (T04)"
+    ],
+    "preservation": "No resets, commits, pushes, or unrelated file reversions. Verification records the shared working tree as observed.",
+    "observedDirtyPaths": [
+      {
+        "status": " M",
+        "path": "apps/tauri/package.json"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobileDocumentAccess.kt"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobilePlatformPlugin.kt"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/permissions/mobile.toml"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/permissions/product.toml"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/src/ipc.rs"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/src/lib.rs"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/src/state.rs"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/src/system.rs"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/src/system/android.rs"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/src/system/download.rs"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src-tauri/src/system/lifecycle.rs"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/App.vue"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/components/accounts/AccountConnectionForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/components/accounts/AccountCreateForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/components/accounts/AccountNameForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/components/accounts/AccountSettingsPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/components/accounts/ProxySettingsPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/main.ts"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/platform/configure-tauri-workbench.ts"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/styles/app.scss"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/src/vite-env.d.ts"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/test/components/accounts/ProxySettingsPanel.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "apps/tauri/test/platform/configure-tauri-workbench.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "apps/userscript/package.json"
+      },
+      {
+        "status": " M",
+        "path": "apps/userscript/src/bootstrap-userscript-app.ts"
+      },
+      {
+        "status": " M",
+        "path": "apps/userscript/src/platform/configure-userscript-workbench.ts"
+      },
+      {
+        "status": " M",
+        "path": "apps/userscript/src/platform/dom/shadow-style-registry.ts"
+      },
+      {
+        "status": " M",
+        "path": "apps/userscript/test/platform/dom/shadow-style-registry.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/README.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/README.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/architecture/plugin-data-ownership.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/architecture/project-architecture.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/cross-platform/features/local-library-and-custom-plugins.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/desktop/README.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/desktop/backend-engineering.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/desktop/development.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/desktop/douyin-background-login-experiment.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/desktop/runtime-architecture.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/en/desktop/rust-workspace-plan.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/文档索引.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/桌面端/Rust工作区规划.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/桌面端/后端工程规范.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/桌面端/开发规范.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/桌面端/抖音后台登录试验.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/桌面端/文档索引.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/桌面端/运行端架构.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/文档索引.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/架构/可复用包边界.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/架构/插件数据归属.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/zh-cn/跨平台/架构/项目架构.md"
+      },
+      {
+        "status": " M",
+        "path": "packages/core/src/download/download-history.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/core/src/index.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/core/test/download/download-history.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/AGENTS.md"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/package.json"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/music-workbench/src/components/music-sources/PlayerBar.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/music-workbench/src/components/music-sources/PlayerControlActions.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/music-workbench/src/components/music-sources/PlayerSettingsDialog.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/music-workbench/src/components/music-sources/player-control-options.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/components/settings/NetworkProxySettingsForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/audio-export/download-audio.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/downloads/download-archive.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/downloads/use-download-manager.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/downloads/use-player-download.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/library/use-track-collection-view.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/player/use-audio-player.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/plugins/use-music-creation.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/plugins/use-tag-management.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/plugins/use-workbench-modules.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/plugins/use-workbench-theme.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/features/settings/use-network-proxy-settings-form.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/index.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/plugin-adapters/workbench-module-directory.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/plugin-adapters/workbench-modules.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/plugin-adapters/workbench-ui-directory.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/plugin-adapters/workbench-view-components.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/src/runtime/workbench-runtime.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts"
+      },
+      {
+        "status": " D",
+        "path": "packages/music-workbench/test/components/music-sources/PlayerBar.test.ts"
+      },
+      {
+        "status": " D",
+        "path": "packages/music-workbench/test/components/music-sources/PlayerControlActions.test.ts"
+      },
+      {
+        "status": " D",
+        "path": "packages/music-workbench/test/components/music-sources/PlayerSettingsDialog.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/features/downloads/use-download-manager.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/features/downloads/use-player-download.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/features/plugins/use-workbench-modules.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/fixtures/storage/repositories.json"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/plugin-adapters/workbench-modules.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/plugin-adapters/workbench-ui.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/storage/product-generation-store.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/test/storage/storage-repository-keys.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/music-workbench/vitest.config.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/AGENTS.md"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/src/creation-session.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/src/index.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/src/vue/components/MaterialCollectionToolbar.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/src/vue/components/MaterialTrackRow.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/src/vue/components/SegmentComposer.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/src/vue/components/SegmentTimeline.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/src/vue/use-material-library-filters.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/src/vue/use-segment-composer.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/test/creation-session.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-music-creation/test/vue/use-segment-composer.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-tag-management/AGENTS.md"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-tag-management/src/tag-session.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-tag-management/src/vue/components/TagMaintenanceToolbar.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-tag-management/src/vue/components/TagManagementPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-tag-management/src/vue/components/TagTrackCard.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-tag-management/src/vue/use-tag-management-filters.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-tag-management/test/vue/use-tag-management-filters.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/AGENTS.md"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/package.json"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/src/trusted/index.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/src/trusted/theme-contracts.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/src/trusted/theme-controller.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/src/trusted/theme-directory.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/src/trusted/theme-resources.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/test/trusted/presentation.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/test/trusted/theme-controller.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/plugin-ui-vue/test/trusted/theme-resources.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/AGENTS.md"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/package.json"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/downloads/ActiveDownloadPanel.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/src/components/downloads/DownloadHistoryBatchCard.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/src/components/downloads/DownloadHistoryPanel.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/src/components/downloads/DownloadHistoryTrackItem.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/src/components/downloads/download-history-presentation.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/library/PlaylistDrawer.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogDrawer.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogDrawerActionsDialog.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogDrawerList.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogDrawerListHeader.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogFilterHistoryRegionSettings.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogFilterHistorySettings.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogOperatorActions.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogTrackFilterEditor.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/CatalogTrackOperatorPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/GlobalSettingsPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/QueuePanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/music-sources/catalog-track-filter-presentation.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/plugins/NativePluginAuthorityPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/plugins/PluginPackagePreview.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/product-workbench/AppShellPreferenceDialog.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/product-workbench/AppShellPreferencesPanel.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/product-workbench/NavigationOrderList.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/src/components/product-workbench/ProductTopBar.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/src/components/product-workbench/ProductWorkbench.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/product-workbench/app-shell-preference-options.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/settings/CreatorProfileSettingsForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/settings/MusicSourceSettings.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/settings/ProxyCreateForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/settings/ProxyManagementList.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/settings/SettingsNavigation.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/settings/SettingsNumberForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/components/tracks/TrackNameEditor.vue"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/src/composables/downloads/download-history-view.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/filters/use-filter-draft.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/library/use-custom-track-panel.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/library/use-playlist-filters.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/library/use-playlist-panel.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/music-sources/catalog-filter-history-settings.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/music-sources/use-catalog-drawer-list.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/music-sources/use-catalog-filter-history-settings.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/music-sources/use-catalog-list-controls.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/music-sources/use-catalog-track-filter-editor.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/music-sources/use-catalog-track-filters.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/music-sources/use-queue-list-controls.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/music-sources/use-track-batch-actions.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/use-collection-navigation.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/use-global-settings.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/composables/use-settings-navigation.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/index.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/product/action-feedback.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/product/filter-history-settings.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/product/music-creation.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/product/product-navigation.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/product/tag-management.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/product/ui-presentation.ts"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/src/styles/_downloads.scss"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/styles/_product-workbench.scss"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/styles/_settings.scss"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/src/styles/index.scss"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/test/components/music-sources/CatalogFilterHistorySettings.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/test/components/music-sources/CatalogTrackOperatorPanel.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/test/components/music-sources/GlobalSettingsPanel.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/test/components/plugins/PluginPackagePreview.test.ts"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/test/components/product-workbench/AppShellPreferencesPanel.test.ts"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/test/components/product-workbench/ProductWorkbench.layout.test.ts"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/test/components/product-workbench/ProductWorkbench.test.ts"
+      },
+      {
+        "status": " D",
+        "path": "packages/ui/test/composables/downloads/download-history-view.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/test/composables/music-sources/use-track-batch-actions.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "packages/ui/test/product/app-shell-preferences.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "pnpm-lock.yaml"
+      },
+      {
+        "status": " M",
+        "path": "scripts/check-mobile-boundaries.mjs"
+      },
+      {
+        "status": " M",
+        "path": "scripts/check-package-boundaries.mjs"
+      },
+      {
+        "status": " M",
+        "path": "scripts/check-plugin-isolation.mjs"
+      },
+      {
+        "status": " M",
+        "path": "scripts/test/check-mobile-boundaries.test.mjs"
+      },
+      {
+        "status": " M",
+        "path": "scripts/test/check-package-boundaries.test.mjs"
+      },
+      {
+        "status": " M",
+        "path": "scripts/test/check-plugin-isolation.test.mjs"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobileDownloadDirectory.kt"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/src-tauri/src/system/download_directory.rs"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/src-tauri/src/system/download_scheduler.rs"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/src/components/downloads/DownloadDirectorySettings.vue"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/src/features/downloads/use-download-directory.ts"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/src/platform/native-download-scheduler.ts"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/src/platform/verify-native-download.ts"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/test/features/downloads/use-download-directory.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/test/platform/native-download-scheduler.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "apps/tauri/test/platform/verify-native-download.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final-baseline.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.en.md"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-summary.zh-cn.md"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T00-commands.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T00-surfaces.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T00.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-boundaries.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-build.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-format-attempt-1.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-format.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-lint.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-test.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-theme-tests.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-typecheck-attempt-1.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-typecheck.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01-workspace-before.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T01.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-build.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-format-check-initial.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-format-check.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-lint.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-target-tests.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-test-initial.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-test-integration.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-test.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-typecheck-initial.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02-typecheck.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T02.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-build-attempt-1.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-build-tauri-frontend.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-build-userscript.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-build.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-format.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-lint.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-plugin-ui-tests.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-target-tests.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-target-typecheck.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-test-attempt-1.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-test.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-typecheck-attempt-1.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-typecheck.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-workbench-tests.txt"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03-workspace-before.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/baselines/theme-ui-migration/T03.json"
+      },
+      {
+        "status": "??",
+        "path": "docs/en/cross-platform/architecture/independent-theme-ui-migration-plan.md"
+      },
+      {
+        "status": "??",
+        "path": "docs/en/cross-platform/architecture/independent-theme-ui-t00-baseline.md"
+      },
+      {
+        "status": "??",
+        "path": "docs/zh-cn/跨平台/架构/独立主题UI迁移T00基线.md"
+      },
+      {
+        "status": "??",
+        "path": "docs/zh-cn/跨平台/架构/独立主题UI迁移计划.md"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/src/components/music-sources/MusicWorkbenchPresentation.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/src/features/downloads/download-scheduler.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/src/features/player/player-presentation.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/src/features/plugins/use-workbench-root-theme.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/src/features/plugins/use-workbench-theme-session.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/src/features/workbench/use-workbench-controller.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/src/features/workbench/use-workbench-presentation.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/src/theme.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/test/features/player/player-presentation.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/test/features/plugins/use-workbench-root-theme.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/music-workbench/test/features/workbench/use-workbench-controller.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-music-creation/src/vue/collection-toolbar-state.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-music-creation/src/vue/material-range-state.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-music-creation/src/vue/timeline-state.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-tag-management/src/vue/tag-maintenance-state.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-tag-management/src/vue/tag-track-state.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/src/trusted/ThemeHost.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/src/trusted/ThemeHostSurface.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/src/trusted/ThemeRootBoundary.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/src/trusted/themes/index.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/test/trusted/ThemeHost.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/test/trusted/generic-theme-host.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/test/trusted/root-theme-controller.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/test/trusted/root-theme-fixture.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/plugin-ui-vue/test/trusted/theme-directory.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/AGENTS.md"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/package.json"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/ClassicRoot.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/player/ClassicPlayer.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/player/PlayerBar.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/player/PlayerControlActions.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/player/PlayerSettingsDialog.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/player/player-control-options.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/shell/ClassicNavigation.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/shell/ClassicShell.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/shell/ProductTopBar.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/components/shell/ProductWorkbench.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/index.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/styles/index.scss"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/src/vue.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/player/PlayerBar.interactions.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/player/PlayerBar.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/player/PlayerControlActions.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/player/PlayerSettingsDialog.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/shell/ClassicNavigation.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/shell/ClassicRoot.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/shell/ProductWorkbench.interactions.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/shell/ProductWorkbench.layout.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/shell/ProductWorkbench.preferences.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/components/shell/ProductWorkbench.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/helpers/test-renderer.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/test/metadata.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/tsconfig.json"
+      },
+      {
+        "status": "??",
+        "path": "packages/theme-default/vitest.config.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/components/downloads/DownloadOperatorPanel.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/components/downloads/DownloadTrackActionsDialog.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/components/downloads/DownloadTrackRow.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/components/downloads/download-track-presentation.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/components/plugins/NativePluginCommandResult.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/components/plugins/NativePluginInstallList.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/components/plugins/PluginPackageConsent.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/components/plugins/PluginSettingsSection.vue"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/composables/downloads/use-download-list-controls.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/composables/library/playlist-editing-state.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/composables/music-sources/catalog-filter-editing-state.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/composables/tracks/track-action-editing-state.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/composables/use-editing-session.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/product/theme-contracts.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/product/theme-features.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/product/theme-metadata.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/product/workbench-chrome.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/src/theme.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/components/downloads/ActiveDownloadPanel.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/components/downloads/DownloadOperatorPanel.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/components/downloads/DownloadTrackActionsDialog.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/components/downloads/DownloadTrackRow.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/components/plugins/NativePluginAuthorityPanel.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/composables/downloads/use-download-list-controls.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/composables/use-editing-session.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/fixtures/themes/compliant-themes.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/fixtures/themes/theme-features.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/product/theme-contracts.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/product/theme-contracts.types.ts"
+      },
+      {
+        "status": "??",
+        "path": "packages/ui/test/product/theme-metadata.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "scripts/test/helpers/package-workspace.mjs"
+      }
+    ],
+    "incidentalFormattingOnly": [
+      "apps/userscript/test/platform/dom/shadow-style-registry.test.ts",
+      "docs/baselines/theme-ui-migration/T03.json",
+      "packages/music-workbench/test/features/player/player-presentation.test.ts",
+      "packages/music-workbench/test/features/plugins/use-workbench-root-theme.test.ts",
+      "packages/theme-default/test/components/shell/ProductWorkbench.interactions.test.ts",
+      "packages/theme-default/test/components/shell/ProductWorkbench.layout.test.ts"
+    ]
+  },
+  "verification": {
+    "targetTests": {
+      "command": "pnpm --filter @any-music/ui --filter @any-music/plugin-tag-management --filter @any-music/plugin-music-creation --filter @any-music/music-workbench test",
+      "exitCode": 0,
+      "log": "T02-target-tests.txt",
+      "phase": "Iterative baseline before the final root verification; final root log includes subsequent changes."
+    },
+    "rootTest": {
+      "command": "pnpm test",
+      "log": "T02-test.txt",
+      "exitCode": 0,
+      "vitestSuites": [
+        {
+          "owner": "packages/network-routing",
+          "files": 2,
+          "tests": 28
+        },
+        {
+          "owner": "packages/audio-composition",
+          "files": 5,
+          "tests": 15
+        },
+        {
+          "owner": "packages/plugin-sdk",
+          "files": 5,
+          "tests": 120
+        },
+        {
+          "owner": "packages/account-pool",
+          "files": 3,
+          "tests": 22
+        },
+        {
+          "owner": "packages/core",
+          "files": 8,
+          "tests": 49
+        },
+        {
+          "owner": "packages/plugin-vm",
+          "files": 3,
+          "tests": 39
+        },
+        {
+          "owner": "packages/plugin-center",
+          "files": 9,
+          "tests": 56
+        },
+        {
+          "owner": "packages/plugin-sandbox-browser",
+          "files": 3,
+          "tests": 18
+        },
+        {
+          "owner": "packages/plugin-testkit",
+          "files": 1,
+          "tests": 33
+        },
+        {
+          "owner": "packages/ui",
+          "files": 91,
+          "tests": 548
+        },
+        {
+          "owner": "packages/plugin-source-bilibili",
+          "files": 3,
+          "tests": 47
+        },
+        {
+          "owner": "packages/plugin-source-douyin",
+          "files": 6,
+          "tests": 86
+        },
+        {
+          "owner": "packages/plugin-music-creation",
+          "files": 4,
+          "tests": 14
+        },
+        {
+          "owner": "packages/plugin-tag-management",
+          "files": 3,
+          "tests": 11
+        },
+        {
+          "owner": "packages/plugin-ui-vue",
+          "files": 9,
+          "tests": 55
+        },
+        {
+          "owner": "packages/theme-default",
+          "files": 10,
+          "tests": 100
+        },
+        {
+          "owner": "packages/music-workbench",
+          "files": 54,
+          "tests": 378
+        },
+        {
+          "owner": "apps/tauri",
+          "files": 39,
+          "tests": 352
+        },
+        {
+          "owner": "apps/userscript",
+          "files": 17,
+          "tests": 80
+        }
+      ],
+      "vitestFiles": 275,
+      "vitestTests": 2051
+    },
+    "rootTypecheck": {
+      "command": "pnpm typecheck",
+      "log": "T02-typecheck.txt",
+      "exitCode": 0
+    },
+    "rootLint": {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T02-lint.txt"
+    },
+    "rootFormatCheck": {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T02-format-check.txt"
+    },
+    "rootBuild": {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T02-build.txt",
+      "outputs": [
+        "apps/userscript/dist/any-music.user.js",
+        "apps/tauri/dist",
+        "target/release/any-music-tauri.exe"
+      ]
+    },
+    "initialFailures": [
+      {
+        "command": "pnpm test",
+        "log": "T02-test-initial.txt",
+        "scope": "Concurrent player presentation interaction test"
+      },
+      {
+        "command": "pnpm typecheck",
+        "log": "T02-typecheck-initial.txt",
+        "scope": "Concurrent ClassicRoot test view type"
+      },
+      {
+        "command": "pnpm test",
+        "log": "T02-test-integration.txt",
+        "scope": "Concurrent moved player style registration; registry subsequently updated"
+      },
+      {
+        "command": "pnpm format:check",
+        "log": "T02-format-check-initial.txt",
+        "scope": "Concurrent T03/T04 authoring files"
+      }
+    ],
+    "newT02Regressions": 9
+  },
+  "testBoundaries": {
+    "lifetime": "Real workbench/source/library/player/download/plugin factories with an inert mocked theme-loading boundary; two Node-rendered presentation roots. Download encoder is deferred, media is an injected deterministic fixture.",
+    "liveUiLaunched": false,
+    "transport": "No GM or Rust/live playback/save acceptance claimed."
+  },
+  "exitConditions": {
+    "businessFactoriesAbovePresentation": true,
+    "stableMediaHost": true,
+    "editingStateOwnersDocumented": true,
+    "noPresentationUnmountWritesOrReplay": true,
+    "rootVerificationPending": false
+  },
+  "nextBatch": "T03",
+  "pending": [
+    "T03 final host/transaction acceptance and later theme/production adoption remain separately owned",
+    "T13 explicit live browser/application/GM/Rust/native-save acceptance"
+  ],
+  "artifacts": [
+    {
+      "directory": "apps/userscript/dist",
+      "fileCount": 3,
+      "bytes": 4790567,
+      "sumOfIndividualGzipBytes": 935652,
+      "files": [
+        {
+          "path": "apps/userscript/dist/any-music.user.js",
+          "bytes": 4756773,
+          "gzipBytes": 931200,
+          "sha256": "1fbc50d9a8ce9fe66ca48beda94b1dd840f9b017efa30138f1248cbc43139187"
+        },
+        {
+          "path": "apps/userscript/dist/favicon.svg",
+          "bytes": 323,
+          "gzipBytes": 302,
+          "sha256": "cc0d86ba45aa6d335387275250865b0a8948b2f3f764840558aebb162d1fd671"
+        },
+        {
+          "path": "apps/userscript/dist/userscript-build-audit.json",
+          "bytes": 33471,
+          "gzipBytes": 4150,
+          "sha256": "1c9d2e9859cf7dc2b3865837154a0646edf4bc4b2a085c49d4ef50ad49833648"
+        }
+      ]
+    },
+    {
+      "directory": "apps/tauri/dist",
+      "fileCount": 69,
+      "bytes": 2831147,
+      "sumOfIndividualGzipBytes": 694802,
+      "files": [
+        {
+          "path": "apps/tauri/dist/assets/ActiveDownloadPanel-CXdTNS-a.css",
+          "bytes": 5567,
+          "gzipBytes": 1230,
+          "sha256": "e344484dde8e37e92653e96b9cb72c7322afa290088603b73c7a6489b2ca7f25"
+        },
+        {
+          "path": "apps/tauri/dist/assets/ActiveDownloadPanel-DI8rPHtj.js",
+          "bytes": 18400,
+          "gzipBytes": 6224,
+          "sha256": "3913aea3e84f2dc0a01a9bbca98ed90362cc10a05f228e2ae078365eaccc9495"
+        },
+        {
+          "path": "apps/tauri/dist/assets/AppIcon-D4ck_dDu.css",
+          "bytes": 164,
+          "gzipBytes": 139,
+          "sha256": "8cc42051a7d3a3628ff5e14d5e526096557a70a91c02b1b7d860906f7debbffe"
+        },
+        {
+          "path": "apps/tauri/dist/assets/AppIcon-DmrpMxT5.js",
+          "bytes": 73924,
+          "gzipBytes": 28945,
+          "sha256": "2656e7bc965ba5d9b345cd6e583baf06fe30e16023b68f2d93bd52d1177e2308"
+        },
+        {
+          "path": "apps/tauri/dist/assets/BottomSheet-DPiYjZe2.css",
+          "bytes": 9108,
+          "gzipBytes": 1571,
+          "sha256": "8065f06b0e887f02f39ab3951f7ab52f199297f48cf73d4c5814520b9521b86e"
+        },
+        {
+          "path": "apps/tauri/dist/assets/BottomSheet-DTn_ZpcR.js",
+          "bytes": 7493,
+          "gzipBytes": 2382,
+          "sha256": "3dd5bb745a960a463f38de7859efbe335aeb610d056b1d2b30c8d45f984a1513"
+        },
+        {
+          "path": "apps/tauri/dist/assets/CatalogHeadingHandle-BcamBWnY.js",
+          "bytes": 24399,
+          "gzipBytes": 8581,
+          "sha256": "65065be8e29a872f4aaa1602b67208d13ddca4cf7a380177161b5e0d8dd0a489"
+        },
+        {
+          "path": "apps/tauri/dist/assets/CatalogHeadingHandle-KQfBfzaf.css",
+          "bytes": 7770,
+          "gzipBytes": 1465,
+          "sha256": "5ca5c70f3506acb024cb2f8eb8b57f69977fe2f29176aec456abacbbf298f6b8"
+        },
+        {
+          "path": "apps/tauri/dist/assets/CustomTrackPanel-Dh7ega_3.js",
+          "bytes": 8326,
+          "gzipBytes": 3352,
+          "sha256": "060583c512a2b1a5bdad81568cc6e58849739db45231e4345da0533e42b71b84"
+        },
+        {
+          "path": "apps/tauri/dist/assets/DefaultTrackRow-CVDGwFV9.js",
+          "bytes": 5639,
+          "gzipBytes": 2228,
+          "sha256": "939a8d3f9f2d90950f25832e045d996d06f895d6a8362b8affcb5d2f54f2b8f0"
+        },
+        {
+          "path": "apps/tauri/dist/assets/DefaultTrackRow-DiH6o5Tp.css",
+          "bytes": 2242,
+          "gzipBytes": 646,
+          "sha256": "a2a16f84f0a1029c3dbaddcc8f48214f26c68688d31ba6312204bde705361244"
+        },
+        {
+          "path": "apps/tauri/dist/assets/ExternalSourceSettings-B4D0PMVV.css",
+          "bytes": 9508,
+          "gzipBytes": 1608,
+          "sha256": "bc57eeb705520474f87f6d5e3b57591d492ce6a3c0ca7255ecac6fa98b333772"
+        },
+        {
+          "path": "apps/tauri/dist/assets/ExternalSourceSettings-CkWYNwuV.js",
+          "bytes": 22178,
+          "gzipBytes": 7528,
+          "sha256": "7d253f57b408c84f48d93665d9270eb3c4105f569a653149710ed866769f6417"
+        },
+        {
+          "path": "apps/tauri/dist/assets/FavoritePanel-D8PFakYx.js",
+          "bytes": 2606,
+          "gzipBytes": 1050,
+          "sha256": "f14a197f8753f93cac6d821cdd7b4d97d53857d00e492aa61f11f624e629ae3e"
+        },
+        {
+          "path": "apps/tauri/dist/assets/FavoriteTrackRow-CCTl_nSc.js",
+          "bytes": 3370,
+          "gzipBytes": 1482,
+          "sha256": "04109146def72145da0910e655067f30c1b9aa2f9fba103dc5c67669909e3c96"
+        },
+        {
+          "path": "apps/tauri/dist/assets/GlobalSettingsPanel-Bc1a9tts.css",
+          "bytes": 15328,
+          "gzipBytes": 2483,
+          "sha256": "493171624b839f995ceb46a04bb7b721a2407d591a463a40ed91bd0d905ccd27"
+        },
+        {
+          "path": "apps/tauri/dist/assets/GlobalSettingsPanel-H624ifj6.js",
+          "bytes": 28897,
+          "gzipBytes": 9333,
+          "sha256": "ae1ee9341fbf2934d67bd64deb8deb38036baa0c4d07f9a8a36a502bde5f05a0"
+        },
+        {
+          "path": "apps/tauri/dist/assets/HistoryPanel-BB18Ydum.js",
+          "bytes": 2560,
+          "gzipBytes": 1367,
+          "sha256": "3bdae84c6355f856dff2b22b879216943103518ec384e121fee9ba8cbc94b8ce"
+        },
+        {
+          "path": "apps/tauri/dist/assets/PlaylistPanel-C_8nv5yH.css",
+          "bytes": 13321,
+          "gzipBytes": 2028,
+          "sha256": "6262d8d3f1df29fc22cd585dfacdd174125a1f054f181ef53c91f7362058ac16"
+        },
+        {
+          "path": "apps/tauri/dist/assets/PlaylistPanel-FxH_yymL.js",
+          "bytes": 29405,
+          "gzipBytes": 9348,
+          "sha256": "0b5d40295fd5b12ab10e6eb387dcf5c08d9ad549bf5f47acc525e1e7e992be5f"
+        },
+        {
+          "path": "apps/tauri/dist/assets/QueuePanel-BaB_0mM8.js",
+          "bytes": 32297,
+          "gzipBytes": 10314,
+          "sha256": "f2f04826fdb9a2eaa28a38ab3ac3eccfe19905f30acbe7f5ffce9078187d4ada"
+        },
+        {
+          "path": "apps/tauri/dist/assets/QueuePanel-CK5HGE5R.js",
+          "bytes": 66,
+          "gzipBytes": 81,
+          "sha256": "b07a1b48eb72791e686d5856f959c8d1a9a396f6ff35552580c521373bbe193e"
+        },
+        {
+          "path": "apps/tauri/dist/assets/QueuePanel-D7EW7FM1.css",
+          "bytes": 15104,
+          "gzipBytes": 2615,
+          "sha256": "edf170806d897a1c935daeb66cd32dae55b503f08889bbd9a317535c2d17ed5f"
+        },
+        {
+          "path": "apps/tauri/dist/assets/QueueViewControls-U7gjwyYx.js",
+          "bytes": 4574,
+          "gzipBytes": 2095,
+          "sha256": "bd95c9bc43299238f9b3c1284ad822cd04b700cca4d475a2dcbdc3caa2602859"
+        },
+        {
+          "path": "apps/tauri/dist/assets/QueueViewControls-thGrXOE_.css",
+          "bytes": 2670,
+          "gzipBytes": 761,
+          "sha256": "b7790128fda11a9ec12375028123641a0e4262593724915270267562dd1ab646"
+        },
+        {
+          "path": "apps/tauri/dist/assets/TrackCardSummary-DYMIhAgB.js",
+          "bytes": 3413,
+          "gzipBytes": 1589,
+          "sha256": "87c6a8589f0892cb11f8ec755b07ae2a52ccc579021cecba3893dd1b702187fc"
+        },
+        {
+          "path": "apps/tauri/dist/assets/TrackCardSummary-gJSrTlII.css",
+          "bytes": 422,
+          "gzipBytes": 237,
+          "sha256": "b71d3d8c395b5bd6d8c588ada49a3ca3e3c521de2a33f24277f8fb37fbe3a489"
+        },
+        {
+          "path": "apps/tauri/dist/assets/TrackRow-D-EnqkAN.css",
+          "bytes": 58098,
+          "gzipBytes": 7585,
+          "sha256": "0975a5ab5d0cd10ac18020b6cf770ba31ed47b3a900097de13c4561c954601a3"
+        },
+        {
+          "path": "apps/tauri/dist/assets/TrackRow-FQ9IsHzt.js",
+          "bytes": 61755,
+          "gzipBytes": 18572,
+          "sha256": "f0a9df22838d3cdceb731d2a53c2701d7735a5a44b5e9dc7847927420682d489"
+        },
+        {
+          "path": "apps/tauri/dist/assets/TrackSourcePageLink-U3ZWiUOH.js",
+          "bytes": 406,
+          "gzipBytes": 325,
+          "sha256": "46def9b4fcac7c60667a90dd29009d9939b3dcee3ad9b4d34021c151338f1092"
+        },
+        {
+          "path": "apps/tauri/dist/assets/__vite-browser-external-8b-sKxde.js",
+          "bytes": 1142,
+          "gzipBytes": 643,
+          "sha256": "31ef1a57e0dfbf30974fe2940fd488c14433d7a708bde8ebe69a703d7f1bfc5c"
+        },
+        {
+          "path": "apps/tauri/dist/assets/__vite-browser-external-D3_sD4Dv.js",
+          "bytes": 77,
+          "gzipBytes": 95,
+          "sha256": "ae53911ef5ad69a049cb94c01283ab7ae5da80e5e0df19f44d8820458d61517a"
+        },
+        {
+          "path": "apps/tauri/dist/assets/app-error-BjZGph4G.js",
+          "bytes": 7448,
+          "gzipBytes": 2099,
+          "sha256": "1f87c8d9b58adfe6647a92b9217e74ddf68c8df27a230e097538342a2c271f9a"
+        },
+        {
+          "path": "apps/tauri/dist/assets/audio-exporter-PbUZSpQ-.js",
+          "bytes": 317664,
+          "gzipBytes": 134364,
+          "sha256": "142666fffc0b7319c520c298b49b4fcfe608840dc993992d6f538a004b2b3abe"
+        },
+        {
+          "path": "apps/tauri/dist/assets/audio-exporter-SpWRGWO0.js",
+          "bytes": 82,
+          "gzipBytes": 87,
+          "sha256": "e463949342ecf6a6a7720ac0c7e342e537c7484b5f381aa761c971c5034edd49"
+        },
+        {
+          "path": "apps/tauri/dist/assets/douyin-request-state-CFbLQ2P_.js",
+          "bytes": 4610,
+          "gzipBytes": 2058,
+          "sha256": "3b3f15fd27074662d2fd37941335beb05bde604798aaedec2d4c52f18c3ed29f"
+        },
+        {
+          "path": "apps/tauri/dist/assets/download-archive-aGajjFNI.js",
+          "bytes": 7398,
+          "gzipBytes": 3129,
+          "sha256": "3aaaea66fac5a5656b7ff7c4e9036c3580424c2f10215c2ac7afd7490bd2e495"
+        },
+        {
+          "path": "apps/tauri/dist/assets/download-history-BEKzmkgW.js",
+          "bytes": 5049,
+          "gzipBytes": 1797,
+          "sha256": "4cab7f78b6b5a476e92b6ee9ef968f0953a0183dbd6e6400a6cb43742d9e79b6"
+        },
+        {
+          "path": "apps/tauri/dist/assets/http-Bx2BUOLo.js",
+          "bytes": 183,
+          "gzipBytes": 157,
+          "sha256": "b4441747f73aa575c1dff22a888dd46e26165fa3221b005c7d4f048250286d55"
+        },
+        {
+          "path": "apps/tauri/dist/assets/index-BaksZmOP.css",
+          "bytes": 217669,
+          "gzipBytes": 29603,
+          "sha256": "5b929b73027dc8666b0a2dbd076ac0b08128248def612a89660105cc11d9280a"
+        },
+        {
+          "path": "apps/tauri/dist/assets/index-CAJhYTf3.js",
+          "bytes": 1160871,
+          "gzipBytes": 201957,
+          "sha256": "2fa0a4ce20fb35d4cbccad00a4d9350d7fe7d7cf9f43a451af349abf7f4de8cb"
+        },
+        {
+          "path": "apps/tauri/dist/assets/native-http-CZsR900D.js",
+          "bytes": 4900,
+          "gzipBytes": 2043,
+          "sha256": "348bc7b955de64896859070baf824ece13d9a18e9d7de500efbdd7d579ce39ce"
+        },
+        {
+          "path": "apps/tauri/dist/assets/native-source-plugins-CLI4SZ1r.js",
+          "bytes": 3162,
+          "gzipBytes": 1380,
+          "sha256": "7833d1480fc2dc5da76967a7a531ec75e2ec530a21e9a0ab74060044cdc98a98"
+        },
+        {
+          "path": "apps/tauri/dist/assets/output-C0ZydUOt.js",
+          "bytes": 444694,
+          "gzipBytes": 112401,
+          "sha256": "3d7cca8b0bd29dcacd6003d58b5ecfeca12e4997299f7866b91742b43432bfc9"
+        },
+        {
+          "path": "apps/tauri/dist/assets/playback-history-filters-TtojXpjP.js",
+          "bytes": 193,
+          "gzipBytes": 164,
+          "sha256": "8000c160be74a669241bf44fa08fad41f711647418517258a5d1ea84e180d676"
+        },
+        {
+          "path": "apps/tauri/dist/assets/plugin-CTPDroLL.js",
+          "bytes": 139,
+          "gzipBytes": 141,
+          "sha256": "9c2fb1e3430d6277fb82138495240d09207c36c5835ee3e0800b3b54a197a2ca"
+        },
+        {
+          "path": "apps/tauri/dist/assets/policies-Ca8WcR-N.js",
+          "bytes": 569,
+          "gzipBytes": 358,
+          "sha256": "d37f4656af824a83aadf43da0d9aa5117fbd017f260b0c0ad9c119d034888f99"
+        },
+        {
+          "path": "apps/tauri/dist/assets/preload-helper-Czpn1I53.js",
+          "bytes": 1196,
+          "gzipBytes": 675,
+          "sha256": "aba87f2a53e45ecdc9113fc30387d16e449d1676428cf5f82dd624c1df97d152"
+        },
+        {
+          "path": "apps/tauri/dist/assets/render-custom-track-media-D4w_CI6y.js",
+          "bytes": 797,
+          "gzipBytes": 570,
+          "sha256": "64972e3a68cf8b32930d45b2d0b2644a399b8713a809181505212e66963b024a"
+        },
+        {
+          "path": "apps/tauri/dist/assets/resolved-media-loader-ocXT3m_V.js",
+          "bytes": 1155,
+          "gzipBytes": 753,
+          "sha256": "c59fd27c378583becb595e65332a8e1779cb3696c41b5ffb0ee3ad30c429005a"
+        },
+        {
+          "path": "apps/tauri/dist/assets/runtime-D-4MfbVr.js",
+          "bytes": 39397,
+          "gzipBytes": 13155,
+          "sha256": "5b518a0a629881b58b4e0944d39be4ba28610d4b06a6d58c6c8ee33987260a28"
+        },
+        {
+          "path": "apps/tauri/dist/assets/runtime-dom.esm-bundler-DLRojSsK.js",
+          "bytes": 16291,
+          "gzipBytes": 6871,
+          "sha256": "d2ed99e3b2e0557c55dbe80011de874e81f11e5ad01788c8874a224b63e32f92"
+        },
+        {
+          "path": "apps/tauri/dist/assets/runtime-ed0Noo7_.js",
+          "bytes": 25287,
+          "gzipBytes": 9033,
+          "sha256": "ca47e21e2f1077e04f6adffe31378591e3118f1fa264803441fff5a4f14262b5"
+        },
+        {
+          "path": "apps/tauri/dist/assets/studio-theme-DJGuxFHv.js",
+          "bytes": 4528,
+          "gzipBytes": 1692,
+          "sha256": "c7a2daf395871e6eb8cd631f97546af5129a5383908fc14ae01b3ad6bd0e9eb9"
+        },
+        {
+          "path": "apps/tauri/dist/assets/ui-contributions-COPtp3pV.js",
+          "bytes": 321,
+          "gzipBytes": 254,
+          "sha256": "b596f19e0fd6e46e40de88eff26c72b9f87cb5fde26e02d9d6654b5a1690b14d"
+        },
+        {
+          "path": "apps/tauri/dist/assets/url-parser-BgMrwjwU.js",
+          "bytes": 1679,
+          "gzipBytes": 881,
+          "sha256": "ede89b1c681949c7e0c5a9108049e3974501bde08229a8ae49be2395b9a134b5"
+        },
+        {
+          "path": "apps/tauri/dist/assets/url-parser-CDWVVYUf.js",
+          "bytes": 3946,
+          "gzipBytes": 1619,
+          "sha256": "766d72c26c5deb4a6395dfd3a4d4db22d8e199dd3df364a90022e7ec60ff4d66"
+        },
+        {
+          "path": "apps/tauri/dist/assets/use-action-feedback-DwwPhhjR.js",
+          "bytes": 3901,
+          "gzipBytes": 1604,
+          "sha256": "6abb784904da8226c64b8ffc7f23aec575d2bf6aa90542eb3782718d7ece23fc"
+        },
+        {
+          "path": "apps/tauri/dist/assets/use-catalog-filter-history-BqWc79RY.js",
+          "bytes": 12127,
+          "gzipBytes": 4496,
+          "sha256": "23b4df8ffecf3d49f596f9afc2f437d19ace62851ce836103c242313fbfa20b1"
+        },
+        {
+          "path": "apps/tauri/dist/assets/use-catalog-list-controls-C6q5JMdK.js",
+          "bytes": 1263,
+          "gzipBytes": 619,
+          "sha256": "2edff0bd7515652e2731c1ed5a392cdf52789f3ee7991443529299296cce3c0c"
+        },
+        {
+          "path": "apps/tauri/dist/assets/use-confirmation-dialog-BVhS6cWQ.js",
+          "bytes": 989,
+          "gzipBytes": 572,
+          "sha256": "babc13179521fe112671aabe99b4d3543f72c3952c04afde0dd542e9e7066f5a"
+        },
+        {
+          "path": "apps/tauri/dist/assets/use-editing-session-DXzy8e52.js",
+          "bytes": 716,
+          "gzipBytes": 391,
+          "sha256": "f5e9bed18b2ec91cefb0429f0a70bc7242c9226e4f12246cae4b204c751dfeab"
+        },
+        {
+          "path": "apps/tauri/dist/assets/use-favorite-filters-BIlmOPDC.js",
+          "bytes": 247,
+          "gzipBytes": 179,
+          "sha256": "db57de29e742472f37c126014a9df58a4b195adb2e1692e4f9b4b690888f7253"
+        },
+        {
+          "path": "apps/tauri/dist/assets/use-settings-feedback-D8l88fEL.js",
+          "bytes": 1525,
+          "gzipBytes": 851,
+          "sha256": "8e5e6fb1ee490c1bbc32accfc997e73de513139f4edae2fcd786a80f7225def1"
+        },
+        {
+          "path": "apps/tauri/dist/assets/vue-Au38QDn7.js",
+          "bytes": 31383,
+          "gzipBytes": 10454,
+          "sha256": "7a01329357c2e55883020eb98f5916bf0fb2a64c614af5414425f286b333c30e"
+        },
+        {
+          "path": "apps/tauri/dist/assets/vue-BPjObDYi.css",
+          "bytes": 4236,
+          "gzipBytes": 1050,
+          "sha256": "dffbd4bdc56bff694f7850d0d2f723460289e720fbb245239fe01a9fd58f1fcf"
+        },
+        {
+          "path": "apps/tauri/dist/assets/vue-DEbRv9bU.js",
+          "bytes": 16946,
+          "gzipBytes": 6007,
+          "sha256": "73cee9c4fbfa7b6e5f4cef057ed85005acfff25e09cb2873a3ffe473d7b61add"
+        },
+        {
+          "path": "apps/tauri/dist/assets/vue-DaDRMIPR.css",
+          "bytes": 15222,
+          "gzipBytes": 2619,
+          "sha256": "a67873d9a9b489d1bd5597c4056ca6b3a95faaeef848db8dab226e0604409e07"
+        },
+        {
+          "path": "apps/tauri/dist/index.html",
+          "bytes": 3135,
+          "gzipBytes": 817,
+          "sha256": "8206186fe2e6dd0fe4c7b351b61b73019066172ae22b30406ac167b1b8371177"
+        }
+      ]
+    }
+  ],
+  "nativeArtifact": {
+    "path": "target/release/any-music-tauri.exe",
+    "bytes": 28338688,
+    "sha256": "7870c973855636dacb403d0bc5ebc708bfa43dfd87ecbaa403fc8a3e2809ef07",
+    "executed": false
+  },
+  "artifactScope": "Measured build outputs from the shared dirty tree, including independently authored T03/T04 changes; not an isolated T02 size comparison.",
+  "runtimes": ["userscript", "tauri"],
+  "committed": false,
+  "pushed": false,
+  "productUiLaunched": false
+}

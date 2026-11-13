@@ -1,0 +1,97 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "userscript",
+  "schemaVersion": 1,
+  "batchId": "B11-document-start-launcher-userscript",
+  "capturedAt": "2026-10-21T18:58:59.547+08:00",
+  "initialHead": "cdbd92dd17652ec2fad5f65a921dcc18547bfe8c",
+  "head": "9dc061654ba30a74f595c5ce5201fa2270cd5cf5",
+  "workingTree": "M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json\n M packages/music-workbench/src/features/plugins/use-workbench-theme.ts\n M packages/plugin-source-bilibili/src/url-parser.ts\n M packages/plugin-ui-vue/src/trusted/theme-controller.ts\n M packages/plugin-ui-vue/test/trusted/theme-controller.test.ts\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-baseline.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-baseline.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-fix.json\n?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared.json\n?? packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts\n?? packages/plugin-source-bilibili/test/url-parser.test.ts",
+  "sourceHashes": [
+    {
+      "path": "apps/userscript/AGENTS.md",
+      "sha256": "729a9c32a4a1fa26c258eef53fc5ef36603bb142916909b2066c69d338ffcad6"
+    },
+    {
+      "path": "apps/userscript/package.json",
+      "sha256": "a33183d9e9c535ba8d3a82dba25234b32014f85762ba534c57bcec2ab4da61e6"
+    },
+    {
+      "path": "apps/userscript/vite.config.ts",
+      "sha256": "c2cdd4e3fb110cb56bd200df1f0305aee0557bafc1dd1897b973a1566b3b90b1"
+    },
+    {
+      "path": "apps/userscript/vitest.config.ts",
+      "sha256": "03b3f78cf43f30b12d2472e4e8f39c78c6d4923835a9da4012056ae36113f554"
+    },
+    {
+      "path": "apps/userscript/src/main.ts",
+      "sha256": "f368f24f44e5b315875ea5aaba4efa78c4d03b3f06720fd903e8d9d05bf33b5c"
+    },
+    {
+      "path": "apps/userscript/src/platform/dom/mount-userscript-launcher.ts",
+      "sha256": "16c72ee477ccadd5d86e6a0c485940bc7bc8b07190fdaf050fd4e08d32899175"
+    },
+    {
+      "path": "apps/userscript/src/platform/dom/keyboard-event-boundary.ts",
+      "sha256": "acb1ced1bb559eef9b3a85d06911dfb6126d161ac0d9d08b64fc217837eb6c6a"
+    },
+    {
+      "path": "apps/userscript/src/bootstrap-userscript-app.ts",
+      "sha256": "542193b20f038e1f9a323aa9d8eac0460dab40b6819158b81ebef4e1a59d9f82"
+    },
+    {
+      "path": "apps/userscript/src/platform/dom/mount-userscript-app.ts",
+      "sha256": "8f0405933c5bfbf494e860affd2019cd8ba8caa6068d032c2f6666a6381d1283"
+    },
+    {
+      "path": "apps/userscript/src/platform/configure-userscript-workbench.ts",
+      "sha256": "0692ec0c391427200fee4aa1fb48cf0fe5ba62e2bdd6b57df928b209ddefbc0f"
+    },
+    {
+      "path": "apps/userscript/src/platform/product-storage.ts",
+      "sha256": "3a2770c8be7e84137bd32eebf84fb819a2519e795c081ebbf71695789d037298"
+    },
+    {
+      "path": "apps/userscript/scripts/userscript-bundle-boundary.ts",
+      "sha256": "8f945f8c850789f7b47452870e6b9b177b1cd9e100407ab1208676c536c55dc2"
+    },
+    {
+      "path": "apps/userscript/test/platform/dom/mount-userscript-launcher.test.ts",
+      "sha256": "df25e7248fb2b2f7abb1b4adb50ad7a6bf7ade31c099844b0c089e20872ca2c5"
+    },
+    {
+      "path": "apps/userscript/test/platform/dom/keyboard-event-boundary.test.ts",
+      "sha256": "2dafc84e5e753056ef14e3946dfd02d52ac0efbb86bfbafa2351d086d47594c4"
+    },
+    {
+      "path": "apps/userscript/test/bootstrap-userscript-app.test.ts",
+      "sha256": "f24634de8c52011ba1c4e534ce6037e603e0aa6c5c34ca58e65057fec62d1542"
+    },
+    {
+      "path": "apps/userscript/test/build/userscript-bundle-boundary.test.ts",
+      "sha256": "9f779dc01ca1fb4507398eaf19009aa67904ae7728a434d1e8cb6d0f1709ceba"
+    },
+    {
+      "path": "docs/en/userscript/development.md",
+      "sha256": "b326af2745dab644f9b65f0f1ab5317b4d4455114779b77b6f95d7a77e3e6051"
+    },
+    {
+      "path": ".agents/skills/any-music-userscript-runtime/SKILL.md",
+      "sha256": "cbc5ebb0db3444fcecc35c6a75859188e44616c946578ff9db72084930169bc7"
+    }
+  ],
+  "environment": {
+    "os": "win32",
+    "cwd": "<project-root>",
+    "timezone": "Asia/Shanghai",
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "vite": "8.2.2",
+    "vitest": "4.1.11"
+  },
+  "note": "The initial worktree already included Userscript storage/bootstrap changes. HEAD advanced concurrently to include those changes in 9dc0616; this agent made no product edits or commits. Final verification is bound to these source hashes. Existing unrelated B08/B10 work is retained.",
+  "readScope": "Manual implementation reads are main/launcher/keyboard/bootstrap/mount plus configure injection and storage pagehide excerpts. Generated graph traversal is artifact evidence, not manual auditing of all rendered modules.",
+  "verifiedAt": "2026-10-21T19:00:21.291+08:00",
+  "finalHead": "9dc061654ba30a74f595c5ce5201fa2270cd5cf5"
+}

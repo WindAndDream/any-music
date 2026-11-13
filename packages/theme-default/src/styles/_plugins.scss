@@ -1,0 +1,480 @@
+@use './collection-chrome';
+
+// Plugin browsing uses the collection page's geometry, tokens and control roles.
+:where(.am-theme-default) {
+  .product-view[data-active-view='plugins'] {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  .classic-plugins {
+    color: var(--am-color-text);
+  }
+  .classic-plugin-card__header,
+  .classic-plugin-card__footer,
+  .classic-plugin-card__actions,
+  .classic-plugin-card__primary-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--am-space-3);
+    min-inline-size: 0;
+  }
+  .classic-plugin-card button,
+  .classic-plugins__notice button,
+  .classic-plugin-card__toggle {
+    min-block-size: 44px;
+  }
+  .classic-plugin-card button,
+  .classic-plugins__notice button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--am-space-2);
+    padding: 0 var(--am-space-3);
+    border: 1px solid var(--am-color-border);
+    border-radius: var(--am-radius-control);
+    background: var(--am-color-surface);
+    color: var(--am-color-text-secondary);
+    font: inherit;
+    font-size: var(--am-font-size-xs);
+    cursor: pointer;
+  }
+  .classic-plugin-card button:hover:enabled {
+    border-color: var(--am-color-primary);
+    color: var(--am-color-primary);
+  }
+  .classic-plugin-card button:disabled,
+  .classic-plugins__import:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .classic-plugin-card button:focus-visible,
+  .classic-plugins__notice button:focus-visible,
+  .classic-plugins__import:focus-visible {
+    outline: var(--am-focus-ring);
+    outline-offset: var(--am-focus-offset);
+  }
+  .classic-plugins__toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--am-space-3);
+    padding-block: var(--am-space-2);
+    border-block-end: 1px solid var(--am-color-border);
+  }
+  .classic-plugins__import {
+    display: inline-flex;
+    min-block-size: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--am-space-2);
+    padding-inline: var(--am-space-3);
+    border: 1px solid var(--am-color-primary);
+    border-radius: var(--am-radius-control);
+    background: var(--am-color-primary);
+    color: var(--am-color-on-primary);
+    font: 650 var(--am-font-size-xs) var(--am-font-family);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition:
+      background-color var(--am-motion-fast),
+      border-color var(--am-motion-fast);
+  }
+  .classic-plugins__import:is(:hover, :focus-visible):enabled {
+    border-color: var(--am-color-primary-hover);
+    background: var(--am-color-primary-hover);
+  }
+  .classic-plugins__import .app-icon {
+    transition: transform var(--am-motion-fast) var(--am-ease-emphasized);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .classic-plugins__import:is(:hover, :focus-visible):enabled .app-icon {
+      transform: scale(1.12) rotate(-8deg);
+    }
+  }
+  .classic-plugins__filters {
+    --am-operator-actions-background: var(--am-color-surface-subtle);
+    min-inline-size: 0;
+  }
+  .classic-plugins__filters .catalog-operator-actions__content {
+    gap: var(--am-space-1);
+  }
+  .classic-plugins__categories {
+    @include collection-chrome.state-tabs(3);
+  }
+  .classic-plugins__category-viewport {
+    position: relative;
+    display: grid;
+    flex: 1 0 auto;
+    grid-template-columns: minmax(0, 1fr);
+    min-inline-size: 0;
+    overflow-x: clip;
+  }
+  .classic-plugins-category-forward-enter-active,
+  .classic-plugins-category-forward-leave-active,
+  .classic-plugins-category-back-enter-active,
+  .classic-plugins-category-back-leave-active {
+    transition:
+      transform var(--am-motion-slow) var(--am-ease-emphasized),
+      opacity var(--am-motion-slow) var(--am-ease-standard);
+  }
+  .classic-plugins-category-forward-leave-active,
+  .classic-plugins-category-back-leave-active {
+    /* Match collection pages: the incoming category owns the height during the slide. */
+    position: absolute;
+    inset: 0;
+    overflow: clip;
+    pointer-events: none;
+  }
+  .classic-plugins-category-forward-enter-from,
+  .classic-plugins-category-back-leave-to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  .classic-plugins-category-forward-leave-to,
+  .classic-plugins-category-back-enter-from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  .classic-plugins__fields {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .classic-plugins__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: var(--am-space-4);
+  }
+  .classic-plugins__items[data-display='list'] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .classic-plugins__items[data-display='list'] .classic-plugin-card__description {
+    display: none;
+  }
+  .classic-plugin-card {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+    gap: var(--am-space-3);
+    padding: var(--am-space-4);
+    border: 1px solid var(--am-color-border);
+    border-radius: var(--am-radius-card);
+    background: var(--am-color-surface);
+    transition:
+      border-color var(--am-motion-fast),
+      box-shadow var(--am-motion-fast);
+  }
+  .classic-plugin-card:not([data-selected='true']):has(.classic-plugin-card__open:hover:enabled) {
+    border-color: var(--am-color-border-strong);
+    box-shadow: var(--am-shadow-control);
+  }
+  .classic-plugin-card[data-selected='true'] {
+    border-color: var(--am-color-primary);
+  }
+  .classic-plugin-card .classic-plugin-card__open {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+  }
+  .classic-plugin-card .classic-plugin-card__open:focus-visible {
+    outline-offset: -3px;
+  }
+  .classic-plugin-card .classic-plugin-card__more {
+    position: absolute;
+    inset-block-start: var(--am-space-4);
+    inset-inline-end: var(--am-space-4);
+    z-index: 2;
+    flex: none;
+    inline-size: 44px;
+    padding: 0;
+    border-color: transparent;
+    background: transparent;
+  }
+  .classic-plugin-card__header {
+    padding-inline-end: calc(44px + var(--am-space-3));
+  }
+  .classic-plugin-card .classic-plugin-card__more:hover:enabled {
+    background: var(--am-color-surface-hover);
+    border-color: transparent;
+  }
+  .classic-plugin-card__selection {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: 44px;
+    min-block-size: 44px;
+    cursor: pointer;
+    animation: am-plugin-selection-enter var(--am-motion-fast) var(--am-ease-standard)
+      var(--am-motion-normal) both;
+  }
+  .classic-plugin-card__selection input {
+    inline-size: 20px;
+    block-size: 20px;
+    margin: 0;
+    accent-color: var(--am-color-primary);
+    cursor: pointer;
+  }
+  .classic-plugin-card__selection input:focus-visible {
+    outline: var(--am-focus-ring);
+    outline-offset: var(--am-focus-offset);
+  }
+  .classic-plugin-card__icon {
+    position: relative;
+    display: grid;
+    flex: none;
+    inline-size: 44px;
+    block-size: 44px;
+    place-items: center;
+    border-radius: var(--am-radius-sm);
+    color: var(--am-color-primary);
+    background: var(--am-color-primary-container);
+  }
+  .classic-plugin-card__actions {
+    position: relative;
+    z-index: 2;
+    min-block-size: 44px;
+    // Keep controls at the original right edge, with room to slide left before selection appears.
+    padding-inline-start: calc(44px + var(--am-space-2));
+  }
+  .classic-plugin-card__primary-actions {
+    flex: none;
+    transition: transform var(--am-motion-normal) var(--am-ease-emphasized);
+  }
+  .classic-plugin-card[data-selectable='true'] .classic-plugin-card__primary-actions {
+    transform: translateX(calc(-44px - var(--am-space-2)));
+  }
+  .classic-plugin-card[data-origin='external'] .classic-plugin-card__icon {
+    background: var(--am-color-surface-subtle);
+    color: var(--am-color-text-secondary);
+  }
+  .classic-plugin-card__identity {
+    flex: 1;
+    min-inline-size: 0;
+  }
+  .classic-plugin-card__identity h3 {
+    margin: 0 0 var(--am-space-1);
+    font-size: var(--am-font-size-sm);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+  .classic-plugin-card__identity > span {
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+  }
+  .classic-plugin-card__description,
+  .classic-plugin-card__publisher,
+  .classic-plugin-card__error {
+    margin: 0;
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+  .classic-plugin-card__error {
+    color: var(--am-color-danger);
+  }
+  .classic-plugin-card__footer {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-block-start: auto;
+    padding-block-start: var(--am-space-2);
+    border-block-start: 1px solid var(--am-color-border);
+  }
+  .classic-plugin-card__status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--am-space-2);
+    font-size: var(--am-font-size-xs);
+    color: var(--am-color-text-secondary);
+  }
+  .classic-plugin-card__status::before {
+    content: '';
+    inline-size: 6px;
+    block-size: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .classic-plugin-card__status[data-enabled='true'] {
+    color: var(--am-color-success);
+  }
+  .classic-plugin-card__status[data-development-status='updating'],
+  .classic-plugin-card__status[data-development-status='developing'] {
+    color: var(--am-color-primary);
+  }
+  .classic-plugin-card__status[data-development-status='fixing'],
+  .classic-plugin-card__status[data-development-status='disabled'] {
+    color: var(--am-color-warning);
+  }
+  .classic-plugin-card__status[data-error='true'] {
+    color: var(--am-color-danger);
+  }
+  .classic-plugin-card__toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--am-space-2);
+    font-size: var(--am-font-size-xs);
+    color: var(--am-color-text-secondary);
+    cursor: pointer;
+  }
+  .classic-plugin-card__toggle input {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .classic-plugin-card__toggle input:disabled {
+    cursor: not-allowed;
+  }
+  .classic-plugin-card__switch {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    inline-size: 34px;
+    block-size: 20px;
+    padding: 3px;
+    border-radius: 999px;
+    background: var(--am-color-border);
+    pointer-events: none;
+  }
+  .classic-plugin-card__switch::after {
+    content: '';
+    inline-size: 14px;
+    block-size: 14px;
+    border-radius: 50%;
+    background: var(--am-color-surface);
+  }
+  .classic-plugin-card__toggle input:checked + .classic-plugin-card__switch {
+    background: var(--am-color-primary);
+  }
+  .classic-plugin-card__toggle input:checked + .classic-plugin-card__switch::after {
+    transform: translateX(14px);
+    background: var(--am-color-on-primary);
+  }
+  .classic-plugin-card__toggle input:focus-visible + .classic-plugin-card__switch {
+    outline: var(--am-focus-ring);
+    outline-offset: var(--am-focus-offset);
+  }
+  .classic-plugins__hint,
+  .classic-plugins__notice {
+    margin: 0 0 var(--am-space-3);
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-xs);
+    line-height: 1.7;
+  }
+  .classic-plugins__notice {
+    color: var(--am-color-danger);
+  }
+  @keyframes am-plugin-selection-enter {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @container (min-width: 700px) {
+    .classic-plugins__items[data-display='list'] .classic-plugin-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      align-items: center;
+    }
+    .classic-plugins__items[data-display='list'] .classic-plugin-card__header {
+      grid-area: 1 / 1;
+      padding-inline-end: 0;
+    }
+    .classic-plugins__items[data-display='list'] .classic-plugin-card__more {
+      position: relative;
+      inset: auto;
+      grid-area: 1 / 3;
+    }
+    .classic-plugins__items[data-display='list'] .classic-plugin-card__footer {
+      grid-area: 1 / 2;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      gap: var(--am-space-4);
+    }
+    .classic-plugins__items[data-display='list'] .classic-plugin-card__publisher,
+    .classic-plugins__items[data-display='list'] .classic-plugin-card__error {
+      grid-column: 1 / -1;
+    }
+  }
+  @container (max-width: 480px) {
+    .classic-plugins__toolbar {
+      gap: var(--am-space-2);
+    }
+    .classic-plugins__import {
+      min-inline-size: 80px;
+      padding-inline: var(--am-space-2);
+    }
+  }
+  @container (max-width: 600px) {
+    .classic-plugins__items {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--am-space-2);
+    }
+    .classic-plugin-card {
+      gap: var(--am-space-1);
+      padding: var(--am-space-3);
+    }
+    .classic-plugin-card__header {
+      gap: var(--am-space-2);
+    }
+    .classic-plugin-card .classic-plugin-card__more {
+      inset-block-start: var(--am-space-3);
+      inset-inline-end: var(--am-space-3);
+    }
+    .classic-plugin-card__identity h3 {
+      margin-block-end: 0;
+    }
+    .classic-plugin-card__description,
+    .classic-plugin-card__publisher,
+    .classic-plugin-card__error,
+    .classic-plugin-card__toggle > span:first-child {
+      display: none;
+    }
+    .classic-plugin-card__footer {
+      padding-block-start: 0;
+      border: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .classic-plugin-card__selection {
+      animation: none;
+    }
+    .classic-plugins__import,
+    .classic-plugins__import .app-icon,
+    .classic-plugin-card,
+    .classic-plugin-card__primary-actions,
+    .classic-plugins-category-forward-enter-active,
+    .classic-plugins-category-forward-leave-active,
+    .classic-plugins-category-back-enter-active,
+    .classic-plugins-category-back-leave-active {
+      transition: none;
+    }
+  }
+}

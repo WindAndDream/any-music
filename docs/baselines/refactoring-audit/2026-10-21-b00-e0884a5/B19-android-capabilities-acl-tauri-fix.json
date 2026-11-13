@@ -1,0 +1,117 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B19-android-capabilities-acl-tauri-fix",
+  "parentBatch": "B19",
+  "candidate": "B19-android-capabilities-acl",
+  "runtime": "tauri",
+  "platform": "android",
+  "reviewedAt": "2026-10-22T03:32:31.183Z",
+  "head": "a693165205be0bc321764768d796d7c842f7a446",
+  "originalReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri.json",
+  "scope": "Repair B19-A01 only: describe the existing Android account proxy and account-bound media capabilities accurately. Preserve effective identifiers, platform/WebView selectors and permission groups exactly.",
+  "changes": [
+    {
+      "path": "apps/tauri/src-tauri/capabilities/main-android.json",
+      "line": 3,
+      "fields": ["description"],
+      "before": "Android main host: native Bilibili QR accounts and HTTP, local data and bounded package preview/document saving. No desktop browsers, media grants or external execution.",
+      "after": "Android main host: native Bilibili QR accounts, account proxies, HTTP and account-bound media, local data and bounded package preview/document saving. No desktop browsers or external execution."
+    }
+  ],
+  "baseline": {
+    "beforeJsonSha256": "3935c1061c0d7bf8ff1cebd13a604119232b5a67b994d5f896bf428f55bf656e",
+    "afterJsonSha256": "9fab9271e8e59b2dea796cb013af7ea1ce64933875e191f21135e8aa10eec66e",
+    "effectiveAuthorityBefore": {
+      "identifier": "main-android",
+      "platforms": ["android"],
+      "webviews": ["main"],
+      "permissions": [
+        "core:default",
+        "core:app:allow-exit",
+        "allow-mobile-commands",
+        "allow-android-account-commands",
+        "allow-android-delivery-commands"
+      ]
+    },
+    "effectiveAuthorityAfter": {
+      "identifier": "main-android",
+      "platforms": ["android"],
+      "webviews": ["main"],
+      "permissions": [
+        "core:default",
+        "core:app:allow-exit",
+        "allow-mobile-commands",
+        "allow-android-account-commands",
+        "allow-android-delivery-commands"
+      ]
+    }
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "not-run",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C6: capability metadata matches the implemented contract",
+      "result": "pass",
+      "evidence": [
+        "apps/tauri/src-tauri/capabilities/main-android.json:3",
+        "apps/tauri/src-tauri/permissions/mobile.toml:15-34"
+      ],
+      "detail": "Description now includes native Bilibili accounts, account proxies, HTTP and account-bound media. Desktop-browser and external-execution exclusions remain explicit."
+    },
+    {
+      "criterion": "C5: repair preserves effective authority",
+      "result": "pass",
+      "evidence": ["baseline.effectiveAuthorityBefore", "baseline.effectiveAuthorityAfter"],
+      "detail": "Parsed JSON excluding description is deeply equal before/after: no identifier, Android platform, main WebView or permission-group change."
+    },
+    {
+      "criterion": "C5/C6: existing offline platform/ACL rejection regressions",
+      "result": "pass",
+      "evidence": [
+        ".codex-tmp/refactoring-audit-b19-fix/boundaries.log",
+        ".codex-tmp/refactoring-audit-b19-fix/boundary-tests.log"
+      ],
+      "detail": "Current boundary checker and 2 existing tests pass, including negative mutations for desktop/remote privileges and widened platform/network configuration."
+    }
+  ],
+  "verification": [
+    {
+      "kind": "static",
+      "result": "pass",
+      "command": "node .codex-tmp/refactoring-audit-b19-fix/record-fix.mjs",
+      "exitCode": 0,
+      "detail": "JSON parsing and description-only deep equality against the pre-fix snapshot."
+    },
+    {
+      "kind": "static",
+      "result": "pass",
+      "command": "pnpm check:mobile:boundaries",
+      "exitCode": 0,
+      "log": ".codex-tmp/refactoring-audit-b19-fix/boundaries.log"
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "node --test scripts/test/check-mobile-boundaries.test.mjs",
+      "exitCode": 0,
+      "tests": 2,
+      "log": ".codex-tmp/refactoring-audit-b19-fix/boundary-tests.log"
+    }
+  ],
+  "resolvedFindingIds": ["B19-A01"],
+  "openFindingIds": [],
+  "limitations": [
+    "Verification is specific to this metadata-only correction; no claim of repository-wide zero defects.",
+    "No new APK/AAB/iOS artifact, native compilation or device/browser/emulator inspection. The original 12-test/Android-Clippy evidence remains historical in the original report.",
+    "Other existing worktree changes, iOS adapter delivery, remaining six B19 candidates and recorded S16 lifecycle/cold-start failures are outside this repair and stay open."
+  ],
+  "nextBatch": "B19-android-document-save-keystore"
+}

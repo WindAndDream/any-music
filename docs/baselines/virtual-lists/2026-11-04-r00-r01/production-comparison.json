@@ -1,0 +1,43 @@
+{
+  "baseline": "../2026-11-04-p12-p15/build-artifacts.json",
+  "current": "build-artifacts.json",
+  "method": "Production frontend JS/CSS/Wasm totals; per-file gzip level 9; native executable excluded from payload totals.",
+  "changedBuildSources": [
+    "packages/ui/src/composables/dom-grid-reorder-geometry.ts",
+    "packages/ui/src/composables/grid-reorder-geometry.ts",
+    "packages/ui/src/composables/use-grid-reorder.ts",
+    "packages/ui/src/composables/virtual-scroll/virtual-grid-reorder-geometry.ts"
+  ],
+  "runtimeResults": [
+    {
+      "runtime": "userscript",
+      "payloadBytesDelta": 1456,
+      "payloadGzipBytesDelta": 320,
+      "audits": [
+        {
+          "path": "apps/userscript/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false
+        },
+        {
+          "path": "apps/userscript/dist/userscript-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false
+        }
+      ]
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytesDelta": 624,
+      "payloadGzipBytesDelta": 291,
+      "audits": [
+        {
+          "path": "apps/tauri/dist/theme-build-audit.json",
+          "virtualizerPresent": false,
+          "virtualReorderAdapterPresent": false
+        }
+      ]
+    }
+  ],
+  "limits": "The DOM reorder extraction is used by current production consumers. R01 virtual geometry remains internal and test-consumed only; no production list switched. Combined dirty-workspace build deltas do not prove actual rendering/frame-time or runtime parity."
+}

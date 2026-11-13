@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 1,
+  "documentType": "ui-preview-acceptance-evidence",
+  "runtimeScope": "userscript",
+  "recordedAt": "2026-10-27T03:44:33.194Z",
+  "status": "passed-for-listed-preview-cases",
+  "runtime": "Vite renderer preview with development GM substitutes; not installed Tampermonkey",
+  "origins": [
+    "http://127.0.0.1:18766/index.html?preview=gm-r4",
+    "http://localhost:18766/index.html?preview=gm-r4"
+  ],
+  "sourceBoundaries": "UI fixes were exercised before/after source updates as recorded in raw snapshots; installed production acceptance is separate.",
+  "inputClassification": {
+    "browserInput": "CUA/Playwright pointer, select, Tab/Shift+Tab, Escape and PageDown",
+    "domDriven": "Read-only DOM/geometry/focus observations; no page state injection for the long-list fixture",
+    "physicalKeyboardMouse": false,
+    "touchHardware": false,
+    "touchEmulation": false
+  },
+  "findingsFixed": [
+    "Modal Tab candidates excluded nested protected Shadow inputs, hidden/inert controls and some outside-focus cases.",
+    "Theme replacement overrode new modal initial focus; settings close could lose its semantic opener.",
+    "GM advertised an empty account-settings slot.",
+    "Studio required navigation visibility and library enqueue wording were inconsistent with host actions.",
+    "Studio platform order items ran together.",
+    "Material search lacked an accessible name; an empty collection remount cleared its unfinished search.",
+    "Both plugin toggle labels measured about 17.7 CSS px high; fixed to 44 CSS px."
+  ],
+  "verifiedFlows": [
+    "Protected proxy host input Tab reaches username and Shift+Tab returns to host in narrow and wider views.",
+    "Both directions of theme replacement keep the settings modal initial focus and Escape returns to the new semantic settings opener.",
+    "Unpublished title, uncreated collection name and material query survive a round trip between complete themes; material query also survives leaving/re-entering the page.",
+    "Proxy test drafts survive presentation replacement; the earlier 127.0.0.1 isolated preview saved only a disabled dummy proxy fixture, never production configuration.",
+    "Twenty-seven playlists were created through the public UI; keyboard PageDown reached 1381.1428 CSS px, Classic restored the same offset and Studio restored it on return.",
+    "Classic and Studio plugin labels measured 44 CSS px after repair.",
+    "Protected forms have independent Shadow roots and host-only style resources."
+  ],
+  "longScroll": {
+    "fixture": "27 UI-created empty playlists in localhost preview storage",
+    "attempt": "Creation loop stopped at an input timeout after playlist 27 had been acknowledged; no additional creation was assumed.",
+    "maxStudioScroll": 1381.142822265625,
+    "studioBefore": 1381.142822265625,
+    "classicAfter": 1381.142822265625,
+    "studioAfterReturn": 1381.142822265625,
+    "source": "preview-layout-observations.json"
+  },
+  "screenshots": [
+    {
+      "theme": "classic",
+      "page": "queue",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-1.png",
+      "sha256": "bbb6a6b0d7f3205d7d12f21ade0ce260e11bc9cc8df189545fbf33d8a94f924c",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "favorites",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-2.png",
+      "sha256": "1eeef8a177989be017e23b38730090526e3788f208fe420af667d3f2a7910b50",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "playlists",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-3.png",
+      "sha256": "e5198a2623ceeb1c2cf2c72a0f4499f38276cda09c2a9e120bc2e9b66cabae82",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "custom-tracks",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-4.png",
+      "sha256": "22a89ba3ec6687936aff64d06a720a32fc8e04e067bc1784fe843cbd1d4132bd",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "tags",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-5.png",
+      "sha256": "952cff45d6af992466f4fd9f0f1f13ed29cc4a14ee1e8882c36f0dc13b95f3ef",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "composer",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-6.png",
+      "sha256": "41cf8b225fb097e74bffc193304ca6a60e189bb0b07dd595aff06c84c74fb790",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "downloads",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-7.png",
+      "sha256": "73dadc43e73c2787a19c0d53470ad61a08228fc0064785a58cc6ba7401917114",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "history",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-8.png",
+      "sha256": "19502c59a47acae4dc8e4d3ab5f199a5d868aee3940faa51746afd460bbb8364",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "plugins",
+      "viewport": "990x1039",
+      "appearance": "dark",
+      "file": "preview-classic-dark-9.png",
+      "sha256": "b32042eec2c9bf847b9fca025cb4e5fb2a4d0b6c0d2a25ab3bc64279277c1c2d",
+      "imageFormat": "JPEG",
+      "imageWidth": 990,
+      "imageHeight": 1039
+    },
+    {
+      "theme": "classic",
+      "page": "queue",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-1.png",
+      "sha256": "1f51641820c055d69552c12e5476e2986613ae515312043400e65a2d3940c0f2",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "classic",
+      "page": "favorites",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-2.png",
+      "sha256": "2fbc5bcfd9bd910bd084d234bf28bd790fadb725589c524b6f11ffc545d691ff",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "classic",
+      "page": "playlists",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-3.png",
+      "sha256": "6cdac027f34ce5a746b2df72b215e9d9c70626e6dddabd258c65c4441b6b7d31",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "classic",
+      "page": "custom-tracks",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-4.png",
+      "sha256": "946b1982ec949aa9e6b5bc8bc5f8a82ed6c73dcc96a9b68ce030cb29b97557b9",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "classic",
+      "page": "tags",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-5.png",
+      "sha256": "c8a021a575b98391d99f155e774e8600b23f1d220cc627f2fc06c5925ed865b4",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "classic",
+      "page": "composer",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-6.png",
+      "sha256": "e0f48068155b285b17548754e287dd001f541ca6e5cc7c809134606ef6fa4acd",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "classic",
+      "page": "downloads",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-7.png",
+      "sha256": "0c4f58ae86a15229140cebfd856294b0f212f07805e7cb9f9f64b9b87110c03e",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "classic",
+      "page": "history",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-8.png",
+      "sha256": "04e6c75669cad549e1790372836e89e9a6e496bb0bc17637574175dc5b8fd31f",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "classic",
+      "page": "plugins",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-classic-9.png",
+      "sha256": "7d6d895570bbcd3a5b063661eab2a41221154554dd3afd24d27b021b848a43fa",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "catalog",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-0.png",
+      "sha256": "4e63ba7c724e71d929b547f359a0b19b761169b660b9c7a6510af1e8cbb46949",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "queue",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-2.png",
+      "sha256": "5102a94887aa0997e4bc6b2b9829b2240d7663cfb8016406ee6c37a255515263",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "favorites",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-3.png",
+      "sha256": "ca38ea9e38335f56914cb976fa61a1fcb92d633e4d647d5134475c024ff985b6",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "playlists",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-4.png",
+      "sha256": "4cade63f9e1efbc38a898e1ea5f22da8875d8e9a3bba3674cd127d2610b4f72f",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "custom-tracks",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-5.png",
+      "sha256": "17e8b0dd88f1556be7458672986acf2f89814b6a2d79433d62f9b82fd1b2c95a",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "tags",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-6.png",
+      "sha256": "da95881f49b8372f748aa3936ab3183802ddd5e131d5ddd8e55288e53d39b0b6",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "composer",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-7.png",
+      "sha256": "d72b33a991e352be925b6cc9882a29a9613c3b4c807be95bfa506b9e8c01b810",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "downloads",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-8.png",
+      "sha256": "1807dc135c83ee963bb83d238280ebb2420b541d6ac52e48b1e6ebcdc308163f",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "history",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-9.png",
+      "sha256": "97117ed8397b0229ec72213109616e7bf344e9c9e89ed55b6c884f708afc3181",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "plugins",
+      "viewport": "411x864",
+      "appearance": "system-light",
+      "file": "preview-narrow-studio-plugins-final.png",
+      "sha256": "2a66b90415fb3d612aba0960ab655aa9b97c4bf80f5f98eba3aa5cd52a6d4ea2",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "proxy-protected",
+      "viewport": "411x864",
+      "appearance": "light",
+      "file": "preview-narrow-studio-protected-proxy.png",
+      "sha256": "6fdc2db364e4301eb61241041a18aacce7febe34f4dffe1a27bfe7b464780a29",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "proxy-protected",
+      "viewport": "411x864",
+      "appearance": "dark",
+      "file": "preview-narrow-studio-dark-protected-proxy.png",
+      "sha256": "8588b27c2a9819dcc16a935e581a6b292c9c4f33d8e42bc14d1c195e0b529139",
+      "imageFormat": "JPEG",
+      "imageWidth": 411,
+      "imageHeight": 864
+    },
+    {
+      "theme": "studio",
+      "page": "proxy-protected",
+      "viewport": "1440x900",
+      "appearance": "dark",
+      "file": "preview-wide-studio-dark-protected-proxy.png",
+      "sha256": "c0353d7b472c7e361d95befe9e7ad8907a68ac726e6243cbec4d2ab9fb746bab",
+      "imageFormat": "JPEG",
+      "imageWidth": 1440,
+      "imageHeight": 900
+    },
+    {
+      "theme": "studio",
+      "page": "catalog",
+      "viewport": "1440x900",
+      "appearance": "dark",
+      "file": "preview-wide-studio-dark-catalog.png",
+      "sha256": "d37f4654b762fd76c553a895baae8de2838d97b6b1e73a455eec52d68253cd2a",
+      "imageFormat": "JPEG",
+      "imageWidth": 1440,
+      "imageHeight": 900
+    }
+  ],
+  "samplingLimits": [
+    "Initial narrow captures could show the previous compositor frame while AX already showed the destination. Classic captures were overwritten after waiting for drawer transitions and matching headings.",
+    "Studio narrow files are mapped by their reviewed visible titles, not by their initial numeric target. Their raw AX records are not asserted to describe the exact same frame.",
+    "Default viewport was resized explicitly for responsive checks; final cleanup resets the override.",
+    "No GM permissions, authenticated transport, native saving, reduced-motion emulation, real touch or installed-production claim follows from this preview."
+  ],
+  "screenshotMetadataAudit": {
+    "date": "2026-10-27",
+    "method": "Pillow opens/verifies the original bytes and reports actual format/dimensions; SHA-256 recomputed. Visible page headings independently reviewed from original screenshot contact sheets.",
+    "verifiedFiles": 32,
+    "hashMatches": 32,
+    "filenameLimit": "All 32 recorded .png files contain JPEG bytes returned by the preview browser screenshot API. Filenames and bytes remain unchanged; imageFormat/imageWidth/imageHeight replace invalid PNG-header-derived dimensions.",
+    "pageMapping": "The 32 page/theme mappings match their visible headings. Studio narrow numeric names follow reviewed rendered pages, not the earlier AX destination; preview-narrow-studio-1.png remains excluded as a duplicate catalog frame.",
+    "reviewScope": "No clear clipping/overlap found at contact-sheet inspection scale. This review does not establish contrast ratios, all scroll positions, fine typography or a complete page/color/viewport Cartesian matrix.",
+    "residualSamplingLimit": "Some Classic narrow screenshots retain the prior playlist bottom-navigation highlight during transition; this sample alone does not establish a persistent current-code navigation defect."
+  }
+}

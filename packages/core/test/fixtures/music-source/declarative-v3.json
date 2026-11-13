@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 3,
+  "id": "custom-fixture-v3",
+  "name": "Fixture source v3",
+  "allowedOrigins": ["https://api.example.com", "https://media.example.com"],
+  "endpoints": {
+    "search": {
+      "request": {
+        "urlTemplate": "https://api.example.com/search?q={{query}}&page={{page}}"
+      },
+      "itemsPath": "items",
+      "pageSize": 20,
+      "track": {
+        "resourceIdPath": "id",
+        "titlePath": "title",
+        "artistNamePath": "artist"
+      },
+      "title": "Fixture search"
+    },
+    "importUrl": {
+      "request": {
+        "urlTemplate": "https://api.example.com/import?url={{url}}"
+      },
+      "acceptedUrls": [
+        {
+          "origin": "https://example.com",
+          "pathnamePrefix": "/playlist/"
+        }
+      ],
+      "itemsPath": "items",
+      "pageSize": 20,
+      "track": {
+        "resourceIdPath": "id",
+        "titlePath": "title",
+        "artistNamePath": "artist"
+      },
+      "title": "Fixture import"
+    },
+    "resolve": {
+      "type": "direct-url",
+      "loadingStrategy": "range",
+      "qualities": [
+        {
+          "id": "standard",
+          "rank": 1,
+          "urlTemplate": "https://media.example.com/{{resourceId}}.mp3",
+          "mimeType": "audio/mpeg"
+        },
+        {
+          "id": "high",
+          "rank": 2,
+          "urlTemplate": "https://media.example.com/{{resourceId}}-high.mp3",
+          "mimeType": "audio/mpeg"
+        }
+      ]
+    },
+    "availability": {
+      "request": {
+        "urlTemplate": "https://api.example.com/health"
+      },
+      "validPath": "available"
+    }
+  }
+}

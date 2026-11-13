@@ -1,0 +1,93 @@
+[package]
+name = "any-music-tauri"
+version = "0.1.0"
+description = "Any Music desktop and mobile runtime"
+publish = false
+edition.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+# Explicit, non-release harness. No runtime path from the product opens it.
+s03-isolation-probe = []
+s15-acceptance = []
+
+[[example]]
+name = "plugin-isolation-probe"
+required-features = ["s03-isolation-probe"]
+
+[[example]]
+name = "plugin-delivery-acceptance"
+required-features = ["s15-acceptance"]
+
+[lib]
+name = "any_music_tauri_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+am-plugin-runtime.workspace = true
+am-plugin-net.workspace = true
+am-plugin-package.workspace = true
+am-plugin-protocol.workspace = true
+tauri = { version = "2.12.1", features = [] }
+serde.workspace = true
+serde_json.workspace = true
+reqwest = { version = "0.12", default-features = false, features = [
+  "rustls-tls",
+  "json",
+  "cookies",
+  "stream",
+  "socks",
+] }
+reqwest_cookie_store = "0.9"
+cookie_store = { version = "0.22", features = ["serde_json"] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+fs2 = "0.4"
+tokio = { version = "1", features = [
+  "sync",
+  "net",
+  "time",
+  "fs",
+  "process",
+  "io-util",
+  "macros",
+  "rt",
+] }
+tokio-util = "0.7"
+uuid = { version = "1", features = ["v4", "serde"] }
+chacha20poly1305 = "0.10"
+rand = "0.8"
+base64 = "0.22"
+sha2 = "0.10"
+hmac = "0.12"
+hkdf = "0.12"
+axum = "0.8"
+futures-util = "0.3"
+tokio-tungstenite = "0.28"
+# Keep SQLite bundled, statement caching, and checked u64 conversion for resource-cache columns.
+rusqlite = { version = "=0.41.1", default-features = false, features = [
+  "bundled",
+  "cache",
+  "fallible_uint",
+] }
+tauri-plugin-deep-link = "2"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+webview2-com = "0.39"
+windows = { version = "0.62", features = ["Win32_System_Com"] }
+windows-sys = { version = "0.61", features = [
+  "Win32_Storage_FileSystem",
+  "Win32_Security_Authorization",
+  "Win32_System_Threading",
+] }
+keyring = { version = "3.6", features = ["windows-native"] }
+[target.'cfg(any(target_os = "macos", target_os = "ios"))'.dependencies]
+keyring = { version = "3.6", features = ["apple-native"] }
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring = { version = "3.6", features = ["linux-native-sync-persistent", "crypto-rust"] }

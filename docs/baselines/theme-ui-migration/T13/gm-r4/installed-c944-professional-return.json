@@ -1,0 +1,55 @@
+{
+  "method": "Native field filling and Studio-to-classic UI switch; return uses public theme action through DOM instrumentation",
+  "sample": {
+    "label": "studio-professional-drafts-round-trip",
+    "at": "2026-10-27T09:08:45.483Z",
+    "viewport": {
+      "width": 950,
+      "height": 900,
+      "dpr": 1.0000000447034836,
+      "touch": 10,
+      "dark": false,
+      "reduced": true
+    },
+    "theme": "studio",
+    "resolved": "light",
+    "appearance": "system",
+    "focus": { "tag": "BUTTON", "key": "settings:open", "label": "打开全局设置" },
+    "audio": { "count": 1, "sameReference": true, "paused": true, "hasSource": false, "time": 0 },
+    "scroll": [
+      {
+        "key": "navigation",
+        "top": 0,
+        "height": 60,
+        "total": 60,
+        "width": 950,
+        "totalWidth": 1045
+      },
+      {
+        "key": "workspace",
+        "top": 0,
+        "height": 757,
+        "total": 757,
+        "width": 950,
+        "totalWidth": 950
+      },
+      {
+        "key": "workspace",
+        "top": 0,
+        "height": 757,
+        "total": 1187,
+        "width": 675,
+        "totalWidth": 675
+      }
+    ],
+    "dialogs": [],
+    "protectedSurfaces": [{ "type": "protected" }, { "type": "slot", "styles": 1 }],
+    "hostStyleCount": 1,
+    "themeRootCount": 1
+  },
+  "fields": [
+    { "label": "新素材合集名称", "value": "GM-R4 未创建合集" },
+    { "label": "自定义歌曲名称", "value": "GM-R4 未发布作品" },
+    { "label": "搜索歌曲、作者或标签", "value": "GM-R4 素材草稿" }
+  ]
+}

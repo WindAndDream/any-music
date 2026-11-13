@@ -1,0 +1,83 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B12-renderer-platform-tauri-fix",
+  "capturedAt": "2026-10-21T13:49:02.535Z",
+  "sourceState": "post-repair",
+  "head": "ce7dcb6f03a06e66430c6022a61568a474e60bdd",
+  "previousBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+  "workingTree": [
+    "M apps/tauri/src-tauri/src/network/http.rs",
+    " M apps/tauri/src/platform/native-http.ts",
+    " M apps/tauri/test/platform/native-http.test.ts",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/desktop/development.md",
+    " M \"docs/zh-cn/\\346\\241\\214\\351\\235\\242\\347\\253\\257/\\345\\274\\200\\345\\217\\221\\350\\247\\204\\350\\214\\203.md\"",
+    "?? apps/tauri/src-tauri/src/network/http/",
+    "?? apps/tauri/test/fixtures/native-http-response.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json"
+  ],
+  "environment": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "rustc": "1.91.1",
+    "msrv": "1.90.0",
+    "target": "Windows x86_64 MSVC",
+    "timezone": "Asia/Shanghai"
+  },
+  "files": [
+    {
+      "path": "apps/tauri/src/platform/native-http.ts",
+      "sha256": "830b618df2b7a4cdd9cbfd50bca904cf5d783252ba353e7d69fce8d761917bf4"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/network/http.rs",
+      "sha256": "16421a41b5380d3a2bc5d1354e5c342713308a7166dfe37f58576e0dbf6a1c30"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/network/http/response.rs",
+      "sha256": "23fca200618c68f9f6097be5cf64eb04df3360d34512a0368505c2ff0945b9be"
+    },
+    {
+      "path": "apps/tauri/test/platform/native-http.test.ts",
+      "sha256": "c7f1e2bce3f88f7e3b8a464a40780d5b14d0ee5d15797ec3bc8cae29c26eceba"
+    },
+    {
+      "path": "apps/tauri/test/fixtures/native-http-response.json",
+      "sha256": "c4c05af31493f20ac81bd558e877a8f84a0c7ac99ace02761a95d23e2cb08372"
+    },
+    {
+      "path": "docs/en/desktop/development.md",
+      "sha256": "bccc6de30dd676da74f95fba9fd3c0a2567089af04c0f4a85544ec99614581d4"
+    },
+    {
+      "path": "docs/zh-cn/桌面端/开发规范.md",
+      "sha256": "415423551046729f7d22e854326bd5042b5d3d626f3c81b907b4c68fcac961ee"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "53212780b8821b735b6fd386c3edff8713c73827ba57a173d93f1fa53bd6f273"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff"
+    },
+    {
+      "path": "apps/tauri/src-tauri/Cargo.toml",
+      "sha256": "97f0e00eba58dff07c5722447e482240c3a4f84e5c92b1f99d7914b670e90137"
+    }
+  ],
+  "concurrencyNotice": "Other chats changed plugin-vm and other audit records during this repair. Those changes are preserved; whole-repository checks observe the combined working tree. No other module repair is attributed to B12."
+}

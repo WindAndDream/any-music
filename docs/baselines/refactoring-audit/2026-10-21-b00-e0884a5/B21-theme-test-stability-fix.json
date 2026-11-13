@@ -1,0 +1,1054 @@
+{
+  "documentType": "audit-fix-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B21-theme-test-stability-fix",
+  "parentBatch": "B21",
+  "ownerBatch": "B08",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-22T03:58:34.995Z",
+  "originalAudit": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-repository-final.json",
+  "scope": "Repair B21-T01 in shared theme preference test initialization; production code, default scheduler, assertions and per-assertion polling deadlines stay unchanged.",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "resolvedFindingIds": ["B21-T01"],
+  "openFindingIds": [],
+  "baseline": {
+    "head": "9719113028a552d886c501da57c900373a88de7f",
+    "before": {
+      "path": "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts",
+      "sha256": "70e41847aa370ea4e4b7c1b2f16202277df382f250711837eb1977cad2ee9fd6"
+    },
+    "after": {
+      "path": "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts",
+      "sha256": "5ca4e0b880e2b26012b4350459bb748dce71d7ec935a937d55416868d4b5ea32"
+    },
+    "inputManifest": ".codex-tmp/b21-theme-fix/after-fix-inputs.json",
+    "inputManifestSha256": "887d5fd63f762218cb36f3531aae0841213fe8a7d4112d080d3e8bf5815daaa9"
+  },
+  "rootCause": {
+    "confirmed": "The first studio selection starts a real lazy SFC import. The preference test puts that compilation inside vi.waitFor's default one-second polling budget, unlike the existing theme-controller suite which initializes the real theme in beforeAll. A controlled 1500 ms cold transform deterministically reproduces the exact original two-writes/one-write failure.",
+    "limit": "The original loaded environment's individual compiler/scheduler timings were not measured. The injected reproduction establishes the faulty timing boundary without claiming a deterministic runtime defect."
+  },
+  "changes": [
+    {
+      "path": "packages/music-workbench/test/features/plugins/use-workbench-theme.test.ts",
+      "line": 98,
+      "detail": "Use the public loadBuiltInTheme in a bounded 20-second beforeAll hook, matching the existing controller suite. The real built-in module is compiled before preference assertions; no loader mock, global timeout change, test retry or assertion removal is introduced."
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "detail": "Test uses a public trusted export; production dependency/entry graphs are unchanged and root boundary guards pass."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "detail": "All seven original behavioral tests are preserved, including save failure/retry, real fallback failure, late allocation after unmount, ignored retained actions, renderer recovery and resource disposal."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "detail": "Controlled cold-transform red/green, ten fresh-process repeats (70 cases), and the full root suite under the unchanged default parallel scheduler all pass after repair."
+    }
+  ],
+  "verification": [
+    {
+      "name": "cold-transform-red",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run --config ../../.codex-tmp/b21-theme-fix/slow-theme.config.ts test/features/plugins/use-workbench-theme.test.ts --testNamePattern reports a preference save failure",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "--config",
+        "../../.codex-tmp/b21-theme-fix/slow-theme.config.ts",
+        "test/features/plugins/use-workbench-theme.test.ts",
+        "--testNamePattern",
+        "reports a preference save failure"
+      ],
+      "phase": "before-fix",
+      "result": "fail",
+      "exitCode": 1,
+      "startedAt": "2026-10-22T03:48:46.6580388+00:00",
+      "finishedAt": "2026-10-22T03:48:54.1193641+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/cold-transform-red.log",
+      "logSha256": "9d553e702afa270143d3073a323107cf0abb982b361e4cb0ce2017f67806ca00"
+    },
+    {
+      "name": "cold-transform-green",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run --config ../../.codex-tmp/b21-theme-fix/slow-theme.config.ts test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "--config",
+        "../../.codex-tmp/b21-theme-fix/slow-theme.config.ts",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:49:16.2123578+00:00",
+      "finishedAt": "2026-10-22T03:49:30.0708990+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/cold-transform-green.log",
+      "logSha256": "d7701bb4d63ea413cd22a592e2f2351143e60ee6eb73833ca3704e6576931297"
+    },
+    {
+      "name": "theme-repeat-1",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:50:32.2205480+00:00",
+      "finishedAt": "2026-10-22T03:50:46.2062020+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-1.log",
+      "logSha256": "d29c64cebe9e8bcd2d5670b90eb07eb86720e64fd17c5777e337a8731ca31250"
+    },
+    {
+      "name": "theme-repeat-2",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:50:46.3522054+00:00",
+      "finishedAt": "2026-10-22T03:50:55.3474955+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-2.log",
+      "logSha256": "161eb93b2fa836a4376a7083e6a9f5124eaabe7a89acfc23f3ef818584398479"
+    },
+    {
+      "name": "theme-repeat-3",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:50:55.3764847+00:00",
+      "finishedAt": "2026-10-22T03:51:06.6412759+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-3.log",
+      "logSha256": "d7add7592143b377300f75c0fe29ba3890c292829f7b2d0763f79c7bd0dc6b9e"
+    },
+    {
+      "name": "theme-repeat-4",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:51:06.6959234+00:00",
+      "finishedAt": "2026-10-22T03:51:15.4580779+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-4.log",
+      "logSha256": "156e3a583b98a9c74f43bfa09fa043a0c88f715ff1497055341da519beae239c"
+    },
+    {
+      "name": "theme-repeat-5",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:51:15.4872738+00:00",
+      "finishedAt": "2026-10-22T03:51:23.2913646+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-5.log",
+      "logSha256": "c3b69f11b5513dc0756d4ed449923324cc8338cd4df5cde6e1009d90c7693937"
+    },
+    {
+      "name": "theme-repeat-6",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:51:23.3252300+00:00",
+      "finishedAt": "2026-10-22T03:51:30.7811963+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-6.log",
+      "logSha256": "6c5bf7e4127baa16c9759ce28a9022a5315b4045dbd375feb487b947f58119de"
+    },
+    {
+      "name": "theme-repeat-7",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:51:30.7975491+00:00",
+      "finishedAt": "2026-10-22T03:51:37.4142995+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-7.log",
+      "logSha256": "8da2c61b1da835498d3f4ee71cee713b3b5c057edb14ef224c92c26e6a2e738f"
+    },
+    {
+      "name": "theme-repeat-8",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:51:37.4406570+00:00",
+      "finishedAt": "2026-10-22T03:51:44.9635785+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-8.log",
+      "logSha256": "bc92a9190c5b0fea1df0664b6c67dc2b5d8c279de854094f006d571b6aef86bf"
+    },
+    {
+      "name": "theme-repeat-9",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:51:44.9831775+00:00",
+      "finishedAt": "2026-10-22T03:51:51.0991298+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-9.log",
+      "logSha256": "5ccc3ccbc8beada1a39b29db52a7ab9525823d3a04129a910777081df4ff577c"
+    },
+    {
+      "name": "theme-repeat-10",
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/plugins/use-workbench-theme.test.ts",
+      "arguments": [
+        "--filter",
+        "@any-music/music-workbench",
+        "exec",
+        "vitest",
+        "run",
+        "test/features/plugins/use-workbench-theme.test.ts"
+      ],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:51:51.1157687+00:00",
+      "finishedAt": "2026-10-22T03:51:57.0266511+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/theme-repeat-10.log",
+      "logSha256": "b0d509add62f7b52e809efdbd2b90674d71a73e76e2fc9030f172bc2eebc4368"
+    },
+    {
+      "name": "root-format-check",
+      "command": "pnpm format:check",
+      "arguments": ["format:check"],
+      "phase": "after-fix",
+      "result": "fail",
+      "exitCode": 1,
+      "startedAt": "2026-10-22T03:52:24.5323944+00:00",
+      "finishedAt": "2026-10-22T03:52:27.9211142+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/root-format-check.log",
+      "logSha256": "12476e5dc7d0fd79a3bd84e07f3c91443f46273aa864e1008ee273ff6390020a"
+    },
+    {
+      "name": "root-format-final",
+      "command": "pnpm format:check",
+      "arguments": ["format:check"],
+      "phase": "after-format-cleanup",
+      "result": "fail",
+      "exitCode": 1,
+      "startedAt": "2026-10-22T03:56:44.5556877+00:00",
+      "finishedAt": "2026-10-22T03:56:48.0927005+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/root-format-final.log",
+      "logSha256": "33661c3ba7a36ee3222dda4640fa490716c7bf44db0a810daa54efa9a56e2e62"
+    },
+    {
+      "name": "root-test",
+      "command": "pnpm test",
+      "arguments": ["test"],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:50:21.1676739+00:00",
+      "finishedAt": "2026-10-22T03:51:22.3529265+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/root-test.log",
+      "logSha256": "b714e091c6699b03d5b7c5cd8e9bc85120ef5d60c3f1eb9b5abfb459aae9ae96"
+    },
+    {
+      "name": "root-typecheck",
+      "command": "pnpm typecheck",
+      "arguments": ["typecheck"],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:51:22.4100350+00:00",
+      "finishedAt": "2026-10-22T03:52:22.6934977+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/root-typecheck.log",
+      "logSha256": "0e52d885b915b5c8ab949443aec3dd85d00b08de7c193e511b48862ee2ebb45a"
+    },
+    {
+      "name": "root-lint",
+      "command": "pnpm lint",
+      "arguments": ["lint"],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:52:22.7230281+00:00",
+      "finishedAt": "2026-10-22T03:52:24.5155263+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/root-lint.log",
+      "logSha256": "61759e2de68c1bec3b02765f50fe3441b3d9e0b9fcf2f32c12e276520b8aa448"
+    },
+    {
+      "name": "root-format-clean",
+      "command": "pnpm format:check",
+      "arguments": ["format:check"],
+      "phase": "after-format-cleanup",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:58:01.4340820+00:00",
+      "finishedAt": "2026-10-22T03:58:04.8520237+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/root-format-clean.log",
+      "logSha256": "117fce019a595566d9b8a2ded0579dd852e3e426a0b2086990c5a2fbb69bbf87"
+    },
+    {
+      "name": "root-build",
+      "command": "pnpm build",
+      "arguments": ["build"],
+      "phase": "after-fix",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:52:27.9394776+00:00",
+      "finishedAt": "2026-10-22T03:54:58.7747124+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/root-build.log",
+      "logSha256": "0d268f741499969b6fe1eb27cfd7a4cafd6845623c31344f33a1a13b12877220"
+    },
+    {
+      "name": "root-format-after-report",
+      "command": "pnpm format:check",
+      "arguments": ["format:check"],
+      "phase": "final-report",
+      "result": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-10-22T03:59:02.5407794+00:00",
+      "finishedAt": "2026-10-22T03:59:06.0546906+00:00",
+      "logPath": ".codex-tmp/b21-theme-fix/root-format-after-report.log",
+      "logSha256": "54426c7c56ce5309a8d6be060419e1c53f2014059bf2284479500f036c9cf3de"
+    }
+  ],
+  "repeatSummary": {
+    "freshProcesses": 10,
+    "passedCases": 70,
+    "failures": 0,
+    "assertionTimeoutIncreased": false,
+    "schedulerOverridden": false
+  },
+  "planCoverageAtRepair": {
+    "candidates": 112,
+    "reviewed": 25,
+    "unreviewed": 87
+  },
+  "formatCleanups": [
+    {
+      "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository-baseline.json",
+      "beforeSha256": "114483da0bf453a597ea9eb8b602438bf1b5baa1035832158056428dcec6afc7",
+      "afterSha256": "6f92da03cf1754f2d0021dd6d5f71f0f0fe2aac32064399cd1b4cb303567f422",
+      "nonWhitespaceUnchanged": true
+    },
+    {
+      "path": "docs/en/desktop/runtime-architecture.md",
+      "beforeSha256": "38cbc27cbb1f991a6cc8f35291bb8f491ef3203afa83344e0f91306bf06897f1",
+      "afterSha256": "38cbc27cbb1f991a6cc8f35291bb8f491ef3203afa83344e0f91306bf06897f1",
+      "nonWhitespaceUnchanged": true
+    },
+    {
+      "path": "docs/zh-cn/桌面端/运行端架构.md",
+      "beforeSha256": "15f764fb0bbb190c37f60519a6fb541887979e157a518533f1c773bf575b5ec3",
+      "afterSha256": "15f764fb0bbb190c37f60519a6fb541887979e157a518533f1c773bf575b5ec3",
+      "nonWhitespaceUnchanged": true
+    },
+    {
+      "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository.json",
+      "beforeSha256": "98c44057812671958fd1b4eab23df819866c00df5b977e84eac7d0b7492341f5",
+      "afterSha256": "98c44057812671958fd1b4eab23df819866c00df5b977e84eac7d0b7492341f5",
+      "nonWhitespaceUnchanged": true
+    },
+    {
+      "path": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "beforeSha256": "50404ebc9987edb684b667054a24cfa4cb8df6aba541e7ef3d19642e6b31b775",
+      "afterSha256": "50404ebc9987edb684b667054a24cfa4cb8df6aba541e7ef3d19642e6b31b775",
+      "nonWhitespaceUnchanged": true
+    }
+  ],
+  "unchanged": [
+    "All original assertions",
+    "Production theme loading/switching and UI wording",
+    "Failure, retry and lifecycle coverage",
+    "Workspace concurrency and Vitest configuration",
+    "Native target admission and capture dates"
+  ],
+  "remainingLimits": [
+    "87 planned B01-B20 candidates remain unreviewed; this repair does not close their architecture audits.",
+    "No product/browser/emulator/device was launched. Existing exact-runtime/device/channel evidence gaps remain.",
+    "Offline regression success is bounded evidence; it is not a guarantee against every untested future condition."
+  ],
+  "delivery": {
+    "productionImplementationChanged": false,
+    "testInitializationChanged": true,
+    "committed": false,
+    "pushed": false
+  },
+  "nextBatch": "B06-userscript-generation",
+  "inputRecheck": {
+    "capturedAt": "2026-10-22T03:59:50.458Z",
+    "head": "9719113028a552d886c501da57c900373a88de7f",
+    "noCodeOrManifestDriftAfterTest": true,
+    "codeFilesChecked": 1225,
+    "finalFormatting": ".codex-tmp/b21-theme-fix/root-format-after-report.log"
+  },
+  "remainingCandidatesAtRepair": [
+    {
+      "parentBatch": "B01",
+      "candidate": "B01-audio-recipes",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B01",
+      "candidate": "B01-audio-prefetch",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B01",
+      "candidate": "B01-audio-browser",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B01",
+      "candidate": "B01-core-errors",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B01",
+      "candidate": "B01-core-library",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B01",
+      "candidate": "B01-core-download",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B01",
+      "candidate": "B01-core-ports",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B02",
+      "candidate": "B02-account-pool",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B03",
+      "candidate": "B03-sdk-music",
+      "runtime": ["shared", "tauri"]
+    },
+    {
+      "parentBatch": "B03",
+      "candidate": "B03-sdk-schema",
+      "runtime": ["shared", "tauri"]
+    },
+    {
+      "parentBatch": "B03",
+      "candidate": "B03-sdk-guest",
+      "runtime": ["shared", "tauri"]
+    },
+    {
+      "parentBatch": "B03",
+      "candidate": "B03-sdk-host",
+      "runtime": ["shared", "tauri"]
+    },
+    {
+      "parentBatch": "B03",
+      "candidate": "B03-sdk-node",
+      "runtime": ["shared", "tauri"]
+    },
+    {
+      "parentBatch": "B03",
+      "candidate": "B03-native-protocol",
+      "runtime": ["shared", "tauri"]
+    },
+    {
+      "parentBatch": "B04",
+      "candidate": "B04-music-sources",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B04",
+      "candidate": "B04-dependencies",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B04",
+      "candidate": "B04-enable-disable",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B04",
+      "candidate": "B04-availability",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B05",
+      "candidate": "B05-library",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B05",
+      "candidate": "B05-plugins",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B05",
+      "candidate": "B05-settings",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B05",
+      "candidate": "B05-runtime",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B05",
+      "candidate": "B05-stores",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B05",
+      "candidate": "B05-plugin-adapters",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B06",
+      "candidate": "B06-userscript-generation",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B06",
+      "candidate": "B06-tauri-renderer-mirror",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B06",
+      "candidate": "B06-tauri-native-product-mirror",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B06",
+      "candidate": "B06-plugin-portable-namespaces",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B07",
+      "candidate": "B07-player",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B07",
+      "candidate": "B07-downloads",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B07",
+      "candidate": "B07-audio-export",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B07",
+      "candidate": "B07-userscript-media-wiring",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B07",
+      "candidate": "B07-tauri-media-wiring",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B08",
+      "candidate": "B08-controlled-components",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B08",
+      "candidate": "B08-theme-root",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B08",
+      "candidate": "B08-theme-directory",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B08",
+      "candidate": "B08-layout-live",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B09",
+      "candidate": "B09-music-creation",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B09",
+      "candidate": "B09-userscript-injection",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B09",
+      "candidate": "B09-tauri-injection",
+      "runtime": ["shared", "userscript", "tauri"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-bilibili-session",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-bilibili-search",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-bilibili-import-listing",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-bilibili-media",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-douyin-descriptor",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-douyin-session",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-douyin-search",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-douyin-import-listing",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B10",
+      "candidate": "B10-douyin-media",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B11",
+      "candidate": "B11-shadow-dom",
+      "runtime": ["userscript"]
+    },
+    {
+      "parentBatch": "B11",
+      "candidate": "B11-gm-http",
+      "runtime": ["userscript"]
+    },
+    {
+      "parentBatch": "B11",
+      "candidate": "B11-page-bridges",
+      "runtime": ["userscript"]
+    },
+    {
+      "parentBatch": "B11",
+      "candidate": "B11-gm-storage",
+      "runtime": ["userscript"]
+    },
+    {
+      "parentBatch": "B11",
+      "candidate": "B11-single-proxy",
+      "runtime": ["userscript"]
+    },
+    {
+      "parentBatch": "B11",
+      "candidate": "B11-production-graph",
+      "runtime": ["userscript"]
+    },
+    {
+      "parentBatch": "B12",
+      "candidate": "B12-native-network",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B12",
+      "candidate": "B12-request-registry",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B12",
+      "candidate": "B12-accounts-vault-proxy",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B12",
+      "candidate": "B12-browser-cdp-operation",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B12",
+      "candidate": "B12-media-grants",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B12",
+      "candidate": "B12-system-download",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B12",
+      "candidate": "B12-ipc-acl",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B13",
+      "candidate": "B13-vm-engine-bridge",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B13",
+      "candidate": "B13-browser-adapter",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B13",
+      "candidate": "B13-same-engine-testkit",
+      "runtime": ["shared"]
+    },
+    {
+      "parentBatch": "B15",
+      "candidate": "B15-native-gate",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B15",
+      "candidate": "B15-network-ledger",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B15",
+      "candidate": "B15-final-byte-delivery",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B16",
+      "candidate": "B16-runtime-install-files",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B16",
+      "candidate": "B16-application-package-files",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B16",
+      "candidate": "B16-package-transactions",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B16",
+      "candidate": "B16-revocations-recovery",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B17",
+      "candidate": "B17-sdk-node-artifact",
+      "runtime": ["repository", "tauri"]
+    },
+    {
+      "parentBatch": "B17",
+      "candidate": "B17-testkit-artifact",
+      "runtime": ["repository", "tauri"]
+    },
+    {
+      "parentBatch": "B17",
+      "candidate": "B17-windows-dev-pairing",
+      "runtime": ["repository", "tauri"]
+    },
+    {
+      "parentBatch": "B17",
+      "candidate": "B17-windows-dev-reload",
+      "runtime": ["repository", "tauri"]
+    },
+    {
+      "parentBatch": "B17",
+      "candidate": "B17-windows-dev-end",
+      "runtime": ["repository", "tauri"]
+    },
+    {
+      "parentBatch": "B18",
+      "candidate": "B18-executor-relay",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B18",
+      "candidate": "B18-resource-filter",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B18",
+      "candidate": "B18-command-catalog-save-operation",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B19",
+      "candidate": "B19-android-document-save-keystore",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B19",
+      "candidate": "B19-android-lifecycle",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B19",
+      "candidate": "B19-android-bilibili-accounts-proxy-media",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B19",
+      "candidate": "B19-android-build-signing",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B19",
+      "candidate": "B19-android-minimum-device-channel",
+      "runtime": ["tauri"]
+    },
+    {
+      "parentBatch": "B20",
+      "candidate": "B20-bilingual-counterparts-indexes",
+      "runtime": ["repository"]
+    },
+    {
+      "parentBatch": "B20",
+      "candidate": "B20-targeted-legacy-check",
+      "runtime": ["repository"]
+    }
+  ],
+  "reportRefsAtRepair": [
+    {
+      "parentBatch": "B01",
+      "batchId": "B01-utils-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-fix.json",
+      "sha256": "5cf15919951426fd255a41ee76bfc00211700553478b03a8c221482c35025ed9"
+    },
+    {
+      "parentBatch": "B02",
+      "batchId": "B02-network-routing-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-fix.json",
+      "sha256": "960aaa32dae95193199350bfcdccbb3df3e6db556f2322c93c7b6eaa4aaeda96"
+    },
+    {
+      "parentBatch": "B03",
+      "batchId": "B03-sdk-root-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B03-sdk-root-shared.json",
+      "sha256": "ed69edd3b5c540f40d6a90d36b885a2b7c8ccac34d6ea1e64272a5d4552ddfa1"
+    },
+    {
+      "parentBatch": "B04",
+      "batchId": "B04-generic-root-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-fix.json",
+      "sha256": "e0b810ba22fa6d52964af465bbbedc44a84f90d93180f6c23d8179aefd3c028d"
+    },
+    {
+      "parentBatch": "B05",
+      "batchId": "B05-music-sources-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-fix.json",
+      "sha256": "d8e77fb6e9fd4ba6422621f087c61de82b0e6c001cac2aebfb3fd86779e64410"
+    },
+    {
+      "parentBatch": "B06",
+      "batchId": "B06-workbench-storage-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared-fix.json",
+      "sha256": "e8052ecad59c8b88adb3d5ae7ef23ac48891a5c963a079fe73d5263a872bec15"
+    },
+    {
+      "parentBatch": "B07",
+      "batchId": "B07-media-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B07-media-shared-fix.json",
+      "sha256": "2a1481cc8f2146aca5ee597462014760c21cf857f215d6e3a862dfd8b24f7ccc"
+    },
+    {
+      "parentBatch": "B08",
+      "batchId": "B08-theme-trusted-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B08-theme-trusted-shared-fix.json",
+      "sha256": "4847e41f5ea8ab4f110a64a6838db357cb1f25590192a6791e0732fbfce7c380"
+    },
+    {
+      "parentBatch": "B09",
+      "batchId": "B09-tag-management-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+      "sha256": "44c938a49d28684b0bb503f1a65cb72c52783e0347b789e47b91ef8d95d2a9e3"
+    },
+    {
+      "parentBatch": "B10",
+      "batchId": "B10-bilibili-descriptor-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B10-bilibili-descriptor-shared-fix.json",
+      "sha256": "b5a7da021bad788a1456deafd45754b2fccc3cb19eac9f13ab046fc14b436fab"
+    },
+    {
+      "parentBatch": "B11",
+      "batchId": "B11-document-start-launcher-userscript",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript.json",
+      "sha256": "b328a030a1d9fcaa1ec89595ee36e5b1e4f79ceb48c42e04cdb3685a45d3eabf"
+    },
+    {
+      "parentBatch": "B12",
+      "batchId": "B12-renderer-platform-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-fix.json",
+      "sha256": "22a50c47a482aa9411fe29bf8c96f03f8d448a30dbb524fa36d823b1fe5631e4"
+    },
+    {
+      "parentBatch": "B13",
+      "batchId": "B13-vm-profile-control-shared",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-fix.json",
+      "sha256": "b34b41acd1266c25146c071dce0d948a1a3211c2ce967e3a1d74948bf2fe90a0"
+    },
+    {
+      "parentBatch": "B14",
+      "batchId": "B14-pure-policy-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+      "sha256": "b08ddc3464fc31effcc5f544ebf42ab4e7bf2c2e9f6ac47a3bfd30fd553684e6"
+    },
+    {
+      "parentBatch": "B14",
+      "batchId": "B14-runtime-ports-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+      "sha256": "ca51c0da6a3a956697d31ac282505c564e87042a8223ec45767e19f3752e09f9"
+    },
+    {
+      "parentBatch": "B14",
+      "batchId": "B14-authority-storage-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+      "sha256": "cbca36627fd1aad66a995ab8e6bd857621969d84563f18b3f77e2eb4bd0b414b"
+    },
+    {
+      "parentBatch": "B14",
+      "batchId": "B14-named-commit-revoke-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+      "sha256": "b20aa1b7621e56c92da318a6b4257c1ad384ef902e52be69d7a3f6a5ec96127d"
+    },
+    {
+      "parentBatch": "B15",
+      "batchId": "B15-public-target-bounded-transport-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+      "sha256": "d6a60aa760609bf6c5088dfff49d01250c976d2a1efbc07d02073b5246910f4e"
+    },
+    {
+      "parentBatch": "B16",
+      "batchId": "B16-package-verification-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B16-package-verification-tauri-fix.json",
+      "sha256": "ddfe173b53e70e12efc9f787314c1d0ba71208fe0c12e36cfc4f85415a7fbb26"
+    },
+    {
+      "parentBatch": "B17",
+      "batchId": "B17-cli-build-pack-sign",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B21-b17-cli-revalidation.json",
+      "sha256": "5c4f979a960b4e6477fe21b65bb50d3284ce6bdbc3e5d4d3bf85b84798a464f1"
+    },
+    {
+      "parentBatch": "B18",
+      "batchId": "B18-native-delivery-control-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B18-native-delivery-control-tauri-fix.json",
+      "sha256": "b6646f7939bbaf1c357c7afa05e9ccc7ecdacd060fb05a90b8abba361b709040"
+    },
+    {
+      "parentBatch": "B19",
+      "batchId": "B19-android-capabilities-acl-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-android-capabilities-acl-tauri-fix.json",
+      "sha256": "695d846fba410c48b486d25d51c94566770e707cc5dfee7f7d28fbb72bfa3d70"
+    },
+    {
+      "parentBatch": "B19",
+      "batchId": "B19-ios-capability-boundary-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B19-ios-capability-boundary-tauri.json",
+      "sha256": "12db63bd566f331f0cdc6cf7c66475b854598947acfeb8c297e6f0b27b43b246"
+    },
+    {
+      "parentBatch": "B20",
+      "batchId": "B20-reviewed-area-guidance-repository",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-reviewed-area-guidance-repository.json",
+      "sha256": "3bdbb3867cf9cd43922756ab42fc49043e07753ffda498fef18b773fa4687049"
+    },
+    {
+      "parentBatch": "B20",
+      "batchId": "B20-ownership-status-scope-repository",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B20-ownership-status-scope-repository.json",
+      "sha256": "98c44057812671958fd1b4eab23df819866c00df5b977e84eac7d0b7492341f5"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "playback-queue:v1": {
+    "schemaVersion": 1,
+    "trackIds": ["fixture:audio:b", "fixture:audio:a"],
+    "mode": "shuffle",
+    "arrangementMode": "platform",
+    "addedAtMsByTrackId": {
+      "fixture:audio:b": 20,
+      "fixture:audio:a": 10
+    }
+  },
+  "music-source-workspace:v1": {
+    "schemaVersion": 1,
+    "disabledPluginIds": ["custom-fixture-v2"],
+    "activePluginId": "fixture",
+    "searchQuery": "Fixture query",
+    "importUrl": "https://example.com/playlist/fixture",
+    "downloadConcurrency": 2,
+    "drawers": [
+      {
+        "id": "drawer:fixture",
+        "pluginId": "fixture",
+        "kind": "search",
+        "input": "Fixture query",
+        "title": "Renamed fixture",
+        "originalTitle": "Fixture query",
+        "isPinned": true,
+        "isExpanded": true,
+        "createdAtMs": 10
+      }
+    ]
+  },
+  "catalog-filter-history:v1": [
+    {
+      "dimension": "tags",
+      "filters": {
+        "tags": ["ambiguous-legacy-tag"]
+      }
+    }
+  ],
+  "catalog-filter-history:v2": [
+    {
+      "scopeId": "catalog:tracks:drawer:fixture",
+      "dimension": "tags",
+      "filters": {
+        "tags": ["user-tag"]
+      }
+    },
+    {
+      "scopeId": "favorites:tracks",
+      "dimension": "search",
+      "filters": {
+        "searchFilters": [
+          {
+            "query": "Fixture"
+          }
+        ]
+      }
+    }
+  ],
+  "catalog-filter-history-settings:v1": {
+    "limits": {
+      "search": 8,
+      "tags": 6,
+      "published": 5,
+      "duration": 4,
+      "platforms": 3,
+      "naming": 2
+    },
+    "collapseAfter": 2,
+    "contexts": {
+      "queue": {
+        "limits": {
+          "search": 7
+        },
+        "collapseAfter": 4
+      }
+    }
+  },
+  "download-history:v1": {
+    "schemaVersion": 2,
+    "batches": [
+      {
+        "id": "batch:fixture",
+        "origin": {
+          "kind": "queue",
+          "label": "Fixture queue"
+        },
+        "status": "running",
+        "startedAtMs": 10,
+        "concurrency": 1,
+        "items": [
+          {
+            "id": "item:fixture",
+            "track": {
+              "id": "fixture:audio:a",
+              "title": "Fixture a",
+              "artists": [
+                {
+                  "id": "artist:fixture",
+                  "name": "Fixture artist"
+                }
+              ],
+              "durationMs": 10000,
+              "sourceTags": ["source-tag"],
+              "source": {
+                "pluginId": "fixture",
+                "mediaKind": "audio",
+                "resourceId": "a"
+              }
+            },
+            "status": "downloading",
+            "requestedAtMs": 10,
+            "startedAtMs": 11,
+            "maxRetryCount": 2,
+            "attempts": [
+              {
+                "attemptNumber": 1,
+                "startedAtMs": 10,
+                "completedAtMs": 11,
+                "status": "failed",
+                "error": {
+                  "code": "download-failed",
+                  "statusCode": "AM-7201",
+                  "message": "Fixture failure"
+                }
+              },
+              {
+                "attemptNumber": 2,
+                "startedAtMs": 12,
+                "status": "running"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app-shell:v1": {
+    "schemaVersion": 1,
+    "sidebarSide": "right",
+    "isSidebarCollapsed": true,
+    "isMobileNavigationEnabled": true,
+    "theme": "dark",
+    "destinationOrder": [
+      "tags",
+      "composer",
+      "custom-tracks",
+      "catalog",
+      "queue",
+      "favorites",
+      "playlists",
+      "downloads",
+      "history",
+      "plugins"
+    ],
+    "hiddenDestinationIds": ["tags", "composer"]
+  }
+}

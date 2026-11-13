@@ -1,0 +1,163 @@
+{
+  "recordedAt": "2026-10-19T16:12:38.824Z",
+  "runtimeScope": "tauri",
+  "evidenceScope": "offline-only",
+  "productLaunched": false,
+  "browserLaunched": false,
+  "emulatorLaunched": false,
+  "gitCommitted": false,
+  "gitPushed": false,
+  "acceptedMobileTargets": [],
+  "checks": [
+    {
+      "command": "pnpm test",
+      "startedAt": "2026-10-19T16:05:32.9324019Z",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/test.log",
+      "logSha256": "6b2fb1ea59c25e3880e9bc4e3a9521abb3ed40e448b9a4aeda7541d4c7701e1f"
+    },
+    {
+      "command": "pnpm typecheck",
+      "startedAt": "2026-10-19T16:06:27.4102090Z",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/typecheck.log",
+      "logSha256": "1315d5a5a97842e22c0f1a7189525932ada9e908b4df81cdb2c5d35280d6d756"
+    },
+    {
+      "command": "pnpm lint",
+      "startedAt": "2026-10-19T16:07:13.6908424Z",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/lint.log",
+      "logSha256": "f7f3878f7b62359127276f7e27e87a37336e864b4f8bcea5358833536f7217f6"
+    },
+    {
+      "command": "pnpm format:check",
+      "startedAt": "2026-10-19T16:07:15.1663939Z",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/format-check.log",
+      "logSha256": "9edaf7e4a2205cbd86d6f0f339c7fd9759dc1743f9513b43ad9ea5d7285f8c1f"
+    },
+    {
+      "command": "pnpm build",
+      "startedAt": "2026-10-19T16:07:18.8553934Z",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/build.log",
+      "logSha256": "98a3d4b242b0a9b5a8a6911b7e304504b98cf98eddb962e684ccb95c465de3ff"
+    },
+    {
+      "command": "pnpm check:native",
+      "startedAt": "2026-10-19T16:03:02.3003427Z",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/check-native.log",
+      "logSha256": "2694e647df31531a1d01f9ee32dbcafce553a8c1781a01a2f251271bf70700eb"
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "startedAt": "2026-10-19T16:03:28.0592417Z",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/check-rust-msrv.log",
+      "logSha256": "74809e6dfd97a1ae949a2d0523ba92e6da1dc2fbffbb1cb7f79386a797671910"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "startedAt": "2026-10-19T16:03:52.5781209Z",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/check-rust-deny.log",
+      "logSha256": "aa9b1476db446615ecdff6d63f4540567f83dd83160b8b445b521808377fc233"
+    }
+  ],
+  "tests": {
+    "vitestPassed": 1724,
+    "rustPassed": 192,
+    "rustIgnored": 1,
+    "rootScriptTestsPassed": 24
+  },
+  "android": {
+    "target": "aarch64-linux-android",
+    "rust": "1.91.1",
+    "ndk": "30.0.16248370",
+    "minSdk": 24,
+    "targetSdk": 37,
+    "identifier": "com.anymusic.app",
+    "externalPlugins": "none",
+    "clippy": {
+      "command": "pnpm check:mobile:android",
+      "exitCode": 0,
+      "localLog": ".codex-tmp/s16/android-check.log",
+      "logSha256": "185b98f3a7ab53302121f9d677b236a0a0a0c0a814f9744b3467265b528c28f8"
+    },
+    "standardApkBuild": {
+      "exitCode": 1,
+      "blocker": "Windows symbolic-link privilege unavailable",
+      "localLog": ".codex-tmp/s16/android-final-build.log",
+      "logSha256": "6735ee5ceb44f668d7b1fc42a5a5ce5156b05927a5423b9927efb28986e73797"
+    },
+    "debugApkAssembly": {
+      "exitCode": 0,
+      "acquisition": "Copy the current compiled JNI library; Gradle skips only duplicate Rust/symlink task",
+      "command": "gradlew --project-dir apps/tauri/src-tauri/gen/android --no-daemon --console plain :app:assembleArm64Debug -x :app:rustBuildArm64Debug",
+      "localLog": ".codex-tmp/s16/android-gradle-final.log",
+      "logSha256": "7e612b36bd4cede318dee9e7b2091cdfa5d66cdb4891155d56ab12f0f2b74492"
+    },
+    "artifact": {
+      "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/arm64/debug/app-arm64-debug.apk",
+      "bytes": 235981249,
+      "sha256": "abb34f3399121ce2d9263701fb76ffec7419f501b5dfc8d1cd741e888c9b9841",
+      "nativeLibrarySha256": "e69c0081af428b968485e64949037c436547c573604b6100c0cc5365431c5f4e",
+      "nativeLibraryMatches": true,
+      "executed": false
+    },
+    "deviceEvidence": null,
+    "channelAcceptance": null
+  },
+  "ios": {
+    "externalPlugins": "none",
+    "generatedProject": false,
+    "buildEvidence": null,
+    "deviceEvidence": null,
+    "blocker": "macOS/Xcode required; Windows CLI has no ios initialization command"
+  },
+  "preservation": {
+    "preexistingChangedPaths": 829,
+    "unchangedHashes": 794,
+    "intentionallyEditedPreexistingPaths": [
+      "apps/tauri/src-tauri/permissions/product.toml",
+      "apps/tauri/src-tauri/src/ipc.rs",
+      "apps/tauri/src-tauri/src/plugins.rs",
+      "apps/tauri/src-tauri/src/plugins/control.rs",
+      "apps/tauri/src-tauri/src/plugins/delivery.rs",
+      "apps/tauri/src-tauri/src/plugins/dev.rs",
+      "apps/tauri/src-tauri/src/plugins/network.rs",
+      "apps/tauri/src-tauri/src/plugins/target.rs",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "scripts/test/check-plugin-isolation.test.mjs",
+      ".agents/skills/any-music-tauri-runtime/SKILL.md",
+      "AGENTS.md",
+      "README.en.md",
+      "README.md",
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      "apps/tauri/src-tauri/build.rs",
+      "apps/tauri/src-tauri/capabilities/main.json",
+      "apps/tauri/src-tauri/src/lib.rs",
+      "apps/tauri/src-tauri/src/media.rs",
+      "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "docs/en/README.md",
+      "docs/en/cross-platform/README.md",
+      "docs/en/desktop/README.md",
+      "docs/en/desktop/development.md",
+      "docs/en/desktop/runtime-architecture.md",
+      "docs/zh-cn/文档索引.md",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "docs/zh-cn/桌面端/文档索引.md",
+      "docs/zh-cn/桌面端/运行端架构.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "package.json"
+    ],
+    "newTrackedDeletions": 0,
+    "localBaseline": ".codex-tmp/s16/start.json"
+  }
+}

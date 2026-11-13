@@ -1,0 +1,527 @@
+
+> any-music@0.0.0 test <project-root>
+> node --test scripts/test/*.test.mjs && pnpm -r --if-present run test
+
+✔ mobile theme packages cannot depend on desktop/native APIs, including through a second script block (79.7275ms)
+✔ mobile capabilities separate Android built-in transport from iOS local data (350.4185ms)
+✔ desktop or remote privilege cannot enter mobile through configuration (23.4143ms)
+✔ accepts valid sources and deferred/type-only heavy imports (82.3749ms)
+✔ VM profiles and adapter roots stay engine-free; native imports and production testkit are rejected (68.3582ms)
+✔ trusted build directory discovery cannot eagerly load Vue through the workbench root (64.676ms)
+✔ theme metadata stays lightweight and Vue adapters cannot import private workbench state (59.2551ms)
+✔ rejects undeclared and forbidden internal dependencies (62.9202ms)
+✔ tag metadata remains lightweight and the feature cannot consume host repositories (65.4962ms)
+✔ rejects app aliases and relative paths outside the package (66.7501ms)
+✔ creation metadata cannot load presentation or access private host state (47.7328ms)
+✔ routing packages reject Node and music dependencies while accepting their public edge (69.7596ms)
+✔ follows the source plugin root barrel to eager codecs (50.1155ms)
+✔ SDK rejects runtime libraries, even through a local barrel (53.4974ms)
+✔ rejects browser audio implementations without a codec import (49.0461ms)
+✔ accepts export patterns and rejects private exports (57.5459ms)
+✔ source metadata cannot load protocols and source plugins cannot access the host (43.0137ms)
+✔ independent themes accept only public metadata, Vue and style entries without eager presentation (76.6283ms)
+✔ theme dependency fixtures reject cross-theme, host, native, SDK, private and cyclic edges (185.0303ms)
+✔ theme metadata follows local barrels; private exports and cross-theme Sass cannot escape checks (90.7802ms)
+✔ third themes inherit metadata, dependency, selector and runtime boundaries (101.7835ms)
+✔ neutral UI rejects hidden theme skins and retired dispatch imports (51.9377ms)
+✔ built-in themes cannot acquire plugin authority through package imports (88.4249ms)
+✔ the actual registry has complete AppManifest coverage and exact main authority (351.8218ms)
+✔ new commands, broad capabilities, remote access and relay grants cannot silently bypass review (14.825ms)
+✔ actual acceptance records fail closed on missing evidence, leaked authority or inconsistent targets (2.7389ms)
+✔ pure protocol/policy dependency closures reject an IO dependency several edges away (45.9253ms)
+✔ Cargo cycle and reverse policy dependency are rejected (28.3403ms)
+✔ anonymous plugin transport cannot acquire native authority or account persistence (35.2847ms)
+✔ standard-library IO and global clocks cannot bypass a dependency-only check (0.7754ms)
+✔ package verification cannot acquire native runtime authority or a transport (30.7682ms)
+✔ Android signing needs an explicit release and complete credentials before any build (2.8002ms)
+✔ release verification rejects compiled debug, backup, cleartext and test-harness variants (2.592ms)
+✔ instrumentation requires completed tests and rejects adb success with failed JUnit (0.7381ms)
+✔ third theme styles load as inert values with the same scope ID as their templates (58.7464ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1832.8574
+Scope: 22 of 23 workspace projects
+packages/audio-composition test$ vitest run
+packages/network-routing test$ vitest run
+packages/plugin-sdk test$ pnpm generate:check && vitest run
+packages/audio-composition test:  RUN  v4.1.11 <project-root>/packages/audio-composition
+packages/network-routing test:  RUN  v4.1.11 <project-root>/packages/network-routing
+packages/plugin-sdk test: > @any-music/plugin-sdk@0.1.0 generate:check <project-root>\packages\plugin-sdk
+packages/plugin-sdk test: > node scripts/generate.mjs --check
+packages/network-routing test:  Test Files  2 passed (2)
+packages/network-routing test:       Tests  28 passed (28)
+packages/network-routing test:    Start at  11:28:25
+packages/network-routing test:    Duration  416ms (transform 140ms, setup 0ms, import 309ms, tests 33ms, environment 0ms)
+packages/network-routing test: Done
+packages/audio-composition test:  Test Files  5 passed (5)
+packages/audio-composition test:       Tests  15 passed (15)
+packages/audio-composition test:    Start at  11:28:25
+packages/audio-composition test:    Duration  653ms (transform 308ms, setup 0ms, import 800ms, tests 350ms, environment 1ms)
+packages/audio-composition test: Done
+packages/plugin-sdk test: SDK generated artifacts match (47 definitions).
+packages/plugin-sdk test:  RUN  v4.1.11 <project-root>/packages/plugin-sdk
+packages/plugin-sdk test:  Test Files  5 passed (5)
+packages/plugin-sdk test:       Tests  120 passed (120)
+packages/plugin-sdk test:    Start at  11:28:27
+packages/plugin-sdk test:    Duration  1.17s (transform 2.46s, setup 0ms, import 4.58s, tests 139ms, environment 0ms)
+packages/plugin-sdk test: Done
+packages/account-pool test$ vitest run
+packages/core test$ vitest run
+packages/plugin-vm test$ vitest run
+packages/account-pool test:  RUN  v4.1.11 <project-root>/packages/account-pool
+packages/plugin-vm test:  RUN  v4.1.11 <project-root>/packages/plugin-vm
+packages/core test:  RUN  v4.1.11 <project-root>/packages/core
+packages/account-pool test:  Test Files  3 passed (3)
+packages/account-pool test:       Tests  22 passed (22)
+packages/account-pool test:    Start at  11:28:29
+packages/account-pool test:    Duration  558ms (transform 307ms, setup 0ms, import 633ms, tests 40ms, environment 0ms)
+packages/account-pool test: Done
+packages/core test:  Test Files  8 passed (8)
+packages/core test:       Tests  49 passed (49)
+packages/core test:    Start at  11:28:29
+packages/core test:    Duration  662ms (transform 534ms, setup 0ms, import 1.14s, tests 126ms, environment 1ms)
+packages/core test: Done
+packages/plugin-vm test:  Test Files  3 passed (3)
+packages/plugin-vm test:       Tests  39 passed (39)
+packages/plugin-vm test:    Start at  11:28:29
+packages/plugin-vm test:    Duration  1.35s (transform 696ms, setup 0ms, import 1.23s, tests 40ms, environment 0ms)
+packages/plugin-vm test: Done
+packages/plugin-center test$ vitest run
+packages/plugin-sandbox-browser test$ pnpm build && vitest run
+packages/plugin-testkit test$ vitest run
+packages/ui test$ vitest run
+packages/plugin-center test:  RUN  v4.1.11 <project-root>/packages/plugin-center
+packages/plugin-sandbox-browser test: > @any-music/plugin-sandbox-browser@0.1.0 build <project-root>\packages\plugin-sandbox-browser
+packages/plugin-sandbox-browser test: > node scripts/build.mjs
+packages/plugin-testkit test:  RUN  v4.1.11 <project-root>/packages/plugin-testkit
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/plugin-sandbox-browser test: vite v8.2.2 building client environment for production...
+packages/plugin-sandbox-browser test: transforming...
+packages/plugin-sandbox-browser test: ✓ 24 modules transformed.
+packages/plugin-sandbox-browser test: rendering chunks...
+packages/plugin-sandbox-browser test: computing gzip size...
+packages/plugin-sandbox-browser test: dist/worker.js  780.35 kB │ gzip: 333.29 kB
+packages/plugin-sandbox-browser test: ✓ built in 428ms
+packages/plugin-center test:  Test Files  9 passed (9)
+packages/plugin-center test:       Tests  56 passed (56)
+packages/plugin-center test:    Start at  11:28:31
+packages/plugin-center test:    Duration  1.00s (transform 2.17s, setup 0ms, import 3.87s, tests 178ms, environment 1ms)
+packages/plugin-center test: Done
+packages/plugin-sandbox-browser test:  RUN  v4.1.11 <project-root>/packages/plugin-sandbox-browser
+packages/ui test:  Test Files  61 passed (61)
+packages/ui test:       Tests  330 passed (330)
+packages/ui test:    Start at  11:28:31
+packages/ui test:    Duration  4.82s (transform 9.05s, setup 0ms, import 20.42s, tests 1.59s, environment 31ms)
+packages/ui test: Done
+packages/plugin-sandbox-browser test:  Test Files  3 passed (3)
+packages/plugin-sandbox-browser test:       Tests  18 passed (18)
+packages/plugin-sandbox-browser test:    Start at  11:28:32
+packages/plugin-sandbox-browser test:    Duration  4.14s (transform 3.93s, setup 0ms, import 6.01s, tests 1.85s, environment 1ms)
+packages/plugin-sandbox-browser test: Done
+packages/plugin-testkit test:  Test Files  1 passed (1)
+packages/plugin-testkit test:       Tests  33 passed (33)
+packages/plugin-testkit test:    Start at  11:28:31
+packages/plugin-testkit test:    Duration  5.99s (transform 1.06s, setup 0ms, import 1.80s, tests 3.83s, environment 0ms)
+packages/plugin-testkit test: Done
+packages/plugin-cli test$ pnpm --filter @any-music/plugin-testkit build && node --test test/*.test.mjs
+packages/plugin-music-creation test$ vitest run
+packages/plugin-source-bilibili test$ vitest run
+packages/plugin-source-douyin test$ vitest run
+packages/plugin-source-bilibili test:  RUN  v4.1.11 <project-root>/packages/plugin-source-bilibili
+packages/plugin-source-douyin test:  RUN  v4.1.11 <project-root>/packages/plugin-source-douyin
+packages/plugin-cli test: > @any-music/plugin-testkit@0.1.0 build <project-root>\packages\plugin-testkit
+packages/plugin-cli test: > node scripts/build.mjs
+packages/plugin-music-creation test:  RUN  v4.1.11 <project-root>/packages/plugin-music-creation
+packages/plugin-source-bilibili test:  Test Files  3 passed (3)
+packages/plugin-source-bilibili test:       Tests  47 passed (47)
+packages/plugin-source-bilibili test:    Start at  11:28:37
+packages/plugin-source-bilibili test:    Duration  848ms (transform 661ms, setup 0ms, import 1.47s, tests 34ms, environment 0ms)
+packages/plugin-source-bilibili test: Done
+packages/plugin-tag-management test$ vitest run
+packages/plugin-source-douyin test:  Test Files  6 passed (6)
+packages/plugin-source-douyin test:       Tests  86 passed (86)
+packages/plugin-source-douyin test:    Start at  11:28:37
+packages/plugin-source-douyin test:    Duration  1.01s (transform 1.22s, setup 0ms, import 2.23s, tests 252ms, environment 1ms)
+packages/plugin-source-douyin test: Done
+packages/plugin-ui-vue test$ vitest run
+packages/plugin-tag-management test:  RUN  v4.1.11 <project-root>/packages/plugin-tag-management
+packages/plugin-ui-vue test:  RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+packages/plugin-cli test: ✔ public source template paginates anonymous catalog responses through named ports and handles denial (311.9493ms)
+packages/plugin-cli test: ✔ source-code: create → check → same VM tests → reproducible archive → verify → migration (597.0662ms)
+packages/plugin-cli test: ✔ source-declarative: create → check → same VM tests → reproducible archive → verify → migration (64.4555ms)
+packages/plugin-cli test: ✔ tag-suggestion: create → check → same VM tests → reproducible archive → verify → migration (230.4768ms)
+packages/plugin-music-creation test:  Test Files  4 passed (4)
+packages/plugin-music-creation test:       Tests  14 passed (14)
+packages/plugin-music-creation test:    Start at  11:28:37
+packages/plugin-music-creation test:    Duration  2.59s (transform 4.27s, setup 0ms, import 8.93s, tests 52ms, environment 4ms)
+packages/plugin-music-creation test: Done
+packages/theme-default test$ vitest run
+packages/plugin-cli test: ✔ export: create → check → same VM tests → reproducible archive → verify → migration (249.6433ms)
+packages/plugin-cli test: ✔ config and pack hooks are inert; sealed source survives path edits (125.1983ms)
+packages/plugin-cli test: ✔ small sealed assets retain bounded memory and preserve their original package bytes (161.234ms)
+packages/plugin-cli test: ✔ sealed reads preserve empty files, exact limits and over-budget rejection (25.7375ms)
+packages/plugin-cli test: ✔ non-config JSON null returns a configuration error (38.047ms)
+packages/plugin-cli test: ✔ non-config JSON [] returns a configuration error (23.4698ms)
+packages/plugin-cli test: ✔ non-config JSON true returns a configuration error (24.3885ms)
+packages/plugin-cli test: ✔ non-config JSON 0 returns a configuration error (25.5432ms)
+packages/plugin-cli test: ✔ non-config JSON "invalid" returns a configuration error (28.5406ms)
+packages/plugin-cli test: ✔ non-config JSON {} returns a configuration error (22.6187ms)
+packages/plugin-cli test: ✔ static checks reject native globals, dynamic code, network and foreign imports (1.3765ms)
+packages/plugin-cli test: ✔ linked files and escaped graphs are rejected (25.7455ms)
+packages/plugin-cli test: ✔ signatures use raw integrity bytes and an explicit publisher pin (142.9807ms)
+packages/theme-default test:  RUN  v4.1.11 <project-root>/packages/theme-default
+packages/plugin-cli test: ✔ CLI stdout is JSON and failures have stable exit codes (71.6923ms)
+packages/plugin-cli test: ✔ DEV requires host pairing and never creates a server or launches an application (0.2344ms)
+packages/plugin-tag-management test:  Test Files  3 passed (3)
+packages/plugin-tag-management test:       Tests  11 passed (11)
+packages/plugin-tag-management test:    Start at  11:28:39
+packages/plugin-tag-management test:    Duration  2.35s (transform 2.51s, setup 0ms, import 4.85s, tests 49ms, environment 1ms)
+packages/plugin-ui-vue test:  Test Files  8 passed (8)
+packages/plugin-ui-vue test:       Tests  41 passed (41)
+packages/plugin-ui-vue test:    Start at  11:28:39
+packages/plugin-ui-vue test:    Duration  2.22s (transform 3.73s, setup 0ms, import 8.72s, tests 409ms, environment 4ms)
+packages/plugin-ui-vue test: Done
+packages/theme-studio test$ vitest run
+packages/plugin-tag-management test: Done
+packages/plugin-cli test: ✔ pack smoke rejects a malformed continuation and invalid nested completion JSON (517.3524ms)
+packages/plugin-cli test: ✔ doctor/check capability matrix rejects required host gaps and permits unavailable optionals (50.458ms)
+packages/plugin-cli test: ℹ tests 21
+packages/plugin-cli test: ℹ suites 0
+packages/plugin-cli test: ℹ pass 21
+packages/plugin-cli test: ℹ fail 0
+packages/plugin-cli test: ℹ cancelled 0
+packages/plugin-cli test: ℹ skipped 0
+packages/plugin-cli test: ℹ todo 0
+packages/plugin-cli test: ℹ duration_ms 3460.7015
+packages/plugin-cli test: Done
+packages/theme-studio test:  RUN  v4.1.11 <project-root>/packages/theme-studio
+packages/theme-default test:  Test Files  50 passed (50)
+packages/theme-default test:       Tests  350 passed (350)
+packages/theme-default test:    Start at  11:28:41
+packages/theme-default test:    Duration  6.83s (transform 16.95s, setup 0ms, import 42.22s, tests 7.71s, environment 19ms)
+packages/theme-default test: Done
+packages/theme-studio test:  Test Files  2 passed (2)
+packages/theme-studio test:       Tests  12 passed (12)
+packages/theme-studio test:    Start at  11:28:42
+packages/theme-studio test:    Duration  6.01s (transform 2.77s, setup 0ms, import 5.57s, tests 898ms, environment 1ms)
+packages/theme-studio test: Done
+packages/music-workbench test$ vitest run
+packages/music-workbench test:  RUN  v4.1.11 <project-root>/packages/music-workbench
+packages/music-workbench test:  Test Files  56 passed (56)
+packages/music-workbench test:       Tests  407 passed (407)
+packages/music-workbench test:    Start at  11:28:48
+packages/music-workbench test:    Duration  8.98s (transform 26.16s, setup 0ms, import 56.97s, tests 10.85s, environment 16ms)
+packages/music-workbench test: Done
+apps/tauri test$ vitest run && cargo test --manifest-path ../../Cargo.toml --workspace --locked && pnpm -w check:protocol
+apps/userscript test$ vitest run --config vitest.config.ts
+apps/tauri test:  RUN  v4.1.11 <project-root>/apps/tauri
+apps/userscript test:  RUN  v4.1.11 <project-root>/apps/userscript
+apps/tauri test:  Test Files  40 passed (40)
+apps/tauri test:       Tests  354 passed (354)
+apps/tauri test:    Start at  11:28:58
+apps/tauri test:    Duration  4.52s (transform 15.70s, setup 0ms, import 26.54s, tests 5.26s, environment 22ms)
+apps/userscript test:  Test Files  18 passed (18)
+apps/userscript test:       Tests  82 passed (82)
+apps/userscript test:    Start at  11:28:58
+apps/userscript test:    Duration  4.59s (transform 6.44s, setup 0ms, import 9.58s, tests 5.12s, environment 7ms)
+apps/userscript test: Done
+apps/tauri test:    Compiling am-plugin-policy v0.1.0 (<project-root>\crates\am-plugin-policy)
+apps/tauri test:     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.91s
+apps/tauri test:      Running unittests src\lib.rs (<project-root>\target\debug\deps\am_plugin_net-64ffacc9ef6f356a.exe)
+apps/tauri test: running 9 tests
+apps/tauri test: test tests::mixed_dns_and_unconstrained_proxy_routes_make_no_connection ... ok
+apps/tauri test: test tests::hostile_headers_ranges_and_non_http_exits_never_dispatch ... ok
+apps/tauri test: test tests::tls_validation_still_uses_original_hostname ... ok
+apps/tauri test: test tests::resource_range_release_and_revocation_keep_the_same_gate ... ok
+apps/tauri test: test tests::revocation_during_streaming_stops_chunks_and_late_results ... ok
+apps/tauri test: test tests::cross_origin_303_reconstructs_headers_and_body_without_secrets ... ok
+apps/tauri test: test tests::real_tls_anonymous_channel_filters_cookie_and_response_headers ... ok
+apps/tauri test: test tests::redirects_cannot_rebind_escape_hosts_or_preserve_cross_origin_post ... ok
+apps/tauri test: test tests::redirect_and_byte_budgets_are_cumulative ... ok
+apps/tauri test: test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+apps/tauri test:      Running tests\targets.rs (<project-root>\target\debug\deps\targets-8d4344414babef7b.exe)
+apps/tauri test: running 3 tests
+apps/tauri test: test every_dns_candidate_must_be_public ... ok
+apps/tauri test: test special_numeric_translation_and_credential_targets_fail_closed ... ok
+apps/tauri test: test normalized_hosts_keep_exact_scope_boundaries ... ok
+apps/tauri test: test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:      Running unittests src\lib.rs (<project-root>\target\debug\deps\am_plugin_package-97ea5cfc8a10d430.exe)
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:      Running tests\corpus.rs (<project-root>\target\debug\deps\corpus-68d16ead7d354405.exe)
+apps/tauri test: running 2 tests
+apps/tauri test: test cancellation_is_checked_before_parser_allocation ... ok
+apps/tauri test: test shared_package_corpus_and_node_ed25519_vectors ... ok
+apps/tauri test: test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+apps/tauri test:      Running tests\revocations.rs (<project-root>\target\debug\deps\revocations-664a358c1a06c642.exe)
+apps/tauri test: running 1 test
+apps/tauri test: test only_app_trust_roots_can_publish_fresh_revocations_and_rotate_preprovisioned_keys ... ok
+apps/tauri test: test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+apps/tauri test:      Running unittests src\lib.rs (<project-root>\target\debug\deps\am_plugin_policy-31428c13697d96b0.exe)
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:      Running tests\authorization.rs (<project-root>\target\debug\deps\authorization-79ac986acce509f5.exe)
+apps/tauri test: running 3 tests
+apps/tauri test: test cumulative_limits_and_overflow_fail_closed ... ok
+apps/tauri test: test rejects_stale_subject_scope_expiry_and_missing_grants ... ok
+apps/tauri test: test private_history_and_new_private_reads_require_egress_approval ... ok
+apps/tauri test: test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:      Running unittests src\lib.rs (<project-root>\target\debug\deps\am_plugin_protocol-84fc0bf73b44ba04.exe)
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:      Running tests\contracts.rs (<project-root>\target\debug\deps\contracts-3727a74c0bd108c9.exe)
+apps/tauri test: running 4 tests
+apps/tauri test: test rejects_invalid_utf8_bom_trailing_tokens_and_noncanonical_numbers ... ok
+apps/tauri test: test operation_literals_select_the_correct_serde_union_branch ... ok
+apps/tauri test: test typed_dtos_deny_unknown_fields_and_round_trip ... ok
+apps/tauri test: test consumes_sdk_raw_schema_corpus ... ok
+apps/tauri test: test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+apps/tauri test:      Running unittests src\lib.rs (<project-root>\target\debug\deps\am_plugin_runtime-f27b09ed803e9694.exe)
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:      Running tests\offline.rs (<project-root>\target\debug\deps\offline-f14ea72cf2a88c00.exe)
+apps/tauri test: running 26 tests
+apps/tauri test: test changed_content_cannot_reuse_an_old_grant_even_for_a_new_session ... ok
+apps/tauri test: test failed_revoke_never_acknowledges_or_mutates_in_memory ... ok
+apps/tauri test: test corrupt_policy_and_secret_input_fail_closed ... ok
+apps/tauri test: test commit_rechecks_epoch_after_durable_revocation ... ok
+apps/tauri test: test expiry_and_selection_close_reject_late_work ... ok
+apps/tauri test: test actual_channel_document_and_account_are_all_bound ... ok
+apps/tauri test: test a_private_host_annotation_cannot_be_forwarded_by_a_public_network_plugin ... ok
+apps/tauri test: test expected_version_and_operation_id_are_checked_at_commit ... ok
+apps/tauri test: test chunks_retries_and_finished_requests_share_session_budgets_and_audit_is_redacted ... ok
+apps/tauri test: test capability_guard_refreshes_time_after_transaction_admission ... ok
+apps/tauri test: test no_url_scheme_can_substitute_for_host_preview_or_business_commit ... ok
+apps/tauri test: test oversized_payload_and_unselected_annotation_have_no_effect ... ok
+apps/tauri test: test idle_network_grants_and_changed_install_identity_fail_closed ... ok
+apps/tauri test: test context_guard_refreshes_time_after_transaction_admission ... ok
+apps/tauri test: test new_selection_invalidates_old_context_and_reservations ... ok
+apps/tauri test: test namespaces_and_tickets_cannot_cross_plugins ... ok
+apps/tauri test: test operation_ids_do_not_replay_through_a_new_native_channel ... ok
+apps/tauri test: test private_a_to_host_title_to_b_remains_private ... ok
+apps/tauri test: test restart_invalidates_sessions_and_pending_work_but_preserves_data_and_history ... ok
+apps/tauri test: test selected_projection_never_enumerates_hidden_fields_or_objects ... ok
+apps/tauri test: test retained_private_data_cannot_be_unread_before_networking_or_reinstall ... ok
+apps/tauri test: test unknown_history_or_provenance_is_private_and_never_self_downgraded ... ok
+apps/tauri test: test retained_lineage_and_public_refresh_cannot_erase_private_origin ... ok
+apps/tauri test: test every_exit_uses_real_channel_epoch_and_context ... ok
+apps/tauri test: test public_then_linked_then_private_combinations_require_distinct_approval ... ok
+apps/tauri test: test reinstall_and_hash_publisher_data_generation_changes_invalidate_old_channels ... ok
+apps/tauri test: test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:      Running unittests src\lib.rs (<project-root>\target\debug\deps\any_music_tauri_lib-1f432d3a41b2b16c.exe)
+apps/tauri test: running 182 tests
+apps/tauri test: test accounts::douyin_login::tests::a_terminated_qr_session_is_reported_instead_of_polled_forever ... ok
+apps/tauri test: test accounts::douyin_login::tests::a_poll_that_returns_a_fresh_qr_replaces_the_token_and_stays_waiting ... ok
+apps/tauri test: test accounts::douyin_login::tests::blocked_diagnostics_distinguish_unsafe_site_from_captcha_without_private_payloads ... ok
+apps/tauri test: test accounts::douyin_login::tests::a_reissued_qr_during_the_mfa_retry_keeps_the_challenge_and_adopts_the_new_token ... ok
+apps/tauri test: test accounts::douyin_login::tests::qr_image_is_png_data_not_a_second_qr_encoding_and_mobile_is_masked ... ok
+apps/tauri test: test accounts::commands::tests::signing_projection_preserves_missing_empty_fallback_and_duplicate_cookie_values ... ok
+apps/tauri test: test accounts::douyin_login::tests::risk_expiry_and_confirmed_do_not_expose_user_credentials_or_refresh_tokens ... ok
+apps/tauri test: test accounts::douyin_login::tests::secondary_projection_keeps_only_public_options_and_pauses_polling ... ok
+apps/tauri test: test accounts::douyin_login::tests::verification_methods_keep_the_live_order_ids_labels_and_in_app_flags ... ok
+apps/tauri test: test accounts::douyin_passport::tests::minted_abogus_carries_the_checked_constant_for_every_length ... ok
+apps/tauri test: test accounts::douyin_login::tests::secondary_sms_uses_lite_sdk_and_keeps_qr_authentication_out_of_its_requests ... ok
+apps/tauri test: test accounts::douyin_login::tests::csrf_header_comes_only_from_the_pending_jar ... ok
+apps/tauri test: test accounts::douyin_passport::tests::signature_uses_ten_sorted_unencoded_query_fields_and_every_form_field ... ok
+apps/tauri test: test accounts::douyin_login::tests::pending_jar_default_csrf_is_used_and_post_signature_matches_the_sent_form ... ok
+apps/tauri test: test accounts::douyin_login::tests::unfinished_mfa_and_cooldowns_never_issue_poll_or_duplicate_sms_requests ... ok
+apps/tauri test: test accounts::douyin_login::tests::mfa_retry_sends_challenge_fields_after_signing_the_ordinary_qr_form ... ok
+apps/tauri test: test accounts::douyin_login::tests::qr_requests_carry_the_observed_transport_block_and_an_unslashed_next ... ok
+apps/tauri test: test accounts::douyin_passport::tests::signer_matches_the_live_verified_vector_for_a_minimal_request ... ok
+apps/tauri test: test accounts::login::tests::handoff_accepts_only_the_exact_official_scan_challenge ... ok
+apps/tauri test: test accounts::douyin_passport::tests::utc_day_and_path_bind_the_header_while_form_binds_the_query_signature ... ok
+apps/tauri test: test accounts::session::tests::probe_distinguishes_expiry_guests_and_unknown_failures ... ok
+apps/tauri test: test accounts::session::tests::recovery_only_allows_a_read_only_official_identity_probe ... ok
+apps/tauri test: test accounts::state::tests::pending_login_and_confirmed_challenges_have_distinct_request_errors ... ok
+apps/tauri test: test accounts::state::tests::security_and_network_failures_preserve_login_evidence ... ok
+apps/tauri test: test accounts::usage::tests::deletion_allows_active_work_but_blocks_new_work_until_cleanup ... ok
+apps/tauri test: test browser::cdp::tests::dropping_a_command_future_releases_its_reply_without_a_socket_response ... ok
+apps/tauri test: test browser::cdp::tests::delivered_reply_is_not_discarded_by_a_simultaneous_disconnect ... ok
+apps/tauri test: test accounts::commands::tests::deleting_an_active_account_revokes_only_its_sessions_grants_and_renderer_uses ... ok
+apps/tauri test: test browser::douyin_browser::browser_identity::tests::handoffs_and_restarts_keep_the_browser_even_when_chrome_becomes_available ... ok
+apps/tauri test: test browser::cdp::tests::timed_out_reply_cannot_complete_the_next_command_and_disconnect_drains_pending ... ok
+apps/tauri test: test browser::douyin_browser::commands::tests::detail_identity_cannot_mix_search_or_profile_arguments ... ok
+apps/tauri test: test browser::douyin_browser::commands::tests::paused_accounts_can_check_identity_but_cannot_search ... ok
+apps/tauri test: test browser::douyin_browser::commands::tests::search_identity_is_validated_without_native_state_or_browser_work ... ok
+apps/tauri test: test accounts::identity::tests::recording_before_the_first_edit_retains_the_current_name_and_clock_order ... ok
+apps/tauri test: test accounts::commands::tests::identity_switch_cancels_only_its_platform_and_preserves_configuration ... ok
+apps/tauri test: test browser::douyin_browser::detail::tests::identities_and_responses_are_validated_before_capture ... ok
+apps/tauri test: test browser::douyin_browser::import::tests::routes_and_cursors_keep_likes_collections_and_mixes_separate ... ok
+apps/tauri test: test accounts::identity::tests::duplicates_are_rejected_before_credential_writes_even_when_disabled ... ok
+apps/tauri test: test accounts::login::tests::stale_cancel_cannot_remove_new_login_and_confirmation_requires_real_cookies ... ok
+apps/tauri test: test accounts::identity::tests::simultaneous_logins_admit_exactly_one_local_account_for_a_platform_user ... ok
+apps/tauri test: test accounts::identity::tests::unresolved_existing_credentials_require_an_identity_check_before_another_login ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::credentials_stay_platform_scoped_and_require_login_cookie ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::browser_delta_preserves_native_updates_and_applies_changed_paths_and_deletions ... ok
+apps/tauri test: test browser::douyin_browser::profile::tests::login_events_keep_inflight_completions_and_reject_unbounded_backlogs ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::only_exact_login_origins_and_no_private_context ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::preflight_never_enters_the_response_body_queue ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::qr_refresh_risk_and_final_login_are_distinct ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::security_evidence_takes_priority_over_http_or_business_authentication_rejections ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::identity_probe_requires_authentication_evidence_and_keeps_unknown_failures_distinct ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::sms_uses_the_captured_web_origin_and_success_envelope ... ok
+apps/tauri test: test browser::douyin_browser::projection::tests::expired_snapshot_cookies_do_not_abort_valid_credentials ... ok
+apps/tauri test: test browser::douyin_browser::search::cache::tests::import_cursors_can_decrease_without_serving_a_consumed_page_again ... ok
+apps/tauri test: test browser::douyin_browser::search::cache::tests::global_bytes_and_per_listing_requests_and_packets_are_bounded ... ok
+apps/tauri test: test browser::douyin_browser::search::cache::tests::requests_pause_scrolling_before_headers_and_release_on_completion_or_failure ... ok
+apps/tauri test: test browser::douyin_browser::search::scroll::tests::resized_bottom_missing_or_invalid_target_stops_a_burst_without_spilling_into_window ... ok
+apps/tauri test: test browser::douyin_browser::search::cache::tests::duplicates_skipped_cursors_and_closed_listings_release_the_budget ... ok
+apps/tauri test: test browser::douyin_browser::search::scroll::tests::bursts_accelerate_decelerate_and_vary_within_distance_and_time_budgets ... ok
+apps/tauri test: test browser::douyin_browser::profile::tests::fresh_profile_checks_leave_visible_search_untouched_and_detect_logout ... ok
+apps/tauri test: test browser::douyin_browser::search::tests::response_requires_exact_origin_keyword_cursor_and_data_type ... ok
+apps/tauri test: test browser::douyin_browser::tests::explicit_profile_retry_bypasses_stale_rejection_and_qr_expiry_never_means_account_logout ... ok
+apps/tauri test: test browser::douyin_browser::tests::homepage_profile_fallback_is_bounded_and_does_not_interrupt_login ... ok
+apps/tauri test: test browser::douyin_browser::tests::opening_waits_for_page_setup_and_stopping_waits_for_profile_cleanup ... ok
+apps/tauri test: test browser::douyin_browser::tests::startup_profile_response_avoids_reload_but_later_checks_and_cancellation_do_not_reuse_it ... ok
+apps/tauri test: test browser::douyin_browser::tests::profile_rejection_uses_current_browser_cookies_while_unknown_failures_do_not_probe_credentials ... ok
+apps/tauri test: test browser::douyin_browser::search::tests::login_panels_require_same_browser_credentials_and_close_the_failed_target_once ... ok
+apps/tauri test: test browser::douyin_browser::verification::tests::stale_verification_cannot_read_or_close_a_replacement_account_run ... ok
+apps/tauri test: test browser::douyin_browser::verification::tests::pending_submission_only_navigates_an_unrelated_unchallenged_page ... ok
+apps/tauri test: test browser::douyin_browser::verification::tests::verification_reads_only_the_exact_search_session_keyword_and_origin ... ok
+apps/tauri test: test browser::login_experiment::tests::sms_guards_require_a_challenge_and_prevent_duplicate_or_early_retry ... ok
+apps/tauri test: test browser::login_experiment::tests::stale_cancel_preserves_new_run_and_cancel_waits_for_teardown ... ok
+apps/tauri test: test browser::process::desktop::tests::command_arguments_preserve_spaces_quotes_and_trailing_slashes ... ok
+apps/tauri test: test browser::login_experiment::process::tests::cleanup_is_scoped ... ok
+apps/tauri test: test browser::process::desktop::tests::owned_tree_fixture ... ignored, subprocess fixture; executed only by the owned-tree regression
+apps/tauri test: test accounts::identity::tests::renames_deletion_readdition_and_restart_preserve_every_name_period ... ok
+apps/tauri test: test browser::process::desktop::tests::missing_executable_reports_launch_stage_and_windows_code ... ok
+apps/tauri test: test isolation::tests::relay_binds_native_caller_and_rejects_spoofing_replay_and_revocation ... ok
+apps/tauri test: test isolation::tests::relay_bounds_message_count_bytes_and_schema ... ok
+apps/tauri test: test browser::douyin_browser::commands::tests::catalog_failures_preserve_credentials_and_distinguish_verification_from_logout ... ok
+apps/tauri test: test accounts::session::tests::a_valid_identity_recovers_expiry_but_does_not_clear_content_verification ... ok
+apps/tauri test: test model::tests::validation_rejects_paths_and_credentials ... ok
+apps/tauri test: test model::tests::verification_pauses_without_classifying_generic_failure_as_proxy ... ok
+apps/tauri test: test network::http::response::tests::binary_frame_matches_the_renderer_fixture ... ok
+apps/tauri test: test media::tests::account_deletion_rejects_late_media_registration ... ok
+apps/tauri test: test browser::douyin_browser::profile::tests::temporary_profile_pages_close_on_cancellation_timeout_and_rejected_responses ... ok
+apps/tauri test: test network::http::response::tests::large_binary_body_has_only_fixed_metadata_overhead ... ok
+apps/tauri test: test network::http::tests::credential_headers_are_rejected_case_insensitively_and_public_headers_are_kept ... ok
+apps/tauri test: test media::tests::account_media_preserves_range_cookies_proxy_and_cancels_the_body ... ok
+apps/tauri test: test network::http::tests::douyin_search_cannot_use_native_http_but_details_and_other_sources_can ... ok
+apps/tauri test: test isolation::tests::tauri_acl_rejects_every_business_core_and_official_command ... ok
+apps/tauri test: test network::http::tests::response_header_projection_keeps_duplicates_and_invalid_text_without_credentials ... ok
+apps/tauri test: test network::http::tests::unbound_anonymous_requests_cannot_bypass_plugin_authority ... ok
+apps/tauri test: test accounts::session::tests::cancelled_verification_preserves_an_existing_login_and_never_implies_expiry_or_success ... ok
+apps/tauri test: test network::proxies::tests::duplicate_and_invalid_saves_do_not_change_existing_profiles ... ok
+apps/tauri test: test network::proxies::tests::frontend_and_native_share_endpoint_cases ... ok
+apps/tauri test: test network::http::tests::declared_and_chunked_body_limits_keep_recovery_and_release_requests ... ok
+apps/tauri test: test network::proxy_routing::tests::assignments_exclude_duplicates_missing_proxies_and_implicit_direct_fallback ... ok
+apps/tauri test: test network::request_registry::tests::cancellation_before_registration_prevents_late_work ... ok
+apps/tauri test: test network::request_registry::tests::duplicate_and_abandoned_entries_have_bounded_budgets ... ok
+apps/tauri test: test plugins::delivery::tests::acquisition_has_no_plugin_credentials_or_other_exits ... ok
+apps/tauri test: test plugins::delivery::tests::local_acquisition_rejects_non_packages_without_reading ... ok
+apps/tauri test: test network::proxies::tests::concurrent_saves_persist_only_one_copy_and_keep_the_limit ... ok
+apps/tauri test: test plugins::dev::tests::rejects_oversized_and_unknown_frames_before_package_parse ... ok
+apps/tauri test: test plugins::dev::tests::owner_only_pipe_is_single_use_and_rejects_a_second_server ... ok
+apps/tauri test: test plugins::dev::tests::snapshots_bind_exact_package_hash_plugin_session_and_epoch ... ok
+apps/tauri test: test network::http::response::tests::oversized_metadata_is_rejected_before_delivery ... ok
+apps/tauri test: test network::proxy_routing::tests::sequential_backups_keep_identity_reuse_success_and_never_replay_writes ... ok
+apps/tauri test: test browser::douyin_browser::tests::visible_startup_reuses_one_blank_tab_before_navigation ... ok
+apps/tauri test: test browser::process::desktop::tests::profile_handoff_waits_for_descendants_after_the_launcher_exits ... ok
+apps/tauri test: test plugins::executor::tests::executor_acl_grants_only_its_relay_and_never_inherits_main ... ok
+apps/tauri test: test plugins::executor::tests::fixed_resources_reject_cross_subject_paths_queries_and_service_workers ... ok
+apps/tauri test: test plugins::executor_budget::tests::crashes_back_off_then_quarantine_until_window_expires ... ok
+apps/tauri test: test plugins::executor_budget::tests::rates_are_shared_across_realms_and_expire_without_resetting_subjects ... ok
+apps/tauri test: test plugins::executor_transport::tests::transport_allows_fixed_resources_and_only_bounded_relay ... ok
+apps/tauri test: test network::http::tests::stalled_native_body_cancellation_and_timeout_release_requests ... ok
+apps/tauri test: test plugins::executor::cancellation_tests::cancelled_task_cannot_write_after_failed_close_and_storage_recovery ... ok
+apps/tauri test: test plugins::executor::cancellation_tests::cancellation_propagates_session_close_failure_and_retry_closes_authority ... ok
+apps/tauri test: test browser::cdp::tests::interleaved_events_and_late_replies ... ok
+apps/tauri test: test plugins::executor::cancellation_tests::unknown_install_is_a_noop_and_poisoned_task_registry_is_an_error ... ok
+apps/tauri test: test plugins::executor::cancellation_tests::successful_cancellation_preserves_committed_values_and_durable_grants ... ok
+apps/tauri test: test plugins::executor::cancellation_tests::cancellation_failure_does_not_skip_other_matching_sessions ... ok
+apps/tauri test: test plugins::network::tests::sqlite_native_gate_rechecks_authority_and_cancels_before_revoke_acknowledgement ... ok
+apps/tauri test: test plugins::packages::tests::installation_count_exhaustion_never_commits_an_unreadable_ledger ... ok
+apps/tauri test: test plugins::packages::tests::disk_full_and_gc_never_delete_current_or_rollback_data ... ok
+apps/tauri test: test plugins::packages::tests::each_load_reverifies_bytes_and_cannot_use_the_old_fixture_session_api ... ok
+apps/tauri test: test plugins::packages::tests::production_preview_never_enables_or_creates_grants ... ok
+apps/tauri test: test plugins::packages::tests::failed_committed_load_restores_safe_code_data_pair_with_new_epoch_and_no_grants ... ok
+apps/tauri test: test plugins::packages::tests::revocation_lists_are_monotonic_and_known_revocations_never_disappear ... ok
+apps/tauri test: test plugins::packages::tests::rollback_tests::absent_or_unknown_rollback_does_not_disable_the_current_installation ... ok
+apps/tauri test: test network::http::tests::native_read_keeps_account_cookies_range_and_binary_response ... ok
+apps/tauri test: test plugins::packages::tests::pinned_continuity_inherits_only_live_effective_permissions ... ok
+apps/tauri test: test plugins::packages::tests::migration_only_changes_own_copy_and_rollback_restores_matching_data ... ok
+apps/tauri test: test plugins::packages::tests::revoked_permissions_survive_failed_update_restart_rollback_and_reinstall ... ok
+apps/tauri test: test plugins::packages::tests::rollback_tests::approved_rollback_keeps_security_history_and_revokes_current_authority ... ok
+apps/tauri test: test plugins::packages::tests::rollback_tests::concurrent_confirmation_cannot_replay_a_completed_rollback ... ok
+apps/tauri test: test plugins::packages::tests::rollback_tests::unadmitted_rollback_preview_and_commit_preserve_the_entire_ledger ... ok
+apps/tauri test: test plugins::packages::tests::source_snapshot_changes_cannot_change_previewed_or_executed_bytes ... ok
+apps/tauri test: test plugins::packages::tests::suspension_invalidates_previews_and_late_acquisition_without_erasing_committed_storage ... ok
+apps/tauri test: test plugins::packages::tests::stale_confirmation_preserves_the_new_preview_and_terminal_state_tracks_commit ... ok
+apps/tauri test: test plugins::packages::tests::stale_concurrent_preview_and_cancellation_do_not_replace_active_data ... ok
+apps/tauri test: test plugins::packages::tests::unsupported_optional_capability_versions_do_not_receive_old_version_permissions ... ok
+apps/tauri test: test browser::douyin_browser::search::tests::listing_targets_are_lazy_independent_and_read_only_the_requested_response ... ok
+apps/tauri test: test plugins::tests::rejects_executor_remote_and_child_callers ... ok
+apps/tauri test: test state::tests::credentials_keep_nonpersistent_cookies_across_encrypted_restart ... ok
+apps/tauri test: test plugins::packages::tests::rollback_tests::declining_confirmation_and_ending_the_session_cannot_commit ... ok
+apps/tauri test: test plugins::revocations::tests::self_supplied_keys_cannot_revoke_and_signed_replay_is_rejected ... ok
+apps/tauri test: test state::tests::pending_login_jar_does_not_share_business_cookies_or_cancellation ... ok
+apps/tauri test: test state::tests::first_launch_and_empty_restarts_never_create_accounts ... ok
+apps/tauri test: test state::tests::saved_accounts_are_preserved_on_restart ... ok
+apps/tauri test: test plugins::packages::tests::rollback_tests::tampered_retained_code_is_reverified_before_preview_and_commit ... ok
+apps/tauri test: test storage::plugins::tests::empty_database_cannot_create_an_authorized_session ... ok
+apps/tauri test: test plugins::tests::creates_and_recovers_an_independent_empty_authority_directory ... ok
+apps/tauri test: test plugins::packages::tests::unsigned_same_version_and_publisher_rotation_need_explicit_data_confirmation ... ok
+apps/tauri test: test storage::plugins::tests::missing_revocation_authority_row_does_not_reset_known_security_state ... ok
+apps/tauri test: test storage::plugins::tests::future_database_schema_and_malformed_grants_are_preserved_and_rejected ... ok
+apps/tauri test: test browser::douyin_browser::detail::tests::fresh_targets_match_one_work_bound_reads_and_close_after_success_or_cancellation ... ok
+apps/tauri test: test storage::product::tests::prevents_unsupported_formats_and_stale_overwrites ... ok
+apps/tauri test: test storage::vault::tests::encryption_authenticates_and_uses_fresh_nonces ... ok
+apps/tauri test: test storage::plugins::tests::failed_transaction_rolls_back_values_labels_and_operation_receipts_together ... ok
+apps/tauri test: test system::capabilities::tests::desktop_policy_remains_target_specific ... ok
+apps/tauri test: test system::capabilities::tests::mobile_does_not_inherit_desktop_admission_or_capabilities ... ok
+apps/tauri test: test system::capabilities::tests::source_account_support_is_explicit_for_each_native_platform ... ok
+apps/tauri test: test storage::vault::tests::interrupted_replacement_restores_the_previous_snapshot ... ok
+apps/tauri test: test system::download::tests::filenames_cannot_escape_the_selected_directory ... ok
+apps/tauri test: test system::download::tests::simultaneous_identical_saves_create_only_one_complete_file ... ok
+apps/tauri test: test system::download::tests::concurrent_saves_preserve_existing_files_and_reject_missing_directories ... ok
+apps/tauri test: test storage::plugins::tests::persisted_revocation_is_acknowledged_only_after_commit ... ok
+apps/tauri test: test system::download_scheduler::tests::cancellation_before_registration_and_fifo_admission_are_preserved ... ok
+apps/tauri test: test storage::plugins::tests::previous_database_schemas_are_rejected_without_modifying_data ... ok
+apps/tauri test: test system::external::tests::qr_presentation_follows_native_support_without_mobile_browser_fallback ... ok
+apps/tauri test: test system::download_scheduler::tests::permits_bound_work_and_cancel_waiters_without_leaking_slots ... ok
+apps/tauri test: test system::download_directory::tests::preferences_restart_reset_and_failed_write_preserve_native_ownership ... ok
+apps/tauri test: test system::download::tests::verification_requires_the_exact_name_and_full_content_and_handles_deletion ... ok
+apps/tauri test: test system::lifecycle::tests::suspension_cancels_work_without_changing_durable_accounts_or_product_data ... ok
+apps/tauri test: test system::lifecycle::tests::only_opened_unexpired_qr_handoff_survives_suspension ... ok
+apps/tauri test: test storage::plugins::tests::native_commit_failure_keeps_value_provenance_and_receipt_in_the_old_generation ... ok
+apps/tauri test: test storage::plugins::tests::sqlite_restart_preserves_value_label_and_receipt_but_rejects_old_channel ... ok
+apps/tauri test: test storage::plugins::tests::second_native_connection_revokes_before_late_commit ... ok
+apps/tauri test: test browser::douyin_browser::search::tests::import_targets_capture_exact_get_or_post_cursors_and_clean_up_without_signed_replay ... ok
+apps/tauri test: test plugins::packages::tests::rollback_tests::expiry_and_cancellation_before_or_during_commit_preserve_the_ledger ... ok
+apps/tauri test: test plugins::packages::tests::rollback_tests::update_revoke_and_revocation_revision_invalidate_an_open_confirmation ... ok
+apps/tauri test: test plugins::packages::tests::sqlite_commit_failures_at_each_transaction_boundary_preserve_a_complete_pair ... ok
+apps/tauri test: test plugins::packages::tests::every_directory_db_cut_recovers_whole_pair_without_resurrecting_sessions ... ok
+apps/tauri test: test result: ok. 181 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 2.19s
+apps/tauri test:      Running unittests src\main.rs (<project-root>\target\debug\deps\any_music_tauri-b631987217f953bf.exe)
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:    Doc-tests am_plugin_net
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:    Doc-tests am_plugin_package
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:    Doc-tests am_plugin_policy
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:    Doc-tests am_plugin_protocol
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:    Doc-tests am_plugin_runtime
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test:    Doc-tests any_music_tauri_lib
+apps/tauri test: running 0 tests
+apps/tauri test: test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+apps/tauri test: > any-music@0.0.0 check:protocol <project-root>
+apps/tauri test: > node scripts/check-plugin-protocol.mjs
+apps/tauri test:    Compiling am-plugin-policy v0.1.0 (<project-root>\crates\am-plugin-policy)
+apps/tauri test:     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.66s
+apps/tauri test: TS/Rust protocol differential passed: 47 shared raw fixtures + 136 boundary/schema/negotiation cases (183 total).
+apps/tauri test: Done

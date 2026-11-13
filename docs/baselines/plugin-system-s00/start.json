@@ -1,0 +1,989 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-16T07:08:27.151Z",
+  "commit": "976c405b93719755b5879d576fbd836926ccbcdf",
+  "branch": "develop",
+  "nodeVersion": "v24.11.1",
+  "trackedDiffSha256": "55ea9803d54d7416965dcc22e601ab9057add8a6f5e18daf89bb3586eafe7ff4",
+  "files": [
+    {
+      "status": " M",
+      "path": "apps/tauri/AGENTS.md",
+      "sha256": "659edf931ad7f42ffde6d56f6fa101b20b53c91d1b7034796accd1641c6cef9c"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src-tauri/AGENTS.md",
+      "sha256": "4ab21c224f92fcf7a714bc7b986c7526b3df410a11b28466b59b2ea670cb8435"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src-tauri/src/browser/cdp.rs",
+      "sha256": "1448ecdeef0e4f6e4dfcce4b0ace072bbb1c2a4b0aa1d3642678d405a0d720d6"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser.rs",
+      "sha256": "06b9f2dba852a2eb81094d7c1b897ba51ff7cdc1b6592d3c69fc8e1a17cb8159"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/commands.rs",
+      "sha256": "734b3b4313400a0bcbdb3b66d7a9d5ac336d15a9daad9f8f932060137a90d94a"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/detail.rs",
+      "sha256": "14033997ba38e065203ae216aaf677326806841043b2c3f11f217996726d3741"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/scroll-page.js",
+      "sha256": "660daa99f03c4e67920cd56b050738f61327b2a8db50ae152f1fb942d32c99a6"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/search.rs",
+      "sha256": "c30998221f9e33f802bdf4203ef9d89aae3969e371507acda32705816504f766"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/search/cache.rs",
+      "sha256": "a870ded043cde18ebc244445d3a1254adcd842a6e8dba343eda1c227e9536aac"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/src/platform/douyin-browser-catalog.ts",
+      "sha256": "f5d2888aa7343e9ff39382c94d65938d289b7c32cdd5696aa0e8882ccada40d2"
+    },
+    {
+      "status": " M",
+      "path": "apps/tauri/test/platform/douyin-browser-catalog.test.ts",
+      "sha256": "92e08999a555a9d02261745e63e4c1c62947a3e08f474bac2e78f2b33b846251"
+    },
+    {
+      "status": " M",
+      "path": "apps/userscript/src/platform/dom/shadow-style-registry.ts",
+      "sha256": "985b5cddab91a0b9e1ee114166083fb288a26efe4bf97e8cecefd4c83bfd1316"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/cross-platform/README.md",
+      "sha256": "85a32766fed61315049a059914bd40ca39d1c47e1f5a44d2c2053be2fd53839f"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/cross-platform/architecture/music-source-plugin-architecture.md",
+      "sha256": "1c1e78d13f7a86de2526d9bcaea362798e4c9e46eb8b83f28c7a5151a74d2ae8"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/cross-platform/architecture/project-architecture.md",
+      "sha256": "e879bfaba67d4aa67df7f165fa9ebffaee4b46d14762e31e51a8684dfee5c281"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "sha256": "c45566aa600ce74f11803fb2b422d9a3bc253c262574e212e1c9be30e58ffabd"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+      "sha256": "1eecc54c7d45f850b0b9b78c69e1a42c1b414d7f64f50c9d4eefad8d45b46c74"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/cross-platform/features/local-library-and-custom-plugins.md",
+      "sha256": "e9d4df878a2a99f28b039310363cf0b82a731d1ded3aa990c67e105ab0cf6292"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/cross-platform/planning/feature-requirements-and-roadmap.md",
+      "sha256": "637399389c67725a0ada034a967a5111f159d2856e718e1e80d670989dc06673"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/cross-platform/platforms/douyin/web-api-contract.md",
+      "sha256": "debe9b1c0ee1a20d9fb82a2e9a6b643d5164712e5a95750a7e354447ece2f001"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/desktop/README.md",
+      "sha256": "748a659d4499ae3ad958da64e5d667604138115bbd0fe8259663a70454e16df9"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/desktop/development.md",
+      "sha256": "141ed06d0efd7fd8360e7d40abc20a3cef1238f8c13c5336be62d85ca3449b68"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/desktop/runtime-architecture.md",
+      "sha256": "970799195e6a0fbe44474db478fe3997a71a4d0863514879396f25863ced187c"
+    },
+    {
+      "status": " M",
+      "path": "docs/en/userscript/development.md",
+      "sha256": "808876769188668b83deefe0ecb7b6890166b4cda04c9b84e2a30fe2f5342a5c"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/桌面端/开发规范.md",
+      "sha256": "1829b04c1748a938e2d714d64a1246cacf21151f206559a77934a4eed478cc5e"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/桌面端/文档索引.md",
+      "sha256": "2dba32d425bcc193ffebba5ba3818de2af856c0ab2291ff44d71108dc6154304"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/桌面端/运行端架构.md",
+      "sha256": "04506a7056365463fc44ee227531e3b46e06a133b717a7d8829ca8dc2c53c9c6"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/用户脚本/开发规范.md",
+      "sha256": "4d0424f083555301bc8735a1e67638dc9287df6f4b709711a56385e78b720fd8"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/跨平台/产品规划/功能需求与路线图.md",
+      "sha256": "47eb3692eea3413dc83a31f2afb0c94852b4393abcc35aeee4061de0acefc9b4"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md",
+      "sha256": "2a459d937759bd1bffd673ef0957d782e6d97290227b6c15d0a98b242e6aa1f3"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+      "sha256": "3872f3fb4cb15fd64f11cc6e444ea17268d67a43bee5b723bdfda5f18130521c"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/跨平台/平台接口/抖音/网页接口契约.md",
+      "sha256": "4d08a38ed4b0e6ef8fb42655823bcc6471d47d95afcdafbac775b58af58e6bbd"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/跨平台/文档索引.md",
+      "sha256": "93686acf76da989dbe8a32dbdc742c74461e38ccc904f3cb9a4250d108317506"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "sha256": "53b7a1489319b9fd4728739ceffc54659e2e9829a99ebe55e4e9b32f43feb433"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/跨平台/架构/音乐源插件架构.md",
+      "sha256": "45e5962474bbe2ad4b0ed1aada458dd3c2c904aca18baaa74a1a552f2ca5f0af"
+    },
+    {
+      "status": " M",
+      "path": "docs/zh-cn/跨平台/架构/项目架构.md",
+      "sha256": "293923eefb6f06a703bdf4b55881fa42d97103b12360e74cafe239c634f7afe1"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-sources/src/douyin/douyin-api.ts",
+      "sha256": "e277d2d9a407248e93b0765d9658887694b88cabed62b1ae73cefaac2603af09"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-sources/src/douyin/douyin-plugin.ts",
+      "sha256": "ea1127bea19292b890b777da95a81dec75a86b6882f69f3924f2b29846255d6e"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-sources/src/douyin/runtime-contracts.ts",
+      "sha256": "7a714fc47ae618dfdf392500ca115b19f83aaa1885050c8a6c32dcd44da7bb74"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-sources/src/douyin/url-parser.ts",
+      "sha256": "5e593c775db6d4ff65067669ce0adbd0d28e5ef52a36f37285fa1f83ebee6061"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-sources/test/douyin/douyin-api.test.ts",
+      "sha256": "69d1f428511dbd16b61ca10f57447ee467adad97916db9514ce30c3eac5a9968"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-sources/test/douyin/douyin-plugin.test.ts",
+      "sha256": "584c8a0ee9560b33694d417d7a71e80a9696efe03d772ded76f7f41d266d9acb"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-sources/test/douyin/url-parser.test.ts",
+      "sha256": "3f9458805a40f133edd994f115815c57ca9af5fdad76f6cc6f7cb083c2c53a5b"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "sha256": "c1cacf42046830353129108c7a5bf1710b30381a16e087af7865d089ba72d361"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/components/music-sources/PlayerBar.vue",
+      "sha256": "a26657c0029487411b02effb2127131485d242d07585e68f59a0f8b76c3559e1"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/features/downloads/use-player-download.ts",
+      "sha256": "eb04d330ed7687ae1d19f7042d6fa78926fa6576c574da3566a7934af42cabe4"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workbench.ts",
+      "sha256": "045ee1a6af612c7a5cc5e141b7d6e0a3099be810135ea4aa4fca3c4f6b6018a4"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/features/music-sources/use-music-source-workspace.ts",
+      "sha256": "18a6b9e8f5c28fe5199d71a4bc5ab635a30200d5a1b316e4796bd9d0e1c8b177"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/features/player/playback-queue-state.ts",
+      "sha256": "856200a4df387ad4ea841c31d2f612160a2a84a6514d63745a77cb4144710403"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/features/player/use-audio-player.ts",
+      "sha256": "a5d3c3baba50b0df6abbe16bf80a3125ad282013acc3b233a60d15061039762c"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/features/player/use-playback-queue.ts",
+      "sha256": "a68e565dbd055f63865bcffb9fd726af3b53cd8cd721214529f08e0df2d0942f"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/storage/playback-queue-repository.ts",
+      "sha256": "53eecb01fc6c1df4bd1058a44e46cdda18e8f52ce561807788c9d48e69c830fc"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/src/stores/music-source-workspace-store.ts",
+      "sha256": "36a798f187d40dacc0af4b11d75753cc69057cda087f2292de3f745956410cee"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/test/components/music-sources/MusicSourceWorkbench.test.ts",
+      "sha256": "f9547dcb5df255d666797c5b7f27af8b09fc37bf94a1b3772d7942fcf368bb47"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/test/features/downloads/use-player-download.test.ts",
+      "sha256": "640fb21cae0b101aa15b50d3a09f47aa7c1c759122e4f5889f9c3176a81774f6"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/test/features/music-sources/use-music-source-workbench.test.ts",
+      "sha256": "0c14e1f4a1fb987677feeec7957271f6500b792a464c91f63d23ee21d37f621b"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/test/features/music-sources/use-music-source-workspace.test.ts",
+      "sha256": "1500decda95d511f091ae996b6ceca9dfcec39b2b14b2f7388f8431ec4fe34ac"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/test/features/player/playback-queue-state.test.ts",
+      "sha256": "c9918c8a775e1453b9fed75c66d7458b2f7eaea9c799994ed1f1d93f013e20cb"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/test/features/player/use-audio-player.test.ts",
+      "sha256": "806fae87c38e446952dba7721f265bbdc234cf84bde6f3cc2367769ab389fd28"
+    },
+    {
+      "status": " M",
+      "path": "packages/music-workbench/test/features/player/use-playback-queue.test.ts",
+      "sha256": "9966aeaf39caab4a8c13bbc6809ee4bcf2076f077202926cc20600f927773127"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/MusicAppShell.vue",
+      "sha256": "4f1472d47ae56ec4f93a631389c1756499be209c3e66aa7c6aa05f53dec75bf9"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/SidePanel.vue",
+      "sha256": "e0dbc523700925a67b4bbf223c11cfd8b2b361d7b7914dfdebe1257515d8bd91"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/app-icon.ts",
+      "sha256": "d83029ff0b8b035c5a243528583c13ecff88839763a8e2152542d7f772d98bbc"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/library/FavoritePanel.vue",
+      "sha256": "96961b606ad335b3829d4f83595832965b67fdd812e2f59569710257d2241ffd"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogDrawer.vue",
+      "sha256": "9f10c71e66dcf3692746d98d7b64ea4fb9209ec6dd3e4b4f9d22b868530b9e21"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerActionsDialog.vue",
+      "sha256": "287a1383a50543a1323b03c5dd6a44c85cb17ef6a2c4852fe70736c88bc43654"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerCard.vue",
+      "sha256": "fd2dacd1f1904385bfd34e5433061911da66fc1a54dd5d8b157e77d281e399dd"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerDetails.vue",
+      "sha256": "733543068c5ea7fcb348e9de23715754afc1bc975d1cfcb77c298a34def750f9"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerList.vue",
+      "sha256": "d09cee57c3e0944fe00d2e9f1a95a288bc5b8a3e4bbc60f81e8776eb1eb4db57"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerOperatorPanel.vue",
+      "sha256": "f06bf89374e4c47c1cce2872c37c74de26328772eacab2048d4a180a8b7a8bee"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogOperatorActions.vue",
+      "sha256": "f03c6602b859b5d97e85ace924a81715686f93dee427f2c070130245d1521e95"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogTrackActionsDialog.vue",
+      "sha256": "59a8096b7b83698a202f3b0bebb4a29aed549463c55483e9efeb53cce828d1cf"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogTrackFilterEditor.vue",
+      "sha256": "181b9ff2ea082d0867f8c9e8bb85d000d4cf87924cc7904f162a30031918f153"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue",
+      "sha256": "d19ea939bf4366869d87ab48f42cd09e285adf5b9f112de98cd20a5553dc5624"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/CatalogTrackOperatorPanel.vue",
+      "sha256": "fcc20d3d83a9ca9244adb514553cbe9ddc0c3873534b1178b699ab2f96ed74cc"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/PlayerControlPager.vue",
+      "sha256": "23c1c1e4cb25f60cd1fe4b793f44bfd822483314551f65f228f9a11f588cf1b8"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/QueuePanel.vue",
+      "sha256": "b0ff65f39ad4bb172d5139c8c7de814ad5fb15bbcdec95ea7bea216d0d8ec383"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/QueueTrackRow.vue",
+      "sha256": "b7a07fa02be86c4209cdcda3108061bf9bf4fec6705a6c335d624a44d0fa49fc"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/SourceToolbar.vue",
+      "sha256": "9cae675cd2161122055954d7ff80e43b94d83f46be7c436efce894fbe9aa3959"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/TrackList.vue",
+      "sha256": "cb78fe2f3b443025be44ae1f0758ae2173a4d28363954e69a3003f1a88af578f"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/TrackRow.vue",
+      "sha256": "ae16b2c1e8322648e7e4d00961fee516402c3a5e9a33efaf824bcfb10e56df4e"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/catalog-drawer-presentation.ts",
+      "sha256": "cac08966f55f8f72ea2c1eb9c227fb535a8cd5254e10befbce23f40f1bda347f"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/music-sources/catalog-track-filter-presentation.ts",
+      "sha256": "1ef256f8416c53aa66115b8154a4b283e8de9672ddcc2365410addff6424c685"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/product-workbench/ProductTopBar.vue",
+      "sha256": "4d6b77d60580cbf346ef91be9aa18d96300638df20aa94c5d8bd2127d35b53fd"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/components/product-workbench/ProductWorkbench.vue",
+      "sha256": "ce6484326f9de73949ab401e73185dbc8715ef0473c910c15f764cff435fb8b3"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/composables/music-sources/catalog-filter-history-settings.ts",
+      "sha256": "760abdaf65f9b41678c20489194471f9a3ce3dc381c9a93ad643f7d2909328d0"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/composables/music-sources/use-catalog-drawer-list.ts",
+      "sha256": "74075415ccc280466159b54ac4dd545d3d2cd54c720e5a70bae19bb0c6022159"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/composables/music-sources/use-catalog-filter-history-settings.ts",
+      "sha256": "8c91b171c72e7b4e79606575495f0d8724c26321f6a9e7aa4b41854d56d9306a"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/composables/music-sources/use-queue-reorder.ts",
+      "sha256": "fa328e21735c4d95f289ee3ddaa3bf462f7d017848205721e2926e2b549285ad"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/composables/player/use-player-control-pager.ts",
+      "sha256": "f636839f81c470933ac456636508b9af74d9f5303f1f074dfde61abaedf405c1"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/index.ts",
+      "sha256": "1b99f9c62fdb7f38f29e205466d783210099756131eec61392c404972543cbba"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/product/action-feedback.ts",
+      "sha256": "e34849a742e0ddb8d29dd47f6e20b31e9897c80ef357e86734ed058bbc54af81"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/product/catalog-drawer.ts",
+      "sha256": "8e24e8f5e031531cf8c38d4d1123bca17f96723391e8d921561ef689b06dbb17"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/product/filter-history-settings.ts",
+      "sha256": "e2e468cce4247bba41ac3885e2f36c6aaf0d1462de33352b41712369cc14448a"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/styles/_feature-panels.scss",
+      "sha256": "d0cba2d9417e472de9703e97a521dcca0efcfb7a7b49ac07ec5b988c99920afc"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/styles/_product-workbench.scss",
+      "sha256": "079f7b0c5b5dcef7b141b824e7c9fe15f9abc1a931b0514e143f32645d5ee57d"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/src/styles/index.scss",
+      "sha256": "089535b2de8a64782908faaf339abe2b8ee867c3d1951100fbcf1703d1dc3b6a"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/CatalogDrawer.test.ts",
+      "sha256": "d452eaea370fedaba4d1407f1bfa1a9da81a4868ba38397cf9a412ae50ecb118"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/CatalogDrawerActionsDialog.test.ts",
+      "sha256": "68b4f6f904408c3f14a83f8f764d0c6c782f175e81add6cfec88755feb24c58e"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/CatalogDrawerCard.test.ts",
+      "sha256": "f22250e14918ee657586f81a152494a1a7b81cd5e4a12dd44f32d81398fab972"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/CatalogDrawerList.test.ts",
+      "sha256": "a01178db625d40e63703cbe4f445bcfb7b16a84d83804b377bd17087f53dcec5"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/CatalogTrackActionsDialog.test.ts",
+      "sha256": "2ff26187827923c8ba56afe5778946d9a888a0cf72c4780f57341c5e2c8e162a"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/CatalogTrackOperatorPanel.test.ts",
+      "sha256": "be73a0b6c8bfecff7aac7c0aebda437dc7ba7d065fa70628d5a694da06ee00c4"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/PlayerControlPager.test.ts",
+      "sha256": "74116ff5f5a82dd9de86ec6e78eb19356d1cebb10aaded32541433eb169ec3ee"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/QueuePanel.test.ts",
+      "sha256": "f041bbbf82f74d082798767a01ecea6cd8997a1f66f854473ac658d51a65b408"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/catalog-drawer-presentation.test.ts",
+      "sha256": "44907f38a163ab6285907ae8cb0ea484ad0a73f600c75c34c2e58c2325c7030a"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/catalog-selection-markup.test.ts",
+      "sha256": "08411290f98edcc5d83f45bbaaf635172e124ba8b8bc13b6b013414ff67a9b54"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/music-sources/catalog-test-renderer.ts",
+      "sha256": "b5684bbb74bcba825c36b75e9a4c788632cd12ea875eadeeb63d865215d961fc"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/product-workbench/ProductWorkbench.layout.test.ts",
+      "sha256": "1476943634b2d9480dad76da980b1c1507d73fbd2a8bd4dea4f44b26a15bee05"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/components/product-workbench/ProductWorkbench.test.ts",
+      "sha256": "b7f37c59c429cb92067fd2f5a5d2c8c1be22ef5fcd46c4cacc894bac6f7f2f9b"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/composables/music-sources/use-catalog-filter-history.test.ts",
+      "sha256": "ec55d130f8e309310f6ad390538be2bbb7f99e71e44aa2941d7cdef4b28908fd"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/composables/music-sources/use-queue-reorder.test.ts",
+      "sha256": "8eebb5ae474f36f952e969a3ececd03f03ef1adea7aad9ac4cdc900692998502"
+    },
+    {
+      "status": " M",
+      "path": "packages/ui/test/composables/player/use-player-control-pager.test.ts",
+      "sha256": "f045224293bae8a432355057dfc25c2e5c381f23abfb56d6f788d97987c1840f"
+    },
+    {
+      "status": "??",
+      "path": "apps/tauri/src-tauri/src/browser/douyin_browser/import.rs",
+      "sha256": "2b6647049a4f45b0ebf8f8896677cfb09b35c2c76a285979255c816778456f6a"
+    },
+    {
+      "status": "??",
+      "path": "apps/userscript/test/platform/dom/shadow-style-registry.test.ts",
+      "sha256": "da9b9221b859c2d0836a2c14afbff6bef0d5c5ff8ead627cf9104d87ef1fee20"
+    },
+    {
+      "status": "??",
+      "path": "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "sha256": "4e876633abc7f46b5a2f584e0b56ff9163eadb5dcfee23a6f82a14e7d18b1245"
+    },
+    {
+      "status": "??",
+      "path": "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "sha256": "5487bc134fb8e39b2a5f83ea9fc9258ef83d5641713db25227422c4aaf3a806e"
+    },
+    {
+      "status": "??",
+      "path": "docs/en/desktop/rust-workspace-plan.md",
+      "sha256": "65264115581c73aa2298631d5dc0c123a64be56a1afa0d138f5b8a1e8263b746"
+    },
+    {
+      "status": "??",
+      "path": "docs/zh-cn/桌面端/Rust工作区规划.md",
+      "sha256": "d0432e87152b4ffcc03013cb7d33e97d835f906dc072acd99412a713fb8d7ca5"
+    },
+    {
+      "status": "??",
+      "path": "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "sha256": "7927e7a9a386b71f039d18096bcae3b56c2eb0fda3794b0efb579ba0684bfc6a"
+    },
+    {
+      "status": "??",
+      "path": "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "sha256": "3a8cab89e79a0add16a6e8dc4d4343dbd62ababcbdd7171e251e78547225e3c4"
+    },
+    {
+      "status": "??",
+      "path": "packages/music-workbench/src/features/library/use-favorite-collection.ts",
+      "sha256": "c8d82364667b4448d0da5c1f8bcd792ad7cdcb1437642d3fd0dc124640dbbde5"
+    },
+    {
+      "status": "??",
+      "path": "packages/music-workbench/src/features/library/use-track-collection-view.ts",
+      "sha256": "ad3b920d0bed0ced9e27c52f13bc1cd6a5dab347d7b5eb22369a13d89488c091"
+    },
+    {
+      "status": "??",
+      "path": "packages/music-workbench/src/features/music-sources/use-catalog-scroll-restoration.ts",
+      "sha256": "5d5fc8addd1f3a657332f513b249ec9de5f2267d620e663c1d28611b4f0323cd"
+    },
+    {
+      "status": "??",
+      "path": "packages/music-workbench/test/features/library/use-favorite-collection.test.ts",
+      "sha256": "6fa3b670bcbefdfbf8742fc9ce91646bf9b6a693a06ca441f61561ceecbfdd76"
+    },
+    {
+      "status": "??",
+      "path": "packages/music-workbench/test/features/library/use-track-collection-view.test.ts",
+      "sha256": "fe14c774b3b06771b2e83f42835acc0d0ebeae20b8a1669bbc44cfab2680abd3"
+    },
+    {
+      "status": "??",
+      "path": "packages/music-workbench/test/features/music-sources/use-catalog-scroll-restoration.test.ts",
+      "sha256": "7d40e1194dec5bde695e9d3d78d97dcfd7368c61c224de6bb29e986a98ddc51a"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/CollectionBreadcrumbs.vue",
+      "sha256": "cb76045baf04fa6a3895f9b832d7f86236bd6c0f1b58e43224beaa05767a6e06"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/CollectionCard.vue",
+      "sha256": "e11ae655a3ec876069b3c6aa8832966b44fc2614aba669d21a57531844b8ae30"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/CollectionGrid.vue",
+      "sha256": "c4523240cdf96bd2729686f52f6485bfe26297e03aa6094fa18a80910ea90567"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/CatalogDrawerListHeader.vue",
+      "sha256": "0c865a066674b7fac45d2a043b8b2eb1e39a404edb5766e3ec9d102e8ffe3360"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/MusicListEmptyState.vue",
+      "sha256": "3ba4aa1cf9e7f71cc6059735bb83a2b6978f6b83acb61dbdc7df5e3f380e57be"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/QueuePlatformGroup.vue",
+      "sha256": "a8123a48b2871317bfa2e0b7ff13c38d089a92ccb27a919ae47b47cdf9203c6d"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/QueuePlatformHeading.vue",
+      "sha256": "42a0c059c5c2348355a74cfcd80c3f43da07cd2089ce8e56222835c02d6bc016"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/QueueTrackActionsDialog.vue",
+      "sha256": "faf27b207ec50f167f9cc3fe78ba6395df265a5eea14618fdc648aaf56cd37a6"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/QueueTrackGrid.vue",
+      "sha256": "ca7c10e50e3d97b0225e5b11c0cda94683fe5f484659777523902716b9cd09c1"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/QueueViewControls.vue",
+      "sha256": "f5bf804bc4ce1cb421f4a170fcb21a98e926036cab8c208f7e762cb05c9a9596"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/TrackActionButton.vue",
+      "sha256": "3567aee2aebc1be85af40f21c90becfe4eb43acad6518649656edb84222ca616"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/components/music-sources/TrackCardGrid.vue",
+      "sha256": "a6bb62c971df206636cf9ac18da5a2462b10a884a3e6977f73839449260c88ae"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/music-sources/queue-reorder-geometry.ts",
+      "sha256": "b686321eb149358b8889de651506d385ca9f3a6109bb1284388302e778f6c01e"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/music-sources/use-catalog-drawer-reorder.ts",
+      "sha256": "62194d2d5b4bd5dfaa8462c4fca6c142082fca3e20bdda2dea086614190d941f"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/music-sources/use-queue-list-controls.ts",
+      "sha256": "e21ae644e0b732a671fa21af33ea14d588630af407da4d371605cd9643bcf3d1"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/music-sources/use-queue-view-toolbar.ts",
+      "sha256": "bb947fdbf7bc1e95b827fe6dcb068cceb4f7e793de956609ba5f5a6873f6df79"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/music-sources/use-track-batch-actions.ts",
+      "sha256": "912871ba7ae323b144084b5f817b13791008c680ab4c5382f7281d7ba9000691"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/use-collection-navigation.ts",
+      "sha256": "068d71064f8d2b42d9c2c1ef02bd5ee6dcae9f9f04ca4df28fe9952fc4d217f5"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/use-copy-text.ts",
+      "sha256": "7c5294639f8bd9e850be8ee38be9ae8dc5661f4c12bb3e67f4c3d7f6a6cff478"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/use-grid-reorder.ts",
+      "sha256": "166c20b5579cf76dcad7f75f458a2c015f3a30baca840d3bb24dfb5b6df0097a"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/composables/use-long-press-drag.ts",
+      "sha256": "752ca7ab7a49c2615cef45ed9fd0690cb4ac8e412480017d1a0dabd0da9c83a9"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/product/clipboard.ts",
+      "sha256": "21cf14298896701a61409411feb929283e28d65749fb5150cae8254993e60d84"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/product/track-collection.ts",
+      "sha256": "6884d7bed784b7a3a9bb35f520b93fbcb675fe2e5c78cd6251c4c72e37eb0952"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/src/product/track-playback-state.ts",
+      "sha256": "6595ece54bdde72ad3c12d44a746eca3aaf517e1ffe4d7b36a5a53d21a9c0b82"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/components/library/FavoritePanel.test.ts",
+      "sha256": "6e360436168c03e015b9cf9a809024898e507a7e9f42818905abab5094c57c3d"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/components/music-sources/CatalogDrawer.activity.test.ts",
+      "sha256": "40ca548a170bd920177c13b135f916da59d232cc2d1867951b6043e02347a7af"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/components/music-sources/QueuePanel.interactions.test.ts",
+      "sha256": "95ec0eb617f16129c35e788cbcd82ecf41fcab2863123f2d3d33f7c3a0024365"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/components/music-sources/QueuePlatformGroup.test.ts",
+      "sha256": "d6f124b6f8d129dbcf2498571e64ac359f3052e80307b4220293e0f2c008bb94"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/components/music-sources/QueueTrackGrid.test.ts",
+      "sha256": "503301f8ce9b85ec00c32552104f9d259bdf66c0e307050ef496af9b57969bb3"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/composables/music-sources/queue-reorder-geometry.test.ts",
+      "sha256": "a0be886658765e49a9805da42e0f40a6ed473cc34ca66ee4b0e54ee8aa34bd18"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/composables/music-sources/use-catalog-drawer-reorder.test.ts",
+      "sha256": "38c2617d3b0c268a36b1a4b696f42aa8cb815c0fddf150b39c2f09a87b06c54f"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/composables/music-sources/use-queue-list-controls.test.ts",
+      "sha256": "96e894ec3cb3765fbf2dbe1e4392d21e90a7f0fadab042791a54f95ad0f73897"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/composables/music-sources/use-queue-view-toolbar.test.ts",
+      "sha256": "dae67d849bd1206a3bdf0eac1ffb3efa83cb1fa44c48c07635d4d5df4c7aebe9"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/composables/music-sources/use-track-batch-actions.test.ts",
+      "sha256": "02362b160bb4121bdf0092fb0614c461bd5f255901cec791f795d23a3a25ee67"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/composables/use-collection-navigation.test.ts",
+      "sha256": "305d7665a4911299be308453e53462c78011f94d5b9400901a71aec08900d1d3"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/composables/use-copy-text.test.ts",
+      "sha256": "d7cd34c10122916d87348bca21df4beec5f02e05b6eaa2326696b2bd49db3bc1"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/composables/use-long-press-drag.test.ts",
+      "sha256": "a0c7e95e3204c2a12d75ac9cf7d8a21eb8ede8252f56c7f284ed40905b9a1579"
+    },
+    {
+      "status": "??",
+      "path": "packages/ui/test/product/clipboard.test.ts",
+      "sha256": "cfea7bcc2daac5d3c3fa4de8301f126bfa9e738c1b4eac976cc2671fad2a0a0c"
+    }
+  ],
+  "packages": [
+    {
+      "path": "apps/tauri/package.json",
+      "name": "@any-music/tauri",
+      "exports": null,
+      "scripts": {
+        "dev": "tauri dev",
+        "dev:frontend": "vite --mode dev",
+        "build": "pnpm run build:prod",
+        "build:dev": "tauri build --no-bundle --debug --config src-tauri/tauri.dev.conf.json",
+        "build:staging": "tauri build --no-bundle --config src-tauri/tauri.staging.conf.json",
+        "build:prod": "tauri build --no-bundle",
+        "build:frontend": "vite build --mode prod",
+        "bundle": "tauri build",
+        "check:rust": "cargo fmt --manifest-path src-tauri/Cargo.toml -- --check && cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings",
+        "android:dev": "tauri android dev",
+        "ios:dev": "tauri ios dev",
+        "test": "vitest run && cargo test --manifest-path src-tauri/Cargo.toml",
+        "typecheck": "vue-tsc --noEmit -p tsconfig.json && pnpm check:rust",
+        "check:native": "cargo check --manifest-path src-tauri/Cargo.toml --all-targets",
+        "tauri": "tauri"
+      }
+    },
+    {
+      "path": "apps/userscript/package.json",
+      "name": "@any-music/userscript",
+      "exports": null,
+      "scripts": {
+        "build": "pnpm run build:prod",
+        "build:dev": "vite build --mode dev",
+        "build:staging": "vite build --mode staging",
+        "build:prod": "vite build --mode prod",
+        "dev": "pnpm run dev:dev",
+        "dev:dev": "vite --mode dev",
+        "dev:staging": "vite --mode staging",
+        "dev:prod": "vite --mode prod",
+        "preview": "vite preview --mode prod",
+        "test": "vitest run --config vitest.config.ts",
+        "typecheck": "vue-tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json && vue-tsc --noEmit -p tsconfig.test.json"
+      }
+    },
+    {
+      "path": "packages/account-pool/package.json",
+      "name": "@any-music/account-pool",
+      "exports": {
+        ".": "./src/index.ts"
+      },
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    },
+    {
+      "path": "packages/audio-composition/package.json",
+      "name": "@any-music/audio-composition",
+      "exports": {
+        ".": "./src/index.ts",
+        "./browser": "./src/browser/index.ts"
+      },
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    },
+    {
+      "path": "packages/core/package.json",
+      "name": "@any-music/core",
+      "exports": {
+        ".": "./src/index.ts"
+      },
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    },
+    {
+      "path": "packages/music-sources/package.json",
+      "name": "@any-music/music-sources",
+      "exports": {
+        ".": "./src/index.ts",
+        "./bilibili": "./src/bilibili/index.ts",
+        "./douyin": "./src/douyin/index.ts",
+        "./declarative": "./src/declarative/index.ts",
+        "./descriptors": "./src/descriptors.ts",
+        "./douyin/browser": "./src/douyin/douyin-request-state.ts",
+        "./douyin/contracts": "./src/douyin/runtime-contracts.ts"
+      },
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    },
+    {
+      "path": "packages/music-workbench/package.json",
+      "name": "@any-music/music-workbench",
+      "exports": {
+        ".": "./src/index.ts",
+        "./components/*": "./src/components/*",
+        "./features/*": "./src/features/*.ts",
+        "./media/*": "./src/media/*.ts"
+      },
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+      }
+    },
+    {
+      "path": "packages/network-routing/package.json",
+      "name": "@any-music/network-routing",
+      "exports": {
+        ".": "./src/index.ts"
+      },
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    },
+    {
+      "path": "packages/plugin-center/package.json",
+      "name": "@any-music/plugin-center",
+      "exports": {
+        ".": "./src/index.ts",
+        "./music-sources": "./src/music-sources/index.ts"
+      },
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    },
+    {
+      "path": "packages/ui/package.json",
+      "name": "@any-music/ui",
+      "exports": {
+        ".": "./src/index.ts",
+        "./components/*": "./src/components/*",
+        "./styles": "./src/styles/index.scss"
+      },
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+      }
+    },
+    {
+      "path": "packages/utils/package.json",
+      "name": "@any-music/utils",
+      "exports": {
+        ".": "./src/index.ts",
+        "./number": "./src/number/index.ts"
+      },
+      "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    }
+  ]
+}

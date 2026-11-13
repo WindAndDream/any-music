@@ -1,0 +1,154 @@
+{
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R3",
+  "privacy": "No cookie values, account names/IDs, private folder IDs/titles, signed media URLs or signature values.",
+  "samples": [
+    {
+      "label": "observer-installed",
+      "at": 1793072533796,
+      "origin": "https://www.douyin.com",
+      "sourceOrder": [],
+      "session": [],
+      "audioCount": 0,
+      "audio": [],
+      "roots": 0,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "douyin-host-cancel-requested",
+      "at": 1793072562602,
+      "origin": "https://www.douyin.com",
+      "theme": "studio",
+      "source": "douyin",
+      "sourceOrder": ["douyin", "bilibili", "netease"],
+      "session": [
+        {
+          "status": "checking",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "douyin-host-cancel-settled",
+      "at": 1793072583524,
+      "origin": "https://www.douyin.com",
+      "theme": "studio",
+      "source": "douyin",
+      "sourceOrder": ["douyin", "bilibili", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "douyin-host-explicit-retry-result",
+      "at": 1793072614372,
+      "origin": "https://www.douyin.com",
+      "theme": "studio",
+      "source": "douyin",
+      "sourceOrder": ["douyin", "bilibili", "netease"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    }
+  ],
+  "bridge": [
+    {
+      "stage": "begin",
+      "at": 1793072557360,
+      "id": "am-mvq53rxr-1",
+      "path": "/aweme/v1/web/user/profile/self/",
+      "hasSignature": false
+    },
+    {
+      "stage": "begin",
+      "at": 1793072562064,
+      "id": "am-mvq53vkf-2",
+      "path": "/aweme/v1/web/general/search/stream/",
+      "hasSignature": false
+    },
+    {
+      "stage": "cancel",
+      "at": 1793072562595,
+      "id": "am-mvq53rxr-1",
+      "hasSignature": false
+    },
+    {
+      "stage": "cancel",
+      "at": 1793072567079,
+      "id": "am-mvq53vkf-2",
+      "hasSignature": false
+    },
+    {
+      "stage": "begin",
+      "at": 1793072589199,
+      "id": "am-mvq54gi5-3",
+      "path": "/aweme/v1/web/general/search/stream/",
+      "hasSignature": false
+    },
+    {
+      "stage": "cancel",
+      "at": 1793072594198,
+      "id": "am-mvq54gi5-3",
+      "hasSignature": false
+    }
+  ],
+  "actions": [
+    {
+      "kind": "signature-triggered-dom-cancel",
+      "at": 1793072562066
+    }
+  ],
+  "verificationRequired": {
+    "at": 1793072632944,
+    "query": "轻音乐",
+    "error": "verification-required",
+    "scope": "GM source-host search"
+  },
+  "capturedAt": 1793072666546
+}

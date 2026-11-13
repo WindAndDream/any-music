@@ -1,0 +1,7 @@
+{
+  "identifier": "main",
+  "platforms": ["windows", "macOS", "linux"],
+  "description": "Local product window only; remote account pages have no application permissions.",
+  "permissions": ["core:default", "allow-product-commands"],
+  "webviews": ["main"]
+}

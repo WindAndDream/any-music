@@ -1,0 +1,36 @@
+Scope: 5 of 23 workspace projects
+packages/ui test$ vitest run
+packages/ui test:  RUN  v4.1.11 <project-root>/packages/ui
+packages/ui test:  Test Files  61 passed (61)
+packages/ui test:       Tests  330 passed (330)
+packages/ui test:    Start at  11:26:25
+packages/ui test:    Duration  3.68s (transform 7.37s, setup 0ms, import 17.09s, tests 1.58s, environment 24ms)
+packages/ui test: Done
+packages/plugin-ui-vue test$ vitest run
+packages/theme-default test$ vitest run
+packages/theme-studio test$ vitest run
+packages/theme-studio test:  RUN  v4.1.11 <project-root>/packages/theme-studio
+packages/plugin-ui-vue test:  RUN  v4.1.11 <project-root>/packages/plugin-ui-vue
+packages/theme-default test:  RUN  v4.1.11 <project-root>/packages/theme-default
+packages/plugin-ui-vue test:  Test Files  8 passed (8)
+packages/plugin-ui-vue test:       Tests  41 passed (41)
+packages/plugin-ui-vue test:    Start at  11:26:30
+packages/plugin-ui-vue test:    Duration  2.45s (transform 3.12s, setup 0ms, import 7.72s, tests 927ms, environment 5ms)
+packages/plugin-ui-vue test: Done
+packages/theme-studio test:  Test Files  2 passed (2)
+packages/theme-studio test:       Tests  12 passed (12)
+packages/theme-studio test:    Start at  11:26:29
+packages/theme-studio test:    Duration  7.42s (transform 2.52s, setup 0ms, import 5.60s, tests 2.36s, environment 1ms)
+packages/theme-studio test: Done
+packages/theme-default test:  Test Files  50 passed (50)
+packages/theme-default test:       Tests  350 passed (350)
+packages/theme-default test:    Start at  11:26:30
+packages/theme-default test:    Duration  7.65s (transform 17.94s, setup 0ms, import 44.54s, tests 8.00s, environment 30ms)
+packages/theme-default test: Done
+packages/music-workbench test$ vitest run
+packages/music-workbench test:  RUN  v4.1.11 <project-root>/packages/music-workbench
+packages/music-workbench test:  Test Files  56 passed (56)
+packages/music-workbench test:       Tests  407 passed (407)
+packages/music-workbench test:    Start at  11:26:38
+packages/music-workbench test:    Duration  9.14s (transform 25.34s, setup 0ms, import 58.86s, tests 10.74s, environment 17ms)
+packages/music-workbench test: Done

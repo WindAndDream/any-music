@@ -1,0 +1,200 @@
+{
+  "documentType": "audit-summary",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14",
+  "reviewedAt": "2026-10-21T15:39:12.765Z",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "auditComplete": true,
+  "acceptanceComplete": false,
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "scope": "All four B14 candidates have scoped code/test evidence. Both confirmed P2 defects are repaired with permanent regressions and production builds. Full live runtime/release acceptance remains separate; baseline dependency-audit and document-format debt is retained.",
+  "reviewedSubbatches": [
+    {
+      "batchId": "B14-pure-policy-tauri",
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "not-run",
+        "live": "not-applicable"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+      "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+      "originalAuditVerdict": "pass-scoped",
+      "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json"
+    },
+    {
+      "batchId": "B14-runtime-ports-tauri",
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+      "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri-baseline.json",
+      "originalAuditVerdict": "needs-fix",
+      "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json"
+    },
+    {
+      "batchId": "B14-authority-storage-tauri",
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+      "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri-baseline.json",
+      "originalAuditVerdict": "pass-scoped",
+      "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json"
+    },
+    {
+      "batchId": "B14-named-commit-revoke-tauri",
+      "refactorStatus": "conformant",
+      "verdict": "pass-scoped",
+      "evidence": {
+        "static": "pass",
+        "tests": "pass",
+        "artifact": "not-run",
+        "live": "not-run"
+      },
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+      "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri-baseline.json",
+      "originalAuditVerdict": "needs-fix",
+      "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json"
+    }
+  ],
+  "counts": {
+    "planned": 4,
+    "reviewed": 4,
+    "passScoped": 4,
+    "needsFix": 0,
+    "openFindings": 0,
+    "resolvedFindings": 2
+  },
+  "findings": [
+    {
+      "id": "B14-R01",
+      "priority": 2,
+      "severity": "P2",
+      "status": "resolved",
+      "title": "Sample authorization time after entering the Store transaction",
+      "owner": "crates/am-plugin-runtime/src/authority.rs",
+      "locations": [
+        {
+          "path": "crates/am-plugin-runtime/src/authority.rs",
+          "start": 303,
+          "end": 306
+        },
+        {
+          "path": "crates/am-plugin-runtime/src/authority.rs",
+          "start": 317,
+          "end": 319
+        }
+      ],
+      "trigger": "Call check_context or check_capability while now < the grant/session/context expiry, then let Store acquisition wait until now >= that expiry before invoking the transaction closure.",
+      "observed": "All six guard/expiry combinations return Ok(()) instead of Err(Expired). Positive controls succeed before the wait; already-expired controls and read with transaction-local time deny correctly.",
+      "effect": "Expired context/capability checks can authorize after Store contention. Direct executor callers use check_context before guest bootstrap/final-output delivery and check_capability before broker operations.",
+      "evidence": [
+        ".codex-tmp/audit-b14-runtime-ports/probes.rs:94",
+        ".codex-tmp/audit-b14-runtime-ports/probes.log",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:167",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:578",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:719",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:728"
+      ],
+      "limit": "Reproduced against the unchanged runtime with a deterministic injected Store/Clock, not a live native SQLite queue. Native epoch/revocation checks still use current ledger state; this finding does not establish unauthorized persisted writes. No executor exploit or live runtime acceptance is claimed.",
+      "suggestedAction": "Borrow self.clock before transaction, then call clock.now_ms() inside each transaction closure before bound_context, matching read/create_session/host_context. Add permanent delayed-admission regressions for both methods and all expiry sources; rerun runtime and direct executor tests.",
+      "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+      "resolution": "Both guards borrow the injected clock before entering Store::transaction and sample it inside the transaction immediately before bound_context. Store waits cannot reuse the pre-admission authorization time."
+    },
+    {
+      "id": "B14-N01",
+      "priority": 2,
+      "severity": "P2",
+      "status": "resolved",
+      "title": "Propagate native session-close errors before acknowledging command cancellation",
+      "owner": "apps/tauri/src-tauri/src/plugins/executor.rs",
+      "locations": [
+        {
+          "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+          "start": 63,
+          "end": 70
+        },
+        {
+          "path": "apps/tauri/src-tauri/src/plugins/control.rs",
+          "start": 180,
+          "end": 183
+        }
+      ],
+      "trigger": "A running task is canceled while the SQLite transaction that closes its native session fails before COMMIT. A previously admitted relay reaches its blocking broker after the cancel response and storage becomes writable again.",
+      "observed": "cancel_install discards authority.with(host_end_session) errors and returns unit. plugin_command_cancel consequently returns Ok(()). The failed transaction retains the session/context; after the injected SQLite failure is cleared, the unchanged state.set arm returns version 1 and the late value is persisted.",
+      "effect": "The user receives a successful cancellation acknowledgement while old native write authority remains usable by already admitted work. This violates the documented close-before-ACK contract. Normal cancellation closes the session and denies the same late write.",
+      "evidence": [
+        ".codex-tmp/audit-b14-named-commit/probes.rs:99",
+        ".codex-tmp/audit-b14-named-commit/probes.rs:106",
+        ".codex-tmp/audit-b14-named-commit/probes.log",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:70",
+        "apps/tauri/src-tauri/src/plugins/control.rs:182",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:718",
+        "apps/tauri/src-tauri/src/plugins/executor.rs:597"
+      ],
+      "limit": "Reproduced with the unchanged extracted cancellation method, product-command body and state.set arm, actual runtime and actual SQLite adapter. Native/view setup is headless and the already admitted relay is simulated; no actual WebView race or exploit was executed. The demonstrated late write is confined to the installation namespace, not canonical host library data.",
+      "suggestedAction": "Make cancel_install return a Result and propagate poisoned-task-lock/session-close failures. Return success from plugin_command_cancel only after every matching session/context has durably closed. Keep already admitted work unable to commit after successful cancellation; cover failure and successful controls with permanent regressions.",
+      "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+      "resolution": "cancel_install returns Result, reports poisoned-registry or durable session-close errors and still attempts closure for every matching task. The product command returns that result directly. Broker/queued relay reject canceled tasks and state.set rechecks cancellation after acquiring the native authority lock. The closed mobile adapter preserves its no-task behavior with the matching Result signature."
+    }
+  ],
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "evidenceValidity": {
+    "originalFailingEvidence": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri-before-fix.json",
+    "currentSourceHashes": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+    "assessment": "Original audit snapshots remain historical. Final repair hashes, seven permanent regressions and current full/targeted checks supersede affected authority/executor evidence."
+  },
+  "verificationBySubbatch": [
+    {
+      "batchId": "B14-pure-policy-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+      "note": "Read exact commands, exits, timestamps, logs and limits in the corresponding report; repeated tests are not summed as unique cases."
+    },
+    {
+      "batchId": "B14-runtime-ports-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-runtime-ports-tauri.json",
+      "note": "Read exact commands, exits, timestamps, logs and limits in the corresponding report; repeated tests are not summed as unique cases."
+    },
+    {
+      "batchId": "B14-authority-storage-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-authority-storage-tauri.json",
+      "note": "Read exact commands, exits, timestamps, logs and limits in the corresponding report; repeated tests are not summed as unique cases."
+    },
+    {
+      "batchId": "B14-named-commit-revoke-tauri",
+      "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-named-commit-revoke-tauri.json",
+      "note": "Read exact commands, exits, timestamps, logs and limits in the corresponding report; repeated tests are not summed as unique cases."
+    }
+  ],
+  "limits": [
+    "Tests and builds do not establish an actual admitted WebView/IPC race or application/device acceptance; no app, browser, server, emulator or screenshot was launched.",
+    "Root format/dependency-audit baselines are still not green, so no unrestricted release-readiness claim is made.",
+    "Native host/resource fingerprint admission remains exact and separate; production execution acceptance was not altered to force a target open. Android received an offline arm64 check; iOS was not built or tested on this Windows host.",
+    "No finite regression suite guarantees the absence of all other defects; conclusions apply to the changed paths and recorded verification."
+  ],
+  "productImplementationChanged": true,
+  "nextAction": "The two B14 implementation defects are repaired. Track dependency-advisory and pre-existing document-format debt independently, and perform explicitly authorized live runtime acceptance if required for release.",
+  "historicalAudit": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-overview-tauri-before-fix.json",
+  "remediationReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-fix-tauri.json",
+  "implementationReviewComplete": true
+}

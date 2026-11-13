@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-19T11:21:41.004284+00:00",
+  "runtimeScope": "repository",
+  "status": "implemented",
+  "scope": "S15 only; accepted Windows catalog/command matrix",
+  "commands": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "logSha256": "134f6c3a9418c3c7771bd03a49acecea6ef6539ba8a18a988fb9f4fbca38ab00"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "logSha256": "970029609fcf3ae275b52708ad4d90356974f282db8b5348a2059a747a5341b4"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "logSha256": "29c604ee6db1dc180786b8c1fddaba266555dcbceeb2a6d5f8762c60da994597"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "logSha256": "e24829619a630a73393a859f687fa1d2e35fde38333359178bb5a08ba5c507d1"
+    },
+    {
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "logSha256": "e1b0afd62ac8bb98092f5203c64e5426648be6d6c16a0f9ed8590fe0ae7b489f"
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "logSha256": "caef20934b4bdbe63fade6bfdd60c5e340af84d1305683daba6016a546a50a8e"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "exitCode": 0,
+      "logSha256": "aa9b1476db446615ecdff6d63f4540567f83dd83160b8b445b521808377fc233"
+    },
+    {
+      "command": "pnpm audit --json",
+      "exitCode": 0,
+      "logSha256": "00d46c80c39a756d7f55e7e99aa92550733a446cb4d80cbdddb52310e1f05170"
+    },
+    {
+      "command": "pnpm check:plugin:package",
+      "exitCode": 0,
+      "logSha256": "f3d1398bc8849c0de5d6ac57cf987ba928e069868a902fb362d832df661a2095"
+    },
+    {
+      "command": "pnpm check:plugin:tools --keep-consumer",
+      "exitCode": 0,
+      "logSha256": "2f4aefb93fa7107bf45208f1f0fdb21abd5a6a3110608d77dd5676265816d0ac"
+    },
+    {
+      "command": "node apps/tauri/scripts/accept-plugin-delivery.mjs --run --production",
+      "exitCode": 0,
+      "logSha256": "a4d81edd61eb35c4fc87e6a43fe2adf6864653c551005f1c094d3d8a1d33d1ef"
+    }
+  ],
+  "totals": {
+    "rootScriptTests": 22,
+    "cliTests": 13,
+    "vitestPassed": 1721,
+    "rustPassed": 189,
+    "rustIgnored": 1,
+    "protocolDefinitions": 47,
+    "protocolDifferential": 183,
+    "packageCorpus": 43
+  },
+  "license": "MIT (SDK/CLI/testkit only)",
+  "toolArtifactsSha256": {
+    "plugin-sdk": "ef59e6c0923989966fa552af9ac3b486817895b651c358a00aca4e9d7a8c2656",
+    "plugin-cli": "381bdd6c9ef93016e924ffb7d11ecd5f1bf316fa5044953d789ac509d6022998",
+    "plugin-testkit": "0c8679b6e91e8848942eaabaadc1c5a6f86c28d0ba03e253506ca1efb7e160b9"
+  },
+  "nativeProductionGatePassed": true,
+  "realDesktopChecks": 23,
+  "liveDeniedCommands": {
+    "commands": 234,
+    "subjects": 3,
+    "denials": 702
+  },
+  "preexistingFilesRetained": true,
+  "missingPreexistingFiles": [],
+  "applicationLaunched": true,
+  "browserEvidence": "isolated WebView2; no public music-account capture",
+  "gitCommit": false,
+  "gitPush": false,
+  "publication": false,
+  "s16Started": false,
+  "limitations": [
+    "Only exact accepted Windows/WebView/Profile/resources",
+    "No media resolver/playback in catalog adapter",
+    "No OS installer association registration test",
+    "No mobile/device/channel acceptance; S16 untouched",
+    "No provisioned distribution service, marketplace or external JS migration"
+  ]
+}

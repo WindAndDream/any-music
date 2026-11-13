@@ -1,0 +1,264 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "runId": "2026-10-21-b00-e0884a5",
+  "batchId": "B01-utils-shared",
+  "parentBatch": "B01",
+  "runtime": "shared",
+  "completedAt": "2026-10-21T13:54:23.4570170+08:00",
+  "scope": {
+    "invariant": "Both utils public exports remain pure and share one implementation; the selected direct consumer preserves its documented progress interval for numeric boundary inputs.",
+    "allowedPaths": [
+      "packages/utils",
+      "packages/core/AGENTS.md",
+      "packages/core/package.json",
+      "packages/core/tsconfig.json",
+      "packages/core/src/player/normalize-progress.ts",
+      "packages/core/src/index.ts:121",
+      "packages/core/test (inventory, symbol search and existing suite execution only)"
+    ],
+    "chain": [
+      "@any-music/utils or @any-music/utils/number",
+      "utils/src/number/clamp.ts",
+      "core/src/player/normalize-progress.ts",
+      "core public export at src/index.ts:121"
+    ],
+    "excluded": [
+      "audio-composition",
+      "other core domain implementations",
+      "UI/platform call chains",
+      "persistent product/test-code changes",
+      "live runtime acceptance"
+    ],
+    "implementationReadFiles": [
+      "packages/utils/src/index.ts:1-2",
+      "packages/utils/src/number/index.ts:1-2",
+      "packages/utils/src/number/clamp.ts:1-12",
+      "packages/core/src/player/normalize-progress.ts:1-6",
+      "packages/core/src/index.ts:121"
+    ],
+    "testReadNote": "Existing core test paths and symbol matches were inspected; their full source was not reviewed. The temporary probe source and output were reviewed."
+  },
+  "baseline": {
+    "reference": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B01-utils-shared-baseline.json",
+    "head": "1fe6a2f0ef3ebaf082741ac2d1d4ffb4beafaac9",
+    "priorB00Head": "e0884a5189d6ef10a68c3ca054f2d01e84d05acd",
+    "initialObservedHead": "e75973b4a0419f97ce1dd0acd74f6a9d335104ca",
+    "environment": {
+      "os": "Windows 10.0.26200 x64",
+      "node": "v24.11.1",
+      "pnpm": "10.23.0",
+      "vitest": "4.1.11",
+      "timezone": "Asia/Shanghai"
+    },
+    "revalidation": {
+      "head": "1fe6a2f0ef3ebaf082741ac2d1d4ffb4beafaac9",
+      "changedEvidenceFiles": [],
+      "targetStatus": [],
+      "probeRemoved": true
+    },
+    "changes": "HEAD advanced during concurrent work. Target packages and base tsconfig have no tracked diff from B00; all 30 evidence hashes were unchanged after verification. Unrelated documentation/index edits were preserved.",
+    "logDirectoryNote": "The local log directory suffix reflects the first observed HEAD, not the verification baseline."
+  },
+  "declaredStatus": [
+    {
+      "claim": "B01 and all its subbatches were unreviewed at B00.",
+      "reference": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json (before this batch)"
+    },
+    {
+      "claim": "Utils must contain only independent, side-effect-free TypeScript utilities; inputs, boundaries, returns and errors must be documented.",
+      "reference": "packages/utils/AGENTS.md:3-5"
+    },
+    {
+      "claim": "normalizeProgress restricts arbitrary progress to a safe 0-to-1 interval.",
+      "reference": "packages/core/src/player/normalize-progress.ts:3"
+    }
+  ],
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "scope": "Utils ownership, dependency direction and public exports.",
+      "evidence": [
+        "packages/utils/package.json:7-10 exposes only root and /number",
+        "packages/utils/package.json:15-17 has only a TypeScript devDependency; no production/internal dependency",
+        "packages/core/package.json:14-16 uses workspace:* for utils",
+        "packages/core/src/player/normalize-progress.ts:1 consumes the public root",
+        "Both public paths return the same function in the boundary probe."
+      ]
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "scope": "Entire utils root and /number export graph.",
+      "evidence": [
+        "packages/utils/src/index.ts:2 and src/number/index.ts:2 both export src/number/clamp.ts",
+        "packages/utils/src/number/clamp.ts:6-11 contains only a function, RangeError and Math operations",
+        "packages/utils/tsconfig.json:4 uses ES2023 without DOM libraries"
+      ],
+      "limit": "No production bundle was built; static source graph and package typecheck only."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "scope": "Documented clamp behavior and selected normalizeProgress consumer.",
+      "evidence": [
+        "Boundary probe: 25 passed, 1 failed",
+        "Finite/fractional/extreme values, equal endpoints, reversed bounds and infinite progress passed",
+        "normalizeProgress(NaN) returns NaN; Number.isFinite(result) is false"
+      ],
+      "findingIds": ["B01-U01"],
+      "notApplicable": [
+        "Integer-millisecond semantics, asynchronous cancellation, retry and resource cleanup do not apply to this synchronous general numeric utility."
+      ]
+    },
+    {
+      "criterion": "C6",
+      "result": "fail",
+      "scope": "Coverage of the selected public behavior and failure input.",
+      "evidence": [
+        "Utils has no test script or test directory; its real typecheck was executed",
+        "The existing core suite passed 32 tests in 7 files",
+        "No existing core test references normalizeProgress or @any-music/utils",
+        "A temporary 26-case public-export probe reproduced the uncovered failure"
+      ],
+      "findingIds": ["B01-U01"],
+      "limit": "Passing the core suite does not establish clamp/normalizeProgress behavioral coverage. The temporary failing regression probe was retained locally and removed from the worktree."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "fail",
+      "scope": "C1/C2 pass; C3 contract mismatch confirmed; no evidence for other B01 modules.",
+      "evidence": [
+        "packages/core/src/player/normalize-progress.ts:3-5",
+        "packages/utils/src/number/clamp.ts:11"
+      ]
+    },
+    "tests": {
+      "result": "fail",
+      "commands": [
+        {
+          "id": "boundary-probe",
+          "command": "pnpm --filter @any-music/core exec vitest run test/player/b01-utils-shared.audit.test.ts",
+          "exitCode": 1,
+          "startedAt": "2026-10-21T13:53:19.8128064+08:00",
+          "completedAt": "2026-10-21T13:53:21.0279237+08:00",
+          "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-utils-shared-e75973b\\boundary-probe.log",
+          "retainedSource": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-utils-shared-e75973b\\b01-utils-shared.audit.test.ts",
+          "temporaryWorkspacePath": "packages/core/test/player/b01-utils-shared.audit.test.ts"
+        },
+        {
+          "id": "core-tests",
+          "command": "pnpm --filter @any-music/core test",
+          "exitCode": 0,
+          "startedAt": "2026-10-21T13:51:59.5751946+08:00",
+          "completedAt": "2026-10-21T13:52:01.3882679+08:00",
+          "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-utils-shared-e75973b\\core-tests.log"
+        },
+        {
+          "id": "core-typecheck",
+          "command": "pnpm --filter @any-music/core typecheck",
+          "exitCode": 0,
+          "startedAt": "2026-10-21T13:51:59.5793874+08:00",
+          "completedAt": "2026-10-21T13:52:01.3250955+08:00",
+          "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-utils-shared-e75973b\\core-typecheck.log"
+        },
+        {
+          "id": "utils-typecheck",
+          "command": "pnpm --filter @any-music/utils typecheck",
+          "exitCode": 0,
+          "startedAt": "2026-10-21T13:51:59.5776801+08:00",
+          "completedAt": "2026-10-21T13:52:00.4939744+08:00",
+          "logPath": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b01-utils-shared-e75973b\\utils-typecheck.log"
+        }
+      ],
+      "summary": {
+        "existingCoreTests": {
+          "passed": 32,
+          "files": 7,
+          "exitCode": 0
+        },
+        "boundaryProbe": {
+          "passed": 25,
+          "failed": 1,
+          "total": 26,
+          "exitCode": 1
+        },
+        "typechecks": {
+          "utils": "pass",
+          "core": "pass"
+        }
+      },
+      "probe": {
+        "source": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b01-utils-shared-e75973b/b01-utils-shared.audit.test.ts",
+        "sha256": "9d0866cc79eec00a32eb6f4ef81d66bc58c6112613c46e74cfdb189ccd0aae72",
+        "temporaryWorkspacePath": "packages/core/test/player/b01-utils-shared.audit.test.ts",
+        "removed": true,
+        "replay": "Restore the retained probe to its temporaryWorkspacePath without overwriting an existing file, run the recorded boundary-probe command from the repository root, then remove only the restored probe.",
+        "note": "Vitest ran and reported the assertion failure. pnpm additionally printed a misleading command-not-found wrapper after the nonzero exit; this is not a missing-Vitest blocker."
+      }
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "Read-only scoped audit; no public export/dependency changes. Production bundle verification belongs to a later batch/B21."
+    },
+    "live": {
+      "result": "not-applicable",
+      "reason": "The selected chain is synchronous pure TypeScript; product/browser inspection was not requested."
+    },
+    "rootGates": {
+      "result": "not-run",
+      "reason": "No product implementation changes or commit. This subbatch is not B21/final repository acceptance."
+    }
+  },
+  "findings": [
+    {
+      "id": "B01-U01",
+      "priority": "P2",
+      "severity": "medium",
+      "owner": "packages/core/src/player/normalize-progress.ts",
+      "criterion": ["C3", "C6"],
+      "title": "NaN escapes the promised normalized progress interval.",
+      "trigger": "Call the public normalizeProgress API with Number.NaN (for example, an upstream invalid progress calculation).",
+      "observed": "normalizeProgress(NaN) calls clamp(NaN, 0, 1), whose Math.min/Math.max result is NaN.",
+      "effect": "The public normalizer returns a non-finite value outside its documented safe interval. A consumer that relies on this guarantee can receive invalid progress.",
+      "evidence": [
+        "packages/core/src/player/normalize-progress.ts:3-5",
+        "packages/core/src/index.ts:121",
+        "packages/utils/src/number/clamp.ts:11",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b01-utils-shared-e75973b/boundary-probe.log"
+      ],
+      "suggestedNextAction": "Define the domain normalizer's NaN policy, implement it in core without globally changing ordinary clamp semantics, and add a retained regression test under core/test/player. Re-run the probe and core suite/typechecks.",
+      "limits": "No end-to-end UI/playback failure was established. The introduction date was not investigated, so this is an existing contract defect, not a proven regression introduced by the latest refactor. NaN propagation in the generic clamp is recorded behavior, not independently classified as a defect."
+    }
+  ],
+  "unreadPaths": [
+    "packages/audio-composition/**",
+    "packages/core/src/errors/**",
+    "packages/core/src/library/**",
+    "packages/core/src/download/**",
+    "packages/core/src/ports/**",
+    "packages/core/src beyond the selected progress module and public-export excerpt",
+    "Other consumers and all UI/runtime implementations"
+  ],
+  "missingEvidence": [
+    "A permanent normalizeProgress regression test and a passing NaN contract check",
+    "Production entry/bundle evidence (not required to diagnose this pure helper)",
+    "All seven remaining planned B01 subbatches"
+  ],
+  "dependencies": [
+    {
+      "target": "B01-U01 repair",
+      "kind": "follow-up-fix",
+      "status": "open",
+      "blocking": "B01 completion",
+      "note": "Audit-only scope does not authorize applying product fixes."
+    }
+  ],
+  "nextBatch": "B01-audio-recipes-shared",
+  "handoff": "Only B01-utils-shared was reviewed. Utils ownership and lightweight exports pass; the selected core consumer fails its NaN interval contract. Both typechecks and the 32 existing core tests pass, while the temporary probe has 25 passes and one reproducible failure. All target evidence hashes stayed stable despite concurrent unrelated HEAD changes. No product code, retained tests, browser/app sessions, commits or pushes were changed. Continue with B01-audio-recipes-shared; keep B01-U01 open for a separate authorized fix."
+}

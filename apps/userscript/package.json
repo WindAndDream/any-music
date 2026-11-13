@@ -1,0 +1,45 @@
+{
+  "name": "@any-music/userscript",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm run build:prod",
+    "build:dev": "vite build --mode dev",
+    "build:staging": "vite build --mode staging",
+    "build:prod": "vite build --mode prod",
+    "dev": "pnpm run dev:dev",
+    "dev:dev": "vite --mode dev",
+    "dev:staging": "vite --mode staging",
+    "dev:prod": "vite --mode prod",
+    "preview": "vite preview --mode prod",
+    "test": "vitest run --config vitest.config.ts",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json && vue-tsc --noEmit -p tsconfig.test.json"
+  },
+  "dependencies": {
+    "@any-music/core": "workspace:*",
+    "@any-music/music-workbench": "workspace:*",
+    "@any-music/plugin-center": "workspace:*",
+    "@any-music/plugin-music-creation": "workspace:*",
+    "@any-music/plugin-source-bilibili": "workspace:*",
+    "@any-music/plugin-source-douyin": "workspace:*",
+    "@any-music/plugin-source-netease": "workspace:*",
+    "@any-music/plugin-tag-management": "workspace:*",
+    "@any-music/plugin-ui-vue": "workspace:*",
+    "@any-music/theme-default": "workspace:*",
+    "@any-music/theme-studio": "workspace:*",
+    "@any-music/ui": "workspace:*",
+    "pinia": "catalog:",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "sass": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-monkey": "catalog:",
+    "vitest": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

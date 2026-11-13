@@ -1,0 +1,177 @@
+{
+  "step": "S12",
+  "reviewDate": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "status": "implemented-offline",
+  "scope": ["tauri-native", "shared-trusted-workbench"],
+  "productionExternalActivation": false,
+  "productionCodeAdmission": false,
+  "networkingAdded": false,
+  "appOrBrowserLaunched": false,
+  "gitCommittedOrPushed": false,
+  "tests": {
+    "node": 20,
+    "vitest": 1658,
+    "rustPassed": 134,
+    "rustIgnored": 1,
+    "protocolDifferential": 171,
+    "targetedS12": 34
+  },
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T09:53:38.725729+00:00",
+      "localLog": ".codex-tmp/s12/test.log",
+      "logSha256": "ccd973eb1ef70712cf6a745a4cda6eb938428c9ba6a93ac82a67a3a70fde8683"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T09:53:38.035979+00:00",
+      "localLog": ".codex-tmp/s12/typecheck.log",
+      "logSha256": "d89d0b79c504ca86b5dc57bce4cc43135c4d6ad32ce95005beb65b73281058a2"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T09:58:29.699288+00:00",
+      "localLog": ".codex-tmp/s12/lint.log",
+      "logSha256": "8fddccc49552f59cf4c8e54d369378a569ce5d606073bdf5e3400cfc54c57da1"
+    },
+    {
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T09:54:21.914897+00:00",
+      "localLog": ".codex-tmp/s12/native.log",
+      "logSha256": "f3f3ae3a1bb4ffb9744391e7b6c8de5985651562cd4d1fb59344c32ed61a2c07"
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T09:54:20.736569+00:00",
+      "localLog": ".codex-tmp/s12/msrv.log",
+      "logSha256": "c242eb641923ef22b71d1fdb85e4cbc7a0c0103d6c29bfc68a4f83d1fbb183ad"
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "exitCode": 1,
+      "completedAtUtc": "2026-10-18T09:48:31.331599+00:00",
+      "localLog": ".codex-tmp/s12/deny.log",
+      "logSha256": "af46115e38e708e70aca8e2cc96d4f632cc7207080d878140f466b70857c46de"
+    },
+    {
+      "command": "pnpm check:rust:deny:pure",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T09:52:10.895841+00:00",
+      "localLog": ".codex-tmp/s12/deny-pure.log",
+      "logSha256": "5ae6f7b77858ef2fb44b99f0d39b9e8e0ab90cf524db5ee645c918b1bf177fef"
+    },
+    {
+      "command": "cargo test -p am-plugin-runtime --locked",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T09:51:49.803109+00:00",
+      "localLog": ".codex-tmp/s12/runtime.log",
+      "logSha256": "a44747c6aab7a314d8025798dffef569442bffc8fe19b30e96a45095ce548e2d"
+    },
+    {
+      "command": "pnpm --filter @any-music/music-workbench exec vitest run test/plugin-adapters/offline-plugin-data.test.ts test/features/plugins/use-native-plugin-authority.test.ts",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T09:57:23.624882+00:00",
+      "localLog": ".codex-tmp/s12/proxy.log",
+      "logSha256": "e35c8c90dc8cd10689b9ea3dbb6e81ea7326e0e18e752d04790d4846381d9ddf"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T10:00:28.305672+00:00",
+      "localLog": ".codex-tmp/s12/build.log",
+      "logSha256": "239ff07fc099a72106964b6f43c06b03caf81e48a510542c56148be7227cb886"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "completedAtUtc": "2026-10-18T10:00:11.164003+00:00",
+      "localLog": ".codex-tmp/s12/format-check.log",
+      "logSha256": "3167d1be3838bc6d13cdee738b8a494a8e2b0452bec5447d0e0ee15af29e3a0b"
+    }
+  ],
+  "limits": [
+    "Host test installation records only; no production install/grant/session-creation/data-relay IPC.",
+    "No new real WebView/CSP, public-network, visual or mobile acceptance.",
+    "Full native dependency audit fails on existing rustls 0.23.45 advisories; no ignores or unrelated updates."
+  ],
+  "existingAdvisories": [
+    "RUSTSEC-2026-0346",
+    "RUSTSEC-2026-0347",
+    "RUSTSEC-2026-0348",
+    "RUSTSEC-2026-0349"
+  ],
+  "preservation": {
+    "baselinePaths": 695,
+    "unchangedExistingPaths": 653,
+    "changedExistingPaths": [
+      "Cargo.lock",
+      "Cargo.toml",
+      "apps/tauri/src-tauri/permissions/product.toml",
+      "apps/tauri/src-tauri/src/ipc.rs",
+      "crates/AGENTS.md",
+      "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+      "docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md",
+      "docs/en/desktop/rust-workspace-plan.md",
+      "docs/zh-cn/桌面端/Rust工作区规划.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md",
+      "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+      "scripts/check-rust-workspace.mjs",
+      "scripts/test/check-plugin-isolation.test.mjs",
+      "AGENTS.md",
+      "apps/tauri/AGENTS.md",
+      "apps/tauri/src-tauri/AGENTS.md",
+      "apps/tauri/src-tauri/Cargo.toml",
+      "apps/tauri/src-tauri/src/lib.rs",
+      "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "docs/en/cross-platform/README.md",
+      "docs/en/cross-platform/architecture/project-architecture.md",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md",
+      "docs/en/cross-platform/features/cross-platform-ui-and-interaction.md",
+      "docs/en/desktop/README.md",
+      "docs/en/desktop/backend-engineering.md",
+      "docs/en/desktop/development.md",
+      "docs/en/desktop/runtime-architecture.md",
+      "docs/zh-cn/桌面端/后端工程规范.md",
+      "docs/zh-cn/桌面端/开发规范.md",
+      "docs/zh-cn/桌面端/文档索引.md",
+      "docs/zh-cn/桌面端/运行端架构.md",
+      "docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md",
+      "docs/zh-cn/跨平台/文档索引.md",
+      "docs/zh-cn/跨平台/架构/可复用包边界.md",
+      "docs/zh-cn/跨平台/架构/项目架构.md",
+      "packages/music-workbench/AGENTS.md",
+      "packages/music-workbench/package.json",
+      "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "packages/music-workbench/src/index.ts",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "packages/ui/AGENTS.md",
+      "packages/ui/src/index.ts"
+    ],
+    "method": "Compared SHA-256 against local .codex-tmp/s12/start.json; pre-existing deletions remain deleted. Changed existing paths are S12 code/docs/guides only.",
+    "finalAudit": "Passed: all existing paths outside the listed S12 edits retain their original byte hashes/deleted state."
+  },
+  "artifacts": [
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "sizeBytes": 3397950,
+      "sha256": "f89ac68cff2ad35fae5b673235c24b7f03848e38f85db17bb76bc5c3e3051550"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "sizeBytes": 20399104,
+      "sha256": "98d5c94c31416f4197ba9d3dc8dc03677b5e0148372a8177fa8d93fb98bbb3eb"
+    }
+  ],
+  "notes": [
+    "Root pnpm build reruns typecheck and builds both production consumers, without launching them.",
+    "Whole-table SQLite transactions are bounded; no throughput or real-device claims.",
+    "The existing ignored native test is the subprocess helper fixture, not S12 acceptance."
+  ]
+}

@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop, 'release/**', 'hotfix/**']
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  workflow_call:
+    inputs:
+      ref:
+        description: Exact commit to validate for the release workflow.
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}-${{ inputs.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  CARGO_INCREMENTAL: '0'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+
+jobs:
+  privacy:
+    name: Privacy and secrets
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+      - name: Install verified privacy scanner
+        run: node scripts/setup-privacy.mjs
+      - name: Test privacy enforcement
+        run: node --test scripts/test/privacy.test.mjs
+      - name: Scan current files, history and incoming commits
+        run: node scripts/check-privacy.mjs ci
+
+  git-flow:
+    name: Git Flow policy
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-workspace
+        with:
+          rust: 'false'
+      - name: Validate PR direction, title and commit messages
+        run: pnpm check:git-flow
+
+  quality:
+    name: Repository checks (Windows x64)
+    runs-on: windows-2022
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-workspace
+        with:
+          cache-key: quality-windows-x64
+      - name: Check product versions
+        id: release
+        run: pnpm check:release
+      - name: Tests
+        # Root security regression tests exercise the pinned real scanner.
+        # Setup runs without enabling hooks in CI.
+        run: pnpm privacy:setup && pnpm test
+      - name: TypeScript and Rust checks
+        run: pnpm typecheck
+      - name: Lint and boundaries
+        run: pnpm lint
+      - name: Formatting
+        run: pnpm format:check
+      - name: Production builds
+        run: pnpm build
+      - name: Native release configurations
+        run: pnpm check:native
+      - name: Minimum Rust version
+        env:
+          AM_RUST_MSRV: ${{ steps.release.outputs.msrv }}
+        run: |
+          rustup toolchain install "$AM_RUST_MSRV" --profile minimal
+          pnpm check:rust:msrv
+      - name: Install dependency auditor
+        run: cargo install cargo-deny --version 0.20.2 --locked
+      - name: Native dependency audit
+        run: pnpm check:rust:deny

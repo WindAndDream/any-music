@@ -1,0 +1,33 @@
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+docs/baselines/theme-ui-migration/T06-moves.json (0ms)
+docs/baselines/theme-ui-migration/T06-workspace-before.json (1ms)
+docs/baselines/theme-ui-migration/T06.json (0ms)
+docs/en/cross-platform/architecture/project-architecture.md (134ms)
+docs/en/cross-platform/architecture/reusable-package-boundaries.md (440ms)
+docs/zh-cn/跨平台/架构/可复用包边界.md (371ms)
+docs/zh-cn/跨平台/架构/项目架构.md (614ms)
+packages/theme-default/package.json (0ms)
+packages/theme-default/src/components/downloads/ActiveDownloadPanel.vue (194ms)
+packages/theme-default/src/components/downloads/ClassicDownloads.vue (53ms)
+packages/theme-default/src/components/library/ClassicCustomTracks.vue (40ms)
+packages/theme-default/src/components/library/ClassicFavoriteFilters.vue (21ms)
+packages/theme-default/src/components/library/ClassicFavorites.vue (22ms)
+packages/theme-default/src/components/library/ClassicFeatureStatus.vue (14ms)
+packages/theme-default/src/components/library/ClassicHistory.vue (35ms)
+packages/theme-default/src/components/library/ClassicPlaylists.vue (45ms)
+packages/theme-default/src/components/library/ClassicQueue.vue (11ms)
+packages/theme-default/src/components/library/ClassicTrackFilters.vue (16ms)
+packages/theme-default/src/styles/_library.scss (1ms)
+packages/theme-default/test/components/downloads/ActiveDownloadPanel.test.ts (0ms)
+packages/theme-default/test/components/library/ClassicLibrary.test.ts (1ms)
+packages/theme-default/test/components/library/HistoryPanel.test.ts (0ms)
+packages/theme-default/test/components/library/PlaylistDrawer.test.ts (0ms)
+
+Format issues found in above 23 files. Run without `--check` to fix.
+Finished in 4366ms on 1282 files using 12 threads.
+ ELIFECYCLE  Command failed with exit code 1.

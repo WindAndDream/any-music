@@ -1,0 +1,314 @@
+{
+  "documentType": "ui-runtime-acceptance-observations",
+  "runtimeScope": "userscript",
+  "batchId": "T13-GM-R3",
+  "privacy": "No cookie values, account names/IDs, private folder IDs/titles, signed media URLs or signature values.",
+  "samples": [
+    {
+      "label": "observer-installed",
+      "at": 1793072105015,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "bilibili",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "unavailable",
+          "error": "列表使用的音乐源已停用，加载已中止。请在设置中启用后重试。（错误码：AM-1005）"
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "netease-host-search-cancel",
+      "at": 1793072132357,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "netease",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "signed-out",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "netease-host-cancel-settled",
+      "at": 1793072148698,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "netease",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "signed-out",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "netease-host-explicit-search-retry-complete",
+      "at": 1793072199247,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "netease",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "signed-out",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "netease-host-song-start",
+      "at": 1793072217278,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "netease",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "signed-out",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "empty",
+          "host": ""
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "netease-host-song-playing",
+      "at": 1793072226038,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "netease",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "signed-out",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": false,
+          "time": 8.416688,
+          "readyState": 4,
+          "duration": 267.245714,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "netease-host-playing-before-capability-check",
+      "at": 1793072257517,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "netease",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "signed-out",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": false,
+          "time": 39.890211,
+          "readyState": 4,
+          "duration": 267.245714,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "netease-disabled-during-playback",
+      "at": 1793072372141,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "bilibili",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "two-disabled-last-source-retained-core-mounted",
+      "at": 1793072396299,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "source": "douyin",
+      "sourceOrder": ["netease", "bilibili", "douyin"],
+      "session": [
+        {
+          "status": "signed-in",
+          "error": null
+        }
+      ],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "two-disabled-favorites-view",
+      "at": 1793072411321,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "sourceOrder": [],
+      "session": [],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    },
+    {
+      "label": "sources-restored-no-implicit-playback",
+      "at": 1793072482075,
+      "origin": "https://music.163.com",
+      "theme": "studio",
+      "sourceOrder": [],
+      "session": [],
+      "audioCount": 1,
+      "audio": [
+        {
+          "paused": true,
+          "time": 0,
+          "readyState": 0,
+          "duration": null,
+          "urlKind": "https",
+          "host": "m10.music.126.net"
+        }
+      ],
+      "roots": 1,
+      "hostProductStyleCount": 0
+    }
+  ],
+  "actions": [
+    {
+      "kind": "browser-search-submit",
+      "at": 1793072131721
+    },
+    {
+      "kind": "precision-dom-cancel",
+      "at": 1793072131813
+    },
+    {
+      "kind": "fault-removed-retains-network-error-until-explicit-retry",
+      "at": 1793072181019,
+      "hasError": true
+    }
+  ],
+  "capabilityCombination": {
+    "at": 1793072473946,
+    "scope": "two sources disabled; last-source disable rejected by controller",
+    "lastSourceRetained": true
+  },
+  "capturedAt": 1793072482425
+}

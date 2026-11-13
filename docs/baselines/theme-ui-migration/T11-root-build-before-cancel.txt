@@ -1,0 +1,226 @@
+
+> any-music@0.0.0 build <project-root>
+> pnpm build:prod
+
+
+> any-music@0.0.0 build:prod <project-root>
+> pnpm typecheck && pnpm -r --if-present run build:prod
+
+
+> any-music@0.0.0 typecheck <project-root>
+> pnpm -r --if-present run typecheck
+
+Scope: 22 of 23 workspace projects
+packages/audio-composition typecheck$ tsc --noEmit -p tsconfig.json
+packages/network-routing typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-sdk typecheck$ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json
+packages/utils typecheck$ tsc --noEmit -p tsconfig.json
+packages/utils typecheck: Done
+packages/network-routing typecheck: Done
+packages/audio-composition typecheck: Done
+packages/plugin-sdk typecheck: Done
+packages/account-pool typecheck$ tsc --noEmit -p tsconfig.json
+packages/core typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-vm typecheck$ tsc --noEmit -p tsconfig.json
+packages/account-pool typecheck: Done
+packages/core typecheck: Done
+packages/plugin-vm typecheck: Done
+packages/plugin-center typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-sandbox-browser typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-testkit typecheck$ tsc --noEmit -p tsconfig.json
+packages/ui typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-center typecheck: Done
+packages/plugin-testkit typecheck: Done
+packages/plugin-sandbox-browser typecheck: Done
+packages/ui typecheck: Done
+packages/plugin-music-creation typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-cli typecheck$ node --check src/cli.mjs && node --check src/project.mjs && node --check src/package.mjs
+packages/plugin-source-bilibili typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-source-douyin typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-cli typecheck: Done
+packages/plugin-tag-management typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-bilibili typecheck: Done
+packages/plugin-ui-vue typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-douyin typecheck: Done
+packages/theme-default typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-music-creation typecheck: Done
+packages/theme-studio typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-tag-management typecheck: Done
+packages/plugin-ui-vue typecheck: Done
+packages/theme-studio typecheck: Done
+packages/theme-default typecheck: Done
+packages/music-workbench typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/music-workbench typecheck: Done
+apps/tauri typecheck$ vue-tsc --noEmit -p tsconfig.json && pnpm check:rust
+apps/userscript typecheck$ vue-tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json && vue-tsc --noEmit -p tsconfig.test.json
+apps/tauri typecheck: > @any-music/tauri@0.0.0 check:rust <project-root>\apps\tauri
+apps/tauri typecheck: > pnpm -w check:protocol:generated && pnpm -w check:rust:boundaries && cargo fmt --manifest-path ../../Cargo.toml --all --check && cargo clippy --manifest-path ../../Cargo.toml --workspace --all-targets --locked -- -D warnings
+apps/tauri typecheck: > any-music@0.0.0 check:protocol:generated <project-root>
+apps/tauri typecheck: > node scripts/generate-plugin-protocol.mjs --check
+apps/tauri typecheck: Rust serde DTOs/field checks match (47 definitions).
+apps/tauri typecheck: > any-music@0.0.0 check:rust:boundaries <project-root>
+apps/tauri typecheck: > node scripts/check-rust-workspace.mjs
+apps/tauri typecheck: {
+apps/tauri typecheck:   "workspace": [
+apps/tauri typecheck:     "any-music-tauri",
+apps/tauri typecheck:     "am-plugin-net",
+apps/tauri typecheck:     "am-plugin-package",
+apps/tauri typecheck:     "am-plugin-protocol",
+apps/tauri typecheck:     "am-plugin-runtime",
+apps/tauri typecheck:     "am-plugin-policy"
+apps/tauri typecheck:   ],
+apps/tauri typecheck:   "releaseMatrix": {
+apps/tauri typecheck:     "version": 1,
+apps/tauri typecheck:     "releaseToolchain": "1.91.1",
+apps/tauri typecheck:     "msrv": "1.90.0",
+apps/tauri typecheck:     "releases": [
+apps/tauri typecheck:       {
+apps/tauri typecheck:         "target": "x86_64-pc-windows-msvc",
+apps/tauri typecheck:         "package": "any-music-tauri",
+apps/tauri typecheck:         "defaultFeatures": false,
+apps/tauri typecheck:         "features": [
+apps/tauri typecheck:           "tauri/custom-protocol"
+apps/tauri typecheck:         ]
+apps/tauri typecheck:       }
+apps/tauri typecheck:     ],
+apps/tauri typecheck:     "pendingPlatforms": [
+apps/tauri typecheck:       "macOS",
+apps/tauri typecheck:       "Linux",
+apps/tauri typecheck:       "Android",
+apps/tauri typecheck:       "iOS"
+apps/tauri typecheck:     ]
+apps/tauri typecheck:   },
+apps/tauri typecheck:   "pureClosures": {
+apps/tauri typecheck:     "am-plugin-protocol": [
+apps/tauri typecheck:       "am-plugin-protocol",
+apps/tauri typecheck:       "itoa",
+apps/tauri typecheck:       "memchr",
+apps/tauri typecheck:       "proc-macro2",
+apps/tauri typecheck:       "quote",
+apps/tauri typecheck:       "serde",
+apps/tauri typecheck:       "serde_core",
+apps/tauri typecheck:       "serde_derive",
+apps/tauri typecheck:       "serde_json",
+apps/tauri typecheck:       "syn",
+apps/tauri typecheck:       "unicode-ident",
+apps/tauri typecheck:       "zmij"
+apps/tauri typecheck:     ],
+apps/tauri typecheck:     "am-plugin-policy": [
+apps/tauri typecheck:       "am-plugin-policy",
+apps/tauri typecheck:       "am-plugin-protocol",
+apps/tauri typecheck:       "itoa",
+apps/tauri typecheck:       "memchr",
+apps/tauri typecheck:       "proc-macro2",
+apps/tauri typecheck:       "quote",
+apps/tauri typecheck:       "serde",
+apps/tauri typecheck:       "serde_core",
+apps/tauri typecheck:       "serde_derive",
+apps/tauri typecheck:       "serde_json",
+apps/tauri typecheck:       "syn",
+apps/tauri typecheck:       "unicode-ident",
+apps/tauri typecheck:       "zmij"
+apps/tauri typecheck:     ],
+apps/tauri typecheck:     "am-plugin-runtime": [
+apps/tauri typecheck:       "am-plugin-policy",
+apps/tauri typecheck:       "am-plugin-protocol",
+apps/tauri typecheck:       "am-plugin-runtime",
+apps/tauri typecheck:       "itoa",
+apps/tauri typecheck:       "memchr",
+apps/tauri typecheck:       "proc-macro2",
+apps/tauri typecheck:       "quote",
+apps/tauri typecheck:       "serde",
+apps/tauri typecheck:       "serde_core",
+apps/tauri typecheck:       "serde_derive",
+apps/tauri typecheck:       "serde_json",
+apps/tauri typecheck:       "syn",
+apps/tauri typecheck:       "unicode-ident",
+apps/tauri typecheck:       "zmij"
+apps/tauri typecheck:     ]
+apps/tauri typecheck:   }
+apps/tauri typecheck: }
+apps/tauri typecheck:     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.57s
+apps/tauri typecheck: Done
+apps/userscript typecheck: Done
+Scope: 22 of 23 workspace projects
+packages/plugin-sandbox-browser build:prod$ node scripts/build.mjs
+packages/plugin-sandbox-browser build:prod: vite v8.2.2 building client environment for production...
+packages/plugin-sandbox-browser build:prod: transforming...
+packages/plugin-sandbox-browser build:prod: ✓ 24 modules transformed.
+packages/plugin-sandbox-browser build:prod: rendering chunks...
+packages/plugin-sandbox-browser build:prod: computing gzip size...
+packages/plugin-sandbox-browser build:prod: dist/worker.js  780.35 kB │ gzip: 333.29 kB
+packages/plugin-sandbox-browser build:prod: ✓ built in 117ms
+packages/plugin-sandbox-browser build:prod: Done
+apps/tauri build:prod$ tauri build --no-bundle -- --locked --no-default-features
+apps/userscript build:prod$ vite build --mode prod
+apps/tauri build:prod:         Info Looking up installed tauri packages to check mismatched versions...
+apps/userscript build:prod: vite v8.2.2 building client environment for prod...
+apps/userscript build:prod: transforming...
+apps/tauri build:prod:      Running beforeBuildCommand `pnpm build:frontend`
+apps/tauri build:prod: > @any-music/tauri@0.0.0 build:frontend <project-root>\apps\tauri
+apps/tauri build:prod: > vite build --mode prod
+apps/tauri build:prod: vite v8.2.2 building client environment for prod...
+apps/tauri build:prod: transforming...
+apps/userscript build:prod: ✓ 839 modules transformed.
+apps/userscript build:prod: rendering chunks...
+apps/tauri build:prod: ✓ 940 modules transformed.
+apps/tauri build:prod: rendering chunks...
+apps/tauri build:prod: computing gzip size...
+apps/tauri build:prod: dist/index.html                                        1.56 kB │ gzip:   0.53 kB
+apps/tauri build:prod: dist/theme-build-audit.json                           66.27 kB │ gzip:   6.80 kB
+apps/tauri build:prod: dist/assets/index-BvC8ixOx.css                        75.40 kB │ gzip:  12.02 kB
+apps/tauri build:prod: dist/assets/studio-Cvl5TjoP.js                         0.04 kB │ gzip:   0.06 kB
+apps/tauri build:prod: dist/assets/__vite-browser-external-D3_sD4Dv.js        0.07 kB │ gzip:   0.09 kB
+apps/tauri build:prod: dist/assets/audio-exporter-SpWRGWO0.js                 0.08 kB │ gzip:   0.08 kB
+apps/tauri build:prod: dist/assets/plugin-CTPDroLL.js                         0.13 kB │ gzip:   0.14 kB
+apps/tauri build:prod: dist/assets/http-Bx2BUOLo.js                           0.18 kB │ gzip:   0.15 kB
+apps/tauri build:prod: dist/assets/policies-Ca8WcR-N.js                       0.56 kB │ gzip:   0.35 kB
+apps/tauri build:prod: dist/assets/render-custom-track-media-D4w_CI6y.js      0.79 kB │ gzip:   0.57 kB
+apps/tauri build:prod: dist/assets/__vite-browser-external-8b-sKxde.js        1.14 kB │ gzip:   0.64 kB
+apps/tauri build:prod: dist/assets/resolved-media-loader-ocXT3m_V.js          1.15 kB │ gzip:   0.75 kB
+apps/tauri build:prod: dist/assets/preload-helper-Czpn1I53.js                 1.19 kB │ gzip:   0.67 kB
+apps/tauri build:prod: dist/assets/url-parser-BgMrwjwU.js                     1.67 kB │ gzip:   0.88 kB
+apps/tauri build:prod: dist/assets/use-confirmation-dialog-DNjsEQD1.js        2.62 kB │ gzip:   1.35 kB
+apps/tauri build:prod: dist/assets/native-source-plugins-CLI4SZ1r.js          3.16 kB │ gzip:   1.37 kB
+apps/tauri build:prod: dist/assets/url-parser-CDWVVYUf.js                     3.94 kB │ gzip:   1.62 kB
+apps/tauri build:prod: dist/assets/douyin-request-state-CFbLQ2P_.js           4.61 kB │ gzip:   2.06 kB
+apps/tauri build:prod: dist/assets/native-http-CZsR900D.js                    4.90 kB │ gzip:   2.04 kB
+apps/tauri build:prod: dist/assets/download-history-BEKzmkgW.js               5.04 kB │ gzip:   1.80 kB
+apps/tauri build:prod: dist/assets/download-archive-aGajjFNI.js               7.39 kB │ gzip:   3.13 kB
+apps/tauri build:prod: dist/assets/use-favorite-filters-Dsti0KOF.js           7.40 kB │ gzip:   2.89 kB
+apps/tauri build:prod: dist/assets/app-error-BjZGph4G.js                      7.44 kB │ gzip:   2.09 kB
+apps/tauri build:prod: dist/assets/styles-D6HkvH4D.js                        10.30 kB │ gzip:   1.91 kB
+apps/tauri build:prod: dist/assets/vue-QiDL3b5R.js                           14.84 kB │ gzip:   5.52 kB
+apps/tauri build:prod: dist/assets/ExternalSourceSettings-CSxeXjeu.js        22.12 kB │ gzip:   7.52 kB
+apps/tauri build:prod: dist/assets/runtime-ed0Noo7_.js                       25.28 kB │ gzip:   9.08 kB
+apps/tauri build:prod: dist/assets/vue-ByPw4Y7I.js                           28.50 kB │ gzip:   9.63 kB
+apps/tauri build:prod: dist/assets/runtime-D-4MfbVr.js                       39.39 kB │ gzip:  13.23 kB
+apps/tauri build:prod: dist/assets/SettingsNumberForm-DNtaSR02.js            49.71 kB │ gzip:  17.46 kB
+apps/tauri build:prod: dist/assets/vue-C_6DZgDU.js                           85.20 kB │ gzip:  22.64 kB
+apps/tauri build:prod: dist/assets/AppIcon-CTF0HW1A.js                       87.63 kB │ gzip:  34.63 kB
+apps/tauri build:prod: dist/assets/audio-exporter-PbUZSpQ-.js               317.66 kB │ gzip: 135.98 kB
+apps/tauri build:prod: dist/assets/output-C0ZydUOt.js                       444.69 kB │ gzip: 113.24 kB
+apps/tauri build:prod: dist/assets/index-B6zRN7Ji.js                      1,696.94 kB │ gzip: 292.09 kB
+apps/tauri build:prod: ✓ built in 2.15s
+apps/tauri build:prod: [plugin builtin:vite-reporter]
+apps/tauri build:prod: (!) Some chunks are larger than 500 kB after minification. Consider:
+apps/tauri build:prod: - Using dynamic import() to code-split the application
+apps/tauri build:prod: - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+apps/tauri build:prod: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+apps/tauri build:prod:    Compiling any-music-tauri v0.1.0 (<project-root>\apps\tauri\src-tauri)
+apps/userscript build:prod: computing gzip size...
+apps/userscript build:prod: dist/userscript-build-audit.json     38.26 kB │ gzip:   4.60 kB
+apps/userscript build:prod: dist/theme-build-audit.json          59.10 kB │ gzip:   6.22 kB
+apps/userscript build:prod: dist/any-music.user.js            4,817.74 kB │ gzip: 937.23 kB
+apps/userscript build:prod: ✓ built in 6.44s
+apps/userscript build:prod: [33m[PLUGIN_TIMINGS] [0mYour build spent 94% of 6.4s inside plugin hooks (6.0s).
+apps/userscript build:prod: Measured inside the callback, so queue time is excluded and time the callback itself awaited is not:
+apps/userscript build:prod:   - monkey:buildBundle generateBundle (64%, 4.1s, 1 call)
+apps/userscript build:prod: Those rows are 64% of the build; the rest of the 94% is below.
+apps/userscript build:prod: Not measurable — 1 hook whose calls overlap, so elapsed time covers work other calls were doing. Profile with `node --cpu-prof`:
+apps/userscript build:prod:   - vite:css transform (105 calls)
+apps/userscript build:prod: See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+apps/userscript build:prod: Done
+apps/tauri build:prod:     Finished `release` profile [optimized] target(s) in 1m 06s
+apps/tauri build:prod:        Built application at: <project-root>\target\release\any-music-tauri.exe
+apps/tauri build:prod: Done

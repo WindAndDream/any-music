@@ -1,0 +1,40 @@
+{
+  "method": "Vue Node keyed MeasuredListConsumer with installed engine; 100px injected viewport, 20px injected natural border boxes, overscan 2, cache limit 32; ol/li semantics and resource-owning slot cards. No browser/CSS layout/image decode/frame timing. Scope counts refer to slot cards only.",
+  "samples": [
+    {
+      "count": 0,
+      "mounted": 0,
+      "observed": 2,
+      "cached": 0,
+      "released": 0
+    },
+    {
+      "count": 1,
+      "mounted": 1,
+      "observed": 3,
+      "cached": 1,
+      "released": 1
+    },
+    {
+      "count": 80,
+      "mounted": 7,
+      "observed": 9,
+      "cached": 7,
+      "released": 7
+    },
+    {
+      "count": 1000,
+      "mounted": 7,
+      "observed": 9,
+      "cached": 7,
+      "released": 7
+    },
+    {
+      "count": 10000,
+      "mounted": 7,
+      "observed": 9,
+      "cached": 7,
+      "released": 7
+    }
+  ]
+}

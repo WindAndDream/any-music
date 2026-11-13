@@ -1,0 +1,266 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "userscript",
+  "schemaVersion": 1,
+  "batchId": "B11-document-start-launcher-userscript",
+  "parentBatch": "B11",
+  "runtime": "userscript",
+  "reviewedAt": "2026-10-21T19:00:21.369+08:00",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript-baseline.json",
+  "scope": {
+    "invariant": "document-start installs page boundaries before launcher routing, the workbench executes only on expansion, one load/session is active, failed expansion permits retry, and explicit unmount cleans up or rejects late results.",
+    "selectedChain": "main.ts -> task/normal-document routing -> mountUserscriptLauncher -> first click -> bootstrap-userscript-app -> mountUserscriptApp and injected runtime -> explicit unmount or load failure.",
+    "allowedPaths": [
+      "apps/userscript/src/main.ts",
+      "apps/userscript/src/platform/dom launcher/keyboard/mount lifecycle",
+      "apps/userscript/src/bootstrap-userscript-app.ts",
+      "Direct configure/storage lifecycle excerpts, production entry configuration and matching tests"
+    ],
+    "expansionReasons": [
+      "Bootstrap and the mount adapter own completion/failure/unmount of the launcher promise; their boundary is required to verify the selected lifecycle.",
+      "configureUserscriptWorkbench and product-storage pagehide excerpts only identify runtime injection and the writer release owner. Their independent storage semantics remain B06/B11-gm-storage work.",
+      "The actual build audit and metadata establish eager execution and document-start/noframes; complete production-graph policy coverage remains a separate B11 candidate."
+    ],
+    "exclusions": [
+      "Product implementation fixes or permanent tests",
+      "Shared App.vue hide/player/download behavior, Shadow DOM layout/focus and the independent B11-shadow-dom batch",
+      "Page-bridge validation/signing/capture internals and protected-page transport",
+      "GM HTTP/cookies/limits/single proxy and full product-generation storage audit",
+      "Tauri/native transport, full external-plugin entry rejection coverage, live Tampermonkey and browser/application inspection",
+      "Root final acceptance, commit and push"
+    ],
+    "readingLimit": "One document-start/expansion lifecycle was reviewed. Stop here; remaining B11 candidates are unreviewed."
+  },
+  "declaredStatus": {
+    "claim": "Only document-start bridges, keyboard boundaries and the framework-free launcher execute initially. First expansion loads the product; failure permits retry and actual disposal releases sessions.",
+    "references": [
+      "apps/userscript/AGENTS.md:7",
+      "docs/en/userscript/development.md:26",
+      "docs/en/userscript/architecture/edge-cases.md:55",
+      "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:136"
+    ],
+    "evidenceLimit": "Offline entry/launcher lifecycle only. Explicit unmount is exercised through the public handle; production page-exit/script-manager teardown, hide-preserves-session behavior and real browser import retry are not claimed."
+  },
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Do document-start and expansion remain owned by the Userscript composition layer?",
+      "evidence": [
+        "apps/userscript/src/main.ts:1",
+        "apps/userscript/src/main.ts:55",
+        "apps/userscript/src/bootstrap-userscript-app.ts:16",
+        "apps/userscript/src/platform/dom/mount-userscript-launcher.ts:173"
+      ],
+      "limit": "No independent shared-workbench or UI ownership audit."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Are bridges/guard installed before routing, with product execution deferred until expansion?",
+      "evidence": [
+        "apps/userscript/src/main.ts:15",
+        "apps/userscript/src/main.ts:21",
+        "apps/userscript/src/main.ts:24",
+        "apps/userscript/src/main.ts:46",
+        "apps/userscript/src/main.ts:57",
+        ".codex-tmp/audit-b11-launcher/b11-main.audit.test.ts",
+        ".codex-tmp/audit-b11-launcher/artifact-check.json"
+      ],
+      "detail": "Five routing probes pass, including a missing document root, fragment/session capture routing and denied sessionStorage. Production eager graph has 25 modules and no Vue, Pinia, product styles, workbench or bootstrap."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "question": "Are loads single-flight, failures retryable and late results cleaned up after explicit disposal?",
+      "evidence": [
+        "apps/userscript/src/platform/dom/mount-userscript-launcher.ts:198",
+        "apps/userscript/src/platform/dom/mount-userscript-launcher.ts:215",
+        "apps/userscript/src/platform/dom/mount-userscript-launcher.ts:220",
+        "apps/userscript/src/platform/dom/mount-userscript-launcher.ts:242",
+        "apps/userscript/src/bootstrap-userscript-app.ts:34",
+        "apps/userscript/src/bootstrap-userscript-app.ts:43",
+        "apps/userscript/src/platform/dom/mount-userscript-app.ts:33",
+        ".codex-tmp/audit-b11-launcher/b11-launcher.audit.test.ts",
+        "apps/userscript/test/bootstrap-userscript-app.test.ts:41"
+      ],
+      "detail": "Seven launcher probes cover lazy/single-flight loading, cleared-root rejection retry, undefined-result retry, disposal before paint, late success, late rejection and external host removal. Existing bootstrap cases verify storage readiness and once-only release for explicit unmount/failure.",
+      "limit": "Injected module/DOM doubles do not establish browser/SystemJS failure caching, actual page-exit integration, hide behavior or renderer effects after partial Vue mount."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Does this expansion entry inject the Userscript built-in-only policy without a native runtime?",
+      "evidence": [
+        "apps/userscript/src/platform/configure-userscript-workbench.ts:21",
+        "apps/userscript/src/platform/configure-userscript-workbench.ts:34",
+        "apps/userscript/vite.config.ts:55",
+        "apps/userscript/vite.config.ts:78",
+        ".codex-tmp/audit-b11-launcher/artifact-check.json"
+      ],
+      "detail": "The inspected configure boundary fixes externalPlugins to none; generated metadata preserves match *://*/*, noframes and document-start. The existing production guard rejects external executor/installer code and found no such rendered modules.",
+      "limit": "Full @grant/@connect inventory, every activation/command/media/prefetch entry and bridge authorization semantics remain separate unreviewed candidates."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Are conclusions supported by current tests and actual artifacts, with live acceptance kept separate?",
+      "evidence": [
+        ".codex-tmp/audit-b11-launcher/userscript-tests.log",
+        ".codex-tmp/audit-b11-launcher/launcher-audit-tests.log",
+        ".codex-tmp/audit-b11-launcher/userscript-typecheck.log",
+        ".codex-tmp/audit-b11-launcher/userscript-build.log",
+        "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript-baseline.json"
+      ],
+      "detail": "80 existing package tests pass; the 34-case targeted group includes 12 temporary audit probes and 22 repeated existing tests. Typecheck and production build pass. Probe sources/logs remain local; only audit records are added to tracked paths."
+    }
+  ],
+  "verification": [
+    {
+      "kind": "static",
+      "result": "pass",
+      "command": "Bounded source/call-chain inspection at the recorded file hashes",
+      "exitCode": 0,
+      "log": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B11-document-start-launcher-userscript-baseline.json"
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/userscript test",
+      "startedAt": "2026-10-21T18:59:13.3130577+08:00",
+      "finishedAt": "2026-10-21T18:59:22.6771033+08:00",
+      "exitCode": 0,
+      "log": ".codex-tmp/audit-b11-launcher/userscript-tests.log",
+      "testFiles": 17,
+      "tests": 80
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/userscript exec vitest run test/b11-main.audit.test.ts test/platform/dom/b11-launcher.audit.test.ts test/bootstrap-userscript-app.test.ts test/platform/dom/mount-userscript-launcher.test.ts test/platform/dom/keyboard-event-boundary.test.ts test/build/userscript-bundle-boundary.test.ts",
+      "startedAt": "2026-10-21T19:00:02.1415357+08:00",
+      "finishedAt": "2026-10-21T19:00:04.2111489+08:00",
+      "exitCode": 0,
+      "log": ".codex-tmp/audit-b11-launcher/launcher-audit-tests.log",
+      "testFiles": 6,
+      "tests": 34,
+      "temporaryProbeTests": 12
+    },
+    {
+      "kind": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/userscript typecheck",
+      "startedAt": "2026-10-21T18:59:13.3153418+08:00",
+      "finishedAt": "2026-10-21T18:59:41.9427803+08:00",
+      "exitCode": 0,
+      "log": ".codex-tmp/audit-b11-launcher/userscript-typecheck.log"
+    },
+    {
+      "kind": "artifact",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/userscript run build:prod",
+      "startedAt": "2026-10-21T18:59:13.3309160+08:00",
+      "finishedAt": "2026-10-21T18:59:24.3514844+08:00",
+      "exitCode": 0,
+      "log": ".codex-tmp/audit-b11-launcher/userscript-build.log",
+      "artifactCheck": {
+        "documentStart": true,
+        "noframes": true,
+        "matchAllHttp": true,
+        "externalPlugins": "none",
+        "renderedCount": 413,
+        "eagerCount": 25,
+        "eagerBootstrap": [],
+        "externalExecutors": []
+      },
+      "artifacts": [
+        {
+          "Path": "<project-root>\\apps\\userscript\\dist\\any-music.user.js",
+          "Hash": "A75A9C9D35E168B92EFB39490922F0FC230889442B83E071EF87E00FB26DDDF2"
+        },
+        {
+          "Path": "<project-root>\\apps\\userscript\\dist\\userscript-build-audit.json",
+          "Hash": "A3F446585636CAA9A4DF7C7A124D45C1C16B02DBFD8AD5F353F39B48CB2ABFB8"
+        }
+      ]
+    },
+    {
+      "kind": "live",
+      "result": "not-run",
+      "command": null,
+      "exitCode": null,
+      "reason": "The task requests a bounded audit; repository instructions require an explicit browser/application inspection request for live activity. No product/server/browser/emulator was launched."
+    },
+    {
+      "kind": "root-gates",
+      "result": "not-run",
+      "command": "pnpm test; pnpm typecheck; pnpm lint; pnpm format:check; pnpm build",
+      "exitCode": null,
+      "reason": "No product changes or commit. Full gates are reserved for B21/final closure; only target checks and audit-file formatting are performed here."
+    }
+  ],
+  "findings": [],
+  "missingEvidence": [
+    "Installed Tampermonkey checks for actual document-start ordering, loader retry and page/script teardown",
+    "Hide/show preserves playback/download sessions and real Shadow DOM focus/layout behavior (B11-shadow-dom)",
+    "Bridge allowlists/expiry/cancellation and GM credentials/abort/timeout/size/proxy behavior",
+    "Complete policy rejection coverage at all external entry points and full production-graph audit"
+  ],
+  "unreadPaths": [
+    "App.vue and shared product state implementations",
+    "Page signing/capture/bridge internals (only their entry imports/routing were inspected)",
+    "platform/http and proxy implementations",
+    "Full product-storage implementation (only pagehide/release excerpt inspected)",
+    "Other source/runtime implementation modules in the generated graph"
+  ],
+  "dependencies": [
+    {
+      "batch": "B06-userscript-generation",
+      "reason": "Writer-session/persistence semantics remain an independent audit. Bootstrap tests establish only the release-call boundary."
+    },
+    {
+      "batch": "B11-page-bridges",
+      "reason": "Routing probes mock task parsing and capture. They do not accept page DTO validation or authorization."
+    }
+  ],
+  "probeReproduction": {
+    "directory": ".codex-tmp/audit-b11-launcher",
+    "restore": [
+      {
+        "from": ".codex-tmp/audit-b11-launcher/b11-main.audit.test.ts",
+        "to": "apps/userscript/test/b11-main.audit.test.ts"
+      },
+      {
+        "from": ".codex-tmp/audit-b11-launcher/b11-launcher.audit.test.ts",
+        "to": "apps/userscript/test/platform/dom/b11-launcher.audit.test.ts"
+      }
+    ],
+    "instruction": "Restore both files to their exact original test paths, run the targeted command above, then remove only these temporary copies. Sources intentionally stay outside tracked package tests after this audit."
+  },
+  "nextBatch": {
+    "batchId": "B11-shadow-dom-userscript",
+    "candidate": "B11-shadow-dom",
+    "runtime": "userscript",
+    "question": "Verify the same Shadow Host is retained through expand/hide/show, shared inline/generated styles stay scoped, and intentional unmount releases the host, styles and keyboard listeners.",
+    "allowedPaths": [
+      "apps/userscript/src/platform/dom/mount-userscript-app.ts",
+      "apps/userscript/src/platform/dom/shadow-style-registry.ts",
+      "apps/userscript/src/App.vue hide/show composition and its directly injected UI-state contract",
+      "Matching owner tests only"
+    ],
+    "exclusions": [
+      "Product fixes",
+      "GM HTTP, bridge internals, full storage or proxy audit",
+      "Browser/application inspection, commit and push"
+    ]
+  },
+  "handoff": "B11-document-start-launcher-userscript passes only its offline scope. No confirmed defect and no product edit. Current source hashes, 80 package tests, a 34-case target group including 12 temporary probes, typecheck and actual production eager graph are recorded. B11 remains pending with six candidates unreviewed; no GM or live acceptance is inferred. Continue with B11-shadow-dom-userscript only."
+}

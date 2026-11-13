@@ -1,0 +1,243 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B02-network-routing-shared",
+  "parentBatch": "B02",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T14:12:04.5578605+08:00",
+  "scope": {
+    "invariant": "Portable request routing must bound attempts and timers, stop work on terminal cancellation, suppress stale results, and release proxy leases without granting runtime transport or credential authority.",
+    "allowedPaths": [
+      "packages/network-routing/**",
+      "packages/account-pool/package.json",
+      "packages/account-pool/src/requests.ts (one-hop executor wiring only)"
+    ],
+    "exclusions": [
+      "Full account-pool catalog/selection/request acceptance",
+      "apps/tauri native/renderer integration (B12)",
+      "Userscript account/proxy integration (B11)",
+      "Any product UI, browser, application, emulator or live network acceptance",
+      "Product fixes, retained regression tests, commits and pushes"
+    ],
+    "selectedChain": "Public requestWithProxyPool -> ProxyPool selection/acquire -> runFirstSuccessful -> injected transport -> classified outcome -> lease/timer/subscription cleanup. requests.ts was inspected only as the direct account-pool consumer of the executor."
+  },
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B02-network-routing-shared-baseline.json",
+  "declaredStatus": {
+    "claim": "Maintained architecture declares account-pool -> network-routing, injected clocks/transports, no runtime credentials or music/framework dependencies. Current product composition is Tauri; Userscript retains one host account/proxy.",
+    "references": [
+      "packages/network-routing/AGENTS.md:1",
+      "packages/account-pool/AGENTS.md:1",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md:20",
+      "docs/zh-cn/跨平台/架构/重构分板块排查计划.md:82"
+    ],
+    "evidenceLimit": "Architecture claims were checked for this shared routing subbatch only; they are not proof of GM/Rust transport integration."
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-applicable"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Are ownership, exports and dependency direction portable and one-way?",
+      "evidence": [
+        "packages/network-routing/package.json:7",
+        "packages/network-routing/src/index.ts:1",
+        "packages/account-pool/package.json:14",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/package-boundaries.log"
+      ],
+      "detail": "network-routing has no runtime/internal dependencies; account-pool declares only network-routing via workspace:*. Source imports stay local and public exports expose the portable contracts. Repository boundary checker passed."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Are entry points lightweight and clock/transport capabilities injected?",
+      "evidence": [
+        "packages/network-routing/tsconfig.json:3",
+        "packages/network-routing/src/attempts.ts:4",
+        "packages/network-routing/src/attempts.ts:47",
+        "packages/network-routing/src/proxy-pool.ts:177"
+      ],
+      "detail": "ES2023-only package compilation passed. Source contains no DOM/Node/GM/Vue/music-model imports, wall-clock access, concrete HTTP, persistence or raw credentials. Runtime supplies monotonic clock/timers and execute callbacks. configurationKey is an opaque reference."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Do races, deadlines and cancellation stop all future work and release resources?",
+      "evidence": [
+        "packages/network-routing/src/attempts.ts:101",
+        "packages/network-routing/src/attempts.ts:116",
+        "packages/network-routing/src/attempts.ts:130",
+        "packages/network-routing/test/attempts.test.ts:13",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/lifecycle-probe.log"
+      ],
+      "detail": "Existing serial/parallel/deadline/write-safety tests pass. Synchronous cancellation inside isAvailable still starts one transport and leaves one timer; reentrant cancellation from an abort subscriber still allows onFailure to run. Both failures share missing terminal-state rechecks after user callbacks.",
+      "findingIds": ["B02-N01"]
+    },
+    {
+      "criterion": "C4/C5",
+      "result": "pass",
+      "question": "Are proxy health, explicit direct permission and non-replayable operations isolated from runtime authority?",
+      "evidence": [
+        "packages/network-routing/src/proxy-pool.ts:56",
+        "packages/network-routing/src/proxy-pool.ts:130",
+        "packages/network-routing/src/proxy-pool.ts:197",
+        "packages/network-routing/src/proxy-pool.ts:225",
+        "packages/network-routing/src/proxy-pool.ts:316",
+        "packages/network-routing/test/proxy-pool.test.ts:42",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/lifecycle-probe.log"
+      ],
+      "detail": "Proven proxy failures alone reach backoff with a correct classifier; unknown platform errors/timeouts stay neutral. Explicit proxy support and direct permission are checked, unsafe writes are not replayed, stale generations cannot affect health, and proxy disable/reconfiguration cancels old leases. Renaming preserves leases. No GM/Rust behavior was accepted. RoutingError remains a portable exception and runtime AppErrorState conversion is deferred to B12."
+    },
+    {
+      "criterion": "C6",
+      "result": "fail",
+      "question": "Do owner tests cover the lifecycle contract sufficiently?",
+      "evidence": [
+        "packages/network-routing/test/attempts.test.ts:13",
+        "packages/network-routing/test/proxy-pool.test.ts:41",
+        "packages/network-routing/test/fixtures/clock.ts:3",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/lifecycle-probe.log"
+      ],
+      "detail": "All 24 retained tests pass with a deterministic injected clock. Six temporary lifecycle probes produce four passes and two reproducible failures. The two callback-reentrancy branches lack permanent regression coverage; repair must add owner tests. Temporary probes were removed after archiving, so product implementation and retained tests remain unchanged."
+    }
+  ],
+  "verification": [
+    {
+      "level": "tests",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/network-routing test",
+      "exitCode": 0,
+      "time": "2026-10-21T14:09:48+08:00",
+      "summary": "2 files, 24 tests passed.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/network-routing-tests.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "pnpm --filter @any-music/network-routing typecheck",
+      "exitCode": 0,
+      "time": "2026-10-21T14:09:48+08:00",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/network-routing-typecheck.log"
+    },
+    {
+      "level": "tests",
+      "result": "fail",
+      "command": "pnpm --filter @any-music/network-routing exec vitest run test/b02-audit-probe.test.ts",
+      "exitCode": 1,
+      "time": "2026-10-21T14:11:11+08:00",
+      "summary": "6 probes: 4 passed, 2 failed with assertion mismatches. pnpm also printed a generic recursive-exec error after Vitest's failure; the log confirms that Vitest executed and the assertions failed.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/lifecycle-probe.log",
+      "probeSource": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/b02-audit-probe.test.ts",
+      "reproduce": "Copy the archived probe to packages/network-routing/test/b02-audit-probe.test.ts, run the exact command, then remove only that temporary file. Uses no product UI or network."
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "node scripts/check-package-boundaries.mjs",
+      "exitCode": 0,
+      "time": "2026-10-21T14:12:04+08:00",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/package-boundaries.log"
+    },
+    {
+      "level": "static",
+      "result": "pass",
+      "command": "Compare all ten routing file SHA-256 hashes and git status before/after; verify temporary probe absent.",
+      "exitCode": 0,
+      "time": "2026-10-21T14:12:04.5578605+08:00",
+      "summary": "No hash mismatches; no relevant working-tree changes; temporary probe removed.",
+      "logPath": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/after.json"
+    },
+    {
+      "level": "artifact",
+      "result": "not-run",
+      "reason": "No public entry, dependency or product code changed. Production builds and final root gates belong to the applicable repair/B21 closure and were not claimed here."
+    },
+    {
+      "level": "live",
+      "result": "not-applicable",
+      "reason": "This subbatch is a pure shared algorithm audit. No browser/application inspection was authorized or performed; actual Tauri/GM cancellation remains separate runtime evidence."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B02-N01",
+      "severity": "P2",
+      "owner": "packages/network-routing/src/attempts.ts",
+      "criterion": ["C3", "C6"],
+      "title": "Reentrant cancellation from injected callbacks does not stop subsequent executor work.",
+      "trigger": "isAvailable synchronously cancels the operation and returns true. A related branch occurs when fail() cancels an attempt and its abort listener synchronously cancels the parent.",
+      "observed": "The first probe receives RoutingError(cancelled) but execute still runs once and the manual clock retains one timer. The second receives RoutingError(cancelled) but onFailure still runs once.",
+      "effect": "A caller may start transport after receiving terminal cancellation and retain its timer; callback side effects may run after cancellation. The newly created attempt misses finish() cleanup because finish already marked the operation done. Late success remains suppressed, so this is a cancellation/resource defect rather than a demonstrated stale-result publication.",
+      "evidence": [
+        "packages/network-routing/src/attempts.ts:119",
+        "packages/network-routing/src/attempts.ts:125",
+        "packages/network-routing/src/attempts.ts:144",
+        "packages/network-routing/src/attempts.ts:131",
+        "packages/network-routing/src/attempts.ts:133",
+        "packages/network-routing/src/attempts.ts:136",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b02-network-routing-1fe6a2f/lifecycle-probe.log"
+      ],
+      "suggestedNextAction": "Recheck terminal state immediately after reentrant availability and cancellation callbacks, before creating/scheduling/starting more work or invoking failure classification. Add permanent regression tests for both branches under network-routing/test/attempts.test.ts, then rerun routing and direct account-pool consumer tests/typechecks.",
+      "limits": "Reproduced through the public shared executor with legal synchronous callbacks. The one-hop account consumer currently uses a simple synchronous catalog availability check; no production GM/Rust manifestation or introduction by the latest refactor was established. Severity is limited to the demonstrated shared cancellation contract."
+    }
+  ],
+  "reviewedFiles": [
+    "packages/network-routing/AGENTS.md:1",
+    "packages/network-routing/package.json:1",
+    "packages/network-routing/tsconfig.json:1",
+    "packages/network-routing/src/index.ts:1",
+    "packages/network-routing/src/cancellation.ts:1",
+    "packages/network-routing/src/attempts.ts:1",
+    "packages/network-routing/src/proxy-pool.ts:1",
+    "packages/network-routing/test/attempts.test.ts:1",
+    "packages/network-routing/test/proxy-pool.test.ts:1",
+    "packages/network-routing/test/fixtures/clock.ts:1",
+    "packages/account-pool/AGENTS.md:1",
+    "packages/account-pool/package.json:1",
+    "packages/account-pool/src/requests.ts:23"
+  ],
+  "unreadPaths": [
+    "packages/account-pool/src/catalog.ts",
+    "packages/account-pool/src/selection.ts",
+    "packages/account-pool/test/**",
+    "apps/tauri/src/features/accounts/**",
+    "apps/tauri/src/platform/**",
+    "apps/tauri/src-tauri/**",
+    "apps/userscript/**"
+  ],
+  "missingEvidence": [
+    "B02-N01 fix and permanent owner regression coverage",
+    "B02-account-pool-shared full lease/selection/catalog acceptance",
+    "B12 runtime clock/transport injection, native cancellation and AppErrorState translation",
+    "Applicable final root gates when repair/B21 closure is performed"
+  ],
+  "dependencies": [
+    {
+      "target": "B02-N01 repair",
+      "kind": "follow-up-fix",
+      "status": "open",
+      "blocking": "B02 completion"
+    },
+    {
+      "target": "B02-account-pool-shared",
+      "kind": "unreviewed-subbatch",
+      "status": "pending",
+      "blocking": "B02 completion"
+    },
+    {
+      "target": "B12",
+      "kind": "runtime-handoff",
+      "status": "unreviewed",
+      "note": "Trace account-request-router/native HTTP/cancellation separately; this report accepts no desktop/GM transport."
+    }
+  ],
+  "nextBatch": "B02-account-pool-shared",
+  "handoff": "本次仅完成 B02-network-routing-shared。单向依赖、轻入口、时钟/传输注入、代理健康、显式直连及写操作不重放已复核。原有 24 项测试、类型检查和包边界检查通过；临时 6 项生命周期探针 4 通过、2 失败，确认 B02-N01：同步回调取消后仍启动传输/遗留计时器，或继续执行失败分类。结论 violating / needs-fix，未修改产品实现或保留测试。HEAD 在审查期间变化，10 个路由文件哈希未变。下一批唯一入口为 B02-account-pool-shared；B02-N01 修复和 B12 原生接线仍是开放待办，不能宣称 B02 或运行端验收完成。"
+}

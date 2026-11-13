@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 <project-root>/packages/music-workbench
+
+ ❯ test/features/workbench/use-workbench-controller.test.ts (6 tests | 1 failed | 5 skipped) 78ms
+     × keeps real classic catalog pagination, selection and unfinished filter input across root replacement 77ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/features/workbench/use-workbench-controller.test.ts > stable workbench lifetime > keeps real classic catalog pagination, selection and unfinished filter input across root replacement
+AssertionError: expected 'v-if' to contain '搜索筛选'
+
+Expected: "搜索筛选"
+Received: "v-if"
+
+ ❯ test/features/workbench/use-workbench-controller.test.ts:357:42
+    355|     c.isCatalogFilterOpen.value = true
+    356|     await new Promise<void>((resolve) => setImmediate(resolve))
+    357|     expect(f.catalogOverlay.textContent).toContain('搜索筛选')
+       |                                          ^
+    358|     dispatchCatalogEvent(
+    359|       findCatalogElement(
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 skipped (6)
+   Start at  02:14:38
+   Duration  5.79s (transform 2.90s, setup 0ms, import 5.53s, tests 78ms, environment 0ms)
+
+undefined
+<project-root>\packages\music-workbench:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command "vitest" not found

@@ -1,0 +1,40 @@
+{
+  "tabFocus": {
+    "label": "添加并登录",
+    "tag": "BUTTON"
+  },
+  "returnFocus": {
+    "tag": "BUTTON"
+  },
+  "pBefore": {
+    "label": "classic",
+    "name": "T13 PC unsaved account",
+    "rect": {
+      "x": 648,
+      "y": 449.5357360839844,
+      "width": 246.85714721679688,
+      "height": 44.000003814697266,
+      "top": 449.5357360839844,
+      "right": 894.8571472167969,
+      "bottom": 493.53573989868164,
+      "left": 648
+    },
+    "styleCount": 1,
+    "background": "rgb(255, 255, 255)",
+    "border": "rgba(26, 26, 31, 0.24)",
+    "surface": "slot-overlays",
+    "dialog": [
+      {
+        "label": null,
+        "text": "设置\n\n让 Any Music 更合你的习惯。\n\n外观与导航\n外观与布局\n浅色主题\n导航管理\n排序与显示\n展示方式\n默认风格 · 排列方式\n"
+      },
+      {
+        "label": null,
+        "text": "添加账号\n添加账号\n账号信息\n\n选择平台并填写名称，登录成功后才会添加到账号列表。各账号的登录状态与连接设置独立保存。\n\n平台\n哔哩哔哩\n账"
+      }
+    ],
+    "focus": "添加并登录"
+  },
+  "failure": "On Classic-to-Studio selection, account dialog disappeared (no name input) and parent settings remained open. The account panel disposal called the host settings.close().",
+  "inputLimit": "The first Shift+Tab attempt used incorrect modifier 1 and is excluded; use modifier 8 in the final check."
+}

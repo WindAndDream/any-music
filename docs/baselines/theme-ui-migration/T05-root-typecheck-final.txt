@@ -1,0 +1,54 @@
+
+> any-music@0.0.0 typecheck <project-root>
+> pnpm -r --if-present run typecheck
+
+Scope: 21 of 22 workspace projects
+packages/audio-composition typecheck$ tsc --noEmit -p tsconfig.json
+packages/network-routing typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-sdk typecheck$ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json
+packages/utils typecheck$ tsc --noEmit -p tsconfig.json
+packages/utils typecheck: Done
+packages/network-routing typecheck: Done
+packages/audio-composition typecheck: Done
+packages/plugin-sdk typecheck: Done
+packages/account-pool typecheck$ tsc --noEmit -p tsconfig.json
+packages/core typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-vm typecheck$ tsc --noEmit -p tsconfig.json
+packages/account-pool typecheck: Done
+packages/core typecheck: Done
+packages/plugin-vm typecheck: Done
+packages/plugin-center typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-sandbox-browser typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-testkit typecheck$ tsc --noEmit -p tsconfig.json
+packages/ui typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-center typecheck: Done
+packages/plugin-testkit typecheck: Done
+packages/plugin-sandbox-browser typecheck: Done
+packages/ui typecheck: Done
+packages/plugin-cli typecheck$ node --check src/cli.mjs && node --check src/project.mjs && node --check src/package.mjs
+packages/plugin-music-creation typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-bilibili typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-source-douyin typecheck$ tsc --noEmit -p tsconfig.json
+packages/plugin-cli typecheck: Done
+packages/plugin-tag-management typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-bilibili typecheck: Done
+packages/plugin-ui-vue typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-source-douyin typecheck: Done
+packages/theme-default typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/plugin-music-creation typecheck: Done
+packages/plugin-tag-management typecheck: Done
+packages/plugin-ui-vue typecheck: Done
+packages/theme-default typecheck: Done
+packages/music-workbench typecheck$ vue-tsc --noEmit -p tsconfig.json
+packages/music-workbench typecheck: test/features/workbench/use-workbench-controller.test.ts(262,15): error TS2367: This comparison appears to be unintentional because the types 'boolean' and 'string' have no overlap.
+packages/music-workbench typecheck: test/features/workbench/use-workbench-controller.test.ts(719,32): error TS2345: Argument of type 'true | "root"' is not assignable to parameter of type 'boolean | "catalog" | undefined'.
+packages/music-workbench typecheck:   Type '"root"' is not assignable to type 'boolean | "catalog" | undefined'.
+packages/music-workbench typecheck: ../theme-default/src/components/library/ClassicTrackCollection.vue(30,3): error TS6133: 'remove' is declared but its value is never read.
+packages/music-workbench typecheck: ../theme-default/src/components/library/ClassicTrackCollection.vue(109,19): error TS2339: Property 'removeSelected' does not exist on type '{ toggleAll: () => void; allSelected: boolean; selected: string[]; catalogTrackDisplayModes: readonly { id: CatalogTrackDisplayMode; label: string; description: string; columns: number; }[]; ... 38 more ...; _pStores?: Record<...> | undefined; }'.
+packages/music-workbench typecheck: ../theme-default/src/composables/use-classic-track-collection.ts(119,18): error TS6133: 'removeSelected' is declared but its value is never read.
+packages/music-workbench typecheck: ../theme-default/src/composables/use-classic-track-collection.ts(147,5): error TS18004: No value exists in scope for the shorthand property 'remove'. Either declare one or provide an initializer.
+packages/music-workbench typecheck: Failed
+<project-root>\packages\music-workbench:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @any-music/music-workbench@0.0.0 typecheck: `vue-tsc --noEmit -p tsconfig.json`
+Exit status 2
+ ELIFECYCLE  Command failed with exit code 2.

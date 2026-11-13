@@ -1,0 +1,274 @@
+{
+  "documentType": "audit-remediation",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B04-generic-root-shared",
+  "parentBatch": "B04",
+  "repairId": "B04-G01-fix",
+  "findingIds": ["B04-G01"],
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T07:32:23.272Z",
+  "authorization": "The user requested repair, regression verification, an English Git commit and a local Chinese commit log.",
+  "baseline": {
+    "documentType": "audit-repair-baseline",
+    "runtimeScope": "shared",
+    "head": "c38a2479d669ca788ddac958a3b19cd08223817b",
+    "capturedAt": "2026-10-21T15:24:19.5453592+08:00",
+    "workingTree": [
+      " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared-baseline.json",
+      "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B05-music-sources-shared.json"
+    ],
+    "files": [
+      {
+        "path": "packages/plugin-center/src/contribution-registry.ts",
+        "sha256": "0bcf5d6a54a5fff46e1516cf40e51c2a6df78f253576abf7496610737967a750"
+      },
+      {
+        "path": "packages/plugin-center/test/contribution-registry.test.ts",
+        "sha256": "0a89ce1e4ad29c40a4cf3a03105151e689fabbfd10209866b264fbcb6f5b09ec"
+      }
+    ],
+    "environment": {
+      "node": "v24.11.1",
+      "pnpm": "10.23.0",
+      "timezone": "Asia/Shanghai"
+    }
+  },
+  "supersedes": {
+    "report": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared.json",
+    "reason": "Keep the original failing audit as historical evidence; this record closes B04-G01 after its authorized repair."
+  },
+  "scope": "Capture registration owner identity once and preserve generation/token-based cleanup. Modify only ContributionRegistry, its owning regression tests and B04 audit records; unrelated B05/B06/B07 work is preserved.",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-applicable"
+  },
+  "changes": [
+    {
+      "file": "packages/plugin-center/src/contribution-registry.ts:63",
+      "detail": "Capture ownerId before lookup/publication and use it for generation errors, registration key, token lookup and deletion. Caller descriptor mutation no longer changes cleanup ownership."
+    },
+    {
+      "file": "packages/plugin-center/src/contribution-registry.ts:78",
+      "detail": "Retain the per-registration token check, so a stale disposer cannot delete a replacement or a reinstalled owner, even when generation numbers match."
+    },
+    {
+      "file": "packages/plugin-center/test/contribution-registry.test.ts:110",
+      "detail": "Add five behavioral regression cases; preserve immutable historical snapshots, unrelated owners, idempotent disposal, stale-generation refusal and atomic validation."
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "C1/C2",
+      "result": "pass",
+      "detail": "No new dependency, runtime call, public export, interface or executable descriptor is introduced. Generic ownership and application injection boundaries are unchanged."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "evidence": [
+        "packages/plugin-center/src/contribution-registry.ts:64",
+        "packages/plugin-center/src/contribution-registry.ts:78",
+        "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/red.log",
+        "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/package-test.log"
+      ],
+      "detail": "All five new cases fail before the fix (eight existing registry cases pass); all thirteen registry cases and all 56 package cases pass after the fix."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "evidence": [
+        "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/audit-probe.log",
+        "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/test-retry.log",
+        "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/build.log"
+      ],
+      "detail": "Original five-scenario audit probe passes. Repository test/typecheck/lint and both runtime production builds pass. This bounded repair does not accept the other four B04 candidates or unrelated runtime/live behavior."
+    }
+  ],
+  "regressionTests": [
+    {
+      "file": "packages/plugin-center/test/contribution-registry.test.ts:110",
+      "cases": 2,
+      "behavior": "Changing the original descriptor ID to a missing owner or an existing unrelated owner still removes only the registered contribution, preserves historical snapshots and remains idempotent."
+    },
+    {
+      "file": "packages/plugin-center/test/contribution-registry.test.ts:132",
+      "cases": 1,
+      "behavior": "An old disposer cannot remove the replacement generation; equal generations still reject, and the latest disposer survives mutation of its own descriptor."
+    },
+    {
+      "file": "packages/plugin-center/test/contribution-registry.test.ts:151",
+      "cases": 1,
+      "behavior": "Disposal releases the owner for reinstall with the same generation; changing the old descriptor back cannot make the old handle remove the reinstalled registration."
+    },
+    {
+      "file": "packages/plugin-center/test/contribution-registry.test.ts:168",
+      "cases": 1,
+      "behavior": "A validation failure keeps the snapshot and original cleanup token, which remains effective after caller identity mutation."
+    }
+  ],
+  "verification": {
+    "red": {
+      "command": "pnpm --filter @any-music/plugin-center exec vitest run test/contribution-registry.test.ts",
+      "startedAt": "2026-10-21T15:25:05.2325624+08:00",
+      "finishedAt": "2026-10-21T15:25:06.6079573+08:00",
+      "exitCode": 1,
+      "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/red.log",
+      "passed": 8,
+      "failed": 5,
+      "expectedFailure": true
+    },
+    "packageTests": {
+      "command": "pnpm --filter @any-music/plugin-center test",
+      "startedAt": "2026-10-21T15:25:25.0363539+08:00",
+      "finishedAt": "2026-10-21T15:25:26.9011536+08:00",
+      "exitCode": 0,
+      "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/package-test.log",
+      "passed": 56,
+      "failed": 0
+    },
+    "packageTypecheck": {
+      "command": "pnpm --filter @any-music/plugin-center typecheck",
+      "startedAt": "2026-10-21T15:25:25.0563835+08:00",
+      "finishedAt": "2026-10-21T15:25:27.0270020+08:00",
+      "exitCode": 0,
+      "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/package-typecheck.log"
+    },
+    "originalAuditProbe": {
+      "command": "pnpm --filter @any-music/plugin-center exec vitest run --config <user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.config.mjs",
+      "startedAt": "2026-10-21T15:26:48.2125128+08:00",
+      "finishedAt": "2026-10-21T15:26:50.1272991+08:00",
+      "exitCode": 0,
+      "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/audit-probe.log",
+      "passed": 5,
+      "failed": 0
+    },
+    "rootGates": [
+      {
+        "command": "pnpm test",
+        "startedAt": "2026-10-21T15:29:30.7739574+08:00",
+        "finishedAt": "2026-10-21T15:30:45.4618535+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/test-retry.log",
+        "reason": "Retry after independently owned B06/B07 temporary probes were removed by their audit owners"
+      },
+      {
+        "command": "pnpm typecheck",
+        "startedAt": "2026-10-21T15:26:05.6405263+08:00",
+        "finishedAt": "2026-10-21T15:27:26.7524614+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/typecheck.log"
+      },
+      {
+        "command": "pnpm lint",
+        "startedAt": "2026-10-21T15:26:05.6401456+08:00",
+        "finishedAt": "2026-10-21T15:26:11.9024868+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/lint.log"
+      },
+      {
+        "command": "pnpm format:check",
+        "startedAt": "2026-10-21T15:29:30.7585043+08:00",
+        "finishedAt": "2026-10-21T15:29:35.4184458+08:00",
+        "exitCode": 1,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/format-retry.log",
+        "reason": "Recheck after concurrent temporary probes were removed"
+      },
+      {
+        "command": "pnpm build",
+        "startedAt": "2026-10-21T15:27:52.7960467+08:00",
+        "finishedAt": "2026-10-21T15:30:44.3545059+08:00",
+        "exitCode": 0,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/build.log"
+      }
+    ],
+    "initialAttempts": [
+      {
+        "command": "pnpm test",
+        "startedAt": "2026-10-21T15:26:05.6204037+08:00",
+        "finishedAt": "2026-10-21T15:27:09.6822304+08:00",
+        "exitCode": 1,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/test.log",
+        "classification": "unrelated-concurrent-audit-probe",
+        "detail": "The first root test included a newly created, untracked B07 media audit probe with eight failing cases. No committed B04 test failed. The probe was removed by its owner; the unchanged B04 implementation then passes the complete root test."
+      },
+      {
+        "command": "pnpm format:check",
+        "startedAt": "2026-10-21T15:26:05.6403457+08:00",
+        "finishedAt": "2026-10-21T15:26:13.1445120+08:00",
+        "exitCode": 1,
+        "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/format.log",
+        "classification": "existing-debt-and-concurrent-probes",
+        "detail": "Initial format check saw twelve unchanged documentation files plus B06/B07 temporary probes. After their owners removed the probes, only the twelve original files remain."
+      }
+    ],
+    "formatDebt": {
+      "result": "unchanged-from-HEAD",
+      "files": [
+        "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+        "docs/en/desktop/README.md",
+        "docs/en/desktop/backend-engineering.md",
+        "docs/en/desktop/douyin-background-login-experiment.md",
+        "docs/en/desktop/runtime-architecture.md",
+        "docs/en/desktop/rust-workspace-plan.md",
+        "docs/zh-cn/桌面端/Rust工作区规划.md",
+        "docs/zh-cn/桌面端/后端工程规范.md",
+        "docs/zh-cn/桌面端/抖音后台登录试验.md",
+        "docs/zh-cn/桌面端/文档索引.md",
+        "docs/zh-cn/桌面端/运行端架构.md",
+        "docs/zh-cn/跨平台/架构/插件系统重构计划.md"
+      ],
+      "diffExitCode": 0,
+      "concurrentProbes": [
+        "packages/music-workbench/test/media/b07-media-audit.probe.test.ts",
+        "packages/music-workbench/test/storage/b06-audit-probe.test.ts"
+      ],
+      "note": "Initial pnpm test includes a concurrently created untracked B07 probe (eight failures); initial format check includes concurrent B06/B07 probes. Those changes belong to other audits and are preserved."
+    },
+    "changedFilesFormat": {
+      "result": "pass",
+      "exitCode": 0,
+      "command": "pnpm exec oxfmt --check packages/plugin-center/src/contribution-registry.ts packages/plugin-center/test/contribution-registry.test.ts <B04 remediation report and summary>",
+      "log": "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/changed-format.log"
+    },
+    "live": {
+      "result": "not-applicable",
+      "reason": "Pure shared descriptor/disposal repair. No browser, application, emulator or UI was launched."
+    }
+  },
+  "resolvedFindings": [
+    {
+      "id": "B04-G01",
+      "status": "resolved",
+      "evidence": [
+        "packages/plugin-center/src/contribution-registry.ts:64",
+        "packages/plugin-center/src/contribution-registry.ts:78",
+        "packages/plugin-center/test/contribution-registry.test.ts:110",
+        "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/red.log",
+        "<user-home>/AppData/Local/Temp/any-music-b04-g01-fix/2026-10-21-c38a247/package-test.log"
+      ]
+    }
+  ],
+  "openFindingIds": [],
+  "fixedFileHashes": [
+    {
+      "path": "packages/plugin-center/src/contribution-registry.ts",
+      "sha256": "d26566925d9fc4a4d6325b7772a7052a06d3905dd17e1850aefa2e8c95fcf461"
+    },
+    {
+      "path": "packages/plugin-center/test/contribution-registry.test.ts",
+      "sha256": "1474b07a528c07f5fd74d66b2bde1fe11aa2b43c9213e0846fd7f3f64de1e24f"
+    }
+  ],
+  "remainingLimits": [
+    "Full repository format:check still fails on twelve documentation files unchanged from HEAD; they are outside this repair.",
+    "Four B04 candidate subbatches remain unreviewed. Passing repository tests/builds do not accept their static/runtime behavior.",
+    "Concurrent B05/B06/B07 findings and working-tree changes are independent and remain outside this commit."
+  ],
+  "nextBatch": "B04-music-sources-shared"
+}

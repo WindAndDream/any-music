@@ -1,0 +1,261 @@
+// Shared classic filter controls keep playlist and track editors visually aligned.
+@mixin editor {
+  .catalog-filter-editor {
+    container: am-filter-editor / inline-size;
+    display: grid;
+    align-content: start;
+    gap: var(--am-space-5);
+    min-inline-size: 0;
+    min-block-size: 0;
+  }
+  .catalog-filter-editor--search {
+    gap: var(--am-space-8);
+    padding-block: var(--am-space-6);
+  }
+  .catalog-filter-editor__search,
+  .catalog-filter-editor__field {
+    display: grid;
+    gap: var(--am-space-3);
+  }
+  .catalog-filter-editor__label,
+  .catalog-filter-editor__field > span:not(.catalog-filter-editor__input-control) {
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-sm);
+  }
+  /* 固定底线保留输入位置；主题色焦点线单独合成，不让动画改变输入高度或光标。 */
+  .catalog-filter-editor__input-control {
+    position: relative;
+    display: block;
+    min-inline-size: 0;
+  }
+  .catalog-filter-editor__input-control::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    block-size: 3px;
+    background: var(--am-color-primary);
+    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--am-motion-slow) var(--am-ease-standard);
+  }
+  /* 属性过渡可从当前插值反向，反复聚焦无需定时器，也不会重新从零播放关键帧。 */
+  .catalog-filter-editor__input-control:focus-within::after {
+    transform: scaleX(1);
+  }
+  /* 自动聚焦发生在首帧之前时也提供起始样式，无需延后焦点或安排动画任务。 */
+  @starting-style {
+    .catalog-filter-editor__input-control:focus-within::after {
+      transform: scaleX(0);
+    }
+  }
+  .catalog-filter-editor__line-input {
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 52px;
+    padding: var(--am-space-2) 0;
+    border: 0;
+    border-block-end: 1px solid var(--am-color-border-strong);
+    border-radius: 0;
+    background: transparent;
+    color: var(--am-color-text);
+    font: inherit;
+    font-size: var(--am-font-size-xl);
+  }
+  .catalog-filter-editor__search-input {
+    min-block-size: 72px;
+    font-size: clamp(var(--am-font-size-xl), 4cqi, 2rem);
+  }
+  .catalog-filter-editor__line-input:focus,
+  .catalog-filter-editor__line-input:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+  .catalog-filter-editor__split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--am-space-6);
+    align-items: start;
+  }
+  .catalog-filter-editor__aside {
+    display: grid;
+    min-inline-size: 0;
+    gap: var(--am-space-5);
+    padding-inline-start: var(--am-space-5);
+    border-inline-start: 1px solid var(--am-color-border);
+  }
+  .catalog-filter-editor__pending,
+  .catalog-filter-editor__duration {
+    display: grid;
+    gap: var(--am-space-4);
+  }
+  .catalog-filter-editor--published .catalog-filter-editor__aside {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+  .catalog-filter-editor--published .catalog-filter-editor__split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .catalog-filter-editor--published .catalog-filter-editor__pending {
+    /* 端点自身已提供边框层次，摘要标题与其直接组合，避免嵌套多层卡片。 */
+    gap: var(--am-space-3);
+  }
+  .catalog-filter-editor--published .catalog-filter-editor__label {
+    color: var(--am-color-primary);
+    font-size: var(--am-font-size-sm);
+    font-weight: 700;
+  }
+  .catalog-filter-editor__add {
+    /* 两端使用内容宽度和舒适的最小宽度，避免 Grid 拉伸；触摸高度仍保留 44px。 */
+    justify-self: start;
+    min-inline-size: min(100%, 8rem);
+    max-inline-size: 100%;
+    min-block-size: 44px;
+    padding-inline: var(--am-space-4);
+    border: 1px solid var(--am-color-primary);
+    border-radius: var(--am-radius-control);
+    background: var(--am-color-primary);
+    color: var(--am-color-on-primary);
+    cursor: pointer;
+    font: inherit;
+    font-size: var(--am-font-size-sm);
+    font-weight: 700;
+  }
+  .catalog-filter-editor__add:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .catalog-filter-editor--published .catalog-filter-editor__add,
+  .catalog-filter-editor--published :deep(.catalog-range-list button),
+  .catalog-filter-editor--published :deep(.catalog-range-list__item) {
+    border-radius: var(--am-radius-control);
+  }
+  .catalog-filter-editor--published :deep(.catalog-range-list__item) {
+    border-inline-start: 0;
+  }
+  .catalog-filter-editor button:focus-visible,
+  .catalog-filter-tag input:focus-visible {
+    outline: var(--am-focus-ring);
+    outline-offset: -2px;
+  }
+  .catalog-filter-editor__error {
+    margin: 0;
+    color: var(--am-color-danger);
+    font-size: var(--am-font-size-sm);
+  }
+  .catalog-filter-editor__empty {
+    margin: 0;
+    color: var(--am-color-text-secondary);
+    font-size: var(--am-font-size-sm);
+    padding-block: var(--am-space-6);
+    text-align: center;
+  }
+  .catalog-filter-editor__tags {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--am-space-2);
+  }
+  .catalog-filter-tag {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--am-space-2);
+    min-block-size: 44px;
+    padding: var(--am-space-2) var(--am-space-3);
+    border: 1px solid var(--am-color-border);
+    border-radius: var(--am-radius-sm);
+    background: var(--am-color-surface);
+    font-size: var(--am-font-size-sm);
+    cursor: pointer;
+  }
+  .catalog-filter-tag:has(input:checked) {
+    border-color: var(--am-color-primary);
+    background: var(--am-color-primary-soft);
+  }
+  /* 整个标签都是复选框热区，选中后悬停也继续提供背景反馈。 */
+  .catalog-filter-tag:hover,
+  .catalog-filter-tag:has(input:checked):hover {
+    border-color: var(--am-color-primary);
+    background: var(--am-color-surface-hover);
+  }
+  .catalog-filter-tag:has(input:focus-visible) {
+    border-color: var(--am-color-primary);
+    background: var(--am-color-primary-soft);
+  }
+  .catalog-filter-tag input {
+    accent-color: var(--am-color-primary);
+    cursor: pointer;
+  }
+  .catalog-filter-tag small {
+    color: var(--am-color-text-secondary);
+  }
+  /* 桌面日历占满左栏，低于最小可操作高度时允许滚动；移动布局仍由详情区整体滚动。 */
+  @container am-bottom-sheet (min-width: 761px) {
+    .catalog-filter-editor--published .catalog-filter-editor__split {
+      grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr);
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: var(--am-space-5);
+      block-size: 100%;
+      min-block-size: 0;
+    }
+    .catalog-filter-editor--published .catalog-filter-editor__aside {
+      max-block-size: 100%;
+      min-block-size: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    .catalog-filter-editor--published :deep(.catalog-calendar) {
+      /* size 容器提供真实高度，内部网格先伸缩，达到最小点击尺寸后才产生溢出。 */
+      container-type: size;
+      grid-column: 1;
+      grid-row: 1 / -1;
+      block-size: 100%;
+      min-block-size: 0;
+      /* Only the bounded desktop column needs its own native scroll area. */
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .catalog-filter-editor--published .catalog-filter-editor__date-controls {
+      grid-column: 2;
+      grid-row: 1;
+      padding-inline-end: var(--am-space-2);
+      /* 与下方滚动栏保留相同的原生滚动条槽，加入按钮才会对齐内容右边缘。 */
+      overflow-y: auto;
+      scrollbar-gutter: stable;
+    }
+    .catalog-filter-editor--published .catalog-filter-editor__aside {
+      grid-column: 2;
+      grid-row: 2;
+      padding-inline-end: var(--am-space-2);
+      padding-block-start: 0;
+      border-block-start: 0;
+      scrollbar-gutter: stable;
+    }
+  }
+  @container am-filter-editor (max-width: 759px) {
+    .catalog-filter-editor__split,
+    .catalog-filter-editor__tags {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .catalog-filter-editor__aside {
+      padding-inline-start: 0;
+      padding-block-start: var(--am-space-5);
+      border-inline-start: 0;
+      border-block-start: 1px solid var(--am-color-border);
+    }
+  }
+  @container am-bottom-sheet (max-width: 760px) {
+    .catalog-filter-editor--published .catalog-filter-editor__split {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .catalog-filter-editor--search {
+      padding-block: var(--am-space-4);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .catalog-filter-editor__input-control::after {
+      transition: none;
+    }
+  }
+}

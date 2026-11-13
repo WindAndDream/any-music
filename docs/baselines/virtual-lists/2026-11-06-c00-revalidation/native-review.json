@@ -1,0 +1,811 @@
+{
+  "date": "2026-11-06",
+  "runtimeScope": "tauri",
+  "productionAdmission": "not accepted",
+  "method": "Retained, previously identified complete native debug executable with isolated app identity/native and WebView directories; current Vite development frontend. Native composition lib.rs hash still matches the retained build. Candidate enabled only through transient app.provide.",
+  "identity": {
+    "date": "2026-11-06",
+    "identifier": "com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533",
+    "tempRoot": "<user-home>/AppData/Local/Temp/any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533",
+    "nativeRoot": "<user-home>/AppData/Local/com.anymusic.c00accept.faa64d79ab9440f59ff7c93cca419533",
+    "nativeDebugPort": 24361,
+    "frontendPort": 21420,
+    "binary": "<user-home>/AppData/Local/Temp/any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533/c00-production-debug.exe",
+    "binarySha256": "E3482197064ABC1AF3EDF0619584E427355F59CC31962DC6022AF01510BEC339",
+    "currentNativeCompositionSha256": "DB2AEA496E057B5A648FD54B277BD37FD64599774B3951B428CFBF093D9DA8A8",
+    "notes": "Previously-built isolated full native debug composition, current Vite frontend. Not release/native-rebuild admission. Original native lib.rs SHA matches retained build identity."
+  },
+  "sourceHashes": [
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-measurements.ts",
+      "sha256": "9c8e9e9161d2b8a41d7d55aa16aa34260e2827b181bf72f3a45cda52c81b4ef2"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "ed5096eaa0f25c8229589deeae7649920f0a443809ce9840f41d9094354979ad"
+    },
+    {
+      "path": "packages/theme-default/src/components/music-sources/VirtualQueueTrackGrid.vue",
+      "sha256": "058a2d5fe1e3397657b782e9f075b0db83b75f203737984d3169638aa504051c"
+    },
+    {
+      "path": "packages/music-workbench/src/storage/product-generation-store.ts",
+      "sha256": "fd7fa455dd70e05fc1fac3508f07208f2a421fbb549cbab7cc132e8fc78c1b0b"
+    },
+    {
+      "path": "apps/tauri/src/platform/product-storage.ts",
+      "sha256": "48248176bd2fe40adc2fc8bd3beb0cb39cfe25fecdcebf4d915b9001287d9cdd"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/lib.rs",
+      "sha256": "db2aea496e057b5a648fd54b277bd37fd64599774b3951b428cfbf093d9da8a8"
+    }
+  ],
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Edg/156.0.4314.58",
+    "revision": "@7806b68d20d1c1273d5b07b4f4de18e8f5852581",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+    "jsVersion": "15.6.12.10"
+  },
+  "protocol": {
+    "viewport": {
+      "width": 1280,
+      "height": 851.4285714285714,
+      "dpr": 1.75
+    },
+    "idleReference": "Approximately170Hz native rAF; idlep95/p99 about6ms.",
+    "tracks": "80 and1000 use the same rich deterministic metadata as the prior session, no artwork. Default persisted itemStyle=minimal, standard density. Static pixel checks explicitly select default skin.",
+    "scroll": "10 seconds linearly traversing the full scroll extent. The separate CPU profiles first warm the full scroll range. This differs from the old1200px/s protocol.",
+    "sidebar": "12 real preference toggles spaced750ms across each10-second phase. Before correction3 rounds; final80 baseline/candidate2 rounds each.",
+    "concurrency": "Parent-coordinated exclusive native timing slots; no simultaneous GM timing or tests/builds."
+  },
+  "afterCorrections": {
+    "scope": "Content-generation Map correction plus card-containment CSS correction. Each phase activates native window and runs Node inside one hidden PowerShell call that completes before tool return; actual foreground PID sampled about every100ms.",
+    "phases": [
+      {
+        "count": 1000,
+        "candidate": true,
+        "kind": "scroll",
+        "round": 1,
+        "toggles": 0,
+        "frameMs": {
+          "samples": 1158,
+          "mean": 8.635492227979276,
+          "min": 4.900000000001455,
+          "p50": 5.900000000001455,
+          "p95": 17.69999999999709,
+          "p99": 23.599999999998545,
+          "max": 35.299999999995634,
+          "over16_7": 146,
+          "over33_4": 2
+        },
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "mountedAtEnd": 13,
+        "documentVisibleAndFocusedEveryFrame": true,
+        "osForegroundSamples": 105,
+        "osNonOwnedSamples": 0
+      },
+      {
+        "count": 80,
+        "candidate": false,
+        "kind": "sidebar",
+        "round": 1,
+        "toggles": 12,
+        "frameMs": {
+          "samples": 1327,
+          "mean": 7.535719668425017,
+          "min": 5.600000000000364,
+          "p50": 5.899999999999636,
+          "p95": 17.799999999999272,
+          "p99": 23.600000000000364,
+          "max": 35.19999999999982,
+          "over16_7": 147,
+          "over33_4": 1
+        },
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "mountedAtEnd": 80,
+        "documentVisibleAndFocusedEveryFrame": true,
+        "osForegroundSamples": 105,
+        "osNonOwnedSamples": 0
+      },
+      {
+        "count": 80,
+        "candidate": false,
+        "kind": "sidebar",
+        "round": 2,
+        "toggles": 12,
+        "frameMs": {
+          "samples": 1344,
+          "mean": 7.440401785714285,
+          "min": 5.700000000000728,
+          "p50": 5.900000000001455,
+          "p95": 17.700000000000728,
+          "p99": 23.599999999998545,
+          "max": 29.299999999999272,
+          "over16_7": 154,
+          "over33_4": 0
+        },
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "mountedAtEnd": 80,
+        "documentVisibleAndFocusedEveryFrame": true,
+        "osForegroundSamples": 105,
+        "osNonOwnedSamples": 0
+      },
+      {
+        "count": 80,
+        "candidate": true,
+        "kind": "sidebar",
+        "round": 1,
+        "toggles": 12,
+        "frameMs": {
+          "samples": 1338,
+          "mean": 7.473766816143499,
+          "min": 5.599999999998545,
+          "p50": 5.900000000001455,
+          "p95": 17.700000000004366,
+          "p99": 23.60000000000582,
+          "max": 35.200000000004366,
+          "over16_7": 137,
+          "over33_4": 2
+        },
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "mountedAtEnd": 12,
+        "documentVisibleAndFocusedEveryFrame": true,
+        "osForegroundSamples": 105,
+        "osNonOwnedSamples": 0
+      },
+      {
+        "count": 80,
+        "candidate": true,
+        "kind": "sidebar",
+        "round": 2,
+        "toggles": 12,
+        "frameMs": {
+          "samples": 1347,
+          "mean": 7.423756495916854,
+          "min": 5.599999999998545,
+          "p50": 5.900000000001455,
+          "p95": 17.700000000004366,
+          "p99": 23.599999999998545,
+          "max": 35.400000000001455,
+          "over16_7": 139,
+          "over33_4": 1
+        },
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "mountedAtEnd": 12,
+        "documentVisibleAndFocusedEveryFrame": true,
+        "osForegroundSamples": 105,
+        "osNonOwnedSamples": 0
+      }
+    ],
+    "warmedScrollCpu": {
+      "scope": "Diagnostic profiling only; excludes profiler timings from acceptance.",
+      "contentGenerationSelfMsBefore": 2078.779,
+      "contentGenerationSelfMsAfter": 6.004,
+      "totalProfileMsAfter": 11526.056,
+      "geometryReadSelfMsAfter": 2383.362,
+      "foregroundSamples": 240,
+      "nonOwnedForegroundSamples": 0,
+      "remaining": "Geometry/layout reads and Vue render work remain; this does not claim a stable16.7ms tail for the full fast-scroll protocol.",
+      "logs": [
+        "native-candidate-1000-scroll.cpuprofile",
+        "native-after-candidate-1000-scroll.cpuprofile",
+        "native-after-scroll-profile-summary.json"
+      ]
+    }
+  },
+  "beforeCorrections": {
+    "foregroundLimit": "Native document remained visible/focused with real rAF, but separate continuous OS monitor found Chrome foreground during80/1000. These initial results are diagnostic and must not be called equally strict foreground comparison evidence.",
+    "cases": [
+      {
+        "count": 80,
+        "candidate": false,
+        "scroll": [
+          {
+            "kind": "scroll",
+            "toggles": 0,
+            "frameMs": {
+              "samples": 1700,
+              "mean": 5.882235294117646,
+              "min": 5.699999999998909,
+              "p50": 5.899999999999636,
+              "p95": 6,
+              "p99": 6,
+              "max": 6,
+              "over16_7": 0,
+              "over33_4": 0
+            },
+            "longTaskCount": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "mountedAtEnd": 80
+          }
+        ],
+        "sidebar": [
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1279,
+              "mean": 7.818530101641909,
+              "min": 5.700000000000728,
+              "p50": 5.900000000001455,
+              "p95": 23.599999999998545,
+              "p99": 35.30000000000291,
+              "max": 53.10000000000218,
+              "over16_7": 120,
+              "over33_4": 16
+            },
+            "longTaskCount": 3,
+            "longTaskTotalMs": 152,
+            "longTaskMaxMs": 51,
+            "mountedAtEnd": 80
+          },
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1145,
+              "mean": 8.733537117903932,
+              "min": 5.599999999998545,
+              "p50": 5.900000000001455,
+              "p95": 47,
+              "p99": 53,
+              "max": 64.80000000000291,
+              "over16_7": 77,
+              "over33_4": 76
+            },
+            "longTaskCount": 29,
+            "longTaskTotalMs": 1539,
+            "longTaskMaxMs": 65,
+            "mountedAtEnd": 80
+          },
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1279,
+              "mean": 7.818530101641909,
+              "min": 5.5,
+              "p50": 5.900000000001455,
+              "p95": 23.5,
+              "p99": 35.200000000004366,
+              "max": 53,
+              "over16_7": 129,
+              "over33_4": 17
+            },
+            "longTaskCount": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "mountedAtEnd": 80
+          }
+        ]
+      },
+      {
+        "count": 80,
+        "candidate": true,
+        "scroll": [
+          {
+            "kind": "scroll",
+            "toggles": 0,
+            "frameMs": {
+              "samples": 1590,
+              "mean": 6.2892452830188645,
+              "min": 5.69999999999709,
+              "p50": 5.900000000001455,
+              "p95": 6,
+              "p99": 23.5,
+              "max": 58.79999999998836,
+              "over16_7": 21,
+              "over33_4": 9
+            },
+            "longTaskCount": 6,
+            "longTaskTotalMs": 334,
+            "longTaskMaxMs": 62,
+            "mountedAtEnd": 14
+          }
+        ],
+        "sidebar": [
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1156,
+              "mean": 8.650432525951553,
+              "min": 5.19999999999709,
+              "p50": 5.899999999994179,
+              "p95": 41.30000000000291,
+              "p99": 53,
+              "max": 94.10000000000582,
+              "over16_7": 80,
+              "over33_4": 68
+            },
+            "longTaskCount": 27,
+            "longTaskTotalMs": 1472,
+            "longTaskMaxMs": 91,
+            "mountedAtEnd": 12
+          },
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1218,
+              "mean": 8.210016420361251,
+              "min": 5.69999999999709,
+              "p50": 5.899999999994179,
+              "p95": 35.19999999999709,
+              "p99": 47,
+              "max": 64.69999999999709,
+              "over16_7": 87,
+              "over33_4": 69
+            },
+            "longTaskCount": 4,
+            "longTaskTotalMs": 222,
+            "longTaskMaxMs": 65,
+            "mountedAtEnd": 12
+          },
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1192,
+              "mean": 8.389093959731547,
+              "min": 5.600000000005821,
+              "p50": 5.899999999994179,
+              "p95": 35.40000000000873,
+              "p99": 52.90000000000873,
+              "max": 59,
+              "over16_7": 82,
+              "over33_4": 68
+            },
+            "longTaskCount": 13,
+            "longTaskTotalMs": 696,
+            "longTaskMaxMs": 59,
+            "mountedAtEnd": 12
+          }
+        ]
+      },
+      {
+        "count": 1000,
+        "candidate": false,
+        "scroll": [
+          {
+            "kind": "scroll",
+            "toggles": 0,
+            "frameMs": {
+              "samples": 695,
+              "mean": 14.388489208633091,
+              "min": 4.700000000000728,
+              "p50": 11.799999999999272,
+              "p95": 29.5,
+              "p99": 41.19999999999891,
+              "max": 64.60000000000036,
+              "over16_7": 204,
+              "over33_4": 22
+            },
+            "longTaskCount": 2,
+            "longTaskTotalMs": 112,
+            "longTaskMaxMs": 61,
+            "mountedAtEnd": 1000
+          }
+        ],
+        "sidebar": [
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 19,
+              "mean": 527.5421052631579,
+              "min": 23.5,
+              "p50": 505.8000000000029,
+              "p95": 935.2999999999993,
+              "p99": 935.2999999999993,
+              "max": 935.2999999999993,
+              "over16_7": 19,
+              "over33_4": 16
+            },
+            "longTaskCount": 16,
+            "longTaskTotalMs": 9615,
+            "longTaskMaxMs": 929,
+            "mountedAtEnd": 1000
+          },
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 57,
+              "mean": 175.43333333333342,
+              "min": 5.799999999995634,
+              "p50": 5.900000000001455,
+              "p95": 911.6999999999971,
+              "p99": 935.4000000000015,
+              "max": 935.4000000000015,
+              "over16_7": 22,
+              "over33_4": 18
+            },
+            "longTaskCount": 16,
+            "longTaskTotalMs": 9329,
+            "longTaskMaxMs": 930,
+            "mountedAtEnd": 1000
+          },
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 171,
+              "mean": 58.47894736842106,
+              "min": 5.69999999999709,
+              "p50": 5.900000000001455,
+              "p95": 470.70000000000437,
+              "p99": 911.6999999999971,
+              "max": 935.4000000000015,
+              "over16_7": 18,
+              "over33_4": 17
+            },
+            "longTaskCount": 14,
+            "longTaskTotalMs": 8676,
+            "longTaskMaxMs": 920,
+            "mountedAtEnd": 1000
+          }
+        ]
+      },
+      {
+        "count": 1000,
+        "candidate": true,
+        "scroll": [
+          {
+            "kind": "scroll",
+            "toggles": 0,
+            "frameMs": {
+              "samples": 221,
+              "mean": 45.30135746606337,
+              "min": 5.69999999999709,
+              "p50": 35.30000000000291,
+              "p95": 158.90000000000873,
+              "p99": 182.40000000000873,
+              "max": 241.1999999999971,
+              "over16_7": 112,
+              "over33_4": 111
+            },
+            "longTaskCount": 76,
+            "longTaskTotalMs": 7554,
+            "longTaskMaxMs": 237,
+            "mountedAtEnd": 21
+          }
+        ],
+        "sidebar": [
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1032,
+              "mean": 9.689728682170545,
+              "min": 5.5,
+              "p50": 5.899999999994179,
+              "p95": 52.80000000000291,
+              "p99": 88.19999999999709,
+              "max": 123.59999999999127,
+              "over16_7": 68,
+              "over33_4": 63
+            },
+            "longTaskCount": 37,
+            "longTaskTotalMs": 2544,
+            "longTaskMaxMs": 110,
+            "mountedAtEnd": 12
+          },
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1058,
+              "mean": 9.45160680529301,
+              "min": 5.69999999999709,
+              "p50": 5.899999999994179,
+              "p95": 47.10000000000582,
+              "p99": 82.30000000000291,
+              "max": 105.90000000000873,
+              "over16_7": 70,
+              "over33_4": 68
+            },
+            "longTaskCount": 28,
+            "longTaskTotalMs": 1958,
+            "longTaskMaxMs": 104,
+            "mountedAtEnd": 12
+          },
+          {
+            "kind": "sidebar",
+            "toggles": 12,
+            "frameMs": {
+              "samples": 1069,
+              "mean": 9.354349859681948,
+              "min": 5.69999999999709,
+              "p50": 5.899999999994179,
+              "p95": 41.20000000001164,
+              "p99": 82.30000000000291,
+              "max": 105.90000000000873,
+              "over16_7": 70,
+              "over33_4": 67
+            },
+            "longTaskCount": 31,
+            "longTaskTotalMs": 2132,
+            "longTaskMaxMs": 109,
+            "mountedAtEnd": 12
+          }
+        ]
+      }
+    ]
+  },
+  "compact10000": {
+    "setup": "Current-format native and renderer mirrors successfully accepted valid compact10000 tracks (4,841,242 renderer characters); full workbench startup completed after the old2-second readiness delay. Rich10000 mirror setup still exceeds renderer quota and is not admitted.",
+    "count": 10000,
+    "mountedAtStart": 12,
+    "phases": [
+      {
+        "kind": "idle",
+        "toggles": 0,
+        "frameMs": {
+          "samples": 510,
+          "mean": 5.882156862745086,
+          "min": 5.5,
+          "p50": 5.899999999994179,
+          "p95": 6,
+          "p99": 6,
+          "max": 6.2999999999883585,
+          "over16_7": 0,
+          "over33_4": 0
+        },
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "mountedAtEnd": 12
+      },
+      {
+        "kind": "scroll",
+        "toggles": 0,
+        "frameMs": {
+          "samples": 126,
+          "mean": 79.92460317460318,
+          "min": 5.7999999999883585,
+          "p50": 88.19999999999709,
+          "p95": 117.60000000000582,
+          "p99": 141.3000000000029,
+          "max": 153,
+          "over16_7": 107,
+          "over33_4": 107
+        },
+        "longTaskCount": 107,
+        "longTaskTotalMs": 9801,
+        "longTaskMaxMs": 153,
+        "mountedAtEnd": 19
+      },
+      {
+        "kind": "sidebar",
+        "toggles": 12,
+        "frameMs": {
+          "samples": 106,
+          "mean": 94.33867924528296,
+          "min": 5.69999999999709,
+          "p50": 5.900000000008731,
+          "p95": 664.6999999999971,
+          "p99": 717.6999999999971,
+          "max": 723.5,
+          "over16_7": 28,
+          "over33_4": 25
+        },
+        "longTaskCount": 15,
+        "longTaskTotalMs": 6987,
+        "longTaskMaxMs": 603,
+        "mountedAtEnd": 12
+      },
+      {
+        "kind": "sidebar",
+        "toggles": 12,
+        "frameMs": {
+          "samples": 144,
+          "mean": 69.44374999999997,
+          "min": 5.7999999999883585,
+          "p50": 5.900000000008731,
+          "p95": 611.8000000000029,
+          "p99": 688.3000000000029,
+          "max": 694.1000000000058,
+          "over16_7": 31,
+          "over33_4": 27
+        },
+        "longTaskCount": 16,
+        "longTaskTotalMs": 6870,
+        "longTaskMaxMs": 582,
+        "mountedAtEnd": 12
+      },
+      {
+        "kind": "sidebar",
+        "toggles": 12,
+        "frameMs": {
+          "samples": 159,
+          "mean": 62.89182389937118,
+          "min": 5.7999999999883585,
+          "p50": 5.899999999994179,
+          "p95": 588.3999999999942,
+          "p99": 658.8999999999942,
+          "max": 705.8999999999942,
+          "over16_7": 38,
+          "over33_4": 27
+        },
+        "longTaskCount": 17,
+        "longTaskTotalMs": 6869,
+        "longTaskMaxMs": 637,
+        "mountedAtEnd": 12
+      }
+    ],
+    "scope": "Before the later Map/CSS corrections; candidate only. No final corrected10000 native timing was run. Direct fixture setup is not a public product mutation acceptance test."
+  },
+  "earlierContainmentExperiment": {
+    "stage": "Temporary card-only contain:layout style paint experiment before the final explicit intrinsic-block-size:none correction. This is not the final CSS acceptance stage.",
+    "scope": "80 rich tracks, light/default/standard. Six visible/partly visible shared card crops.",
+    "commonCardExactPixelDifferenceCounts": [0, 0, 0, 0, 0, 0],
+    "articleDescendantRectangleDifferences": 0,
+    "wholeViewportDifference": {
+      "differentPixels": 414,
+      "over3": 408,
+      "over16": 400,
+      "maxDelta": 44,
+      "bbox": [2231, 189, 2239, 243]
+    },
+    "repeatHashesStable": true,
+    "retainedScreenshotPairs": {
+      "baseline": {
+        "files": ["native-visual-baseline-0.png", "native-visual-baseline-1.png"],
+        "sha256": "546fabdb91c16f0713b57c119e333ca586d3532e862de67451e63bcb19c2bd54"
+      },
+      "candidateWithTemporaryContainment": {
+        "files": ["native-visual-candidate-contain-0.png", "native-visual-candidate-contain-1.png"],
+        "sha256": "f6b68990e958ff66556f85d319db1e3cca8d0a490dd573751ad71e11c335ffd5"
+      }
+    },
+    "interpretation": "Exact zero differences for shared card crops and the414-pixel scrollbar-only viewport difference belong to this earlier temporary experiment. They must not be attributed to the final intrinsic:none capture.",
+    "logs": ["native-visual-experiment.json", "native-visual-diff.json"]
+  },
+  "finalStaticDefaultSkin": {
+    "stage": "Final production card-containment CSS with explicit intrinsic-block-size:none, after the measurement correction.",
+    "scope": "80 rich tracks, light/default/standard, current Vite CSS without injected temporary styles. Six visible/partly visible shared cards.",
+    "repeatHashesStable": true,
+    "commonCardPixelDifferenceCounts": [
+      {
+        "id": "c00-native:0",
+        "differentPixels": 131,
+        "over3": 0,
+        "maxChannelDelta": 2
+      },
+      {
+        "id": "c00-native:1",
+        "differentPixels": 133,
+        "over3": 0,
+        "maxChannelDelta": 2
+      },
+      {
+        "id": "c00-native:2",
+        "differentPixels": 131,
+        "over3": 0,
+        "maxChannelDelta": 2
+      },
+      {
+        "id": "c00-native:3",
+        "differentPixels": 56,
+        "over3": 0,
+        "maxChannelDelta": 2
+      },
+      {
+        "id": "c00-native:4",
+        "differentPixels": 58,
+        "over3": 0,
+        "maxChannelDelta": 2
+      },
+      {
+        "id": "c00-native:5",
+        "differentPixels": 56,
+        "over3": 0,
+        "maxChannelDelta": 2
+      }
+    ],
+    "articleDescendantRectangleDifferences": 0,
+    "wholeViewportDifference": {
+      "differentPixels": 24526,
+      "over3": 408,
+      "over16": 400,
+      "maxDelta": 44,
+      "bbox": [495, 189, 2239, 1153]
+    },
+    "viewportPixelDeltaDistribution": {
+      "maxChannelDelta1": 23916,
+      "maxChannelDelta2": 202,
+      "maxChannelDelta3": 0,
+      "maxChannelDeltaGreaterThan3": 408,
+      "greaterThan3BoundingBox": [2231, 190, 2239, 243]
+    },
+    "interpretation": "Article-descendant geometry matches exactly. Final card crops contain565 differing pixels in total, with maximum per-channel delta2; no card pixel exceeds delta3. The viewport has24,526 strictly differing pixels, of which24,118 have delta1 or2 and408 exceed delta3 only in the native scrollbar. Thresholded similarity is not exact pixel equality. Final pixel equivalence remains partial and unaccepted.",
+    "causeOfLowAmplitudeDifferences": "Not established by the retained captures. The final baseline screenshot itself also differs from the earlier experiment baseline, so these stages do not isolate intrinsic:none as the cause. The earlier zero-difference explanation was incorrectly carried forward after final captures replaced the formal-stage data; this record now separates the stages. No runtime was relaunched for this evidence correction.",
+    "pixelGate": "partial; exact final card-pixel equivalence not accepted",
+    "retainedScreenshotPairs": {
+      "baseline": {
+        "files": ["native-visual-formal-baseline-0.png", "native-visual-formal-baseline-1.png"],
+        "sha256": "e82bf1e94ed4cc0d14aa028b70e2108f15394dcea9d533774e84342797c7feed"
+      },
+      "candidate": {
+        "files": ["native-visual-formal-candidate-0.png", "native-visual-formal-candidate-1.png"],
+        "sha256": "932027ddd4712b71d52160684d606c7fc1f81983979635206248091dba578c15"
+      }
+    },
+    "computedCss": {
+      "normal": {
+        "contain": "content",
+        "intrinsicBlock": "none",
+        "visibility": "visible"
+      },
+      "states": {
+        "data-am-grid-source": {
+          "contain": "none",
+          "intrinsicBlock": "none",
+          "visibility": "visible"
+        },
+        "data-am-grid-landing": {
+          "contain": "none",
+          "intrinsicBlock": "none",
+          "visibility": "visible"
+        },
+        "data-am-grid-settling": {
+          "contain": "none",
+          "intrinsicBlock": "none",
+          "visibility": "visible"
+        }
+      },
+      "final": {
+        "contain": "content",
+        "intrinsicBlock": "none",
+        "visibility": "visible"
+      }
+    },
+    "wrapperContainment": "All4 virtual cell/motion wrappers computed contain:none in the recorded formal check.",
+    "logs": [
+      "native-visual-formal.json",
+      "native-visual-formal-diff.json",
+      "native-formal-final-intrinsic.json"
+    ]
+  },
+  "cleanup": {
+    "normalClose": {
+      "pid": 29424,
+      "path": "<user-home>\\AppData\\Local\\Temp\\any-music-c00-desktop-faa64d79ab9440f59ff7c93cca419533\\c00-production-debug.exe",
+      "closeRequested": true,
+      "normalExit": true,
+      "forced": false
+    },
+    "finalAudit": {
+      "remainingIsolatedProcesses": [],
+      "remainingKnownFrontendPids": [],
+      "remainingListeners": []
+    },
+    "frontend": "Exact owned Vite/pnpm wrapper tree PIDs31236,2200,7292,18904 stopped after command-line inspection. No21420/24361 listener remains.",
+    "data": "Unique previously established isolated native/WebView directories retained for reproduction; production identity/data untouched."
+  },
+  "limits": [
+    "Final native default-skin card geometry matches, but exact pixel equality is unaccepted:565 shared-card pixels differ by at most2 per channel. The earlier exact-zero claim belongs only to the retained temporary-containment experiment.",
+    "Final80 native minimal-skin sidebar results match baseline within recorded quantiles; this does not close GM regression or full C00.",
+    "Final1000 fast-scrollp95/p99 remains17.7/23.6ms under this aggressive full-range protocol.",
+    "Cold startup, complete visual/artwork matrix, native drag both directions, realIME/touch, authenticated playback/download continuity and optimized production artifact remain unaccepted.",
+    "Initial and final foreground scopes differ explicitly; CPU hotspot removal plus target work-count regressions and strict final native samples support the correction.",
+    "WebView tracing completion was asynchronous and its second start failed; no trace-time claims are made. CPU profiler/trace sessions were stopped."
+  ],
+  "logDirectory": "logs/2026-11-06-virtual-list-implementation",
+  "commit": false,
+  "push": false
+}

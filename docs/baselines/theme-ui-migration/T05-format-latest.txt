@@ -1,0 +1,11 @@
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+docs/baselines/theme-ui-migration/T05.json (0ms)
+
+Format issues found in above 1 files. Run without `--check` to fix.
+Finished in 6569ms on 1285 files using 12 threads.
+ ELIFECYCLE  Command failed with exit code 1.

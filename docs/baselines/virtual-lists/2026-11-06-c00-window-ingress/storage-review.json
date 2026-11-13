@@ -1,0 +1,143 @@
+{
+  "date": "2026-11-06",
+  "step": "C00",
+  "scope": "Shared product generation persistence; synchronous memory backend only. No GM/native runtime timing.",
+  "decision": "Reject and revert the checksum allocation experiment; no production/test storage changes retained.",
+  "retainedCode": false,
+  "sourceSha256AfterReversal": "fd7fa455dd70e05fc1fac3508f07208f2a421fbb549cbab7cc132e8fc78c1b0b",
+  "baselineSha256": "fd7fa455dd70e05fc1fac3508f07208f2a421fbb549cbab7cc132e8fc78c1b0b",
+  "experimentSha256": "539e7bc4e20a887dbc91fcfefda9268414627c9d703d4cef838a97ca614d8504",
+  "experiment": "Replace canonical JSON Object.fromEntries(sorted keys mapped to tuples) with one in-place sorted keys array and loop-populated null-prototype record; c1 and commit validation/order otherwise unchanged.",
+  "command": "STORAGE_BENCH_LABEL=alternating pnpm --filter @any-music/music-workbench exec vitest run --config ../../logs/2026-11-06-virtual-list-implementation/session-storage-benchmark.config.ts",
+  "method": {
+    "backend": "Synchronous memory backend clones JSON on every raw read and write, with exclusive synchronous writer. No GM/native runtime transport.",
+    "sizes": [80, 1000, 10000],
+    "warmupsPerVariant": 3,
+    "samplesPerVariant": 12,
+    "order": "alternating before/after then after/before in one process",
+    "includes": "Complete app-shell preference write: detached candidate, whole-product/namespace validation, journal/parts/manifest writes, normalized checksums, full staged read-back validation and pointer publication. Raw memory reads/writes clone JSON; restoration/snapshot equality checks occur outside timing.",
+    "concurrency": "No concurrent tests, builds or product animation during measured alternate run. Main GM setup server idle; other agents held heavy commands.",
+    "statisticalLimit": "One local same-process alternating run, not a statistical performance admission, no timing assertions. JIT/GC and runtime/backend differences remain."
+  },
+  "results": [
+    {
+      "count": 80,
+      "label": "before",
+      "productJsonBytes": 23573,
+      "milliseconds": [
+        2.09680000000003, 2.0731000000000677, 2.0996999999999844, 2.241600000000062,
+        2.164700000000039, 2.113399999999956, 1.8204000000000633, 1.9367999999999483,
+        1.8717000000001462, 1.79950000000008, 1.7211999999999534, 1.696100000000115
+      ],
+      "medianMs": 2.004950000000008,
+      "minMs": 1.696100000000115,
+      "maxMs": 2.241600000000062
+    },
+    {
+      "count": 80,
+      "label": "after",
+      "productJsonBytes": 23573,
+      "milliseconds": [
+        2.2490999999999985, 2.0979999999999563, 2.239699999999857, 2.4828999999999724,
+        1.868199999999888, 1.8953000000001339, 1.8679999999999382, 2.611599999999953,
+        1.7899999999999636, 1.7740000000001146, 1.750099999999975, 2.2742000000000644
+      ],
+      "medianMs": 1.996650000000045,
+      "minMs": 1.750099999999975,
+      "maxMs": 2.611599999999953
+    },
+    {
+      "count": 1000,
+      "label": "before",
+      "productJsonBytes": 287493,
+      "milliseconds": [
+        29.18690000000015, 31.330299999999625, 24.45219999999972, 25.790700000000015,
+        25.133699999999862, 27.356500000000324, 28.092099999999846, 22.609800000000178,
+        26.166400000000067, 22.059700000000248, 26.523099999999886, 37.9701
+      ],
+      "medianMs": 26.344749999999976,
+      "minMs": 22.059700000000248,
+      "maxMs": 37.9701
+    },
+    {
+      "count": 1000,
+      "label": "after",
+      "productJsonBytes": 287493,
+      "milliseconds": [
+        24.600400000000263, 25.509100000000217, 25.209800000000087, 26.88299999999981,
+        25.54220000000032, 22.7796000000003, 26.528899999999794, 26.497400000000198,
+        27.90099999999984, 23.034500000000207, 25.640600000000177, 26.11110000000008
+      ],
+      "medianMs": 25.59140000000025,
+      "minMs": 22.7796000000003,
+      "maxMs": 27.90099999999984
+    },
+    {
+      "count": 10000,
+      "label": "before",
+      "productJsonBytes": 2924493,
+      "milliseconds": [
+        232.7523000000001, 234.21540000000005, 229.01690000000053, 231.61110000000008,
+        229.17659999999978, 241.35410000000047, 242.8751000000002, 232.1872000000003,
+        234.80429999999978, 229.7966000000015, 229.2464, 251.15740000000005
+      ],
+      "medianMs": 232.4697500000002,
+      "minMs": 229.01690000000053,
+      "maxMs": 251.15740000000005
+    },
+    {
+      "count": 10000,
+      "label": "after",
+      "productJsonBytes": 2924493,
+      "milliseconds": [
+        235.40000000000055, 239.29619999999977, 234.40269999999964, 233.9256000000005,
+        239.7605999999996, 239.8778000000002, 249.19550000000072, 263.174500000001,
+        239.14370000000054, 240.2407000000003, 244.21099999999933, 251.42410000000018
+      ],
+      "medianMs": 239.8191999999999,
+      "minMs": 233.9256000000005,
+      "maxMs": 263.174500000001
+    }
+  ],
+  "conclusion": "First separate-process pair suggested a compact10k improvement, but same-process alternating medians were 232.47ms before vs 239.82ms experiment, with overlapping ranges. No reliable complete-commit benefit; do not retain this rewrite or claim persistence stalls fixed.",
+  "earlierAttempts": [
+    {
+      "log": "session-storage-benchmark-before.log",
+      "scope": "Config accidentally retained base include, so package suite ran: 72 files/627 tests passed; not benchmark evidence."
+    },
+    {
+      "log": "session-storage-benchmark-before-retry.log",
+      "data": "session-storage-benchmark-before.json",
+      "scope": "Separate-process baseline; not decisive."
+    },
+    {
+      "log": "session-storage-benchmark-after.log",
+      "data": "session-storage-benchmark-after.json",
+      "scope": "Separate-process experiment; not decisive."
+    }
+  ],
+  "synchronousDesignConstraints": [
+    "StableValueStorage.write and ProductGenerationStorage.replace return void; ProductGenerationBackend.withExclusiveWrite<T>(operation: () => T): T is explicitly synchronous.",
+    "Userscript and Tauri withExclusiveWrite release their writing flag in finally when the callback returns. Returning a Promise would release protection before staged validation/publication; merely inserting awaits is invalid.",
+    "Runtime adapters synchronously update in-memory/current mirror state and queue durable GM/IPC writes. Tauri serializes the complete staged ProductSnapshot to localStorage per raw write. This benchmark excludes that native-mirror cost.",
+    "A real nonblocking design needs an explicit async commit/preparation contract, detached bounded candidates, serialized runtime writer ownership, session/revision checks after each yield and before pointer publication, flush/disposal/error semantics, and crash/interleaving tests in both runtimes. This is broader than the isolated checksum change and remains an open C00 task."
+  ],
+  "preservedContracts": [
+    "candidate isolation",
+    "full candidate and staged read-back validation",
+    "depth and UTF-8 budgets",
+    "namespace validation",
+    "normalized c1 checksum",
+    "stale revision barriers",
+    "commit ordering",
+    "crash recovery",
+    "current schema and runtime authority"
+  ],
+  "artifacts": [
+    "session-storage-before.ts",
+    "session-storage-benchmark.config.ts",
+    "session-storage-benchmark.test.ts",
+    "session-storage-benchmark-alternating.log",
+    "session-storage-benchmark-alternating.json"
+  ]
+}

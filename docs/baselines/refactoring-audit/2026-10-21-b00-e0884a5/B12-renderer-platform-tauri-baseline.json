@@ -1,0 +1,79 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B12-renderer-platform-tauri",
+  "capturedAt": "2026-10-21T21:15:29.8320360+08:00",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "workingTree": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json"
+  ],
+  "environment": {
+    "os": "Microsoft Windows NT 10.0.26200.0",
+    "cargo": "1.91.1",
+    "pnpm": "10.23.0",
+    "rustc": "1.91.1",
+    "timezone": "Asia/Shanghai",
+    "node": "24.11.1"
+  },
+  "files": [
+    {
+      "path": "apps/tauri/package.json",
+      "sha256": "d5ef5958e1a344ed2a0e98c412fd465e6d8077d616b16ce8017f16d2a2f35a6b"
+    },
+    {
+      "path": "apps/tauri/vitest.config.ts",
+      "sha256": "a3d2e3ac451326c810af88468ebfdf260696a73c160021855c53e1c983a740cb"
+    },
+    {
+      "path": "apps/tauri/src/platform/native-http.ts",
+      "sha256": "52687c8f58a9bc4d524f7bc13f4ef00efcd6bc0fd67d9da35c62d0c1fc1e65e2"
+    },
+    {
+      "path": "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "sha256": "9bb0e2e0365a9379c996f26c4cdbdeac35ac38595a7049b2453af56b42690694"
+    },
+    {
+      "path": "apps/tauri/src/features/accounts/account-runtime.ts",
+      "sha256": "8ddcd5903353f1962b11bcc9a9c87286bb5f85fa94835e2627b01642ed75db24"
+    },
+    {
+      "path": "apps/tauri/test/platform/native-http.test.ts",
+      "sha256": "3537d7cec4f65518296375288d06de97950e4711624fa7cc65ede678cd247501"
+    },
+    {
+      "path": "apps/tauri/test/platform/configure-tauri-workbench.test.ts",
+      "sha256": "b106f29d1c3b28bc621ff0144bbf4b716ae91b93eae793231485ac6b772fc7d6"
+    },
+    {
+      "path": "apps/tauri/test/features/accounts/source-cancellation.test.ts",
+      "sha256": "bb6f009b3735769bcb5816c134449faf072c353e40d334482b4bed9e0a819792"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/network/http.rs",
+      "sha256": "ec3677a86eb093f8f3ec60c492cb931b380fe3b40ba7d660224454c9ad01a620"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/network/request_registry.rs",
+      "sha256": "9c6faa39158f7120fb1f15362ad85b9416e1a56f230524a4201b7ee04839619a"
+    },
+    {
+      "path": "apps/tauri/src-tauri/src/model.rs",
+      "sha256": "a59301e91da0c7b97b3a4b8b226dbef7947ac64af487813434dae0174b2d402f"
+    },
+    {
+      "path": "docs/en/desktop/development.md",
+      "sha256": "fa5a16c426ef019ecbb8654487eb71a1c8f89f552baa9a3c60b445c197adb920"
+    },
+    {
+      "path": "docs/en/desktop/backend-engineering.md",
+      "sha256": "a140ffb5a4ed91334ab5f31380e1cda4089ead612a3fd97e3298f7115d82ea61"
+    },
+    {
+      "path": ".agents/skills/any-music-tauri-runtime/SKILL.md",
+      "sha256": "1eb5c2a442dba52f39f8d8443b7884caa1c5f2cf792778669566d13f93006b86"
+    }
+  ]
+}

@@ -1,0 +1,404 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "repository",
+  "schemaVersion": 1,
+  "batchId": "B17-cli-build-pack-sign",
+  "parentBatch": "B17",
+  "runtime": "node",
+  "reviewedAt": "2026-10-21T15:36:38.622Z",
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B17-cli-build-pack-sign-baseline.json",
+  "scope": {
+    "invariant": "Node author tools build, pack and sign an owned, bounded project snapshot through fixed trusted tooling and the production VM without executing project hooks/config/tests in Node or granting native authority.",
+    "selectedChain": "CLI pack/sign -> snapshotProject/openProject -> fixed virtual Vite graph -> testkit VM smoke -> deterministic archive + SDK Node verifier -> explicit Ed25519 signing -> exclusive new output.",
+    "allowedPaths": [
+      "packages/plugin-cli/src/{cli,project,build,package,diagnostic,index,templates}.mjs",
+      "packages/plugin-cli/test/tools.test.mjs",
+      "Public SDK Node verifier path/resource excerpts and SDK/testkit package manifests",
+      "scripts/check-plugin-tools.mjs and dependency-boundary checker excerpts"
+    ],
+    "exclusions": [
+      "Product-code fixes and permanent regression additions",
+      "Full SDK /node internals/packaging audit",
+      "Full testkit VM embedding/build/license closure audit",
+      "CLI watch/DEV transport and Windows native pairing/reload/end chains",
+      "Tauri authorization, executor, install/recovery and exact target live acceptance",
+      "Browser/app/dev server/emulator launches, root/B21 gates, commit, push and registry publication"
+    ],
+    "expansionReasons": [
+      "Read direct verifier path/resource excerpts to confirm key assets fail closed and archive verification remains separate from signing authority.",
+      "Run required public-artifact check and testkit direct-consumer suite; these do not mark the two independent artifact audit candidates complete."
+    ],
+    "readingBoundary": "Stopped at one Node build/pack/sign chain. Native guides were preflighted before narrowing; no Tauri DEV implementation was read."
+  },
+  "criteria": [
+    "C1 owner/dependency/public artifact separation",
+    "C2 fixed injected build and VM execution boundary",
+    "C3 bounded file snapshot/archive/sign lifecycle",
+    "C4 structured redacted errors and stable exit codes",
+    "C6 behavioral/artifact evidence, licenses and honest delivery status"
+  ],
+  "declaredStatus": {
+    "claim": "S15 declares fixed sealed CLI builds, independent locally packed public tools, retained licenses, stable redacted diagnostics and separate native DEV approval; registry publication has not occurred.",
+    "references": [
+      "packages/plugin-cli/AGENTS.md:3",
+      "packages/plugin-cli/README.md:11",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:14",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md:19"
+    ]
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Are author-tool dependencies separate from production apps and public tarballs usable without private VM packages?",
+      "evidence": [
+        "packages/plugin-cli/package.json:25",
+        "packages/plugin-testkit/package.json:37",
+        "scripts/check-package-boundaries.mjs:238",
+        ".codex-tmp/audit-b17-cli/boundaries.log",
+        ".codex-tmp/audit-b17-cli/tools.log"
+      ],
+      "detail": "CLI depends on public SDK/testkit and fixed tools. Boundary gate passes. Installed tarballs have no workspace source alias/private VM dependency and public host/type smoke succeeds. This is bounded artifact/dependency evidence."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Do selected source bytes, inert config and same-VM guest tests prevent Node execution of project code?",
+      "evidence": [
+        "packages/plugin-cli/src/project.mjs:32",
+        "packages/plugin-cli/src/project.mjs:198",
+        "packages/plugin-cli/src/build.mjs:10",
+        "packages/plugin-cli/src/build.mjs:73",
+        "packages/plugin-cli/test/tools.test.mjs:131",
+        ".codex-tmp/audit-b17-cli/probes.log"
+      ],
+      "detail": "Root/file identities, link/path checks, bounded JSON, import allowlist and owned source/assets precede fixed configFile:false/envDir:false build. Sources and tests execute in testkit VM. Sealed-source mutation, config/hook fixtures and a tsconfig field-semantics probe pass."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Does file sealing retain memory proportional to selected contents while archive/sign failures remain bounded and fail closed?",
+      "evidence": [
+        "packages/plugin-cli/src/project.mjs:66",
+        "packages/plugin-cli/src/project.mjs:72",
+        "packages/plugin-cli/src/project.mjs:246",
+        ".codex-tmp/audit-b17-cli/probe-results.json",
+        "packages/plugin-cli/src/package.mjs:129",
+        "packages/plugin-cli/src/package.mjs:160"
+      ],
+      "detail": "B17-C01: each asset slice retains its entire 8 MiB + 1 backing buffer. A valid 33-asset snapshot contains 455 bytes but retains 276824097 backing bytes. Deterministic repack/signature and .pem rejection otherwise pass; unreviewed exceptional key-file IO cases remain explicit limits."
+    },
+    {
+      "criterion": "C4",
+      "result": "fail",
+      "question": "Are diagnostic data redacted and malformed configuration distinguished from environment failure?",
+      "evidence": [
+        "packages/plugin-cli/src/diagnostic.mjs:1",
+        "packages/plugin-cli/src/cli.mjs:154",
+        "packages/plugin-cli/src/project.mjs:205",
+        ".codex-tmp/audit-b17-cli/probes.log",
+        ".codex-tmp/audit-b17-cli/failure-probes.log"
+      ],
+      "detail": "B17-C02: null configuration reaches Object.keys without an object guard, producing TOOL_FAILURE / exit 3 instead of CONFIG / exit 2. Guest-thrown details, local paths and key-marker bytes remain absent from tested diagnostics."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Do tested artifacts carry licenses and avoid implying registry publication or native admission?",
+      "evidence": [
+        "packages/plugin-cli/src/package.mjs:56",
+        "packages/plugin-cli/src/package.mjs:101",
+        "packages/plugin-cli/src/project.mjs:20",
+        ".codex-tmp/audit-b17-cli/probes.log",
+        ".codex-tmp/audit-b17-cli/tools.log"
+      ],
+      "detail": "All three tarballs carry package/LICENSE; testkit includes binding/QuickJS licenses. Four off-repository templates pass installation, same-VM runtime/type smoke, repack/verify/migration. Self-signatures remain unverified publishers and local outputs do not claim publication/admission."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B17-C01",
+      "severity": "P2",
+      "owner": "packages/plugin-cli/src/project.mjs:66",
+      "title": "Small sealed files retain full per-file budget buffers",
+      "trigger": "A project declares multiple small assets, each read with the default 8 MiB asset budget.",
+      "effect": "openProject.read returns Buffer.subarray from an 8 MiB + 1 allocation. Snapshot.assets keeps the backing stores alive through build/test/pack/DEV. Small valid projects incur hundreds of MiB of retained external backing memory; at the allowed 100 assets this approaches 800 MiB even for tiny content.",
+      "evidence": [
+        "packages/plugin-cli/src/project.mjs:66",
+        "packages/plugin-cli/src/project.mjs:72",
+        "packages/plugin-cli/src/project.mjs:246",
+        ".codex-tmp/audit-b17-cli/probes.mjs",
+        ".codex-tmp/audit-b17-cli/probe-results.json"
+      ],
+      "observed": {
+        "count": 33,
+        "byteLength": 455,
+        "retainedBackingBytes": 276824097,
+        "fileBudgets": [8388609],
+        "packedBytes": 11357
+      },
+      "measurementLimit": "This measures retained unique ArrayBuffer.byteLength, not RSS, physical-memory commitment, peak process memory or an observed OOM.",
+      "suggestedNextAction": "Copy the returned used bytes into content-sized storage or use an identity-checked bounded read sized to the observed regular file; retain growth/change detection and add a tiny-multi-asset regression. Consider the total snapshot budget separately."
+    },
+    {
+      "id": "B17-C02",
+      "severity": "P3",
+      "owner": "packages/plugin-cli/src/project.mjs:205",
+      "title": "Null JSON configuration is reported as an environment failure",
+      "trigger": "A selected project has plugin.config.json containing valid JSON null; run am-plugin check or pack.",
+      "effect": "Object.keys(config) throws before the CONFIG Diagnostic is created. CLI returns code 3 / TOOL_FAILURE, although its documented unsupported-config path returns code 2. Automation cannot distinguish author input error from environment failure.",
+      "evidence": [
+        "packages/plugin-cli/src/project.mjs:205",
+        "packages/plugin-cli/src/project.mjs:207",
+        "packages/plugin-cli/src/cli.mjs:180",
+        "packages/plugin-cli/README.md:13",
+        ".codex-tmp/audit-b17-cli/probe-results.json"
+      ],
+      "observed": {
+        "expectedExitCode": 2,
+        "actualExitCode": 3,
+        "actualDiagnostic": "TOOL_FAILURE"
+      },
+      "suggestedNextAction": "Validate that parsed configuration is a non-null object of the supported shape before enumerating or reading fields, and add a CLI black-box malformed-config exit-code regression."
+    }
+  ],
+  "verification": [
+    {
+      "command": "pnpm check:plugin:tools",
+      "level": "artifact",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:31:45.226Z",
+      "log": ".codex-tmp/audit-b17-cli/tools.log",
+      "logSha256": "2924967db5e7bc6e4d1a75a9b41ad98a456c5385810a7f6d7eb79a58c6350a7e",
+      "detail": "Three off-repository tarballs installed offline with scripts disabled, second frozen install, four templates, identical-byte repack, public host/runtime/type consumption. Historical S15 JSON bytes backed up/restored; observed outputs kept locally."
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-cli test",
+      "level": "tests",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:32:44.385Z",
+      "log": ".codex-tmp/audit-b17-cli/cli-tests.log",
+      "logSha256": "3258094b3aac603436a27bdf65a5bdeef2eaf306ffa0755210969c0a735bc969",
+      "detail": "13/13 pass; includes required testkit build, four templates, sealed edits, hooks/config, imports, links, signatures, exit codes and malformed smoke."
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-cli typecheck",
+      "level": "static",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:32:38.72Z",
+      "log": ".codex-tmp/audit-b17-cli/cli-typecheck.log",
+      "logSha256": "01d900ac8df02a96cd60c5303f978f39653655673067779b79d674374e9745f4",
+      "detail": "Owner script checks CLI/project/package MJS syntax; it is not a TypeScript proof for all MJS files."
+    },
+    {
+      "command": "node scripts/check-package-boundaries.mjs",
+      "level": "static",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:32:39.268Z",
+      "log": ".codex-tmp/audit-b17-cli/boundaries.log",
+      "logSha256": "d6086e25ac251e1afe5aeddfd5932e41a64b9c32d3c75ebda51271f9fd160d3b",
+      "detail": "Checks dependency/public-entry rules and forbids production app imports of author CLI/testkit; no production app build was launched."
+    },
+    {
+      "command": "pnpm --filter @any-music/plugin-testkit test",
+      "level": "tests",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:34:08.45Z",
+      "log": ".codex-tmp/audit-b17-cli/testkit-tests.log",
+      "logSha256": "01f717e5487564cf41ab2c6b913777b63e57009f0df16f68cdae6d06d2d26bf5",
+      "detail": "33/33 tests pass in one file; direct consumer coverage, not a full testkit implementation audit."
+    },
+    {
+      "command": "node .codex-tmp/audit-b17-cli/probes.mjs",
+      "level": "tests",
+      "result": "fail",
+      "exitCode": 1,
+      "time": "2026-10-21T15:33:28.334Z",
+      "log": ".codex-tmp/audit-b17-cli/probes.log",
+      "logSha256": "cdafbb1df22992cd81c97c6dfc038b282c6198b14b13265118a0664502181798",
+      "detail": "Two expected-contract checks fail: excess retained backing memory and null config exit code. Project tsconfig inertness and three packed license inventories pass. Local probe only; product tests unchanged."
+    },
+    {
+      "command": "node .codex-tmp/audit-b17-cli/failure-probes.mjs",
+      "level": "tests",
+      "result": "pass",
+      "exitCode": 0,
+      "time": "2026-10-21T15:34:40.656Z",
+      "log": ".codex-tmp/audit-b17-cli/failure-probes.log",
+      "logSha256": "7cc133b52e594d04f67ded69c69574ea6e021394afbd70c5855ec7d0058a94c8",
+      "detail": "Guest-thrown marker and local paths absent from diagnostics; a .pem asset is rejected before an output archive is written."
+    }
+  ],
+  "preservedFiles": [
+    {
+      "path": "docs/baselines/plugin-system-s15/tools.json",
+      "beforeSha256": "52819331237b338a39d8f9d12771c0b724f0dc679c013a62785d2c6335e05657",
+      "afterSha256": "52819331237b338a39d8f9d12771c0b724f0dc679c013a62785d2c6335e05657",
+      "preserved": true,
+      "observedOutput": ".codex-tmp/audit-b17-cli/tools.json.observed"
+    },
+    {
+      "path": "docs/baselines/plugin-system-s15/toolchain-sbom.json",
+      "beforeSha256": "3bb86111bb5fa5badf361a1c6d50f30fc83e5987d712b38878f201eeb49afc82",
+      "afterSha256": "3bb86111bb5fa5badf361a1c6d50f30fc83e5987d712b38878f201eeb49afc82",
+      "preserved": true,
+      "observedOutput": ".codex-tmp/audit-b17-cli/toolchain-sbom.json.observed"
+    }
+  ],
+  "unrunVerification": [
+    {
+      "commands": ["pnpm test", "pnpm typecheck", "pnpm lint", "pnpm format:check", "pnpm build"],
+      "reason": "This is one audit-only subbatch with no product changes or commit. Complete repository/B21 gates are not claimed; report formatting is checked separately."
+    },
+    {
+      "commands": ["pnpm check:native", "pnpm check:rust:msrv", "pnpm check:rust:deny"],
+      "reason": "No native implementation audit/change in this subbatch."
+    },
+    {
+      "commands": ["accept:*", "application/browser launch"],
+      "reason": "The audit plan does not authorize live inspection; current-task authorization was not requested or inferred."
+    }
+  ],
+  "unreadPaths": [
+    "packages/plugin-sdk/scripts/build.mjs and full Node verification tests",
+    "packages/plugin-testkit/scripts/build.mjs and VM implementation",
+    "packages/plugin-cli/src/dev.mjs beyond existing no-pairing test",
+    "apps/tauri/src-tauri/src/plugins/dev.rs and its native pairing/reload/end callers",
+    "Signing key special-file/oversize/cancellation handling beyond ordinary test key and sanitized failure paths"
+  ],
+  "missingEvidence": [
+    "Permanent regressions and fixes for B17-C01/C02",
+    "Two independent Node public artifact architecture subbatches",
+    "Three independent Windows DEV lifecycle subbatches",
+    "New exact target/WebView/Profile/resource live acceptance; existing historical S15 evidence is not refreshed"
+  ],
+  "dependencies": [
+    {
+      "batchId": "B03",
+      "scope": "SDK schema/public entry contract, only consumed here"
+    },
+    {
+      "batchId": "B13",
+      "scope": "Production VM/Profile, exercised via testkit but not re-audited"
+    },
+    {
+      "batchId": "B16",
+      "scope": "SDK package-format implementation has pre-existing uncommitted changes. Current tarball smoke is recorded, but verifier/installation fixes are owned by B16."
+    },
+    {
+      "batchId": "B18",
+      "scope": "Native exact-target admission and live executor acceptance stay independent."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B17-sdk-node-artifact",
+    "parentBatch": "B17",
+    "runtime": "node",
+    "status": "pending",
+    "question": "Does packed SDK /node use only its public standalone schema closure, retain the license and stay absent from browser root/music/schema entry graphs?",
+    "allowedPaths": [
+      "packages/plugin-sdk/package.json",
+      "packages/plugin-sdk/scripts/build.mjs",
+      "packages/plugin-sdk/scripts/check-package.mjs",
+      "packages/plugin-sdk/src/node/package-format.mjs",
+      "matching public package tests"
+    ],
+    "requiredGuidance": [
+      "AGENTS.md",
+      "packages/plugin-sdk/AGENTS.md",
+      "docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md"
+    ],
+    "continuation": "Reuse only the artifact smoke and hashes from this report after checking changes. B17-C01/C02 remain open; SDK/testkit internals and all three Tauri DEV candidates are still separate audits. Do not start an application/browser or renew admission without explicit live-inspection authorization."
+  },
+  "completion": "This completes the selected Node audit, with two confirmed issues and all five criteria decided. It does not complete B17: five candidates, repairs and native/live evidence remain open. Product implementation was not modified.",
+  "readFiles": [
+    {
+      "path": "packages/plugin-cli/src/project.mjs",
+      "purpose": "Full project snapshot, path/identity/import/config/resource chain",
+      "lines": "1-255"
+    },
+    {
+      "path": "packages/plugin-cli/src/build.mjs",
+      "purpose": "Fixed build, VM execution and guest-test entry",
+      "lines": "1-104"
+    },
+    {
+      "path": "packages/plugin-cli/src/package.mjs",
+      "purpose": "Archive assembly, verifier, inspection, diff and signing; migration excluded",
+      "lines": "1-163"
+    },
+    {
+      "path": "packages/plugin-cli/src/cli.mjs",
+      "purpose": "Command composition, output, redaction and exit mapping",
+      "lines": "1-201"
+    },
+    {
+      "path": "packages/plugin-cli/src/diagnostic.mjs",
+      "purpose": "Structured tool errors",
+      "lines": "1-17"
+    },
+    {
+      "path": "packages/plugin-cli/src/templates.mjs",
+      "purpose": "Scaffold/manifest excerpts only",
+      "lines": "10-110"
+    },
+    {
+      "path": "packages/plugin-cli/src/index.mjs",
+      "purpose": "Public entry symbols",
+      "lines": "1-10 via export-symbol search"
+    },
+    {
+      "path": "packages/plugin-cli/test/tools.test.mjs",
+      "purpose": "Relevant behavioral tests; all 13 executed",
+      "lines": "1-48,95-240; all test names located"
+    },
+    {
+      "path": "packages/plugin-cli/README.md",
+      "purpose": "Documented behavior and limits",
+      "lines": "1-36"
+    },
+    {
+      "path": "packages/plugin-cli/package.json",
+      "purpose": "Scripts/exports/dependencies",
+      "lines": "full manifest"
+    },
+    {
+      "path": "packages/plugin-sdk/package.json",
+      "purpose": "Direct public artifact boundary",
+      "lines": "full manifest"
+    },
+    {
+      "path": "packages/plugin-sdk/src/node/package-format.mjs",
+      "purpose": "Direct path/resource/key-asset boundary excerpts",
+      "lines": "1-76 plus resource/signature symbol search"
+    },
+    {
+      "path": "packages/plugin-testkit/package.json",
+      "purpose": "Direct VM host artifact boundary",
+      "lines": "full manifest"
+    },
+    {
+      "path": "scripts/check-plugin-tools.mjs",
+      "purpose": "Side effects and artifact evidence review",
+      "lines": "full script"
+    },
+    {
+      "path": "scripts/check-package-boundaries.mjs",
+      "purpose": "Production dependency exclusion; full gate executed",
+      "lines": "dependency symbols and 238-257"
+    }
+  ]
+}

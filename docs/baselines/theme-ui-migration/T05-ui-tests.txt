@@ -1,0 +1,12 @@
+
+> @any-music/ui@0.0.0 test <project-root>\packages\ui
+> vitest run
+
+
+ RUN  v4.1.11 <project-root>/packages/ui
+
+
+ Test Files  61 passed (61)
+      Tests  328 passed (328)
+   Start at  02:17:33
+   Duration  3.93s (transform 6.86s, setup 0ms, import 17.61s, tests 1.75s, environment 26ms)

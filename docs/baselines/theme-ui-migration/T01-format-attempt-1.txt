@@ -1,0 +1,11 @@
+
+> any-music@0.0.0 format:check <project-root>
+> oxfmt --check .
+
+Checking formatting...
+
+packages/music-workbench/src/runtime/workbench-runtime.ts (0ms)
+
+Format issues found in above 1 files. Run without `--check` to fix.
+Finished in 4894ms on 1188 files using 12 threads.
+ ELIFECYCLE  Command failed with exit code 1.

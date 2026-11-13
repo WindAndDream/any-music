@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <!-- 该页面只用于 Vite 开发服务；生产构建输出由 vite-plugin-monkey 生成。 -->
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Any Music</title>
+  </head>
+  <body>
+    <!-- 开发页占位节点；Userscript 运行时会自行创建隔离的 Shadow Root。 -->
+    <div id="app"></div>
+    <!-- 仅 Vite 预览页需要浏览器兼容层；正式构建仍由脚本管理器注入 GM 能力。 -->
+    <script type="module" src="/src/platform/dev/install-dev-userscript-runtime.ts"></script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "releaseToolchain": "1.91.1",
+  "msrv": "1.90.0",
+  "releases": [
+    {
+      "id": "windows-x64",
+      "runner": "windows-2022",
+      "platform": "windows",
+      "arch": "x64",
+      "bundles": ["nsis"],
+      "target": "x86_64-pc-windows-msvc",
+      "package": "any-music-tauri",
+      "defaultFeatures": false,
+      "features": ["tauri/custom-protocol"]
+    },
+    {
+      "id": "macos-arm64",
+      "runner": "macos-15",
+      "platform": "macos",
+      "arch": "arm64",
+      "bundles": ["dmg"],
+      "target": "aarch64-apple-darwin",
+      "package": "any-music-tauri",
+      "defaultFeatures": false,
+      "features": ["tauri/custom-protocol"]
+    },
+    {
+      "id": "macos-x64",
+      "runner": "macos-15-intel",
+      "platform": "macos",
+      "arch": "x64",
+      "bundles": ["dmg"],
+      "target": "x86_64-apple-darwin",
+      "package": "any-music-tauri",
+      "defaultFeatures": false,
+      "features": ["tauri/custom-protocol"]
+    },
+    {
+      "id": "linux-x64",
+      "runner": "ubuntu-22.04",
+      "platform": "linux",
+      "arch": "x64",
+      "bundles": ["appimage", "deb"],
+      "target": "x86_64-unknown-linux-gnu",
+      "package": "any-music-tauri",
+      "defaultFeatures": false,
+      "features": ["tauri/custom-protocol"]
+    }
+  ],
+  "android": {
+    "runner": "ubuntu-22.04",
+    "javaVersion": "21",
+    "sdk": "37.0",
+    "buildTools": "36.0.0",
+    "ndk": "30.0.16248370",
+    "versionCode": 1,
+    "targets": [
+      {
+        "id": "android-arm64",
+        "target": "aarch64",
+        "arch": "arm64"
+      },
+      {
+        "id": "android-x64",
+        "target": "x86_64",
+        "arch": "x64"
+      }
+    ]
+  },
+  "pendingPlatforms": ["iOS"]
+}

@@ -1,0 +1,133 @@
+{
+  "date": "2026-11-04",
+  "runtimeScope": "shared renderer; both production frontend builds checked separately",
+  "logDirectory": "logs/2026-11-04-virtual-list-implementation",
+  "checks": [
+    {
+      "command": "UI virtual/drag/geometry target",
+      "result": "passed: 30 files / 455 tests",
+      "log": "r07-r08-combined-target.log"
+    },
+    {
+      "command": "pnpm test",
+      "result": "passed on final full retry after production build completed; UI 115 files / 959 tests; includes Rust workspace and protocol differential",
+      "log": "r07-r08-test-final.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "log": "r07-r08-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with warnings outside this batch",
+      "log": "r07-r08-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "r07-r08-format-check.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed: both production frontends and Tauri release executable",
+      "log": "r07-r08-build.log"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/ui/AGENTS.md",
+      "sha256": "d45422f8d2db2b1cd7b537223a0b80a0d94973da7fe4e352142d6dc14d6eba9a"
+    },
+    {
+      "path": "packages/ui/src/composables/focus-availability.ts",
+      "sha256": "b46f21228aa0647ea0e458a4dee684bc78c0a27d2c4d0ed00aa4c156e32c4ceb"
+    },
+    {
+      "path": "packages/ui/src/composables/use-grid-reorder.ts",
+      "sha256": "c2339d1a1f6e03cdc15178ddf671b7a5e660ec6d9dcee861ef99108fb05a5e7b"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-retention.ts",
+      "sha256": "ab6b825bd0bb08bc437a218c8a6cdffd2f53bd9f49e38d570ae2b238f0595b88"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-grid-move-transition.ts",
+      "sha256": "d2cf625b221926dbdfa2030266a6e0e0ff853de2ea6b304a4b74a456e374142d"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+      "sha256": "39b7e996b8145f0bc8d58a28e9cfb0289033a891d682e80e68ec15d7db8ec1ab"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "6c295562e744f3ae751ebe3ab61282945095c560f55018a11a2cf5cd5eabf475"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-item-retention.test.ts",
+      "sha256": "0c09b8a6fc1e0059a294f45a97257f96f1097fc35df2c6b9fda2ed228f1d8cbc"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-grid-reorder-keyboard.test.ts",
+      "sha256": "d06bfecbc64e474f80cc01f40ced9a5371fa940fd42d78ca29140ee8dc2c26f2"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-virtual-grid-move-transition.test.ts",
+      "sha256": "529172cd9d80c34a896832b34174b3bf257fbae116093ab6ef64c68b3d37e95f"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTrackCardGrid.motion.test.ts",
+      "sha256": "32543118076d0f5b2a166847f73541ad9229733a6099d814f12c424eca1b07d8"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTrackCardGrid.test.ts",
+      "sha256": "06502dda577265500f964cedd65700f397ccc4bd5a79880d7f338f6339a3754d"
+    }
+  ],
+  "assessment": {
+    "R07": "Implemented: original eligible-subset intent; focused-source hold and abortable stable-key navigation after controlled commit, one final measured realignment, composed hidden/inert checks, legacy one-flush timing and reduced-motion cleanup.",
+    "R08": "Implemented: stable-key mounted intersection only; separate natural/FLIP/pointer surfaces, early semantic density/column trigger plus spatial revisions, interrupted-frame continuation, drag/landing suppression and bounded cleanup.",
+    "addedRegressions": {
+      "keyboardAndReducedMotion": 32,
+      "focusCancellationAndMeasuredAlignment": 8,
+      "keyedMotion": 16,
+      "total": 56
+    },
+    "composition": {
+      "keyboardOccurrences": 1000,
+      "eligibleKeyboardGap": 900,
+      "keyedMotionOccurrences": 10000,
+      "measuredNeighborHeight": 180,
+      "keyboardMountedUpperExclusive": 20,
+      "keyboardRetainedKeyCap": 2,
+      "injectedLayoutAndFocus": true
+    },
+    "review": "Disjoint subagents owned motion, keyboard integration tests and read-only review; coordinator owned controller/retention, integration, docs and root checks. No remaining actionable blocker found."
+  },
+  "earlierAttempts": [
+    {
+      "command": "pnpm test",
+      "result": "Failed in unchanged Rust media::cache::tests::clear_after_headers_resumes_once_from_the_exact_byte_without_buffering_a_song: response returned None. All UI tests passed.",
+      "log": "r07-r08-test.log",
+      "isolatedRetry": {
+        "result": "passed without code changes",
+        "log": "r07-r08-native-cache-retry.log"
+      },
+      "resolution": "Final full pnpm test passed without native modifications; initial failure retained as intermittent validation evidence, not diagnosed or repaired in this UI batch."
+    },
+    {
+      "command": "pnpm test",
+      "result": "Failed in unchanged Studio standalone consumer build test at its 5000ms timeout while production release build was running; no theme or timeout changes made.",
+      "log": "r07-r08-test-retry.log",
+      "resolution": "After production build completed, final full pnpm test passed."
+    }
+  ],
+  "openGates": [
+    "C00 and all production virtual consumers remain pending",
+    "P14 consumer-specific offscreen semantic restoration before relevant consumer admission",
+    "P03 actual layout/visual/frame baseline, browser Find/text selection and native table/focus/IME behavior",
+    "Installed Userscript, Tauri WebView, mobile and G01-G03"
+  ],
+  "noProductBrowserLaunch": true,
+  "noCommitPush": true
+}

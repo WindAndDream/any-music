@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "endOfLine": "lf",
+  "sortImports": true,
+  "sortPackageJson": true,
+  "ignorePatterns": ["dist", "packages/plugin-vm/engine/loader.mjs"]
+}

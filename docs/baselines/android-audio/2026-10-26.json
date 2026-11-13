@@ -1,0 +1,465 @@
+{
+  "schemaVersion": 1,
+  "runtimeScope": "tauri",
+  "recordedAtUtc": "2026-10-26T04:06:28.656Z",
+  "localDate": "2026-10-26",
+  "timeZone": "Asia/Shanghai",
+  "status": "implemented-reference-device-subset",
+  "fullPlaybackDeviceMatrixAccepted": false,
+  "externalPlugins": "none",
+  "environment": {
+    "device": "Xiaomi 23113RKC6C",
+    "androidApi": 35,
+    "abi": "arm64-v8a",
+    "webview": "com.google.android.webview 153.0.8010.36",
+    "route": "built-in speaker",
+    "physicalDevice": true
+  },
+  "delivery": {
+    "runtimeScope": "tauri",
+    "recordedAtUtc": "2026-10-25T18:06:03.260Z",
+    "target": "aarch64",
+    "buildTools": "36.0.0",
+    "signerSha256": "10336282357619a26ac35066e29b3bca05018d7a0e571d7b889afc838acf48e0",
+    "signed": true,
+    "debuggable": false,
+    "backup": false,
+    "cleartext": false,
+    "apk16KiBAlignment": true,
+    "bundlePayloadSignatures": true,
+    "native16KiBAlignment": true,
+    "nativeLibraryCount": 1,
+    "externalPlugins": "none",
+    "executionAdmitted": false,
+    "storeChannelAccepted": false,
+    "artifacts": [
+      {
+        "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/apk/arm64/release/app-arm64-release.apk",
+        "bytes": 26182857,
+        "sha256": "7606c5bd4714e167ab155461a86a99febec636d9256981f73ac1ba20cfda0b29"
+      },
+      {
+        "path": "apps/tauri/src-tauri/gen/android/app/build/outputs/bundle/arm64Release/app-arm64-release.aab",
+        "bytes": 10994388,
+        "sha256": "fbbb7f6556e99e19bf95330dc6cfabc0e1c0d68e2e76104db598219df51e47a5"
+      }
+    ],
+    "installedApk": {
+      "path": ".codex-tmp/android-audio/eos-installed-release.apk",
+      "sha256": "7606c5bd4714e167ab155461a86a99febec636d9256981f73ac1ba20cfda0b29"
+    },
+    "installedMatchesBuild": true
+  },
+  "implementation": [
+    "One stable media element for ordinary tracks and compiled leaves; WebView owns focus.",
+    "Foreground native mode/noisy/lifecycle hints; no telephony/Bluetooth permissions or new renderer IPC.",
+    "Abort old generations/reads/prefetch and release grants; retain logical position; explicit play resolves fresh media.",
+    "Native state handshake and late registration lifecycle initialization; no request while blocked.",
+    "Natural ordinary completion, end-position interruption and segmented EOF restart on the first explicit play."
+  ],
+  "scenarioArtifact": "7c7f044ca44ba70a2678b03e1bda974ae81916e4734dd1e5ec73e512728acb65",
+  "scenarios": [
+    {
+      "id": "complete-bilibili-baseline",
+      "status": "passed",
+      "artifactSha256": "1674ce6abec66edad6095cb8642abfcd67ddcb1453b4bc9a441cba4d595a9c7b",
+      "observations": "Thirteen synchronized samples from 0:01.0 through natural 3:09.8 end; no AM-7001. Earlier artifact, retained separately.",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/complete-playback.json",
+          "sha256": "979d38f91976590634f8e7bda570500e93c68ed8d449162c5f96945c595927e8"
+        }
+      ]
+    },
+    {
+      "id": "segmented-complete",
+      "status": "passed",
+      "artifactSha256": "7c7f044ca44ba70a2678b03e1bda974ae81916e4734dd1e5ec73e512728acb65",
+      "observations": "Existing draft saved as a temporary 60-second custom track: two 0–30-second leaves. Screens show 0:01.2, 0:36.5, 0:54.3 and natural 1:00.0; media-element segmented status, native output and no full-render startup.",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/custom-complete.json",
+          "sha256": "e3eae58313b3747a9c1788dffddf27f033d5052883341fcc55249b8b15059db8"
+        },
+        {
+          "path": ".codex-tmp/android-audio/custom-complete-0.png",
+          "sha256": "df5356f2647c23d01f7aed41ddca1455278891f875c44313cf014069d1567fa7"
+        },
+        {
+          "path": ".codex-tmp/android-audio/custom-complete-4.png",
+          "sha256": "4e104fe589e3283db155279d387dbfd329e29a0c438f36e6fd5ce36ca4d0dce0"
+        },
+        {
+          "path": ".codex-tmp/android-audio/custom-complete-8.png",
+          "sha256": "d2cc0a7d0e725348a5076090d1cb811d8c995ed09d4d531df258a1ec3cdd7195"
+        }
+      ]
+    },
+    {
+      "id": "ordinary-focus-permanent",
+      "status": "passed",
+      "artifactSha256": "7c7f044ca44ba70a2678b03e1bda974ae81916e4734dd1e5ec73e512728acb65",
+      "observations": "Real GAIN competitor; visible 2:34.9 playing becomes 2:36.3 paused and stays paused after focus release.",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/gain-during.json",
+          "sha256": "fe55225f1626d1819dab41639d1b05ae8dc8275d2c07effc7e45f96760d59b7d"
+        },
+        {
+          "path": ".codex-tmp/android-audio/gain-before.png",
+          "sha256": "cefbfb60a2fc9a9db128d905bbe8dcef9cc7dbf1928e75c5d2b57c2337a87170"
+        },
+        {
+          "path": ".codex-tmp/android-audio/gain-during.png",
+          "sha256": "21a494ecea0e4fa7aeae3f014d360168b523b36f46cb7503b01f44c62c2357c0"
+        },
+        {
+          "path": ".codex-tmp/android-audio/gain-after.png",
+          "sha256": "7a2a348d9d760b21307db960ae1d465974534d41714845607bc85a4c4b375fb2"
+        }
+      ]
+    },
+    {
+      "id": "ordinary-focus-duck",
+      "status": "partial",
+      "artifactSha256": "7c7f044ca44ba70a2678b03e1bda974ae81916e4734dd1e5ec73e512728acb65",
+      "observations": "GAIN_TRANSIENT_MAY_DUCK and product LOSS_TRANSIENT_CAN_DUCK then none observed; user stream volume remains unchanged. Actual attenuation amplitude/acoustic restoration was not measured.",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/duck-during.json",
+          "sha256": "e4223fcfb75faf01cd3a24eea6992531107aa83a07ad03183b6dca1858028e25"
+        }
+      ]
+    },
+    {
+      "id": "communication-mode",
+      "status": "passed-mode-simulation",
+      "artifactSha256": "7c7f044ca44ba70a2678b03e1bda974ae81916e4734dd1e5ec73e512728acb65",
+      "observations": "Separate UID silent output requests MODE_IN_COMMUNICATION=3. Native output stops, UI retains 2:37.5 and interruption notice. Returning mode to normal does not replay. Not real telephony.",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/communication-during.json",
+          "sha256": "0d9b6ef5ec5cfcbd1d90e8e55be8b19fb611fecd00b9af1edaa17cb29149dce6"
+        },
+        {
+          "path": ".codex-tmp/android-audio/communication-probe-log.txt",
+          "sha256": "4350ccb080a8dcdc81e0ddf24d519d84ca87e8c0fb0371eb55939c8f932ff06f"
+        },
+        {
+          "path": ".codex-tmp/android-audio/communication-during.png",
+          "sha256": "bd2be0757f0f74186c415dc5bc150ddb96941e36a21da04dc5671efe10374eb0"
+        },
+        {
+          "path": ".codex-tmp/android-audio/communication-after.png",
+          "sha256": "8cf8a0158e4077cea2d036b339b4bc38dc4e00d1d420f534f289f5134d23fa0a"
+        }
+      ]
+    },
+    {
+      "id": "background-resume",
+      "status": "passed",
+      "artifactSha256": "7c7f044ca44ba70a2678b03e1bda974ae81916e4734dd1e5ec73e512728acb65",
+      "observations": "HOME stops output and cancels grants. Resume retains 2:37.6, does not play, and explicit play starts a fresh native output with focus.",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/background-before.json",
+          "sha256": "6b64afeba06b2fd646933db6bf0bd642c30df6dfd7762f65446b983f6443866f"
+        },
+        {
+          "path": ".codex-tmp/android-audio/background-hidden.json",
+          "sha256": "378458455476e49ff131fba94eb23dd0613c3635d016144244333f7e8c054b73"
+        },
+        {
+          "path": ".codex-tmp/android-audio/background-resumed.json",
+          "sha256": "e0025ebcd53cf56547317a495c6f3bcf4b1e70a56194e70322d04fea3b58010f"
+        },
+        {
+          "path": ".codex-tmp/android-audio/background-explicit-play.json",
+          "sha256": "0e85eaef26980a3ef877302ae6aa571307138f0d3e200bed00f27541d4d37d44"
+        },
+        {
+          "path": ".codex-tmp/android-audio/background-resumed.png",
+          "sha256": "7ffb5bcf293e9289dea4475c6c23bae4637423f12829e06aff76ce03ac6810e9"
+        }
+      ]
+    },
+    {
+      "id": "final-ordinary-complete",
+      "status": "passed",
+      "artifactSha256": "7606c5bd4714e167ab155461a86a99febec636d9256981f73ac1ba20cfda0b29",
+      "observations": "Final signed APK: continuous ordinary playback from 0:01.7 to natural 3:09.8, 15 screenshot/native samples, no AM-7001 and native output stopped.",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/ordinary-delivery.json",
+          "sha256": "1f3b8c1a5ee309e72f574d444dfe8e8d982ecd96039db32bd9173d70c27fca32"
+        },
+        {
+          "path": ".codex-tmp/android-audio/ordinary-delivery-start.png",
+          "sha256": "8122427fd7d589fcb8097b60f42a6fbd4a539aec78cf1bddb82cb2621c3a301b"
+        },
+        {
+          "path": ".codex-tmp/android-audio/ordinary-delivery-14.png",
+          "sha256": "f98365e3d06d9aaf26056dcee00e6d7385b643a517820162415cde3b13746794"
+        }
+      ]
+    },
+    {
+      "id": "final-segmented-replay",
+      "status": "passed",
+      "artifactSha256": "7606c5bd4714e167ab155461a86a99febec636d9256981f73ac1ba20cfda0b29",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/final-custom-end.png",
+          "sha256": "854c17620e78f5e70b9c548ec28ff2152a74356541efb370d5459670222e1de8"
+        },
+        {
+          "path": ".codex-tmp/android-audio/final-custom-replay.png",
+          "sha256": "9f4e02888d408aa1f690b0817e3ad30d28e2e7f7b4bf1f163d633eeaf6a3c47e"
+        },
+        {
+          "path": ".codex-tmp/android-audio/final-custom-play.json",
+          "sha256": "91560b88df7b85e04990125f137c70859ab806562ace22d4f76af09508c97b54"
+        }
+      ]
+    },
+    {
+      "id": "final-custom-transient-focus",
+      "status": "passed",
+      "artifactSha256": "7606c5bd4714e167ab155461a86a99febec636d9256981f73ac1ba20cfda0b29",
+      "evidence": [
+        {
+          "path": ".codex-tmp/android-audio/final-custom-focus-during.json",
+          "sha256": "32fac4c0b9cb22cbee3fc44222ee390641ace8d7031563e92855fc0e97193785"
+        },
+        {
+          "path": ".codex-tmp/android-audio/final-custom-focus-before.png",
+          "sha256": "5661476b385772232191ef0118e314be88b753f8a66a26f8482b02d5f9534c6b"
+        },
+        {
+          "path": ".codex-tmp/android-audio/final-custom-focus-during.png",
+          "sha256": "6ce04735de7d774c3f587617f27bf5d12b640fea1593bcbc201863112e6c07e7"
+        },
+        {
+          "path": ".codex-tmp/android-audio/final-custom-focus-after.png",
+          "sha256": "a994a4992e9bf5b5b31464f76f8d7d71f18a8cf8fa6f76c9ee36895cc84ad86f"
+        }
+      ]
+    }
+  ],
+  "pending": [
+    "Real incoming/answered/ended cellular and VoIP calls: explicitly deferred by the user because no second call device is available.",
+    "Bluetooth A2DP/SCO, wired/USB output, disconnect and headset controls: explicitly deferred; no available headset. A saved Bluetooth device did not connect.",
+    "Measured ducking attenuation/restoration; stale native AAudio started state alone is not proof of audible output.",
+    "Other providers/sources/qualities, minimum devices/API26–30 execution, OEM audio mixing combinations and the complete device matrix.",
+    "Forced Activity recreation, real OOM/storage/power loss, background services and store/channel exits remain separate S16 work."
+  ],
+  "validationScope": "Implementation batch checks precede later concurrent repository edits. Final workspace formatting is recorded separately and is not a clean-check claim for unrelated in-progress work.",
+  "validation": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/eos-test.txt",
+        "sha256": "46ef7b3d91332c53a8bfa3ce898ff22c6d8a03891ba660bc05d4f6514eee7756"
+      }
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/eos-typecheck.txt",
+        "sha256": "c88d759a044a0f3fbeca8d881f2665c0f83152823b832a17cc111d4ec60a3de9"
+      }
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/eos-lint.txt",
+        "sha256": "4613cb9200e13310e1a422b4e09d698197b94df2dd8e85d6f07d290617e1e848"
+      }
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 1,
+      "log": {
+        "path": ".codex-tmp/android-audio/final-format.txt",
+        "sha256": "a9d987e4e6e2e7514691e6967f1187dd99a87b8a78b7877dec494c1213e660f2"
+      }
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/eos-root-build.txt",
+        "sha256": "d712bb10f30b5e6c3590d6cdebe1e418c860b9b3cfa401bc9f4297d6cfaaa1d6"
+      }
+    },
+    {
+      "command": "pnpm check:native",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/final-native.txt",
+        "sha256": "43584f6196ed09bb15065e395c0c82b6b7209a1e0f0bd355a2f9a0530522bb7b"
+      }
+    },
+    {
+      "command": "pnpm check:rust:msrv",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/final-msrv.txt",
+        "sha256": "31d3f9c0b2ed7e3ccbdfcf14619f511a322f4844ab29ec4ba7f155bc7af4dfe5"
+      }
+    },
+    {
+      "command": "pnpm check:rust:deny",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/delivery-deny.txt",
+        "sha256": "a5ba7be5241bd7c8cf51d87a914724a2ea0d81b76c51f1d1a7f4ae6094ef721e"
+      }
+    },
+    {
+      "command": "pnpm check:mobile:android",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/android-clippy.txt",
+        "sha256": "5cd09612ab02305a5274042aa59313a4b04289cbcdb7253cef7cb2c515771676"
+      }
+    },
+    {
+      "command": "pnpm build:mobile:android aarch64 --release --signed",
+      "exitCode": 0,
+      "log": {
+        "path": ".codex-tmp/android-audio/eos-build.txt",
+        "sha256": "0b0ffb2becfa603d580c660019feea941175cfd9cef154950685cdcbdbba90d8"
+      }
+    }
+  ],
+  "finalFormatting": {
+    "status": "failed-concurrent-workspace-changes",
+    "earlierBatchPassed": {
+      "path": ".codex-tmp/android-audio/delivery-format-before-record.txt",
+      "sha256": "b9334cc73ba8cc96fa38222086da3d37ca99028cb04ed117dbfe947cebb4a370"
+    },
+    "files": [
+      "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "apps/tauri/src/platform/resource-cache.ts",
+      "packages/music-workbench/src/components/music-sources/MusicSourceWorkbench.vue",
+      "packages/music-workbench/src/components/music-sources/MusicWorkbenchThemeHost.vue",
+      "packages/music-workbench/src/features/settings/use-resource-cache-settings.ts",
+      "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "packages/theme-default/src/components/settings/GlobalSettingsPanel.vue",
+      "packages/ui/src/components/music-sources/RemoteImage.vue",
+      "packages/ui/src/components/settings/ResourceCacheSettings.vue",
+      "packages/ui/src/composables/use-remote-image.ts"
+    ]
+  },
+  "regressions": {
+    "playerCases": 7,
+    "environmentCases": 2,
+    "fixturesAreNotDeviceEvidence": true,
+    "finalTargetChecks": [
+      {
+        "command": "pnpm --filter @any-music/music-workbench exec vitest run test/features/player/playback-interruptions.test.ts",
+        "exitCode": 0,
+        "log": {
+          "path": ".codex-tmp/android-audio/delivery-player-target.txt",
+          "sha256": "c470da7e3b62e7e8d1e793315bd0ae35cede1f8cb0e80dff74c3dbe4c3b4dc66"
+        }
+      },
+      {
+        "command": "pnpm --filter @any-music/tauri exec vitest run test/platform/android-playback-environment.test.ts",
+        "exitCode": 0,
+        "log": {
+          "path": ".codex-tmp/android-audio/delivery-environment-target.txt",
+          "sha256": "d8bd11955dd74e9a0a26ddd8047f103cbd12806350d878c9499c45c4fbc2e634"
+        }
+      },
+      {
+        "command": "pnpm exec oxfmt --check (seven Android audio source/test/document files)",
+        "exitCode": 0,
+        "log": {
+          "path": ".codex-tmp/android-audio/delivery-target-format.txt",
+          "sha256": "df9e6d07064b3403399fa81b9a328591b1c429a07b337c029ac393e795cdf2bd"
+        }
+      }
+    ]
+  },
+  "safety": {
+    "phoneNumbersRecorded": false,
+    "credentialsRecorded": false,
+    "ephemeralUrlsPersisted": false,
+    "externalExecutionAdmitted": false,
+    "committed": false,
+    "pushed": false
+  },
+  "sourceFilesPurpose": "Review-time hashes of the working tree; not a build source manifest. Concurrent tasks share this checkout.",
+  "sourceFiles": [
+    {
+      "path": "apps/tauri/src/platform/android-playback-environment.ts",
+      "sha256": "8eea19c7fab63ca724704d7e3aac1261b380128de468266cd17019344225681f"
+    },
+    {
+      "path": "apps/tauri/src/platform/configure-tauri-workbench.ts",
+      "sha256": "aa10e658ec8324e6890e5b514354ec7a7e3144ab69922f0f5ad3a27affee5cda"
+    },
+    {
+      "path": "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobileAudioInterruptions.kt",
+      "sha256": "034b5b017f2ea54b60bb45852149b379f3e8831452e904b45a9d856fe4d239da"
+    },
+    {
+      "path": "apps/tauri/src-tauri/gen/android/app/src/main/java/com/anymusic/app/MobilePlatformPlugin.kt",
+      "sha256": "1bad8fb6fb6f657d3a06400b8178bce2b7ef9df59db25f4e1b115a9b8cb18b02"
+    },
+    {
+      "path": "apps/tauri/src-tauri/gen/android/app/src/audioProbe/java/com/anymusic/app/AudioFocusProbeReceiver.kt",
+      "sha256": "ab12c278ac1d825520b31cd9574fe987f1c988752b998669b4d596bdc31bf125"
+    },
+    {
+      "path": "packages/music-workbench/src/features/player/use-audio-player.ts",
+      "sha256": "42138b9a6b2cab46df2013976faff7bd87da0baa0778de0be73f1c7e8d4abb37"
+    },
+    {
+      "path": "packages/music-workbench/src/runtime/workbench-runtime.ts",
+      "sha256": "0e860d742130f163a0ca5fc7a993dee3b5e19010ba61d61e2f531bf15ac45203"
+    },
+    {
+      "path": "packages/music-workbench/src/features/workbench/use-workbench-controller.ts",
+      "sha256": "ef51b4a87fa022a396965b4199d2c0589a7dc38eb8d12650c72dc44a758fd0c5"
+    },
+    {
+      "path": "packages/music-workbench/test/features/player/playback-interruptions.test.ts",
+      "sha256": "fff97df4477b05a082e8ca2467c7fd9621f992f099ff0def4d6142230fc1e2a4"
+    },
+    {
+      "path": "apps/tauri/test/platform/android-playback-environment.test.ts",
+      "sha256": "a926abbc28877207d0b0cb97c7c92a0bae4709efc0687305d6748c9affb828f0"
+    }
+  ],
+  "cleanup": {
+    "originalSimultaneousAudio": true,
+    "simultaneousAudioRestored": true,
+    "originalStayOnWhilePluggedIn": 0,
+    "stayOnWhilePluggedInRestored": true,
+    "probePackagesAbsent": true,
+    "temporaryCustomRemoved": true,
+    "originalDraftTitleRestored": true,
+    "originalDraftSegmentsRestored": true,
+    "originalMaterialCountRestored": true,
+    "namespaceTransaction": {
+      "coreUnchanged": true,
+      "hostUnchanged": true,
+      "otherNamespacesUnchanged": true,
+      "draftUnchanged": true,
+      "collectionIdentityPreserved": true,
+      "removedOnlyTemporaryAssociation": true,
+      "nativeMirrorCommitted": true
+    },
+    "optimizedReleaseRestored": true,
+    "installedDebuggable": false,
+    "debugFlagAbsent": true,
+    "originalDebugLibraryRestored": true,
+    "diagnosticShellRemoved": true
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "documentType": "audit-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B04-generic-root-shared",
+  "parentBatch": "B04",
+  "runtime": "shared",
+  "reviewedAt": "2026-10-21T14:57:50.7727996+08:00",
+  "scope": {
+    "invariant": "The generic public root keeps identity and static contribution descriptors separate from injected executable instances, and registration-to-disable/disposal withdraws only the matching owner generation without retaining caller-owned mutable identity or stale activation results.",
+    "allowedPaths": [
+      "packages/plugin-center/package.json and tsconfig.json",
+      "packages/plugin-center/src/{index,plugin-catalog,module-contracts,contribution-registry}.ts",
+      "packages/plugin-center/src/module-controller.ts (registration, activation publication, invalidation and subscription excerpts)",
+      "packages/plugin-center/src/contribution-allocator.ts (projection return path)",
+      "packages/plugin-center/test/{plugin-catalog,contribution-registry,module-controller}.test.ts and module-fixtures.ts",
+      "Other generic root modules: import-graph scan only"
+    ],
+    "exclusions": [
+      "/music-sources implementation, stale availability requests and music task/media lifecycles",
+      "Complete dependency resolver, allocator/condition semantics, command execution, recovery and enable/disable audits",
+      "Application/Vue composition, native grants, GM/Rust transport and production UI/runtime acceptance",
+      "Product implementation edits, permanent regression tests, UI/live inspection, commit/push"
+    ],
+    "selectedChain": "Public root -> injected BuiltInModule -> frozen descriptor registration -> controller activation/private instance -> allocation -> synchronous disable invalidation -> reverse cleanup and unsubscribe; direct registerBatch() disposal is checked at the same generic registration ownership boundary.",
+    "expansionReason": "Controller/allocator excerpts are the direct consumer and projection return path required to verify one contribution registration-to-disable chain. Remaining root files were scanned only for imports; no second runtime/domain operation was expanded.",
+    "scopeRule": "One of five B04 candidate subbatches, following the referenced plan. Remaining candidates are not accepted by a broader package test result."
+  },
+  "baseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B04-generic-root-shared-baseline.json",
+  "declaredStatus": {
+    "claim": "Generic root is framework-free, owns identity/lifecycle/static descriptors, receives built-ins from the host and has no external install, native grant or execution authority.",
+    "references": [
+      "packages/plugin-center/AGENTS.md:3",
+      "packages/plugin-center/AGENTS.md:5",
+      "packages/plugin-center/AGENTS.md:7",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md:26",
+      "docs/en/cross-platform/architecture/reusable-package-boundaries.md:73"
+    ],
+    "evidenceLimit": "Current implementation ownership can be checked here; native authority, music adapter lifecycle and exact production runtime acceptance remain separate."
+  },
+  "refactorStatus": "violating",
+  "verdict": "needs-fix",
+  "evidence": {
+    "static": "fail",
+    "tests": "fail",
+    "artifact": "not-run",
+    "live": "not-applicable"
+  },
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "question": "Does the root separate generic identity/static definitions from music models and executable host instances?",
+      "evidence": [
+        "packages/plugin-center/package.json:7",
+        "packages/plugin-center/src/index.ts:1",
+        "packages/plugin-center/src/plugin-catalog.ts:1",
+        "packages/plugin-center/src/contribution-registry.ts:12",
+        "packages/plugin-center/src/module-contracts.ts:55",
+        "packages/plugin-center/src/module-contracts.ts:92",
+        "packages/plugin-center/src/module-controller.ts:24",
+        "packages/plugin-center/src/module-controller.ts:259"
+      ],
+      "detail": "Root exposes generic contracts and local modules. core uses workspace:* and is consumed by the separately exported music adapter. The contribution registry contains frozen definitions and implementation IDs; the controller keeps actual instances privately and takes build-injected factories. Catalog identity remains usable for non-music plugins."
+    },
+    {
+      "criterion": "C2",
+      "result": "pass",
+      "question": "Are the generic root imports lightweight and implementations injected/lazy at discovery?",
+      "evidence": [
+        "packages/plugin-center/src/index.ts:2",
+        "packages/plugin-center/src/module-controller.ts:55",
+        "packages/plugin-center/src/module-controller.ts:86",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/root-graph.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.test.ts:48"
+      ],
+      "detail": "Static runtime import traversal reaches ten same-directory TypeScript files, with no external runtime import and no /music-sources, core, Vue, source implementation or codec edge. The behavioral probe confirms construction registers the descriptor without executing activate(); instances load only on activation. This is source-graph/test evidence, not a production build graph."
+    },
+    {
+      "criterion": "C3",
+      "result": "fail",
+      "question": "Does registration cleanup retain owner identity and generation, while disable/late activation/unsubscribe preserve the projection contract?",
+      "evidence": [
+        "packages/plugin-center/src/contribution-registry.ts:72",
+        "packages/plugin-center/src/contribution-registry.ts:76",
+        "packages/plugin-center/src/module-controller.ts:79",
+        "packages/plugin-center/src/module-controller.ts:136",
+        "packages/plugin-center/src/module-controller.ts:328",
+        "packages/plugin-center/src/module-controller.ts:513",
+        "packages/plugin-center/src/contribution-allocator.ts:67",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.log"
+      ],
+      "detail": "B04-G01 fails: dispose() dereferences the caller-owned module.id after registration instead of the captured/frozen owner ID. Four supplemental controls pass: stale-generation/idempotent disposal, rejected registration atomicity, immediate projection withdrawal with deferred cleanup and unsubscribe, and pending activation invalidation with late-result suppression. These passing controller checks do not close the full enable/disable candidate."
+    },
+    {
+      "criterion": "C5",
+      "result": "pass",
+      "question": "Is trusted ownership and authorization display distinguished from native granting authority?",
+      "evidence": [
+        "packages/plugin-center/src/plugin-catalog.ts:17",
+        "packages/plugin-center/src/contribution-registry.ts:117",
+        "packages/plugin-center/src/module-controller.ts:31",
+        "packages/plugin-center/src/module-controller.ts:284",
+        "packages/plugin-center/src/contribution-allocator.ts:15"
+      ],
+      "detail": "Trust comes from host-injected owner sets/factories, with untrusted host implementations and trusted-only slots rejected by the registry. readPolicy is an injected read-only epoch/authorization projection. No native grant, storage, network or external-code installation operation is implemented by the generic root. Native enforcement and arbitrary external DTO validation are not accepted here."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "question": "Are ownership tests and evidence current, scoped and sufficient to support the reported failure and limits?",
+      "evidence": [
+        "packages/plugin-center/test/plugin-catalog.test.ts:6",
+        "packages/plugin-center/test/contribution-registry.test.ts:87",
+        "packages/plugin-center/test/module-controller.test.ts:8",
+        "packages/plugin-center/test/module-controller.test.ts:113",
+        "packages/plugin-center/test/module-controller.test.ts:266",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/package-test.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/package-typecheck.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.log",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/final-input-check.json"
+      ],
+      "detail": "All 51 existing tests in nine files and the package typecheck pass. The five-scenario temporary behavioral probe records four passes and one assertion failure, exposing an existing coverage gap for caller identity mutation. The initial probe invocation had a cross-drive Vitest root setup error before any tests ran; the corrected invocation executes all five scenarios. Baseline source/config/guidance hashes remain unchanged. No permanent test or product code was modified."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "node <user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/root-graph.cjs",
+          "startedAt": "2026-10-21T14:56:20.2793053+08:00",
+          "finishedAt": "2026-10-21T14:56:20.5769109+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/root-graph.log"
+        }
+      ],
+      "detail": "Import graph passes; reviewed cleanup code and failing behavioral reproduction establish B04-G01."
+    },
+    "tests": {
+      "result": "fail",
+      "commands": [
+        {
+          "command": "pnpm --filter @any-music/plugin-center test",
+          "startedAt": "2026-10-21T14:54:36.5843032+08:00",
+          "finishedAt": "2026-10-21T14:54:38.1632876+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/package-test.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-center typecheck",
+          "startedAt": "2026-10-21T14:54:36.5839270+08:00",
+          "finishedAt": "2026-10-21T14:54:38.1669531+08:00",
+          "exitCode": 0,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/package-typecheck.log"
+        },
+        {
+          "command": "pnpm --filter @any-music/plugin-center exec vitest run --config <user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.config.mjs",
+          "startedAt": "2026-10-21T14:56:38.9345462+08:00",
+          "finishedAt": "2026-10-21T14:56:40.1933789+08:00",
+          "exitCode": 1,
+          "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.log"
+        }
+      ],
+      "retainedSuite": {
+        "files": 9,
+        "passed": 51,
+        "failed": 0
+      },
+      "supplementalProbe": {
+        "passed": 4,
+        "failed": 1,
+        "findingIds": ["B04-G01"],
+        "source": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.test.ts",
+        "config": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.config.mjs"
+      },
+      "setupAttempt": {
+        "command": "pnpm --filter @any-music/plugin-center exec vitest run --config <user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.config.mjs",
+        "startedAt": "2026-10-21T14:56:20.2794033+08:00",
+        "finishedAt": "2026-10-21T14:56:21.4082597+08:00",
+        "exitCode": 1,
+        "log": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe-setup-failure.log",
+        "result": "setup-error",
+        "detail": "Vitest combined a D: project root with a C: absolute test include. Set root to the temporary C: directory and use a relative include; the subsequent invocation executes all scenarios. This initial setup failure is not a product finding."
+      }
+    },
+    "artifact": {
+      "result": "not-run",
+      "reason": "No public entry or product implementation changed. Application builds/production graphs are not required for this bounded audit and are not claimed."
+    },
+    "live": {
+      "result": "not-applicable",
+      "reason": "Generic shared descriptor/cleanup contracts are exercised without UI. Browser/app/emulator inspection was not requested and none was launched."
+    },
+    "finalGates": {
+      "result": "not-run",
+      "reason": "This is one audit subbatch with report-only repository writes. Full pnpm test/typecheck/lint/format:check/build belong to B21/final closure or any requested commit; no commit or overall acceptance is claimed."
+    }
+  },
+  "findings": [
+    {
+      "id": "B04-G01",
+      "severity": "P2",
+      "status": "open",
+      "owner": "packages/plugin-center / ContributionRegistry.registerBatch",
+      "title": "Cleanup reads mutable caller identity and can leave a contribution registered",
+      "trigger": "Register a mutable ModuleDescriptor with id one, change that original descriptor.id to renamed, and invoke the returned dispose(). ModuleDescriptor.id is mutable and registerBatch() intentionally copies/freezes the descriptor rather than freezing caller data.",
+      "effect": "The token lookup is performed under renamed, returns undefined, and exits without deleting the original one registration. one/view remains in the current snapshot and the owner generation remains reserved after disposal.",
+      "evidence": [
+        "packages/plugin-center/src/module-contracts.ts:55",
+        "packages/plugin-center/src/contribution-registry.ts:72",
+        "packages/plugin-center/src/contribution-registry.ts:76",
+        "packages/plugin-center/src/contribution-registry.ts:78",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.test.ts:4",
+        "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b04-generic-root-b87ac45/probe.log"
+      ],
+      "reproducer": [
+        "const descriptor = moduleFixture('one').descriptor",
+        "const handle = registry.registerBatch(descriptor, true, 1)",
+        "descriptor.id = 'renamed'",
+        "handle.dispose()",
+        "// Actual current contributions: ['one/view']; expected: []"
+      ],
+      "impactLimit": "Confirmed for the public registerBatch() API. The inspected production-facing ModuleController uses registry.replace(), so this finding does not establish a current product disable leak, executable resource leak or native authority bypass. Other application callers were not audited.",
+      "suggestedNextAction": "Capture the original owner ID before publication and use that immutable ID for disposal lookup/deletion while retaining the token check. Add a permanent regression for caller descriptor mutation and retain stale-generation/idempotent cleanup coverage in a separate fix task."
+    }
+  ],
+  "findingIds": ["B04-G01"],
+  "openFindingIds": ["B04-G01"],
+  "readFiles": [
+    {
+      "path": "packages/plugin-center/src/index.ts",
+      "lines": "1-10"
+    },
+    {
+      "path": "packages/plugin-center/src/plugin-catalog.ts",
+      "lines": "1-99"
+    },
+    {
+      "path": "packages/plugin-center/src/module-contracts.ts",
+      "lines": "1-157"
+    },
+    {
+      "path": "packages/plugin-center/src/contribution-registry.ts",
+      "lines": "1-156"
+    },
+    {
+      "path": "packages/plugin-center/src/module-controller.ts",
+      "lines": "1-208,249-566",
+      "note": "209-248 command execution excluded; dependency/replacement/availability excerpts only used as boundary context."
+    },
+    {
+      "path": "packages/plugin-center/src/contribution-allocator.ts",
+      "lines": "1-119",
+      "note": "Projection path only; selection/condition/dependency edge cases not exhaustively audited."
+    },
+    {
+      "path": "packages/plugin-center/test/plugin-catalog.test.ts",
+      "lines": "1-50"
+    },
+    {
+      "path": "packages/plugin-center/test/contribution-registry.test.ts",
+      "lines": "1-109"
+    },
+    {
+      "path": "packages/plugin-center/test/module-controller.test.ts",
+      "lines": "8-168,266-300",
+      "note": "Other test names located; full package suite executed."
+    },
+    {
+      "path": "packages/plugin-center/test/module-fixtures.ts",
+      "lines": "full"
+    },
+    {
+      "path": "packages/plugin-center/package.json",
+      "lines": "full"
+    },
+    {
+      "path": "packages/plugin-center/tsconfig.json",
+      "lines": "full"
+    }
+  ],
+  "unreadPaths": [
+    "packages/plugin-center/src/music-sources/** and matching test implementations",
+    "packages/plugin-center/src/module-dependencies.ts (imports scanned only)",
+    "packages/plugin-center/src/module-conditions.ts (imports scanned only)",
+    "packages/plugin-center/src/module-recovery.ts and external-plugin-policy.ts (import graph only)",
+    "packages/plugin-center/src/module-controller.ts:209-248; remaining condition/allocator and lifecycle edge cases",
+    "Application composition, workbench Vue subscribers, native authority and runtime transports"
+  ],
+  "missingEvidence": [
+    "B04-G01 fix and a passing permanent regression",
+    "Four remaining B04 candidate audits: /music-sources, dependencies, full enable/disable and availability",
+    "Production application/artifact/runtime evidence is not produced or inferred from these shared tests"
+  ],
+  "dependencies": [
+    {
+      "target": "B04-generic-root-shared-fix",
+      "kind": "confirmed-finding",
+      "status": "pending",
+      "note": "B04-G01 is unresolved. This audit changes reports only."
+    },
+    {
+      "target": "B04-music-sources-shared",
+      "kind": "remaining-candidate",
+      "status": "pending",
+      "note": "Inspect the separate music adapter contract and generation-bound removal/reinstall/disposal; generic root tests do not accept it."
+    },
+    {
+      "target": "B05",
+      "kind": "consumer-follow-up",
+      "status": "pending",
+      "note": "Workbench/application injection and scope disposal of real Vue subscribers were not audited."
+    },
+    {
+      "target": "B14",
+      "kind": "authority-follow-up",
+      "status": "pending",
+      "note": "Read-only policy injection here provides no evidence for native identity/epoch/grant enforcement."
+    }
+  ],
+  "nextBatch": "B04-generic-root-shared-fix",
+  "handoff": [
+    "B04-generic-root-shared; baseline b87ac45bfb32b9cee89b77c2170b842a69f9f98f with unchanged plugin-center inputs. Only generic descriptor registration and its direct controller projection/disable chain were audited.",
+    "Ownership and static light-entry boundaries conform: ten same-directory runtime import nodes, no core/Vue/source/runtime dependency; host injects executable built-ins separately from frozen contribution definitions. Authorization is a read-only injected projection.",
+    "B04-G01 is an open P2 cleanup defect at contribution-registry.ts:76-78. Changing caller descriptor.id after registerBatch() makes dispose() miss the captured registration, leaving one/view in the snapshot. Current ModuleController uses replace(), so product disable/resource/native-authority failure is not established by this finding.",
+    "The retained package suite passes 51/51 in nine files and typecheck exits 0. The temporary five-scenario probe passes four controls and fails the identity-mutation cleanup assertion; corrected probe exit is 1. A preceding cross-drive Vitest configuration failure executed no tests and is recorded separately. Root import traversal exits 0. Logs/probe sources remain in the local temp path recorded above.",
+    "Result is violating / needs-fix. No product code, permanent test, application, browser, emulator, commit or push was changed/launched. Artifact builds were not run, live evidence is not applicable to this pure root contract, and full final gates remain with B21.",
+    "Next is only B04-generic-root-shared-fix. Other B04 candidates remain unreviewed; retain previous B01/B02/B03 continuations rather than treating broad package tests as their acceptance."
+  ]
+}

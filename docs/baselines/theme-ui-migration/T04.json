@@ -1,0 +1,377 @@
+{
+  "batchId": "T04",
+  "status": "completed",
+  "date": "2026-10-23",
+  "runtimeScope": "shared",
+  "baseRevision": "2d0ec9bfe8df848b47f87d1b86439844285a0cd6",
+  "scope": "Classic shell/top bar/navigation/player extraction, controlled UI contracts and direct consumer style/component injection. Complete-root production admission remains T11 after T05-T08 coverage.",
+  "workspace": {
+    "alreadyDirtyAtStart": true,
+    "concurrentChangesConfirmedByUser": [
+      "T02 stable controller/editor lifetime",
+      "T03 complete-root host/transaction",
+      "Existing native download work"
+    ],
+    "preservation": "No reset, revert, commit or push. Verification and built artifacts describe the current shared worktree, not an isolated T04 checkout. Prior batch closure is recorded independently."
+  },
+  "prerequisites": {
+    "T02": {
+      "record": "T02.json",
+      "status": "complete"
+    },
+    "T03": {
+      "record": "T03.json",
+      "status": "complete"
+    }
+  },
+  "ownership": {
+    "theme-default": [
+      "controlled classic ProductWorkbench/ProductTopBar",
+      "PlayerBar/PlayerControlActions/PlayerSettingsDialog and presentation-only player settings",
+      "ClassicRoot/Shell/Navigation/Player adapters, incomplete full-root definition",
+      "scoped classic chrome CSS",
+      "moved component/layout tests and new interaction/admission tests"
+    ],
+    "ui": [
+      "type-only UiWorkbenchChrome/shell/player contracts",
+      "neutral MusicAppShell/navigation/seek/dialog primitives",
+      "semantic tokens/reset/protected host styling"
+    ],
+    "music-workbench": [
+      "stable media/business/controller lifetime retained",
+      "readonly player projection and named event adaptation",
+      "real-controller presentation-remount integration test"
+    ],
+    "applications": [
+      "build-known chrome injection",
+      "separate theme styles in Tauri and userscript Shadow Root",
+      "userscript development style mirroring and cleanup"
+    ]
+  },
+  "coverage": {
+    "implementedViews": ["shell", "navigation", "player"],
+    "fullDefinitionAdmission": "rejected until remaining required views are migrated",
+    "productionFullRootSelected": false,
+    "mediaOwnership": "stable host; no media instance/resolution/disposal ports exposed to presentation"
+  },
+  "commands": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "T04-test.txt"
+    },
+    {
+      "command": "pnpm --filter @any-music/theme-default test",
+      "exitCode": 0,
+      "log": "T04-theme-tests.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "T04-lint.txt"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "T04-typecheck.txt",
+      "repairedAttempts": ["T04-typecheck-attempt-1.txt", "T04-typecheck-attempt-2.txt"]
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "T04-build.txt",
+      "scope": "Both frontend builds and Windows native release build; no application launch"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "log": "T04-format.txt"
+    }
+  ],
+  "testResults": {
+    "vitestFiles": 276,
+    "vitestTests": 2054,
+    "packageFiles": [
+      {
+        "package": "packages/network-routing",
+        "files": 2
+      },
+      {
+        "package": "packages/audio-composition",
+        "files": 5
+      },
+      {
+        "package": "packages/plugin-sdk",
+        "files": 5
+      },
+      {
+        "package": "packages/account-pool",
+        "files": 3
+      },
+      {
+        "package": "packages/core",
+        "files": 8
+      },
+      {
+        "package": "packages/plugin-vm",
+        "files": 3
+      },
+      {
+        "package": "packages/plugin-center",
+        "files": 9
+      },
+      {
+        "package": "packages/plugin-sandbox-browser",
+        "files": 3
+      },
+      {
+        "package": "packages/plugin-testkit",
+        "files": 1
+      },
+      {
+        "package": "packages/ui",
+        "files": 91
+      },
+      {
+        "package": "packages/plugin-source-bilibili",
+        "files": 3
+      },
+      {
+        "package": "packages/plugin-source-douyin",
+        "files": 6
+      },
+      {
+        "package": "packages/plugin-tag-management",
+        "files": 3
+      },
+      {
+        "package": "packages/plugin-music-creation",
+        "files": 4
+      },
+      {
+        "package": "packages/plugin-ui-vue",
+        "files": 9
+      },
+      {
+        "package": "packages/theme-default",
+        "files": 11
+      },
+      {
+        "package": "packages/music-workbench",
+        "files": 54
+      },
+      {
+        "package": "apps/tauri",
+        "files": 39
+      },
+      {
+        "package": "apps/userscript",
+        "files": 17
+      }
+    ],
+    "packageTests": [
+      {
+        "package": "packages/network-routing",
+        "tests": 28
+      },
+      {
+        "package": "packages/audio-composition",
+        "tests": 15
+      },
+      {
+        "package": "packages/plugin-sdk",
+        "tests": 120
+      },
+      {
+        "package": "packages/account-pool",
+        "tests": 22
+      },
+      {
+        "package": "packages/core",
+        "tests": 49
+      },
+      {
+        "package": "packages/plugin-vm",
+        "tests": 39
+      },
+      {
+        "package": "packages/plugin-center",
+        "tests": 56
+      },
+      {
+        "package": "packages/plugin-sandbox-browser",
+        "tests": 18
+      },
+      {
+        "package": "packages/plugin-testkit",
+        "tests": 33
+      },
+      {
+        "package": "packages/ui",
+        "tests": 548
+      },
+      {
+        "package": "packages/plugin-source-bilibili",
+        "tests": 47
+      },
+      {
+        "package": "packages/plugin-source-douyin",
+        "tests": 86
+      },
+      {
+        "package": "packages/plugin-tag-management",
+        "tests": 11
+      },
+      {
+        "package": "packages/plugin-music-creation",
+        "tests": 14
+      },
+      {
+        "package": "packages/plugin-ui-vue",
+        "tests": 55
+      },
+      {
+        "package": "packages/theme-default",
+        "tests": 101
+      },
+      {
+        "package": "packages/music-workbench",
+        "tests": 380
+      },
+      {
+        "package": "apps/tauri",
+        "tests": 352
+      },
+      {
+        "package": "apps/userscript",
+        "tests": 80
+      }
+    ],
+    "rustPassed": 229,
+    "rustIgnored": 1,
+    "themeLatest": {
+      "files": 11,
+      "tests": 101
+    },
+    "notes": "Counts come from this execution output. Native tests and protocol differential are automated evidence only; no application launch occurred."
+  },
+  "verificationPending": [],
+  "repairs": [
+    "Explicit canDownload=true prevents Vue optional-boolean casting from disabling existing download actions.",
+    "Root chrome selectors match the same .am-theme-default element as well as scoped descendants.",
+    "Userscript HMR style directory follows the moved player.",
+    "Readonly navigation test updates the host projection instead of mutating a feature; a test-only mechanical rename typo was corrected.",
+    "The transitive catalog filter integration had a missing createCatalogTrackFilterState import; restored the public local import without replacing concurrent editing-state work."
+  ],
+  "liveAcceptance": {
+    "launched": false,
+    "remaining": [
+      "real layout/focus/keyboard/touch/reduced-motion behavior",
+      "installed Userscript GM/Shadow runtime continuity",
+      "Tauri native playback/account/media continuity"
+    ],
+    "stage": "T13 requires explicit runtime inspection request"
+  },
+  "environment": {
+    "node": "v24.11.1",
+    "pnpm": "10.23.0",
+    "os": "Windows-11-10.0.26200-SP0",
+    "testRuntime": "Node Vitest custom renderer/SSR, workspace Rust tests; no browser"
+  },
+  "exitConditions": {
+    "lightweightEntries": true,
+    "controlledShellAndPlayer": true,
+    "scopedChromeCss": true,
+    "directConsumersMigrated": true,
+    "realStablePlayerRemountTest": true,
+    "fullRootStillUnadmitted": true,
+    "prerequisitesClosed": true
+  },
+  "affectedFiles": [
+    "packages/theme-default/AGENTS.md",
+    "packages/theme-default/package.json",
+    "packages/theme-default/src/ClassicRoot.vue",
+    "packages/theme-default/src/components/player/ClassicPlayer.vue",
+    "packages/theme-default/src/components/player/player-control-options.ts",
+    "packages/theme-default/src/components/player/PlayerBar.vue",
+    "packages/theme-default/src/components/player/PlayerControlActions.vue",
+    "packages/theme-default/src/components/player/PlayerSettingsDialog.vue",
+    "packages/theme-default/src/components/shell/ClassicNavigation.vue",
+    "packages/theme-default/src/components/shell/ClassicShell.vue",
+    "packages/theme-default/src/components/shell/ProductTopBar.vue",
+    "packages/theme-default/src/components/shell/ProductWorkbench.vue",
+    "packages/theme-default/src/index.ts",
+    "packages/theme-default/src/styles/index.scss",
+    "packages/theme-default/src/vue.ts",
+    "packages/theme-default/test/components/player/PlayerBar.interactions.test.ts",
+    "packages/theme-default/test/components/player/PlayerBar.test.ts",
+    "packages/theme-default/test/components/player/PlayerControlActions.test.ts",
+    "packages/theme-default/test/components/player/PlayerSettingsDialog.test.ts",
+    "packages/theme-default/test/components/shell/ClassicNavigation.test.ts",
+    "packages/theme-default/test/components/shell/ClassicRoot.test.ts",
+    "packages/theme-default/test/components/shell/ProductWorkbench.interactions.test.ts",
+    "packages/theme-default/test/components/shell/ProductWorkbench.layout.test.ts",
+    "packages/theme-default/test/components/shell/ProductWorkbench.preferences.test.ts",
+    "packages/theme-default/test/components/shell/ProductWorkbench.test.ts",
+    "packages/theme-default/test/helpers/test-renderer.ts",
+    "packages/theme-default/test/metadata.test.ts",
+    "packages/theme-default/tsconfig.json",
+    "packages/theme-default/vitest.config.ts",
+    "packages/ui/src/product/workbench-chrome.ts",
+    "packages/ui/src/product/theme-features.ts",
+    "packages/ui/src/theme.ts",
+    "packages/ui/src/index.ts",
+    "packages/ui/src/styles/_product-workbench.scss",
+    "packages/ui/src/components/music-sources/CatalogTrackFilterPanel.vue",
+    "packages/music-workbench/src/features/player/player-presentation.ts",
+    "packages/music-workbench/src/components/music-sources/MusicWorkbenchPresentation.vue",
+    "packages/music-workbench/src/runtime/workbench-runtime.ts",
+    "packages/music-workbench/test/features/player/player-presentation.test.ts",
+    "packages/music-workbench/vitest.config.ts",
+    "packages/music-workbench/package.json",
+    "apps/userscript/package.json",
+    "apps/userscript/src/bootstrap-userscript-app.ts",
+    "apps/userscript/src/platform/configure-userscript-workbench.ts",
+    "apps/userscript/src/platform/dom/shadow-style-registry.ts",
+    "apps/userscript/test/platform/dom/shadow-style-registry.test.ts",
+    "apps/tauri/package.json",
+    "apps/tauri/src/main.ts",
+    "apps/tauri/src/platform/configure-tauri-workbench.ts",
+    "apps/tauri/src/vite-env.d.ts",
+    "pnpm-lock.yaml"
+  ],
+  "movedFrom": [
+    "packages/ui/src/components/product-workbench/ProductWorkbench.vue",
+    "packages/ui/src/components/product-workbench/ProductTopBar.vue",
+    "packages/music-workbench/src/components/music-sources/PlayerBar.vue",
+    "packages/music-workbench/src/components/music-sources/PlayerControlActions.vue",
+    "packages/music-workbench/src/components/music-sources/PlayerSettingsDialog.vue",
+    "packages/music-workbench/src/components/music-sources/player-control-options.ts",
+    "packages/ui/test/components/product-workbench/ProductWorkbench.test.ts",
+    "packages/ui/test/components/product-workbench/ProductWorkbench.layout.test.ts",
+    "packages/ui/test/components/product-workbench/AppShellPreferencesPanel.test.ts",
+    "packages/music-workbench/test/components/music-sources/PlayerBar.test.ts",
+    "packages/music-workbench/test/components/music-sources/PlayerControlActions.test.ts",
+    "packages/music-workbench/test/components/music-sources/PlayerSettingsDialog.test.ts"
+  ],
+  "artifacts": {
+    "userscript": {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 4757098,
+      "sha256": "10c48a59383cc46af962d28b066fd68522955265b29ec0efd0efa8aec53a5100"
+    },
+    "windowsRelease": {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 28334592,
+      "sha256": "9d704c7857e7f8d04ef702b7e653ec31110251a91e50e0938942c6305b0a49f2"
+    },
+    "tauriFrontend": {
+      "path": "apps/tauri/dist",
+      "files": 69,
+      "bytes": 2831318
+    },
+    "attribution": "Measurements cover the concurrent shared worktree. No isolated T04 bundle-size attribution or runtime-acceptance claim."
+  },
+  "nextBatch": "T05",
+  "futureIntegration": "T05-T08 finish required page coverage. T11 must assemble the theme stylesheet and generated theme/neutral SFC CSS into ThemeHost Shadow resources before complete-root production admission."
+}

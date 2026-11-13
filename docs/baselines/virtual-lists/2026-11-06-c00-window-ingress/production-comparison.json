@@ -1,0 +1,23 @@
+{
+  "scope": "Combined dirty-workspace production frontend payload comparison only, not runtime performance",
+  "comparison": [
+    {
+      "runtime": "userscript",
+      "payloadBytes": 5940115,
+      "payloadGzipBytes": 1154625,
+      "previousPayloadBytes": 5938960,
+      "previousPayloadGzipBytes": 1154335,
+      "deltaBytes": 1155,
+      "deltaGzipBytes": 290
+    },
+    {
+      "runtime": "tauri",
+      "payloadBytes": 3678492,
+      "payloadGzipBytes": 886758,
+      "previousPayloadBytes": 3678026,
+      "previousPayloadGzipBytes": 886583,
+      "deltaBytes": 466,
+      "deltaGzipBytes": 175
+    }
+  ]
+}

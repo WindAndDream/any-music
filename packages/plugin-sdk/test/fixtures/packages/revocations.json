@@ -1,0 +1,11 @@
+{
+  "raw": "eyJ2ZXJzaW9uIjoxLCJzZXF1ZW5jZSI6NDIsImlzc3VlZEF0TXMiOjAsImV4cGlyZXNBdE1zIjo5MDA3MTk5MjU0NzQwOTkxLCJwbHVnaW5JZHMiOltdLCJwYWNrYWdlSGFzaGVzIjpbIjNkZGEzNGIzZDJiMzE2MTk5ZGJiNzEzOTkxMDMzOWU2NTM4OTVmZjAwZWMyYzg3YWQ1Y2Q2MGIzY2YxYmJiYzUiXSwicHVibGlzaGVyS2V5cyI6W119",
+  "envelope": {
+    "version": 1,
+    "algorithm": "Ed25519",
+    "keyId": "ephemeral-test-publisher",
+    "publicKey": "868d73c5195f9c86df4a75faab6d5049a3310b7fd29799892afc73149bcfc05f",
+    "fingerprint": "d6e7ddf8deb3bf9284b3bd6d763718ab39431332853afba80182f8a7b7c45f6e",
+    "signature": "796f13fce129a3eb64943dc667ca83b7788124d5da125ac06ce3fa7615e6c5c1674c1a3105d0645241f06ad3528f48f15860f133d5232571874ea0b1ee951300"
+  }
+}

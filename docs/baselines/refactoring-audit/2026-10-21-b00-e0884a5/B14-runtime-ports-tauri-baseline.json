@@ -1,0 +1,123 @@
+{
+  "documentType": "audit-baseline",
+  "runtimeScope": "tauri",
+  "schemaVersion": 1,
+  "batchId": "B14-runtime-ports-tauri",
+  "capturedAt": "2026-10-21T21:22:48.440902+08:00",
+  "recordedAt": "2026-10-21T21:29:02.4390087+08:00",
+  "initialHead": "acf455cb3e33259ce8887672f3fe679659161180",
+  "head": "acf455cb3e33259ce8887672f3fe679659161180",
+  "initialWorkingTree": [
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json"
+  ],
+  "workingTreeAtRecord": [
+    " M apps/tauri/src-tauri/src/network/http.rs",
+    " M apps/tauri/src/platform/native-http.ts",
+    " M docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/summary.json",
+    " M docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md",
+    " M \"docs/zh-cn/\\350\\267\\250\\345\\271\\263\\345\\217\\260/\\346\\236\\266\\346\\236\\204/\\346\\217\\222\\344\\273\\266\\347\\263\\273\\347\\273\\237\\351\\207\\215\\346\\236\\204S15\\345\\267\\245\\345\\205\\267\\344\\270\\216\\346\\241\\214\\351\\235\\242\\344\\272\\244\\344\\273\\230.md\"",
+    " M packages/plugin-vm/engine/profile.json",
+    " M packages/plugin-vm/src/profile-identity.ts",
+    " M packages/plugin-vm/src/profile.ts",
+    "?? apps/tauri/src-tauri/src/network/http/",
+    "?? apps/tauri/test/fixtures/native-http-response.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B09-tag-management-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B12-renderer-platform-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B13-vm-profile-control-shared.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri-baseline.json",
+    "?? docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B15-public-target-bounded-transport-tauri.json",
+    "?? packages/plugin-vm/test/profile.test.ts"
+  ],
+  "sourceHashes": [
+    {
+      "path": "crates/am-plugin-runtime/tests/offline.rs",
+      "sha256": "056fc73165560ec41d01426138def76af19f210c7d97f33bd78acc8f56c4ce82"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/model.rs",
+      "sha256": "39019af1c04b3472b6e275193c9031a2724e0e2ce94a7a5bc5814744b7ef9e09"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/lib.rs",
+      "sha256": "11bf53d3fce14e12b470865f9d9eaf877e4314c2219bcce62d92dba8de8fe0ac"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/install_model.rs",
+      "sha256": "c0305fefc6e65e445b4ef05619a4395490463ad6fb4ed95bece13fa3fda93574"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/install.rs",
+      "sha256": "787d00cf2f5aa9d03b3faabe8b9d3dc9509ed8cd99166bd2ba54fa53d95e0533"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/egress.rs",
+      "sha256": "1e502931a8cf9928158c3bf3bcad2c0c6d7f92f572744a347c6cacdff0a20a3e"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/data.rs",
+      "sha256": "b52041a716cc0bf2408843c469b6dabf411ee53e38f6b58d2c258c43edf0a296"
+    },
+    {
+      "path": "crates/am-plugin-runtime/src/authority.rs",
+      "sha256": "c5b0cf7d7d9f9da3ef3c9f7ea6f3ec5ff4d0dbd6c3130cf0c83c700755a0a96e"
+    },
+    {
+      "path": "crates/am-plugin-runtime/Cargo.toml",
+      "sha256": "6968b238313b68a7922672e55020644a5307d967459327e2bf67ffe265638254"
+    },
+    {
+      "path": "crates/am-plugin-runtime/AGENTS.md",
+      "sha256": "e7aeb9661794336f1245bbfb48e11a32c812227aa5fa7d63970b64f12a8f6af6"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "53212780b8821b735b6fd386c3edff8713c73827ba57a173d93f1fa53bd6f273"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "6629fc0ec91d8fad1061072ea3dff0331f90a8872a9a7246ec92e55667b76cff"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "3e9da041cf8d454d57c4fb0bbe0d5f72c424739f9d213abcc6a0db4087ce7f13"
+    },
+    {
+      "path": "crates/AGENTS.md",
+      "sha256": "aec1b1d8587da76c626726f0b50328a54d80ff8524812775f6d6c2116782274b"
+    }
+  ],
+  "directCallerHash": {
+    "path": "apps/tauri/src-tauri/src/plugins/executor.rs",
+    "sha256": "943603eacfe41d6af016224282d8a941990b5802e3a69af2c7c06cb2d8700d25"
+  },
+  "evidenceReuse": {
+    "previousReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri.json",
+    "previousBaseline": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B14-pure-policy-tauri-baseline.json",
+    "result": "All 89 previous evidence inputs matched at start; pure policy decision evidence is retained without rerunning its tests.",
+    "unchangedRuntimeInputs": 14,
+    "normalization": "The raw initial snapshot grouped runtime paths/hashes into parallel arrays; the saved baseline flattens those original pairs without changing their captured hashes or timestamp."
+  },
+  "environment": {
+    "os": "Windows",
+    "shell": "PowerShell",
+    "timezone": "Asia/Shanghai",
+    "rustc": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+    "cargo": "cargo 1.91.1 (ea2d97820 2025-10-10)",
+    "pnpm": "10.23.0"
+  },
+  "hashScope": "All crate files are hashed for invalidation. install.rs and the unselected data/egress paths were not manually audited. Direct executor callers are excerpts only."
+}

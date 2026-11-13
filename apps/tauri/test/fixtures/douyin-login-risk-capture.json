@@ -1,0 +1,382 @@
+{
+  "documentType": "platform-interface-capture",
+  "platform": "douyin",
+  "captureDate": "2026-10-03",
+  "scope": "Live observation on a chrome-devtools-mcp Chrome 154 profile (Windows, automation flags on) against www.douyin.com and login.douyin.com. Signing inputs were read out of the loaded Passport SDK by wrapping its js-sha256 module; parameter necessity was then tested by replaying the real endpoint from the same page session. No account content is recorded.",
+  "session": {
+    "aid": "6383",
+    "qrSdkVersion": "3.4.9",
+    "qrSdkType": "normal",
+    "authnSdkVersion": "1.0.0.428-web",
+    "ts": "1791028800",
+    "tsDerivation": "UTC noon of the current day, matching douyin_passport.rs",
+    "appKey": "163e7ce78d58971a41f5b969996d85c2"
+  },
+  "verifiedSignatureAlgorithms": {
+    "source": "Bundle modules: 99313 (968906 exports generateSignatureContent/hmac/hkdf), 9075 (encrypt = byte XOR 5 to hex), 4217 (x-tt-passport-aid-sign header key).",
+    "sign": {
+      "algorithm": "sha256(`${sortedFirst10(params) joined k=v with &}&${formKeysSorted joined k=v with &}&app_key=${appKey}`)",
+      "notes": [
+        "params = the SDK common-parameter object at signing time; only the first 10 keys after Object.keys().sort() are covered.",
+        "form values are sorted too, and an absent form yields the literal `&&` before app_key.",
+        "Object-valued params go through JSON.stringify.",
+        "Transport-level fields (ts, p_ui, p_ca, p_ca_real, p_js_v, p_js_t, p_zt, p_ver, p_ver_real, request_host, p_bd, p_ts, p_no, msToken, a_bogus) are appended AFTER signing and are not covered."
+      ],
+      "verifiedAgainstLiveRequest": {
+        "signedKeys": [
+          "account_app_language",
+          "account_sdk_source",
+          "account_sdk_source_info",
+          "aid",
+          "biz_trace_id",
+          "device_platform",
+          "fp",
+          "is_from_iesaccountsaas",
+          "is_from_ttaccountsdk",
+          "language"
+        ],
+        "form": "is_frontier=true&is_new_login=1&need_logo=false&need_short_url=true&next=https://www.douyin.com&token=<redacted>",
+        "path": "/passport/web/check_qrconnect/",
+        "reproducedSign": "9a2f5afb45650861923373c24abd02ee2016214e2fe3e20f1bec712d9434e043",
+        "liveSign": "9a2f5afb45650861923373c24abd02ee2016214e2fe3e20f1bec712d9434e043",
+        "bitExact": true
+      }
+    },
+    "qs": {
+      "algorithm": "hex(byte XOR 5) over the comma-joined covered key names, in the same order used for sign",
+      "observedCoveredKeysWhenFpAbsent": 9
+    },
+    "aidSign": {
+      "algorithm": "hex(HMAC-SHA256(HKDF-SHA256(ikm=appKey, salt=ts, info=empty, 32 bytes), `aid=6383&path=<path>&ts=<ts>`))",
+      "verifiedAgainstLiveValues": {
+        "/passport/web/get_qrcode/": "366e257a954f417c6aabd6b8451f6f472a69213c9027ac99e0916248a8af8052",
+        "/passport/web/check_qrconnect/": "161dccdedfdaffe525166539ade720a24e744d8f714ac992ed537a3302aa47ae",
+        "bothMatch": true
+      }
+    }
+  },
+  "passportPollGate": {
+    "endpoint": "POST https://login.douyin.com/passport/web/check_qrconnect/",
+    "method": "One QR token per session; variants replayed from the page with credentials included.",
+    "observations": [
+      {
+        "variant": "valid sign + qs + aid-sign + csrf, no a_bogus",
+        "result": "accepted (error_code 0)"
+      },
+      {
+        "variant": "no sign, no qs, no passport headers at all",
+        "result": "accepted (error_code 0) — the poll endpoint does not validate the query signature"
+      },
+      {
+        "variant": "valid sign plus a stale a_bogus",
+        "result": "rejected error_code 4031 (risk block)"
+      },
+      {
+        "variant": "without the p_ui/p_ca/p_ca_real/p_js_*/p_zt/p_ver*/p_bd/p_ts/p_no/request_host block",
+        "result": "accepted"
+      },
+      { "variant": "without msToken", "result": "accepted" },
+      { "variant": "without fp/verifyFp", "result": "accepted" }
+    ],
+    "conclusion": "a_bogus is optional for this endpoint, but a present-and-invalid a_bogus triggers 4031. Missing sign/qs/msToken/fp/p_* are all tolerated.",
+    "signedKeySetRule": {
+      "method": "128 live check_qrconnect requests captured through an in-page XHR/fetch recorder; each request's `qs` parameter was decoded (hex, byte XOR 5) back to the signed key list.",
+      "observed": [
+        {
+          "samples": 124,
+          "keyCount": 10,
+          "keys": "account_app_language, account_sdk_source, account_sdk_source_info, aid, biz_trace_id, device_platform, fp, is_from_iesaccountsaas, is_from_ttaccountsdk, language"
+        },
+        { "samples": 1, "keyCount": 9, "keys": "the same list without fp" }
+      ],
+      "rule": "The signed set is exactly the SDK's common-parameter object as it exists at signing time, key-sorted and capped at ten entries. Before the verify SDK has produced a fingerprint the object has nine members, which is why an early decode in this capture showed nine keys; from the first normal poll onward fp is present and the set is ten.",
+      "samplesWithFp": 127,
+      "samplesCarryingBogusAtTheCallerLayer": 32,
+      "note": "Only 32 of 128 caller-layer URLs already carried a_bogus, consistent with the recorder seeing the request before the transport instrumentation appends it."
+    },
+    "refreshedQrInPoll": {
+      "why": "This is the second, a_bogus-independent cause of polling failures reported by the project, found while auditing this capture's own recorder output rather than by probing the live site.",
+      "evidence": "Of 157 recorded passport responses in one session, 69 were not a `status` payload at all but a fresh QR payload with error_code 0.",
+      "shapeCensus": {
+        "method": "Every recorded check_qrconnect/get_qrcode response body was parsed and grouped by its own field signature.",
+        "shapes": [
+          { "count": 60, "signature": "error_code 0, status new, no qrcode" },
+          {
+            "count": 65,
+            "signature": "error_code 0, status EXPIRED, qrcode present, new token present (13 fields including app_name/expire_time/frontier_params/qrcode_index_url/web_name)"
+          },
+          {
+            "count": 4,
+            "signature": "error_code 0, NO status field, qrcode present, new token present (same 13 fields plus copywriting)"
+          },
+          { "count": 22, "signature": "error_code 4031, caption/desc_url/description only" }
+        ],
+        "total": 151,
+        "notObserved": "No scanned or confirmed sample exists, because this session's scan never reached confirmation."
+      },
+      "twoSubShapes": "A reissued QR arrives either with status=expired (65 samples) or with no status at all (4 samples). The older code returned 'expired' for the first, silently discarding the new token and image, and raised 'unknown state' for the second. The fix intercepts on a non-empty data.qrcode before the status match, so both sub-shapes now adopt the new token and return waiting with the new image.",
+      "requestSideAudit": {
+        "why": "The same class of bug — a peer sending a shape the client did not anticipate — was checked on the request side too.",
+        "bodies": "Every real check_qrconnect body is the identical six-field form with only the token differing; the one exception is a deliberate probe that sent `a=1`. No unexpected request body shape exists.",
+        "queryKeySets": "The dominant real key set has 28 members: account_app_language, account_sdk_source, account_sdk_source_info, aid, biz_trace_id, device_platform, fp, is_from_iesaccountsaas, is_from_ttaccountsdk, language, p_bd, p_ca, p_ca_real, p_js_t, p_js_v, p_no, p_ts, p_ui, p_ver, p_ver_real, p_zt, passport_jssdk_type, passport_jssdk_version, qs, request_host, sign, ts, verifyFp. msToken and a_bogus are absent at this caller layer, as expected.",
+        "verdict": "No request-side surprise. The only delta against the native implementation is exactly what the parity table already lists: account_sdk_source_info, fp/verifyFp, p_ts and p_no."
+      },
+      "shape": {
+        "error_code": 0,
+        "qrcode": "a new PNG image, same encoding as the get_qrcode response",
+        "token": "a DIFFERENT token from the request's token",
+        "expire_time": "a new expiry",
+        "frontier_params": "present",
+        "status": "absent"
+      },
+      "trigger": "Polling a token that has expired or been superseded.",
+      "browserBehaviour": "The login panel renders the returned image in place and continues with the new token, which is why the QR appears to refresh by itself after the countdown.",
+      "projectBug": "apply_poll matched only new/scanned/expired/confirmed and returned '未知抖音二维码状态，请使用系统浏览器。' for anything else, so every poll after the 60-second expiry turned into a hard error even though the QR had merely been reissued.",
+      "fix": "apply_poll now checks for a non-empty data.qrcode before the status match, reuses parse_qr (which already enforces error_code 0 and the PNG magic), adopts the new token and returns a waiting payload with the new image. The token stays out of the public projection.",
+      "lockedBy": "douyin_login::tests::a_poll_that_returns_a_fresh_qr_replaces_the_token_and_stays_waiting",
+      "note": "Many of these 69 responses were the live panel's own polls across several expiry cycles, so the behaviour is routine rather than exceptional."
+    },
+    "qrPollQueryOrder": {
+      "method": "The caller-side parameter order was byte-stable across 59 captured polls.",
+      "order": "passport_jssdk_version, passport_jssdk_type, is_from_ttaccountsdk, aid, language, account_app_language, ts, is_from_iesaccountsaas, p_ui, p_ca, p_ca_real, fp, verifyFp, account_sdk_source, account_sdk_source_info, p_js_v, p_js_t, p_zt, p_ver, p_ver_real, request_host, p_bd, p_ts, p_no, biz_trace_id, device_platform, sign, qs",
+      "notable": [
+        "account_sdk_source and account_sdk_source_info sit after fp/verifyFp, not at the front.",
+        "biz_trace_id and device_platform sit near the end, immediately before sign and qs.",
+        "msToken and a_bogus are appended by the transport after qs and are not part of this caller order."
+      ]
+    },
+    "nativeClientBlock": {
+      "clients": [
+        "Node 24 undici fetch (HTTP/1.1, OpenSSL)",
+        "curl (HTTP/1.1, Schannel; no HTTP/2 support in this build)"
+      ],
+      "cookies": "the live browser Cookie header, replayed verbatim, including ttwid, odin_tt, UIFID_TEMP, passport_csrf_token, biz_trace_id, sdk_source_info",
+      "signature": "correct sign + qs + aid-sign + csrf headers",
+      "result": {
+        "get_qrcode": "accepted (HTTP 200, error_code 0, PNG QR returned) — the generate endpoint is lenient",
+        "check_qrconnect": "rejected: first attempt error_code 22 (非法应用), subsequent attempts error_code 4031 (安全风险拦截)"
+      },
+      "control": "In the same second, from the page with the same cookies and no signature at all, check_qrconnect returned error_code 0.",
+      "conclusion": "The poll gate rejects non-browser clients on client-attestation grounds rather than on parameters or cookies.",
+      "attestationIsJavascriptLevel": {
+        "method": "Same page, same cookies, same Chrome network stack, same second: the request was sent twice, once through a pristine same-origin iframe realm whose window.fetch is still native, and once through the page's own fetch (which the ByteDance secsdk wraps).",
+        "pristineIframeFetch": "rejected: error_code 4031",
+        "secsdkWrappedPageFetch": "accepted: error_code 0",
+        "conclusion": "The gate is NOT the TLS or HTTP/2 ClientHello fingerprint — both calls used the identical Chrome transport. It is what the secsdk's request instrumentation attaches in JavaScript."
+      },
+      "secsdkInstrumentation": {
+        "evidence": "A wrapped page fetch that explicitly set only `content-type` still went on the wire with three items the caller never provided.",
+        "appendedQueryParameters": ["msToken", "a_bogus"],
+        "appendedHeaders": ["x-tt-session-dtrait"],
+        "msTokenSource": "the secsdk's msToken store, refreshed via POST https://mssdk.bytedance.com/web/r/token?ms_appid=6383 and the x-ms-token response header",
+        "aBogusSource": "computed by the secsdk over the final query string (including msToken) immediately before the request is written",
+        "sessionDtraitShape": "d0_<base64 session blob>_<base64 signature>",
+        "explainsEarlierResults": "Every in-page replay earlier in this capture ran through the wrapped fetch, so the secsdk silently supplied a valid a_bogus; the variants that failed with 4031 were exactly the ones where the caller had already set an a_bogus, which the wrapper then left stale. No browser-authenticated request in this capture was ever actually unsigned.",
+        "nativeClientRequirement": "A native desktop client must reproduce all three: msToken, a valid a_bogus over the final query string, and the x-tt-session-dtrait header. Parameters and cookies alone are not enough.",
+        "nativeAttemptWithProjectSigner": {
+          "what": "Native Node client sent a real check_qrconnect poll three ways, using the project's own packages/music-sources/src/douyin/a-bogus.ts to compute a_bogus over the exact encoded query string (msToken included).",
+          "variants": [
+            { "variant": "no msToken, no a_bogus", "result": "error_code 4031" },
+            { "variant": "msToken only", "result": "error_code 4031" },
+            { "variant": "msToken plus project a_bogus", "result": "error_code 4031" }
+          ],
+          "conclusion": "RESOLVED. The poll gate is a_bogus and nothing else. A native Node client that sends the a_bogus the secsdk itself produced is accepted (error_code 0) with no dtrait header and no msToken handling, while the same request without a_bogus is rejected with 4031. TLS/HTTP-2 fingerprint, header shape, user agent, dtrait and msToken are all individually irrelevant.",
+          "projectSignerVerdict": {
+            "result": "NOT ACCEPTED by the live server",
+            "variantsTried": [
+              "a_bogus over the exact query string including msToken",
+              "a_bogus over the key-sorted query string",
+              "a_bogus over the query string without msToken",
+              "a_bogus over the key-sorted query string without msToken",
+              "a_bogus over the query string without sign and qs",
+              "a_bogus over path plus query string",
+              "each of the above with the default MacIntel fingerprint",
+              "with a Windows fingerprint matching screen 2195x1235 / outer 1988x1045",
+              "with a probe-exact dimension fingerprint"
+            ],
+            "allRejected": "error_code 4031 in every case",
+            "structuralDiff": {
+              "method": "Both values decoded with the signature alphabet the project already uses; every character resolved, so the comparison is alphabet-independent.",
+              "secsdkAcceptedValue": { "chars": 188, "decodedBytes": 140 },
+              "projectValue": { "chars": 168, "decodedBytes": 124 },
+              "difference": "The project payload is 16 bytes shorter than the value the server accepts.",
+              "methodArgumentIrrelevant": "Passing POST, GET, lowercase post or an empty method yields byte-identical output length and every variant is rejected, so the gap is structural rather than an argument-encoding mistake.",
+              "nextStep": "Recover the current payload layout from the live secsdk and add the missing 16 bytes; the length gap is the acceptance criterion to close.",
+              "payloadIsFixedSize": "Both values keep their size regardless of query-string length (a 2612-character signed input still yields a 188-character a_bogus), so the query is hashed into the payload rather than embedded. The 16-byte gap is therefore one extra fixed-size field in the current layout.",
+              "oracleAvailable": {
+                "how": "Calling the page's own (secsdk-wrapped) fetch and then reading response.url returns the instrumented URL with the a_bogus the secsdk computed for that exact caller-supplied string.",
+                "why": "This yields unlimited (input, a_bogus) pairs from inside the page without a Network-panel round trip, which is what makes recalibrating the project signer tractable.",
+                "caveat": "The oracle only runs inside the live page realm; it cannot be used at runtime by the desktop client, which must still reproduce the algorithm."
+              },
+              "payloadSampling": {
+                "method": "Four identical-input samples plus one single-character variant and one padded variant, all signed by the live secsdk through the oracle and decoded with the project alphabet.",
+                "observedLengths": {
+                  "sameInputSamples": "192 chars / 144 bytes",
+                  "singleCharVariant": "144 bytes",
+                  "paddedVariant": "144 bytes",
+                  "earlierCaptures": "188 chars / 140 bytes"
+                },
+                "lengthIsNotFixed": "The accepted values seen so far are 140 and 144 bytes, so the earlier 'exactly 16 bytes short' reading was over-confident: encoded length varies between requests (consistent with a random-length prefix or a random RC4 key).",
+                "stability": "117 of 144 bytes differ across four identical-input samples, so the payload is largely randomised per call and a naive byte diff cannot separate 'input changed' from 'key changed'.",
+                "nextLever": "Determinise the randomness before diffing: stub Math.random (or the secsdk's PRNG) to a fixed sequence so that one input maps to one output, then re-run the same/variant/padded comparison.",
+                "deterministicRig": {
+                  "status": "WORKING",
+                  "recipe": "Replace Math.random with a seeded LCG and reset the seed (and pin Date.now) immediately before each request. Resetting per request matters: the secsdk draws roughly 59 random values per signature, so a stream that keeps advancing makes two identical inputs produce different outputs.",
+                  "verified": "Two identical inputs then produced byte-identical 141-byte payloads.",
+                  "inputSensitivity": "Changing one character, and separately appending 40 characters, altered the SAME seven byte positions: indices 24, 27, 28, 31, 32, 35 and the final byte 140. Every other byte was untouched.",
+                  "interpretation": "The query string is not embedded in the payload. Only a small fixed-size region carries input-dependent data, which is why the encoded length does not grow with the query. The rest of the payload is randomised prefix/key material.",
+                  "lengthVariance": "Across runs the accepted payload measured 140, 141, 142 and 144 bytes, so the prefix length is random and encoded length alone cannot be used as the acceptance target.",
+                  "serverCheckedBytes": {
+                    "method": "With the deterministic rig, take the accepted 141-byte payload for one exact query string, re-encode it after flipping a single byte, and resend with msToken supplied by the caller so the wrapper appends nothing (one msToken on the wire throughout).",
+                    "control": "unmodified payload -> error_code 0",
+                    "flipByte0": "error_code 4031 (rejected)",
+                    "flipByte70": "error_code 0 (accepted)",
+                    "flipByte30": "error_code 0 (accepted)",
+                    "flipByte140": "error_code 0 (accepted)",
+                    "conclusion": "The server does not cryptographically verify the whole payload. Corrupting byte 30, 70 or the final byte is tolerated, while corrupting byte 0 is fatal, so the checked surface is a small header region rather than the entire blob.",
+                    "byte0IsNotConstant": "Byte 0 measured 131 in one sample and 43 in another, so it is not a fixed magic value; it is derived from something the server can recompute, which is consistent with a length or format byte being validated while the rest of the blob is treated as opaque padding.",
+                    "whyThisMatters": "If the accepted/checked surface really is a small header, the project signer may only need to match that header rather than reproduce the whole current algorithm. Finding which bytes must agree is now the cheapest remaining experiment: transplant candidate bytes from an accepted payload into the project's output and re-test.",
+                    "validatedHeader": {
+                      "method": "Same deterministic rig, accepted full-parameter request; flip one byte (XOR 0xff) or a whole block in the decoded payload, re-encode, resend.",
+                      "control": "unmodified -> error_code 0",
+                      "flipByte1": "4031",
+                      "flipByte2": "4031",
+                      "flipByte3": "4031",
+                      "flipByte4": "0",
+                      "flipByte5": "0",
+                      "flipByte6": "0",
+                      "flipByte7": "0",
+                      "flipByte8": "0",
+                      "zeroBytes10to19": "0",
+                      "flipBytes40to60": "0",
+                      "conclusion": "Only bytes 0 through 3 are validated. Every byte from index 4 onward, including a 21-byte block in the middle, can be corrupted without consequence. The accepted payload is effectively a 4-byte checked header followed by ~137 bytes of unchecked material.",
+                      "characterLevelMap": {
+                        "why": "The byte-level map depends on the project's alphabet being the decoder the server uses. Replacing one character of the transmitted a_bogus string (and re-sending it verbatim) removes that assumption.",
+                        "acceptedString": "188 characters beginning Q7sRDetyYx/n",
+                        "control": "unmodified -> error_code 0",
+                        "rejectedCharIndices": [0, 1, 2, 3, 5],
+                        "toleratedCharIndices": [4, 6, 7, 9, 12, 20],
+                        "conclusion": "The checked surface is confined to the first six characters, and even there it is not all-or-nothing: index 4 is tolerated while 5 is fatal. That rules out a simple prefix comparison and points at specific bit fields inside the leading characters, which the server reads while ignoring neighbouring bits.",
+                        "status": "The exact bit field the server extracts has not been identified. Doing so requires either reading the obfuscated secsdk or a much larger empirical search, and it is the remaining prerequisite for a fully native Douyin login."
+                      },
+                      "bitLevelMap": {
+                        "method": "Deterministic rig, accepted full-parameter request. Starting from the accepted payload's decoded bytes (43, 82, 88, 3, ...), flip exactly one bit at a time (XOR 0x01 and XOR 0x80), re-encode and resend.",
+                        "control": "unmodified -> error_code 0",
+                        "byte0Xor0x01": "4031",
+                        "byte0Xor0x80": "0",
+                        "byte1Xor0x01": "0",
+                        "byte1Xor0x80": "4031",
+                        "byte2Xor0x01": "4031",
+                        "byte2Xor0x80": "0",
+                        "byte3Xor0x01": "0",
+                        "byte3Xor0x80": "4031",
+                        "conclusion": "SUPERSEDED — see crossMethodCheck. The first reading of this table suggested a scattered set of enforced bits, but that was an artifact of probing only two bits per byte.",
+                        "crossMethodCheck": {
+                          "method": "The character-level map was re-run on this exact deterministic payload and reproduced the earlier sample exactly (188 characters beginning Q7sRDety): mutating characters 0, 1, 2, 3 and 5 is fatal, while 4, 6 and 7 are free. The two maps were then reconciled through the custom base64 layout, where four characters encode three bytes.",
+                          "reconciliation": "Character 0 covers bits 7..2 of byte 0, so char 0 being fatal while byte0 bit7 is free simply means bits 6..2 of byte 0 are enforced. Character 2 covers bits 3..0 of byte 1 and bits 7..6 of byte 2; both bytes' probed bits were free yet char 2 is fatal, so enforced bits lie among the unprobed ones. Character 4 covers bits 7..2 of byte 3 and is entirely free, so bits 6..2 of byte 3 are free too.",
+                          "correctTitle": "The enforced surface is the leading characters, not a scattered bit set.",
+                          "reliableMap": "Characters 0, 1, 2, 3 and 5 are enforced; characters 4, 6, 7 and everything after are free. The enforced positions are measured twice on the same payload by two independent methods, so this is the trustworthy statement.",
+                          "lesson": "Sampling two bits per byte is too sparse to support any claim about which bits are checked, and the resulting 'scattered bits' conclusion in this file's earlier revision was wrong."
+                        },
+                        "caution": "Measured on one accepted payload. Whether the enforced positions are fixed or payload dependent is not established, so this maps a single sample rather than a settled format.",
+                        "status": "Still not enough to mint a valid payload: the value those enforced bits must satisfy is unknown."
+                      },
+                      "headerDependencies": {
+                        "method": "Same deterministic rig; vary exactly one dimension per sample and record the first eight decoded bytes plus payload length.",
+                        "baselineSeed1337ClockT": {
+                          "length": 141,
+                          "first8": [43, 82, 88, 3, 255, 116, 162, 35]
+                        },
+                        "repeatOfBaseline": "byte-identical, confirming the rig is deterministic",
+                        "queryChangedByOneChar": "first eight bytes unchanged, so the validated header does NOT depend on the query string",
+                        "clockPlus1s": "first eight bytes unchanged (payload length moved 141 -> 144)",
+                        "clockPlus1Day": "first eight bytes unchanged",
+                        "seed9999": { "length": 141, "first8": [9, 18, 88, 3, 245, 101, 138, 114] },
+                        "seed424242": {
+                          "length": 141,
+                          "first8": [161, 87, 80, 19, 253, 53, 128, 55]
+                        },
+                        "interpretation": "The checked leading region is a deterministic function of the client's random material only: not of the query, not of the clock. Because byte 0 alone takes values such as 43, 9 and 161 across seeds, the server cannot be comparing it against a fixed constant; it must be applying a structural or relational rule to the leading region, or it decodes the string with a different bit grouping than the project alphabet implies. Either way the leading region behaves like a client-attestation field rather than a request signature."
+                      },
+                      "reframedFix": "The project signer does not need the whole current algorithm to satisfy this endpoint; it needs the correct first four bytes. Whether that header is query-independent is not yet established, so the next step is to vary one dimension at a time (seed, clock, query) and observe only bytes 0-3.",
+                      "sparseQueryStillRejected": "A minimal query (aid=6383&zz_probe=1) carrying a genuinely secsdk-signed a_bogus was still rejected with 4031, so a valid header alone is not sufficient: the risk layer also wants the normal SDK parameter set present."
+                    }
+                  }
+                },
+                "costBenefit": "Reimplementing the current a_bogus natively is a deep reverse-engineering effort with uncertain payoff. Letting the system Chrome/Edge the app already uses perform the passport flow avoids it entirely, at the cost of not rendering the QR inside the app itself."
+              }
+            },
+            "consequence": "packages/music-sources/src/douyin/a-bogus.ts produces a value the current server rejects for this endpoint. Recalibrating it against the live secsdk is the blocking prerequisite for native Douyin login; porting it to Rust before that would be wasted work."
+          }
+        }
+      }
+    },
+    "preeflightEndpoints": [
+      "GET https://www.douyin.com/passport/general/login_guiding_strategy/",
+      "POST https://login.douyin.com/passport/web/challenge/ (form: sign, sk; response: passportiv, template, ts)",
+      "POST https://www.douyin.com/passport/ticket_guard/get_client_cert/ (form: server_data; response: server_cert, server_sn)",
+      "GET https://login.douyin.com/passport/web/get_qrcode/",
+      "POST https://mssdk.bytedance.com/web/r/token?ms_appid=6383 (msToken rotation)"
+    ],
+    "headersSeenOnPoll": [
+      "web-sdk-version: 1",
+      "x-tt-passport-csrf-token",
+      "x-tt-passport-aid-sign",
+      "x-tt-passport-trace-id",
+      "x-tt-passport-verify-portrait",
+      "x-tt-session-dtrait"
+    ]
+  },
+  "environmentProbe": {
+    "encoding": "hex(byte XOR 5) of a JSON string; carried as the account_sdk_source_info query parameter and as the sdk_source_info cookie",
+    "accountSdkSourceInfoKeys": [
+      "hardwareConcurrency",
+      "webdriver",
+      "chromedriver",
+      "shelldriver",
+      "plugins",
+      "innerHeight",
+      "innerWidth",
+      "outerHeight",
+      "outerWidth",
+      "webgl.vendor",
+      "webgl.renderer",
+      "automation.{s,c,p,s1,c1,p1}",
+      "performance.timeOrigin",
+      "performance.usedJSHeapSize",
+      "performance.navigationTiming.decodedBodySize",
+      "browser.t",
+      "browser.bit_protocol",
+      "browser.bit_helper"
+    ],
+    "sdkSourceInfoCookieKeys": [
+      "automa_ele",
+      "bit_helper",
+      "chrome_extension_script",
+      "console_lied",
+      "global_variables",
+      "swt_alt",
+      "zn_cap",
+      "hok_noti",
+      "inj_zfb",
+      "t",
+      "bit_protocol"
+    ],
+    "note": "Both values are produced by an axios request interceptor in bundle module 52804 and are covered by the signature. This capture ran under automation, so webdriver was true and global_variables listed [\"webdriver\"].",
+    "signerGlobals": ["byted_acrawler", "bdms", "useWebSecsdkApi", "_secsdk_uifid"]
+  },
+  "signerAssets": [
+    "https://lf-c-flwb.bytetos.com/obj/rc-client-security/c-webmssdk/1.0.0.20/webmssdk.es5.js",
+    "https://lf-c-flwb.bytetos.com/obj/rc-client-security/web/glue/1.0.0.64-fix.01/sdk-glue.js",
+    "https://lf-security.bytegoofy.com/obj/security-secsdk/runtime_bundler_34.js",
+    "https://lf-rc1.yhgfb-cn-static.com/obj/rc-verifycenter/verifycenter/1.0.0.421/index.js",
+    "https://lf-rc1.yhgfb-cn-static.com/obj/rc-verifycenter/sec_sdk_build/4.0.28/captcha/index.js",
+    "https://lf-rc1.yhgfb-cn-static.com/obj/rc-verifycenter/rmc-nocaptcha/1.0.0.52/setup.js"
+  ],
+  "outstanding": [
+    "Second-verification (error_code 2046) flow was not exercised: it requires a real account scan.",
+    "Whether a valid a_bogus lets a native client poll is untested; the page exposes byted_acrawler.frontierSign (returns X-Bogus) and useWebSecsdkApi, but no direct a_bogus entry point was located.",
+    "Ticket-guard replay (real x-tt-session-dtrait plus bd_ticket_guard cookies from a native client) was not run.",
+    "Browser-wide cache and storage partitions were not independently verified."
+  ]
+}

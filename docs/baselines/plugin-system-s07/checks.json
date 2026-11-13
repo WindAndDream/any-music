@@ -1,0 +1,95 @@
+{
+  "scope": "S07",
+  "status": "implemented",
+  "date": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:53:52.172876+00:00",
+      "logSha256": "efd1d8a6f55ccc3d6996a3c9888aa8460f736ba581783f8841db49a74dcbb9e4"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:54:09.432582+00:00",
+      "logSha256": "271476b3b173c5a4bc13cc99c6bfbb8612eb149299b4a05ac449070c942a4f49"
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:53:57.352167+00:00",
+      "logSha256": "dbe8fe119f2d07f9ace599a0ea824b6d2f85688d5de582d720974333d5230be2"
+    },
+    {
+      "command": "pnpm format:check",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:55:35.505070+00:00",
+      "logSha256": "ea72060eb9858efffe4a5209cefec09ff5477fa9e7806f63546275e7eba61d7e"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "logCompletedAt": "2026-10-17T16:55:01.260973+00:00",
+      "logSha256": "b262562391851d300ae0582358d33260670d91dc83793b6ea112acd00ab63ae5"
+    }
+  ],
+  "tests": {
+    "script": 16,
+    "vitest": 1517,
+    "rust": 109,
+    "rustIgnored": 1,
+    "protocolDifferential": 171
+  },
+  "artifacts": [
+    {
+      "path": "apps/userscript/dist/any-music.user.js",
+      "bytes": 3454615,
+      "sha256": "793cf1c05f9261724c020407680a2bdbe85535d6c7861bc7a6ab303a7b9b47fa"
+    },
+    {
+      "path": "apps/tauri/dist/index.html",
+      "bytes": 2824,
+      "sha256": "ebd2aaa218169769846660027df5daf18e6625c59e5b8b6bb0a14c1157ce41ab"
+    },
+    {
+      "path": "target/release/any-music-tauri.exe",
+      "bytes": 18042880,
+      "sha256": "efc1d301e2a6f59c5ae15648c28df609ee2721b6e58006a15fc56515ebbd3d44"
+    },
+    {
+      "path": "apps/tauri/dist/assets/vue-DGrOBc9E.js",
+      "bytes": 16543,
+      "sha256": "a0c700c02e97823fb76ce9c1347c8c20dfe3690c846aa046169c741f79c0b7d1"
+    },
+    {
+      "path": "apps/tauri/dist/assets/vue-aclRcn2a.css",
+      "bytes": 4176,
+      "sha256": "2e8a0d8b1c0248e29da9b1026f0bbf17561af37cbcdb85f9895d470cda1781a0"
+    }
+  ],
+  "artifactAssertions": {
+    "tauriTagEntryDeferred": true,
+    "userscriptContainsTagStylesAndShadowRegistry": true,
+    "userscriptExternalExecutorMarkersAbsent": true,
+    "metadataGraphs": "entry-graphs.json"
+  },
+  "limitations": [
+    "No app, development server, browser, simulator, live GM/IPC, focus/visual or device acceptance.",
+    "S00 synthetic sanitized legacy fixtures; no real-user backups.",
+    "S03 awaits isolation acceptance; S08-S16 remain unimplemented.",
+    "No native source change. Additional native/MSRV/dependency-audit commands were not rerun; existing S06 dependency-audit limitations remain."
+  ],
+  "uncommittedChangesPreserved": true,
+  "gitCommitOrPush": false,
+  "lockfiles": {
+    "Cargo.lock": "ede1f3780515d02277d7afcd95548809e612de7651efaaf2b519fc274d3ed013",
+    "pnpm-lock.yaml": "5226a649da483c5953a523102b4a84c77a2ba9d1e84ee2862506268e7b6130c2"
+  },
+  "documentationLinks": {
+    "filesChecked": 18,
+    "localLinksChecked": 350,
+    "missing": 0
+  }
+}

@@ -1,0 +1,386 @@
+{
+  "documentType": "audit-fix-report",
+  "runtimeScope": "shared",
+  "schemaVersion": 1,
+  "batchId": "B06-workbench-storage-shared-fix",
+  "parentBatch": "B06",
+  "runtime": "shared",
+  "supportingRuntimes": ["userscript", "tauri"],
+  "reviewedAt": "2026-10-21T18:27:55.9613403+08:00",
+  "authorization": "The user explicitly requested repair of B06-S01/B06-S02 and regression verification. Runtime adapters and lifecycle tests changed only to implement the required storage contract.",
+  "previousReport": "docs/baselines/refactoring-audit/2026-10-21-b00-e0884a5/B06-workbench-storage-shared.json",
+  "refactorStatus": "conformant",
+  "verdict": "pass-scoped",
+  "evidence": {
+    "static": "pass",
+    "tests": "pass",
+    "artifact": "pass",
+    "live": "not-run"
+  },
+  "scope": "The two confirmed shared storage findings, their direct GM/Tauri renderer adapters and the workbench mount/disposal needed by the storage lifetime. This is not acceptance of all B06 candidates, native product mirroring, portable-data preflight or live runtime behavior.",
+  "changes": [
+    {
+      "findingId": "B06-S01",
+      "status": "resolved",
+      "detail": "ProductGenerationBackend requires a synchronous withExclusiveWrite guard around initial generation reads and the entire commit path. Stale checks, reclamation, staging, verification, runtime proxy writes and pointer publication share the guard. The memory test backend rejects nested writers; the final-check/publication interleaving now rejects the competing save rather than acknowledging a lost update.",
+      "evidence": [
+        "packages/music-workbench/src/storage/product-generation-store.ts:103",
+        "packages/music-workbench/test/storage/product-generation-store.test.ts:163",
+        "packages/music-workbench/test/storage/product-generation-store.test.ts:182",
+        "packages/music-workbench/test/storage/product-generation-store.test.ts:207"
+      ]
+    },
+    {
+      "findingId": "B06-S01",
+      "status": "resolved",
+      "runtime": "userscript",
+      "detail": "The GM adapter registers a unique tab session using GM.saveTab before checking GM.getTabs. A second expanded workbench fails before product IO. Initial state uses async GM reads, and ordered acknowledged GM writes stop on failure. No synchronous GM key enumeration or cached value is used for locking. Actual unmount/pagehide freezes the writer, drains queued IO and removes only its own registration. Pending initialization, session replacement, closed tabs and late disposal have explicit owners. The Userscript root now renders a persistent storage-error toast from serializable AppErrorState; the event listener is disposed with its scope.",
+      "evidence": [
+        "apps/userscript/src/platform/product-storage.ts:41",
+        "apps/userscript/src/platform/configure-userscript-workbench.ts:17",
+        "apps/userscript/src/bootstrap-userscript-app.ts:16",
+        "apps/userscript/test/platform/product-storage.test.ts",
+        "apps/userscript/test/bootstrap-userscript-app.test.ts",
+        "apps/userscript/src/platform/use-product-storage-notice.ts:6",
+        "apps/userscript/src/App.vue:8",
+        "apps/userscript/test/platform/use-product-storage-notice.test.ts:8"
+      ]
+    },
+    {
+      "findingId": "B06-S01",
+      "status": "resolved",
+      "runtime": "tauri",
+      "detail": "The renderer guard prevents synchronous reentry and compares the persisted local mirror with the expected value, rejecting stale storage instances. Startup rechecks the local mirror before/after the awaited native save. Existing native revision validation and atomic replacement are unchanged.",
+      "evidence": [
+        "apps/tauri/src/platform/product-storage.ts:89",
+        "apps/tauri/test/platform/product-storage.test.ts:175",
+        "apps/tauri/test/platform/product-storage.test.ts:187"
+      ]
+    },
+    {
+      "findingId": "B06-S02",
+      "status": "resolved",
+      "detail": "A shared core sanitizer retains HTTP(S) and protocol-relative artwork/page metadata URLs while dropping Blob/data/file URLs and embedded credentials. Both host library and download-history normalizers use it. Save/reload/export tests preserve stable track IDs and plugin namespaces and exercise ordinary stable URL controls.",
+      "evidence": [
+        "packages/core/src/models/track.ts:66",
+        "packages/core/src/download/download-history.ts:243",
+        "packages/music-workbench/src/storage/local-music-library-repository.ts:175",
+        "packages/music-workbench/test/storage/product-generation-store.test.ts:224"
+      ]
+    }
+  ],
+  "visibleBehavior": "Userscript now permits one expanded workbench session per script-manager tab inventory. Hiding retains ownership for playback/downloads; another tab receives an explicit close-the-owning-tab/retry error. Actual unmount/page exit releases after persistence. Tauri retains its main-WebView composition.",
+  "checks": [
+    {
+      "criterion": "C1",
+      "result": "pass",
+      "detail": "Storage authority remains injected. Shared generation code has no GM/Tauri/app imports; GM tab/value APIs remain in the userscript platform and required grants appear in the production artifact. No new package, persisted schema, compatibility reader or IPC alias was added."
+    },
+    {
+      "criterion": "C3",
+      "result": "pass",
+      "detail": "Permanent tests cover staging/publication interleavings, stale renderer instances, same-realm replacement and late disposal, simultaneous GM initialization, missing self registration, pagehide during/after initialization, queue draining, every GM write failure before/after persistence, mount failures and idempotent unmount. Existing generation failure/reclamation/import tests remain passing."
+    },
+    {
+      "criterion": "C4",
+      "result": "pass",
+      "detail": "Blob URL regression is covered in both library and download snapshots with stable HTTP(S)/CDN controls. Host IDs/recipes/plugin namespaces and proxy-secret isolation remain covered; poisoned writers cannot continue persisting proxy settings. No native credentials or external-plugin authority were introduced."
+    },
+    {
+      "criterion": "C6",
+      "result": "pass",
+      "detail": "Tests remain with their implementation owners. Both data-ownership and runtime-development guides are synchronized in English/Chinese. Root tests/typecheck/lint/build pass; final affected GM/lifecycle cases are rerun after the last guard change. Unrelated existing documentation-format debt is recorded separately."
+    }
+  ],
+  "verification": {
+    "static": {
+      "result": "pass",
+      "detail": "Required guard and both adapters reviewed; relevant source hashes stable through final gates."
+    },
+    "tests": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm test",
+          "startedAt": "2026-10-21T18:24:23.8018929+08:00",
+          "finishedAt": "2026-10-21T18:25:40.440002+08:00",
+          "exitCode": 0,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b06-storage-fix\\root-test-closure.log"
+        }
+      ],
+      "permanentRegressionFiles": [
+        "packages/music-workbench/test/storage/product-generation-store.test.ts",
+        "apps/userscript/test/platform/product-storage.test.ts",
+        "apps/userscript/test/bootstrap-userscript-app.test.ts",
+        "apps/userscript/test/platform/use-product-storage-notice.test.ts",
+        "apps/tauri/test/platform/product-storage.test.ts"
+      ],
+      "finalUserscriptTargetedCases": 21,
+      "detail": "Final root test rerun includes the last GM guard and visible failure-notice changes, with the full TS/Vue, repository-script and Rust workspace suites. The additional 21 GM/lifecycle/notice cases also passed together before that run. Existing native ignored tests retain their original status."
+    },
+    "typecheck": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm typecheck",
+          "startedAt": "2026-10-21T16:56:54.5488066+08:00",
+          "finishedAt": "2026-10-21T16:58:29.8248372+08:00",
+          "exitCode": 0,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b06-storage-fix\\root-typecheck-final.log"
+        }
+      ],
+      "finalRefresh": "The successful final pnpm build reruns pnpm typecheck on the final product source hashes, including Vue/TS, Rust formatting and all-target Clippy."
+    },
+    "lint": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm lint",
+          "startedAt": "2026-10-21T18:24:23.8287224+08:00",
+          "finishedAt": "2026-10-21T18:24:27.3745462+08:00",
+          "exitCode": 0,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b06-storage-fix\\root-lint-closure.log"
+        }
+      ]
+    },
+    "artifact": {
+      "result": "pass",
+      "commands": [
+        {
+          "command": "pnpm build",
+          "startedAt": "2026-10-21T18:24:23.7998776+08:00",
+          "finishedAt": "2026-10-21T18:27:10.808112+08:00",
+          "exitCode": 0,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b06-storage-fix\\root-build-closure.log"
+        }
+      ],
+      "inspectionLog": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-storage-fix/artifact-check.json",
+      "detail": "Both production runtimes built, including the Tauri optimized release binary. Required async/tab GM grants and lazy document-start boundary were checked on the final userscript artifact. No product was launched."
+    },
+    "format": {
+      "result": "fail-pre-existing",
+      "commands": [
+        {
+          "command": "pnpm format:check",
+          "startedAt": "2026-10-21T18:28:25.2999512+08:00",
+          "finishedAt": "2026-10-21T18:28:28.8066348+08:00",
+          "exitCode": 1,
+          "log": "<user-home>\\AppData\\Local\\Temp\\any-music-refactoring-audit\\2026-10-21-b06-storage-fix\\root-format-closure.log"
+        }
+      ],
+      "unchangedDebtFiles": [
+        {
+          "path": "docs/en/cross-platform/architecture/plugin-system-redesign-plan.md",
+          "unchangedFromHead": true,
+          "sha256": "ae08a106e26a89a0a57bf3353e2fbeac9b72b55ea55b8b0e4e652f2326d657a1"
+        },
+        {
+          "path": "docs/en/desktop/README.md",
+          "unchangedFromHead": true,
+          "sha256": "8c728a6a2ffa96f41ace381241aa3f27cd9be821f7c53a152387a5c09915ff8d"
+        },
+        {
+          "path": "docs/en/desktop/backend-engineering.md",
+          "unchangedFromHead": true,
+          "sha256": "a140ffb5a4ed91334ab5f31380e1cda4089ead612a3fd97e3298f7115d82ea61"
+        },
+        {
+          "path": "docs/en/desktop/douyin-background-login-experiment.md",
+          "unchangedFromHead": true,
+          "sha256": "b0be90cbeb4ee1bcc16448e7bd9da1cf99874983108afa9471be8a53c3d22600"
+        },
+        {
+          "path": "docs/en/desktop/runtime-architecture.md",
+          "unchangedFromHead": true,
+          "sha256": "a9fd56637726264708d533f34eba2e883139185e4fa9cc4375fc94ade2463b95"
+        },
+        {
+          "path": "docs/en/desktop/rust-workspace-plan.md",
+          "unchangedFromHead": true,
+          "sha256": "87d2d2c36d32aa5800c86cd127b428a6bb3027a9896696a758c715965e90665c"
+        },
+        {
+          "path": "docs/zh-cn/桌面端/Rust工作区规划.md",
+          "unchangedFromHead": true,
+          "sha256": "a1dca0c60551ffc2f3e9bd6e1a6aea1b59f851f383561ebad8e495364b278df2"
+        },
+        {
+          "path": "docs/zh-cn/桌面端/后端工程规范.md",
+          "unchangedFromHead": true,
+          "sha256": "2b22c8c7cf7cc783e6435d75b8312cd71f352cfdf515cdc9d338c18eadc78d82"
+        },
+        {
+          "path": "docs/zh-cn/桌面端/抖音后台登录试验.md",
+          "unchangedFromHead": true,
+          "sha256": "45787b6e8b4f39e16c0057af49235f116ad6f00e844384046b1f02f56858d75b"
+        },
+        {
+          "path": "docs/zh-cn/桌面端/文档索引.md",
+          "unchangedFromHead": true,
+          "sha256": "b37f853d428e62b24b16461aabf252da9e198e15589149b614ecf87fdde1c15a"
+        },
+        {
+          "path": "docs/zh-cn/桌面端/运行端架构.md",
+          "unchangedFromHead": true,
+          "sha256": "40c1459221268cbba27f24a4a1254af91abde69f6c115eb2e28e0cf5179a6b56"
+        },
+        {
+          "path": "docs/zh-cn/跨平台/架构/插件系统重构计划.md",
+          "unchangedFromHead": true,
+          "sha256": "5e9ef7a9caccb1b969c6566f1b78f53df198c856e8d2567cf46fbb26e901e4ad"
+        }
+      ],
+      "changedFilesCheck": "<user-home>/AppData/Local/Temp/any-music-refactoring-audit/2026-10-21-b06-storage-fix/changed-format.log",
+      "detail": "The full check fails only on the listed unchanged documents. Changed B06 source/docs/reports are checked separately after report finalization."
+    },
+    "live": {
+      "result": "not-run",
+      "reason": "No explicit browser/application inspection authorization. Offline GM/IPC doubles and successful artifacts do not establish live runtime acceptance."
+    },
+    "nativeChanges": {
+      "result": "not-applicable",
+      "reason": "No Rust, native configuration or native dependencies changed in B06. Full root tests/typecheck/build still execute the applicable Rust workspace/release checks; check:native/MSRV/deny are not asserted here."
+    }
+  },
+  "baseline": {
+    "originalAuditHead": "c38a2479d669ca788ddac958a3b19cd08223817b",
+    "repairObservedHead": "844b5e35b0d6b152350c34043857e042170cbd61",
+    "headChangeNote": "The working HEAD advanced independently during concurrent B04 work. This B06 task made no commit or push; unrelated B05/B07 edits are preserved.",
+    "inputs": [
+      {
+        "path": "packages/core/src/models/track.ts",
+        "sha256": "e08560223fdfc9dc4bbff619c206fac5ec1c71c4d3c211c37388463475cd52d7"
+      },
+      {
+        "path": "packages/core/src/index.ts",
+        "sha256": "bbed35f40f47d50364fb1f1b15e09ca6ca4ce7bb3c8d69952c9665439be34580"
+      },
+      {
+        "path": "packages/core/src/download/download-history.ts",
+        "sha256": "476bd46eb214d80224e57a4c862ff7a7d8cc0b56726b5bb9895c13555de6845f"
+      },
+      {
+        "path": "packages/music-workbench/src/storage/product-generation-store.ts",
+        "sha256": "68a069f28a5ee21437d3ea9edafc45cc0231e549ff85688887a4c14a8c6ca0a9"
+      },
+      {
+        "path": "packages/music-workbench/src/storage/product-storage.ts",
+        "sha256": "09bf7c7773033027cf37906bd42fc03c4e7079812b4ffba424cae392d8033d09"
+      },
+      {
+        "path": "packages/music-workbench/src/storage/local-music-library-repository.ts",
+        "sha256": "6cf21a8b1527922bbe0227c4c9a39fff9ad69053cbaf0681625b11d7b168a211"
+      },
+      {
+        "path": "packages/music-workbench/test/storage/product-generation-store.test.ts",
+        "sha256": "0b5d8da3061186b5e17fa65d6b40fb3c3818e5717d3098ecf93b2d90eff1487c"
+      },
+      {
+        "path": "packages/music-workbench/test/storage/product-storage-fixtures.ts",
+        "sha256": "30e3316cc709aadb7d7ec32f695da754274b1842fbf923ae15798fd63c0618c2"
+      },
+      {
+        "path": "apps/userscript/src/platform/product-storage.ts",
+        "sha256": "3a2770c8be7e84137bd32eebf84fb819a2519e795c081ebbf71695789d037298"
+      },
+      {
+        "path": "apps/userscript/src/platform/configure-userscript-workbench.ts",
+        "sha256": "0692ec0c391427200fee4aa1fb48cf0fe5ba62e2bdd6b57df928b209ddefbc0f"
+      },
+      {
+        "path": "apps/userscript/src/bootstrap-userscript-app.ts",
+        "sha256": "542193b20f038e1f9a323aa9d8eac0460dab40b6819158b81ebef4e1a59d9f82"
+      },
+      {
+        "path": "apps/userscript/src/platform/dev/install-dev-userscript-runtime.ts",
+        "sha256": "16e1e6687b4783344212b7e1a942a70f7eb26893af2b94f67741069537e82dd2"
+      },
+      {
+        "path": "apps/userscript/vite.config.ts",
+        "sha256": "c2cdd4e3fb110cb56bd200df1f0305aee0557bafc1dd1897b973a1566b3b90b1"
+      },
+      {
+        "path": "apps/userscript/test/platform/product-storage.test.ts",
+        "sha256": "e01ac6d0dc60334e0a7e02880e3103fcd374bb1d88b6b53fc09613286c0da3c0"
+      },
+      {
+        "path": "apps/userscript/test/bootstrap-userscript-app.test.ts",
+        "sha256": "f24634de8c52011ba1c4e534ce6037e603e0aa6c5c34ca58e65057fec62d1542"
+      },
+      {
+        "path": "apps/tauri/src/platform/product-storage.ts",
+        "sha256": "96ee86184f93c6c6e43d5f926dfdeffc7ac28e4f062b31a1536ecc9560292dc3"
+      },
+      {
+        "path": "apps/tauri/test/platform/product-storage.test.ts",
+        "sha256": "c942bba1044286825f4e5a46c1e4301b90ad6ddd4805cd12928ab356fcefd6e1"
+      },
+      {
+        "path": "docs/en/cross-platform/architecture/plugin-data-ownership.md",
+        "sha256": "458b12a606d451b8406411ddde06ab275f83e6574c7abd0678f2566951a5c3ab"
+      },
+      {
+        "path": "docs/zh-cn/跨平台/架构/插件数据归属.md",
+        "sha256": "d45e0eb26329f7ba9c7719d5e833a4210186110c38b89b844df1073dfeb0693c"
+      },
+      {
+        "path": "docs/en/userscript/development.md",
+        "sha256": "b326af2745dab644f9b65f0f1ab5317b4d4455114779b77b6f95d7a77e3e6051"
+      },
+      {
+        "path": "docs/zh-cn/用户脚本/开发规范.md",
+        "sha256": "f7d98366ef8954685cf7f42e2866e14bdf39576f334c230d09511cc24591a169"
+      },
+      {
+        "path": "docs/en/desktop/development.md",
+        "sha256": "fa5a16c426ef019ecbb8654487eb71a1c8f89f552baa9a3c60b445c197adb920"
+      },
+      {
+        "path": "docs/zh-cn/桌面端/开发规范.md",
+        "sha256": "7a347901682b1885270462490c1d3563ec5b2a109a69a711d12bac54837373b3"
+      },
+      {
+        "path": "apps/userscript/src/App.vue",
+        "sha256": "1d82d70e15f760580a9586fc8c0853bac220ef992a491d993865dbfe364ca7f2"
+      },
+      {
+        "path": "apps/userscript/src/platform/use-product-storage-notice.ts",
+        "sha256": "a99c905617359e0474f3319508693caa320ce704c64ad1d5ae3d6f37587b1269"
+      },
+      {
+        "path": "apps/userscript/test/platform/use-product-storage-notice.test.ts",
+        "sha256": "f45d8187e0f67955ccfdf23a1ecc7a204cca23d59467b75613356811b4c6ee7d"
+      }
+    ],
+    "currentHead": "cdbd92dd17652ec2fad5f65a921dcc18547bfe8c",
+    "inputHashCapture": "2026-10-21T18:24:21.9186066+08:00"
+  },
+  "limitations": [
+    "No browser, application, preview server, emulator or live Tampermonkey regression was launched. GM tab/value API doubles and production artifacts do not establish live script-manager cache/visibility, suspend/resume or abrupt-navigation acceptance.",
+    "Tauri tests include the renderer/native IPC double and the existing root Rust suite. Multi-process delivery and a separate full native product-mirror audit are not accepted by this fix.",
+    "Portable import/export preflight, unknown-namespace policy, other shared repositories and full B09 projection withdrawal remain independent audits.",
+    "The GM synchronous facade returns after enqueueing persistence; flush/dispose waits for acknowledgment, and failures freeze later saves and report a storage error. It does not claim that a page can finish all pending asynchronous work after forced process termination.",
+    "Full format:check retains existing failures in unrelated maintained documents; changed files are checked separately. There is no overall repository or B06 acceptance claim."
+  ],
+  "officialReferences": [
+    {
+      "url": "https://www.tampermonkey.net/documentation.php?q=GM_tabs",
+      "use": "Manager-owned getTab/saveTab/getTabs registration and tab lifetime; using these APIs does not replace live acceptance."
+    },
+    {
+      "url": "https://github.com/Tampermonkey/tampermonkey/blob/master/src/environment.js",
+      "use": "The published implementation demonstrates why synchronous GM values/key enumeration cannot be treated as atomic cross-tab lock registers."
+    },
+    {
+      "url": "https://github.com/Tampermonkey/tampermonkey/issues/2123",
+      "use": "Official upstream injection-cache issue motivated removal of synchronous cache dependence from the product adapter."
+    }
+  ],
+  "nextBatch": {
+    "batchId": "B06-userscript-generation",
+    "runtime": "userscript",
+    "status": "pending",
+    "question": "Independently audit the final GM single-writer adapter and startup/recovery contract, retaining live Tampermonkey evidence as not-run unless explicitly authorized. Reuse this fix report and verify input hashes; do not infer full GM/Tauri or portable-data acceptance."
+  },
+  "handoff": "B06-S01/S02 已按用户要求修复。共享提交显式要求运行端互斥；GM 使用管理器登记的单写入会话、异步代次读取与串行保存，卸载/页面退出先冻结并等待保存结束，第二个展开工作台明确失败；Tauri 防止重入及旧镜像覆盖。资料库与下载历史同时过滤 Blob 等临时元数据地址。全量 test/typecheck/lint/build 和最终定向回归通过，历史失败报告保留；全量格式仍有原有文档欠账，本次文件单独核对。没有启动 UI、提交或推送。shared 修复范围 pass-scoped，不等于整个 B06 通过；下一批仍为 B06-userscript-generation，GM/Tauri 实测和其他存储边界待独立验收。"
+}

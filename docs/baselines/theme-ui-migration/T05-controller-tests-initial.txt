@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 <project-root>/packages/music-workbench
+
+ ❯ test/features/workbench/use-workbench-controller.test.ts (6 tests | 1 failed) 1077ms
+     × keeps real classic catalog pagination, selection and unfinished filter input across root replacement 75ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/features/workbench/use-workbench-controller.test.ts > stable workbench lifetime > keeps real classic catalog pagination, selection and unfinished filter input across root replacement
+Error: Expected catalog element was not rendered
+ ❯ Module.findCatalogElement test/helpers/test-renderer.ts:146:9
+    144|     }
+    145|   }
+    146|   throw new Error('Expected catalog element was not rendered')
+       |         ^
+    147| }
+    148|
+ ❯ test/features/workbench/use-workbench-controller.test.ts:319:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  02:13:34
+   Duration  6.86s (transform 3.12s, setup 0ms, import 5.63s, tests 1.08s, environment 0ms)
+
+undefined
+<project-root>\packages\music-workbench:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command "vitest" not found

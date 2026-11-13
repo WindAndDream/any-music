@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-04",
+  "runtimeScope": "shared renderer; both production frontend builds checked separately",
+  "logDirectory": "logs/2026-11-04-virtual-list-implementation",
+  "checks": [
+    {
+      "command": "UI virtual/drag/geometry/pagination target",
+      "result": "passed: 30 files / 415 tests; 24 new tests in this batch",
+      "log": "r02-r03-target-test.log"
+    },
+    {
+      "command": "pnpm test",
+      "result": "passed; UI package 110 files / 843 tests; includes production composition and Rust workspace tests",
+      "log": "r02-r03-test-final.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "log": "r02-r03-typecheck.log"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed with existing warnings outside this batch",
+      "log": "r02-r03-lint.log"
+    },
+    {
+      "command": "pnpm format:check",
+      "result": "passed",
+      "log": "r02-r03-format-check-final.log"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed: both production frontends and Tauri release executable",
+      "log": "r02-r03-build.log"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/ui/src/composables/grid-reorder-geometry.ts",
+      "sha256": "058f819bbd1b5f3ba6f475ba52360cd36e5face817783e7cc6ebb4a214d26556"
+    },
+    {
+      "path": "packages/ui/src/composables/use-grid-reorder.ts",
+      "sha256": "a04e98afa328af4b65e109a43014f2ccd4a92a75f3073c090a046647fe54346b"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/virtual-grid-reorder-geometry.ts",
+      "sha256": "68861ccfa0157eadddbe94a8d4803a667d767fb254a6e01c1b77f27c483adf76"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-virtual-item-retention.ts",
+      "sha256": "a98e609d76243e91e3c9864eb8ce88a226dbb913fc18b1b714a04ea7d7ca17f8"
+    },
+    {
+      "path": "packages/ui/src/composables/virtual-scroll/use-measured-virtual-grid.ts",
+      "sha256": "774620ddf169d1663b06648eac47fd3da5d992863ea53485a3670c4ca8d3eb7f"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualGridCell.vue",
+      "sha256": "02bf55e603b58cb98ad516f079f8d9504ad7a6f10c35f61ea06ab4f78150c484"
+    },
+    {
+      "path": "packages/ui/src/components/virtual-scroll/VirtualTrackCardGrid.vue",
+      "sha256": "ae331096ac6f708f29e3f8a1e5c71424b96e2d5e7f1ec4163ef666f6f0f59394"
+    },
+    {
+      "path": "packages/ui/test/composables/use-grid-reorder.virtual-window.test.ts",
+      "sha256": "606ff0280f3d97122df37668b484d8893902c552920cbd13537bfb936a5160fa"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/virtual-grid-reorder-retention.test.ts",
+      "sha256": "3efefe075a2fc809386ef9fde4001817b946c5b979702064f9104559585727eb"
+    },
+    {
+      "path": "packages/ui/test/composables/virtual-scroll/use-measured-virtual-grid.test.ts",
+      "sha256": "2585022a666dbaf19efc990e539e53a1276f104fd3dbf386b3755c50202fc0c1"
+    },
+    {
+      "path": "packages/ui/test/components/virtual-scroll/VirtualTrackCardGrid.test.ts",
+      "sha256": "4b6f2bc760e4549d9b61b9ad67bf128a9ef9796567a505332cf28ef38489b62e"
+    }
+  ],
+  "dragAssessment": {
+    "R02": "implemented; source/current-destination bounded holds transfer through landing, stable placement/measurement/motion split and source/landing elevation",
+    "R03": "implemented; reactive mounted-window refresh, stationary bidirectional autoscroll, explicit existing viewport, semantic spatial revision and stale-layout cancellation",
+    "composition": {
+      "occurrences": 1000,
+      "retainedKeyCap": 2,
+      "mountedCellsUpperExclusive": 20,
+      "measuredCacheLimit": 32,
+      "realInjectedNaturalMeasurements": true,
+      "sameIdentitySnapshotRefresh": true
+    },
+    "layoutRevision": "Equivalent natural measurement/cache churn and metadata replacement preserve spatial revision; real size/width/column/ordered-identity changes invalidate it. Row equivalence work occurs on measurement/layout changes, not plain scroll queries; no frame-time bound claimed.",
+    "legacyProtection": "DOM sessions without mounted-window revisions recompute preview offsets only when the target changes; no source marker is added without opt-in retention."
+  },
+  "openGates": [
+    "R04-R08 bidirectional virtual landing matrices, full invalidation/interruption, keyboard/focus/reduced motion and FLIP integration",
+    "Every production virtual consumer including C00 remains pending",
+    "P14 consumer-specific offscreen semantic scroll/focus restoration before relevant consumer admission",
+    "P03 actual layout/visual/frame baseline, browser Find/text selection and native table/focus/IME behavior",
+    "Installed Userscript, Tauri WebView and mobile / G01-G03"
+  ],
+  "noProductBrowserLaunch": true,
+  "noCommitPush": true
+}

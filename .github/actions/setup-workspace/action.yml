@@ -1,0 +1,44 @@
+name: Set up Any Music workspace
+description: Install locked pnpm dependencies, the repository Rust toolchain and optional Linux desktop libraries.
+
+inputs:
+  rust:
+    description: Set up and cache Rust dependencies.
+    default: 'true'
+  linux-desktop:
+    description: Install GTK/WebKitGTK libraries for a Linux desktop build.
+    default: 'false'
+  cache-key:
+    description: Separate caches for independent build targets.
+    default: workspace
+
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5
+    - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      with:
+        node-version-file: .node-version
+        cache: pnpm
+    - name: Install Linux desktop libraries
+      if: runner.os == 'Linux' && inputs.linux-desktop == 'true'
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install --no-install-recommends -y \
+          libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libxdo-dev \
+          patchelf libssl-dev libkeyutils-dev libdbus-1-dev
+    - name: Select repository Rust toolchain
+      if: inputs.rust == 'true'
+      shell: bash
+      run: rustup show active-toolchain
+    - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      if: inputs.rust == 'true'
+      with:
+        key: ${{ inputs.cache-key }}
+        cache-bin: 'true'
+    - name: Install workspace dependencies
+      shell: bash
+      env:
+        HUSKY: '0'
+      run: pnpm install --frozen-lockfile
