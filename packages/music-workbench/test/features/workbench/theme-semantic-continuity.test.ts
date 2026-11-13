@@ -11,7 +11,10 @@ import { defineComponent, h, nextTick, provide, shallowRef } from 'vue'
 import { createThemeFeatures } from '../../fixtures/theme-features'
 import { createSemanticThemeRenderer } from '../../helpers/semantic-theme-renderer'
 
-const lazyRenderer = vi.hoisted(() => ({ wait: undefined as Promise<void> | undefined }))
+const lazyRenderer = vi.hoisted(() => ({
+  wait: undefined as Promise<void> | undefined,
+  release: undefined as (() => void) | undefined,
+}))
 
 // The canary stays private and default-closed in production. This test-only injected value
 // exercises the actual candidate through the themes' public complete definitions.
@@ -43,17 +46,25 @@ vi.mock('vue', async (load) => {
   }
 })
 const cleanups: (() => void)[] = []
-afterEach(() => {
-  cleanups.splice(0).forEach((cleanup) => cleanup())
-  vi.unstubAllGlobals()
+const restorationAborts: AbortController[] = []
+afterEach(async () => {
+  // Cancel pending semantic restores before removing the mock HTMLElement globals.
+  restorationAborts.splice(0).forEach((controller) => controller.abort())
+  // A timed-out lazy-loading test must not block later tests in this file.
+  lazyRenderer.release?.()
+  lazyRenderer.release = undefined
+  lazyRenderer.wait = undefined
+  try {
+    cleanups.splice(0).forEach((cleanup) => cleanup())
+    await settle()
+  } finally {
+    vi.unstubAllGlobals()
+  }
 })
 async function settle() {
-  for (let index = 0; index < 8; index++) {
-    // eslint-disable-next-line no-await-in-loop -- Flush bounded async component/measurement commits.
-    await nextTick()
-    // eslint-disable-next-line no-await-in-loop -- Async renderer imports finish in task turns.
-    await new Promise<void>((resolve) => setTimeout(resolve, 0))
-  }
+  await nextTick()
+  await vi.dynamicImportSettled()
+  await nextTick()
 }
 
 function setup(
@@ -135,7 +146,18 @@ function setup(
   const scroll = () => env.root.children[0]! as unknown as HTMLElement
   const adapter = () => getPresentationContinuity(region())!
   const resources = createThemeResources(() => env.root as unknown as HTMLElement)
-  return { ...env, theme, region, adapter, scroll, resources, actions }
+  const restoration = new AbortController()
+  restorationAborts.push(restoration)
+  return {
+    ...env,
+    theme,
+    region,
+    adapter,
+    scroll,
+    capture: () => resources.capture(restoration.signal),
+    signal: restoration.signal,
+    actions,
+  }
 }
 
 describe('C00 cross-theme semantic handoff through real compiled consumers', () => {
@@ -144,6 +166,7 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
     lazyRenderer.wait = new Promise<void>((resolve) => {
       ready = resolve
     })
+    lazyRenderer.release = ready
     const test = setup('default', 'studio')
     await settle()
     test.scroll().scrollTop = 54_093
@@ -151,21 +174,23 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
       .region()
       .querySelectorAll<HTMLElement>('[data-am-focus-key="track:track:900:play"]')[0]!
     play.focus()
-    const restore = test.resources.capture()
+    const restore = test.capture()
     test.theme.value = 'classic'
     await nextTick()
     expect(test.region()).toBeDefined() // The parent bridge exists before its lazy child.
     const pending = restore()
     let finished = false
-    void Promise.resolve(pending).then(() => {
+    const markFinished = () => {
       finished = true
-    })
+    }
+    void Promise.resolve(pending).then(markFinished, markFinished)
     await nextTick()
     expect(finished).toBe(false)
     expect(test.region().querySelectorAll('[data-am-continuity-item]')).toHaveLength(0)
     ready()
     await pending
     lazyRenderer.wait = undefined
+    lazyRenderer.release = undefined
     expect(test.adapter().capture()!.anchor).toEqual({ key: 'track:900', offset: 13 })
     expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
       'track:track:900:play',
@@ -178,8 +203,8 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
       anchor: { key: 'source:900', offset: 13 },
       focus: { itemKey: 'source:900', controlKey: 'platform:source:900:open' },
     }
-    expect(await test.adapter().restore(snapshot, new AbortController().signal)).toBe(true)
-    const restoreStudio = test.resources.capture()
+    expect(await test.adapter().restore(snapshot, test.signal)).toBe(true)
+    const restoreStudio = test.capture()
     test.theme.value = 'studio'
     await settle()
     await restoreStudio()
@@ -187,7 +212,7 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
     expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
       snapshot.focus.controlKey,
     )
-    const restoreClassic = test.resources.capture()
+    const restoreClassic = test.capture()
     test.theme.value = 'classic'
     await nextTick()
     await restoreClassic()
@@ -210,17 +235,17 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
             anchor: { key, offset: 13 },
             focus: { itemKey: key, controlKey: `platform:${key}:reorder` },
           },
-          new AbortController().signal,
+          test.signal,
         ),
       ).toBe(true)
-      const restoreStudio = test.resources.capture()
+      const restoreStudio = test.capture()
       test.theme.value = 'studio'
       await settle()
       await restoreStudio()
       const current = test.document.activeElement as HTMLElement
       expect(current.hasAttribute('disabled')).toBe(false)
       expect(current.dataset.amFocusKey).toBe(`platform:${key}:${index === 0 ? 'open' : 'reorder'}`)
-      const restoreClassic = test.resources.capture()
+      const restoreClassic = test.capture()
       test.theme.value = 'classic'
       await nextTick()
       await restoreClassic()
@@ -241,13 +266,13 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
             anchor: { key: 'track:900', offset: 13 },
             focus: { itemKey: 'track:900', controlKey: 'track:track:900:play' },
           },
-          new AbortController().signal,
+          test.signal,
         ),
       ).toBe(true)
       await settle()
       const before = test.adapter().capture()!
       expect(before.anchor).toEqual({ key: 'track:900', offset: 13 })
-      const restoreStudio = test.resources.capture()
+      const restoreStudio = test.capture()
       const oldPixelOffset = test.scroll().scrollTop
       test.theme.value = 'studio'
       await settle()
@@ -258,7 +283,7 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
       expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
         'track:track:900:play',
       )
-      const restoreClassic = test.resources.capture()
+      const restoreClassic = test.capture()
       test.theme.value = 'classic'
       await settle()
       expect(test.region().querySelectorAll('[data-am-continuity-item="track:900"]')).toHaveLength(

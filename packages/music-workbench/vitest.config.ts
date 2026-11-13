@@ -31,5 +31,10 @@ vuePlugin.load = {
 export default defineConfig({
   plugins: [vuePlugin],
   resolve: { alias: { '#workbench': fileURLToPath(new URL('./src', import.meta.url)) } },
-  test: { environment: 'node', include: ['test/**/*.test.ts'] },
+  test: {
+    environment: 'node',
+    include: ['test/**/*.test.ts'],
+    // Compiled Vue integration suites can time out when workers compete for CPU and memory.
+    fileParallelism: false,
+  },
 })
