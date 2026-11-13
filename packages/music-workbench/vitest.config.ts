@@ -34,9 +34,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['test/**/*.test.ts'],
-    // Heavy compiled Vue integration suites become slower and flaky when their workers
-    // compete for CPU/memory. Keep the default full-suite run deterministic.
-    maxWorkers: 1,
+    // Compiled Vue integration suites can time out when workers compete for CPU and memory.
     fileParallelism: false,
   },
 })
