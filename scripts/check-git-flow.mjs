@@ -18,7 +18,14 @@ if (mode === 'commit') {
 } else if (mode === 'pr') {
   const { pull_request: pr } = JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'))
   assert(pr, 'Expected a pull_request event')
-  validatePullRequest(pr.base.ref, pr.head.ref)
+  // GitHub security updates target the default branch. Use the PR author, even on reruns.
+  const dependabot =
+    pr.user?.login === 'dependabot[bot]' &&
+    pr.user.id === 49699333 &&
+    pr.user.type === 'Bot' &&
+    Number.isSafeInteger(pr.base.repo?.id) &&
+    pr.head.repo?.id === pr.base.repo.id
+  validatePullRequest(pr.base.ref, pr.head.ref, { dependabot })
   // Pass metadata as stdin, never as executable shell text.
   const lint = (input) => {
     // PR titles and non-merge commits must not pass through commitlint's default merge/tag ignores.

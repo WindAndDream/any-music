@@ -41,6 +41,8 @@ git push -u origin feature/42-virtual-lists
 
 PR 标题沿用提交格式，正文使用仓库模板，说明问题与结果、运行端范围、提交批次、实际执行命令与结果、缺失的实机验收、风险和关联任务。纯文档 PR 也运行必要检查，不用路径过滤造成保护检查永久等待。CI 检查分支流向和非 merge 提交格式；分支起点、冻结范围与验收真实性仍由评审确认。
 
+GitHub Dependabot 的安全更新以默认分支 `main` 为目标。PR 由 GitHub Dependabot 机器人创建且两端分支属于同一仓库时，CI 接受 `dependabot/* -> main`。这些 PR 仍须通过提交与标题检查、隐私扫描、构建与发布检查及独立评审，合并后按流程将 `main` 回合并到 `develop`。
+
 ## 提交与验证
 
 新提交和 PR 标题遵循 [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)：`type: imperative subject` 或 `type(scope): imperative subject`。标题使用英文 ASCII，最多 100 字符，不以句号结尾。可选的 scope 用小写连字符格式标识受影响的包、运行端或子系统，例如 `music-workbench`、`tauri`、`userscript`、`player`、`release`；跨仓库变更可以省略。描述使用祈使语气，保留 IPC、AppErrorState 等标识符的大小写。

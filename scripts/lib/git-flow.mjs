@@ -12,8 +12,9 @@ export function isTopicBranch(branch) {
 }
 
 /** Validate PR direction independently of GitHub credentials or native/product runtimes. */
-export function validatePullRequest(base, head) {
+export function validatePullRequest(base, head, { dependabot = false } = {}) {
   assert(base !== head, 'A pull request must connect different branches')
+  if (dependabot && base === 'main' && /^dependabot\/.+/u.test(head)) return
   assert(isTopicBranch(head) || head === 'main', 'Use feature/*, fix/*, release/* or hotfix/*')
   const kind = head.split('/')[0]
   const allowed =

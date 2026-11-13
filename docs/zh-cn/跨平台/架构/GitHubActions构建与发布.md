@@ -11,6 +11,8 @@ runtimeScope: repository
 
 ## 工作流与产物
 
+`.github/dependabot.yml` 为 pnpm 和 Cargo 的安全更新 PR 指定 Conventional Commits 格式，并关闭这两个生态的定期版本更新 PR。在仓库设置中开启 **Dependabot security updates**，GitHub 才会创建安全更新 PR。合并前检查锁文件是否仍有受影响版本。
+
 `.github/workflows/ci.yml` 在 PR 及 `main`、`develop`、`release/**`、`hotfix/**` 推送时运行，也供发布工作流复用。PR 额外运行 `Git Flow policy`，检查分支流向、标题和非 merge 提交格式；feature/fix 推送通过其 PR 验证，避免重复构建。Windows job 执行五项根检查、原生发布检查、Rust MSRV 和 cargo-deny。Node 由 `.node-version` 固定，pnpm 由 `packageManager` 固定，Rust 由 `rust-toolchain.toml` 固定；外部 Action 固定到已核对的 Commit SHA。
 
 `.github/workflows/release.yml` 先解析一个确定的 Commit，复用 CI，再独立构建所有声明目标。`scripts/native-targets.json` 统一维护桌面 Runner、target、安装包类型，以及 Android 工具链和 versionCode。发布构建使用锁定的依赖图与明确的原生 features，不包含诊断 features。

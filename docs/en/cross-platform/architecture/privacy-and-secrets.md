@@ -41,6 +41,8 @@ History secret scanning covers all fetched refs. Incoming privacy scanning check
 
 ## Exceptions and review
 
+Commit message checks recognize the exact public sign-off line GitHub adds to Dependabot commits. All other lines and repository files remain subject to the normal contact-data rules. Gitleaks receives the original commit message.
+
 Do not skip hooks, add a finding baseline, use `gitleaks:allow`, ignore whole test/documentation directories or disable a secret rule to make a failure disappear. The wrapper ignores inline suppression and `.gitleaksignore` files. `.gitleaks.toml` extends defaults and contains only reviewed rule-specific exceptions: acceptance file-digest maps, exact synthetic test values, SDK constants with documented public origin and exact prose. A new exception must explain provenance and scope and include a regression proving that a genuine-looking credential in the same area is still rejected. Sensitive filenames and additional privacy rules are independent of Gitleaks exceptions.
 
 Review changes to scanners, hooks, checksums, allowlists and CI as security-sensitive changes. Configure the actual public repository to require PR review, **Privacy and secrets**, **Git Flow policy** and **Repository checks (Windows x64)** for `main`/`develop`, with stale approval dismissal, resolved conversations, no force-push/deletion and no administrator bypass. Verify enforcement after repository creation or plan/visibility changes; checked-in workflows alone do not activate server protection.
