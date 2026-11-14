@@ -13,11 +13,11 @@ runtimeScope: repository
 
 `.github/dependabot.yml` 为 pnpm 和 Cargo 的安全更新 PR 指定 Conventional Commits 格式，并关闭这两个生态的定期版本更新 PR。在仓库设置中开启 **Dependabot security updates**，GitHub 才会创建安全更新 PR。合并前检查锁文件是否仍有受影响版本。
 
-`.github/workflows/ci.yml` 在 PR 及 `main`、`develop`、`release/**`、`hotfix/**` 推送时运行，也供发布工作流复用。PR 额外运行 `Git Flow policy`，检查分支流向、标题和非 merge 提交格式；feature/fix 推送通过其 PR 验证，避免重复构建。Windows job 执行五项根检查、原生发布检查、Rust MSRV 和 cargo-deny。Node 由 `.node-version` 固定，pnpm 由 `packageManager` 固定，Rust 由 `rust-toolchain.toml` 固定；外部 Action 固定到已核对的 Commit SHA。
+`.github/workflows/ci.yml` 在 PR 及 `main`、`develop`、`release/**`、`hotfix/**` 推送时运行，也供发布工作流复用。PR 额外运行 `Git Flow policy`，检查分支流向、标题和非 merge 提交格式。feature/fix 分支通过其 PR 运行 CI。两个 Windows job 并行运行，并分别使用独立的 Rust 缓存。一个按现有包顺序串行运行完整测试，另一个检查产品版本、类型、lint、格式、原生发布配置、Rust MSRV 和 cargo-deny，并通过根目录的 `build:prod` 脚本构建全部生产目标。只有两个 job 都成功，必需检查 `Repository checks (Windows x64)` 才会通过。Node 由 `.node-version` 固定，pnpm 由 `packageManager` 固定，Rust 由 `rust-toolchain.toml` 固定。外部 Action 固定到已核对的 Commit SHA。
 
-`.github/workflows/release.yml` 先解析一个确定的 Commit，复用 CI，再独立构建所有声明目标。`scripts/native-targets.json` 统一维护桌面 Runner、target、安装包类型，以及 Android 工具链和 versionCode。发布构建使用锁定的依赖图与明确的原生 features，不包含诊断 features。
+`.github/workflows/release.yml` 先解析一个确定的 Commit。复用的 CI 与 Userscript、桌面端和未签名 Android 构建并行运行。已签名 Android job 等 CI 通过后才进入签名环境。`scripts/native-targets.json` 统一维护桌面 Runner、target、安装包类型，以及 Android 工具链和 versionCode。发布构建使用锁定的依赖图与明确的原生 features，不包含诊断 features。
 
-目标为 `main` 的 PR 会自动基于 PR merge Commit 构建完整的未签名候选矩阵。只有全部预期构建和产物校验成功，`Release candidate checks` 才成功；依赖失败或跳过不能让此门禁通过。普通 feature/fix 合入 `develop` 的 PR 运行 CI，不逐个平台生成安装包。推送附注 `v*` Tag 后构建已签名 Android 产物，再进入受保护的发布 job。在 GitHub 页面手动创建 Release 不会触发此工作流。
+目标为 `main` 的 PR 会自动基于事件对应的 PR merge Commit 构建完整的未签名候选矩阵。只有 CI、全部预期构建和产物校验均成功，`Release candidate checks` 才会通过。普通 feature/fix 合入 `develop` 的 PR 运行 CI，不逐个平台生成安装包。推送附注 `v*` Tag 后构建已签名 Android 产物，再进入受保护的发布 job。在 GitHub 页面手动创建 Release 不会触发此工作流。
 
 Android job 先安装固定版本的 SDK 命令行工具，再安装声明的平台、build-tools 和 NDK，并额外为锁定的 Tauri Android 库安装 API 36。应用平台使用 Google 的包版本号（API 37 对应 `37.0`）。
 
