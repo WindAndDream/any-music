@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
-          ref: ${{ inputs.ref || github.ref }}
+          ref: ${{ inputs.ref || (github.event_name == 'pull_request' && github.sha) || github.ref }}
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -68,7 +68,7 @@ jobs:
       ref: ${{ needs.prepare.outputs.commit }}
 
   userscript:
-    needs: [prepare, checks]
+    needs: prepare
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     env:
@@ -93,7 +93,7 @@ jobs:
 
   desktop:
     name: Desktop (${{ matrix.id }})
-    needs: [prepare, checks]
+    needs: prepare
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.prepare.outputs.desktop) }}
@@ -133,7 +133,7 @@ jobs:
   android:
     name: Android unsigned (${{ matrix.id }})
     if: needs.prepare.outputs.publish != 'true'
-    needs: [prepare, checks]
+    needs: prepare
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.prepare.outputs.android) }}
