@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -12,6 +12,7 @@ import {
   root,
   run,
 } from './lib/mobile-android.mjs'
+import { readReleaseConfig } from './lib/release.mjs'
 
 /** Verify compiled manifest values, including absent attributes' Android defaults. */
 export function checkReleaseManifest(manifest) {
@@ -46,30 +47,32 @@ export function checkReleaseManifest(manifest) {
   assert.match(bootstrap[0], /android:exported\([^)]*\)=\(type 0x12\)0xffffffff\b/)
 }
 
+/** Read the single APK signer from the pinned apksigner's verbose report. */
+export function checkReleaseSigner(signature) {
+  assert(/^Number of signers: 1$/m.test(signature), 'Expected exactly one APK signer')
+  const signer = signature.match(/^Signer #1 certificate SHA-256 digest: ([0-9a-f]{64})$/im)?.[1]
+  assert(signer, 'APK signature report is missing the release certificate SHA-256 digest')
+  assert(!/CN=Android Debug\b/i.test(signature), 'APK release cannot use a debug certificate')
+  return signer.toLowerCase()
+}
+
 export function verifyAndroidRelease(target) {
   inspectMobileBoundaries()
   const build = { ...androidBuildOptions([target]), profile: 'release', signed: true }
   const { apk, aab } = androidOutput(build)
   const { java } = androidToolchain()
-  const versions = readdirSync(join(process.env.ANDROID_HOME, 'build-tools'))
-    .filter((v) => /^\d+\.\d+\.\d+$/.test(v))
-    .toSorted((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-  assert(versions.length, 'Android build-tools unavailable')
-  const version = versions.at(-1)
+  // Keep the verifier on the same toolchain as Gradle and CI. apksigner's report varies by version.
+  const version = readReleaseConfig().android.buildTools
   const tools = join(process.env.ANDROID_HOME, 'build-tools', version)
+  const apksigner = join(tools, 'lib/apksigner.jar')
+  assert(
+    existsSync(apksigner),
+    `Android Build-Tools ${version} is required for release verification`,
+  )
   const exe = process.platform === 'win32' ? '.exe' : ''
   assert(existsSync(apk) && existsSync(aab), 'Signed release APK and AAB are required')
-  const signature = run(
-    java,
-    ['-jar', join(tools, 'lib/apksigner.jar'), 'verify', '--verbose', '--print-certs', apk],
-    { capture: true },
-  )
-  const signer = signature
-    .match(/Signer #1 certificate SHA-256 digest: ([0-9a-f]{64})/i)?.[1]
-    .toLowerCase()
-  assert(
-    signer && !/CN=Android Debug|Signer #2 certificate/.test(signature),
-    'Expected a single non-debug release signer',
+  const signer = checkReleaseSigner(
+    run(java, ['-jar', apksigner, 'verify', '--verbose', '--print-certs', apk], { capture: true }),
   )
   checkReleaseManifest(
     run(join(tools, `aapt${exe}`), ['dump', 'xmltree', apk, 'AndroidManifest.xml'], {
