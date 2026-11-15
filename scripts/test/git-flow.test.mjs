@@ -51,6 +51,38 @@ test('PR policy validates event metadata and does not ignore merge-like titles',
   }
 })
 
+test('only same-repository Dependabot PRs get the dependency update route to main', (t) => {
+  const directory = mkdtempSync(join(tmpdir(), 'any-music-dependabot-policy-'))
+  t.after(() => rmSync(directory, { recursive: true, force: true }))
+  const eventPath = join(directory, 'event.json')
+  const root = fileURLToPath(new URL('../../', import.meta.url))
+  const sha = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim()
+  const bot = { login: 'dependabot[bot]', id: 49699333, type: 'Bot' }
+  const pr = {
+    title: 'build(deps): bump a workspace dependency',
+    user: bot,
+    base: { ref: 'main', sha, repo: { id: 1 } },
+    head: { ref: 'dependabot/npm_and_yarn/workspace-1.2.3', sha, repo: { id: 1 } },
+  }
+  for (const [label, overrides, expected] of [
+    ['bot', {}, 0],
+    ['different user', { user: { ...bot, id: 2 } }, 1],
+    ['different repo', { head: { ...pr.head, repo: { id: 2 } } }, 1],
+    ['missing repo', { head: { ...pr.head, repo: null } }, 1],
+    ['different base', { base: { ...pr.base, ref: 'develop' } }, 1],
+    ['ordinary branch', { head: { ...pr.head, ref: 'fix/ordinary' } }, 1],
+    ['invalid title', { title: 'Unformatted title' }, 1],
+  ]) {
+    writeFileSync(eventPath, JSON.stringify({ pull_request: { ...pr, ...overrides } }))
+    const result = spawnSync(process.execPath, ['scripts/check-git-flow.mjs', 'pr'], {
+      cwd: root,
+      env: { ...process.env, GITHUB_EVENT_PATH: eventPath },
+      encoding: 'utf8',
+    })
+    assert.equal(result.status, expected, `${label}: ${result.stdout}\n${result.stderr}`)
+  }
+})
+
 test('Git Flow accepts development, release, emergency and back-merge routes', () => {
   for (const [base, head] of [
     ['develop', 'feature/42-virtual-lists'],

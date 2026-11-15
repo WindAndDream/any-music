@@ -1,6 +1,6 @@
 [package]
 name = "any-music-tauri"
-version = "0.1.0"
+version = "0.1.2"
 description = "Any Music desktop and mobile runtime"
 publish = false
 edition.workspace = true

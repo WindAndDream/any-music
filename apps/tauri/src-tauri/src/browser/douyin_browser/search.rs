@@ -638,20 +638,19 @@ mod tests {
                             "Target.closeTarget" => json!({"success":true}),
                             other => panic!("unexpected import command {other}"),
                         };
-                        ws.send(Message::Text(
+                        let reply = Message::Text(
                             json!({"id":command["id"],"result":result})
                                 .to_string()
                                 .into(),
-                        ))
-                        .await
-                        .unwrap();
-                        if action == "Target.closeTarget" {
-                            return (reads, wheels);
-                        }
+                        );
                         if action != "Page.navigate"
                             && !(action == "Input.dispatchMouseEvent"
                                 && wheels <= if kind == "self-history" { 2 } else { 1 })
                         {
+                            ws.send(reply).await.unwrap();
+                            if action == "Target.closeTarget" {
+                                return (reads, wheels);
+                            }
                             continue;
                         }
                         let cursor: u64 = if action == "Page.navigate" {
@@ -689,6 +688,8 @@ mod tests {
                                     .unwrap();
                             }
                         }
+                        // Queue the mock response before acknowledging the input that triggered it.
+                        ws.send(reply).await.unwrap();
                     }
                     panic!("import target was not closed");
                 });
@@ -1002,13 +1003,11 @@ mod tests {
                             "search must only navigate/scroll/observe official pages: {method}"
                         ),
                     }
-                    ws.send(Message::Text(
+                    let mut reply = Some(Message::Text(
                         json!({"id":command["id"],"result":result})
                             .to_string()
                             .into(),
-                    ))
-                    .await
-                    .unwrap();
+                    ));
                     if let Some(offset) = response {
                         let session = command["sessionId"].as_str().unwrap();
                         let offsets = if navigated == 1 {
@@ -1037,6 +1036,9 @@ mod tests {
                                     && sid == session
                                     && request.starts_with("wanted-")
                                 {
+                                    // The reader queues the request before resolving the wheel.
+                                    // TCP scheduling cannot let the next wheel beat this event.
+                                    ws.send(reply.take().unwrap()).await.unwrap();
                                     // More than several wheel intervals without headers/body.
                                     // Exactly one wheel must suffice once the official request starts.
                                     tokio::time::sleep(Duration::from_millis(180)).await;
@@ -1045,6 +1047,9 @@ mod tests {
                                 ws.send(Message::Text(json!({"sessionId":sid,"method":"Network.loadingFinished","params":{"requestId":request,"encodedDataLength":10}}).to_string().into())).await.unwrap();
                             }
                         }
+                    }
+                    if let Some(reply) = reply {
+                        ws.send(reply).await.unwrap();
                     }
                     if closed == 2 {
                         break;

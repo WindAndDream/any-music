@@ -5,7 +5,7 @@ import { join, resolve } from 'node:path'
 import { test } from 'node:test'
 
 import { instrumentationCount } from '../accept-mobile-android.mjs'
-import { checkReleaseManifest } from '../check-mobile-release.mjs'
+import { checkReleaseManifest, checkReleaseSigner } from '../check-mobile-release.mjs'
 import {
   androidBuildOptions,
   androidOutput,
@@ -86,6 +86,24 @@ test('Android signing needs an explicit release and complete credentials before 
     assert.throws(() =>
       androidBuildOptions(['aarch64', '--release', '--signed'], { ...env, ...change }),
     )
+})
+
+test('release verification requires one non-debug APK signer and its certificate digest', () => {
+  const digest = 'AB'.repeat(32)
+  const signature = `Number of signers: 1\r\nSigner #1 certificate DN: CN=Fixture\r\nSigner #1 certificate SHA-256 digest: ${digest}\r\n`
+  assert.equal(checkReleaseSigner(signature), digest.toLowerCase())
+  assert.throws(
+    () => checkReleaseSigner(signature.replace('signers: 1', 'signers: 2')),
+    /one APK signer/,
+  )
+  assert.throws(
+    () => checkReleaseSigner(signature.replace('certificate SHA-256', 'public key SHA-256')),
+    /missing the release certificate/,
+  )
+  assert.throws(
+    () => checkReleaseSigner(signature.replace('CN=Fixture', 'CN=Android Debug')),
+    /debug certificate/,
+  )
 })
 
 const manifest = `A: package="com.anymusic.app"

@@ -35,11 +35,13 @@ pnpm check:privacy:history
 - `pre-commit` runs Git Flow/whitespace checks and scans the complete staged snapshot; personal Git author/committer emails are allowed.
 - `commit-msg` enforces the repository's Conventional Commits format with English headers and scans the message for privacy and secrets.
 - `pre-push` preserves Git Flow checks and scans incoming commit messages, changed snapshots and secret-containing diffs, including values removed by later commits. Personal Git metadata emails are allowed. Both guards receive the same Git update stream.
-- CI's **Privacy and secrets** job checks current files, secret-bearing history and incoming commit privacy. The Windows quality job installs the same scanner before the root regression suite. No path filters skip documentation-only PRs.
+- CI's **Privacy and secrets** job checks current files, secret-bearing history and incoming commit privacy. The Windows test job installs the same scanner before the root regression suite. No path filters skip documentation-only PRs.
 
 History secret scanning covers all fetched refs. Incoming privacy scanning checks commits introduced by a push/PR; the original private repository still retains its pre-policy personal metadata and evidence. A new public snapshot must have a single independent root commit and no original refs or objects. Never push the original private history into that public repository.
 
 ## Exceptions and review
+
+Commit message checks recognize the exact public sign-off line GitHub adds to Dependabot commits. All other lines and repository files remain subject to the normal contact-data rules. Gitleaks receives the original commit message.
 
 Do not skip hooks, add a finding baseline, use `gitleaks:allow`, ignore whole test/documentation directories or disable a secret rule to make a failure disappear. The wrapper ignores inline suppression and `.gitleaksignore` files. `.gitleaks.toml` extends defaults and contains only reviewed rule-specific exceptions: acceptance file-digest maps, exact synthetic test values, SDK constants with documented public origin and exact prose. A new exception must explain provenance and scope and include a regression proving that a genuine-looking credential in the same area is still rejected. Sensitive filenames and additional privacy rules are independent of Gitleaks exceptions.
 

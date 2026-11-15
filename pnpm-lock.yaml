@@ -58,8 +58,8 @@ catalogs:
       specifier: ~6.0.2
       version: 6.0.3
     vite:
-      specifier: ^8.2.0
-      version: 8.2.2
+      specifier: 8.2.4
+      version: 8.2.4
     vite-plugin-monkey:
       specifier: ^8.1.0
       version: 8.1.0
@@ -183,7 +183,7 @@ importers:
         version: 1.5.6
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       quickjs-emscripten-core:
         specifier: 0.31.0
         version: 0.31.0
@@ -195,10 +195,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: 'catalog:'
-        version: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+        version: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue-tsc:
         specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
@@ -253,7 +253,7 @@ importers:
         version: 24.13.3
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       sass:
         specifier: 'catalog:'
         version: 1.103.1
@@ -262,13 +262,13 @@ importers:
         version: 6.0.3
       vite:
         specifier: 'catalog:'
-        version: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+        version: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
       vite-plugin-monkey:
         specifier: 'catalog:'
-        version: 8.1.0(postcss@8.5.31)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 8.1.0(postcss@8.5.31)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue-tsc:
         specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
@@ -284,7 +284,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/audio-composition:
     dependencies:
@@ -300,7 +300,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/card-styles:
     dependencies:
@@ -313,13 +313,13 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue:
         specifier: 'catalog:'
         version: 3.5.44(typescript@6.0.3)
@@ -338,7 +338,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/music-workbench:
     dependencies:
@@ -390,7 +390,7 @@ importers:
         version: 24.13.3
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       sass:
         specifier: 'catalog:'
         version: 1.103.1
@@ -399,10 +399,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: 'catalog:'
-        version: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+        version: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue-tsc:
         specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
@@ -414,7 +414,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/plugin-center:
     dependencies:
@@ -427,7 +427,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/plugin-cli:
     dependencies:
@@ -450,8 +450,8 @@ importers:
         specifier: 6.0.3
         version: 6.0.3
       vite:
-        specifier: 8.2.2
-        version: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+        specifier: 'catalog:'
+        version: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
 
   packages/plugin-music-creation:
     dependencies:
@@ -470,7 +470,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       sass:
         specifier: 'catalog:'
         version: 1.103.1
@@ -479,7 +479,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue-tsc:
         specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
@@ -501,10 +501,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: 'catalog:'
-        version: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+        version: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/plugin-sdk:
     devDependencies:
@@ -525,7 +525,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/plugin-source-bilibili:
     dependencies:
@@ -544,7 +544,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/plugin-source-douyin:
     dependencies:
@@ -560,7 +560,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/plugin-source-netease:
     dependencies:
@@ -576,7 +576,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/plugin-tag-management:
     dependencies:
@@ -595,7 +595,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       sass:
         specifier: 'catalog:'
         version: 1.103.1
@@ -604,7 +604,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue-tsc:
         specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
@@ -626,10 +626,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: 'catalog:'
-        version: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+        version: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/plugin-ui-vue:
     dependencies:
@@ -645,7 +645,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       sass:
         specifier: 'catalog:'
         version: 1.103.1
@@ -654,7 +654,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue-tsc:
         specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
@@ -682,7 +682,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
 
   packages/theme-default:
     dependencies:
@@ -698,7 +698,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       sass:
         specifier: 'catalog:'
         version: 1.103.1
@@ -707,7 +707,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue:
         specifier: 'catalog:'
         version: 3.5.44(typescript@6.0.3)
@@ -732,7 +732,7 @@ importers:
         version: 24.13.3
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       sass:
         specifier: 'catalog:'
         version: 1.103.1
@@ -741,10 +741,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: 'catalog:'
-        version: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+        version: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue:
         specifier: 'catalog:'
         version: 3.5.44(typescript@6.0.3)
@@ -766,7 +766,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
       sass:
         specifier: 'catalog:'
         version: 1.103.1
@@ -775,7 +775,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       vue:
         specifier: 'catalog:'
         version: 3.5.44(typescript@6.0.3)
@@ -2391,8 +2391,8 @@ packages:
       vite:
         optional: true
 
-  vite@8.2.2:
-    resolution: {integrity: sha512-cFKLV/PRgAUlIRm5WjMjJ86jrftzpqcgH+Us+DS8mI3CDNiH30Whrz8uHL3+MOLPAgqbMBAqWdAHAphOAM+z/Q==}
+  vite@8.2.4:
+    resolution: {integrity: sha512-lfauXnrf2x0p+UoA+wXh0dgFWnUjCyG6Js95KBkgaCwUU9k0DAHI4W6Q0WCx+h+5g+Alce1y4Zi2QjjK0UvGBw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -3092,10 +3092,10 @@ snapshots:
     dependencies:
       '@types/node': 24.13.3
 
-  '@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))':
+  '@vitejs/plugin-vue@6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+      vite: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
       vue: 3.5.44(typescript@6.0.3)
 
   '@vitest/expect@4.1.11':
@@ -3107,13 +3107,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.1
 
-  '@vitest/mocker@4.1.11(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))':
+  '@vitest/mocker@4.1.11(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))':
     dependencies:
       '@vitest/spy': 4.1.11
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+      vite: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
 
   '@vitest/pretty-format@4.1.11':
     dependencies:
@@ -3889,7 +3889,7 @@ snapshots:
 
   undici-types@7.18.2: {}
 
-  vite-plugin-monkey@8.1.0(postcss@8.5.31)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)):
+  vite-plugin-monkey@8.1.0(postcss@8.5.31)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)):
     dependencies:
       acorn-walk: 8.3.5
       cross-spawn: 7.0.6
@@ -3903,11 +3903,11 @@ snapshots:
       rollup: 4.62.5
       systemjs: 6.15.1
     optionalDependencies:
-      vite: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+      vite: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
     transitivePeerDependencies:
       - postcss
 
-  vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1):
+  vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.5
@@ -3920,10 +3920,10 @@ snapshots:
       jiti: 2.6.1
       sass: 1.103.1
 
-  vitest@4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)):
+  vitest@4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)):
     dependencies:
       '@vitest/expect': 4.1.11
-      '@vitest/mocker': 4.1.11(vite@8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
+      '@vitest/mocker': 4.1.11(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
       '@vitest/pretty-format': 4.1.11
       '@vitest/runner': 4.1.11
       '@vitest/snapshot': 4.1.11
@@ -3940,7 +3940,7 @@ snapshots:
       tinyexec: 1.3.0
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vite: 8.2.2(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
+      vite: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.13.3

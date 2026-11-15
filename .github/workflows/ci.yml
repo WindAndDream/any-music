@@ -61,8 +61,28 @@ jobs:
       - name: Validate PR direction, title and commit messages
         run: pnpm check:git-flow
 
+  tests:
+    name: Repository tests (Windows x64)
+    runs-on: windows-2022
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-workspace
+        with:
+          cache-key: tests-windows-x64
+      - name: Tests
+        # Root security regression tests exercise the pinned real scanner.
+        # Setup runs without enabling hooks in CI.
+        run: pnpm privacy:setup && pnpm test
+
   quality:
-    name: Repository checks (Windows x64)
+    name: Builds and static checks (Windows x64)
     runs-on: windows-2022
     timeout-minutes: 60
     defaults:
@@ -79,10 +99,6 @@ jobs:
       - name: Check product versions
         id: release
         run: pnpm check:release
-      - name: Tests
-        # Root security regression tests exercise the pinned real scanner.
-        # Setup runs without enabling hooks in CI.
-        run: pnpm privacy:setup && pnpm test
       - name: TypeScript and Rust checks
         run: pnpm typecheck
       - name: Lint and boundaries
@@ -90,7 +106,7 @@ jobs:
       - name: Formatting
         run: pnpm format:check
       - name: Production builds
-        run: pnpm build
+        run: pnpm build:prod
       - name: Native release configurations
         run: pnpm check:native
       - name: Minimum Rust version
@@ -103,3 +119,20 @@ jobs:
         run: cargo install cargo-deny --version 0.20.2 --locked
       - name: Native dependency audit
         run: pnpm check:rust:deny
+
+  repository-checks:
+    name: Repository checks (Windows x64)
+    if: always()
+    needs: [tests, quality]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - name: Require both Windows jobs to succeed
+        shell: bash
+        env:
+          TESTS_RESULT: ${{ needs.tests.result }}
+          QUALITY_RESULT: ${{ needs.quality.result }}
+        run: |
+          echo "Repository tests: $TESTS_RESULT"
+          echo "Builds and static checks: $QUALITY_RESULT"
+          test "$TESTS_RESULT" = success && test "$QUALITY_RESULT" = success

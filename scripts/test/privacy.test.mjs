@@ -252,6 +252,43 @@ test(
 )
 
 test(
+  'commit scans accept only the exact public Dependabot sign-off',
+  { skip: !cacheReady },
+  (t) => {
+    const f = fixture(t)
+    const address = ['support', 'github.com'].join('@')
+    const signOff = `Signed-off-by: dependabot[bot] <${address}>`
+    const messagePath = join(f.directory, 'message')
+    const subject = 'build(deps): bump a workspace dependency'
+    const base = f.commit()
+    f.write('safe.txt', 'safe public content\n')
+    const head = f.commit(`${subject}\n\n${signOff}`)
+    const update = (sha) =>
+      `refs/heads/fix/privacy-fixture ${sha} refs/heads/fix/privacy-fixture ${base}\n`
+    let result = f.run('push', update(head))
+    assert.equal(result.status, 0, result.stderr)
+
+    for (const [body, expected] of [
+      [signOff, 0],
+      [`Signed-off-by: dependabot[bot] <${personalEmail}>`, 1],
+      [`Co-authored-by: dependabot[bot] <${address}>`, 1],
+      [`${signOff} ${personalEmail}`, 1],
+      [`${signOff}\nContact ${personalEmail}`, 1],
+    ]) {
+      f.write('message', `${subject}\n\n${body}\n`)
+      result = f.run('message', undefined, [messagePath])
+      assert.equal(result.status, expected, result.stderr)
+      assert(!result.stderr.includes(personalEmail))
+    }
+    f.write('message', '')
+    f.write('safe.txt', signOff)
+    result = f.run('worktree')
+    assert.equal(result.status, 1)
+    assert.match(result.stderr, /personal-email/u)
+  },
+)
+
+test(
   'pushed history rejects a secret or mailbox even after a later commit deletes it',
   { skip: !cacheReady },
   (t) => {
