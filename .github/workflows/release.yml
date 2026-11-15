@@ -268,7 +268,12 @@ jobs:
   publish:
     name: Publish accepted release
     needs: [prepare, assemble]
-    if: needs.prepare.outputs.publish == 'true'
+    # The unsigned Android job is skipped on tagged releases.
+    if: >-
+      !cancelled() &&
+      needs.prepare.result == 'success' &&
+      needs.assemble.result == 'success' &&
+      needs.prepare.outputs.publish == 'true'
     environment: release-publish
     runs-on: ubuntu-22.04
     timeout-minutes: 10
