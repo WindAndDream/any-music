@@ -25,7 +25,9 @@ All endpoints below are relative to `https://music.163.com/api/`. Built-in calls
 | Session          | GET `w/nuser/account/get`         | `profile.userId` / `nickname`; explicit null account/profile means signed out                                                                               |
 | Media descriptor | POST `song/enhance/player/url/v1` | `ids=[id]`, `level=jymaster` by default, `encodeType=flac`; actual `level`, `br`, `encodeType`, `time`, `url`, `code`, `freeTrialInfo` determine the result |
 
-Imports accept official HTTPS `music.163.com` song/playlist/album/artist URLs with a unique positive safe integer `id`, including `/#/` and `/m/` routes. Other origins, duplicate IDs and conflicting routes are rejected before HTTP. Stable track IDs are `netease:audio:{songId}`; only stable page references and metadata enter the library. Named artists whose upstream numeric ID is zero retain their names without a stable artist ID; song IDs remain strictly positive.
+When search returns HTTP or API code `404` or `501`, retry once with GET `search/get/web` and the same search parameters and account. Other errors retain their original handling.
+
+Imports accept official HTTPS `music.163.com` song/playlist/album/artist URLs with a unique positive safe integer `id`, including `/#/` and `/m/` routes. `discover/toplist?id=…` addresses use the same playlist identity and lazy loading. Other origins, duplicate IDs and conflicting routes are rejected before HTTP. Stable track IDs are `netease:audio:{songId}`; only stable page references and metadata enter the library. Named artists whose upstream numeric ID is zero retain their names without a stable artist ID; song IDs remain strictly positive.
 
 Playlist iterators load one ID manifest, then one bounded details batch per consumer step. Early close performs no later requests. Continuation resumes at the selected page; unavailable song IDs may be absent without ending later pages. Each operation forwards cancellation and rejects late results. Retries create fresh requests.
 

@@ -25,14 +25,17 @@ export function parseNeteaseImportUrl(input: string): NeteaseImportTarget {
   if (url.hash.startsWith('#/')) {
     if (url.pathname !== '/' || url.search)
       throw new MusicSourceError('unsupported-url', '网易云链接包含冲突的资源路径。')
-    url = new URL(url.hash.slice(1), url.origin)
+    // Interpret the fragment as a route on the verified origin, never a new authority.
+    url = new URL(`${url.origin}${url.hash.slice(1)}`)
   }
   const match = /^\/(?:m\/)?(song|playlist|album|artist)\/?$/.exec(url.pathname)
-  const kind = match?.[1] as NeteaseImportTarget['kind'] | undefined
+  const kind = /^\/(?:m\/)?discover\/toplist\/?$/.test(url.pathname)
+    ? 'playlist'
+    : (match?.[1] as NeteaseImportTarget['kind'] | undefined)
   if (!kind || url.hash || url.searchParams.getAll('id').length !== 1)
     throw new MusicSourceError(
       'unsupported-url',
-      '支持歌曲、歌单、专辑和歌手链接，链接需包含唯一的 id。',
+      '支持歌曲、歌单、榜单、专辑和歌手链接，链接需包含唯一的 id。',
     )
   const id = validateNeteaseId(url.searchParams.get('id')!)
   return { kind, id, url: `https://music.163.com/${kind}?id=${id}` }

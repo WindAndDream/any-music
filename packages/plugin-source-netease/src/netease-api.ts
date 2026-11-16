@@ -35,15 +35,17 @@ export class NeteaseApi {
     return this.request('w/nuser/account/get')
   }
   async search(query: string, limit: number, offset: number): Promise<NeteaseRecord> {
-    return record(
-      (
-        await this.request(
-          'cloudsearch/pc',
-          { s: query, type: 1, limit, offset, total: true },
-          'POST',
-        )
-      ).result,
-    )
+    const params = { s: query, type: 1, limit, offset, total: true }
+    let response: NeteaseRecord
+    try {
+      response = await this.request('cloudsearch/pc', params, 'POST')
+    } catch (error) {
+      const upstreamCode =
+        error instanceof MusicSourceError ? (error.cause as { code?: number })?.code : undefined
+      if (upstreamCode !== 404 && upstreamCode !== 501) throw error
+      response = await this.request('search/get/web', params)
+    }
+    return record(response.result)
   }
   async getSongs(ids: readonly string[]): Promise<unknown[]> {
     if (!ids.length) return []
@@ -101,6 +103,7 @@ export class NeteaseApi {
       body: method === 'POST' ? form.toString() : undefined,
       headers: {
         Referer: 'https://music.163.com/',
+        Origin: 'https://music.163.com',
         ...(method === 'POST' ? { 'Content-Type': 'application/x-www-form-urlencoded' } : {}),
       },
       credentials: 'include',
@@ -110,7 +113,7 @@ export class NeteaseApi {
       cancellation: this.cancellation,
     })
     this.assertActive()
-    if (response.status !== 200) throw responseError(response.status, { status: response.status })
+    if (response.status !== 200) throw responseError(response.status, { code: response.status })
     let data: NeteaseRecord
     try {
       data = record(
