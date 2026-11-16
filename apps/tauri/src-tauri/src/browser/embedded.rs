@@ -289,7 +289,62 @@ async fn native_click(webview: tauri::Webview, x: f64, y: f64, viewport: f64) ->
         .await
         .unwrap_or(false)
 }
-#[cfg(not(target_os = "macos"))]
+/// WebView2 input through its DevTools protocol is browser-trusted. CSS viewport points are
+/// the protocol's own coordinate space, so no inset mapping is needed here.
+#[cfg(windows)]
+async fn native_click(webview: tauri::Webview, x: f64, y: f64, _: f64) -> bool {
+    use webview2_com::CallDevToolsProtocolMethodCompletedHandler;
+    use windows::core::HSTRING;
+    let events = [
+        json!({"type": "mouseMoved", "x": x, "y": y, "button": "none", "buttons": 0}),
+        json!({"type": "mousePressed", "x": x, "y": y, "button": "left", "buttons": 1, "clickCount": 1}),
+        json!({"type": "mouseReleased", "x": x, "y": y, "button": "left", "buttons": 0, "clickCount": 1}),
+    ];
+    let count = events.len();
+    let (done, wait) = std::sync::mpsc::channel();
+    // WebView2 COM objects belong to the UI thread; `with_webview` runs there. The protocol
+    // processes these calls in order and completes each one on the same thread.
+    let scheduled = webview.with_webview(move |platform| {
+        // SAFETY: wry's controller is live for this UI-thread callback; each completion
+        // handler owns only a channel sender.
+        unsafe {
+            let Ok(core) = platform.controller().CoreWebView2() else {
+                let _ = done.send(false);
+                return;
+            };
+            for event in events {
+                let reply = done.clone();
+                let handler = CallDevToolsProtocolMethodCompletedHandler::create(Box::new(
+                    move |result, _| {
+                        let _ = reply.send(result.is_ok());
+                        Ok(())
+                    },
+                ));
+                if core
+                    .CallDevToolsProtocolMethod(
+                        &HSTRING::from("Input.dispatchMouseEvent"),
+                        &HSTRING::from(event.to_string()),
+                        &handler,
+                    )
+                    .is_err()
+                {
+                    let _ = done.send(false);
+                    return;
+                }
+            }
+        }
+    });
+    scheduled.is_ok()
+        && tauri::async_runtime::spawn_blocking(move || {
+            (0..count).all(|_| {
+                wait.recv_timeout(std::time::Duration::from_secs(2))
+                    .unwrap_or(false)
+            })
+        })
+        .await
+        .unwrap_or(false)
+}
+#[cfg(not(any(target_os = "macos", windows)))]
 async fn native_click(_: tauri::Webview, _: f64, _: f64, _: f64) -> bool {
     false
 }
