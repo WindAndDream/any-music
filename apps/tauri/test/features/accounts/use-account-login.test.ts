@@ -5,9 +5,12 @@ import type { LoginVerification, QrLoginResult } from '@/features/accounts/accou
 import { AccountRuntime } from '@/features/accounts/account-runtime'
 import type { NativeAccount } from '@/features/accounts/account-runtime'
 import { useAccountLogin } from '@/features/accounts/use-account-login'
+import { useAccountPage } from '@/platform/account-page'
 
 const native = vi.hoisted(() => ({ invoke: vi.fn(), encode: vi.fn() }))
 vi.mock('@tauri-apps/api/core', () => ({ invoke: native.invoke }))
+// In-app page presentation events are native; these tests exercise the owning flows only.
+vi.mock('@tauri-apps/api/event', () => ({ listen: vi.fn(async () => () => {}) }))
 vi.mock('qrcode', () => ({ toDataURL: native.encode }))
 const account: NativeAccount = {
   backupProxyIds: [],
@@ -99,7 +102,8 @@ describe('account login lifecycle', () => {
     expect(calls('begin_browser_login')).toEqual([
       [
         'begin_browser_login',
-        expect.objectContaining({ accountId: account.id, browser: 'system' }),
+        // Official browser login now opens the account's embedded page.
+        expect.objectContaining({ accountId: account.id, browser: 'embedded' }),
       ],
     ])
     await vi.advanceTimersByTimeAsync(4000)
@@ -432,7 +436,7 @@ describe('account login lifecycle', () => {
     await login.beginBrowser()
     expect(calls('begin_browser_login')[0]?.[1]).toMatchObject({
       accountId: account.id,
-      browser: 'system',
+      browser: 'embedded',
       loginId: expect.any(String),
     })
     await login.completeBrowser()
@@ -459,7 +463,7 @@ describe('account login lifecycle', () => {
     expect(login.loginPhase.value).toBe('browser')
     expect(calls('begin_browser_login')[0]?.[1]).toMatchObject({
       accountId: 'b',
-      browser: 'system',
+      browser: 'embedded',
       loginId: expect.any(String),
     })
     login.endLogin()
@@ -528,5 +532,28 @@ describe('account login lifecycle', () => {
     cancellation.resolve()
     await handoff
     expect(calls('begin_browser_login')).toHaveLength(1)
+  })
+  it('drives in-app login from its page dialog: confirm saves, closing cancels', async () => {
+    const login = setup()
+    const page = useAccountPage()
+    await login.beginBrowser()
+    expect(login.loginPhase.value).toBe('browser')
+    expect(page.current.value).toMatchObject({ accountId: account.id, mode: 'page' })
+    page.action()
+    await vi.waitFor(() => expect(login.loginPhase.value).toBe('complete'))
+    expect(calls('complete_browser_login')).toHaveLength(1)
+    expect(page.current.value).toBeUndefined()
+    login.selectLogin({ ...account, id: 'b' })
+    await login.beginBrowser()
+    const pending = calls('begin_browser_login').at(-1)![1]
+    page.close()
+    expect(login.loginPhase.value).toBe('choose')
+    expect(page.current.value).toBeUndefined()
+    await login.waitForCleanup()
+    expect(calls('cancel_browser_login').at(-1)![1]).toEqual({
+      accountId: pending.accountId,
+      loginId: pending.loginId,
+    })
+    expect(calls('complete_browser_login')).toHaveLength(1)
   })
 })

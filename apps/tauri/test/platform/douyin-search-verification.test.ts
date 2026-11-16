@@ -1,10 +1,13 @@
 import { CancellationSource } from '@any-music/network-routing'
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { useAccountPage } from '@/platform/account-page'
 import { verifyDouyinSearch } from '@/platform/douyin-search-verification'
 
 const native = vi.hoisted(() => ({ invoke: vi.fn() }))
 vi.mock('@tauri-apps/api/core', () => ({ invoke: native.invoke }))
+// In-app page presentation events are native; these tests exercise the owning flows only.
+vi.mock('@tauri-apps/api/event', () => ({ listen: vi.fn(async () => () => {}) }))
 const response = (data: unknown) => ({
   status: 200,
   statusText: '',
@@ -124,6 +127,25 @@ describe('explicit account search verification', () => {
     expect(native.invoke).toHaveBeenLastCalledWith(
       'end_douyin_search_verification',
       expect.objectContaining({ accountId: 'account-b', completed: false }),
+    )
+  })
+
+  it('closing the in-app verification dialog cancels the verification without committing', async () => {
+    native.invoke.mockImplementation(async (command: string) =>
+      command === 'poll_douyin_search_verification' ? null : undefined,
+    )
+    const pending = verifyDouyinSearch('account-a', '夜曲')
+    const rejected = expect(pending).rejects.toMatchObject({ code: 'operation-cancelled' })
+    const page = useAccountPage()
+    await vi.waitFor(() => expect(page.current.value?.mode).toBe('challenge'))
+    page.close()
+    await vi.advanceTimersByTimeAsync(1000)
+    await rejected
+    expect(page.current.value).toBeUndefined()
+    expect(native.invoke.mock.calls.some(([, args]) => args?.completed === true)).toBe(false)
+    expect(native.invoke).toHaveBeenLastCalledWith(
+      'end_douyin_search_verification',
+      expect.objectContaining({ accountId: 'account-a', completed: false }),
     )
   })
 

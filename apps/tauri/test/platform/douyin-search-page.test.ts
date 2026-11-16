@@ -70,7 +70,7 @@ describe('official search page controls', () => {
   })
   it('focuses and selects the unique official field for browser-native text insertion', () => {
     const events: string[] = []
-    const input = {
+    const input: Record<string, unknown> = {
       disabled: false,
       value: '',
       focus: () => {
@@ -84,17 +84,22 @@ describe('official search page controls', () => {
       activeElement: unknown
       querySelectorAll: (selector: string) => unknown[]
     } = {
-      readyState: 'interactive',
+      readyState: 'loading',
       activeElement: null,
-      querySelectorAll: (selector) =>
-        selector.startsWith('input') ? [input] : [{ disabled: false }],
+      querySelectorAll: (selector) => (selector.startsWith('input') ? [input] : [button]),
     }
+    const button: Record<string, unknown> = { disabled: false }
     vi.stubGlobal('location', { origin: 'https://www.douyin.com', pathname: '/jingxuan' })
     vi.stubGlobal('document', document)
     const run = () => new Function(`return ${prepare.slice(1)}`)()
     expect(run()).toBe(false)
+    // Server-rendered controls are present before React owns them.
+    document.readyState = 'interactive'
+    expect(run()).toBe(false)
+    input['__reactProps$test'] = {}
+    expect(run()).toBe(false)
     expect(events).toEqual([])
-    document.readyState = 'complete'
+    button['__reactProps$test'] = {}
     expect(run()).toBe(true)
     expect(events).toEqual(['focus', 'select'])
     expect(input.value).toBe('')
@@ -103,7 +108,12 @@ describe('official search page controls', () => {
   })
   it('reads the native controlled input after rendering and targets the current button', async () => {
     const query = '古风 / "& # +\\n'
-    let inputs = [{ value: '', disabled: false }]
+    const field = (value: string, rendered = value) => ({
+      value,
+      disabled: false,
+      __reactProps$test: { value: rendered },
+    })
+    let inputs = [field('')]
     const button = {
       disabled: false,
       getBoundingClientRect: () => ({ left: 40, top: 60, width: 80, height: 40 }),
@@ -121,10 +131,14 @@ describe('official search page controls', () => {
     const run = new Function(`return (${submit})`)()
     const pending = run(query)
     queueMicrotask(() => {
-      inputs = [{ value: query, disabled: false }]
+      inputs = [field(query)]
     })
     expect(await pending).toEqual({ x: 80, y: 80 })
     expect(button.click).not.toHaveBeenCalled()
+    // The DOM value alone is not accepted until the controlled props render it.
+    inputs = [field(query, '')]
+    expect(await run(query)).toBe(false)
+    inputs = [field(query)]
     inputs[0]!.value = ''
     expect(await run(query)).toBe(false)
     inputs[0]!.value = query
@@ -144,9 +158,11 @@ describe('official search page controls', () => {
     }
     hit = button
     const document = {
-      readyState: 'interactive',
+      readyState: 'loading',
       querySelectorAll: (selector: string) =>
-        selector.startsWith('input') ? [{ value: '古风', disabled: false }] : [button],
+        selector.startsWith('input')
+          ? [{ value: '古风', disabled: false, __reactProps$test: { value: '古风' } }]
+          : [button],
       elementFromPoint: () => hit,
     }
     const location = { origin: 'https://www.douyin.com', pathname: '/jingxuan' }
@@ -156,7 +172,7 @@ describe('official search page controls', () => {
     vi.stubGlobal('innerHeight', 800)
     const run = new Function(`return (${submit})`)()
     expect(await run('古风')).toBe(false)
-    document.readyState = 'complete'
+    document.readyState = 'interactive'
     expect(await run('古风')).toEqual({ x: 80, y: 80 })
     hit = {}
     expect(await run('古风')).toBe(false)
