@@ -2,9 +2,9 @@
 async function submitSearch(query) {
   if (location.origin !== 'https://www.douyin.com' || !/^\/jingxuan\/?$/.test(location.pathname))
     return false
-  // Server-rendered controls can precede the homepage's input handlers.
-  // Wait for initialization, then verify the native-input value below.
-  if (document.readyState !== 'complete') return false
+  // Server-rendered controls can precede the homepage's input handlers; the
+  // hydrated-props check below verifies the official handler owns the value.
+  if (document.readyState === 'loading') return false
   // Give native insertText a task to render its new state/handler. Re-read
   // current controls because initialization or rendering may replace the nodes.
   await new Promise((resolve) => setTimeout(resolve, 0))
@@ -13,6 +13,11 @@ async function submitSearch(query) {
   if (currentInputs.length !== 1 || currentButtons.length !== 1) return false
   if (currentInputs[0].value !== query || currentInputs[0].disabled || currentButtons[0].disabled)
     return false
+  // A controlled field renders its state as props.value; a stale value means the
+  // official handler has not accepted the inserted text yet.
+  const propsKey = Object.keys(currentInputs[0]).find((key) => key.startsWith('__reactProps$'))
+  const props = propsKey && currentInputs[0][propsKey]
+  if (!props || ('value' in props && props.value !== query)) return false
   if (location.origin !== 'https://www.douyin.com' || !/^\/jingxuan\/?$/.test(location.pathname))
     return false
   const bounds = currentButtons[0].getBoundingClientRect()

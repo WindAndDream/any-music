@@ -5,7 +5,7 @@ use crate::{
 };
 use futures_util::StreamExt;
 use std::time::Duration;
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 use tokio_util::sync::CancellationToken;
 
 mod response;
@@ -350,11 +350,11 @@ fn require_anonymous_grant(url: &reqwest::Url, media_port: u16) -> Result<(), St
 
 #[tauri::command]
 pub async fn http_request(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     request: HttpRequest,
 ) -> Result<tauri::ipc::Response, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     request_http(&state, &request).await
 }
 
@@ -374,11 +374,11 @@ async fn request_http(
 }
 #[tauri::command]
 pub fn cancel_request(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     request_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     crate::model::validate_id(&request_id)?;
     state.requests.lock().unwrap().cancel(&request_id);
     Ok(())

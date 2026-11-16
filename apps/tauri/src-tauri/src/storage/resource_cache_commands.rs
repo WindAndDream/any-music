@@ -1,24 +1,24 @@
 //! Main-WebView cache preferences; filesystem selection never becomes renderer write authority.
 use super::resource_cache::CacheSnapshot;
 use crate::{browser::verification::require_main, state::RuntimeState};
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 
 #[tauri::command]
 pub async fn resource_cache_snapshot(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
 ) -> Result<CacheSnapshot, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.resource_cache.snapshot().await
 }
 #[tauri::command]
 pub async fn resource_cache_configure(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     capacity_bytes: Option<u64>,
     memory_capacity_bytes: Option<u64>,
 ) -> Result<CacheSnapshot, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     match (capacity_bytes, memory_capacity_bytes) {
         (Some(capacity), None) => state.resource_cache.configure(capacity).await,
         (None, Some(capacity)) => state.resource_cache.configure_memory(capacity).await,
@@ -27,19 +27,19 @@ pub async fn resource_cache_configure(
 }
 #[tauri::command]
 pub async fn resource_cache_clear(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
 ) -> Result<CacheSnapshot, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.resource_cache.clear().await
 }
 #[tauri::command]
 pub async fn resource_cache_directory(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     reset: bool,
 ) -> Result<Option<CacheSnapshot>, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     #[cfg(desktop)]
     {
         use tauri_plugin_dialog::DialogExt;
@@ -53,7 +53,7 @@ pub async fn resource_cache_directory(
             None
         } else {
             let selected = tauri::async_runtime::spawn_blocking(move || {
-                window
+                webview
                     .dialog()
                     .file()
                     .set_title("选择缓存目录（将创建 AnyMusicCache 子目录）")

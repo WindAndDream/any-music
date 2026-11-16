@@ -34,7 +34,9 @@ am-plugin-runtime.workspace = true
 am-plugin-net.workspace = true
 am-plugin-package.workspace = true
 am-plugin-protocol.workspace = true
-tauri = { version = "2.12.1", features = [] }
+# Account pages are child WebViews of the product window (`unstable`), with per-account
+# WebKit proxies on macOS 14+ (`macos-proxy`).
+tauri = { version = "2.12.1", features = ["unstable", "macos-proxy"] }
 serde.workspace = true
 serde_json.workspace = true
 reqwest = { version = "0.12", default-features = false, features = [
@@ -89,5 +91,20 @@ windows-sys = { version = "0.61", features = [
 keyring = { version = "3.6", features = ["windows-native"] }
 [target.'cfg(any(target_os = "macos", target_os = "ios"))'.dependencies]
 keyring = { version = "3.6", features = ["apple-native"] }
+# Browser-trusted input for embedded account pages; versions follow wry's AppKit bindings.
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2-app-kit = { version = "0.3.2", default-features = false, features = [
+  "std",
+  "NSEvent",
+  "NSGraphicsContext",
+  "NSResponder",
+  "NSView",
+  "NSWindow",
+] }
+objc2-foundation = { version = "0.3.2", default-features = false, features = [
+  "std",
+  "NSGeometry",
+  "NSProcessInfo",
+] }
 [target.'cfg(target_os = "linux")'.dependencies]
 keyring = { version = "3.6", features = ["linux-native-sync-persistent", "crypto-rust"] }

@@ -52,6 +52,8 @@ pub(crate) fn handler() -> impl Fn(tauri::ipc::Invoke<tauri::Wry>) -> bool + Sen
         browser::douyin_browser::verification::begin_douyin_search_verification,
         browser::douyin_browser::verification::poll_douyin_search_verification,
         browser::douyin_browser::verification::end_douyin_search_verification,
+        browser::embedded::account_page_layout,
+        browser::embedded::account_page_report,
         media::register_media,
         media::release_media,
         accounts::login::begin_qr_login,

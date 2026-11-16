@@ -1,6 +1,6 @@
-//! Account-owned CDP sessions. Official pages generate authentication and search requests.
+//! Account-owned embedded page sessions. Official pages generate authentication and search
+//! requests; the account actor drives them through a bounded CDP-subset page transport.
 //! Only public login projections and allowlisted business response bodies cross IPC.
-mod browser_identity;
 pub(crate) mod commands;
 mod detail;
 mod import;
@@ -9,7 +9,11 @@ mod profile;
 pub(crate) mod projection;
 mod search;
 pub(crate) mod verification;
-use crate::{browser::cdp::Cdp, browser::process::AccountProcess, state::RuntimeState};
+use crate::{
+    browser::cdp::Cdp,
+    browser::embedded::{AccountPages, DOUYIN_CAPTURE, Presentation, Store},
+    state::RuntimeState,
+};
 use packet::Packet;
 use serde_json::{Value, json};
 use std::{
@@ -49,7 +53,6 @@ struct PrivateState {
     verification_response: Option<Value>,
     failure: Option<String>,
     page_ready: bool,
-    shutdown_failure: Option<String>,
 }
 struct Run {
     cancel: CancellationToken,
@@ -91,35 +94,40 @@ impl Manager {
         verification: Option<(String, String)>,
     ) -> Result<bool, String> {
         let account = state.account(id)?;
-        let usage = state.use_account(id, "账号浏览器")?;
+        let usage = state.use_account(id, "账号页面")?;
         if !cfg!(desktop) {
-            return Err("此设备不支持系统浏览器账号会话。".into());
+            return Err("此设备不支持内嵌账号页面。".into());
         }
         if account.platform_id != "douyin" || !account.enabled {
             return Err("抖音账号不可用。".into());
         }
+        // Read stored credentials before taking the run lock; sessions use their own locks.
+        let seed = seed_cookies(state, &account);
         let mut runs = self.runs.lock().unwrap();
         if let Some(run) = runs.get(id) {
             if !run.cancel.is_cancelled() {
                 return Ok(false);
             }
-            return Err("旧账号浏览器正在退出，请稍后重试。".into());
+            return Err("旧账号页面正在关闭，请稍后重试。".into());
         }
-        let (kind, path) = browser_identity::resolve(
-            &state.directory.join("profiles"),
-            id,
-            browser,
-            &account.user_agent,
-        )?;
         let mut routes = state.proxy_routes(&account)?;
         let active = state.active_proxy(&account);
         let start = routes.iter().position(|(id, _)| *id == active).unwrap_or(0);
         routes.rotate_left(start);
         let profile_root = state.directory.join("profiles");
-        let visible = browser.is_some() || verification.is_some();
-        let process =
-            AccountProcess::start(&profile_root, id, &path, routes[0].1.as_deref(), visible)?;
-        process.remember_browser(&kind)?;
+        // Verification shows only the website's challenge; explicit login shows the page.
+        let presentation = if verification.is_some() {
+            Some(Presentation::Challenge)
+        } else {
+            browser.map(|_| Presentation::Page)
+        };
+        let host = state.embedded.clone();
+        let process = AccountPages::open(
+            host.clone(),
+            Store::new(&profile_root, id, routes[0].1.as_deref(), DOUYIN_CAPTURE)?,
+            presentation,
+            seed,
+        )?;
         let cancel = CancellationToken::new();
         let public = Arc::new(Mutex::new(PrivateState {
             login: json!({"status":"waiting","keepPolling":true,"message":"正在加载官方登录页面…"}),
@@ -146,13 +154,15 @@ impl Manager {
                 let current = if let Some(process) = process.take() {
                     Ok(process)
                 } else {
-                    AccountProcess::start(
+                    Store::new(
                         &profile_root,
                         &account_id,
-                        &path,
                         proxy_url.as_deref(),
-                        visible,
+                        DOUYIN_CAPTURE,
                     )
+                    .and_then(|store| {
+                        AccountPages::open(host.clone(), store, presentation, Vec::new())
+                    })
                 };
                 let result = match current {
                     Ok(process) => {
@@ -212,11 +222,7 @@ impl Manager {
             run.cancel.cancel();
             run.task
                 .await
-                .map_err(|_| "network-error:账号浏览器退出任务中断。".to_string())?;
-            let failure = run.public.lock().unwrap().shutdown_failure.clone();
-            if let Some(error) = failure {
-                return Err(error);
-            }
+                .map_err(|_| "network-error:账号页面关闭任务中断。".to_string())?;
         }
         Ok(())
     }
@@ -255,7 +261,7 @@ impl Manager {
     }
     pub fn status(&self, id: &str) -> Result<Value, String> {
         let runs = self.runs.lock().unwrap();
-        let run = runs.get(id).ok_or("账号浏览器会话已结束，请重新登录。")?;
+        let run = runs.get(id).ok_or("账号页面会话已结束，请重新登录。")?;
         let value = run.public.lock().unwrap().login.clone();
         Ok(value)
     }
@@ -268,6 +274,10 @@ impl Manager {
         let data = run.public.lock().unwrap();
         if data.login["status"] != "signed-in" {
             return Err("官方账号登录尚未确认。".into());
+        }
+        // Native HTTP must reuse the page's real identity, never an empty placeholder.
+        if data.agent.is_empty() {
+            return Err("network-error:账号页面尚未完成加载，请重试。".into());
         }
         Ok((data.cookies.clone(), data.agent.clone()))
     }
@@ -317,13 +327,13 @@ impl Manager {
                     let runs = self.runs.lock().unwrap();
                     let run = runs
                         .get(id)
-                        .ok_or("operation-cancelled:账号浏览器会话已结束。")?;
+                        .ok_or("operation-cancelled:账号页面会话已结束。")?;
                     let data = run.public.lock().unwrap();
                     if let Some(error) = &data.failure {
                         return Err(error.clone());
                     }
                     if run.cancel.is_cancelled() {
-                        return Err("operation-cancelled:账号浏览器会话已结束。".into());
+                        return Err("operation-cancelled:账号页面会话已结束。".into());
                     }
                     if data.page_ready {
                         return Ok(());
@@ -332,7 +342,7 @@ impl Manager {
                 tokio::time::sleep(Duration::from_millis(25)).await;
             }
         };
-        tokio::select! { _=cancel.cancelled()=>Err("operation-cancelled:账号浏览器启动已取消。".into()), result=tokio::time::timeout(Duration::from_secs(30),work)=>result.map_err(|_| "request-timeout:账号验证页面启动超时。".to_string()).and_then(|v|v) }
+        tokio::select! { _=cancel.cancelled()=>Err("operation-cancelled:账号页面启动已取消。".into()), result=tokio::time::timeout(Duration::from_secs(30),work)=>result.map_err(|_| "request-timeout:账号验证页面启动超时。".to_string()).and_then(|v|v) }
     }
     async fn ready(&self, id: &str, cancel: &CancellationToken) -> Result<(), String> {
         let wait = async {
@@ -360,7 +370,7 @@ impl Manager {
                     Some("signed-in") => return Ok(()),
                     Some("expired") => {
                         return Err(
-                            "verification-required:登录二维码已过期，请重新生成或打开官方浏览器。"
+                            "verification-required:登录二维码已过期，请重新生成二维码或改用应用内网页登录。"
                                 .into(),
                         );
                     }
@@ -371,7 +381,7 @@ impl Manager {
                 }
             }
         };
-        tokio::select! { _=cancel.cancelled()=>Err("operation-cancelled:请求已取消。".into()), result=tokio::time::timeout(Duration::from_secs(20),wait)=>result.map_err(|_|"request-timeout:无法确认此抖音账号的登录状态，请重试。".to_string()).and_then(|v|v) }
+        tokio::select! { _=cancel.cancelled()=>Err("operation-cancelled:请求已取消。".into()), result=tokio::time::timeout(Duration::from_secs(35),wait)=>result.map_err(|_|"request-timeout:无法确认此抖音账号的登录状态，请重试。".to_string()).and_then(|v|v) }
     }
     async fn profile(
         &self,
@@ -398,7 +408,7 @@ impl Manager {
             let run = runs
                 .get(id)
                 .filter(|run| !run.cancel.is_cancelled())
-                .ok_or("operation-cancelled:账号浏览器会话已结束。")?;
+                .ok_or("operation-cancelled:账号页面会话已结束。")?;
             let data = run.public.lock().unwrap();
             if projection::authenticated_profile(&data.profile) {
                 return Ok(json!({"status":200,"body":serde_json::to_vec(&data.profile).unwrap()}));
@@ -419,14 +429,14 @@ impl Manager {
             let run = runs
                 .get(id)
                 .filter(|r| !r.cancel.is_cancelled())
-                .ok_or("operation-cancelled:账号浏览器已关闭，请重新打开。")?;
+                .ok_or("operation-cancelled:账号页面已关闭，请重新打开。")?;
             (run.actions.clone(), run.cancel.clone())
         };
         let (reply, answer) = oneshot::channel();
         sender
             .try_send(build(reply))
             .map_err(|_| "limit-exceeded:账号操作队列已满。")?;
-        tokio::select! {_=cancel.cancelled()=>Err("operation-cancelled:请求已取消。".into()),_=stop.cancelled()=>Err("operation-cancelled:账号浏览器已结束。".into()),result=tokio::time::timeout(Duration::from_secs(22),answer)=>result.map_err(|_|"request-timeout:账号页面操作超时。".to_string()).and_then(|r|r.map_err(|_|"network-error:账号浏览器连接中断。".to_string())).and_then(|r|r)}
+        tokio::select! {_=cancel.cancelled()=>Err("operation-cancelled:请求已取消。".into()),_=stop.cancelled()=>Err("operation-cancelled:账号页面已结束。".into()),result=tokio::time::timeout(Duration::from_secs(40),answer)=>result.map_err(|_|"request-timeout:账号页面操作超时。".to_string()).and_then(|r|r.map_err(|_|"network-error:账号页面连接中断。".to_string())).and_then(|r|r)}
     }
     pub async fn sms(
         &self,
@@ -479,7 +489,7 @@ impl Manager {
             let run = runs
                 .get(id)
                 .filter(|r| !r.cancel.is_cancelled())
-                .ok_or("operation-cancelled:账号浏览器已关闭，请重新打开。")?;
+                .ok_or("operation-cancelled:账号页面已关闭，请重新打开。")?;
             (run.actions.clone(), run.cancel.clone())
         };
         let (reply, answer) = oneshot::channel();
@@ -488,10 +498,10 @@ impl Manager {
             .map_err(|_| "limit-exceeded:账号操作队列已满。")?;
         tokio::select! {
             _=cancel.cancelled()=>Err("operation-cancelled:请求已取消。".into()),
-            _=stop.cancelled()=>Err("operation-cancelled:账号浏览器已结束。".into()),
-            result=tokio::time::timeout(Duration::from_secs(25),answer)=>result
+            _=stop.cancelled()=>Err("operation-cancelled:账号页面已结束。".into()),
+            result=tokio::time::timeout(Duration::from_secs(85),answer)=>result
                 .map_err(|_|"request-timeout:账号搜索操作超时。".to_string())
-                .and_then(|r|r.map_err(|_|"network-error:账号浏览器连接中断。".to_string())).and_then(|r|r)
+                .and_then(|r|r.map_err(|_|"network-error:账号页面连接中断。".to_string())).and_then(|r|r)
         }
     }
     async fn detail(
@@ -524,7 +534,7 @@ impl Manager {
             let run = runs
                 .get(id)
                 .filter(|run| !run.cancel.is_cancelled())
-                .ok_or("operation-cancelled:账号浏览器已关闭。")?;
+                .ok_or("operation-cancelled:账号页面已关闭。")?;
             (run.actions.clone(), run.cancel.clone())
         };
         let (reply, answer) = oneshot::channel();
@@ -533,14 +543,14 @@ impl Manager {
             .map_err(|_| "limit-exceeded:账号操作队列已满。")?;
         tokio::select! {
             _ = cancel.cancelled() => Err("operation-cancelled:作品读取已取消。".into()),
-            _ = stop.cancelled() => Err("operation-cancelled:账号浏览器已结束。".into()),
-            result = tokio::time::timeout(Duration::from_secs(25), answer) => result
+            _ = stop.cancelled() => Err("operation-cancelled:账号页面已结束。".into()),
+            result = tokio::time::timeout(Duration::from_secs(45), answer) => result
                 .map_err(|_| {
                     // A queued/active detail must also release its target after the waiter times out.
                     cancel.cancel();
                     "request-timeout:作品读取超时。".to_string()
                 })
-                .and_then(|result| result.map_err(|_| "network-error:账号浏览器连接中断。".to_string()))
+                .and_then(|result| result.map_err(|_| "network-error:账号页面连接中断。".to_string()))
                 .and_then(|result| result),
         }
     }
@@ -559,7 +569,7 @@ pub async fn page_action(
     let source = include_str!("douyin_browser/page-actions.js").replacen("export default ", "", 1);
     let result=cdp.call(Some(session),"Runtime.evaluate",json!({"expression":format!("({source})({}, {})",json!(action),json!(code)),"returnByValue":true,"awaitPromise":true,"userGesture":true})).await?;
     if result.get("exceptionDetails").is_some() {
-        return Err("官方页面控件已改变，请在账号浏览器中完成操作。".into());
+        return Err("官方页面控件已改变，请在账号页面中完成操作。".into());
     }
     Ok(result["result"]["value"].clone())
 }
@@ -602,35 +612,19 @@ async fn attach_target(cdp: &mut Cdp, target: String) -> Result<(String, String)
     Ok((target, session))
 }
 
-/// The owned headed process already opens one blank tab. Attach before navigating so
-/// response capture is ready, without leaving that tab behind and creating a second window.
-async fn startup_target(
-    cdp: &mut Cdp,
-    has_startup_window: bool,
-) -> Result<(String, String), String> {
-    if !has_startup_window {
-        return target(cdp, true).await;
+/// Stored native credentials seed a newly created page context, so a signed-in account keeps
+/// its session when it first moves into its embedded store.
+fn seed_cookies(
+    state: &RuntimeState,
+    account: &crate::model::Account,
+) -> Vec<tauri::webview::Cookie<'static>> {
+    if account.authentication != "credential" {
+        return Vec::new();
     }
-    let deadline = Instant::now() + Duration::from_secs(5);
-    loop {
-        let targets = cdp.call(None, "Target.getTargets", json!({})).await?;
-        let id = targets["targetInfos"]
-            .as_array()
-            .and_then(|targets| {
-                targets
-                    .iter()
-                    .find(|target| target["type"] == "page" && target["url"] == "about:blank")
-            })
-            .and_then(|target| target["targetId"].as_str());
-        if let Some(id) = id {
-            return attach_target(cdp, id.to_owned()).await;
-        }
-        if Instant::now() >= deadline {
-            return Err("无法找到账号浏览器的初始页面。".into());
-        }
-        // DevToolsActivePort can be ready before Chromium publishes its startup tab.
-        tokio::time::sleep(Duration::from_millis(100)).await;
-    }
+    state
+        .session(&account.id)
+        .map(|session| crate::browser::embedded::seed_cookies(&session.cookies.lock().unwrap()))
+        .unwrap_or_default()
 }
 pub async fn body(cdp: &mut Cdp, session: &str, id: &str, limit: usize) -> Result<Vec<u8>, String> {
     use base64::Engine;
@@ -685,52 +679,50 @@ fn needs_profile_navigation(data: &PrivateState, elapsed: Duration, navigated: b
         && matches!(data.login["status"].as_str(), Some("waiting" | "scanned"))
 }
 async fn worker(
-    mut process: AccountProcess,
+    mut process: AccountPages,
     cancel: &CancellationToken,
     data: &Arc<Mutex<PrivateState>>,
     actions: &mut mpsc::Receiver<Action>,
     start_query: Option<String>,
 ) -> Result<(), String> {
-    let mut cdp = process.connect(cancel).await?;
+    let mut cdp = process.connect();
     let result = worker_connected(&mut process, &mut cdp, cancel, data, actions, start_query).await;
-    // All paths (including CDP/page failures) finish the old tree before releasing Profile.
-    if cancel.is_cancelled() {
-        // Revoked work has no browser state to commit. Stop the owned tree immediately,
-        // while still waiting for all Profile handles before acknowledging cancellation.
-        process.terminate();
-    } else {
+    // All paths (including page failures) close every page before releasing the store lock.
+    if !cancel.is_cancelled() {
         let _ = tokio::time::timeout(
             Duration::from_secs(2),
             cdp.call(None, "Browser.close", json!({})),
         )
         .await;
     }
-    if process.wait_for_exit(Duration::from_secs(5)).await.is_err() {
-        process.terminate();
-        if let Err(error) = process.wait_for_exit(Duration::from_secs(5)).await {
-            data.lock().unwrap().shutdown_failure = Some(error.clone());
-            return Err(error);
-        }
-    }
+    process.close().await;
     result
 }
+/// Pages report their real browser identity from their first document.
+async fn remember_agent(cdp: &mut Cdp, data: &Arc<Mutex<PrivateState>>) -> Result<(), String> {
+    if !data.lock().unwrap().agent.is_empty() {
+        return Ok(());
+    }
+    let version = cdp.call(None, "Browser.getVersion", json!({})).await?;
+    if let Some(agent) = version["userAgent"]
+        .as_str()
+        .filter(|agent| !agent.is_empty())
+    {
+        data.lock().unwrap().agent = agent.into();
+    }
+    Ok(())
+}
 async fn worker_connected(
-    process: &mut AccountProcess,
+    process: &mut AccountPages,
     cdp: &mut Cdp,
     cancel: &CancellationToken,
     data: &Arc<Mutex<PrivateState>>,
     actions: &mut mpsc::Receiver<Action>,
     start_query: Option<String>,
 ) -> Result<(), String> {
-    let version = cdp.call(None, "Browser.getVersion", json!({})).await?;
-    data.lock().unwrap().agent = version["userAgent"]
-        .as_str()
-        .ok_or("无法读取浏览器身份。")?
-        .into();
-    // On Windows the inactive desktop hides ordinary headed windows without changing
-    // document visibility/focus. Visible handoff keeps auxiliary search targets hidden.
-    let hidden_targets = process.visible || !cfg!(target_os = "windows");
-    let (_, session) = startup_target(cdp, cfg!(target_os = "windows") || process.visible).await?;
+    // Auxiliary pages always stay hidden; only the account's startup page may be presented.
+    let hidden_targets = true;
+    let (_, session) = target(cdp, !process.visible).await?;
     // Observe from startup: the user may submit while account state is still loading.
     let mut verification_capture = start_query
         .as_ref()
@@ -784,6 +776,7 @@ async fn worker_connected(
                                 return Err(projection::authentication_error(projection::has_login(&projection::cookie_store(&cookies)?)))
                             }
                             let profile=profile::refresh(cdp,hidden_targets,cancel,&mut searches,verification_capture.as_mut(),&mut login_events).await?;
+                            remember_agent(cdp, data).await?;
                             let cookies=cdp.call(None,"Storage.getCookies",json!({})).await?;
                             if !projection::has_login(&projection::cookie_store(&cookies)?){return Err("not-authenticated:官方页面登录已失效，请重新登录。".into())}
                             let mut data=data.lock().unwrap();data.cookies=cookies;data.profile=profile;data.profile_error=None;data.login=json!({"status":"signed-in"});
@@ -799,6 +792,7 @@ async fn worker_connected(
                             tokio::select!{result=&mut work=>result,_=stop.cancelled()=>{operation.cancel();work.await}}
                         };
                         if let Ok(profile)=&result{
+                            remember_agent(cdp, data).await?;
                             let cookies=cdp.call(None,"Storage.getCookies",json!({})).await?;
                             let mut data=data.lock().unwrap();data.profile=profile.clone();data.profile_error=None;
                             if projection::has_login(&projection::cookie_store(&cookies)?){data.cookies=cookies;data.login=json!({"status":"signed-in"});}
@@ -825,7 +819,7 @@ async fn worker_connected(
                             if code.is_some() && verification["selectedMethod"]!="mobile_sms_verify"{return Err("请先选择接收短信验证码。".into())}
                             if code.is_none() && cooldown.is_some_and(|at|at>Instant::now()){return Err("请等待短信重发倒计时。".into())}
                             let result=tokio::select!{_=stop.cancelled()=>return Err("本次登录已取消。".into()),_=cancel.cancelled()=>return Err("账号会话已结束。".into()),result=page_action(cdp,&session,if code.is_some(){"submit"}else{"send"},code.as_deref())=>result}?;
-                            if result["ok"]!=true{return Err("无法唯一识别短信控件，请在账号浏览器中操作。".into())}
+                            if result["ok"]!=true{return Err("无法唯一识别短信控件，请在账号页面中操作。".into())}
                             sms_pending=Some(Instant::now());if code.is_none(){cooldown=Some(Instant::now()+Duration::from_secs(60));}
                             data.lock().unwrap().login["message"]=if code.is_none(){"正在等待官方短信发送确认…"}else{"正在等待官方短信验证结果…"}.into();
                             Ok(data.lock().unwrap().login.clone())
@@ -833,6 +827,7 @@ async fn worker_connected(
                         let _=reply.send(result);
                     }
                     Action::Search(request,stop,reply)=>{
+                        let keyword=request.import.is_none();
                         let work=searches.load(cdp,request,&stop);
                         let result=tokio::select!{_=cancel.cancelled()=>Err("operation-cancelled:账号会话已结束。".into()),result=work=>result};
                         if result.is_ok() && !stop.is_cancelled() && !cancel.is_cancelled() {
@@ -845,8 +840,11 @@ async fn worker_connected(
                             public.page_ready = false;
                             public.login = json!({"status":"waiting","keepPolling":true,"message":"正在切换备用代理…"});
                         }
+                        let delivered=result.is_ok();
                         let _=reply.send(result);
                         if let Some(error) = proxy_failure { return Err(error); }
+                        // A failed warm-up only leaves the next search cold.
+                        if delivered && keyword && !cancel.is_cancelled() { let _=searches.warm(cdp).await; }
                     }
                     Action::Detail(request,stop,reply)=>{
                         let operation = cancel.child_token();
@@ -908,13 +906,13 @@ async fn worker_connected(
                             let error=validate_browser_profile(cdp,&value,status).await.err();
                             let mut data=data.lock().unwrap();data.profile=value;
                             if let Some(error)=&error && error.starts_with("verification-required:"){
-                                data.login=json!({"status":"verification-required","keepPolling":true,"message":"账号需要完成安全验证，请打开官方浏览器。"});
+                                data.login=json!({"status":"verification-required","keepPolling":true,"message":"账号需要完成安全验证，请使用应用内网页登录。"});
                             }
                             data.profile_error=error;
                             continue
                         }
                         if data.lock().unwrap().login["status"]=="signed-in"{continue}
-                        let Some(mut public)=projection::project(&kind,&value) else{return Err("官方登录状态尚未识别，请在账号浏览器中查看。".into())};
+                        let Some(mut public)=projection::project(&kind,&value) else{return Err("官方登录状态尚未识别，请在账号页面中查看。".into())};
                         if public.get("smsResult").is_some(){
                             sms_pending=None;
                             let mut data=data.lock().unwrap();
@@ -937,8 +935,8 @@ async fn worker_connected(
             }
             _=tick.tick()=>{
                 searches.reap(cdp).await;
-                if process.window_seen(){return Err("观察到账号浏览器窗口出现，已结束隐藏会话。请主动打开系统浏览器完成验证。".into())}
-                if process.exited()?{return Err("network-error:账号浏览器已关闭，请重新打开验证。".into())}
+                if process.closed(){return Err("network-error:账号页面已关闭，请重新打开验证。".into())}
+                remember_agent(cdp, data).await?;
                 let signed_in=data.lock().unwrap().login["status"]=="signed-in";
                 // Hidden authenticated browsers can be reopened from the same Profile.
                 // Reclaim the entire account process tree after browser activity stops.
@@ -984,7 +982,7 @@ async fn worker_connected(
                         // Give an existing session time to bootstrap; do not open a guest login modal over it.
                         if !projection::has_login(&projection::cookie_store(&cookies)?) && page_action(cdp,&session,"login",None).await?["ok"]==true{login_clicked=true;}
                     }
-                    if sms_pending.is_some_and(|at|at.elapsed()>Duration::from_secs(15)){sms_pending=None;data.lock().unwrap().login["message"]="短信操作未收到确认，请在账号浏览器查看后重试。".into();}
+                    if sms_pending.is_some_and(|at|at.elapsed()>Duration::from_secs(15)){sms_pending=None;data.lock().unwrap().login["message"]="短信操作未收到确认，请在账号页面查看后重试。".into();}
                     if data.lock().unwrap().login.get("verification").is_some(){
                         let view=page_action(cdp,&session,"inspect",None).await?;
                         let mut data=data.lock().unwrap();data.login["verification"]["retryAfter"]=json!(cooldown.map(|at|at.saturating_duration_since(Instant::now()).as_secs().saturating_add(1)).unwrap_or(0).max(view["retryAfter"].as_u64().unwrap_or(0)));
@@ -1133,75 +1131,6 @@ mod tests {
         });
     }
     #[test]
-    fn visible_startup_reuses_one_blank_tab_before_navigation() {
-        tauri::async_runtime::block_on(async {
-            let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
-            let address = listener.local_addr().unwrap();
-            let task = tauri::async_runtime::spawn(async move {
-                let (stream, _) = listener.accept().await.unwrap();
-                let mut socket = tokio_tungstenite::accept_async(stream).await.unwrap();
-                let mut calls = Vec::new();
-                let mut queries = 0;
-                while calls.last().is_none_or(|method| method != "Page.enable") {
-                    let message = socket.next().await.unwrap().unwrap();
-                    let command: Value = serde_json::from_str(message.to_text().unwrap()).unwrap();
-                    let method = command["method"].as_str().unwrap().to_owned();
-                    let result = match method.as_str() {
-                        "Target.getTargets" => {
-                            queries += 1;
-                            if queries == 1 {
-                                json!({"targetInfos":[]})
-                            } else {
-                                json!({"targetInfos":[
-                                    {"targetId":"worker","type":"service_worker","url":"about:blank"},
-                                    {"targetId":"startup","type":"page","url":"about:blank"}
-                                ]})
-                            }
-                        }
-                        "Target.attachToTarget" => {
-                            assert_eq!(command["params"]["targetId"], "startup");
-                            assert_eq!(command["params"]["flatten"], true);
-                            json!({"sessionId":"page"})
-                        }
-                        "Network.enable" | "Page.enable" => {
-                            assert_eq!(command["sessionId"], "page");
-                            json!({})
-                        }
-                        other => panic!("startup must reuse the existing tab: {other}"),
-                    };
-                    socket
-                        .send(Message::Text(
-                            json!({"id":command["id"],"result":result})
-                                .to_string()
-                                .into(),
-                        ))
-                        .await
-                        .unwrap();
-                    calls.push(method);
-                }
-                calls
-            });
-            let mut cdp = Cdp::connect(&format!("ws://{address}"), &CancellationToken::new())
-                .await
-                .unwrap();
-            assert_eq!(
-                startup_target(&mut cdp, true).await.unwrap(),
-                ("startup".into(), "page".into())
-            );
-            let calls = task.await.unwrap();
-            assert_eq!(
-                calls,
-                [
-                    "Target.getTargets",
-                    "Target.getTargets",
-                    "Target.attachToTarget",
-                    "Network.enable",
-                    "Page.enable"
-                ]
-            );
-        });
-    }
-    #[test]
     fn homepage_profile_fallback_is_bounded_and_does_not_interrupt_login() {
         let mut data = PrivateState {
             login: json!({"status":"waiting"}),
@@ -1294,7 +1223,7 @@ mod tests {
             }));
             let (actions, _) = mpsc::channel(1);
             let (release, wait) = oneshot::channel();
-            let stopped = data.clone();
+            let (closed, finished) = oneshot::channel();
             manager.runs.lock().unwrap().insert(
                 "account".into(),
                 Run {
@@ -1303,12 +1232,11 @@ mod tests {
                     actions,
                     task: tauri::async_runtime::spawn(async move {
                         let _ = wait.await;
-                        stopped.lock().unwrap().shutdown_failure =
-                            Some("request-timeout:旧账号浏览器尚未完全退出，请稍后重试。".into());
+                        closed.send(()).unwrap();
                     }),
                 },
             );
-            // A visible window can be ready before login; opening it must not wait for a scan.
+            // A presented page can be ready before login; opening it must not wait for a scan.
             manager
                 .ready_page("account", &CancellationToken::new())
                 .await
@@ -1320,7 +1248,9 @@ mod tests {
                 _ = tokio::task::yield_now() => {}
             }
             release.send(()).unwrap();
-            assert!(stopping.await.unwrap_err().starts_with("request-timeout:"));
+            stopping.await.unwrap();
+            // The store lock is released only after the worker closed every page.
+            finished.await.unwrap();
             assert!(
                 manager
                     .ready_page("account", &CancellationToken::new())

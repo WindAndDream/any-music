@@ -5,7 +5,7 @@ use std::{
     collections::HashMap,
     sync::{Arc, Mutex},
 };
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 use tokio::sync::{OwnedSemaphorePermit, Semaphore};
 use tokio_util::sync::CancellationToken;
 
@@ -131,22 +131,22 @@ impl Schedule {
 
 #[tauri::command]
 pub async fn open_download_schedule(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     concurrency: usize,
 ) -> Result<String, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.download_schedules.open(concurrency)
 }
 
 #[tauri::command]
 pub async fn acquire_download_slot(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     schedule_id: String,
     task_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state
         .download_schedules
         .get(&schedule_id)?
@@ -156,12 +156,12 @@ pub async fn acquire_download_slot(
 
 #[tauri::command]
 pub async fn release_download_slot(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     schedule_id: String,
     task_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     if let Ok(schedule) = state.download_schedules.get(&schedule_id) {
         schedule.release(&task_id);
     }
@@ -170,11 +170,11 @@ pub async fn release_download_slot(
 
 #[tauri::command]
 pub async fn close_download_schedule(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     schedule_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     // A late close from an old renderer must never clear a newer queue.
     let mut current = state.download_schedules.0.lock().unwrap();
     if current

@@ -129,7 +129,9 @@ pub(super) async fn load(
         hidden,
         cancel,
         searches,
-        Duration::from_secs(18),
+        // The detail API starts only after the official page loads its script set, which
+        // takes tens of seconds on slow links; its SSR document carries no media URLs.
+        Duration::from_secs(40),
     )
     .await
 }
@@ -178,7 +180,7 @@ async fn load_with_budget(
                 biased;
                 _ = cancel.cancelled() => return Err("operation-cancelled:作品读取已取消。".into()),
                 event = cdp.events.recv() => {
-                    let event = event.ok_or("network-error:账号浏览器连接中断。")?;
+                    let event = event.ok_or("network-error:账号页面连接中断。")?;
                     if event["sessionId"] != session {
                         searches.observe(cdp, &event).await;
                         continue;

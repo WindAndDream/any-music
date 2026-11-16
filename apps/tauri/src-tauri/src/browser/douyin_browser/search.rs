@@ -57,14 +57,24 @@ struct Page {
     import: Option<super::import::Target>,
     last_offset: Option<u64>,
     touched: Instant,
+    /// Adopted from the standby homepage, which is already navigating or hydrated.
+    warm: bool,
 }
 pub struct Pages {
     pages: HashMap<String, Page>,
     sessions: HashMap<String, String>,
     responses: ResponseCache,
     hidden: bool,
+    /// One unsubmitted homepage (target, session) for the next keyword search. The official
+    /// homepage hydrates only after its full script set loads, which takes tens of seconds
+    /// on slow links; loading it ahead keeps that cost off later searches.
+    standby: Option<(String, String)>,
 }
 pub const HOME_URL: &str = "https://www.douyin.com/jingxuan";
+/// Loading and hydrating the official homepage, measured from navigation or standby adoption.
+const CONTROLS_BUDGET: Duration = Duration::from_secs(60);
+/// Producing the requested result page once submitted (or once a later page is due).
+const RESPONSE_BUDGET: Duration = Duration::from_secs(18);
 
 #[derive(Clone, Copy)]
 enum Progress {
@@ -92,7 +102,7 @@ fn submit_expression(query: &str) -> String {
 pub async fn submit(cdp: &mut Cdp, session: &str, query: &str) -> Result<bool, String> {
     let ready = cdp.call(Some(session), "Runtime.evaluate", json!({"expression":include_str!("prepare-search.js"),"returnByValue":true,"userGesture":true})).await?;
     if ready.get("exceptionDetails").is_some() {
-        return Err("invalid-response:无法操作官方搜索控件，请在账号浏览器中查看。".into());
+        return Err("invalid-response:无法操作官方搜索控件，请在账号页面中查看。".into());
     }
     if ready["result"]["value"] != true {
         return Ok(false);
@@ -107,7 +117,7 @@ pub async fn submit(cdp: &mut Cdp, session: &str, query: &str) -> Result<bool, S
         )
         .await?;
     if result.get("exceptionDetails").is_some() {
-        return Err("invalid-response:无法操作官方搜索控件，请在账号浏览器中查看。".into());
+        return Err("invalid-response:无法操作官方搜索控件，请在账号页面中查看。".into());
     }
     let point = &result["result"]["value"];
     let (Some(x), Some(y)) = (point["x"].as_f64(), point["y"].as_f64()) else {
@@ -215,7 +225,28 @@ impl Pages {
             sessions: HashMap::new(),
             responses: ResponseCache::default(),
             hidden,
+            standby: None,
         }
+    }
+    /// Start loading the next search homepage after a keyword result has been delivered, so
+    /// it never competes with that search for bandwidth. It stays outside `sessions`, so its
+    /// traffic is never attributed to a listing before adoption.
+    pub async fn warm(&mut self, cdp: &mut Cdp) -> Result<(), String> {
+        if self.standby.is_some() {
+            return Ok(());
+        }
+        let (target, session) = target(cdp, self.hidden).await?;
+        let navigation = cdp
+            .call(Some(&session), "Page.navigate", json!({"url":HOME_URL}))
+            .await;
+        if navigation.is_err() {
+            let _ = cdp
+                .call(None, "Target.closeTarget", json!({"targetId":target}))
+                .await;
+        }
+        navigation?;
+        self.standby = Some((target, session));
+        Ok(())
     }
     pub async fn close(&mut self, cdp: &mut Cdp, id: &str) {
         if let Some(page) = self.pages.remove(id) {
@@ -332,7 +363,16 @@ impl Pages {
             if request.offset != 0 {
                 return Err("pagination-unavailable:搜索会话已结束，请从第一页重新搜索。".into());
             }
-            let (target, session) = target(cdp, self.hidden).await?;
+            let standby = if request.import.is_none() {
+                self.standby.take()
+            } else {
+                None
+            };
+            let warm = standby.is_some();
+            let (target, session) = match standby {
+                Some(page) => page,
+                None => target(cdp, self.hidden).await?,
+            };
             self.sessions
                 .insert(session.clone(), request.listing.clone());
             if request.import.is_some() {
@@ -349,6 +389,7 @@ impl Pages {
                     import: request.import.clone(),
                     last_offset: None,
                     touched: Instant::now(),
+                    warm,
                 },
             );
         }
@@ -369,13 +410,22 @@ impl Pages {
         page.touched = Instant::now();
         let session = page.session.clone();
         let first = page.last_offset.is_none();
+        let navigate = first && !page.warm;
         let mut progress = if first {
             Progress::Controls
         } else {
             Progress::Requested
         };
         let work = async {
-            if first {
+            // Official pages can take well over ten seconds to become interactive on slow
+            // links; give loading its own budget and restart the response budget at submit.
+            let mut deadline = tokio::time::Instant::now()
+                + if first {
+                    CONTROLS_BUDGET
+                } else {
+                    RESPONSE_BUDGET
+                };
+            if navigate {
                 let url = request
                     .import
                     .as_ref()
@@ -411,8 +461,9 @@ impl Pages {
                     // Process an arrived response/cancellation before another wheel input.
                     biased;
                     _=cancel.cancelled()=>return Err("operation-cancelled:搜索已取消。".into()),
+                    _=tokio::time::sleep_until(deadline)=>return Err(if request.import.is_some() { "request-timeout:官方抖音导入页面加载超时，请稍后重试。".into() } else { progress.timeout_message() }),
                     event=cdp.events.recv()=>{
-                        let Some(event)=event else{return Err("network-error:账号浏览器连接中断。".into())};
+                        let Some(event)=event else{return Err("network-error:账号页面连接中断。".into())};
                         if event["sessionId"] == session {
                             let params = match event["method"].as_str() {
                                 Some("Network.requestWillBeSent") => json!({"type":event["params"]["type"],"response":{"url":event["params"]["request"]["url"]}}),
@@ -442,6 +493,7 @@ impl Pages {
                             submitted = submit(cdp, &session, &request.query).await?;
                             if submitted {
                                 progress = Progress::Clicked;
+                                deadline = tokio::time::Instant::now() + RESPONSE_BUDGET;
                                 inspect = tokio::time::interval(Duration::from_secs(1));
                                 inspect.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
                                 inspect.reset();
@@ -456,7 +508,7 @@ impl Pages {
                 }
             }
         };
-        let result = tokio::select! {biased; _=cancel.cancelled()=>Err("operation-cancelled:列表读取已取消。".into()),result=tokio::time::timeout(Duration::from_secs(18),work)=>result.map_err(|_| if request.import.is_some() { "request-timeout:官方抖音导入页面加载超时，请稍后重试。".into() } else { progress.timeout_message() }).and_then(|v|v)};
+        let result = tokio::select! {biased; _=cancel.cancelled()=>Err("operation-cancelled:列表读取已取消。".into()),result=work=>result};
         if result.is_ok() {
             self.pages.get_mut(&request.listing).unwrap().last_offset = Some(request.offset);
         } else {
@@ -537,6 +589,7 @@ mod tests {
                         import: None,
                         last_offset: Some(70),
                         touched: Instant::now(),
+                        warm: false,
                     },
                 );
                 assert!(

@@ -36,7 +36,7 @@ impl CatalogInput {
 // Preserve the established flat IPC arguments while validating them as one native input.
 #[allow(clippy::too_many_arguments)] // Existing flat catalog IPC plus explicit detail identity.
 pub async fn douyin_catalog_request(
-    window: tauri::WebviewWindow,
+    webview: tauri::Webview,
     state: tauri::State<'_, RuntimeState>,
     account_id: String,
     request_id: String,
@@ -48,7 +48,7 @@ pub async fn douyin_catalog_request(
     import_kind: Option<String>,
     mix_id: Option<String>,
 ) -> Result<tauri::ipc::Response, String> {
-    crate::browser::verification::require_main(&window)?;
+    crate::browser::verification::require_main(&webview)?;
     crate::model::validate_id(&request_id)?;
     let input = if let Some(kind) = import_kind {
         if query.is_some() || aweme_id.is_some() || page_kind.is_some() {
@@ -79,7 +79,7 @@ pub async fn douyin_catalog_request(
         return Err(reason.into());
     }
     let cancel = state.requests.lock().unwrap().begin(&request_id)?;
-    let deadline = tokio::time::Instant::now() + Duration::from_secs(45);
+    let deadline = tokio::time::Instant::now() + Duration::from_secs(100);
     let mut epoch = None;
     let result = async {
         if cancel.is_cancelled() {
@@ -241,14 +241,14 @@ fn persist_failure(state: &RuntimeState, id: &str, error: &str) -> Result<(), St
 /// Native cookie reconciliation and account persistence stay in the account's current epoch.
 #[tauri::command]
 pub async fn report_douyin_search_failure(
-    window: tauri::WebviewWindow,
+    webview: tauri::Webview,
     state: tauri::State<'_, RuntimeState>,
     account_id: String,
     listing_id: String,
     request_id: String,
     code: String,
 ) -> Result<String, String> {
-    crate::browser::verification::require_main(&window)?;
+    crate::browser::verification::require_main(&webview)?;
     crate::model::validate_id(&listing_id)?;
     crate::model::validate_id(&request_id)?;
     if !matches!(
@@ -301,12 +301,12 @@ pub async fn report_douyin_search_failure(
 }
 #[tauri::command]
 pub fn close_douyin_listing(
-    window: tauri::WebviewWindow,
+    webview: tauri::Webview,
     state: tauri::State<'_, RuntimeState>,
     account_id: String,
     listing_id: String,
 ) -> Result<(), String> {
-    crate::browser::verification::require_main(&window)?;
+    crate::browser::verification::require_main(&webview)?;
     state.account(&account_id)?;
     crate::model::validate_id(&listing_id)?;
     state.douyin_browsers.close(&account_id, &listing_id);

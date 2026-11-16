@@ -45,7 +45,7 @@ pub fn project(kind: &str, value: &Value) -> Option<Value> {
         });
     if code == 4031 || data["captcha"].as_str().is_some_and(|v| !v.is_empty()) {
         return Some(
-            json!({"status":"blocked","message":"官方页面要求安全验证，请主动打开官方浏览器。"}),
+            json!({"status":"blocked","message":"官方页面要求安全验证，请使用应用内网页登录。"}),
         );
     }
     if code == 2046 {
@@ -71,7 +71,7 @@ pub fn project(kind: &str, value: &Value) -> Option<Value> {
             return Some(json!({"smsResult":kind,"accepted":false}));
         }
         return Some(
-            json!({"status":"blocked","message":"官方登录请求未成功，已停止自动操作。可主动打开官方浏览器。"}),
+            json!({"status":"blocked","message":"官方登录请求未成功，已停止自动操作。可改用应用内网页登录。"}),
         );
     }
     if let Some(image) = data["qrcode"].as_str().filter(|v| v.len() <= 512 * 1024) {
@@ -135,7 +135,7 @@ pub fn validate_profile(value: &Value, status: u16) -> Result<(), String> {
 /// Retained browser credentials require verification; only their absence confirms logout.
 pub fn authentication_error(has_login: bool) -> String {
     if has_login {
-        "verification-required:账号仍有登录凭证，请在官方浏览器中完成验证后重试。".into()
+        "verification-required:账号仍有登录凭证，请在应用内官方页面中完成验证后重试。".into()
     } else {
         "not-authenticated:官方页面未登录，请重新登录。".into()
     }
