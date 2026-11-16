@@ -54,7 +54,6 @@ export function useAccountLogin(
   const loginSource = shallowRef<AccountPlatform>()
   const authentication = computed<AccountAuthentication>(() => {
     const account = loginAccount.value
-    if (account?.platformId === 'netease') return { ...BUILT_IN_AUTHENTICATION, methods: ['qr'] }
     if (!account || !isExternalAccount(account.platformId)) return BUILT_IN_AUTHENTICATION
     const config =
       loginSource.value?.available === false ? undefined : loginSource.value?.authentication
@@ -207,9 +206,10 @@ export function useAccountLogin(
   }
   function schedulePoll(expected: number) {
     stopPolling()
+    const interval = loginAccount.value?.platformId === 'netease' ? 3000 : 2000
     pollTimer = setTimeout(() => {
       void poll(expected)
-    }, 2000)
+    }, interval)
   }
   async function present(result: QrLoginResult, expected: number) {
     if (!valid(expected)) return

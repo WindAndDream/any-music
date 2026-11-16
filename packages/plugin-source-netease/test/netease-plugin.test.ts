@@ -1,5 +1,5 @@
 import { AppError } from '@any-music/core'
-import type { HttpRequest, Track } from '@any-music/core'
+import type { HttpClient, HttpRequest, Track } from '@any-music/core'
 import { describe, expect, it, vi } from 'vitest'
 
 import { NeteaseApi, NeteaseMusicSourcePlugin } from '../src/runtime'
@@ -74,6 +74,7 @@ describe('NetEase portable source', () => {
     expect(request.mock.calls[0]![0]).toMatchObject({
       credentials: 'include',
       method: 'POST',
+      headers: { Origin: 'https://music.163.com' },
       maxResponseBytes: 4194304,
     })
     expect(Object.fromEntries(new URLSearchParams(request.mock.calls[0]![0].body))).toMatchObject({
@@ -85,6 +86,36 @@ describe('NetEase portable source', () => {
     expect((await pages.next()).value).toMatchObject({ pageNumber: 2, hasMore: false })
     expect(request).toHaveBeenCalledTimes(2)
     expect(await pages.next()).toMatchObject({ done: true })
+  })
+  it.each([
+    { status: 404, body: '{}' },
+    { status: 200, body: JSON.stringify({ code: 501 }) },
+  ])('reuses the same search parameters on the web fallback for %j', async (failure) => {
+    const request = vi.fn<HttpClient['request']>()
+    request
+      .mockResolvedValueOnce({ ...failure, headers: '', statusText: '' })
+      .mockResolvedValueOnce({
+        status: 200,
+        statusText: '',
+        headers: '',
+        body: JSON.stringify({ code: 200, result: { songCount: 1, songs: [song(1)] } }),
+      })
+    const api = new NeteaseApi({ request })
+    await expect(api.search('回退', 2, 4)).resolves.toMatchObject({ songCount: 1 })
+    expect(request).toHaveBeenCalledTimes(2)
+    const [primary, fallback] = request.mock.calls.map(([input]) => input)
+    expect(primary).toMatchObject({ method: 'POST', credentials: 'include' })
+    expect(fallback).toMatchObject({ method: 'GET', credentials: 'include' })
+    const url = new URL(fallback!.url)
+    expect(url.pathname).toBe('/api/search/get/web')
+    expect(url.searchParams.toString()).toBe(primary!.body)
+  })
+  it('does not replay a search that requests security verification', async () => {
+    const { request } = setup([{ code: -460 }])
+    await expect(new NeteaseApi({ request }).search('test', 2, 0)).rejects.toMatchObject({
+      code: 'verification-required',
+    })
+    expect(request).toHaveBeenCalledOnce()
   })
   it('keeps named artists with zero IDs without rejecting a search page or inventing identities', async () => {
     const { plugin, request } = setup([
@@ -145,7 +176,7 @@ describe('NetEase portable source', () => {
       { code: 200, songs: [song(4), song(3)] },
     ])
     const listing = plugin.importFromUrl({
-      url: 'https://music.163.com/#/playlist?id=5',
+      url: 'https://music.163.com/#/discover/toplist?id=5',
       pageSize: 2,
     })
     const iterator = listing.pages()[Symbol.asyncIterator]()

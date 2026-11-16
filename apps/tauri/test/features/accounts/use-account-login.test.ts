@@ -80,11 +80,30 @@ afterEach(() => {
 })
 
 describe('account login lifecycle', () => {
-  it('offers only QR login for NetEase and does not start a system browser', async () => {
+  it('switches a failed NetEase QR session to the official browser login', async () => {
     const login = setup({ ...account, platformId: 'netease' })
-    expect(login.authentication.value.methods).toEqual(['qr'])
+    const previous = native.invoke.getMockImplementation()!
+    native.invoke.mockImplementation((name: string, input: unknown) =>
+      name === 'poll_qr_login' ? Promise.reject('状态码 8821') : previous(name, input),
+    )
+    expect(login.authentication.value.methods).toEqual(['qr', 'system-browser'])
+    await login.beginQr()
+    await vi.advanceTimersByTimeAsync(2999)
+    expect(calls('poll_qr_login')).toHaveLength(0)
+    await vi.advanceTimersByTimeAsync(1)
+    expect(login.loginPhase.value).toBe('blocked')
+    const [[, pending]] = calls('begin_qr_login')
+    expect(calls('cancel_qr_login')).toEqual([['cancel_qr_login', pending]])
+    login.chooseMethod()
     await login.beginBrowser()
-    expect(calls('begin_browser_login')).toHaveLength(0)
+    expect(calls('begin_browser_login')).toEqual([
+      [
+        'begin_browser_login',
+        expect.objectContaining({ accountId: account.id, browser: 'system' }),
+      ],
+    ])
+    await vi.advanceTimersByTimeAsync(4000)
+    expect(calls('poll_qr_login')).toHaveLength(1)
   })
   function setupHandoff() {
     native.invoke.mockImplementation(async (name: string) => {
