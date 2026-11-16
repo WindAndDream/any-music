@@ -137,22 +137,30 @@ describe('sanitizeLocalMusicLibrarySnapshot', () => {
     expect(writeStored).toHaveBeenCalledWith('local-library:v1', snapshot)
   })
 
-  it('sanitizes the history setting and trims history to valid newest records', () => {
+  it('keeps the newest entry per track and applies the limit to distinct tracks', () => {
     const track = createTrackRecord('test:audio:leaf', '叶子歌曲', 'audio', 'leaf')
+    const otherTrack = createTrackRecord('test:audio:other', '叶子歌曲', 'audio', 'other')
+    const oldestTrack = createTrackRecord('test:audio:oldest', '旧歌曲', 'audio', 'oldest')
+    const latest = {
+      ...createHistoryEntry('history:5', track.track.id, 5),
+      positionMs: 2_000,
+    }
+    const other = createHistoryEntry('history:2', otherTrack.track.id, 2)
     const snapshot = sanitizeLocalMusicLibrarySnapshot({
       ...createCurrentSnapshotBase(),
       settings: { historyLimit: 2 },
-      tracks: [track],
+      tracks: [track, otherTrack, oldestTrack],
       history: [
-        createHistoryEntry('history:3', track.track.id, 3),
-        createHistoryEntry('history:2', track.track.id, 2),
-        createHistoryEntry('history:missing', 'missing:audio:track', 2),
-        createHistoryEntry('history:1', track.track.id, 1),
+        latest,
+        createHistoryEntry('history:4', track.track.id, 4),
+        createHistoryEntry('history:missing', 'missing:audio:track', 3),
+        other,
+        createHistoryEntry('history:1', oldestTrack.track.id, 1),
       ],
     })
 
     expect(snapshot.settings).toEqual({ historyLimit: 2 })
-    expect(snapshot.history.map((entry) => entry.id)).toEqual(['history:3', 'history:2'])
+    expect(snapshot.history).toMatchObject([{ ...latest, playCount: 2 }, other])
 
     const oversized = sanitizeLocalMusicLibrarySnapshot({
       ...createCurrentSnapshotBase(),

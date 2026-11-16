@@ -25,7 +25,7 @@ Material collections use `material-collection:<uuid>` IDs. Every direct source i
 
 ## 3. Playback and Download History
 
-Selecting a track creates a playback-history entry; progress updates are throttled to one injected-storage write per second. The user can retain between 1 and 500 entries. Lowering the limit immediately removes the oldest entries, and the storage boundary enforces the same hard maximum.
+Playback history keeps one entry per stable track ID across all playback entry points. Replaying a track moves it to the top and records progress for the new play. Playlist listening counts include repeat plays while a track remains in history. Loading a snapshot keeps the newest entry for each track before applying the limit. Merging a backup also keeps the newest play per track. Progress updates are throttled to one injected-storage write per second. The user can retain between 1 and 500 tracks. Lowering the limit immediately removes the oldest entries, and the storage boundary enforces the same hard maximum.
 
 The listen-later queue uses a separate playback-queue:v1 snapshot with a runtime-owned prefix/backend containing stable track IDs, order, and playback mode. Temporary Favorites playback contexts, the current position, shuffle bags, and media URLs are session-only.
 

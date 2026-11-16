@@ -57,6 +57,37 @@ describe('S06 portable data preview and transactional import', () => {
     reloaded.write('ui-theme:v1', {})
     expect(() => another.apply('use-backup')).toThrow('stale')
   })
+  it('imports a backup with repeated plays and keeps the latest entry across both libraries', () => {
+    const { backup, source, sourceState } = setup()
+    const library = source.read<LocalMusicLibrarySnapshot>('local-library:v1')!
+    const original = backup.core.library.history[0]!
+    const other = {
+      ...original,
+      id: 'history:other',
+      trackId: 'fixture:audio:b',
+      startedAtMs: 30,
+      updatedAtMs: 30,
+    }
+    const replay = {
+      ...original,
+      id: 'history:replay',
+      startedAtMs: 25,
+      updatedAtMs: 26,
+      positionMs: 1_000,
+    }
+    const settings = { historyLimit: 2 }
+    source.write('local-library:v1', { ...library, settings, history: [other, original] })
+    backup.core.library.settings = settings
+    backup.core.library.history = [replay, { ...original, positionMs: -1 }]
+    expect(() => previewPortableProductImport(source, backup)).toThrow('History import')
+
+    backup.core.library.history = [replay, original]
+    previewPortableProductImport(source, backup).apply('keep-current')
+
+    const reloaded = createProductGenerationStorage(sourceState.raw, options)
+    expect(reloaded.snapshot().core.library.history).toEqual([other, { ...replay, playCount: 2 }])
+    expect(previewPortableProductImport(reloaded, backup).preview.alreadyImported).toBe(true)
+  })
   it('preserves newer or damaged plugin data while keeping host reads and writes independent', () => {
     for (const pluginId of ['feature.tags', 'feature.composer']) {
       for (const schemaVersion of [1, 99]) {

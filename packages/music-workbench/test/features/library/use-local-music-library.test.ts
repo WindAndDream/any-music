@@ -311,14 +311,45 @@ describe('useLocalMusicLibrary favorites', () => {
     scope.stop()
   })
 
+  it('moves a replayed track to the top and records progress for the latest play', () => {
+    const scope = effectScope()
+    const library = scope.run(useLocalMusicLibrary)!
+    const track = createTrack('bilibili')
+    const otherTrack = createTrack('douyin')
+    library.rememberTracks([track, otherTrack])
+    const oldId = library.beginHistory(track)
+    library.updateHistory(oldId, 10_000, 10_000, true)
+    const otherId = library.beginHistory(otherTrack)
+
+    vi.advanceTimersByTime(1_000)
+    const replayId = library.beginHistory({ ...track, title: '更新后的歌曲名称' })
+    library.updateHistory(oldId, 10_000, 10_000, true)
+
+    expect(library.history.value.map((entry) => entry.id)).toEqual([replayId, otherId])
+    expect(library.history.value[0]).toMatchObject({
+      trackId: track.id,
+      startedAtMs: Date.now(),
+      positionMs: 0,
+      completed: false,
+      playCount: 2,
+    })
+    library.updateHistory(replayId, 2_000, 10_000)
+    vi.advanceTimersByTime(1_000)
+    expect(repositoryMock.save.mock.lastCall?.[0].history).toEqual(library.history.value)
+    expect(library.history.value[0]?.positionMs).toBe(2_000)
+    scope.stop()
+  })
+
   it('persists a configurable history limit and immediately removes the oldest overflow', () => {
     const scope = effectScope()
     const library = scope.run(useLocalMusicLibrary)!
-    const track = createTrack()
-    library.rememberTracks([track])
-    const firstId = library.beginHistory(track)
-    const secondId = library.beginHistory(track)
-    const thirdId = library.beginHistory(track)
+    const firstTrack = createTrack()
+    const secondTrack = createTrack('bilibili')
+    const thirdTrack = createTrack('douyin')
+    library.rememberTracks([firstTrack, secondTrack, thirdTrack])
+    const firstId = library.beginHistory(firstTrack)
+    const secondId = library.beginHistory(secondTrack)
+    const thirdId = library.beginHistory(thirdTrack)
 
     library.setHistoryLimit(2)
 
