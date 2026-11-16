@@ -113,10 +113,9 @@ export function sanitizeLocalMusicLibrarySnapshot(input: unknown): LocalMusicLib
   const settings = {
     historyLimit: sanitizePlaybackHistoryLimit(settingsInput?.historyLimit),
   }
-  // v6 统一在存储边界裁剪历史，损坏快照不能绕过设置中的 500 条硬上限。
-  const history = readArray(input.history, sanitizeHistoryEntry)
-    .filter((entry) => validTrackIds.has(entry.trackId))
-    .slice(0, settings.historyLimit)
+  const history = consolidatePlaybackHistory(
+    sanitizePlaybackHistoryEntries(input.history, validTrackIds),
+  ).slice(0, settings.historyLimit)
   return {
     schemaVersion: LOCAL_MUSIC_LIBRARY_SCHEMA_VERSION,
     profile,
@@ -227,6 +226,32 @@ function sanitizePlaylist(input: unknown): MusicPlaylist | undefined {
   }
 }
 
+export function sanitizePlaybackHistoryEntries(
+  input: unknown,
+  validTrackIds: ReadonlySet<string>,
+): PlaybackHistoryEntry[] {
+  return readArray(input, sanitizeHistoryEntry).filter((entry) => validTrackIds.has(entry.trackId))
+}
+
+/** Keep the newest play's progress and consolidate counts from repeated entries. */
+export function consolidatePlaybackHistory(
+  entries: readonly PlaybackHistoryEntry[],
+  combinePlayCounts = (first: number, second: number) =>
+    Math.min(first + second, Number.MAX_SAFE_INTEGER),
+): PlaybackHistoryEntry[] {
+  const byTrackId = new Map<string, PlaybackHistoryEntry>()
+  for (const entry of entries) {
+    const latest = byTrackId.get(entry.trackId)
+    byTrackId.set(
+      entry.trackId,
+      latest
+        ? { ...latest, playCount: combinePlayCounts(latest.playCount ?? 1, entry.playCount ?? 1) }
+        : entry,
+    )
+  }
+  return [...byTrackId.values()]
+}
+
 function sanitizeHistoryEntry(input: unknown): PlaybackHistoryEntry | undefined {
   if (!isRecord(input)) return undefined
   const startedAtMs = readTimestamp(input.startedAtMs)
@@ -251,6 +276,7 @@ function sanitizeHistoryEntry(input: unknown): PlaybackHistoryEntry | undefined 
     durationMs: optionalNonNegativeNumber(input.durationMs),
     completed: input.completed,
     completedAtMs: optionalNonNegativeNumber(input.completedAtMs),
+    playCount: optionalPositiveInteger(input.playCount),
     customTrackVersion: optionalPositiveInteger(input.customTrackVersion),
   }
 }

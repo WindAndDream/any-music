@@ -514,6 +514,7 @@ function mountWorkbench(
     catalogOverlay,
     catalogOperator,
     controller,
+    themeFixture,
     presentation,
     mounted,
     factories,
@@ -537,6 +538,34 @@ function mountWorkbench(
 }
 
 describe('stable workbench lifetime', () => {
+  it('shares one history entry per track between playback entry points', async () => {
+    const { controller, themeFixture } = mountWorkbench()
+    await controller.modules.ready
+    const { features } = themeFixture
+    const first = track('one')
+    const second = track('two')
+
+    controller.playTrack(first)
+    await nextTick()
+    controller.playTrack(second)
+    await nextTick()
+    features.value.history.actions.play(first.id)
+    await nextTick()
+
+    expect(features.value.history.state.entries.map(({ trackId }) => trackId)).toEqual([
+      first.id,
+      second.id,
+    ])
+
+    controller.playFavoriteTrack(second, [first, second])
+    await nextTick()
+
+    expect(features.value.history.state.entries.map(({ trackId }) => trackId)).toEqual([
+      second.id,
+      first.id,
+    ])
+  })
+
   it('never loads blocked creation and reports its configured reason without changing data', async () => {
     const f = mountWorkbench(false, undefined, false)
     await f.controller.modules.ready

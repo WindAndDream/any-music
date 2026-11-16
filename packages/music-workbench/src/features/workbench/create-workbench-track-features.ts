@@ -76,13 +76,16 @@ export function createWorkbenchTrackFeatures(controller: WorkbenchController) {
     },
   })
   const playCountByPlaylistId = computed(() => {
-    const counts = new Map<string, number>()
-    for (const entry of c.library.history.value)
-      counts.set(entry.trackId, (counts.get(entry.trackId) ?? 0) + 1)
+    const counts = new Map(
+      c.library.history.value.map(({ trackId, playCount }) => [trackId, playCount ?? 1]),
+    )
     return new Map(
       c.library.playlists.value.map((playlist) => [
         playlist.id,
-        [...new Set(playlist.trackIds)].reduce((total, id) => total + (counts.get(id) ?? 0), 0),
+        Math.min(
+          [...new Set(playlist.trackIds)].reduce((total, id) => total + (counts.get(id) ?? 0), 0),
+          Number.MAX_SAFE_INTEGER,
+        ),
       ]),
     )
   })

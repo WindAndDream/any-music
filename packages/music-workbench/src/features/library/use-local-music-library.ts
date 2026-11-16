@@ -354,6 +354,9 @@ export function useLocalMusicLibrary() {
   function beginHistory(track: Track): string {
     const now = Date.now()
     const definition = customTrackById.get(track.id)
+    const previous = history.value.find((entry) => entry.trackId === track.id)
+    const previousPlayCount = previous ? (previous.playCount ?? 1) : 0
+    // Each play gets its own ID so progress from a replaced play cannot update its successor.
     const entry: PlaybackHistoryEntry = {
       id: `history:${crypto.randomUUID()}`,
       trackId: track.id,
@@ -362,9 +365,11 @@ export function useLocalMusicLibrary() {
       positionMs: 0,
       durationMs: track.durationMs,
       completed: false,
+      playCount: Math.min(previousPlayCount + 1, Number.MAX_SAFE_INTEGER),
       customTrackVersion: definition?.version,
     }
-    history.value = [entry, ...history.value].slice(0, historyLimit.value)
+    const otherEntries = history.value.filter(({ trackId }) => trackId !== track.id)
+    history.value = [entry, ...otherEntries].slice(0, historyLimit.value)
     schedulePersist()
     return entry.id
   }
