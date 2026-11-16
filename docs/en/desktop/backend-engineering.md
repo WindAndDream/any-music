@@ -22,7 +22,7 @@ src/
 ├── lib.rs                 # Tauri composition, IPC registration and exit cleanup
 ├── main.rs                # Executable entry point
 ├── accounts.rs + accounts/ # Account commands, login, state and usage leases
-├── browser.rs + browser/   # Manual verification, CDP, process trees, Douyin and experiments
+├── browser.rs + browser/   # Embedded account pages, CDP-subset driver, Douyin sessions and experiments
 ├── network.rs + network/   # Native HTTP, proxies and request cancellation registry
 ├── storage.rs + storage/   # Encrypted credentials, atomic files and separate product snapshots
 ├── system.rs + system/     # File saving and external application capabilities
@@ -74,6 +74,7 @@ Bilibili search already uses `native-http -> IPC -> Rust HTTP`. Shared paginatio
 ## Async state and ownership
 
 - Use async Tauri commands for network, waits and substantial work. Protect pure memory with short standard Mutex scopes; use async locks or a single actor for resources spanning await. Never hold a standard MutexGuard across await. Move blocking work to bounded blocking tasks where needed; dropping their future does not stop underlying work.
+- Synchronous Tauri commands run on the AppKit main thread on macOS, which also serves the embedded account pages. Commands that read the system credential vault (for example `request_state`) stay async: a pending Keychain authorization prompt must not freeze those pages.
 - Preserve serialized account operations, fixed generations and cancellation tokens. Deadlines cover queuing, startup and reading. Reclaim timed-out work rather than only ignoring renderer results. Preserve acknowledged target creation and bounded process-tree cleanup.
 - Pending replies in `browser/cdp.rs` have a Drop guard: an outer timeout/select dropping a future releases its slot immediately and late replies cannot satisfy another command. The reader moves JSON Values instead of cloning large bodies. Plain response Strings become bytes by ownership transfer; Base64 lengths are checked before decoding.
 - Closing a renderer listing sends cancel_request before queuing target closure and rejects late successes. The native account actor closes CDP targets and reclaims cancelled reads. Preserve the first failure and prevent late events from reviving closed listings.

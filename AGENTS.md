@@ -15,7 +15,7 @@
 | Directory                                                          | Responsibility                                                                                                                  |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `apps/userscript/src/features`                                     | Runtime source composition; consume product behavior from the shared workbench                                                  |
-| `apps/tauri`                                                       | Desktop/future mobile composition; Rust owns accounts, proxies, credentials and system-browser verification                     |
+| `apps/tauri`                                                       | Desktop/future mobile composition; Rust owns accounts, proxies, credentials and embedded account-page verification              |
 | `packages/music-workbench`                                         | Shared workbench, player, library and download orchestration with explicit runtime injection                                    |
 | `apps/userscript/src/platform`                                     | GM HTTP/storage, host DOM, cookies, media sessions and page bridges                                                             |
 | `apps/tauri/src/platform`                                          | Renderer IPC, native HTTP ports, product snapshots and file-save integration                                                    |
