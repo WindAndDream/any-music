@@ -7,7 +7,7 @@ runtimeScope: tauri
 
 Chinese counterpart: [音乐源认证](../../zh-cn/桌面端/音乐源认证.md).
 
-Authentication methods, permission to use a source without login, and an account's current login state are separate contracts. Desktop Bilibili, Douyin and NetEase accounts require successful native verification before appearing in the account list. Bilibili and Douyin offer native QR and system-browser verification where supported; NetEase offers QR login only. Douyin's existing secondary SMS verification remains a challenge within its official login flow; it is not an invented primary phone-login API.
+Authentication methods, permission to use a source without login, and an account's current login state are separate contracts. Desktop Bilibili, Douyin and NetEase accounts require successful native verification before appearing in the account list. All three offer native QR and system-browser login where supported. Douyin's secondary SMS verification is part of its official login flow.
 
 External declarative API sources declare their own QR, credential-input and SMS phone methods. System-browser authentication is reserved for built-ins and is rejected in external manifests. `allowUnauthenticated` controls the explicit **No login required** choice; it is never inferred from a failed login. Static catalogs and ordinary sandbox catalogs retain their existing account-free behavior.
 

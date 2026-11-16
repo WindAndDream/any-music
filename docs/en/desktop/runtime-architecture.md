@@ -43,7 +43,7 @@ Download directory selection lives under Settings → Network and Downloads → 
 
 ## Accounts and verification
 
-NetEase Cloud Music is built in on desktop with account-bound HTTP/media and native QR polling. Its login UI offers QR only; native login verifies the official account/profile identity before committing credentials. See the [NetEase integration record](../cross-platform/platforms/netease/api-integration.md) for protocol observations and outstanding live GM/desktop acceptance. Mobile does not register this source.
+NetEase Cloud Music is built in on desktop with account-bound HTTP/media, native QR polling, and an isolated system browser for official login and verification. Rust verifies the official account/profile identity before committing credentials. See the [NetEase integration record](../cross-platform/platforms/netease/api-integration.md) for protocol observations and outstanding live GM/desktop acceptance. Mobile does not register this source.
 
 Visible Douyin verification reuses the blank tab opened by the account browser. Rust attaches and enables response observation before navigating to the official page, without creating a second visible window. A bounded wait covers the debugging port becoming ready before the startup tab; background paths without a startup window still create a hidden target. CDP fixture tests verify reuse and command order; this change has not received a live system-browser check.
 
