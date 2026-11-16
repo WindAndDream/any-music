@@ -83,6 +83,7 @@ pub const NO_CAPTURE: Capture = Capture {
 pub struct Store {
     pub account: String,
     directory: PathBuf,
+    #[cfg(target_os = "macos")]
     identifier: [u8; 16],
     pub proxy: Option<String>,
     capture: Capture,
@@ -106,6 +107,7 @@ impl Store {
         Ok(Self {
             account: account.into(),
             directory,
+            #[cfg(target_os = "macos")]
             identifier: identifier(account),
             proxy: proxy.map(str::to_owned),
             capture,
@@ -176,6 +178,7 @@ impl ManualPage {
 }
 
 /// macOS data stores are keyed by 16 bytes; derive them from the stable account UUID.
+#[cfg(any(target_os = "macos", test))]
 pub fn identifier(account: &str) -> [u8; 16] {
     use sha2::{Digest, Sha256};
     let digest = Sha256::digest(format!("any-music-account-page:{account}"));
