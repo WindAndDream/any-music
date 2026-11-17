@@ -843,8 +843,12 @@ async fn worker_connected(
                         let delivered=result.is_ok();
                         let _=reply.send(result);
                         if let Some(error) = proxy_failure { return Err(error); }
-                        // A failed warm-up only leaves the next search cold.
-                        if delivered && keyword && !cancel.is_cancelled() { let _=searches.warm(cdp).await; }
+                        // Playback usually follows a result list. A failed warm-up only leaves
+                        // the next detail or search on a cold official page.
+                        if delivered && keyword && !cancel.is_cancelled() {
+                            let _=searches.warm_player(cdp).await;
+                            let _=searches.warm(cdp).await;
+                        }
                     }
                     Action::Detail(request,stop,reply)=>{
                         let operation = cancel.child_token();
@@ -866,8 +870,10 @@ async fn worker_connected(
                             public.page_ready = false;
                             public.login = json!({"status":"waiting","keepPolling":true,"message":"正在切换备用代理…"});
                         }
+                        let delivered = result.is_ok();
                         let _ = reply.send(result);
                         if let Some(error) = proxy_failure { return Err(error); }
+                        if delivered && !cancel.is_cancelled() { let _ = searches.warm_player(cdp).await; }
                     }
                     Action::Close(id)=>{searches.close(cdp,&id).await;}
                 }

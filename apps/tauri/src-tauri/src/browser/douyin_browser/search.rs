@@ -69,6 +69,9 @@ pub struct Pages {
     /// homepage hydrates only after its full script set loads, which takes tens of seconds
     /// on slow links; loading it ahead keeps that cost off later searches.
     standby: Option<(String, String)>,
+    /// One hydrated page (target, session) that work detail routes in-page, so playback
+    /// skips a cold official page load. Media and images are refused at the network layer.
+    player: Option<(String, String)>,
 }
 pub const HOME_URL: &str = "https://www.douyin.com/jingxuan";
 /// Loading and hydrating the official homepage, measured from navigation or standby adoption.
@@ -226,7 +229,45 @@ impl Pages {
             responses: ResponseCache::default(),
             hidden,
             standby: None,
+            player: None,
         }
+    }
+    /// Start loading the reusable work-detail page. Like the standby homepage it stays
+    /// outside `sessions`; `observe` refuses its media and image requests until adoption.
+    pub async fn warm_player(&mut self, cdp: &mut Cdp) -> Result<(), String> {
+        if self.player.is_some() {
+            return Ok(());
+        }
+        let (target, session) = target(cdp, self.hidden).await?;
+        let started = async {
+            cdp.call(
+                Some(&session),
+                "Fetch.enable",
+                json!({"patterns":[
+                    {"resourceType":"Media","requestStage":"Request"},
+                    {"resourceType":"Image","requestStage":"Request"}
+                ]}),
+            )
+            .await?;
+            cdp.call(Some(&session), "Page.navigate", json!({"url":HOME_URL}))
+                .await
+        }
+        .await;
+        if started.is_err() {
+            let _ = cdp
+                .call(None, "Target.closeTarget", json!({"targetId":target}))
+                .await;
+        }
+        started?;
+        self.player = Some((target, session));
+        Ok(())
+    }
+    pub(super) fn take_player(&mut self) -> Option<(String, String)> {
+        self.player.take()
+    }
+    /// Keep a player that delivered its detail; it stays hydrated on the work route.
+    pub(super) fn restore_player(&mut self, player: (String, String)) {
+        self.player = Some(player);
     }
     /// Start loading the next search homepage after a keyword result has been delivered, so
     /// it never competes with that search for bandwidth. It stays outside `sessions`, so its
@@ -272,6 +313,20 @@ impl Pages {
     /// Keep those exact responses bounded and account/target/keyword scoped; never refetch
     /// a signed URL or serve one listing's cursor to another listing.
     pub async fn observe(&mut self, cdp: &mut Cdp, event: &Value) {
+        if let Some((_, player)) = &self.player
+            && event["sessionId"] == player.as_str()
+        {
+            if event["method"] == "Fetch.requestPaused" {
+                let _ = cdp
+                    .call(
+                        Some(player),
+                        "Fetch.failRequest",
+                        json!({"requestId":event["params"]["requestId"],"errorReason":"Aborted"}),
+                    )
+                    .await;
+            }
+            return;
+        }
         let Some(id) = event["sessionId"]
             .as_str()
             .and_then(|session| self.sessions.get(session))
