@@ -17,7 +17,7 @@ const props = defineProps<{
   busy: boolean
   error: string
 }>()
-const emit = defineEmits<{ select: [id: string | null]; refresh: []; manage: []; close: [] }>()
+const emit = defineEmits<{ select: [id: string]; refresh: []; manage: []; close: [] }>()
 const platformName = computed(() => (props.platformId ? getPlatformName(props.platformId) : ''))
 const rows = computed(() =>
   props.accounts.map((account) => {
@@ -40,7 +40,7 @@ const rows = computed(() =>
   <AppDialog
     :open="platformId !== null"
     :title="`${platformName} · 切换账号`"
-    description="选择此平台使用的账号，或从可用账号中随机选择。"
+    description="选择此平台的默认账号，下次进入时会保留本次选择。"
     size="compact"
     @close="emit('close')"
   >
@@ -48,23 +48,12 @@ const rows = computed(() =>
       <p v-if="error" class="settings-form__error" role="alert">{{ error }}</p>
       <div class="account-switcher__options" role="group" aria-label="可用账号">
         <button
-          class="account-switcher__option"
-          type="button"
-          :aria-pressed="selectedId === null"
-          :disabled="busy"
-          @click="emit('select', null)"
-        >
-          <AppIcon name="refresh" />
-          <span><strong>随机</strong><small>从已启用的可用账号中选择</small></span>
-          <AppIcon v-if="selectedId === null" name="check" />
-        </button>
-        <button
           v-for="row in rows"
           :key="row.account.id"
           class="account-switcher__option"
           type="button"
           :aria-pressed="selectedId === row.account.id"
-          :disabled="busy || !row.account.enabled"
+          :disabled="busy || !row.account.enabled || row.account.pending"
           :title="row.name"
           @click="emit('select', row.account.id)"
         >
@@ -79,9 +68,7 @@ const rows = computed(() =>
       <p v-if="!accounts.length" class="settings-form__hint">
         还没有此平台的账号，请在账号管理中添加。
       </p>
-      <p class="settings-form__hint">
-        切换会中止此平台正在进行的请求。已有列表仍显示原内容，重新搜索或导入时使用新账号。
-      </p>
+      <p class="settings-form__hint">新搜索或导入使用所选账号，已有列表和媒体继续使用原账号。</p>
     </div>
     <template #footer>
       <div class="settings-form__footer">

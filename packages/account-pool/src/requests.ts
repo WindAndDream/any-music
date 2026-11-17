@@ -3,11 +3,9 @@ import type { AttemptResult, RoutingCancellation, RoutingClock } from '@any-musi
 
 import { AccountCatalog, validateAccountOperationPolicy } from './catalog'
 import type { AccountOperationPolicy, AccountProfile } from './catalog'
-import { AccountSelector } from './selection'
 
 export interface AccountRequestOptions<Value> {
   catalog: AccountCatalog
-  selector: AccountSelector
   platformId: string
   operation: string
   policy: AccountOperationPolicy
@@ -25,12 +23,7 @@ export function requestWithAccountPool<Value>(
 ): Promise<AttemptResult<Value>> {
   const policy = validateAccountOperationPolicy(options.policy)
   if (options.cancellation?.isCancelled()) return Promise.reject(new RoutingError('cancelled'))
-  const candidates = options.selector.order(
-    options.platformId,
-    options.operation,
-    options.catalog.eligible(options.platformId, policy),
-    policy.selection,
-  )
+  const candidates = options.catalog.eligible(options.platformId, policy)
   return runFirstSuccessful({
     candidates,
     policy,

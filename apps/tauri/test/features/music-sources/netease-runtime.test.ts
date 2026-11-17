@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { NativeAccount } from '@/features/accounts/account-runtime'
 import { AccountRuntime } from '@/features/accounts/account-runtime'
@@ -6,6 +6,14 @@ import { createBuiltInMusicSources } from '@/features/music-sources/built-in-mus
 
 const native = vi.hoisted(() => ({ invoke: vi.fn() }))
 vi.mock('@tauri-apps/api/core', () => ({ invoke: native.invoke }))
+beforeEach(() => {
+  const values = new Map<string, string>()
+  vi.stubGlobal('localStorage', {
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => values.set(key, value),
+  })
+})
+afterEach(() => vi.unstubAllGlobals())
 afterEach(() => native.invoke.mockReset())
 
 function frame(value: unknown): ArrayBuffer {

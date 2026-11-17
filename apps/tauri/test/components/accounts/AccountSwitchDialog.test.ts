@@ -56,6 +56,8 @@ describe('account switcher names', () => {
     expect(html).toContain('平台用户乙（备用账号）')
     expect(html).not.toContain('平台用户甲（备用账号）')
     expect(html).toContain('aria-pressed="true"')
+    expect(html).toContain('下次进入时会保留本次选择')
+    expect(html.match(/aria-pressed=/g)).toHaveLength(2)
   })
 
   it('retains a usable name before a session check and avoids repeating identical names', async () => {

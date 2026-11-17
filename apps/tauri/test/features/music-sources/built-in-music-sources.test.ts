@@ -1,7 +1,7 @@
 import type { MusicSourcePlugin, ResolvedMediaSource, Track, TrackPage } from '@any-music/core'
 import { AppError } from '@any-music/core'
 import { CancellationSource } from '@any-music/network-routing'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { readonly } from 'vue'
 
 import { AccountRuntime } from '@/features/accounts/account-runtime'
@@ -14,9 +14,15 @@ vi.mock('@/platform/douyin-search-verification', () => ({
 const native = vi.hoisted(() => ({ invoke: vi.fn().mockResolvedValue(undefined) }))
 vi.mock('@tauri-apps/api/core', () => ({ invoke: native.invoke }))
 beforeEach(() => {
+  const values = new Map<string, string>()
+  vi.stubGlobal('localStorage', {
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => values.set(key, value),
+  })
   native.invoke.mockClear()
   verification.verify.mockClear()
 })
+afterEach(() => vi.unstubAllGlobals())
 
 describe('account listing lifetime', () => {
   it('offers restored search verification for the challenged account within the current policy without a search', async () => {

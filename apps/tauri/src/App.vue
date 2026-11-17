@@ -56,7 +56,7 @@ const accountSelectionLabels = computed(() =>
       source.pluginId ?? source.id,
       accountRuntime.snapshot.value.accounts.find(
         (account) => account.id === accountRuntime.selectedAccountIds.value[source.id],
-      )?.name ?? '随机',
+      )?.name ?? '无可用账号',
     ]),
   ),
 )

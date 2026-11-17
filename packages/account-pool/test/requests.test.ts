@@ -2,7 +2,7 @@ import { CancellationSource, DEFAULT_ATTEMPT_POLICY } from '@any-music/network-r
 import type { RoutingClock, RoutingCancellation } from '@any-music/network-routing'
 import { describe, expect, it } from 'vitest'
 
-import { AccountCatalog, AccountSelector, requestWithAccountPool } from '../src/index'
+import { AccountCatalog, requestWithAccountPool } from '../src/index'
 import type { AccountProfile, AccountRequestOptions } from '../src/index'
 
 function setup() {
@@ -30,10 +30,9 @@ function setup() {
   const options: AccountRequestOptions<string> = {
     catalog,
     clock,
-    selector: new AccountSelector(() => 0),
     platformId: 'source',
     operation: 'search',
-    policy: { ...DEFAULT_ATTEMPT_POLICY, selection: 'random' },
+    policy: { ...DEFAULT_ATTEMPT_POLICY },
     replaySafe: true,
     execute: async (account) => account.id,
   }
@@ -41,6 +40,20 @@ function setup() {
 }
 
 describe('account request leases', () => {
+  it('keeps candidate order stable across operations and fallback attempts', async () => {
+    const { options } = setup()
+    expect((await requestWithAccountPool(options)).candidateId).toBe('a')
+    expect((await requestWithAccountPool(options)).candidateId).toBe('a')
+    const calls: string[] = []
+    options.execute = async (account) => {
+      calls.push(account.id)
+      if (account.id !== 'c') throw new Error('unavailable')
+      return account.id
+    }
+    options.onFailure = () => 'retry'
+    expect((await requestWithAccountPool(options)).candidateId).toBe('c')
+    expect(calls).toEqual(['a', 'b', 'c'])
+  })
   it('switches after a validated platform failure and preserves that error for the runtime', async () => {
     const { options, catalog, timers } = setup()
     const failure = new Error('expired')

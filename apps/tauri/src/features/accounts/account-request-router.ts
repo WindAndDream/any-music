@@ -1,4 +1,4 @@
-import { AccountCatalog, AccountSelector, requestWithAccountPool } from '@any-music/account-pool'
+import { AccountCatalog, requestWithAccountPool } from '@any-music/account-pool'
 import type { AccountOperationPolicy, AccountProfile } from '@any-music/account-pool'
 import { AppError } from '@any-music/core'
 import {
@@ -29,7 +29,6 @@ export interface AccountRequestRouterOptions {
   capabilities: { isolatedAccounts: boolean; explicitProxy: boolean }
   /** Only the runtime can identify a proxy CONNECT/authentication/handshake failure. */
   isProxyFailure(error: unknown): boolean
-  random?: () => number
 }
 
 export interface RoutedAccountRequest<Value> {
@@ -52,12 +51,10 @@ const DIRECT_ASSIGNMENT: Readonly<ProxyAssignment> = Object.freeze({
  */
 export class AccountRequestRouter {
   private readonly options: AccountRequestRouterOptions
-  private readonly selector: AccountSelector
   private readonly assignments = new Map<string, Readonly<ProxyAssignment>>()
 
   constructor(options: AccountRequestRouterOptions) {
     this.options = options
-    this.selector = new AccountSelector(options.random)
   }
 
   assignProxies(accountId: string, input: ProxyAssignment): void {
@@ -87,7 +84,7 @@ export class AccountRequestRouter {
     const policy: Readonly<AccountOperationPolicy> = catalog.getPolicy(
       request.platformId,
       request.operation,
-    ) ?? { ...DEFAULT_ATTEMPT_POLICY, selection: 'shuffle' }
+    ) ?? { ...DEFAULT_ATTEMPT_POLICY }
     if (
       !capabilities.isolatedAccounts &&
       catalog
@@ -103,7 +100,6 @@ export class AccountRequestRouter {
     try {
       const result = await requestWithAccountPool({
         catalog,
-        selector: this.selector,
         platformId: request.platformId,
         operation: request.operation,
         policy,
