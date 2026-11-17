@@ -2,7 +2,7 @@
 use super::vault;
 use crate::{browser::verification::require_main, state::RuntimeState};
 use std::sync::Mutex;
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 
 // Serializes the revision check with the atomic replacement, including concurrent IPC calls.
 static PRODUCT_WRITE: Mutex<()> = Mutex::new(());
@@ -39,11 +39,11 @@ fn validate_replacement(
 
 #[tauri::command]
 pub fn save_product_data(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     value: serde_json::Value,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let _guard = PRODUCT_WRITE.lock().map_err(|_| "产品存储锁不可用。")?;
     let bytes = serde_json::to_vec(&value).map_err(|_| "资料库序列化失败。")?;
     if bytes.len() > 32 * 1024 * 1024 {
@@ -62,10 +62,10 @@ pub fn save_product_data(
 
 #[tauri::command]
 pub fn load_product_data(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
 ) -> Result<serde_json::Value, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let path = state.directory.join("product.json");
     vault::recover_atomic(&path)?;
     if !path.exists() {

@@ -46,8 +46,9 @@ const emit = defineEmits<{ qr: []; browser: []; credentials: []; phone: []; with
       :disabled="busy"
       @click="emit('browser')"
     >
-      <AppIcon name="external-link" /><span
-        ><strong>使用系统浏览器</strong> <small>在此账号独立的浏览器窗口中登录或验证</small></span
+      <AppIcon name="layout" /><span
+        ><strong>应用内网页登录</strong>
+        <small>在应用内打开此账号独立的官方页面登录或验证</small></span
       ><AppIcon name="arrow-right" :size="18" />
     </button>
     <button

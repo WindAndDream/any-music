@@ -54,6 +54,42 @@ fn tauri_acl_rejects_every_business_core_and_official_command() {
                     continue;
                 }
                 count += 1;
+                let douyin = Origin::Remote {
+                    url: "https://www.douyin.com/jingxuan".parse().unwrap(),
+                };
+                if key == "account_page_report" {
+                    // Only embedded official pages report, and only from admitted origins.
+                    assert!(
+                        authority
+                            .resolve_access(&key, "main", "account-page-1", &douyin)
+                            .is_some()
+                    );
+                    for (webview, origin) in [
+                        ("main", Origin::Local),
+                        ("account-page-1", Origin::Local),
+                        (
+                            "account-page-1",
+                            Origin::Remote {
+                                url: "https://example.com/".parse().unwrap(),
+                            },
+                        ),
+                    ] {
+                        assert!(
+                            authority
+                                .resolve_access(&key, "main", webview, &origin)
+                                .is_none(),
+                            "{webview}: {key}"
+                        );
+                    }
+                    continue;
+                }
+                // Embedded account pages never inherit product or core authority.
+                assert!(
+                    authority
+                        .resolve_access(&key, "main", "account-page-1", &douyin)
+                        .is_none(),
+                    "account page: {key}"
+                );
                 for label in ["s03-a", "s03-b", "unknown"] {
                     assert!(
                         authority

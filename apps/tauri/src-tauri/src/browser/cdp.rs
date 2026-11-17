@@ -1,4 +1,5 @@
-//! One socket reader owns protocol ordering. Command waits never discard page events.
+//! One transport reader owns protocol ordering. Command waits never discard page events.
+//! Embedded account pages and CDP WebSockets share this reader through `Transport` frames.
 use futures_util::{SinkExt, StreamExt};
 use serde_json::{Value, json};
 use std::{
@@ -70,6 +71,12 @@ impl Drop for PendingCall {
     }
 }
 fn protocol_error(error: &Value) -> String {
+    // The embedded-page driver reports fixed native product messages.
+    if error["native"] == true
+        && let Some(message) = error["message"].as_str()
+    {
+        return message.into();
+    }
     // Recognize fixed protocol diagnostics without exposing variable upstream URLs/tokens.
     match error["message"].as_str() {
         Some(
@@ -83,6 +90,9 @@ fn protocol_error(error: &Value) -> String {
     }
     .into()
 }
+/// A protocol frame from the transport, or the fixed reason it ended.
+pub type Frame = Result<Value, &'static str>;
+
 pub struct Cdp {
     outgoing: mpsc::Sender<Value>,
     pending: Arc<Mutex<HashMap<u64, Reply>>>,
@@ -107,13 +117,46 @@ impl Cdp {
         )
         .await
         .map_err(|_| "浏览器连接超时。")?
-        .map_err(|_| "无法连接专属账号浏览器。")?;
+        .map_err(|_| "无法连接账号页面调试端口。")?;
         let (mut sink, mut source) = socket.split();
         let (outgoing, mut commands) = mpsc::channel::<Value>(32);
+        let (frames, incoming) = mpsc::channel::<Frame>(64);
+        let stopped = parent.child_token();
+        let stop = stopped.clone();
+        tauri::async_runtime::spawn(async move {
+            let reason = loop {
+                tokio::select! {
+                    _ = stop.cancelled() => break "CDP 会话已取消",
+                    command = commands.recv() => {
+                        let Some(command) = command else { break "CDP 会话已取消" };
+                        if sink.send(Message::Text(command.to_string().into())).await.is_err() { break "CDP 命令发送失败" }
+                    }
+                    message = source.next() => {
+                        let message=match message {Some(Ok(message))=>message,Some(Err(_))=>break "CDP WebSocket 读取失败",None=>break "浏览器关闭了 CDP 连接"};
+                        if message.is_close() { break "浏览器发送了 CDP 关闭消息" }
+                        if let Message::Ping(bytes) = message {
+                            if sink.send(Message::Pong(bytes)).await.is_err() { break "CDP 命令发送失败" }
+                            continue;
+                        }
+                        let Ok(value) = serde_json::from_str::<Value>(message.to_text().unwrap_or("")) else { continue };
+                        if frames.send(Ok(value)).await.is_err() { break "CDP 会话已取消" }
+                    }
+                }
+            };
+            let _ = frames.send(Err(reason)).await;
+        });
+        Ok(Self::over(outgoing, incoming, stopped))
+    }
+    /// Read replies/events from any transport. The transport receives command objects on
+    /// `outgoing` and must finish with `Err(reason)` or by dropping its frame sender.
+    pub fn over(
+        outgoing: mpsc::Sender<Value>,
+        mut incoming: mpsc::Receiver<Frame>,
+        stopped: CancellationToken,
+    ) -> Self {
         let (events_tx, events) = mpsc::channel(2048);
         let pending = Arc::new(Mutex::new(HashMap::<u64, Reply>::new()));
         let replies = pending.clone();
-        let stopped = parent.child_token();
         let stop = stopped.clone();
         let reason = Arc::new(Mutex::new("CDP 连接结束"));
         let exit_reason = reason.clone();
@@ -122,18 +165,12 @@ impl Cdp {
             loop {
                 tokio::select! {
                     _ = stop.cancelled() => { *exit_reason.lock().unwrap()="CDP 会话已取消"; break },
-                    command = commands.recv() => {
-                        let Some(command) = command else { break };
-                        if sink.send(Message::Text(command.to_string().into())).await.is_err() { *exit_reason.lock().unwrap()="CDP 命令发送失败"; break }
-                    }
-                    message = source.next() => {
-                        let message=match message {Some(Ok(message))=>message,Some(Err(_))=>{*exit_reason.lock().unwrap()="CDP WebSocket 读取失败";break},None=>{*exit_reason.lock().unwrap()="浏览器关闭了 CDP 连接";break}};
-                        if message.is_close() { *exit_reason.lock().unwrap()="浏览器发送了 CDP 关闭消息"; break }
-                        if let Message::Ping(bytes) = message {
-                            if sink.send(Message::Pong(bytes)).await.is_err() { break }
-                            continue;
-                        }
-                        let Ok(mut value) = serde_json::from_str::<Value>(message.to_text().unwrap_or("")) else { continue };
+                    frame = incoming.recv() => {
+                        let mut value = match frame {
+                            Some(Ok(value)) => value,
+                            Some(Err(reason)) => { *exit_reason.lock().unwrap()=reason; break }
+                            None => { *exit_reason.lock().unwrap()="浏览器关闭了 CDP 连接"; break }
+                        };
                         if let Some(id) = value["id"].as_u64() {
                             if let Some(reply) = replies.lock().unwrap().remove(&id) {
                                 // Upstream errors can embed URLs or tokens; only fixed messages cross the boundary.
@@ -154,19 +191,19 @@ impl Cdp {
             stop.cancel();
             for (_, reply) in replies.lock().unwrap().drain() {
                 let _ = reply.send(Err(format!(
-                    "network-error:账号浏览器连接已结束（{}）。",
+                    "network-error:账号页面连接已结束（{}）。",
                     *exit_reason.lock().unwrap()
                 )));
             }
         });
-        Ok(Self {
+        Self {
             outgoing,
             pending,
             next: 0,
             events,
             stopped,
             reason,
-        })
+        }
     }
     pub fn disconnect_reason(&self) -> String {
         self.reason.lock().unwrap().to_string()
@@ -189,7 +226,7 @@ impl Cdp {
     ) -> Result<Value, String> {
         if self.stopped.is_cancelled() {
             return Err(format!(
-                "network-error:账号浏览器连接已结束（{}）。",
+                "network-error:账号页面连接已结束（{}）。",
                 self.disconnect_reason()
             ));
         }
@@ -213,13 +250,16 @@ impl Cdp {
                 self.outgoing.send(command).await.map_err(|_| "network-error:浏览器连接已结束。".to_string())?;
                 (&mut wait).await.map_err(|_| "network-error:浏览器连接已结束。".to_string())?
             }) =>
-                result.map_err(|_| "request-timeout:浏览器操作超时，请重试或打开官方浏览器。".to_string()).and_then(|v| v),
+                result.map_err(|_| "request-timeout:浏览器操作超时，请重试。".to_string()).and_then(|v| v),
             // Closure can arrive on another runtime thread between polling the two branches.
             // Recheck the reply channel as well as prioritizing the response future.
-            _ = self.stopped.cancelled() => wait.try_recv().unwrap_or_else(|_| Err(format!("network-error:账号浏览器连接已结束（{}）。", self.disconnect_reason()))),
+            _ = self.stopped.cancelled() => wait.try_recv().unwrap_or_else(|_| Err(format!("network-error:账号页面连接已结束（{}）。", self.disconnect_reason()))),
         };
         answer.map_err(|message| {
-            if message.starts_with("network-error:") || message.starts_with("request-timeout:") {
+            // Coded native errors (`limit-exceeded:` etc.) keep their product error class.
+            if message.split_once(':').is_some_and(|(code, _)| {
+                !code.is_empty() && code.bytes().all(|b| b.is_ascii_lowercase() || b == b'-')
+            }) {
                 message
             } else {
                 format!("{method}：{message}")

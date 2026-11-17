@@ -7,7 +7,7 @@ runtimeScope: tauri
 
 Chinese counterpart: [音乐源认证](../../zh-cn/桌面端/音乐源认证.md).
 
-Authentication methods, permission to use a source without login, and an account's current login state are separate contracts. Desktop Bilibili, Douyin and NetEase accounts require successful native verification before appearing in the account list. All three offer native QR and system-browser login where supported. Douyin's secondary SMS verification is part of its official login flow.
+Authentication methods, permission to use a source without login, and an account's current login state are separate contracts. Desktop Bilibili, Douyin and NetEase accounts require successful native verification before appearing in the account list. All three offer native QR and official-page login where supported; the `system-browser` method opens the account's embedded official page inside the app. Douyin's secondary SMS verification is part of its official login flow.
 
 External declarative API sources declare their own QR, credential-input and SMS phone methods. System-browser authentication is reserved for built-ins and is rejected in external manifests. `allowUnauthenticated` controls the explicit **No login required** choice; it is never inferred from a failed login. Static catalogs and ordinary sandbox catalogs retain their existing account-free behavior.
 
@@ -57,7 +57,7 @@ Search is one bounded request per consumer page, at most 50 pages, with a 64 KiB
 
 ## Native ownership and lifetime
 
-`apps/tauri/src-tauri/src/plugins/source_auth` owns verified configuration, challenges, token storage and the host-only gateway transport. SDK Schema owns declaration shape; generic plugin VM networking remains anonymous. Built-in CookieStores, proxies and system-browser processes are never lent to this path. `am-plugin-net` remains an anonymous transport crate; the host gateway reuses its public-target/DNS policy and the native Gate's identity, epoch, budgets and delivery barriers.
+`apps/tauri/src-tauri/src/plugins/source_auth` owns verified configuration, challenges, token storage and the host-only gateway transport. SDK Schema owns declaration shape; generic plugin VM networking remains anonymous. Built-in CookieStores, proxies and embedded account pages are never lent to this path. `am-plugin-net` remains an anonymous transport crate; the host gateway reuses its public-target/DNS policy and the native Gate's identity, epoch, budgets and delivery barriers.
 
 Tokens are encrypted in the native vault and bound to installation identity, publisher and authentication configuration. Public snapshots, product backups and guest state do not contain them. A form captures the displayed configuration's native fingerprint. Native submission rechecks it before dispatch, so an update cannot redirect already-entered credentials to a replacement service. Changing authentication configuration requires fresh login. Selected public source queries use the L1 consent boundary; host notes remain L2 and Secret host data remains unavailable. Plugin installation still requires native confirmation, including user-linked networking consent.
 

@@ -4,8 +4,9 @@ import { toDataURL } from 'qrcode'
 import { computed, onScopeDispose, shallowRef, watch } from 'vue'
 import type { ShallowRef } from 'vue'
 
+import { openAccountPage } from '../../platform/account-page'
 import type { LoginPhase, LoginVerification, QrLoginResult } from './account-login'
-import { canLogin } from './account-presentation'
+import { canLogin, platformName } from './account-presentation'
 import type { AccountRuntime, NativeAccount } from './account-runtime'
 import { getAccountState } from './account-state'
 import { BUILT_IN_AUTHENTICATION, isExternalAccount } from './source-authentication'
@@ -76,6 +77,7 @@ export function useAccountLogin(
   const qrUnavailable = shallowRef(false)
   const qrFailures = new Set<string>()
   let browserSession: PendingLogin | undefined
+  let browserPage: Awaited<ReturnType<typeof openAccountPage>> | undefined
   let closingWork: Promise<void> = Promise.resolve()
   const qrImage = shallowRef('')
   const qrContent = shallowRef('')
@@ -143,6 +145,8 @@ export function useAccountLogin(
     }
     const previousBrowser = browserSession
     browserSession = undefined
+    browserPage?.dismiss()
+    browserPage = undefined
     // Reopening waits for native Profile teardown rather than racing the old visible browser.
     if (hadLogin || old || previousBrowser)
       closingWork = Promise.all([
@@ -237,7 +241,7 @@ export function useAccountLogin(
         blocked:
           capabilities.value.qrPresentation === 'handoff'
             ? '平台暂未完成授权，请重新生成二维码后重试。'
-            : '平台拒绝登录请求，请使用系统浏览器。',
+            : '平台拒绝登录请求，请改用应用内网页登录。',
       }[result.status]
     if (result.status === 'verification-required') {
       stopPolling()
@@ -469,7 +473,7 @@ export function useAccountLogin(
     busy.value = true
     error.value = ''
     loginPhase.value = 'generating'
-    loginStatus.value = '正在打开系统浏览器…'
+    loginStatus.value = '正在打开应用内登录页面…'
     const pending = { accountId: account.id, loginId: crypto.randomUUID() }
     try {
       await closingWork
@@ -478,27 +482,56 @@ export function useAccountLogin(
       await capabilityReady
       if (!valid(expected)) return
       if (capabilities.value.verification !== 'system-browser')
-        throw new Error('此设备暂不支持系统浏览器登录。')
+        throw new Error('此设备暂不支持应用内登录页面。')
       browserSession = pending
-      await invoke('begin_browser_login', { ...pending, browser: 'system' })
+      // Open the dialog first so the native page's presentation events have a receiver.
+      browserPage = await openAccountPage({
+        accountId: account.id,
+        title: `${platformName(account.platformId)} · 应用内登录`,
+        description: '在下方官方页面中完成登录与安全验证，然后点击“我已完成登录”。',
+        mode: 'page',
+        actionLabel: '我已完成登录',
+        onAction: () => void completeBrowser(),
+        onClose: () => closeBrowser(pending),
+      })
+      if (!valid(expected)) return
+      await invoke('begin_browser_login', { ...pending, browser: 'embedded' })
       if (!valid(expected)) {
         await invoke('cancel_browser_login', pending).catch(() => {})
         return
       }
       loginPhase.value = 'browser'
-      loginStatus.value = '请在打开的浏览器中完成登录与验证，然后保持窗口打开并点击“完成验证”。'
+      loginStatus.value = '请在应用内登录页面中完成登录与验证，然后点击“我已完成登录”。'
       await runtime.refresh()
     } catch (cause) {
       if (valid(expected)) {
         error.value = String(cause)
         loginPhase.value = 'choose'
-        loginStatus.value = '系统浏览器未能打开，请处理连接或浏览器问题后重试。'
+        loginStatus.value = '应用内登录页面未能打开，请处理连接问题后重试。'
         browserSession = undefined
+        browserPage?.dismiss()
+        browserPage = undefined
         await invoke('cancel_browser_login', pending).catch(() => {})
       }
     } finally {
       if (valid(expected)) busy.value = false
     }
+  }
+  /** Dismissing the page dialog ends this in-app login and returns to method selection. */
+  function closeBrowser(pending: PendingLogin) {
+    if (browserSession !== pending) return
+    browserSession = undefined
+    browserPage?.dismiss()
+    browserPage = undefined
+    generation++
+    busy.value = false
+    loginPhase.value = 'choose'
+    loginStatus.value = '已关闭应用内登录页面，可重新选择登录方式。'
+    closingWork = Promise.all([closingWork, invoke('cancel_browser_login', pending)])
+      .then(async () => {
+        if (!disposed) await runtime.refresh()
+      })
+      .catch(() => {})
   }
   function chooseSourceMethod(method: 'credentials' | 'phone') {
     const account = currentAccount()
@@ -574,19 +607,26 @@ export function useAccountLogin(
     busy.value = true
     error.value = ''
     loginStatus.value = '正在确认登录与验证结果…'
+    const page = browserPage
+    page?.update({ busy: true, status: '' })
     try {
       await invoke('complete_browser_login', browserSession)
       if (!valid(expected)) return
       browserSession = undefined
+      browserPage?.dismiss()
+      browserPage = undefined
       loginPhase.value = 'complete'
       loginStatus.value = '登录成功，登录状态已保存。'
       await runtime.refresh()
     } catch (cause) {
+      // The page dialog checks its own ownership, so its user still sees the failure.
+      page?.update({ status: String(cause) })
       if (valid(expected)) {
         error.value = String(cause)
-        loginStatus.value = '验证尚未确认，请在账号浏览器中完成登录或安全验证后重试。'
+        loginStatus.value = '验证尚未确认，请在应用内登录页面中完成登录或安全验证后重试。'
       }
     } finally {
+      page?.update({ busy: false })
       if (valid(expected)) busy.value = false
     }
   }

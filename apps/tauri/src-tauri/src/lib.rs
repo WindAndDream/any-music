@@ -106,6 +106,7 @@ pub fn run() {
                 runtime
             };
             accounts::deletion::schedule(runtime.directory.clone());
+            runtime.embedded.attach(app.handle().clone());
             app.manage(runtime);
             #[cfg(any(desktop, target_os = "android"))]
             media::start(app.handle().clone()).map_err(std::io::Error::other)?;

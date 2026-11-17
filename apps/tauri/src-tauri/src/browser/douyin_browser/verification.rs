@@ -4,7 +4,7 @@ use super::{Manager, body, search};
 use crate::{browser::cdp::Cdp, model::HttpResponse, state::RuntimeState};
 use serde_json::{Value, json};
 use std::collections::HashMap;
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 
 /// Reuse the loaded homepage or the user's matching results instead of reloading them.
 /// Only an unrelated, unchallenged route needs a return to the official search controls.
@@ -181,29 +181,28 @@ mod tests {
             {
                 let runs = manager.runs.lock().unwrap();
                 let mut data = runs.get("account-a").unwrap().public.lock().unwrap();
-                data.failure =
-                    Some("network-error:无法启动账号浏览器（Windows 错误码 5）。".into());
+                data.failure = Some("network-error:无法启动账号页面（Windows 错误码 5）。".into());
             }
             assert_eq!(
                 manager
                     .verification_response("account-a", "new")
                     .err()
                     .unwrap(),
-                "network-error:无法启动账号浏览器（Windows 错误码 5）。"
+                "network-error:无法启动账号页面（Windows 错误码 5）。"
             );
             assert_eq!(
                 manager
                     .ready_page("account-a", &CancellationToken::new())
                     .await
                     .unwrap_err(),
-                "network-error:无法启动账号浏览器（Windows 错误码 5）。"
+                "network-error:无法启动账号页面（Windows 错误码 5）。"
             );
             assert_eq!(
                 manager
                     .ready("account-a", &CancellationToken::new())
                     .await
                     .unwrap_err(),
-                "network-error:无法启动账号浏览器（Windows 错误码 5）。"
+                "network-error:无法启动账号页面（Windows 错误码 5）。"
             );
             manager
                 .runs
@@ -385,7 +384,7 @@ impl Manager {
             return Err(error.clone());
         }
         if run.cancel.is_cancelled() {
-            return Err("network-error:验证浏览器已关闭，请重新点击验证。".into());
+            return Err("network-error:验证页面已关闭，请重新点击验证。".into());
         }
         Ok(data
             .verification_response
@@ -401,13 +400,13 @@ impl Manager {
 
 #[tauri::command]
 pub async fn begin_douyin_search_verification(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     verification_id: String,
     query: String,
 ) -> Result<(), String> {
-    crate::browser::verification::require_main(&window)?;
+    crate::browser::verification::require_main(&webview)?;
     let request = search::Request::new(verification_id.clone(), query, 0)?;
     let _usage = state.use_account(&account_id, "搜索二次验证")?;
     let _handoff = state.douyin_browsers.handoff(&account_id).await;
@@ -446,12 +445,12 @@ pub async fn begin_douyin_search_verification(
 
 #[tauri::command]
 pub fn poll_douyin_search_verification(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     verification_id: String,
 ) -> Result<Option<HttpResponse>, String> {
-    crate::browser::verification::require_main(&window)?;
+    crate::browser::verification::require_main(&webview)?;
     state.account(&account_id)?;
     crate::model::validate_id(&verification_id)?;
     state
@@ -461,13 +460,13 @@ pub fn poll_douyin_search_verification(
 
 #[tauri::command]
 pub async fn end_douyin_search_verification(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     verification_id: String,
     completed: bool,
 ) -> Result<(), String> {
-    crate::browser::verification::require_main(&window)?;
+    crate::browser::verification::require_main(&webview)?;
     crate::model::validate_id(&verification_id)?;
     if !completed {
         state

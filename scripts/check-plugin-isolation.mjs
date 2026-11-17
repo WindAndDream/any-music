@@ -9,12 +9,19 @@ const root = fileURLToPath(new URL('../', import.meta.url))
 const read = (path) => readFileSync(resolve(root, path), 'utf8')
 
 /** Static complement to the native tests of Tauri's resolved runtime authority. */
+/** Official account pages are remote; they may reach exactly one report command. */
+const ACCOUNT_PAGE_ORIGINS = [
+  'https://*.douyin.com/*',
+  'https://*.bilibili.com/*',
+  'https://music.163.com/*',
+]
 export function checkIsolationConfig({
   registry,
   composition,
   build,
   permission,
   capability,
+  accountPages,
   config,
 }) {
   assert.equal((registry.match(/tauri::generate_handler!/g) ?? []).length, 1)
@@ -34,27 +41,54 @@ export function checkIsolationConfig({
   assert(composition.includes('.invoke_handler(ipc::handler())'))
   assert(build.includes('include_str!("src/ipc.rs")'))
   assert(build.includes('AppManifest::new().commands(commands)'))
-  // This permission file deliberately uses only an explicit TOML string array.
-  const array = permission.match(/commands\.allow\s*=\s*(\[[^\]]*\])/)?.[1] ?? '[]'
-  const allowed = JSON.parse(array.replace(/,(\s*\])/g, '$1'))
+  // This permission file deliberately uses only explicit TOML string arrays.
+  const permissions = Object.fromEntries(
+    [
+      ...permission.matchAll(
+        /identifier\s*=\s*"([^"]+)"[\s\S]*?commands\.allow\s*=\s*(\[[^\]]*\])/g,
+      ),
+    ].map(([, identifier, array]) => [identifier, JSON.parse(array.replace(/,(\s*\])/g, '$1'))]),
+  )
   assert.deepEqual(
-    allowed.toSorted(),
+    Object.keys(permissions).toSorted(),
+    ['allow-account-page-report', 'allow-product-commands'],
+    'Only reviewed application permission sets exist',
+  )
+  assert.deepEqual(
+    permissions['allow-product-commands'].toSorted(),
     commands
       .filter(
-        (name) => !['plugin_probe_relay', 'plugin_executor_relay', 'open_qr_login'].includes(name),
+        (name) =>
+          ![
+            'plugin_probe_relay',
+            'plugin_executor_relay',
+            'open_qr_login',
+            'account_page_report',
+          ].includes(name),
       )
       .toSorted(),
     'Desktop product permissions must cover desktop business commands without Android-only handoff',
   )
   assert.deepEqual(
+    permissions['allow-account-page-report'],
+    ['account_page_report'],
+    'Account pages may only report page observations',
+  )
+  assert.deepEqual(
     config.app.security.capabilities,
-    ['main'],
-    'Only the explicit product capability is enabled',
+    ['main', 'account-pages'],
+    'Only the explicit product and account-page capabilities are enabled',
   )
   assert.equal(capability.identifier, 'main')
   assert.deepEqual(capability.webviews, ['main'])
   assert(!capability.windows && !capability.remote, 'No inherited window or remote authority')
   assert.deepEqual(capability.permissions, ['core:default', 'allow-product-commands'])
+  assert.equal(accountPages.identifier, 'account-pages')
+  assert.deepEqual(accountPages.webviews, ['account-page-*'])
+  assert(!accountPages.windows, 'Account pages inherit no window authority')
+  assert.equal(accountPages.local, false, 'Account-page reports never accept local callers')
+  assert.deepEqual(accountPages.remote?.urls, ACCOUNT_PAGE_ORIGINS)
+  assert.deepEqual(accountPages.permissions, ['allow-account-page-report'])
   return commands
 }
 
@@ -70,6 +104,7 @@ export function inspectIsolationConfig() {
     build: read('apps/tauri/src-tauri/build.rs'),
     permission: read('apps/tauri/src-tauri/permissions/product.toml'),
     capability: JSON.parse(read('apps/tauri/src-tauri/capabilities/main.json')),
+    accountPages: JSON.parse(read('apps/tauri/src-tauri/capabilities/account-pages.json')),
     config: JSON.parse(read('apps/tauri/src-tauri/tauri.conf.json')),
   })
 }

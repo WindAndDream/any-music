@@ -31,15 +31,16 @@ fn main() {
     ] {
         println!("cargo:rerun-if-changed={path}");
     }
-    // Cargo examples do not inherit Tauri's executable resource manifest. Dialog
-    // imports require Common Controls v6 before any WebView can be constructed.
-    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows")
-        && (std::env::var_os("CARGO_FEATURE_S03_ISOLATION_PROBE").is_some()
-            || std::env::var_os("CARGO_FEATURE_S15_ACCEPTANCE").is_some())
-    {
-        println!("cargo:rustc-link-arg-examples=/MANIFEST:EMBED");
+    // Dialog imports require Common Controls v6 before any WebView can be constructed.
+    // Tauri's resource manifest reaches only executables, so library unit tests and
+    // examples would fail to load (STATUS_ENTRYPOINT_NOT_FOUND). With MSVC, embed the
+    // same dependency through the linker for every linked target instead.
+    let msvc = std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows")
+        && std::env::var("CARGO_CFG_TARGET_ENV").as_deref() == Ok("msvc");
+    if msvc {
+        println!("cargo:rustc-link-arg=/MANIFEST:EMBED");
         println!(
-            "cargo:rustc-link-arg-examples=/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'"
+            "cargo:rustc-link-arg=/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'"
         );
     }
     // Derive ACL coverage from the same registry compiled by invoke_handler.
@@ -91,8 +92,14 @@ fn main() {
     }
     // AppManifest requires a static slice; this one allocation lives for the build process.
     let commands = Box::leak(commands.into_boxed_slice());
+    let windows = if msvc {
+        tauri_build::WindowsAttributes::new_without_app_manifest()
+    } else {
+        tauri_build::WindowsAttributes::new()
+    };
     tauri_build::try_build(
         tauri_build::Attributes::new()
+            .windows_attributes(windows)
             .app_manifest(tauri_build::AppManifest::new().commands(commands)),
     )
     .expect("application permission manifest");

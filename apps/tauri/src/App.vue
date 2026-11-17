@@ -3,6 +3,7 @@ import MusicSourceWorkbench from '@any-music/music-workbench/components/music-so
 import { AppToast, provideBackNavigation, provideTrackAccountName } from '@any-music/ui'
 import { computed, useTemplateRef, watch } from 'vue'
 
+import AccountPageDialog from './components/accounts/AccountPageDialog.vue'
 import AccountSettingsOverlay from './components/accounts/AccountSettingsOverlay.vue'
 import AccountSettingsPanel from './components/accounts/AccountSettingsPanel.vue'
 import AccountSwitchDialog from './components/accounts/AccountSwitchDialog.vue'
@@ -163,6 +164,8 @@ function addSourceAccount(sourceId: string) {
             @refresh="switcher.refresh(refreshSession)"
             @manage="manageAccounts(openSettings)"
           />
+          <!-- Last, so official login/verification pages stay above settings dialogs. -->
+          <AccountPageDialog v-if="hasAccountTransport" :overlay-target="context.overlayTarget" />
         </template>
       </MusicSourceWorkbench>
     </main>

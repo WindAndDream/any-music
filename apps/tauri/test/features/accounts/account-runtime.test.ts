@@ -395,9 +395,9 @@ describe('native account composition', () => {
       const slow = runtime.run(
         'douyin',
         'search',
-        async () => new Promise<string>((resolve) => setTimeout(() => resolve('ok'), 30_000)),
+        async () => new Promise<string>((resolve) => setTimeout(() => resolve('ok'), 90_000)),
       )
-      await vi.advanceTimersByTimeAsync(30_000)
+      await vi.advanceTimersByTimeAsync(90_000)
       expect(await slow).toBe('ok')
 
       let cancelled = false
@@ -409,7 +409,7 @@ describe('native account composition', () => {
       })
       const pending = runtime.run('douyin', 'search', execute)
       const assertion = expect(pending).rejects.toMatchObject({ code: 'request-timeout' })
-      await vi.advanceTimersByTimeAsync(50_000)
+      await vi.advanceTimersByTimeAsync(105_000)
       await assertion
       expect(cancelled).toBe(true)
       expect(execute).toHaveBeenCalledOnce()

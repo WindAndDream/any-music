@@ -262,6 +262,7 @@ export class AccountRuntime {
     useSelection = true,
   ): AccountOperationPolicy {
     const isDouyinSearch = platform === 'douyin' && operation === 'search'
+    const isDouyinPlayback = platform === 'douyin' && operation === 'playback'
     const signedInAccounts =
       operation === 'session' || (platform === 'douyin' && operation === 'search')
         ? this.snapshot.value.accounts
@@ -289,10 +290,11 @@ export class AccountRuntime {
         }
       : {
           ...DEFAULT_ATTEMPT_POLICY,
-          // Native search has a 45s deadline including browser startup and queued work.
-          // Leave time for its bounded cleanup/error projection instead of cancelling at 25s.
-          attemptTimeoutMs: isDouyinSearch ? 50_000 : 25_000,
-          totalTimeoutMs: 60_000,
+          // Native search has a 100s deadline including a cold official page load and queued
+          // work. Leave time for its bounded cleanup/error projection instead of cancelling first.
+          // Native Douyin detail waits up to 45s for a cold official work page.
+          attemptTimeoutMs: isDouyinSearch ? 105_000 : isDouyinPlayback ? 50_000 : 25_000,
+          totalTimeoutMs: isDouyinSearch ? 115_000 : isDouyinPlayback ? 70_000 : 60_000,
           concurrency: 2,
           selection: 'shuffle',
           // A fast guest response must not hide an existing account's login/verification state.

@@ -1,0 +1,11 @@
+{
+  "identifier": "account-pages",
+  "platforms": ["windows", "macOS", "linux"],
+  "description": "Embedded official account pages report bounded page observations to their own native page only; no product command is reachable.",
+  "local": false,
+  "remote": {
+    "urls": ["https://*.douyin.com/*", "https://*.bilibili.com/*", "https://music.163.com/*"]
+  },
+  "permissions": ["allow-account-page-report"],
+  "webviews": ["account-page-*"]
+}

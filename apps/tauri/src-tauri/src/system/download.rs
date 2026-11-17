@@ -3,7 +3,7 @@ use serde::Serialize;
 use sha2::{Digest, Sha256};
 #[cfg(target_os = "android")]
 use tauri::Manager;
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 #[cfg(desktop)]
 use tauri_plugin_dialog::DialogExt;
 
@@ -17,14 +17,14 @@ pub struct DownloadReceipt {
 
 #[tauri::command]
 pub async fn verify_download(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     request_id: String,
     file_name: String,
     size_bytes: u64,
     sha256: String,
 ) -> Result<bool, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     if !valid_file_name(&file_name)
         || size_bytes > 512 * 1024 * 1024
         || sha256.len() != 64
@@ -53,7 +53,7 @@ pub async fn verify_download(
         }
         #[cfg(target_os = "android")]
         {
-            super::android::verify_download(window.app_handle(), &file_name, size_bytes, &sha256)
+            super::android::verify_download(webview.app_handle(), &file_name, size_bytes, &sha256)
                 .await
         }
         #[cfg(target_os = "ios")]
@@ -66,12 +66,12 @@ pub async fn verify_download(
 
 #[tauri::command]
 pub async fn save_download(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     file_name: String,
     bytes: Vec<u8>,
 ) -> Result<Option<DownloadReceipt>, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let _ = &state;
     if !valid_file_name(&file_name) || bytes.len() > 512 * 1024 * 1024 {
         return Err("下载文件超过预算或文件名无效。".into());
@@ -81,7 +81,7 @@ pub async fn save_download(
         if bytes.len() > 32 * 1024 * 1024 {
             return Err("移动保存超过 32 MiB 预算。".into());
         }
-        let app = window.app_handle().clone();
+        let app = webview.app_handle().clone();
         let receipt = DownloadReceipt {
             file_name: file_name.clone(),
             size_bytes: bytes.len() as u64,
@@ -112,7 +112,7 @@ pub async fn save_download(
             .await
             .map_err(|_| "保存任务失败。")?;
         }
-        let handle = window.clone();
+        let handle = webview.clone();
         let path = tauri::async_runtime::spawn_blocking(move || {
             handle
                 .dialog()

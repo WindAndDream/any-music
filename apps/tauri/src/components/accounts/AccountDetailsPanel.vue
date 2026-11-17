@@ -64,7 +64,7 @@ const emit = defineEmits<{
           !account.enabled
             ? '启用账号后可登录'
             : canLogin(account)
-              ? '二维码或系统浏览器'
+              ? '二维码或应用内网页'
               : isSignedIn(account)
                 ? '已登录，可检测当前状态'
                 : '登录待确认，请先检测账号'

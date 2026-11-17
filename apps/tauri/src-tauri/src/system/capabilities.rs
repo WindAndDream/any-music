@@ -114,10 +114,8 @@ pub(crate) fn require_account_platform(source: &str) -> Result<(), String> {
 }
 
 #[tauri::command]
-pub(crate) fn runtime_capabilities(
-    window: tauri::WebviewWindow,
-) -> Result<RuntimeCapabilities, String> {
-    crate::browser::verification::require_main(&window)?;
+pub(crate) fn runtime_capabilities(webview: tauri::Webview) -> Result<RuntimeCapabilities, String> {
+    crate::browser::verification::require_main(&webview)?;
     Ok(for_platform(
         Platform::current(),
         crate::plugins::target::admitted(),

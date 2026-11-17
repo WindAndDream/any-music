@@ -45,6 +45,7 @@ commands.allow = [
   "begin_douyin_search_verification",
   "poll_douyin_search_verification",
   "end_douyin_search_verification",
+  "account_page_layout",
   "register_media",
   "release_media",
   "begin_qr_login",
@@ -78,3 +79,9 @@ commands.allow = [
   "plugin_result_save",
   "plugin_diagnostics_export",
 ]
+
+# Embedded official account pages may only report bounded observations to their own actor.
+[[permission]]
+identifier = "allow-account-page-report"
+description = "Bridge observations from embedded account pages; no product operation."
+commands.allow = ["account_page_report"]

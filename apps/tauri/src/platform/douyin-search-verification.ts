@@ -2,9 +2,13 @@ import { AppError } from '@any-music/core'
 import type { CancellationSignal, HttpResponse } from '@any-music/core'
 import { invoke } from '@tauri-apps/api/core'
 
+import { openAccountPage } from './account-page'
 import { mapNativeError } from './native-http'
 
-/** Only an explicit listing action opens a visible account browser. Private CDP state stays Rust-owned. */
+/**
+ * Only an explicit listing action opens the account's in-app verification page. It stays
+ * hidden until the official page shows a challenge. Private page state stays Rust-owned.
+ */
 export async function verifyDouyinSearch(
   accountId: string,
   query: string,
@@ -17,13 +21,24 @@ export async function verifyDouyinSearch(
   if (cancellation?.isCancelled()) throw new AppError('operation-cancelled')
   const verificationId = crypto.randomUUID()
   let completed = false
-  const cancelled = () => cancellation?.isCancelled() === true
-  const detach = cancellation?.subscribe(() => {
-    void invoke('end_douyin_search_verification', {
+  let dismissed = false
+  const cancelled = () => dismissed || cancellation?.isCancelled() === true
+  const end = () =>
+    invoke('end_douyin_search_verification', {
       accountId,
       verificationId,
       completed: false,
     }).catch(() => {})
+  const detach = cancellation?.subscribe(() => void end())
+  const page = await openAccountPage({
+    accountId,
+    title: '抖音安全验证',
+    description: '请在下方完成官方验证，完成后列表会自动继续加载。',
+    mode: 'challenge',
+    onClose() {
+      dismissed = true
+      void end()
+    },
   })
   try {
     if (cancelled()) throw new AppError('operation-cancelled')
@@ -46,6 +61,7 @@ export async function verifyDouyinSearch(
         isDouyinSearchVerificationComplete({ ...response, body: new Uint8Array(response.body) })
       ) {
         onProgress?.('confirming')
+        page.update({ busy: true, status: '验证已通过，正在恢复列表…' })
         // oxlint-disable-next-line no-await-in-loop
         await invoke('end_douyin_search_verification', {
           accountId,
@@ -75,11 +91,7 @@ export async function verifyDouyinSearch(
     throw mapNativeError(error)
   } finally {
     detach?.()
-    if (!completed)
-      await invoke('end_douyin_search_verification', {
-        accountId,
-        verificationId,
-        completed: false,
-      }).catch(() => {})
+    page.dismiss()
+    if (!completed) await end()
   }
 }

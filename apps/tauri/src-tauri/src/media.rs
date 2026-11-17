@@ -18,7 +18,7 @@ use std::{
 };
 #[cfg(any(desktop, target_os = "android"))]
 use tauri::Manager;
-use tauri::WebviewWindow;
+use tauri::Webview;
 
 #[cfg(any(desktop, target_os = "android"))]
 pub(crate) mod artwork;
@@ -26,11 +26,11 @@ pub(crate) mod artwork;
 mod cache;
 #[tauri::command]
 pub fn register_artwork(
-    window: WebviewWindow,
+    webview: Webview,
     state: tauri::State<'_, RuntimeState>,
     url: String,
 ) -> Result<String, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     #[cfg(any(desktop, target_os = "android"))]
     {
         artwork::register_artwork(&state, url)
@@ -60,14 +60,14 @@ pub struct MediaGrant {
 
 #[tauri::command]
 pub fn register_media(
-    window: WebviewWindow,
+    webview: Webview,
     state: tauri::State<'_, RuntimeState>,
     account_id: Option<String>,
     url: String,
     headers: HashMap<String, String>,
     cache_identity: Option<MediaCacheIdentity>,
 ) -> Result<String, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     if *state.media_port.lock().unwrap() == 0 {
         return Err("network-error:本机媒体服务正在初始化，请重试。".into());
     }
@@ -102,11 +102,11 @@ pub fn register_media(
 
 #[tauri::command]
 pub fn release_media(
-    window: WebviewWindow,
+    webview: Webview,
     state: tauri::State<'_, RuntimeState>,
     urls: Vec<String>,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     if urls.len() > 32 {
         return Err("媒体释放数量超过预算。".into());
     }
