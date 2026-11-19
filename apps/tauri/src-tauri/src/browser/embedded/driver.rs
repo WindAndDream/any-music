@@ -91,6 +91,9 @@ impl AccountPages {
     pub fn closed(&self) -> bool {
         self.ended.load(Ordering::SeqCst)
     }
+    pub(in crate::browser) fn host(&self) -> Arc<Host> {
+        self.host.clone()
+    }
     /// Close every page and wait until the driver released them.
     pub async fn close(&mut self) {
         self.stop.cancel();
@@ -235,7 +238,13 @@ impl Driver {
         let session = command["sessionId"].as_str().map(str::to_owned);
         let method = command["method"].as_str().unwrap_or("");
         match method {
-            "Target.createTarget" => match self.create(params["newWindow"] == true).await {
+            "Target.createTarget" => match self
+                .create(
+                    params["newWindow"] == true,
+                    params["officialSearch"] == true,
+                )
+                .await
+            {
                 Ok(label) => self.reply(id, json!({"targetId": label})),
                 Err(error) => self.fail(id, &error),
             },
@@ -366,13 +375,18 @@ impl Driver {
         }
     }
 
-    async fn create(&mut self, present: bool) -> Result<String, String> {
+    async fn create(&mut self, present: bool, official_search: bool) -> Result<String, String> {
         if self.pages.len() >= 12 {
             return Err("limit-exceeded:账号页面过多，请关闭旧列表。".into());
         }
         let page = self
             .host
-            .open(&self.store, self.reports.clone(), "about:blank")
+            .open(
+                &self.store,
+                self.reports.clone(),
+                "about:blank",
+                official_search,
+            )
             .await?;
         if !self.seed.is_empty() {
             // A new persistent context has no cookies; keep stored native credentials.

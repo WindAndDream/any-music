@@ -42,6 +42,52 @@ describe('useMusicSourceWorkspace', () => {
     setActivePinia(createPinia())
   })
 
+  it('saves a hosted search card and binds a page only when the card opens', async () => {
+    repositoryMock.load.mockReturnValue({ ...createSnapshot(), drawers: [] })
+    const search = vi.fn<MusicSourcePlugin['search']>()
+    const importFromUrl = vi.fn(() => ({
+      id: 'imported',
+      title: '导入',
+      pages: () => createPages([]),
+    }))
+    const plugin = createPlugin(search, importFromUrl)
+    const getAccount = vi.fn(() => ({ id: 'account:fixture', name: '请求账号' }))
+    const hostedSearch = { sourceId: 'test', getAccount }
+    const first = createWorkspaceWithFallback(plugin, hostedSearch)
+    await first.workspace.search('抖音搜索')
+    await first.workspace.search('抖音搜索')
+    expect(first.workspace.drawers.value).toHaveLength(1)
+    const card = first.workspace.drawers.value[0]!
+    expect(card).toMatchObject({ input: '抖音搜索', hostedSearchRevision: 0 })
+    expect(getAccount).not.toHaveBeenCalled()
+    expect(search).not.toHaveBeenCalled()
+    first.workspace.persistNow()
+    const snapshot = sanitizeMusicSourceWorkspaceSnapshot(repositoryMock.save.mock.lastCall![0])
+    first.scope.stop()
+
+    repositoryMock.load.mockReturnValue(snapshot)
+    setActivePinia(createPinia())
+    const restored = createWorkspaceWithFallback(plugin, hostedSearch)
+    try {
+      expect(restored.workspace.drawers.value[0]).toMatchObject({
+        id: card.id,
+        hostedSearchRevision: 0,
+      })
+      restored.workspace.openDrawer(card.id)
+      expect(restored.workspace.drawers.value[0]).toMatchObject({
+        hostedSearchRevision: 1,
+        account: { id: 'account:fixture' },
+      })
+      await restored.workspace.retry(card.id)
+      expect(restored.workspace.drawers.value[0]?.hostedSearchRevision).toBe(2)
+      await restored.workspace.importFromUrl('https://example.com/list')
+      expect(importFromUrl).toHaveBeenCalledOnce()
+      expect(search).not.toHaveBeenCalled()
+    } finally {
+      restored.scope.stop()
+    }
+  })
+
   it.each(['search', 'import-url'] as const)(
     'retains %s results across duplicate submissions and restart, requesting only the next page',
     async (kind) => {
@@ -1214,7 +1260,10 @@ describe('useMusicSourceWorkspace', () => {
   )
 })
 
-function createWorkspaceWithFallback(plugin: MusicSourcePlugin) {
+function createWorkspaceWithFallback(
+  plugin: MusicSourcePlugin,
+  hostedSearch?: Parameters<typeof useMusicSourceWorkspace>[0]['hostedSearch'],
+) {
   const fallback = { ...plugin, descriptor: { ...plugin.descriptor, id: 'fallback' } }
   const plugins = shallowRef([plugin, fallback])
   const scope = effectScope()
@@ -1228,6 +1277,7 @@ function createWorkspaceWithFallback(plugin: MusicSourcePlugin) {
       activePlugin: plugin,
       activatePlugin: vi.fn(),
       getPlugin: (id) => plugins.value.find((item) => item.descriptor.id === id),
+      hostedSearch,
     }),
   )!
   const onError = vi.fn()

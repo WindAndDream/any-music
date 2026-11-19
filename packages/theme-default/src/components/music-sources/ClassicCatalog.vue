@@ -245,7 +245,14 @@ function finishView(element: Element): void {
             </div>
             <div class="catalog-drawer">
               <div class="catalog-drawer__panel">
+                <slot
+                  v-if="drawer.hostedSearchRevision !== undefined && $slots['catalog-results']"
+                  name="catalog-results"
+                  :drawer="drawer"
+                  :suspended="modalOpen"
+                />
                 <TrackList
+                  v-else
                   :selectable="operatorOpen"
                   :key="drawer.id"
                   :listing-id="drawer.id"

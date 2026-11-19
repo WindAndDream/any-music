@@ -24,7 +24,7 @@ import {
 } from 'vue'
 import type { MaybeRefOrGetter, ShallowRef } from 'vue'
 
-import type { SourceInvalidation } from '../../runtime/workbench-runtime'
+import type { SourceInvalidation, WorkbenchRuntime } from '../../runtime/workbench-runtime'
 import { useMusicSourceWorkspaceStore } from '../../stores/music-source-workspace-store'
 import type { NetworkProxySettings } from '../settings/network-proxy-settings'
 import { type CatalogDrawerRecipe, type CatalogRequestKind } from './music-source-workspace-state'
@@ -41,6 +41,7 @@ interface CatalogDrawerRuntime {
   requiresRestart?: boolean
   interruptionError: ShallowRef<AppErrorState | undefined>
   accountStatusVisible: ShallowRef<boolean>
+  hostedSearchRevision?: ShallowRef<number>
 }
 
 interface UseMusicSourceWorkspaceOptions {
@@ -49,6 +50,7 @@ interface UseMusicSourceWorkspaceOptions {
   activePlugin: MaybeRefOrGetter<MusicSourcePlugin>
   activatePlugin: (pluginId: string) => void
   getPlugin: (pluginId: string) => MusicSourcePlugin | undefined
+  hostedSearch?: WorkbenchRuntime['hostedCatalogSearch']
   isPluginAllowed?: (pluginId: string) => boolean
   /** 单账号运行端只复用已知身份，不为列表详情额外发起会话请求。 */
   getSourceAccount?: (pluginId: string) => TrackListing['account']
@@ -182,6 +184,7 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
       store.moveDrawerToFront(existing.id)
       store.setDrawerExpanded(existing.id, true)
       actionErrorState.value = undefined
+      if (runtimeById.get(existing.id)?.hostedSearchRevision) return
       openDrawer(existing.id)
       await runtimeById.get(existing.id)?.pendingRun
       return
@@ -206,7 +209,7 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
   async function runDrawer(drawerId: string): Promise<void> {
     const recipe = drawerRecipes.value.find((drawer) => drawer.id === drawerId)
     const runtime = runtimeById.get(drawerId)
-    if (!recipe || !runtime) return
+    if (!recipe || !runtime || runtime.hostedSearchRevision) return
     if (runtime.pendingRun) return runtime.pendingRun
 
     const task = performDrawerRequest(recipe, runtime).finally(() => {
@@ -288,6 +291,11 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
   }
 
   function retry(drawerId: string): Promise<void> {
+    const runtime = runtimeById.get(drawerId)
+    if (runtime?.hostedSearchRevision) {
+      openDrawer(drawerId)
+      return Promise.resolve()
+    }
     return runDrawer(drawerId)
   }
 
@@ -392,8 +400,15 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
     if (!recipe) return
     if (!recipe.isExpanded) store.setDrawerExpanded(drawerId, true)
     const runtime = runtimeById.get(drawerId)
-    if (runtime) runtime.accountStatusVisible.value = true
-    if (runtime?.status.value === 'idle') void runDrawer(drawerId)
+    if (!runtime) return
+    if (runtime.hostedSearchRevision) {
+      if (runtime.status.value === 'idle') {
+        runtime.account = options.hostedSearch?.getAccount()
+        runtime.hostedSearchRevision.value++
+      }
+    }
+    runtime.accountStatusVisible.value = true
+    if (!runtime.hostedSearchRevision && runtime.status.value === 'idle') void runDrawer(drawerId)
   }
 
   function toggleDrawer(drawerId: string): void {
@@ -554,6 +569,8 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
   function createDrawerView(recipe: CatalogDrawerRecipe): CatalogDrawerView {
     const runtime = runtimeById.get(recipe.id)
     const catalog = runtime?.catalog
+    const hostedSearchRevision = runtime?.hostedSearchRevision?.value
+    const result = hostedSearchRevision === undefined ? recipe.result : undefined
     const isSourceEnabled =
       isPluginEnabled(recipe.pluginId) && Boolean(options.getPlugin(recipe.pluginId))
     const status = !options.getPlugin(recipe.pluginId)
@@ -562,7 +579,7 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
         ? 'disconnected'
         : (runtime?.status.value ?? getDormantDrawerStatus(recipe.pluginId))
     const liveAccount = catalog?.account.value
-    const origin = catalog?.originAccount.value ?? liveAccount ?? recipe.result?.account
+    const origin = catalog?.originAccount.value ?? liveAccount ?? result?.account
     const account = origin
       ? {
           ...origin,
@@ -579,12 +596,13 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
       pluginName: options.getPlugin(recipe.pluginId)?.descriptor.name ?? recipe.pluginId,
       // 多账号列表尚未选出身份时保持未知，不能拿当前平台会话冒充请求账号。
       account,
+      hostedSearchRevision,
       accountStatusVisible: runtime?.accountStatusVisible.value ?? false,
-      sourceUrl: catalog?.sourceUrl.value ?? recipe.result?.sourceUrl,
+      sourceUrl: catalog?.sourceUrl.value ?? result?.sourceUrl,
       isSourceEnabled,
-      loadedPageCount: catalog?.loadedPageCount.value ?? recipe.result?.loadedPageCount ?? 0,
-      tracks: catalog?.tracks.value ?? recipe.result?.tracks ?? [],
-      total: catalog ? catalog.total.value : recipe.result?.total,
+      loadedPageCount: catalog?.loadedPageCount.value ?? result?.loadedPageCount ?? 0,
+      tracks: catalog?.tracks.value ?? result?.tracks ?? [],
+      total: catalog ? catalog.total.value : result?.total,
       hasMore:
         isSourceEnabled && isPluginAvailable(recipe.pluginId) && (catalog?.hasMore.value ?? false),
       isLoading: isSourceEnabled && (catalog?.isLoading.value ?? false),
@@ -615,10 +633,14 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
           invalidReason: shallowRef(getDormantDrawerReason(recipe.pluginId)),
           interruptionError: shallowRef(),
           accountStatusVisible: shallowRef(false),
+          hostedSearchRevision:
+            recipe.kind === 'search' && recipe.pluginId === options.hostedSearch?.sourceId
+              ? shallowRef(0)
+              : undefined,
         })
         const runtime = runtimeById.get(recipe.id)!
         const plugin = options.getPlugin(recipe.pluginId)
-        if (recipe.result && plugin) {
+        if (recipe.result && plugin && !runtime.hostedSearchRevision) {
           restoreCatalog(recipe, runtime, plugin)
         }
       }
@@ -668,6 +690,15 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
     for (const recipe of drawerRecipes.value) {
       const runtime = runtimeById.get(recipe.id)
       if (!runtime) continue
+      if (runtime.hostedSearchRevision) {
+        runtime.status.value = getDormantDrawerStatus(recipe.pluginId)
+        runtime.invalidReason.value = getDormantDrawerReason(recipe.pluginId)
+        if (runtime.status.value !== 'idle') {
+          runtime.account = undefined
+          runtime.hostedSearchRevision.value = 0
+        }
+        continue
+      }
 
       const plugin = options.getPlugin(recipe.pluginId)
       if (!plugin) {

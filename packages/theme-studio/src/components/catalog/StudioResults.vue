@@ -2,7 +2,7 @@
 import { useEditingSession, useScrollPageLoader } from '@any-music/ui/catalog'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
 import type { UiThemeFeatureMap, UiThemeHostSlots } from '@any-music/ui/theme'
-import { useTemplateRef } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 
 import StudioBatchActions from '../library/StudioBatchActions.vue'
 import StudioDisplayControls from '../library/StudioDisplayControls.vue'
@@ -12,7 +12,7 @@ import StudioTrackRow from './StudioTrackRow.vue'
 import { useStudioCatalog } from './use-studio-catalog'
 
 const props = defineProps<{ feature: UiThemeFeatureMap['catalog'] }>()
-defineSlots<UiThemeHostSlots>()
+const slots = defineSlots<UiThemeHostSlots>()
 const {
   state,
   drawer,
@@ -28,6 +28,9 @@ const {
   loadMore,
 } = useStudioCatalog(props)
 const listElement = useTemplateRef<HTMLElement>('listElement')
+const hostedResults = computed(
+  () => drawer.value?.hostedSearchRevision !== undefined && Boolean(slots['catalog-results']),
+)
 useScrollPageLoader({
   editing: useEditingSession(`pagination:${drawer.value?.id ?? 'empty'}`),
   listElement,
@@ -96,7 +99,9 @@ useScrollPageLoader({
           恢复已选歌曲原名
         </button>
       </fieldset>
+      <slot v-if="hostedResults" name="catalog-results" :drawer="drawer" />
       <div
+        v-else
         ref="listElement"
         class="studio-table-scroll"
         role="region"
@@ -172,8 +177,10 @@ useScrollPageLoader({
           </tbody>
         </table>
       </div>
-      <p v-if="!state.tracks.length && !drawer.isLoading" role="status">暂无匹配歌曲。</p>
-      <footer class="studio-results__footer">
+      <p v-if="!hostedResults && !state.tracks.length && !drawer.isLoading" role="status">
+        暂无匹配歌曲。
+      </p>
+      <footer v-if="!hostedResults" class="studio-results__footer">
         <span>已加载 {{ drawer.loadedPageCount }} 页</span>
         <span v-if="drawer.isLoading" role="status">正在加载…</span>
         <span v-else-if="!drawer.hasMore">已加载全部歌曲</span>

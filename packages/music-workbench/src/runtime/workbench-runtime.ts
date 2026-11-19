@@ -5,6 +5,7 @@ import type {
   MusicSourcePlugin,
   ResolvedMediaSource,
   Track,
+  TrackListing,
 } from '@any-music/core'
 import type { ModuleDescriptor, ModuleForm, ModuleRuntime } from '@any-music/plugin-center'
 import type { ExternalPluginPolicy } from '@any-music/plugin-center'
@@ -67,6 +68,10 @@ export interface WorkbenchRuntime {
   storage: StableValueStorage
   http: HttpClient
   builtInMusicSources: readonly MusicSourcePlugin[]
+  hostedCatalogSearch?: {
+    sourceId: string
+    getAccount(): TrackListing['account']
+  }
   configureProxy(settings: NetworkProxySettings): void
   openLogin(url: string, platformId: string): void
   prepareMedia?(track: Track, source: ResolvedMediaSource): Promise<ResolvedMediaSource>

@@ -246,6 +246,8 @@ function mountPage(mobileLayout = true) {
         'source-identity': () => h('span', { 'data-source-account': true }, '当前账号'),
         'request-account': ({ drawerId }: { drawerId: string }) =>
           h('span', { 'data-request-account': drawerId }, '原请求账号'),
+        'catalog-results': (context: { drawer: CatalogDrawerView }) =>
+          h('div', { 'data-hosted-results': context.drawer.id }),
       },
     )
   const A = defineComponent({ setup: () => () => h('main', page()) })
@@ -280,6 +282,29 @@ function click(root: CatalogTestElement, text: string) {
 }
 
 describe('classic catalog complete-root contract', () => {
+  it('shows hosted results only inside the opened card drawer', async () => {
+    const f = mountPage()
+    try {
+      f.state.activeDrawerId = null
+      f.state.drawers = [{ ...f.state.drawers[0]!, hostedSearchRevision: 1 }]
+      await nextTick()
+      expect(f.root.querySelector('[data-hosted-results]')).toBeNull()
+      click(f.root, '查看歌曲')
+      await nextTick()
+      const panel = findCatalogElement(
+        f.root,
+        (node) => node.props.class === 'catalog-drawer__panel',
+      )
+      expect(panel.querySelector('[data-hosted-results="request:stable"]')).toBeTruthy()
+      click(f.root, '返回音乐列表')
+      await nextTick()
+      expect(f.root.querySelector('[data-hosted-results]')).toBeNull()
+      expect(f.root.querySelector('[data-catalog-drawer-id="request:stable"]')).toBeTruthy()
+    } finally {
+      f.dispose()
+    }
+  })
+
   it('keeps display choices on songs while request cards use the sole default layout', async () => {
     const f = mountPage()
     const displayButton = () =>

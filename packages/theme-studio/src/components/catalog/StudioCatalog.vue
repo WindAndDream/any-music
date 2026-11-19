@@ -29,6 +29,8 @@ provideEditingSession(useEditingSession('catalog-root'))
         :feature="feature"
         ><template v-if="$slots['request-account']" #request-account="context"
           ><slot name="request-account" v-bind="context" /></template
+        ><template v-if="$slots['catalog-results']" #catalog-results="context"
+          ><slot name="catalog-results" v-bind="context" /></template
       ></StudioResults>
     </div>
   </section>

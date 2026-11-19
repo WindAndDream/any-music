@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SettingsDetailContext, SettingsSectionId } from '@any-music/ui'
+import type { CatalogDrawerView, SettingsDetailContext, SettingsSectionId } from '@any-music/ui'
 import { provideRemoteImageResolver } from '@any-music/ui'
 import { useTemplateRef } from 'vue'
 
@@ -17,6 +17,7 @@ const emit = defineEmits<{
   settingsClosed: []
 }>()
 defineSlots<{
+  'catalog-results'?: (context: { drawer: CatalogDrawerView; suspended: boolean }) => unknown
   'download-settings'?: () => unknown
   'network-settings'?: () => unknown
   'account-settings'?: (context: SettingsDetailContext) => unknown
@@ -64,6 +65,9 @@ defineExpose({
     @select-account="emit('selectAccount', $event)"
     @add-account="emit('addAccount', $event)"
   >
+    <template v-if="$slots['catalog-results']" #catalog-results="context"
+      ><slot name="catalog-results" v-bind="context"
+    /></template>
     <template v-if="$slots['download-settings']" #download-settings
       ><slot name="download-settings"
     /></template>

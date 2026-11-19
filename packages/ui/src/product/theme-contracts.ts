@@ -1,5 +1,6 @@
 import type { Slots, VNodeChild } from 'vue'
 
+import type { CatalogDrawerView } from './catalog-drawer'
 import type { ResourceCacheSettingsContext, SettingsDetailContext } from './settings-detail-context'
 import type { UiThemeFeatureMap } from './theme-features'
 import {
@@ -35,6 +36,7 @@ export interface UiThemeHostSlots {
   'external-source-settings'?: () => VNodeChild
   'source-identity'?: (context: { sourceId: string }) => VNodeChild
   'request-account'?: (context: { drawerId: string }) => VNodeChild
+  'catalog-results'?: (context: { drawer: CatalogDrawerView; suspended?: boolean }) => VNodeChild
 }
 
 export interface UiThemeRootProps {

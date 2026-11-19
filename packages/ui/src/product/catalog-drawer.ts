@@ -31,6 +31,8 @@ export interface CatalogDrawerView {
   /** False until this retained result is opened in the current session. */
   accountStatusVisible?: boolean
   accountStatus?: string
+  /** Present for search recipes whose results are supplied by the application. */
+  hostedSearchRevision?: number
   kind: CatalogRequestKind
   input: string
   title: string

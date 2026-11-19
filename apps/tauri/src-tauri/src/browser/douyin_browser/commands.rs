@@ -218,7 +218,7 @@ pub async fn douyin_catalog_request(
     result
 }
 
-fn has_pending_login(state: &RuntimeState, id: &str) -> bool {
+pub(super) fn has_pending_login(state: &RuntimeState, id: &str) -> bool {
     state.qr.lock().unwrap().contains_key(id)
         || state.browser_login_ids.lock().unwrap().contains_key(id)
 }

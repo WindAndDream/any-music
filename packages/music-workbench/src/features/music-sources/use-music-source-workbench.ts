@@ -147,6 +147,7 @@ export function useMusicSourceWorkbench(workbenchOptions: UseMusicSourceWorkbenc
     activePlugin: () => registry.activePlugin.value,
     activatePlugin: registry.activate,
     getPlugin: registry.getPlugin,
+    hostedSearch: getWorkbenchRuntime().hostedCatalogSearch,
     isPluginAllowed: (id) => sourceModuleEnabled.value(id),
     getSourceAccount: (pluginId) => {
       const known = session.getKnownSession(pluginId)

@@ -9,6 +9,7 @@ import AccountSettingsPanel from './components/accounts/AccountSettingsPanel.vue
 import AccountSwitchDialog from './components/accounts/AccountSwitchDialog.vue'
 import ProxySettingsPanel from './components/accounts/ProxySettingsPanel.vue'
 import DownloadDirectorySettings from './components/downloads/DownloadDirectorySettings.vue'
+import DouyinOfficialSearchPage from './components/music-sources/DouyinOfficialSearchPage.vue'
 import { accountStatus } from './features/accounts/account-presentation'
 import type { AccountPlatform } from './features/accounts/source-authentication'
 import { useAccountSettings } from './features/accounts/use-account-settings'
@@ -112,6 +113,20 @@ function addSourceAccount(sourceId: string) {
         @add-account="addSourceAccount"
         @settings-closed="handleSettingsClosed"
       >
+        <template
+          v-if="hasAccountTransport && nativeCapabilities.form === 'desktop'"
+          #catalog-results="{ drawer, suspended }"
+        >
+          <DouyinOfficialSearchPage
+            v-if="
+              drawer.hostedSearchRevision && drawer.isSourceEnabled && drawer.status !== 'paused'
+            "
+            :key="`${drawer.id}:${drawer.hostedSearchRevision}`"
+            :account-id="drawer.account?.id"
+            :query="drawer.input"
+            :suspended="suspended"
+          />
+        </template>
         <template #account-settings="context"
           ><AccountSettingsPanel
             v-if="hasAccountTransport"
