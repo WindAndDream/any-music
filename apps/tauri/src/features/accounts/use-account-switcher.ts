@@ -47,7 +47,7 @@ export function useAccountSwitcher(
     busy.value = false
     error.value = ''
   }
-  async function select(id: string | null, refreshSession: () => Promise<void>) {
+  async function select(id: string, refreshSession: () => Promise<void>) {
     if (!platformId.value || busy.value) return
     const current = generation
     busy.value = true

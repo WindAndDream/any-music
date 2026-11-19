@@ -77,7 +77,6 @@ describe('public account catalog', () => {
     catalog.save(account('b'))
     catalog.savePolicy('bilibili', 'search', {
       ...DEFAULT_ATTEMPT_POLICY,
-      selection: 'shuffle',
       accountIds: ['a'],
     })
     catalog.remove('a')
@@ -96,7 +95,7 @@ describe('public account catalog', () => {
     catalog.save({ ...account('challenge'), status: 'verification-required' })
     catalog.save({ ...account('blocked'), status: 'network-blocked' })
     catalog.save(account('other', 'douyin'))
-    const policy = { ...DEFAULT_ATTEMPT_POLICY, selection: 'random' as const }
+    const policy = { ...DEFAULT_ATTEMPT_POLICY }
     expect(catalog.eligible('bilibili', policy).map((entry) => entry.id)).toEqual(['ready'])
     expect(() =>
       catalog.savePolicy('bilibili', 'search', { ...policy, accountIds: ['other'] }),
@@ -112,7 +111,6 @@ describe('public account catalog', () => {
     expect(JSON.stringify(catalog.list())).not.toContain('secret')
     const policy = validateAccountOperationPolicy({
       ...DEFAULT_ATTEMPT_POLICY,
-      selection: 'random',
       password: 'secret',
     } as Parameters<typeof validateAccountOperationPolicy>[0])
     expect(JSON.stringify(policy)).not.toContain('secret')

@@ -38,6 +38,78 @@ const account = (id: string, authentication: 'anonymous' | 'credential'): Native
 })
 
 describe('native account composition', () => {
+  it.each([undefined, '{', '[]', '{"bilibili":42}', '{"bilibili":"missing"}'])(
+    'saves a stable first default with absent or invalid preferences: %s',
+    async (stored) => {
+      const key = 'any-music:tauri:selected-accounts:v1'
+      if (stored !== undefined) localStorage.setItem(key, stored)
+      native.invoke.mockResolvedValue({
+        accounts: [
+          { ...account('disabled', 'credential'), enabled: false },
+          { ...account('pending', 'credential'), pending: true },
+          account('signed-out', 'anonymous'),
+          account('first', 'credential'),
+          account('second', 'credential'),
+        ],
+        proxies: [],
+      })
+      const runtime = new AccountRuntime()
+      await runtime.initialize()
+      expect(runtime.selectedAccountIds.value).toEqual({ bilibili: 'first' })
+      expect(JSON.parse(localStorage.getItem(key)!)).toEqual({ bilibili: 'first' })
+      await runtime.refresh()
+      expect(runtime.getPolicy('bilibili', 'search').accountIds).toEqual(['first'])
+    },
+  )
+  it('retains a paused choice, replaces a disabled choice, and persists the replacement', async () => {
+    const key = 'any-music:tauri:selected-accounts:v1'
+    localStorage.setItem(key, JSON.stringify({ bilibili: 'chosen' }))
+    const paused = { ...account('chosen', 'credential'), status: 'verification-required' }
+    native.invoke.mockResolvedValue({
+      accounts: [account('first', 'credential'), paused],
+      proxies: [],
+    })
+    const runtime = new AccountRuntime()
+    await runtime.initialize()
+    expect(runtime.selectedAccountIds.value.bilibili).toBe('chosen')
+    native.invoke.mockResolvedValue({
+      accounts: [account('first', 'credential'), { ...paused, enabled: false }],
+      proxies: [],
+    })
+    await runtime.refresh()
+    expect(runtime.selectedAccountIds.value.bilibili).toBe('first')
+    const restored = new AccountRuntime()
+    await restored.initialize()
+    expect(restored.selectedAccountIds.value.bilibili).toBe('first')
+    native.invoke.mockResolvedValue({ accounts: [], proxies: [] })
+    await restored.refresh()
+    expect(restored.selectedAccountIds.value).toEqual({})
+    expect(restored.getPolicy('bilibili', 'search').accountIds).toEqual([])
+    expect(JSON.parse(localStorage.getItem(key)!)).toEqual({})
+  })
+  it.each(['search', 'import', 'playback'] as const)(
+    'uses only the saved account for repeated %s operations and preserves it after failure',
+    async (operation) => {
+      native.invoke.mockImplementation(async (command) =>
+        command === 'account_snapshot'
+          ? { accounts: [account('a', 'credential'), account('b', 'credential')], proxies: [] }
+          : undefined,
+      )
+      const runtime = new AccountRuntime()
+      await runtime.initialize()
+      await runtime.selectAccount('bilibili', 'b')
+      vi.spyOn(runtime, 'createPlugin').mockResolvedValue({} as MusicSourcePlugin)
+      const execute = vi.fn(async (selected: NativeAccount) => selected.id)
+      await expect(runtime.run('bilibili', operation, execute)).resolves.toBe('b')
+      await expect(runtime.run('bilibili', operation, execute)).resolves.toBe('b')
+      expect(execute).toHaveBeenCalledTimes(2)
+      const failure = new AppError('network-error')
+      execute.mockRejectedValueOnce(failure)
+      await expect(runtime.run('bilibili', operation, execute)).rejects.toBe(failure)
+      expect(execute).toHaveBeenCalledTimes(3)
+      expect(runtime.selectedAccountIds.value.bilibili).toBe('b')
+    },
+  )
   it.each(['bilibili', 'douyin', 'netease'])(
     'requires login before routing built-in %s content',
     async (platformId) => {
@@ -126,11 +198,6 @@ describe('native account composition', () => {
         : undefined,
     )
     await runtime.refresh()
-    runtime.setPolicy('bilibili', 'search', {
-      ...runtime.getPolicy('bilibili', 'search'),
-      mode: 'serial',
-      concurrency: 1,
-    })
     vi.spyOn(runtime, 'createPlugin').mockResolvedValue({} as MusicSourcePlugin)
     const execute = vi.fn(async () => {
       throw new AppError('operation-cancelled', '账号已删除')
@@ -140,7 +207,7 @@ describe('native account composition', () => {
     })
     expect(execute).toHaveBeenCalledOnce()
   })
-  it('falls back to available accounts when the last policy participant is removed', async () => {
+  it('uses the saved default when a listing account is removed', async () => {
     const runtime = new AccountRuntime()
     native.invoke.mockImplementation(async (command: string) =>
       command === 'account_snapshot'
@@ -148,10 +215,7 @@ describe('native account composition', () => {
         : undefined,
     )
     await runtime.refresh()
-    runtime.setPolicy('bilibili', 'search', {
-      ...runtime.getPolicy('bilibili', 'search'),
-      accountIds: ['a'],
-    })
+    await runtime.selectAccount('bilibili', 'a')
     expect(runtime.getPolicy('bilibili', 'search').accountIds).toEqual(['a'])
     native.invoke.mockImplementation(async (command: string) =>
       command === 'account_snapshot'
@@ -174,7 +238,7 @@ describe('native account composition', () => {
     await runtime.refresh()
     expect([...runtime.sessionUserNames.value]).toEqual([['a', '平台用户甲']])
   })
-  it('persists one selected identity across operations and restores automatic policies', async () => {
+  it('persists one selected identity across operations and restores it on restart', async () => {
     const runtime = new AccountRuntime()
     native.invoke.mockImplementation(async (command: string) =>
       command === 'account_snapshot'
@@ -188,12 +252,10 @@ describe('native account composition', () => {
     expect(lease.cancellation.isCancelled()).toBe(false)
     for (const operation of ['search', 'import', 'session', 'playback'] as const)
       expect(runtime.getPolicy('bilibili', operation).accountIds).toEqual(['b'])
-    expect(runtime.getPolicy('bilibili', 'search', false).accountIds).toBeUndefined()
     const restored = new AccountRuntime()
     await restored.initialize()
     expect(restored.selectedAccountIds.value.bilibili).toBe('b')
-    await restored.selectAccount('bilibili', null)
-    expect(restored.getPolicy('bilibili', 'search').accountIds).toBeUndefined()
+    expect(restored.getPolicy('bilibili', 'search').accountIds).toEqual(['b'])
     lease.release()
   })
   it('restores each platform selection with its latest native account state after reopening', async () => {
@@ -266,7 +328,7 @@ describe('native account composition', () => {
     })
     native.invoke.mockResolvedValue({ accounts: [account('a', 'credential')], proxies: [] })
     await runtime.refresh()
-    expect(runtime.selectedAccountIds.value.bilibili).toBeUndefined()
+    expect(runtime.selectedAccountIds.value.bilibili).toBe('a')
   })
   it('revokes only removed account media, publishes once and releases buffered uses', async () => {
     native.invoke.mockClear()
@@ -358,7 +420,7 @@ describe('native account composition', () => {
     expect(native.invoke.mock.calls.some(([command]) => command === 'http_request')).toBe(false)
   })
 
-  it('serializes Douyin search despite an old parallel preference and stops at the first risk challenge', async () => {
+  it('uses one Douyin account and stops at the first risk challenge', async () => {
     const runtime = new AccountRuntime()
     const accounts = ['a', 'b'].map((id) =>
       Object.assign(account(id, 'credential'), { platformId: 'douyin' as const }),
@@ -366,12 +428,6 @@ describe('native account composition', () => {
     runtime.snapshot.value = { accounts, proxies: [] }
     for (const profile of accounts)
       runtime.catalog.save({ ...profile, credentialKey: profile.id, status: 'ready' })
-    runtime.setPolicy(
-      'douyin',
-      'search',
-      { ...runtime.getPolicy('douyin', 'search'), mode: 'parallel', concurrency: 2 },
-      false,
-    )
     expect(runtime.getPolicy('douyin', 'search')).toMatchObject({ mode: 'serial', concurrency: 1 })
     vi.spyOn(runtime, 'refresh').mockResolvedValue()
     vi.spyOn(runtime, 'createPlugin').mockResolvedValue({} as MusicSourcePlugin)
@@ -438,7 +494,7 @@ describe('native account composition', () => {
       expect(execute).toHaveBeenCalledOnce()
     },
   )
-  it('prefers credentials for session state while preserving public content and explicit account scopes', async () => {
+  it('defaults to a ready signed-in account and keeps explicit choices across operations', async () => {
     const runtime = new AccountRuntime()
     runtime.snapshot.value = {
       accounts: [account('guest', 'anonymous'), account('signed-in', 'credential')],
@@ -447,13 +503,8 @@ describe('native account composition', () => {
     native.invoke.mockResolvedValue(runtime.snapshot.value)
     await runtime.refresh()
     expect(runtime.getPolicy('bilibili', 'session').accountIds).toEqual(['signed-in'])
-    expect(runtime.getPolicy('bilibili', 'search').accountIds).toBeUndefined()
-    runtime.setPolicy(
-      'bilibili',
-      'session',
-      { ...runtime.getPolicy('bilibili', 'session'), accountIds: ['guest'] },
-      false,
-    )
+    expect(runtime.getPolicy('bilibili', 'search').accountIds).toEqual(['signed-in'])
+    await runtime.selectAccount('bilibili', 'guest')
     expect(runtime.getPolicy('bilibili', 'session').accountIds).toEqual(['guest'])
   })
   it('preserves leases on rename and cancels them when the proxy changes', async () => {

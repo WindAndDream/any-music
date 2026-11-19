@@ -22,7 +22,6 @@ export interface AccountProfile {
 }
 
 export interface AccountOperationPolicy extends AttemptPolicy {
-  selection: 'random' | 'shuffle'
   /** Undefined means all eligible accounts; an empty list intentionally disables this operation. */
   accountIds?: readonly string[]
 }
@@ -194,8 +193,6 @@ export function validateAccountOperationPolicy(
   input: AccountOperationPolicy,
 ): AccountOperationPolicy {
   const policy = validateAttemptPolicy(input)
-  if (input.selection !== 'random' && input.selection !== 'shuffle')
-    throw new TypeError('Invalid account selection.')
   if (
     input.accountIds !== undefined &&
     (input.accountIds.length > 256 ||
@@ -208,7 +205,6 @@ export function validateAccountOperationPolicy(
     concurrency: policy.concurrency,
     attemptTimeoutMs: policy.attemptTimeoutMs,
     totalTimeoutMs: policy.totalTimeoutMs,
-    selection: input.selection,
     ...(input.accountIds === undefined ? {} : { accountIds: Object.freeze([...input.accountIds]) }),
   }
 }
