@@ -84,6 +84,7 @@ const allDrawerFavorited = computed(
 )
 const viewTransition = shallowRef('catalog-forward')
 let returnDrawerId = drawer.value?.id
+let listScrollTop = 0
 watch(
   () => drawer.value?.id,
   (id) => {
@@ -93,6 +94,7 @@ watch(
   },
 )
 function deactivateView(element: Element): void {
+  if (element.getAttribute('data-catalog-view') === 'lists') listScrollTop = element.scrollTop
   const root = element.getRootNode()
   const activeElement = root instanceof ShadowRoot ? root.activeElement : document.activeElement
   if (activeElement && element.contains(activeElement)) stage.value?.focus({ preventScroll: true })
@@ -102,6 +104,9 @@ function deactivateView(element: Element): void {
 function activateView(element: Element): void {
   element.removeAttribute('inert')
   element.removeAttribute('aria-hidden')
+}
+function restoreListScroll(element: Element): void {
+  if (element.getAttribute('data-catalog-view') === 'lists') element.scrollTop = listScrollTop
 }
 function toggleDrawerPinned(id: string): void {
   // Closing the dialog clears actionDrawer before this event; resolve the saved list by ID.
@@ -135,6 +140,7 @@ function finishView(element: Element): void {
         :name="viewTransition"
         @before-leave="deactivateView"
         @before-enter="activateView"
+        @enter="restoreListScroll"
         @leave-cancelled="activateView"
         @after-enter="finishView"
       >
@@ -143,6 +149,7 @@ function finishView(element: Element): void {
           class="classic-catalog__view catalog-page"
           :class="drawer ? 'catalog-page--tracks' : 'catalog-page--lists'"
           :data-catalog-view="drawer?.id ?? 'lists'"
+          :data-am-scroll-key="drawer ? undefined : 'workspace'"
         >
           <template v-if="drawer">
             <div class="catalog-page__sticky-header">
@@ -243,40 +250,42 @@ function finishView(element: Element): void {
               </header>
               <CatalogErrorNotice :drawer="drawer" @show-error="errorDrawerId = $event" />
             </div>
-            <div class="catalog-drawer">
-              <div class="catalog-drawer__panel">
-                <slot
-                  v-if="drawer.hostedSearchRevision !== undefined && $slots['catalog-results']"
-                  name="catalog-results"
-                  :drawer="drawer"
-                  :suspended="modalOpen"
-                />
-                <TrackList
-                  v-else
-                  :selectable="operatorOpen"
-                  :key="drawer.id"
-                  :listing-id="drawer.id"
-                  :tracks="state.tracks"
-                  :custom-tags-by-track-id="state.customTagsByTrackId"
-                  :current-track-id="state.currentTrackId ?? undefined"
-                  :invalid-track-ids="invalidIds"
-                  :favorite-track-ids="favoriteIds"
-                  :selected-track-ids="selectedIds"
-                  :display-mode="state.displayMode"
-                  :mobile-columns="state.mobileColumns"
-                  :download-busy="Boolean(state.downloadBusy)"
-                  :loading="drawer.isLoading || drawer.status === 'restoring'"
-                  :has-more="drawer.hasMore && drawer.isSourceEnabled"
-                  :loaded-page-count="drawer.loadedPageCount"
-                  :loaded-track-count="drawer.tracks.length"
-                  error-message=""
-                  @load-more="!drawer.isLoading && feature.actions.loadMore(drawer.id)"
-                  @select="toggleSelected"
-                  @play="play"
-                  @download="download([$event])"
-                  @favorite="feature.actions.toggleFavorite($event.id)"
-                  @show-actions="actionTrackId = $event.id"
-                />
+            <div class="catalog-page__tracks-scroll" data-am-scroll-key="workspace">
+              <div class="catalog-drawer">
+                <div class="catalog-drawer__panel">
+                  <slot
+                    v-if="drawer.hostedSearchRevision !== undefined && $slots['catalog-results']"
+                    name="catalog-results"
+                    :drawer="drawer"
+                    :suspended="modalOpen"
+                  />
+                  <TrackList
+                    v-else
+                    :selectable="operatorOpen"
+                    :key="drawer.id"
+                    :listing-id="drawer.id"
+                    :tracks="state.tracks"
+                    :custom-tags-by-track-id="state.customTagsByTrackId"
+                    :current-track-id="state.currentTrackId ?? undefined"
+                    :invalid-track-ids="invalidIds"
+                    :favorite-track-ids="favoriteIds"
+                    :selected-track-ids="selectedIds"
+                    :display-mode="state.displayMode"
+                    :mobile-columns="state.mobileColumns"
+                    :download-busy="Boolean(state.downloadBusy)"
+                    :loading="drawer.isLoading || drawer.status === 'restoring'"
+                    :has-more="drawer.hasMore && drawer.isSourceEnabled"
+                    :loaded-page-count="drawer.loadedPageCount"
+                    :loaded-track-count="drawer.tracks.length"
+                    error-message=""
+                    @load-more="!drawer.isLoading && feature.actions.loadMore(drawer.id)"
+                    @select="toggleSelected"
+                    @play="play"
+                    @download="download([$event])"
+                    @favorite="feature.actions.toggleFavorite($event.id)"
+                    @show-actions="actionTrackId = $event.id"
+                  />
+                </div>
               </div>
             </div>
           </template>
@@ -502,17 +511,18 @@ function finishView(element: Element): void {
 <style scoped>
 .classic-catalog {
   display: flex;
-  flex: 1 0 auto;
+  flex: 1;
   flex-direction: column;
   min-inline-size: 0;
-  min-block-size: 100%;
-  /* Clip translated pages without creating a nested scroll container for the sticky heading. */
-  overflow-x: clip;
+  min-block-size: 0;
+  overflow: clip;
 }
 .classic-catalog__stage {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   min-inline-size: 0;
+  min-block-size: 0;
   flex: 1;
 }
 .classic-catalog__view {

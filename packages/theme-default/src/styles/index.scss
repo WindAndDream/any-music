@@ -32,6 +32,11 @@
     container-name: am-content am-workbench;
   }
 
+  .music-app-shell__content:has(> .am-workspace-surface > .classic-catalog) {
+    overflow: clip;
+    scrollbar-gutter: auto;
+  }
+
   @media (max-width: 768px) {
     .music-app-shell .am-workspace-surface {
       // Playlist actions start at the collection surface inset, without another toolbar inset.

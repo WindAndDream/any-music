@@ -291,11 +291,16 @@ describe('classic catalog complete-root contract', () => {
       expect(f.root.querySelector('[data-hosted-results]')).toBeNull()
       click(f.root, '查看歌曲')
       await nextTick()
-      const panel = findCatalogElement(
+      const heading = findCatalogElement(
         f.root,
-        (node) => node.props.class === 'catalog-drawer__panel',
+        (node) => node.props.class === 'catalog-page__sticky-header',
       )
-      expect(panel.querySelector('[data-hosted-results="request:stable"]')).toBeTruthy()
+      const content = findCatalogElement(
+        f.root,
+        (node) => node.props.class === 'catalog-page__tracks-scroll',
+      )
+      expect(heading.parent).toBe(content.parent)
+      expect(content.querySelector('[data-hosted-results="request:stable"]')).toBeTruthy()
       click(f.root, '返回音乐列表')
       await nextTick()
       expect(f.root.querySelector('[data-hosted-results]')).toBeNull()
