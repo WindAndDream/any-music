@@ -42,49 +42,40 @@ describe('useMusicSourceWorkspace', () => {
     setActivePinia(createPinia())
   })
 
-  it('saves a hosted search card and binds a page only when the card opens', async () => {
+  it('keeps the first page and releases its reader when the detail closes during loading', async () => {
     repositoryMock.load.mockReturnValue({ ...createSnapshot(), drawers: [] })
-    const search = vi.fn<MusicSourcePlugin['search']>()
-    const importFromUrl = vi.fn(() => ({
-      id: 'imported',
-      title: '导入',
-      pages: () => createPages([]),
-    }))
-    const plugin = createPlugin(search, importFromUrl)
-    const getAccount = vi.fn(() => ({ id: 'account:fixture', name: '请求账号' }))
-    const hostedSearch = { sourceId: 'test', getAccount }
-    const first = createWorkspaceWithFallback(plugin, hostedSearch)
-    await first.workspace.search('抖音搜索')
-    await first.workspace.search('抖音搜索')
-    expect(first.workspace.drawers.value).toHaveLength(1)
-    const card = first.workspace.drawers.value[0]!
-    expect(card).toMatchObject({ input: '抖音搜索', hostedSearchRevision: 0 })
-    expect(getAccount).not.toHaveBeenCalled()
-    expect(search).not.toHaveBeenCalled()
-    first.workspace.persistNow()
-    const snapshot = sanitizeMusicSourceWorkspaceSnapshot(repositoryMock.save.mock.lastCall![0])
-    first.scope.stop()
-
-    repositoryMock.load.mockReturnValue(snapshot)
-    setActivePinia(createPinia())
-    const restored = createWorkspaceWithFallback(plugin, hostedSearch)
+    let finish!: (page: TrackPage) => void
+    const page = new Promise<TrackPage>((resolve) => {
+      finish = resolve
+    })
+    const close = vi.fn()
+    const search = () => ({
+      id: 'listing',
+      title: '结果',
+      async *pages() {
+        try {
+          yield await page
+        } finally {
+          close()
+        }
+      },
+    })
+    const { scope, workspace } = createWorkspaceWithFallback(createPlugin(search, search))
     try {
-      expect(restored.workspace.drawers.value[0]).toMatchObject({
-        id: card.id,
-        hostedSearchRevision: 0,
+      const pending = workspace.search('音乐')
+      const drawerId = workspace.drawers.value[0]!.id
+      workspace.openDrawer(drawerId)
+      workspace.closeDrawer(drawerId)
+      finish({ items: [createTrack(1)], pageNumber: 1, pageSize: 1, hasMore: true })
+      await pending
+      expect(close).toHaveBeenCalledOnce()
+      expect(workspace.drawers.value[0]).toMatchObject({
+        tracks: [createTrack(1)],
+        loadedPageCount: 1,
+        paginationLocked: true,
       })
-      restored.workspace.openDrawer(card.id)
-      expect(restored.workspace.drawers.value[0]).toMatchObject({
-        hostedSearchRevision: 1,
-        account: { id: 'account:fixture' },
-      })
-      await restored.workspace.retry(card.id)
-      expect(restored.workspace.drawers.value[0]?.hostedSearchRevision).toBe(2)
-      await restored.workspace.importFromUrl('https://example.com/list')
-      expect(importFromUrl).toHaveBeenCalledOnce()
-      expect(search).not.toHaveBeenCalled()
     } finally {
-      restored.scope.stop()
+      scope.stop()
     }
   })
 
@@ -1260,10 +1251,7 @@ describe('useMusicSourceWorkspace', () => {
   )
 })
 
-function createWorkspaceWithFallback(
-  plugin: MusicSourcePlugin,
-  hostedSearch?: Parameters<typeof useMusicSourceWorkspace>[0]['hostedSearch'],
-) {
+function createWorkspaceWithFallback(plugin: MusicSourcePlugin) {
   const fallback = { ...plugin, descriptor: { ...plugin.descriptor, id: 'fallback' } }
   const plugins = shallowRef([plugin, fallback])
   const scope = effectScope()
@@ -1277,7 +1265,6 @@ function createWorkspaceWithFallback(
       activePlugin: plugin,
       activatePlugin: vi.fn(),
       getPlugin: (id) => plugins.value.find((item) => item.descriptor.id === id),
-      hostedSearch,
     }),
   )!
   const onError = vi.fn()

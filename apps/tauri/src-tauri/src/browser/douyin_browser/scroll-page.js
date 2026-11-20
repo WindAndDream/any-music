@@ -1,4 +1,4 @@
-;(() => {
+;((delta) => {
   if (
     location.origin !== 'https://www.douyin.com' ||
     !/^\/(?:(?:jingxuan\/)?search\/|user\/self(?:\/|$)|collection\/\d+)/.test(location.pathname)
@@ -9,11 +9,13 @@
   const content =
     document.querySelector('[data-e2e="scroll-list"]') ??
     document.querySelector('a[href*="/video/"], a[href*="/note/"]')
+  const overlay = document.documentElement?.dataset.amCatalogDocument
+  const rendered = Boolean(overlay && document.querySelector('[data-am-catalog-host]'))
   let element = content?.parentElement
   while (element) {
     if (
-      element.clientHeight >= 240 &&
-      element.scrollHeight > element.clientHeight + 120 &&
+      element.clientHeight >= (rendered ? 1 : 240) &&
+      element.scrollHeight > element.clientHeight + (rendered ? 1 : 120) &&
       /auto|scroll/.test(getComputedStyle(element).overflowY)
     )
       break
@@ -21,6 +23,18 @@
   }
   const container = element ?? document.scrollingElement
   if (!container) return null
+  if (rendered) {
+    // The product scroll surface covers the original page. Demand already came
+    // from the product list, so scroll the same official result container directly.
+    if (!content) return null
+    const remaining = Math.max(
+      0,
+      container.scrollHeight - container.clientHeight - container.scrollTop,
+    )
+    if (Number.isFinite(delta) && delta > 0)
+      container.scrollBy({ top: Math.min(delta, remaining), behavior: 'instant' })
+    return { x: 0, y: 0, viewportHeight: container.clientHeight, remaining, embedded: true }
+  }
   // Only measure here. Rust sends bounded browser-native wheel input and owns its
   // timing/cancellation; no page animation can outlive a pending consumer read.
   const bounds = element

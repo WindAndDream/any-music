@@ -282,6 +282,16 @@
   .studio-results {
     min-inline-size: 0;
   }
+  .studio-catalog-tracks {
+    position: relative;
+    max-block-size: min(55dvh, 42rem);
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+  .studio-catalog-tracks--native {
+    block-size: min(55dvh, 42rem);
+  }
   .studio-results__heading {
     align-items: start;
     overflow-wrap: anywhere;

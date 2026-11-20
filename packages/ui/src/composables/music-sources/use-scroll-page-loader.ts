@@ -7,8 +7,8 @@ import type { VirtualScrollMetrics } from '../virtual-scroll/use-virtual-scroll-
 interface UseScrollPageLoaderOptions {
   editing?: EditingSession
   listElement: MaybeRefOrGetter<HTMLElement | null>
-  /** Nonvirtual root override; virtual lists use their context's root. Null waits for mount. */
-  scrollElement?: MaybeRefOrGetter<HTMLElement | null>
+  /** Nonvirtual root override. Null waits for mount; undefined discovers the nearest root. */
+  scrollElement?: MaybeRefOrGetter<HTMLElement | null | undefined>
   /** Accepts the fixed/dynamic list's full geometry without observing its mounted rows. */
   virtualList?: {
     totalSize: MaybeRefOrGetter<number>
@@ -27,6 +27,10 @@ interface UseScrollPageLoaderOptions {
   loadNext: () => void
   /** Disable background filling for retained discovery results; explicit scrolling still pages. */
   fillShortList?: MaybeRefOrGetter<boolean>
+  /** Start one page ahead on downward input, using the current viewport height. */
+  prefetch?: MaybeRefOrGetter<boolean>
+  /** Restore the current list's position from its editing scope before listening for scroll. */
+  restoreScroll?: boolean
 }
 
 interface PageAdmission {
@@ -34,10 +38,22 @@ interface PageAdmission {
   previousPageNumber: number
   wasLoading: boolean
   canRetry: boolean
+  scrollTop?: number
 }
 const pageAdmissionKey = editingStateKey<PageAdmission>('scroll-page-loader:admission')
 function createAdmission(): PageAdmission {
   return { requestedPageNumber: -1, previousPageNumber: 0, wasLoading: false, canRetry: false }
+}
+
+/** A native viewport and its Vue fallback share the same editing-session position. */
+export function getPageScrollCheckpoint(editing: EditingSession) {
+  const admission = editing.state(pageAdmissionKey, createAdmission)
+  return {
+    read: () => admission.scrollTop,
+    save: (position: number) => {
+      if (Number.isFinite(position) && position >= 0) admission.scrollTop = position
+    },
+  }
 }
 
 function findScrollContainer(element: HTMLElement): HTMLElement | undefined {
@@ -62,7 +78,8 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
   const scrollRoot = computed(() => {
     // A virtual renderer already owns root selection and pooled geometry observation.
     if (options.virtualList) return toValue(options.virtualList.context.scrollElement)
-    if (options.scrollElement !== undefined) return toValue(options.scrollElement)
+    const explicitRoot = toValue(options.scrollElement)
+    if (explicitRoot !== undefined) return explicitRoot
     const element = toValue(options.listElement)
     return element ? findScrollContainer(element) : undefined
   })
@@ -109,13 +126,17 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
     return { bottom, viewportHeight: metrics.viewportHeight }
   }
 
-  function isNearBottom(): boolean {
+  function isNearBottom(allowPrefetch = false): boolean {
     const geometry = getGeometry()
-    return Boolean(
-      scrollContainer &&
-      geometry &&
-      geometry.bottom - scrollContainer.scrollTop - geometry.viewportHeight <= 240,
-    )
+    if (!scrollContainer || !geometry) return false
+    const distance = geometry.bottom - scrollContainer.scrollTop - geometry.viewportHeight
+    const threshold =
+      allowPrefetch &&
+      toValue(options.prefetch) &&
+      toValue(options.visibleCount) === toValue(options.loadedCount)
+        ? Math.max(240, Math.min(1600, geometry.viewportHeight * 1.5))
+        : 240
+    return distance <= threshold
   }
 
   function handleScroll(): void {
@@ -124,8 +145,10 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
     const isScrollingDown = scrollTop > lastScrollTop
     const isScrollingUp = scrollTop < lastScrollTop
     lastScrollTop = scrollTop
-    if (!isNearBottom() || isScrollingUp) hasScrollDemand = false
-    if (isScrollingDown && scrollTop > 0 && isNearBottom()) {
+    if (options.restoreScroll) admission.scrollTop = scrollTop
+    const nearBottom = isNearBottom(true)
+    if (!nearBottom || isScrollingUp) hasScrollDemand = false
+    if (isScrollingDown && scrollTop > 0 && nearBottom) {
       hasScrollDemand = true
       requestNext(true)
     }
@@ -134,7 +157,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
   function handleWheel(event: WheelEvent): void {
     // At the bottom (including a short first page), a wheel has no scroll event.
     if (event.deltaY < 0) hasScrollDemand = false
-    if (event.deltaY > 0 && isNearBottom()) {
+    if (event.deltaY > 0 && isNearBottom(true)) {
       hasScrollDemand = true
       requestNext(true)
     }
@@ -143,7 +166,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
   function handleKeyDown(event: KeyboardEvent): void {
     if (event.target !== listElement || !['ArrowDown', 'PageDown', 'End'].includes(event.key))
       return
-    if (isNearBottom()) {
+    if (isNearBottom(true)) {
       hasScrollDemand = true
       requestNext(true)
     }
@@ -157,7 +180,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
     const nextY = event.touches.length === 1 ? event.touches[0]?.clientY : undefined
     if (touchY === undefined || nextY === undefined) return
     if (nextY > touchY + 8) hasScrollDemand = false
-    if (nextY < touchY - 8 && isNearBottom()) {
+    if (nextY < touchY - 8 && isNearBottom(true)) {
       touchY = nextY
       hasScrollDemand = true
       requestNext(true)
@@ -178,6 +201,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
 
   function detach(): void {
     attachmentVersion += 1
+    if (options.restoreScroll && scrollContainer) admission.scrollTop = scrollContainer.scrollTop
     listElement?.removeEventListener('keydown', handleKeyDown)
     listElement = undefined
     scrollContainer?.removeEventListener('scroll', handleScroll)
@@ -235,6 +259,8 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
       listElement = element ?? undefined
       listElement?.addEventListener('keydown', handleKeyDown)
       scrollContainer = element ? (root ?? undefined) : undefined
+      if (scrollContainer && options.restoreScroll && admission.scrollTop !== undefined)
+        scrollContainer.scrollTop = admission.scrollTop
       lastScrollTop = scrollContainer?.scrollTop ?? 0
       scrollContainer?.addEventListener('scroll', handleScroll, { passive: true })
       scrollContainer?.addEventListener('wheel', handleWheel, { passive: true })

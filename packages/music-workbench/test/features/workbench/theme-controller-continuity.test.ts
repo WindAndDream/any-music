@@ -627,8 +627,15 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     await c.workspace.search('cancelled')
     const id = c.workspace.drawers.value[0]!.id
     c.openCatalogDrawer(id)
+    f.selection.value = studio
     const pending = f.fixture.features.value.catalog.actions.loadMore(id)
     await vi.waitFor(() => expect(f.requested).toEqual([1, 2]))
+    const refresh = findCatalogElement(
+      f.root,
+      (node) => node.tag === 'button' && node.textContent.trim() === '刷新',
+    )
+    expect(refresh.props.disabled).toBe(true)
+    expect(f.root.textContent).not.toContain('取消加载')
     f.fixture.features.value.catalog.actions.cancel(id)
     expect(f.cancellation()?.isCancelled()).toBe(true)
     f.page.resolve()
@@ -748,7 +755,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     dispatchCatalogEvent(input(f.root, 'track:one:select'), 'onChange')
     dispatchCatalogEvent(button(f.root, '播放 one'), 'onClick')
     await vi.waitFor(() => expect(f.resolveMedia).toHaveBeenCalledOnce())
-    void c.workspace.loadNext(id)
+    const pendingPage = c.workspace.loadNext(id)
     await vi.waitFor(() => expect(f.requested).toEqual([1, 2]))
     const subscriptions = f.subscriptions.length
     c.workspace.searchQuery.value = 'unfinished'
@@ -796,10 +803,16 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     expect(f.audio.currentTime).toBe(4)
     click(f.root, '我的喜欢')
     await vi.waitFor(() => expect(c.activeTab.value).toBe('favorites'))
+    expect(f.cancellation()?.isCancelled()).toBe(true)
     click(f.root, '发现')
     f.selection.value = classic
     f.page.resolve()
-    await vi.waitFor(() => expect(c.activeCatalogDrawer.value?.tracks).toHaveLength(2))
+    await pendingPage
+    expect(c.activeCatalogDrawer.value).toMatchObject({
+      tracks: [track('one')],
+      paginationLocked: true,
+    })
+    await f.fixture.features.value.catalog.actions.loadMore(id)
     expect(f.fixture.selected.value).toEqual(['one'])
     expect(f.requested).toEqual([1, 2])
     expect(f.maximumReads()).toBe(1)

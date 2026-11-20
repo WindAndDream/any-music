@@ -24,6 +24,20 @@ export function isCatalogDrawerDisconnected(drawer: CatalogDrawerView): boolean 
   return drawer.status === 'disconnected' || drawer.status === 'missing' || !drawer.isSourceEnabled
 }
 
+/** Refresh remains visible while the current request or verification owns the list. */
+export function canRefreshCatalogDrawer(
+  drawer: CatalogDrawerView | undefined,
+): drawer is CatalogDrawerView {
+  return Boolean(
+    drawer &&
+    !isCatalogDrawerDisconnected(drawer) &&
+    drawer.status !== 'paused' &&
+    drawer.status !== 'restoring' &&
+    !drawer.isLoading &&
+    !drawer.isVerifying,
+  )
+}
+
 export function getCatalogDrawerDisconnectedMessage(drawer: CatalogDrawerView): string {
   const sourceState = drawer.status === 'missing' ? '音乐源已卸载' : '音乐源已停用'
   const nextStep =

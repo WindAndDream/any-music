@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import type { Track } from '@any-music/core'
 import { useScrollPageLoader, useEditingSession } from '@any-music/ui/catalog'
-import type { CatalogTrackDisplayMode, MobileTrackColumns } from '@any-music/ui/catalog'
+import type {
+  CatalogTrackDisplayMode,
+  MobileTrackColumns,
+  TrackGridViewport,
+} from '@any-music/ui/catalog'
+import LoadingSpinner from '@any-music/ui/components/LoadingSpinner.vue'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
+import type { CollectionItemStyle } from '@any-music/ui/library'
 import { computed, useTemplateRef } from 'vue'
 
 import TrackRow from './TrackRow.vue'
@@ -18,6 +24,7 @@ const props = defineProps<{
   selectedTrackIds: ReadonlySet<string>
   selectable?: boolean
   displayMode: CatalogTrackDisplayMode
+  itemStyle?: CollectionItemStyle
   mobileColumns: MobileTrackColumns
   loading: boolean
   hasMore: boolean
@@ -25,6 +32,9 @@ const props = defineProps<{
   loadedTrackCount: number
   errorMessage: string
   downloadBusy?: boolean
+  scrollElement?: HTMLElement | null
+  viewportSize?: TrackGridViewport
+  prefetch?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -47,12 +57,16 @@ const emptyMessage = computed(() => {
 useScrollPageLoader({
   editing: useEditingSession(`pagination:${props.listingId}`),
   listElement,
+  scrollElement: () => props.scrollElement,
   hasMore: () => props.hasMore,
   loading: () => props.loading,
   pageNumber: () => props.loadedPageCount,
   visibleCount: () => props.tracks.length,
   loadedCount: () => props.loadedTrackCount,
   loadNext: () => emit('loadMore'),
+  fillShortList: () => props.prefetch === true,
+  prefetch: () => props.prefetch === true,
+  restoreScroll: true,
 })
 </script>
 
@@ -64,6 +78,7 @@ useScrollPageLoader({
       v-if="tracks.length > 0"
       :display-mode="props.displayMode"
       :mobile-columns="props.mobileColumns"
+      :viewport-size="props.viewportSize"
       :item-keys="itemKeys"
       animate
     >
@@ -79,6 +94,7 @@ useScrollPageLoader({
           :selected="selectedTrackIds.has(track.id)"
           :download-busy="props.downloadBusy"
           :display-mode="props.displayMode"
+          :item-style="props.itemStyle"
           @play="emit('play', $event)"
           @download="emit('download', $event)"
           @favorite="emit('favorite', $event)"
@@ -87,7 +103,7 @@ useScrollPageLoader({
         />
       </div>
     </TrackCardGrid>
-    <p v-if="loading" class="list__message" role="status">加载中…</p>
+    <p v-if="loading" class="list__message"><LoadingSpinner label="正在加载歌曲" /></p>
   </div>
 </template>
 

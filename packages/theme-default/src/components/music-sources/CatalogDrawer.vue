@@ -199,7 +199,12 @@ function applyFilterDraft(): void {
         :display-mode="props.displayMode"
         :mobile-columns="props.mobileColumns"
         :loading="props.drawer.isLoading || props.drawer.status === 'restoring'"
-        :has-more="props.active && props.drawer.hasMore && props.drawer.isSourceEnabled"
+        :has-more="
+          props.active &&
+          props.drawer.hasMore &&
+          props.drawer.isSourceEnabled &&
+          !props.drawer.paginationLocked
+        "
         :loaded-page-count="props.drawer.loadedPageCount"
         :loaded-track-count="props.drawer.tracks.length"
         :error-message="''"

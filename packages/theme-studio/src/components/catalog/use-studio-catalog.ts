@@ -23,6 +23,7 @@ export function useStudioCatalog(props: Readonly<{ feature: UiThemeFeatureMap['c
       Boolean(
         drawer.value?.isSourceEnabled &&
         drawer.value.hasMore &&
+        !drawer.value.paginationLocked &&
         !drawer.value.isLoading &&
         !drawer.value.errorMessage &&
         !['error', 'invalid', 'disconnected', 'missing'].includes(drawer.value.status),

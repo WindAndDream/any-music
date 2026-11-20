@@ -9,7 +9,7 @@ import AccountSettingsPanel from './components/accounts/AccountSettingsPanel.vue
 import AccountSwitchDialog from './components/accounts/AccountSwitchDialog.vue'
 import ProxySettingsPanel from './components/accounts/ProxySettingsPanel.vue'
 import DownloadDirectorySettings from './components/downloads/DownloadDirectorySettings.vue'
-import DouyinOfficialSearchPage from './components/music-sources/DouyinOfficialSearchPage.vue'
+import CatalogWebviewViewport from './components/music-sources/CatalogWebviewViewport.vue'
 import { accountStatus } from './features/accounts/account-presentation'
 import type { AccountPlatform } from './features/accounts/source-authentication'
 import { useAccountSettings } from './features/accounts/use-account-settings'
@@ -22,12 +22,16 @@ const backNavigation =
   nativeCapabilities.platform === 'android' ? provideBackNavigation() : undefined
 const exitNotice = useAndroidBackNavigation(backNavigation)
 const hasAccountTransport = nativeCapabilities.accountTransport === 'provided'
-const builtInPlatforms = getBuiltInSourceDirectory(nativeCapabilities.form).map(
-  ({ descriptor }) => ({
-    id: descriptor.id,
-    name: descriptor.name,
-  }),
+const directory = getBuiltInSourceDirectory(nativeCapabilities.form)
+const webviewSources = new Set<string>(
+  directory.flatMap((source) =>
+    'catalogWebview' in source && source.catalogWebview ? [source.descriptor.id] : [],
+  ),
 )
+const builtInPlatforms = directory.map(({ descriptor }) => ({
+  id: descriptor.id,
+  name: descriptor.name,
+}))
 const sourcePlatforms = computed<readonly AccountPlatform[]>(() => [
   ...builtInPlatforms,
   ...accountRuntime.sourcePlatforms.value,
@@ -113,18 +117,19 @@ function addSourceAccount(sourceId: string) {
         @add-account="addSourceAccount"
         @settings-closed="handleSettingsClosed"
       >
-        <template
-          v-if="hasAccountTransport && nativeCapabilities.form === 'desktop'"
-          #catalog-results="{ drawer, suspended }"
-        >
-          <DouyinOfficialSearchPage
+        <template v-if="nativeCapabilities.form === 'desktop'" #catalog-viewport="context">
+          <CatalogWebviewViewport
             v-if="
-              drawer.hostedSearchRevision && drawer.isSourceEnabled && drawer.status !== 'paused'
+              webviewSources.has(context.drawer.pluginId) &&
+              context.drawer.kind === 'search' &&
+              context.drawer.account?.id &&
+              context.drawer.isSourceEnabled &&
+              context.drawer.hasMore &&
+              !context.drawer.paginationLocked
             "
-            :key="`${drawer.id}:${drawer.hostedSearchRevision}`"
-            :account-id="drawer.account?.id"
-            :query="drawer.input"
-            :suspended="suspended"
+            :key="`${context.drawer.id}:${context.drawer.account.id}:${context.drawer.refreshRevision ?? 0}`"
+            v-bind="context"
+            :account-id="context.drawer.account.id"
           />
         </template>
         <template #account-settings="context"

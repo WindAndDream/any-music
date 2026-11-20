@@ -4,7 +4,6 @@
 pub(crate) mod commands;
 mod detail;
 mod import;
-pub(crate) mod official_search;
 mod packet;
 mod profile;
 pub(crate) mod projection;
@@ -42,7 +41,6 @@ enum Action {
         oneshot::Sender<Result<Packet, String>>,
     ),
     Close(String),
-    OpenOfficialSearch(official_search::Request, Reply),
 }
 #[derive(Default)]
 struct PrivateState {
@@ -749,7 +747,6 @@ async fn worker_connected(
     let mut requests = HashMap::<String, (String, u16)>::new();
     let mut login_events = profile::LoginEvents::new(&session);
     let mut searches = search::Pages::new(hidden_targets);
-    let mut official_tab: Option<official_search::Tab> = None;
     let mut verification_query = None;
     let mut cooldown: Option<Instant> = None;
     let mut sms_pending: Option<Instant> = None;
@@ -768,19 +765,6 @@ async fn worker_connected(
                 let Some(action)=action else{break};
                 last_activity = Instant::now();
                 match action{
-                    Action::OpenOfficialSearch(request, reply)=>{
-                        let host = process.host();
-                        if !host.catalog.owns(&request.id) {
-                            let _ = reply.send(Err("operation-cancelled:抖音搜索页面已关闭。".into()));
-                            continue;
-                        }
-                        if let Some(tab) = official_tab.take() {
-                            tab.close(cdp).await;
-                        }
-                        let result = official_search::Tab::open(host, cdp, request)
-                            .await.map(|tab| { official_tab = Some(tab); Value::Null });
-                        let _=reply.send(result);
-                    }
                     Action::RefreshCredentials(reply)=>{
                         // Manual verification can replace risk/session cookies after login.
                         // Read them at handoff time; private values never cross product IPC.
@@ -844,6 +828,8 @@ async fn worker_connected(
                     }
                     Action::Search(request,stop,reply)=>{
                         let keyword=request.import.is_none();
+                        #[cfg(windows)]
+                        let identity = (request.listing.clone(), request.query.clone());
                         let work=searches.load(cdp,request,&stop);
                         let result=tokio::select!{_=cancel.cancelled()=>Err("operation-cancelled:账号会话已结束。".into()),result=work=>result};
                         if result.is_ok() && !stop.is_cancelled() && !cancel.is_cancelled() {
@@ -857,6 +843,10 @@ async fn worker_connected(
                             public.login = json!({"status":"waiting","keepPolling":true,"message":"正在切换备用代理…"});
                         }
                         let delivered=result.is_ok();
+                        #[cfg(windows)]
+                        if delivered && keyword && let Some(target) = searches.catalog_target(&identity.0) {
+                            process.publish_catalog(target, &identity.1, "https://www.douyin.com");
+                        }
                         let _=reply.send(result);
                         if let Some(error) = proxy_failure { return Err(error); }
                         // Playback usually follows a result list. A failed warm-up only leaves
@@ -895,9 +885,6 @@ async fn worker_connected(
                 }
             }
             event=async { match login_events.pop() { Some(event)=>Some(event), None=>cdp.events.recv().await } }=>{
-                if let (Some(tab), Some(event)) = (&mut official_tab, &event) {
-                    tab.observe(event);
-                }
                 let Some(event)=event else{return Err(cdp.disconnect_reason())};
                 if let Some(capture) = &mut verification_capture {
                     capture.retain(cdp, &event).await?;
@@ -959,21 +946,15 @@ async fn worker_connected(
                 }
             }
             _=tick.tick()=>{
-                if let Some(tab) = &mut official_tab
-                    && !matches!(tab.advance(cdp).await, Ok(true))
-                    && let Some(tab) = official_tab.take()
-                {
-                    tab.close(cdp).await;
-                }
                 searches.reap(cdp).await;
                 if process.closed(){return Err("network-error:账号页面已关闭，请重新打开验证。".into())}
                 remember_agent(cdp, data).await?;
                 let signed_in=data.lock().unwrap().login["status"]=="signed-in";
                 // Hidden authenticated browsers can be reopened from the same Profile.
                 // Reclaim the entire account process tree after browser activity stops.
-                if signed_in && !process.visible && verification_capture.is_none() && official_tab.is_none()
+                if signed_in && !process.visible && verification_capture.is_none()
                     && last_activity.elapsed() >= Duration::from_secs(120) { break; }
-                if !signed_in && official_tab.is_none() && started.elapsed()>Duration::from_secs(600){return Err("本次登录已超时，请重新生成二维码。".into())}
+                if !signed_in && started.elapsed()>Duration::from_secs(600){return Err("本次登录已超时，请重新生成二维码。".into())}
                 if !signed_in{
                     if confirmed && !profile_navigation{
                         profile_navigation=true;
@@ -991,7 +972,7 @@ async fn worker_connected(
                     let fallback=!requests.values().any(|(kind,_)|kind=="profile") && needs_profile_navigation(&data.lock().unwrap(),profile_started.elapsed(),fallback_navigation);
                     if fallback{
                         fallback_navigation=true;
-                        // Account checks must not replace the visible search or a completed challenge.
+                        // Account checks must not replace a completed challenge.
                         match profile::refresh(cdp,hidden_targets,cancel,&mut searches,verification_capture.as_mut(),&mut login_events).await{
                             Ok(profile)=>{let mut data=data.lock().unwrap();data.profile=profile;data.profile_error=None;}
                             Err(error)=>{data.lock().unwrap().profile_error=Some(error);}

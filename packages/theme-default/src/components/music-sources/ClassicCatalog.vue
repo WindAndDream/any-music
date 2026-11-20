@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { canRefreshCatalogDrawer, useCatalogViewportOverlay } from '@any-music/ui/catalog'
 import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
@@ -29,6 +30,8 @@ import { useClassicCatalog } from './use-classic-catalog'
 const props = defineProps<{ feature: UiThemeFeatureMap['catalog']; mobileLayout?: boolean }>()
 const heading = useTemplateRef<HTMLElement>('heading')
 const stage = useTemplateRef<HTMLElement>('stage')
+const nativeReady = shallowRef(false)
+const { openOverlay, registerOverlayOpener } = useCatalogViewportOverlay()
 const headingCollapsed = shallowRef(false)
 const headingContextId = useId()
 defineSlots<UiThemeHostSlots>()
@@ -77,6 +80,9 @@ const {
   viewLoadedTracks,
   closeError,
 } = useClassicCatalog(props)
+function showTrackActions(id: string): void {
+  actionTrackId.value = id
+}
 const allDrawerFavorited = computed(
   () =>
     Boolean(drawer.value?.tracks.length) &&
@@ -228,21 +234,13 @@ function finishView(element: Element): void {
                     }}</span>
                   </button>
                   <button
-                    v-if="drawer.isLoading"
-                    type="button"
-                    aria-label="取消加载"
-                    @click="feature.actions.cancel(drawer.id)"
-                  >
-                    <AppIcon name="close" :size="17" /><span class="classic-catalog__request-label"
-                      >取消加载</span
-                    >
-                  </button>
-                  <button
-                    v-else
                     type="button"
                     aria-label="刷新"
-                    :disabled="!drawer.isSourceEnabled"
-                    @click="feature.actions.retry(drawer.id)"
+                    :disabled="
+                      !canRefreshCatalogDrawer(drawer) ||
+                      feature.availability.status !== 'available'
+                    "
+                    @click="feature.actions.refresh(drawer.id)"
                   >
                     <AppIcon name="refresh" :size="17" /><span>刷新</span>
                   </button>
@@ -250,17 +248,23 @@ function finishView(element: Element): void {
               </header>
               <CatalogErrorNotice :drawer="drawer" @show-error="errorDrawerId = $event" />
             </div>
-            <div class="catalog-page__tracks-scroll" data-am-scroll-key="workspace">
-              <div class="catalog-drawer">
+            <div
+              :key="drawer.refreshRevision"
+              class="catalog-page__tracks-scroll"
+              data-am-scroll-key="workspace"
+            >
+              <slot
+                name="catalog-viewport"
+                :drawer="drawer"
+                :selectable="operatorOpen"
+                :suspended="modalOpen"
+                :set-ready="(ready) => (nativeReady = ready)"
+                :register-overlay-opener="registerOverlayOpener"
+                :show-track-actions="showTrackActions"
+              />
+              <div v-if="!nativeReady" class="catalog-drawer">
                 <div class="catalog-drawer__panel">
-                  <slot
-                    v-if="drawer.hostedSearchRevision !== undefined && $slots['catalog-results']"
-                    name="catalog-results"
-                    :drawer="drawer"
-                    :suspended="modalOpen"
-                  />
                   <TrackList
-                    v-else
                     :selectable="operatorOpen"
                     :key="drawer.id"
                     :listing-id="drawer.id"
@@ -271,10 +275,11 @@ function finishView(element: Element): void {
                     :favorite-track-ids="favoriteIds"
                     :selected-track-ids="selectedIds"
                     :display-mode="state.displayMode"
+                    :item-style="state.itemStyle"
                     :mobile-columns="state.mobileColumns"
                     :download-busy="Boolean(state.downloadBusy)"
                     :loading="drawer.isLoading || drawer.status === 'restoring'"
-                    :has-more="drawer.hasMore && drawer.isSourceEnabled"
+                    :has-more="drawer.hasMore && drawer.isSourceEnabled && !drawer.paginationLocked"
                     :loaded-page-count="drawer.loadedPageCount"
                     :loaded-track-count="drawer.tracks.length"
                     error-message=""
@@ -283,7 +288,7 @@ function finishView(element: Element): void {
                     @play="play"
                     @download="download([$event])"
                     @favorite="feature.actions.toggleFavorite($event.id)"
-                    @show-actions="actionTrackId = $event.id"
+                    @show-actions="openOverlay(() => showTrackActions($event.id))"
                   />
                 </div>
               </div>
@@ -342,7 +347,7 @@ function finishView(element: Element): void {
           :can-display="Boolean(drawer)"
           @filter="openFilters"
           @operator="operatorOpen = !operatorOpen"
-          @display="displayOpen = true"
+          @display="openOverlay(() => (displayOpen = true))"
       /></template>
       <MusicSourcePickerDialog
         :open="sourcePickerOpen"
@@ -401,7 +406,7 @@ function finishView(element: Element): void {
         @favorite-all="favoriteDrawer"
         @rename="feature.actions.renameDrawer"
         @toggle-pinned="toggleDrawerPinned"
-        @refresh="feature.actions.retry"
+        @refresh="feature.actions.refresh"
       />
       <CatalogTrackActionsDialog
         :playlists="state.playlists"
@@ -509,6 +514,10 @@ function finishView(element: Element): void {
 </template>
 
 <style scoped>
+.catalog-page__tracks-scroll {
+  position: relative;
+}
+
 .classic-catalog {
   display: flex;
   flex: 1;
@@ -561,11 +570,6 @@ function finishView(element: Element): void {
   .catalog-back-enter-active,
   .catalog-back-leave-active {
     transition: none;
-  }
-}
-@container am-catalog-heading (max-width: 600px) {
-  .classic-catalog__request-label {
-    display: none;
   }
 }
 </style>

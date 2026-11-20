@@ -284,6 +284,32 @@ describe('official search page controls', () => {
     expect(root.scrollTop).toBe(100)
     expect(scrollBy).not.toHaveBeenCalled()
   })
+  it('advances only the original result scroller on demand when the Shadow list covers it', () => {
+    const content = {
+      clientHeight: 166,
+      scrollHeight: 506,
+      scrollTop: 300,
+      scrollBy: vi.fn(),
+    }
+    const fallback = { scrollBy: vi.fn() }
+    const overlay = {}
+    vi.stubGlobal('location', { origin: 'https://www.douyin.com', pathname: '/search/音乐' })
+    vi.stubGlobal('document', {
+      documentElement: { dataset: { amCatalogDocument: 'current' } },
+      querySelector: (selector: string) =>
+        selector === '[data-am-catalog-host]' ? overlay : { parentElement: content },
+      scrollingElement: fallback,
+      elementFromPoint: () => overlay,
+    })
+    vi.stubGlobal('getComputedStyle', () => ({ overflowY: 'auto' }))
+    const run = (delta?: number) =>
+      new Function('delta', `return ${scroll.trimEnd().slice(1, -2)}(delta)`)(delta)
+    expect(run()).toMatchObject({ embedded: true, remaining: 40, viewportHeight: 166 })
+    expect(content.scrollBy).not.toHaveBeenCalled()
+    run(80)
+    expect(content.scrollBy).toHaveBeenCalledExactlyOnceWith({ top: 40, behavior: 'instant' })
+    expect(fallback.scrollBy).not.toHaveBeenCalled()
+  })
   it('refuses covered, nested, offscreen or foreign result areas instead of targeting a sidebar', () => {
     let bounds = { left: 100, top: 60, right: 900, bottom: 560 }
     const content = {

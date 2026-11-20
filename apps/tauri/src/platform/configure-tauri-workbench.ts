@@ -128,25 +128,6 @@ export async function configureTauriWorkbench(): Promise<void> {
     // Source factories bind their own account HTTP/CDP ports. Gate construction too,
     // rather than relying only on the workbench's generic HTTP adapter.
     builtInMusicSources: sources,
-    hostedCatalogSearch:
-      capabilities.form === 'desktop' && capabilities.accountTransport === 'provided'
-        ? {
-            sourceId: 'douyin',
-            getAccount() {
-              const id = accountRuntime.selectedAccountIds.value.douyin
-              const account = accountRuntime.snapshot.value.accounts.find(
-                ({ id: candidate }) => candidate === id,
-              )
-              if (account)
-                return {
-                  id: account.id,
-                  name: accountRuntime.sessionUserNames.value.get(account.id) ?? account.name,
-                  customName: account.name,
-                }
-              return undefined
-            },
-          }
-        : undefined,
     configureProxy: () => {},
     openLogin: (_, platformId) => {
       requireRuntimeCapability(capabilities.accountTransport, '账号登录')

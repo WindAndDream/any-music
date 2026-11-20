@@ -452,6 +452,13 @@ export function useWorkbenchController(
   const displayedCatalogDrawer = computed(() =>
     activeTab.value === 'catalog' ? activeCatalogDrawer.value : undefined,
   )
+  watch(
+    () => displayedCatalogDrawer.value?.id,
+    (_, previous) => {
+      if (previous) workspace.closeDrawer(previous)
+    },
+    { flush: 'sync' },
+  )
   useCatalogSelectionOperator({
     context: () => activeCatalogDrawerId.value ?? 'drawers',
     open: isCatalogOperatorOpen,
@@ -688,9 +695,11 @@ export function useWorkbenchController(
   const { reloadDrawer: retryCatalogDrawer } = useCatalogReload({
     getDrawer: (drawerId) => workspace.drawers.value.find((item) => item.id === drawerId),
     confirm: confirmationDialog.confirm,
-    reload: workspace.retry,
-    onReloadStart: () => {
+    reload: (drawerId, action) =>
+      action === 'refresh' ? workspace.refresh(drawerId) : workspace.retry(drawerId),
+    onReloadStart: (drawerId, action) => {
       activeActionDrawerId.value = undefined
+      if (action === 'refresh') editing.scope('catalog-root').clearScope(`pagination:${drawerId}`)
     },
   })
 

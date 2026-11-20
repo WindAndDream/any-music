@@ -1,8 +1,8 @@
 //! Official account pages embedded in the product window as child WebViews.
 //! Each account owns a persistent data store and proxy. Remote pages reach only the bounded
 //! report bridge of their own native page; credentials stay native and the renderer only
-//! positions a presented page inside its dialog or the Discover results region.
-pub(super) mod catalog;
+//! positions a presented page inside its dialog.
+pub(crate) mod catalog;
 mod driver;
 pub use driver::AccountPages;
 
@@ -143,7 +143,7 @@ impl ManualPage {
     pub async fn open(host: &Host, store: Store, url: &str) -> Result<Self, String> {
         let lock = lock(&store)?;
         let (reports, mut received) = mpsc::channel::<Value>(64);
-        let page = host.open(&store, reports, url, false).await?;
+        let page = host.open(&store, reports, url).await?;
         let agent = Arc::new(Mutex::new(None));
         let observed = agent.clone();
         let task = tauri::async_runtime::spawn(async move {
@@ -432,12 +432,13 @@ struct Shown {
 
 #[derive(Default)]
 pub struct Host {
+    #[cfg(windows)]
+    pub(super) catalog: catalog::Surface,
     app: OnceLock<tauri::AppHandle>,
     links: Mutex<HashMap<String, Link>>,
     shown: Mutex<HashMap<String, Shown>>,
     layouts: Mutex<HashMap<String, Bounds>>,
     next: AtomicU64,
-    pub(super) catalog: catalog::Surface,
 }
 impl Host {
     pub fn attach(&self, app: tauri::AppHandle) {
@@ -449,7 +450,6 @@ impl Host {
         store: &Store,
         reports: mpsc::Sender<Value>,
         url: &str,
-        official_search: bool,
     ) -> Result<Page, String> {
         if !cfg!(desktop) {
             return Err("此设备不支持内嵌账号页面。".into());
@@ -488,7 +488,7 @@ impl Host {
             let label = label.clone();
             let store = store.clone();
             tauri::async_runtime::spawn_blocking(move || {
-                build(&app, &label, url, script, &store, reports, official_search)
+                build(&app, &label, url, script, &store, reports)
             })
             .await
             .map_err(|_| "network-error:账号页面创建中断。".to_string())
@@ -506,7 +506,26 @@ impl Host {
             }
         }
     }
+    #[cfg(windows)]
+    pub(super) fn publish_catalog(
+        &self,
+        label: &str,
+        account: &str,
+        query: &str,
+        origin: &'static str,
+    ) {
+        use tauri::Manager;
+        if self.owns(label, account)
+            && let Some(webview) = self.app.get().and_then(|app| app.get_webview(label))
+        {
+            self.catalog.publish(webview, account, query, origin);
+        }
+    }
     pub fn close(&self, page: &Page) {
+        #[cfg(windows)]
+        let retained = self.catalog.reader_closed(&page.label);
+        #[cfg(not(windows))]
+        let retained = false;
         self.links.lock().unwrap().remove(&page.label);
         let account = {
             let mut shown = self.shown.lock().unwrap();
@@ -522,7 +541,9 @@ impl Host {
         if let Some(account) = account {
             self.emit(&account, "closed", None, None);
         }
-        let _ = page.webview.close();
+        if !retained {
+            let _ = page.webview.close();
+        }
     }
     /// Register the account's user-facing page. Only one page per account is presented.
     pub fn present(&self, account: &str, page: &Page, mode: Presentation) {
@@ -732,7 +753,6 @@ fn build(
     script: String,
     store: &Store,
     reports: mpsc::Sender<Value>,
-    official_search: bool,
 ) -> Result<tauri::Webview, String> {
     use tauri::Manager;
     let window = app.get_window("main").ok_or("无法找到应用窗口。")?;
@@ -743,13 +763,16 @@ fn build(
         .disable_drag_drop_handler()
         .background_throttling(tauri::utils::config::BackgroundThrottlingPolicy::Disabled)
         // Remote pages may follow official HTTPS redirects but never open app schemes/windows.
-        .on_navigation(move |url| {
-            url.as_str() == "about:blank"
-                || url.scheme() == "https" && (!official_search || douyin_page(url))
-        })
+        .on_navigation(|url| url.as_str() == "about:blank" || url.scheme() == "https")
         .on_new_window(|_, _| tauri::webview::NewWindowResponse::Deny)
-        .on_page_load(move |_, payload| {
+        .on_page_load(move |webview, payload| {
+            #[cfg(not(windows))]
+            let _ = webview;
             if matches!(payload.event(), tauri::webview::PageLoadEvent::Started) {
+                #[cfg(windows)]
+                if let Some(state) = webview.try_state::<crate::state::RuntimeState>() {
+                    state.embedded.catalog.navigation(&page);
+                }
                 let _ = reports.try_send(json!({"label": page, "kind": "navigation"}));
             }
         });
@@ -782,19 +805,8 @@ fn build(
     _: String,
     _: &Store,
     _: mpsc::Sender<Value>,
-    _: bool,
 ) -> Result<tauri::Webview, String> {
     Err("此设备不支持内嵌账号页面。".into())
-}
-
-#[cfg(any(desktop, test))]
-fn douyin_page(url: &tauri::Url) -> bool {
-    matches!(
-        url.host_str(),
-        Some("www.douyin.com" | "www-hj.douyin.com" | "login.douyin.com" | "douyin.com")
-    ) && url.port_or_known_default() == Some(443)
-        && url.username().is_empty()
-        && url.password().is_none()
 }
 
 /// Embedded bridge observations only; no product capability is reachable from this command.
@@ -827,24 +839,6 @@ pub fn account_page_layout(
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn official_search_top_navigation_is_limited_to_douyin() {
-        for url in [
-            "https://www.douyin.com/jingxuan",
-            "https://www-hj.douyin.com/",
-            "https://login.douyin.com/",
-        ] {
-            assert!(douyin_page(&url.parse().unwrap()));
-        }
-        for url in [
-            "https://www.douyin.com.example.invalid/",
-            "https://www.douyin.com:444/",
-            "https://example.invalid/www.douyin.com",
-        ] {
-            assert!(!douyin_page(&url.parse().unwrap()));
-        }
-    }
 
     #[test]
     fn reports_require_the_page_token_and_known_bounded_kinds() {

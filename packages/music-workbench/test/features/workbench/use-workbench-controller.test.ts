@@ -1011,6 +1011,63 @@ describe('stable workbench lifetime', () => {
     expect(f.loadCreation).toHaveBeenCalledTimes(2)
     f.unmount()
   })
+  it.each(['back to the music lists', 'another section'])(
+    'locks pagination after leaving for %s and refreshes from page one',
+    async (exit) => {
+      const f = mountWorkbench()
+      const c = f.controller
+      await c.modules.ready
+      await c.workspace.search('submitted')
+      const id = c.workspace.drawers.value[0]!.id
+      const actions = f.themeFixture.features.value.catalog.actions
+      actions.openDrawer(id)
+      expect(c.displayedCatalogDrawer.value?.paginationLocked).toBe(false)
+      const pendingPage = actions.loadMore(id)
+      await vi.waitFor(() => expect(f.requestedPages).toEqual([1, 2]))
+      const cancellation = f.listingCancellation()
+
+      if (exit === 'another section') {
+        c.selectTab('favorites')
+        c.selectTab('catalog')
+      } else {
+        actions.closeDrawer()
+        actions.openDrawer(id)
+      }
+      expect(cancellation?.isCancelled()).toBe(true)
+      f.secondPage.resolve()
+      await pendingPage
+      expect(c.displayedCatalogDrawer.value).toMatchObject({
+        id,
+        hasMore: true,
+        paginationLocked: true,
+        loadedPageCount: 1,
+      })
+      await actions.loadMore(id)
+      expect(f.requestedPages).toEqual([1, 2])
+
+      const cancelled = actions.refresh(id)
+      c.confirmationDialog.cancel()
+      await cancelled
+      await actions.loadMore(id)
+      expect(f.requestedPages).toEqual([1, 2])
+
+      const refreshed = actions.refresh(id)
+      c.confirmationDialog.accept()
+      await refreshed
+      expect(c.displayedCatalogDrawer.value).toMatchObject({
+        id,
+        refreshRevision: 1,
+        paginationLocked: false,
+        loadedPageCount: 1,
+      })
+      expect(f.requestedPages).toEqual([1, 2, 1])
+      await actions.loadMore(id)
+      expect(f.requestedPages).toEqual([1, 2, 1, 2])
+      actions.closeDrawer()
+      actions.openDrawer(id)
+      expect(c.displayedCatalogDrawer.value?.paginationLocked).toBe(true)
+    },
+  )
   it('keeps real classic catalog pagination, selection and unfinished filter input across root replacement', async () => {
     const f = mountWorkbench('catalog')
     const c = f.controller

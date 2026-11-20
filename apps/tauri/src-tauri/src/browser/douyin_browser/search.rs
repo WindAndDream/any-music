@@ -289,6 +289,10 @@ impl Pages {
         self.standby = Some((target, session));
         Ok(())
     }
+    #[cfg(windows)]
+    pub(super) fn catalog_target(&self, id: &str) -> Option<&str> {
+        self.pages.get(id).map(|page| page.target.as_str())
+    }
     pub async fn close(&mut self, cdp: &mut Cdp, id: &str) {
         if let Some(page) = self.pages.remove(id) {
             self.sessions.remove(&page.session);

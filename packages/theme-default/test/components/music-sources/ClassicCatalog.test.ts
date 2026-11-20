@@ -13,7 +13,7 @@ import type {
   CatalogRequestKind,
   CatalogTrackFilterState,
 } from '@any-music/ui/catalog'
-import type { UiThemeFeatureMap } from '@any-music/ui/theme'
+import type { CatalogViewportContext, UiThemeFeatureMap } from '@any-music/ui/theme'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { computed, defineComponent, h, nextTick, reactive, shallowRef } from 'vue'
 
@@ -118,7 +118,10 @@ const source: MusicSourceDescriptor & { enabled: boolean } = {
   capabilities: { search: true, importUrl: true, session: false },
   importUrlScopes: [{ origin: 'https://example.com', pathnamePrefix: '/' }],
 }
-function mountPage(mobileLayout = true) {
+function mountPage(
+  mobileLayout = true,
+  catalogViewport?: (context: CatalogViewportContext) => void,
+) {
   const initialTracks = [track('one'), track('two')]
   const drawer: CatalogDrawerView = {
     id: 'request:stable',
@@ -224,6 +227,7 @@ function mountPage(mobileLayout = true) {
     toggleQueue: vi.fn(),
     requestCreatePlaylist: vi.fn(),
     loadMore: vi.fn(),
+    refresh: vi.fn(),
     retry: vi.fn(),
     cancel: vi.fn(),
     removeDrawer: vi.fn(),
@@ -246,8 +250,7 @@ function mountPage(mobileLayout = true) {
         'source-identity': () => h('span', { 'data-source-account': true }, '当前账号'),
         'request-account': ({ drawerId }: { drawerId: string }) =>
           h('span', { 'data-request-account': drawerId }, '原请求账号'),
-        'catalog-results': (context: { drawer: CatalogDrawerView }) =>
-          h('div', { 'data-hosted-results': context.drawer.id }),
+        'catalog-viewport': catalogViewport,
       },
     )
   const A = defineComponent({ setup: () => () => h('main', page()) })
@@ -282,29 +285,39 @@ function click(root: CatalogTestElement, text: string) {
 }
 
 describe('classic catalog complete-root contract', () => {
-  it('shows hosted results only inside the opened card drawer', async () => {
-    const f = mountPage()
+  it('defers display settings when the results are presented in a native viewport', async () => {
+    let viewport!: CatalogViewportContext
+    const f = mountPage(false, (context) => (viewport = context))
+    let openDialog: (() => void) | undefined
+    const release = viewport.registerOverlayOpener((open) => (openDialog = open))
+    const dialog = () =>
+      findCatalogElement(
+        f.root,
+        (node) => node.props['aria-label'] === '歌曲展示方式' && node.tag === 'section',
+      )
     try {
-      f.state.activeDrawerId = null
-      f.state.drawers = [{ ...f.state.drawers[0]!, hostedSearchRevision: 1 }]
+      click(f.root, '展示方式')
       await nextTick()
-      expect(f.root.querySelector('[data-hosted-results]')).toBeNull()
-      click(f.root, '查看歌曲')
+      expect(() => dialog()).toThrow()
+      expect(openDialog).toBeTypeOf('function')
+      openDialog?.()
       await nextTick()
-      const heading = findCatalogElement(
-        f.root,
-        (node) => node.props.class === 'catalog-page__sticky-header',
-      )
-      const content = findCatalogElement(
-        f.root,
-        (node) => node.props.class === 'catalog-page__tracks-scroll',
-      )
-      expect(heading.parent).toBe(content.parent)
-      expect(content.querySelector('[data-hosted-results="request:stable"]')).toBeTruthy()
-      click(f.root, '返回音乐列表')
+      expect(dialog()).toBeDefined()
+    } finally {
+      release()
+      f.dispose()
+    }
+  })
+
+  it('opens the regular Classic song dialog for a row from the native viewport', async () => {
+    let viewport!: CatalogViewportContext
+    const f = mountPage(false, (context) => (viewport = context))
+    try {
+      viewport.showTrackActions('one')
       await nextTick()
-      expect(f.root.querySelector('[data-hosted-results]')).toBeNull()
-      expect(f.root.querySelector('[data-catalog-drawer-id="request:stable"]')).toBeTruthy()
+      expect(
+        findCatalogElement(f.root, (node) => node.props['aria-label'] === '歌曲操作').textContent,
+      ).toContain('one')
     } finally {
       f.dispose()
     }
@@ -578,17 +591,19 @@ describe('classic catalog complete-root contract', () => {
     f.dispose()
   })
 
-  it('routes page cancellation/retry by stable request ID and disables invalid song actions', async () => {
+  it('keeps the refresh button in place while loading and routes it by stable request ID', async () => {
     const f = mountPage()
     f.state.drawers[0]!.isLoading = true
     f.state.invalidTrackIds = ['one']
     await nextTick()
-    click(f.root, '取消加载')
-    expect(f.actions.cancel).toHaveBeenCalledExactlyOnceWith('request:stable')
+    const refresh = findCatalogElement(f.root, (node) => node.props['aria-label'] === '刷新')
+    expect(refresh.props.disabled).toBe(true)
+    expect(f.root.textContent).not.toContain('取消加载')
     f.state.drawers[0]!.isLoading = false
     await nextTick()
+    expect(refresh.props.disabled).toBe(false)
     click(f.root, '刷新')
-    expect(f.actions.retry).toHaveBeenCalledExactlyOnceWith('request:stable')
+    expect(f.actions.refresh).toHaveBeenCalledExactlyOnceWith('request:stable')
     expect(f.actions.loadMore).not.toHaveBeenCalled()
     expect(
       findCatalogElement(f.root, (node) => node.props['data-am-focus-key'] === 'track:one:play')
