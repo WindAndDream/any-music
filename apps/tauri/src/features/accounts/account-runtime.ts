@@ -1,7 +1,12 @@
 import { AccountCatalog, requestWithAccountPool } from '@any-music/account-pool'
 import type { AccountOperationPolicy } from '@any-music/account-pool'
 import { AppError, createAppErrorState } from '@any-music/core'
-import type { CancellationSignal, MusicSourcePlugin, Track } from '@any-music/core'
+import type {
+  CancellationSignal,
+  MusicSourcePlugin,
+  MusicSourceSession,
+  Track,
+} from '@any-music/core'
 import type { SourceInvalidation } from '@any-music/music-workbench'
 import {
   CancellationSource,
@@ -69,6 +74,14 @@ export class AccountRuntime {
   readonly snapshot = shallowRef<AccountSnapshot>({ accounts: [], proxies: [] })
   /** 复用既有会话检查的公开用户名；账号弹窗与列表详情不为展示额外请求平台。 */
   readonly sessionUserNames = shallowRef<ReadonlyMap<string, string>>(new Map())
+  rememberSessionUserName(accountId: string, session: MusicSourceSession): void {
+    const name = session.status === 'signed-in' ? session.user.name.trim() : ''
+    if (!name && session.status !== 'signed-out' && session.status !== 'expired') return
+    const names = new Map(this.sessionUserNames.value)
+    if (name) names.set(accountId, name)
+    else names.delete(accountId)
+    this.sessionUserNames.value = names
+  }
   readonly catalog = new AccountCatalog()
   readonly selectedAccountIds = shallowRef<Readonly<Record<string, string>>>({})
   private generation = 0
@@ -227,6 +240,15 @@ export class AccountRuntime {
     if (JSON.stringify(selected) === JSON.stringify(this.selectedAccountIds.value)) return
     localStorage.setItem(SELECTION_STORAGE_KEY, JSON.stringify(selected))
     this.selectedAccountIds.value = selected
+  }
+
+  getSelectedAccountName(platform: string): string | undefined {
+    const selectedId = this.selectedAccountIds.value[platform]
+    const account = this.snapshot.value.accounts.find((item) => item.id === selectedId)
+    if (account?.platformId === 'douyin') {
+      return this.sessionUserNames.value.get(account.id) ?? account.name
+    }
+    return account?.name
   }
 
   /** 搜索偏好只作用于新操作；已存在的列表和媒体保持实际使用的账号。 */

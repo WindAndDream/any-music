@@ -395,11 +395,11 @@ impl Manager {
         if started {
             self.ready(id, cancel).await?;
         } else {
-            // A fresh explicit probe must be able to recover a previous rejection/challenge.
+            // An import profile refresh can replace a stale browser result.
             self.ready_page(id, cancel).await?;
         }
         // Only the request that started this browser may consume its fresh bootstrap
-        // response. Later explicit checks use a fresh auxiliary page to detect logout/expiry.
+        // response. Later import reads refresh the profile in an independent auxiliary page.
         if started {
             if cancel.is_cancelled() {
                 return Err("operation-cancelled:请求已取消。".into());
@@ -1080,7 +1080,7 @@ mod tests {
         });
     }
     #[test]
-    fn explicit_profile_retry_bypasses_stale_rejection_and_qr_expiry_never_means_account_logout() {
+    fn import_profile_rechecks_stale_page_state_and_qr_expiry_is_not_logout() {
         tauri::async_runtime::block_on(async {
             let manager = Manager::default();
             let data = Arc::new(Mutex::new(PrivateState {
@@ -1170,7 +1170,7 @@ mod tests {
     }
 
     #[test]
-    fn startup_profile_response_avoids_reload_but_later_checks_and_cancellation_do_not_reuse_it() {
+    fn import_profile_reuses_bootstrap_only_for_the_first_read() {
         tauri::async_runtime::block_on(async {
             let manager = Manager::default();
             let profile = json!({"status_code":0,"user":{"nickname":"fixture"}});

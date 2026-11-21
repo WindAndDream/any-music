@@ -76,7 +76,7 @@ describe('official-page catalog injection', () => {
       undefined,
       undefined,
       {
-        getSelfProfile: async () =>
+        getSelfImportProfile: async () =>
           verificationResponse(
             JSON.stringify({ status_code: 8, verify_url: 'https://www.douyin.com/verify' }),
             401,
@@ -84,7 +84,9 @@ describe('official-page catalog injection', () => {
         openSearch: vi.fn(),
       },
     )
-    await expect(api.getSelfProfile()).rejects.toMatchObject({ code: 'verification-required' })
+    await expect(api.getSelfImportProfile()).rejects.toMatchObject({
+      code: 'verification-required',
+    })
   })
   it('requires a successful search payload, including framed streams, before closing verification', () => {
     const response = verificationResponse
@@ -119,7 +121,7 @@ describe('official-page catalog injection', () => {
       expect(isDouyinSearchVerificationComplete(response(body))).toBe(false)
     expect(isDouyinSearchVerificationComplete(response(payload, 403))).toBe(false)
   })
-  it('parses browser response frames and never invokes native signing/HTTP for search or session', async () => {
+  it('parses browser response frames and never invokes native signing/HTTP for search or an import profile', async () => {
     const request = vi.fn()
     const payload = JSON.stringify({ status_code: 0, data: [{ type: 1 }], cursor: 10, has_more: 1 })
     const bytes = new TextEncoder().encode(payload)
@@ -131,22 +133,33 @@ describe('official-page catalog injection', () => {
     }
     const load = vi.fn().mockResolvedValue(response)
     const close = vi.fn().mockResolvedValue(undefined)
-    const getSelfProfile = vi.fn().mockResolvedValue({
+    const getSelfImportProfile = vi.fn().mockResolvedValue({
       ...response,
       body: JSON.stringify({ status_code: 0, user: { uid: 'account-a' } }),
     })
     const state = vi.fn(() => FIXED_REQUEST_STATE)
     const api = new DouyinApi({ request }, state, undefined, undefined, {
-      getSelfProfile,
+      getSelfImportProfile,
       openSearch: () => ({ load, close }),
     })
-    await expect(api.getSelfProfile()).resolves.toMatchObject({ user: { uid: 'account-a' } })
+    await expect(api.getSelfImportProfile()).resolves.toMatchObject({ user: { uid: 'account-a' } })
     const reader = api.openSearch('音乐', 10)
     await expect(reader.load(0)).resolves.toMatchObject({ data: [{ type: 1 }], cursor: 10 })
     await reader.close()
     expect(close).toHaveBeenCalledOnce()
     expect(request).not.toHaveBeenCalled()
     expect(state).not.toHaveBeenCalled()
+    request.mockResolvedValue(
+      verificationResponse(JSON.stringify({ status_code: 0, user: { uid: 'http-account' } })),
+    )
+    await expect(api.getSelfProfile()).resolves.toMatchObject({ user: { uid: 'http-account' } })
+    expect(getSelfImportProfile).toHaveBeenCalledOnce()
+    expect(request).toHaveBeenCalledWith(
+      expect.objectContaining({
+        url: expect.stringContaining('/aweme/v1/web/user/profile/self/'),
+        credentials: 'include',
+      }),
+    )
   })
 })
 
@@ -169,7 +182,7 @@ describe('Douyin transport failures', () => {
         ])})</script>`,
       })
       const api = new DouyinApi({ request }, state, undefined, undefined, {
-        getSelfProfile: vi.fn(),
+        getSelfImportProfile: vi.fn(),
         openSearch: vi.fn(),
         getAwemeDetail,
       })
@@ -181,7 +194,7 @@ describe('Douyin transport failures', () => {
   )
   it('rejects browser API detail for another work', async () => {
     const api = new DouyinApi({ request: vi.fn() }, vi.fn(), undefined, undefined, {
-      getSelfProfile: vi.fn(),
+      getSelfImportProfile: vi.fn(),
       openSearch: vi.fn(),
       getAwemeDetail: vi.fn().mockResolvedValue({
         status: 200,

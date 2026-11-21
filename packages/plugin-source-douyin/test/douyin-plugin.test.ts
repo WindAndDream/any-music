@@ -697,11 +697,11 @@ describe('Douyin history imports', () => {
       .fn()
       .mockResolvedValueOnce({ aweme_list: [aweme('1')], max_cursor: 1723456789123, has_more: 1 })
       .mockResolvedValueOnce({ aweme_list: [aweme('2')], max_cursor: 1723456789000, has_more: 1 })
-    const getSelfProfile = vi.fn()
+    const getSelfImportProfile = vi.fn()
     const getUserPosts = vi.fn()
     const plugin = new DouyinMusicSourcePlugin({
       getSelfHistory,
-      getSelfProfile,
+      getSelfImportProfile,
       getUserPosts,
     } as unknown as DouyinApi)
     const listing = plugin.importFromUrl({ url: 'https://www.douyin.com/user/self?showTab=record' })
@@ -715,7 +715,7 @@ describe('Douyin history imports', () => {
       [0, 18],
       [1723456789123, 18],
     ])
-    expect(getSelfProfile).not.toHaveBeenCalled()
+    expect(getSelfImportProfile).not.toHaveBeenCalled()
     expect(getUserPosts).not.toHaveBeenCalled()
   })
 })
@@ -865,7 +865,7 @@ describe('Douyin protected self listings', () => {
   it('opens captured liked pages after a failed GM request and retries GM on every cursor', async () => {
     const calls: string[] = []
     const api = {
-      async getSelfProfile() {
+      async getSelfImportProfile() {
         calls.push('profile')
         return { user: { sec_uid: 'self-sec-uid' } }
       },
@@ -952,7 +952,7 @@ describe('Douyin protected self listings', () => {
 
   it('opens the liked page when self-profile lookup fails before the favorite request', async () => {
     const api = {
-      async getSelfProfile() {
+      async getSelfImportProfile() {
         throw new MusicSourceError('access-denied', 'profile rejected')
       },
     } as unknown as DouyinApi
@@ -1001,7 +1001,7 @@ describe('Douyin self recommendation listing', () => {
   it('resolves the current account lazily and uses the dedicated recommendation endpoint', async () => {
     const calls: string[] = []
     const api = {
-      async getSelfProfile() {
+      async getSelfImportProfile() {
         calls.push('profile')
         return { user: { sec_uid: 'self-sec-uid' } }
       },
@@ -1026,7 +1026,7 @@ describe('Douyin self recommendation listing', () => {
 
   it('opens the recommendation page after any unusable direct response', async () => {
     const api = {
-      async getSelfProfile() {
+      async getSelfImportProfile() {
         return { user: { sec_uid: 'self-sec-uid' } }
       },
       async getSelfRecommendations() {

@@ -98,10 +98,7 @@ export function useAccountChecks(
             if (source.signal.isCancelled()) break
             if (session.status === 'unavailable' || session.status === 'expired')
               throw new AppError(session.error.code, session.error.message)
-            const names = new Map(runtime.sessionUserNames.value)
-            if (session.status === 'signed-in') names.set(account.id, session.user.name)
-            else names.delete(account.id)
-            runtime.sessionUserNames.value = names
+            runtime.rememberSessionUserName(account.id, session)
             message = session.status === 'signed-in' ? '登录有效' : '未登录，可重新登录'
             outcome = session.status === 'signed-in' ? 'signed-in' : 'signed-out'
             observedLogin = outcome

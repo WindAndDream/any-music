@@ -1,5 +1,5 @@
-// Embedded pages may render the self profile without requesting it. Issue that official request
-// once from the page itself, so the website's own SDK signs it and the bridge observes it.
+// Fallback while a browser operation needs the full self profile. The 2026-11-21
+// browser probe returned a user with these parameters when the page SDK signed the request.
 // oxlint-disable-next-line no-unused-expressions -- Rust evaluates this expression.
 ;(() => {
   if (location.origin !== 'https://www.douyin.com' || document.readyState === 'loading')

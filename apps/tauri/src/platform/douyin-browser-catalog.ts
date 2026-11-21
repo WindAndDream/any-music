@@ -21,7 +21,7 @@ export function createDouyinBrowserCatalog(
       offset?: number
       awemeId?: string
       pageKind?: 'video' | 'note'
-      importKind?: DouyinBrowserImportTarget['kind']
+      importKind?: DouyinBrowserImportTarget['kind'] | 'self-profile'
       mixId?: string
     },
     listingCancellation?: CancellationSignal,
@@ -59,7 +59,7 @@ export function createDouyinBrowserCatalog(
     }
   }
   return {
-    getSelfProfile: () => request({}),
+    getSelfImportProfile: () => request({ importKind: 'self-profile' }),
     getAwemeDetail: (awemeId, pageKind) => request({ awemeId, pageKind }),
     openImport(target) {
       const listingId = crypto.randomUUID()

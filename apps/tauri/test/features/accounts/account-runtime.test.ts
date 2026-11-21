@@ -238,6 +238,30 @@ describe('native account composition', () => {
     await runtime.refresh()
     expect([...runtime.sessionUserNames.value]).toEqual([['a', '平台用户甲']])
   })
+  it('uses the verified Douyin nickname for the selected account label', () => {
+    const runtime = new AccountRuntime()
+    runtime.snapshot.value = {
+      accounts: [
+        account('bilibili', 'credential'),
+        { ...account('douyin', 'credential'), platformId: 'douyin', name: '本地账号名' },
+      ],
+      proxies: [],
+    }
+    runtime.selectedAccountIds.value = { bilibili: 'bilibili', douyin: 'douyin' }
+    expect(runtime.getSelectedAccountName('douyin')).toBe('本地账号名')
+    runtime.rememberSessionUserName('douyin', {
+      status: 'signed-in',
+      user: { id: '123', name: '测试抖音昵称' },
+    })
+    expect(runtime.getSelectedAccountName('douyin')).toBe('测试抖音昵称')
+    runtime.rememberSessionUserName('bilibili', {
+      status: 'signed-in',
+      user: { id: '456', name: '平台昵称' },
+    })
+    expect(runtime.getSelectedAccountName('bilibili')).toBe(
+      runtime.snapshot.value.accounts[0]?.name,
+    )
+  })
   it('persists one selected identity across operations and restores it on restart', async () => {
     const runtime = new AccountRuntime()
     native.invoke.mockImplementation(async (command: string) =>

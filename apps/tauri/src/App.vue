@@ -59,9 +59,7 @@ const accountSelectionLabels = computed(() =>
   Object.fromEntries(
     sourcePlatforms.value.map((source) => [
       source.pluginId ?? source.id,
-      accountRuntime.snapshot.value.accounts.find(
-        (account) => account.id === accountRuntime.selectedAccountIds.value[source.id],
-      )?.name ?? '无可用账号',
+      accountRuntime.getSelectedAccountName(source.id) ?? '无可用账号',
     ]),
   ),
 )
