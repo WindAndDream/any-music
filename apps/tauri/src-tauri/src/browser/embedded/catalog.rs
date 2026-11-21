@@ -57,7 +57,7 @@ pub async fn sync_catalog_webview(
 }
 
 #[tauri::command]
-pub fn close_catalog_webview(
+pub async fn close_catalog_webview(
     webview: Webview,
     state: State<'_, RuntimeState>,
     lease: String,
@@ -65,7 +65,7 @@ pub fn close_catalog_webview(
     require_main(&webview)?;
     crate::model::validate_id(&lease)?;
     #[cfg(windows)]
-    state.embedded.catalog.close(&lease);
+    state.embedded.catalog.close(&lease).await;
     #[cfg(not(windows))]
     let _ = state;
     Ok(())
@@ -77,18 +77,25 @@ pub(super) use windows::Surface;
 #[cfg(windows)]
 mod windows {
     use super::{Bounds, Request, Value, Webview, json};
-    use crate::browser::embedded::HIDDEN_ORIGIN;
+    use crate::browser::embedded::{HIDDEN_ORIGIN, VIEWPORT};
     use std::{collections::HashMap, sync::Mutex, time::Duration};
     use tauri::{LogicalPosition, LogicalSize, Manager, Rect};
 
     const RENDERER: &str = include_str!(concat!(env!("OUT_DIR"), "/catalog-webview.js"));
+
+    #[derive(Clone, Copy, PartialEq, Eq)]
+    enum Reader {
+        Active,
+        Finished,
+        Closed,
+    }
 
     struct Candidate {
         webview: Webview,
         account: String,
         query: String,
         origin: &'static str,
-        reader_closed: bool,
+        reader: Reader,
     }
 
     struct Lease {
@@ -112,6 +119,8 @@ mod windows {
     #[derive(Default)]
     pub(in crate::browser) struct Surface {
         resources: Mutex<Resources>,
+        // Reuse must wait for an in-flight installation and the old mask's cleanup.
+        rendering: tokio::sync::Mutex<()>,
     }
 
     impl Surface {
@@ -131,8 +140,58 @@ mod windows {
                     account: account.to_owned(),
                     query: query.to_owned(),
                     origin,
-                    reader_closed: false,
+                    reader: Reader::Active,
                 });
+        }
+
+        pub(in crate::browser) fn finish_reader(&self, label: &str) {
+            let mut resources = self.resources.lock().unwrap();
+            if resources
+                .current
+                .as_ref()
+                .is_some_and(|lease| lease.label == label)
+            {
+                if let Some(target) = resources.candidates.get_mut(label) {
+                    target.reader = Reader::Finished;
+                }
+            } else {
+                resources.candidates.remove(label);
+            }
+        }
+
+        pub(in crate::browser) async fn prepare_reuse(&self, webview: Webview) {
+            let _rendering = self.rendering.lock().await;
+            let label = webview.label();
+            let cleanup = {
+                let mut resources = self.resources.lock().unwrap();
+                let cleanup = if resources
+                    .current
+                    .as_ref()
+                    .is_some_and(|lease| lease.label == label)
+                {
+                    release(&mut resources)
+                } else {
+                    None
+                };
+                resources.candidates.remove(label);
+                cleanup
+            };
+            clean_context(cleanup).await;
+            // The in-app viewport can be too narrow for the official top search bar.
+            let (done, applied) = tokio::sync::oneshot::channel();
+            let page = webview.clone();
+            if webview
+                .run_on_main_thread(move || {
+                    let _ = page.set_bounds(Rect {
+                        position: LogicalPosition::new(HIDDEN_ORIGIN, 0.0).into(),
+                        size: LogicalSize::new(VIEWPORT.0, VIEWPORT.1).into(),
+                    });
+                    let _ = done.send(());
+                })
+                .is_ok()
+            {
+                let _ = tokio::time::timeout(Duration::from_secs(3), applied).await;
+            }
         }
 
         pub(in crate::browser) fn reader_closed(&self, label: &str) -> bool {
@@ -149,7 +208,7 @@ mod windows {
                 return false;
             };
             // A visible target can outlive the reader until the restored list paints.
-            target.reader_closed = true;
+            target.reader = Reader::Closed;
             true
         }
 
@@ -177,28 +236,35 @@ mod windows {
                     .get(&lease.label)
                     .is_some_and(|target| target.account == account)
             }) {
-                release(&mut resources);
+                // The driver is about to close the pages that still belong to it.
+                let _ = release(&mut resources);
             }
             resources.candidates.retain(|_, target| {
                 if target.account != account {
                     return true;
                 }
-                if target.reader_closed {
+                if target.reader == Reader::Closed {
                     let _ = target.webview.close();
                 }
                 false
             });
         }
 
-        pub(in crate::browser) fn close(&self, id: &str) {
-            let mut resources = self.resources.lock().unwrap();
-            if resources
-                .current
-                .as_ref()
-                .is_some_and(|lease| lease.id == id)
-            {
-                release(&mut resources);
-            }
+        pub(in crate::browser) async fn close(&self, id: &str) {
+            let _rendering = self.rendering.lock().await;
+            let cleanup = {
+                let mut resources = self.resources.lock().unwrap();
+                if resources
+                    .current
+                    .as_ref()
+                    .is_some_and(|lease| lease.id == id)
+                {
+                    release(&mut resources)
+                } else {
+                    None
+                }
+            };
+            clean_context(cleanup).await;
         }
 
         fn park(&self, id: &str) {
@@ -217,7 +283,8 @@ mod windows {
         }
 
         pub(super) async fn sync(&self, request: Request, bounds: Bounds) -> Result<Value, String> {
-            let label = {
+            let _rendering = self.rendering.lock().await;
+            let (label, cleanup) = {
                 let mut resources = self.resources.lock().unwrap();
                 let current = resources
                     .current
@@ -226,19 +293,19 @@ mod windows {
                 if let Some(current) = current {
                     let label = current.label.clone();
                     resources.current.as_mut().unwrap().bounds = Some(bounds);
-                    label
+                    (label, None)
                 } else {
                     let mut matches = resources.candidates.iter().filter(|(_, target)| {
                         target.account == request.account_id
                             && target.query == request.query
-                            && !target.reader_closed
+                            && target.reader == Reader::Active
                     });
                     let Some((label, _)) = matches.next().filter(|_| matches.next().is_none())
                     else {
                         return Ok(json!({"ready": false}));
                     };
                     let label = label.clone();
-                    release(&mut resources);
+                    let cleanup = release(&mut resources);
                     resources.current = Some(Lease {
                         id: request.lease.clone(),
                         label: label.clone(),
@@ -248,9 +315,10 @@ mod windows {
                         applied: None,
                         document_epoch: 0,
                     });
-                    label
+                    (label, cleanup)
                 }
             };
+            clean_context(cleanup).await;
             let (webview, origin, mut context, bridge_key, document_epoch) = {
                 let resources = self.resources.lock().unwrap();
                 let Some(lease) = resources
@@ -320,7 +388,7 @@ mod windows {
                     let value = target
                         .try_state::<crate::state::RuntimeState>()
                         .map_or_else(
-                            || Ok(json!({"ready": false})),
+                            || (Ok(json!({"ready": false})), None),
                             |state| {
                                 state.embedded.catalog.commit(
                                     &request.lease,
@@ -335,9 +403,11 @@ mod windows {
                     let _ = reply.send(value);
                 })
                 .map_err(|_| "network-error:无法更新音乐列表视口。".to_owned())?;
-            outcome
+            let (result, cleanup) = outcome
                 .await
-                .map_err(|_| "operation-cancelled:音乐列表已结束。".to_owned())?
+                .map_err(|_| "operation-cancelled:音乐列表已结束。".to_owned())?;
+            clean_context(cleanup).await;
+            result
         }
 
         fn commit(
@@ -348,7 +418,7 @@ mod windows {
             context: Option<i64>,
             bridge_key: String,
             result: Result<Value, String>,
-        ) -> Result<Value, String> {
+        ) -> (Result<Value, String>, Option<Cleanup>) {
             // Navigation starts and visibility commits are serialized on the UI thread.
             let mut resources = self.resources.lock().unwrap();
             let Some(lease) = resources.current.as_mut().filter(|lease| {
@@ -356,28 +426,35 @@ mod windows {
                     && lease.label == webview.label()
                     && lease.document_epoch == document_epoch
             }) else {
-                clean_context(webview, context, bridge_key);
-                return Ok(json!({"ready": false}));
+                return (
+                    Ok(json!({"ready": false})),
+                    context.map(|id| (webview, id, bridge_key)),
+                );
             };
             match result {
                 Ok(value) if value["ready"] == true => {
                     lease.context = context;
                     if let Some(bounds) = lease.bounds {
                         if lease.applied != Some(bounds) {
-                            place(&webview, bounds)?;
+                            if let Err(error) = place(&webview, bounds) {
+                                return (Err(error), None);
+                            }
                             lease.applied = Some(bounds);
                         }
-                        return Ok(value);
+                        return (Ok(value), None);
                     }
                 }
                 _ => {
                     lease.context = None;
                     lease.applied = None;
                     hide(&webview);
-                    clean_context(webview, context, bridge_key);
+                    return (
+                        Ok(json!({"ready": false})),
+                        context.map(|id| (webview, id, bridge_key)),
+                    );
                 }
             }
-            Ok(json!({"ready": false}))
+            (Ok(json!({"ready": false})), None)
         }
     }
 
@@ -399,32 +476,34 @@ mod windows {
         Ok(json!({"ready": false}))
     }
 
-    fn release(resources: &mut Resources) {
-        let Some(lease) = resources.current.take() else {
-            return;
-        };
-        let Some(target) = resources.candidates.get(&lease.label) else {
-            return;
-        };
+    type Cleanup = (Webview, i64, String);
+
+    fn release(resources: &mut Resources) -> Option<Cleanup> {
+        let lease = resources.current.take()?;
+        let target = resources.candidates.get(&lease.label)?;
         hide(&target.webview);
-        if target.reader_closed {
+        let cleanup = if target.reader == Reader::Closed {
             let _ = target.webview.close();
-            resources.candidates.remove(&lease.label);
+            None
         } else {
-            clean_context(target.webview.clone(), lease.context, lease.bridge_key);
+            lease
+                .context
+                .map(|id| (target.webview.clone(), id, lease.bridge_key))
+        };
+        if target.reader != Reader::Active {
+            resources.candidates.remove(&lease.label);
         }
+        cleanup
     }
 
-    fn clean_context(webview: Webview, context: Option<i64>, bridge_key: String) {
-        if let Some(context) = context {
-            tauri::async_runtime::spawn(async move {
-                let _ = evaluate(
-                    &webview,
-                    context,
-                    format!("globalThis[{}]?.close()", json!(bridge_key)),
-                )
-                .await;
-            });
+    async fn clean_context(cleanup: Option<Cleanup>) {
+        if let Some((webview, context, bridge_key)) = cleanup {
+            let _ = evaluate(
+                &webview,
+                context,
+                format!("globalThis[{}]?.close()", json!(bridge_key)),
+            )
+            .await;
         }
     }
 

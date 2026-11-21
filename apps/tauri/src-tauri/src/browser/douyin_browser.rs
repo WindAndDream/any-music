@@ -588,7 +588,13 @@ pub async fn target(cdp: &mut Cdp, hidden: bool) -> Result<(String, String), Str
         .as_str()
         .ok_or("无法创建账号页面。")?
         .to_owned();
-    attach_target(cdp, target).await
+    let result = attach_target(cdp, target.clone()).await;
+    if result.is_err() {
+        let _ = cdp
+            .call(None, "Target.closeTarget", json!({"targetId":target}))
+            .await;
+    }
+    result
 }
 
 async fn attach_target(cdp: &mut Cdp, target: String) -> Result<(String, String), String> {
@@ -722,7 +728,9 @@ async fn worker_connected(
 ) -> Result<(), String> {
     // Auxiliary pages always stay hidden; only the account's startup page may be presented.
     let hidden_targets = true;
-    let (_, session) = target(cdp, !process.visible).await?;
+    let (startup_target, session) = target(cdp, !process.visible).await?;
+    let mut search_home = (!process.visible && start_query.is_none()).then_some(startup_target);
+    let mut startup_is_search = false;
     // Observe from startup: the user may submit while account state is still loading.
     let mut verification_capture = start_query
         .as_ref()
@@ -763,7 +771,6 @@ async fn worker_connected(
             _=cancel.cancelled()=>break,
             action=actions.recv()=>{
                 let Some(action)=action else{break};
-                last_activity = Instant::now();
                 match action{
                     Action::RefreshCredentials(reply)=>{
                         // Manual verification can replace risk/session cookies after login.
@@ -827,7 +834,19 @@ async fn worker_connected(
                         let _=reply.send(result);
                     }
                     Action::Search(request,stop,reply)=>{
+                        #[cfg(windows)]
                         let keyword=request.import.is_none();
+                        if request.import.is_none() && request.offset == 0
+                            && !stop.is_cancelled()
+                            && let Some(target) = search_home.take()
+                        {
+                            searches.adopt_home(target, session.clone());
+                            startup_is_search = true;
+                        }
+                        #[cfg(windows)]
+                        if !stop.is_cancelled() && let Some(target) = searches.target_to_reuse(&request) {
+                            process.prepare_catalog_reuse(target).await;
+                        }
                         #[cfg(windows)]
                         let identity = (request.listing.clone(), request.query.clone());
                         let work=searches.load(cdp,request,&stop);
@@ -842,21 +861,17 @@ async fn worker_connected(
                             public.page_ready = false;
                             public.login = json!({"status":"waiting","keepPolling":true,"message":"正在切换备用代理…"});
                         }
-                        let delivered=result.is_ok();
                         #[cfg(windows)]
-                        if delivered && keyword && let Some(target) = searches.catalog_target(&identity.0) {
+                        if result.is_ok() && !stop.is_cancelled() && !cancel.is_cancelled()
+                            && keyword && let Some(target) = searches.catalog_target(&identity.0)
+                        {
                             process.publish_catalog(target, &identity.1, "https://www.douyin.com");
                         }
                         let _=reply.send(result);
                         if let Some(error) = proxy_failure { return Err(error); }
-                        // Playback usually follows a result list. A failed warm-up only leaves
-                        // the next detail or search on a cold official page.
-                        if delivered && keyword && !cancel.is_cancelled() {
-                            let _=searches.warm_player(cdp).await;
-                            let _=searches.warm(cdp).await;
-                        }
                     }
                     Action::Detail(request,stop,reply)=>{
+                        searches.reap(cdp).await;
                         let operation = cancel.child_token();
                         let result = {
                             let work = detail::load(cdp,request,hidden_targets,&operation,&mut searches);
@@ -876,20 +891,25 @@ async fn worker_connected(
                             public.page_ready = false;
                             public.login = json!({"status":"waiting","keepPolling":true,"message":"正在切换备用代理…"});
                         }
-                        let delivered = result.is_ok();
                         let _ = reply.send(result);
                         if let Some(error) = proxy_failure { return Err(error); }
-                        if delivered && !cancel.is_cancelled() { let _ = searches.warm_player(cdp).await; }
                     }
-                    Action::Close(id)=>{searches.close(cdp,&id).await;}
+                    Action::Close(id)=>{
+                        #[cfg(windows)]
+                        if let Some(target) = searches.catalog_target(&id) {
+                            process.finish_catalog_reader(target);
+                        }
+                        searches.close(cdp,&id).await;
+                    }
                 }
+                last_activity = Instant::now();
             }
             event=async { match login_events.pop() { Some(event)=>Some(event), None=>cdp.events.recv().await } }=>{
                 let Some(event)=event else{return Err(cdp.disconnect_reason())};
                 if let Some(capture) = &mut verification_capture {
                     capture.retain(cdp, &event).await?;
                     }
-                if event["sessionId"]!=session{
+                if startup_is_search || event["sessionId"]!=session{
                     tokio::select!{_=cancel.cancelled()=>break,_=searches.observe(cdp,&event)=>{}}
                     continue
                 }
@@ -953,7 +973,7 @@ async fn worker_connected(
                 // Hidden authenticated browsers can be reopened from the same Profile.
                 // Reclaim the entire account process tree after browser activity stops.
                 if signed_in && !process.visible && verification_capture.is_none()
-                    && last_activity.elapsed() >= Duration::from_secs(120) { break; }
+                    && last_activity.elapsed() >= search::PAGE_IDLE { break; }
                 if !signed_in && started.elapsed()>Duration::from_secs(600){return Err("本次登录已超时，请重新生成二维码。".into())}
                 if !signed_in{
                     if confirmed && !profile_navigation{
