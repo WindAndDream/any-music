@@ -33,7 +33,6 @@ pub struct QrSession {
     pub _usage: Option<Arc<crate::accounts::usage::AccountUse>>,
     pub key: String,
     pub handoff: Option<QrHandoff>,
-    pub douyin: Option<crate::accounts::douyin_login::DouyinQr>,
     pub generation: String,
     pub session: Arc<AccountSession>,
 }
@@ -393,7 +392,6 @@ mod tests {
                 _usage: None,
                 key: "key".into(),
                 handoff: None,
-                douyin: None,
                 generation: "nonce".into(),
                 session: login.clone(),
             },

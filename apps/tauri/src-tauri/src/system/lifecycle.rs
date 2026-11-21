@@ -70,7 +70,6 @@ mod tests {
                 crate::state::QrSession {
                     _usage: None,
                     key: "public".into(),
-                    douyin: None,
                     generation: "generation".into(),
                     session: session.clone(),
                     handoff: Some(crate::state::QrHandoff {

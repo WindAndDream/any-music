@@ -28,10 +28,7 @@ pub async fn begin_qr_login(
         if !account.enabled {
             return Err("请先启用此账号。".into());
         }
-        if !matches!(
-            account.platform_id.as_str(),
-            "bilibili" | "douyin" | "netease"
-        ) {
+        if !matches!(account.platform_id.as_str(), "bilibili" | "netease") {
             return Err("此平台使用应用内网页完成验证。".into());
         }
         let session =
@@ -52,7 +49,6 @@ pub async fn begin_qr_login(
                 _usage: Some(usage),
                 key: String::new(),
                 handoff: None,
-                douyin: None,
                 generation: login_id.clone(),
                 session: session.clone(),
             },
@@ -69,16 +65,6 @@ pub async fn begin_qr_login(
                 .filter(|qr| qr.generation == login_id && !qr.session.cancelled.is_cancelled())
                 .ok_or("二维码会话已取消或替换。")?;
             current.key = key;
-            return Ok(public);
-        }
-        if platform == "douyin" {
-            let (pending, public) = crate::accounts::douyin_login::generate(&session).await?;
-            let mut qr = state.qr.lock().unwrap();
-            let current = qr
-                .get_mut(&account_id)
-                .filter(|qr| qr.generation == login_id && !qr.session.cancelled.is_cancelled())
-                .ok_or("二维码会话已取消或替换。")?;
-            current.douyin = Some(pending);
             return Ok(public);
         }
         let account = state.account(&account_id)?;
@@ -243,14 +229,10 @@ pub async fn poll_qr_login(
             .acquire()
             .await
             .map_err(|_| "登录会话已关闭。")?;
-        // A preceding SMS operation may have updated the challenge while this request was queued.
         let current = pending(&state, &account_id, &login_id)?;
-        let mut douyin = current.douyin.clone();
         let platform = state.account(&account_id)?.platform_id;
         let public = if platform == "netease" {
             super::netease_login::poll(&state, &account_id, &current.session, &current.key).await?
-        } else if let Some(qr) = &mut douyin {
-            crate::accounts::douyin_login::poll(&current.session, qr).await?
         } else {
             if current.key.is_empty() {
                 return Err("二维码尚未生成。".into());
@@ -294,11 +276,9 @@ pub async fn poll_qr_login(
         // Serialize credential commit with browser launch and account environment changes.
         let _browsers = state.browsers.lock().unwrap();
         let mut qr = state.qr.lock().unwrap();
-        let latest = qr
-            .get_mut(&account_id)
+        qr.get(&account_id)
             .filter(|qr| qr.generation == login_id && !qr.session.cancelled.is_cancelled())
             .ok_or("二维码会话已取消或替换。")?;
-        latest.douyin = douyin;
         if public["status"] == "signed-in" {
             let platform = state.account(&account_id)?.platform_id;
             if !has_credential(&current, &platform) {
@@ -358,16 +338,6 @@ fn has_credential(current: &QrSession, platform: &str) -> bool {
                 && match platform {
                     "bilibili" => name == "SESSDATA",
                     "netease" => name == "MUSIC_U",
-                    // Confirmed against the live site on 2026-10-03, after the first fully
-                    // completed scan-plus-verification sign-in: the browser's own subsequent
-                    // request carried BOTH sessionid and sessionid_ss (equal values), together
-                    // with sid_tt, sid_guard, uid_tt, uid_tt_ss, session_tlb_tag, sid_ucp_v1,
-                    // ssid_ucp_v1, x_tt_token, passport_assist_user, n_mh, login_time and
-                    // bd_ticket_guard_server_data. This pair is therefore observed rather than
-                    // assumed, and no cookie value is recorded here on purpose. Note that
-                    // sessionid does not appear in document.cookie, so only a request header or
-                    // an equivalent credential read can see it.
-                    "douyin" => matches!(name, "sessionid" | "sessionid_ss"),
                     _ => false,
                 }
         })
@@ -380,39 +350,19 @@ async fn sms_action(
     code: Option<&str>,
 ) -> Result<Value, String> {
     let current = pending(state, account_id, login_id)?;
-    if state.account(account_id)?.platform_id == "douyin" {
-        let result = state
-            .douyin_browsers
-            .sms(
-                account_id,
-                code.map(str::to_owned),
-                &current.session.cancelled,
-            )
-            .await?;
-        pending(state, account_id, login_id)?;
-        return Ok(result);
+    if state.account(account_id)?.platform_id != "douyin" {
+        return Err("此账号没有抖音验证会话。".into());
     }
-    let work = async {
-        let _queue = current
-            .session
-            .queue
-            .acquire()
-            .await
-            .map_err(|_| "登录会话已关闭。")?;
-        let mut current = pending(state, account_id, login_id)?;
-        let douyin = current.douyin.as_mut().ok_or("此账号没有抖音验证会话。")?;
-        let result = crate::accounts::douyin_login::sms(&current.session, douyin, code).await;
-        let _browsers = state.browsers.lock().unwrap();
-        let mut qr = state.qr.lock().unwrap();
-        let latest = qr
-            .get_mut(account_id)
-            .filter(|qr| qr.generation == login_id && !qr.session.cancelled.is_cancelled())
-            .ok_or("二维码会话已取消或替换。")?;
-        // Keep resend cooldowns on rejected sends; pending challenge state never goes to disk.
-        latest.douyin = current.douyin;
-        result
-    };
-    tokio::select! { _ = current.session.cancelled.cancelled() => Err("登录已取消。".into()), result = work => result }
+    let result = state
+        .douyin_browsers
+        .sms(
+            account_id,
+            code.map(str::to_owned),
+            &current.session.cancelled,
+        )
+        .await?;
+    pending(state, account_id, login_id)?;
+    Ok(result)
 }
 
 #[tauri::command]
@@ -492,7 +442,6 @@ async fn begin_douyin(
                 _usage: Some(usage),
                 key: String::new(),
                 handoff: None,
-                douyin: None,
                 generation: login_id.into(),
                 session: session.clone(),
             },
@@ -617,19 +566,16 @@ mod tests {
             _usage: None,
             key: String::new(),
             handoff: None,
-            douyin: None,
             generation: "new".into(),
             session: session.clone(),
         };
-        state
-            .qr
-            .lock()
-            .unwrap()
-            .insert(account.id.clone(), qr.clone());
+        state.qr.lock().unwrap().insert(account.id.clone(), qr);
         state.pause_login(&account.id).unwrap();
         cancel_pending(&state, &account.id, "old").unwrap();
         assert!(pending(&state, &account.id, "new").is_ok());
-        assert!(!has_credential(&qr, "douyin"));
+        assert!(!crate::browser::douyin_browser::projection::has_login(
+            &session.cookies.lock().unwrap()
+        ));
         let url = "https://www.douyin.com/".parse().unwrap();
         session
             .cookies
@@ -637,7 +583,9 @@ mod tests {
             .unwrap()
             .parse("sessionid=test; Domain=douyin.com; Path=/; Secure", &url)
             .unwrap();
-        assert!(has_credential(&qr, "douyin"));
+        assert!(crate::browser::douyin_browser::projection::has_login(
+            &session.cookies.lock().unwrap()
+        ));
         cancel_pending(&state, &account.id, "new").unwrap();
         assert!(session.cancelled.is_cancelled());
         assert_eq!(state.account(&account.id).unwrap().status, "ready");

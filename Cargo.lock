@@ -132,7 +132,6 @@ dependencies = [
  "cookie_store",
  "fs2",
  "futures-util",
- "hkdf",
  "hmac",
  "keyring",
  "objc2-app-kit",
