@@ -69,7 +69,7 @@ Sources: [Cargo workspaces](https://doc.rust-lang.org/cargo/reference/workspaces
 | Rust account actor         | Owns the browser/Profile, CookieStore and proxy; serializes operations, checks generations, handles cancellation/deadlines, commits credentials and reaps idle resources              |
 | Rust CDP search            | `search.rs` drives official controls and matches responses; `search/cache.rs` owns bounded transport bytes, deduplication and stale-cursor reclamation without duplicating music DTOs |
 
-Bilibili search already uses `native-http -> IPC -> Rust HTTP`. Shared pagination and mappings do not need a Rust duplicate. Douyin login, session checks and search all use CDP. Verification and ordinary network/page timeout failures stop. Explicit proxy/tunnel errors may select ordered user-configured backups while retaining the same account. Existing later pages require a refresh rather than reuse a cursor across browser sessions. Requests, policy and process control stay native; shared packages continue to map DTOs.
+Bilibili search already uses `native-http -> IPC -> Rust HTTP`. Shared pagination and mappings do not need a Rust duplicate. Douyin login and search use the native page driver. Standalone account checks use Rust HTTP and match the returned UID against the identity bound at login. Verification and ordinary network/page timeout failures stop. Explicit proxy/tunnel errors may select ordered user-configured backups while retaining the same account. Existing later pages require a refresh rather than reuse a cursor across browser sessions. Requests, policy and process control stay native; shared packages continue to map DTOs.
 
 ## Async state and ownership
 
