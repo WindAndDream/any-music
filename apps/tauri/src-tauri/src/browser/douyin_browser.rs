@@ -25,9 +25,13 @@ use tokio::sync::{mpsc, oneshot};
 use tokio_util::sync::CancellationToken;
 
 type Reply = oneshot::Sender<Result<Value, String>>;
+enum ProfileRead {
+    Catalog,
+    Nickname,
+}
 enum Action {
     Sms(Option<String>, CancellationToken, Reply),
-    Profile(CancellationToken, Reply),
+    Profile(ProfileRead, CancellationToken, Reply),
     SearchFailure(String, String, Reply),
     RefreshCredentials(Reply),
     Search(
@@ -388,6 +392,7 @@ impl Manager {
         id: &str,
         cancel: &CancellationToken,
         started: bool,
+        purpose: ProfileRead,
     ) -> Result<Value, String> {
         if cancel.is_cancelled() {
             return Err("operation-cancelled:请求已取消。".into());
@@ -395,11 +400,11 @@ impl Manager {
         if started {
             self.ready(id, cancel).await?;
         } else {
-            // A fresh explicit probe must be able to recover a previous rejection/challenge.
+            // An import profile refresh can replace a stale browser result.
             self.ready_page(id, cancel).await?;
         }
         // Only the request that started this browser may consume its fresh bootstrap
-        // response. Later explicit checks use a fresh auxiliary page to detect logout/expiry.
+        // response. Later import reads refresh the profile in an independent auxiliary page.
         if started {
             if cancel.is_cancelled() {
                 return Err("operation-cancelled:请求已取消。".into());
@@ -415,7 +420,7 @@ impl Manager {
             }
         }
         let token = cancel.clone();
-        self.action(id, |reply| Action::Profile(token, reply), cancel)
+        self.action(id, |reply| Action::Profile(purpose, token, reply), cancel)
             .await
     }
     async fn action(
@@ -588,7 +593,13 @@ pub async fn target(cdp: &mut Cdp, hidden: bool) -> Result<(String, String), Str
         .as_str()
         .ok_or("无法创建账号页面。")?
         .to_owned();
-    attach_target(cdp, target).await
+    let result = attach_target(cdp, target.clone()).await;
+    if result.is_err() {
+        let _ = cdp
+            .call(None, "Target.closeTarget", json!({"targetId":target}))
+            .await;
+    }
+    result
 }
 
 async fn attach_target(cdp: &mut Cdp, target: String) -> Result<(String, String), String> {
@@ -722,7 +733,9 @@ async fn worker_connected(
 ) -> Result<(), String> {
     // Auxiliary pages always stay hidden; only the account's startup page may be presented.
     let hidden_targets = true;
-    let (_, session) = target(cdp, !process.visible).await?;
+    let (startup_target, session) = target(cdp, !process.visible).await?;
+    let mut search_home = (!process.visible && start_query.is_none()).then_some(startup_target);
+    let mut startup_is_search = false;
     // Observe from startup: the user may submit while account state is still loading.
     let mut verification_capture = start_query
         .as_ref()
@@ -763,7 +776,6 @@ async fn worker_connected(
             _=cancel.cancelled()=>break,
             action=actions.recv()=>{
                 let Some(action)=action else{break};
-                last_activity = Instant::now();
                 match action{
                     Action::RefreshCredentials(reply)=>{
                         // Manual verification can replace risk/session cookies after login.
@@ -784,21 +796,21 @@ async fn worker_connected(
                         }.await;
                         let _=reply.send(result);
                     }
-                    Action::Profile(stop,reply)=>{
+                    Action::Profile(purpose,stop,reply)=>{
                         let operation=cancel.child_token();
                         let result={
                             let work=profile::refresh(cdp,hidden_targets,&operation,&mut searches,verification_capture.as_mut(),&mut login_events);
                             tokio::pin!(work);
                             tokio::select!{result=&mut work=>result,_=stop.cancelled()=>{operation.cancel();work.await}}
                         };
-                        if let Ok(profile)=&result{
+                        if matches!(purpose, ProfileRead::Catalog) && let Ok(profile)=&result{
                             remember_agent(cdp, data).await?;
                             let cookies=cdp.call(None,"Storage.getCookies",json!({})).await?;
                             let mut data=data.lock().unwrap();data.profile=profile.clone();data.profile_error=None;
                             if projection::has_login(&projection::cookie_store(&cookies)?){data.cookies=cookies;data.login=json!({"status":"signed-in"});}
                         }
                         // Keep connection/format failures retryable; they do not erase identity.
-                        if let Err(error)=&result
+                        if matches!(purpose, ProfileRead::Catalog) && let Err(error)=&result
                             && (error.starts_with("not-authenticated:") || error.starts_with("verification-required:")) {
                                 let mut data=data.lock().unwrap();data.profile=Value::Null;data.profile_error=Some(error.clone());
                                 if error.starts_with("not-authenticated:"){data.cookies=Value::Null;}
@@ -827,7 +839,21 @@ async fn worker_connected(
                         let _=reply.send(result);
                     }
                     Action::Search(request,stop,reply)=>{
+                        #[cfg(windows)]
                         let keyword=request.import.is_none();
+                        if request.import.is_none() && request.offset == 0
+                            && !stop.is_cancelled()
+                            && let Some(target) = search_home.take()
+                        {
+                            searches.adopt_home(target, session.clone());
+                            startup_is_search = true;
+                        }
+                        #[cfg(windows)]
+                        if !stop.is_cancelled() && let Some(target) = searches.target_to_reuse(&request) {
+                            process.prepare_catalog_reuse(target).await;
+                        }
+                        #[cfg(windows)]
+                        let identity = (request.listing.clone(), request.query.clone());
                         let work=searches.load(cdp,request,&stop);
                         let result=tokio::select!{_=cancel.cancelled()=>Err("operation-cancelled:账号会话已结束。".into()),result=work=>result};
                         if result.is_ok() && !stop.is_cancelled() && !cancel.is_cancelled() {
@@ -840,17 +866,17 @@ async fn worker_connected(
                             public.page_ready = false;
                             public.login = json!({"status":"waiting","keepPolling":true,"message":"正在切换备用代理…"});
                         }
-                        let delivered=result.is_ok();
+                        #[cfg(windows)]
+                        if result.is_ok() && !stop.is_cancelled() && !cancel.is_cancelled()
+                            && keyword && let Some(target) = searches.catalog_target(&identity.0)
+                        {
+                            process.publish_catalog(target, &identity.1, "https://www.douyin.com");
+                        }
                         let _=reply.send(result);
                         if let Some(error) = proxy_failure { return Err(error); }
-                        // Playback usually follows a result list. A failed warm-up only leaves
-                        // the next detail or search on a cold official page.
-                        if delivered && keyword && !cancel.is_cancelled() {
-                            let _=searches.warm_player(cdp).await;
-                            let _=searches.warm(cdp).await;
-                        }
                     }
                     Action::Detail(request,stop,reply)=>{
+                        searches.reap(cdp).await;
                         let operation = cancel.child_token();
                         let result = {
                             let work = detail::load(cdp,request,hidden_targets,&operation,&mut searches);
@@ -870,20 +896,25 @@ async fn worker_connected(
                             public.page_ready = false;
                             public.login = json!({"status":"waiting","keepPolling":true,"message":"正在切换备用代理…"});
                         }
-                        let delivered = result.is_ok();
                         let _ = reply.send(result);
                         if let Some(error) = proxy_failure { return Err(error); }
-                        if delivered && !cancel.is_cancelled() { let _ = searches.warm_player(cdp).await; }
                     }
-                    Action::Close(id)=>{searches.close(cdp,&id).await;}
+                    Action::Close(id)=>{
+                        #[cfg(windows)]
+                        if let Some(target) = searches.catalog_target(&id) {
+                            process.finish_catalog_reader(target);
+                        }
+                        searches.close(cdp,&id).await;
+                    }
                 }
+                last_activity = Instant::now();
             }
             event=async { match login_events.pop() { Some(event)=>Some(event), None=>cdp.events.recv().await } }=>{
                 let Some(event)=event else{return Err(cdp.disconnect_reason())};
                 if let Some(capture) = &mut verification_capture {
                     capture.retain(cdp, &event).await?;
                     }
-                if event["sessionId"]!=session{
+                if startup_is_search || event["sessionId"]!=session{
                     tokio::select!{_=cancel.cancelled()=>break,_=searches.observe(cdp,&event)=>{}}
                     continue
                 }
@@ -947,7 +978,7 @@ async fn worker_connected(
                 // Hidden authenticated browsers can be reopened from the same Profile.
                 // Reclaim the entire account process tree after browser activity stops.
                 if signed_in && !process.visible && verification_capture.is_none()
-                    && last_activity.elapsed() >= Duration::from_secs(120) { break; }
+                    && last_activity.elapsed() >= search::PAGE_IDLE { break; }
                 if !signed_in && started.elapsed()>Duration::from_secs(600){return Err("本次登录已超时，请重新生成二维码。".into())}
                 if !signed_in{
                     if confirmed && !profile_navigation{
@@ -966,7 +997,7 @@ async fn worker_connected(
                     let fallback=!requests.values().any(|(kind,_)|kind=="profile") && needs_profile_navigation(&data.lock().unwrap(),profile_started.elapsed(),fallback_navigation);
                     if fallback{
                         fallback_navigation=true;
-                        // Account checks must not replace the visible search or a completed challenge.
+                        // Account checks must not replace a completed challenge.
                         match profile::refresh(cdp,hidden_targets,cancel,&mut searches,verification_capture.as_mut(),&mut login_events).await{
                             Ok(profile)=>{let mut data=data.lock().unwrap();data.profile=profile;data.profile_error=None;}
                             Err(error)=>{data.lock().unwrap().profile_error=Some(error);}
@@ -1074,7 +1105,7 @@ mod tests {
         });
     }
     #[test]
-    fn explicit_profile_retry_bypasses_stale_rejection_and_qr_expiry_never_means_account_logout() {
+    fn import_profile_rechecks_stale_page_state_and_qr_expiry_is_not_logout() {
         tauri::async_runtime::block_on(async {
             let manager = Manager::default();
             let data = Arc::new(Mutex::new(PrivateState {
@@ -1104,9 +1135,10 @@ mod tests {
                     .unwrap_err()
                     .starts_with("verification-required:")
             );
-            let probe = manager.profile("account", &cancel, false);
+            let probe = manager.profile("account", &cancel, false, ProfileRead::Catalog);
             let respond = async {
-                let Some(Action::Profile(_, reply)) = receiver.recv().await else {
+                let Some(Action::Profile(ProfileRead::Catalog, _, reply)) = receiver.recv().await
+                else {
                     panic!("fresh probe expected")
                 };
                 reply.send(Ok(json!({"status":200,"body":serde_json::to_vec(&json!({"status_code":0,"user":{"uid":"12"}})).unwrap()}))).unwrap();
@@ -1164,7 +1196,7 @@ mod tests {
     }
 
     #[test]
-    fn startup_profile_response_avoids_reload_but_later_checks_and_cancellation_do_not_reuse_it() {
+    fn import_profile_reuses_bootstrap_only_for_the_first_read() {
         tauri::async_runtime::block_on(async {
             let manager = Manager::default();
             let profile = json!({"status_code":0,"user":{"nickname":"fixture"}});
@@ -1187,7 +1219,10 @@ mod tests {
                 },
             );
             let cancel = CancellationToken::new();
-            let result = manager.profile("account", &cancel, true).await.unwrap();
+            let result = manager
+                .profile("account", &cancel, true, ProfileRead::Catalog)
+                .await
+                .unwrap();
             assert_eq!(result["body"], json!(serde_json::to_vec(&profile).unwrap()));
             assert!(
                 receiver.try_recv().is_err(),
@@ -1197,15 +1232,16 @@ mod tests {
             cancelled.cancel();
             assert!(
                 manager
-                    .profile("account", &cancelled, true)
+                    .profile("account", &cancelled, true, ProfileRead::Catalog)
                     .await
                     .unwrap_err()
                     .starts_with("operation-cancelled:")
             );
             assert!(receiver.try_recv().is_err());
-            let check = manager.profile("account", &cancel, false);
+            let check = manager.profile("account", &cancel, false, ProfileRead::Nickname);
             let respond = async {
-                let Some(Action::Profile(_, reply)) = receiver.recv().await else {
+                let Some(Action::Profile(ProfileRead::Nickname, _, reply)) = receiver.recv().await
+                else {
                     panic!("a later check must request a fresh official response");
                 };
                 reply

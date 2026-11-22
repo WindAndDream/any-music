@@ -11,7 +11,8 @@ function compileSfcStyles(path: string) {
       ? new URL('../../../src/components/shell/ProductTopBar.vue', import.meta.url)
       : path === 'product-workbench/AppShellPreferencesPanel'
         ? new URL('../../../src/components/settings/AppShellPreferencesPanel.vue', import.meta.url)
-        : path.startsWith('music-sources/Queue') ||
+        : path === 'music-sources/ClassicCatalog' ||
+            path.startsWith('music-sources/Queue') ||
             path.startsWith('music-sources/Catalog') ||
             path.startsWith('downloads/') ||
             path.startsWith('library/')
@@ -28,6 +29,7 @@ function compileSfcStyles(path: string) {
 
 const topBarStyles = compileSfcStyles('product-workbench/ProductTopBar')
 const shellStyles = compileSfcStyles('MusicAppShell')
+const catalogStyles = compileSfcStyles('music-sources/ClassicCatalog')
 const catalogListStyles = compileSfcStyles('music-sources/CatalogDrawerList')
 const catalogListHeaderStyles = compileSfcStyles('music-sources/CatalogDrawerListHeader')
 const catalogDetailsStyles = compileSfcStyles('music-sources/CatalogDrawerDetails')
@@ -94,6 +96,32 @@ function readLayout(
 }
 
 describe('Classic shell and current page layout integration', () => {
+  it.each([390, 1440])(
+    'bounds the catalog and scrolls only below the track header at %ipx',
+    (width) => {
+      expect(readLayout(catalogStyles, ['.classic-catalog'], width).flex).toBe('1')
+      expect(
+        readLayout(catalogStyles, ['.classic-catalog__stage'], width)['grid-template-rows'],
+      ).toBe('minmax(0, 1fr)')
+      const shellOverride =
+        '.music-app-shell__content:has(> .am-workspace-surface > .classic-catalog)'
+      expect(readLayout(sharedStyles, [shellOverride], width)).toMatchObject({
+        overflow: 'clip',
+        'scrollbar-gutter': 'auto',
+      })
+      expect(
+        readLayout(sharedStyles, ['.catalog-page--tracks > .catalog-page__sticky-header'], width),
+      ).toMatchObject({ position: 'relative', 'flex-shrink': '0' })
+      expect(readLayout(sharedStyles, ['.catalog-page__tracks-scroll'], width)).toMatchObject({
+        flex: '1',
+        'min-block-size': '0',
+        overflow: 'hidden auto',
+        'scrollbar-gutter': 'stable',
+      })
+      expect(readLayout(sharedStyles, ['.catalog-page--lists'], width).overflow).toBe('hidden auto')
+    },
+  )
+
   it('keeps download and playlist motion surfaces composited through dragging and landing', () => {
     expect(
       readLayout(downloadRowStyles, ['.download-track__surface--moving'], 1200)['will-change'],

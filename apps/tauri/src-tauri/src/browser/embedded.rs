@@ -2,6 +2,7 @@
 //! Each account owns a persistent data store and proxy. Remote pages reach only the bounded
 //! report bridge of their own native page; credentials stay native and the renderer only
 //! positions a presented page inside its dialog.
+pub(crate) mod catalog;
 mod driver;
 pub use driver::AccountPages;
 
@@ -431,6 +432,8 @@ struct Shown {
 
 #[derive(Default)]
 pub struct Host {
+    #[cfg(windows)]
+    pub(super) catalog: catalog::Surface,
     app: OnceLock<tauri::AppHandle>,
     links: Mutex<HashMap<String, Link>>,
     shown: Mutex<HashMap<String, Shown>>,
@@ -503,7 +506,26 @@ impl Host {
             }
         }
     }
+    #[cfg(windows)]
+    pub(super) fn publish_catalog(
+        &self,
+        label: &str,
+        account: &str,
+        query: &str,
+        origin: &'static str,
+    ) {
+        use tauri::Manager;
+        if self.owns(label, account)
+            && let Some(webview) = self.app.get().and_then(|app| app.get_webview(label))
+        {
+            self.catalog.publish(webview, account, query, origin);
+        }
+    }
     pub fn close(&self, page: &Page) {
+        #[cfg(windows)]
+        let retained = self.catalog.reader_closed(&page.label);
+        #[cfg(not(windows))]
+        let retained = false;
         self.links.lock().unwrap().remove(&page.label);
         let account = {
             let mut shown = self.shown.lock().unwrap();
@@ -519,7 +541,9 @@ impl Host {
         if let Some(account) = account {
             self.emit(&account, "closed", None, None);
         }
-        let _ = page.webview.close();
+        if !retained {
+            let _ = page.webview.close();
+        }
     }
     /// Register the account's user-facing page. Only one page per account is presented.
     pub fn present(&self, account: &str, page: &Page, mode: Presentation) {
@@ -739,10 +763,16 @@ fn build(
         .disable_drag_drop_handler()
         .background_throttling(tauri::utils::config::BackgroundThrottlingPolicy::Disabled)
         // Remote pages may follow official HTTPS redirects but never open app schemes/windows.
-        .on_navigation(|url| url.scheme() == "https" || url.as_str() == "about:blank")
+        .on_navigation(|url| url.as_str() == "about:blank" || url.scheme() == "https")
         .on_new_window(|_, _| tauri::webview::NewWindowResponse::Deny)
-        .on_page_load(move |_, payload| {
+        .on_page_load(move |webview, payload| {
+            #[cfg(not(windows))]
+            let _ = webview;
             if matches!(payload.event(), tauri::webview::PageLoadEvent::Started) {
+                #[cfg(windows)]
+                if let Some(state) = webview.try_state::<crate::state::RuntimeState>() {
+                    state.embedded.catalog.navigation(&page);
+                }
                 let _ = reports.try_send(json!({"label": page, "kind": "navigation"}));
             }
         });

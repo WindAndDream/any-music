@@ -1,6 +1,7 @@
 /** 歌曲列表只调整卡片密度；筛选、选择和播放状态不受展示方式切换影响。 */
 export type CatalogTrackDisplayMode = 'comfortable' | 'standard' | 'compact'
 export type MobileTrackColumns = 1 | 2
+export type TrackGridViewport = 'narrow' | 'wide'
 
 export const catalogTrackDisplayModes: readonly {
   id: CatalogTrackDisplayMode

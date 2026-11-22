@@ -1,4 +1,4 @@
-//! A listing owns a target and cursor chain; responses from other tabs/keywords are never reused.
+//! Discover leases one account page across keyword searches. Imports own separate cursor pages.
 mod cache;
 mod scroll;
 use super::{Packet, body, target};
@@ -57,24 +57,29 @@ struct Page {
     import: Option<super::import::Target>,
     last_offset: Option<u64>,
     touched: Instant,
-    /// Adopted from the standby homepage, which is already navigating or hydrated.
-    warm: bool,
+    /// Browser timestamp immediately before submitting this listing's search.
+    submitted_at: Option<f64>,
+}
+struct IdleSearch {
+    target: String,
+    session: String,
+    has_results: bool,
+    since: Instant,
 }
 pub struct Pages {
     pages: HashMap<String, Page>,
     sessions: HashMap<String, String>,
     responses: ResponseCache,
     hidden: bool,
-    /// One unsubmitted homepage (target, session) for the next keyword search. The official
-    /// homepage hydrates only after its full script set loads, which takes tens of seconds
-    /// on slow links; loading it ahead keeps that cost off later searches.
-    standby: Option<(String, String)>,
-    /// One hydrated page (target, session) that work detail routes in-page, so playback
-    /// skips a cold official page load. Media and images are refused at the network layer.
-    player: Option<(String, String)>,
+    idle_search: Option<IdleSearch>,
+    /// A page that already delivered an official work-detail response.
+    detail_page: Option<((String, String), Instant)>,
 }
 pub const HOME_URL: &str = "https://www.douyin.com/jingxuan";
-/// Loading and hydrating the official homepage, measured from navigation or standby adoption.
+pub(super) const PAGE_IDLE: Duration = Duration::from_secs(90);
+const RESULT_CONTROLS_BUDGET: Duration = Duration::from_secs(2);
+const RESULT_ROUTE_BUDGET: Duration = Duration::from_secs(6);
+/// Loading and hydrating the official homepage, measured from navigation or adoption.
 const CONTROLS_BUDGET: Duration = Duration::from_secs(60);
 /// Producing the requested result page once submitted (or once a later page is due).
 const RESPONSE_BUDGET: Duration = Duration::from_secs(18);
@@ -100,15 +105,28 @@ fn submit_expression(query: &str) -> String {
     format!("({})({})", include_str!("submit-search.js"), json!(query))
 }
 
-/// Let the official homepage generate the result route and its per-search aid.
-/// Call from the event loop so loading the homepage never discards captured responses.
-pub async fn submit(cdp: &mut Cdp, session: &str, query: &str) -> Result<bool, String> {
+pub(super) struct Submission {
+    time: f64,
+    page_url: String,
+}
+
+/// Let the official controls generate the result route and its per-search aid.
+pub(super) async fn submit(
+    cdp: &mut Cdp,
+    session: &str,
+    query: &str,
+    clear: bool,
+) -> Result<Option<Submission>, String> {
     let ready = cdp.call(Some(session), "Runtime.evaluate", json!({"expression":include_str!("prepare-search.js"),"returnByValue":true,"userGesture":true})).await?;
     if ready.get("exceptionDetails").is_some() {
         return Err("invalid-response:无法操作官方搜索控件，请在账号页面中查看。".into());
     }
     if ready["result"]["value"] != true {
-        return Ok(false);
+        return Ok(None);
+    }
+    if clear {
+        cdp.call(Some(session), "Input.insertText", json!({"text":""}))
+            .await?;
     }
     cdp.call(Some(session), "Input.insertText", json!({"text":query}))
         .await?;
@@ -123,8 +141,13 @@ pub async fn submit(cdp: &mut Cdp, session: &str, query: &str) -> Result<bool, S
         return Err("invalid-response:无法操作官方搜索控件，请在账号页面中查看。".into());
     }
     let point = &result["result"]["value"];
-    let (Some(x), Some(y)) = (point["x"].as_f64(), point["y"].as_f64()) else {
-        return Ok(false);
+    let (Some(x), Some(y), Some(time), Some(page_url)) = (
+        point["x"].as_f64(),
+        point["y"].as_f64(),
+        point["time"].as_f64(),
+        point["pageUrl"].as_str(),
+    ) else {
+        return Ok(None);
     };
     for action in ["mousePressed", "mouseReleased"] {
         cdp.call(
@@ -134,7 +157,10 @@ pub async fn submit(cdp: &mut Cdp, session: &str, query: &str) -> Result<bool, S
         )
         .await?;
     }
-    Ok(true)
+    Ok(Some(Submission {
+        time,
+        page_url: page_url.into(),
+    }))
 }
 pub(super) fn response_cursor(params: &Value, query: &str) -> Option<u64> {
     if !matches!(params["type"].as_str(), Some("XHR" | "Fetch")) {
@@ -228,98 +254,108 @@ impl Pages {
             sessions: HashMap::new(),
             responses: ResponseCache::default(),
             hidden,
-            standby: None,
-            player: None,
+            idle_search: None,
+            detail_page: None,
         }
     }
-    /// Start loading the reusable work-detail page. Like the standby homepage it stays
-    /// outside `sessions`; `observe` refuses its media and image requests until adoption.
-    pub async fn warm_player(&mut self, cdp: &mut Cdp) -> Result<(), String> {
-        if self.player.is_some() {
-            return Ok(());
-        }
-        let (target, session) = target(cdp, self.hidden).await?;
-        let started = async {
-            cdp.call(
-                Some(&session),
-                "Fetch.enable",
-                json!({"patterns":[
-                    {"resourceType":"Media","requestStage":"Request"},
-                    {"resourceType":"Image","requestStage":"Request"}
-                ]}),
-            )
-            .await?;
-            cdp.call(Some(&session), "Page.navigate", json!({"url":HOME_URL}))
-                .await
-        }
-        .await;
-        if started.is_err() {
-            let _ = cdp
-                .call(None, "Target.closeTarget", json!({"targetId":target}))
-                .await;
-        }
-        started?;
-        self.player = Some((target, session));
-        Ok(())
+    pub(super) fn take_detail_page(&mut self) -> Option<(String, String)> {
+        self.detail_page.take().map(|(page, _)| page)
     }
-    pub(super) fn take_player(&mut self) -> Option<(String, String)> {
-        self.player.take()
+    pub(super) fn retain_detail_page(&mut self, page: (String, String)) {
+        self.detail_page = Some((page, Instant::now()));
     }
-    /// Keep a player that delivered its detail; it stays hydrated on the work route.
-    pub(super) fn restore_player(&mut self, player: (String, String)) {
-        self.player = Some(player);
+    pub(super) fn adopt_home(&mut self, target: String, session: String) {
+        self.idle_search = Some(IdleSearch {
+            target,
+            session,
+            has_results: false,
+            since: Instant::now(),
+        });
     }
-    /// Start loading the next search homepage after a keyword result has been delivered, so
-    /// it never competes with that search for bandwidth. It stays outside `sessions`, so its
-    /// traffic is never attributed to a listing before adoption.
-    pub async fn warm(&mut self, cdp: &mut Cdp) -> Result<(), String> {
-        if self.standby.is_some() {
-            return Ok(());
+    fn active_search(&self) -> Option<&str> {
+        self.pages
+            .iter()
+            .find(|(_, page)| page.import.is_none())
+            .map(|(id, _)| id.as_str())
+    }
+    #[cfg(windows)]
+    pub(super) fn target_to_reuse(&self, request: &Request) -> Option<&str> {
+        if request.import.is_some()
+            || request.offset != 0
+            || self.pages.contains_key(&request.listing)
+        {
+            return None;
         }
-        let (target, session) = target(cdp, self.hidden).await?;
-        let navigation = cdp
-            .call(Some(&session), "Page.navigate", json!({"url":HOME_URL}))
-            .await;
-        if navigation.is_err() {
-            let _ = cdp
-                .call(None, "Target.closeTarget", json!({"targetId":target}))
-                .await;
-        }
-        navigation?;
-        self.standby = Some((target, session));
-        Ok(())
+        self.idle_search
+            .as_ref()
+            .map(|page| page.target.as_str())
+            .or_else(|| self.active_search().and_then(|id| self.catalog_target(id)))
+    }
+    #[cfg(windows)]
+    pub(super) fn catalog_target(&self, id: &str) -> Option<&str> {
+        self.pages.get(id).map(|page| page.target.as_str())
+    }
+    fn remove(&mut self, id: &str) -> Option<Page> {
+        let page = self.pages.remove(id)?;
+        self.sessions.remove(&page.session);
+        self.responses.remove(id);
+        Some(page)
     }
     pub async fn close(&mut self, cdp: &mut Cdp, id: &str) {
-        if let Some(page) = self.pages.remove(id) {
-            self.sessions.remove(&page.session);
-            self.responses.remove(id);
-            let _ = cdp
-                .call(None, "Target.closeTarget", json!({"targetId":page.target}))
-                .await;
+        if let Some(page) = self.remove(id) {
+            if page.import.is_none() && page.last_offset.is_some() {
+                self.idle_search = Some(IdleSearch {
+                    target: page.target,
+                    session: page.session,
+                    has_results: true,
+                    since: Instant::now(),
+                });
+            } else {
+                close_target(cdp, page.target).await;
+            }
+        }
+    }
+    async fn discard(&mut self, cdp: &mut Cdp, id: &str) {
+        if let Some(page) = self.remove(id) {
+            close_target(cdp, page.target).await;
         }
     }
     pub async fn reap(&mut self, cdp: &mut Cdp) {
         let stale = self
             .pages
             .iter()
-            .filter(|(_, page)| page.touched.elapsed() >= Duration::from_secs(120))
+            .filter(|(_, page)| page.touched.elapsed() >= PAGE_IDLE)
             .map(|(id, _)| id.clone())
             .collect::<Vec<_>>();
         for id in stale {
-            self.close(cdp, &id).await;
+            self.discard(cdp, &id).await;
+        }
+        if self
+            .idle_search
+            .as_ref()
+            .is_some_and(|page| page.since.elapsed() >= PAGE_IDLE)
+        {
+            close_target(cdp, self.idle_search.take().unwrap().target).await;
+        }
+        if self
+            .detail_page
+            .as_ref()
+            .is_some_and(|(_, since)| since.elapsed() >= PAGE_IDLE)
+        {
+            close_target(cdp, self.take_detail_page().unwrap().0).await;
         }
     }
     /// The official client may preload the next cursor before the consumer asks for it.
     /// Keep those exact responses bounded and account/target/keyword scoped; never refetch
     /// a signed URL or serve one listing's cursor to another listing.
     pub async fn observe(&mut self, cdp: &mut Cdp, event: &Value) {
-        if let Some((_, player)) = &self.player
-            && event["sessionId"] == player.as_str()
+        if let Some(((_, session), _)) = &self.detail_page
+            && event["sessionId"] == session.as_str()
         {
             if event["method"] == "Fetch.requestPaused" {
                 let _ = cdp
                     .call(
-                        Some(player),
+                        Some(session),
                         "Fetch.failRequest",
                         json!({"requestId":event["params"]["requestId"],"errorReason":"Aborted"}),
                     )
@@ -342,8 +378,14 @@ impl Pages {
                     json!({"type":params["type"],"response":{"url":params["request"]["url"]}});
                 let cursor = if let Some(target) = &page.import {
                     target.request_cursor(params)
-                } else {
+                } else if page
+                    .submitted_at
+                    .zip(params["wallTime"].as_f64())
+                    .is_some_and(|(submitted, started)| started >= submitted)
+                {
                     response_cursor(&request, &page.query)
+                } else {
+                    None
                 };
                 if let Some(offset) = cursor {
                     self.responses.started(id, request_id, offset);
@@ -356,7 +398,9 @@ impl Pages {
                         .then(|| self.responses.request_cursor(id, request_id))
                         .flatten()
                 } else {
-                    response_cursor(params, &page.query)
+                    response_cursor(params, &page.query).filter(|cursor| {
+                        self.responses.request_cursor(id, request_id) == Some(*cursor)
+                    })
                 };
                 if let Some(offset) = cursor
                     && let Some(status) = params["response"]["status"]
@@ -411,22 +455,37 @@ impl Pages {
             return Err("operation-cancelled:搜索已取消。".into());
         }
         self.reap(cdp).await;
+        let mut navigate = false;
+        let mut try_result_controls = false;
         if !self.pages.contains_key(&request.listing) {
-            if self.pages.len() >= 8 {
-                return Err("limit-exceeded:此账号打开的搜索列表过多，请关闭旧列表。".into());
-            }
             if request.offset != 0 {
                 return Err("pagination-unavailable:搜索会话已结束，请从第一页重新搜索。".into());
             }
-            let standby = if request.import.is_none() {
-                self.standby.take()
+            let reusable = if request.import.is_none() {
+                if let Some(active) = self.active_search().map(str::to_owned) {
+                    self.close(cdp, &active).await;
+                }
+                if self.pages.len() >= 8 {
+                    return Err("limit-exceeded:此账号打开的搜索列表过多，请关闭旧列表。".into());
+                }
+                self.idle_search.take()
             } else {
                 None
             };
-            let warm = standby.is_some();
-            let (target, session) = match standby {
-                Some(page) => page,
-                None => target(cdp, self.hidden).await?,
+            let (target, session) = match reusable {
+                Some(page) => {
+                    try_result_controls = page.has_results;
+                    (page.target, page.session)
+                }
+                None => {
+                    if self.pages.len() + usize::from(self.idle_search.is_some()) >= 8 {
+                        return Err(
+                            "limit-exceeded:此账号打开的搜索列表过多，请关闭旧列表。".into()
+                        );
+                    }
+                    navigate = true;
+                    target(cdp, self.hidden).await?
+                }
             };
             self.sessions
                 .insert(session.clone(), request.listing.clone());
@@ -444,7 +503,7 @@ impl Pages {
                     import: request.import.clone(),
                     last_offset: None,
                     touched: Instant::now(),
-                    warm,
+                    submitted_at: None,
                 },
             );
         }
@@ -465,7 +524,6 @@ impl Pages {
         page.touched = Instant::now();
         let session = page.session.clone();
         let first = page.last_offset.is_none();
-        let navigate = first && !page.warm;
         let mut progress = if first {
             Progress::Controls
         } else {
@@ -474,32 +532,34 @@ impl Pages {
         let work = async {
             // Official pages can take well over ten seconds to become interactive on slow
             // links; give loading its own budget and restart the response budget at submit.
-            let mut deadline = tokio::time::Instant::now()
-                + if first {
-                    CONTROLS_BUDGET
-                } else {
-                    RESPONSE_BUDGET
-                };
+            let now = tokio::time::Instant::now();
+            let controls_deadline = now + CONTROLS_BUDGET;
+            let mut deadline = if first {
+                controls_deadline
+            } else {
+                now + RESPONSE_BUDGET
+            };
             if navigate {
                 let url = request
                     .import
                     .as_ref()
                     .map_or_else(|| HOME_URL.into(), super::import::Target::url);
-                cdp.call(Some(&session), "Page.navigate", json!({"url":url}))
-                    .await?;
+                navigate_to(cdp, &session, &url).await?;
             }
             let mut submitted = !first || request.import.is_some();
+            let mut retry_home_at =
+                try_result_controls.then(|| tokio::time::Instant::now() + RESULT_CONTROLS_BUDGET);
+            let mut check_result_route: Option<(tokio::time::Instant, String)> = None;
             let mut scroller = scroll::Scroller::new();
             let scroll_timer = tokio::time::sleep(scroller.initial_delay());
             tokio::pin!(scroll_timer);
             // Poll controls quickly only until one successful click. This adds no
             // search requests and avoids a full second of idle readiness latency.
-            let mut inspect = tokio::time::interval(if first {
+            let mut inspect = page_inspection(if first {
                 Duration::from_millis(250)
             } else {
                 Duration::from_secs(1)
             });
-            inspect.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
             loop {
                 if cancel.is_cancelled() {
                     return Err("operation-cancelled:搜索已取消。".into());
@@ -519,20 +579,14 @@ impl Pages {
                     _=tokio::time::sleep_until(deadline)=>return Err(if request.import.is_some() { "request-timeout:官方抖音导入页面加载超时，请稍后重试。".into() } else { progress.timeout_message() }),
                     event=cdp.events.recv()=>{
                         let Some(event)=event else{return Err("network-error:账号页面连接中断。".into())};
-                        if event["sessionId"] == session {
-                            let params = match event["method"].as_str() {
-                                Some("Network.requestWillBeSent") => json!({"type":event["params"]["type"],"response":{"url":event["params"]["request"]["url"]}}),
-                                Some("Network.responseReceived") => event["params"].clone(),
-                                _ => Value::Null,
-                            };
-                            if response_cursor(&params, &request.query) == Some(request.offset) {
-                                progress = Progress::Requested;
-                            }
-                        }
                         if cancel.is_cancelled() {
                             return Err("operation-cancelled:搜索已取消。".into());
                         }
                         self.observe(cdp,&event).await;
+                        if self.responses.pending(&request.listing, request.offset) {
+                            progress = Progress::Requested;
+                            check_result_route = None;
+                        }
                     }
                     _=inspect.tick()=>{
                         let result = cdp.call(Some(&session), "Runtime.evaluate", json!({"expression":include_str!("inspect-search-page.js"),"returnByValue":true})).await?;
@@ -544,13 +598,38 @@ impl Pages {
                             },
                             _ => {},
                         }
+                        if let Some((at, _)) = &check_result_route
+                            && tokio::time::Instant::now() >= *at
+                        {
+                            let (_, previous_url) = check_result_route.take().unwrap();
+                            let location = cdp.call(Some(&session), "Runtime.evaluate", json!({"expression":"location.href","returnByValue":true})).await?;
+                            // Retry from home only if the result page did not navigate or start
+                            // the new search, for example when it ignored a repeated term.
+                            if location["result"]["value"] == previous_url {
+                                self.pages.get_mut(&request.listing).unwrap().submitted_at = None;
+                                navigate_to(cdp, &session, HOME_URL).await?;
+                                submitted = false;
+                                progress = Progress::Controls;
+                                deadline = controls_deadline;
+                                inspect = page_inspection(Duration::from_millis(250));
+                                continue;
+                            }
+                        }
                         if !submitted {
-                            submitted = submit(cdp, &session, &request.query).await?;
-                            if submitted {
+                            if retry_home_at.is_some_and(|at| tokio::time::Instant::now() >= at) {
+                                navigate_to(cdp, &session, HOME_URL).await?;
+                                retry_home_at = None;
+                                continue;
+                            }
+                            if let Some(submission) = submit(cdp, &session, &request.query, retry_home_at.is_some()).await? {
+                                if retry_home_at.take().is_some() {
+                                    check_result_route = Some((tokio::time::Instant::now() + RESULT_ROUTE_BUDGET, submission.page_url));
+                                }
+                                self.pages.get_mut(&request.listing).unwrap().submitted_at = Some(submission.time);
+                                submitted = true;
                                 progress = Progress::Clicked;
                                 deadline = tokio::time::Instant::now() + RESPONSE_BUDGET;
-                                inspect = tokio::time::interval(Duration::from_secs(1));
-                                inspect.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
+                                inspect = page_inspection(Duration::from_secs(1));
                                 inspect.reset();
                             }
                         }
@@ -565,12 +644,36 @@ impl Pages {
         };
         let result = tokio::select! {biased; _=cancel.cancelled()=>Err("operation-cancelled:列表读取已取消。".into()),result=work=>result};
         if result.is_ok() {
-            self.pages.get_mut(&request.listing).unwrap().last_offset = Some(request.offset);
+            let page = self.pages.get_mut(&request.listing).unwrap();
+            page.last_offset = Some(request.offset);
+            page.touched = Instant::now();
         } else {
-            self.close(cdp, &request.listing).await;
+            self.discard(cdp, &request.listing).await;
         }
         result
     }
+}
+
+fn page_inspection(period: Duration) -> tokio::time::Interval {
+    let mut timer = tokio::time::interval(period);
+    timer.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
+    timer
+}
+
+async fn close_target(cdp: &mut Cdp, target: String) {
+    let _ = cdp
+        .call(None, "Target.closeTarget", json!({"targetId":target}))
+        .await;
+}
+
+async fn navigate_to(cdp: &mut Cdp, session: &str, url: &str) -> Result<(), String> {
+    let navigation = cdp
+        .call(Some(session), "Page.navigate", json!({"url":url}))
+        .await?;
+    if let Some(error) = navigation["errorText"].as_str() {
+        return Err(format!("network-error:{error}"));
+    }
+    Ok(())
 }
 #[cfg(test)]
 mod tests {
@@ -644,7 +747,7 @@ mod tests {
                         import: None,
                         last_offset: Some(70),
                         touched: Instant::now(),
-                        warm: false,
+                        submitted_at: None,
                     },
                 );
                 assert!(
@@ -661,7 +764,7 @@ mod tests {
                         .unwrap(),
                     expected
                 );
-                pages.close(&mut cdp, "owned").await;
+                pages.discard(&mut cdp, "owned").await;
                 let mut methods = vec!["Runtime.evaluate"];
                 if signal == Some("login-required") {
                     methods.push("Storage.getCookies");
@@ -995,7 +1098,7 @@ mod tests {
         });
     }
     #[test]
-    fn listing_targets_are_lazy_independent_and_read_only_the_requested_response() {
+    fn discover_reuses_one_target_and_discards_old_cursors_until_idle_or_cancelled() {
         tauri::async_runtime::block_on(async {
             let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
             let address = listener.local_addr().unwrap();
@@ -1008,9 +1111,11 @@ mod tests {
                 let mut navigated = 0;
                 let mut submitted = 0;
                 let mut submit_attempts = 0;
+                let mut cleared = 0;
                 let mut scrolled = 0;
                 let mut read = 0;
                 let mut closed = 0;
+                let mut query = String::new();
                 while let Some(Ok(message)) = ws.next().await {
                     if !message.is_text() {
                         continue;
@@ -1046,8 +1151,7 @@ mod tests {
                             {
                                 assert_eq!(command["params"]["userGesture"], true);
                                 result = json!({"result":{"value":true}});
-                            } else if command["params"]["expression"] == submit_expression("测试")
-                            {
+                            } else if command["params"]["expression"] == submit_expression(&query) {
                                 assert_eq!(command["params"]["awaitPromise"], true);
                                 assert_eq!(command["params"]["userGesture"], true);
                                 submit_attempts += 1;
@@ -1055,8 +1159,11 @@ mod tests {
                                     // Homepage controls are not ready on the first inspection.
                                     result = json!({"result":{"value":false}});
                                 } else {
-                                    result = json!({"result":{"value":{"x":20,"y":30}}});
+                                    result = json!({"result":{"value":{"x":20,"y":30,"time":submitted + 10,"pageUrl":"https://www.douyin.com/jingxuan/search/music"}}});
                                 }
+                            } else if command["params"]["expression"] == "location.href" {
+                                assert_eq!(submitted, 3);
+                                result = json!({"result":{"value":"https://www.douyin.com/jingxuan/search/music"}});
                             } else {
                                 assert_eq!(
                                     command["params"]["expression"],
@@ -1066,7 +1173,10 @@ mod tests {
                             }
                         }
                         "Input.insertText" => {
-                            assert_eq!(command["params"]["text"], "测试");
+                            query = command["params"]["text"].as_str().unwrap().to_owned();
+                            if query.is_empty() {
+                                cleared += 1;
+                            }
                         }
                         "Input.dispatchMouseEvent" => {
                             if command["params"]["type"] == "mouseWheel" {
@@ -1089,8 +1199,10 @@ mod tests {
                                 assert_eq!(command["params"]["y"], 30.0);
                                 if command["params"]["type"] == "mouseReleased" {
                                     submitted += 1;
-                                    assert_eq!(submitted, navigated);
-                                    response = Some(0);
+                                    // The official result page can ignore a repeated keyword.
+                                    if submitted != 3 {
+                                        response = Some(0);
+                                    }
                                 } else {
                                     assert_eq!(command["params"]["type"], "mousePressed");
                                 }
@@ -1118,27 +1230,34 @@ mod tests {
                     ));
                     if let Some(offset) = response {
                         let session = command["sessionId"].as_str().unwrap();
-                        let offsets = if navigated == 1 {
+                        let offsets = if submitted == 1 && offset == 0 {
                             vec![offset, 10]
                         } else {
                             vec![offset]
                         };
                         for offset in offsets {
                             let endpoint = if offset == 0 { "stream" } else { "single" };
-                            let url = format!(
-                                "https://www.douyin.com/aweme/v1/web/general/search/{endpoint}/?keyword=%E6%B5%8B%E8%AF%95&offset={offset}"
-                            );
-                            // Another account and an unrelated keyword cannot win.
-                            for (sid, request, address) in [
-                                ("another-account", "noise".to_string(), url.clone()),
+                            let mut url = reqwest::Url::parse(&format!(
+                                "https://www.douyin.com/aweme/v1/web/general/search/{endpoint}/?"
+                            ))
+                            .unwrap();
+                            url.query_pairs_mut()
+                                .append_pair("keyword", &query)
+                                .append_pair("offset", &offset.to_string());
+                            let url = url.to_string();
+                            // A previous submission, unrelated keyword or other account cannot win.
+                            for (sid, request, address, time) in [
+                                ("another-account", "noise".to_string(), url.clone(), 100),
                                 (
                                     session,
                                     "noise".to_string(),
                                     url.replace("keyword=", "keyword=wrong"),
+                                    100,
                                 ),
-                                (session, format!("wanted-{offset}"), url),
+                                (session, "old-request".into(), url.clone(), 1),
+                                (session, format!("wanted-{offset}"), url, 100),
                             ] {
-                                ws.send(Message::Text(json!({"sessionId":sid,"method":"Network.requestWillBeSent","params":{"requestId":request,"type":"Fetch","request":{"url":address}}}).to_string().into())).await.unwrap();
+                                ws.send(Message::Text(json!({"sessionId":sid,"method":"Network.requestWillBeSent","params":{"requestId":request,"wallTime":time,"type":"Fetch","request":{"url":address}}}).to_string().into())).await.unwrap();
                                 if method == "Input.dispatchMouseEvent"
                                     && offset == 10
                                     && sid == session
@@ -1168,6 +1287,7 @@ mod tests {
                     navigated,
                     submit_attempts,
                     submitted,
+                    cleared,
                     scrolled,
                     read,
                     closed,
@@ -1180,6 +1300,8 @@ mod tests {
             let mut pages = Pages::new(true);
             let a = uuid::Uuid::new_v4().to_string();
             let b = uuid::Uuid::new_v4().to_string();
+            let c = uuid::Uuid::new_v4().to_string();
+            let d = uuid::Uuid::new_v4().to_string();
             let cancelled = CancellationToken::new();
             cancelled.cancel();
             assert!(
@@ -1194,11 +1316,20 @@ mod tests {
                     .starts_with("operation-cancelled:")
             );
             assert!(pages.pages.is_empty());
-            for (id, offset) in [(&a, 0), (&b, 0), (&a, 10), (&b, 10)] {
+            let (startup, session) = target(&mut cdp, true).await.unwrap();
+            navigate_to(&mut cdp, &session, HOME_URL).await.unwrap();
+            pages.adopt_home(startup, session.clone());
+            for (id, query, offset) in [
+                (&a, "测试", 0),
+                (&a, "测试", 10),
+                (&b, "音乐", 0),
+                (&b, "音乐", 10),
+                (&c, "音乐", 0),
+            ] {
                 let response = pages
                     .load(
                         &mut cdp,
-                        Request::new(id.clone(), "测试".into(), offset).unwrap(),
+                        Request::new(id.clone(), query.into(), offset).unwrap(),
                         &stop,
                     )
                     .await
@@ -1209,6 +1340,8 @@ mod tests {
                     b"8\n{\"ok\":1}"
                 };
                 assert_eq!(response.body, expected);
+                assert_eq!(pages.pages.len(), 1);
+                assert_eq!(pages.pages[id].session, session);
                 if id == &a && offset == 0 {
                     // Model the actor while the UI is idle: retain official preloading,
                     // but do not scroll or deliver the next page before consumer demand.
@@ -1221,16 +1354,30 @@ mod tests {
                     .await
                     .unwrap();
                 }
+                if id == &a && offset == 10 {
+                    pages.close(&mut cdp, &a).await;
+                    assert_eq!(pages.idle_search.as_ref().unwrap().session, session);
+                    assert!(!pages.responses.contains(&a, 10));
+                    assert!(
+                        pages
+                            .load(
+                                &mut cdp,
+                                Request::new(a.clone(), query.into(), 20).unwrap(),
+                                &stop
+                            )
+                            .await
+                            .unwrap_err()
+                            .starts_with("pagination-unavailable:")
+                    );
+                }
             }
-            assert_eq!(pages.pages.len(), 2);
-            assert_ne!(pages.pages[&a].session, pages.pages[&b].session);
-            pages.close(&mut cdp, &a).await;
+            pages.close(&mut cdp, &b).await;
             assert_eq!(pages.pages.len(), 1);
             assert!(
                 pages
                     .load(
                         &mut cdp,
-                        Request::new(b.clone(), "测试".into(), 20).unwrap(),
+                        Request::new(c.clone(), "音乐".into(), 20).unwrap(),
                         &pending_cancel
                     )
                     .await
@@ -1238,8 +1385,23 @@ mod tests {
                     .starts_with("operation-cancelled:")
             );
             assert!(pages.pages.is_empty());
-            pages.close(&mut cdp, &b).await;
-            assert_eq!(task.await.unwrap(), (2, 2, 3, 2, 2, 4, 2));
+            assert!(pages.idle_search.is_none());
+            pages
+                .load(
+                    &mut cdp,
+                    Request::new(d.clone(), "测试".into(), 0).unwrap(),
+                    &stop,
+                )
+                .await
+                .unwrap();
+            pages.close(&mut cdp, &d).await;
+            pages.reap(&mut cdp).await;
+            assert!(pages.idle_search.is_some());
+            pages.idle_search.as_mut().unwrap().since -= PAGE_IDLE;
+            pages.reap(&mut cdp).await;
+            assert!(pages.idle_search.is_none());
+            assert_eq!(PAGE_IDLE, Duration::from_secs(90));
+            assert_eq!(task.await.unwrap(), (2, 3, 6, 5, 2, 2, 6, 2));
         });
     }
 }

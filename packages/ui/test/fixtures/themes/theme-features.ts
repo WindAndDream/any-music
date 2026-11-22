@@ -123,6 +123,7 @@ export function createThemeFeatures(submit: () => void): UiThemeFeatureMap {
           toggleQueue: noop,
           requestCreatePlaylist: noop,
           loadMore: noop,
+          refresh: noop,
           retry: noop,
           cancel: noop,
           removeDrawer: noop,

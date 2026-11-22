@@ -155,25 +155,31 @@ async fn load_with_budget(
         return Err("operation-cancelled:作品读取已取消。".into());
     }
     let deadline = tokio::time::Instant::now() + budget;
-    if let Some(player) = searches.take_player() {
+    if let Some(page) = searches.take_detail_page() {
         let routed = tokio::select! {
             biased;
             _ = cancel.cancelled() => Err("operation-cancelled:作品读取已取消。".into()),
-            result = tokio::time::timeout_at(deadline, routed(cdp, &player.1, &request, cancel, searches)) => result.unwrap_or(Ok(None)),
+            result = tokio::time::timeout_at(deadline, routed(cdp, &page.1, &request, cancel, searches)) => result.unwrap_or(Ok(None)),
         };
         match routed {
             Ok(Some(packet)) => {
-                searches.restore_player(player);
+                searches.retain_detail_page(page);
                 return Ok(packet);
             }
             // Failures keep their original error; the page may hold a challenge or stale state.
             result => {
                 let _ = cdp
-                    .call(None, "Target.closeTarget", json!({"targetId":player.0}))
+                    .call(None, "Target.closeTarget", json!({"targetId":page.0}))
                     .await;
                 result?;
             }
         }
+    }
+    if cancel.is_cancelled() {
+        return Err("operation-cancelled:作品读取已取消。".into());
+    }
+    if tokio::time::Instant::now() >= deadline {
+        return Err("request-timeout:官方作品详情加载超时，请重试。".into());
     }
     let (target_id, session) = target(cdp, hidden).await?;
     let mut document = None;
@@ -223,16 +229,17 @@ async fn load_with_budget(
                 .ok_or_else(|| "request-timeout:官方作品详情加载超时，请重试。".to_string()),
         },
     };
-    // Closing the fresh target also stops autoplay/media reads and pending navigation.
-    // No detail response or media URL survives into another playback attempt.
-    let _ = cdp
-        .call(None, "Target.closeTarget", json!({"targetId":target_id}))
-        .await;
+    if result.is_ok() && api_received && !cancel.is_cancelled() {
+        searches.retain_detail_page((target_id, session));
+    } else {
+        let _ = cdp
+            .call(None, "Target.closeTarget", json!({"targetId":target_id}))
+            .await;
+    }
     result
 }
 
-/// Wait for the warm page to hydrate, route it to the work and capture the client's detail
-/// API. `Ok(None)` means the route produced nothing usable and a cold page should be tried.
+/// Route a retained detail page and wait for the new work's official response.
 async fn routed(
     cdp: &mut Cdp,
     session: &str,
@@ -246,32 +253,16 @@ async fn routed(
         json!(request.page_kind),
         json!(request.aweme_id)
     );
-    let mut timer = tokio::time::interval(Duration::from_millis(250));
-    timer.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
-    loop {
-        tokio::select! {
-            biased;
-            _ = cancel.cancelled() => return Err("operation-cancelled:作品读取已取消。".into()),
-            event = cdp.events.recv() => {
-                let event = event.ok_or("network-error:账号页面连接中断。")?;
-                if event["sessionId"] != session {
-                    searches.observe(cdp, &event).await;
-                } else if event["method"] == "Fetch.requestPaused" {
-                    cdp.call(Some(session), "Fetch.failRequest", json!({
-                        "requestId":event["params"]["requestId"], "errorReason":"Aborted"
-                    })).await?;
-                }
-            }
-            _ = timer.tick() => {
-                inspect(cdp, session).await?;
-                let result = cdp.call(Some(session), "Runtime.evaluate", json!({"expression":expression,"returnByValue":true,"userGesture":true})).await?;
-                match result["result"]["value"].as_str() {
-                    Some("routed") => break,
-                    Some(_) => return Ok(None),
-                    None => {}
-                }
-            }
-        }
+    inspect(cdp, session).await?;
+    let result = cdp
+        .call(
+            Some(session),
+            "Runtime.evaluate",
+            json!({"expression":expression,"returnByValue":true,"userGesture":true}),
+        )
+        .await?;
+    if result["result"]["value"] != true {
+        return Ok(None);
     }
     let (mut document, mut api_received) = (None, false);
     let captured = tokio::time::timeout(
@@ -435,7 +426,7 @@ mod tests {
     }
 
     #[test]
-    fn fresh_targets_match_one_work_bound_reads_and_close_after_success_or_cancellation() {
+    fn navigated_targets_match_one_work_and_close_after_fallback_failure_or_cancellation() {
         tauri::async_runtime::block_on(async {
             let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
             let address = listener.local_addr().unwrap();
@@ -589,11 +580,17 @@ mod tests {
                 )
                 .await;
                 match attempt {
-                    1 => assert!(
-                        String::from_utf8(result.unwrap().body)
-                            .unwrap()
-                            .contains("aweme_detail")
-                    ),
+                    1 => {
+                        assert!(
+                            String::from_utf8(result.unwrap().body)
+                                .unwrap()
+                                .contains("aweme_detail")
+                        );
+                        let (target, _) = searches.take_detail_page().unwrap();
+                        cdp.call(None, "Target.closeTarget", json!({"targetId":target}))
+                            .await
+                            .unwrap();
+                    }
                     2 => assert!(
                         String::from_utf8(result.unwrap().body)
                             .unwrap()
@@ -624,10 +621,12 @@ mod tests {
     }
 
     #[test]
-    fn warm_player_routes_in_page_is_reused_and_falls_back_to_a_cold_target() {
+    fn detail_page_opens_on_demand_and_is_reused_until_a_route_requires_replacement() {
         tauri::async_runtime::block_on(async {
             let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
             let address = listener.local_addr().unwrap();
+            let cancel = CancellationToken::new();
+            let cancel_on_route = cancel.clone();
             let task = tauri::async_runtime::spawn(async move {
                 let (stream, _) = listener.accept().await.unwrap();
                 let mut ws = tokio_tungstenite::accept_async(stream).await.unwrap();
@@ -636,7 +635,7 @@ mod tests {
                 while let Some(Ok(message)) = ws.next().await {
                     let command: Value = serde_json::from_str(message.to_text().unwrap()).unwrap();
                     let method = command["method"].as_str().unwrap();
-                    let mut api = None;
+                    let mut work_id = None;
                     let result = match method {
                         "Target.createTarget" => {
                             created += 1;
@@ -649,33 +648,39 @@ mod tests {
                             json!({})
                         }
                         "Page.navigate" => {
-                            navigations.push(command["params"]["url"].as_str().unwrap().to_owned());
-                            if created == 2 {
-                                api = Some(command["sessionId"].as_str().unwrap().to_owned());
-                            }
+                            let url = command["params"]["url"].as_str().unwrap();
+                            navigations.push(url.to_owned());
+                            work_id = url.strip_prefix("https://www.douyin.com/note/");
                             json!({"frameId":"main"})
                         }
                         "Runtime.evaluate" => {
                             let expression = command["params"]["expression"].as_str().unwrap();
                             if expression.contains("routeDetail") {
                                 routes += 1;
-                                assert!(expression.ends_with(r#"("note","123")"#));
-                                // Not hydrated, then routed; the reused page cannot revisit its route.
                                 let value = match routes {
-                                    1 => json!(false),
-                                    2 => json!("routed"),
-                                    _ => json!("unavailable"),
+                                    1 => {
+                                        assert!(expression.ends_with(r#"("note","456")"#));
+                                        work_id = Some("456");
+                                        json!(true)
+                                    }
+                                    2 => {
+                                        assert!(expression.ends_with(r#"("note","456")"#));
+                                        json!(false)
+                                    }
+                                    _ => {
+                                        assert!(expression.ends_with(r#"("note","789")"#));
+                                        cancel_on_route.cancel();
+                                        json!(true)
+                                    }
                                 };
-                                if routes == 2 {
-                                    api = Some(command["sessionId"].as_str().unwrap().to_owned());
-                                }
                                 json!({"result":{"value":value}})
                             } else {
                                 json!({"result":{"value":null}})
                             }
                         }
                         "Network.getResponseBody" => {
-                            json!({"body":"{\"aweme_detail\":{\"aweme_id\":\"123\"}}","base64Encoded":false})
+                            let id = command["params"]["requestId"].as_str().unwrap();
+                            json!({"body":json!({"aweme_detail":{"aweme_id":id}}).to_string(),"base64Encoded":false})
                         }
                         "Target.closeTarget" => {
                             closed.push(command["params"]["targetId"].as_str().unwrap().to_owned());
@@ -690,11 +695,15 @@ mod tests {
                     ))
                     .await
                     .unwrap();
-                    if let Some(session) = api {
+                    if let Some(id) = work_id {
+                        let session = command["sessionId"].as_str().unwrap();
+                        let url = format!(
+                            "https://www.douyin.com/aweme/v1/web/aweme/detail/?aweme_id={id}"
+                        );
                         for event in [
                             json!({"sessionId":session,"method":"Fetch.requestPaused","params":{"requestId":"cover"}}),
-                            json!({"sessionId":session,"method":"Network.responseReceived","params":{"requestId":"detail","type":"XHR","response":{"url":"https://www.douyin.com/aweme/v1/web/aweme/detail/?aweme_id=123","status":200}}}),
-                            json!({"sessionId":session,"method":"Network.loadingFinished","params":{"requestId":"detail","encodedDataLength":50}}),
+                            json!({"sessionId":session,"method":"Network.responseReceived","params":{"requestId":id,"type":"XHR","response":{"url":url,"status":200}}}),
+                            json!({"sessionId":session,"method":"Network.loadingFinished","params":{"requestId":id,"encodedDataLength":50}}),
                         ] {
                             ws.send(Message::Text(event.to_string().into()))
                                 .await
@@ -711,11 +720,10 @@ mod tests {
                 .await
                 .unwrap();
             let mut searches = search::Pages::new(true);
-            searches.warm_player(&mut cdp).await.unwrap();
-            for _ in 0..2 {
+            for id in ["123", "456", "456"] {
                 let packet = load_with_budget(
                     &mut cdp,
-                    Request::new("123".into(), Some("note".into())).unwrap(),
+                    Request::new(id.into(), Some("note".into())).unwrap(),
                     true,
                     &CancellationToken::new(),
                     &mut searches,
@@ -723,22 +731,27 @@ mod tests {
                 )
                 .await
                 .unwrap();
-                assert!(
-                    String::from_utf8(packet.body)
-                        .unwrap()
-                        .contains("aweme_detail")
-                );
+                let body: Value = serde_json::from_slice(&packet.body).unwrap();
+                assert_eq!(body["aweme_detail"]["aweme_id"], id);
             }
-            // The second read routed nothing new, closed the player and used one cold target.
-            assert!(searches.take_player().is_none());
+            let result = load(
+                &mut cdp,
+                Request::new("789".into(), Some("note".into())).unwrap(),
+                true,
+                &cancel,
+                &mut searches,
+            )
+            .await;
+            assert!(result.unwrap_err().starts_with("operation-cancelled:"));
+            assert!(searches.take_detail_page().is_none());
             let (created, routes, navigations, closed) = task.await.unwrap();
             assert_eq!(created, 2);
             assert_eq!(routes, 3);
             assert_eq!(
                 navigations,
                 [
-                    "https://www.douyin.com/jingxuan",
-                    "https://www.douyin.com/note/123"
+                    "https://www.douyin.com/note/123",
+                    "https://www.douyin.com/note/456"
                 ]
             );
             assert_eq!(closed, ["target-1", "target-2"]);

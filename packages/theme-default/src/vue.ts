@@ -50,3 +50,5 @@ export const QueuePanel = createAsyncFeatureComponent(
 export const ActiveDownloadPanel = createAsyncFeatureComponent(
   () => import('./components/downloads/ActiveDownloadPanel.vue'),
 )
+
+export { default as TrackList } from './components/music-sources/TrackList.vue'

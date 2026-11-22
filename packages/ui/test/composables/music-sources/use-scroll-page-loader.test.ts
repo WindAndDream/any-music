@@ -36,7 +36,12 @@ afterEach(() => {
 })
 
 /** 用事件目标模拟详情对话框的滚动容器，验证逐页请求及卸载清理。 */
-function createLoader(editing?: EditingSession, fillShortList = true) {
+function createLoader(
+  editing?: EditingSession,
+  fillShortList = true,
+  restoreScroll = false,
+  prefetch = false,
+) {
   vi.stubGlobal('getComputedStyle', (element: ScrollElement) => ({ overflowY: element.overflowY }))
   const container = new ScrollElement()
   container.overflowY = 'auto'
@@ -62,6 +67,8 @@ function createLoader(editing?: EditingSession, fillShortList = true) {
       loadedCount,
       loadNext,
       fillShortList,
+      restoreScroll,
+      prefetch,
     }),
   )
 
@@ -184,6 +191,48 @@ function press(element: EventTarget, key: string): void {
 }
 
 describe('useScrollPageLoader', () => {
+  it('prefetches one page on early downward input without chaining loads or expanding filtered demand', async () => {
+    const loader = createLoader(undefined, false, false, true)
+    loader.container.scrollHeight = 1300
+    loader.listElement.value = loader.list
+    await nextTick()
+    loader.container.scrollTo(290)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+    loader.visibleCount.value = 10
+    loader.container.scrollTo(340)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+
+    loader.visibleCount.value = 20
+    loader.container.scrollTo(350)
+    loader.container.wheel(120)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    loader.loading.value = true
+    loader.container.scrollTo(400)
+    loader.pageNumber.value = 2
+    loader.container.scrollHeight = 1350
+    loader.loading.value = false
+    await nextTick()
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    loader.container.scrollTo(410)
+    expect(loader.loadNext).toHaveBeenCalledTimes(2)
+  })
+  it('restores a retained scroll position without requesting a page on entry', async () => {
+    const editing = createEditingSession()
+    const first = createLoader(editing, false, true)
+    first.listElement.value = first.list
+    await nextTick()
+    first.container.scrollTop = 580
+    first.stop()
+
+    const second = createLoader(editing, false, true)
+    second.listElement.value = second.list
+    await nextTick()
+    expect(second.container.scrollTop).toBe(580)
+    second.container.dispatchEvent(new Event('scroll'))
+    expect(second.loadNext).not.toHaveBeenCalled()
+    second.container.wheel(120)
+    expect(second.loadNext).toHaveBeenCalledOnce()
+  })
   it('does not carry a previous scroll demand into an explicitly refreshed listing', async () => {
     const loader = createLoader(undefined, false)
     loader.listElement.value = loader.list

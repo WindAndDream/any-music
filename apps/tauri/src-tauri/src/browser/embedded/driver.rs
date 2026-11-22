@@ -91,6 +91,27 @@ impl AccountPages {
     pub fn closed(&self) -> bool {
         self.ended.load(Ordering::SeqCst)
     }
+    #[cfg(windows)]
+    pub(in crate::browser) fn publish_catalog(
+        &self,
+        label: &str,
+        query: &str,
+        origin: &'static str,
+    ) {
+        self.host
+            .publish_catalog(label, &self.store.account, query, origin);
+    }
+    #[cfg(windows)]
+    pub(in crate::browser) fn finish_catalog_reader(&self, label: &str) {
+        self.host.catalog.finish_reader(label);
+    }
+    #[cfg(windows)]
+    pub(in crate::browser) async fn prepare_catalog_reuse(&self, label: &str) {
+        use tauri::Manager;
+        if let Some(webview) = self.host.app.get().and_then(|app| app.get_webview(label)) {
+            self.host.catalog.prepare_reuse(webview).await;
+        }
+    }
     /// Close every page and wait until the driver released them.
     pub async fn close(&mut self) {
         self.stop.cancel();
@@ -209,6 +230,8 @@ impl Driver {
                 break "账号页面会话已结束";
             }
         };
+        #[cfg(windows)]
+        self.host.catalog.invalidate_account(&self.store.account);
         for (_, state) in self.pages.drain() {
             self.host.close(&state.page);
         }
@@ -602,7 +625,7 @@ impl Driver {
         self.event(
             label,
             "Network.requestWillBeSent",
-            json!({"requestId": id, "type": report["type"],
+            json!({"requestId": id, "type": report["type"], "wallTime": report["wallTime"],
                 "request": {"url": report["url"], "method": report["method"], "postData": report["postData"]}}),
         );
     }

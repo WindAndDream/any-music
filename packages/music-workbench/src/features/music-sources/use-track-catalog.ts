@@ -227,6 +227,7 @@ export function useTrackCatalog(pluginSource: MaybeRefOrGetter<MusicSourcePlugin
       pendingPage = undefined
       if (result.done) {
         hasMore.value = false
+        closeIterator()
         return
       }
 
@@ -252,6 +253,8 @@ export function useTrackCatalog(pluginSource: MaybeRefOrGetter<MusicSourcePlugin
       hasMore.value = page.hasMore
       continuation.value = page.continuation
       loadedPageCount.value = Math.max(loadedPageCount.value, page.pageNumber)
+      // A generator can hold its native page while suspended at the final yield.
+      if (!page.hasMore) closeIterator()
     } catch (cause) {
       if (expectedGeneration !== generation) return
       pendingPage = undefined

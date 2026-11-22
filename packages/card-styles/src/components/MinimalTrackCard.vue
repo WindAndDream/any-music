@@ -231,7 +231,10 @@ const selectionLabel = computed(
   user-select: none;
   -webkit-touch-callout: none;
 }
-.am-minimal-track__cover img {
+.am-minimal-track__cover :deep(img) {
+  /* RemoteImage is a child component. Size the backing image from the cover, not the grid item. */
+  position: absolute;
+  inset: 0;
   display: block;
   inline-size: 100%;
   block-size: 100%;
@@ -489,13 +492,13 @@ button:focus-visible,
     animation: none;
   }
   .am-minimal-track,
-  .am-minimal-track__cover img,
+  .am-minimal-track__cover :deep(img),
   .am-minimal-track__play,
   .am-minimal-track__play-icon,
   .am-minimal-track__more {
     transition: none;
   }
-  .am-minimal-track__cover img,
+  .am-minimal-track__cover :deep(img),
   .am-minimal-track__play-icon {
     transform: none;
   }

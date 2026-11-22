@@ -6,7 +6,9 @@ import {
   useConfirmAction,
   catalogRootEditingKey,
   createCatalogRootEditing,
+  canRefreshCatalogDrawer,
 } from '@any-music/ui/catalog'
+import LoadingSpinner from '@any-music/ui/components/LoadingSpinner.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed } from 'vue'
 
@@ -131,7 +133,7 @@ const statuses = [
         <p v-if="drawer.errorMessage || drawer.invalidReason" role="alert">
           {{ drawer.errorMessage || drawer.invalidReason }}
         </p>
-        <p v-if="drawer.isLoading" role="status">正在加载…</p>
+        <LoadingSpinner v-if="drawer.isLoading" label="正在加载音乐列表" />
         <div class="studio-actions">
           <label
             ><input
@@ -141,16 +143,15 @@ const statuses = [
               @change="controls.toggleItem(drawer.id)"
             />选择列表</label
           >
-          <button v-if="drawer.isLoading" type="button" @click="feature.actions.cancel(drawer.id)">
-            取消加载
-          </button>
           <button
-            v-else
             type="button"
-            :disabled="!drawer.isSourceEnabled || feature.availability.status !== 'available'"
-            @click="feature.actions.retry(drawer.id)"
+            v-if="drawer.id !== feature.state.activeDrawerId"
+            :disabled="
+              !canRefreshCatalogDrawer(drawer) || feature.availability.status !== 'available'
+            "
+            @click="feature.actions.refresh(drawer.id)"
           >
-            重试加载
+            刷新
           </button>
           <button
             v-if="drawer.canVerify && !drawer.isVerifying"

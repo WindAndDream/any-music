@@ -5,6 +5,8 @@ use serde::Deserialize;
 use serde_json::json;
 use std::{collections::VecDeque, time::Duration};
 
+const MEASURE: &str = include_str!("../scroll-page.js");
+
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct Target {
@@ -12,6 +14,8 @@ struct Target {
     y: f64,
     viewport_height: f64,
     remaining: f64,
+    #[serde(default)]
+    embedded: bool,
 }
 impl Target {
     fn valid(&self) -> bool {
@@ -89,7 +93,7 @@ impl Scroller {
             .call(
                 Some(session),
                 "Runtime.evaluate",
-                json!({"expression":include_str!("../scroll-page.js"),"returnByValue":true}),
+                json!({"expression":MEASURE,"returnByValue":true}),
             )
             .await?;
         if result.get("exceptionDetails").is_some() {
@@ -98,12 +102,25 @@ impl Scroller {
         let target = serde_json::from_value::<Target>(result["result"]["value"].clone()).ok();
         let (delta, delay) = self.next(target.as_ref());
         if let (Some(delta), Some(target)) = (delta, target) {
-            cdp.call(
+            if target.embedded {
+                let measure = MEASURE
+                    .trim_end()
+                    .strip_suffix("()")
+                    .expect("scroll expression");
+                cdp.call(
+                    Some(session),
+                    "Runtime.evaluate",
+                    json!({"expression":format!("{measure}({delta})"),"returnByValue":true}),
+                )
+                .await?;
+            } else {
+                cdp.call(
                 Some(session),
                 "Input.dispatchMouseEvent",
                 json!({"type":"mouseWheel","x":target.x,"y":target.y,"deltaX":0,"deltaY":delta}),
             )
             .await?;
+            }
         }
         Ok(delay)
     }
@@ -125,6 +142,7 @@ mod tests {
             y: 400.0,
             viewport_height: 800.0,
             remaining,
+            embedded: false,
         }
     }
 

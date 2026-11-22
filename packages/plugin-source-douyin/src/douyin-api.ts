@@ -78,11 +78,15 @@ export class DouyinApi {
   }
 
   getSelfProfile(): Promise<DouyinProfileData> {
+    return this.getJson('/aweme/v1/web/user/profile/self/')
+  }
+
+  getSelfImportProfile(): Promise<DouyinProfileData> {
     if (this.browserCatalog)
       return this.browserCatalog
-        .getSelfProfile()
+        .getSelfImportProfile()
         .then((response) => parseDouyinApiResponse(response) as DouyinProfileData)
-    return this.getJson('/aweme/v1/web/user/profile/self/')
+    return this.getSelfProfile()
   }
 
   /** Browser rejections retain their recovery action; never replay them through local signing. */
@@ -656,7 +660,7 @@ async function createSignedParams(
   const params = createBaseParams(path, endpointParams, state)
   const profile = getRequestProfile(path)
   if (profile !== 'search') {
-    // 登录态列表和个人资料把 verifyFp/fp 纳入 a_bogus 覆盖的最终查询前缀。
+    // 自身资料页面的最终 URL 将 verifyFp/fp 排在 msToken 和 a_bogus 之前。
     params.set('verifyFp', state.verifyFp)
     params.set('fp', state.verifyFp)
   }
@@ -697,7 +701,7 @@ async function createSignedParams(
   }
 }
 
-/** 详情与账号受保护接口都经过当前网页 Web SecSDK；普通公开列表仍只使用 BDMS。 */
+/** 当前适配器只为作品详情、喜欢和收藏视频附加 Web SecSDK 签名字段。 */
 function usesWebSecuritySignature(profile: DouyinRequestProfile): boolean {
   return profile === 'detail' || profile === 'favorite' || profile === 'collection'
 }

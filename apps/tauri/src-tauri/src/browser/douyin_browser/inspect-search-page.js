@@ -1,6 +1,7 @@
 ;(() => {
   const width = innerWidth
   const height = innerHeight
+  const masked = Boolean(document.documentElement?.dataset.amCatalogDocument)
   const visible = (element) => {
     const bounds = element.getBoundingClientRect()
     if (
@@ -17,7 +18,7 @@
       if (
         style.display === 'none' ||
         style.visibility === 'hidden' ||
-        Number(style.opacity || 1) <= 0
+        (Number(style.opacity || 1) <= 0 && !(masked && current.parentElement === document.body))
       )
         return false
     }

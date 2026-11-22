@@ -13,6 +13,15 @@ fn main() {
             "trusted executor resource build failed"
         );
     }
+    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows") {
+        let output = std::env::var_os("OUT_DIR").expect("Cargo output directory");
+        let status = std::process::Command::new("node")
+            .arg("../scripts/build-catalog-webview.mjs")
+            .arg(output)
+            .status()
+            .expect("Node is required to build the embedded catalog renderer");
+        assert!(status.success(), "embedded catalog renderer build failed");
+    }
     for path in [
         "src/lib.rs",
         "src/plugins",
@@ -24,6 +33,13 @@ fn main() {
         "../../../Cargo.lock",
         "tauri.conf.json",
         "../src/plugin-executor",
+        "../src/catalog-webview",
+        "../scripts/build-catalog-webview.mjs",
+        "../../../scripts/vite/theme-style-resources.ts",
+        "../../../packages/ui/src",
+        "../../../packages/card-styles/src",
+        "../../../packages/theme-default/src",
+        "../../../packages/theme-studio/src",
         "../scripts/build-plugin-executor.mjs",
         "../../../packages/plugin-vm/src",
         "../../../packages/plugin-sandbox-browser/src",

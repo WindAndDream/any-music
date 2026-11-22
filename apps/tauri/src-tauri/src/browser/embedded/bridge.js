@@ -41,21 +41,24 @@
       : body.length > config.limit
         ? { bodyState: 'too-large' }
         : { bodyState: 'ok', body }
+  // The same native target can load several documents while a request is in flight.
+  const documentId = performance.timeOrigin
   let sequence = 0
 
   // Wrap with Proxies so native function identity/toString stay unchanged for website code.
   window.fetch = new Proxy(window.fetch, {
     apply(target, self, args) {
+      const wallTime = (performance.timeOrigin + performance.now()) / 1000
       const result = Reflect.apply(target, self, args)
       const input = args[0]
       const url = absolute(
         typeof input === 'string' ? input : input instanceof URL ? input.href : (input?.url ?? ''),
       )
       if (!captured(url)) return result
-      const requestId = `f${++sequence}`
+      const requestId = `${documentId}:f${++sequence}`
       const method = String(args[1]?.method ?? input?.method ?? 'GET').toUpperCase()
       const postData = form(args[1]?.body)
-      send({ kind: 'request', requestId, type: 'Fetch', url, method, postData })
+      send({ kind: 'request', requestId, type: 'Fetch', url, method, postData, wallTime })
       Promise.resolve(result).then(
         (response) => {
           const finish = (body) =>
@@ -66,6 +69,7 @@
               url,
               method,
               postData,
+              wallTime,
               responseUrl: response.url || url,
               status: response.status,
               ...content(body),
@@ -101,9 +105,10 @@
     apply(target, self, args) {
       const request = requests.get(self)
       if (request && captured(request.url)) {
-        const requestId = `x${++sequence}`
+        const wallTime = (performance.timeOrigin + performance.now()) / 1000
+        const requestId = `${documentId}:x${++sequence}`
         const postData = form(args[0])
-        send({ kind: 'request', requestId, type: 'XHR', ...request, postData })
+        send({ kind: 'request', requestId, type: 'XHR', ...request, postData, wallTime })
         self.addEventListener(
           'loadend',
           () => {
@@ -131,6 +136,7 @@
               type: 'XHR',
               ...request,
               postData,
+              wallTime,
               responseUrl: self.responseURL || request.url,
               status: self.status,
               ...content(body),

@@ -28,7 +28,7 @@ pub(super) async fn submit_pending(
         .await?;
     match view["result"]["value"].as_str() {
         Some("submitted") => Ok(true),
-        Some("ready") => search::submit(cdp, session, query).await,
+        Some("ready") => Ok(search::submit(cdp, session, query, false).await?.is_some()),
         Some("navigate") => {
             let result = cdp
                 .call(
@@ -501,7 +501,6 @@ pub async fn end_douyin_search_verification(
     }
     let account = state.account(&account_id)?;
     if account.enabled && completed {
-        // Close gracefully to flush the persistent Profile before the inactive desktop takes over.
         state.status(
             &account_id,
             if account.authentication == "credential" {
@@ -510,7 +509,6 @@ pub async fn end_douyin_search_verification(
                 "signed-out"
             },
         )?;
-        state.douyin_browsers.ensure(&state, &account_id, None)?;
     }
     Ok(())
 }

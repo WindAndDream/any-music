@@ -40,3 +40,5 @@ export const definition = {
     composer: StudioComposer,
   },
 } satisfies UiThemeDefinition
+
+export { default as StudioCatalogTracks } from './components/catalog/StudioCatalogTracks.vue'

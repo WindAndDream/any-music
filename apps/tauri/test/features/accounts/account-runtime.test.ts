@@ -238,6 +238,30 @@ describe('native account composition', () => {
     await runtime.refresh()
     expect([...runtime.sessionUserNames.value]).toEqual([['a', '平台用户甲']])
   })
+  it.each(['douyin', 'bilibili', 'netease', 'external:test-source'])(
+    'uses the custom selected account name before and after a session check on %s',
+    async (platformId) => {
+      const runtime = new AccountRuntime()
+      const selected = { ...account('a', 'credential'), platformId, name: '本地账号名' }
+      native.invoke.mockResolvedValue({ accounts: [selected], proxies: [] })
+
+      await runtime.initialize()
+      expect(runtime.getSelectedAccountName(platformId)).toBe('本地账号名')
+
+      runtime.rememberSessionUserName(selected.id, {
+        status: 'signed-in',
+        user: { id: 'test-platform-user', name: '测试平台昵称' },
+      })
+      expect(runtime.getSelectedAccountName(platformId)).toBe('本地账号名')
+
+      native.invoke.mockResolvedValue({
+        accounts: [{ ...selected, name: '新账号名' }],
+        proxies: [],
+      })
+      await runtime.refresh()
+      expect(runtime.getSelectedAccountName(platformId)).toBe('新账号名')
+    },
+  )
   it('persists one selected identity across operations and restores it on restart', async () => {
     const runtime = new AccountRuntime()
     native.invoke.mockImplementation(async (command: string) =>

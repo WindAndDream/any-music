@@ -470,7 +470,11 @@ export function createWorkbenchTrackFeatures(controller: WorkbenchController) {
         if (track) c.toggleTrackQueue(track)
       },
       requestCreatePlaylist: c.openPlaylistCreation,
-      loadMore: c.workspace.loadNext,
+      loadMore: (id) => {
+        const drawer = c.displayedCatalogDrawer.value
+        if (drawer?.id === id && !drawer.paginationLocked) return c.workspace.loadNext(id)
+      },
+      refresh: c.refreshCatalogDrawer,
       retry: c.retryCatalogDrawer,
       cancel: c.workspace.cancel,
       removeDrawer: (id) => c.removeDrawers([id]),

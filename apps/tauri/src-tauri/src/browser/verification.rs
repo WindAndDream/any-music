@@ -340,7 +340,6 @@ pub async fn complete_browser_login(
         if logins.get(&account_id) != Some(&login_id) {
             return Err("operation-cancelled:登录验证已结束。".into());
         }
-        state.douyin_browsers.ensure(&state, &account_id, None)?;
         logins.remove(&account_id);
         return Ok(());
     }

@@ -6,6 +6,7 @@ import CatalogRequestAccount from '@any-music/ui/components/music-sources/Catalo
 import ModuleRecoveryPanel from '@any-music/ui/components/plugins/ModuleRecoveryPanel.vue'
 import ResourceCacheHelpButton from '@any-music/ui/components/settings/ResourceCacheHelpButton.vue'
 import ResourceCacheSettings from '@any-music/ui/components/settings/ResourceCacheSettings.vue'
+import type { CatalogViewportContext, UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed, onMounted, useTemplateRef } from 'vue'
 
 import { useResourceCacheSettings } from '../../features/settings/use-resource-cache-settings'
@@ -23,6 +24,15 @@ const emit = defineEmits<{
   addAccount: [platformId: string]
 }>()
 defineSlots<{
+  'catalog-viewport'?: (
+    context: CatalogViewportContext & {
+      feature: UiThemeFeatureMap['catalog']
+      theme: string
+      colorScheme: 'light' | 'dark'
+      density: string
+      suspended: boolean
+    },
+  ) => unknown
   'download-settings'?: () => unknown
   'network-settings'?: () => unknown
   'account-settings'?: (context: SettingsDetailContext) => unknown
@@ -65,6 +75,22 @@ function drawer(id: string) {
     :protected-css="runtime.protectedStyles"
     @failure="c.uiTheme.reportRenderFailure"
   >
+    <template v-if="$slots['catalog-viewport']" #catalog-viewport="context">
+      <slot
+        name="catalog-viewport"
+        v-bind="context"
+        :feature="features.catalog"
+        :theme="c.uiTheme.current.value.theme.definition.id"
+        :color-scheme="features.shell.state.resolvedTheme ?? 'light'"
+        :density="c.uiTheme.current.value.settings.density"
+        :suspended="
+          Boolean(context.suspended) ||
+          c.isExternalOverlayOpen.value ||
+          features.overlays.state.active !== null ||
+          c.displayedCatalogDrawer.value?.id !== context.drawer.id
+        "
+      />
+    </template>
     <template v-if="$slots['account-settings']" #account-settings="context"
       ><slot name="account-settings" v-bind="context"
     /></template>

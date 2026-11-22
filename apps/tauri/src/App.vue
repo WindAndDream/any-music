@@ -9,6 +9,7 @@ import AccountSettingsPanel from './components/accounts/AccountSettingsPanel.vue
 import AccountSwitchDialog from './components/accounts/AccountSwitchDialog.vue'
 import ProxySettingsPanel from './components/accounts/ProxySettingsPanel.vue'
 import DownloadDirectorySettings from './components/downloads/DownloadDirectorySettings.vue'
+import CatalogWebviewViewport from './components/music-sources/CatalogWebviewViewport.vue'
 import { accountStatus } from './features/accounts/account-presentation'
 import type { AccountPlatform } from './features/accounts/source-authentication'
 import { useAccountSettings } from './features/accounts/use-account-settings'
@@ -21,12 +22,16 @@ const backNavigation =
   nativeCapabilities.platform === 'android' ? provideBackNavigation() : undefined
 const exitNotice = useAndroidBackNavigation(backNavigation)
 const hasAccountTransport = nativeCapabilities.accountTransport === 'provided'
-const builtInPlatforms = getBuiltInSourceDirectory(nativeCapabilities.form).map(
-  ({ descriptor }) => ({
-    id: descriptor.id,
-    name: descriptor.name,
-  }),
+const directory = getBuiltInSourceDirectory(nativeCapabilities.form)
+const webviewSources = new Set<string>(
+  directory.flatMap((source) =>
+    'catalogWebview' in source && source.catalogWebview ? [source.descriptor.id] : [],
+  ),
 )
+const builtInPlatforms = directory.map(({ descriptor }) => ({
+  id: descriptor.id,
+  name: descriptor.name,
+}))
 const sourcePlatforms = computed<readonly AccountPlatform[]>(() => [
   ...builtInPlatforms,
   ...accountRuntime.sourcePlatforms.value,
@@ -35,6 +40,9 @@ const settings = useAccountSettings(accountRuntime, sourcePlatforms)
 provideTrackAccountName(accountRuntime.getTrackAccountName)
 const switcher = useAccountSwitcher(accountRuntime, () =>
   sourcePlatforms.value.map((platform) => platform.id),
+)
+const switcherPlatformName = computed(() =>
+  switcher.platformId.value === null ? null : settings.platformLabel(switcher.platformId.value),
 )
 const workbench = useTemplateRef('workbench')
 const missingAccountSources = computed(() =>
@@ -54,9 +62,7 @@ const accountSelectionLabels = computed(() =>
   Object.fromEntries(
     sourcePlatforms.value.map((source) => [
       source.pluginId ?? source.id,
-      accountRuntime.snapshot.value.accounts.find(
-        (account) => account.id === accountRuntime.selectedAccountIds.value[source.id],
-      )?.name ?? '无可用账号',
+      accountRuntime.getSelectedAccountName(source.id) ?? '无可用账号',
     ]),
   ),
 )
@@ -112,6 +118,21 @@ function addSourceAccount(sourceId: string) {
         @add-account="addSourceAccount"
         @settings-closed="handleSettingsClosed"
       >
+        <template v-if="nativeCapabilities.form === 'desktop'" #catalog-viewport="context">
+          <CatalogWebviewViewport
+            v-if="
+              webviewSources.has(context.drawer.pluginId) &&
+              context.drawer.kind === 'search' &&
+              context.drawer.account?.id &&
+              context.drawer.isSourceEnabled &&
+              context.drawer.hasMore &&
+              !context.drawer.paginationLocked
+            "
+            :key="`${context.drawer.id}:${context.drawer.account.id}:${context.drawer.refreshRevision ?? 0}`"
+            v-bind="context"
+            :account-id="context.drawer.account.id"
+          />
+        </template>
         <template #account-settings="context"
           ><AccountSettingsPanel
             v-if="hasAccountTransport"
@@ -152,7 +173,7 @@ function addSourceAccount(sourceId: string) {
             @pause-change="settings.removeNotice.setPaused"
           />
           <AccountSwitchDialog
-            :platform-id="switcher.platformId.value"
+            :platform-name="switcherPlatformName"
             :accounts="switcher.accounts.value"
             :user-names="accountRuntime.sessionUserNames.value"
             :proxies="settings.snapshot.value.proxies"

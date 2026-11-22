@@ -42,6 +42,43 @@ describe('useMusicSourceWorkspace', () => {
     setActivePinia(createPinia())
   })
 
+  it('keeps the first page and releases its reader when the detail closes during loading', async () => {
+    repositoryMock.load.mockReturnValue({ ...createSnapshot(), drawers: [] })
+    let finish!: (page: TrackPage) => void
+    const page = new Promise<TrackPage>((resolve) => {
+      finish = resolve
+    })
+    const close = vi.fn()
+    const search = () => ({
+      id: 'listing',
+      title: '结果',
+      async *pages() {
+        try {
+          yield await page
+        } finally {
+          close()
+        }
+      },
+    })
+    const { scope, workspace } = createWorkspaceWithFallback(createPlugin(search, search))
+    try {
+      const pending = workspace.search('音乐')
+      const drawerId = workspace.drawers.value[0]!.id
+      workspace.openDrawer(drawerId)
+      workspace.closeDrawer(drawerId)
+      finish({ items: [createTrack(1)], pageNumber: 1, pageSize: 1, hasMore: true })
+      await pending
+      expect(close).toHaveBeenCalledOnce()
+      expect(workspace.drawers.value[0]).toMatchObject({
+        tracks: [createTrack(1)],
+        loadedPageCount: 1,
+        paginationLocked: true,
+      })
+    } finally {
+      scope.stop()
+    }
+  })
+
   it.each(['search', 'import-url'] as const)(
     'retains %s results across duplicate submissions and restart, requesting only the next page',
     async (kind) => {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { canRefreshCatalogDrawer, useCatalogViewportOverlay } from '@any-music/ui/catalog'
 import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
@@ -29,6 +30,8 @@ import { useClassicCatalog } from './use-classic-catalog'
 const props = defineProps<{ feature: UiThemeFeatureMap['catalog']; mobileLayout?: boolean }>()
 const heading = useTemplateRef<HTMLElement>('heading')
 const stage = useTemplateRef<HTMLElement>('stage')
+const nativeReady = shallowRef(false)
+const { openOverlay, registerOverlayOpener } = useCatalogViewportOverlay()
 const headingCollapsed = shallowRef(false)
 const headingContextId = useId()
 defineSlots<UiThemeHostSlots>()
@@ -77,6 +80,9 @@ const {
   viewLoadedTracks,
   closeError,
 } = useClassicCatalog(props)
+function showTrackActions(id: string): void {
+  actionTrackId.value = id
+}
 const allDrawerFavorited = computed(
   () =>
     Boolean(drawer.value?.tracks.length) &&
@@ -84,6 +90,7 @@ const allDrawerFavorited = computed(
 )
 const viewTransition = shallowRef('catalog-forward')
 let returnDrawerId = drawer.value?.id
+let listScrollTop = 0
 watch(
   () => drawer.value?.id,
   (id) => {
@@ -93,6 +100,7 @@ watch(
   },
 )
 function deactivateView(element: Element): void {
+  if (element.getAttribute('data-catalog-view') === 'lists') listScrollTop = element.scrollTop
   const root = element.getRootNode()
   const activeElement = root instanceof ShadowRoot ? root.activeElement : document.activeElement
   if (activeElement && element.contains(activeElement)) stage.value?.focus({ preventScroll: true })
@@ -102,6 +110,9 @@ function deactivateView(element: Element): void {
 function activateView(element: Element): void {
   element.removeAttribute('inert')
   element.removeAttribute('aria-hidden')
+}
+function restoreListScroll(element: Element): void {
+  if (element.getAttribute('data-catalog-view') === 'lists') element.scrollTop = listScrollTop
 }
 function toggleDrawerPinned(id: string): void {
   // Closing the dialog clears actionDrawer before this event; resolve the saved list by ID.
@@ -135,6 +146,7 @@ function finishView(element: Element): void {
         :name="viewTransition"
         @before-leave="deactivateView"
         @before-enter="activateView"
+        @enter="restoreListScroll"
         @leave-cancelled="activateView"
         @after-enter="finishView"
       >
@@ -143,6 +155,7 @@ function finishView(element: Element): void {
           class="classic-catalog__view catalog-page"
           :class="drawer ? 'catalog-page--tracks' : 'catalog-page--lists'"
           :data-catalog-view="drawer?.id ?? 'lists'"
+          :data-am-scroll-key="drawer ? undefined : 'workspace'"
         >
           <template v-if="drawer">
             <div class="catalog-page__sticky-header">
@@ -221,21 +234,13 @@ function finishView(element: Element): void {
                     }}</span>
                   </button>
                   <button
-                    v-if="drawer.isLoading"
-                    type="button"
-                    aria-label="取消加载"
-                    @click="feature.actions.cancel(drawer.id)"
-                  >
-                    <AppIcon name="close" :size="17" /><span class="classic-catalog__request-label"
-                      >取消加载</span
-                    >
-                  </button>
-                  <button
-                    v-else
                     type="button"
                     aria-label="刷新"
-                    :disabled="!drawer.isSourceEnabled"
-                    @click="feature.actions.retry(drawer.id)"
+                    :disabled="
+                      !canRefreshCatalogDrawer(drawer) ||
+                      feature.availability.status !== 'available'
+                    "
+                    @click="feature.actions.refresh(drawer.id)"
                   >
                     <AppIcon name="refresh" :size="17" /><span>刷新</span>
                   </button>
@@ -243,33 +248,49 @@ function finishView(element: Element): void {
               </header>
               <CatalogErrorNotice :drawer="drawer" @show-error="errorDrawerId = $event" />
             </div>
-            <div class="catalog-drawer">
-              <div class="catalog-drawer__panel">
-                <TrackList
-                  :selectable="operatorOpen"
-                  :key="drawer.id"
-                  :listing-id="drawer.id"
-                  :tracks="state.tracks"
-                  :custom-tags-by-track-id="state.customTagsByTrackId"
-                  :current-track-id="state.currentTrackId ?? undefined"
-                  :invalid-track-ids="invalidIds"
-                  :favorite-track-ids="favoriteIds"
-                  :selected-track-ids="selectedIds"
-                  :display-mode="state.displayMode"
-                  :mobile-columns="state.mobileColumns"
-                  :download-busy="Boolean(state.downloadBusy)"
-                  :loading="drawer.isLoading || drawer.status === 'restoring'"
-                  :has-more="drawer.hasMore && drawer.isSourceEnabled"
-                  :loaded-page-count="drawer.loadedPageCount"
-                  :loaded-track-count="drawer.tracks.length"
-                  error-message=""
-                  @load-more="!drawer.isLoading && feature.actions.loadMore(drawer.id)"
-                  @select="toggleSelected"
-                  @play="play"
-                  @download="download([$event])"
-                  @favorite="feature.actions.toggleFavorite($event.id)"
-                  @show-actions="actionTrackId = $event.id"
-                />
+            <div
+              :key="drawer.refreshRevision"
+              class="catalog-page__tracks-scroll"
+              data-am-scroll-key="workspace"
+            >
+              <slot
+                name="catalog-viewport"
+                :drawer="drawer"
+                :selectable="operatorOpen"
+                :suspended="modalOpen"
+                :set-ready="(ready) => (nativeReady = ready)"
+                :register-overlay-opener="registerOverlayOpener"
+                :show-track-actions="showTrackActions"
+              />
+              <div v-if="!nativeReady" class="catalog-drawer">
+                <div class="catalog-drawer__panel">
+                  <TrackList
+                    :selectable="operatorOpen"
+                    :key="drawer.id"
+                    :listing-id="drawer.id"
+                    :tracks="state.tracks"
+                    :custom-tags-by-track-id="state.customTagsByTrackId"
+                    :current-track-id="state.currentTrackId ?? undefined"
+                    :invalid-track-ids="invalidIds"
+                    :favorite-track-ids="favoriteIds"
+                    :selected-track-ids="selectedIds"
+                    :display-mode="state.displayMode"
+                    :item-style="state.itemStyle"
+                    :mobile-columns="state.mobileColumns"
+                    :download-busy="Boolean(state.downloadBusy)"
+                    :loading="drawer.isLoading || drawer.status === 'restoring'"
+                    :has-more="drawer.hasMore && drawer.isSourceEnabled && !drawer.paginationLocked"
+                    :loaded-page-count="drawer.loadedPageCount"
+                    :loaded-track-count="drawer.tracks.length"
+                    error-message=""
+                    @load-more="!drawer.isLoading && feature.actions.loadMore(drawer.id)"
+                    @select="toggleSelected"
+                    @play="play"
+                    @download="download([$event])"
+                    @favorite="feature.actions.toggleFavorite($event.id)"
+                    @show-actions="openOverlay(() => showTrackActions($event.id))"
+                  />
+                </div>
               </div>
             </div>
           </template>
@@ -326,7 +347,7 @@ function finishView(element: Element): void {
           :can-display="Boolean(drawer)"
           @filter="openFilters"
           @operator="operatorOpen = !operatorOpen"
-          @display="displayOpen = true"
+          @display="openOverlay(() => (displayOpen = true))"
       /></template>
       <MusicSourcePickerDialog
         :open="sourcePickerOpen"
@@ -385,7 +406,7 @@ function finishView(element: Element): void {
         @favorite-all="favoriteDrawer"
         @rename="feature.actions.renameDrawer"
         @toggle-pinned="toggleDrawerPinned"
-        @refresh="feature.actions.retry"
+        @refresh="feature.actions.refresh"
       />
       <CatalogTrackActionsDialog
         :playlists="state.playlists"
@@ -493,19 +514,24 @@ function finishView(element: Element): void {
 </template>
 
 <style scoped>
+.catalog-page__tracks-scroll {
+  position: relative;
+}
+
 .classic-catalog {
   display: flex;
-  flex: 1 0 auto;
+  flex: 1;
   flex-direction: column;
   min-inline-size: 0;
-  min-block-size: 100%;
-  /* Clip translated pages without creating a nested scroll container for the sticky heading. */
-  overflow-x: clip;
+  min-block-size: 0;
+  overflow: clip;
 }
 .classic-catalog__stage {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   min-inline-size: 0;
+  min-block-size: 0;
   flex: 1;
 }
 .classic-catalog__view {
@@ -544,11 +570,6 @@ function finishView(element: Element): void {
   .catalog-back-enter-active,
   .catalog-back-leave-active {
     transition: none;
-  }
-}
-@container am-catalog-heading (max-width: 600px) {
-  .classic-catalog__request-label {
-    display: none;
   }
 }
 </style>

@@ -46,6 +46,8 @@ commands.allow = [
   "poll_douyin_search_verification",
   "end_douyin_search_verification",
   "account_page_layout",
+  "sync_catalog_webview",
+  "close_catalog_webview",
   "register_media",
   "release_media",
   "begin_qr_login",

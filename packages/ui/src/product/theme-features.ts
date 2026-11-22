@@ -230,6 +230,7 @@ export interface UiThemeFeatureMap {
       toggleQueue: (trackId: string) => void
       requestCreatePlaylist: () => void
       loadMore: (id: string) => UiThemeAction
+      refresh: (id: string) => UiThemeAction
       retry: (id: string) => UiThemeAction
       cancel: (id: string) => void
       removeDrawer: (id: string) => void

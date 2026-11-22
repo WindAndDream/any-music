@@ -133,7 +133,7 @@ describe('official search page controls', () => {
     queueMicrotask(() => {
       inputs = [field(query)]
     })
-    expect(await pending).toEqual({ x: 80, y: 80 })
+    expect(await pending).toMatchObject({ x: 80, y: 80, time: expect.any(Number) })
     expect(button.click).not.toHaveBeenCalled()
     // The DOM value alone is not accepted until the controlled props render it.
     inputs = [field(query, '')]
@@ -173,7 +173,8 @@ describe('official search page controls', () => {
     const run = new Function(`return (${submit})`)()
     expect(await run('古风')).toBe(false)
     document.readyState = 'interactive'
-    expect(await run('古风')).toEqual({ x: 80, y: 80 })
+    const point = { x: 80, y: 80, time: expect.any(Number) }
+    expect(await run('古风')).toMatchObject(point)
     hit = {}
     expect(await run('古风')).toBe(false)
     hit = button
@@ -183,7 +184,13 @@ describe('official search page controls', () => {
     expect(await run('古风')).toBe(false)
     button.disabled = true
     expect(await run('古风')).toBe(false)
+    button.disabled = false
+    bounds = { left: 40, top: 60, width: 80, height: 40 }
+    location.pathname = '/search/古风'
+    expect(await run('古风')).toMatchObject(point)
     location.pathname = '/jingxuan/search/古风'
+    expect(await run('古风')).toMatchObject(point)
+    location.pathname = '/video/123'
     expect(await run('古风')).toBe(false)
     location.pathname = '/jingxuan'
     location.origin = 'https://evil.example'
@@ -283,6 +290,32 @@ describe('official search page controls', () => {
     })
     expect(root.scrollTop).toBe(100)
     expect(scrollBy).not.toHaveBeenCalled()
+  })
+  it('advances only the original result scroller on demand when the Shadow list covers it', () => {
+    const content = {
+      clientHeight: 166,
+      scrollHeight: 506,
+      scrollTop: 300,
+      scrollBy: vi.fn(),
+    }
+    const fallback = { scrollBy: vi.fn() }
+    const overlay = {}
+    vi.stubGlobal('location', { origin: 'https://www.douyin.com', pathname: '/search/音乐' })
+    vi.stubGlobal('document', {
+      documentElement: { dataset: { amCatalogDocument: 'current' } },
+      querySelector: (selector: string) =>
+        selector === '[data-am-catalog-host]' ? overlay : { parentElement: content },
+      scrollingElement: fallback,
+      elementFromPoint: () => overlay,
+    })
+    vi.stubGlobal('getComputedStyle', () => ({ overflowY: 'auto' }))
+    const run = (delta?: number) =>
+      new Function('delta', `return ${scroll.trimEnd().slice(1, -2)}(delta)`)(delta)
+    expect(run()).toMatchObject({ embedded: true, remaining: 40, viewportHeight: 166 })
+    expect(content.scrollBy).not.toHaveBeenCalled()
+    run(80)
+    expect(content.scrollBy).toHaveBeenCalledExactlyOnceWith({ top: 40, behavior: 'instant' })
+    expect(fallback.scrollBy).not.toHaveBeenCalled()
   })
   it('refuses covered, nested, offscreen or foreign result areas instead of targeting a sidebar', () => {
     let bounds = { left: 100, top: 60, right: 900, bottom: 560 }

@@ -5,6 +5,38 @@ import { describe, expect, it, vi } from 'vitest'
 import { useTrackCatalog } from '#workbench/features/music-sources/use-track-catalog'
 
 describe('useTrackCatalog', () => {
+  it('releases the source reader after the last page without another pagination request', async () => {
+    const close = vi.fn()
+    const read = vi.fn()
+    const catalog = useTrackCatalog(
+      createPlugin(() => ({
+        id: 'list',
+        title: 'List',
+        async *pages() {
+          try {
+            read(1)
+            yield { items: [createTrack(1)], pageNumber: 1, pageSize: 1, hasMore: true }
+            read(2)
+            yield { items: [createTrack(2)], pageNumber: 2, pageSize: 1, hasMore: false }
+            read(3)
+          } finally {
+            close()
+          }
+        },
+      })),
+    )
+
+    await catalog.search('test')
+    expect(read.mock.calls).toEqual([[1]])
+    expect(close).not.toHaveBeenCalled()
+
+    await catalog.loadNext()
+    expect(read.mock.calls).toEqual([[1], [2]])
+    expect(close).toHaveBeenCalledOnce()
+    expect(catalog.tracks.value).toEqual([createTrack(1), createTrack(2)])
+    expect(catalog.hasMore.value).toBe(false)
+  })
+
   it('retains the first account across continuation and replaces it on refresh', async () => {
     let selected = 'first'
     const createListing = () => {

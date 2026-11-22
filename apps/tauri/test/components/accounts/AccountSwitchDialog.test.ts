@@ -8,7 +8,12 @@ import type { NativeAccount } from '@/features/accounts/account-runtime'
 beforeEach(() => vi.stubGlobal('window', new EventTarget()))
 afterEach(() => vi.unstubAllGlobals())
 
-function render(names: readonly string[], userNames: ReadonlyMap<string, string>) {
+function render(
+  names: readonly string[],
+  userNames: ReadonlyMap<string, string>,
+  platformName = '哔哩哔哩',
+  savedNicknames: readonly string[] = [],
+) {
   const accounts: NativeAccount[] = names.map((name, index) => ({
     backupProxyIds: [],
     state: {
@@ -20,6 +25,7 @@ function render(names: readonly string[], userNames: ReadonlyMap<string, string>
     id: String(index),
     platformId: 'bilibili',
     name,
+    platformNickname: savedNicknames[index],
     status: 'ready',
     enabled: true,
     userAgent: '',
@@ -31,7 +37,7 @@ function render(names: readonly string[], userNames: ReadonlyMap<string, string>
     createSSRApp({
       render: () =>
         h(AccountSwitchDialog, {
-          platformId: 'bilibili',
+          platformName,
           accounts,
           userNames,
           proxies: [],
@@ -44,6 +50,16 @@ function render(names: readonly string[], userNames: ReadonlyMap<string, string>
 }
 
 describe('account switcher names', () => {
+  it('shows a saved nickname at startup and replaces it with the result of a fresh read', async () => {
+    const names = ['常用账号']
+    const savedNicknames = ['已验证的昵称']
+    const startup = await render(names, new Map(), '抖音', savedNicknames)
+    expect(startup).toContain('已验证的昵称（常用账号）')
+    expect(startup).not.toContain('抖音（常用账号）')
+    const refreshed = await render(names, new Map([['0', '最新昵称']]), '抖音', savedNicknames)
+    expect(refreshed).toContain('最新昵称（常用账号）')
+  })
+
   it('shows the platform username followed by its custom name, scoped to each account', async () => {
     const html = await render(
       ['常用账号', '备用账号'],
@@ -60,10 +76,21 @@ describe('account switcher names', () => {
     expect(html.match(/aria-pressed=/g)).toHaveLength(2)
   })
 
-  it('retains a usable name before a session check and avoids repeating identical names', async () => {
-    const html = await render(['待检查账号', '同名账号'], new Map([['1', '同名账号']]))
-    expect(html).toMatch(/<strong[^>]*>待检查账号<\/strong>/)
-    expect(html).toMatch(/<strong[^>]*>同名账号<\/strong>/)
-    expect(html).not.toContain('同名账号（同名账号）')
-  })
+  it.each(['抖音', '哔哩哔哩', '网易云音乐', '测试外置来源'])(
+    'keeps both parts of the label on %s even without a distinct platform username',
+    async (platformName) => {
+      const html = await render(
+        ['待检查账号', '同名账号', '无昵称账号'],
+        new Map([
+          ['1', ' 同名账号 '],
+          ['2', ' '],
+        ]),
+        platformName,
+      )
+      expect(html).toContain(`${platformName} · 切换账号`)
+      expect(html).toContain(`${platformName}（待检查账号）`)
+      expect(html).toContain('同名账号（同名账号）')
+      expect(html).toContain(`${platformName}（无昵称账号）`)
+    },
+  )
 })

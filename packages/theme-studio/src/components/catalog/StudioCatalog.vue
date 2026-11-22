@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { provideEditingSession, useEditingSession } from '@any-music/ui/catalog'
 import type { UiThemeFeatureMap, UiThemeHostSlots } from '@any-music/ui/theme'
+import { computed } from 'vue'
 
 import StudioFeatureStatus from '../StudioFeatureStatus.vue'
 import StudioDrawerRail from './StudioDrawerRail.vue'
 import StudioResults from './StudioResults.vue'
 import StudioSearch from './StudioSearch.vue'
 
-defineProps<{ feature: UiThemeFeatureMap['catalog'] }>()
+const props = defineProps<{ feature: UiThemeFeatureMap['catalog'] }>()
 defineSlots<UiThemeHostSlots>()
 provideEditingSession(useEditingSession('catalog-root'))
+const resultsKey = computed(() => {
+  const { activeDrawerId, drawers } = props.feature.state
+  const drawer = drawers.find(({ id }) => id === activeDrawerId)
+  return drawer ? `${drawer.id}:${drawer.refreshRevision ?? 0}` : undefined
+})
 </script>
 
 <template>
@@ -21,14 +27,18 @@ provideEditingSession(useEditingSession('catalog-root'))
       </div>
       <slot name="source-identity" :source-id="feature.state.sourceId" />
     </header>
-    <StudioFeatureStatus :availability="feature.availability" :status="feature.status" />
+    <StudioFeatureStatus
+      v-if="feature.status.status !== 'loading' || feature.availability.status !== 'available'"
+      :availability="feature.availability"
+      :status="feature.status"
+    />
     <StudioSearch :feature="feature" />
     <div class="studio-catalog__desk">
-      <StudioDrawerRail :feature="feature" /><StudioResults
-        :key="feature.state.activeDrawerId ?? undefined"
-        :feature="feature"
+      <StudioDrawerRail :feature="feature" /><StudioResults :key="resultsKey" :feature="feature"
         ><template v-if="$slots['request-account']" #request-account="context"
           ><slot name="request-account" v-bind="context" /></template
+        ><template v-if="$slots['catalog-viewport']" #catalog-viewport="context"
+          ><slot name="catalog-viewport" v-bind="context" /></template
       ></StudioResults>
     </div>
   </section>

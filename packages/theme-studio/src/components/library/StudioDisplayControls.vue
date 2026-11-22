@@ -3,7 +3,7 @@ import { collectionItemStyles } from '@any-music/card-styles'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import CollectionDisplayDialog from '@any-music/ui/components/CollectionDisplayDialog.vue'
 import type { UiThemeTrackListState, UiThemeTrackListActions } from '@any-music/ui/theme'
-import { onDeactivated, shallowRef } from 'vue'
+import { onDeactivated } from 'vue'
 import type { DeepReadonly } from 'vue'
 
 import StudioPageOverlays from '../overlays/StudioPageOverlays.vue'
@@ -14,7 +14,7 @@ const props = defineProps<{
   subject?: string
   hideArrangement?: boolean
 }>()
-const open = shallowRef(false)
+const open = defineModel<boolean>('open', { default: false })
 onDeactivated(() => {
   open.value = false
 })

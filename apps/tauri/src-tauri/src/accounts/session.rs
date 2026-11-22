@@ -2,6 +2,47 @@
 use crate::model::{Account, HttpRequest};
 use serde_json::Value;
 
+pub(crate) const DOUYIN_IDENTITY_URL: &str = "https://www.douyin.com/aweme/v1/web/query/user/?device_platform=webapp&aid=6383&channel=channel_pc_web&publish_video_strategy_type=2";
+
+pub fn douyin_nickname(user: &Value, expected_uid: &str) -> Option<String> {
+    if user["uid"].as_str() != Some(expected_uid) {
+        return None;
+    }
+    let name = user["nickname"].as_str()?.trim();
+    (!name.is_empty() && name.chars().count() <= 128 && !name.chars().any(char::is_control))
+        .then(|| name.to_owned())
+}
+
+/// Call under the browser lifecycle lock after checking the current request epoch and UID.
+pub fn remember_douyin_nickname(
+    state: &crate::state::RuntimeState,
+    account: &Account,
+    nickname: &str,
+) -> Result<(), String> {
+    if account.platform_nickname.as_deref() == Some(nickname) {
+        return Ok(());
+    }
+    state.mutate(|snapshot| {
+        let current = snapshot
+            .accounts
+            .iter_mut()
+            .find(|current| current.id == account.id)
+            .filter(|current| {
+                current.platform_id == "douyin"
+                    && current.platform_user_id.is_some()
+                    && current.platform_user_id == account.platform_user_id
+            })
+            .ok_or("operation-cancelled:账号身份已改变。")?;
+        current.platform_nickname = Some(nickname.into());
+        Ok(())
+    })
+}
+
+pub fn has_pending_login(state: &crate::state::RuntimeState, id: &str) -> bool {
+    state.qr.lock().unwrap().contains_key(id)
+        || state.browser_login_ids.lock().unwrap().contains_key(id)
+}
+
 /// Abandoning verification supplies no logout evidence and cannot clear a content challenge.
 pub fn cancel_verification(state: &crate::state::RuntimeState, id: &str) -> Result<(), String> {
     state.mutate(|snapshot| {
@@ -47,6 +88,7 @@ pub fn is_bilibili_probe(account: &Account, input: &HttpRequest, url: &reqwest::
 
 pub fn is_identity_probe(account: &Account, input: &HttpRequest, url: &reqwest::Url) -> bool {
     is_bilibili_probe(account, input, url)
+        || is_douyin_probe(account, input, url)
         || (account.platform_id == "netease"
             && input.method.as_deref().unwrap_or("GET") == "GET"
             && input.body.is_none()
@@ -56,6 +98,40 @@ pub fn is_identity_probe(account: &Account, input: &HttpRequest, url: &reqwest::
             && url.path() == "/api/w/nuser/account/get"
             && url.query().is_none()
             && url.fragment().is_none())
+}
+
+pub fn is_douyin_probe(account: &Account, input: &HttpRequest, url: &reqwest::Url) -> bool {
+    account.platform_id == "douyin"
+        && input.method.as_deref().unwrap_or("GET") == "GET"
+        && input.body.is_none()
+        && url.as_str() == DOUYIN_IDENTITY_URL
+}
+
+/// Both a signed-in session and a guest browser can receive a numeric UID with type 0.
+/// Callers confirm the returned UID against the account's already-bound platform identity.
+pub fn douyin_probe_uid(status: u16, body: &str) -> Result<String, String> {
+    if crate::model::classify("douyin", status, body) == "verification-required" {
+        return Err("verification-required:抖音要求安全验证，请完成后重试。".into());
+    }
+    if status != 200 {
+        return Err(format!("upstream-error:抖音账号检测返回 HTTP {status}。"));
+    }
+    let value: Value =
+        serde_json::from_str(body).map_err(|_| "invalid-response:抖音账号检测响应无法解析。")?;
+    if value["status_code"].as_i64() != Some(0) {
+        return Err("upstream-error:抖音未返回可用的账号状态，请重试。".into());
+    }
+    value["user_uid"]
+        .as_str()
+        .filter(|uid| {
+            value["user_uid_type"].as_u64() == Some(0)
+                && !uid.is_empty()
+                && uid.len() <= 128
+                && uid.as_bytes()[0] != b'0'
+                && uid.bytes().all(|byte| byte.is_ascii_digit())
+        })
+        .map(str::to_owned)
+        .ok_or_else(|| "invalid-response:抖音账号检测响应缺少有效身份。".into())
 }
 
 pub fn identity_status(account: &Account, status: u16, body: &str) -> Option<&'static str> {
@@ -109,6 +185,101 @@ pub fn bilibili_status(authentication: &str, status: u16, body: &str) -> Option<
 mod tests {
     use super::*;
     use serde_json::json;
+
+    #[test]
+    fn verified_nickname_survives_restart_without_changing_local_name() {
+        use crate::state::{RuntimeState, add_test_account};
+
+        let directory =
+            std::env::temp_dir().join(format!("any-music-nickname-{}", uuid::Uuid::new_v4()));
+        let state = RuntimeState::new(directory.clone()).unwrap();
+        let account = add_test_account(&state, "douyin");
+        confirm_identity(&state, &account.id, "123").unwrap();
+        let account = state.account(&account.id).unwrap();
+        remember_douyin_nickname(&state, &account, "平台昵称").unwrap();
+        let mut stale = account.clone();
+        stale.platform_user_id = Some("456".into());
+        assert!(remember_douyin_nickname(&state, &stale, "错误名称").is_err());
+        drop(state);
+
+        let restored = RuntimeState::new(directory.clone()).unwrap();
+        let current = restored.account(&account.id).unwrap();
+        assert_eq!(current.platform_nickname.as_deref(), Some("平台昵称"));
+        assert_eq!(current.name, account.name);
+        drop(restored);
+        std::fs::remove_dir_all(directory).unwrap();
+    }
+
+    #[test]
+    fn douyin_recovery_accepts_only_the_fixed_read_and_checks_the_response_shape() {
+        let account: Account = serde_json::from_value(json!({
+            "id":"a", "platformId":"douyin", "name":"test", "enabled":true,
+            "status":"expired", "authentication":"credential", "userAgent":"", "webId":"",
+            "backupProxyIds":[], "proxyId":null,
+            "state":{"login":"signed-out","verification":"not-required","connection":"available"}
+        }))
+        .unwrap();
+        let mut input: HttpRequest =
+            serde_json::from_value(json!({"requestId":"r","url":DOUYIN_IDENTITY_URL})).unwrap();
+        assert!(is_identity_probe(
+            &account,
+            &input,
+            &input.url.parse().unwrap()
+        ));
+        for url in [
+            DOUYIN_IDENTITY_URL.replace("www.douyin.com", "www.douyin.com.example"),
+            DOUYIN_IDENTITY_URL.replace("www.douyin.com", "www.douyin.com:444"),
+            format!("{DOUYIN_IDENTITY_URL}&aid=6383"),
+            format!("{DOUYIN_IDENTITY_URL}#fragment"),
+        ] {
+            assert!(!is_identity_probe(&account, &input, &url.parse().unwrap()));
+        }
+        input.body = Some("not a probe".into());
+        assert!(!is_identity_probe(
+            &account,
+            &input,
+            &input.url.parse().unwrap()
+        ));
+        assert_eq!(
+            douyin_probe_uid(
+                200,
+                r#"{"status_code":0,"user_uid_type":0,"user_uid":"9007199254740993"}"#
+            ),
+            Ok("9007199254740993".into())
+        );
+        for (status, body, code) in [
+            (401, r#"{"status_code":2483}"#, "verification-required"),
+            (
+                200,
+                r#"{"status_code":0,"data":{"verify_url":"https://example.invalid"}}"#,
+                "verification-required",
+            ),
+            (401, "{}", "upstream-error"),
+            (200, r#"{"status_code":12}"#, "upstream-error"),
+            (
+                200,
+                r#"{"status_code":0,"user_uid_type":0}"#,
+                "invalid-response",
+            ),
+            (
+                200,
+                r#"{"status_code":0,"user_uid_type":1,"user_uid":"123"}"#,
+                "invalid-response",
+            ),
+            (
+                200,
+                r#"{"status_code":0,"user_uid_type":0,"user_uid":"0"}"#,
+                "invalid-response",
+            ),
+        ] {
+            assert!(
+                douyin_probe_uid(status, body)
+                    .unwrap_err()
+                    .starts_with(code)
+            );
+        }
+    }
+
     #[test]
     fn netease_recovery_accepts_only_exact_identity_probes_and_valid_profiles() {
         let account: Account = serde_json::from_value(json!({"id":"a","platformId":"netease","name":"a","enabled":true,"status":"expired","authentication":"credential","userAgent":"","webId":"", "backupProxyIds":[], "state":{"login":"signed-in","verification":"not-required","connection":"available"},"proxyId":null})).unwrap();

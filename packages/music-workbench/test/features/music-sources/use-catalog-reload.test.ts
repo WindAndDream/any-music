@@ -42,13 +42,13 @@ describe('useCatalogReload', () => {
       useCatalogReload({ getDrawer: () => drawer, confirm, reload, onReloadStart }),
     )!
     await controller.reloadDrawer(drawer.id, 'refresh')
-    expect(confirm).toHaveBeenLastCalledWith(expect.objectContaining({ confirmLabel: '刷新列表' }))
+    expect(confirm).toHaveBeenLastCalledWith(expect.objectContaining({ confirmLabel: '刷新' }))
     expect(drawer.tracks).toHaveLength(1)
     expect(onReloadStart).not.toHaveBeenCalled()
     expect(reload).not.toHaveBeenCalled()
     await controller.reloadDrawer(drawer.id, 'refresh')
-    expect(onReloadStart).toHaveBeenCalledExactlyOnceWith(drawer.id)
-    expect(reload).toHaveBeenCalledExactlyOnceWith(drawer.id)
+    expect(onReloadStart).toHaveBeenCalledExactlyOnceWith(drawer.id, 'refresh')
+    expect(reload).toHaveBeenCalledExactlyOnceWith(drawer.id, 'refresh')
     scope.stop()
   })
 

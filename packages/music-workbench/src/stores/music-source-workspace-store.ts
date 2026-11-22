@@ -147,7 +147,7 @@ export const useMusicSourceWorkspaceStore = defineStore('music-source-workspace'
     if (next.length !== drawerRecipes.value.length) drawerRecipes.value = next
   }
 
-  function setDrawerResult(drawerId: string, result: CatalogResultSnapshot): void {
+  function setDrawerResult(drawerId: string, result: CatalogResultSnapshot | undefined): void {
     drawerRecipes.value = drawerRecipes.value.map((drawer) =>
       drawer.id === drawerId
         ? { ...drawer, result: sanitizeCatalogResultSnapshot(result, drawer.pluginId) }

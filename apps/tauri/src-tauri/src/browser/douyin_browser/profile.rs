@@ -1,4 +1,4 @@
-//! Fresh account identity checks own a temporary page, leaving visible verification untouched.
+//! Full profile reads for account pages own a temporary target and preserve visible verification.
 use super::{body, projection, search, target, validate_browser_profile, verification};
 use crate::browser::cdp::Cdp;
 use serde_json::{Value, json};
