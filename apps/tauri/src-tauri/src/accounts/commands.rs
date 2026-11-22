@@ -89,6 +89,7 @@ pub fn create_account(
         platform_id,
         name: name.into(),
         platform_user_id: None,
+        platform_nickname: None,
         status: "signed-out".into(),
         state: crate::accounts::state::AccountState::anonymous(),
         enabled: true,

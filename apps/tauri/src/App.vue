@@ -41,6 +41,9 @@ provideTrackAccountName(accountRuntime.getTrackAccountName)
 const switcher = useAccountSwitcher(accountRuntime, () =>
   sourcePlatforms.value.map((platform) => platform.id),
 )
+const switcherPlatformName = computed(() =>
+  switcher.platformId.value === null ? null : settings.platformLabel(switcher.platformId.value),
+)
 const workbench = useTemplateRef('workbench')
 const missingAccountSources = computed(() =>
   sourcePlatforms.value
@@ -170,7 +173,7 @@ function addSourceAccount(sourceId: string) {
             @pause-change="settings.removeNotice.setPaused"
           />
           <AccountSwitchDialog
-            :platform-id="switcher.platformId.value"
+            :platform-name="switcherPlatformName"
             :accounts="switcher.accounts.value"
             :user-names="accountRuntime.sessionUserNames.value"
             :proxies="settings.snapshot.value.proxies"

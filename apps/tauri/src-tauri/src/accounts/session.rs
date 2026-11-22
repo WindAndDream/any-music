@@ -4,6 +4,40 @@ use serde_json::Value;
 
 pub(crate) const DOUYIN_IDENTITY_URL: &str = "https://www.douyin.com/aweme/v1/web/query/user/?device_platform=webapp&aid=6383&channel=channel_pc_web&publish_video_strategy_type=2";
 
+pub fn douyin_nickname(user: &Value, expected_uid: &str) -> Option<String> {
+    if user["uid"].as_str() != Some(expected_uid) {
+        return None;
+    }
+    let name = user["nickname"].as_str()?.trim();
+    (!name.is_empty() && name.chars().count() <= 128 && !name.chars().any(char::is_control))
+        .then(|| name.to_owned())
+}
+
+/// Call under the browser lifecycle lock after checking the current request epoch and UID.
+pub fn remember_douyin_nickname(
+    state: &crate::state::RuntimeState,
+    account: &Account,
+    nickname: &str,
+) -> Result<(), String> {
+    if account.platform_nickname.as_deref() == Some(nickname) {
+        return Ok(());
+    }
+    state.mutate(|snapshot| {
+        let current = snapshot
+            .accounts
+            .iter_mut()
+            .find(|current| current.id == account.id)
+            .filter(|current| {
+                current.platform_id == "douyin"
+                    && current.platform_user_id.is_some()
+                    && current.platform_user_id == account.platform_user_id
+            })
+            .ok_or("operation-cancelled:账号身份已改变。")?;
+        current.platform_nickname = Some(nickname.into());
+        Ok(())
+    })
+}
+
 pub fn has_pending_login(state: &crate::state::RuntimeState, id: &str) -> bool {
     state.qr.lock().unwrap().contains_key(id)
         || state.browser_login_ids.lock().unwrap().contains_key(id)
@@ -151,6 +185,30 @@ pub fn bilibili_status(authentication: &str, status: u16, body: &str) -> Option<
 mod tests {
     use super::*;
     use serde_json::json;
+
+    #[test]
+    fn verified_nickname_survives_restart_without_changing_local_name() {
+        use crate::state::{RuntimeState, add_test_account};
+
+        let directory =
+            std::env::temp_dir().join(format!("any-music-nickname-{}", uuid::Uuid::new_v4()));
+        let state = RuntimeState::new(directory.clone()).unwrap();
+        let account = add_test_account(&state, "douyin");
+        confirm_identity(&state, &account.id, "123").unwrap();
+        let account = state.account(&account.id).unwrap();
+        remember_douyin_nickname(&state, &account, "平台昵称").unwrap();
+        let mut stale = account.clone();
+        stale.platform_user_id = Some("456".into());
+        assert!(remember_douyin_nickname(&state, &stale, "错误名称").is_err());
+        drop(state);
+
+        let restored = RuntimeState::new(directory.clone()).unwrap();
+        let current = restored.account(&account.id).unwrap();
+        assert_eq!(current.platform_nickname.as_deref(), Some("平台昵称"));
+        assert_eq!(current.name, account.name);
+        drop(restored);
+        std::fs::remove_dir_all(directory).unwrap();
+    }
 
     #[test]
     fn douyin_recovery_accepts_only_the_fixed_read_and_checks_the_response_shape() {

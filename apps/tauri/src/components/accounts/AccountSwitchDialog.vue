@@ -2,14 +2,11 @@
 import { AppDialog, AppIcon } from '@any-music/ui'
 import { computed } from 'vue'
 
-import {
-  accountStatus,
-  platformName as getPlatformName,
-} from '../../features/accounts/account-presentation'
+import { accountStatus } from '../../features/accounts/account-presentation'
 import type { NativeAccount, NativeProxy } from '../../features/accounts/account-runtime'
 
 const props = defineProps<{
-  platformId: string | null
+  platformName: string | null
   accounts: readonly NativeAccount[]
   userNames: ReadonlyMap<string, string>
   proxies: readonly NativeProxy[]
@@ -18,28 +15,26 @@ const props = defineProps<{
   error: string
 }>()
 const emit = defineEmits<{ select: [id: string]; refresh: []; manage: []; close: [] }>()
-const platformName = computed(() => (props.platformId ? getPlatformName(props.platformId) : ''))
-const rows = computed(() =>
-  props.accounts.map((account) => {
-    const userName = props.userNames.get(account.id)?.trim()
-    const customName = account.name.trim()
+const rows = computed(() => {
+  const { platformName } = props
+  if (platformName === null) return []
+  return props.accounts.map((account) => {
+    const platformUserName =
+      props.userNames.get(account.id)?.trim() || account.platformNickname || platformName
     return {
       account,
-      name:
-        userName && customName && userName !== customName
-          ? `${userName}（${customName}）`
-          : userName || customName,
+      name: `${platformUserName}（${account.name.trim()}）`,
       status: accountStatus(account),
       proxy: props.proxies.find((proxy) => proxy.id === account.proxyId)?.name ?? '直连',
     }
-  }),
-)
+  })
+})
 </script>
 
 <template>
   <AppDialog
-    :open="platformId !== null"
-    :title="`${platformName} · 切换账号`"
+    :open="platformName !== null"
+    :title="`${platformName ?? ''} · 切换账号`"
     description="选择此平台的默认账号，下次进入时会保留本次选择。"
     size="compact"
     @close="emit('close')"

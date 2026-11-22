@@ -9,11 +9,15 @@ import { invoke } from '@tauri-apps/api/core'
 
 import { mapNativeError } from './native-http'
 
+export interface DouyinAccountBrowserCatalog extends DouyinBrowserCatalog {
+  getSelfNickname(): Promise<HttpResponse>
+}
+
 /** Account/target IDs are public; CDP sockets, signed URLs and credentials stay native. */
 export function createDouyinBrowserCatalog(
   accountId: string,
   cancellation?: CancellationSignal,
-): DouyinBrowserCatalog {
+): DouyinAccountBrowserCatalog {
   async function request(
     input: {
       listingId?: string
@@ -21,7 +25,7 @@ export function createDouyinBrowserCatalog(
       offset?: number
       awemeId?: string
       pageKind?: 'video' | 'note'
-      importKind?: DouyinBrowserImportTarget['kind'] | 'self-profile'
+      importKind?: DouyinBrowserImportTarget['kind'] | 'self-profile' | 'self-nickname'
       mixId?: string
     },
     listingCancellation?: CancellationSignal,
@@ -60,6 +64,7 @@ export function createDouyinBrowserCatalog(
   }
   return {
     getSelfImportProfile: () => request({ importKind: 'self-profile' }),
+    getSelfNickname: () => request({ importKind: 'self-nickname' }),
     getAwemeDetail: (awemeId, pageKind) => request({ awemeId, pageKind }),
     openImport(target) {
       const listingId = crypto.randomUUID()

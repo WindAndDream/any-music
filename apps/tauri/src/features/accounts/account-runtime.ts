@@ -28,6 +28,7 @@ export interface NativeAccount {
   id: string
   platformId: string
   name: string
+  platformNickname?: string
   status: string
   state: AccountState
   enabled: boolean
@@ -244,11 +245,7 @@ export class AccountRuntime {
 
   getSelectedAccountName(platform: string): string | undefined {
     const selectedId = this.selectedAccountIds.value[platform]
-    const account = this.snapshot.value.accounts.find((item) => item.id === selectedId)
-    if (account?.platformId === 'douyin') {
-      return this.sessionUserNames.value.get(account.id) ?? account.name
-    }
-    return account?.name
+    return this.snapshot.value.accounts.find((account) => account.id === selectedId)?.name
   }
 
   /** 搜索偏好只作用于新操作；已存在的列表和媒体保持实际使用的账号。 */

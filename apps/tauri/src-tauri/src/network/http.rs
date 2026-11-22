@@ -9,7 +9,6 @@ use std::{sync::Arc, time::Duration};
 use tauri::{State, Webview};
 use tokio_util::sync::CancellationToken;
 
-mod douyin_profile;
 mod response;
 use response::HttpResponse;
 
@@ -42,15 +41,13 @@ fn douyin_probe_account(
 }
 
 fn douyin_identity_response(user_id: Option<&str>, input: &HttpRequest) -> HttpResponse {
-    douyin_json_response(serde_json::json!({"userId":user_id}), input)
-}
-
-fn douyin_json_response(payload: serde_json::Value, input: &HttpRequest) -> HttpResponse {
     HttpResponse {
         status: 200,
         status_text: "OK".into(),
         headers: String::new(),
-        body: payload.to_string().into_bytes(),
+        body: serde_json::json!({"userId":user_id})
+            .to_string()
+            .into_bytes(),
         is_binary: input.response_type.as_deref() == Some("bytes"),
     }
 }
@@ -157,7 +154,6 @@ async fn execute(
     cancellation: &CancellationToken,
 ) -> Result<HttpResponse, String> {
     let url = validate_public_url(&input.url)?;
-    let nickname_probe = douyin_profile::is_request(input, &url);
     if input.credentials.as_deref() != Some("include") {
         require_anonymous_grant(&url, *state.media_port.lock().unwrap())?;
     }
@@ -177,9 +173,6 @@ async fn execute(
             .as_deref()
             .ok_or("account-unavailable:缺少账号请求上下文。")?;
         let account = state.account(id)?;
-        if nickname_probe && account.platform_id != "douyin" {
-            return Err("invalid-input:账号平台与抖音资料请求不匹配。".into());
-        }
         if !account.enabled {
             return Err("operation-cancelled:账号已停用。".into());
         }
@@ -297,25 +290,12 @@ async fn execute(
         };
         let status = response.status();
         let final_url = response.url().clone();
-        if nickname_probe
-            && (status != reqwest::StatusCode::OK
-                || final_url != url
-                || response
-                    .headers()
-                    .get(reqwest::header::CONTENT_TYPE)
-                    .and_then(|value| value.to_str().ok())
-                    .is_none_or(|value| value.split(';').next() != Some("text/html")))
-        {
-            return Err("upstream-error:抖音个人页没有返回可读取的资料。".into());
-        }
         let headers = response_headers(response.headers());
         let limit = input
             .max_response_bytes
             .unwrap_or(16 * 1024 * 1024)
             .min(if douyin_probe {
                 DOUYIN_IDENTITY_LIMIT
-            } else if nickname_probe {
-                douyin_profile::BODY_LIMIT
             } else {
                 512 * 1024 * 1024
             });
@@ -363,20 +343,6 @@ async fn execute(
                 cancellation,
                 result,
             );
-        }
-        if nickname_probe {
-            let id = input.account_id.as_deref().unwrap();
-            let _lifecycle = state.browsers.lock().unwrap();
-            let current = douyin_probe_account(state, id, session.as_ref().unwrap(), cancellation)?;
-            let nickname = current
-                .platform_user_id
-                .as_deref()
-                .and_then(|uid| douyin_profile::nickname(&bytes, uid))
-                .ok_or("invalid-response:抖音个人页未提供当前账号的昵称。")?;
-            return Ok(douyin_json_response(
-                serde_json::json!({"nickname":nickname}),
-                input,
-            ));
         }
         if let Some(id) = &input.account_id
             && session.is_some()
@@ -459,9 +425,7 @@ async fn execute(
         _ = expiry.cancelled() => Err("operation-cancelled:账号环境已释放。".into()),
         result = tokio::time::timeout(Duration::from_millis(input.timeout_ms.unwrap_or(30_000).clamp(100,120_000)), work) => result.unwrap_or_else(|_|Err("request-timeout:请求超时。".into())),
     };
-    if let Some(session) = owned_session
-        && !nickname_probe
-    {
+    if let Some(session) = owned_session {
         let mut count = session.failures.lock().unwrap();
         match &result {
             Ok(_) => {

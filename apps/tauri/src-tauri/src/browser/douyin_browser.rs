@@ -25,9 +25,13 @@ use tokio::sync::{mpsc, oneshot};
 use tokio_util::sync::CancellationToken;
 
 type Reply = oneshot::Sender<Result<Value, String>>;
+enum ProfileRead {
+    Catalog,
+    Nickname,
+}
 enum Action {
     Sms(Option<String>, CancellationToken, Reply),
-    Profile(CancellationToken, Reply),
+    Profile(ProfileRead, CancellationToken, Reply),
     SearchFailure(String, String, Reply),
     RefreshCredentials(Reply),
     Search(
@@ -388,6 +392,7 @@ impl Manager {
         id: &str,
         cancel: &CancellationToken,
         started: bool,
+        purpose: ProfileRead,
     ) -> Result<Value, String> {
         if cancel.is_cancelled() {
             return Err("operation-cancelled:请求已取消。".into());
@@ -415,7 +420,7 @@ impl Manager {
             }
         }
         let token = cancel.clone();
-        self.action(id, |reply| Action::Profile(token, reply), cancel)
+        self.action(id, |reply| Action::Profile(purpose, token, reply), cancel)
             .await
     }
     async fn action(
@@ -791,21 +796,21 @@ async fn worker_connected(
                         }.await;
                         let _=reply.send(result);
                     }
-                    Action::Profile(stop,reply)=>{
+                    Action::Profile(purpose,stop,reply)=>{
                         let operation=cancel.child_token();
                         let result={
                             let work=profile::refresh(cdp,hidden_targets,&operation,&mut searches,verification_capture.as_mut(),&mut login_events);
                             tokio::pin!(work);
                             tokio::select!{result=&mut work=>result,_=stop.cancelled()=>{operation.cancel();work.await}}
                         };
-                        if let Ok(profile)=&result{
+                        if matches!(purpose, ProfileRead::Catalog) && let Ok(profile)=&result{
                             remember_agent(cdp, data).await?;
                             let cookies=cdp.call(None,"Storage.getCookies",json!({})).await?;
                             let mut data=data.lock().unwrap();data.profile=profile.clone();data.profile_error=None;
                             if projection::has_login(&projection::cookie_store(&cookies)?){data.cookies=cookies;data.login=json!({"status":"signed-in"});}
                         }
                         // Keep connection/format failures retryable; they do not erase identity.
-                        if let Err(error)=&result
+                        if matches!(purpose, ProfileRead::Catalog) && let Err(error)=&result
                             && (error.starts_with("not-authenticated:") || error.starts_with("verification-required:")) {
                                 let mut data=data.lock().unwrap();data.profile=Value::Null;data.profile_error=Some(error.clone());
                                 if error.starts_with("not-authenticated:"){data.cookies=Value::Null;}
@@ -1130,9 +1135,10 @@ mod tests {
                     .unwrap_err()
                     .starts_with("verification-required:")
             );
-            let probe = manager.profile("account", &cancel, false);
+            let probe = manager.profile("account", &cancel, false, ProfileRead::Catalog);
             let respond = async {
-                let Some(Action::Profile(_, reply)) = receiver.recv().await else {
+                let Some(Action::Profile(ProfileRead::Catalog, _, reply)) = receiver.recv().await
+                else {
                     panic!("fresh probe expected")
                 };
                 reply.send(Ok(json!({"status":200,"body":serde_json::to_vec(&json!({"status_code":0,"user":{"uid":"12"}})).unwrap()}))).unwrap();
@@ -1213,7 +1219,10 @@ mod tests {
                 },
             );
             let cancel = CancellationToken::new();
-            let result = manager.profile("account", &cancel, true).await.unwrap();
+            let result = manager
+                .profile("account", &cancel, true, ProfileRead::Catalog)
+                .await
+                .unwrap();
             assert_eq!(result["body"], json!(serde_json::to_vec(&profile).unwrap()));
             assert!(
                 receiver.try_recv().is_err(),
@@ -1223,15 +1232,16 @@ mod tests {
             cancelled.cancel();
             assert!(
                 manager
-                    .profile("account", &cancelled, true)
+                    .profile("account", &cancelled, true, ProfileRead::Catalog)
                     .await
                     .unwrap_err()
                     .starts_with("operation-cancelled:")
             );
             assert!(receiver.try_recv().is_err());
-            let check = manager.profile("account", &cancel, false);
+            let check = manager.profile("account", &cancel, false, ProfileRead::Nickname);
             let respond = async {
-                let Some(Action::Profile(_, reply)) = receiver.recv().await else {
+                let Some(Action::Profile(ProfileRead::Nickname, _, reply)) = receiver.recv().await
+                else {
                     panic!("a later check must request a fresh official response");
                 };
                 reply

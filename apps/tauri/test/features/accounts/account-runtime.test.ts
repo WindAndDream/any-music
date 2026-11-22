@@ -238,30 +238,30 @@ describe('native account composition', () => {
     await runtime.refresh()
     expect([...runtime.sessionUserNames.value]).toEqual([['a', '平台用户甲']])
   })
-  it('uses the verified Douyin nickname for the selected account label', () => {
-    const runtime = new AccountRuntime()
-    runtime.snapshot.value = {
-      accounts: [
-        account('bilibili', 'credential'),
-        { ...account('douyin', 'credential'), platformId: 'douyin', name: '本地账号名' },
-      ],
-      proxies: [],
-    }
-    runtime.selectedAccountIds.value = { bilibili: 'bilibili', douyin: 'douyin' }
-    expect(runtime.getSelectedAccountName('douyin')).toBe('本地账号名')
-    runtime.rememberSessionUserName('douyin', {
-      status: 'signed-in',
-      user: { id: '123', name: '测试抖音昵称' },
-    })
-    expect(runtime.getSelectedAccountName('douyin')).toBe('测试抖音昵称')
-    runtime.rememberSessionUserName('bilibili', {
-      status: 'signed-in',
-      user: { id: '456', name: '平台昵称' },
-    })
-    expect(runtime.getSelectedAccountName('bilibili')).toBe(
-      runtime.snapshot.value.accounts[0]?.name,
-    )
-  })
+  it.each(['douyin', 'bilibili', 'netease', 'external:test-source'])(
+    'uses the custom selected account name before and after a session check on %s',
+    async (platformId) => {
+      const runtime = new AccountRuntime()
+      const selected = { ...account('a', 'credential'), platformId, name: '本地账号名' }
+      native.invoke.mockResolvedValue({ accounts: [selected], proxies: [] })
+
+      await runtime.initialize()
+      expect(runtime.getSelectedAccountName(platformId)).toBe('本地账号名')
+
+      runtime.rememberSessionUserName(selected.id, {
+        status: 'signed-in',
+        user: { id: 'test-platform-user', name: '测试平台昵称' },
+      })
+      expect(runtime.getSelectedAccountName(platformId)).toBe('本地账号名')
+
+      native.invoke.mockResolvedValue({
+        accounts: [{ ...selected, name: '新账号名' }],
+        proxies: [],
+      })
+      await runtime.refresh()
+      expect(runtime.getSelectedAccountName(platformId)).toBe('新账号名')
+    },
+  )
   it('persists one selected identity across operations and restores it on restart', async () => {
     const runtime = new AccountRuntime()
     native.invoke.mockImplementation(async (command: string) =>

@@ -10,6 +10,9 @@ pub struct Account {
     /// Verified platform identity is independent of the local browser/profile UUID.
     #[serde(default)]
     pub platform_user_id: Option<String>,
+    /// Last display name verified against the bound platform identity.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub platform_nickname: Option<String>,
     pub status: String,
     pub state: crate::accounts::state::AccountState,
     pub enabled: bool,

@@ -1,11 +1,13 @@
 //! Thin IPC boundary: validate catalog/detail identity before any account/browser work.
-use super::{Packet, detail, projection, search};
-use crate::accounts::session::has_pending_login;
+use super::{Packet, ProfileRead, detail, projection, search};
+use crate::accounts::session::{douyin_nickname, has_pending_login, remember_douyin_nickname};
 use crate::state::RuntimeState;
+use serde_json::{Value, json};
 use std::{sync::Arc, time::Duration};
 
 enum CatalogInput {
     SelfImportProfile,
+    SelfNickname,
     Search(search::Request),
     Detail(detail::Request),
 }
@@ -34,11 +36,14 @@ impl CatalogInput {
         mix_id: Option<String>,
         offset: Option<u64>,
     ) -> Result<Self, String> {
-        if kind == "self-profile" {
+        if matches!(kind, "self-profile" | "self-nickname") {
             if listing_id.is_some() || mix_id.is_some() || offset.is_some() {
                 return Err("invalid-input:个人资料请求不能携带列表参数。".into());
             }
-            return Ok(Self::SelfImportProfile);
+            return Ok(match kind {
+                "self-nickname" => Self::SelfNickname,
+                _ => Self::SelfImportProfile,
+            });
         }
         search::Request::for_import(
             listing_id.ok_or("invalid-input:导入请求缺少列表标识。")?,
@@ -48,6 +53,16 @@ impl CatalogInput {
         )
         .map(Self::Search)
     }
+}
+
+fn profile_nickname(packet: &Packet, expected_uid: &str) -> Result<String, String> {
+    let profile: Value = serde_json::from_slice(&packet.body)
+        .map_err(|_| "invalid-response:抖音账号资料响应格式不兼容。")?;
+    if packet.status != 200 || !projection::authenticated_profile(&profile) {
+        return Err("invalid-response:抖音未返回已登录的账号资料。".into());
+    }
+    douyin_nickname(&profile["user"], expected_uid)
+        .ok_or_else(|| "invalid-response:抖音未返回当前账号的有效昵称。".into())
 }
 
 #[tauri::command]
@@ -79,7 +94,13 @@ pub async fn douyin_catalog_request(
         }
         CatalogInput::new(listing_id, query, offset, aweme_id, page_kind)?
     };
-    let _usage = state.use_account(&account_id, "搜索、导入或读取作品详情")?;
+    let is_nickname = matches!(&input, CatalogInput::SelfNickname);
+    let usage = if is_nickname {
+        "读取抖音账号昵称"
+    } else {
+        "搜索、导入或读取作品详情"
+    };
+    let _usage = state.use_account(&account_id, usage)?;
     let account = state.account(&account_id)?;
     if !CatalogInput::permits(&account) {
         let reason = if account.enabled && account.platform_id == "douyin" {
@@ -92,7 +113,8 @@ pub async fn douyin_catalog_request(
         return Err(reason.into());
     }
     let cancel = state.requests.lock().unwrap().begin(&request_id)?;
-    let deadline = tokio::time::Instant::now() + Duration::from_secs(100);
+    let deadline =
+        tokio::time::Instant::now() + Duration::from_secs(if is_nickname { 40 } else { 100 });
     let mut epoch = None;
     let result = async {
         if cancel.is_cancelled() {
@@ -126,7 +148,9 @@ pub async fn douyin_catalog_request(
                 .launch(&state, &account_id, None, None)?
         };
         let is_profile = matches!(&input, CatalogInput::SelfImportProfile);
-        let before = if is_profile {
+        let before = if is_nickname {
+            None
+        } else if is_profile {
             // Only a known browser baseline can distinguish its cookie changes from
             // updates that were already made by independent native requests.
             state
@@ -138,7 +162,7 @@ pub async fn douyin_catalog_request(
             if !started && state.douyin_browsers.needs_profile_refresh(&account_id) {
                 state
                     .douyin_browsers
-                    .profile(&account_id, &cancel, false)
+                    .profile(&account_id, &cancel, false, ProfileRead::Catalog)
                     .await?;
             }
             state.douyin_browsers.ready(&account_id, &cancel).await?;
@@ -159,10 +183,15 @@ pub async fn douyin_catalog_request(
                     .search(&account_id, request, &cancel)
                     .await?
             }
-            CatalogInput::SelfImportProfile => {
+            CatalogInput::SelfImportProfile | CatalogInput::SelfNickname => {
+                let purpose = if is_nickname {
+                    ProfileRead::Nickname
+                } else {
+                    ProfileRead::Catalog
+                };
                 let response = state
                     .douyin_browsers
-                    .profile(&account_id, &cancel, started)
+                    .profile(&account_id, &cancel, started, purpose)
                     .await;
                 Packet::from_value(response?)?
             }
@@ -182,6 +211,23 @@ pub async fn douyin_catalog_request(
                 .is_some_and(|current| Arc::ptr_eq(current, &account_session))
         {
             return Err("operation-cancelled:账号环境已改变。".into());
+        }
+        if is_nickname {
+            let current = state.account(&account_id)?;
+            if !CatalogInput::permits(&current) || has_pending_login(&state, &account_id) {
+                return Err("operation-cancelled:账号环境已改变。".into());
+            }
+            let uid = current
+                .platform_user_id
+                .as_deref()
+                .ok_or("invalid-response:抖音账号身份尚未确认。")?;
+            let nickname = profile_nickname(&value, uid)?;
+            let _ = remember_douyin_nickname(&state, &current, &nickname);
+            return Ok(Packet {
+                status: 200,
+                body: json!({"nickname":nickname}).to_string().into_bytes(),
+            }
+            .into_ipc());
         }
         let (cookies, _) = state.douyin_browsers.credentials(&account_id)?;
         if is_profile {
@@ -209,7 +255,10 @@ pub async fn douyin_catalog_request(
     // Startup, profile, search and detail rejections update the same native projection.
     // A replaced/cancelled account epoch cannot publish a late authentication failure.
     state.requests.lock().unwrap().finish(&request_id);
-    if let Err(error) = &result {
+    // A display-only lookup cannot override native identity evidence or pause content.
+    if let Err(error) = &result
+        && !is_nickname
+    {
         let _lock = state.browsers.lock().unwrap();
         if !cancel.is_cancelled()
             && epoch.as_ref().is_some_and(|session| {
@@ -434,6 +483,35 @@ mod tests {
         assert!(CatalogInput::for_import("self-profile", Some("list".into()), None, None).is_err());
         assert!(CatalogInput::for_import("self-profile", None, Some("mix".into()), None).is_err());
         assert!(CatalogInput::for_import("self-profile", None, None, Some(0)).is_err());
+        assert!(matches!(
+            CatalogInput::for_import("self-nickname", None, None, None),
+            Ok(CatalogInput::SelfNickname)
+        ));
+        assert!(CatalogInput::for_import("self-nickname", None, None, Some(0)).is_err());
+    }
+
+    #[test]
+    fn profile_accepts_only_a_valid_nickname_for_the_bound_uid() {
+        let packet = |status, code, uid, name| Packet {
+            status,
+            body: serde_json::to_vec(
+                &json!({"status_code":code,"user":{"uid":uid,"nickname":name}}),
+            )
+            .unwrap(),
+        };
+        assert_eq!(
+            profile_nickname(&packet(200, 0, "123", " 测试用户 "), "123"),
+            Ok("测试用户".into())
+        );
+        for record in [
+            packet(401, 0, "123", "测试用户"),
+            packet(200, 2483, "123", "测试用户"),
+            packet(200, 0, "456", "其他用户"),
+            packet(200, 0, "123", ""),
+            packet(200, 0, "123", "昵称\n测试"),
+        ] {
+            assert!(profile_nickname(&record, "123").is_err());
+        }
     }
 
     #[test]

@@ -295,6 +295,7 @@ pub fn add_test_account(state: &RuntimeState, platform: &str) -> Account {
         platform_id: platform.into(),
         name: format!("测试{platform}账号"),
         platform_user_id: None,
+        platform_nickname: None,
         status: "ready".into(),
         state: crate::accounts::state::AccountState::anonymous(),
         enabled: true,
