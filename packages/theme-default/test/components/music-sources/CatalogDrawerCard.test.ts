@@ -201,6 +201,21 @@ describe('CatalogDrawerCard selection and actions', () => {
     },
   )
 
+  it.each([true, false])(
+    'shows load counts without a continuation badge (hasMore: %s)',
+    (hasMore) => {
+      const mounted = mountCatalogComponent(CatalogDrawerCard, {
+        drawer: { ...drawer, tracks: [{ id: 'test:1' }], hasMore },
+        selected: false,
+      })
+      expect(mounted.root.textContent).toContain('1 首已加载')
+      expect(mounted.root.textContent).toContain('1 页内容')
+      expect(mounted.root.textContent).not.toContain('还有更多')
+      expect(mounted.root.textContent).not.toContain('已到末尾')
+      mounted.unmount()
+    },
+  )
+
   it.each(['disconnected', 'error', 'invalid', 'missing'] as const)(
     'keeps %s source cards neutral and opens only already loaded tracks',
     (status) => {

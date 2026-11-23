@@ -180,10 +180,6 @@ function handlePrimaryAction(): void {
           <span data-catalog-text
             ><strong>{{ props.drawer.loadedPageCount }}</strong> 页内容</span
           >
-          <span v-if="props.drawer.hasMore && !isDisconnected" data-catalog-text>还有更多</span>
-          <span v-else-if="props.drawer.status === 'ready' && !isDisconnected" data-catalog-text
-            >已到末尾</span
-          >
         </div>
       </div>
     </div>
