@@ -545,6 +545,10 @@ export function createWorkbenchTrackFeatures(controller: WorkbenchController) {
       },
     },
   }))
+  const playlistTracks = computed(() => ({
+    ...state('playlists'),
+    ...collectionState(sourceTracks('playlists'), playlistArrangement.value),
+  }))
   const playlists = computed<UiThemeFeatureMap['playlists']>(() => {
     // Bind tag actions to this plugin session so old UI events cannot write after re-enable.
     const session = c.tagManagement.actions.value
@@ -557,10 +561,9 @@ export function createWorkbenchTrackFeatures(controller: WorkbenchController) {
     return {
       ...feature('playlists'),
       state: {
-        ...state('playlists'),
+        ...playlistTracks.value,
         playlistTagsAvailable: c.tagManagement.available.value,
         customTagsByPlaylistId: c.tagManagement.tagsByPlaylistId.value,
-        ...collectionState(sourceTracks('playlists'), playlistArrangement.value),
         playlists: c.library.playlists.value,
         activePlaylistId: playlistId.value,
         query: playlistQuery.value,

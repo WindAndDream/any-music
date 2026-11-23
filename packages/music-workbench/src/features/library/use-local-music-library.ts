@@ -505,13 +505,12 @@ export function useLocalMusicLibrary() {
     playlistId: string,
     updater: (playlist: MusicPlaylist) => MusicPlaylist,
   ): void {
-    let found = false
-    playlists.value = playlists.value.map((playlist) => {
-      if (playlist.id !== playlistId) return playlist
-      found = true
-      return updater(playlist)
-    })
-    if (!found) throw new AppError('not-found', '找不到歌单。')
+    const index = playlists.value.findIndex(({ id }) => id === playlistId)
+    if (index < 0) throw new AppError('not-found', '找不到歌单。')
+    const playlist = playlists.value[index]!
+    const updated = updater(playlist)
+    if (updated === playlist) return
+    playlists.value = playlists.value.with(index, updated)
     schedulePersist()
   }
 
@@ -687,9 +686,15 @@ export function useLocalMusicLibrary() {
         const known = new Set(playlist.trackIds)
         const requested = [...new Set(ids)].filter((id) => known.has(id))
         const requestedIds = new Set(requested)
+        const trackIds = [...requested, ...playlist.trackIds.filter((id) => !requestedIds.has(id))]
+        if (
+          trackIds.length === playlist.trackIds.length &&
+          trackIds.every((id, index) => id === playlist.trackIds[index])
+        )
+          return playlist
         return {
           ...playlist,
-          trackIds: [...requested, ...playlist.trackIds.filter((id) => !requestedIds.has(id))],
+          trackIds,
           updatedAtMs: Date.now(),
         }
       })

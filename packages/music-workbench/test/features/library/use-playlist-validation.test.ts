@@ -21,6 +21,48 @@ const playlist = (ids: string[], id = 'p'): MusicPlaylist => ({
 const flush = () => new Promise<void>((resolve) => setImmediate(resolve))
 
 describe('open playlist validation', () => {
+  it('keeps the run across reorder and batches progress from several resolutions', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+    const active = shallowRef(playlist(['1', '2', '3', '4']))
+    const pending = new Map<string, () => void>()
+    const cancel = vi.fn()
+    const check = vi.fn(async (song: Track, signal: CancellationSignal) => {
+      signal.subscribe(cancel)
+      await new Promise<void>((resolve) => pending.set(song.id, resolve))
+    })
+    const scope = effectScope()
+    const validation = scope.run(() =>
+      usePlaylistValidation({
+        playlist: () => active.value,
+        getTrack: track,
+        leafIds: (s) => [s.id],
+        check,
+      }),
+    )!
+    try {
+      active.value = playlist(['4', '2', '3', '1'])
+      expect(cancel).not.toHaveBeenCalled()
+      expect(check.mock.calls.map(([song]) => song.id)).toEqual(['1', '2', '3'])
+
+      pending.get('1')!()
+      pending.get('2')!()
+      await flush()
+      expect(check.mock.calls.map(([song]) => song.id)).toEqual(['1', '2', '3', '4'])
+      expect(validation.state.value.checkedCount).toBe(0)
+      vi.advanceTimersByTime(100)
+      expect(validation.state.value.checkedCount).toBe(2)
+
+      pending.get('3')!()
+      pending.get('4')!()
+      await flush()
+      expect(validation.state.value).toMatchObject({ status: 'complete', checkedCount: 4 })
+      expect(vi.getTimerCount()).toBe(0)
+    } finally {
+      scope.stop()
+      vi.useRealTimers()
+    }
+  })
+
   it('does no work before entry, bounds concurrency, retains typed failures and retries', async () => {
     const active = shallowRef<MusicPlaylist>()
     const pending = new Map<string, () => void>()
