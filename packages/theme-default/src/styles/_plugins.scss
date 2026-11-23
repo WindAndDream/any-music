@@ -110,32 +110,6 @@
     min-inline-size: 0;
     overflow-x: clip;
   }
-  .classic-plugins-category-forward-enter-active,
-  .classic-plugins-category-forward-leave-active,
-  .classic-plugins-category-back-enter-active,
-  .classic-plugins-category-back-leave-active {
-    transition:
-      transform var(--am-motion-slow) var(--am-ease-emphasized),
-      opacity var(--am-motion-slow) var(--am-ease-standard);
-  }
-  .classic-plugins-category-forward-leave-active,
-  .classic-plugins-category-back-leave-active {
-    /* Match collection pages: the incoming category owns the height during the slide. */
-    position: absolute;
-    inset: 0;
-    overflow: clip;
-    pointer-events: none;
-  }
-  .classic-plugins-category-forward-enter-from,
-  .classic-plugins-category-back-leave-to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  .classic-plugins-category-forward-leave-to,
-  .classic-plugins-category-back-enter-from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
   .classic-plugins__fields {
     grid-area: 1 / 1;
     display: flex;
@@ -469,11 +443,7 @@
     .classic-plugins__import,
     .classic-plugins__import .app-icon,
     .classic-plugin-card,
-    .classic-plugin-card__primary-actions,
-    .classic-plugins-category-forward-enter-active,
-    .classic-plugins-category-forward-leave-active,
-    .classic-plugins-category-back-enter-active,
-    .classic-plugins-category-back-leave-active {
+    .classic-plugin-card__primary-actions {
       transition: none;
     }
   }

@@ -11,6 +11,7 @@ import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicLis
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
 import { shallowRef, useTemplateRef, watch } from 'vue'
 
+import ClassicResultView from '../library/ClassicResultView.vue'
 import CatalogDrawerCard from './CatalogDrawerCard.vue'
 import CatalogDrawerListHeader from './CatalogDrawerListHeader.vue'
 import CatalogDrawerOperatorPanel from './CatalogDrawerOperatorPanel.vue'
@@ -62,7 +63,7 @@ const {
 const isFilterDetailOpen = shallowRef(false)
 const grid = useTemplateRef<HTMLElement>('grid')
 const orderAnnouncement = shallowRef('')
-const stateTransition = shallowRef('catalog-state-forward')
+const reverse = shallowRef(false)
 const stateOrder = ['all', 'available', 'unavailable', 'attention']
 const reorder = useCatalogDrawerReorder({
   drawers: controls.visibleItems,
@@ -83,10 +84,7 @@ watch(
   stateFilter,
   (next, previous) => {
     reorder.cancel()
-    stateTransition.value =
-      stateOrder.indexOf(next) > stateOrder.indexOf(previous)
-        ? 'catalog-state-forward'
-        : 'catalog-state-back'
+    reverse.value = stateOrder.indexOf(next) < stateOrder.indexOf(previous)
   },
   { flush: 'sync' },
 )
@@ -108,14 +106,6 @@ function applyFilters(): void {
 function requestDiscovery(): void {
   emit('closeOperator')
   emit('discover')
-}
-function deactivateResults(element: Element): void {
-  element.setAttribute('inert', '')
-  element.setAttribute('aria-hidden', 'true')
-}
-function activateResults(element: Element): void {
-  element.removeAttribute('inert')
-  element.removeAttribute('aria-hidden')
 }
 </script>
 
@@ -140,65 +130,58 @@ function activateResults(element: Element): void {
       /></template>
     </CatalogDrawerListHeader>
     <div class="catalog-drawers__stage">
-      <Transition
-        :name="stateTransition"
-        @before-leave="deactivateResults"
-        @before-enter="activateResults"
-        @leave-cancelled="activateResults"
+      <ClassicResultView
+        class="catalog-drawers__results"
+        :view-key="stateFilter"
+        :reverse="reverse"
       >
-        <div :key="stateFilter" class="catalog-drawers__results">
-          <MusicListEmptyState
-            v-if="props.drawers.length === 0"
-            icon="search"
-            title="还没有音乐列表"
-          >
-            {{ props.discoveryInHeader ? '点击顶部的' : '打开底部“操作器”，点击' }}“{{
-              props.discoveryLabel
-            }}”查找歌曲、作者或导入来源链接。
-          </MusicListEmptyState>
-          <MusicListEmptyState
-            v-else-if="controls.visibleItems.value.length === 0"
-            icon="search"
-            title="没有匹配的音乐列表"
-          >
-            在筛选器中调整文本、平台、命名或搜索时间，或切换“全部 / 可用 / 不可用 / 错误”状态。
-          </MusicListEmptyState>
+        <MusicListEmptyState v-if="props.drawers.length === 0" icon="search" title="还没有音乐列表">
+          {{ props.discoveryInHeader ? '点击顶部的' : '打开底部“操作器”，点击' }}“{{
+            props.discoveryLabel
+          }}”查找歌曲、作者或导入来源链接。
+        </MusicListEmptyState>
+        <MusicListEmptyState
+          v-else-if="controls.visibleItems.value.length === 0"
+          icon="search"
+          title="没有匹配的音乐列表"
+        >
+          在筛选器中调整文本、平台、命名或搜索时间，或切换“全部 / 可用 / 不可用 / 错误”状态。
+        </MusicListEmptyState>
+        <div
+          v-else
+          ref="grid"
+          class="catalog-drawers__grid"
+          :class="{
+            'catalog-drawers__grid--dragging': reorder.draggedId.value,
+            'catalog-drawers__grid--settling': reorder.isSettling.value,
+          }"
+        >
+          <!-- 卡片按实际网格单元宽度适配，不依赖整页或工作台断点。 -->
           <div
-            v-else
-            ref="grid"
-            class="catalog-drawers__grid"
-            :class="{
-              'catalog-drawers__grid--dragging': reorder.draggedId.value,
-              'catalog-drawers__grid--settling': reorder.isSettling.value,
-            }"
+            v-for="drawer in controls.visibleItems.value"
+            :key="drawer.id"
+            class="catalog-drawers__cell"
+            :class="{ 'catalog-drawers__cell--dragging': reorder.draggedId.value === drawer.id }"
+            data-catalog-drop-kind="drawer"
+            :data-catalog-drop-id="drawer.id"
           >
-            <!-- 卡片按实际网格单元宽度适配，不依赖整页或工作台断点。 -->
-            <div
-              v-for="drawer in controls.visibleItems.value"
-              :key="drawer.id"
-              class="catalog-drawers__cell"
-              :class="{ 'catalog-drawers__cell--dragging': reorder.draggedId.value === drawer.id }"
-              data-catalog-drop-kind="drawer"
-              :data-catalog-drop-id="drawer.id"
-            >
-              <CatalogDrawerCard
-                :selectable="props.operatorOpen"
-                :drawer="drawer"
-                :selected="controls.selectedIds.value.has(drawer.id)"
-                :dragging="reorder.draggedId.value === drawer.id"
-                :reorder-style="reorder.getItemStyle('drawer', drawer.id)"
-                @press-start="reorder.startPress"
-                @shift="(id, direction) => reorder.shift('drawer', id, direction)"
-                @drag-cancel="reorder.cancel"
-                @view="emit('view', $event)"
-                @show-error="emit('showError', $event)"
-                @show-actions="emit('showActions', $event)"
-                @select="controls.toggleItem"
-              />
-            </div>
+            <CatalogDrawerCard
+              :selectable="props.operatorOpen"
+              :drawer="drawer"
+              :selected="controls.selectedIds.value.has(drawer.id)"
+              :dragging="reorder.draggedId.value === drawer.id"
+              :reorder-style="reorder.getItemStyle('drawer', drawer.id)"
+              @press-start="reorder.startPress"
+              @shift="(id, direction) => reorder.shift('drawer', id, direction)"
+              @drag-cancel="reorder.cancel"
+              @view="emit('view', $event)"
+              @show-error="emit('showError', $event)"
+              @show-actions="emit('showActions', $event)"
+              @select="controls.toggleItem"
+            />
           </div>
         </div>
-      </Transition>
+      </ClassicResultView>
     </div>
     <p class="am-sr-only" role="status" aria-live="polite">{{ orderAnnouncement }}</p>
 
@@ -291,35 +274,6 @@ function activateResults(element: Element): void {
   min-inline-size: 0;
   min-block-size: 0;
   flex: 1;
-}
-.catalog-state-forward-enter-active,
-.catalog-state-forward-leave-active,
-.catalog-state-back-enter-active,
-.catalog-state-back-leave-active {
-  transition:
-    transform var(--am-motion-slow) var(--am-ease-emphasized),
-    opacity var(--am-motion-slow) var(--am-ease-standard);
-}
-.catalog-state-forward-enter-from,
-.catalog-state-back-leave-to {
-  opacity: 0;
-  transform: translateX(100%);
-}
-.catalog-state-forward-leave-to,
-.catalog-state-back-enter-from {
-  opacity: 0;
-  transform: translateX(-100%);
-}
-.catalog-drawers__results[aria-hidden='true'] {
-  pointer-events: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .catalog-state-forward-enter-active,
-  .catalog-state-forward-leave-active,
-  .catalog-state-back-enter-active,
-  .catalog-state-back-leave-active {
-    transition: none;
-  }
 }
 .catalog-drawers {
   container: am-catalog-list / inline-size;

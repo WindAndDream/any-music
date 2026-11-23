@@ -265,6 +265,83 @@ function mountRoot(component: Component, model: unknown) {
 }
 
 describe('complete-root classic library contracts', () => {
+  it.each(['queue', 'favorites', 'history'] as const)(
+    'slides the empty %s results in both directions and keeps the toolbar mounted',
+    async (context) => {
+      const state = shallowReactive({
+        ...list(),
+        arrangementMode: 'flat' as 'flat' | 'platform',
+        currentTrackId: null,
+        totalCount: 0,
+        tracks: [],
+        entries: [],
+        query: '',
+        platformId: 'all',
+        startedAfterMs: null,
+      })
+      const commands = {
+        ...actions(state),
+        setArrangementMode: (mode: 'flat' | 'platform') => {
+          state.arrangementMode = mode
+        },
+      }
+      const view = mountRoot(definition.views[context], feature(state, commands))
+      try {
+        const results = () =>
+          findCatalogElement(view.root, (node) => node.props.class === 'listen-queue__list')
+        const platform = view.button('按平台')
+        const flat = view.button(context === 'history' ? '全部记录' : '全部歌曲')
+        const choose = async (button: CatalogTestElement, direction: 'forward' | 'back') => {
+          const previous = results()
+          Object.assign(previous, { contains: () => false })
+          Object.assign(view.root, { activeElement: button })
+          dispatchCatalogEvent(button, 'onClick', false)
+          await nextTick()
+          expect(button.props['aria-pressed']).toBe(true)
+          if (context === 'history') expect(previous.parent).toBeNull()
+          else expect(results()).toBe(previous)
+          expect(results().props['data-classic-result-enter']).toBe(direction)
+        }
+        await choose(platform, 'forward')
+        await choose(flat, 'back')
+        await choose(platform, 'forward')
+        await choose(flat, 'back')
+        expect(view.button('按平台')).toBe(platform)
+        expect(findCatalogElement(view.root, (node) => node.tag === 'section').isFocused).toBe(
+          false,
+        )
+      } finally {
+        view.close()
+      }
+    },
+  )
+
+  it('reattaches the full song grid when returning from the Favorites platform overview', async () => {
+    const state = shallowReactive({
+      ...list(),
+      arrangementMode: 'flat' as 'flat' | 'platform',
+      currentTrackId: null,
+    })
+    const commands = {
+      ...actions(state),
+      setArrangementMode: (mode: 'flat' | 'platform') => {
+        state.arrangementMode = mode
+      },
+    }
+    const view = mountRoot(definition.views.favorites, feature(state, commands))
+    try {
+      const trackActions = view.button('打开《one》的操作')
+      dispatchCatalogEvent(view.button('按平台'), 'onClick', false)
+      await nextTick()
+      expect(view.root.querySelector('[aria-label="打开《one》的操作"]')).toBeNull()
+      dispatchCatalogEvent(view.button('全部歌曲'), 'onClick', false)
+      await nextTick()
+      expect(view.button('打开《one》的操作') === trackActions).toBe(true)
+    } finally {
+      view.close()
+    }
+  })
+
   it.each(['queue', 'favorites'] as const)(
     'places one icon display picker before the %s mobile filter and targets the active region',
     async (context) => {

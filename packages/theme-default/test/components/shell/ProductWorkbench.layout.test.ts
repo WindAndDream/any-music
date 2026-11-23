@@ -196,7 +196,7 @@ describe('Classic shell and current page layout integration', () => {
         'var(--am-space-1)',
       )
       expect(readLayout(queueViewStyles, ['.queue-view-controls__segments'], width).display).toBe(
-        width <= 760 ? 'grid' : 'flex',
+        'grid',
       )
       const cover = readLayout(queueRowStyles, ['.queue-track__cover-control'], width)
       expect(cover.background).toBe('transparent')
@@ -211,7 +211,7 @@ describe('Classic shell and current page layout integration', () => {
     },
   )
   it.each([320, 600, 1440])(
-    'uses the incoming collection height throughout forward and back transitions at %ipx',
+    'uses the current result height and keeps detail navigation in one frame at %ipx',
     (width) => {
       for (const styles of [queueStyles, sharedStyles]) {
         for (const reducedMotion of [false, true]) {
@@ -226,6 +226,9 @@ describe('Classic shell and current page layout integration', () => {
           expect(results.position).toBe('relative')
           expect(readLayout(styles, ['.listen-queue__content'], width).position).toBe('relative')
           expect(results['grid-template-columns']).toBe('minmax(0, 1fr)')
+          const list = readLayout(styles, ['.listen-queue__list'], width)
+          expect(list['grid-area']?.replace(/\s/g, '')).toBe('1/1')
+          expect(list.position).not.toBe('absolute')
           expect(
             readLayout(
               styles,
@@ -235,23 +238,22 @@ describe('Classic shell and current page layout integration', () => {
           ).toBe('grid')
           for (const direction of ['forward', 'back']) {
             for (const phase of ['enter', 'leave']) {
-              const list = readLayout(
+              const view = readLayout(
                 styles,
-                ['.listen-queue__list', `.queue-view-${direction}-${phase}-active`],
+                ['.listen-queue__view', `.queue-view-${direction}-${phase}-active`],
                 width,
                 width,
                 reducedMotion,
               )
-              expect(list['grid-area']?.replace(/\s/g, '')).toBe('1/1')
               if (phase === 'leave') {
-                expect(list.position).toBe('absolute')
-                expect(list.inset).toBe('0')
-                expect(list.overflow).toBe('clip')
+                expect(view.position).toBe('absolute')
+                expect(view.inset).toBe('0')
+                expect(view.overflow).toBe('clip')
               } else {
-                expect(list.position).not.toBe('absolute')
+                expect(view.position).not.toBe('absolute')
               }
-              expect(list.display).not.toBe('none')
-              if (reducedMotion) expect(list.transition).toBe('none')
+              expect(view.display).not.toBe('none')
+              if (reducedMotion) expect(view.transition).toBe('none')
             }
           }
         }

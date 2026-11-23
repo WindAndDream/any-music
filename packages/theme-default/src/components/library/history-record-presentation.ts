@@ -1,10 +1,13 @@
 import type { PlaybackHistoryEntry } from '@any-music/core'
 
+const playbackTimeFormatter = new Intl.DateTimeFormat('zh-CN', {
+  dateStyle: 'short',
+  timeStyle: 'medium',
+})
+
 /** Keep the row and its actions dialog anchored to the same individual playback. */
 export function formatHistoryRecord(entry: PlaybackHistoryEntry): string {
-  const time = new Intl.DateTimeFormat('zh-CN', { dateStyle: 'short', timeStyle: 'medium' }).format(
-    entry.startedAtMs,
-  )
+  const time = playbackTimeFormatter.format(entry.startedAtMs)
   const progress = entry.completed
     ? '已播完'
     : entry.durationMs

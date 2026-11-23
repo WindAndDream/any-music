@@ -11,6 +11,7 @@ import { useClassicPlugins } from '../../composables/use-classic-plugins'
 import ClassicCollectionControls from '../library/ClassicCollectionControls.vue'
 import ClassicCollectionSurface from '../library/ClassicCollectionSurface.vue'
 import ClassicFeatureStatus from '../library/ClassicFeatureStatus.vue'
+import ClassicResultView from '../library/ClassicResultView.vue'
 import CatalogOperatorActions from '../music-sources/CatalogOperatorActions.vue'
 import ClassicPageOverlays from '../overlays/ClassicPageOverlays.vue'
 import ClassicPluginCard from './ClassicPluginCard.vue'
@@ -62,14 +63,6 @@ watch(
   },
   { flush: 'sync' },
 )
-function leaveCategory(element: Element): void {
-  element.setAttribute('inert', '')
-  element.setAttribute('aria-hidden', 'true')
-}
-function activateCategory(element: Element): void {
-  element.removeAttribute('inert')
-  element.removeAttribute('aria-hidden')
-}
 function setEnabled(id: string, enabled: boolean): void {
   if (!disabled.value) void props.feature.actions.setEnabled(id, enabled)
 }
@@ -151,50 +144,49 @@ function manageDetails(): void {
         当前运行端不支持外置插件，可使用内置插件。
       </p>
       <div class="classic-plugins__category-viewport">
-        <Transition
-          :name="`classic-plugins-category-${slideDirection}`"
-          @before-leave="leaveCategory"
-          @before-enter="activateCategory"
-          @leave-cancelled="activateCategory"
+        <ClassicResultView
+          class="classic-plugins__fields"
+          as="fieldset"
+          :view-key="filter"
+          :reverse="slideDirection === 'back'"
+          :disabled="disabled"
         >
-          <fieldset :key="filter" class="classic-plugins__fields" :disabled="disabled">
-            <legend class="am-sr-only">插件列表</legend>
-            <div v-if="visible.length" class="classic-plugins__items" :data-display="display">
-              <ClassicPluginCard
-                v-for="item in visible"
-                :key="item.id"
-                :item="item"
-                :busy="disabled"
-                :selectable="operatorOpen"
-                :selected="controls.selectedIds.value.has(item.id)"
-                @select="controls.toggleItem(item.id)"
-                @set-enabled="setEnabled(item.id, $event)"
-                @retry="feature.actions.retry(item.id)"
-                @details="detailsId = item.id"
-              />
-            </div>
-            <MusicListEmptyState
-              v-else
-              icon="plugin"
-              role="status"
-              :title="
-                counts[filter]
-                  ? '没有匹配的插件'
-                  : filter === 'external'
-                    ? '还没有外置插件'
-                    : '暂无可用插件'
-              "
-            >
-              {{
-                counts[filter]
-                  ? '调整筛选条件，或切换分类查看其他插件。'
-                  : filter === 'external' && feature.state.externalSupported
-                    ? '从右上角导入插件包，确认安装后即可在这里管理。'
-                    : '可切换分类查看其他插件。'
-              }}
-            </MusicListEmptyState>
-          </fieldset>
-        </Transition>
+          <legend class="am-sr-only">插件列表</legend>
+          <div v-if="visible.length" class="classic-plugins__items" :data-display="display">
+            <ClassicPluginCard
+              v-for="item in visible"
+              :key="item.id"
+              :item="item"
+              :busy="disabled"
+              :selectable="operatorOpen"
+              :selected="controls.selectedIds.value.has(item.id)"
+              @select="controls.toggleItem(item.id)"
+              @set-enabled="setEnabled(item.id, $event)"
+              @retry="feature.actions.retry(item.id)"
+              @details="detailsId = item.id"
+            />
+          </div>
+          <MusicListEmptyState
+            v-else
+            icon="plugin"
+            role="status"
+            :title="
+              counts[filter]
+                ? '没有匹配的插件'
+                : filter === 'external'
+                  ? '还没有外置插件'
+                  : '暂无可用插件'
+            "
+          >
+            {{
+              counts[filter]
+                ? '调整筛选条件，或切换分类查看其他插件。'
+                : filter === 'external' && feature.state.externalSupported
+                  ? '从右上角导入插件包，确认安装后即可在这里管理。'
+                  : '可切换分类查看其他插件。'
+            }}
+          </MusicListEmptyState>
+        </ClassicResultView>
       </div>
     </ClassicCollectionSurface>
     <ClassicPageOverlays :modal-open="modalOpen" :operator-open="operatorOpen">

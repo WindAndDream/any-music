@@ -235,10 +235,13 @@ export function useClassicCollectionPresentation(
     ],
     reorder.clearDrag,
   )
-  function deactivateLeavingView(view: Element) {
+  function moveFocusFromView(view: Element) {
     const root = view.getRootNode() as Document | ShadowRoot
     if (root.activeElement && view.contains(root.activeElement))
       element.value?.focus({ preventScroll: true })
+  }
+  function deactivateLeavingView(view: Element) {
+    moveFocusFromView(view)
     view.setAttribute('inert', '')
     view.setAttribute('aria-hidden', 'true')
   }
@@ -278,6 +281,7 @@ export function useClassicCollectionPresentation(
     setArrangement,
     togglePlatform,
     deactivateLeavingView,
+    moveFocusFromView,
     activateView,
     finishViewTransition,
   }

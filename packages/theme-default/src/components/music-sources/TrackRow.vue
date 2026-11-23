@@ -8,6 +8,8 @@ import TrackCardSummary from '@any-music/ui/components/tracks/TrackCardSummary.v
 import type { CollectionItemStyle } from '@any-music/ui/library'
 import { computed, useId } from 'vue'
 
+import { formatCompactCount, formatTrackDate } from './track-value-formatters'
+
 // 曲目行只读取统一 Track，不能根据 pluginId 分支解析平台字段。
 const props = withDefaults(
   defineProps<{
@@ -55,19 +57,9 @@ const emit = defineEmits<{
 }>()
 
 const publishedLabel = computed(() =>
-  props.track.publishedAtMs
-    ? new Intl.DateTimeFormat('zh-CN', { dateStyle: 'medium' }).format(props.track.publishedAtMs)
-    : '时间未知',
+  props.track.publishedAtMs ? formatTrackDate(props.track.publishedAtMs) : '时间未知',
 )
-const compactCountFormatter = new Intl.NumberFormat('zh-CN', {
-  notation: 'compact',
-  maximumFractionDigits: 1,
-})
 // 窄封面的角标优先保留两项统计，完整计数仍提供给辅助技术和悬停提示。
-function formatCompactCount(count?: number): string {
-  return count === undefined ? '—' : compactCountFormatter.format(count)
-}
-
 const statisticsLabel = computed(
   () =>
     `播放 ${formatCompactCount(props.track.statistics?.playCount)} · 弹幕 ${formatCompactCount(props.track.statistics?.danmakuCount)}`,

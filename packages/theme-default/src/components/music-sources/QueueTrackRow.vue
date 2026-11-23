@@ -5,6 +5,7 @@ import type { CatalogTrackDisplayMode, MobileTrackColumns } from '@any-music/ui/
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
 
+import { formatTrackDate } from './track-value-formatters'
 import TrackRow from './TrackRow.vue'
 
 /** 待听封面始终支持长按排序；选择模式下短按选择；其余内容复用歌曲列表。 */
@@ -41,7 +42,7 @@ const emit = defineEmits<{
 const addedLabel = computed(() =>
   props.addedAtMs === undefined
     ? `${props.dateLabel ?? '添加'}时间未知`
-    : `${props.dateLabel ?? '添加'}于 ${new Intl.DateTimeFormat('zh-CN', { dateStyle: 'medium' }).format(props.addedAtMs)}`,
+    : `${props.dateLabel ?? '添加'}于 ${formatTrackDate(props.addedAtMs)}`,
 )
 const { displayName } = useTrackName(() => props.track)
 // 在单张卡片内订阅位移，避免每帧重建整个网格并触发 TransitionGroup 的全量布局测量。
