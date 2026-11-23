@@ -157,7 +157,8 @@ export function useClassicCollectionPresentation(
   const positions = computed(
     () => new Map(props.state.tracks.map((track, index) => [track.id, index + 1])),
   )
-  const filtered = computed(() => countCatalogTrackFilters(props.state.filters).total > 0)
+  const filterCount = computed(() => countCatalogTrackFilters(props.state.filters).total)
+  const filtered = computed(() => filterCount.value > 0)
   const available = () => props.availability.status === 'available'
   // Group checks run for every logical candidate, including unmounted tracks. Index once
   // per controlled result instead of scanning that result for each reorder comparison.
@@ -276,6 +277,7 @@ export function useClassicCollectionPresentation(
       props.actions.setMobileColumns(columns, displayScope.value),
     displayedTracks,
     positions,
+    filterCount,
     filtered,
     reorder,
     setArrangement,

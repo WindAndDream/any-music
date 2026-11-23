@@ -4,7 +4,6 @@ import type { UiPluginDevelopmentStatus } from '@any-music/ui/theme'
 import { computed, nextTick, shallowRef, watch } from 'vue'
 import type { Ref } from 'vue'
 
-import { createPluginFilters } from './use-classic-plugins'
 import type { PluginFilterState } from './use-classic-plugins'
 
 type Dimension = keyof PluginFilterState
@@ -47,21 +46,21 @@ export function usePluginFilterPanel(
     {
       id: 'keyword' as const,
       label: '关键词',
-      description: '搜索插件名称、描述或发布者',
+      description: '搜索插件名称、描述或发布者。',
       icon: 'search' as const,
       labels: draft.value?.keyword.trim() ? [draft.value.keyword.trim()] : [],
     },
     {
       id: 'category' as const,
       label: '插件类型',
-      description: '按插件提供的功能分类筛选',
+      description: '按插件提供的功能分类筛选。',
       icon: 'plugin' as const,
       labels: draft.value?.category ?? [],
     },
     {
       id: 'status' as const,
       label: '插件状态',
-      description: '按启用状态或加载结果筛选',
+      description: '按启用状态或加载结果筛选。',
       icon: 'check' as const,
       labels:
         draft.value?.status.map(
@@ -71,7 +70,7 @@ export function usePluginFilterPanel(
     {
       id: 'developmentStatus' as const,
       label: '开发者状态',
-      description: '按内置插件的开发与维护状态筛选',
+      description: '按内置插件的开发与维护状态筛选。',
       icon: 'plugin' as const,
       labels:
         draft.value?.developmentStatus.map((status) => PLUGIN_DEVELOPMENT_STATUS_LABELS[status]) ??
@@ -126,9 +125,6 @@ export function usePluginFilterPanel(
         draft.value.developmentStatus.filter((_, entryIndex) => entryIndex !== index),
       )
   }
-  function clear(): void {
-    draft.value = createPluginFilters()
-  }
   function afterLeave(): void {
     // Match Discover: resize the sheet footer only after the outgoing view is gone.
     detailOpen.value = active.value !== null
@@ -157,7 +153,6 @@ export function usePluginFilterPanel(
     back,
     finish,
     remove,
-    clear,
     leave,
     afterLeave,
     focusView,

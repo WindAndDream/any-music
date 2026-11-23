@@ -100,8 +100,6 @@ function mountFilterPanel(
             filters.value = next
           },
           tagStats: previewOptions?.tagStats ?? [],
-          resultCount: resultCount.value,
-          totalCount: previewOptions?.tracks.length ?? 12,
           onPreviewChange: updatePreview,
         })
     },
@@ -122,8 +120,6 @@ describe('CatalogTrackFilterPanel overview actions', () => {
             historyScope: 'test',
             filters: createCatalogTrackFilterState(),
             tagStats: [],
-            resultCount: 0,
-            totalCount: 0,
             onDetailOpenChange: (value: boolean) => {
               detailOpen.value = value
             },
@@ -184,8 +180,6 @@ describe('CatalogTrackFilterPanel overview actions', () => {
                   historyScope: 'test',
                   tagStats: [],
                   platformStats: [{ id: 'source', name: '测试平台', count: 2 }],
-                  resultCount: 2,
-                  totalCount: 2,
                   onDetailOpenChange: (value: boolean) => {
                     detailOpen.value = value
                   },
@@ -216,8 +210,12 @@ describe('CatalogTrackFilterPanel overview actions', () => {
 
   it('restores the dimension rail scroll position after returning to the overview', async () => {
     const view = mountFilterPanel(createCatalogTrackFilterState())
-    const rail = findCatalogElement(view.root, (node) => node.props['aria-label'] === '筛选类型')
-    rail.scrollLeft = 175
+    const viewport = () =>
+      findCatalogElement(
+        findCatalogElement(view.root, (node) => node.props['aria-label'] === '筛选类型'),
+        (node) => typeof node.props.onScroll === 'function',
+      )
+    viewport().scrollLeft = 175
     dispatchCatalogEvent(
       findCatalogElement(view.root, (node) => node.props['data-filter-dimension'] === 'duration'),
       'onClick',
@@ -230,9 +228,8 @@ describe('CatalogTrackFilterPanel overview actions', () => {
       false,
     )
     await nextTick()
-    expect(
-      findCatalogElement(view.root, (node) => node.props['aria-label'] === '筛选类型').scrollLeft,
-    ).toBe(175)
+    await nextTick()
+    expect(viewport().scrollLeft).toBe(175)
     view.unmount()
   })
 
@@ -278,48 +275,47 @@ describe('CatalogTrackFilterPanel overview actions', () => {
     },
   )
 
-  it('keeps clear-all pending until accepted and preserves the draft when canceled', async () => {
+  it('shows only a numeric badge for each active dimension and restores the empty overview', async () => {
     const initialFilters = {
       ...createCatalogTrackFilterState(),
       tags: ['现场'],
-      durationRanges: [{ minMs: 60_000 }],
     }
     const view = mountFilterPanel(initialFilters)
-    const clear = findCatalogElement(
+    const tags = findCatalogElement(
       view.root,
-      (node) => node.tag === 'button' && node.textContent === '清空全部',
+      (node) => node.props['data-filter-dimension'] === 'tags',
     )
-    dispatchCatalogEvent(clear, 'onClick', false)
-    expect(view.confirmation.activeRequest.value?.title).toBe('清空全部筛选？')
-    expect(view.filters.value).toEqual(initialFilters)
-    view.confirmation.cancel()
-    await nextTick()
-    expect(view.filters.value).toEqual(initialFilters)
-
-    dispatchCatalogEvent(clear, 'onClick', false)
-    view.confirmation.accept()
-    await nextTick()
+    expect(tags.textContent).toBe('标签筛选1')
+    expect(view.root.textContent).not.toContain('已筛选')
+    expect(view.root.textContent).not.toContain('点击具体条件即可修改')
+    expect(view.root.textContent).not.toContain('清空全部')
+    dispatchCatalogEvent(
+      findCatalogElement(view.root, (node) => node.props['aria-label'] === '删除标签筛选条件 现场'),
+      'onClick',
+      false,
+    )
     await nextTick()
     expect(view.filters.value).toEqual(createCatalogTrackFilterState())
-    expect(() =>
-      findCatalogElement(
-        view.root,
-        (node) => node.tag === 'button' && node.textContent === '清空全部',
-      ),
-    ).toThrow()
+    const empty = findCatalogElement(view.root, (node) =>
+      String(node.props.class).includes('catalog-filter-summary__empty-state'),
+    )
+    expect(findCatalogElement(empty, (node) => node.tag === 'h3').textContent).toBe(
+      '还没有筛选条件',
+    )
+    expect(() => findCatalogElement(empty, (node) => node.tag === 'p')).toThrow()
     view.unmount()
   })
 
-  it('shows reactive preview counts inside both overview and detail headings', async () => {
-    const view = mountFilterPanel(createCatalogTrackFilterState())
-    const summaryHeader = findCatalogElement(
-      view.root,
-      (node) => node.props.class === 'catalog-filter-summary__header',
+  it('places the criterion count beside its heading and keeps the overview focused on conditions', async () => {
+    const view = mountFilterPanel({ ...createCatalogTrackFilterState(), tags: ['现场'] })
+    const summary = findCatalogElement(view.root, (node) => node.props['aria-label'] === '筛选条件')
+    const badge = findCatalogElement(
+      summary,
+      (node) => node.props.class === 'catalog-filter-summary__group-count',
     )
-    expect(summaryHeader.textContent).toContain('筛选预览3 / 12 首')
-    view.resultCount.value = 7
-    await nextTick()
-    expect(summaryHeader.textContent).toContain('筛选预览7 / 12 首')
+    expect(badge.textContent.trim()).toBe('1 项')
+    expect(badge.parent?.textContent.trim()).toBe('标签筛选1 项')
+    expect(summary.textContent).not.toContain('筛选预览')
 
     dispatchCatalogEvent(
       findCatalogElement(view.root, (node) => node.props['data-filter-dimension'] === 'search'),
@@ -331,8 +327,9 @@ describe('CatalogTrackFilterPanel overview actions', () => {
       view.root,
       (node) => node.props.class === 'catalog-filters__detail-header',
     )
-    expect(detailHeader.textContent).toContain('筛选预览7 / 12 首')
-    expect(view.root.textContent).toContain('搜索筛选')
+    expect(detailHeader.textContent).toContain('搜索筛选')
+    expect(detailHeader.textContent).not.toContain('筛选预览')
+    expect(detailHeader.textContent).not.toContain('按歌曲、作者或用户 ID 查找')
     view.unmount()
   })
 
@@ -406,12 +403,6 @@ describe('CatalogTrackFilterPanel overview actions', () => {
       await nextTick()
       const expectedCount = dimension === 'tags' ? 3 : 1
       expect(view.resultCount.value).toBe(expectedCount)
-      expect(
-        findCatalogElement(
-          view.root,
-          (node) => node.props.class === 'catalog-filters__detail-header',
-        ).textContent,
-      ).toContain(`筛选预览${expectedCount} / 3 首`)
       expect(view.filters.value).toEqual(initialFilters)
       dispatchCatalogEvent(
         findCatalogElement(view.root, (node) => node.props['aria-label'] === '返回筛选概览'),
@@ -449,8 +440,6 @@ describe('CatalogTrackFilterPanel history confirmation', () => {
             filterContext: activeScopeId.value === 'catalog:drawers' ? 'drawers' : 'tracks',
             filters: createCatalogTrackFilterState(),
             tagStats: [],
-            resultCount: 0,
-            totalCount: 0,
           })
       },
     })
@@ -513,8 +502,6 @@ describe('CatalogTrackFilterPanel history confirmation', () => {
                 filters.value = next
               },
               tagStats: [{ name: '当前标签', count: 1 }],
-              resultCount: 1,
-              totalCount: 1,
             })
         },
       })
@@ -585,8 +572,6 @@ describe('CatalogTrackFilterPanel history confirmation', () => {
                 filters.value = next
               },
               tagStats: [{ name: '现场', count: 1 }],
-              resultCount: 1,
-              totalCount: 1,
             })
         },
       })

@@ -2,7 +2,6 @@
 @mixin panel {
   .catalog-filters {
     display: grid;
-    /* 预览并入概览/详情标题，整页只占一条轨道，不另增顶部行。 */
     grid-template-rows: minmax(0, 1fr);
     block-size: 100%;
     min-block-size: 0;
@@ -15,16 +14,6 @@
     grid-template-columns: minmax(210px, 0.28fr) minmax(0, 1fr);
     min-block-size: 0;
     overflow: hidden;
-  }
-
-  .catalog-filters__dimensions {
-    display: grid;
-    align-content: start;
-    gap: var(--am-space-2);
-    min-block-size: 0;
-    overflow-y: auto;
-    padding-inline-end: var(--am-space-5);
-    border-inline-end: 1px solid var(--am-color-border);
   }
 
   .catalog-filter-dimension {
@@ -58,7 +47,8 @@
   .catalog-filter-dimension:focus-visible,
   .catalog-filters__detail button:focus-visible {
     outline: var(--am-focus-ring);
-    outline-offset: var(--am-focus-offset);
+    /* 维度栏和详情为裁切区域，焦点环绘制在按钮内部。 */
+    outline-offset: -2px;
   }
 
   .catalog-filter-dimension__icon {
@@ -71,16 +61,9 @@
     background: var(--am-color-primary-soft);
   }
 
-  .catalog-filter-dimension__copy {
-    display: grid;
-    gap: 2px;
+  .catalog-filter-dimension__label {
     min-inline-size: 0;
-  }
-
-  .catalog-filter-dimension__copy small {
     overflow: hidden;
-    color: var(--am-color-text-secondary);
-    font-size: var(--am-font-size-xs);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -95,6 +78,10 @@
     color: var(--am-color-on-primary);
     font-size: 10px;
     background: var(--am-color-primary);
+  }
+
+  .catalog-filter-dimension__arrow {
+    grid-column: -2;
   }
 
   .catalog-filters__summary {
@@ -112,8 +99,7 @@
   }
 
   .catalog-filters__detail-header {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    display: flex;
     align-items: center;
     gap: var(--am-space-3);
     padding: var(--am-space-2) 0 var(--am-space-5);
@@ -121,24 +107,15 @@
   }
 
   .catalog-filters__detail-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--am-space-1);
     min-inline-size: 0;
-    justify-self: start;
-    text-align: start;
-  }
-
-  .catalog-filters__detail-heading > div {
-    display: grid;
-    gap: 2px;
   }
 
   .catalog-filters__detail-heading strong {
     font-size: var(--am-font-size-lg);
     letter-spacing: -0.015em;
-  }
-
-  .catalog-filters__detail-heading small {
-    color: var(--am-color-text-secondary);
-    font-size: var(--am-font-size-xs);
   }
 
   .catalog-filters__detail-content {
@@ -156,6 +133,10 @@
     border-block-start: 1px solid var(--am-color-border);
     color: var(--am-color-text-secondary);
     font-size: var(--am-font-size-sm);
+  }
+
+  .catalog-filters__detail-footer strong {
+    font-variant-numeric: tabular-nums;
   }
 
   .catalog-filters__detail-actions {
@@ -191,6 +172,10 @@
     border-color: var(--am-color-border-strong);
     background: var(--am-color-surface);
     color: var(--am-color-text);
+  }
+
+  .catalog-filters__detail-actions .catalog-filters__footer-confirm:focus-visible {
+    outline-color: var(--am-color-on-primary);
   }
 
   .catalog-filter-fade-enter-active {
@@ -248,25 +233,8 @@
       scrollbar-width: none;
     }
 
-    .catalog-filters__summary::-webkit-scrollbar,
-    .catalog-filters__dimensions::-webkit-scrollbar {
+    .catalog-filters__summary::-webkit-scrollbar {
       display: none;
-    }
-
-    .catalog-filters__dimensions {
-      grid-row: 2;
-      display: flex;
-      gap: var(--am-space-2);
-      min-block-size: 0;
-      padding: var(--am-space-3) 0 0;
-      border-inline-end: 0;
-      border-block-start: 1px solid var(--am-color-border);
-      overflow-x: auto;
-      overflow-y: hidden;
-      overscroll-behavior-inline: contain;
-      scroll-snap-type: inline proximity;
-      scrollbar-width: none;
-      touch-action: pan-x;
     }
 
     .catalog-filter-dimension {
@@ -292,8 +260,6 @@
     }
 
     .catalog-filters__detail-header {
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: var(--am-space-2);
       padding-block-start: 0;
     }
 

@@ -10,6 +10,10 @@ export const appIconPaths = {
   phone: ['M7 2h10v20H7zM10 5h4M11 19h2'],
   'external-link': ['M14 3h7v7M21 3l-9 9M10 3H3v18h18v-7'],
   info: ['M12 11v6M12 7h.01', 'M22 12a10 10 0 1 0-20 0 10 10 0 0 0 20 0Z'],
+  help: [
+    'M9 9a3 3 0 1 1 5 2.24c-1.15 1-2 1.26-2 2.76M12 17h.01',
+    'M22 12a10 10 0 1 0-20 0 10 10 0 0 0 20 0Z',
+  ],
   'arrow-down': ['M6 9l6 6 6-6'],
   'arrow-up': ['m6 15 6-6 6 6'],
   'arrow-left': ['M15 18l-6-6 6-6'],

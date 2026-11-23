@@ -2,7 +2,6 @@
 import type { LibraryTrackRecord } from '@any-music/core'
 import type { TrackDisplayPreferences } from '@any-music/ui'
 import type { CatalogTrackFilterState } from '@any-music/ui/catalog'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import CollectionSelectionToolbar from '@any-music/ui/components/CollectionSelectionToolbar.vue'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
 import { useReadonlyTrackCollection } from '@any-music/ui/library'
@@ -10,6 +9,7 @@ import { computed, onScopeDispose, shallowRef, watch } from 'vue'
 
 import CatalogDisplayModeDialog from '../music-sources/CatalogDisplayModeDialog.vue'
 import CatalogTrackFilterPanel from '../music-sources/CatalogTrackFilterPanel.vue'
+import CollectionFilterSheet from '../music-sources/CollectionFilterSheet.vue'
 import TrackRow from '../music-sources/TrackRow.vue'
 import ClassicPageOverlays from '../overlays/ClassicPageOverlays.vue'
 import ClassicFilterFooter from './ClassicFilterFooter.vue'
@@ -121,10 +121,9 @@ onScopeDispose(() => emit('modalOpenChange', false))
         @update-item-style="actions.setItemStyle"
         @close="view.displayOpen = false"
       />
-      <BottomSheet
+      <CollectionFilterSheet
         :open="view.filterDraft !== null"
         title="关联音乐筛选器"
-        size="full"
         @close="actions.cancelFilters"
       >
         <CatalogTrackFilterPanel
@@ -132,19 +131,18 @@ onScopeDispose(() => emit('modalOpenChange', false))
           v-model:filters="view.filterDraft"
           :tag-stats="tagStats"
           :platform-stats="platformStats"
-          :result-count="preview.length"
-          :total-count="tracks.length"
           history-scope="tags:detail-tracks"
           @detail-open-change="detailOpen = $event"
           @preview-change="dimensionPreview = $event"
         />
         <template v-if="!detailOpen" #footer
           ><ClassicFilterFooter
-            :summary="`匹配 ${preview.length} / ${tracks.length} 首`"
+            :result-count="preview.length"
+            :total-count="tracks.length"
             @cancel="actions.cancelFilters"
             @apply="actions.applyFilters"
         /></template>
-      </BottomSheet>
+      </CollectionFilterSheet>
     </ClassicPageOverlays>
   </section>
 </template>

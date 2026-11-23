@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { cloneCatalogTrackFilterState, getCatalogTagStats } from '@any-music/ui/catalog'
 import type { CatalogTrackFilterState } from '@any-music/ui/catalog'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import { filterQueueTracks } from '@any-music/ui/library'
 import type { UiThemeTrackListState, UiThemeTrackListActions } from '@any-music/ui/theme'
 import { computed, shallowRef, watch } from 'vue'
 import type { DeepReadonly } from 'vue'
 
 import CatalogTrackFilterPanel from '../music-sources/CatalogTrackFilterPanel.vue'
+import CollectionFilterSheet from '../music-sources/CollectionFilterSheet.vue'
 import ClassicPageOverlays from '../overlays/ClassicPageOverlays.vue'
 import ClassicFilterFooter from './ClassicFilterFooter.vue'
 
@@ -77,10 +77,9 @@ const tagStats = computed(() => getCatalogTagStats(tracks.value, props.state.cus
 
 <template>
   <ClassicPageOverlays :modal-open="state.filterDraft !== null">
-    <BottomSheet
+    <CollectionFilterSheet
       :open="state.filterDraft !== null"
       title="歌曲筛选器"
-      size="full"
       @close="actions.cancelFilters"
     >
       <CatalogTrackFilterPanel
@@ -91,20 +90,19 @@ const tagStats = computed(() => getCatalogTagStats(tracks.value, props.state.cus
         :tag-stats="tagStats"
         :platform-stats="platformStats"
         :platform-scoped="platformId !== undefined"
-        :result-count="preview.length"
-        :total-count="tracks.length"
         :history-scope="scope"
         @detail-open-change="detailOpen = $event"
         @preview-change="dimensionPreview = $event"
       />
       <template v-if="!detailOpen" #footer>
         <ClassicFilterFooter
-          :summary="`匹配 ${preview.length} / ${tracks.length} 首`"
+          :result-count="preview.length"
+          :total-count="tracks.length"
           :disabled="disabled"
           @cancel="actions.cancelFilters"
           @apply="actions.applyFilters"
         />
       </template>
-    </BottomSheet>
+    </CollectionFilterSheet>
   </ClassicPageOverlays>
 </template>

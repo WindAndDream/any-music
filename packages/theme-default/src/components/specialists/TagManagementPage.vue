@@ -14,6 +14,15 @@ import TagManagementResults from './TagManagementResults.vue'
 
 const props = defineProps<{ editor: TagManagementPresentation; mobileLayout?: boolean }>()
 const state = computed(() => props.editor.state)
+const filterCount = computed(() => {
+  const { searchQuery, selectedPlatformIds, usage, platformScope } = state.value.filters
+  return (
+    Number(Boolean(searchQuery.trim())) +
+    selectedPlatformIds.length +
+    usage.length +
+    platformScope.length
+  )
+})
 const displayOpen = shallowRef(false)
 const modalOpen = computed(
   () =>
@@ -62,7 +71,7 @@ const modalOpen = computed(
           :selected-count="state.selectedTags.length"
           :total-count="state.tagOptions.length"
           :operator-open="state.operatorOpen"
-          :filter-active="state.hasFilters"
+          :filter-count="filterCount"
           can-display
           filter-label="筛选标签"
           display-label="标签展示方式"

@@ -662,18 +662,6 @@
     color: var(--am-color-text);
   }
 
-  .catalog-operator-launcher__filter b {
-    display: grid;
-    min-inline-size: 20px;
-    block-size: 20px;
-    place-items: center;
-    padding-inline: 4px;
-    border-radius: var(--am-radius-detail);
-    background: var(--am-color-primary);
-    color: var(--am-color-on-primary);
-    font-size: 10px;
-  }
-
   .catalog-operator-launcher button.catalog-operator-launcher__top {
     display: none;
   }

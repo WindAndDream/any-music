@@ -98,6 +98,17 @@ function readLayout(
 }
 
 describe('Classic shell and current page layout integration', () => {
+  it('reserves an arrow slot only for overflowing dimensions in a narrow filter sheet', () => {
+    const styles = compileSfcStyles('music-sources/CatalogFilterDimensions')
+    const rail = '.catalog-filter-dimensions'
+    const overflow = `${rail}--overflow`
+    const arrow = `${rail} > ${rail}__advance`
+    expect(readLayout(styles, [rail], 390)['grid-row']).toBe('2')
+    expect(readLayout(styles, [overflow], 390)['grid-template-columns']).toBe('minmax(0, 1fr) 44px')
+    expect(readLayout(styles, [arrow], 390).display).toBe('grid')
+    expect(readLayout(styles, [arrow], 900).display).toBe('none')
+  })
+
   it.each([390, 1440])(
     'bounds the catalog and scrolls only below the track header at %ipx',
     (width) => {
@@ -146,6 +157,21 @@ describe('Classic shell and current page layout integration', () => {
       expect(readLayout(styles, [selector], 1200, 1200, true).transition).toBe('none')
     }
   })
+  it('uses the Favorites switch surface and slider for the date endpoints', () => {
+    const dateStyles = compileSfcStyles('music-sources/CatalogFilterDateControls')
+    const date = '.catalog-date-controls__endpoints'
+    const arrangement = '.queue-view-controls__segments'
+    expect(readLayout(dateStyles, [date], 390)).toMatchObject({
+      background: 'var(--am-color-surface)',
+      'box-shadow': 'inset 0 0 0 1px var(--am-color-border)',
+      'grid-template-columns': 'repeat(2, minmax(0, 1fr))',
+    })
+    const slider = readLayout(dateStyles, [`${date}::before`], 390)
+    expect(slider.background).toBe('var(--am-color-primary-container)')
+    expect(slider).toEqual(readLayout(queueViewStyles, [`${arrangement}::before`], 390))
+    expect(readLayout(dateStyles, [`${date}::before`], 390, 390, true).transition).toBe('none')
+  })
+
   it('matches collection removal colors to the music-list delete action', () => {
     const removal = readLayout(
       trackOperatorStyles,

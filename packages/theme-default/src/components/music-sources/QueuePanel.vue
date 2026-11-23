@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Track } from '@any-music/core'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import CollectionGrid from '@any-music/ui/components/CollectionGrid.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
@@ -26,10 +25,12 @@ import {
   watch,
 } from 'vue'
 
+import ClassicFilterFooter from '../library/ClassicFilterFooter.vue'
 import ClassicResultView from '../library/ClassicResultView.vue'
 import CatalogPlaylistPickerDialog from './CatalogPlaylistPickerDialog.vue'
 import CatalogTrackFilterPanel from './CatalogTrackFilterPanel.vue'
 import CatalogTrackOperatorPanel from './CatalogTrackOperatorPanel.vue'
+import CollectionFilterSheet from './CollectionFilterSheet.vue'
 import QueuePlatformGroup from './QueuePlatformGroup.vue'
 import QueuePlatformHeading from './QueuePlatformHeading.vue'
 import QueueTrackActionsDialog from './QueueTrackActionsDialog.vue'
@@ -530,11 +531,10 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
       </Transition>
     </div>
     <Teleport v-if="props.overlayTarget" :to="props.overlayTarget" :disabled="!isActive">
-      <BottomSheet
+      <CollectionFilterSheet
         :open="props.filterOpen"
         :title="`${collectionTitle}筛选器`"
         :description="`按文本、标签、歌曲时长、${activePlatformId === undefined ? '平台与' : ''}${props.context === 'favorites' ? '喜欢' : '添加'}日期找到${props.context === 'favorites' ? '喜欢' : '想听'}的歌曲。`"
-        size="full"
         :suspended="!isActive || props.panelsSuspended"
         @close="emit('closeFilter')"
       >
@@ -546,23 +546,18 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
           :tag-stats="tagStats"
           :platform-scoped="activePlatformId !== undefined"
           :platform-stats="platformStats"
-          :result-count="previewTracks.length"
-          :total-count="scopedItems.length"
           @detail-open-change="isFilterDetailOpen = $event"
           @preview-change="draft.preview.value = $event"
         />
         <template v-if="!isFilterDetailOpen" #footer>
-          <div class="listen-queue__filter-footer">
-            <span>匹配 {{ previewTracks.length }} / 共 {{ scopedItems.length }} 首</span>
-            <div>
-              <button type="button" @click="emit('closeFilter')">取消</button
-              ><button class="listen-queue__apply" type="button" @click="applyFilterDraft">
-                应用筛选
-              </button>
-            </div>
-          </div>
+          <ClassicFilterFooter
+            :result-count="previewTracks.length"
+            :total-count="scopedItems.length"
+            @cancel="emit('closeFilter')"
+            @apply="applyFilterDraft"
+          />
         </template>
-      </BottomSheet>
+      </CollectionFilterSheet>
       <QueueTrackActionsDialog
         :playlists="props.playlists"
         @add-to-playlist="(track, id) => emit('addToPlaylist', id, [track])"
@@ -775,36 +770,7 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
   color: var(--am-color-danger);
   background: var(--am-color-surface);
 }
-.listen-queue__filter-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--am-space-3);
-  color: var(--am-color-text-secondary);
-  font-size: var(--am-font-size-sm);
-}
-.listen-queue__filter-footer > div {
-  display: flex;
-  gap: var(--am-space-2);
-}
-.listen-queue__filter-footer button {
-  min-block-size: 44px;
-  padding-inline: var(--am-space-4);
-  border: 1px solid var(--am-color-border-strong);
-  border-radius: var(--am-radius-control);
-  background: var(--am-color-surface);
-  color: var(--am-color-text);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-.listen-queue__filter-footer .listen-queue__apply {
-  border-color: var(--am-color-primary);
-  background: var(--am-color-primary);
-  color: var(--am-color-on-primary);
-}
-.listen-queue button:focus-visible,
-.listen-queue__filter-footer button:focus-visible {
+.listen-queue button:focus-visible {
   outline: var(--am-focus-ring);
   outline-offset: var(--am-focus-offset);
 }
@@ -816,17 +782,6 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
     gap: var(--am-space-2);
   }
 }
-@media (max-width: 600px) {
-  .listen-queue__filter-footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
-  .listen-queue__filter-footer > div,
-  .listen-queue__filter-footer button {
-    flex: 1;
-  }
-}
-
 .queue-view-forward-enter-active,
 .queue-view-forward-leave-active,
 .queue-view-back-enter-active,

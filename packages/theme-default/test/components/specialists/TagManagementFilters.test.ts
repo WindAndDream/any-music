@@ -47,11 +47,13 @@ vi.mock('@any-music/ui/components/BottomSheet.vue', async () => {
   const vue = await import('vue')
   return {
     default: vue.defineComponent({
-      props: ['open'],
+      props: ['open', 'description'],
       setup:
         (props, { slots }) =>
         () =>
-          props.open ? vue.h('section', [slots.default?.(), slots.footer?.()]) : null,
+          props.open
+            ? vue.h('section', [props.description, slots.default?.(), slots.footer?.()])
+            : null,
     }),
   }
 })
@@ -81,7 +83,6 @@ function mountFilters() {
   const filters = shallowRef(createFilters())
   const draft = shallowRef<TagManagementFilterState | null>(createFilters())
   const resultCount = shallowRef(2)
-  let confirmation!: ReturnType<typeof provideConfirmationDialog>
   const editor = {
     state: {
       get filterDraft() {
@@ -112,7 +113,7 @@ function mountFilters() {
   } as unknown as TagManagementPresentation
   const host = defineComponent({
     setup() {
-      confirmation = provideConfirmationDialog()
+      provideConfirmationDialog()
       return () => h(TagManagementFilters, { editor })
     },
   })
@@ -136,10 +137,66 @@ function mountFilters() {
     )
     await nextTick()
   }
-  return { ...view, filters, draft, resultCount, confirmation, click, edit }
+  return { ...view, filters, draft, resultCount, click, edit }
 }
 
 describe('TagManagementFilters', () => {
+  it('scrolls to the next hidden filter and offers a return when the rail reaches the end', async () => {
+    const view = mountFilters()
+    try {
+      vi.stubGlobal('window', { matchMedia: () => ({ matches: false }) })
+      const rail = findCatalogElement(
+        view.root,
+        (node) => node.props['aria-label'] === '标签筛选类型',
+      )
+      const viewport = findCatalogElement(rail, (node) => typeof node.props.onScroll === 'function')
+      const content = viewport.children[0]!
+      const buttons = content.children.filter((node) => node.tag === 'button')
+      const scrollTo = vi.fn(({ left }: ScrollToOptions) => {
+        viewport.scrollLeft = Math.min(left ?? 0, 420)
+        dispatchCatalogEvent(viewport, 'onScroll', false)
+      })
+      Object.assign(viewport, {
+        clientWidth: 220,
+        scrollWidth: 640,
+        scrollTo,
+        getBoundingClientRect: () => ({ left: 0 }),
+      })
+      Object.assign(content, { scrollWidth: 640, querySelectorAll: () => buttons })
+      buttons.forEach((button, index) => {
+        Object.assign(button, {
+          getBoundingClientRect: () => {
+            const left = index * 128 - viewport.scrollLeft
+            return { left, right: left + 120 }
+          },
+        })
+      })
+      const arrow = (label: string) =>
+        findCatalogElement(rail, (node) => node.props['aria-label'] === label)
+      const forward = '查看更多筛选项'
+      const back = '返回前面的筛选项'
+
+      Object.assign(rail, { clientWidth: 640 })
+      dispatchCatalogEvent(viewport, 'onScroll', false)
+      await nextTick()
+      expect(() => arrow(forward)).toThrow()
+
+      Object.assign(rail, { clientWidth: 268 })
+      dispatchCatalogEvent(viewport, 'onScroll', false)
+      await nextTick()
+      dispatchCatalogEvent(arrow(forward), 'onClick', false)
+      expect(scrollTo).toHaveBeenLastCalledWith({ left: 128, behavior: 'smooth' })
+
+      viewport.scrollLeft = 420
+      dispatchCatalogEvent(viewport, 'onScroll', false)
+      await nextTick()
+      dispatchCatalogEvent(arrow(back), 'onClick', false)
+      expect(scrollTo).toHaveBeenLastCalledWith({ left: 0, behavior: 'smooth' })
+    } finally {
+      view.unmount()
+    }
+  })
+
   it.each(['返回', '确定'])(
     'keeps the outer footer stable until %s finishes leaving',
     async (label) => {
@@ -177,7 +234,7 @@ describe('TagManagementFilters', () => {
       await nextTick()
       view.draft.value = createFilters()
       await nextTick()
-      expect(view.root.textContent).toContain('全部标签')
+      expect(view.root.textContent).toContain('还没有筛选条件')
       expect(view.root.textContent).toContain('应用筛选')
     } finally {
       view.unmount()
@@ -187,8 +244,9 @@ describe('TagManagementFilters', () => {
   it('previews the plugin draft, returns without committing a dimension, and applies only explicitly', async () => {
     const view = mountFilters()
     try {
-      expect(view.root.textContent).toContain('全部标签')
-      expect(view.root.textContent).toContain('已标记音乐 3 首')
+      expect(view.root.textContent).toContain('还没有筛选条件')
+      expect(view.root.textContent).not.toContain('已标记音乐')
+      expect(view.root.textContent).not.toContain('覆盖平台 2 个')
       await view.edit('searchQuery')
       const input = findCatalogElement(
         view.root,
@@ -201,11 +259,12 @@ describe('TagManagementFilters', () => {
       expect(view.filters.value.searchQuery).toBe('')
       view.resultCount.value = 1
       await nextTick()
-      expect(view.root.textContent).toContain('筛选预览1 / 2 个标签')
+      expect(view.root.textContent).toContain('匹配 1 / 2 个标签')
+      expect(view.root.textContent).not.toContain('筛选预览')
       expect(() =>
         findCatalogElement(
           view.root,
-          (node) => node.tag === 'button' && node.textContent === '应用筛选',
+          (node) => node.tag === 'button' && node.textContent.trim() === '应用筛选',
         ),
       ).toThrow()
       await view.click('返回')
@@ -243,7 +302,12 @@ describe('TagManagementFilters', () => {
       )
       await view.click('确定')
       expect(view.draft.value?.[dimension]).toEqual([value])
-      expect(view.root.textContent).toContain('已筛选 1 项')
+      const button = findCatalogElement(
+        view.root,
+        (node) => node.props['data-filter-dimension'] === dimension,
+      )
+      expect(button.textContent).toMatch(/[^\d]1$/)
+      expect(button.textContent).not.toContain('已筛选')
       await view.click('取消')
       expect(view.filters.value).toEqual(createFilters())
       expect(view.draft.value).toBeNull()
@@ -333,26 +397,4 @@ describe('TagManagementFilters', () => {
       }
     },
   )
-
-  it('confirms clearing and ignores confirmation after the draft has been replaced', async () => {
-    const view = mountFilters()
-    try {
-      view.draft.value = { ...createFilters(), searchQuery: '通勤' }
-      await nextTick()
-      await view.click('清空全部')
-      expect(view.confirmation.activeRequest.value?.title).toBe('清空全部筛选？')
-      expect(view.draft.value.searchQuery).toBe('通勤')
-      view.draft.value = { ...createFilters(), searchQuery: '放松' }
-      view.confirmation.accept()
-      await nextTick()
-      expect(view.draft.value.searchQuery).toBe('放松')
-      await view.click('清空全部')
-      view.confirmation.accept()
-      await nextTick()
-      expect(view.draft.value).toEqual(createFilters())
-      expect(view.filters.value).toEqual(createFilters())
-    } finally {
-      view.unmount()
-    }
-  })
 })

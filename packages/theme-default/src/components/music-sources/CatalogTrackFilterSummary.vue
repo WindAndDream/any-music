@@ -12,12 +12,10 @@ interface FilterSummaryGroup {
   title: string
 }
 
-/** 概览展示受控草稿与调用方计算的匹配数，只发出编辑、删除和清空请求。 */
+/** 将受控的筛选草稿转换为可编辑的概览分组。 */
 const props = withDefaults(
   defineProps<{
     filters: CatalogTrackFilterState
-    resultCount: number
-    totalCount: number
     filterContext?: CatalogFilterContext
     historyRecords?: boolean
     platformScoped?: boolean
@@ -29,7 +27,6 @@ const props = withDefaults(
 const emit = defineEmits<{
   edit: [dimension: CatalogTrackFilterDimension, index: number]
   remove: [dimension: CatalogTrackFilterDimension, index: number]
-  clear: []
 }>()
 
 const platformNames = computed(() => new Map(props.platformStats.map(({ id, name }) => [id, name])))
@@ -47,21 +44,7 @@ const groups = computed<readonly FilterSummaryGroup[]>(() =>
 <template>
   <CollectionFilterSummary
     :groups="groups"
-    :result-count="resultCount"
-    :total-count="totalCount"
-    :unit="historyRecords ? '条' : filterContext === 'drawers' ? '个列表' : '首'"
-    :all-label="
-      filterContext === 'drawers' ? '全部音乐列表' : historyRecords ? '全部播放记录' : '全部歌曲'
-    "
-    :all-description="
-      filterContext === 'drawers'
-        ? '全部已有音乐列表都会显示'
-        : historyRecords
-          ? '全部播放记录都会显示'
-          : '全部已加载歌曲都会显示'
-    "
     @edit="(dimension, index) => emit('edit', dimension, index)"
     @remove="(dimension, index) => emit('remove', dimension, index)"
-    @clear="emit('clear')"
   />
 </template>

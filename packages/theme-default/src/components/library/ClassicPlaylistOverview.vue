@@ -4,7 +4,7 @@ import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicLis
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
 import { playlistEditorErrorMessage } from '@any-music/ui/library'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { shallowRef, useTemplateRef } from 'vue'
+import { computed, shallowRef, useTemplateRef } from 'vue'
 
 import { useClassicPlaylistOverview } from '../../composables/use-classic-playlist-overview'
 import { usePresentationActivity } from '../../composables/use-presentation-activity'
@@ -32,6 +32,15 @@ const {
   removeSelected,
   downloadSelected,
 } = useClassicPlaylistOverview(props, useTemplateRef<HTMLElement>('grid'))
+const filterCount = computed(() => {
+  const { keyword, trackCountRanges, tags, tagsDormant, cover } = collection.filters.value
+  return (
+    Number(Boolean(keyword.trim())) +
+    trackCountRanges.length +
+    (tagsDormant ? 0 : tags.length) +
+    cover.length
+  )
+})
 const importInput = useTemplateRef<HTMLInputElement>('importInput')
 const importMessage = shallowRef('')
 const importError = shallowRef('')
@@ -150,6 +159,7 @@ async function importPlaylist(event: Event) {
           :selected-count="collection.selected.value.length"
           :total-count="collection.visible.value.length"
           :operator-open="collection.operatorOpen.value"
+          :filter-count="filterCount"
           can-display
           :icon-only-display="compact"
           :disabled="!available()"

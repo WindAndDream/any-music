@@ -44,6 +44,7 @@ const emit = defineEmits<{
 const filters = defineModel<CatalogTrackFilterState>('filters', { required: true })
 const root = useTemplateRef<HTMLElement>('root')
 const searchInput = useTemplateRef<HTMLInputElement>('searchInput')
+const dateControls = useTemplateRef<InstanceType<typeof CatalogFilterDateControls>>('dateControls')
 const editorId = useId()
 const tagQuery = shallowRef('')
 const visibleTagStats = computed(() => filterCatalogTagStats(props.tagStats, tagQuery.value))
@@ -125,9 +126,7 @@ async function handleRestore(entry: CatalogFilterHistoryEntry): Promise<void> {
 async function handleAddPublishedRange(): Promise<void> {
   if (!addPublishedRange()) return
   await nextTick()
-  root.value
-    ?.querySelector<HTMLButtonElement>('[aria-label="设置起始日期"]')
-    ?.focus({ preventScroll: true })
+  dateControls.value?.focusStart()
 }
 
 /** 删除后的焦点留在相邻区间；清空列表时回到当前输入，避免落到面板外。 */
@@ -155,12 +154,8 @@ defineExpose({ focusInitialControl, confirmDraft })
   >
     <template v-if="props.dimension === 'search'">
       <form class="catalog-filter-editor__search" role="search" @submit.prevent="emit('confirm')">
-        <label :for="`${editorId}-search`" class="catalog-filter-editor__label">{{
-          props.filterContext === 'drawers' ? '列表名称、搜索词、链接或来源' : '名称、作者或用户 ID'
-        }}</label>
         <span class="catalog-filter-editor__input-control"
           ><input
-            :id="`${editorId}-search`"
             ref="searchInput"
             v-model="searchQuery"
             class="catalog-filter-editor__line-input catalog-filter-editor__search-input"
@@ -168,6 +163,7 @@ defineExpose({ focusInitialControl, confirmDraft })
             autocomplete="off"
             inputmode="search"
             maxlength="120"
+            :aria-label="props.filterContext === 'drawers' ? '搜索音乐列表' : '搜索歌曲'"
             :placeholder="
               props.filterContext === 'drawers'
                 ? '输入列表名称、搜索词、链接或来源'
@@ -240,10 +236,10 @@ defineExpose({ focusInitialControl, confirmDraft })
     </template>
 
     <template v-else-if="props.dimension === 'platforms'">
-      <p class="catalog-filter-editor__empty">
-        未选择时显示全部平台；选择多个平台时匹配其中任意一个。
+      <p v-if="props.platformStats.length === 0" class="catalog-filter-editor__empty">
+        当前无任何平台
       </p>
-      <div class="catalog-filter-editor__tags">
+      <div v-else class="catalog-filter-editor__tags">
         <label
           v-for="platform in props.platformStats"
           :key="platform.id"
@@ -274,6 +270,7 @@ defineExpose({ focusInitialControl, confirmDraft })
 
     <div v-else-if="props.dimension === 'published'" class="catalog-filter-editor__split">
       <CatalogFilterDateControls
+        ref="dateControls"
         class="catalog-filter-editor__date-controls"
         :stage="publishedStage"
         :has-end-date="Boolean(pendingEnd)"

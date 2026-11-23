@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { canRefreshCatalogDrawer, useCatalogViewportOverlay } from '@any-music/ui/catalog'
+import {
+  canRefreshCatalogDrawer,
+  countCatalogTrackFilters,
+  useCatalogViewportOverlay,
+} from '@any-music/ui/catalog'
 import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
 import type { UiThemeFeatureMap, UiThemeHostSlots } from '@any-music/ui/theme'
 import { computed, shallowRef, useId, useTemplateRef, watch } from 'vue'
@@ -22,6 +25,7 @@ import CatalogPlaylistPickerDialog from './CatalogPlaylistPickerDialog.vue'
 import CatalogTrackActionsDialog from './CatalogTrackActionsDialog.vue'
 import CatalogTrackFilterPanel from './CatalogTrackFilterPanel.vue'
 import CatalogTrackOperatorPanel from './CatalogTrackOperatorPanel.vue'
+import CollectionFilterSheet from './CollectionFilterSheet.vue'
 import MusicSourcePickerButton from './MusicSourcePickerButton.vue'
 import MusicSourcePickerDialog from './MusicSourcePickerDialog.vue'
 import SourceToolbar from './SourceToolbar.vue'
@@ -37,7 +41,7 @@ const headingContextId = useId()
 defineSlots<UiThemeHostSlots>()
 const {
   state,
-  drawerSelectedCount,
+  drawerListSummary,
   updateDrawerSummary,
   modalOpen,
   batchActions,
@@ -80,6 +84,7 @@ const {
   viewLoadedTracks,
   closeError,
 } = useClassicCatalog(props)
+const trackFilterCount = computed(() => countCatalogTrackFilters(state.value.filters).total)
 function showTrackActions(id: string): void {
   actionTrackId.value = id
 }
@@ -339,10 +344,13 @@ function finishView(element: Element): void {
       </template>
       <template #toolbar
         ><ClassicCollectionControls
-          :selected-count="drawer ? state.selectedTrackIds.length : drawerSelectedCount"
+          :selected-count="
+            drawer ? state.selectedTrackIds.length : (drawerListSummary?.selectedCount ?? 0)
+          "
           :disabled="feature.availability.status !== 'available'"
           :total-count="drawer ? drawer.tracks.length : state.drawers.length"
           :operator-open="operatorOpen"
+          :filter-count="drawer ? trackFilterCount : (drawerListSummary?.filterCount ?? 0)"
           filter-label="筛选器"
           :can-display="Boolean(drawer)"
           @filter="openFilters"
@@ -436,10 +444,9 @@ function finishView(element: Element): void {
         @close="playlistPickerOpen = false"
         @select="batchActions.addSelectedToPlaylist"
       />
-      <BottomSheet
+      <CollectionFilterSheet
         :open="state.filterDraft !== null"
         title="歌曲筛选器"
-        size="full"
         @close="feature.actions.cancelFilters"
       >
         <CatalogTrackFilterPanel
@@ -447,21 +454,20 @@ function finishView(element: Element): void {
           :filters="draft"
           :history-scope="`catalog:tracks:${state.activeDrawerId}`"
           :tag-stats="tagStats"
-          :result-count="previewTracks.length"
-          :total-count="drawer?.tracks.length ?? 0"
           @update:filters="draft = $event"
           @preview-change="filterPreview = $event"
           @detail-open-change="filterDetailOpen = $event"
         />
         <template v-if="!filterDetailOpen" #footer>
           <ClassicFilterFooter
-            :summary="`匹配 ${previewTracks.length} / ${drawer?.tracks.length ?? 0} 首`"
+            :result-count="previewTracks.length"
+            :total-count="drawer?.tracks.length ?? 0"
             :disabled="feature.availability.status !== 'available'"
             @cancel="feature.actions.cancelFilters"
             @apply="feature.actions.applyFilters"
           />
         </template>
-      </BottomSheet>
+      </CollectionFilterSheet>
       <AppDialog :open="Boolean(errorDrawer)" title="音乐列表错误处理" @close="closeError"
         ><CatalogErrorDetails
           v-if="errorDrawer"

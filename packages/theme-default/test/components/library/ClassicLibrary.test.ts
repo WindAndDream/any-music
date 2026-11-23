@@ -1458,9 +1458,13 @@ describe('complete-root classic library contracts', () => {
         ).toBe('')
         await setCount('最多歌曲数量（首）', '1')
         await confirmDimension()
-        dispatchCatalogEvent(view.button('清空全部'), 'onClick', false)
-        view.confirmation.accept()
-        await nextTick()
+        dispatchCatalogEvent(
+          findCatalogElement(view.root, (node) =>
+            String(node.props['aria-label']).startsWith('删除歌曲数量条件 '),
+          ),
+          'onClick',
+          false,
+        )
         await nextTick()
         expect(view.root.textContent).toContain('匹配 3 / 3 个歌单')
         await openDimension('trackCountRanges')

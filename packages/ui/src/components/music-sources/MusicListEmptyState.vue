@@ -10,7 +10,7 @@ defineProps<{
 }>()
 
 defineSlots<{
-  default: () => unknown
+  default?: () => unknown
   actions?: () => unknown
 }>()
 </script>
@@ -28,7 +28,7 @@ defineSlots<{
       >
         {{ title }}
       </h3>
-      <p class="music-list-empty__description"><slot /></p>
+      <p v-if="$slots.default" class="music-list-empty__description"><slot /></p>
       <slot name="actions" />
     </div>
   </div>

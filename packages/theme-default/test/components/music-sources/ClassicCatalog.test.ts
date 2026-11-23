@@ -515,11 +515,39 @@ describe('classic catalog complete-root contract', () => {
     expect(f.actions.applyFilters).not.toHaveBeenCalled()
     click(f.root, '确定')
     await nextTick()
+    const summary = findCatalogElement(f.root, (node) => node.props['aria-label'] === '筛选条件')
+    expect(summary.textContent).not.toContain('匹配的歌曲')
+    const footer = findCatalogElement(
+      f.root,
+      (node) => node.props.class === 'classic-filter-footer',
+    )
+    expect(findCatalogElement(footer, (node) => node.tag === 'strong').textContent).toBe('1 / 2 首')
     click(f.root, '应用筛选')
     await nextTick()
     expect(f.state.tracks.map(({ id }) => id)).toEqual(['two'])
     expect(f.actions.applyFilters).toHaveBeenCalledTimes(1)
     expect(f.state.selectedTrackIds).toEqual(['one'])
+    f.dispose()
+  })
+
+  it('keeps the track filter count scoped to the open drawer', async () => {
+    const f = mountPage()
+    f.state.filters = {
+      ...f.state.filters,
+      platformIds: ['source'],
+      durationRanges: [{ minMs: 1000 }],
+    }
+    await nextTick()
+    const filterButton = findCatalogElement(f.root, (node) => node.props['aria-label'] === '筛选器')
+    expect(filterButton.props['aria-description']).toBe('已应用 2 个筛选条件')
+
+    f.state.activeDrawerId = null
+    await nextTick()
+    expect(filterButton.props['aria-description']).toBeUndefined()
+
+    f.state.activeDrawerId = f.state.drawers[0]!.id
+    await nextTick()
+    expect(filterButton.props['aria-description']).toBe('已应用 2 个筛选条件')
     f.dispose()
   })
 

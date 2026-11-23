@@ -134,7 +134,6 @@ export function useCatalogDrawerList(options: UseCatalogDrawerListOptions) {
     getId: (drawer) => drawer.id,
     getName: (drawer) => drawer.title,
   })
-  const draftFilterCount = computed(() => countCatalogTrackFilters(filterDraft.value).total)
   const selectedCustomNamedIds = computed(() =>
     toValue(options.drawers)
       .filter((drawer) => drawer.isCustomNamed && controls.selectedIds.value.has(drawer.id))
@@ -174,7 +173,6 @@ export function useCatalogDrawerList(options: UseCatalogDrawerListOptions) {
     filters: readonly(filters),
     filterDraft,
     filterPreview,
-    draftFilterCount,
     availableCount,
     unavailableCount,
     attentionCount,

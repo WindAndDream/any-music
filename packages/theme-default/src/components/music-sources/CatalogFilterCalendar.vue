@@ -223,7 +223,7 @@ async function handleDateKeydown(event: KeyboardEvent, date: string): Promise<vo
           :aria-label="mode === 'year' ? '上一组年份' : mode === 'month' ? '上一年' : '上个月'"
           @click="shiftPeriod(-1)"
         >
-          <AppIcon name="arrow-left" :size="18" />
+          <AppIcon name="arrow-left" size="var(--catalog-calendar-step-icon-size)" />
         </button>
         <div class="catalog-calendar__heading" role="group" aria-label="选择年、月、日视图">
           <button
@@ -264,7 +264,7 @@ async function handleDateKeydown(event: KeyboardEvent, date: string): Promise<vo
           :aria-label="mode === 'year' ? '下一组年份' : mode === 'month' ? '下一年' : '下个月'"
           @click="shiftPeriod(1)"
         >
-          <AppIcon name="arrow-right" :size="18" />
+          <AppIcon name="arrow-right" size="var(--catalog-calendar-step-icon-size)" />
         </button>
       </div>
       <p class="catalog-calendar__hint">
@@ -406,10 +406,18 @@ async function handleDateKeydown(event: KeyboardEvent, date: string): Promise<vo
   text-decoration: none;
 }
 .catalog-calendar .catalog-calendar__step {
+  --catalog-calendar-step-icon-size: 18px;
   display: grid;
   place-items: center;
   inline-size: 44px;
   color: var(--am-color-text);
+}
+@container am-bottom-sheet (min-width: 761px) {
+  .catalog-calendar .catalog-calendar__step {
+    --catalog-calendar-step-icon-size: 26px;
+    inline-size: 52px;
+    min-block-size: 52px;
+  }
 }
 .catalog-calendar__heading {
   display: flex;

@@ -143,23 +143,7 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
   grid-template-columns: minmax(0, 1fr);
 }
 .queue-view-controls__segments {
-  @include collection-chrome.state-tabs(2);
-  --am-queue-tab-gap: var(--am-space-1);
-  min-inline-size: 0;
-  column-gap: var(--am-queue-tab-gap);
-  padding: var(--am-space-1);
-  border: 0;
-  border-radius: var(--am-radius-control);
-  background: var(--am-color-surface);
-  box-shadow: inset 0 0 0 1px var(--am-color-border);
-  &::before {
-    inset-block: var(--am-space-1);
-    inset-inline-start: var(--am-space-1);
-    inline-size: calc((100% - 2 * var(--am-space-1) - var(--am-queue-tab-gap)) / 2);
-    background: var(--am-color-primary-container);
-    box-shadow: none;
-    transform: translateX(calc(var(--am-state-tab-index, 0) * (100% + var(--am-queue-tab-gap))));
-  }
+  @include collection-chrome.inset-state-tabs;
 }
 .queue-view-controls__trigger {
   display: flex;

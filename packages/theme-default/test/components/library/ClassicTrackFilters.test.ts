@@ -129,7 +129,7 @@ describe('ClassicTrackFilters', () => {
         false,
       )
       await nextTick()
-      expect(view.root.textContent).toContain('1 / 2 首')
+      expect(view.root.textContent).not.toContain('1 / 2 首')
       dispatchCatalogEvent(
         findCatalogElement(
           view.root,
@@ -140,6 +140,7 @@ describe('ClassicTrackFilters', () => {
       )
       await nextTick()
       expect(filters.value.tags).toEqual(['通勤'])
+      expect(view.root.textContent).toContain('匹配 1 / 2 首')
       dispatchCatalogEvent(
         findCatalogElement(
           view.root,

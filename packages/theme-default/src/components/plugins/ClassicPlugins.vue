@@ -5,7 +5,7 @@ import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
 import PluginDisplayOptions from '@any-music/ui/components/plugins/PluginDisplayOptions.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { shallowRef, watch } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
 
 import { useClassicPlugins } from '../../composables/use-classic-plugins'
 import ClassicCollectionControls from '../library/ClassicCollectionControls.vue'
@@ -43,6 +43,12 @@ const {
   applyFilters,
   setSelectedEnabled,
 } = useClassicPlugins(props)
+const filterCount = computed(() => {
+  const { keyword, category, status, developmentStatus } = criteria.value
+  return (
+    Number(Boolean(keyword.trim())) + category.length + status.length + developmentStatus.length
+  )
+})
 function selectDisplay(value: PluginCenterDisplay): void {
   display.value = value
   displayOpen.value = false
@@ -195,6 +201,7 @@ function manageDetails(): void {
           :selected-count="selected.length"
           :total-count="visible.length"
           :operator-open="operatorOpen"
+          :filter-count="filterCount"
           :disabled="disabled"
           can-display
           filter-label="筛选插件"

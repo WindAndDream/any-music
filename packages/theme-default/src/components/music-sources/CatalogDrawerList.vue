@@ -6,16 +6,17 @@ import { useActionFeedback } from '@any-music/ui/catalog'
 import { useConfirmAction } from '@any-music/ui/catalog'
 import { provideEditingSession, useEditingSession } from '@any-music/ui/catalog'
 import { getSelectionFeedbackMessage } from '@any-music/ui/catalog'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
 import { shallowRef, useTemplateRef, watch } from 'vue'
 
+import ClassicFilterFooter from '../library/ClassicFilterFooter.vue'
 import ClassicResultView from '../library/ClassicResultView.vue'
 import CatalogDrawerCard from './CatalogDrawerCard.vue'
 import CatalogDrawerListHeader from './CatalogDrawerListHeader.vue'
 import CatalogDrawerOperatorPanel from './CatalogDrawerOperatorPanel.vue'
 import CatalogTrackFilterPanel from './CatalogTrackFilterPanel.vue'
+import CollectionFilterSheet from './CollectionFilterSheet.vue'
 
 /** 音乐列表仅组合卡片、状态分组和受控底部面板；筛选、多选与确认由 headless 状态管理。 */
 const props = withDefaults(defineProps<UiCatalogDrawerListProps>(), {
@@ -39,7 +40,6 @@ const {
   stateFilter,
   filterDraft,
   filterPreview,
-  draftFilterCount,
   availableCount,
   unavailableCount,
   attentionCount,
@@ -187,11 +187,9 @@ function requestDiscovery(): void {
 
     <!-- 筛选为模态草稿，操作器为播放器上方的非模态区域，宿主及层级与歌曲页一致。 -->
     <Teleport v-if="props.overlayTarget" :to="props.overlayTarget" :disabled="!props.active">
-      <BottomSheet
+      <CollectionFilterSheet
         :open="props.filterOpen"
         title="音乐列表筛选器"
-        description="筛选已有列表，不会重新搜索或导入。"
-        size="full"
         :suspended="!props.active || props.panelsSuspended"
         @close="emit('closeFilter')"
       >
@@ -201,30 +199,19 @@ function requestDiscovery(): void {
           filter-context="drawers"
           :tag-stats="[]"
           :platform-stats="platformStats"
-          :result-count="previewDrawers.length"
-          :total-count="stateFilteredDrawers.length"
           @detail-open-change="isFilterDetailOpen = $event"
           @preview-change="filterPreview = $event"
         />
         <template v-if="!isFilterDetailOpen" #footer>
-          <div class="catalog-list-filter-footer">
-            <span
-              >草稿 {{ draftFilterCount }} 项 · 匹配 {{ previewDrawers.length }} /
-              {{ stateFilteredDrawers.length }} 个列表</span
-            >
-            <div class="catalog-list-filter-footer__actions">
-              <button
-                class="catalog-list-filter-footer__cancel"
-                type="button"
-                @click="emit('closeFilter')"
-              >
-                取消
-              </button>
-              <button type="button" @click="applyFilters">应用筛选</button>
-            </div>
-          </div>
+          <ClassicFilterFooter
+            :result-count="previewDrawers.length"
+            :total-count="stateFilteredDrawers.length"
+            unit="个列表"
+            @cancel="emit('closeFilter')"
+            @apply="applyFilters"
+          />
         </template>
-      </BottomSheet>
+      </CollectionFilterSheet>
     </Teleport>
     <Teleport
       v-if="props.operatorOverlayTarget"
@@ -292,10 +279,6 @@ function requestDiscovery(): void {
   display: flex;
   flex-direction: column;
 }
-.catalog-list-filter-footer button:focus-visible {
-  outline: var(--am-focus-ring);
-  outline-offset: var(--am-focus-offset);
-}
 .catalog-drawers__grid {
   display: grid;
   /* 保留空列，宽屏不设列数上限，窄容器的单项始终不超过可用宽度。 */
@@ -321,33 +304,6 @@ function requestDiscovery(): void {
 .catalog-drawers__grid--settling :deep(.catalog-card) {
   transition: none;
 }
-.catalog-list-filter-footer,
-.catalog-list-filter-footer__actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--am-space-3);
-}
-.catalog-list-filter-footer {
-  color: var(--am-color-text-secondary);
-  font-size: var(--am-font-size-sm);
-}
-.catalog-list-filter-footer button {
-  min-block-size: 44px;
-  padding-inline: var(--am-space-4);
-  border: 1px solid var(--am-color-primary);
-  border-radius: var(--am-radius-control);
-  background: var(--am-color-primary);
-  color: var(--am-color-on-primary);
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-}
-.catalog-list-filter-footer button.catalog-list-filter-footer__cancel {
-  border-color: var(--am-color-border-strong);
-  background: var(--am-color-surface);
-  color: var(--am-color-text);
-}
 @container am-catalog-list (max-width: 680px) {
   .catalog-drawers__grid {
     gap: var(--am-space-3);
@@ -357,13 +313,6 @@ function requestDiscovery(): void {
   .catalog-drawers:not(.catalog-drawers--empty) {
     /* 空态与待听、喜欢共用表面内边距；有列表时才增加滚动尾部空间。 */
     padding-block-end: var(--am-space-8);
-  }
-  .catalog-list-filter-footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
-  .catalog-list-filter-footer__actions {
-    justify-content: flex-end;
   }
 }
 </style>

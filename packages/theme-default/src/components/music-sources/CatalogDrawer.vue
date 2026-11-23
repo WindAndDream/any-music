@@ -4,7 +4,6 @@ import { useFilterDraft } from '@any-music/ui/catalog'
 import { useCatalogListControls } from '@any-music/ui/catalog'
 import {
   cloneCatalogTrackFilterState,
-  countCatalogTrackFilters,
   filterCatalogTracks,
   useCatalogTrackFilters,
 } from '@any-music/ui/catalog'
@@ -14,14 +13,15 @@ import { useActionFeedback } from '@any-music/ui/catalog'
 import { useEditingSession, provideEditingSession } from '@any-music/ui/catalog'
 import { getSelectionFeedbackMessage } from '@any-music/ui/catalog'
 import type { CatalogTrackListSummary } from '@any-music/ui/catalog'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
 import { computed, onScopeDispose, shallowRef, watch } from 'vue'
 
+import ClassicFilterFooter from '../library/ClassicFilterFooter.vue'
 import CatalogErrorNotice from './CatalogErrorNotice.vue'
 import CatalogPlaylistPickerDialog from './CatalogPlaylistPickerDialog.vue'
 import CatalogTrackFilterPanel from './CatalogTrackFilterPanel.vue'
 import CatalogTrackOperatorPanel from './CatalogTrackOperatorPanel.vue'
+import CollectionFilterSheet from './CollectionFilterSheet.vue'
 import TrackList from './TrackList.vue'
 
 // 歌曲页容器拥有筛选、多选和确认编排；来源请求与资料库写入仍通过事件上抛。
@@ -74,7 +74,6 @@ const previewTracks = computed(() =>
     userTagsEnabled.value,
   ),
 )
-const previewFilterCounts = computed(() => countCatalogTrackFilters(filterDraft.value))
 const trackControls = useCatalogListControls({
   editing,
   items: visibleTracks,
@@ -220,11 +219,10 @@ function applyFilterDraft(): void {
 
   <!-- 筛选器与歌单选择属于模态层；操作条使用较低的独立宿主，让系统侧栏始终可覆盖它。 -->
   <Teleport v-if="props.overlayTarget" :to="props.overlayTarget" :disabled="!props.active">
-    <BottomSheet
+    <CollectionFilterSheet
       :open="props.filterOpen"
       title="歌曲筛选器"
       :description="props.drawer.title"
-      size="full"
       :suspended="!props.active || props.panelsSuspended"
       @close="closeFilter"
     >
@@ -232,26 +230,18 @@ function applyFilterDraft(): void {
         v-model:filters="filterDraft"
         :history-scope="`catalog:tracks:${props.drawer.id}`"
         :tag-stats="tagStats"
-        :result-count="previewTracks.length"
-        :total-count="props.drawer.tracks.length"
         @detail-open-change="isFilterDetailOpen = $event"
         @preview-change="filterPreview = $event"
       />
       <template v-if="!isFilterDetailOpen" #footer>
-        <div class="catalog-panel-footer">
-          <span>
-            草稿 {{ previewFilterCounts.total }} 项 · 匹配 {{ previewTracks.length }} / 已加载
-            {{ props.drawer.tracks.length }} 首
-          </span>
-          <div class="catalog-panel-footer__actions">
-            <button class="catalog-panel-footer__secondary" type="button" @click="closeFilter">
-              取消
-            </button>
-            <button type="button" @click="applyFilterDraft">应用筛选</button>
-          </div>
-        </div>
+        <ClassicFilterFooter
+          :result-count="previewTracks.length"
+          :total-count="props.drawer.tracks.length"
+          @cancel="closeFilter"
+          @apply="applyFilterDraft"
+        />
       </template>
-    </BottomSheet>
+    </CollectionFilterSheet>
   </Teleport>
 
   <Teleport
@@ -298,51 +288,3 @@ function applyFilterDraft(): void {
     @select="batchActions.addSelectedToPlaylist"
   />
 </template>
-
-<style scoped>
-.catalog-panel-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--am-space-3);
-  color: var(--am-color-text-secondary);
-  font-size: var(--am-font-size-sm);
-}
-
-.catalog-panel-footer button {
-  min-block-size: 38px;
-  padding-inline: var(--am-space-4);
-  border: 1px solid var(--am-color-primary);
-  border-radius: var(--am-radius-control);
-  background: var(--am-color-primary);
-  color: var(--am-color-on-primary);
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-}
-
-.catalog-panel-footer__actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--am-space-2);
-}
-
-.catalog-panel-footer button.catalog-panel-footer__secondary {
-  border-color: var(--am-color-border-strong);
-  background: var(--am-color-surface);
-  color: var(--am-color-text);
-}
-
-@media (max-width: 600px) {
-  .catalog-panel-footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .catalog-panel-footer__actions,
-  .catalog-panel-footer__actions button {
-    flex: 1;
-  }
-}
-</style>
