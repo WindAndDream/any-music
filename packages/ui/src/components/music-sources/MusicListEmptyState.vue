@@ -2,14 +2,17 @@
 import type { AppIconName } from '../app-icon'
 import AppIcon from '../AppIcon.vue'
 
-/** 搜索列表与待听共用空状态表面；内容作为一组居中，标题可接收集合切页后的焦点。 */
+/** 集合共用空状态表面；内容作为一组居中，标题可接收集合切页后的焦点。 */
 defineProps<{
   icon: AppIconName
   title: string
   focusTitle?: boolean
 }>()
 
-defineSlots<{ default: () => unknown }>()
+defineSlots<{
+  default: () => unknown
+  actions?: () => unknown
+}>()
 </script>
 
 <template>
@@ -26,6 +29,7 @@ defineSlots<{ default: () => unknown }>()
         {{ title }}
       </h3>
       <p class="music-list-empty__description"><slot /></p>
+      <slot name="actions" />
     </div>
   </div>
 </template>

@@ -37,7 +37,7 @@ defineSlots<{ default(): unknown }>()
           aria-haspopup="dialog"
           @click="editor.actions.beginCreate"
         >
-          <AppIcon name="plus" :size="16" />创建标签
+          <AppIcon name="plus" :size="16" />创建
         </button>
       </div>
     </template>

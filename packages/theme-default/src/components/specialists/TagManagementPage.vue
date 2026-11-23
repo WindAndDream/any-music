@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
+import SlidingView from '@any-music/ui/components/SlidingView.vue'
 import type { TagManagementPresentation } from '@any-music/ui/theme'
 import { computed, shallowRef } from 'vue'
 
@@ -43,7 +44,9 @@ const modalOpen = computed(
       >
         {{ state.errorMessage }}
       </p>
-      <TagManagementResults :editor="editor" />
+      <SlidingView :view-key="state.entityKind" :reverse="state.entityKind === 'tracks'">
+        <TagManagementResults :editor="editor" />
+      </SlidingView>
     </TagManagementOverview>
     <ClassicPageOverlays :modal-open="modalOpen" :operator-open="state.operatorOpen">
       <template v-if="mobileLayout" #source>

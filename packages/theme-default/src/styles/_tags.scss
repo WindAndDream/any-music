@@ -41,9 +41,14 @@
   .tag-management__results {
     min-inline-size: 0;
   }
+  .tag-management__results--empty {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+  }
   .tag-management__display,
   .tag-management__criteria button,
-  .tag-management__empty button {
+  .tag-management__reset-filters {
     display: inline-flex;
     min-block-size: 44px;
     align-items: center;
@@ -134,22 +139,9 @@
     margin-inline-start: auto;
     color: var(--am-color-primary);
   }
-  .tag-management__empty {
-    display: grid;
-    justify-items: center;
-    gap: var(--am-space-3);
-    padding: var(--am-space-8) var(--am-space-4);
-    text-align: center;
-  }
-  .tag-management__empty h3 {
-    margin: 0;
-    font-size: var(--am-font-size-md);
-  }
-  .tag-management__empty p {
-    margin: 0;
-    color: var(--am-color-text-secondary);
-    font-size: var(--am-font-size-sm);
-    line-height: 1.7;
+  .tag-management__reset-filters {
+    background: var(--am-color-surface-subtle);
+    color: var(--am-color-primary);
   }
   .tag-management__error {
     color: var(--am-color-danger);
