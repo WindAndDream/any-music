@@ -47,6 +47,7 @@ defineProps<{
   opacity: 0.5;
 }
 .download-summary--compact {
+  flex-wrap: nowrap;
   justify-content: flex-end;
   column-gap: var(--am-space-1);
   font-size: var(--am-font-size-xs);

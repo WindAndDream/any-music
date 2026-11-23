@@ -228,6 +228,7 @@ function SettingsView() {
       <div
         ref="sourceTarget"
         v-show="['catalog', 'tags'].includes(features.shell.state.activeViewId)"
+        class="product-top-bar__source-context"
       ></div>
     </template>
     <template #player>

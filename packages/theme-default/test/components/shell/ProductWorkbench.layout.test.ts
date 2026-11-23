@@ -39,7 +39,9 @@ const trackListStyles = compileSfcStyles('music-sources/TrackCardGrid')
 const queueStyles = compileSfcStyles('music-sources/QueuePanel')
 const queueRowStyles = compileSfcStyles('music-sources/QueueTrackRow')
 const downloadRowStyles = compileSfcStyles('downloads/DownloadTrackRow')
+const downloadCollectionStyles = compileSfcStyles('downloads/DownloadCollectionContent')
 const playlistTileStyles = compileSfcStyles('library/ClassicPlaylistTile')
+const playlistOverviewStyles = compileSfcStyles('library/ClassicPlaylistOverview')
 const queueViewStyles = compileSfcStyles('music-sources/QueueViewControls')
 const preferencesStyles = compileSfcStyles('product-workbench/AppShellPreferencesPanel')
 const operatorStyles = compileSfcStyles('SidePanel')
@@ -375,12 +377,42 @@ describe('Classic shell and current page layout integration', () => {
   ])('adapts the desktop top bar at viewport %ipx and header %ipx', (viewport, header) => {
     const containers = { 'am-shell': viewport - 26, 'am-top-bar': header }
     const layout = readLayout(topBarStyles, ['.product-top-bar'], viewport, containers)
-    expect(layout['grid-template-areas']).toBe(
-      header <= 720 ? "'copy copy' 'source actions'" : "'copy source actions'",
+    const withoutSource = readLayout(
+      topBarStyles,
+      ['.product-top-bar', '.product-top-bar--without-source'],
+      viewport,
+      containers,
     )
+    expect(layout['grid-template-areas']).toBe("'copy source actions'")
+    expect(withoutSource['grid-template-areas']).toBe("'copy actions'")
+    if (header <= 720) {
+      expect(layout['grid-template-columns']).toBe('minmax(4em, 1fr) minmax(0, 180px) auto')
+    }
+    expect(withoutSource['min-block-size']).toBe(layout['min-block-size'])
     expect(
       readLayout(topBarStyles, ['.product-top-bar__actions'], viewport, containers).display,
     ).toBe('flex')
+  })
+
+  it.each([390, 1440])('uses the same collection toolbar divider geometry at %ipx', (width) => {
+    const reference = readLayout(queueViewStyles, ['.queue-view-controls'], width)
+    const toolbars = [
+      readLayout(playlistOverviewStyles, ['.playlist-overview__actions'], width),
+      readLayout(sharedStyles, ['.tag-management__actions'], width),
+      readLayout(downloadCollectionStyles, ['.download-collection__toolbar'], width),
+      readLayout(sharedStyles, ['.classic-plugins__toolbar'], width),
+    ]
+    expect(reference['--am-collection-toolbar-inset-start']).toBe(
+      width <= 768 ? '0px' : 'var(--am-space-2)',
+    )
+    for (const toolbar of toolbars) {
+      expect(toolbar).toMatchObject({
+        'min-block-size': reference['min-block-size'],
+        'padding-block': reference['padding-block'],
+        'border-block-end': reference['border-block-end'],
+        '--am-collection-toolbar-inset-start': reference['--am-collection-toolbar-inset-start'],
+      })
+    }
   })
 
   it.each([2200, 1600, 1286, 1110, 750, 600, 480])(

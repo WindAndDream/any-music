@@ -200,16 +200,17 @@ async function importPlaylist(event: Event) {
   </ClassicCollectionSurface>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../styles/collection-chrome';
+
 .playlist-overview__actions {
+  @include collection-chrome.toolbar-divider;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--am-space-2);
   margin-block-end: var(--am-space-4);
-  padding-block-end: var(--am-space-3);
-  border-block-end: 1px solid var(--am-color-border);
 }
 .playlist-overview__error {
   color: var(--am-color-danger);

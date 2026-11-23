@@ -55,12 +55,12 @@
     outline-offset: var(--am-focus-offset);
   }
   .classic-plugins__toolbar {
+    @include collection-chrome.toolbar-divider;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: var(--am-space-3);
-    padding-block: var(--am-space-2);
-    border-block-end: 1px solid var(--am-color-border);
+    margin-block-end: var(--am-space-4);
   }
   .classic-plugins__import {
     display: inline-flex;

@@ -123,6 +123,7 @@ watch(
   background: var(--am-color-surface-subtle);
 }
 .download-collection__toolbar {
+  @include collection-chrome.toolbar-divider;
   position: sticky;
   z-index: var(--am-z-sticky);
   inset-block-start: 0;
@@ -141,8 +142,6 @@ watch(
   grid-template-columns: minmax(0, 1fr);
 }
 .download-collection__tabs :deep(.catalog-operator-actions__content) {
-  padding-block: var(--am-space-2);
-  border-block-end: 1px solid var(--am-color-border);
   gap: var(--am-space-1);
 }
 .download-collection__status-options {

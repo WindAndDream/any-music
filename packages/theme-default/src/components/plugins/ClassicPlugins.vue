@@ -88,7 +88,7 @@ function manageDetails(): void {
       <template #count>
         <PluginSummary :items="feature.state.items" />
       </template>
-      <template #header>
+      <template #controls>
         <div class="classic-plugins__toolbar">
           <CatalogOperatorActions
             class="classic-plugins__filters"

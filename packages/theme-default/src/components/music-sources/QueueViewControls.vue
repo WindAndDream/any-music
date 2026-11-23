@@ -114,6 +114,7 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
   display: contents;
 }
 .queue-view-controls {
+  @include collection-chrome.toolbar-divider;
   position: sticky;
   z-index: var(--am-z-sticky);
   inset-block-start: 0;
@@ -121,8 +122,6 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
   grid-template-columns: minmax(0, 1fr) auto;
   min-inline-size: 0;
   max-inline-size: 100%;
-  padding-block: var(--am-space-2);
-  border-block-end: 1px solid var(--am-color-border);
   align-items: center;
   gap: var(--am-space-2);
   margin-block-end: var(--am-space-4);

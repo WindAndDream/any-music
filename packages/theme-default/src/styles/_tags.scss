@@ -1,14 +1,15 @@
+@use './collection-chrome';
+
 // The tag directory keeps intrinsic tile widths and clips each row's final tile to its remainder.
 :where(.am-theme-default) {
   .tag-management__actions {
+    @include collection-chrome.toolbar-divider;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: var(--am-space-2);
     margin-block-end: var(--am-space-4);
-    padding-block-end: var(--am-space-3);
-    border-block-end: 1px solid var(--am-color-border);
   }
   .tag-management__create {
     display: inline-flex;
@@ -296,8 +297,13 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+  .tag-management--mobile .tag-management__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
   .tag-management--mobile .tag-management__create {
-    inline-size: 100%;
+    gap: var(--am-space-1);
+    padding-inline: var(--am-space-2);
   }
   @media (prefers-reduced-motion: reduce) {
     .tag-management__merge-field::after {

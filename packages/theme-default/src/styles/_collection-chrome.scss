@@ -1,4 +1,18 @@
-// Collection pages share state buttons and a sliding selection surface.
+// Match the row occupied by 44px controls inside the inset arrangement switch.
+@mixin toolbar-divider {
+  --am-collection-toolbar-inset-start: var(--am-space-2);
+  min-block-size: calc(
+    44px + 2 * var(--am-space-1) + var(--am-collection-toolbar-inset-start) + var(--am-space-2) +
+      1px
+  );
+  padding-block: var(--am-collection-toolbar-inset-start) var(--am-space-2);
+  border-block-end: 1px solid var(--am-color-border);
+
+  @media (max-width: 768px) {
+    --am-collection-toolbar-inset-start: 0px;
+  }
+}
+
 @mixin state-button {
   display: inline-flex;
   flex: 0 0 auto;

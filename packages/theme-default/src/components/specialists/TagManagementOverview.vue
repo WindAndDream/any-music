@@ -26,7 +26,11 @@ defineSlots<{ default(): unknown }>()
   >
     <template #controls>
       <div class="tag-management__actions">
-        <TagEntitySwitch :kind="editor.state.entityKind" @change="editor.actions.setEntityKind" />
+        <TagEntitySwitch
+          :kind="editor.state.entityKind"
+          :compact="mobileLayout"
+          @change="editor.actions.setEntityKind"
+        />
         <button
           class="tag-management__create"
           type="button"
