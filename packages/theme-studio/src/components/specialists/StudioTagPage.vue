@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
+import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
 import SlidingView from '@any-music/ui/components/SlidingView.vue'
 import type { TagManagementPresentation } from '@any-music/ui/theme'
 import { computed, shallowRef } from 'vue'
@@ -33,7 +34,11 @@ const modalOpen = computed(
       <small class="studio-tag-desk__count" :aria-label="`共 ${state.allTagOptions.length} 个标签`"
         ><strong>{{ state.allTagOptions.length }}</strong> 个标签</small
       >
-      <div class="studio-actions studio-tag-desk__kinds" role="group" aria-label="标签类型">
+      <SlidingSegments
+        class="studio-segments studio-tag-desk__kinds"
+        role="group"
+        aria-label="标签类型"
+      >
         <button
           type="button"
           :aria-pressed="state.entityKind === 'tracks'"
@@ -48,7 +53,7 @@ const modalOpen = computed(
         >
           <AppIcon name="playlist" :size="16" />歌单标签
         </button>
-      </div>
+      </SlidingSegments>
       <button
         class="studio-tag-desk__create"
         type="button"

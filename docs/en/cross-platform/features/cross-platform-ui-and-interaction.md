@@ -229,6 +229,8 @@ Operation results and existing settings, repeated-playback, and export notices s
 
 ## 7. Motion and Gestures
 
+Segmented view, mode, and status controls in the collection and Discover toolbars slide one selection surface between buttons. The surface follows each button’s size and position, including wrapped layouts. A layout resize realigns it immediately. Reduced motion switches the highlight without animation.
+
 All card movement has a rendering lifetime, including keyboard ordering, density/column changes, interrupted FLIP and drag neighbors returning to their slots. Previously, protection covered landing but not ordinary FLIP or returning previews, and the virtual default card also switched its paint containment at gesture boundaries. These gaps can cull descendants, change internal raster coordinates or let later siblings cover a moving item. Extending animation duration or adding a page-specific class does not repair that ownership.
 In Classic, changing collection arrangement, download or Discover list status, or plugin category uses the same directional slide and fade as Tag Management, including when the results are empty. The outgoing results detach in the same update that mounts the incoming results, and the animation starts on the incoming results' first paint. Collection arrangement uses CSS to move its selection highlight. The full song grid stays available off-document while platform groups are shown, so returning reuses the same cards. The toolbar keeps its buttons and focus. Opening or returning from details uses the full-width navigation transition. Reduced motion skips the result slide.
 

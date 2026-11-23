@@ -4,6 +4,7 @@ import type { PluginCenterDisplay } from '@any-music/ui'
 import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import PluginDisplayOptions from '@any-music/ui/components/plugins/PluginDisplayOptions.vue'
+import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { shallowRef } from 'vue'
 
@@ -66,7 +67,11 @@ const filters = [
       </div>
     </header>
     <StudioFeatureStatus :availability="feature.availability" :status="feature.status" />
-    <div class="studio-plugins__filters" role="group" aria-label="插件分类">
+    <SlidingSegments
+      class="studio-segments studio-plugins__filters"
+      role="group"
+      aria-label="插件分类"
+    >
       <button
         v-for="option in filters"
         :key="option.id"
@@ -76,7 +81,7 @@ const filters = [
       >
         {{ option.label }} <span>{{ counts[option.id] }}</span>
       </button>
-    </div>
+    </SlidingSegments>
     <p v-if="feature.state.errorMessage" role="alert">
       {{ feature.state.errorMessage
       }}<button type="button" :disabled="feature.state.busy" @click="feature.actions.refresh()">
