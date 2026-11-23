@@ -24,6 +24,12 @@ class ScrollElement extends CatalogTestElement {
   releasePointerCapture = vi.fn(() => {
     this.pointerId = undefined
   })
+  getBoundingClientRect() {
+    return { left: this.offsetLeft, right: this.offsetLeft + this.offsetWidth }
+  }
+  querySelectorAll() {
+    return this.children
+  }
   scrollTo = vi.fn((options: ScrollToOptions) => {
     this.scrollLeft = Math.max(0, Math.min(this.scrollWidth - this.clientWidth, options.left ?? 0))
   })
@@ -101,7 +107,7 @@ describe('useCatalogOperatorScroll', () => {
     expect(scroll.hasOverflow.value).toBe(true)
     expect(observe).toHaveBeenCalledTimes(3)
     scroll.advance()
-    expect(viewport.scrollTo).toHaveBeenLastCalledWith({ left: 240, behavior: 'smooth' })
+    expect(viewport.scrollTo).toHaveBeenLastCalledWith({ left: 232, behavior: 'smooth' })
     scroll.updateScroll()
     expect(scroll.isAtEnd.value).toBe(true)
     matchMedia.mockReturnValue({ matches: true })
@@ -113,6 +119,14 @@ describe('useCatalogOperatorScroll', () => {
     container.clientWidth = 500
     observerCallback()
     expect(scroll.hasOverflow.value).toBe(false)
+  })
+
+  it('returns from a fractional end position even before the scroll event arrives', () => {
+    const { scroll, viewport } = mountScroll()
+    viewport.scrollLeft = 230.75
+    expect(scroll.isAtEnd.value).toBe(false)
+    scroll.advance()
+    expect(viewport.scrollTo).toHaveBeenCalledExactlyOnceWith({ left: 0, behavior: 'smooth' })
   })
 
   it('leaves scrolling as soon as the buttons fit the full row, even while the arrow still occupies space', () => {

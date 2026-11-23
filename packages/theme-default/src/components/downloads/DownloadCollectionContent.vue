@@ -49,7 +49,7 @@ watch(
         aria-label="下载状态"
         align="start"
         forward-label="查看更多下载状态"
-        back-label="返回前面的下载状态"
+        back-label="返回下载状态开头"
       >
         <div
           class="download-collection__status-options"

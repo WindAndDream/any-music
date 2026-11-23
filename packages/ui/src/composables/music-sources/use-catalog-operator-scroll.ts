@@ -28,25 +28,37 @@ export function useCatalogOperatorScroll(options: CatalogOperatorScrollOptions) 
     const maximum = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
     // 按整行宽度判断是否放得下，避免已显示的箭头占位让按钮一直停留在滚动布局。
     hasOverflow.value = contentWidth > availableWidth + 1
-    isAtEnd.value = hasOverflow.value && maximum > 1 && viewport.scrollLeft >= maximum - 1
+    // 宽度按整数像素报告，滚动位置可能带小数。
+    isAtEnd.value =
+      hasOverflow.value && maximum > 1 && Math.round(viewport.scrollLeft) >= maximum - 1
     if (!hasOverflow.value) releasePointer()
   }
 
   function advance(): void {
     const viewport = toValue(options.viewport)
+    updateScroll()
     if (!viewport || !hasOverflow.value) return
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const nextButton = Array.from(toValue(options.content)?.children ?? []).find(
-      (element) =>
-        element instanceof HTMLElement &&
-        element.offsetLeft > viewport.scrollLeft + 1 &&
-        element.offsetLeft + element.offsetWidth > viewport.scrollLeft + viewport.clientWidth,
-    ) as HTMLElement | undefined
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? 'instant'
+      : 'smooth'
+    if (isAtEnd.value) {
+      viewport.scrollTo({ left: 0, behavior })
+      return
+    }
+
+    const viewportLeft = viewport.getBoundingClientRect().left
+    const viewportRight = viewportLeft + viewport.clientWidth
+    let distance = viewport.clientWidth
+    // 下载状态等按钮位于分组中，需要按按钮在视口中的位置前进。
+    for (const button of toValue(options.content)?.querySelectorAll('button') ?? []) {
+      const { left, right } = button.getBoundingClientRect()
+      if (left <= viewportLeft + 1 || right <= viewportRight) continue
+      distance = left - viewportLeft
+      break
+    }
     viewport.scrollTo({
-      left: isAtEnd.value
-        ? 0
-        : (nextButton?.offsetLeft ?? viewport.scrollLeft + viewport.clientWidth),
-      behavior: reducedMotion ? 'instant' : 'smooth',
+      left: Math.min(viewport.scrollLeft + distance, viewport.scrollWidth - viewport.clientWidth),
+      behavior,
     })
   }
 
