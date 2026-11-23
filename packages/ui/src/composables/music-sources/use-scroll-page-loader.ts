@@ -1,4 +1,4 @@
-import { computed, onScopeDispose, toValue, watch } from 'vue'
+import { computed, onScopeDispose, shallowRef, toValue, watch } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
 
 import { editingStateKey, type EditingSession } from '../use-editing-session'
@@ -31,7 +31,15 @@ interface UseScrollPageLoaderOptions {
   prefetch?: MaybeRefOrGetter<boolean>
   /** Restore the current list's position from its editing scope before listening for scroll. */
   restoreScroll?: boolean
+  /** Measure actual rows while preparing a new, unfiltered discovery viewport. */
+  initialFill?: {
+    enabled: MaybeRefOrGetter<boolean>
+    contentElement: MaybeRefOrGetter<HTMLElement | null>
+  }
 }
+
+const INITIAL_FILL_PAGE_LIMIT = 4
+const INITIAL_FILL_TIMEOUT_MS = 4_000
 
 interface PageAdmission {
   requestedPageNumber: number
@@ -39,6 +47,7 @@ interface PageAdmission {
   wasLoading: boolean
   canRetry: boolean
   scrollTop?: number
+  initialFillFinished?: boolean
 }
 const pageAdmissionKey = editingStateKey<PageAdmission>('scroll-page-loader:admission')
 function createAdmission(): PageAdmission {
@@ -64,7 +73,7 @@ function findScrollContainer(element: HTMLElement): HTMLElement | undefined {
 }
 
 /** 在最近的滚动容器接近底部时逐页请求；短列表只补齐到能够滚动。 */
-export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
+export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
   let scrollContainer: HTMLElement | undefined
   let listElement: HTMLElement | undefined
   let resizeObserver: ResizeObserver | undefined
@@ -75,6 +84,13 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
   // A presentation replacement must not admit the same page again before its
   // request updates the host projection. Listeners still belong to this view.
   const admission = options.editing?.state(pageAdmissionKey, createAdmission) ?? createAdmission()
+  const initialFill = options.initialFill
+  const preparing = shallowRef(
+    Boolean(initialFill && toValue(initialFill.enabled)) &&
+      !admission.initialFillFinished &&
+      admission.scrollTop === undefined,
+  )
+  let initialFillTimer: ReturnType<typeof setTimeout> | undefined
   const scrollRoot = computed(() => {
     // A virtual renderer already owns root selection and pooled geometry observation.
     if (options.virtualList) return toValue(options.virtualList.context.scrollElement)
@@ -87,6 +103,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
   function requestNext(explicit = false): void {
     const pageNumber = toValue(options.pageNumber)
     if (
+      (explicit && preparing.value) ||
       !toValue(options.hasMore) ||
       toValue(options.loading) ||
       (admission.requestedPageNumber === pageNumber && !(explicit && admission.canRetry))
@@ -140,7 +157,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
   }
 
   function handleScroll(): void {
-    if (!scrollContainer) return
+    if (!scrollContainer || preparing.value) return
     const scrollTop = scrollContainer.scrollTop
     const isScrollingDown = scrollTop > lastScrollTop
     const isScrollingUp = scrollTop < lastScrollTop
@@ -192,6 +209,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
   }
 
   function continueScrollLoad(): void {
+    if (preparing.value) return
     // Demand arriving during a load survives completion; filtered lists do not
     // keep paging in the background without another explicit scroll.
     if (!isNearBottom()) hasScrollDemand = false
@@ -201,7 +219,8 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
 
   function detach(): void {
     attachmentVersion += 1
-    if (options.restoreScroll && scrollContainer) admission.scrollTop = scrollContainer.scrollTop
+    if (options.restoreScroll && scrollContainer && !preparing.value)
+      admission.scrollTop = scrollContainer.scrollTop
     listElement?.removeEventListener('keydown', handleKeyDown)
     listElement = undefined
     scrollContainer?.removeEventListener('scroll', handleScroll)
@@ -216,7 +235,57 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
     resizeObserver = undefined
   }
 
+  function revealInitialFill(): void {
+    clearTimeout(initialFillTimer)
+    if (scrollContainer) scrollContainer.scrollTop = 0
+    lastScrollTop = 0
+    hasScrollDemand = false
+    if (options.restoreScroll) admission.scrollTop = 0
+    admission.initialFillFinished = true
+    preparing.value = false
+  }
+
+  function fillInitialViewport(): void {
+    if (!initialFill || !preparing.value || !listElement) return
+    if (!toValue(initialFill.enabled)) {
+      revealInitialFill()
+      return
+    }
+    if (toValue(options.loading)) return
+    const pageNumber = toValue(options.pageNumber)
+    if (
+      !toValue(options.hasMore) ||
+      pageNumber === 0 ||
+      toValue(options.visibleCount) !== toValue(options.loadedCount) ||
+      admission.canRetry ||
+      pageNumber >= INITIAL_FILL_PAGE_LIMIT
+    ) {
+      revealInitialFill()
+      return
+    }
+    initialFillTimer ??= setTimeout(revealInitialFill, INITIAL_FILL_TIMEOUT_MS)
+    const geometry = getGeometry()
+    if (!geometry || !scrollContainer) return
+    const content = toValue(initialFill.contentElement)
+    // Padding, loading indicators, and a stretched list surface do not count as rows.
+    const paddingBottom = Number.parseFloat(getComputedStyle(scrollContainer).paddingBottom) || 0
+    const rowsBottom =
+      content && toValue(options.visibleCount) > 0
+        ? content.getBoundingClientRect().bottom -
+          scrollContainer.getBoundingClientRect().top -
+          scrollContainer.clientTop +
+          scrollContainer.scrollTop
+        : 0
+    if (rowsBottom >= geometry.viewportHeight - paddingBottom - 1) {
+      revealInitialFill()
+    } else requestNext()
+  }
+
   function fillShortList(): void {
+    if (preparing.value) {
+      fillInitialViewport()
+      return
+    }
     const geometry = getGeometry()
     if (
       toValue(options.fillShortList) === false ||
@@ -259,8 +328,9 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
       listElement = element ?? undefined
       listElement?.addEventListener('keydown', handleKeyDown)
       scrollContainer = element ? (root ?? undefined) : undefined
-      if (scrollContainer && options.restoreScroll && admission.scrollTop !== undefined)
-        scrollContainer.scrollTop = admission.scrollTop
+      const restoredTop = preparing.value ? 0 : admission.scrollTop
+      if (scrollContainer && options.restoreScroll && restoredTop !== undefined)
+        scrollContainer.scrollTop = restoredTop
       lastScrollTop = scrollContainer?.scrollTop ?? 0
       scrollContainer?.addEventListener('scroll', handleScroll, { passive: true })
       scrollContainer?.addEventListener('wheel', handleWheel, { passive: true })
@@ -289,6 +359,8 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
         toValue(options.hasMore),
         toValue(options.visibleCount),
         toValue(options.loadedCount),
+        initialFill && toValue(initialFill.enabled),
+        initialFill && toValue(initialFill.contentElement),
       ] as const,
     ([pageNumber]) => {
       if (pageNumber < admission.previousPageNumber) {
@@ -315,5 +387,9 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions): void {
     { flush: 'post' },
   )
 
-  onScopeDispose(detach)
+  onScopeDispose(() => {
+    clearTimeout(initialFillTimer)
+    detach()
+  })
+  return { preparing: computed(() => preparing.value) }
 }

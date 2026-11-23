@@ -121,11 +121,12 @@ const source: MusicSourceDescriptor & { enabled: boolean } = {
 function mountPage(
   mobileLayout = true,
   catalogViewport?: (context: CatalogViewportContext) => void,
+  pluginId = source.id,
 ) {
   const initialTracks = [track('one'), track('two')]
   const drawer: CatalogDrawerView = {
     id: 'request:stable',
-    pluginId: 'source',
+    pluginId,
     pluginName: '历史来源标签',
     account: { id: 'account:original', name: '原请求账号' },
     kind: 'search',
@@ -285,6 +286,22 @@ function click(root: CatalogTestElement, text: string) {
 }
 
 describe('classic catalog complete-root contract', () => {
+  it('hands a new Douyin list to the native viewport after initial preparation', async () => {
+    const viewport = vi.fn()
+    const f = mountPage(false, viewport, 'douyin')
+    try {
+      expect(viewport).not.toHaveBeenCalled()
+      expect(findCatalogElement(f.root, (node) => node.props.inert === true)).toBeDefined()
+
+      f.state.drawers[0]!.hasMore = false
+      await nextTick()
+      expect(viewport).toHaveBeenCalled()
+      expect(() => findCatalogElement(f.root, (node) => node.props.inert === true)).toThrow()
+    } finally {
+      f.dispose()
+    }
+  })
+
   it('defers display settings when the results are presented in a native viewport', async () => {
     let viewport!: CatalogViewportContext
     const f = mountPage(false, (context) => (viewport = context))

@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { canRefreshCatalogDrawer, useCatalogViewportOverlay } from '@any-music/ui/catalog'
+import {
+  canRefreshCatalogDrawer,
+  countCatalogTrackFilters,
+  useCatalogViewportOverlay,
+} from '@any-music/ui/catalog'
 import type { UiThemeFeatureMap, UiThemeHostSlots } from '@any-music/ui/theme'
 import { computed, shallowRef } from 'vue'
 
@@ -14,6 +18,15 @@ const props = defineProps<{ feature: UiThemeFeatureMap['catalog'] }>()
 const { state, drawer, allSelected, toggleAll, openFilters, canLoadMore } = useStudioCatalog(props)
 const nativeReady = shallowRef(false)
 const reserveViewport = shallowRef(false)
+const viewportKey = computed(() => `${drawer.value?.id}:${drawer.value?.refreshRevision ?? 0}`)
+const preparedViewport = shallowRef<string>()
+const prepareViewport = computed(
+  () =>
+    drawer.value?.pluginId === 'douyin' &&
+    drawer.value.isSourceEnabled &&
+    !drawer.value.paginationLocked &&
+    countCatalogTrackFilters(state.value.filters).total === 0,
+)
 const displayOpen = shallowRef(false)
 const { openOverlay, registerOverlayOpener } = useCatalogViewportOverlay()
 function setNativeReady(ready: boolean) {
@@ -103,10 +116,12 @@ function setDisplayOpen(open: boolean): void {
         </button>
       </fieldset>
       <div
+        :key="viewportKey"
         class="studio-catalog-tracks"
-        :class="{ 'studio-catalog-tracks--native': reserveViewport }"
+        :class="{ 'studio-catalog-tracks--native': reserveViewport || prepareViewport }"
       >
         <slot
+          v-if="!prepareViewport || preparedViewport === viewportKey"
           name="catalog-viewport"
           :drawer="drawer"
           :selectable="true"
@@ -122,6 +137,9 @@ function setDisplayOpen(open: boolean): void {
           :drawer="drawer"
           :loaded-track-count="drawer.tracks.length"
           :can-load-more="canLoadMore"
+          :prepare-viewport="prepareViewport"
+          :prefetch="drawer.pluginId === 'douyin'"
+          @viewport-ready="preparedViewport = viewportKey"
         />
       </div>
     </template>

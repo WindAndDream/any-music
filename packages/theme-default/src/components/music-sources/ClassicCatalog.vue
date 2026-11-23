@@ -84,7 +84,16 @@ const {
   viewLoadedTracks,
   closeError,
 } = useClassicCatalog(props)
+const viewportKey = computed(() => `${drawer.value?.id}:${drawer.value?.refreshRevision ?? 0}`)
+const preparedViewport = shallowRef<string>()
 const trackFilterCount = computed(() => countCatalogTrackFilters(state.value.filters).total)
+const prepareViewport = computed(
+  () =>
+    drawer.value?.pluginId === 'douyin' &&
+    drawer.value.isSourceEnabled &&
+    !drawer.value.paginationLocked &&
+    trackFilterCount.value === 0,
+)
 function showTrackActions(id: string): void {
   actionTrackId.value = id
 }
@@ -259,6 +268,7 @@ function finishView(element: Element): void {
               data-am-scroll-key="workspace"
             >
               <slot
+                v-if="!prepareViewport || preparedViewport === viewportKey"
                 name="catalog-viewport"
                 :drawer="drawer"
                 :selectable="operatorOpen"
@@ -287,7 +297,10 @@ function finishView(element: Element): void {
                     :has-more="drawer.hasMore && drawer.isSourceEnabled && !drawer.paginationLocked"
                     :loaded-page-count="drawer.loadedPageCount"
                     :loaded-track-count="drawer.tracks.length"
+                    :prepare-viewport="prepareViewport"
+                    :prefetch="drawer.pluginId === 'douyin'"
                     error-message=""
+                    @viewport-ready="preparedViewport = viewportKey"
                     @load-more="!drawer.isLoading && feature.actions.loadMore(drawer.id)"
                     @select="toggleSelected"
                     @play="play"
