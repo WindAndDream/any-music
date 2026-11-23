@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { getPluginFailure, getPluginStatusLabel } from '@any-music/ui'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import type { UiPluginCenterItem } from '@any-music/ui/theme'
 import { computed } from 'vue'
-
-import { pluginFailure, pluginStatusLabel } from '../../composables/plugin-presentation'
 
 const props = defineProps<{
   item: UiPluginCenterItem
@@ -11,7 +10,7 @@ const props = defineProps<{
   selectable?: boolean
   selected?: boolean
 }>()
-const emit = defineEmits<{ setEnabled: [enabled: boolean]; retry: []; details: []; select: [] }>()
+const emit = defineEmits<{ setEnabled: [enabled: boolean]; details: []; select: [] }>()
 function checkAvailability(event: Event): void {
   if (!props.item.unavailableReason) return
   event.preventDefault()
@@ -23,8 +22,8 @@ function changeEnabled(event: Event): void {
   // Keep the control authoritative when the host rejects a change, e.g. the last source.
   input.checked = props.item.enabled
 }
-const failure = computed(() => pluginFailure(props.item))
-const statusLabel = computed(() => pluginStatusLabel(props.item))
+const hasError = computed(() => Boolean(getPluginFailure(props.item)))
+const statusLabel = computed(() => getPluginStatusLabel(props.item))
 </script>
 
 <template>
@@ -58,11 +57,10 @@ const statusLabel = computed(() => pluginStatusLabel(props.item))
       发布者 {{ item.publisher
       }}<template v-if="item.generation !== undefined"> · 代次 {{ item.generation }}</template>
     </p>
-    <p v-if="failure" class="classic-plugin-card__error" role="alert">{{ failure }}</p>
     <footer class="classic-plugin-card__footer">
       <span
         class="classic-plugin-card__status"
-        :data-error="!!failure"
+        :data-error="hasError"
         :data-enabled="item.enabled"
         :data-development-status="item.origin === 'builtin' ? item.developmentStatus : undefined"
         :role="item.status.status === 'loading' ? 'status' : undefined"
@@ -70,9 +68,6 @@ const statusLabel = computed(() => pluginStatusLabel(props.item))
       >
       <div class="classic-plugin-card__actions">
         <div class="classic-plugin-card__primary-actions">
-          <button v-if="failure" type="button" :disabled="busy" @click="emit('retry')">
-            <AppIcon name="refresh" :size="15" />重试
-          </button>
           <label v-if="item.origin === 'builtin'" class="classic-plugin-card__toggle">
             <span>{{ item.enabled ? '启用中' : '已停用' }}</span>
             <input

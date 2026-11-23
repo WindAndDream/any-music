@@ -554,10 +554,13 @@ describe.each([
       (node) => node.tag === 'input' && node.props.type === 'checkbox',
     )
     ;(checkbox.props.onChange as (event: unknown) => void)({ target: { checked: true } })
-    f.click('重试')
+    expect(f.root.textContent).not.toContain('重试')
+    f.click('查看插件介绍 标签管理')
+    await nextTick()
+    f.click('重试加载')
     expect(setEnabled).toHaveBeenCalledExactlyOnceWith('feature.tags', true)
     expect(retry).toHaveBeenCalledExactlyOnceWith('feature.tags')
-    expect(f.root.textContent).toContain('加载失败')
+    expect(f.root.textContent).toContain('错误信息加载失败')
   })
 })
 

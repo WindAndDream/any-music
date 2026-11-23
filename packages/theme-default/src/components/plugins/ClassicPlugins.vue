@@ -3,6 +3,7 @@ import type { PluginCenterDisplay } from '@any-music/ui'
 import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
+import PluginDetailsDialog from '@any-music/ui/components/plugins/PluginDetailsDialog.vue'
 import PluginDisplayOptions from '@any-music/ui/components/plugins/PluginDisplayOptions.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed, shallowRef, watch } from 'vue'
@@ -15,7 +16,6 @@ import ClassicResultView from '../library/ClassicResultView.vue'
 import CatalogOperatorActions from '../music-sources/CatalogOperatorActions.vue'
 import ClassicPageOverlays from '../overlays/ClassicPageOverlays.vue'
 import ClassicPluginCard from './ClassicPluginCard.vue'
-import PluginDetailsDialog from './PluginDetailsDialog.vue'
 import PluginFilters from './PluginFilters.vue'
 import PluginOperator from './PluginOperator.vue'
 import PluginSummary from './PluginSummary.vue'
@@ -168,7 +168,6 @@ function manageDetails(): void {
               :selected="controls.selectedIds.value.has(item.id)"
               @select="controls.toggleItem(item.id)"
               @set-enabled="setEnabled(item.id, $event)"
-              @retry="feature.actions.retry(item.id)"
               @details="detailsId = item.id"
             />
           </div>

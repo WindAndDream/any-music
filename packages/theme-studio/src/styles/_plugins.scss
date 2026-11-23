@@ -110,9 +110,6 @@
     font-size: var(--am-font-size-xs);
     line-height: 1.7;
   }
-  .studio-plugin-card__body p[role='alert'] {
-    color: var(--am-color-danger);
-  }
   .studio-plugin-card__footer {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -136,7 +133,7 @@
     color: var(--am-color-warning);
   }
   .studio-plugin-card__footer > span[data-error='true'] {
-    color: var(--am-color-danger);
+    color: var(--am-color-text-secondary);
   }
   .studio-plugin-card__actions label {
     min-block-size: 44px;

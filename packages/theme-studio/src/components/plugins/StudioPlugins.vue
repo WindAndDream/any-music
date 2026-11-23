@@ -3,10 +3,11 @@ import { usePluginCenterView } from '@any-music/ui'
 import type { PluginCenterDisplay } from '@any-music/ui'
 import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
+import PluginDetailsDialog from '@any-music/ui/components/plugins/PluginDetailsDialog.vue'
 import PluginDisplayOptions from '@any-music/ui/components/plugins/PluginDisplayOptions.vue'
 import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { shallowRef } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
 
 import StudioPageOverlays from '../overlays/StudioPageOverlays.vue'
 import StudioFeatureStatus from '../StudioFeatureStatus.vue'
@@ -18,6 +19,20 @@ const { filter, display, counts, visible } = usePluginCenterView(
   () => props.feature.state.defaultDisplay,
 )
 const displayOpen = shallowRef(false)
+const detailsId = shallowRef<string>()
+const details = computed(() => props.feature.state.items.find(({ id }) => id === detailsId.value))
+const disabled = computed(
+  () => props.feature.state.busy || props.feature.availability.status !== 'available',
+)
+watch(details, (item) => {
+  if (!item) detailsId.value = undefined
+})
+function manageDetails(): void {
+  if (!details.value || disabled.value) return
+  const { id } = details.value
+  detailsId.value = undefined
+  props.feature.actions.manageExternal(id)
+}
 function selectDisplay(value: PluginCenterDisplay): void {
   display.value = value
   displayOpen.value = false
@@ -107,7 +122,7 @@ const filters = [
             feature.availability.status === 'available' &&
             feature.actions.setEnabled(item.id, $event)
           "
-          @retry="feature.actions.retry(item.id)"
+          @details="detailsId = item.id"
           @manage="feature.actions.manageExternal(item.id)"
         />
       </div>
@@ -124,7 +139,15 @@ const filters = [
         </p>
       </div>
     </fieldset>
-    <StudioPageOverlays :open="displayOpen">
+    <StudioPageOverlays :open="displayOpen || !!details">
+      <PluginDetailsDialog
+        :item="details"
+        :busy="disabled"
+        @close="detailsId = undefined"
+        @set-enabled="details && feature.actions.setEnabled(details.id, $event)"
+        @retry="details && feature.actions.retry(details.id)"
+        @manage="manageDetails"
+      />
       <AppDialog
         :open="displayOpen"
         title="插件展示方式"
