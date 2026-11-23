@@ -12,7 +12,7 @@ export function createWorkbenchThemeFeatures(
   c: WorkbenchController,
   props: Readonly<WorkbenchProps>,
 ) {
-  const collections = createWorkbenchTrackFeatures(c)
+  const collections = createWorkbenchTrackFeatures(c, props)
   const specialist = createWorkbenchSpecialistFeatures(
     c,
     collections.displayDefaults,
@@ -40,38 +40,6 @@ export function createWorkbenchThemeFeatures(
   const features = computed<UiThemeFeatureMap>(() => ({
     ...collections.features.value,
     ...specialist,
-    catalog: {
-      ...collections.features.value.catalog,
-      state: {
-        ...collections.features.value.catalog.state,
-        accountMissing: props.accountMissing?.includes(c.registry.activePluginId.value) ?? false,
-        drawers: collections.features.value.catalog.state.drawers.map((drawer) => ({
-          ...drawer,
-          accountStatus:
-            drawer.accountStatusVisible && drawer.account?.id && props.accountStatuses
-              ? (props.accountStatuses[drawer.account.id] ?? '已删除')
-              : undefined,
-        })),
-      },
-      actions: {
-        ...collections.features.value.catalog.actions,
-        notifyMissingAccount: () =>
-          c.actionFeedback.show({
-            status: 'error',
-            message: '此平台尚未添加账号，请先在账号管理中添加。',
-          }),
-        submit: async () => {
-          if (props.accountMissing?.includes(c.registry.activePluginId.value)) {
-            c.actionFeedback.show({
-              status: 'error',
-              message: '此平台尚未添加账号，请先在账号管理中添加。',
-            })
-            return
-          }
-          await collections.features.value.catalog.actions.submit()
-        },
-      },
-    },
     shell: {
       availability: available,
       status: ready,

@@ -25,7 +25,7 @@ import {
 } from '../features/settings/network-proxy-settings'
 import { musicSourceWorkspaceRepository } from '../storage/music-source-workspace-repository'
 
-const PERSIST_THROTTLE_MS = 300
+const PERSIST_DELAY_MS = 300
 
 /**
  * 音乐源工作区的 Pinia 单一状态源。
@@ -202,18 +202,16 @@ export const useMusicSourceWorkspaceStore = defineStore('music-source-workspace'
 
   function schedulePersist(): void {
     if (persistTimer !== undefined) return
-    persistTimer = window.setTimeout(persistNow, PERSIST_THROTTLE_MS)
+    persistTimer = window.setTimeout(persistNow, PERSIST_DELAY_MS)
   }
 
-  // shallowRef 状态只通过 action 整体替换，因此无需昂贵的 deep watch。
+  // Request drafts ride along with workspace saves. Typing alone schedules no snapshot writes.
   watch(
     [
       activePluginId,
       disabledPluginIds,
       proxySettings,
       downloadConcurrency,
-      searchQuery,
-      importUrl,
       drawerRecipes,
       unavailableTrackIds,
     ],

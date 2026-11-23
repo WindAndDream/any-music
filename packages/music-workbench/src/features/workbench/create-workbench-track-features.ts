@@ -24,7 +24,7 @@ import { usePlaylistArtwork } from '../library/use-playlist-artwork'
 import { usePlaylistFileTransfer } from '../library/use-playlist-file-transfer'
 import { usePlaylistValidation } from '../library/use-playlist-validation'
 import { reorderQueueIds } from '../player/playback-queue-state'
-import type { WorkbenchController } from './use-workbench-controller'
+import type { WorkbenchController, WorkbenchProps } from './use-workbench-controller'
 
 type CollectionId = 'catalog' | 'queue' | 'favorites' | 'playlists' | 'custom-tracks' | 'downloads'
 function createCollection() {
@@ -36,10 +36,21 @@ function createCollection() {
 }
 
 /** One stable adapter per controller. Theme roots receive data/intents, never business owners. */
-export function createWorkbenchTrackFeatures(controller: WorkbenchController) {
+export function createWorkbenchTrackFeatures(
+  controller: WorkbenchController,
+  props: Readonly<Pick<WorkbenchProps, 'accountMissing' | 'accountStatuses'>>,
+) {
   const c = controller
   const cells = new Map<string, ReturnType<typeof createCollection>>()
   const requestKind = shallowRef<CatalogRequestKind>('search')
+  const accountMissing = computed(
+    () => props.accountMissing?.includes(c.registry.activePluginId.value) ?? false,
+  )
+  const notifyMissingAccount = () =>
+    c.actionFeedback.show({
+      status: 'error',
+      message: '此平台尚未添加账号，请先在账号管理中添加。',
+    })
   const playlistId = shallowRef<string | null>(null)
   const playlistQuery = shallowRef('')
   const playlistName = shallowRef('')
@@ -429,16 +440,31 @@ export function createWorkbenchTrackFeatures(controller: WorkbenchController) {
         enabled: c.workspace.isPluginEnabled(descriptor.id),
       })),
       sourceId: c.registry.activePluginId.value,
-      requestKind: requestKind.value,
-      searchQuery: c.workspace.searchQuery.value,
-      importUrl: c.workspace.importUrl.value,
-      drawers: c.workspace.drawers.value,
+      accountMissing: accountMissing.value,
+      // Read drafts from the form's reactive scope so edits keep the catalog projection stable.
+      get requestKind() {
+        return requestKind.value
+      },
+      get searchQuery() {
+        return c.workspace.searchQuery.value
+      },
+      get importUrl() {
+        return c.workspace.importUrl.value
+      },
+      drawers: c.workspace.drawers.value.map((drawer) => ({
+        ...drawer,
+        accountStatus:
+          drawer.accountStatusVisible && drawer.account?.id && props.accountStatuses
+            ? (props.accountStatuses[drawer.account.id] ?? '已删除')
+            : undefined,
+      })),
       activeDrawerId: c.activeCatalogDrawerId.value ?? null,
       playlists: c.library.playlists.value,
     },
     actions: {
       ...actions('catalog'),
       selectSource: c.handleActivatePlugin,
+      notifyMissingAccount,
       setSearchQuery: (value) => {
         c.workspace.searchQuery.value = value
       },
@@ -449,6 +475,10 @@ export function createWorkbenchTrackFeatures(controller: WorkbenchController) {
         requestKind.value = kind
       },
       submit: async () => {
+        if (accountMissing.value) {
+          notifyMissingAccount()
+          return
+        }
         if (requestKind.value === 'search') await c.workspace.search(c.workspace.searchQuery.value)
         else await c.workspace.importFromUrl(c.workspace.importUrl.value)
       },

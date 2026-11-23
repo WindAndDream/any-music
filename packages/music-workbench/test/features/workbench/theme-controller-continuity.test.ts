@@ -257,6 +257,53 @@ function button(root: CatalogTestElement, label: string) {
 }
 
 describe('T09 actual classic/Studio roots with one real business controller', () => {
+  it.each([classic, studio])(
+    'updates the $id search field without rebuilding the catalog projection',
+    async (theme) => {
+      const f = mount()
+      await f.controller.modules.ready
+      await f.controller.workspace.search('previous')
+      f.selection.value = theme
+      await nextTick()
+      if (theme === classic) {
+        dispatchCatalogEvent(
+          findCatalogElement(
+            f.root,
+            (node) => node.props['aria-haspopup'] === 'dialog' && node.textContent === '发现',
+          ),
+          'onClick',
+        )
+        await nextTick()
+      }
+
+      const field = findCatalogElement(
+        f.root,
+        (node) => node.tag === 'input' && node.props.type === 'search',
+      )
+      const form = field.closest('form')!
+      const submit = findCatalogElement(form, (node) => node.props.type === 'submit')
+      const catalog = f.fixture.features.value.catalog
+      async function editQuery(text: string) {
+        field.value = text
+        dispatchCatalogEvent(field, 'onInput')
+        await nextTick()
+        expect(f.fixture.features.value.catalog).toBe(catalog)
+        expect(catalog.state.searchQuery).toBe(text)
+        expect(submit.props.disabled).toBe(!text)
+      }
+      await editQuery('音')
+      await editQuery('音乐')
+      await editQuery('音')
+      await editQuery('')
+      await editQuery('新歌曲')
+      expect(f.search).toHaveBeenCalledOnce()
+
+      dispatchCatalogEvent(form, 'onSubmit')
+      await vi.waitFor(() => expect(f.search).toHaveBeenCalledTimes(2))
+      expect(f.search).toHaveBeenLastCalledWith(expect.objectContaining({ query: '新歌曲' }))
+    },
+  )
+
   it('imports offline, checks only on playlist entry and releases descriptors without starting playback', async () => {
     const f = mount()
     await f.controller.modules.ready
