@@ -2,6 +2,7 @@ import type { StableValueStorage } from '@any-music/music-workbench'
 import {
   createProductGenerationStorage,
   loadProductGeneration,
+  PRODUCT_COMMIT_KEY,
 } from '@any-music/music-workbench/storage'
 import type { ProductGenerationBackend } from '@any-music/music-workbench/storage'
 import { invoke } from '@tauri-apps/api/core'
@@ -55,7 +56,7 @@ function generation(snapshot: ProductSnapshot): number {
 /** Interrupted staging uses unique IDs. Only the live and immediately preceding
  * generations are reachable; retaining abandoned chunks can exhaust WebView storage. */
 function compactGenerations(snapshot: ProductSnapshot): ProductSnapshot {
-  const pointer = snapshot.values['product-data:commit']
+  const pointer = snapshot.values[PRODUCT_COMMIT_KEY]
   const keep = new Set<string>()
   if (record(pointer)) {
     const prefix = `product-data:g${pointer.slot}:${pointer.id}:`
@@ -79,7 +80,7 @@ function compactGenerations(snapshot: ProductSnapshot): ProductSnapshot {
 }
 
 /** Generation and revision order complete native/renderer snapshots.
- * Each native write contains the complete staged map, including the single commit pointer. */
+ * Publish one complete local snapshot at the commit pointer, then queue its native mirror. */
 export async function createProductStorage(): Promise<StableValueStorage> {
   const nativeInput = await invoke<unknown>('load_product_data')
   const native = parse(nativeInput)
@@ -114,6 +115,7 @@ export async function createProductStorage(): Promise<StableValueStorage> {
   snapshot = compactGenerations(snapshot)
   let writes = Promise.resolve()
   let mirrorFailed = false
+  let stagedValues: ProductSnapshot['values'] | undefined
   function assertCurrentMirror(): void {
     if (localStorage.getItem(STORAGE_KEY) !== expectedLocal)
       throw new Error('Product mirror changed; reload before writing')
@@ -123,26 +125,32 @@ export async function createProductStorage(): Promise<StableValueStorage> {
       if (productWriting) throw new Error('Product storage is busy')
       assertCurrentMirror()
       productWriting = true
+      stagedValues = { ...snapshot.values }
       try {
         return operation()
       } finally {
+        stagedValues = undefined
         productWriting = false
       }
     },
-    read: <T>(key: string, fallback?: T) => (snapshot.values[key] as T | undefined) ?? fallback,
+    read: <T>(key: string, fallback?: T) =>
+      ((stagedValues ?? snapshot.values)[key] as T | undefined) ?? fallback,
     remove(key) {
-      // Reclamation runs immediately before the journal write. That next full snapshot
-      // persists all removals together; interruption here leaves the old mirror intact.
-      const values = { ...snapshot.values }
-      delete values[key]
-      snapshot = { ...snapshot, values }
+      if (!stagedValues) throw new Error('Product storage write requires an active transaction')
+      delete stagedValues[key]
     },
     write(key, value) {
       if (mirrorFailed) throw new Error('Native mirror failed; restart before writing')
+      if (!stagedValues) throw new Error('Product storage write requires an active transaction')
+      stagedValues[key] = value
+      // Stage and verify chunks in memory. A single localStorage value can publish the
+      // complete generation atomically, including reclamation and the new pointer.
+      if (key !== PRODUCT_COMMIT_KEY) return
+      assertCurrentMirror()
       const next: ProductSnapshot = {
         schemaVersion: 2,
         revision: snapshot.revision + 1,
-        values: { ...snapshot.values, [key]: value },
+        values: stagedValues,
       }
       const text = JSON.stringify(next)
       localStorage.setItem(STORAGE_KEY, text)
