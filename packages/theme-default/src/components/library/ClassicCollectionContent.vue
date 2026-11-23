@@ -11,6 +11,7 @@ import QueuePlatformHeading from '../music-sources/QueuePlatformHeading.vue'
 import QueueTrackGrid from '../music-sources/QueueTrackGrid.vue'
 import QueueViewControls from '../music-sources/QueueViewControls.vue'
 import ClassicCollectionSurface from './ClassicCollectionSurface.vue'
+import ClassicResultView from './ClassicResultView.vue'
 import PlaylistTrackHeading from './PlaylistTrackHeading.vue'
 
 const props = defineProps<{
@@ -124,91 +125,88 @@ const intro = computed(() =>
       class="listen-queue__results"
       :class="{ 'listen-queue__results--empty': !presentation.displayedTracks.value.length }"
     >
-      <Transition
-        :name="`queue-view-${presentation.arrangement.value === 'flat' ? 'back' : 'forward'}`"
+      <ClassicResultView
+        class="listen-queue__list"
+        :view-key="presentation.arrangement.value"
+        :reverse="presentation.arrangement.value === 'flat'"
+        :retain-track-grid="!presentation.virtualGrid.value"
         @before-leave="presentation.deactivateLeavingView"
-        @before-enter="presentation.activateView"
-        @leave-cancelled="presentation.activateView"
+        @before-switch="presentation.moveFocusFromView"
       >
-        <!-- Keep the arrangement controls in place while the two lists share the page slide. -->
-        <div :key="presentation.arrangement.value" class="listen-queue__list">
-          <MusicListEmptyState
-            v-if="!presentation.displayedTracks.value.length"
-            :icon="favorites ? 'heart' : 'queue'"
-            :title="
-              totalCount
-                ? `没有匹配的${playlist ? '歌单' : favorites ? '喜欢' : '待听'}歌曲`
-                : `还没有${playlist ? '歌单里的' : favorites ? '喜欢的' : '待听'}歌曲`
-            "
-            focus-title
-            >{{
-              totalCount
-                ? '调整筛选条件，找到想听的音乐。'
-                : playlist
-                  ? '从音乐列表中选择歌曲并加入这个歌单。'
-                  : favorites
-                    ? '在发现、待听、我的歌单或自定义音乐中，喜欢心动的歌曲。'
-                    : '在发现、我的喜欢、我的歌单或自定义音乐中，将想听的歌曲加入待听。'
-            }}</MusicListEmptyState
-          >
-          <QueueTrackGrid
-            :selectable="props.selectable"
-            :animate="!presentation.reorder.isSettling.value"
-            v-else-if="
-              presentation.arrangement.value === 'flat' || presentation.activePlatform.value
-            "
-            :tracks="presentation.displayedTracks.value"
-            :virtual="presentation.virtualGrid.value"
-            :continuity-key="presentation.continuityRegion.value ?? undefined"
-            :custom-tags-by-track-id="state.customTagsByTrackId"
-            :custom-names-by-track-id="state.customNamesByTrackId"
-            :date-label="favorites ? '喜欢' : '添加'"
-            :positions="presentation.positions.value"
-            :platform-names="state.platformNames"
-            :added-at-ms-by-track-id="state.addedAtMsByTrackId"
-            :current-track-id="state.currentTrackId ?? undefined"
-            :selected-ids="selected"
-            :dragged-id="presentation.reorder.draggedId.value"
-            :get-reorder-style="(id) => presentation.reorder.getItemStyle('track', id)"
-            :favorite-track-ids="favoriteIds"
-            :invalid-track-ids="invalidIds"
-            :download-busy="Boolean(state.downloadBusy)"
-            :display-mode="state.displayMode"
-            :mobile-columns="state.mobileColumns"
-            @select="emit('select', $event)"
-            @play="emit('play', $event)"
-            @favorite="emit('favorite', $event)"
-            @download="emit('download', $event)"
-            @show-actions="emit('showActions', $event)"
-            @drag-start="presentation.reorder.startTrackPress"
-            @shift="(id, direction) => presentation.reorder.shift('track', id, direction)"
-            @drag-cancel="presentation.reorder.clearDrag"
-          />
-          <QueuePlatformGrid
-            v-else
-            :groups="presentation.groups.value"
-            :continuity-key="presentation.continuityRegion.value ?? undefined"
-            :virtual="presentation.virtualGrid.value"
-            :selected-ids="selected"
-            :selectable="props.selectable"
-            :filtered="presentation.filtered.value"
-            :dragged-id="
-              presentation.reorder.dragKind.value === 'platform'
-                ? presentation.reorder.draggedId.value
-                : undefined
-            "
-            :get-reorder-style="(id) => presentation.reorder.getItemStyle('platform', id)"
-            :animate="!presentation.reorder.isSettling.value"
-            :display-mode="state.displayMode"
-            :mobile-columns="state.mobileColumns"
-            @open="presentation.navigation.open"
-            @select="presentation.togglePlatform"
-            @drag-start="presentation.reorder.startPlatformPress"
-            @shift="(id, direction) => presentation.reorder.shift('platform', id, direction)"
-            @drag-cancel="presentation.reorder.clearDrag"
-          />
-        </div>
-      </Transition>
+        <MusicListEmptyState
+          v-if="!presentation.displayedTracks.value.length"
+          :icon="favorites ? 'heart' : 'queue'"
+          :title="
+            totalCount
+              ? `没有匹配的${playlist ? '歌单' : favorites ? '喜欢' : '待听'}歌曲`
+              : `还没有${playlist ? '歌单里的' : favorites ? '喜欢的' : '待听'}歌曲`
+          "
+          focus-title
+          >{{
+            totalCount
+              ? '调整筛选条件，找到想听的音乐。'
+              : playlist
+                ? '从音乐列表中选择歌曲并加入这个歌单。'
+                : favorites
+                  ? '在发现、待听、我的歌单或自定义音乐中，喜欢心动的歌曲。'
+                  : '在发现、我的喜欢、我的歌单或自定义音乐中，将想听的歌曲加入待听。'
+          }}</MusicListEmptyState
+        >
+        <QueueTrackGrid
+          :selectable="props.selectable"
+          :animate="!presentation.reorder.isSettling.value"
+          v-else-if="presentation.arrangement.value === 'flat' || presentation.activePlatform.value"
+          :tracks="presentation.displayedTracks.value"
+          :virtual="presentation.virtualGrid.value"
+          :continuity-key="presentation.continuityRegion.value ?? undefined"
+          :custom-tags-by-track-id="state.customTagsByTrackId"
+          :custom-names-by-track-id="state.customNamesByTrackId"
+          :date-label="favorites ? '喜欢' : '添加'"
+          :positions="presentation.positions.value"
+          :platform-names="state.platformNames"
+          :added-at-ms-by-track-id="state.addedAtMsByTrackId"
+          :current-track-id="state.currentTrackId ?? undefined"
+          :selected-ids="selected"
+          :dragged-id="presentation.reorder.draggedId.value"
+          :get-reorder-style="(id) => presentation.reorder.getItemStyle('track', id)"
+          :favorite-track-ids="favoriteIds"
+          :invalid-track-ids="invalidIds"
+          :download-busy="Boolean(state.downloadBusy)"
+          :display-mode="state.displayMode"
+          :mobile-columns="state.mobileColumns"
+          @select="emit('select', $event)"
+          @play="emit('play', $event)"
+          @favorite="emit('favorite', $event)"
+          @download="emit('download', $event)"
+          @show-actions="emit('showActions', $event)"
+          @drag-start="presentation.reorder.startTrackPress"
+          @shift="(id, direction) => presentation.reorder.shift('track', id, direction)"
+          @drag-cancel="presentation.reorder.clearDrag"
+        />
+        <QueuePlatformGrid
+          v-else
+          :groups="presentation.groups.value"
+          :continuity-key="presentation.continuityRegion.value ?? undefined"
+          :virtual="presentation.virtualGrid.value"
+          :selected-ids="selected"
+          :selectable="props.selectable"
+          :filtered="presentation.filtered.value"
+          :dragged-id="
+            presentation.reorder.dragKind.value === 'platform'
+              ? presentation.reorder.draggedId.value
+              : undefined
+          "
+          :get-reorder-style="(id) => presentation.reorder.getItemStyle('platform', id)"
+          :animate="!presentation.reorder.isSettling.value"
+          :display-mode="state.displayMode"
+          :mobile-columns="state.mobileColumns"
+          @open="presentation.navigation.open"
+          @select="presentation.togglePlatform"
+          @drag-start="presentation.reorder.startPlatformPress"
+          @shift="(id, direction) => presentation.reorder.shift('platform', id, direction)"
+          @drag-cancel="presentation.reorder.clearDrag"
+        />
+      </ClassicResultView>
     </div>
   </ClassicCollectionSurface>
 </template>

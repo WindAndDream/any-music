@@ -5,7 +5,7 @@ import type { UiPluginCenterItem } from '@any-music/ui/theme'
 import { computed } from 'vue'
 
 const props = defineProps<{ item: UiPluginCenterItem; busy: boolean }>()
-const emit = defineEmits<{ setEnabled: [enabled: boolean]; retry: []; manage: [] }>()
+const emit = defineEmits<{ setEnabled: [enabled: boolean]; details: []; manage: [] }>()
 function checkAvailability(event: Event): void {
   if (!props.item.unavailableReason) return
   event.preventDefault()
@@ -17,7 +17,7 @@ function changeEnabled(event: Event): void {
   // The host may reject disabling its last source; retain the confirmed state.
   input.checked = props.item.enabled
 }
-const failure = computed(() => getPluginFailure(props.item))
+const hasError = computed(() => Boolean(getPluginFailure(props.item)))
 const label = computed(() => getPluginStatusLabel(props.item))
 </script>
 
@@ -35,18 +35,25 @@ const label = computed(() => getPluginStatusLabel(props.item))
       <h2>{{ item.name }}</h2>
       <p>{{ item.description }}</p>
       <small v-if="item.publisher">发布者 {{ item.publisher }} · 代次 {{ item.generation }}</small>
-      <p v-if="failure" role="alert">{{ failure }}</p>
     </div>
     <footer class="studio-plugin-card__footer">
       <span
         :data-enabled="item.enabled"
-        :data-error="!!failure"
+        :data-error="hasError"
         :data-development-status="item.origin === 'builtin' ? item.developmentStatus : undefined"
         :role="item.status.status === 'loading' ? 'status' : undefined"
         >{{ label }}</span
       >
       <div class="studio-plugin-card__actions">
-        <button v-if="failure" type="button" @click="emit('retry')">重试</button>
+        <button
+          type="button"
+          :disabled="busy"
+          :aria-label="`查看插件介绍 ${item.name}`"
+          aria-haspopup="dialog"
+          @click="emit('details')"
+        >
+          详情
+        </button>
         <button
           v-if="item.origin === 'external'"
           type="button"

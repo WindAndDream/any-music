@@ -17,7 +17,7 @@ vi.mock('@any-music/ui/components/AppDialog.vue', () => ({
     setup:
       (props, { slots }) =>
       () =>
-        props.open ? h('dialog', slots.default?.()) : null,
+        props.open ? h('dialog', [slots.default?.(), slots.footer?.()]) : null,
   }),
 }))
 
@@ -69,7 +69,7 @@ describe('classic specialist availability and plugin controls', () => {
     },
   )
 
-  it('forwards only named enable and retry actions from the built-in plugin page', () => {
+  it('forwards enablement from the card and retry from the plugin introduction', async () => {
     const setEnabled = vi.fn(),
       retry = vi.fn()
     const feature: UiThemeFeatureMap['plugins'] = {
@@ -104,16 +104,23 @@ describe('classic specialist availability and plugin controls', () => {
     )
     const checkbox = findCatalogElement(root, (node) => node.props.type === 'checkbox')
     ;(checkbox.props.onChange as (event: unknown) => void)({ target: { checked: true } })
+    expect(setEnabled).toHaveBeenCalledExactlyOnceWith('feature.tags', true)
+    expect(retry).not.toHaveBeenCalled()
+    dispatchCatalogEvent(
+      findCatalogElement(root, (node) => node.props['aria-label'] === '查看插件介绍 标签管理'),
+      'onClick',
+    )
+    await nextTick()
+    const dialog = findCatalogElement(root, (node) => node.tag === 'dialog')
     dispatchCatalogEvent(
       findCatalogElement(
-        root,
-        (node) => node.tag === 'button' && node.textContent.includes('重试'),
+        dialog,
+        (node) => node.tag === 'button' && node.textContent.includes('重试加载'),
       ),
       'onClick',
     )
-    expect(setEnabled).toHaveBeenCalledWith('feature.tags', true)
-    expect(retry).toHaveBeenCalledWith('feature.tags')
-    expect(root.textContent).toContain('加载失败')
+    expect(retry).toHaveBeenCalledExactlyOnceWith('feature.tags')
+    expect(dialog.textContent).toContain('错误信息加载失败')
     unmount()
   })
 })

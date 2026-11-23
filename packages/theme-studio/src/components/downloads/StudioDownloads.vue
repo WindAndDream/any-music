@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { cloneCatalogTrackFilterState } from '@any-music/ui/catalog'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
+import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
 import {
   getDownloadEntryError,
   getDownloadListEntries,
@@ -141,15 +142,18 @@ function remove() {
     <StudioFeatureStatus :availability="feature.availability" :status="feature.status" />
     <fieldset :disabled="feature.availability.status !== 'available'">
       <div class="studio-actions">
-        <button
-          v-for="[id, title] in statuses"
-          :key="id"
-          type="button"
-          :aria-pressed="state.statusFilter === id"
-          @click="feature.actions.setStatusFilter(id)"
-        >
-          {{ title }}</button
-        ><label
+        <SlidingSegments class="studio-segments" role="group" aria-label="下载状态">
+          <button
+            v-for="[id, title] in statuses"
+            :key="id"
+            type="button"
+            :aria-pressed="state.statusFilter === id"
+            @click="feature.actions.setStatusFilter(id)"
+          >
+            {{ title }}
+          </button>
+        </SlidingSegments>
+        <label
           ><input type="checkbox" :checked="allSelected" @change="toggleAll" />全选匹配任务</label
         ><span>已选 {{ selected.length }}</span
         ><StudioDisplayControls

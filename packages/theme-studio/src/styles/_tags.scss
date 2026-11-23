@@ -1,15 +1,26 @@
 :where(.am-theme-studio) {
   .studio-tag-desk {
+    container: studio-tag-desk / inline-size;
     min-inline-size: 0;
   }
   .studio-tag-desk__heading {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas:
+      'intro count create'
+      'divider divider divider'
+      'kinds kinds kinds';
     align-items: start;
-    gap: var(--am-space-3);
-    margin-block-end: var(--am-space-5);
-    padding-block-end: var(--am-space-4);
+    column-gap: var(--am-space-2);
+  }
+  .studio-tag-desk__heading::after {
+    grid-area: divider;
+    margin-block: var(--am-space-4) var(--am-space-5);
     border-block-end: 1px solid var(--am-color-border);
+    content: '';
+  }
+  .studio-tag-desk__intro {
+    grid-area: intro;
   }
   .studio-tag-desk__heading h2 {
     display: flex;
@@ -25,19 +36,10 @@
     font-size: var(--am-font-size-xs);
     line-height: 1.6;
   }
-  .studio-tag-desk__heading-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--am-space-3);
-  }
-  @container (max-width: 600px) {
-    .studio-tag-desk__heading-actions {
-      flex-direction: column;
-      align-items: end;
-      gap: var(--am-space-2);
-    }
-  }
-  .studio-tag-desk__heading small {
+  .studio-tag-desk__count {
+    grid-area: count;
+    justify-self: end;
+    align-self: center;
     padding: var(--am-space-1) var(--am-space-2);
     border-radius: var(--am-radius-control);
     background: var(--am-color-primary-container);
@@ -45,11 +47,38 @@
     font-size: var(--am-font-size-sm);
     white-space: nowrap;
   }
-  .studio-tag-desk__heading button {
-    display: inline-flex;
+  .studio-tag-desk__kinds {
+    grid-area: kinds;
+  }
+  .studio-tag-desk__create {
+    grid-area: create;
+    justify-self: end;
     align-items: center;
-    gap: var(--am-space-2);
     white-space: nowrap;
+  }
+  @container studio-tag-desk (max-width: 600px) {
+    .studio-tag-desk__heading {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'intro count'
+        'divider divider'
+        'kinds create';
+      align-items: center;
+    }
+    .studio-tag-desk__heading::after {
+      margin-block: var(--am-space-3);
+    }
+    .studio-tag-desk__heading .studio-tag-desk__kinds {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .studio-tag-desk__kinds button,
+    .studio-tag-desk__create {
+      gap: var(--am-space-1);
+      padding-inline: var(--am-space-2);
+      font-size: var(--am-font-size-xs);
+      white-space: nowrap;
+    }
   }
   .studio-tag-desk__tags {
     display: flex;
@@ -164,10 +193,6 @@
     inline-size: 100%;
     min-inline-size: 0;
     box-sizing: border-box;
-  }
-  .studio-tag-desk__empty {
-    padding: var(--am-space-7);
-    text-align: center;
   }
   .studio-tag-desk__error {
     color: var(--am-color-danger);

@@ -9,6 +9,7 @@ import {
   canRefreshCatalogDrawer,
 } from '@any-music/ui/catalog'
 import LoadingSpinner from '@any-music/ui/components/LoadingSpinner.vue'
+import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed } from 'vue'
 
@@ -72,15 +73,18 @@ const statuses = [
     </h2>
     <p v-if="!feature.state.drawers.length">搜索或导入后，音乐列表会保存在这里。</p>
     <div class="studio-actions">
-      <button
-        v-for="[id, title] in statuses"
-        :key="id"
-        type="button"
-        :aria-pressed="stateFilter === id"
-        @click="stateFilter = id"
-      >
-        {{ title }}</button
-      ><button type="button" @click="listFilterOpen = true">筛选音乐列表</button
+      <SlidingSegments class="studio-segments" role="group" aria-label="音乐列表状态">
+        <button
+          v-for="[id, title] in statuses"
+          :key="id"
+          type="button"
+          :aria-pressed="stateFilter === id"
+          @click="stateFilter = id"
+        >
+          {{ title }}
+        </button>
+      </SlidingSegments>
+      <button type="button" @click="listFilterOpen = true">筛选音乐列表</button
       ><label
         ><input
           type="checkbox"

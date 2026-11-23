@@ -12,6 +12,8 @@ import {
   mountCatalogComponent,
 } from '../../helpers/test-renderer'
 
+const helpTransition = vi.hoisted(() => ({ finish: undefined as (() => void) | undefined }))
+
 // 执行真实列表、编辑器与操作器；仅替换浏览器弹层和转场宿主，不启动产品界面。
 vi.mock('vue', async (importOriginal) => {
   const vue = await importOriginal<typeof import('vue')>()
@@ -22,19 +24,37 @@ vi.mock('vue', async (importOriginal) => {
       () =>
         slots.default?.(),
   })
-  return { ...vue, Transition: passthrough, Teleport: passthrough }
+  const transition = vue.defineComponent({
+    inheritAttrs: false,
+    setup(_props, { slots, attrs }) {
+      let wasOpen = false
+      return () => {
+        const children = slots.default?.()
+        if (attrs.name === 'app-dialog') {
+          const open = Boolean(children?.some((child) => child.type !== vue.Comment))
+          if (wasOpen && !open) helpTransition.finish = attrs.onAfterLeave as () => void
+          wasOpen = open
+        }
+        return children
+      }
+    },
+  })
+  return { ...vue, Transition: transition, Teleport: passthrough }
 })
 vi.mock('@any-music/ui/components/BottomSheet.vue', async () => {
   const vue = await import('vue')
   return {
     default: vue.defineComponent({
-      props: ['open', 'title'],
+      props: ['open', 'title', 'suspended'],
       inheritAttrs: false,
       setup:
         (props, { slots }) =>
         () =>
           props.open
-            ? vue.h('section', { 'aria-label': props.title }, [slots.default?.(), slots.footer?.()])
+            ? vue.h('section', { 'aria-label': props.title, inert: props.suspended || undefined }, [
+                slots.default?.(),
+                slots.footer?.(),
+              ])
             : null,
     }),
   }
@@ -57,7 +77,10 @@ beforeEach(() => {
   vi.stubGlobal('Document', CatalogTestElement)
   vi.stubGlobal('ShadowRoot', CatalogTestElement)
 })
-afterEach(() => vi.unstubAllGlobals())
+afterEach(() => {
+  helpTransition.finish = undefined
+  vi.unstubAllGlobals()
+})
 
 function createDrawer(id: string): CatalogDrawerView {
   return {
@@ -449,6 +472,71 @@ describe('CatalogDrawerList interactions', () => {
     view.unmount()
   })
 
+  it.each([
+    ['文本筛选', '列表名称、搜索词、链接或来源。'],
+    ['平台筛选', '未选择时显示全部平台；选择多个平台时匹配其中任意一个。'],
+    ['命名筛选', '按是否设置自定义名称筛选。'],
+    ['搜索时间', '按搜索或导入的创建日期筛选，支持多个日期区间。'],
+  ])(
+    'opens a modal for %s and restores the filter sheet after Escape',
+    async (label, description) => {
+      const keyboard = new EventTarget()
+      vi.stubGlobal('window', keyboard)
+      const view = mountList([createDrawer('晨间')])
+      clickText(view.root, label)
+      await nextTick()
+      expect(view.root.textContent).not.toContain(description.slice(0, -1))
+
+      const help = findCatalogElement(
+        view.root,
+        (node) => node.props['aria-label'] === `${label}说明`,
+      )
+      expect(help.props['aria-haspopup']).toBe('dialog')
+      dispatchCatalogEvent(help, 'onClick', false)
+      await nextTick()
+      const sheet = findCatalogElement(
+        view.root,
+        (node) => node.props['aria-label'] === '音乐列表筛选器',
+      )
+      const dialog = findCatalogElement(view.root, (node) => node.props.role === 'dialog')
+      expect(dialog.props['aria-modal']).toBe('true')
+      expect(dialog.textContent).toContain(`${label}说明`)
+      expect(dialog.textContent).toContain(description)
+      expect(sheet.props.inert).toBe(true)
+
+      const escape = Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' })
+      keyboard.dispatchEvent(escape)
+      await nextTick()
+      expect(escape.defaultPrevented).toBe(true)
+      expect(view.root.textContent).not.toContain(description)
+      expect(sheet.props.inert).toBe(true)
+      expect(helpTransition.finish).toBeDefined()
+      helpTransition.finish?.()
+      await nextTick()
+      expect(sheet.props.inert).toBeUndefined()
+      expect(view.filterOpen.value).toBe(true)
+      view.unmount()
+    },
+  )
+
+  it('shows a text hint in the platform filter until a platform is available', async () => {
+    const view = mountList([])
+    clickText(view.root, '平台筛选')
+    await nextTick()
+
+    expect(view.root.textContent).toContain('当前无任何平台')
+
+    view.items.value = [createDrawer('晨间')]
+    await nextTick()
+    expect(view.root.textContent).not.toContain('当前无任何平台')
+    const platform = findCatalogElement(
+      view.root,
+      (node) => node.tag === 'label' && node.textContent.includes('测试源'),
+    )
+    expect(findCatalogElement(platform, (node) => node.tag === 'input').props.type).toBe('checkbox')
+    view.unmount()
+  })
+
   it('shows only list dimensions, previews text and cancels or applies the complete draft', async () => {
     const view = mountList([createDrawer('晨间'), createDrawer('夜曲')])
     expect(view.root.textContent).toContain('文本筛选')
@@ -463,13 +551,35 @@ describe('CatalogDrawerList interactions', () => {
       (node) => node.tag === 'input' && node.props.type === 'search',
     )
     expect(input.props.placeholder).toBe('输入列表名称、搜索词、链接或来源')
-    input.value = '夜曲'
+    expect(input.props['aria-label']).toBe('搜索音乐列表')
+    input.value = '无对应列表'
     input.dispatchListeners('input', { target: input })
     await nextTick()
-    expect(view.root.textContent).toContain('1 / 2 个列表')
     expect(view.summary.value?.visibleCount).toBe(2)
     clickText(view.root, '确定')
     await nextTick()
+    const summary = findCatalogElement(view.root, (node) => node.props['aria-label'] === '筛选条件')
+    expect(summary.textContent).toContain('无对应列表')
+    expect(summary.textContent).not.toContain('匹配的音乐列表')
+    expect(summary.textContent).not.toContain('没有匹配结果')
+    const cancel = findCatalogElement(
+      view.root,
+      (node) => node.tag === 'button' && node.textContent === '取消',
+    )
+    const apply = findCatalogElement(
+      view.root,
+      (node) => node.tag === 'button' && node.textContent.trim() === '应用筛选',
+    )
+    expect(cancel.parent).toBe(apply.parent)
+    const footer = findCatalogElement(
+      view.root,
+      (node) => node.props.class === 'classic-filter-footer',
+    )
+    const status = findCatalogElement(footer, (node) => node.props.role === 'status')
+    expect(status.textContent).toBe('匹配 0 / 2 个列表')
+    expect(findCatalogElement(status, (node) => node.tag === 'strong').textContent).toBe(
+      '0 / 2 个列表',
+    )
     clickText(view.root, '取消')
     await nextTick()
     expect(view.summary.value?.filterCount).toBe(0)

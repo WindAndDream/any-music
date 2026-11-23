@@ -2,6 +2,7 @@
 import { cloneCatalogTrackFilterState } from '@any-music/ui/catalog'
 import type { CatalogTrackFilterState } from '@any-music/ui/catalog'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
+import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
 import { useHistoryCollection, usePlaylistPickerOpen } from '@any-music/ui/library'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed, shallowRef } from 'vue'
@@ -103,21 +104,23 @@ function clear() {
     </header>
     <StudioFeatureStatus :availability="feature.availability" :status="feature.status" />
     <fieldset :disabled="feature.availability.status !== 'available'">
-      <div class="studio-actions" role="group" aria-label="播放历史排列方式">
-        <button
-          type="button"
-          :aria-pressed="history.arrangement.value === 'flat'"
-          @click="history.setArrangement('flat')"
-        >
-          全部记录
-        </button>
-        <button
-          type="button"
-          :aria-pressed="history.arrangement.value === 'platform'"
-          @click="history.setArrangement('platform')"
-        >
-          按平台
-        </button>
+      <div class="studio-actions">
+        <SlidingSegments class="studio-segments" role="group" aria-label="播放历史排列方式">
+          <button
+            type="button"
+            :aria-pressed="history.arrangement.value === 'flat'"
+            @click="history.setArrangement('flat')"
+          >
+            全部记录
+          </button>
+          <button
+            type="button"
+            :aria-pressed="history.arrangement.value === 'platform'"
+            @click="history.setArrangement('platform')"
+          >
+            按平台
+          </button>
+        </SlidingSegments>
         <StudioDisplayControls
           :state="displayState"
           :actions="displayActions"

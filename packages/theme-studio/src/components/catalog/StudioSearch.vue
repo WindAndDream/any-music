@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed } from 'vue'
 
@@ -45,7 +46,11 @@ function submit(): void {
         </option>
       </select></label
     >
-    <div class="studio-request-kinds" role="group" aria-label="请求方式">
+    <SlidingSegments
+      class="studio-segments studio-request-kinds"
+      role="group"
+      aria-label="请求方式"
+    >
       <button
         type="button"
         :aria-pressed="feature.state.requestKind === 'search'"
@@ -62,7 +67,7 @@ function submit(): void {
       >
         导入链接
       </button>
-    </div>
+    </SlidingSegments>
     <label v-if="feature.state.requestKind === 'search'" class="studio-field"
       >搜索关键词<input
         type="search"

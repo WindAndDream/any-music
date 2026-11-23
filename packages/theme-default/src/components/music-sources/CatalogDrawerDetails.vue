@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useCopyText } from '@any-music/ui/catalog'
+import { useActionFeedback, useCopyText } from '@any-music/ui/catalog'
 import type { CatalogDrawerView } from '@any-music/ui/catalog'
 import {
   formatCatalogDrawerCreatedAt,
@@ -8,7 +8,7 @@ import {
   isCatalogDrawerDisconnected,
 } from '@any-music/ui/catalog'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
-import { computed, useTemplateRef } from 'vue'
+import { computed, useTemplateRef, watch } from 'vue'
 
 /** 操作弹窗中的只读卡片全文；直接消费当前列表投影，不触发请求或保存额外副本。 */
 const props = defineProps<{ drawer: CatalogDrawerView; suspended?: boolean }>()
@@ -29,9 +29,12 @@ const inputCopy = useCopyText({
   successMessage: () =>
     props.drawer.kind === 'search' ? '原始搜索词已复制。' : '导入链接已复制。',
 })
-const copyFeedback = computed(() =>
-  [informationCopy.feedback.value, inputCopy.feedback.value].filter((value) => value !== undefined),
-)
+const showFeedback = useActionFeedback()
+for (const { feedback } of [informationCopy, inputCopy]) {
+  watch(feedback, (result) => {
+    if (result) showFeedback(result)
+  })
+}
 const kindLabel = computed(() => getCatalogDrawerKindLabel(props.drawer))
 const statusLabel = computed(() => getCatalogDrawerStatusLabel(props.drawer))
 const accountLabel = computed(() => {
@@ -147,15 +150,6 @@ const paginationLabel = computed(() => {
         </dd>
       </div>
     </dl>
-    <p
-      v-for="(feedback, index) in copyFeedback"
-      :key="index"
-      class="catalog-list-details__feedback"
-      :data-status="feedback.status"
-      role="status"
-    >
-      {{ feedback.message }}
-    </p>
   </section>
 </template>
 
@@ -275,17 +269,6 @@ const paginationLabel = computed(() => {
 .catalog-list-details__copy:focus-visible {
   outline: var(--am-focus-ring);
   outline-offset: -3px;
-}
-
-.catalog-list-details__feedback {
-  margin: 0;
-  color: var(--am-color-text-secondary);
-  font-size: var(--am-font-size-xs);
-  overflow-wrap: anywhere;
-}
-
-.catalog-list-details__feedback[data-status='error'] {
-  color: var(--am-color-danger);
 }
 
 .catalog-list-details dt {

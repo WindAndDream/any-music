@@ -1,4 +1,18 @@
-// Collection pages share state buttons and a sliding selection surface.
+// Match the row occupied by 44px controls inside the inset arrangement switch.
+@mixin toolbar-divider {
+  --am-collection-toolbar-inset-start: var(--am-space-2);
+  min-block-size: calc(
+    44px + 2 * var(--am-space-1) + var(--am-collection-toolbar-inset-start) + var(--am-space-2) +
+      1px
+  );
+  padding-block: var(--am-collection-toolbar-inset-start) var(--am-space-2);
+  border-block-end: 1px solid var(--am-color-border);
+
+  @media (max-width: 768px) {
+    --am-collection-toolbar-inset-start: 0px;
+  }
+}
+
 @mixin state-button {
   display: inline-flex;
   flex: 0 0 auto;
@@ -74,5 +88,36 @@
       background: transparent;
       box-shadow: none;
     }
+  }
+}
+
+@mixin inset-state-tabs {
+  @include state-tabs(2);
+  --am-state-tab-gap: var(--am-space-1);
+  --am-state-tab-direction: 1;
+  min-inline-size: 0;
+  column-gap: var(--am-state-tab-gap);
+  padding: var(--am-space-1);
+  border: 0;
+  border-radius: var(--am-radius-control);
+  background: var(--am-color-surface);
+  box-shadow: inset 0 0 0 1px var(--am-color-border);
+
+  &:dir(rtl) {
+    --am-state-tab-direction: -1;
+  }
+
+  &::before {
+    inset-block: var(--am-space-1);
+    inset-inline-start: var(--am-space-1);
+    inline-size: calc((100% - 2 * var(--am-space-1) - var(--am-state-tab-gap)) / 2);
+    background: var(--am-color-primary-container);
+    box-shadow: none;
+    transform: translateX(
+      calc(
+        var(--am-state-tab-index, 0) * var(--am-state-tab-direction) *
+          (100% + var(--am-state-tab-gap))
+      )
+    );
   }
 }

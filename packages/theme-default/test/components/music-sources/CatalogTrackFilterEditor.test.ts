@@ -1,12 +1,13 @@
 import type { CatalogTrackFilterState } from '@any-music/ui'
 import { createCatalogTrackFilterState } from '@any-music/ui'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { nextTick, shallowRef } from 'vue'
+import { defineComponent, h, nextTick, shallowRef } from 'vue'
 
 import CatalogFilterCalendar from '../../../src/components/music-sources/CatalogFilterCalendar.vue'
 import CatalogFilterHistoryList from '../../../src/components/music-sources/CatalogFilterHistoryList.vue'
 import CatalogTrackFilterEditor from '../../../src/components/music-sources/CatalogTrackFilterEditor.vue'
 import CatalogTrackFilterSummary from '../../../src/components/music-sources/CatalogTrackFilterSummary.vue'
+import CollectionFilterSheet from '../../../src/components/music-sources/CollectionFilterSheet.vue'
 
 // Node 宿主执行实际转场生命周期和焦点逻辑，CSS 动画由生产构建保留。
 vi.mock('vue', async (importOriginal) => {
@@ -93,7 +94,7 @@ describe('catalog track filter editor interactions', () => {
     view.unmount()
   })
 
-  it('previews platform unions and displays names when restoring platform history', async () => {
+  it('previews platform unions and shows every saved platform before restoring the group', async () => {
     const filters = shallowRef<CatalogTrackFilterState>({
       ...createCatalogTrackFilterState(),
       platformIds: ['source-a'],
@@ -101,28 +102,37 @@ describe('catalog track filter editor interactions', () => {
       searchFilters: [{ query: '关键词' }],
     })
     const preview = vi.fn()
-    const view = mountCatalogComponent(CatalogTrackFilterEditor, {
-      dimension: 'platforms',
-      filterContext: 'drawers',
-      tagStats: [],
-      platformStats: [
-        { id: 'source-a', name: '甲平台', count: 2 },
-        { id: 'source-b', name: '乙平台', count: 3 },
-      ],
-      historyEntries: [
-        {
-          dimension: 'platforms',
-          filters: { ...createCatalogTrackFilterState(), platformIds: ['source-b'] },
-        },
-      ],
-      get filters() {
-        return filters.value
-      },
-      'onUpdate:filters': (next: CatalogTrackFilterState) => {
-        filters.value = next
-      },
-      onPreviewChange: preview,
+    const Host = defineComponent({
+      setup: () => () =>
+        h(CollectionFilterSheet, { open: true, title: '音乐列表筛选器' }, () =>
+          h(CatalogTrackFilterEditor, {
+            dimension: 'platforms',
+            filterContext: 'drawers',
+            tagStats: [],
+            platformStats: [
+              { id: 'source-a', name: '甲平台', count: 2 },
+              { id: 'source-b', name: '乙平台', count: 3 },
+              { id: 'source-c', name: '丙平台', count: 4 },
+            ],
+            historyEntries: [
+              {
+                scopeId: 'catalog:drawers',
+                dimension: 'platforms',
+                filters: {
+                  ...createCatalogTrackFilterState(),
+                  platformIds: ['source-b', 'source-c'],
+                },
+              },
+            ],
+            filters: filters.value,
+            'onUpdate:filters': (next) => {
+              filters.value = next
+            },
+            onPreviewChange: preview,
+          }),
+        ),
     })
+    const view = mountCatalogComponent(Host, {})
     const platform = findCatalogElement(
       view.root,
       (node) => node.tag === 'label' && node.textContent.includes('乙平台'),
@@ -133,9 +143,30 @@ describe('catalog track filter editor interactions', () => {
     await nextTick()
     expect(filters.value.platformIds).toEqual(['source-a', 'source-b'])
     expect(preview).toHaveBeenLastCalledWith(filters.value)
-    dispatchCatalogEvent(findButton(view.root, '乙平台'), 'onClick', false)
+    const history = findCatalogElement(
+      view.root,
+      (node) => node.props['aria-label'] === '查看平台筛选历史 乙平台；丙平台',
+    )
+    expect(history.props['aria-haspopup']).toBe('dialog')
+    expect(
+      history.children
+        .find((node) => node.tag === 'span')
+        ?.children.filter((node) => node.tag === 'span')
+        .map((chip) => chip.textContent.trim()),
+    ).toEqual(['乙平台', '丙平台'])
+    dispatchCatalogEvent(history, 'onClick', false)
     await nextTick()
-    expect(filters.value.platformIds).toEqual(['source-b'])
+    const dialog = findCatalogElement(
+      view.root,
+      (node) => node.props.role === 'dialog' && node.props['aria-modal'] === 'true',
+    )
+    expect(dialog.textContent).toContain('乙平台')
+    expect(dialog.textContent).toContain('丙平台')
+    expect(filters.value.platformIds).toEqual(['source-a', 'source-b'])
+    dispatchCatalogEvent(findButton(dialog, '恢复筛选'), 'onClick', false)
+    await nextTick()
+    await nextTick()
+    expect(filters.value.platformIds).toEqual(['source-b', 'source-c'])
     expect(filters.value.naming).toBe('custom')
     expect(filters.value.searchFilters).toEqual([{ query: '关键词' }])
     expect(view.root.textContent).not.toContain('source-b')
@@ -206,6 +237,12 @@ describe('catalog track filter editor interactions', () => {
       pendingRange,
       (node) => node.tag === 'button' && node.props['aria-label'] === '设置结束日期',
     )
+    const startControl = findButton(view.root, '起始时间')
+    const endControl = findButton(view.root, '结束时间')
+    expect(startControl.parent).toBe(endControl.parent)
+    expect(startControl.parent?.props.role).toBe('group')
+    const controls = startControl.parent?.parent
+    expect(controls?.props.class).not.toContain('catalog-date-controls--with-action')
     expect(startSummary.props.type).toBe('button')
     expect(endSummary.props.type).toBe('button')
     expect(startSummary.props['aria-pressed']).toBe(true)
@@ -226,11 +263,8 @@ describe('catalog track filter editor interactions', () => {
     await nextTick()
     expect(startSummary.props['aria-pressed']).toBe(false)
     expect(endSummary.props['aria-pressed']).toBe(true)
-    expect(
-      findCatalogElement(view.root, (node) => node.props['aria-label'] === '设置结束日期').props[
-        'aria-pressed'
-      ],
-    ).toBe(true)
+    expect(endControl.props['aria-pressed']).toBe(true)
+    expect(controls?.props.class).toContain('catalog-date-controls--with-action')
     expect(filters.value.publishedRanges).toEqual([])
     expect(
       findCatalogElement(
@@ -248,11 +282,7 @@ describe('catalog track filter editor interactions', () => {
     await nextTick()
     expect(startSummary.props['aria-pressed']).toBe(true)
     expect(endSummary.props['aria-pressed']).toBe(false)
-    expect(
-      findCatalogElement(view.root, (node) => node.props['aria-label'] === '设置起始日期').props[
-        'aria-pressed'
-      ],
-    ).toBe(true)
+    expect(startControl.props['aria-pressed']).toBe(true)
     expect(findButton(view.root, '加入时间段').props.disabled).toBe(false)
     expect(() =>
       findCatalogElement(pendingRange, (node) => /^起始\s*正在设置$/u.test(node.textContent)),
@@ -260,11 +290,7 @@ describe('catalog track filter editor interactions', () => {
     expect(() =>
       findCatalogElement(pendingRange, (node) => /^结束\s*正在设置$/u.test(node.textContent)),
     ).toThrow()
-    dispatchCatalogEvent(
-      findCatalogElement(view.root, (node) => node.props['aria-label'] === '设置结束日期'),
-      'onClick',
-      false,
-    )
+    dispatchCatalogEvent(endControl, 'onClick', false)
     await nextTick()
     const firstDay = findCatalogElement(
       view.root,
@@ -278,10 +304,8 @@ describe('catalog track filter editor interactions', () => {
     expect(filters.value.publishedRanges).toEqual([{ from: selectedDate, to: selectedDate }])
     expect(view.root.textContent).toContain(`${selectedDate} 至 ${selectedDate}`)
     expect(() => findButton(view.root, '加入时间段')).toThrow()
-    expect(
-      findCatalogElement(view.root, (node) => node.props['aria-label'] === '设置起始日期')
-        .isFocused,
-    ).toBe(true)
+    expect(controls?.props.class).not.toContain('catalog-date-controls--with-action')
+    expect(startControl.isFocused).toBe(true)
     view.unmount()
   })
 
@@ -302,14 +326,8 @@ describe('catalog track filter editor interactions', () => {
         filters.value = next
       },
     })
-    const start = findCatalogElement(
-      view.root,
-      (node) => node.tag === 'button' && node.props['aria-label'] === '设置起始日期',
-    )
-    const end = findCatalogElement(
-      view.root,
-      (node) => node.tag === 'button' && node.props['aria-label'] === '设置结束日期',
-    )
+    const start = findButton(view.root, '起始时间')
+    const end = findButton(view.root, '结束时间')
     expect(end.props['aria-pressed']).toBe(true)
     dispatchCatalogEvent(start, 'onClick', false)
     await nextTick()
@@ -409,8 +427,6 @@ describe('catalog track filter editor interactions', () => {
         ...createCatalogTrackFilterState(),
         durationRanges: [{ minMs: 60_000 }, { maxMs: 180_000 }],
       },
-      resultCount: 2,
-      totalCount: 3,
       onEdit: edit,
     })
     dispatchCatalogEvent(findButton(view.root, '3 分钟 以内'), 'onClick', false)
@@ -786,7 +802,12 @@ describe('catalog track filter editor interactions', () => {
           : '恢复筛选 1 分钟 至 3 分钟；0.5 分钟 以内'
       const record = findCatalogElement(view.root, (node) => node.props['aria-label'] === label)
       expect(
-        record.children.filter((node) => node.tag === 'span').map((node) => node.textContent),
+        (dimension === 'tags'
+          ? record.children.find((node) => node.tag === 'span')!.children
+          : record.children
+        )
+          .filter((node) => node.tag === 'span')
+          .map((node) => node.textContent.trim()),
       ).toEqual(
         dimension === 'tags' ? entries[1]!.filters.tags : ['1 分钟 至 3 分钟', '0.5 分钟 以内'],
       )

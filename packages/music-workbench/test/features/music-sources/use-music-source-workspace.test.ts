@@ -42,6 +42,52 @@ describe('useMusicSourceWorkspace', () => {
     setActivePinia(createPinia())
   })
 
+  it('includes request drafts in workspace saves without scheduling draft-only writes', () => {
+    vi.useFakeTimers()
+    vi.stubGlobal('window', { clearTimeout, setTimeout })
+    const draftDocument = Object.assign(new EventTarget(), { hidden: false })
+    vi.stubGlobal('document', draftDocument)
+    const { scope, workspace } = createWorkspaceWithFallback(createPlugin(vi.fn(), vi.fn()))
+    try {
+      vi.advanceTimersByTime(1000)
+      repositoryMock.save.mockClear()
+      workspace.searchQuery.value = '测试'
+      vi.advanceTimersByTime(500)
+      workspace.searchQuery.value = '测试歌曲'
+      vi.advanceTimersByTime(500)
+      workspace.searchQuery.value = '测试歌'
+      workspace.importUrl.value = 'https://example.com/draft'
+      draftDocument.hidden = true
+      draftDocument.dispatchEvent(new Event('visibilitychange'))
+      expect(vi.getTimerCount()).toBe(0)
+      vi.advanceTimersByTime(1000)
+      expect(repositoryMock.save).not.toHaveBeenCalled()
+
+      workspace.renameDrawer('drawer:saved', '新标题')
+      vi.advanceTimersByTime(300)
+      expect(repositoryMock.save).toHaveBeenCalledOnce()
+      expect(repositoryMock.save).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          searchQuery: '测试歌',
+          importUrl: 'https://example.com/draft',
+          drawers: [expect.objectContaining({ title: '新标题' })],
+        }),
+      )
+
+      workspace.searchQuery.value = ''
+      scope.stop()
+      expect(repositoryMock.save).toHaveBeenCalledTimes(2)
+      expect(repositoryMock.save).toHaveBeenLastCalledWith(
+        expect.objectContaining({ searchQuery: '' }),
+      )
+      expect(vi.getTimerCount()).toBe(0)
+    } finally {
+      scope.stop()
+      vi.unstubAllGlobals()
+      vi.useRealTimers()
+    }
+  })
+
   it('keeps the first page and releases its reader when the detail closes during loading', async () => {
     repositoryMock.load.mockReturnValue({ ...createSnapshot(), drawers: [] })
     let finish!: (page: TrackPage) => void

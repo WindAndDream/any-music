@@ -1,7 +1,6 @@
-import { useConfirmAction } from '@any-music/ui'
 import { useBackHandler } from '@any-music/ui/catalog'
 import type { TagManagementFilterState, TagManagementPresentation } from '@any-music/ui/theme'
-import { computed, nextTick, onScopeDispose, shallowRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, watch } from 'vue'
 import type { Ref } from 'vue'
 
 type Dimension = keyof TagManagementFilterState
@@ -16,11 +15,6 @@ export function useTagManagementFilterPanel(
   props: Readonly<{ editor: TagManagementPresentation }>,
   overview: Readonly<Ref<HTMLElement | null>>,
 ) {
-  const confirm = useConfirmAction()
-  let disposed = false
-  onScopeDispose(() => {
-    disposed = true
-  })
   const active = shallowRef<Dimension | null>(null)
   const detailOpen = shallowRef(false)
   const previous = shallowRef<Dimension | null>(null)
@@ -77,25 +71,18 @@ export function useTagManagementFilterPanel(
         },
       ] as const,
   )
-  const defaults = computed<TagManagementFilterState>(() => ({
-    searchQuery: '',
-    selectedPlatformIds: [],
-    usage: [],
-    platformScope: [],
-    sortMode: [],
-  }))
   const dimensions = computed(() => [
     {
       id: 'searchQuery' as const,
       label: '标签名称',
-      description: '按名称关键词查找标签',
+      description: '按名称关键词查找标签。',
       icon: 'search' as const,
       labels: draft.value?.searchQuery.trim() ? [draft.value.searchQuery.trim()] : [],
     },
     {
       id: 'selectedPlatformIds' as const,
       label: '关联平台',
-      description: `可多选，满足任一平台即可；不改变标签的全局${subject.value}数量`,
+      description: `可选择多个平台，匹配其中任意一个。标签的全局${subject.value}数量保持不变。`,
       icon: 'music' as const,
       labels:
         draft.value?.selectedPlatformIds.map(
@@ -105,7 +92,7 @@ export function useTagManagementFilterPanel(
     {
       id: 'usage' as const,
       label: `关联${subject.value}`,
-      description: `可多选，匹配其中任意一种全局${subject.value}数量`,
+      description: `按标签关联的全局${subject.value}数量筛选，多个条件匹配其中任意一个。`,
       icon: 'library' as const,
       labels:
         draft.value?.usage.map(
@@ -115,7 +102,7 @@ export function useTagManagementFilterPanel(
     {
       id: 'platformScope' as const,
       label: '平台覆盖',
-      description: '可多选，匹配其中任意一种平台覆盖范围',
+      description: '筛选仅覆盖一个平台或覆盖多个平台的标签，可同时选择多个范围。',
       icon: 'tags' as const,
       labels:
         draft.value?.platformScope.map(
@@ -125,7 +112,7 @@ export function useTagManagementFilterPanel(
     {
       id: 'sortMode' as const,
       label: '排序方式',
-      description: '可多选，按选择先后确定排序优先级；默认按最近维护排序',
+      description: '按选择先后确定排序优先级，默认按最近维护时间排序。',
       icon: 'list' as const,
       labels:
         draft.value?.sortMode.map(
@@ -188,24 +175,12 @@ export function useTagManagementFilterPanel(
   }
   function remove(dimension: Dimension, index: number): void {
     if (!draft.value) return
-    if (dimension === 'searchQuery') set(dimension, defaults.value[dimension])
+    if (dimension === 'searchQuery') set(dimension, '')
     else
       set(
         dimension,
         draft.value[dimension].filter((_, candidate) => candidate !== index),
       )
-  }
-  async function clear(): Promise<void> {
-    const original = draft.value
-    if (!original) return
-    const accepted = await confirm({
-      title: '清空全部筛选？',
-      message: '将移除当前草稿中的全部条件并恢复最近维护排序，应用后更新标签列表。',
-      confirmLabel: '清空全部',
-      tone: 'danger',
-    })
-    if (accepted && !disposed && draft.value === original)
-      props.editor.actions.setFilterDraft(defaults.value)
   }
   async function focusView(element: Element): Promise<void> {
     await nextTick()
@@ -221,7 +196,6 @@ export function useTagManagementFilterPanel(
     active,
     detailOpen,
     draft,
-    defaults,
     dimensions,
     groups,
     current,
@@ -234,7 +208,6 @@ export function useTagManagementFilterPanel(
     back,
     finish,
     remove,
-    clear,
     leave,
     handleViewAfterLeave,
     focusView,

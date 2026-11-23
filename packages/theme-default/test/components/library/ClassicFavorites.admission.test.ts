@@ -48,7 +48,8 @@ vi.mock('vue', async (load) => {
       () =>
         slots.default?.(),
   })
-  return { ...vue, Teleport: passthrough, Transition: passthrough, TransitionGroup: passthrough }
+  // Teleport has array children. A fragment keeps them inline in this renderer.
+  return { ...vue, Teleport: vue.Fragment, Transition: passthrough, TransitionGroup: passthrough }
 })
 vi.mock('@any-music/ui/components/SidePanel.vue', async () => {
   const vue = await import('vue')

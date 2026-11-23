@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
@@ -10,8 +9,10 @@ import { provideEditingSession, useEditingSession } from '@any-music/ui/library'
 import type { ActiveDownloadProps, ActiveDownloadEmits } from '@any-music/ui/theme'
 import { computed, onActivated, onDeactivated, onScopeDispose, shallowRef, watch } from 'vue'
 
+import ClassicFilterFooter from '../library/ClassicFilterFooter.vue'
 import CatalogOperatorActions from '../music-sources/CatalogOperatorActions.vue'
 import CatalogTrackFilterPanel from '../music-sources/CatalogTrackFilterPanel.vue'
+import CollectionFilterSheet from '../music-sources/CollectionFilterSheet.vue'
 import QueueViewControls from '../music-sources/QueueViewControls.vue'
 import DownloadCollectionHeading from './DownloadCollectionHeading.vue'
 import DownloadOperatorPanel from './DownloadOperatorPanel.vue'
@@ -154,7 +155,7 @@ async function removeItems(ids: readonly string[]): Promise<void> {
               aria-label="下载状态"
               align="start"
               forward-label="查看更多下载状态"
-              back-label="返回前面的下载状态"
+              back-label="返回下载状态开头"
             >
               <div
                 class="download-collection__status-options"
@@ -246,11 +247,10 @@ async function removeItems(ids: readonly string[]): Promise<void> {
         @remove-tag="(track, tag) => emit('removeTag', track, tag)"
         @rename="(track, name) => emit('rename', track, name)"
       />
-      <BottomSheet
+      <CollectionFilterSheet
         :open="filterOpen"
         title="下载筛选器"
         description="按文本、标签、歌曲时长、来源平台与任务日期筛选。"
-        size="full"
         :suspended="suspended"
         @close="emit('closeFilter')"
       >
@@ -261,19 +261,18 @@ async function removeItems(ids: readonly string[]): Promise<void> {
           filter-context="downloads"
           :tag-stats="tagStats"
           :platform-stats="platformStats"
-          :result-count="previewEntries.length"
-          :total-count="scopedEntries.length"
           @detail-open-change="filterDetailOpen = $event"
           @preview-change="draft.preview.value = $event"
         />
-        <template v-if="!filterDetailOpen" #footer
-          ><div class="download-collection__filter-footer">
-            <span>匹配 {{ previewEntries.length }} / 共 {{ scopedEntries.length }} 首</span
-            ><button type="button" @click="emit('closeFilter')">取消</button
-            ><button type="button" @click="applyFilterDraft">应用筛选</button>
-          </div></template
-        >
-      </BottomSheet>
+        <template v-if="!filterDetailOpen" #footer>
+          <ClassicFilterFooter
+            :result-count="previewEntries.length"
+            :total-count="scopedEntries.length"
+            @cancel="emit('closeFilter')"
+            @apply="applyFilterDraft"
+          />
+        </template>
+      </CollectionFilterSheet>
     </Teleport>
     <Teleport v-if="operatorOverlayTarget" :to="operatorOverlayTarget" :disabled="!active">
       <SidePanel
@@ -355,8 +354,7 @@ async function removeItems(ids: readonly string[]): Promise<void> {
 .download-collection__status-options {
   @include collection-chrome.state-tabs(5);
 }
-.download-collection__display,
-.download-collection__filter-footer button {
+.download-collection__display {
   display: inline-flex;
   min-block-size: 44px;
   flex: 0 0 auto;
@@ -376,12 +374,10 @@ async function removeItems(ids: readonly string[]): Promise<void> {
     background-color var(--am-motion-fast) var(--am-ease-standard),
     color var(--am-motion-fast) var(--am-ease-standard);
 }
-.download-collection__display:is(:hover, :focus-visible),
-.download-collection__filter-footer button:is(:hover, :focus-visible) {
+.download-collection__display:is(:hover, :focus-visible) {
   background: var(--am-color-surface-hover);
 }
-.download-collection__display:focus-visible,
-.download-collection__filter-footer button:focus-visible {
+.download-collection__display:focus-visible {
   outline: var(--am-focus-ring);
   outline-offset: -3px;
 }
@@ -392,16 +388,6 @@ async function removeItems(ids: readonly string[]): Promise<void> {
 }
 .download-collection__error {
   color: var(--am-color-danger);
-}
-.download-collection__filter-footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--am-space-2);
-  font-size: var(--am-font-size-sm);
-}
-.download-collection__filter-footer span {
-  flex: 1 1 auto;
 }
 @container am-download-collection (max-width: 760px) {
   .download-collection__display {
@@ -414,8 +400,7 @@ async function removeItems(ids: readonly string[]): Promise<void> {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .download-collection__display,
-  .download-collection__filter-footer button {
+  .download-collection__display {
     transition: none;
   }
 }

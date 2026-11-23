@@ -5,7 +5,7 @@ import type { TrackGridViewport } from '@any-music/ui/catalog'
 import LoadingSpinner from '@any-music/ui/components/LoadingSpinner.vue'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { computed, useTemplateRef } from 'vue'
+import { computed, useTemplateRef, watch } from 'vue'
 
 import StudioStyledTrack from '../library/StudioStyledTrack.vue'
 import StudioTrackRow from './StudioTrackRow.vue'
@@ -40,13 +40,17 @@ const props = defineProps<{
   drawer: Pick<
     CatalogDrawerView,
     'id' | 'isLoading' | 'loadedPageCount' | 'hasMore' | 'paginationLocked'
-  >
+  > &
+    Partial<Pick<CatalogDrawerView, 'status'>>
   loadedTrackCount: number
   canLoadMore: boolean
   scrollElement?: HTMLElement | null
   viewportSize?: TrackGridViewport
   prefetch?: boolean
+  prepareViewport?: boolean
 }>()
+const emit = defineEmits<{ viewportReady: [] }>()
+const loading = computed(() => props.drawer.isLoading || props.drawer.status === 'restoring')
 const selectedIds = computed(() => new Set(props.state.selectedTrackIds))
 const invalidIds = computed(() => new Set(props.state.invalidTrackIds))
 const favoriteIds = computed(() => new Set(props.state.favoriteTrackIds))
@@ -59,22 +63,30 @@ function toggle(id: string) {
   )
 }
 const listElement = useTemplateRef<HTMLElement>('listElement')
-useScrollPageLoader({
+const { preparing } = useScrollPageLoader({
   editing: useEditingSession(`pagination:${props.drawer.id}`),
   listElement,
   scrollElement: () => props.scrollElement,
   hasMore: () => props.canLoadMore,
-  loading: () => props.drawer.isLoading,
+  loading,
   pageNumber: () => props.drawer.loadedPageCount,
   visibleCount: () => props.state.tracks.length,
   loadedCount: () => props.loadedTrackCount,
   loadNext: () => {
     if (props.canLoadMore) void props.actions.loadMore(props.drawer.id)
   },
-  fillShortList: () => props.prefetch === true,
+  fillShortList: false,
   prefetch: () => props.prefetch === true,
   restoreScroll: true,
+  initialFill: { enabled: () => props.prepareViewport === true, contentElement: listElement },
 })
+watch(
+  preparing,
+  (pending) => {
+    if (!pending) emit('viewportReady')
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -82,6 +94,8 @@ useScrollPageLoader({
     <div
       ref="listElement"
       class="studio-table-scroll"
+      :class="{ 'studio-table-scroll--preparing': preparing }"
+      :inert="preparing"
       role="region"
       aria-label="歌曲列表"
       tabindex="0"
@@ -156,16 +170,28 @@ useScrollPageLoader({
         </tbody>
       </table>
     </div>
-    <p v-if="!state.tracks.length && !drawer.isLoading" role="status">暂无匹配歌曲。</p>
-    <footer class="studio-results__footer">
+    <div v-if="preparing" class="studio-catalog-preparation">
+      <LoadingSpinner label="正在加载歌曲" />
+    </div>
+    <p v-else-if="!state.tracks.length && !loading" role="status">暂无匹配歌曲。</p>
+    <footer v-if="!preparing" class="studio-results__footer">
       <span>已加载 {{ drawer.loadedPageCount }} 页</span>
-      <LoadingSpinner v-if="drawer.isLoading" label="正在加载歌曲" />
+      <LoadingSpinner v-if="loading" label="正在加载歌曲" />
       <span v-else-if="!drawer.hasMore && !drawer.paginationLocked">已加载全部歌曲</span>
     </footer>
   </template>
 </template>
 
 <style scoped>
+.studio-table-scroll--preparing {
+  visibility: hidden;
+}
+.studio-catalog-preparation {
+  position: absolute;
+  inset-block-start: var(--am-space-4);
+  inset-inline: 0;
+  text-align: center;
+}
 .studio-minimal-cell {
   min-inline-size: 0;
   container: am-track-card / inline-size;

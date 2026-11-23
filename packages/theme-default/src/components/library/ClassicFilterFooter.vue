@@ -1,15 +1,16 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ summary?: string; applyLabel?: string; disabled?: boolean }>(), {
-  summary: '',
-  applyLabel: '应用筛选',
-  disabled: false,
-})
+withDefaults(
+  defineProps<{ resultCount: number; totalCount: number; unit?: string; disabled?: boolean }>(),
+  { unit: '首', disabled: false },
+)
 const emit = defineEmits<{ cancel: []; apply: [] }>()
 </script>
 
 <template>
   <div class="classic-filter-footer">
-    <span v-if="summary" role="status">{{ summary }}</span>
+    <span role="status"
+      >匹配 <strong>{{ resultCount }} / {{ totalCount }} {{ unit }}</strong></span
+    >
     <div class="classic-filter-footer__actions">
       <button type="button" @click="emit('cancel')">取消</button>
       <button
@@ -18,7 +19,7 @@ const emit = defineEmits<{ cancel: []; apply: [] }>()
         :disabled="disabled"
         @click="emit('apply')"
       >
-        {{ applyLabel }}
+        应用筛选
       </button>
     </div>
   </div>
@@ -32,6 +33,9 @@ const emit = defineEmits<{ cancel: []; apply: [] }>()
   gap: var(--am-space-3);
   color: var(--am-color-text-secondary);
   font-size: var(--am-font-size-sm);
+}
+.classic-filter-footer strong {
+  font-variant-numeric: tabular-nums;
 }
 .classic-filter-footer__actions {
   display: flex;
@@ -52,7 +56,7 @@ const emit = defineEmits<{ cancel: []; apply: [] }>()
 }
 .classic-filter-footer button:focus-visible {
   outline: var(--am-focus-ring);
-  outline-offset: var(--am-focus-offset);
+  outline-offset: -2px;
 }
 .classic-filter-footer button:disabled {
   opacity: 0.5;
@@ -63,16 +67,18 @@ const emit = defineEmits<{ cancel: []; apply: [] }>()
   background: var(--am-color-primary);
   color: var(--am-color-on-primary);
 }
-@media (max-width: 600px) {
+.classic-filter-footer .classic-filter-footer__apply:focus-visible {
+  outline-color: var(--am-color-on-primary);
+}
+@container am-bottom-sheet (max-width: 600px) {
   .classic-filter-footer {
     align-items: stretch;
     flex-direction: column;
   }
   .classic-filter-footer__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-inline-start: 0;
-  }
-  .classic-filter-footer button {
-    flex: 1;
   }
 }
 </style>

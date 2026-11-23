@@ -57,7 +57,8 @@ vi.mock('vue', async (load) => {
           slots.default?.(),
         ),
   })
-  return { ...vue, Teleport: passthrough, Transition: transition, TransitionGroup: passthrough }
+  // Teleport has array children. A fragment keeps them inline in this renderer.
+  return { ...vue, Teleport: vue.Fragment, Transition: transition, TransitionGroup: passthrough }
 })
 vi.mock('@any-music/ui/components/SidePanel.vue', async () => {
   const vue = await import('vue')
@@ -73,12 +74,9 @@ vi.mock('@any-music/ui/components/SidePanel.vue', async () => {
 })
 
 async function settle() {
-  for (let index = 0; index < 8; index++) {
-    // eslint-disable-next-line no-await-in-loop -- Resolve actual lazy imports and measurements.
-    await nextTick()
-    // eslint-disable-next-line no-await-in-loop -- Lazy module resolution needs a task turn.
-    await new Promise<void>((resolve) => setTimeout(resolve, 0))
-  }
+  await nextTick()
+  await vi.dynamicImportSettled()
+  await nextTick()
 }
 beforeAll(async () => {
   // Production laziness is checked by the throwing-loader admission suite. Preload the
@@ -607,10 +605,9 @@ describe.each(['favorites', 'queue', 'playlists'] as const)('%s window lifetime'
           const mounted = test.cells()
           for (const cell of mounted) visited.add(cell)
           expect(mounted.length).toBeLessThanOrEqual(24)
-          expect([...visited].filter((cell) => cell.parent !== null)).toEqual(
-            expect.arrayContaining(mounted),
-          )
-          expect([...visited].filter((cell) => cell.parent !== null)).toHaveLength(mounted.length)
+          const attached = new Set([...visited].filter((cell) => cell.parent !== null))
+          expect(attached.size).toBe(mounted.length)
+          expect(mounted.every((cell) => attached.has(cell))).toBe(true)
         }
         expect(test.cells().map((cell) => cell.props['data-occurrence'])).toEqual(initial)
         if (count >= 80) expect(visited.size).toBeGreaterThan(initial.length)

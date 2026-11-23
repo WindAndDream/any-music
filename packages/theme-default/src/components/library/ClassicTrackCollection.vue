@@ -186,6 +186,7 @@ watch([operatorOpen, displayOpen, contentDisplayOpen], presentation.reorder.clea
             :disabled="availability.status !== 'available'"
             :total-count="presentation.displayedTracks.value.length"
             :operator-open="operatorOpen"
+            :filter-count="presentation.filterCount.value"
             can-display
             :icon-only-display="Boolean(collection) && presentation.compactControls.value"
             @filter="actions.setFilterDraft(cloneCatalogTrackFilterState(state.filters))"

@@ -8,7 +8,6 @@ import {
 import {
   createPlaylistOverviewFilters,
   filterPlaylistOverview,
-  useConfirmAction,
   usePlaylistOverviewFilterEditor,
   formatPlaylistTrackCountRange,
 } from '@any-music/ui/library'
@@ -39,7 +38,6 @@ export function usePlaylistOverviewFilters(
 ) {
   const editor = usePlaylistOverviewFilterEditor()
   const { active, previous, local } = editor
-  const confirm = useConfirmAction()
   const contribution = useUiContributionAvailability('trackList.filters', () => ({
     area: 'playlists',
   }))
@@ -67,33 +65,33 @@ export function usePlaylistOverviewFilters(
     {
       id: 'keyword' as const,
       label: '文本搜索',
+      description: '按歌单名称或简介查找。',
       icon: 'search' as const,
-      description: '按歌单名称或简介搜索',
       labels: props.draft?.keyword.trim() ? [props.draft.keyword.trim()] : [],
     },
     {
       id: 'trackCountRanges' as const,
       label: '歌曲数量',
+      description: '按歌单内的歌曲数量筛选，多个数量范围匹配任意一个。',
       icon: 'music' as const,
-      description: '按歌单内的歌曲数量筛选，多个数量段匹配任意一个',
       labels: props.draft?.trackCountRanges.map(formatPlaylistTrackCountRange) ?? [],
     },
     {
       id: 'tags' as const,
       label: '用户标签',
-      icon: 'tag' as const,
       description: !tagsEnabled.value
-        ? '标签功能已停用，已选条件保留但不参与筛选'
+        ? '标签功能已停用，已选条件保留但不参与筛选。'
         : local.value.tagsDormant
-          ? '已选标签暂不参与筛选，确定后恢复'
-          : '选择多个标签时匹配其中任意一个',
+          ? '已选标签暂不参与筛选，确定后恢复。'
+          : '选择多个标签时匹配其中任意一个。',
+      icon: 'tag' as const,
       labels: props.draft?.tags ?? [],
     },
     {
       id: 'cover' as const,
       label: '歌单封面',
+      description: '按是否设置了封面筛选，选择多个条件时匹配其中任意一个。',
       icon: 'image' as const,
-      description: '按是否设置了封面筛选，选择多个条件时匹配其中任意一个',
       labels:
         props.draft?.cover.map(
           (value) => coverOptions.find((option) => option.value === value)!.label,
@@ -106,9 +104,6 @@ export function usePlaylistOverviewFilters(
       title: item.label,
       labels: item.labels,
     })),
-  )
-  const selectedCount = computed(() =>
-    groups.value.reduce((sum, group) => sum + group.labels.length, 0),
   )
   const current = computed(() => dimensions.value.find((item) => item.id === active.value)!)
   const previewCount = computed(() =>
@@ -164,20 +159,6 @@ export function usePlaylistOverviewFilters(
       })
     else update({ ...props.draft, [dimension]: createPlaylistOverviewFilters()[dimension] })
   }
-  async function clear() {
-    const draft = props.draft
-    if (!draft || props.disabled || !selectedCount.value) return
-    if (
-      await confirm({
-        title: '清空全部筛选？',
-        message: `将移除当前草稿中的 ${selectedCount.value} 条条件，应用后更新歌单列表。`,
-        confirmLabel: '清空全部',
-        tone: 'danger',
-      })
-    ) {
-      if (props.draft === draft && !props.disabled) update(createPlaylistOverviewFilters())
-    }
-  }
   async function focusView(element: Element) {
     await nextTick()
     if (active.value)
@@ -207,7 +188,6 @@ export function usePlaylistOverviewFilters(
     back,
     applyDimension,
     remove,
-    clear,
     focusView,
     leave,
   }

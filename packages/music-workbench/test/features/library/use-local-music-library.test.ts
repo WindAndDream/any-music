@@ -250,6 +250,31 @@ describe('useLocalMusicLibrary favorites', () => {
     scope.stop()
   })
 
+  it('saves only when grouping changes the playlist track order', () => {
+    const scope = effectScope()
+    const library = scope.run(useLocalMusicLibrary)!
+    const playlist = library.createPlaylist('顺序测试')
+    const tracks = [createTrack('bilibili'), createTrack('douyin')]
+    try {
+      library.addTracksToPlaylist(playlist.id, tracks)
+      library.persistNow()
+      repositoryMock.save.mockClear()
+      const original = library.playlists.value
+      library.reorderPlaylistTracks(playlist.id, original[0]!.trackIds)
+      vi.runAllTimers()
+      expect(library.playlists.value).toBe(original)
+      expect(repositoryMock.save).not.toHaveBeenCalled()
+
+      const trackIds = original[0]!.trackIds.toReversed()
+      library.reorderPlaylistTracks(playlist.id, trackIds)
+      vi.runAllTimers()
+      expect(library.playlists.value[0]?.trackIds).toEqual(trackIds)
+      expect(repositoryMock.save).toHaveBeenCalledOnce()
+    } finally {
+      scope.stop()
+    }
+  })
+
   it('rejects invalid custom names without altering records or saving a snapshot', () => {
     const scope = effectScope()
     const library = scope.run(useLocalMusicLibrary)!

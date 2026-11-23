@@ -96,6 +96,8 @@ defineSlots<{
   gap: var(--am-space-4);
 }
 .listen-queue__intro {
+  /* Reserve one description line so headings with only a count use the same toolbar baseline. */
+  min-block-size: calc(44px + var(--am-space-2) + 1.6 * var(--am-font-size-xs));
   min-inline-size: 0;
   flex: 1 1 180px;
 }

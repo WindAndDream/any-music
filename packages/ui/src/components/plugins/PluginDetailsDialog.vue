@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { getPluginRuntimeStatusLabel, PLUGIN_DEVELOPMENT_STATUS_LABELS } from '@any-music/ui'
-import AppDialog from '@any-music/ui/components/AppDialog.vue'
-import AppIcon from '@any-music/ui/components/AppIcon.vue'
-import type { UiPluginCenterItem } from '@any-music/ui/theme'
 import { computed } from 'vue'
 
-import { pluginFailure } from '../../composables/plugin-presentation'
+import {
+  getPluginFailure,
+  getPluginRuntimeStatusLabel,
+  PLUGIN_DEVELOPMENT_STATUS_LABELS,
+} from '../../product/plugin-center-presentation'
+import type { UiPluginCenterItem } from '../../product/theme-features'
+import AppDialog from '../AppDialog.vue'
+import AppIcon from '../AppIcon.vue'
 
 const props = defineProps<{ item?: UiPluginCenterItem; busy: boolean }>()
 defineEmits<{ close: []; setEnabled: [enabled: boolean]; retry: []; manage: [] }>()
-const failure = computed(() => props.item && pluginFailure(props.item))
+const failure = computed(() => props.item && getPluginFailure(props.item))
 </script>
 
 <template>
@@ -42,6 +45,12 @@ const failure = computed(() => props.item && pluginFailure(props.item))
           <dt>运行状态</dt>
           <dd>{{ getPluginRuntimeStatusLabel(item) }}</dd>
         </div>
+        <div v-if="failure">
+          <dt>错误信息</dt>
+          <dd>
+            <span class="plugin-details__error" role="alert">{{ failure }}</span>
+          </dd>
+        </div>
         <div v-if="item.publisher">
           <dt>发布者</dt>
           <dd>{{ item.publisher }}</dd>
@@ -51,7 +60,6 @@ const failure = computed(() => props.item && pluginFailure(props.item))
           <dd>{{ item.generation }}</dd>
         </div>
       </dl>
-      <p v-if="failure" class="plugin-details__error" role="alert">{{ failure }}</p>
     </section>
     <template #footer>
       <div v-if="item" class="plugin-details__actions">

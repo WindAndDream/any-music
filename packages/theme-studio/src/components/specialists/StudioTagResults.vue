@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useIntrinsicWrap } from '@any-music/ui'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
+import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
 import type { TagManagementPresentation } from '@any-music/ui/theme'
 import { useTemplateRef } from 'vue'
 
@@ -14,18 +15,24 @@ useIntrinsicWrap({
 </script>
 
 <template>
-  <p v-if="!editor.state.allTagOptions.length" class="studio-tag-desk__empty">
-    点击右上角「创建标签」，或在{{
-      editor.state.entityKind === 'playlists' ? '歌单' : '歌曲'
-    }}的「操作 → 标签管理」中添加第一个标签。
-  </p>
-  <div v-else-if="!editor.state.tagOptions.length" class="studio-tag-desk__empty">
-    <h3>没有匹配的标签</h3>
-    <p>
-      试试调整名称、平台或关联{{ editor.state.entityKind === 'playlists' ? '歌单' : '歌曲' }}数量。
-    </p>
-    <button type="button" @click="editor.actions.resetFilters">重置筛选</button>
-  </div>
+  <MusicListEmptyState
+    v-if="!editor.state.allTagOptions.length"
+    icon="tags"
+    title="从第一个标签开始"
+  >
+    点击右上角「创建」，或在{{ editor.state.entityKind === 'playlists' ? '歌单' : '歌曲' }}的「操作
+    → 标签管理」中添加第一个标签。
+  </MusicListEmptyState>
+  <MusicListEmptyState
+    v-else-if="!editor.state.tagOptions.length"
+    icon="filter"
+    title="没有匹配的标签"
+  >
+    试试调整名称、平台或关联{{ editor.state.entityKind === 'playlists' ? '歌单' : '歌曲' }}数量。
+    <template #actions>
+      <button type="button" @click="editor.actions.resetFilters">重置筛选</button>
+    </template>
+  </MusicListEmptyState>
   <div
     v-else
     ref="tagList"

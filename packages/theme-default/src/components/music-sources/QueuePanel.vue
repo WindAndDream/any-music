@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Track } from '@any-music/core'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import CollectionGrid from '@any-music/ui/components/CollectionGrid.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
@@ -26,9 +25,12 @@ import {
   watch,
 } from 'vue'
 
+import ClassicFilterFooter from '../library/ClassicFilterFooter.vue'
+import ClassicResultView from '../library/ClassicResultView.vue'
 import CatalogPlaylistPickerDialog from './CatalogPlaylistPickerDialog.vue'
 import CatalogTrackFilterPanel from './CatalogTrackFilterPanel.vue'
 import CatalogTrackOperatorPanel from './CatalogTrackOperatorPanel.vue'
+import CollectionFilterSheet from './CollectionFilterSheet.vue'
 import QueuePlatformGroup from './QueuePlatformGroup.vue'
 import QueuePlatformHeading from './QueuePlatformHeading.vue'
 import QueueTrackActionsDialog from './QueueTrackActionsDialog.vue'
@@ -289,8 +291,8 @@ function getTrackReorderStyle(id: string) {
   return reorder.getItemStyle('track', id)
 }
 function deactivateLeavingContent(element: Element): void {
-  const root = element.getRootNode()
-  const activeElement = root instanceof ShadowRoot ? root.activeElement : document.activeElement
+  const root = element.getRootNode() as Document | ShadowRoot
+  const activeElement = root.activeElement
   if (activeElement && element.contains(activeElement)) {
     // 焦点不能留在离场内容；平台导航随后恢复到标题或卡片，排列工具栏保持原位。
     scrollElement.value?.focus({ preventScroll: true })
@@ -438,106 +440,101 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
             </p>
             <!-- 排列只替换列表内容；平台详情才替换包含标题和工具栏的整页。 -->
             <div class="listen-queue__results">
-              <Transition
-                :name="`queue-view-${arrangementMode === 'flat' ? 'back' : 'forward'}`"
+              <ClassicResultView
+                class="listen-queue__list"
+                :view-key="arrangementMode"
+                :reverse="arrangementMode === 'flat'"
                 @before-leave="deactivateLeavingContent"
-                @before-enter="activateContent"
-                @leave-cancelled="activateContent"
               >
-                <div :key="arrangementMode" class="listen-queue__list">
-                  <MusicListEmptyState
-                    v-if="!displayedTracks.length"
-                    :icon="props.context === 'favorites' ? 'heart' : 'queue'"
-                    :title="
-                      props.items.length
-                        ? `没有匹配的${props.context === 'favorites' ? '喜欢' : '待听'}歌曲`
-                        : `还没有${props.context === 'favorites' ? '喜欢的' : '待听'}歌曲`
-                    "
-                    focus-title
-                  >
-                    {{
-                      props.items.length
-                        ? activePlatform
-                          ? '调整筛选条件，或返回按平台查看其他音乐源。'
-                          : '调整筛选条件，找到想听的音乐。'
-                        : props.context === 'favorites'
-                          ? '在发现、待听、我的歌单或自定义音乐中，喜欢心动的歌曲。'
-                          : '在发现、我的喜欢、我的歌单或自定义音乐中，将想听的歌曲加入待听。'
-                    }}
-                  </MusicListEmptyState>
-                  <QueueTrackGrid
-                    :selectable="props.operatorOpen"
-                    v-else-if="arrangementMode === 'flat' || activePlatform"
-                    :animate="!reorder.isSettling.value"
-                    :tracks="displayedTracks"
-                    :custom-tags-by-track-id="props.customTagsByTrackId"
-                    :date-label="props.context === 'favorites' ? '喜欢' : '添加'"
-                    :positions="positions"
-                    :platform-names="props.platformNames"
-                    :added-at-ms-by-track-id="props.addedAtMsByTrackId"
-                    :current-track-id="props.currentTrackId"
-                    :selected-ids="selection.selectedIds.value"
-                    :dragged-id="reorder.draggedId.value"
-                    :get-reorder-style="getTrackReorderStyle"
-                    :favorite-track-ids="props.favoriteTrackIds"
-                    :invalid-track-ids="props.invalidTrackIds"
-                    :download-busy="props.downloadBusy"
-                    :display-mode="props.displayMode"
-                    :mobile-columns="props.mobileColumns"
-                    @select="selection.toggleItem"
-                    @play="playTrack"
-                    @favorite="emit('favorite', $event)"
-                    @download="emit('download', [$event])"
-                    @show-actions="activeActionTrackId = $event"
-                    @drag-start="startTrackDrag"
-                    @shift="shiftTrack"
-                    @drag-cancel="reorder.clearDrag"
-                  />
-                  <CollectionGrid v-else class="listen-queue__groups">
-                    <TransitionGroup name="queue-group-sort">
-                      <QueuePlatformGroup
-                        :selectable="props.operatorOpen"
-                        v-for="group in matchingPlatforms"
-                        :key="group.id"
-                        :platform-id="group.id"
-                        :name="group.name"
-                        :count="group.tracks.length"
-                        :total-count="group.totalCount"
-                        :filtered="isFiltered"
-                        :is-custom="group.isCustom"
-                        :selected="
-                          controls.platformSelection.value.get(group.id)?.selected ?? false
-                        "
-                        :indeterminate="
-                          controls.platformSelection.value.get(group.id)?.indeterminate ?? false
-                        "
-                        :playback-status="group.playbackStatus"
-                        :dragging="
-                          reorder.dragKind.value === 'platform' &&
-                          reorder.draggedId.value === group.id
-                        "
-                        :reorder-style="reorder.getItemStyle('platform', group.id)"
-                        @open="navigation.open(group.id)"
-                        @select="controls.togglePlatform(group.id)"
-                        @drag-start="reorder.startPlatformPress"
-                        @shift="(id, direction) => reorder.shift('platform', id, direction)"
-                        @drag-cancel="reorder.clearDrag"
-                      />
-                    </TransitionGroup>
-                  </CollectionGrid>
-                </div>
-              </Transition>
+                <MusicListEmptyState
+                  v-if="!displayedTracks.length"
+                  :icon="props.context === 'favorites' ? 'heart' : 'queue'"
+                  :title="
+                    props.items.length
+                      ? `没有匹配的${props.context === 'favorites' ? '喜欢' : '待听'}歌曲`
+                      : `还没有${props.context === 'favorites' ? '喜欢的' : '待听'}歌曲`
+                  "
+                  focus-title
+                >
+                  {{
+                    props.items.length
+                      ? activePlatform
+                        ? '调整筛选条件，或返回按平台查看其他音乐源。'
+                        : '调整筛选条件，找到想听的音乐。'
+                      : props.context === 'favorites'
+                        ? '在发现、待听、我的歌单或自定义音乐中，喜欢心动的歌曲。'
+                        : '在发现、我的喜欢、我的歌单或自定义音乐中，将想听的歌曲加入待听。'
+                  }}
+                </MusicListEmptyState>
+                <QueueTrackGrid
+                  :selectable="props.operatorOpen"
+                  v-else-if="arrangementMode === 'flat' || activePlatform"
+                  :animate="!reorder.isSettling.value"
+                  :tracks="displayedTracks"
+                  :custom-tags-by-track-id="props.customTagsByTrackId"
+                  :date-label="props.context === 'favorites' ? '喜欢' : '添加'"
+                  :positions="positions"
+                  :platform-names="props.platformNames"
+                  :added-at-ms-by-track-id="props.addedAtMsByTrackId"
+                  :current-track-id="props.currentTrackId"
+                  :selected-ids="selection.selectedIds.value"
+                  :dragged-id="reorder.draggedId.value"
+                  :get-reorder-style="getTrackReorderStyle"
+                  :favorite-track-ids="props.favoriteTrackIds"
+                  :invalid-track-ids="props.invalidTrackIds"
+                  :download-busy="props.downloadBusy"
+                  :display-mode="props.displayMode"
+                  :mobile-columns="props.mobileColumns"
+                  @select="selection.toggleItem"
+                  @play="playTrack"
+                  @favorite="emit('favorite', $event)"
+                  @download="emit('download', [$event])"
+                  @show-actions="activeActionTrackId = $event"
+                  @drag-start="startTrackDrag"
+                  @shift="shiftTrack"
+                  @drag-cancel="reorder.clearDrag"
+                />
+                <CollectionGrid v-else class="listen-queue__groups">
+                  <TransitionGroup name="queue-group-sort">
+                    <QueuePlatformGroup
+                      :selectable="props.operatorOpen"
+                      v-for="group in matchingPlatforms"
+                      :key="group.id"
+                      :platform-id="group.id"
+                      :name="group.name"
+                      :count="group.tracks.length"
+                      :total-count="group.totalCount"
+                      :filtered="isFiltered"
+                      :is-custom="group.isCustom"
+                      :selected="controls.platformSelection.value.get(group.id)?.selected ?? false"
+                      :indeterminate="
+                        controls.platformSelection.value.get(group.id)?.indeterminate ?? false
+                      "
+                      :playback-status="group.playbackStatus"
+                      :dragging="
+                        reorder.dragKind.value === 'platform' &&
+                        reorder.draggedId.value === group.id
+                      "
+                      :reorder-style="reorder.getItemStyle('platform', group.id)"
+                      @open="navigation.open(group.id)"
+                      @select="controls.togglePlatform(group.id)"
+                      @drag-start="reorder.startPlatformPress"
+                      @shift="(id, direction) => reorder.shift('platform', id, direction)"
+                      @drag-cancel="reorder.clearDrag"
+                    />
+                  </TransitionGroup>
+                </CollectionGrid>
+              </ClassicResultView>
             </div>
           </div>
         </div>
       </Transition>
     </div>
     <Teleport v-if="props.overlayTarget" :to="props.overlayTarget" :disabled="!isActive">
-      <BottomSheet
+      <CollectionFilterSheet
         :open="props.filterOpen"
         :title="`${collectionTitle}筛选器`"
         :description="`按文本、标签、歌曲时长、${activePlatformId === undefined ? '平台与' : ''}${props.context === 'favorites' ? '喜欢' : '添加'}日期找到${props.context === 'favorites' ? '喜欢' : '想听'}的歌曲。`"
-        size="full"
         :suspended="!isActive || props.panelsSuspended"
         @close="emit('closeFilter')"
       >
@@ -549,23 +546,18 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
           :tag-stats="tagStats"
           :platform-scoped="activePlatformId !== undefined"
           :platform-stats="platformStats"
-          :result-count="previewTracks.length"
-          :total-count="scopedItems.length"
           @detail-open-change="isFilterDetailOpen = $event"
           @preview-change="draft.preview.value = $event"
         />
         <template v-if="!isFilterDetailOpen" #footer>
-          <div class="listen-queue__filter-footer">
-            <span>匹配 {{ previewTracks.length }} / 共 {{ scopedItems.length }} 首</span>
-            <div>
-              <button type="button" @click="emit('closeFilter')">取消</button
-              ><button class="listen-queue__apply" type="button" @click="applyFilterDraft">
-                应用筛选
-              </button>
-            </div>
-          </div>
+          <ClassicFilterFooter
+            :result-count="previewTracks.length"
+            :total-count="scopedItems.length"
+            @cancel="emit('closeFilter')"
+            @apply="applyFilterDraft"
+          />
         </template>
-      </BottomSheet>
+      </CollectionFilterSheet>
       <QueueTrackActionsDialog
         :playlists="props.playlists"
         @add-to-playlist="(track, id) => emit('addToPlaylist', id, [track])"
@@ -744,7 +736,7 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
 }
 .listen-queue__results {
   position: relative;
-  /* 两种排列共享入场视图决定的高度，离场列表不再撑高灰色表面。 */
+  /* 列表切换沿用灰色表面和工具栏，当前结果决定内容高度。 */
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   min-inline-size: 0;
@@ -778,36 +770,7 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
   color: var(--am-color-danger);
   background: var(--am-color-surface);
 }
-.listen-queue__filter-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--am-space-3);
-  color: var(--am-color-text-secondary);
-  font-size: var(--am-font-size-sm);
-}
-.listen-queue__filter-footer > div {
-  display: flex;
-  gap: var(--am-space-2);
-}
-.listen-queue__filter-footer button {
-  min-block-size: 44px;
-  padding-inline: var(--am-space-4);
-  border: 1px solid var(--am-color-border-strong);
-  border-radius: var(--am-radius-control);
-  background: var(--am-color-surface);
-  color: var(--am-color-text);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-.listen-queue__filter-footer .listen-queue__apply {
-  border-color: var(--am-color-primary);
-  background: var(--am-color-primary);
-  color: var(--am-color-on-primary);
-}
-.listen-queue button:focus-visible,
-.listen-queue__filter-footer button:focus-visible {
+.listen-queue button:focus-visible {
   outline: var(--am-focus-ring);
   outline-offset: var(--am-focus-offset);
 }
@@ -819,17 +782,6 @@ async function requestRemoveTracks(ids: readonly string[]): Promise<void> {
     gap: var(--am-space-2);
   }
 }
-@media (max-width: 600px) {
-  .listen-queue__filter-footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
-  .listen-queue__filter-footer > div,
-  .listen-queue__filter-footer button {
-    flex: 1;
-  }
-}
-
 .queue-view-forward-enter-active,
 .queue-view-forward-leave-active,
 .queue-view-back-enter-active,

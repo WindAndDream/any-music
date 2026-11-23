@@ -150,7 +150,7 @@ describe.each([
         ]
         await nextTick()
         expect(f.root.textContent).toContain(`${label} · 加载失败`)
-        expect(f.root.textContent).toContain('编辑器加载异常')
+        expect(f.root.textContent).not.toContain('编辑器加载异常')
         expect(f.actions.setEnabled).not.toHaveBeenCalled()
         expect(f.actions.retry).not.toHaveBeenCalled()
       } finally {
@@ -158,6 +158,54 @@ describe.each([
       }
     },
   )
+  it('shows error details and retry only in the plugin introduction', async () => {
+    const f = mount(definition)
+    try {
+      const failure = '标签数据格式不可用，原数据已保留。'
+      f.state.items = [
+        {
+          ...builtin,
+          status: { status: 'error', error: createAppErrorState('invalid-input', failure) },
+        },
+        {
+          ...external,
+          status: { status: 'invalid', error: createAppErrorState('conflict', '目录无法加载') },
+        },
+      ]
+      await nextTick()
+      expect(f.root.textContent).toContain('加载失败')
+      expect(f.root.textContent).not.toContain(failure)
+      expect(f.root.textContent).not.toContain('目录无法加载')
+      expect(f.root.textContent).not.toContain('重试')
+
+      dispatchCatalogEvent(
+        findCatalogElement(f.root, (node) => node.props['aria-label'] === '查看插件介绍 标签管理'),
+        'onClick',
+      )
+      await nextTick()
+      const dialog = findCatalogElement(f.root, (node) => node.tag === 'dialog')
+      expect(dialog.textContent).toContain('运行状态加载失败')
+      const errorLabel = findCatalogElement(
+        dialog,
+        (node) => node.tag === 'dt' && node.textContent === '错误信息',
+      )
+      expect(errorLabel.parent?.tag).toBe('div')
+      expect(errorLabel.parent?.parent?.tag).toBe('dl')
+      expect(findCatalogElement(errorLabel.parent!, (node) => node.tag === 'dd').textContent).toBe(
+        failure,
+      )
+      dispatchCatalogEvent(button(dialog, '重试加载'), 'onClick')
+      expect(f.actions.retry).toHaveBeenCalledExactlyOnceWith('feature.tags')
+
+      f.state.items = [builtin, external]
+      await nextTick()
+      expect(dialog.textContent).toContain('运行状态已启用')
+      expect(dialog.textContent).not.toContain('错误信息')
+      expect(dialog.textContent).not.toContain('重试')
+    } finally {
+      f.unmount()
+    }
+  })
   it('filters live counts and forwards only explicit management and import actions', async () => {
     const f = mount(definition)
     try {

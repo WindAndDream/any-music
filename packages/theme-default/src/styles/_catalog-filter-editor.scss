@@ -17,6 +17,9 @@
     display: grid;
     gap: var(--am-space-3);
   }
+  .catalog-filter-editor__search {
+    container-type: inline-size;
+  }
   .catalog-filter-editor__label,
   .catalog-filter-editor__field > span:not(.catalog-filter-editor__input-control) {
     color: var(--am-color-text-secondary);
@@ -66,6 +69,9 @@
   .catalog-filter-editor__search-input {
     min-block-size: 72px;
     font-size: clamp(var(--am-font-size-xl), 4cqi, 2rem);
+  }
+  .catalog-filter-editor__search-input::placeholder {
+    font-size: clamp(var(--am-font-size-xs), 5cqi, 2rem);
   }
   .catalog-filter-editor__line-input:focus,
   .catalog-filter-editor__line-input:focus-visible {

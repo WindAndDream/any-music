@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
+import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
+import SlidingView from '@any-music/ui/components/SlidingView.vue'
 import type { TagManagementPresentation } from '@any-music/ui/theme'
 import { computed, shallowRef } from 'vue'
 
@@ -29,31 +31,38 @@ const modalOpen = computed(
           创建和整理标签，让{{ state.entityKind === 'playlists' ? '歌单' : '音乐' }}归类更轻松。
         </p>
       </div>
-      <div class="studio-tag-desk__heading-actions">
-        <small :aria-label="`共 ${state.allTagOptions.length} 个标签`"
-          ><strong>{{ state.allTagOptions.length }}</strong> 个标签</small
+      <small class="studio-tag-desk__count" :aria-label="`共 ${state.allTagOptions.length} 个标签`"
+        ><strong>{{ state.allTagOptions.length }}</strong> 个标签</small
+      >
+      <SlidingSegments
+        class="studio-segments studio-tag-desk__kinds"
+        role="group"
+        aria-label="标签类型"
+      >
+        <button
+          type="button"
+          :aria-pressed="state.entityKind === 'tracks'"
+          @click="editor.actions.setEntityKind('tracks')"
         >
-        <button type="button" aria-haspopup="dialog" @click="editor.actions.beginCreate">
-          <AppIcon name="plus" :size="18" />创建标签
+          <AppIcon name="music" :size="16" />音乐标签
         </button>
-      </div>
+        <button
+          type="button"
+          :aria-pressed="state.entityKind === 'playlists'"
+          @click="editor.actions.setEntityKind('playlists')"
+        >
+          <AppIcon name="playlist" :size="16" />歌单标签
+        </button>
+      </SlidingSegments>
+      <button
+        class="studio-tag-desk__create"
+        type="button"
+        aria-haspopup="dialog"
+        @click="editor.actions.beginCreate"
+      >
+        <AppIcon name="plus" :size="16" />创建
+      </button>
     </header>
-    <div class="studio-actions" role="group" aria-label="标签类型">
-      <button
-        type="button"
-        :aria-pressed="state.entityKind === 'tracks'"
-        @click="editor.actions.setEntityKind('tracks')"
-      >
-        <AppIcon name="music" :size="16" />音乐标签
-      </button>
-      <button
-        type="button"
-        :aria-pressed="state.entityKind === 'playlists'"
-        @click="editor.actions.setEntityKind('playlists')"
-      >
-        <AppIcon name="playlist" :size="16" />歌单标签
-      </button>
-    </div>
     <div v-if="state.hasFilters" class="studio-tag-desk__criteria" role="status">
       <span>匹配 {{ state.tagOptions.length }} / {{ state.allTagOptions.length }} 个标签</span
       ><button type="button" @click="editor.actions.resetFilters">清除筛选</button>
@@ -65,7 +74,9 @@ const modalOpen = computed(
     >
       {{ state.errorMessage }}
     </p>
-    <StudioTagResults :editor="editor" />
+    <SlidingView :view-key="state.entityKind" :reverse="state.entityKind === 'tracks'">
+      <StudioTagResults :editor="editor" />
+    </SlidingView>
     <div class="studio-actions studio-tag-desk__toolbar">
       <span>共 {{ state.tagOptions.length }}</span>
       <button

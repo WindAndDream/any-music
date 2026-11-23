@@ -49,6 +49,7 @@ const externalCount = computed(() => props.items.length - builtinCount.value)
   opacity: 0.5;
 }
 .plugin-summary--compact {
+  flex-wrap: nowrap;
   justify-content: flex-end;
   column-gap: var(--am-space-1);
   font-size: var(--am-font-size-xs);

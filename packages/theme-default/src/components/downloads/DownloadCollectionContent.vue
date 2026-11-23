@@ -4,6 +4,7 @@ import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicLis
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed, shallowRef, watch } from 'vue'
 
+import ClassicResultView from '../library/ClassicResultView.vue'
 import CatalogOperatorActions from '../music-sources/CatalogOperatorActions.vue'
 import DownloadCollectionHeading from './DownloadCollectionHeading.vue'
 
@@ -29,14 +30,6 @@ watch(
   },
   { flush: 'sync' },
 )
-function deactivateLeavingView(element: Element): void {
-  element.setAttribute('inert', '')
-  element.setAttribute('aria-hidden', 'true')
-}
-function activateView(element: Element): void {
-  element.removeAttribute('inert')
-  element.removeAttribute('aria-hidden')
-}
 </script>
 
 <template>
@@ -56,7 +49,7 @@ function activateView(element: Element): void {
         aria-label="下载状态"
         align="start"
         forward-label="查看更多下载状态"
-        back-label="返回前面的下载状态"
+        back-label="返回下载状态开头"
       >
         <div
           class="download-collection__status-options"
@@ -92,32 +85,29 @@ function activateView(element: Element): void {
       </button>
     </div>
     <div class="download-collection__results">
-      <Transition
-        :name="`download-status-${direction}`"
-        @before-leave="deactivateLeavingView"
-        @before-enter="activateView"
-        @leave-cancelled="activateView"
+      <ClassicResultView
+        class="download-collection__list"
+        :view-key="status"
+        :reverse="direction === 'back'"
       >
-        <div :key="status" class="download-collection__list">
-          <MusicListEmptyState
-            v-if="empty"
-            icon="download"
-            :title="
-              !counts.all
-                ? '当前没有下载任务'
-                : status === 'all'
-                  ? '没有匹配的下载任务'
-                  : `没有${statuses.find((entry) => entry.id === status)?.name}任务`
-            "
-            >{{
-              counts.all
-                ? '切换下载状态或调整筛选条件，找到需要的歌曲。'
-                : '在发现、待听、我的喜欢或歌单中选择歌曲，即可开始下载。'
-            }}</MusicListEmptyState
-          >
-          <slot v-else />
-        </div>
-      </Transition>
+        <MusicListEmptyState
+          v-if="empty"
+          icon="download"
+          :title="
+            !counts.all
+              ? '当前没有下载任务'
+              : status === 'all'
+                ? '没有匹配的下载任务'
+                : `没有${statuses.find((entry) => entry.id === status)?.name}任务`
+          "
+          >{{
+            counts.all
+              ? '切换下载状态或调整筛选条件，找到需要的歌曲。'
+              : '在发现、待听、我的喜欢或歌单中选择歌曲，即可开始下载。'
+          }}</MusicListEmptyState
+        >
+        <slot v-else />
+      </ClassicResultView>
     </div>
   </div>
 </template>
@@ -133,6 +123,7 @@ function activateView(element: Element): void {
   background: var(--am-color-surface-subtle);
 }
 .download-collection__toolbar {
+  @include collection-chrome.toolbar-divider;
   position: sticky;
   z-index: var(--am-z-sticky);
   inset-block-start: 0;
@@ -141,8 +132,6 @@ function activateView(element: Element): void {
   align-items: center;
   gap: var(--am-space-2);
   margin-block-end: var(--am-space-4);
-  padding-block: var(--am-space-2);
-  border-block-end: 1px solid var(--am-color-border);
   background: var(--am-color-surface-subtle);
 }
 .download-collection__tabs {
@@ -172,32 +161,6 @@ function activateView(element: Element): void {
   grid-area: 1 / 1;
   inline-size: 100%;
   min-inline-size: 0;
-}
-.download-status-forward-enter-active,
-.download-status-forward-leave-active,
-.download-status-back-enter-active,
-.download-status-back-leave-active {
-  transition:
-    transform var(--am-motion-slow) var(--am-ease-emphasized),
-    opacity var(--am-motion-slow) var(--am-ease-standard);
-}
-.download-status-forward-leave-active,
-.download-status-back-leave-active {
-  /* Let the incoming status own the height, as on the other collection pages. */
-  position: absolute;
-  inset: 0;
-  overflow: clip;
-  pointer-events: none;
-}
-.download-status-forward-enter-from,
-.download-status-back-leave-to {
-  opacity: 0;
-  transform: translateX(100%);
-}
-.download-status-forward-leave-to,
-.download-status-back-enter-from {
-  opacity: 0;
-  transform: translateX(-100%);
 }
 .download-collection__display {
   display: inline-flex;
@@ -239,10 +202,6 @@ function activateView(element: Element): void {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .download-status-forward-enter-active,
-  .download-status-forward-leave-active,
-  .download-status-back-enter-active,
-  .download-status-back-leave-active,
   .download-collection__display {
     transition: none;
   }

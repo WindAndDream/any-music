@@ -30,6 +30,8 @@ vi.mock('vue', async (load) => {
           if (previousKey !== undefined && key !== previousKey)
             (attrs.onAfterLeave as (() => void) | undefined)?.()
           previousKey = key
+          if (children?.[0] && String(attrs.name).startsWith('sliding-view-'))
+            return vue.cloneVNode(children[0], { 'data-transition': attrs.name })
           return children
         }
       },
@@ -272,7 +274,11 @@ it('hides the mobile heading and description while updating the top-bar count an
   expect(view.element('标签管理共 2 个标签').textContent).toContain('个')
   expect(view.root.textContent).toContain('共 2')
   expect(view.root.textContent).toContain('已选 0 · 共 2')
-  await view.click('创建标签')
+  const create = view.button('创建')
+  expect(create.textContent.trim()).toBe('创建')
+  expect(create.parent).toBe(view.element('标签类型').parent)
+  expect(create.parent?.children.at(-1)).toBe(create)
+  await view.click('创建')
   view.editor.actions.setCreateNameDraft('现场')
   view.editor.actions.createTag()
   await nextTick()
@@ -283,6 +289,32 @@ describe.each([
   { name: 'Classic', theme: classic },
   { name: 'Studio', theme: studio },
 ])('$name tag directory', ({ theme }) => {
+  it('slides the result pane in both directions and keeps the switch mounted', async () => {
+    const view = mount(theme)
+    const musicButton = view.button('音乐标签')
+    const playlistButton = view.button('歌单标签')
+    const results = () =>
+      findCatalogElement(view.root, (node) => node.props.class === 'sliding-view__content')
+    const musicResults = results()
+
+    await view.click('歌单标签')
+    const playlistResults = results()
+    expect(playlistResults).not.toBe(musicResults)
+    expect(playlistResults.props['data-transition']).toBe('sliding-view-forward')
+    expect(view.button('歌单标签')).toBe(playlistButton)
+    expect(playlistButton.props['aria-pressed']).toBe(true)
+
+    await view.click('音乐标签')
+    const nextMusicResults = results()
+    expect(nextMusicResults).not.toBe(playlistResults)
+    expect(nextMusicResults.props['data-transition']).toBe('sliding-view-back')
+    expect(view.button('音乐标签')).toBe(musicButton)
+    expect(musicButton.props['aria-pressed']).toBe(true)
+    await view.click('音乐标签')
+    expect(results()).toBe(nextMusicResults)
+    expect(view.write).not.toHaveBeenCalled()
+  })
+
   it('keeps music selection across themes and removes only the selected label in one commit', async () => {
     const view = mount(theme)
     view.session.addPlaylistTag('p', '通勤')
@@ -470,7 +502,8 @@ describe.each([
 
   it('creates an unused tag, keeps drafts across themes, and blocks duplicates with a top notice', async () => {
     const view = mount(theme)
-    await view.click('创建标签')
+    expect(view.button('创建').textContent.trim()).toBe('创建')
+    await view.click('创建')
     const input = () => findCatalogElement(view.root, (node) => node.props.name === 'tag-name')
     input().value = '  ＦＯＯ  '
     dispatchCatalogEvent(input(), 'onInput', false)
@@ -490,7 +523,7 @@ describe.each([
     })
     expect(() => view.element('查看标签 FOO')).not.toThrow()
     expect(view.records.value.every(({ customTags }) => !customTags.includes('FOO'))).toBe(true)
-    await view.click('创建标签')
+    await view.click('创建')
     input().value = 'foo'
     dispatchCatalogEvent(input(), 'onInput', false)
     await submit()
@@ -505,7 +538,7 @@ describe.each([
     expect(view.notice?.message).toBe('已存在重复标签。')
     view.editor.actions.cancelCreate()
     await nextTick()
-    await view.click('创建标签')
+    await view.click('创建')
     expect(input().value).toBe('')
   })
 
@@ -514,7 +547,7 @@ describe.each([
     view.write.mockImplementation(() => {
       throw new Error('disk full')
     })
-    await view.click('创建标签')
+    await view.click('创建')
     view.editor.actions.setCreateNameDraft('现场')
     view.editor.actions.createTag()
     await nextTick()

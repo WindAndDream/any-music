@@ -26,7 +26,8 @@ export function useClassicHistory(
     names: () => state.value.customNamesByTrackId,
     customTags: () => state.value.customTagsByTrackId,
   })
-  const filtered = computed(() => countCatalogTrackFilters(history.filters.value).total > 0)
+  const filterCount = computed(() => countCatalogTrackFilters(history.filters.value).total)
+  const filtered = computed(() => filterCount.value > 0)
   const groups = computed(() => {
     const ids = [...new Set(history.rows.value.map(({ track }) => track.source.pluginId))]
     return ids.map((id) => {
@@ -137,6 +138,7 @@ export function useClassicHistory(
   return {
     history,
     state,
+    filterCount,
     filtered,
     groups,
     navigation,

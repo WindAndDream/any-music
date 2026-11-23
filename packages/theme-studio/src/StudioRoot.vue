@@ -90,6 +90,19 @@ function SettingsView() {
     <ActivePage />
     <template #player><component :is="views.player" :feature="features.player" /></template>
     <template #overlays>
+      <AppDialog
+        v-if="features.overlays.state.active?.kind === 'filters' && list"
+        :open="true"
+        :suspended="pageOverlays.modalOpen.value"
+        title="筛选歌曲"
+        @close="features.overlays.actions.close()"
+        ><StudioFilters
+          :open="true"
+          :state="list.state"
+          :actions="list.actions"
+          :scope="`${features.shell.state.activeViewId}:tracks`"
+          @finished="features.overlays.actions.close()"
+      /></AppDialog>
       <div ref="pageModalTarget" class="studio-page-overlays"></div>
       <AppDialog
         v-if="features.settings.state.open"
@@ -117,18 +130,6 @@ function SettingsView() {
         "
         @close="features.overlays.actions.close()"
       />
-      <AppDialog
-        v-if="features.overlays.state.active?.kind === 'filters' && list"
-        :open="true"
-        title="筛选歌曲"
-        @close="features.overlays.actions.close()"
-        ><StudioFilters
-          :open="true"
-          :state="list.state"
-          :actions="list.actions"
-          :scope="`${features.shell.state.activeViewId}:tracks`"
-          @finished="features.overlays.actions.close()"
-      /></AppDialog>
       <component :is="views.overlays" :feature="features.overlays" />
     </template>
   </component>

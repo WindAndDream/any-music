@@ -57,6 +57,7 @@ export function loadProductGeneration(
 function readProductGeneration(
   raw: StableValueStorage,
   isolate: boolean,
+  staged?: { text: string; checksums: Manifest['checksums'] },
 ): { commit: Commit; data: ProductData } | undefined {
   const journal = raw.read<unknown>(JOURNAL_KEY)
   if (journal !== undefined && (!isRecord(journal) || journal.schemaVersion !== 1))
@@ -80,12 +81,15 @@ function readProductGeneration(
   }
   // Validate the full depth/byte budget and reject accessors before checksum
   // canonicalization. Per-part validation would repeat the large library walk.
-  jsonText(data)
+  const text = jsonText(data)
+  // A fully validated, byte-identical read-back has the candidate's checksums.
+  // A backend that reorders keys still uses the canonical verification path.
+  const stagedChecksums = staged?.text === text ? staged.checksums : undefined
   for (const part of PARTS) {
     const expected = manifest.checksums[part]
     if (typeof expected !== 'string' || !expected.startsWith('c1:'))
       throw new Error('Unsupported generation checksum algorithm')
-    if (checksumValidatedJson(data[part]) !== expected)
+    if ((stagedChecksums?.[part] ?? checksumValidatedJson(data[part])) !== expected)
       throw new Error('Product generation checksum mismatch')
   }
   validateProductStructure(data)
@@ -144,7 +148,8 @@ export function createProductGenerationStorage(
       id: id(),
     }
     const candidate = copyJson(data)
-    validateProductData(candidate)
+    const text = jsonText(candidate)
+    validateProductStructure(candidate)
     try {
       writeRuntimeSettings?.()
       // Reclaim only the previous generation before staging. The committed generation
@@ -195,6 +200,7 @@ export function createProductGenerationStorage(
           },
         },
         false,
+        { text, checksums },
       )
       if (JSON.stringify(raw.read(PRODUCT_COMMIT_KEY)) !== JSON.stringify(loaded?.commit))
         throw new Error('Product generation changed during staging; reload before writing')

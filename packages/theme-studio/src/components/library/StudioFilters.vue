@@ -5,7 +5,6 @@ import {
   provideEditingSession,
   useEditingSession,
   useCatalogFilterHistory,
-  getCatalogTrackFilterLabels,
   commitCatalogTrackFilterDimension,
   createFilterPanelState,
   filterPanelKey,
@@ -18,6 +17,8 @@ import type { EditingSession } from '@any-music/ui/catalog'
 import type { UiThemeTrackListActions, UiThemeTrackListState } from '@any-music/ui/theme'
 import { computed, watch } from 'vue'
 import type { DeepReadonly } from 'vue'
+
+import StudioFilterHistory from './StudioFilterHistory.vue'
 
 const props = defineProps<{
   state: DeepReadonly<
@@ -240,18 +241,16 @@ function cancel() {
       </p>
     </fieldset>
     <p v-if="errorMessage || durationError" role="alert">{{ errorMessage || durationError }}</p>
-    <details>
-      <summary>筛选历史</summary>
-      <p v-if="!history.entries.value.length">暂无历史条件。</p>
-      <div v-for="(entry, index) in history.entries.value" :key="index">
-        <button
-          type="button"
-          @click="draft = commitCatalogTrackFilterDimension(draft, entry.filters, entry.dimension)"
-        >
-          {{ getCatalogTrackFilterLabels(entry.filters, entry.dimension).join(' / ') }}
-        </button>
-      </div>
-    </details>
+    <StudioFilterHistory
+      :key="scope"
+      :entries="history.entries.value"
+      :platform-names="state.platformNames"
+      @restore="
+        (entry) =>
+          (draft = commitCatalogTrackFilterDimension(draft, entry.filters, entry.dimension))
+      "
+      @remove="history.remove"
+    />
     <div class="studio-actions">
       <button type="button" @click="cancel">取消筛选</button
       ><button type="button" @click="apply">应用筛选</button>

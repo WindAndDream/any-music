@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cloneCatalogTrackFilterState } from '@any-music/ui/catalog'
+import { cloneCatalogTrackFilterState, countCatalogTrackFilters } from '@any-music/ui/catalog'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
 import { useCatalogSelectionOperator, useQueueReorder } from '@any-music/ui/library'
@@ -38,6 +38,7 @@ const {
   resume,
   remove,
 } = useClassicDownloads(props)
+const filterCount = computed(() => countCatalogTrackFilters(state.value.filters).total)
 const actionItemId = shallowRef<string>()
 const actionEntry = computed(() => entries.value.find(({ item }) => item.id === actionItemId.value))
 const operatorOpen = shallowRef(false)
@@ -186,6 +187,7 @@ function toggleAllSelection(): void {
             :disabled="feature.availability.status !== 'available'"
             :total-count="visible.length"
             :operator-open="operatorOpen"
+            :filter-count="filterCount"
             can-display
             :icon-only-display="compactControls"
             @filter="feature.actions.setFilterDraft(cloneCatalogTrackFilterState(state.filters))"

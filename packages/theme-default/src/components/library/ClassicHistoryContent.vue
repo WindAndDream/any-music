@@ -11,6 +11,7 @@ import QueuePlatformHeading from '../music-sources/QueuePlatformHeading.vue'
 import QueueViewControls from '../music-sources/QueueViewControls.vue'
 import TrackRow from '../music-sources/TrackRow.vue'
 import ClassicCollectionSurface from './ClassicCollectionSurface.vue'
+import ClassicResultView from './ClassicResultView.vue'
 import { formatHistoryRecord } from './history-record-presentation'
 
 const props = defineProps<{
@@ -75,87 +76,85 @@ const intro = computed(() =>
       class="listen-queue__results"
       :class="{ 'listen-queue__results--empty': !history.visible.value.length }"
     >
-      <Transition
-        :name="`queue-view-${history.arrangement.value === 'flat' ? 'back' : 'forward'}`"
+      <ClassicResultView
+        class="listen-queue__list"
+        :view-key="history.arrangement.value"
+        :reverse="history.arrangement.value === 'flat'"
         @before-leave="presentation.deactivateLeavingView"
-        @before-enter="presentation.activateView"
-        @leave-cancelled="presentation.activateView"
       >
-        <div :key="history.arrangement.value" class="listen-queue__list">
-          <MusicListEmptyState
-            v-if="!history.visible.value.length"
-            icon="history"
-            :title="history.rows.value.length ? '没有匹配的播放记录' : '还没有播放历史'"
-            focus-title
+        <MusicListEmptyState
+          v-if="!history.visible.value.length"
+          icon="history"
+          :title="history.rows.value.length ? '没有匹配的播放记录' : '还没有播放历史'"
+          focus-title
+        >
+          {{
+            history.rows.value.length
+              ? '调整筛选条件，找到想听的音乐。'
+              : '播放喜欢的音乐后，在这里回顾每一次聆听。'
+          }}
+        </MusicListEmptyState>
+        <CollectionGrid
+          v-else-if="history.arrangement.value === 'platform' && !activePlatform"
+          class="listen-queue__groups"
+          :data-display-mode="history.displayMode.value"
+          :data-mobile-columns="history.mobileColumns.value"
+        >
+          <QueuePlatformGroup
+            :selectable="history.operatorOpen.value"
+            v-for="group in groups"
+            :key="group.id"
+            :platform-id="group.id"
+            :name="group.name"
+            :count="group.count"
+            :total-count="group.totalCount"
+            :filtered="filtered"
+            :is-custom="group.isCustom"
+            :dragging="false"
+            history-records
+            :selected="group.selectedCount === group.count"
+            :indeterminate="group.selectedCount > 0 && group.selectedCount < group.count"
+            @open="navigation.open(group.id)"
+            @select="history.togglePlatform(group.id)"
+          />
+        </CollectionGrid>
+        <TrackCardGrid
+          v-else
+          :display-mode="history.displayMode.value"
+          :mobile-columns="history.mobileColumns.value"
+          :item-keys="itemKeys"
+          animate
+        >
+          <div
+            v-for="{ entry, track } in history.visible.value"
+            :key="entry.id"
+            class="history-record list__cell"
           >
-            {{
-              history.rows.value.length
-                ? '调整筛选条件，找到想听的音乐。'
-                : '播放喜欢的音乐后，在这里回顾每一次聆听。'
-            }}
-          </MusicListEmptyState>
-          <CollectionGrid
-            v-else-if="history.arrangement.value === 'platform' && !activePlatform"
-            class="listen-queue__groups"
-            :data-display-mode="history.displayMode.value"
-            :data-mobile-columns="history.mobileColumns.value"
-          >
-            <QueuePlatformGroup
+            <TrackRow
               :selectable="history.operatorOpen.value"
-              v-for="group in groups"
-              :key="group.id"
-              :platform-id="group.id"
-              :name="group.name"
-              :count="group.count"
-              :total-count="group.totalCount"
-              :filtered="filtered"
-              :is-custom="group.isCustom"
-              :dragging="false"
-              history-records
-              :selected="group.selectedCount === group.count"
-              :indeterminate="group.selectedCount > 0 && group.selectedCount < group.count"
-              @open="navigation.open(group.id)"
-              @select="history.togglePlatform(group.id)"
+              :track="track"
+              :custom-tags="feature.state.customTagsByTrackId.get(track.id)"
+              :active="track.id === feature.state.currentTrackId"
+              :invalid="feature.state.invalidTrackIds.includes(track.id)"
+              :favorite="feature.state.favoriteTrackIds.includes(track.id)"
+              :download-busy="Boolean(feature.state.downloadBusy)"
+              :selected="history.selectedIds.value.includes(entry.id)"
+              :display-mode="history.displayMode.value"
+              :context-label="
+                feature.state.platformNames.get(track.source.pluginId) ?? track.source.pluginId
+              "
+              :trailing-meta="formatHistoryRecord(entry)"
+              :focus-id="entry.id"
+              :selection-description="`${feature.state.customNamesByTrackId.get(track.id) ?? track.title} 的${formatHistoryRecord(entry)}记录`"
+              @select="history.select(entry.id)"
+              @play="presentation.play(track.id)"
+              @favorite="feature.actions.toggleFavorite(track.id)"
+              @download="feature.actions.download([track.id])"
+              @show-actions="presentation.actionEntryId.value = entry.id"
             />
-          </CollectionGrid>
-          <TrackCardGrid
-            v-else
-            :display-mode="history.displayMode.value"
-            :mobile-columns="history.mobileColumns.value"
-            :item-keys="itemKeys"
-            animate
-          >
-            <div
-              v-for="{ entry, track } in history.visible.value"
-              :key="entry.id"
-              class="history-record list__cell"
-            >
-              <TrackRow
-                :selectable="history.operatorOpen.value"
-                :track="track"
-                :custom-tags="feature.state.customTagsByTrackId.get(track.id)"
-                :active="track.id === feature.state.currentTrackId"
-                :invalid="feature.state.invalidTrackIds.includes(track.id)"
-                :favorite="feature.state.favoriteTrackIds.includes(track.id)"
-                :download-busy="Boolean(feature.state.downloadBusy)"
-                :selected="history.selectedIds.value.includes(entry.id)"
-                :display-mode="history.displayMode.value"
-                :context-label="
-                  feature.state.platformNames.get(track.source.pluginId) ?? track.source.pluginId
-                "
-                :trailing-meta="formatHistoryRecord(entry)"
-                :focus-id="entry.id"
-                :selection-description="`${feature.state.customNamesByTrackId.get(track.id) ?? track.title} 的${formatHistoryRecord(entry)}记录`"
-                @select="history.select(entry.id)"
-                @play="presentation.play(track.id)"
-                @favorite="feature.actions.toggleFavorite(track.id)"
-                @download="feature.actions.download([track.id])"
-                @show-actions="presentation.actionEntryId.value = entry.id"
-              />
-            </div>
-          </TrackCardGrid>
-        </div>
-      </Transition>
+          </div>
+        </TrackCardGrid>
+      </ClassicResultView>
     </div>
   </ClassicCollectionSurface>
 </template>

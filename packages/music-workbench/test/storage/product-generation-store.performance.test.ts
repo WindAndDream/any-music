@@ -28,6 +28,7 @@ describe('product generation host preference work', () => {
 
     let validatedTracks = 0
     let serializedTracks = 0
+    let canonicalizedTracks = 0
     const propertyNames = Object.getOwnPropertyNames
     const stringify = JSON.stringify
     const validation = vi.spyOn(Object, 'getOwnPropertyNames').mockImplementation((value) => {
@@ -39,8 +40,10 @@ describe('product generation host preference work', () => {
       .mockImplementation((value, replacer, space) => {
         if (isRecord(value)) {
           const core = isRecord(value.core) ? value.core : value
-          if (isRecord(core.library) && Array.isArray(core.library.tracks))
+          if (isRecord(core.library) && Array.isArray(core.library.tracks)) {
             serializedTracks += core.library.tracks.length
+            if (typeof replacer === 'function') canonicalizedTracks += core.library.tracks.length
+          }
         }
         return stringify(value, replacer as never, space)
       })
@@ -58,10 +61,25 @@ describe('product generation host preference work', () => {
       serializedTracks: expect.any(Number),
     })
     expect(serializedTracks).toBeLessThanOrEqual(count * 7)
+    expect(canonicalizedTracks).toBe(count)
     for (const part of ['core', 'host', 'namespaces'])
       expect(reads.filter((key) => key.endsWith(`:${part}`))).toHaveLength(1)
     const restored = createProductGenerationStorage(state.raw, options)
     expect(restored.read<LocalMusicLibrarySnapshot>('local-library:v1')?.tracks).toHaveLength(count)
     expect(restored.read('app-shell:v1')).toMatchObject({ isSidebarCollapsed: true })
+  })
+
+  it('verifies the canonical checksum when a backend returns the same fields in another order', () => {
+    const state = memory(initial())
+    const store = createProductGenerationStorage(state.raw, options)
+    const read = state.raw.read
+    state.raw.read = (key, fallback) => {
+      const value = read(key, fallback)
+      return key.endsWith(':core') && isRecord(value)
+        ? (Object.fromEntries(Object.entries(value).toReversed()) as typeof value)
+        : value
+    }
+    store.write('app-shell:v1', { schemaVersion: 1, isSidebarCollapsed: true })
+    expect(store.read('app-shell:v1')).toMatchObject({ isSidebarCollapsed: true })
   })
 })

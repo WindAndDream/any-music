@@ -39,14 +39,7 @@
 
   @media (max-width: 768px) {
     .music-app-shell .am-workspace-surface {
-      // Playlist actions start at the collection surface inset, without another toolbar inset.
-      :is(
-        .catalog-drawers__header,
-        .queue-view-controls,
-        .download-collection__toolbar,
-        .classic-plugins__toolbar,
-        .custom-tracks__toolbar
-      ) {
+      :is(.catalog-drawers__header, .custom-tracks__toolbar) {
         padding-block-start: 0;
       }
 

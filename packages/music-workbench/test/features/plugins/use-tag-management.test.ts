@@ -21,8 +21,10 @@ async function settle() {
   await Promise.resolve()
   await Promise.resolve()
 }
-function fixture(loader: () => Promise<TagManagementImplementation> = async () => implementation) {
-  const data = memory(initial())
+function fixture(
+  loader: () => Promise<TagManagementImplementation> = async () => implementation,
+  data = memory(initial()),
+) {
   const storage = createProductGenerationStorage(data.raw, options)
   const enabled = shallowRef(true)
   const records = shallowRef<readonly LibraryTrackRecord[]>([])
@@ -47,6 +49,31 @@ function fixture(loader: () => Promise<TagManagementImplementation> = async () =
   return { data, storage, enabled, records, scope, feature }
 }
 describe('tag feature host boundary', () => {
+  it('opens a namespace created by filter history and preserves its conditions when saving tags', async () => {
+    const data = memory()
+    const storage = createProductGenerationStorage(data.raw, options)
+    const history = [{ scopeId: 'scope', dimension: 'tracks', filters: { tags: ['通勤'] } }]
+    storage.write('catalog-filter-history:v2', history)
+    const namespace = storage.read('plugin:feature.tags:v1')
+    expect(namespace).toEqual({
+      filterConditions: [{ index: 0, scopeId: 'scope', dimension: 'tracks', tags: ['通勤'] }],
+    })
+
+    const f = fixture(undefined, data)
+    try {
+      await settle()
+      expect(f.feature.error.value).toBeUndefined()
+      expect(f.feature.available.value).toBe(true)
+      expect(f.feature.tagDefinitions.value).toEqual([])
+      expect(f.storage.read('plugin:feature.tags:v1')).toEqual(namespace)
+      f.feature.actions.value!.createTag('通勤')
+      expect(f.feature.tagDefinitions.value.map(({ name }) => name)).toEqual(['通勤'])
+      expect(f.storage.read('catalog-filter-history:v2')).toEqual(history)
+    } finally {
+      f.scope.stop()
+    }
+  })
+
   it('offers recent user labels and marks only labels shared by the complete selection', async () => {
     const f = fixture()
     await settle()

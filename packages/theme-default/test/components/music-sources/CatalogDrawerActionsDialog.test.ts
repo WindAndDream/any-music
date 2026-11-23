@@ -1,6 +1,7 @@
 import type { CatalogDrawerView } from '@any-music/ui'
+import { provideActionFeedback } from '@any-music/ui'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { nextTick, reactive } from 'vue'
+import { h, nextTick, reactive } from 'vue'
 
 import CatalogDrawerActionsDialog from '../../../src/components/music-sources/CatalogDrawerActionsDialog.vue'
 import {
@@ -24,14 +25,14 @@ vi.mock('vue', async (load) => {
   }
 })
 vi.mock('@any-music/ui/components/AppDialog.vue', async () => {
-  const { defineComponent, h } = await import('vue')
+  const { defineComponent, h: renderElement } = await import('vue')
   return {
     default: defineComponent({
       props: ['open'],
       setup:
         (props, { slots }) =>
         () =>
-          props.open ? h('section', slots.default?.()) : null,
+          props.open ? renderElement('section', slots.default?.()) : null,
     }),
   }
 })
@@ -62,6 +63,20 @@ const drawer: CatalogDrawerView = {
 }
 
 afterEach(() => vi.unstubAllGlobals())
+
+function mountWithActionFeedback(props: InstanceType<typeof CatalogDrawerActionsDialog>['$props']) {
+  let feedback!: ReturnType<typeof provideActionFeedback>
+  const mounted = mountCatalogComponent(
+    {
+      setup() {
+        feedback = provideActionFeedback()
+        return () => h(CatalogDrawerActionsDialog, { ...props })
+      },
+    },
+    {},
+  )
+  return { ...mounted, notice: feedback.notice }
+}
 
 describe('CatalogDrawerActionsDialog', () => {
   it.each([
@@ -116,7 +131,7 @@ describe('CatalogDrawerActionsDialog', () => {
       account: { id: 'account:1', name: '用户名', customName: '常用账号' },
       createdAtMs: 12345,
     }
-    const mounted = mountCatalogComponent(CatalogDrawerActionsDialog, {
+    const mounted = mountWithActionFeedback({
       open: true,
       drawer: currentDrawer,
       favoriteTrackIds: new Set(),
@@ -130,7 +145,13 @@ describe('CatalogDrawerActionsDialog', () => {
     expect(writeText).not.toHaveBeenCalled()
     dispatchCatalogEvent(button, 'onClick')
     dispatchCatalogEvent(button, 'onClick')
-    await vi.waitFor(() => expect(mounted.root.textContent).toContain('完整信息已复制为 JSON。'))
+    await vi.waitFor(() =>
+      expect(mounted.notice.value).toMatchObject({
+        tone: 'success',
+        message: '完整信息已复制为 JSON。',
+      }),
+    )
+    expect(mounted.root.textContent).not.toContain('完整信息已复制为 JSON。')
     expect(writeText).toHaveBeenCalledOnce()
     expect(JSON.parse(writeText.mock.calls[0]![0])).toEqual(currentDrawer)
     expect(onRefresh).not.toHaveBeenCalled()
@@ -158,7 +179,7 @@ describe('CatalogDrawerActionsDialog', () => {
         onRefresh,
         onClose,
       })
-      const mounted = mountCatalogComponent(CatalogDrawerActionsDialog, props)
+      const mounted = mountWithActionFeedback(props)
       const inputLabel = () => (props.drawer.kind === 'search' ? '原始搜索词' : '导入链接')
       const copyInput = () =>
         findCatalogElement(
@@ -168,7 +189,13 @@ describe('CatalogDrawerActionsDialog', () => {
       expect(copyInput().props.title).toBe(`复制${inputLabel()}`)
       expect(writeText).not.toHaveBeenCalled()
       dispatchCatalogEvent(copyInput(), 'onClick')
-      await vi.waitFor(() => expect(mounted.root.textContent).toContain(`${inputLabel()}已复制。`))
+      await vi.waitFor(() =>
+        expect(mounted.notice.value).toMatchObject({
+          tone: 'success',
+          message: `${inputLabel()}已复制。`,
+        }),
+      )
+      expect(mounted.root.textContent).not.toContain(`${inputLabel()}已复制。`)
       expect(writeText).toHaveBeenCalledExactlyOnceWith(props.drawer.input)
 
       props.drawer = {
@@ -181,7 +208,8 @@ describe('CatalogDrawerActionsDialog', () => {
       expect(mounted.root.textContent).not.toContain('已复制。')
       expect(copyInput().props.title).toBe(`复制${inputLabel()}`)
       dispatchCatalogEvent(copyInput(), 'onClick')
-      await vi.waitFor(() => expect(mounted.root.textContent).toContain(`${inputLabel()}已复制。`))
+      await vi.waitFor(() => expect(mounted.notice.value?.message).toBe(`${inputLabel()}已复制。`))
+      expect(mounted.root.textContent).not.toContain(`${inputLabel()}已复制。`)
       expect(writeText).toHaveBeenLastCalledWith(props.drawer.input)
       expect(onRefresh).not.toHaveBeenCalled()
       expect(onClose).not.toHaveBeenCalled()
@@ -198,10 +226,10 @@ describe('CatalogDrawerActionsDialog', () => {
     const props = reactive({
       open: true,
       suspended: true,
-      drawer: { ...drawer, kind: 'import-url', input: 'https://example.com/music/123' },
+      drawer: { ...drawer, kind: 'import-url' as const, input: 'https://example.com/music/123' },
       favoriteTrackIds: new Set<string>(),
     })
-    const mounted = mountCatalogComponent(CatalogDrawerActionsDialog, props)
+    const mounted = mountWithActionFeedback(props)
     const copyInput = () =>
       findCatalogElement(mounted.root, (node) => node.props['aria-label'] === '复制导入链接')
     expect(copyInput().props.disabled).toBe(true)
@@ -212,12 +240,17 @@ describe('CatalogDrawerActionsDialog', () => {
     await nextTick()
     dispatchCatalogEvent(copyInput(), 'onClick')
     dispatchCatalogEvent(copyInput(), 'onClick')
-    await vi.waitFor(() => expect(mounted.root.textContent).toContain('复制失败'))
+    await vi.waitFor(() =>
+      expect(mounted.notice.value).toMatchObject({
+        tone: 'error',
+        message: expect.stringContaining('复制失败'),
+      }),
+    )
+    expect(mounted.root.textContent).not.toContain('复制失败')
     expect(writeText).toHaveBeenCalledOnce()
     expect(copyInput().props.disabled).toBe(false)
     dispatchCatalogEvent(copyInput(), 'onClick')
-    await vi.waitFor(() => expect(mounted.root.textContent).toContain('导入链接已复制。'))
-    expect(mounted.root.textContent).not.toContain('复制失败')
+    await vi.waitFor(() => expect(mounted.notice.value?.message).toBe('导入链接已复制。'))
     expect(writeText).toHaveBeenCalledTimes(2)
     expect(writeText).toHaveBeenLastCalledWith(props.drawer.input)
     mounted.unmount()

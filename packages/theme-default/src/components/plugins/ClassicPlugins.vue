@@ -3,18 +3,19 @@ import type { PluginCenterDisplay } from '@any-music/ui'
 import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
+import PluginDetailsDialog from '@any-music/ui/components/plugins/PluginDetailsDialog.vue'
 import PluginDisplayOptions from '@any-music/ui/components/plugins/PluginDisplayOptions.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { shallowRef, watch } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
 
 import { useClassicPlugins } from '../../composables/use-classic-plugins'
 import ClassicCollectionControls from '../library/ClassicCollectionControls.vue'
 import ClassicCollectionSurface from '../library/ClassicCollectionSurface.vue'
 import ClassicFeatureStatus from '../library/ClassicFeatureStatus.vue'
+import ClassicResultView from '../library/ClassicResultView.vue'
 import CatalogOperatorActions from '../music-sources/CatalogOperatorActions.vue'
 import ClassicPageOverlays from '../overlays/ClassicPageOverlays.vue'
 import ClassicPluginCard from './ClassicPluginCard.vue'
-import PluginDetailsDialog from './PluginDetailsDialog.vue'
 import PluginFilters from './PluginFilters.vue'
 import PluginOperator from './PluginOperator.vue'
 import PluginSummary from './PluginSummary.vue'
@@ -42,6 +43,12 @@ const {
   applyFilters,
   setSelectedEnabled,
 } = useClassicPlugins(props)
+const filterCount = computed(() => {
+  const { keyword, category, status, developmentStatus } = criteria.value
+  return (
+    Number(Boolean(keyword.trim())) + category.length + status.length + developmentStatus.length
+  )
+})
 function selectDisplay(value: PluginCenterDisplay): void {
   display.value = value
   displayOpen.value = false
@@ -62,14 +69,6 @@ watch(
   },
   { flush: 'sync' },
 )
-function leaveCategory(element: Element): void {
-  element.setAttribute('inert', '')
-  element.setAttribute('aria-hidden', 'true')
-}
-function activateCategory(element: Element): void {
-  element.removeAttribute('inert')
-  element.removeAttribute('aria-hidden')
-}
 function setEnabled(id: string, enabled: boolean): void {
   if (!disabled.value) void props.feature.actions.setEnabled(id, enabled)
 }
@@ -95,7 +94,7 @@ function manageDetails(): void {
       <template #count>
         <PluginSummary :items="feature.state.items" />
       </template>
-      <template #header>
+      <template #controls>
         <div class="classic-plugins__toolbar">
           <CatalogOperatorActions
             class="classic-plugins__filters"
@@ -151,50 +150,48 @@ function manageDetails(): void {
         当前运行端不支持外置插件，可使用内置插件。
       </p>
       <div class="classic-plugins__category-viewport">
-        <Transition
-          :name="`classic-plugins-category-${slideDirection}`"
-          @before-leave="leaveCategory"
-          @before-enter="activateCategory"
-          @leave-cancelled="activateCategory"
+        <ClassicResultView
+          class="classic-plugins__fields"
+          as="fieldset"
+          :view-key="filter"
+          :reverse="slideDirection === 'back'"
+          :disabled="disabled"
         >
-          <fieldset :key="filter" class="classic-plugins__fields" :disabled="disabled">
-            <legend class="am-sr-only">插件列表</legend>
-            <div v-if="visible.length" class="classic-plugins__items" :data-display="display">
-              <ClassicPluginCard
-                v-for="item in visible"
-                :key="item.id"
-                :item="item"
-                :busy="disabled"
-                :selectable="operatorOpen"
-                :selected="controls.selectedIds.value.has(item.id)"
-                @select="controls.toggleItem(item.id)"
-                @set-enabled="setEnabled(item.id, $event)"
-                @retry="feature.actions.retry(item.id)"
-                @details="detailsId = item.id"
-              />
-            </div>
-            <MusicListEmptyState
-              v-else
-              icon="plugin"
-              role="status"
-              :title="
-                counts[filter]
-                  ? '没有匹配的插件'
-                  : filter === 'external'
-                    ? '还没有外置插件'
-                    : '暂无可用插件'
-              "
-            >
-              {{
-                counts[filter]
-                  ? '调整筛选条件，或切换分类查看其他插件。'
-                  : filter === 'external' && feature.state.externalSupported
-                    ? '从右上角导入插件包，确认安装后即可在这里管理。'
-                    : '可切换分类查看其他插件。'
-              }}
-            </MusicListEmptyState>
-          </fieldset>
-        </Transition>
+          <legend class="am-sr-only">插件列表</legend>
+          <div v-if="visible.length" class="classic-plugins__items" :data-display="display">
+            <ClassicPluginCard
+              v-for="item in visible"
+              :key="item.id"
+              :item="item"
+              :busy="disabled"
+              :selectable="operatorOpen"
+              :selected="controls.selectedIds.value.has(item.id)"
+              @select="controls.toggleItem(item.id)"
+              @set-enabled="setEnabled(item.id, $event)"
+              @details="detailsId = item.id"
+            />
+          </div>
+          <MusicListEmptyState
+            v-else
+            icon="plugin"
+            role="status"
+            :title="
+              counts[filter]
+                ? '没有匹配的插件'
+                : filter === 'external'
+                  ? '还没有外置插件'
+                  : '暂无可用插件'
+            "
+          >
+            {{
+              counts[filter]
+                ? '调整筛选条件，或切换分类查看其他插件。'
+                : filter === 'external' && feature.state.externalSupported
+                  ? '从右上角导入插件包，确认安装后即可在这里管理。'
+                  : '可切换分类查看其他插件。'
+            }}
+          </MusicListEmptyState>
+        </ClassicResultView>
       </div>
     </ClassicCollectionSurface>
     <ClassicPageOverlays :modal-open="modalOpen" :operator-open="operatorOpen">
@@ -203,6 +200,7 @@ function manageDetails(): void {
           :selected-count="selected.length"
           :total-count="visible.length"
           :operator-open="operatorOpen"
+          :filter-count="filterCount"
           :disabled="disabled"
           can-display
           filter-label="筛选插件"
