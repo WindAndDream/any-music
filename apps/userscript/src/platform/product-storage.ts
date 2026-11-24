@@ -9,6 +9,7 @@ import type {
 } from '@any-music/music-workbench/storage'
 
 const PREFIX = 'any-music:userscript:'
+const SIDEBAR_COLLAPSED_KEY = 'runtime:sidebar-collapsed:v1'
 const TAB_OWNER = 'anyMusicProductWriter'
 let initialization = 0
 let activeOwner: string | undefined
@@ -16,6 +17,10 @@ let tabUpdates = Promise.resolve()
 let pendingWrites = Promise.resolve()
 
 export interface GmProductStorage extends ProductGenerationStorage {
+  sidebarCollapsePreference: {
+    read(): boolean | undefined
+    write(collapsed: boolean): void
+  }
   /** Freeze/drain runtime-local writers before releasing the shared manager tab owner. */
   onDispose(cleanup: () => Promise<void>): void
   flush(): Promise<void>
@@ -98,7 +103,9 @@ export async function createGmProductStorage(): Promise<GmProductStorage> {
       values.set(key, await GM.getValue(`${PREFIX}${key}`))
     }
     await Promise.all(
-      [PRODUCT_COMMIT_KEY, 'product-data:journal', 'runtime:proxy:v1'].map(readValue),
+      [PRODUCT_COMMIT_KEY, 'product-data:journal', 'runtime:proxy:v1', SIDEBAR_COLLAPSED_KEY].map(
+        readValue,
+      ),
     )
     const pointer = values.get(PRODUCT_COMMIT_KEY) as { slot?: unknown; id?: unknown } | undefined
     if (pointer && (pointer.slot === 0 || pointer.slot === 1) && typeof pointer.id === 'string') {
@@ -151,6 +158,14 @@ export async function createGmProductStorage(): Promise<GmProductStorage> {
       throw new Error('Product storage initialization was replaced')
     return {
       ...storage,
+      sidebarCollapsePreference: {
+        read: () => {
+          const value = values.get(SIDEBAR_COLLAPSED_KEY)
+          return typeof value === 'boolean' ? value : undefined
+        },
+        write: (collapsed) =>
+          raw.withExclusiveWrite(() => raw.write(SIDEBAR_COLLAPSED_KEY, collapsed)),
+      },
       flush: () => writes,
       dispose,
       onDispose: (cleanup) => {

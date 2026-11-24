@@ -44,6 +44,7 @@ export async function configureUserscriptWorkbench(): Promise<() => Promise<void
         features: builtInFeatureModules,
       },
       storage,
+      sidebarCollapsePreference: storage.sidebarCollapsePreference,
       http: gmHttpClient,
       builtInMusicSources,
       configureProxy: configureGmHttpProxy,
