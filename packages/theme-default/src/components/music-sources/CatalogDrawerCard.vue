@@ -174,10 +174,10 @@ function handlePrimaryAction(): void {
           </span>
         </div>
         <div class="catalog-card__metrics" aria-label="列表加载概况">
-          <span data-catalog-text
+          <span class="am-metadata-label" data-catalog-text
             ><strong>{{ props.drawer.tracks.length }}</strong> 首已加载</span
           >
-          <span data-catalog-text
+          <span class="am-metadata-label" data-catalog-text
             ><strong>{{ props.drawer.loadedPageCount }}</strong> 页内容</span
           >
         </div>
@@ -482,19 +482,10 @@ function handlePrimaryAction(): void {
   flex: 0 0 auto;
   align-items: center;
   gap: var(--am-space-2);
-  color: var(--am-color-text-secondary);
-  font-size: var(--am-font-size-xs);
 }
 
-.catalog-card__metrics span {
-  display: inline-flex;
-  flex: 0 0 auto;
-  min-block-size: 28px;
-  align-items: center;
+.catalog-card__metrics .am-metadata-label {
   gap: var(--am-space-1);
-  padding: var(--am-space-1) var(--am-space-2);
-  border-radius: var(--am-radius-detail);
-  background: var(--am-color-surface-subtle);
 }
 
 .catalog-card__metrics strong {

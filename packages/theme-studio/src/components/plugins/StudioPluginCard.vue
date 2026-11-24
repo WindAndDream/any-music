@@ -24,12 +24,11 @@ const label = computed(() => getPluginStatusLabel(props.item))
 <template>
   <article class="studio-plugin-card">
     <header class="studio-plugin-card__header">
-      <AppIcon :name="item.category === '音乐源' ? 'music' : 'plugin'" :size="22" /><span>{{
-        item.category
-      }}</span
-      ><span class="studio-plugin-card__origin">{{
-        item.origin === 'builtin' ? '内置' : '外置'
-      }}</span>
+      <AppIcon :name="item.category === '音乐源' ? 'music' : 'plugin'" :size="22" />
+      <div class="am-metadata-labels">
+        <span class="am-metadata-label">{{ item.category }}</span>
+        <span class="am-metadata-label">{{ item.origin === 'builtin' ? '内置' : '外置' }}</span>
+      </div>
     </header>
     <div class="studio-plugin-card__body">
       <h2>{{ item.name }}</h2>

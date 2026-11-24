@@ -49,7 +49,10 @@ const statusLabel = computed(() => getPluginStatusLabel(props.item))
       </span>
       <div class="classic-plugin-card__identity">
         <h3>{{ item.name }}</h3>
-        <span>{{ item.category }} · {{ item.origin === 'builtin' ? '内置' : '外置' }}</span>
+        <div class="am-metadata-labels">
+          <span class="am-metadata-label">{{ item.category }}</span>
+          <span class="am-metadata-label">{{ item.origin === 'builtin' ? '内置' : '外置' }}</span>
+        </div>
       </div>
     </header>
     <p class="classic-plugin-card__description">{{ item.description }}</p>
