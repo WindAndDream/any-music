@@ -2,6 +2,7 @@
 import { computed, effectScope, shallowRef, useTemplateRef, watch } from 'vue'
 import type { CSSProperties } from 'vue'
 
+import { useSidebarCollapseGridMotion } from '../../composables/use-sidebar-collapse-grid-motion'
 import { useMeasuredVirtualGrid } from '../../composables/virtual-scroll/use-measured-virtual-grid'
 import type { MeasuredVirtualGridItem } from '../../composables/virtual-scroll/use-measured-virtual-grid'
 import { useVirtualGridCssLayout } from '../../composables/virtual-scroll/use-virtual-grid-css-layout'
@@ -89,6 +90,11 @@ const retention = shallowRef<ReturnType<typeof useVirtualItemRetention>>()
 const interactionGeneration = shallowRef(0)
 watch(
   [() => result.context.scrollElement.value, () => result.context.metrics.value.ready],
+useSidebarCollapseGridMotion({
+  element: itemsElement,
+  scrollElement: () => props.scrollElement,
+  getLayout: () => ({ width: result.context.metrics.value.listWidth, ...css.layout.value }),
+})
   () => {
     // Retention invalidates registrations with the old context. A synchronous root/visibility
     // change can preserve keyed cells, so those cells must register again after the handoff.

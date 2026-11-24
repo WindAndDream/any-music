@@ -2,6 +2,7 @@
 import { useTemplateRef } from 'vue'
 
 import { useGridMoveTransition } from '../../composables/music-sources/use-grid-move-transition'
+import { useSidebarCollapseGridMotion } from '../../composables/use-sidebar-collapse-grid-motion'
 import type {
   CatalogTrackDisplayMode,
   MobileTrackColumns,
@@ -19,8 +20,10 @@ const props = defineProps<{
   itemKeys?: readonly string[]
 }>()
 defineSlots<{ default(): unknown }>()
+const items = useTemplateRef<HTMLElement>('items')
+useSidebarCollapseGridMotion({ element: items })
 useGridMoveTransition({
-  element: useTemplateRef<HTMLElement>('items'),
+  element: items,
   itemKeys: () => props.itemKeys ?? [],
   layoutKey: () => `${props.displayMode}:${props.mobileColumns}`,
   enabled: () => Boolean(props.animate),

@@ -5,6 +5,7 @@ import type { CSSProperties, EffectScope } from 'vue'
 import { useGridReorder } from '../../../src/composables/use-grid-reorder'
 import { useMeasuredVirtualGrid } from '../../../src/composables/virtual-scroll/use-measured-virtual-grid'
 import { useVirtualItemRetention } from '../../../src/composables/virtual-scroll/use-virtual-item-retention'
+import { useVirtualScrollAnchor } from '../../../src/composables/virtual-scroll/use-virtual-scroll-anchor'
 import { createVirtualGridReorderGeometry } from '../../../src/composables/virtual-scroll/virtual-grid-reorder-geometry'
 import {
   createResizeEnvironment,
@@ -67,7 +68,7 @@ function translation(style: CSSProperties | undefined) {
 }
 
 /** Real measured geometry and leases; motion boxes explicitly represent interrupted CSS frames. */
-function setup(grouped = false) {
+function setup(grouped = false, naturalHeight = 40) {
   const env = createResizeEnvironment()
   Object.assign(env.view, { innerHeight: 600 })
   vi.stubGlobal('window', env.view)
@@ -77,6 +78,7 @@ function setup(grouped = false) {
   root.clientHeight = 400
   root.clientTop = root.clientLeft = 0
   root.rect = { left: 0, top: 0, width: 300, height: 400 }
+  list.scrollTop = 0
   list.rect = { left: 0, top: 0, width: 300, height: 24_990 }
   const items = shallowRef<Item[]>(
     Array.from({ length: 1000 }, (_, index) => ({ id: String(index), title: `Track ${index}` })),
@@ -105,7 +107,7 @@ function setup(grouped = false) {
     const rowAttributes = new Set<string>()
     let partialOffset = { x: 0, y: 0 }
     const natural = new VirtualElement(env.document)
-    natural.rect = { left: 0, top: 0, width: 150, height: 40 }
+    natural.rect = { left: 0, top: 0, width: 150, height: naturalHeight }
     const releaseMeasurement = grid.measurements.observeItem(key, natural.asElement())
     const surface = {
       getBoundingClientRect: () => {
@@ -170,12 +172,25 @@ function setup(grouped = false) {
       scrollElement: root.asElement(),
       listElement: list.asElement(),
     })
+    const anchor = useVirtualScrollAnchor({ context: grid.context, geometry: grid.geometry })
     const retention = useVirtualItemRetention({
       context: grid.context,
       geometry: grid.geometry,
+      suspendReorder: anchor.suspend,
       limit: 2,
     })
     retained.value = retention
+    watch(
+      grid.totalSize,
+      (size) => {
+        // Model a scroll viewport clamping its offset after a smaller grid extent is painted.
+        const maximum = Math.max(0, size - root.clientHeight)
+        if (root.scrollTop <= maximum) return
+        root.scrollTop = maximum
+        root.dispatchEvent(new Event('scroll'))
+      },
+      { flush: 'post' },
+    )
     watch(
       grid.virtualItems,
       (rows) => {
@@ -227,16 +242,17 @@ function setup(grouped = false) {
       createGeometry(input) {
         const source = mounted.get(input.sourceId)
         if (!source) return
-        const revision = grid.layoutRevision.value
         return createVirtualGridReorderGeometry(input, {
           geometry: grid.geometry.value,
+          getGeometry: () => grid.geometry.value,
+          getGeometryRevision: () => grid.layoutRevision.value,
           columns: 2,
           listWidth: grid.context.metrics.value.listWidth,
           origin: { left: 0, top: 0 },
           sourceElement: source as unknown as HTMLElement,
           mountedIds: () => grid.virtualItems.value.map((item) => String(item.key)),
           getRevision: () => grid.virtualItems.value,
-          isValid: () => grid.context.metrics.value.ready && grid.layoutRevision.value === revision,
+          isValid: () => grid.context.metrics.value.ready,
         })
       },
       move,
@@ -469,6 +485,62 @@ describe('virtual controlled-grid release handoff (injected Node boxes)', () => 
       vi.advanceTimersByTime(340)
       expect(test.retention.retainedKeys.value).toEqual([])
       expect(test.maximumHolds()).toBe(2)
+    },
+  )
+
+  it.each([
+    ['downward', '902', '998'],
+    ['upward', '998', '902'],
+  ] as const)(
+    'preserves the viewport and extent after a %s drag across measured and estimated rows',
+    async (_direction, sourceId, targetId) => {
+      const test = setup(false, 60.25)
+      async function scrollTo(offset: number) {
+        test.root.scrollTop = Math.min(offset, test.grid.totalSize.value - test.root.clientHeight)
+        test.root.dispatchEvent(new Event('scroll'))
+        await settle()
+      }
+      function offsetOf(id: string) {
+        const geometry = test.grid.geometry.value
+        return geometry.getItem(geometry.indexOf(id)!)!.start
+      }
+
+      await settle()
+      async function scrollToItem(id: string) {
+        await scrollTo(offsetOf(id) - 100)
+        // The first visit may replace estimated heights before the item reaches the viewport.
+        await scrollTo(offsetOf(id) - 100)
+      }
+      await scrollToItem(sourceId)
+      const grabOffset = test.slot(sourceId).height / 2
+      test.reorder.startDrag(test.pointFor(sourceId), 'track', sourceId)
+      expect(test.reorder.draggedId.value).toBe(sourceId)
+      await scrollTo(offsetOf('950'))
+      await scrollToItem(targetId)
+      if (targetId === '998') await scrollTo(test.grid.totalSize.value - test.root.clientHeight)
+      const releaseOffset = test.root.scrollTop
+      const releaseExtent = test.grid.totalSize.value
+      const up = test.pointFor(targetId)
+      const releasedTop = up.clientY - grabOffset
+
+      expect(test.reorder.draggedId.value).toBe(sourceId)
+      expect(test.mounted.has(targetId)).toBe(true)
+      test.reorder.finishDrag(up)
+      expect(test.move).toHaveBeenCalledExactlyOnceWith(
+        'track',
+        sourceId,
+        targetId,
+        expect.any(Array),
+      )
+      await settle()
+      expect(test.root.scrollTop).toBe(releaseOffset)
+      expect(test.grid.totalSize.value).toBe(releaseExtent)
+      const offset = translation(test.reorder.getItemStyle('track', sourceId))
+      expect(test.slot(sourceId).top + offset.y).toBeCloseTo(releasedTop)
+      runFrame()
+      vi.advanceTimersByTime(340)
+      expect(test.root.scrollTop).toBe(releaseOffset)
+      expect(test.retention.retainedKeys.value).toEqual([])
     },
   )
 

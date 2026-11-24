@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { nextTick, shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, nextTick, provide, shallowRef, useTemplateRef, watch } from 'vue'
 
 import { useBackHandler } from '../composables/use-back-navigation'
 import { useOverlayKeyboard } from '../composables/use-overlay-keyboard'
+import { collapsingSidebarSideKey } from '../composables/use-sidebar-collapse-grid-motion'
 interface Props {
   /** Userscript overlays the host page; desktop and mobile webviews embed the same shell in a root. */
   presentation?: 'overlay' | 'embedded'
@@ -40,19 +41,77 @@ useBackHandler({
   handle: () => emit('closeMobileDrawer'),
 })
 
+const shell = useTemplateRef<HTMLElement>('shell')
 const sidebar = useTemplateRef<HTMLElement>('sidebar')
 const mobileNavigation = useTemplateRef<HTMLElement>('mobileNavigation')
 const previousFocus = shallowRef<HTMLElement>()
 const mobileNavigationHeight = shallowRef(0)
 const isMobileDrawerTransitioning = shallowRef(false)
 const isSidebarTransitioning = shallowRef(false)
+const isPreparingSidebarExpansion = shallowRef(false)
+
+provide(
+  collapsingSidebarSideKey,
+  computed(() =>
+    isSidebarTransitioning.value && props.sidebarCollapsed ? props.sidebarSide : undefined,
+  ),
+)
 
 watch(
   [() => props.mobileLayout, () => props.sidebarCollapsed, () => props.sidebarSide],
-  ([isMobile, isCollapsed, side], [wasMobile, wasCollapsed, previousSide]) => {
-    // Only animate rail toggles; changing sides or entering the drawer layout must settle immediately.
-    isSidebarTransitioning.value =
-      !isMobile && !wasMobile && side === previousSide && isCollapsed !== wasCollapsed
+  ([isMobile, isCollapsed, side], [wasMobile, wasCollapsed, previousSide], onCleanup) => {
+    const element = shell.value
+    const view = element?.ownerDocument.defaultView
+    if (
+      isMobile ||
+      wasMobile ||
+      side !== previousSide ||
+      isCollapsed === wasCollapsed ||
+      !view ||
+      typeof element?.getAnimations !== 'function' ||
+      view.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      isSidebarTransitioning.value = false
+      isPreparingSidebarExpansion.value = false
+      return
+    }
+
+    // Give the narrower content layout a frame before opening a settled rail.
+    // A reversal keeps the in-flight rail responsive and uses the same final layout.
+    isPreparingSidebarExpansion.value = !isCollapsed && !isSidebarTransitioning.value
+    isSidebarTransitioning.value = true
+    let active = true
+    let frame: number
+    const finish = () => {
+      if (active) isSidebarTransitioning.value = false
+    }
+    const afterLayout = (callback: () => void) => {
+      frame = view.requestAnimationFrame(() => {
+        frame = view.requestAnimationFrame(callback)
+      })
+    }
+    const trackRailMotion = () => {
+      // Track the actual transition so cancellation or a coalesced toggle also settles.
+      const transition = element
+        .getAnimations()
+        .find(
+          (animation) =>
+            'transitionProperty' in animation &&
+            animation.transitionProperty === 'grid-template-columns',
+        )
+      if (transition) void transition.finished.then(finish, finish)
+      else finish()
+    }
+    if (isPreparingSidebarExpansion.value) {
+      afterLayout(() => {
+        isPreparingSidebarExpansion.value = false
+        afterLayout(trackRailMotion)
+      })
+    } else afterLayout(trackRailMotion)
+    onCleanup(() => {
+      active = false
+      view.cancelAnimationFrame(frame)
+    })
   },
 )
 
@@ -158,12 +217,14 @@ defineSlots<{
 
 <template>
   <section
+    ref="shell"
     class="music-app-shell"
     :class="{
       'music-app-shell--overlay': props.presentation === 'overlay',
       'music-app-shell--embedded': props.presentation === 'embedded',
       'music-app-shell--sidebar-collapsed': props.sidebarCollapsed,
       'music-app-shell--sidebar-transition': isSidebarTransitioning,
+      'music-app-shell--preparing-sidebar-expansion': isPreparingSidebarExpansion,
       'music-app-shell--mobile-drawer-open': props.mobileDrawerOpen,
       'music-app-shell--mobile-drawer-transition': isMobileDrawerTransitioning,
       'music-app-shell--without-player': !props.hasPlayer,
@@ -175,7 +236,6 @@ defineSlots<{
         ? { '--am-shell-mobile-navigation-offset': `${mobileNavigationHeight}px` }
         : undefined
     "
-    @transitionend.self="isSidebarTransitioning = false"
   >
     <button
       v-if="props.mobileDrawerOpen"
@@ -317,6 +377,41 @@ defineSlots<{
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
   scroll-padding-block-end: var(--am-space-6);
+}
+
+@media (width > 768px) and (prefers-reduced-motion: no-preference) {
+  .music-app-shell--preparing-sidebar-expansion {
+    --am-size-sidebar: var(--am-size-sidebar-collapsed);
+  }
+
+  .music-app-shell--sidebar-transition {
+    /* Clip the overhang without creating a horizontal scroll position that focus can move. */
+    overflow: clip;
+  }
+
+  .music-app-shell--sidebar-transition > .music-app-shell__content {
+    /* Size against the shell, so the moving track never resizes the content.
+       Anchor it to the far edge while the rail slides into the reserved space. */
+    inline-size: calc(100cqi - var(--am-size-sidebar-expanded));
+    justify-self: end;
+  }
+
+  .music-app-shell--sidebar-transition.music-app-shell--sidebar-collapsed
+    > .music-app-shell__content {
+    /* Use the wider layout from the start of collapse and reveal its overhang as the rail slides. */
+    inline-size: calc(100cqi - var(--am-size-sidebar-collapsed));
+    justify-self: start;
+    will-change: transform;
+  }
+
+  .music-app-shell--sidebar-transition[data-sidebar-side='right'] > .music-app-shell__content {
+    justify-self: start;
+  }
+
+  .music-app-shell--sidebar-transition.music-app-shell--sidebar-collapsed[data-sidebar-side='right']
+    > .music-app-shell__content {
+    justify-self: end;
+  }
 }
 
 .music-app-shell__player {

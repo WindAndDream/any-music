@@ -151,6 +151,7 @@ describe('measured virtual list (injected geometry; no browser layout)', () => {
     first.element.getBoundingClientRect.mockClear()
     last.element.getBoundingClientRect.mockClear()
     const revisions: number[] = []
+    const previousRevision = test.result.measurements.revision.value
     for (const target of [first.element, last.element])
       target.getBoundingClientRect.mockImplementation(() => {
         revisions.push(test.result.measurements.revision.value)
@@ -159,15 +160,27 @@ describe('measured virtual list (injected geometry; no browser layout)', () => {
     try {
       test.result.measurements.refresh() // A queued old-width job must be replaced too.
       test.list.rect.width = 600
-      test.observers[0]!.notify([test.list.asElement()])
+      const firstElement = first.element.asElement()
+      const lastElement = last.element.asElement()
+      test.observers[0]!.notify(
+        [test.list.asElement(), firstElement, lastElement],
+        new Map([
+          [firstElement, 90],
+          [lastElement, 10],
+        ]),
+      )
       expect(test.result.measurements.getHeight(0)).toBe(90)
       expect(test.result.measurements.getHeight(2)).toBe(10)
       expect(test.result.measurements.getHeight(1)).toBeUndefined()
-      expect(revisions).toHaveLength(2)
-      expect(revisions[0]).toBe(revisions[1])
+      expect(revisions).toEqual([previousRevision, previousRevision])
       await settle()
+      expect(test.result.measurements.revision.value).toBe(previousRevision + 1)
       expect(first.element.getBoundingClientRect).toHaveBeenCalledOnce()
       expect(last.element.getBoundingClientRect).toHaveBeenCalledOnce()
+      first.element.rect.height = 110
+      test.observers[0]!.notify([firstElement], new Map([[firstElement, 110]]))
+      await settle()
+      expect(test.result.measurements.getHeight(0)).toBe(110)
     } finally {
       test.stop()
     }

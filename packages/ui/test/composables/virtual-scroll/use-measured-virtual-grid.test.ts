@@ -72,6 +72,24 @@ function setup(count = 80, initialColumns = 3) {
 }
 
 describe('row-major measured virtual grid (injected geometry, no CSS layout)', () => {
+  it('reads a valid render window when the column count changes before Vue Virtual updates', async () => {
+    const test = setup(9, 1)
+    try {
+      await settle()
+      expect(test.result.virtualItems.value.some(({ rowIndex }) => rowIndex > 2)).toBe(true)
+
+      test.columns.value = 3
+      // Pagination and motion may read the new layout in the same flush as the resize.
+      expect(test.result.virtualItems.value.map(({ key }) => key)).toEqual(
+        test.items.value.map(({ key }) => key),
+      )
+      await settle()
+      expect(test.result.renderLayout.value.templateRows).toBe('auto auto auto')
+    } finally {
+      test.stop()
+    }
+  })
+
   it('keeps unrelated cached row heights through a reorder in a newly visited region', async () => {
     const test = setup(80)
     const earlier = [0, 1, 2].map((key) => test.mount(key, 80))
@@ -325,6 +343,7 @@ describe('row-major measured virtual grid (injected geometry, no CSS layout)', (
     const test = setup(3)
     const measured = [test.mount(0, 60), test.mount(1, 60), test.mount(2, 60)]
     await settle()
+    const build = vi.spyOn(rowGeometry, 'createVirtualRowGeometry')
     const original = test.result.motionRevision.value
     const motions: number[] = []
     const stop = watch(
@@ -347,6 +366,7 @@ describe('row-major measured virtual grid (injected geometry, no CSS layout)', (
         expect(test.result.motionRevision.value).toBe(original)
       }
       expect(motions).toEqual([])
+      expect(build).not.toHaveBeenCalled()
       // A previously scheduled refresh may flush before the width's post watchers.
       // Its stale jobs cannot finish the newer motion batch or expose estimates.
       test.result.measurements.refresh()
@@ -363,12 +383,14 @@ describe('row-major measured virtual grid (injected geometry, no CSS layout)', (
       await settle()
       expect(motions).toEqual([])
       expect(test.result.geometry.value.getItem(0)?.size).toBe(90)
+      expect(build).toHaveBeenCalledOnce()
       // A later load at the same width remains independent spatial motion.
       measured[0]!.element.rect.height = 110
       test.observers[0]!.notify([measured[0]!.element.asElement()])
       await settle()
       expect(motions).toEqual([110])
     } finally {
+      build.mockRestore()
       stop()
       for (const item of measured) item.release()
       test.stop()
@@ -724,38 +746,59 @@ describe('row-major measured virtual grid (injected geometry, no CSS layout)', (
     }
   })
 
-  it('discards offscreen stretched heights when a key moves to different row siblings', async () => {
-    const test = setup(80)
-    const first = test.mount(0, 100),
-      sibling = test.mount(1, 100)
-    await settle()
-    first.release()
-    sibling.release()
-    expect(test.result.measurements.getHeight(1)).toBe(100)
-    try {
-      const previous = test.items.value
-      test.items.value = [
-        previous[0]!,
-        previous[3]!,
-        previous[4]!,
-        previous[1]!,
-        previous[2]!,
-        previous[5]!,
-        ...previous.slice(6),
-      ]
+  it.each(['remeasuring', 'resizing'] as const)(
+    'replaces a row estimate after %s',
+    async (change) => {
+      const test = setup(80)
+      const first = test.mount(0, 100),
+        sibling = test.mount(1, 100)
       await settle()
-      expect(test.result.measurements.cacheSize.value).toBe(0)
-      expect(test.result.geometry.value.getItem(3)).toMatchObject({ key: 1, start: 32, size: 20 })
-      const moved = test.mount(1, 10),
-        smallSibling = test.mount(2, 12),
-        otherSibling = test.mount(5, 11)
-      await settle()
-      expect(test.result.geometry.value.getItem(3)).toMatchObject({ key: 1, size: 12 })
-      moved.release()
-      smallSibling.release()
-      otherSibling.release()
-    } finally {
-      test.stop()
-    }
-  })
+      first.release()
+      sibling.release()
+      expect(test.result.measurements.getHeight(1)).toBe(100)
+      try {
+        const previous = test.items.value
+        test.items.value = [
+          previous[0]!,
+          previous[3]!,
+          previous[4]!,
+          previous[1]!,
+          previous[2]!,
+          previous[5]!,
+          ...previous.slice(6),
+        ]
+        await settle()
+        expect(test.result.measurements.cacheSize.value).toBe(0)
+        expect(test.result.measurements.getHeight(1)).toBeUndefined()
+        expect(test.result.geometry.value.getItem(3)).toMatchObject({
+          key: 1,
+          start: 112,
+          size: 20,
+        })
+        if (change === 'resizing') {
+          test.list.rect.width = 900
+          test.observers[0]!.notify([test.list.asElement()])
+          await settle()
+          expect(test.result.geometry.value.getItem(3)).toMatchObject({
+            key: 1,
+            start: 32,
+            size: 20,
+          })
+          return
+        }
+        const moved = test.mount(1, 10),
+          smallSibling = test.mount(2, 12),
+          otherSibling = test.mount(5, 11)
+        const firstRow = [0, 3, 4].map((key) => test.mount(key, 20))
+        await settle()
+        expect(test.result.geometry.value.getItem(3)).toMatchObject({ key: 1, start: 32, size: 12 })
+        for (const item of firstRow) item.release()
+        moved.release()
+        smallSibling.release()
+        otherSibling.release()
+      } finally {
+        test.stop()
+      }
+    },
+  )
 })
