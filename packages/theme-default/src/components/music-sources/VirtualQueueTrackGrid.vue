@@ -10,7 +10,7 @@ import type {
 } from '@any-music/ui/virtual-scroll'
 import { computed, onScopeDispose, useTemplateRef, watch } from 'vue'
 
-import type { ClassicVirtualTrackGridAdapter } from '../../composables/classic-virtual-favorites-canary'
+import type { ClassicVirtualTrackGridAdapter } from '../../composables/classic-virtual-track-grid'
 import { useClassicOverlays } from '../../composables/use-classic-overlays'
 import type { QueueTrackGridEmits, QueueTrackGridProps } from './queue-track-grid-contracts'
 import QueueTrackGridItem from './QueueTrackGridItem.vue'

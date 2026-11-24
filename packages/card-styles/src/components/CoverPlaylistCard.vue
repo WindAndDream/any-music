@@ -39,6 +39,7 @@ defineEmits<{
       class="am-cover-playlist__art"
       type="button"
       :data-queue-handle="selectionOnly || readonly ? undefined : ''"
+      :data-am-focus-key="readonly ? undefined : `playlist:${id}:cover`"
       :disabled="disabled"
       :aria-label="
         selectionOnly
@@ -75,6 +76,7 @@ defineEmits<{
           type="button"
           :disabled="disabled"
           :data-collection-entry="id"
+          :data-am-focus-key="readonly ? undefined : `playlist:${id}:open`"
           :title="name"
           @click.stop="!readonly && (selectable ? $emit('select') : $emit('open'))"
         >
@@ -95,6 +97,7 @@ defineEmits<{
           class="am-cover-playlist__more"
           type="button"
           :aria-label="`查看 ${name} 的详细信息`"
+          :data-am-focus-key="`playlist:${id}:details`"
           aria-haspopup="dialog"
           @click.stop="$emit('actions')"
         >
@@ -108,6 +111,7 @@ defineEmits<{
         :disabled="disabled"
         :checked="selected"
         :aria-label="`选择歌单 ${name}`"
+        :data-am-focus-key="`playlist:${id}:select`"
         @change="$emit('select')"
     /></label>
   </div>

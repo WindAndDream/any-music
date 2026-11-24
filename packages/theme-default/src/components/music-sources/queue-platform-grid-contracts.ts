@@ -2,7 +2,7 @@ import type { Track } from '@any-music/core'
 import type { CatalogTrackDisplayMode, MobileTrackColumns } from '@any-music/ui/library'
 import type { CSSProperties } from 'vue'
 
-import type { ClassicVirtualTrackGridBinding } from '../../composables/classic-virtual-favorites-canary'
+import type { ClassicVirtualTrackGridBinding } from '../../composables/classic-virtual-track-grid'
 
 /** Complete controlled platform projections; the mounted window never owns selection or order. */
 export interface QueuePlatformGridGroup {

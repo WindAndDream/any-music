@@ -20,11 +20,6 @@ import ClassicFavorites from '../../../src/components/library/ClassicFavorites.v
 import ClassicPlaylists from '../../../src/components/library/ClassicPlaylists.vue'
 import ClassicQueue from '../../../src/components/library/ClassicQueue.vue'
 import {
-  classicVirtualFavoritesCanaryKey,
-  classicVirtualPlaylistCanaryKey,
-  classicVirtualQueueCanaryKey,
-} from '../../../src/composables/classic-virtual-favorites-canary'
-import {
   CatalogTestElement,
   dispatchCatalogEvent,
   findCatalogElement,
@@ -82,11 +77,13 @@ beforeAll(async () => {
   // Production laziness is checked by the throwing-loader admission suite. Preload the
   // test modules so compilation time cannot be mistaken for a mounted-window failure.
   await Promise.all([
+    import('../../../src/components/library/ClassicPlaylistVirtualGrid.vue'),
     import('../../../src/components/music-sources/VirtualQueueTrackGrid.vue'),
     import('../../../src/components/music-sources/VirtualQueuePlatformGrid.vue'),
   ])
 })
 beforeEach(() => {
+  vi.stubEnv('MODE', 'dev')
   vi.stubGlobal('Document', CatalogTestElement)
   vi.stubGlobal('HTMLElement', CatalogTestElement)
   vi.stubGlobal('window', {
@@ -95,7 +92,10 @@ beforeEach(() => {
     matchMedia: () => ({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() }),
   })
 })
-afterEach(() => vi.unstubAllGlobals())
+afterEach(() => {
+  vi.unstubAllEnvs()
+  vi.unstubAllGlobals()
+})
 
 function createTracks(count: number): Track[] {
   return Array.from({ length: count }, (_, index) => ({
@@ -109,7 +109,11 @@ function createTracks(count: number): Track[] {
     },
   }))
 }
-function setup(context: 'favorites' | 'queue' | 'playlists', tracks = createTracks(1_000)) {
+function setup(
+  context: 'favorites' | 'queue' | 'playlists',
+  tracks = createTracks(1_000),
+  overviewCount?: number,
+) {
   const ids = tracks.map(({ id }) => id)
   const playlist = (id: string) => ({
     id,
@@ -146,8 +150,14 @@ function setup(context: 'favorites' | 'queue' | 'playlists', tracks = createTrac
       ['first', Math.ceil(tracks.length / 2)],
       ['second', Math.floor(tracks.length / 2)],
     ]),
-    playlists: [playlist('one'), playlist('two')],
-    activePlaylistId: context === 'playlists' ? 'one' : null,
+    playlists:
+      overviewCount === undefined
+        ? [playlist('one'), playlist('two')]
+        : Array.from({ length: overviewCount }, (_, index) => ({
+            ...playlist(`playlist-${index}`),
+            trackIds: [`song-${index}`],
+          })),
+    activePlaylistId: context === 'playlists' && overviewCount === undefined ? 'one' : null,
     nameDraft: '',
     query: '',
     coverUrls: { 'cover:one': 'fixture:one', 'cover:two': 'fixture:two' },
@@ -181,13 +191,18 @@ function setup(context: 'favorites' | 'queue' | 'playlists', tracks = createTrac
     clear: vi.fn(),
     open: vi.fn((id: string | null) => {
       state.activePlaylistId = id
+      if (feature.value.state !== state)
+        feature.value = {
+          ...feature.value,
+          state: { ...feature.value.state, activePlaylistId: id },
+        }
     }),
     setNameDraft: vi.fn(),
     create: vi.fn(),
     saveDetails: vi.fn(),
     removeTracks: vi.fn(),
     reorderTracks: vi.fn(),
-    reorderPlaylists: vi.fn(),
+    reorderPlaylists: vi.fn<(ids: readonly string[]) => void>(),
     setQuery: vi.fn(),
   } satisfies UiThemeTrackListActions & UiThemeCollectionActions & Record<string, unknown>
   const feature = shallowRef({
@@ -205,14 +220,6 @@ function setup(context: 'favorites' | 'queue' | 'playlists', tracks = createTrac
         provideEditingSession(editing)
         confirmation = provideConfirmationDialog()
         provide(UI_CONTRIBUTIONS, { resolve: () => [], accepts: () => false })
-        provide(
-          context === 'favorites'
-            ? classicVirtualFavoritesCanaryKey
-            : context === 'queue'
-              ? classicVirtualQueueCanaryKey
-              : classicVirtualPlaylistCanaryKey,
-          true,
-        )
         return () =>
           h(
             (context === 'favorites'
@@ -254,6 +261,9 @@ function setup(context: 'favorites' | 'queue' | 'playlists', tracks = createTrac
         state: { ...feature.value.state, tracks: [...nextTracks] },
       }
     },
+    replacePlaylists(playlists: typeof state.playlists) {
+      feature.value = { ...feature.value, state: { ...feature.value.state, playlists } }
+    },
     confirmation,
     generation,
     button,
@@ -274,11 +284,11 @@ function shift(cell: CatalogTestElement, direction: 'ArrowUp' | 'ArrowDown') {
   )
 }
 
-function finishPlatformTransition(root: CatalogTestElement) {
+function finishCollectionTransition(root: CatalogTestElement, viewClass = 'listen-queue__view') {
   const view = findCatalogElement(
     root,
     (node) =>
-      String(node.props.class).includes('listen-queue__view') &&
+      String(node.props.class).includes(viewClass) &&
       typeof node.props['data-collection-view'] === 'string' &&
       node.parent?.props.onAfterEnter !== undefined,
   )
@@ -292,6 +302,130 @@ function finishPlatformTransition(root: CatalogTestElement) {
 function activeTrack(cell: CatalogTestElement) {
   return findCatalogElement(cell, (node) => String(node.props.class).includes('track--active'))
 }
+
+describe('Classic playlist overview', () => {
+  it('restores the distant name button after keyboard reorder and a visit to the playlist', async () => {
+    const test = setup('playlists', createTracks(1), 1_000)
+    const id = 'playlist-900'
+    const control = `playlist:${id}:open`
+    try {
+      await settle()
+      expect(test.cells().length).toBeLessThan(24)
+      expect(test.cells().some((cell) => cell.dataset.queueDropId === id)).toBe(false)
+      expect(
+        await test
+          .adapter()
+          .restore(
+            { anchor: { key: id, offset: 12 }, focus: { itemKey: id, controlKey: control } },
+            new AbortController().signal,
+          ),
+      ).toBe(true)
+      const source = test.cells().find((cell) => cell.dataset.queueDropId === id)!
+      const playlists = test.state.playlists
+      const byId = new Map(playlists.map((playlist) => [playlist.id, playlist]))
+      test.commands.reorderPlaylists.mockImplementation((ids) =>
+        test.replacePlaylists(ids.map((key) => byId.get(key)!)),
+      )
+      const handle = findCatalogElement(source, (node) => 'data-queue-handle' in node.props)
+      handle.focus()
+      shift(source, 'ArrowUp')
+      await settle()
+      const order = test.commands.reorderPlaylists.mock.lastCall?.[0]
+      expect(order).toHaveLength(1_000)
+      expect(order?.slice(899, 901)).toEqual([id, 'playlist-899'])
+      expect(test.document.activeElement).toBe(handle)
+      expect(source.props['aria-posinset']).toBe(900)
+
+      const before = test.adapter().capture()?.anchor
+      dispatchCatalogEvent(source.querySelector('[data-collection-entry]')!, 'onClick', false)
+      await settle()
+      finishCollectionTransition(test.root, 'playlist-page__view')
+      await settle()
+      dispatchCatalogEvent(test.button('返回我的歌单'), 'onClick', false)
+      await settle()
+      finishCollectionTransition(test.root, 'playlist-page__view')
+      await settle()
+      expect(test.adapter().capture()?.anchor).toEqual(before)
+      expect(
+        (test.document.activeElement as unknown as CatalogTestElement).dataset.amFocusKey,
+      ).toBe(control)
+      expect(test.cells().length).toBeLessThan(24)
+      expect(test.commands.open.mock.calls).toEqual([[id], [null]])
+    } finally {
+      test.close()
+    }
+  })
+
+  it('selects and enqueues all playlists beyond the mounted window', async () => {
+    const test = setup('playlists', [], 1_000)
+    try {
+      await settle()
+      expect(test.cells().length).toBeLessThan(24)
+      dispatchCatalogEvent(test.button('操作器 已选 0'), 'onClick', false)
+      await settle()
+      const selectAll = test.root.querySelector('[aria-label="全选当前 1000 个匹配歌单"]')!
+      dispatchCatalogEvent(selectAll, 'onChange', false)
+      await settle()
+      dispatchCatalogEvent(test.button('加入待听'), 'onClick', false)
+      expect(test.commands.enqueue).toHaveBeenCalledExactlyOnceWith(
+        Array.from({ length: 1_000 }, (_, index) => `song-${index}`),
+      )
+    } finally {
+      test.close()
+    }
+  })
+
+  it.each([
+    [0, 3, ['playlist-1', 'playlist-2', 'playlist-3', 'playlist-0']],
+    [3, 0, ['playlist-3', 'playlist-0', 'playlist-1', 'playlist-2']],
+  ] as const)('moves a long-pressed card from index %i to %i', async (from, to, order) => {
+    vi.stubGlobal('window', Object.assign(new EventTarget(), { innerHeight: 600 }))
+    const test = setup('playlists', [], 4)
+    try {
+      await settle()
+      vi.useFakeTimers()
+      vi.stubGlobal(
+        'requestAnimationFrame',
+        vi.fn(() => 1),
+      )
+      vi.stubGlobal('cancelAnimationFrame', vi.fn())
+      const byId = new Map(test.state.playlists.map((playlist) => [playlist.id, playlist]))
+      test.commands.reorderPlaylists.mockImplementation((ids) =>
+        test.replacePlaylists(ids.map((id) => byId.get(id)!)),
+      )
+      const cell = test.cells()[from]!
+      const handle = cell.querySelector('[data-queue-handle]')!
+      const grid = test.region()
+      const bounds = (grid as unknown as HTMLElement).getBoundingClientRect()
+      Object.assign(grid, {
+        getBoundingClientRect: () => ({ ...bounds, height: 300, bottom: bounds.top + 300 }),
+      })
+      const pointer = (index: number) => ({
+        button: 0,
+        pointerId: 1,
+        isPrimary: true,
+        clientX: 100,
+        clientY: 96 + Math.floor(index / 3) * 156,
+        target: handle,
+        currentTarget: handle,
+        preventDefault() {},
+      })
+      ;(handle.props.onPointerdown as (event: unknown) => void)(pointer(from))
+      vi.advanceTimersByTime(500)
+      await nextTick()
+      expect(cell.hasAttribute('data-am-grid-source')).toBe(true)
+      grid.dispatchListeners('pointerup', pointer(to))
+      await nextTick()
+      expect(test.commands.reorderPlaylists).toHaveBeenCalledExactlyOnceWith(order)
+      expect(test.cells()[to]).toBe(cell)
+      expect(cell.hasAttribute('data-am-grid-source')).toBe(false)
+      expect(test.commands.open).not.toHaveBeenCalled()
+    } finally {
+      test.close()
+      vi.useRealTimers()
+    }
+  })
+})
 
 describe.each(['favorites', 'queue', 'playlists'] as const)(
   'virtual %s committed snapshot handoff',
@@ -519,12 +653,12 @@ describe.each(['queue', 'playlists'] as const)('C01/C02 %s candidate integration
         false,
       )
       await settle()
-      finishPlatformTransition(test.root)
+      finishCollectionTransition(test.root)
       await settle()
       expect(test.cells().map((cell) => cell.dataset.queueDropId)).toEqual(['track:900'])
       dispatchCatalogEvent(test.button('返回按平台'), 'onClick', false)
       await settle()
-      finishPlatformTransition(test.root)
+      finishCollectionTransition(test.root)
       await settle()
       expect(test.adapter().capture()?.anchor).toEqual(before.anchor)
       expect(
@@ -670,7 +804,9 @@ describe('consumer-specific state boundaries', () => {
       dispatchCatalogEvent(test.button('返回我的歌单'), 'onClick', false)
       await settle()
       expect(test.state.activePlaylistId).toBeNull()
-      expect(test.root.querySelectorAll('[data-am-continuity-key]')).toHaveLength(0)
+      expect(
+        test.root.querySelectorAll('[data-am-continuity-key="playlist:overview"]'),
+      ).toHaveLength(1)
       expect(test.state.playlists.map(({ coverId }) => coverId)).toEqual(['cover:one', 'cover:two'])
     } finally {
       test.close()

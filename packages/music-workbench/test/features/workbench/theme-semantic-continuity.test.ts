@@ -5,7 +5,7 @@ import { definition as studio } from '@any-music/theme-studio/vue'
 import { UI_CONTRIBUTIONS, provideConfirmationDialog } from '@any-music/ui'
 import { createEditingSession, provideEditingSession } from '@any-music/ui/library'
 import { getPresentationContinuity } from '@any-music/ui/theme'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defineComponent, h, nextTick, provide, shallowRef } from 'vue'
 
 import { createThemeFeatures } from '../../fixtures/theme-features'
@@ -16,8 +16,7 @@ const lazyRenderer = vi.hoisted(() => ({
   release: undefined as (() => void) | undefined,
 }))
 
-// The canary stays private and default-closed in production. This test-only injected value
-// exercises the actual candidate through the themes' public complete definitions.
+// Use the development profile to exercise the virtual grids through the complete theme definitions.
 vi.mock('vue', async (load) => {
   const vue = await load<typeof import('vue')>()
   const passthrough = vue.defineComponent({
@@ -39,14 +38,11 @@ vi.mock('vue', async (load) => {
             return source()
           })
         : vue.defineAsyncComponent(source),
-    inject: (...args: Parameters<typeof vue.inject>) =>
-      typeof args[0] === 'symbol' && args[0].description === 'classic-virtual-favorites-canary'
-        ? true
-        : vue.inject(...args),
   }
 })
 const cleanups: (() => void)[] = []
 const restorationAborts: AbortController[] = []
+beforeEach(() => vi.stubEnv('MODE', 'dev'))
 afterEach(async () => {
   // Cancel pending semantic restores before removing the mock HTMLElement globals.
   restorationAborts.splice(0).forEach((controller) => controller.abort())
@@ -58,6 +54,7 @@ afterEach(async () => {
     cleanups.splice(0).forEach((cleanup) => cleanup())
     await settle()
   } finally {
+    vi.unstubAllEnvs()
     vi.unstubAllGlobals()
   }
 })
@@ -169,11 +166,12 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
     lazyRenderer.release = ready
     const test = setup('default', 'studio')
     await settle()
-    test.scroll().scrollTop = 54_093
-    const play = test
-      .region()
-      .querySelectorAll<HTMLElement>('[data-am-focus-key="track:track:900:play"]')[0]!
-    play.focus()
+    const snapshot = {
+      anchor: { key: 'track:900', offset: 13 },
+      focus: { itemKey: 'track:900', controlKey: 'track:track:900:play' },
+    }
+    expect(await test.adapter().restore(snapshot, test.signal)).toBe(true)
+    expect(test.adapter().capture()).toEqual(snapshot)
     const restore = test.capture()
     test.theme.value = 'classic'
     await nextTick()
@@ -191,7 +189,7 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
     await pending
     lazyRenderer.wait = undefined
     lazyRenderer.release = undefined
-    expect(test.adapter().capture()!.anchor).toEqual({ key: 'track:900', offset: 13 })
+    expect(test.adapter().capture()!.anchor).toEqual(snapshot.anchor)
     expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
       'track:track:900:play',
     )
@@ -278,8 +276,9 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
       await settle()
       await restoreStudio()
       expect(test.adapter().capture()!.anchor).toEqual(before.anchor)
-      expect(test.scroll().scrollTop).toBe(54_093)
+      expect(test.scroll().scrollTop).toBeGreaterThan(0)
       expect(test.scroll().scrollTop).not.toBe(oldPixelOffset)
+      expect(test.region().querySelectorAll('[data-am-continuity-item]').length).toBeLessThan(32)
       expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
         'track:track:900:play',
       )

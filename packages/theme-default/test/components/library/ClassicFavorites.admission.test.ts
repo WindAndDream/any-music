@@ -20,11 +20,6 @@ import ClassicFavorites from '../../../src/components/library/ClassicFavorites.v
 import ClassicPlaylists from '../../../src/components/library/ClassicPlaylists.vue'
 import ClassicQueue from '../../../src/components/library/ClassicQueue.vue'
 import {
-  classicVirtualFavoritesCanaryKey,
-  classicVirtualPlaylistCanaryKey,
-  classicVirtualQueueCanaryKey,
-} from '../../../src/composables/classic-virtual-favorites-canary'
-import {
   CatalogTestElement,
   dispatchCatalogEvent,
   findCatalogElement,
@@ -34,10 +29,10 @@ import {
 // Exercise real rows and their public actions. Node cannot establish layout, native focus,
 // browser Find/text selection, or the P03/Userscript/Tauri admission gates.
 vi.mock('../../../src/components/music-sources/VirtualQueueTrackGrid.vue', () => {
-  throw new Error('An unadmitted production collection executed the virtual canary')
+  throw new Error('The full-rendered collection loaded the virtual track grid')
 })
 vi.mock('../../../src/components/music-sources/VirtualQueuePlatformGrid.vue', () => {
-  throw new Error('An unadmitted production collection executed the virtual overview canary')
+  throw new Error('The full-rendered collection loaded the virtual overview grid')
 })
 vi.mock('vue', async (load) => {
   const vue = await load<typeof import('vue')>()
@@ -65,6 +60,7 @@ vi.mock('@any-music/ui/components/SidePanel.vue', async () => {
 })
 
 beforeEach(() => {
+  vi.stubEnv('MODE', 'prod')
   vi.stubGlobal('Document', CatalogTestElement)
   vi.stubGlobal('window', {
     addEventListener: vi.fn(),
@@ -72,7 +68,10 @@ beforeEach(() => {
     matchMedia: () => ({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }),
   })
 })
-afterEach(() => vi.unstubAllGlobals())
+afterEach(() => {
+  vi.unstubAllEnvs()
+  vi.unstubAllGlobals()
+})
 
 function createTracks(count = 80): Track[] {
   return Array.from({ length: count }, (_, index) => ({
@@ -90,8 +89,6 @@ function createTracks(count = 80): Track[] {
 function mountCollection(
   context: 'favorites' | 'queue' | 'playlists',
   tracks: readonly Track[] = createTracks(),
-  canary?: boolean,
-  gate: 'favorites' | 'queue' | 'playlists' = 'favorites',
 ) {
   const ids = tracks.map(({ id }) => id)
   const state = shallowReactive({
@@ -180,15 +177,6 @@ function mountCollection(
         provideEditingSession(editing)
         confirmation = provideConfirmationDialog()
         provide(UI_CONTRIBUTIONS, { resolve: () => [], accepts: () => false })
-        if (canary !== undefined)
-          provide(
-            {
-              favorites: classicVirtualFavoritesCanaryKey,
-              queue: classicVirtualQueueCanaryKey,
-              playlists: classicVirtualPlaylistCanaryKey,
-            }[gate],
-            canary,
-          )
         return () => h(component as Component, { feature })
       },
     }),
@@ -223,22 +211,7 @@ function assertProductionRendering(root: CatalogTestElement, count: number) {
   expect(root.querySelectorAll('[data-queue-drop-kind="track"]')).toHaveLength(count)
 }
 
-describe('C00–C02 production admission remains independently closed', () => {
-  it.each([
-    { context: 'queue', gate: 'queue', canary: false },
-    { context: 'playlists', gate: 'playlists', canary: false },
-    { context: 'queue', gate: 'playlists', canary: true },
-    { context: 'playlists', gate: 'queue', canary: true },
-    { context: 'favorites', gate: 'queue', canary: true },
-    { context: 'favorites', gate: 'playlists', canary: true },
-  ] as const)('keeps $context on the production path with $gate=$canary', (input) => {
-    const view = mountCollection(input.context, createTracks(), input.canary, input.gate)
-    try {
-      assertProductionRendering(view.root, 80)
-    } finally {
-      view.close()
-    }
-  })
+describe('Classic collections in development and release profiles', () => {
   it.each(['flat', 'platform'] as const)(
     'settles restoration into an empty %s candidate without awaiting a nonexistent grid',
     async (arrangement) => {
@@ -261,7 +234,8 @@ describe('C00–C02 production admission remains independently closed', () => {
             ? (root as unknown as CatalogTestElement)
             : closest.call(this, selector)
         })
-      const view = mountCollection('favorites', [], true)
+      vi.stubEnv('MODE', 'dev')
+      const view = mountCollection('favorites', [])
       const controller = new AbortController()
       try {
         view.state.arrangementMode = arrangement
@@ -331,29 +305,27 @@ describe('C00–C02 production admission remains independently closed', () => {
 
   it.each(
     (['favorites', 'queue', 'playlists'] as const).flatMap((context) =>
-      (context === 'favorites' ? [undefined, false] : [undefined, false, true]).map((canary) => ({
+      ['staging', 'prod'].map((mode) => ({
         context,
-        canary,
+        mode,
       })),
     ),
-  )(
-    'keeps every $context row without executing the canary (provided: $canary)',
-    ({ context, canary }) => {
-      const view = mountCollection(context, createTracks(), canary)
-      try {
-        assertProductionRendering(view.root, 80)
-        expect(view.rows().map((row) => row.dataset.queueDropId)).toEqual(
-          view.state.tracks.map(({ id }) => id),
-        )
-        expect(view.root.textContent).toContain('歌曲 79')
-        expect(
-          Object.values(view.commands).every((command) => command.mock.calls.length === 0),
-        ).toBe(true)
-      } finally {
-        view.close()
-      }
-    },
-  )
+  )('keeps every $context row in $mode', ({ context, mode }) => {
+    vi.stubEnv('MODE', mode)
+    const view = mountCollection(context)
+    try {
+      assertProductionRendering(view.root, 80)
+      expect(view.rows().map((row) => row.dataset.queueDropId)).toEqual(
+        view.state.tracks.map(({ id }) => id),
+      )
+      expect(view.root.textContent).toContain('歌曲 79')
+      expect(Object.values(view.commands).every((command) => command.mock.calls.length === 0)).toBe(
+        true,
+      )
+    } finally {
+      view.close()
+    }
+  })
 
   it('plays the full host-filtered favorite order and selects all matches without clearing outside selection', async () => {
     // Filtering belongs to the host. The page receives its complete ordered result,
@@ -400,7 +372,7 @@ describe('C00–C02 production admission remains independently closed', () => {
   })
 
   it.each(['favorites', 'queue', 'playlists'] as const)(
-    'keeps the growing %s overview on its production path without a canary provider',
+    'keeps the growing %s overview on its production path',
     async (context) => {
       const tracks = createTracks()
       tracks.forEach((track, index) =>

@@ -26,11 +26,25 @@ const editorDraft = usePlaylistEditorDraft()
 const editor = editorDraft.id
 const details = computed(() => state.value.playlists.find(({ id }) => id === editor.value))
 const page = useTemplateRef<HTMLElement>('page')
+const overview = useTemplateRef<InstanceType<typeof ClassicPlaylistOverview>>('overview')
+const scrollContainer = computed(
+  () => page.value?.closest<HTMLElement>('.music-app-shell__content') ?? null,
+)
+const virtualizedOverview = import.meta.env.MODE === 'dev'
 const navigation = useCollectionNavigation({
   editing: useEditingSession('playlist-overview'),
   enabled: true,
   entryIds: () => state.value.playlists.map(({ id }) => id),
-  scrollContainer: () => page.value?.closest<HTMLElement>('.music-app-shell__content') ?? null,
+  scrollContainer,
+  get captureOverview() {
+    return virtualizedOverview ? overview.value?.captureOverview : undefined
+  },
+  get restoreOverview() {
+    return virtualizedOverview ? overview.value?.restoreOverview : undefined
+  },
+  get focusEntry() {
+    return virtualizedOverview ? overview.value?.focusEntry : undefined
+  },
 })
 watch(
   () => state.value.activePlaylistId,
@@ -114,7 +128,10 @@ async function finish(view: Element) {
           >
             <ClassicPlaylistOverview
               v-if="!active"
+              ref="overview"
               :feature="feature"
+              :scroll-element="scrollContainer"
+              :editing-id="details?.id"
               :suspended="editor !== null"
               @open="feature.actions.open"
               @create="edit()"
