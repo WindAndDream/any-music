@@ -335,6 +335,24 @@ describe('bounded virtual item interaction retention', () => {
     }
   })
 
+  it('reveals a focused item below a sticky header and uses its latest height', async () => {
+    const test = setup()
+    try {
+      const { element } = test.unit(9)
+      test.root.scrollTop = 200
+      test.root.dispatchEvent(new Event('scroll'))
+      let headerHeight = 30
+      const pending = test.retention.focusItem(9, { blockStartInset: () => headerHeight })
+      expect(test.root.scrollTop).toBe(190)
+      headerHeight = 40
+      expect(await pending).toBe(true)
+      expect(test.root.scrollTop).toBe(180)
+      expect(element.focus).toHaveBeenCalledWith({ preventScroll: true })
+    } finally {
+      test.stop()
+    }
+  })
+
   it.each(['start', 'center', 'end', 'auto'] as const)(
     'uses %s alignment in list coordinates with a header',
     (align) => {

@@ -14,6 +14,7 @@ import type { VirtualItemKey } from '../../composables/virtual-scroll/virtual-ro
 import type {
   CatalogTrackDisplayMode,
   MobileTrackColumns,
+  TrackGridViewport,
 } from '../music-sources/catalog-track-display-mode'
 import VirtualGridCell from './VirtualGridCell.vue'
 
@@ -27,6 +28,8 @@ const props = withDefaults(
     scrollElement: HTMLElement | null
     displayMode: CatalogTrackDisplayMode
     mobileColumns: MobileTrackColumns
+    /** A child WebView can use the parent window's breakpoint. */
+    viewportSize?: TrackGridViewport
     /** Collection cards retain their own CSS column widths, gaps and container breakpoint. */
     layout?: 'track' | 'collection'
     layoutGeneration?: VirtualItemGeneration
@@ -56,11 +59,19 @@ const itemsElement = useTemplateRef<HTMLElement>('gridElement')
 // Width is published by the shared context; no additional resize observer is installed here.
 const width = shallowRef(0)
 const interactionIndexes = shallowRef<readonly number[]>([])
+const layoutGeneration = computed(() =>
+  JSON.stringify([
+    props.layout,
+    props.displayMode,
+    props.mobileColumns,
+    props.viewportSize,
+    props.layoutGeneration,
+  ]),
+)
 const css = useVirtualGridCssLayout({
   element: itemsElement,
   width,
-  layoutGeneration: () =>
-    JSON.stringify([props.layout, props.displayMode, props.mobileColumns, props.layoutGeneration]),
+  layoutGeneration,
 })
 const result = useMeasuredVirtualGrid({
   items: () => props.items,
@@ -74,11 +85,15 @@ const result = useMeasuredVirtualGrid({
   columns: () => css.layout.value.columns,
   gap: () => css.layout.value.rowGap,
   columnGap: () => css.layout.value.columnGap,
-  layoutGeneration: () =>
-    JSON.stringify([props.layout, props.displayMode, props.mobileColumns, props.layoutGeneration]),
+  layoutGeneration,
   overscan: () => props.overscan ?? 2,
   cacheLimit: props.cacheLimit,
   retainedIndexes: () => [...(props.retainedIndexes ?? []), ...interactionIndexes.value],
+})
+useSidebarCollapseGridMotion({
+  element: itemsElement,
+  scrollElement: () => props.scrollElement,
+  getLayout: () => ({ width: result.context.metrics.value.listWidth, ...css.layout.value }),
 })
 const anchor = useVirtualScrollAnchor({
   context: result.context,
@@ -90,11 +105,6 @@ const retention = shallowRef<ReturnType<typeof useVirtualItemRetention>>()
 const interactionGeneration = shallowRef(0)
 watch(
   [() => result.context.scrollElement.value, () => result.context.metrics.value.ready],
-useSidebarCollapseGridMotion({
-  element: itemsElement,
-  scrollElement: () => props.scrollElement,
-  getLayout: () => ({ width: result.context.metrics.value.listWidth, ...css.layout.value }),
-})
   () => {
     // Retention invalidates registrations with the old context. A synchronous root/visibility
     // change can preserve keyed cells, so those cells must register again after the handoff.
@@ -140,6 +150,7 @@ const motion = useVirtualGridMoveTransition({
     geometry: result.motionRevision.value,
     displayMode: props.displayMode,
     mobileColumns: props.mobileColumns,
+    viewportSize: props.viewportSize,
     layoutGeneration: props.layoutGeneration,
     layout: props.layout,
   })),
@@ -176,6 +187,7 @@ defineExpose({ result, element: itemsElement, refreshLayout: css.refresh, retent
       role="list"
       :data-display-mode="displayMode"
       :data-mobile-columns="mobileColumns"
+      :data-viewport-size="viewportSize"
       :data-grid-layout="layout ?? 'track'"
       :style="{
         blockSize: `${result.totalSize.value}px`,
@@ -211,6 +223,7 @@ defineExpose({ result, element: itemsElement, refreshLayout: css.refresh, retent
   position: relative;
   display: grid;
   align-content: start;
+  --am-track-mobile-columns: minmax(0, 1fr);
   --am-track-card-min-width: 296px;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--am-track-card-min-width)), 1fr));
   grid-auto-columns: 0px;
@@ -247,13 +260,18 @@ defineExpose({ result, element: itemsElement, refreshLayout: css.refresh, retent
     contain-intrinsic-block-size: none;
   }
 }
+.virtual-track-list__items[data-mobile-columns='2'] {
+  --am-track-mobile-columns: repeat(2, minmax(0, 1fr));
+  --am-track-mobile-gap: var(--am-space-2);
+}
+.virtual-track-list__items[data-grid-layout='track'][data-viewport-size='narrow'] {
+  grid-template-columns: var(--am-track-mobile-columns);
+  gap: var(--am-track-mobile-gap, var(--am-space-3));
+}
 @media (max-width: 600px) {
-  .virtual-track-list__items[data-grid-layout='track'][data-mobile-columns='1'] {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .virtual-track-list__items[data-grid-layout='track'][data-mobile-columns='2'] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--am-space-2);
+  .virtual-track-list__items[data-grid-layout='track']:not([data-viewport-size]) {
+    grid-template-columns: var(--am-track-mobile-columns);
+    gap: var(--am-track-mobile-gap, var(--am-space-3));
   }
 }
 </style>

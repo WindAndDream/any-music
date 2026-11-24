@@ -123,12 +123,14 @@ function createVirtualLoader({
   editing,
   fillShortList = true,
   state = createPageState(count),
+  measuredHeights,
 }: {
   count?: number
   listOffset?: number
   editing?: EditingSession
   fillShortList?: boolean
   state?: ReturnType<typeof createPageState>
+  measuredHeights?: Pick<ReadonlyMap<number | string, number>, 'get'>
 } = {}) {
   const env = createResizeEnvironment()
   // The installed engine's touch-tail lifecycle uses the element's owning window timers.
@@ -149,7 +151,7 @@ function createVirtualLoader({
   const loadNext = vi.fn()
   const scope = effectScope()
   scopes.push(scope)
-  const virtual = scope.run(() => {
+  const { virtual, preparing, restorePosition } = scope.run(() => {
     const virtualList = useFixedVirtualList({
       items,
       getItemKey: (item) => item,
@@ -158,16 +160,21 @@ function createVirtualLoader({
       scrollElement,
       enabled,
     })
-    useScrollPageLoader({
+    const pagination = useScrollPageLoader({
       editing,
       listElement,
-      virtualList,
+      virtualList: {
+        ...virtualList,
+        measurements: measuredHeights && { getHeight: (key) => measuredHeights.get(key) },
+      },
       ...state,
       visibleCount: virtualList.count,
       loadNext,
       fillShortList,
+      initialFill: measuredHeights ? { enabled: true, contentElement: listElement } : undefined,
+      restoreScroll: true,
     })
-    return virtualList
+    return { virtual: virtualList, ...pagination }
   })!
   return {
     ...env,
@@ -182,6 +189,8 @@ function createVirtualLoader({
     enabled,
     loadNext,
     virtual,
+    preparing,
+    restorePosition,
     mount: () => {
       listElement.value = list.asElement()
     },
@@ -205,6 +214,45 @@ function press(element: EventTarget, key: string): void {
 }
 
 describe('useScrollPageLoader', () => {
+  it('uses measured virtual extent for first-viewport fill and keeps the existing page budget', async () => {
+    vi.stubGlobal('getComputedStyle', () => ({ paddingBottom: '0px' }))
+    const heights = shallowRef(new Map<number | string, number>())
+    const loader = createVirtualLoader({
+      count: 10,
+      fillShortList: false,
+      measuredHeights: { get: (key) => heights.value.get(key) },
+    })
+    loader.itemSize.value = 80
+    loader.mount()
+    await nextTick()
+    expect(loader.preparing.value).toBe(true)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+
+    loader.itemSize.value = 20
+    heights.value = new Map(loader.items.value.map((key) => [key, 20]))
+    await nextTick()
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    expect(loader.preparing.value).toBe(true)
+
+    loader.pageNumber.value = 4
+    await nextTick()
+    expect(loader.preparing.value).toBe(false)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+  })
+
+  it('restores a virtual viewport near the end without admitting a page until fresh input', async () => {
+    const loader = createVirtualLoader({ fillShortList: false })
+    loader.mount()
+    await nextTick()
+    loader.restorePosition(1600)
+    loader.container.dispatchEvent(new Event('scroll'))
+    await nextTick()
+    expect(loader.virtual.virtualItems.value[0]?.index).toBeGreaterThan(50)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+    loader.container.wheel(120)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+  })
+
   it('prepares short rows one page at a time and reveals them at the top', async () => {
     const editing = createEditingSession()
     const loader = createLoader(editing, false, true, true, true)

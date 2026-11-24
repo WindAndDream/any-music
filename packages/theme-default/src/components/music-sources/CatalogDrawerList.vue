@@ -1,34 +1,42 @@
 <script setup lang="ts">
 import type { UiCatalogDrawerListProps, UiCatalogDrawerListEmits } from '@any-music/ui/catalog'
 import { useCatalogDrawerList } from '@any-music/ui/catalog'
-import { useCatalogDrawerReorder } from '@any-music/ui/catalog'
 import { useActionFeedback } from '@any-music/ui/catalog'
 import { useConfirmAction } from '@any-music/ui/catalog'
 import { provideEditingSession, useEditingSession } from '@any-music/ui/catalog'
 import { getSelectionFeedbackMessage } from '@any-music/ui/catalog'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
-import { shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, defineAsyncComponent, shallowRef, useTemplateRef, watch } from 'vue'
 
 import ClassicFilterFooter from '../library/ClassicFilterFooter.vue'
 import ClassicResultView from '../library/ClassicResultView.vue'
-import CatalogDrawerCard from './CatalogDrawerCard.vue'
 import CatalogDrawerListHeader from './CatalogDrawerListHeader.vue'
 import CatalogDrawerOperatorPanel from './CatalogDrawerOperatorPanel.vue'
 import CatalogTrackFilterPanel from './CatalogTrackFilterPanel.vue'
 import CollectionFilterSheet from './CollectionFilterSheet.vue'
 
 /** 音乐列表仅组合卡片、状态分组和受控底部面板；筛选、多选与确认由 headless 状态管理。 */
-const props = withDefaults(defineProps<UiCatalogDrawerListProps>(), {
-  active: true,
-  filterOpen: false,
-  discoveryInHeader: false,
-  operatorOpen: false,
-  operatorAutoFocus: true,
-  panelsSuspended: false,
-  overlayTarget: null,
-  operatorOverlayTarget: null,
-})
+const CatalogDrawerGrid = defineAsyncComponent(() => import('./CatalogDrawerGrid.vue'))
+const props = withDefaults(
+  defineProps<
+    UiCatalogDrawerListProps & {
+      scrollElement?: HTMLElement | null
+      initialScrollTop?: number
+      overlayDrawerId?: string
+    }
+  >(),
+  {
+    active: true,
+    filterOpen: false,
+    discoveryInHeader: false,
+    operatorOpen: false,
+    operatorAutoFocus: true,
+    panelsSuspended: false,
+    overlayTarget: null,
+    operatorOverlayTarget: null,
+  },
+)
 const emit = defineEmits<UiCatalogDrawerListEmits>()
 defineSlots<{
   /** 会话由运行端投影，列表不读取平台状态。 */
@@ -61,19 +69,22 @@ const {
   restoreNames: (drawerIds) => emit('restoreNames', drawerIds),
 })
 const isFilterDetailOpen = shallowRef(false)
-const grid = useTemplateRef<HTMLElement>('grid')
+const header = useTemplateRef<{ $el: HTMLElement }>('header')
+const offsetElements = computed(() => {
+  const element = header.value?.$el
+  // On desktop the header is display: contents. Observe the boxes that still move the grid.
+  return element ? [element, ...element.children] : []
+})
+const initialScrollTop = shallowRef(props.initialScrollTop)
+const focusDrawerId = shallowRef<string>()
+defineExpose({ focusDrawer: (id: string) => (focusDrawerId.value = id) })
 const orderAnnouncement = shallowRef('')
 const reverse = shallowRef(false)
 const stateOrder = ['all', 'available', 'unavailable', 'attention']
-const reorder = useCatalogDrawerReorder({
-  drawers: controls.visibleItems,
-  element: grid,
-  suspended: () => props.filterOpen || props.panelsSuspended,
-  move: (id, target, ids) => {
-    orderAnnouncement.value = `已调整「${props.drawers.find((drawer) => drawer.id === id)?.title ?? '音乐列表'}」的顺序。`
-    emit('move', id, target, ids)
-  },
-})
+function moveDrawer(id: string, target: string, ids: readonly string[]) {
+  orderAnnouncement.value = `已调整「${props.drawers.find((drawer) => drawer.id === id)?.title ?? '音乐列表'}」的顺序。`
+  emit('move', id, target, ids)
+}
 watch(
   () => props.operatorOpen,
   (open) => {
@@ -83,12 +94,11 @@ watch(
 watch(
   stateFilter,
   (next, previous) => {
-    reorder.cancel()
+    focusDrawerId.value = undefined
     reverse.value = stateOrder.indexOf(next) < stateOrder.indexOf(previous)
   },
   { flush: 'sync' },
 )
-watch(() => props.operatorOpen, reorder.cancel)
 const showFeedback = useActionFeedback()
 function toggleAllVisible(): void {
   controls.toggleAllVisible()
@@ -115,6 +125,7 @@ function requestDiscovery(): void {
     :class="{ 'catalog-drawers--empty': controls.visibleItems.value.length === 0 }"
   >
     <CatalogDrawerListHeader
+      ref="header"
       v-model:state-filter="stateFilter"
       :total-count="props.drawers.length"
       :available-count="availableCount"
@@ -147,40 +158,27 @@ function requestDiscovery(): void {
         >
           在筛选器中调整文本、平台、命名或搜索时间，或切换“全部 / 可用 / 不可用 / 错误”状态。
         </MusicListEmptyState>
-        <div
+        <CatalogDrawerGrid
           v-else
-          ref="grid"
-          class="catalog-drawers__grid"
-          :class="{
-            'catalog-drawers__grid--dragging': reorder.draggedId.value,
-            'catalog-drawers__grid--settling': reorder.isSettling.value,
-          }"
-        >
-          <!-- 卡片按实际网格单元宽度适配，不依赖整页或工作台断点。 -->
-          <div
-            v-for="drawer in controls.visibleItems.value"
-            :key="drawer.id"
-            class="catalog-drawers__cell"
-            :class="{ 'catalog-drawers__cell--dragging': reorder.draggedId.value === drawer.id }"
-            data-catalog-drop-kind="drawer"
-            :data-catalog-drop-id="drawer.id"
-          >
-            <CatalogDrawerCard
-              :selectable="props.operatorOpen"
-              :drawer="drawer"
-              :selected="controls.selectedIds.value.has(drawer.id)"
-              :dragging="reorder.draggedId.value === drawer.id"
-              :reorder-style="reorder.getItemStyle('drawer', drawer.id)"
-              @press-start="reorder.startPress"
-              @shift="(id, direction) => reorder.shift('drawer', id, direction)"
-              @drag-cancel="reorder.cancel"
-              @view="emit('view', $event)"
-              @show-error="emit('showError', $event)"
-              @show-actions="emit('showActions', $event)"
-              @select="controls.toggleItem"
-            />
-          </div>
-        </div>
+          :drawers="controls.visibleItems.value"
+          :scroll-element="props.scrollElement ?? null"
+          :offset-elements="offsetElements"
+          :selected-ids="controls.selectedIds.value"
+          :selectable="props.operatorOpen"
+          :suspended="
+            !props.active || props.filterOpen || props.panelsSuspended || !!props.overlayDrawerId
+          "
+          :initial-scroll-top="initialScrollTop"
+          :focus-drawer-id="focusDrawerId"
+          :overlay-drawer-id="props.overlayDrawerId"
+          @move="moveDrawer"
+          @view="emit('view', $event)"
+          @show-error="emit('showError', $event)"
+          @show-actions="emit('showActions', $event)"
+          @select="controls.toggleItem"
+          @scroll-restored="initialScrollTop = undefined"
+          @focus-restored="focusDrawerId = undefined"
+        />
       </ClassicResultView>
     </div>
     <p class="am-sr-only" role="status" aria-live="polite">{{ orderAnnouncement }}</p>
@@ -263,6 +261,7 @@ function requestDiscovery(): void {
   flex: 1;
 }
 .catalog-drawers {
+  --am-catalog-list-inline-padding: var(--am-space-3);
   container: am-catalog-list / inline-size;
   min-inline-size: 0;
   /* Fill short lists as well as empty states; the outer page keeps the bottom spacing. */
@@ -271,7 +270,7 @@ function requestDiscovery(): void {
   grid-template-columns: minmax(0, 1fr);
   grid-auto-rows: max-content;
   gap: var(--am-space-4);
-  padding: var(--am-space-4) var(--am-space-3);
+  padding: var(--am-space-4) var(--am-catalog-list-inline-padding);
   background: var(--am-color-surface-subtle);
 }
 .catalog-drawers--empty {
@@ -279,34 +278,9 @@ function requestDiscovery(): void {
   display: flex;
   flex-direction: column;
 }
-.catalog-drawers__grid {
-  display: grid;
-  /* 保留空列，宽屏不设列数上限，窄容器的单项始终不超过可用宽度。 */
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: var(--am-space-4);
-}
-.catalog-drawers__cell {
-  container: am-catalog-card / inline-size;
-  min-inline-size: 0;
-  position: relative;
-}
-.catalog-drawers__cell--dragging {
-  z-index: 2;
-}
-/* 网格持有指针捕获，空隙与卡片子控件都使用同一个排序光标。 */
-.catalog-drawers__grid--dragging,
-.catalog-drawers__grid--dragging .catalog-drawers__cell,
-.catalog-drawers__grid--dragging :deep(.catalog-card),
-.catalog-drawers__grid--dragging :deep(.catalog-card *) {
-  cursor: move;
-  user-select: none;
-}
-.catalog-drawers__grid--settling :deep(.catalog-card) {
-  transition: none;
-}
-@container am-catalog-list (max-width: 680px) {
-  .catalog-drawers__grid {
-    gap: var(--am-space-3);
+@media (max-width: 768px) {
+  .catalog-drawers {
+    padding-block-start: 0;
   }
 }
 @media (max-width: 600px) {

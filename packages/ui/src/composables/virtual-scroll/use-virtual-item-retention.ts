@@ -40,6 +40,8 @@ export interface VirtualItemFocusOptions {
   signal?: AbortSignal
   /** Locate a control within the registered item after it has mounted. */
   target?: (itemElement: HTMLElement) => HTMLElement | null
+  /** Space covered by a sticky header, re-read after the target's natural measurement. */
+  blockStartInset?: () => number
 }
 
 interface Registration {
@@ -214,7 +216,11 @@ export function useVirtualItemRetention(options: VirtualItemRetentionOptions) {
   function navigate(
     key: VirtualItemKey,
     align: VirtualItemScrollAlignment,
-    navigationOptions: { isCurrent?: () => boolean; prepare?: boolean } = {},
+    navigationOptions: {
+      isCurrent?: () => boolean
+      prepare?: boolean
+      blockStartInset?: () => number
+    } = {},
   ) {
     const root = options.context.scrollElement.value
     if (
@@ -240,11 +246,14 @@ export function useVirtualItemRetention(options: VirtualItemRetentionOptions) {
       end = metrics.listOffset + item.end,
       current = root.scrollTop,
       height = metrics.viewportHeight
+    const inset = navigationOptions.blockStartInset?.() ?? 0
+    const leadingInset = Number.isFinite(inset) ? Math.max(0, Math.min(inset, height)) : 0
     let offset = current
-    if (align === 'start') offset = start
-    else if (align === 'center') offset = (start + end - height) / 2
+    if (align === 'start') offset = start - leadingInset
+    else if (align === 'center') offset = (start + end - height - leadingInset) / 2
     else if (align === 'end') offset = end - height
-    else if (start < current || end - start > height) offset = start
+    else if (start < current + leadingInset || end - start > height - leadingInset)
+      offset = start - leadingInset
     else if (end > current + height) offset = end - height
     offset = Math.max(
       0,
@@ -292,7 +301,8 @@ export function useVirtualItemRetention(options: VirtualItemRetentionOptions) {
       !isFocusUnavailable(root) &&
       geometry.value.indexOf(key) !== undefined
     try {
-      if (!navigate(key, focusOptions.align ?? 'auto', { isCurrent })) return false
+      const alignment = { isCurrent, blockStartInset: focusOptions.blockStartInset }
+      if (!navigate(key, focusOptions.align ?? 'auto', alignment)) return false
       // One render flush plus one post-render registration/measurement flush. Missing controls
       // fail without timers or an unbounded retry loop; a later user action may retry normally.
       for (let attempt = 0; attempt < 2; attempt++) {
@@ -319,7 +329,7 @@ export function useVirtualItemRetention(options: VirtualItemRetentionOptions) {
         // Mounting can replace estimated rows with taller/shorter natural measurements. Align
         // once more against that current geometry before preventScroll focus, without restarting
         // the deliberate-navigation hook or scheduling an unbounded measurement retry.
-        if (!navigate(key, focusOptions.align ?? 'auto', { isCurrent, prepare: false }))
+        if (!navigate(key, focusOptions.align ?? 'auto', { ...alignment, prepare: false }))
           return false
         if (!isCurrent()) return false
         target.focus({ preventScroll: true })

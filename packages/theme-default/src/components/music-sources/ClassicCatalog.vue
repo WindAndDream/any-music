@@ -8,7 +8,7 @@ import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
 import type { UiThemeFeatureMap, UiThemeHostSlots } from '@any-music/ui/theme'
-import { computed, shallowRef, useId, useTemplateRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, useId, useTemplateRef, watch } from 'vue'
 
 import ClassicCollectionControls from '../library/ClassicCollectionControls.vue'
 import ClassicFilterFooter from '../library/ClassicFilterFooter.vue'
@@ -34,11 +34,14 @@ import { useClassicCatalog } from './use-classic-catalog'
 const props = defineProps<{ feature: UiThemeFeatureMap['catalog']; mobileLayout?: boolean }>()
 const heading = useTemplateRef<HTMLElement>('heading')
 const stage = useTemplateRef<HTMLElement>('stage')
+const tracksScroll = useTemplateRef<HTMLElement>('tracksScroll')
+const listsScroll = useTemplateRef<HTMLElement>('listsScroll')
+const drawerList = useTemplateRef<{ focusDrawer(id: string): void }>('drawerList')
 const nativeReady = shallowRef(false)
 const { openOverlay, registerOverlayOpener } = useCatalogViewportOverlay()
 const headingCollapsed = shallowRef(false)
 const headingContextId = useId()
-defineSlots<UiThemeHostSlots>()
+const slots = defineSlots<UiThemeHostSlots>()
 const {
   state,
   drawerListSummary,
@@ -87,6 +90,11 @@ const {
 const viewportKey = computed(() => `${drawer.value?.id}:${drawer.value?.refreshRevision ?? 0}`)
 const preparedViewport = shallowRef<string>()
 const trackFilterCount = computed(() => countCatalogTrackFilters(state.value.filters).total)
+const virtualizeTracks = computed(
+  () =>
+    Boolean(drawer.value) &&
+    (drawer.value?.pluginId !== 'douyin' || Boolean(slots['catalog-viewport'])),
+)
 const prepareViewport = computed(
   () =>
     drawer.value?.pluginId === 'douyin' &&
@@ -103,8 +111,9 @@ const allDrawerFavorited = computed(
     drawer.value!.tracks.every(({ id }) => favoriteIds.value.has(id)),
 )
 const viewTransition = shallowRef('catalog-forward')
+const listScrollTop = shallowRef<number>()
+const drawerOpener = shallowRef<{ id: string; dialog: 'actions' | 'error' }>()
 let returnDrawerId = drawer.value?.id
-let listScrollTop = 0
 watch(
   () => drawer.value?.id,
   (id) => {
@@ -114,7 +123,7 @@ watch(
   },
 )
 function deactivateView(element: Element): void {
-  if (element.getAttribute('data-catalog-view') === 'lists') listScrollTop = element.scrollTop
+  if (element.getAttribute('data-catalog-view') === 'lists') listScrollTop.value = element.scrollTop
   const root = element.getRootNode()
   const activeElement = root instanceof ShadowRoot ? root.activeElement : document.activeElement
   if (activeElement && element.contains(activeElement)) stage.value?.focus({ preventScroll: true })
@@ -125,8 +134,17 @@ function activateView(element: Element): void {
   element.removeAttribute('inert')
   element.removeAttribute('aria-hidden')
 }
-function restoreListScroll(element: Element): void {
-  if (element.getAttribute('data-catalog-view') === 'lists') element.scrollTop = listScrollTop
+function openDrawerDialog(id: string, dialog: 'actions' | 'error'): void {
+  drawerOpener.value = { id, dialog }
+  if (dialog === 'actions') actionDrawerId.value = id
+  else errorDrawerId.value = id
+}
+async function releaseDrawerOpener(dialog: 'actions' | 'error'): Promise<void> {
+  const opener = drawerOpener.value
+  if (opener?.dialog !== dialog) return
+  // AppDialog restores the actual opener after the leave render; keep the card mounted until then.
+  await nextTick()
+  if (drawerOpener.value === opener) drawerOpener.value = undefined
 }
 function toggleDrawerPinned(id: string): void {
   // Closing the dialog clears actionDrawer before this event; resolve the saved list by ID.
@@ -141,12 +159,9 @@ function finishView(element: Element): void {
     element.getAttribute('data-catalog-view') !== (drawer.value?.id ?? 'lists')
   )
     return
-  const target = drawer.value
-    ? element.querySelector<HTMLElement>('.catalog-page__back')
-    : [...element.querySelectorAll<HTMLElement>('[data-catalog-drawer-id]')].find(
-        (card) => card.dataset.catalogDrawerId === returnDrawerId,
-      )
-  target?.focus({ preventScroll: true })
+  if (drawer.value)
+    element.querySelector<HTMLElement>('.catalog-page__back')?.focus({ preventScroll: true })
+  else if (returnDrawerId) drawerList.value?.focusDrawer(returnDrawerId)
 }
 </script>
 
@@ -160,11 +175,11 @@ function finishView(element: Element): void {
         :name="viewTransition"
         @before-leave="deactivateView"
         @before-enter="activateView"
-        @enter="restoreListScroll"
         @leave-cancelled="activateView"
         @after-enter="finishView"
       >
         <div
+          :ref="drawer ? undefined : 'listsScroll'"
           :key="drawer?.id ?? 'lists'"
           class="classic-catalog__view catalog-page"
           :class="drawer ? 'catalog-page--tracks' : 'catalog-page--lists'"
@@ -264,6 +279,7 @@ function finishView(element: Element): void {
             </div>
             <div
               :key="drawer.refreshRevision"
+              ref="tracksScroll"
               class="catalog-page__tracks-scroll"
               data-am-scroll-key="workspace"
             >
@@ -299,6 +315,8 @@ function finishView(element: Element): void {
                     :loaded-track-count="drawer.tracks.length"
                     :prepare-viewport="prepareViewport"
                     :prefetch="drawer.pluginId === 'douyin'"
+                    :virtualized="virtualizeTracks"
+                    :scroll-element="virtualizeTracks ? tracksScroll : undefined"
                     error-message=""
                     @viewport-ready="preparedViewport = viewportKey"
                     @load-more="!drawer.isLoading && feature.actions.loadMore(drawer.id)"
@@ -314,7 +332,11 @@ function finishView(element: Element): void {
           </template>
           <CatalogDrawerList
             v-else
+            ref="drawerList"
             :drawers="state.drawers"
+            :scroll-element="listsScroll"
+            :initial-scroll-top="listScrollTop"
+            :overlay-drawer-id="drawerOpener?.id"
             :invalid-track-ids="invalidIds"
             discovery-label="发现"
             discovery-in-header
@@ -329,8 +351,8 @@ function finishView(element: Element): void {
                 : (discoveryOpen = true)
             "
             @view="feature.actions.openDrawer"
-            @show-error="errorDrawerId = $event"
-            @show-actions="actionDrawerId = $event"
+            @show-error="openDrawerDialog($event, 'error')"
+            @show-actions="openDrawerDialog($event, 'actions')"
             @remove-many="$event.forEach(feature.actions.removeDrawer)"
             @restore-names="feature.actions.restoreDrawerNames"
             @move="feature.actions.moveDrawer"
@@ -424,6 +446,7 @@ function finishView(element: Element): void {
         :drawer="actionDrawer"
         :favorite-track-ids="favoriteIds"
         @close="actionDrawerId = undefined"
+        @after-leave="releaseDrawerOpener('actions')"
         @favorite-all="favoriteDrawer"
         @rename="feature.actions.renameDrawer"
         @toggle-pinned="toggleDrawerPinned"
@@ -481,7 +504,11 @@ function finishView(element: Element): void {
           />
         </template>
       </CollectionFilterSheet>
-      <AppDialog :open="Boolean(errorDrawer)" title="音乐列表错误处理" @close="closeError"
+      <AppDialog
+        :open="Boolean(errorDrawer)"
+        title="音乐列表错误处理"
+        @close="closeError"
+        @after-leave="releaseDrawerOpener('error')"
         ><CatalogErrorDetails
           v-if="errorDrawer"
           :drawer="errorDrawer"

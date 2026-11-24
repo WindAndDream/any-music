@@ -263,7 +263,10 @@ const stateOrder: readonly CatalogDrawerStateFilter[] = [
     grid-template-columns: minmax(0, max-content) minmax(80px, 1fr);
     align-items: center;
     gap: var(--am-space-2);
-    padding-block: var(--am-space-2);
+    /* Cover the top and side gutters as list cards pass behind the pinned header. */
+    margin-inline: calc(-1 * var(--am-catalog-list-inline-padding));
+    padding-inline: var(--am-catalog-list-inline-padding);
+    padding-block: var(--am-space-4) var(--am-space-2);
     border-block-end: 1px solid var(--am-color-border);
     background: var(--am-color-surface-subtle);
   }

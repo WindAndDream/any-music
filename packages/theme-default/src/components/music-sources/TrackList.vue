@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import type { Track } from '@any-music/core'
-import { useEditingSession, useScrollPageLoader } from '@any-music/ui/catalog'
+import { useEditingSession, useScrollPageLoader, useTrackNames } from '@any-music/ui/catalog'
 import type {
   CatalogTrackDisplayMode,
   MobileTrackColumns,
   TrackGridViewport,
+  VirtualPageGeometry,
 } from '@any-music/ui/catalog'
 import LoadingSpinner from '@any-music/ui/components/LoadingSpinner.vue'
-import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
+import CatalogTrackGrid from '@any-music/ui/components/music-sources/CatalogTrackGrid.vue'
 import type { CollectionItemStyle } from '@any-music/ui/library'
-import { computed, useTemplateRef, watch } from 'vue'
+import { computed, toValue, useTemplateRef, watch } from 'vue'
 
 import TrackRow from './TrackRow.vue'
 
@@ -36,6 +37,7 @@ const props = defineProps<{
   viewportSize?: TrackGridViewport
   prefetch?: boolean
   prepareViewport?: boolean
+  virtualized?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -50,17 +52,29 @@ const emit = defineEmits<{
 
 const listElement = useTemplateRef<HTMLElement>('listElement')
 const contentElement = useTemplateRef<HTMLElement>('contentElement')
-const itemKeys = computed(() => props.tracks.map(({ id }) => id))
+const grid = useTemplateRef<{ geometry?: VirtualPageGeometry }>('grid')
+const geometry = computed(() => grid.value?.geometry)
+const { customNamesByTrackId } = useTrackNames()
+function contentGeneration(track: Track) {
+  return JSON.stringify([
+    track,
+    customNamesByTrackId.value.get(track.id),
+    props.customTagsByTrackId?.get(track.id),
+    props.invalidTrackIds.has(track.id),
+    props.selectable,
+  ])
+}
 const emptyMessage = computed(() => {
   if (props.loadedTrackCount > 0) return '已加载歌曲中没有匹配项，请调整筛选条件。'
   if (props.hasMore) return '当前页没有可用歌曲，请滚动继续加载。'
   if (props.loadedPageCount === 0) return '尚未加载到歌曲，请查看列表状态或刷新重试。'
   return '当前结果中没有可用歌曲。'
 })
-const { preparing } = useScrollPageLoader({
+const { preparing, restorePosition } = useScrollPageLoader({
   editing: useEditingSession(`pagination:${props.listingId}`),
-  listElement,
+  listElement: () => (!props.virtualized || geometry.value ? listElement.value : null),
   scrollElement: () => props.scrollElement,
+  virtualList: geometry,
   hasMore: () => props.hasMore,
   loading: () => props.loading,
   pageNumber: () => props.loadedPageCount,
@@ -72,13 +86,19 @@ const { preparing } = useScrollPageLoader({
   restoreScroll: true,
   initialFill: { enabled: () => props.prepareViewport === true, contentElement },
 })
+const ready = computed(
+  () =>
+    !preparing.value &&
+    (!props.virtualized || toValue(geometry.value?.context.metrics)?.ready === true),
+)
 watch(
-  preparing,
-  (pending) => {
-    if (!pending) emit('viewportReady')
+  ready,
+  (value) => {
+    if (value) emit('viewportReady')
   },
   { immediate: true },
 )
+defineExpose({ ready, restorePosition })
 </script>
 
 <template>
@@ -88,20 +108,24 @@ watch(
       {{ emptyMessage }}
     </p>
     <div
-      v-if="tracks.length > 0"
+      v-if="virtualized || tracks.length > 0"
       ref="contentElement"
       :class="{ 'list__tracks--preparing': preparing }"
       :inert="preparing"
     >
-      <TrackCardGrid
+      <CatalogTrackGrid
+        ref="grid"
+        :tracks="tracks"
+        :get-content-generation="contentGeneration"
         :display-mode="props.displayMode"
         :mobile-columns="props.mobileColumns"
         :viewport-size="props.viewportSize"
-        :item-keys="itemKeys"
+        :scroll-element="scrollElement"
+        :layout-generation="itemStyle"
+        :virtualized="virtualized"
         :animate="!preparing"
       >
-        <!-- 网格单元是查询容器，歌曲卡片及其按钮只按单元的真实宽度重排。 -->
-        <div v-for="track in tracks" :key="track.id" class="list__cell">
+        <template #default="{ track }">
           <TrackRow
             :track="track"
             :custom-tags="props.customTagsByTrackId?.get(track.id)"
@@ -119,8 +143,8 @@ watch(
             @select="emit('select', $event)"
             @show-actions="emit('showActions', $event)"
           />
-        </div>
-      </TrackCardGrid>
+        </template>
+      </CatalogTrackGrid>
     </div>
     <p
       v-if="loading || preparing"
@@ -144,11 +168,6 @@ watch(
   position: absolute;
   inset-block-start: 0;
   inset-inline: 0;
-}
-.list__cell {
-  container: am-track-card / inline-size;
-  display: grid;
-  min-inline-size: 0;
 }
 .list__more {
   border-radius: var(--am-radius-control);

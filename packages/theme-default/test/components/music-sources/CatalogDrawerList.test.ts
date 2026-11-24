@@ -11,6 +11,7 @@ import {
   findCatalogElement,
   mountCatalogComponent,
 } from '../../helpers/test-renderer'
+import { mountMeasuredThemeGrid } from '../../helpers/virtual-grid-renderer'
 
 const helpTransition = vi.hoisted(() => ({ finish: undefined as (() => void) | undefined }))
 
@@ -102,7 +103,12 @@ function createDrawer(id: string): CatalogDrawerView {
     invalidReason: '',
   }
 }
-function mountList(drawers: readonly CatalogDrawerView[], discoveryInHeader = false) {
+function mountList(
+  drawers: readonly CatalogDrawerView[],
+  discoveryInHeader = false,
+  columns = 3,
+  initialScrollTop?: number,
+) {
   const items = shallowRef(drawers)
   const filterOpen = shallowRef(true)
   const operatorOpen = shallowRef(false)
@@ -112,14 +118,19 @@ function mountList(drawers: readonly CatalogDrawerView[], discoveryInHeader = fa
   const onRestoreNames = vi.fn()
   const onToggleAllVisible = vi.fn()
   const onMove = vi.fn()
+  const list = shallowRef<{ focusDrawer(id: string): void }>()
   let confirmation!: ReturnType<typeof provideConfirmationDialog>
   const host = defineComponent({
-    setup() {
+    props: ['scroll'],
+    setup(props) {
       confirmation = provideConfirmationDialog()
       provideCatalogFilterHistory({ load: () => [], save: vi.fn() })
       return () =>
         h(CatalogDrawerList, {
+          ref: list,
           drawers: items.value,
+          scrollElement: props.scroll,
+          initialScrollTop,
           invalidTrackIds: new Set<string>(),
           discoveryLabel: '搜索与导入',
           discoveryInHeader,
@@ -145,7 +156,7 @@ function mountList(drawers: readonly CatalogDrawerView[], discoveryInHeader = fa
     },
   })
   return {
-    ...mountCatalogComponent(host, {}),
+    ...mountMeasuredThemeGrid(host, () => columns),
     filterOpen,
     operatorOpen,
     summary,
@@ -155,6 +166,7 @@ function mountList(drawers: readonly CatalogDrawerView[], discoveryInHeader = fa
     onToggleAllVisible,
     items,
     onMove,
+    focusDrawer: (id: string) => list.value?.focusDrawer(id),
     confirmation,
   }
 }
@@ -165,11 +177,82 @@ function clickText(root: CatalogTestElement, text: string): void {
   )
 }
 
-function dropBounds(left: number, width: number, top = 0) {
-  return { left, top, width, height: 200, right: left + width, bottom: top + 200 }
+function dropBounds(left: number, width: number, top: number) {
+  return { left, top, width, height: 100, right: left + width, bottom: top + 100 }
+}
+
+function motion(cell: CatalogTestElement) {
+  return findCatalogElement(cell, (node) => node.hasAttribute('data-am-grid-motion'))
 }
 
 describe('CatalogDrawerList interactions', () => {
+  it('restores the directory offset after mount and can focus an offscreen request', async () => {
+    const view = mountList(
+      Array.from({ length: 200 }, (_, index) => createDrawer(`request-${index}`)),
+      false,
+      3,
+      8_000,
+    )
+    try {
+      view.filterOpen.value = false
+      await vi.dynamicImportSettled()
+      await nextTick()
+      expect(view.scroll.scrollTop).toBe(8_000)
+      expect(view.root.querySelector('[data-catalog-drawer-id="request-180"]')).toBeNull()
+      view.focusDrawer('request-180')
+      await vi.waitFor(() =>
+        expect(
+          (view.document.activeElement as unknown as CatalogTestElement)?.dataset.catalogDrawerId,
+        ).toBe('request-180'),
+      )
+      expect(view.onMove).not.toHaveBeenCalled()
+    } finally {
+      view.unmount()
+    }
+  })
+
+  it('windows long discovery lists while selection and state filters use all matches', async () => {
+    const drawers = Array.from({ length: 200 }, (_, index) => createDrawer(`request-${index}`))
+    drawers[199] = { ...drawers[199]!, status: 'disconnected', isSourceEnabled: false }
+    const view = mountList(drawers)
+    try {
+      view.filterOpen.value = false
+      view.operatorOpen.value = true
+      await vi.dynamicImportSettled()
+      await nextTick()
+      const cards = () => view.root.querySelectorAll('[data-catalog-drawer-id]')
+      const first = cards()[0]!
+      expect(first.dataset.catalogDrawerId).toBe('request-0')
+      expect(cards().length).toBeLessThan(30)
+      expect(view.summary.value?.visibleCount).toBe(200)
+      dispatchCatalogEvent(
+        findCatalogElement(
+          view.root,
+          (node) => node.props['aria-label'] === '全选当前 200 个匹配音乐列表',
+        ),
+        'onChange',
+      )
+      expect(view.onToggleAllVisible).toHaveBeenCalledWith(200)
+
+      view.scroll.scrollTop = 8_000
+      view.scroll.dispatchEvent(new Event('scroll'))
+      await nextTick()
+      expect(cards()).not.toContain(first)
+      expect(cards().length).toBeLessThan(30)
+      expect(view.summary.value?.selectedCount).toBe(200)
+      view.scroll.scrollTop = 0
+      view.scroll.dispatchEvent(new Event('scroll'))
+      await nextTick()
+      expect(cards()[0]?.dataset.catalogDrawerId).toBe('request-0')
+      clickText(view.root, '不可用')
+      await nextTick()
+      expect(cards().map((card) => card.dataset.catalogDrawerId)).toEqual(['request-199'])
+      expect(view.summary.value?.visibleCount).toBe(1)
+    } finally {
+      view.unmount()
+    }
+  })
+
   it.each([
     ['same row forward', 3, 'a', 'c', ['b', 'c', 'a']],
     ['same row backward', 3, 'c', 'a', ['c', 'a', 'b']],
@@ -194,29 +277,36 @@ describe('CatalogDrawerList interactions', () => {
         return frameId
       })
       vi.stubGlobal('cancelAnimationFrame', (id: number) => frames.delete(id))
-      const view = mountList(['a', 'b', 'c'].map(createDrawer))
+      const view = mountList(['a', 'b', 'c'].map(createDrawer), false, columns)
       try {
         view.filterOpen.value = false
+        await vi.dynamicImportSettled()
         await nextTick()
         const grid = findCatalogElement(
           view.root,
-          (node) => node.props.class === 'catalog-drawers__grid',
+          (node) => node.props.role === 'list' && node.props['data-grid-layout'] === 'collection',
         )
+        const height = Math.ceil(3 / columns) * 112 - 12
         Object.assign(grid, {
-          scrollHeight: 0,
-          clientHeight: 0,
-          getBoundingClientRect: () => ({ ...dropBounds(0, 660), height: 440, bottom: 440 }),
-          setPointerCapture: vi.fn(),
-          hasPointerCapture: () => true,
-          releasePointerCapture: vi.fn(),
+          getBoundingClientRect: () => ({
+            ...dropBounds(0, 1000, 24),
+            height,
+            bottom: 24 + height,
+          }),
         })
         const rows = () => grid.querySelectorAll('[data-catalog-drop-kind="drawer"]')
+        const width = (1000 - (columns - 1) * 12) / columns
         const boundsAt = (index: number) =>
-          dropBounds((index % columns) * 220, 200, Math.floor(index / columns) * 220)
+          dropBounds(
+            (index % columns) * (width + 12),
+            width,
+            24 + Math.floor(index / columns) * 112,
+          )
         for (const row of rows()) {
           Object.assign(row, {
             getBoundingClientRect: () => boundsAt(rows().indexOf(row)),
           })
+          Object.assign(motion(row), { getBoundingClientRect: () => boundsAt(rows().indexOf(row)) })
         }
         const row = rows().find((node) => node.dataset.catalogDropId === source)!
         const neighbors = rows().filter((node) => node !== row)
@@ -232,7 +322,7 @@ describe('CatalogDrawerList interactions', () => {
           pointerId: 1,
           isPrimary: true,
           clientX: boundsAt(['a', 'b', 'c'].indexOf(id)).left + 60 + offset,
-          clientY: boundsAt(['a', 'b', 'c'].indexOf(id)).top + 60,
+          clientY: boundsAt(['a', 'b', 'c'].indexOf(id)).top + 50,
           target: card,
           currentTarget: card,
           preventDefault() {},
@@ -249,35 +339,32 @@ describe('CatalogDrawerList interactions', () => {
           findCatalogElement(row, (node) => node.props['data-catalog-drawer-id'] === source),
         ).toBe(card)
         expect(row.getAttribute('data-am-grid-landing')).toBe('')
-        expect(card.props.style).toEqual({
-          transform: 'translate3d(15px, 0px, 0)',
+        expect(motion(row).props.style).toMatchObject({
+          transform: expect.stringContaining('translate3d('),
           transition: 'none',
           contentVisibility: 'visible',
         })
         for (const neighbor of neighbors) {
           expect(neighbor.getAttribute('data-am-grid-settling')).toBe('')
           expect(neighbor.getAttribute('data-am-grid-landing')).toBeNull()
-          expect(
-            findCatalogElement(neighbor, (node) => Boolean(node.props['data-catalog-drawer-id']))
-              .props.style,
-          ).toEqual({ transition: 'none', contentVisibility: 'visible' })
+          expect(motion(neighbor).props.style).toMatchObject({
+            transition: 'none',
+            contentVisibility: 'visible',
+          })
         }
         const callbacks = [...frames.values()]
         frames.clear()
         callbacks.forEach((callback) => callback(16))
         await nextTick()
-        expect(card.props.style).toEqual({ contentVisibility: 'visible' })
+        expect(motion(row).props.style).toEqual({ contentVisibility: 'visible' })
         expect(row.getAttribute('data-am-grid-landing')).toBe('')
         vi.advanceTimersByTime(340)
         await nextTick()
         expect(row.getAttribute('data-am-grid-landing')).toBeNull()
-        expect(card.props.style).toBeUndefined()
+        expect(motion(row).props.style).toBeUndefined()
         for (const neighbor of neighbors) {
           expect(neighbor.getAttribute('data-am-grid-settling')).toBeNull()
-          expect(
-            findCatalogElement(neighbor, (node) => Boolean(node.props['data-catalog-drawer-id']))
-              .props.style,
-          ).toBeUndefined()
+          expect(motion(neighbor).props.style).toBeUndefined()
         }
       } finally {
         view.unmount()
@@ -290,6 +377,7 @@ describe('CatalogDrawerList interactions', () => {
     const view = mountList([createDrawer('first'), createDrawer('second')])
     view.filterOpen.value = false
     view.operatorOpen.value = true
+    await vi.dynamicImportSettled()
     await nextTick()
     const toggleAll = () =>
       dispatchCatalogEvent(
@@ -321,6 +409,7 @@ describe('CatalogDrawerList interactions', () => {
     ])
     view.filterOpen.value = false
     view.operatorOpen.value = true
+    await vi.dynamicImportSettled()
     await nextTick()
     const operator = findCatalogElement(view.root, (node) => node.tag === 'aside')
     expect(operator.textContent).not.toContain('恢复原名')
@@ -387,15 +476,11 @@ describe('CatalogDrawerList interactions', () => {
     expect(states.textContent).toContain('错误 1')
     expect(states.textContent).not.toContain('错误处理')
     const visibleIds = () =>
-      findCatalogElement(view.root, (node) => node.props.class === 'catalog-drawers__grid')
-        .children.filter((node) => node.tag === 'div')
-        .map(
-          (cell) =>
-            findCatalogElement(cell, (node) => node.tag === 'article').props[
-              'data-catalog-drawer-id'
-            ],
-        )
+      view.root
+        .querySelectorAll('[data-catalog-drawer-id]')
+        .map((card) => card.dataset.catalogDrawerId)
     clickText(states, '不可用')
+    await vi.dynamicImportSettled()
     await nextTick()
     expect(visibleIds()).toEqual(['disabled', 'removed'])
     expect(view.summary.value?.visibleCount).toBe(2)

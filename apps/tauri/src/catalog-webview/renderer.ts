@@ -42,6 +42,22 @@ const layoutStyles = `
 }
 `
 
+function afterPaint(): Promise<void> {
+  return new Promise((resolve) => {
+    // A parked WebView can throttle animation frames. Never hold the native lease
+    // or block reuse of the account's search page while waiting on the compositor.
+    const timeout = setTimeout(finish, 100)
+    let frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(finish)
+    })
+    function finish() {
+      clearTimeout(timeout)
+      cancelAnimationFrame(frame)
+      resolve()
+    }
+  })
+}
+
 // This entry runs in a native-created isolated JavaScript world. The fixed markup,
 // business projection and accepted events stay inside its closed Shadow root.
 export function install(
@@ -70,6 +86,9 @@ export function install(
   shadow.append(mount)
   const current = shallowRef<CatalogSnapshot & { layout: CatalogLayout }>()
   const scrollElement = shallowRef<HTMLElement | null>(null)
+  const trackList = shallowRef<{ ready: boolean; restorePosition(position: number): void } | null>(
+    null,
+  )
   const names = computed(() => new Map(current.value?.names))
   const actions: CatalogAction[] = []
   let disposed = false
@@ -126,7 +145,9 @@ export function install(
           return h('div', common, [
             h('div', { ref: scrollElement, class: 'studio-results studio-catalog-tracks' }, [
               h(StudioCatalogTracks, {
+                ref: trackList,
                 drawer: value.drawer,
+                virtualized: true,
                 scrollElement: scrollElement.value,
                 viewportSize: value.layout.viewportSize,
                 prefetch: true,
@@ -174,7 +195,9 @@ export function install(
                 h('div', { class: 'catalog-drawer' }, [
                   h('div', { class: 'catalog-drawer__panel' }, [
                     h(TrackList, {
+                      ref: trackList,
                       listingId: value.drawer.id,
+                      virtualized: true,
                       scrollElement: scrollElement.value,
                       viewportSize: value.layout.viewportSize,
                       prefetch: true,
@@ -224,21 +247,21 @@ export function install(
           style.replaceSync(css[snapshot.theme] + layoutStyles)
         const tracks = snapshot.tracks ?? previous?.tracks
         if (!tracks) return { ready: false, actions: [], scrollTop: 0 }
+        // The windowing context can measure a connected list even while native keeps it parked.
+        if (!previous) mask.show()
         current.value = { ...snapshot, tracks }
         await nextTick()
-        if (!isCurrentDocument() || !scrollElement.value)
+        if (isCurrentDocument() && !trackList.value?.ready) await afterPaint()
+        if (!isCurrentDocument() || !trackList.value?.ready)
           return { ready: false, actions: [], scrollTop: 0 }
-        if (!previous) mask.show()
-        if (snapshot.scrollTop !== undefined) scrollElement.value.scrollTop = snapshot.scrollTop
+        if (snapshot.scrollTop !== undefined) trackList.value.restorePosition(snapshot.scrollTop)
         if (!previous || snapshot.scrollTop !== undefined) {
           // Reveal a newly mounted or resumed child only after its rows and scroll position paint.
-          await new Promise<void>((resolve) => {
-            requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
-          })
+          await afterPaint()
         }
       }
       return {
-        ready: isCurrentDocument() && host.isConnected && Boolean(current.value),
+        ready: isCurrentDocument() && host.isConnected && trackList.value?.ready === true,
         actions: actions.splice(0),
         scrollTop: scrollElement.value?.scrollTop ?? 0,
       }

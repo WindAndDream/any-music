@@ -276,3 +276,21 @@ it('puts retained rows behind the child before closing the exhausted results lea
   expect(invoke).toHaveBeenLastCalledWith('close_catalog_webview', { lease: expect.any(String) })
   view.unmount()
 })
+
+it('parks a leaving list immediately while a native placement is still in flight', async () => {
+  const placement = deferred<{ ready: boolean; actions: CatalogAction[] }>()
+  vi.mocked(invoke).mockReturnValueOnce(placement.promise)
+  const view = mountViewport()
+  view.mounted.value = false
+  await nextTick()
+  expect(invoke).toHaveBeenCalledWith('sync_catalog_webview', {
+    request: { lease: expect.any(String), accountId: 'test-account', query: 'test search' },
+  })
+
+  placement.resolve({ ready: true, actions: [{ type: 'more' }] })
+  await vi.advanceTimersByTimeAsync(0)
+  expect(view.fallback()).toBe(true)
+  expect(view.onAction).not.toHaveBeenCalled()
+  expect(invoke).toHaveBeenLastCalledWith('close_catalog_webview', { lease: expect.any(String) })
+  view.unmount()
+})
