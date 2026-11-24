@@ -24,11 +24,11 @@ import { configureWorkbenchRuntime } from '../../../src/runtime/workbench-runtim
 import type { SourceInvalidation } from '../../../src/runtime/workbench-runtime'
 import { localMusicLibraryRepository } from '../../../src/storage/local-music-library-repository'
 import { createProductGenerationStorage } from '../../../src/storage/product-generation-store'
+import { createSemanticThemeRenderer } from '../../helpers/semantic-theme-renderer'
 import {
   CatalogTestElement,
   dispatchCatalogEvent,
   findCatalogElement,
-  renderer,
 } from '../../helpers/test-renderer'
 import { memory, options } from '../../storage/product-storage-fixtures'
 import { createControllerThemeFixture } from './controller-theme-fixture'
@@ -180,6 +180,10 @@ function mount(loadedTracks: readonly Track[] = [track('one')]) {
     }),
   }
   const selection = shallowRef<typeof classic | typeof studio>(classic)
+  const { renderer, root, view } = createSemanticThemeRenderer(() =>
+    selection.value === classic ? 'classic' : 'studio',
+  )
+  vi.stubGlobal('getComputedStyle', view.getComputedStyle)
   const app = renderer.createApp(
     defineComponent({
       setup() {
@@ -204,7 +208,6 @@ function mount(loadedTracks: readonly Track[] = [track('one')]) {
   )
   const pinia = createPinia()
   app.use(pinia)
-  const root = new CatalogTestElement('root')
   app.mount(root)
   let disposed = false
   const unmount = () => {
@@ -463,7 +466,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
         f.root,
         (node) => node.tag === 'button' && node.props['data-am-focus-key'] === 'track:one:play',
       )
-    dispatchCatalogEvent(cover(), 'onClick')
+    dispatchCatalogEvent(await vi.waitFor(cover), 'onClick')
     await vi.waitFor(() => expect(f.resolveMedia).toHaveBeenCalledOnce())
     f.resolving.resolve({
       type: 'remote-url',

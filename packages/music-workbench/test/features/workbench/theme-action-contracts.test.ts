@@ -14,11 +14,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defineComponent, h, nextTick, provide, reactive, shallowRef } from 'vue'
 
 import { createThemeFeatures } from '../../fixtures/theme-features'
+import { createSemanticThemeRenderer } from '../../helpers/semantic-theme-renderer'
 import {
   CatalogTestElement,
   dispatchCatalogEvent,
   findCatalogElement,
-  renderer,
 } from '../../helpers/test-renderer'
 
 vi.mock('vue', async (load) => {
@@ -213,7 +213,10 @@ function mountTheme(initial: typeof classic | typeof studio, contributions?: UiC
   }
   const selection = shallowRef(initial)
   const editing = createEditingSession()
-  const root = new CatalogTestElement('root')
+  const { renderer, root, view } = createSemanticThemeRenderer(() =>
+    selection.value === classic ? 'classic' : 'studio',
+  )
+  vi.stubGlobal('getComputedStyle', view.getComputedStyle)
   let confirmation!: ReturnType<typeof provideConfirmationDialog>
   const app = renderer.createApp(
     defineComponent({
@@ -502,13 +505,12 @@ describe.each([
       clickText(f.root, '操作器')
       await nextTick()
     }
-    dispatchCatalogEvent(
+    const trackSelection = () =>
       findCatalogElement(
         f.root,
         (node) => node.tag === 'input' && node.props['data-am-focus-key'] === 'track:song:select',
-      ),
-      'onChange',
-    )
+      )
+    dispatchCatalogEvent(await vi.waitFor(trackSelection), 'onChange')
     expect(f.actions.select).toHaveBeenCalledExactlyOnceWith(['song'])
 
     f.selection.value = definition === classic ? studio : classic
@@ -519,14 +521,7 @@ describe.each([
       clickText(f.root, '操作器')
       await nextTick()
     }
-    await vi.waitFor(() =>
-      expect(
-        findCatalogElement(
-          f.root,
-          (node) => node.tag === 'input' && node.props['data-am-focus-key'] === 'track:song:select',
-        ).props.checked,
-      ).toBe(true),
-    )
+    await vi.waitFor(() => expect(trackSelection().props.checked).toBe(true))
     expect(f.root.textContent).toContain('请求账号')
     expect(f.actions.submit).not.toHaveBeenCalled()
     expect(f.actions.loadMore).not.toHaveBeenCalled()
