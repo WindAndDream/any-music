@@ -347,12 +347,12 @@
     gap: var(--am-space-3);
     min-inline-size: 150px;
   }
-  .studio-track__identity img {
-    object-fit: cover;
+  .studio-track__artwork {
+    flex: 0 0 44px;
+    block-size: 44px;
     border-radius: var(--am-radius-sm);
   }
-  .studio-track__identity strong,
-  .studio-track__identity span {
+  .studio-track__identity > div > :is(strong, span) {
     display: block;
     overflow-wrap: anywhere;
   }

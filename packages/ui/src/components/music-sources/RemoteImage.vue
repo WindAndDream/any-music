@@ -58,6 +58,7 @@ watch(remote.url, () => {
     referrerpolicy="no-referrer"
     :loading="props.loading"
     decoding="async"
+    :data-image-state="loaded ? undefined : 'loading'"
     :style="{ visibility: loaded ? undefined : 'hidden' }"
     @load="loaded = true"
     @error="handleError"

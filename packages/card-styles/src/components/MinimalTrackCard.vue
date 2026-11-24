@@ -2,7 +2,7 @@
 import type { Track } from '@any-music/core'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import CollectionTagSummary from '@any-music/ui/components/CollectionTagSummary.vue'
-import RemoteImage from '@any-music/ui/components/music-sources/RemoteImage.vue'
+import TrackArtwork from '@any-music/ui/components/tracks/TrackArtwork.vue'
 import { computed } from 'vue'
 
 const props = defineProps<{
@@ -92,8 +92,11 @@ const selectionLabel = computed(
       class="am-minimal-track__cover"
       :data-readonly="readonly ? 'true' : undefined"
     >
-      <RemoteImage v-if="track.artworkUrl" :src="track.artworkUrl" :alt="`${title} 封面`" />
-      <AppIcon v-else name="music" :size="26" />
+      <TrackArtwork
+        class="am-minimal-track__artwork"
+        :src="track.artworkUrl"
+        :alt="`${title} 封面`"
+      />
     </div>
     <button
       v-else
@@ -116,8 +119,11 @@ const selectionLabel = computed(
       @keydown.right="shift($event, 1)"
       @keydown.esc="reorderable && emit('cancelDrag')"
     >
-      <RemoteImage v-if="track.artworkUrl" :src="track.artworkUrl" :alt="`${title} 封面`" />
-      <AppIcon v-else name="music" :size="26" />
+      <TrackArtwork
+        class="am-minimal-track__artwork"
+        :src="track.artworkUrl"
+        :alt="`${title} 封面`"
+      />
       <span
         v-if="!readonly && !selectionOnly && !selectable"
         class="am-minimal-track__play"
@@ -224,21 +230,17 @@ const selectionLabel = computed(
   overflow: hidden;
   border: 0;
   border-radius: var(--am-radius-artwork, 8px);
-  background: var(--am-color-primary-container);
-  color: var(--am-color-primary);
+  background: transparent;
   cursor: pointer;
   touch-action: pan-y;
   user-select: none;
   -webkit-touch-callout: none;
 }
-.am-minimal-track__cover :deep(img) {
-  /* RemoteImage is a child component. Size the backing image from the cover, not the grid item. */
+.am-minimal-track__cover > .am-minimal-track__artwork {
   position: absolute;
   inset: 0;
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
+}
+.am-minimal-track__cover :deep(img) {
   /* Zoom only the artwork inside its clipped frame, preserving grid and drag geometry. */
   transform: scale(var(--am-minimal-track-artwork-scale, 1));
   transition: transform var(--am-motion-slow) var(--am-ease-emphasized);
@@ -262,6 +264,9 @@ const selectionLabel = computed(
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--am-motion-normal);
+}
+.am-minimal-track__cover:has([data-image-state='loading']) .am-minimal-track__play {
+  visibility: hidden;
 }
 .am-minimal-track__play-icon {
   display: grid;
