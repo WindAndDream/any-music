@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import { usePluginStatusPresentation } from '../../composables/plugins/use-plugin-status-presentation'
 import {
   getPluginFailure,
   getPluginRuntimeStatusLabel,
@@ -13,6 +14,7 @@ import AppIcon from '../AppIcon.vue'
 const props = defineProps<{ item?: UiPluginCenterItem; busy: boolean }>()
 defineEmits<{ close: []; setEnabled: [enabled: boolean]; retry: []; manage: [] }>()
 const failure = computed(() => props.item && getPluginFailure(props.item))
+const statusItem = usePluginStatusPresentation(() => props.item)
 </script>
 
 <template>
@@ -41,9 +43,9 @@ const failure = computed(() => props.item && getPluginFailure(props.item))
           <dt>开发者状态</dt>
           <dd>{{ PLUGIN_DEVELOPMENT_STATUS_LABELS[item.developmentStatus ?? 'stable'] }}</dd>
         </div>
-        <div>
+        <div v-if="statusItem">
           <dt>运行状态</dt>
-          <dd>{{ getPluginRuntimeStatusLabel(item) }}</dd>
+          <dd>{{ getPluginRuntimeStatusLabel(statusItem) }}</dd>
         </div>
         <div v-if="failure">
           <dt>错误信息</dt>

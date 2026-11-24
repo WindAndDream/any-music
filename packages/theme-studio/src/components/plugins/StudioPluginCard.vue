@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getPluginFailure, getPluginStatusLabel } from '@any-music/ui'
+import { getPluginFailure, getPluginStatusLabel, usePluginStatusPresentation } from '@any-music/ui'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import type { UiPluginCenterItem } from '@any-music/ui/theme'
 import { computed } from 'vue'
@@ -18,7 +18,8 @@ function changeEnabled(event: Event): void {
   input.checked = props.item.enabled
 }
 const hasError = computed(() => Boolean(getPluginFailure(props.item)))
-const label = computed(() => getPluginStatusLabel(props.item))
+const statusItem = usePluginStatusPresentation(() => props.item)
+const label = computed(() => getPluginStatusLabel(statusItem.value))
 </script>
 
 <template>
@@ -37,10 +38,10 @@ const label = computed(() => getPluginStatusLabel(props.item))
     </div>
     <footer class="studio-plugin-card__footer">
       <span
-        :data-enabled="item.enabled"
+        :data-enabled="statusItem.enabled"
         :data-error="hasError"
         :data-development-status="item.origin === 'builtin' ? item.developmentStatus : undefined"
-        :role="item.status.status === 'loading' ? 'status' : undefined"
+        :role="statusItem.status.status === 'loading' ? 'status' : undefined"
         >{{ label }}</span
       >
       <div class="studio-plugin-card__actions">

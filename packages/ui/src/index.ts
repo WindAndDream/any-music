@@ -219,6 +219,7 @@ export type {
   CatalogTrackFilterDimension,
 } from './components/music-sources/catalog-track-filter-presentation'
 export { usePluginCenterView } from './composables/plugins/use-plugin-center-view'
+export { usePluginStatusPresentation } from './composables/plugins/use-plugin-status-presentation'
 export * from './product/plugin-center-presentation'
 export type {
   PluginCenterFilter,
