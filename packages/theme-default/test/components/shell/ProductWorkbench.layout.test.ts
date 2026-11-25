@@ -300,35 +300,42 @@ describe('Classic shell and current page layout integration', () => {
     },
   )
   it('keeps desktop list states and discovery in one sticky row, and pins the compact mobile header', () => {
+    const inlineGutter = {
+      'padding-inline': 'var(--am-catalog-list-inline-padding)',
+      'margin-inline': 'calc(-1 * var(--am-catalog-list-inline-padding))',
+    }
     const desktop = readLayout(catalogListHeaderStyles, ['.catalog-drawers__state-toolbar'], 1440)
-    expect(desktop.position).toBe('sticky')
-    expect(desktop['grid-template-columns']).toBe('minmax(0, 1fr) auto')
+    expect(desktop).toMatchObject({
+      ...inlineGutter,
+      position: 'sticky',
+      'inset-block-start': '0',
+      'z-index': 'var(--am-z-sticky)',
+      'grid-template-columns': 'minmax(0, 1fr) auto',
+      background: 'var(--am-color-surface-subtle)',
+    })
     expect(
       readLayout(catalogListHeaderStyles, ['.catalog-drawers__title-actions'], 1440)['grid-column'],
     ).toBe('2')
-    expect(
-      readLayout(sharedStyles, ['.catalog-page--lists'], 769)['padding-block-start'],
-    ).toBeUndefined()
     const directorySelector = '.catalog-page--lists > .catalog-drawers'
-    expect(readLayout(sharedStyles, [directorySelector], 769)['margin-block-start']).toBeUndefined()
-    for (const width of [768, 390, 320]) {
-      const mobile = readLayout(catalogListHeaderStyles, ['.catalog-drawers__header'], width)
-      expect(mobile).toMatchObject({
-        position: 'sticky',
-        'inset-block-start': '0',
-        'z-index': 'var(--am-z-sticky)',
-        'grid-template-areas': "'intro actions' 'states states'",
-        'padding-block': 'var(--am-space-4) var(--am-space-2)',
-        'padding-inline': 'var(--am-catalog-list-inline-padding)',
-        'margin-inline': 'calc(-1 * var(--am-catalog-list-inline-padding))',
-        background: 'var(--am-color-surface-subtle)',
-      })
+    for (const width of [320, 390, 768, 769, 1440]) {
       expect(readLayout(sharedStyles, ['.catalog-page--lists'], width)['padding-block-start']).toBe(
         '0',
       )
       expect(readLayout(sharedStyles, [directorySelector], width)['margin-block-start']).toBe(
         'var(--am-catalog-page-padding)',
       )
+    }
+    for (const width of [768, 390, 320]) {
+      const mobile = readLayout(catalogListHeaderStyles, ['.catalog-drawers__header'], width)
+      expect(mobile).toMatchObject({
+        ...inlineGutter,
+        position: 'sticky',
+        'inset-block-start': '0',
+        'z-index': 'var(--am-z-sticky)',
+        'grid-template-areas': "'intro actions' 'states states'",
+        'padding-block': 'var(--am-space-4) var(--am-space-2)',
+        background: 'var(--am-color-surface-subtle)',
+      })
       expect(
         readLayout(catalogListStyles, ['.catalog-drawers'], width)['padding-block-start'],
       ).toBe('0')

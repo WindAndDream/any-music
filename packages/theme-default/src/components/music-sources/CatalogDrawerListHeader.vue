@@ -173,6 +173,8 @@ const stateOrder: readonly CatalogDrawerStateFilter[] = [
   align-items: center;
   gap: var(--am-space-3);
   min-inline-size: 0;
+  margin-inline: calc(-1 * var(--am-catalog-list-inline-padding));
+  padding-inline: var(--am-catalog-list-inline-padding);
   padding-block: var(--am-space-2);
   background: var(--am-color-surface-subtle);
   border-block-end: 1px solid var(--am-color-border);

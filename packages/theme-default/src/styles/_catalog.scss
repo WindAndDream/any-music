@@ -396,12 +396,15 @@
     flex: 1 0 auto;
     flex-direction: column;
     min-block-size: 0;
+    padding-block-start: 0;
   }
 
   .catalog-page--lists > .catalog-drawers {
     /* 空态可沿弹性链铺满；页面背景与四周留白由外层 catalog-page 保留。 */
     inline-size: 100%;
     min-block-size: 0;
+    // The outer gap scrolls away without shifting the sticky boundary.
+    margin-block-start: var(--am-catalog-page-padding);
   }
 
   .catalog-page--lists,
@@ -410,17 +413,6 @@
     overscroll-behavior: contain;
     scrollbar-gutter: stable;
     scroll-padding-block-end: var(--am-space-6);
-  }
-
-  @media (max-width: 768px) {
-    .catalog-page--lists {
-      padding-block-start: 0;
-    }
-
-    .catalog-page--lists > .catalog-drawers {
-      // The outer gap scrolls away without shifting the sticky boundary.
-      margin-block-start: var(--am-catalog-page-padding);
-    }
   }
 
   .catalog-page__tracks-scroll {
