@@ -77,7 +77,7 @@ export function useLocalMusicLibrary() {
     for (const track of tracks) {
       const existing = trackById.get(track.id)
       const next: LibraryTrackRecord = existing
-        ? { ...existing, track, updatedAtMs: now }
+        ? { ...existing, track: retainKnownDuration(track, existing.track), updatedAtMs: now }
         : { track, customTags: [], addedAtMs: now, updatedAtMs: now }
       trackById.set(track.id, next)
       changed = true
@@ -119,7 +119,7 @@ export function useLocalMusicLibrary() {
       if (existing?.favoritedAtMs === undefined) addedCount += 1
       trackById.set(track.id, {
         ...existing,
-        track,
+        track: retainKnownDuration(track, existing?.track),
         customTags: existing?.customTags ?? [],
         favoritedAtMs: existing?.favoritedAtMs ?? now,
         addedAtMs: existing?.addedAtMs ?? now,
@@ -192,7 +192,7 @@ export function useLocalMusicLibrary() {
       const existing = trackById.get(track.id)
       trackById.set(track.id, {
         ...existing,
-        track,
+        track: retainKnownDuration(track, existing?.track),
         customTags: existing?.customTags ?? [],
         addedAtMs: existing?.addedAtMs ?? now,
         updatedAtMs: now,
@@ -753,6 +753,21 @@ export function useLocalMusicLibrary() {
     }
     return [...credits.values()]
   }
+}
+
+function retainKnownDuration(track: Track, existing?: Track): Track {
+  if (track.durationMs !== undefined || existing?.durationMs === undefined) return track
+  const source = track.source
+  const previous = existing.source
+  if (
+    source.pluginId !== previous.pluginId ||
+    source.mediaKind !== previous.mediaKind ||
+    source.resourceId !== previous.resourceId ||
+    (source.partId !== previous.partId &&
+      (source.partId !== undefined || !source.pageUrl || source.pageUrl !== previous.pageUrl))
+  )
+    return track
+  return { ...track, durationMs: existing.durationMs }
 }
 
 function normalizeName(input: string, label: string): string {

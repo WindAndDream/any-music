@@ -355,7 +355,7 @@ export function useMusicSourceWorkbench(workbenchOptions: UseMusicSourceWorkbenc
     startDownload: (track) => {
       const recipe =
         playerDownloadRecipes.get(track) ?? createPlayerExportRecipe(track, playerSegments.value)
-      playerDownloadRecipes.set(track, recipe)
+      if (recipe) playerDownloadRecipes.set(track, recipe)
       if (track.id !== previewTrack.value?.id) library.rememberTracks([track])
       return downloads.startDownloadBatch({
         tracks: [track],

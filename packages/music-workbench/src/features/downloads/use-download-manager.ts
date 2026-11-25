@@ -43,7 +43,7 @@ interface UseDownloadManagerOptions {
   verifyDownload?: WorkbenchRuntime['verifyDownload']
   concurrency: MaybeRefOrGetter<number>
   creatorName: MaybeRefOrGetter<string>
-  createRecipe: (track: Track) => readonly SegmentRecipe[]
+  createRecipe: (track: Track) => readonly SegmentRecipe[] | undefined
   resolveTrack: (trackId: string) => Track | undefined
   resolveMedia: (track: Track, options?: MediaResolveOptions) => Promise<ResolvedMediaSource>
   subscribeSourceInvalidation?: WorkbenchRuntime['subscribeSourceInvalidation']
@@ -175,21 +175,22 @@ export function useDownloadManager(options: UseDownloadManagerOptions) {
           concurrency,
           items: tracks.map((track) => {
             const previous = previousItems.get(track.id)
-            const recipe = (request.createRecipe ?? options.createRecipe)(track).map(
+            const recipe = (request.createRecipe ?? options.createRecipe)(track)?.map(
               ({ sourceTrackId, startMs, endMs }) => ({ sourceTrackId, startMs, endMs }),
             )
             const sameExport =
               previous?.creatorName === creatorName &&
               previous.file?.fileName === createAudioDownloadFileName(track.title, 'mp3') &&
-              previous.recipe?.length === recipe.length &&
-              recipe.every((segment, index) => {
+              previous.recipe?.length === recipe?.length &&
+              (recipe?.every((segment, index) => {
                 const earlier = previous.recipe?.[index]
                 return (
                   earlier?.sourceTrackId === segment.sourceTrackId &&
                   earlier.startMs === segment.startMs &&
                   earlier.endMs === segment.endMs
                 )
-              })
+              }) ??
+                true)
             return {
               id: previous?.id ?? `download-item:${crypto.randomUUID()}`,
               track: cloneTrack(track),
@@ -831,10 +832,11 @@ async function generateTrackFile(
     import('../audio-export/audio-exporter'),
     import('../../media/resolved-media-loader'),
   ])
+  const segments = options.createRecipe(track)
   const file = await exportAudioSegments({
     title: track.title,
     creatorName: toValue(options.creatorName),
-    segments: options.createRecipe(track),
+    ...(segments === undefined ? { track } : { segments }),
     format: 'mp3',
     resolveTrack: options.resolveTrack,
     resolveMedia: options.resolveMedia,

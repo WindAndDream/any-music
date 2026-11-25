@@ -44,8 +44,10 @@ export interface Track {
   artists: readonly TrackArtist[]
   /** 可直接显示的封面资源地址。 */
   artworkUrl?: string
-  /** 歌曲总时长，统一使用毫秒。 */
+  /** 可播放曲目的总时长，统一使用毫秒。 */
   durationMs?: number
+  /** 来源列表的展示时长，可能包含多个分 P。仅用于展示及筛选。 */
+  sourceDurationMs?: number
   /** 发布时间，Unix 毫秒时间戳。 */
   publishedAtMs?: number
   description?: string

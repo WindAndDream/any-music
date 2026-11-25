@@ -44,9 +44,18 @@ describe('createPlayerExportRecipe', () => {
     ])
   })
 
-  it('rejects an ordinary track without a usable full duration', () => {
-    expect(() =>
-      createPlayerExportRecipe({ ...BILIBILI_TRACK, durationMs: undefined }, undefined),
-    ).toThrow('当前曲目缺少有效时长')
+  it('defers the full-track range when only a listing duration is known', () => {
+    expect(
+      createPlayerExportRecipe(
+        { ...BILIBILI_TRACK, durationMs: undefined, sourceDurationMs: 43_200_000 },
+        undefined,
+      ),
+    ).toBeUndefined()
+  })
+
+  it('rejects an ordinary track with an invalid full duration', () => {
+    expect(() => createPlayerExportRecipe({ ...BILIBILI_TRACK, durationMs: 0 }, undefined)).toThrow(
+      '当前曲目缺少有效时长',
+    )
   })
 })
