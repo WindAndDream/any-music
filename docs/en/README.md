@@ -3,25 +3,19 @@ documentType: documentation-index
 runtimeScope: repository
 ---
 
-# Any Music Documentation
+# Any Music documentation
 
-For a fresh checkout or a new computer, follow [Getting started from source](../../README.en.md#getting-started-from-source) and [migration troubleshooting](../../README.en.md#moving-to-another-computer-and-troubleshooting).
+[中文](../zh-cn/文档索引.md)
 
-Chinese counterpart: [文档索引](../zh-cn/文档索引.md). Select the runtime and topic, then read only the relevant guide sections and local `AGENTS.md`; expand for a specific question. Shared product behavior does not imply shared credentials, transport or storage.
+| Question                                                              | Start here                                                     |
+| --------------------------------------------------------------------- | -------------------------------------------------------------- |
+| How is the product put together?                                      | [System architecture](architecture/README.md)                  |
+| Who owns a feature, and how does it work today?                       | [Modules by topic and runtime](modules/README.md)              |
+| What is being changed or has been paused?                             | [Changes in progress](changes/in-progress/README.md)           |
+| What is awaiting or has passed acceptance?                            | [Change acceptance](changes/acceptance/README.md)              |
+| What did the user temporarily approve, and what still needs checking? | [Temporary acceptance](changes/temporary-acceptance/README.md) |
+| What could we build later?                                            | [Future plans](plans/future/README.md)                         |
+| Which alternatives were set aside, and when might we revisit them?    | [Discarded plans](plans/discarded/README.md)                   |
+| How do I set up, change, verify or release the project?               | [Developer guides](guides/README.md)                           |
 
-| Task                                                                   | Entry                                                                                                                                                                                                                                                                      |
-| ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Privacy, secret handling and public-source preparation                 | [Privacy and Secret Handling](cross-platform/architecture/privacy-and-secrets.md)                                                                                                                                                                                          |
-| Git Flow, commit messages, team review and branch synchronization      | [Team policy](cross-platform/architecture/git-flow.md)                                                                                                                                                                                                                     |
-| Shared domain, workbench, UI, protocols or architecture                | [Cross-platform index](cross-platform/README.md)                                                                                                                                                                                                                           |
-| GitHub Actions, version preparation or release artifacts               | [Builds and releases](cross-platform/architecture/github-actions-release.md)                                                                                                                                                                                               |
-| Local users, account bindings, optional cloud plugins and Web planning | [Deployment plan](cross-platform/architecture/multi-user-local-cloud-plan.md) (proposal; not implemented)                                                                                                                                                                  |
-| Virtual lists, drag parity and sidebar performance planning            | [Implementation plan](cross-platform/architecture/virtual-list-implementation-plan.md) (active implementation; reuse batches in section 3, evidence in section 10)                                                                                                         |
-| Tampermonkey, host page, GM storage/network                            | [Userscript index](userscript/README.md) and [development](userscript/development.md)                                                                                                                                                                                      |
-| Tauri desktop/mobile, IPC, Rust, accounts or native data               | [Desktop index](desktop/README.md) and [development](desktop/development.md)                                                                                                                                                                                               |
-| Current plugin progress or exact capabilities                          | [Implementation status](cross-platform/architecture/plugin-system-refactoring-steps.md), [S15 desktop matrix](cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md), [S16 mobile](cross-platform/architecture/plugin-system-s16-mobile-delivery.md) |
-| Built-in theme development or remaining acceptance                     | [Theme guide](cross-platform/architecture/independent-theme-development.md), [remaining acceptance](cross-platform/architecture/independent-theme-ui-migration-plan.md#current-acceptance-and-next-work--2026-11-01)                                                       |
-| Documentation maintenance or task closeout                             | [Documentation lifecycle and agent instructions](cross-platform/architecture/documentation-lifecycle.md)                                                                                                                                                                   |
-| Verification results and task handoff                                  | [Result reporting](cross-platform/architecture/development-workflow.md#verification-results)                                                                                                                                                                               |
-
-Current guides describe present contracts; plans distinguish open work from completed batches, and dated evidence establishes only its recorded build/runtime/scope. Website, GM and Rust evidence are separate. Historical records are for investigation, not default context. Preserve real `captureDate`, `platform`, `runtimeScope` and bilingual counterparts when maintaining documents.
+For a task, choose the runtime and topic, then open the relevant module section and nearest `AGENTS.md`. To resume work, open the matching change record and start at its next step. Follow the [documentation workflow](guides/documentation-workflow.md) when implementing a change.

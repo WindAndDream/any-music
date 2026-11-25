@@ -17,6 +17,6 @@ CLI/SDK/testkit 0.1.0 support wire/Profile/package/data/budget 1. No predecessor
 
 From repository root run generate, generate:check, test and check:package with pnpm --filter @any-music/plugin-sdk. pnpm check:plugin:tools verifies real standalone tarballs and bundled templates outside the repository, without publishing or launching an application.
 
-Declarative music sources can declare `sourceAuthentication` with QR, credentials, SMS phone methods and an explicit no-login policy. Schema excludes system-browser authentication for external packages. The host owns token storage and injection; the generic guest network API remains anonymous. See [Music Source Authentication](../../docs/en/desktop/source-authentication.md).
+Declarative music sources can declare `sourceAuthentication` with QR, credentials, SMS phone methods and an explicit no-login policy. Schema excludes system-browser authentication for external packages. The host owns token storage and injection; the generic guest network API remains anonymous. See [Music Source Authentication](../../docs/en/modules/tauri/source-authentication.md).
 
-See the [S15 delivery and capability matrix](../../docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md) and its Chinese counterpart. music-workbench still owns core/wire conversion; SDK never depends on core, Vue, Node through its root entry, or a runtime.
+See the [S15 delivery and capability matrix](../../docs/en/modules/plugins/desktop-delivery.md) and its Chinese counterpart. music-workbench still owns core/wire conversion; SDK never depends on core, Vue, Node through its root entry, or a runtime.

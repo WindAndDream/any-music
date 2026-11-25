@@ -1,6 +1,6 @@
 # Shared music workbench
 
-Shared scope; consume capabilities through the [shared contracts](../../docs/en/cross-platform/README.md). Each application's guide owns Userscript/Tauri differences.
+Shared scope; consume capabilities through the [shared contracts](../../docs/en/modules/README.md). Each application's guide owns Userscript/Tauri differences.
 
 - Production Userscript, Tauri desktop and future mobile share business orchestration, player, downloads, repository validation and product entry points. No GM, Tauri, Electron, Node or app imports.
 - Vue/browser media belong to explicit renderer consumers and must not load through document-start entries.
@@ -25,4 +25,4 @@ Shared scope; consume capabilities through the [shared contracts](../../docs/en/
 
 - The product is unreleased: implement the current architecture directly. Do not add compatibility packages, previous product-schema readers, source JSON importers, archive UI or duplicate IPC aliases. Current plugin upgrade/rollback and crash recovery remain supported.
 
-See [Independent Theme Development](../../docs/en/cross-platform/architecture/independent-theme-development.md) for new build-owned themes and current entry/style/allocation rules.
+See [Independent Theme Development](../../docs/en/modules/ui/themes.md) for new build-owned themes and current entry/style/allocation rules.

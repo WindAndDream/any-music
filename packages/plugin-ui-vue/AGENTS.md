@@ -9,4 +9,4 @@
 
 - The trusted transaction captures public `ui/theme` continuity adapters and awaits their cancellable occurrence/offset restoration after rendering. New selections, render failure and disposal revoke old restoration, including while a loader is pending. Ordinary keyed pixel/focus regions retain their existing fallback. The host owns no theme-specific row mapping, measurement cache or business state; component tests do not establish native restoration acceptance.
 
-See [Independent Theme Development](../../docs/en/cross-platform/architecture/independent-theme-development.md) for new build-owned themes and current entry/style/allocation rules.
+See [Independent Theme Development](../../docs/en/modules/ui/themes.md) for new build-owned themes and current entry/style/allocation rules.
