@@ -104,7 +104,6 @@ function activateView(element: Element): void {
     :open="tag !== null"
     :suspended="state.confirming || props.suspended || helpOpen"
     title="标签信息"
-    :description="tag ? `#${tag.name}` : undefined"
     :size="view === 'tracks' ? 'wide' : 'compact'"
     :back-action="view === 'actions' ? editor.actions.closeDetail : () => navigate('actions')"
     @close="editor.actions.closeDetail"
