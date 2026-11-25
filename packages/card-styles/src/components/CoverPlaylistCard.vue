@@ -57,11 +57,8 @@ defineEmits<{
       @keydown.right="!readonly && !selectionOnly && ($event.preventDefault(), $emit('shift', 1))"
       @keydown.esc="!readonly && $emit('cancelDrag')"
     >
-      <RemoteImage v-if="coverUrl" :src="coverUrl" :alt="`${name}封面`" /><AppIcon
-        v-else
-        name="playlist"
-        :size="54"
-      />
+      <RemoteImage v-if="coverUrl" :src="coverUrl" :alt="`${name}封面`" />
+      <AppIcon v-else name="playlist" size="var(--am-playlist-cover-icon-size)" />
       <span class="am-cover-playlist__count" aria-hidden="true">
         <span class="am-cover-playlist__count-text"
           >{{ count }}<span class="am-cover-playlist__count-unit"> 首歌曲</span></span
@@ -135,6 +132,8 @@ button {
   cursor: pointer;
 }
 .am-cover-playlist__art {
+  --am-playlist-cover-icon-size: 40px;
+
   /* Count scrolling measures the artwork, including narrow single-column thumbnails. */
   container-type: inline-size;
   position: relative;
@@ -146,12 +145,8 @@ button {
   overflow: hidden;
   padding: 0;
   border-radius: var(--am-radius-artwork, 8px);
-  background: linear-gradient(
-    135deg,
-    var(--am-color-primary-container),
-    var(--am-color-surface-subtle)
-  );
-  color: var(--am-color-primary);
+  background: var(--am-color-surface-subtle);
+  color: var(--am-color-text-secondary);
   touch-action: pan-y;
   user-select: none;
   -webkit-touch-callout: none;
@@ -304,11 +299,9 @@ button:focus-visible,
     min-block-size: 72px;
   }
   .am-cover-playlist__art {
+    --am-playlist-cover-icon-size: 32px;
+
     aspect-ratio: 1;
-  }
-  .am-cover-playlist__art > .app-icon {
-    inline-size: 32px;
-    block-size: 32px;
   }
   .am-cover-playlist__body {
     padding: 0;
