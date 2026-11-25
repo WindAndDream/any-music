@@ -6,6 +6,7 @@ use tauri::{State, Webview};
 
 // Serializes the revision check with the atomic replacement, including concurrent IPC calls.
 static PRODUCT_WRITE: Mutex<()> = Mutex::new(());
+static SIDEBAR_PREFERENCE: Mutex<()> = Mutex::new(());
 
 fn validate_replacement(
     previous: &serde_json::Value,
@@ -73,6 +74,35 @@ pub fn load_product_data(
     }
     serde_json::from_slice(&std::fs::read(path).map_err(|_| "无法读取资料库。")?)
         .map_err(|_| "资料库存储损坏。".into())
+}
+
+#[tauri::command]
+pub async fn sidebar_collapse_preference(
+    webview: Webview,
+    state: State<'_, RuntimeState>,
+    value: Option<bool>,
+) -> Result<Option<bool>, String> {
+    require_main(&webview)?;
+    let path = state.directory.join("sidebar-collapsed.json");
+    tauri::async_runtime::spawn_blocking(move || {
+        let _guard = SIDEBAR_PREFERENCE
+            .lock()
+            .map_err(|_| "侧栏设置锁不可用。")?;
+        if let Some(value) = value {
+            vault::write_atomic(&path, if value { b"true" } else { b"false" })?;
+            return Ok(Some(value));
+        }
+        vault::recover_atomic(&path)?;
+        match std::fs::read(&path) {
+            Ok(bytes) => serde_json::from_slice::<bool>(&bytes)
+                .map(Some)
+                .map_err(|_| "侧栏设置格式不受支持。".into()),
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(None),
+            Err(_) => Err("无法读取侧栏设置。".into()),
+        }
+    })
+    .await
+    .map_err(|_| "侧栏设置任务失败。".to_owned())?
 }
 
 #[cfg(test)]

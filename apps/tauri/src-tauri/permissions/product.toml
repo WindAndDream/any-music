@@ -25,6 +25,7 @@ commands.allow = [
   "request_state",
   "save_product_data",
   "load_product_data",
+  "sidebar_collapse_preference",
   "plugin_authority_snapshot",
   "plugin_authority_revoke",
   "plugin_package_preview",

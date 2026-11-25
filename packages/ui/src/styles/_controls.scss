@@ -1,4 +1,22 @@
 // Neutral track/media primitives, module feedback and fixed host identity controls.
+.am-metadata-labels {
+  display: flex;
+  min-inline-size: 0;
+  flex-wrap: wrap;
+  gap: var(--am-space-1) var(--am-space-2);
+}
+.am-metadata-label {
+  display: inline-flex;
+  flex: 0 0 auto;
+  min-block-size: 28px;
+  align-items: center;
+  padding: var(--am-space-1) var(--am-space-2);
+  border-radius: var(--am-radius-detail);
+  background: var(--am-color-surface-subtle);
+  color: var(--am-color-text-secondary);
+  font-size: var(--am-font-size-xs);
+  white-space: nowrap;
+}
 .feature-module-status,
 .feature-module-error {
   display: grid;
@@ -103,20 +121,10 @@
   min-inline-size: 0;
 }
 .track-card-summary__cover {
-  display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 16/9;
   border-radius: var(--am-radius-md);
-  object-fit: cover;
-}
-.track-card-summary__cover--empty,
-.track-card-summary__cover[data-image-state='error'] {
-  display: grid;
-  place-items: center;
-  background: var(--am-color-surface-subtle);
-  color: var(--am-color-text-secondary);
-  font-size: 24px;
 }
 .track-card-summary__body {
   min-width: 0;
@@ -512,10 +520,6 @@
   color: var(--am-color-background);
   pointer-events: none;
   white-space: nowrap;
-}
-.track-card-summary__cover,
-.track-card-summary__cover--empty {
-  border-radius: var(--am-radius-md);
 }
 .track-source-page-link {
   color: var(--am-color-primary);

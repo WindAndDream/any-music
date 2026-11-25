@@ -15,7 +15,6 @@
     "build:userscript": "pnpm --filter @any-music/userscript run build:prod",
     "dev:tauri": "pnpm --filter @any-music/tauri dev",
     "start:tauri": "node scripts/start-tauri.mjs",
-    "test:virtual-list": "node scripts/start-virtual-list-test.mjs",
     "setup:userscript": "node scripts/setup-userscript-browser.mjs",
     "build:tauri": "pnpm --filter @any-music/tauri run build:prod",
     "build:tauri:dev": "pnpm --filter @any-music/tauri build:dev",

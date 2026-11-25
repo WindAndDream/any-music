@@ -1,8 +1,19 @@
-import { computed, onScopeDispose, shallowRef, toValue, watch } from 'vue'
+import { computed, nextTick, onScopeDispose, shallowRef, toValue, watch } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
 
 import { editingStateKey, type EditingSession } from '../use-editing-session'
 import type { VirtualScrollMetrics } from '../virtual-scroll/use-virtual-scroll-context'
+import type { VirtualItemKey } from '../virtual-scroll/virtual-row-geometry'
+
+export interface VirtualPageGeometry {
+  totalSize: MaybeRefOrGetter<number>
+  context: {
+    scrollElement: MaybeRefOrGetter<HTMLElement | null>
+    metrics: MaybeRefOrGetter<VirtualScrollMetrics>
+  }
+  virtualItems?: MaybeRefOrGetter<readonly { key: VirtualItemKey }[]>
+  measurements?: { getHeight(key: VirtualItemKey): number | undefined }
+}
 
 interface UseScrollPageLoaderOptions {
   editing?: EditingSession
@@ -10,13 +21,7 @@ interface UseScrollPageLoaderOptions {
   /** Nonvirtual root override. Null waits for mount; undefined discovers the nearest root. */
   scrollElement?: MaybeRefOrGetter<HTMLElement | null | undefined>
   /** Accepts the fixed/dynamic list's full geometry without observing its mounted rows. */
-  virtualList?: {
-    totalSize: MaybeRefOrGetter<number>
-    context: {
-      scrollElement: MaybeRefOrGetter<HTMLElement | null>
-      metrics: MaybeRefOrGetter<VirtualScrollMetrics>
-    }
-  }
+  virtualList?: MaybeRefOrGetter<VirtualPageGeometry | undefined>
   hasMore: MaybeRefOrGetter<boolean>
   loading: MaybeRefOrGetter<boolean>
   pageNumber: MaybeRefOrGetter<number>
@@ -29,7 +34,7 @@ interface UseScrollPageLoaderOptions {
   fillShortList?: MaybeRefOrGetter<boolean>
   /** Start one page ahead on downward input, using the current viewport height. */
   prefetch?: MaybeRefOrGetter<boolean>
-  /** Restore the current list's position from its editing scope before listening for scroll. */
+  /** Restore the current list's position from its editing scope without adding pagination demand. */
   restoreScroll?: boolean
   /** Measure actual rows while preparing a new, unfiltered discovery viewport. */
   initialFill?: {
@@ -78,6 +83,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
   let listElement: HTMLElement | undefined
   let resizeObserver: ResizeObserver | undefined
   let attachmentVersion = 0
+  let restoreRevision = 0
   let lastScrollTop = 0
   let hasScrollDemand = false
   let touchY: number | undefined
@@ -91,9 +97,24 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
       admission.scrollTop === undefined,
   )
   let initialFillTimer: ReturnType<typeof setTimeout> | undefined
+  const virtualList = computed(() => toValue(options.virtualList))
+  const initialMeasurementsReady = computed(() => {
+    const virtual = virtualList.value
+    const measurements = virtual?.measurements
+    if (!preparing.value || !measurements || toValue(options.visibleCount) === 0) return true
+    // Wait for the leading window's natural sizes before estimates can finish preparation.
+    const rows = toValue(virtual.virtualItems)
+    return Boolean(
+      rows?.length && rows.every(({ key }) => measurements.getHeight(key) !== undefined),
+    )
+  })
   const scrollRoot = computed(() => {
     // A virtual renderer already owns root selection and pooled geometry observation.
-    if (options.virtualList) return toValue(options.virtualList.context.scrollElement)
+    const virtual = virtualList.value
+    if (virtual)
+      return toValue(virtual.context.metrics).ready
+        ? toValue(virtual.context.scrollElement)
+        : undefined
     const explicitRoot = toValue(options.scrollElement)
     if (explicitRoot !== undefined) return explicitRoot
     const element = toValue(options.listElement)
@@ -122,14 +143,14 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
       scrollContainer !== scrollRoot.value
     )
       return
-    if (!options.virtualList) {
+    if (!virtualList.value) {
       const viewportHeight = scrollContainer.clientHeight
       return viewportHeight > 0
         ? { bottom: scrollContainer.scrollHeight, viewportHeight }
         : undefined
     }
-    const metrics = toValue(options.virtualList.context.metrics)
-    const totalSize = toValue(options.virtualList.totalSize)
+    const metrics = toValue(virtualList.value.context.metrics)
+    const totalSize = toValue(virtualList.value.totalSize)
     const bottom = metrics.listOffset + totalSize
     if (
       !metrics.ready ||
@@ -235,6 +256,16 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
     resizeObserver = undefined
   }
 
+  /** Rebase pagination before the browser delivers scroll events from a viewport handoff. */
+  function restorePosition(position: number): void {
+    if (!scrollContainer || !Number.isFinite(position) || position < 0) return
+    restoreRevision++
+    scrollContainer.scrollTop = position
+    lastScrollTop = scrollContainer.scrollTop
+    hasScrollDemand = false
+    if (options.restoreScroll && !preparing.value) admission.scrollTop = lastScrollTop
+  }
+
   function revealInitialFill(): void {
     clearTimeout(initialFillTimer)
     if (scrollContainer) scrollContainer.scrollTop = 0
@@ -265,12 +296,17 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
     }
     initialFillTimer ??= setTimeout(revealInitialFill, INITIAL_FILL_TIMEOUT_MS)
     const geometry = getGeometry()
-    if (!geometry || !scrollContainer) return
+    if (!geometry || !scrollContainer || !initialMeasurementsReady.value) return
+    const virtual = virtualList.value
+    const hasRows = toValue(options.visibleCount) > 0
     const content = toValue(initialFill.contentElement)
     // Padding, loading indicators, and a stretched list surface do not count as rows.
     const paddingBottom = Number.parseFloat(getComputedStyle(scrollContainer).paddingBottom) || 0
-    const rowsBottom =
-      content && toValue(options.visibleCount) > 0
+    const rowsBottom = virtual
+      ? hasRows
+        ? geometry.bottom
+        : 0
+      : content && hasRows
         ? content.getBoundingClientRect().bottom -
           scrollContainer.getBoundingClientRect().top -
           scrollContainer.clientTop +
@@ -321,7 +357,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
   )
 
   watch(
-    [() => toValue(options.listElement), () => scrollRoot.value],
+    [() => toValue(options.listElement), () => scrollRoot.value, virtualList],
     ([element, root]) => {
       detach()
       hasScrollDemand = false
@@ -329,8 +365,23 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
       listElement?.addEventListener('keydown', handleKeyDown)
       scrollContainer = element ? (root ?? undefined) : undefined
       const restoredTop = preparing.value ? 0 : admission.scrollTop
-      if (scrollContainer && options.restoreScroll && restoredTop !== undefined)
-        scrollContainer.scrollTop = restoredTop
+      if (options.restoreScroll && scrollContainer && restoredTop !== undefined) {
+        if (virtualList.value && restoredTop > 0 && scrollContainer.scrollTop !== restoredTop) {
+          const version = attachmentVersion
+          const revision = restoreRevision
+          const initialTop = scrollContainer.scrollTop
+          // The lazy grid can publish its root before its extent and engine offset finish mounting.
+          void nextTick(() => {
+            if (
+              version === attachmentVersion &&
+              revision === restoreRevision &&
+              scrollContainer?.scrollTop === initialTop &&
+              !hasScrollDemand
+            )
+              restorePosition(restoredTop)
+          })
+        } else restorePosition(restoredTop)
+      }
       lastScrollTop = scrollContainer?.scrollTop ?? 0
       scrollContainer?.addEventListener('scroll', handleScroll, { passive: true })
       scrollContainer?.addEventListener('wheel', handleWheel, { passive: true })
@@ -338,7 +389,7 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
       scrollContainer?.addEventListener('touchmove', handleTouchMove, { passive: true })
       scrollContainer?.addEventListener('touchend', handleTouchEnd, { passive: true })
       scrollContainer?.addEventListener('touchcancel', handleTouchEnd, { passive: true })
-      if (scrollContainer && !options.virtualList && typeof ResizeObserver !== 'undefined') {
+      if (scrollContainer && !virtualList.value && typeof ResizeObserver !== 'undefined') {
         const version = attachmentVersion
         resizeObserver = new ResizeObserver(() => {
           if (version === attachmentVersion) fillShortList()
@@ -377,10 +428,11 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
 
   watch(
     [
-      () => options.virtualList && toValue(options.virtualList.context.metrics).ready,
-      () => options.virtualList && toValue(options.virtualList.context.metrics).viewportHeight,
-      () => options.virtualList && toValue(options.virtualList.context.metrics).listOffset,
-      () => options.virtualList && toValue(options.virtualList.totalSize),
+      () => virtualList.value && toValue(virtualList.value.context.metrics).ready,
+      () => virtualList.value && toValue(virtualList.value.context.metrics).viewportHeight,
+      () => virtualList.value && toValue(virtualList.value.context.metrics).listOffset,
+      () => virtualList.value && toValue(virtualList.value.totalSize),
+      initialMeasurementsReady,
       () => toValue(options.fillShortList),
     ],
     fillShortList,
@@ -391,5 +443,5 @@ export function useScrollPageLoader(options: UseScrollPageLoaderOptions) {
     clearTimeout(initialFillTimer)
     detach()
   })
-  return { preparing: computed(() => preparing.value) }
+  return { preparing: computed(() => preparing.value), restorePosition }
 }

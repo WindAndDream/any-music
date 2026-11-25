@@ -8,8 +8,16 @@ vi.mock('#workbench/runtime/storage', () => ({
   readStored: vi.fn(),
   writeStored: vi.fn(),
 }))
+const sidebarCollapsePreference = vi.hoisted(() => ({
+  read: vi.fn<() => boolean | undefined>(),
+  write: vi.fn<(value: boolean) => void>(),
+}))
+vi.mock('#workbench/runtime/workbench-runtime', () => ({
+  getWorkbenchRuntime: () => ({ sidebarCollapsePreference }),
+}))
 
 import { createEmptyDownloadHistory } from '@any-music/core'
+import { createDefaultAppShellPreferences } from '@any-music/ui'
 
 import { createEmptyMusicSourceWorkspace } from '#workbench/features/music-sources/music-source-workspace-state'
 import { createEmptyPlaybackQueue } from '#workbench/features/player/playback-queue-state'
@@ -24,6 +32,8 @@ describe('production Userscript storage repositories', () => {
     vi.mocked(readStored).mockReset()
     vi.mocked(writeStored).mockReset()
     vi.mocked(readStored).mockReturnValue(undefined)
+    sidebarCollapsePreference.read.mockReset()
+    sidebarCollapsePreference.write.mockReset()
   })
 
   it('keeps workspace, queue and download history in production-only keys', () => {
@@ -48,6 +58,28 @@ describe('production Userscript storage repositories', () => {
     expect(writeStored).toHaveBeenCalledWith('music-source-workspace:v1', workspace)
     expect(writeStored).toHaveBeenCalledWith('playback-queue:v1', queue)
     expect(writeStored).toHaveBeenCalledWith('download-history:v1', downloads)
+  })
+
+  it('restores the saved rail state and writes toggles without committing a product snapshot', () => {
+    const saved = { ...createDefaultAppShellPreferences(), isSidebarCollapsed: true }
+    vi.mocked(readStored).mockReturnValue(saved)
+    let compact: boolean | undefined
+    sidebarCollapsePreference.read.mockImplementation(() => compact)
+    const write = sidebarCollapsePreference.write.mockImplementation((value) => {
+      compact = value
+    })
+
+    expect(appShellPreferencesRepository.load()).toEqual(saved)
+    const expanded = { ...saved, isSidebarCollapsed: false }
+    appShellPreferencesRepository.save(expanded)
+    expect(write).toHaveBeenCalledExactlyOnceWith(false)
+    expect(writeStored).not.toHaveBeenCalled()
+    expect(appShellPreferencesRepository.load()).toEqual(expanded)
+
+    const moved = { ...expanded, sidebarSide: 'right' as const }
+    appShellPreferencesRepository.save(moved)
+    expect(writeStored).toHaveBeenCalledExactlyOnceWith('app-shell:v1', moved)
+    expect(write).toHaveBeenCalledTimes(1)
   })
 
   it('reads the saved repository fixtures without loading ambiguous v1 filter history', () => {

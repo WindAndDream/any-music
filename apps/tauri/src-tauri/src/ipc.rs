@@ -19,6 +19,7 @@ pub(crate) fn handler() -> impl Fn(tauri::ipc::Invoke<tauri::Wry>) -> bool + Sen
         accounts::commands::request_state,
         storage::product::save_product_data,
         storage::product::load_product_data,
+        storage::product::sidebar_collapse_preference,
         storage::resource_cache_commands::resource_cache_snapshot,
         storage::resource_cache_commands::resource_cache_configure,
         storage::resource_cache_commands::resource_cache_clear,

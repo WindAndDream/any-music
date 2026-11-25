@@ -729,3 +729,23 @@ it('closes the classic mobile navigation drawer after selecting a destination', 
   expect(drawer.props['aria-modal']).toBeUndefined()
   expect(drawer.props.inert).toBe(true)
 })
+
+it('unlocks the classic content on widening and keeps the drawer closed on narrowing again', async () => {
+  const f = mount(classic)
+  const content = findCatalogElement(f.root, (node) => node.tag === 'main')
+  Object.assign(content.parent!, { ownerDocument: { defaultView: null } })
+  f.shell.mobileLayout = true
+  await nextTick()
+  f.click('打开功能导航')
+  await nextTick()
+  expect(content.props.inert).toBe(true)
+
+  f.shell.mobileLayout = false
+  await nextTick()
+  expect(content.props.inert).toBeUndefined()
+
+  f.shell.mobileLayout = true
+  await nextTick()
+  expect(content.props.inert).toBeUndefined()
+  expect(f.button('打开功能导航').props['aria-expanded']).toBe(false)
+})

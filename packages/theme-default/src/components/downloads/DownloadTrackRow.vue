@@ -20,6 +20,7 @@ const props = defineProps<{
   active: boolean
   invalid: boolean
   reorderable?: boolean
+  virtualPlacement?: boolean
   dragging?: boolean
   getReorderStyle?: (id: string) => CSSProperties | undefined
 }>()
@@ -36,21 +37,24 @@ const emit = defineEmits<{
 }>()
 const action = computed(() => getDownloadTrackAction(props.entry))
 const detail = computed(() => getDownloadTrackStatus(props.entry))
-const reorderStyle = computed(() => props.getReorderStyle?.(props.entry.item.id))
+const reorderStyle = computed(() =>
+  props.virtualPlacement ? undefined : props.getReorderStyle?.(props.entry.item.id),
+)
 </script>
 
 <template>
   <div
     class="download-track list__cell"
+    :data-am-continuity-item="entry.item.id"
     :class="{ 'download-track--dragging': dragging }"
     :data-status="entry.state"
-    :data-queue-drop-kind="reorderable ? 'track' : undefined"
-    :data-queue-drop-id="reorderable ? entry.item.id : undefined"
+    :data-queue-drop-kind="reorderable && !virtualPlacement ? 'track' : undefined"
+    :data-queue-drop-id="reorderable && !virtualPlacement ? entry.item.id : undefined"
   >
     <div
       class="download-track__surface"
       :class="{ 'download-track__surface--moving': reorderStyle || dragging }"
-      data-am-grid-motion
+      :data-am-grid-motion="virtualPlacement ? undefined : ''"
       :style="reorderStyle"
     >
       <TrackRow
@@ -78,6 +82,7 @@ const reorderStyle = computed(() => props.getReorderStyle?.(props.entry.item.id)
           <button
             class="track__cover-select download-track__cover-control"
             data-queue-handle
+            :data-am-focus-key="`download:${entry.item.id}:reorder`"
             type="button"
             :aria-label="`${props.selectable ? (selected ? '取消选择' : '选择') : '排序'}下载歌曲 ${entry.item.track.title}；长按封面拖动排序；方向键可逐首移动`"
             :aria-pressed="props.selectable ? selected : undefined"
@@ -129,6 +134,7 @@ const reorderStyle = computed(() => props.getReorderStyle?.(props.entry.item.id)
           <button
             class="track__button track__button--more"
             data-card-menu
+            :data-am-focus-key="`download:${entry.item.id}:actions`"
             type="button"
             aria-haspopup="dialog"
             :aria-label="`查看《${entry.item.track.title}》的操作`"

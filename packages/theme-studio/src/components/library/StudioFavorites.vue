@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { usePresentationContinuity } from '@any-music/ui/library'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { inject, useTemplateRef } from 'vue'
+import { useTemplateRef } from 'vue'
 
-import { studioVirtualFavoritesCanaryKey } from '../../composables/studio-virtual-favorites-canary'
 import StudioCollection from './StudioCollection.vue'
 import StudioFavoriteFilters from './StudioFavoriteFilters.vue'
 const props = defineProps<{ feature: UiThemeFeatureMap['favorites'] }>()
-const virtualized = inject(studioVirtualFavoritesCanaryKey, false)
+const virtualized = import.meta.env.MODE === 'dev'
 const platforms = useTemplateRef<HTMLElement>('platforms')
 usePresentationContinuity({
   element: platforms,

@@ -5,18 +5,13 @@ import {
   useEditingSession,
   useQueueReorder,
 } from '@any-music/ui/library'
-import { computed, inject, nextTick, onDeactivated, shallowRef, watch } from 'vue'
+import { computed, nextTick, onDeactivated, shallowRef, watch } from 'vue'
 import type { ShallowRef } from 'vue'
 
-import {
-  classicVirtualFavoritesCanaryKey,
-  classicVirtualPlaylistCanaryKey,
-  classicVirtualQueueCanaryKey,
-} from './classic-virtual-favorites-canary'
 import type {
   ClassicVirtualTrackGridAdapter,
   ClassicVirtualTrackGridBinding,
-} from './classic-virtual-favorites-canary'
+} from './classic-virtual-track-grid'
 import { useClassicCompactControls } from './use-classic-compact-controls'
 import type { ClassicTrackCollectionProps } from './use-classic-track-collection'
 
@@ -30,21 +25,7 @@ export function useClassicCollectionPresentation(
     Boolean(props.collection?.state.mobileLayout),
   )
   const arrangement = computed(() => props.collection?.state.arrangementMode ?? 'flat')
-  // No production provider enables this temporary admission gate.
-  const favoritesCanary = inject(classicVirtualFavoritesCanaryKey, false)
-  const queueCanary = inject(classicVirtualQueueCanaryKey, false)
-  const playlistCanary = inject(classicVirtualPlaylistCanaryKey, false)
   const virtualAdapter = shallowRef<ClassicVirtualTrackGridAdapter>()
-  const virtualCollectionView = computed(() =>
-    Boolean(
-      props.collection &&
-      (props.scope === 'favorites:tracks'
-        ? favoritesCanary
-        : props.scope === 'queue:tracks'
-          ? queueCanary
-          : props.scope?.startsWith('playlist:') && playlistCanary),
-    ),
-  )
   // Playlist identities stay in the region so equal track/platform IDs cannot share a handoff.
   const continuityRegion = computed(() => {
     if (!props.collection || !props.scope) return null
@@ -61,6 +42,9 @@ export function useClassicCollectionPresentation(
       ? `${base}:${arrangement.value === 'flat' || activePlatform.value ? 'tracks' : 'platforms'}`
       : null
   })
+  const virtualCollectionView = computed(
+    () => import.meta.env.MODE === 'dev' && continuityRegion.value !== null,
+  )
   function waitOverviewAdapter(
     signal: AbortSignal,
   ): Promise<ClassicVirtualTrackGridAdapter | undefined> {

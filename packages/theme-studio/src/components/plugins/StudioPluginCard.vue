@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getPluginFailure, getPluginStatusLabel } from '@any-music/ui'
+import { getPluginFailure, getPluginStatusLabel, usePluginStatusPresentation } from '@any-music/ui'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import type { UiPluginCenterItem } from '@any-music/ui/theme'
 import { computed } from 'vue'
@@ -18,18 +18,18 @@ function changeEnabled(event: Event): void {
   input.checked = props.item.enabled
 }
 const hasError = computed(() => Boolean(getPluginFailure(props.item)))
-const label = computed(() => getPluginStatusLabel(props.item))
+const statusItem = usePluginStatusPresentation(() => props.item)
+const label = computed(() => getPluginStatusLabel(statusItem.value))
 </script>
 
 <template>
   <article class="studio-plugin-card">
     <header class="studio-plugin-card__header">
-      <AppIcon :name="item.category === '音乐源' ? 'music' : 'plugin'" :size="22" /><span>{{
-        item.category
-      }}</span
-      ><span class="studio-plugin-card__origin">{{
-        item.origin === 'builtin' ? '内置' : '外置'
-      }}</span>
+      <AppIcon :name="item.category === '音乐源' ? 'music' : 'plugin'" :size="22" />
+      <div class="am-metadata-labels">
+        <span class="am-metadata-label">{{ item.category }}</span>
+        <span class="am-metadata-label">{{ item.origin === 'builtin' ? '内置' : '外置' }}</span>
+      </div>
     </header>
     <div class="studio-plugin-card__body">
       <h2>{{ item.name }}</h2>
@@ -38,10 +38,10 @@ const label = computed(() => getPluginStatusLabel(props.item))
     </div>
     <footer class="studio-plugin-card__footer">
       <span
-        :data-enabled="item.enabled"
+        :data-enabled="statusItem.enabled"
         :data-error="hasError"
         :data-development-status="item.origin === 'builtin' ? item.developmentStatus : undefined"
-        :role="item.status.status === 'loading' ? 'status' : undefined"
+        :role="statusItem.status.status === 'loading' ? 'status' : undefined"
         >{{ label }}</span
       >
       <div class="studio-plugin-card__actions">

@@ -43,11 +43,14 @@ export function useClassicHistory(
       }
     })
   })
+  const viewport = computed(
+    () => element.value?.closest<HTMLElement>('.music-app-shell__content') ?? null,
+  )
   const navigation = useCollectionNavigation({
     editing: history.editing,
     enabled: () => history.arrangement.value === 'platform',
     entryIds: () => groups.value.map(({ id }) => id),
-    scrollContainer: () => element.value?.closest<HTMLElement>('.music-app-shell__content') ?? null,
+    scrollContainer: viewport,
   })
   watch(
     navigation.activeId,
@@ -61,9 +64,19 @@ export function useClassicHistory(
   )
   const compactControls = useClassicCompactControls(element, () => state.value.mobileLayout)
   const actionEntryId = shallowRef<string | null>(null)
+  const actionOpenerId = shallowRef<string>()
   const actionRow = computed(() =>
     history.rows.value.find(({ entry }) => entry.id === actionEntryId.value),
   )
+  function showActions(id: string) {
+    actionOpenerId.value = id
+    actionEntryId.value = id
+  }
+  async function releaseActionOpener() {
+    // Keep the occurrence mounted through the dialog's return-focus patch.
+    await nextTick()
+    if (!actionRow.value) actionOpenerId.value = undefined
+  }
   const displayOpen = shallowRef(false)
   const contentDisplayOpen = shallowRef(false)
   const playlistOpen = usePlaylistPickerOpen(history.editing)
@@ -137,6 +150,7 @@ export function useClassicHistory(
   }
   return {
     history,
+    viewport,
     state,
     filterCount,
     filtered,
@@ -145,7 +159,10 @@ export function useClassicHistory(
     activePlatform,
     compactControls,
     actionEntryId,
+    actionOpenerId,
     actionRow,
+    showActions,
+    releaseActionOpener,
     displayOpen,
     contentDisplayOpen,
     playlistOpen,

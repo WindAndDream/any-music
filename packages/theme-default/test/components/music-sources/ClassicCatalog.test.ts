@@ -22,8 +22,8 @@ import {
   CatalogTestElement,
   dispatchCatalogEvent,
   findCatalogElement,
-  mountCatalogComponent,
 } from '../../helpers/test-renderer'
+import { mountMeasuredThemeGrid } from '../../helpers/virtual-grid-renderer'
 
 // Execute real controls in Node; overlay focus/animation requires separately authorized live acceptance.
 vi.mock('vue', async (load) => {
@@ -256,7 +256,7 @@ function mountPage(
     )
   const A = defineComponent({ setup: () => () => h('main', page()) })
   const B = defineComponent({ setup: () => () => h('article', [h('aside', '替代测试根'), page()]) })
-  const view = mountCatalogComponent(
+  const view = mountMeasuredThemeGrid(
     defineComponent({
       setup() {
         provideEditingSession(editing)
@@ -265,7 +265,7 @@ function mountPage(
         return () => h(root.value)
       },
     }),
-    {},
+    () => 2,
   )
   return {
     ...view,
@@ -286,6 +286,58 @@ function click(root: CatalogTestElement, text: string) {
 }
 
 describe('classic catalog complete-root contract', () => {
+  it.each(['bilibili', 'netease'])(
+    'limits mounted %s results and admits one page near the full list end',
+    async (pluginId) => {
+      const f = mountPage(false, undefined, pluginId)
+      try {
+        const tracks = Array.from({ length: 200 }, (_, index) => track(`song-${index}`))
+        f.state.tracks = tracks
+        f.state.drawers[0]!.tracks = tracks
+        await vi.dynamicImportSettled()
+        await nextTick()
+        const tracksScroll = () =>
+          findCatalogElement(
+            f.root,
+            (node) => node.props.class === 'catalog-page__tracks-scroll',
+          ) as unknown as HTMLElement
+        const cells = () => f.root.querySelectorAll('[data-occurrence]')
+        expect(cells()[0]?.dataset.occurrence).toBe('song-0')
+        expect(cells().length).toBeLessThan(30)
+        expect(cells()[0]?.props['aria-setsize']).toBe(200)
+        expect(f.actions.loadMore).not.toHaveBeenCalled()
+
+        tracksScroll().scrollTop = 7_000
+        tracksScroll().dispatchEvent(new Event('scroll'))
+        await nextTick()
+        expect(cells().some((node) => node.dataset.occurrence === 'song-0')).toBe(false)
+        expect(f.actions.loadMore).not.toHaveBeenCalled()
+        const previousWindow = new Set(cells().map((node) => node.dataset.occurrence))
+
+        f.state.activeDrawerId = null
+        await nextTick()
+        f.state.activeDrawerId = f.state.drawers[0]!.id
+        await vi.dynamicImportSettled()
+        await nextTick()
+        tracksScroll().dispatchEvent(new Event('scroll'))
+        await nextTick()
+        // The new window may replace one row estimate with its natural height during restoration.
+        expect(Math.abs(tracksScroll().scrollTop - 7_000)).toBeLessThan(100)
+        expect(cells().some((node) => previousWindow.has(node.dataset.occurrence))).toBe(true)
+        expect(f.actions.loadMore).not.toHaveBeenCalled()
+
+        const grid = findCatalogElement(f.root, (node) => node.props.role === 'list')
+        const { blockSize } = grid.props.style as { blockSize: string }
+        tracksScroll().scrollTop = Number.parseFloat(blockSize) - tracksScroll().clientHeight + 24
+        for (let count = 0; count < 2; count++)
+          tracksScroll().dispatchEvent(Object.assign(new Event('wheel'), { deltaY: 20 }))
+        expect(f.actions.loadMore).toHaveBeenCalledExactlyOnceWith(f.state.drawers[0]!.id)
+      } finally {
+        f.dispose()
+      }
+    },
+  )
+
   it('hands a new Douyin list to the native viewport after initial preparation', async () => {
     const viewport = vi.fn()
     const f = mountPage(false, viewport, 'douyin')
@@ -294,9 +346,15 @@ describe('classic catalog complete-root contract', () => {
       expect(findCatalogElement(f.root, (node) => node.props.inert === true)).toBeDefined()
 
       f.state.drawers[0]!.hasMore = false
-      await nextTick()
-      expect(viewport).toHaveBeenCalled()
+      f.state.tracks = Array.from({ length: 1000 }, (_, index) => track(`track-${index}`))
+      f.state.drawers[0]!.tracks = f.state.tracks
+      await vi.waitFor(() => expect(viewport).toHaveBeenCalled())
       expect(() => findCatalogElement(f.root, (node) => node.props.inert === true)).toThrow()
+      const mounted = f.root.querySelectorAll('[data-occurrence]')
+      expect(mounted.length).toBeGreaterThan(0)
+      expect(mounted.length).toBeLessThan(24)
+      expect(mounted[0]?.props['aria-setsize']).toBe(1000)
+      expect(f.actions.loadMore).not.toHaveBeenCalled()
     } finally {
       f.dispose()
     }
@@ -350,6 +408,7 @@ describe('classic catalog complete-root contract', () => {
     try {
       expect(displayButton()).toBeDefined()
       f.state.activeDrawerId = null
+      await vi.dynamicImportSettled()
       await nextTick()
       expect(() => displayButton()).toThrow()
       expect(
@@ -371,6 +430,7 @@ describe('classic catalog complete-root contract', () => {
       try {
         f.state.activeDrawerId = null
         f.state.drawers = [{ ...f.state.drawers[0]!, isPinned }]
+        await vi.dynamicImportSettled()
         await nextTick()
         const openActions = async () => {
           dispatchCatalogEvent(
@@ -410,6 +470,7 @@ describe('classic catalog complete-root contract', () => {
           f.state.activeDrawerId = null
           await nextTick()
         }
+        await vi.dynamicImportSettled()
         const checkbox = () =>
           findCatalogElement(
             f.root,
@@ -433,6 +494,7 @@ describe('classic catalog complete-root contract', () => {
         await nextTick()
         expect(checkbox().props.checked).toBe(true)
         f.selection.value = 'B'
+        await vi.dynamicImportSettled()
         await nextTick()
         expect(checkbox().props.checked).toBe(true)
         dispatchCatalogEvent(checkbox(), 'onChange')
@@ -459,6 +521,7 @@ describe('classic catalog complete-root contract', () => {
     expect(f.actions.favoriteDrawer).toHaveBeenCalledExactlyOnceWith('request:stable')
     expect(f.actions.toggleFavorite).not.toHaveBeenCalled()
     f.state.activeDrawerId = null
+    await vi.dynamicImportSettled()
     await nextTick()
     dispatchCatalogEvent(
       findCatalogElement(f.root, (node) => node.props['aria-label'] === '音乐列表操作 来源结果'),
@@ -493,6 +556,7 @@ describe('classic catalog complete-root contract', () => {
 
   it('retains cross-page selection and an unfinished filter across A → B → A without requests or media actions', async () => {
     const f = mountPage()
+    await vi.dynamicImportSettled()
     click(f.root, '操作器')
     await nextTick()
     dispatchCatalogEvent(
@@ -638,6 +702,7 @@ describe('classic catalog complete-root contract', () => {
 
   it('keeps the refresh button in place while loading and routes it by stable request ID', async () => {
     const f = mountPage()
+    await vi.dynamicImportSettled()
     f.state.drawers[0]!.isLoading = true
     f.state.invalidTrackIds = ['one']
     await nextTick()

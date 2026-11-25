@@ -31,12 +31,13 @@ const fixture = () => ({
 
 test('the actual registry has complete AppManifest coverage and exact main authority', () => {
   const commands = inspectIsolationConfig()
-  assert.equal(commands.length, 81)
+  assert.equal(commands.length, 82)
   for (const command of [
     'runtime_capabilities',
     'discard_account_draft',
     'source_account_platforms',
     'source_account_auth',
+    'sidebar_collapse_preference',
     'resource_cache_snapshot',
     'resource_cache_configure',
     'resource_cache_clear',

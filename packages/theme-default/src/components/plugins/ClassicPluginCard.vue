@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getPluginFailure, getPluginStatusLabel } from '@any-music/ui'
+import { getPluginFailure, getPluginStatusLabel, usePluginStatusPresentation } from '@any-music/ui'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import type { UiPluginCenterItem } from '@any-music/ui/theme'
 import { computed } from 'vue'
@@ -23,7 +23,8 @@ function changeEnabled(event: Event): void {
   input.checked = props.item.enabled
 }
 const hasError = computed(() => Boolean(getPluginFailure(props.item)))
-const statusLabel = computed(() => getPluginStatusLabel(props.item))
+const statusItem = usePluginStatusPresentation(() => props.item)
+const statusLabel = computed(() => getPluginStatusLabel(statusItem.value))
 </script>
 
 <template>
@@ -58,7 +59,10 @@ const statusLabel = computed(() => getPluginStatusLabel(props.item))
       </span>
       <div class="classic-plugin-card__identity">
         <h3>{{ item.name }}</h3>
-        <span>{{ item.category }} · {{ item.origin === 'builtin' ? '内置' : '外置' }}</span>
+        <div class="am-metadata-labels">
+          <span class="am-metadata-label">{{ item.category }}</span>
+          <span class="am-metadata-label">{{ item.origin === 'builtin' ? '内置' : '外置' }}</span>
+        </div>
       </div>
     </header>
     <p class="classic-plugin-card__description">{{ item.description }}</p>
@@ -70,9 +74,9 @@ const statusLabel = computed(() => getPluginStatusLabel(props.item))
       <span
         class="classic-plugin-card__status"
         :data-error="hasError"
-        :data-enabled="item.enabled"
+        :data-enabled="statusItem.enabled"
         :data-development-status="item.origin === 'builtin' ? item.developmentStatus : undefined"
-        :role="item.status.status === 'loading' ? 'status' : undefined"
+        :role="statusItem.status.status === 'loading' ? 'status' : undefined"
         >{{ statusLabel }}</span
       >
       <div class="classic-plugin-card__actions">

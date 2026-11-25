@@ -5,7 +5,7 @@ import { defineComponent, h, nextTick, shallowRef } from 'vue'
 
 import type { QueuePlatformGridGroup } from '../../../src/components/music-sources/queue-platform-grid-contracts'
 import VirtualQueuePlatformGrid from '../../../src/components/music-sources/VirtualQueuePlatformGrid.vue'
-import type { ClassicVirtualTrackGridAdapter } from '../../../src/composables/classic-virtual-favorites-canary'
+import type { ClassicVirtualTrackGridAdapter } from '../../../src/composables/classic-virtual-track-grid'
 import {
   dispatchCatalogEvent,
   findCatalogElement,

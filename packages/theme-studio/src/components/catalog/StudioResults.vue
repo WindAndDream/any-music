@@ -5,7 +5,7 @@ import {
   useCatalogViewportOverlay,
 } from '@any-music/ui/catalog'
 import type { UiThemeFeatureMap, UiThemeHostSlots } from '@any-music/ui/theme'
-import { computed, shallowRef } from 'vue'
+import { computed, shallowRef, useTemplateRef } from 'vue'
 
 import StudioBatchActions from '../library/StudioBatchActions.vue'
 import StudioDisplayControls from '../library/StudioDisplayControls.vue'
@@ -13,13 +13,17 @@ import StudioFilters from '../library/StudioFilters.vue'
 import StudioCatalogTracks from './StudioCatalogTracks.vue'
 import { useStudioCatalog } from './use-studio-catalog'
 
-defineSlots<UiThemeHostSlots>()
+const slots = defineSlots<UiThemeHostSlots>()
 const props = defineProps<{ feature: UiThemeFeatureMap['catalog'] }>()
 const { state, drawer, allSelected, toggleAll, openFilters, canLoadMore } = useStudioCatalog(props)
 const nativeReady = shallowRef(false)
 const reserveViewport = shallowRef(false)
+const tracksScroll = useTemplateRef<HTMLElement>('tracksScroll')
 const viewportKey = computed(() => `${drawer.value?.id}:${drawer.value?.refreshRevision ?? 0}`)
 const preparedViewport = shallowRef<string>()
+const virtualizeTracks = computed(
+  () => drawer.value?.pluginId === 'douyin' && Boolean(slots['catalog-viewport']),
+)
 const prepareViewport = computed(
   () =>
     drawer.value?.pluginId === 'douyin' &&
@@ -117,6 +121,7 @@ function setDisplayOpen(open: boolean): void {
       </fieldset>
       <div
         :key="viewportKey"
+        ref="tracksScroll"
         class="studio-catalog-tracks"
         :class="{ 'studio-catalog-tracks--native': reserveViewport || prepareViewport }"
       >
@@ -139,6 +144,8 @@ function setDisplayOpen(open: boolean): void {
           :can-load-more="canLoadMore"
           :prepare-viewport="prepareViewport"
           :prefetch="drawer.pluginId === 'douyin'"
+          :virtualized="virtualizeTracks"
+          :scroll-element="virtualizeTracks ? tracksScroll : undefined"
           @viewport-ready="preparedViewport = viewportKey"
         />
       </div>

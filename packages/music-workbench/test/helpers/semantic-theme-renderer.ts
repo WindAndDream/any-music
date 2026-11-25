@@ -147,6 +147,7 @@ export function createSemanticThemeRenderer(getTheme: () => 'classic' | 'studio'
     parentNode: (node) => node.parent,
     nextSibling: (node) => node.parent?.children[node.parent.children.indexOf(node) + 1] ?? null,
     patchProp: (node, key, _previous, next) => {
+      if (key === 'value') node.value = String(next ?? '')
       if (key.startsWith('data-')) {
         const name = key.slice(5).replace(/-([a-z])/g, (_, letter: string) => letter.toUpperCase())
         if (next === undefined || next === null) delete node.dataset[name]

@@ -160,6 +160,7 @@ function openFilters() {
           :row="actionRow"
           :feature="feature"
           @close="actionEntryId = null"
+          @after-leave="presentation.releaseActionOpener"
           @play="presentation.play"
           @clear="presentation.clear"
         />

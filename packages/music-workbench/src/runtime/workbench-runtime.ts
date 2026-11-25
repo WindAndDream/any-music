@@ -65,6 +65,11 @@ export interface WorkbenchRuntime {
     features?: readonly ModuleDescriptor[]
   }
   storage: StableValueStorage
+  /** Desktop rail state is a runtime-local preference outside the library generation. */
+  sidebarCollapsePreference?: {
+    read(): boolean | undefined
+    write(collapsed: boolean): void
+  }
   http: HttpClient
   builtInMusicSources: readonly MusicSourcePlugin[]
   configureProxy(settings: NetworkProxySettings): void

@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import type { Track } from '@any-music/core'
 import type { CatalogDrawerView } from '@any-music/ui'
 import { useEditingSession, useScrollPageLoader } from '@any-music/ui/catalog'
-import type { TrackGridViewport } from '@any-music/ui/catalog'
+import type { TrackGridViewport, VirtualPageGeometry } from '@any-music/ui/catalog'
 import LoadingSpinner from '@any-music/ui/components/LoadingSpinner.vue'
-import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
+import CatalogTrackGrid from '@any-music/ui/components/music-sources/CatalogTrackGrid.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { computed, useTemplateRef, watch } from 'vue'
+import { computed, toValue, useTemplateRef, watch } from 'vue'
 
 import StudioStyledTrack from '../library/StudioStyledTrack.vue'
+import StudioCatalogTable from './StudioCatalogTable.vue'
 import StudioTrackRow from './StudioTrackRow.vue'
 
 type Catalog = UiThemeFeatureMap['catalog']
@@ -48,6 +50,7 @@ const props = defineProps<{
   viewportSize?: TrackGridViewport
   prefetch?: boolean
   prepareViewport?: boolean
+  virtualized?: boolean
 }>()
 const emit = defineEmits<{ viewportReady: [] }>()
 const loading = computed(() => props.drawer.isLoading || props.drawer.status === 'restoring')
@@ -55,6 +58,20 @@ const selectedIds = computed(() => new Set(props.state.selectedTrackIds))
 const invalidIds = computed(() => new Set(props.state.invalidTrackIds))
 const favoriteIds = computed(() => new Set(props.state.favoriteTrackIds))
 const queuedIds = computed(() => new Set(props.state.queuedTrackIds))
+function play(id: string) {
+  return props.actions.play(
+    id,
+    props.state.tracks.map((track) => track.id),
+  )
+}
+function contentGeneration(track: Track) {
+  return JSON.stringify([
+    track,
+    props.state.customNamesByTrackId.get(track.id),
+    props.state.customTagsByTrackId.get(track.id),
+    invalidIds.value.has(track.id),
+  ])
+}
 function toggle(id: string) {
   props.actions.select(
     selectedIds.value.has(id)
@@ -63,10 +80,13 @@ function toggle(id: string) {
   )
 }
 const listElement = useTemplateRef<HTMLElement>('listElement')
-const { preparing } = useScrollPageLoader({
+const surface = useTemplateRef<{ geometry?: VirtualPageGeometry }>('surface')
+const geometry = computed(() => surface.value?.geometry)
+const { preparing, restorePosition } = useScrollPageLoader({
   editing: useEditingSession(`pagination:${props.drawer.id}`),
-  listElement,
+  listElement: () => (!props.virtualized || geometry.value ? listElement.value : null),
   scrollElement: () => props.scrollElement,
+  virtualList: geometry,
   hasMore: () => props.canLoadMore,
   loading,
   pageNumber: () => props.drawer.loadedPageCount,
@@ -80,13 +100,19 @@ const { preparing } = useScrollPageLoader({
   restoreScroll: true,
   initialFill: { enabled: () => props.prepareViewport === true, contentElement: listElement },
 })
+const ready = computed(
+  () =>
+    !preparing.value &&
+    (!props.virtualized || toValue(geometry.value?.context.metrics)?.ready === true),
+)
 watch(
-  preparing,
-  (pending) => {
-    if (!pending) emit('viewportReady')
+  ready,
+  (value) => {
+    if (value) emit('viewportReady')
   },
   { immediate: true },
 )
+defineExpose({ ready, restorePosition })
 </script>
 
 <template>
@@ -101,13 +127,19 @@ watch(
       tabindex="0"
       data-am-scroll-key="catalog:tracks"
     >
-      <TrackCardGrid
+      <CatalogTrackGrid
         v-if="state.itemStyle && state.itemStyle !== 'default'"
+        ref="surface"
+        :tracks="state.tracks"
+        :get-content-generation="contentGeneration"
         :display-mode="state.displayMode"
         :mobile-columns="state.mobileColumns"
         :viewport-size="viewportSize"
+        :scroll-element="scrollElement"
+        :layout-generation="state.itemStyle"
+        :virtualized="virtualized"
       >
-        <div v-for="track in state.tracks" :key="track.id" class="studio-minimal-cell">
+        <template #default="{ track }">
           <StudioStyledTrack
             :item-style="state.itemStyle"
             :track="track"
@@ -117,35 +149,30 @@ watch(
             :selected="selectedIds.has(track.id)"
             selectable
             @select="toggle(track.id)"
-            @play="
-              actions.play(
-                track.id,
-                state.tracks.map((item) => item.id),
-              )
-            "
+            @play="play(track.id)"
             @actions="actions.showTrackActions(track.id)"
           />
-        </div>
-      </TrackCardGrid>
-      <table v-else class="studio-track-table">
-        <caption>
-          {{
-            state.tracks.length
-          }}
-          首已加载歌曲
-        </caption>
-        <thead>
-          <tr>
+        </template>
+      </CatalogTrackGrid>
+      <StudioCatalogTable
+        v-else
+        ref="surface"
+        :tracks="state.tracks"
+        :get-content-generation="contentGeneration"
+        :scroll-element="scrollElement"
+        :virtualized="virtualized"
+      >
+        <template #head="{ rowIndex }">
+          <tr :aria-rowindex="rowIndex">
             <th scope="col">选择</th>
             <th scope="col">音乐 / 作者</th>
             <th scope="col">时长</th>
             <th scope="col">操作</th>
           </tr>
-        </thead>
-        <tbody>
+        </template>
+        <template #row="{ track, index, rowIndex }">
           <StudioTrackRow
-            v-for="(track, index) in state.tracks"
-            :key="track.id"
+            :aria-rowindex="rowIndex"
             :track="track"
             :index="index"
             :title="state.customNamesByTrackId.get(track.id) ?? track.title"
@@ -156,19 +183,14 @@ watch(
             :current="state.currentTrackId === track.id"
             :download-busy="Boolean(state.downloadBusy)"
             @select="toggle(track.id)"
-            @play="
-              actions.play(
-                track.id,
-                state.tracks.map((item) => item.id),
-              )
-            "
+            @play="play(track.id)"
             @favorite="actions.toggleFavorite(track.id)"
             @queue="actions.toggleQueue(track.id)"
             @download="actions.download([track.id])"
             @actions="actions.showTrackActions(track.id)"
           />
-        </tbody>
-      </table>
+        </template>
+      </StudioCatalogTable>
     </div>
     <div v-if="preparing" class="studio-catalog-preparation">
       <LoadingSpinner label="正在加载歌曲" />
@@ -191,9 +213,5 @@ watch(
   inset-block-start: var(--am-space-4);
   inset-inline: 0;
   text-align: center;
-}
-.studio-minimal-cell {
-  min-inline-size: 0;
-  container: am-track-card / inline-size;
 }
 </style>

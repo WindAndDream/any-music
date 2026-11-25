@@ -5,7 +5,7 @@ export function createResizeEnvironment() {
     observe: ReturnType<typeof vi.fn>
     unobserve: ReturnType<typeof vi.fn>
     disconnect: ReturnType<typeof vi.fn>
-    notify: (targets: Element[]) => void
+    notify: (targets: Element[], deliveredHeights?: ReadonlyMap<Element, number>) => void
   }[] = []
   class Observer {
     observe = vi.fn()
@@ -16,9 +16,16 @@ export function createResizeEnvironment() {
         observe: this.observe,
         unobserve: this.unobserve,
         disconnect: this.disconnect,
-        notify: (targets) =>
+        notify: (targets, deliveredHeights) =>
           notify(
-            targets.map((target) => ({ target }) as ResizeObserverEntry),
+            targets.map((target): Partial<ResizeObserverEntry> => {
+              const blockSize = deliveredHeights?.get(target)
+              return {
+                target,
+                borderBoxSize:
+                  blockSize === undefined ? undefined : [{ blockSize, inlineSize: 500 }],
+              }
+            }) as ResizeObserverEntry[],
             this as unknown as ResizeObserver,
           ),
       })

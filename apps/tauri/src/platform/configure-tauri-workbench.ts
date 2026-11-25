@@ -23,6 +23,7 @@ import { createProductStorage } from './product-storage'
 import { nativeResourceCache, resolveNativeArtwork } from './resource-cache'
 import { loadRuntimeCapabilities, requireRuntimeCapability } from './runtime-capabilities'
 import type { NativeRuntimeCapabilities } from './runtime-capabilities'
+import { loadSidebarCollapsePreference } from './sidebar-collapse-preference'
 import { verifyNativeDownload } from './verify-native-download'
 
 let configuredCapabilities: Readonly<NativeRuntimeCapabilities> | undefined
@@ -77,7 +78,10 @@ export async function configureTauriWorkbench(): Promise<void> {
     )
   }
   if (capabilities.form === 'desktop') await accountRuntime.refreshSourcePlatforms()
-  const storage = await createProductStorage()
+  const [storage, sidebarCollapsePreference] = await Promise.all([
+    createProductStorage(),
+    capabilities.form === 'desktop' ? loadSidebarCollapsePreference() : undefined,
+  ])
   const externalPlugins = capabilities.externalPlugins
   const modules = createBuiltInWorkbenchModules(capabilities.form)
   const sources =
@@ -117,6 +121,7 @@ export async function configureTauriWorkbench(): Promise<void> {
       ...modules,
     },
     storage,
+    sidebarCollapsePreference,
     http:
       capabilities.accountTransport === 'provided'
         ? createNativeHttpClient()

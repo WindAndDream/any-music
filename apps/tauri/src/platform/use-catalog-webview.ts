@@ -114,6 +114,7 @@ export function useCatalogWebview(
 
   const identity = { lease, accountId: options.accountId, query: options.query }
   const close = () => invoke('close_catalog_webview', { lease }).catch(() => {})
+  const parkNative = () => invoke('sync_catalog_webview', { request: identity })
 
   function scheduleSync(delay: number) {
     clearTimeout(timer)
@@ -223,7 +224,7 @@ export function useCatalogWebview(
       if (paintFallback) await afterPaint()
       if (disposed) return
       try {
-        await invoke('sync_catalog_webview', { request: identity })
+        await parkNative()
       } catch {
         lastSent = undefined
         await close()
@@ -281,15 +282,17 @@ export function useCatalogWebview(
     handingOff = (active || Boolean(parking)) && Boolean(region?.isConnected) && !document.hidden
     active = false
     options.setReady(false)
-    if (!handingOff) {
-      void close()
-      return
-    }
-    // Reveal the restored list behind the child WebView before releasing its lease.
-    void nextTick(async () => {
-      if (region?.isConnected) await afterPaint()
+    void (async () => {
+      if (handingOff) {
+        await nextTick()
+        // Only an in-place fallback needs a paint handoff. A leaving catalog page
+        // must move the native child away before it can cover the incoming view.
+        if (region?.isConnected && visibleBounds(region)) await afterPaint()
+      }
+      // Parking clears native placement without waiting for an in-flight renderer sync.
+      await parkNative().catch(() => {})
       await close()
-    })
+    })()
   })
   return { openOverlay }
 }

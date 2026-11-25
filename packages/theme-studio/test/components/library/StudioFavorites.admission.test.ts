@@ -1,23 +1,24 @@
 import { provideConfirmationDialog } from '@any-music/ui/library'
-import { describe, expect, it, vi } from 'vitest'
-import { defineComponent, h, nextTick, provide } from 'vue'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent, h, nextTick } from 'vue'
 
 import StudioCollection from '../../../src/components/library/StudioCollection.vue'
 import StudioFavorites from '../../../src/components/library/StudioFavorites.vue'
-import { studioVirtualFavoritesCanaryKey } from '../../../src/composables/studio-virtual-favorites-canary'
 import { mountMeasuredStudio } from '../../helpers/measured-collection-renderer'
 import { createStudioFavoritesFeature } from '../../helpers/studio-track-fixtures'
 
 const candidate = vi.hoisted(() => ({ load: vi.fn() }))
 vi.mock('../../../src/components/library/StudioVirtualTrackLayout.vue', () => {
   candidate.load()
-  throw new Error('An unadmitted consumer must not execute the virtual candidate')
+  throw new Error('The full-rendered collection loaded the virtual layout')
 })
+afterEach(() => vi.unstubAllEnvs())
 
-describe('Studio C03 independent production admission', () => {
-  it.each([false, true])(
-    'keeps Favorites full-rendered and the lazy candidate untouched, styled=%s',
-    async (styled) => {
+describe('Studio collections in development and release profiles', () => {
+  it.each(['staging', 'prod'].flatMap((mode) => [false, true].map((styled) => ({ mode, styled }))))(
+    'keeps Favorites full-rendered in $mode, styled=$styled',
+    async ({ mode, styled }) => {
+      vi.stubEnv('MODE', mode)
       const feature = createStudioFavoritesFeature(80, styled)
       const view = mountMeasuredStudio(
         defineComponent({
@@ -39,14 +40,14 @@ describe('Studio C03 independent production admission', () => {
   )
 
   it.each(['queue:tracks', 'playlist:p:tracks'])(
-    'never admits %s through the Favorites key',
+    'keeps %s full-rendered during development',
     async (scope) => {
+      vi.stubEnv('MODE', 'dev')
       const feature = createStudioFavoritesFeature(80, false)
       const view = mountMeasuredStudio(
         defineComponent({
           setup() {
             provideConfirmationDialog()
-            provide(studioVirtualFavoritesCanaryKey, true)
             return () =>
               h(StudioCollection, {
                 title: scope,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Track } from '@any-music/core'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
-import RemoteImage from '@any-music/ui/components/music-sources/RemoteImage.vue'
+import TrackArtwork from '@any-music/ui/components/tracks/TrackArtwork.vue'
 import { computed } from 'vue'
 
 const props = withDefaults(
@@ -61,12 +61,11 @@ const emit = defineEmits<{
     </td>
     <td>
       <div class="studio-track__identity">
-        <RemoteImage
+        <TrackArtwork
           v-if="track.artworkUrl"
+          class="studio-track__artwork"
           :src="track.artworkUrl"
           :alt="title"
-          :width="44"
-          :height="44"
         />
         <div>
           <strong>{{ title }}</strong

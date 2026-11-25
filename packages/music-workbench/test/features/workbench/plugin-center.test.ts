@@ -122,6 +122,58 @@ describe.each([
       f.unmount()
     }
   })
+  it.each([false, true])(
+    'keeps enablement text stable until a load settles or takes longer (%s)',
+    async (slow) => {
+      vi.useFakeTimers()
+      const f = mount(definition)
+      try {
+        f.state.items = [{ ...builtin, enabled: false }]
+        await nextTick()
+        dispatchCatalogEvent(
+          findCatalogElement(
+            f.root,
+            (node) => node.props['aria-label'] === '查看插件介绍 标签管理',
+          ),
+          'onClick',
+        )
+        await nextTick()
+        const dialog = findCatalogElement(f.root, (node) => node.tag === 'dialog')
+        const card = findCatalogElement(f.root, (node) => node.tag === 'article')
+        const control = findCatalogElement(card, (node) => node.props.role === 'switch')
+        expect(dialog.textContent).toContain('运行状态已停用')
+
+        f.actions.setEnabled.mockImplementation(() => {
+          f.state.items = [{ ...builtin, status: { status: 'loading' } }]
+        })
+        dispatchCatalogEvent(button(dialog, '启用插件'), 'onClick')
+        await nextTick()
+
+        expect(f.actions.setEnabled).toHaveBeenCalledExactlyOnceWith('feature.tags', true)
+        expect(control.props.checked).toBe(true)
+        expect(dialog.textContent).toContain('运行状态已停用')
+        expect(card.textContent).toContain('已停用')
+        expect(card.textContent).not.toContain('正在加载')
+        if (slow) {
+          vi.advanceTimersByTime(250)
+          await nextTick()
+          expect(dialog.textContent).toContain('运行状态正在加载')
+          expect(card.textContent).toContain('正在加载')
+        }
+
+        f.state.items = [builtin]
+        await nextTick()
+        vi.advanceTimersByTime(250)
+        await nextTick()
+        expect(dialog.textContent).toContain('运行状态已启用')
+        expect(card.textContent).toContain('已启用')
+        expect(card.textContent).not.toContain('正在加载')
+      } finally {
+        f.unmount()
+        vi.useRealTimers()
+      }
+    },
+  )
   it.each([
     ['updating', '更新中'],
     ['fixing', '修复中'],
@@ -138,6 +190,8 @@ describe.each([
         f.state.items = [{ ...builtin, developmentStatus: status, enabled: false }, external]
         await nextTick()
         expect(f.root.textContent).toContain(`${label} · 已停用`)
+        f.state.items = [{ ...builtin, developmentStatus: status }]
+        await nextTick()
         f.state.items = [{ ...builtin, developmentStatus: status, status: { status: 'loading' } }]
         await nextTick()
         expect(f.root.textContent).toContain(`${label} · 正在加载`)

@@ -37,16 +37,43 @@ function mountShell(sidebarSide: 'left' | 'right') {
   cleanups.push(view.unmount)
   const shell = findCatalogElement(view.root, (node) => node.tag === 'section')
   const sidebar = findCatalogElement(view.root, (node) => node.tag === 'aside')
+  const reducedMotion = { matches: false }
+  const frames = new Map<number, FrameRequestCallback>()
+  let frameId = 0
+  const getAnimations = vi.fn<() => { transitionProperty: string; finished: Promise<void> }[]>(
+    () => [],
+  )
+  Object.assign(shell, {
+    getAnimations,
+    ownerDocument: {
+      defaultView: {
+        matchMedia: () => reducedMotion,
+        requestAnimationFrame(callback: FrameRequestCallback) {
+          frames.set(++frameId, callback)
+          return frameId
+        },
+        cancelAnimationFrame: (id: number) => frames.delete(id),
+      },
+    },
+  })
   return {
     props,
+    shell,
     sidebar,
+    reducedMotion,
+    getAnimations,
     isAnimated: () =>
       String(shell.props.class).includes('music-app-shell--mobile-drawer-transition'),
     isSidebarAnimated: () =>
       String(shell.props.class).includes('music-app-shell--sidebar-transition'),
-    finishSidebarTransition: (target = shell) => {
-      const handler = shell.props.onTransitionend as (event: unknown) => void
-      handler({ target, currentTarget: shell })
+    isPreparingExpansion: () =>
+      String(shell.props.class).includes('music-app-shell--preparing-sidebar-expansion'),
+    runAnimationFrames() {
+      for (let frame = 0; frame < 2; frame++) {
+        const callbacks = [...frames.values()]
+        frames.clear()
+        for (const callback of callbacks) callback(0)
+      }
     },
     finishTransition: (propertyName = 'transform', target = sidebar) => {
       const handler = sidebar.props.onTransitionend as (event: unknown) => void
@@ -55,7 +82,37 @@ function mountShell(sidebarSide: 'left' | 'right') {
   }
 }
 
+function createTransition(transitionProperty = 'grid-template-columns') {
+  let finish!: () => void
+  let cancel!: () => void
+  const finished = new Promise<void>((resolve, reject) => {
+    finish = resolve
+    cancel = () => reject(new Error('Transition cancelled'))
+  })
+  return { transitionProperty, finished, finish, cancel }
+}
+
 describe('MusicAppShell responsive drawer motion', () => {
+  it('releases the content when mobile layout ends before the drawer open prop clears', async () => {
+    const view = mountShell('left')
+    const content = findCatalogElement(view.shell, (node) => node.tag === 'main')
+    const hasScrim = () =>
+      view.shell.children.some((node) => node.props['aria-label'] === '关闭功能导航')
+
+    view.props.mobileLayout = true
+    view.props.mobileDrawerOpen = true
+    await nextTick()
+    expect(content.props.inert).toBe(true)
+    expect(hasScrim()).toBe(true)
+
+    view.props.mobileLayout = false
+    await nextTick()
+    expect(content.props.inert).toBeUndefined()
+    expect(hasScrim()).toBe(false)
+    expect(view.sidebar.props['aria-modal']).toBeUndefined()
+    expect(view.isAnimated()).toBe(false)
+  })
+
   it.each(['left', 'right'] as const)(
     'keeps the %s sidebar mounted and hides it without a transition on repeated breakpoint changes',
     async (side) => {
@@ -68,19 +125,10 @@ describe('MusicAppShell responsive drawer motion', () => {
       view.props.sidebarCollapsed = false
       await nextTick()
       expect(view.isSidebarAnimated()).toBe(true)
-      view.finishSidebarTransition(view.sidebar)
-      await nextTick()
-      expect(view.isSidebarAnimated()).toBe(true)
-      view.finishSidebarTransition()
-      await nextTick()
-      expect(view.isSidebarAnimated()).toBe(false)
-      view.props.sidebarCollapsed = true
-      await nextTick()
-      expect(view.isSidebarAnimated()).toBe(true)
       view.props.sidebarSide = side === 'left' ? 'right' : 'left'
       await nextTick()
       expect(view.isSidebarAnimated()).toBe(false)
-      view.props.sidebarCollapsed = false
+      view.props.sidebarCollapsed = true
       await nextTick()
       expect(view.isSidebarAnimated()).toBe(true)
       async function checkLayout(mobileLayout: boolean) {
@@ -97,6 +145,75 @@ describe('MusicAppShell responsive drawer motion', () => {
       await checkLayout(true)
     },
   )
+
+  it('keeps the width stable through reversals until the current grid transition settles', async () => {
+    const view = mountShell('left')
+    const collapse = createTransition()
+    const opacity = createTransition('opacity')
+    view.getAnimations.mockReturnValue([opacity, collapse])
+    view.props.sidebarCollapsed = true
+    await nextTick()
+    view.runAnimationFrames()
+
+    const expand = createTransition()
+    view.getAnimations.mockReturnValue([opacity, expand])
+    view.props.sidebarCollapsed = false
+    await nextTick()
+    view.runAnimationFrames()
+
+    opacity.finish()
+    collapse.cancel()
+    await Promise.resolve()
+    await nextTick()
+    expect(view.isSidebarAnimated()).toBe(true)
+
+    expand.finish()
+    await Promise.resolve()
+    await nextTick()
+    expect(view.isSidebarAnimated()).toBe(false)
+  })
+
+  it('clears the desktop transition when no grid animation starts or motion is reduced', async () => {
+    const view = mountShell('right')
+    view.props.sidebarCollapsed = true
+    await nextTick()
+    view.runAnimationFrames()
+    await nextTick()
+    expect(view.isSidebarAnimated()).toBe(false)
+
+    view.reducedMotion.matches = true
+    view.props.sidebarCollapsed = false
+    await nextTick()
+    expect(view.isSidebarAnimated()).toBe(false)
+    expect(view.getAnimations).toHaveBeenCalledTimes(1)
+  })
+
+  it('lets the content reflow before opening a settled desktop rail', async () => {
+    const view = mountShell('left')
+    view.props.sidebarCollapsed = true
+    await nextTick()
+    view.runAnimationFrames()
+    await nextTick()
+    view.getAnimations.mockClear()
+
+    const expand = createTransition()
+    view.getAnimations.mockReturnValue([expand])
+    view.props.sidebarCollapsed = false
+    await nextTick()
+    expect(view.isPreparingExpansion()).toBe(true)
+
+    view.runAnimationFrames()
+    await nextTick()
+    expect(view.isPreparingExpansion()).toBe(false)
+    expect(view.isSidebarAnimated()).toBe(true)
+    expect(view.getAnimations).not.toHaveBeenCalled()
+
+    view.runAnimationFrames()
+    expand.finish()
+    await Promise.resolve()
+    await nextTick()
+    expect(view.isSidebarAnimated()).toBe(false)
+  })
 
   it('animates mobile open/close, tolerates quick reversals and clears motion after its own slide', async () => {
     const view = mountShell('left')

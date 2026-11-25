@@ -39,6 +39,7 @@ defineEmits<{
       class="am-cover-playlist__art"
       type="button"
       :data-queue-handle="selectionOnly || readonly ? undefined : ''"
+      :data-am-focus-key="readonly ? undefined : `playlist:${id}:cover`"
       :disabled="disabled"
       :aria-label="
         selectionOnly
@@ -56,11 +57,8 @@ defineEmits<{
       @keydown.right="!readonly && !selectionOnly && ($event.preventDefault(), $emit('shift', 1))"
       @keydown.esc="!readonly && $emit('cancelDrag')"
     >
-      <RemoteImage v-if="coverUrl" :src="coverUrl" :alt="`${name}封面`" /><AppIcon
-        v-else
-        name="playlist"
-        :size="54"
-      />
+      <RemoteImage v-if="coverUrl" :src="coverUrl" :alt="`${name}封面`" />
+      <AppIcon v-else name="playlist" size="var(--am-playlist-cover-icon-size)" />
       <span class="am-cover-playlist__count" aria-hidden="true">
         <span class="am-cover-playlist__count-text"
           >{{ count }}<span class="am-cover-playlist__count-unit"> 首歌曲</span></span
@@ -75,6 +73,7 @@ defineEmits<{
           type="button"
           :disabled="disabled"
           :data-collection-entry="id"
+          :data-am-focus-key="readonly ? undefined : `playlist:${id}:open`"
           :title="name"
           @click.stop="!readonly && (selectable ? $emit('select') : $emit('open'))"
         >
@@ -95,6 +94,7 @@ defineEmits<{
           class="am-cover-playlist__more"
           type="button"
           :aria-label="`查看 ${name} 的详细信息`"
+          :data-am-focus-key="`playlist:${id}:details`"
           aria-haspopup="dialog"
           @click.stop="$emit('actions')"
         >
@@ -108,6 +108,7 @@ defineEmits<{
         :disabled="disabled"
         :checked="selected"
         :aria-label="`选择歌单 ${name}`"
+        :data-am-focus-key="`playlist:${id}:select`"
         @change="$emit('select')"
     /></label>
   </div>
@@ -131,6 +132,8 @@ button {
   cursor: pointer;
 }
 .am-cover-playlist__art {
+  --am-playlist-cover-icon-size: 40px;
+
   /* Count scrolling measures the artwork, including narrow single-column thumbnails. */
   container-type: inline-size;
   position: relative;
@@ -142,12 +145,8 @@ button {
   overflow: hidden;
   padding: 0;
   border-radius: var(--am-radius-artwork, 8px);
-  background: linear-gradient(
-    135deg,
-    var(--am-color-primary-container),
-    var(--am-color-surface-subtle)
-  );
-  color: var(--am-color-primary);
+  background: var(--am-color-surface-subtle);
+  color: var(--am-color-text-secondary);
   touch-action: pan-y;
   user-select: none;
   -webkit-touch-callout: none;
@@ -300,11 +299,9 @@ button:focus-visible,
     min-block-size: 72px;
   }
   .am-cover-playlist__art {
+    --am-playlist-cover-icon-size: 32px;
+
     aspect-ratio: 1;
-  }
-  .am-cover-playlist__art > .app-icon {
-    inline-size: 32px;
-    block-size: 32px;
   }
   .am-cover-playlist__body {
     padding: 0;

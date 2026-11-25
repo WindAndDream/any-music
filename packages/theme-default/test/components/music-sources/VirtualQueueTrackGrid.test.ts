@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { computed, defineComponent, h, nextTick, reactive, shallowRef } from 'vue'
 
 import VirtualQueueTrackGrid from '../../../src/components/music-sources/VirtualQueueTrackGrid.vue'
-import type { ClassicVirtualTrackGridAdapter } from '../../../src/composables/classic-virtual-favorites-canary'
+import type { ClassicVirtualTrackGridAdapter } from '../../../src/composables/classic-virtual-track-grid'
 import { provideClassicOverlays } from '../../../src/composables/use-classic-overlays'
 import {
   dispatchCatalogEvent,

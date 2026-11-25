@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import type { MusicPlaylist } from '@any-music/core'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
 import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
-import { playlistEditorErrorMessage } from '@any-music/ui/library'
-import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { computed, shallowRef, useTemplateRef } from 'vue'
+import { playlistEditorErrorMessage, usePresentationContinuity } from '@any-music/ui/library'
+import type { PresentationContinuitySnapshot, UiThemeFeatureMap } from '@any-music/ui/theme'
+import { computed, defineAsyncComponent, shallowRef, useTemplateRef } from 'vue'
 
+import type { ClassicVirtualTrackGridAdapter } from '../../composables/classic-virtual-track-grid'
 import { useClassicPlaylistOverview } from '../../composables/use-classic-playlist-overview'
 import { usePresentationActivity } from '../../composables/use-presentation-activity'
 import CatalogDisplayModeDialog from '../music-sources/CatalogDisplayModeDialog.vue'
@@ -16,8 +18,25 @@ import ClassicPlaylistTile from './ClassicPlaylistTile.vue'
 import PlaylistOverviewFilters from './PlaylistOverviewFilters.vue'
 import PlaylistOverviewOperator from './PlaylistOverviewOperator.vue'
 
-const props = defineProps<{ feature: UiThemeFeatureMap['playlists']; suspended?: boolean }>()
+const ClassicPlaylistVirtualGrid = defineAsyncComponent(
+  () => import('./ClassicPlaylistVirtualGrid.vue'),
+)
+const props = defineProps<{
+  feature: UiThemeFeatureMap['playlists']
+  scrollElement: HTMLElement | null
+  suspended?: boolean
+  editingId?: string
+}>()
 const emit = defineEmits<{ open: [id: string]; create: []; details: [id: string] }>()
+const grid = useTemplateRef<HTMLElement>('grid')
+const virtualized = import.meta.env.MODE === 'dev'
+const virtual =
+  useTemplateRef<
+    Pick<
+      ClassicVirtualTrackGridAdapter,
+      'createGeometry' | 'retainItem' | 'focusItem' | 'continuity'
+    >
+  >('virtual')
 const {
   state,
   collection,
@@ -31,7 +50,54 @@ const {
   available,
   removeSelected,
   downloadSelected,
-} = useClassicPlaylistOverview(props, useTemplateRef<HTMLElement>('grid'))
+} = useClassicPlaylistOverview(props, grid, {
+  autoScrollElement: virtualized ? () => props.scrollElement : undefined,
+  get createGeometry() {
+    return virtual.value?.createGeometry
+  },
+  get retainItem() {
+    return virtual.value?.retainItem
+  },
+  get focusItem() {
+    return virtual.value?.focusItem
+  },
+})
+const continuity = usePresentationContinuity({
+  element: grid,
+  region: 'playlist:overview',
+  scrollElement: () => props.scrollElement,
+  revision: collection.filters,
+  waitForDelegate: () => virtualized && collection.visible.value.length > 0,
+  delegate: () => virtual.value?.continuity,
+})
+defineExpose({
+  captureOverview(id: string): PresentationContinuitySnapshot | undefined {
+    const snapshot = continuity.capture()
+    return snapshot && { ...snapshot, focus: { itemKey: id, controlKey: `playlist:${id}:open` } }
+  },
+  restoreOverview: continuity.restore,
+  focusEntry: (id: string, signal: AbortSignal) =>
+    continuity.restore({ focus: { itemKey: id, controlKey: `playlist:${id}:open` } }, signal),
+})
+function tileProps(playlist: MusicPlaylist, index: number) {
+  return {
+    playlist,
+    index,
+    tags: state.value.customTagsByPlaylistId?.get(playlist.id),
+    coverUrl: playlist.coverId ? state.value.coverUrls[playlist.coverId] : undefined,
+    dragging: reorder.draggedId.value === playlist.id,
+    selectable: collection.operatorOpen.value,
+    selected: collection.selectedIds.value.has(playlist.id),
+  }
+}
+const tileEvents = {
+  select: collection.select,
+  open: (id: string) => emit('open', id),
+  details: (id: string) => emit('details', id),
+  press: reorder.startTrackPress,
+  shift: (id: string, direction: -1 | 1) => reorder.shift('track', id, direction),
+  cancelDrag: reorder.clearDrag,
+}
 const filterCount = computed(() => {
   const { keyword, trackCountRanges, tags, tagsDormant, cover } = collection.filters.value
   return (
@@ -42,8 +108,12 @@ const filterCount = computed(() => {
   )
 })
 const importInput = useTemplateRef<HTMLInputElement>('importInput')
+const controls = useTemplateRef<HTMLElement>('controls')
 const importMessage = shallowRef('')
 const importError = shallowRef('')
+const offsetElements = computed(() =>
+  [controls.value, grid.value?.parentElement].filter((element) => element != null),
+)
 const activity = usePresentationActivity()
 async function importPlaylist(event: Event) {
   const input = event.target as HTMLInputElement
@@ -73,38 +143,42 @@ async function importPlaylist(event: Event) {
     :empty="!collection.visible.value.length"
   >
     <template #controls>
-      <div
-        class="playlist-overview__actions"
-        :class="{ 'playlist-overview__actions--compact': compact }"
-      >
-        <button
-          type="button"
-          class="playlist-overview__import"
-          :disabled="!available() || state.transferBusy"
-          @click="importInput?.click()"
+      <div ref="controls" class="playlist-overview__controls">
+        <div
+          class="playlist-overview__actions"
+          :class="{ 'playlist-overview__actions--compact': compact }"
         >
-          <AppIcon name="arrow-down" :size="16" />{{ state.transferBusy ? '处理中…' : '导入歌单' }}
-        </button>
-        <input
-          ref="importInput"
-          hidden
-          type="file"
-          accept=".json,application/json"
-          aria-label="选择歌单 JSON 文件"
-          @change="importPlaylist"
-        />
-        <button
-          type="button"
-          class="playlist-overview__create"
-          aria-haspopup="dialog"
-          :disabled="!available()"
-          @click="emit('create')"
-        >
-          <AppIcon name="plus" :size="16" />创建
-        </button>
+          <button
+            type="button"
+            class="playlist-overview__import"
+            :disabled="!available() || state.transferBusy"
+            @click="importInput?.click()"
+          >
+            <AppIcon name="arrow-down" :size="16" />{{
+              state.transferBusy ? '处理中…' : '导入歌单'
+            }}
+          </button>
+          <input
+            ref="importInput"
+            hidden
+            type="file"
+            accept=".json,application/json"
+            aria-label="选择歌单 JSON 文件"
+            @change="importPlaylist"
+          />
+          <button
+            type="button"
+            class="playlist-overview__create"
+            aria-haspopup="dialog"
+            :disabled="!available()"
+            @click="emit('create')"
+          >
+            <AppIcon name="plus" :size="16" />创建
+          </button>
+        </div>
+        <p v-if="importMessage" role="status">{{ importMessage }}</p>
+        <p v-if="importError" class="playlist-overview__error" role="alert">{{ importError }}</p>
       </div>
-      <p v-if="importMessage" role="status">{{ importMessage }}</p>
-      <p v-if="importError" class="playlist-overview__error" role="alert">{{ importError }}</p>
     </template>
     <MusicListEmptyState
       v-if="!collection.visible.value.length"
@@ -118,8 +192,28 @@ async function importPlaylist(event: Event) {
     >
     <!-- Keep the measurement root mounted for empty/filter states as well. -->
     <div ref="grid" class="playlist-overview__grid">
+      <ClassicPlaylistVirtualGrid
+        v-if="virtualized && collection.visible.value.length"
+        ref="virtual"
+        :playlists="collection.visible.value"
+        :state="state"
+        :scroll-element="scrollElement"
+        :offset-elements="offsetElements"
+        :revision="collection.filters.value"
+        :editing-id="editingId"
+        :animate="!reorder.isSettling.value && !reorder.draggedId.value"
+        :get-reorder-style="reorder.getItemStyle"
+      >
+        <template #default="{ playlist, index }">
+          <ClassicPlaylistTile
+            v-bind="tileProps(playlist, index)"
+            v-on="tileEvents"
+            virtual-placement
+          />
+        </template>
+      </ClassicPlaylistVirtualGrid>
       <TrackCardGrid
-        v-if="collection.visible.value.length"
+        v-else-if="collection.visible.value.length"
         :display-mode="state.displayMode"
         :mobile-columns="state.mobileColumns"
         :item-keys="ids"
@@ -134,20 +228,9 @@ async function importPlaylist(event: Event) {
           :data-queue-drop-id="playlist.id"
         >
           <ClassicPlaylistTile
-            :playlist="playlist"
-            :index="index"
-            :tags="state.customTagsByPlaylistId?.get(playlist.id)"
-            :cover-url="playlist.coverId ? state.coverUrls[playlist.coverId] : undefined"
-            :dragging="reorder.draggedId.value === playlist.id"
+            v-bind="tileProps(playlist, index)"
+            v-on="tileEvents"
             :get-reorder-style="reorder.getItemStyle"
-            :selectable="collection.operatorOpen.value"
-            :selected="collection.selectedIds.value.has(playlist.id)"
-            @select="collection.select"
-            @open="emit('open', $event)"
-            @details="emit('details', $event)"
-            @press="reorder.startTrackPress"
-            @shift="(id, direction) => reorder.shift('track', id, direction)"
-            @cancel-drag="reorder.clearDrag"
           />
         </div>
       </TrackCardGrid>
@@ -213,6 +296,10 @@ async function importPlaylist(event: Event) {
 <style scoped lang="scss">
 @use '../../styles/collection-chrome';
 
+.playlist-overview__controls {
+  display: flex;
+  flex-direction: column;
+}
 .playlist-overview__actions {
   @include collection-chrome.toolbar-divider;
   display: flex;

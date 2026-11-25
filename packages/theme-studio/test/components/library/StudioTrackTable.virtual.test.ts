@@ -1,12 +1,11 @@
 import { provideConfirmationDialog } from '@any-music/ui/library'
 import { getPresentationContinuity } from '@any-music/ui/theme'
-import { afterEach, describe, expect, it, vi } from 'vitest'
-import { defineComponent, h, nextTick, provide, shallowRef } from 'vue'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent, h, nextTick, shallowRef } from 'vue'
 
 import StudioCollection from '../../../src/components/library/StudioCollection.vue'
 import StudioFavorites from '../../../src/components/library/StudioFavorites.vue'
 import StudioTrackTable from '../../../src/components/library/StudioTrackTable.vue'
-import { studioVirtualFavoritesCanaryKey } from '../../../src/composables/studio-virtual-favorites-canary'
 import { provideStudioOverlays } from '../../../src/composables/use-studio-overlays'
 import { MeasuredStudioNode, mountMeasuredStudio } from '../../helpers/measured-collection-renderer'
 import {
@@ -71,7 +70,11 @@ function setup(count: number, styled: boolean, collection = false) {
 function mounted(root: MeasuredStudioNode) {
   return root.querySelectorAll('[data-am-continuity-item]')
 }
-afterEach(() => vi.unstubAllGlobals())
+beforeEach(() => vi.stubEnv('MODE', 'dev'))
+afterEach(() => {
+  vi.unstubAllEnvs()
+  vi.unstubAllGlobals()
+})
 
 describe.each([false, true])(
   'Studio C03 candidate styled=%s (injected Node geometry)',
@@ -151,7 +154,6 @@ describe.each([false, true])(
         defineComponent({
           setup() {
             confirmation = provideConfirmationDialog()
-            provide(studioVirtualFavoritesCanaryKey, true)
             return () => h(StudioFavorites, { feature })
           },
         }),

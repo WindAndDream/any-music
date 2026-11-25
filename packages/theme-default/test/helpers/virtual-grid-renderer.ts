@@ -8,6 +8,13 @@ function detach(node: CatalogTestElement) {
   node.parent = null
 }
 
+function isCatalogViewport(node: CatalogTestElement) {
+  return (
+    node.props['data-catalog-view'] === 'lists' ||
+    node.props.class === 'catalog-page__tracks-scroll'
+  )
+}
+
 /** Injected geometry for real theme rows; this host performs no CSS layout or browser work. */
 export function mountMeasuredThemeGrid(
   component: Component,
@@ -44,13 +51,37 @@ export function mountMeasuredThemeGrid(
   })
   function element(tag: string) {
     const node = new CatalogTestElement(tag)
-    const events = new EventTarget()
+    function bounds() {
+      let root: CatalogTestElement | null = node
+      while (root && !isCatalogViewport(root)) root = root.parent
+      const top =
+        root === node
+          ? 0
+          : 24 - (root ? (root as unknown as HTMLElement).scrollTop : scroll.scrollTop)
+      const height = root === node ? 300 : naturalHeight
+      return { top, left: 0, width: 1000, height, bottom: top + height, right: 1000 } as DOMRect
+    }
+    Object.defineProperty(node, 'parentElement', { get: () => node.parent })
+    const scrollStyle = Object.assign(node.style, {
+      getPropertyValue: (name: string) => node.style[name] ?? '',
+      getPropertyPriority: () => '',
+      setProperty: (name: string, value: string) => (node.style[name] = value),
+      removeProperty: (name: string) => delete node.style[name],
+    })
     return Object.assign(node, {
       ownerDocument: document,
       isConnected: true,
       nodeType: 1,
-      getBoundingClientRect: () =>
-        ({ top: 24 - scroll.scrollTop, left: 0, width: 1000, height: naturalHeight }) as DOMRect,
+      clientWidth: 1000,
+      clientHeight: 300,
+      clientTop: 0,
+      scrollTop: 0,
+      scrollHeight: 2_000_000,
+      style: scrollStyle,
+      matches: (selector: string) =>
+        selector === ':disabled' ? Boolean(node.props.disabled) : node.closest(selector) === node,
+      getClientRects: () => (node.parent ? [bounds()] : []),
+      getBoundingClientRect: bounds,
       getRootNode: () => document,
       closest: (selector: string): CatalogTestElement | null =>
         selector === '.music-app-shell__content'
@@ -63,11 +94,13 @@ export function mountMeasuredThemeGrid(
       },
       focus: () => {
         Object.assign(document, { activeElement: node })
-        events.dispatchEvent(new Event('focusin'))
+        for (let current: CatalogTestElement | null = node; current; current = current.parent)
+          current.dispatchListeners('focusin', { target: node })
       },
-      addEventListener: events.addEventListener.bind(events),
-      removeEventListener: events.removeEventListener.bind(events),
-      dispatchEvent: events.dispatchEvent.bind(events),
+      dispatchEvent: (event: Event) => node.dispatchListeners(event.type, event),
+      setPointerCapture: () => {},
+      hasPointerCapture: () => true,
+      releasePointerCapture: () => {},
     })
   }
   const renderer = createRenderer<CatalogTestElement, CatalogTestElement>({
@@ -106,6 +139,11 @@ export function mountMeasuredThemeGrid(
     setScopeId: (node, id) => node.setAttribute(id, ''),
   })
   const root = element('root')
+  Object.assign(document, {
+    querySelectorAll: root.querySelectorAll.bind(root),
+    querySelector: root.querySelector.bind(root),
+    contains: root.contains,
+  })
   const app = renderer.createApp({ render: () => h(component, { scroll }) })
   app.mount(root)
   return { root, document, scroll, view, app, unmount: () => app.unmount() }

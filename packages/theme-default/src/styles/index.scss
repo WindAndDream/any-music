@@ -39,7 +39,7 @@
 
   @media (max-width: 768px) {
     .music-app-shell .am-workspace-surface {
-      :is(.catalog-drawers__header, .custom-tracks__toolbar) {
+      .custom-tracks__toolbar {
         padding-block-start: 0;
       }
 

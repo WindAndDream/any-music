@@ -34,7 +34,7 @@ interface MeasurementJob {
 export function useVirtualItemMeasurements(options: VirtualItemMeasurementsOptions) {
   const limit = options.cacheLimit ?? 512
   if (!Number.isSafeInteger(limit) || limit < 1) throw new RangeError('Invalid height cache limit')
-  const cache = new Map<VirtualItemKey, HeightEntry>()
+  let cache = new Map<VirtualItemKey, HeightEntry>()
   const publication = shallowRef({ revision: 0, reflow: 0 })
   const isWidthMeasurementPending = shallowRef(false)
   const { context } = options
@@ -61,9 +61,11 @@ export function useVirtualItemMeasurements(options: VirtualItemMeasurementsOptio
     pending.clear()
     commitBatch(batch)
   }
-  function commitBatch(batch: readonly MeasurementJob[]) {
+  function commitBatch(batch: readonly MeasurementJob[], replaceWidth = false) {
     // Complete every geometry read before notifying Vue/the virtualizer of any size changes.
     const heights = batch.map((job) => job.read())
+    const previousCache = cache
+    if (replaceWidth) cache = new Map()
     let changed = false
     let reflow = false
     batch.forEach((job, index) => {
@@ -73,6 +75,20 @@ export function useVirtualItemMeasurements(options: VirtualItemMeasurementsOptio
       changed = result?.changed || changed
       reflow = result?.reflow || reflow
     })
+    if (replaceWidth) {
+      // Old-width entries only participate in comparison. Keep equal measured rows stable
+      // and publish changed heights/evictions together so the engine resets at most once.
+      changed = cache.size !== previousCache.size
+      if (!changed) {
+        for (const [key, entry] of cache) {
+          const previous = previousCache.get(key)
+          if (previous?.height === entry.height && previous.content === entry.content) continue
+          changed = true
+          break
+        }
+      }
+      reflow ||= previousCache.size > 0
+    }
     if (changed) publish(reflow)
   }
   function schedule(element: HTMLElement, job: MeasurementJob) {
@@ -105,16 +121,18 @@ export function useVirtualItemMeasurements(options: VirtualItemMeasurementsOptio
           next[0] !== previous[0] &&
           next[1] === previous[1] &&
           next[2] === previous[2]
-        if (cache.size) {
-          cache.clear()
-          publish(true)
-        }
         if (isWidthMeasurementPending.value) {
           // Container RO has resolved CSS at this width. Measure the still-mounted natural
           // units before Vue patches estimate rows/spacers and dirties layout again. This
           // discards old authority and publishes one current-width batch before rendering.
-          commitBatch([...widthReaders].flatMap((read) => read() ?? []))
+          commitBatch(
+            [...widthReaders].flatMap((read) => read() ?? []),
+            true,
+          )
           isWidthMeasurementPending.value = false
+        } else if (cache.size) {
+          cache.clear()
+          publish(true)
         }
       }
     },
@@ -122,16 +140,18 @@ export function useVirtualItemMeasurements(options: VirtualItemMeasurementsOptio
   )
   // Observe only bounded remembered content, never one watcher per dataset item. Reading
   // revision discovers new cache entries; a mismatch evicts rather than retaining generations.
+  const staleKeys = computed(() => {
+    void publication.value
+    const stale = new Set<VirtualItemKey>()
+    for (const [key, entry] of cache)
+      if (options.getContentGeneration(key) !== entry.content) stale.add(key)
+    return stale
+  })
   watch(
-    () => {
-      void publication.value
-      return [...cache]
-        .filter(([key, entry]) => options.getContentGeneration(key) !== entry.content)
-        .map(([key]) => key)
-    },
+    staleKeys,
     (stale) => {
       for (const key of stale) cache.delete(key)
-      if (stale.length) publish(true)
+      if (stale.size) publish(true)
     },
     { flush: 'sync' },
   )
@@ -222,7 +242,12 @@ export function useVirtualItemMeasurements(options: VirtualItemMeasurementsOptio
         // observer/load subscriptions stable throughout continuous layout changes.
         if (subscriptionRoot !== root) {
           unsubscribe()
-          const release = observeVirtualElement(element, measure)
+          const release = observeVirtualElement(element, ([entry]) => {
+            // Width changes trigger both the container and cell observers. The container
+            // usually already read this cell; only a different natural height needs a job.
+            const height = entry?.borderBoxSize?.[0]?.blockSize
+            if (height === undefined || height !== observedHeight) measure()
+          })
           // Local capture covers delayed image loads even without ResizeObserver.
           element.addEventListener('load', measure, true)
           refreshers.add(measure)
@@ -282,8 +307,11 @@ export function useVirtualItemMeasurements(options: VirtualItemMeasurementsOptio
     }),
     /** Bounded snapshot for total-extent calculation, including while the viewport is hidden. */
     heights: computed<ReadonlyMap<VirtualItemKey, number>>(() => {
-      void publication.value
-      return new Map([...cache].map(([key, entry]) => [key, entry.height]))
+      // Synchronous geometry readers can run before the eviction watcher on a new cohort.
+      const stale = staleKeys.value
+      const heights = new Map<VirtualItemKey, number>()
+      for (const [key, entry] of cache) if (!stale.has(key)) heights.set(key, entry.height)
+      return heights
     }),
     getHeight: (key: VirtualItemKey) => {
       void publication.value

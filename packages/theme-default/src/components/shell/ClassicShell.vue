@@ -2,7 +2,7 @@
 import type { AppShellPreferences, ProductViewId } from '@any-music/ui'
 import { createDefaultAppShellPreferences } from '@any-music/ui'
 import type { UiThemeFeatureMap, UiThemeForm } from '@any-music/ui/theme'
-import { computed, shallowRef } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
 
 import ClassicNavigation from './ClassicNavigation.vue'
 import ProductWorkbench from './ProductWorkbench.vue'
@@ -25,6 +25,9 @@ defineSlots<{
 const drawerOpen = shallowRef(false)
 const preferencesOpen = shallowRef(false)
 const mobileLayout = computed(() => props.feature.state.mobileLayout ?? props.form === 'mobile')
+watch(mobileLayout, (isMobile) => {
+  if (!isMobile) drawerOpen.value = false
+})
 const preferences = computed(
   () => props.navigation?.state.preferences ?? createDefaultAppShellPreferences(),
 )
@@ -122,7 +125,7 @@ function moveDestination(id: ProductViewId, offset: -1 | 1): void {
     @select-navigation="navigate"
     @select-mobile-navigation="navigate"
     @close-mobile-drawer="drawerOpen = false"
-    @toggle-mobile-drawer="drawerOpen = !drawerOpen"
+    @toggle-mobile-drawer="drawerOpen = mobileLayout && !drawerOpen"
     @open-global-settings="openSettings"
     @open-preferences="preferencesOpen = true"
     @close-preferences="preferencesOpen = false"

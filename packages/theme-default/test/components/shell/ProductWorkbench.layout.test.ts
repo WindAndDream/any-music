@@ -31,6 +31,8 @@ const topBarStyles = compileSfcStyles('product-workbench/ProductTopBar')
 const shellStyles = compileSfcStyles('MusicAppShell')
 const catalogStyles = compileSfcStyles('music-sources/ClassicCatalog')
 const catalogListStyles = compileSfcStyles('music-sources/CatalogDrawerList')
+const catalogGridStyles = compileSfcStyles('music-sources/CatalogDrawerGrid')
+const virtualGridStyles = compileSfcStyles('virtual-scroll/VirtualTrackCardGrid')
 const catalogListHeaderStyles = compileSfcStyles('music-sources/CatalogDrawerListHeader')
 const catalogDetailsStyles = compileSfcStyles('music-sources/CatalogDrawerDetails')
 const catalogCardStyles = compileSfcStyles('music-sources/CatalogDrawerCard')
@@ -70,11 +72,18 @@ function readLayout(
   const declarations: Record<string, string> = {}
   styles.walkRules((rule) => {
     // Sass 规范化字符串引号，SFC CSS 保留原引号；这里只比较相同的选择器与布局值。
-    if (!rule.selectors.some((selector) => selectors.includes(selector.replace(/"/g, "'")))) return
+    if (
+      !rule.selectors.some((selector) =>
+        selectors.includes(selector.replace(/\s+/g, ' ').replace(/"/g, "'")),
+      )
+    )
+      return
     let parent: typeof rule.parent | typeof styles.parent = rule.parent
     while (parent) {
       if (parent.type === 'atrule' && (parent.name === 'media' || parent.name === 'container')) {
         if (parent.params.includes('(prefers-reduced-motion: reduce)') && !reducedMotion) return
+        if (parent.params.includes('(prefers-reduced-motion: no-preference)') && reducedMotion)
+          return
         const width =
           parent.name === 'media'
             ? viewportWidth
@@ -82,6 +91,8 @@ function readLayout(
               ? containerWidth
               : containerWidth[parent.params.split(' ')[0]!]
         if (width === undefined) return
+        const widthExclusiveMinimum = parent.params.match(/\(width > ([\d.]+)px\)/)
+        if (widthExclusiveMinimum && width <= Number(widthExclusiveMinimum[1])) return
         for (const [, bound, value] of parent.params.matchAll(
           /\((max|min)-width:\s*([\d.]+)px\)/g,
         )) {
@@ -200,9 +211,9 @@ describe('Classic shell and current page layout integration', () => {
       expect(surface.background).toBe('var(--am-color-surface-subtle)')
       expect(surface.padding).toBe('var(--am-space-4) var(--am-space-3)')
       expect(surface['inline-size']).toBe('100%')
-      expect(surface.padding).toBe(
-        readLayout(catalogListStyles, ['.catalog-drawers'], width).padding,
-      )
+      const catalogList = readLayout(catalogListStyles, ['.catalog-drawers'], width)
+      expect(catalogList['--am-catalog-list-inline-padding']).toBe('var(--am-space-3)')
+      expect(catalogList.padding).toBe('var(--am-space-4) var(--am-catalog-list-inline-padding)')
       expect(
         readLayout(sharedStyles, ['.product-view[data-active-view=queue]'], width).padding,
       ).toBe('0')
@@ -289,16 +300,45 @@ describe('Classic shell and current page layout integration', () => {
     },
   )
   it('keeps desktop list states and discovery in one sticky row, and pins the compact mobile header', () => {
+    const inlineGutter = {
+      'padding-inline': 'var(--am-catalog-list-inline-padding)',
+      'margin-inline': 'calc(-1 * var(--am-catalog-list-inline-padding))',
+    }
     const desktop = readLayout(catalogListHeaderStyles, ['.catalog-drawers__state-toolbar'], 1440)
-    expect(desktop.position).toBe('sticky')
-    expect(desktop['grid-template-columns']).toBe('minmax(0, 1fr) auto')
+    expect(desktop).toMatchObject({
+      ...inlineGutter,
+      position: 'sticky',
+      'inset-block-start': '0',
+      'z-index': 'var(--am-z-sticky)',
+      'grid-template-columns': 'minmax(0, 1fr) auto',
+      background: 'var(--am-color-surface-subtle)',
+    })
     expect(
       readLayout(catalogListHeaderStyles, ['.catalog-drawers__title-actions'], 1440)['grid-column'],
     ).toBe('2')
+    const directorySelector = '.catalog-page--lists > .catalog-drawers'
+    for (const width of [320, 390, 768, 769, 1440]) {
+      expect(readLayout(sharedStyles, ['.catalog-page--lists'], width)['padding-block-start']).toBe(
+        '0',
+      )
+      expect(readLayout(sharedStyles, [directorySelector], width)['margin-block-start']).toBe(
+        'var(--am-catalog-page-padding)',
+      )
+    }
     for (const width of [768, 390, 320]) {
       const mobile = readLayout(catalogListHeaderStyles, ['.catalog-drawers__header'], width)
-      expect(mobile.position).toBe('sticky')
-      expect(mobile['grid-template-areas']).toBe("'intro actions' 'states states'")
+      expect(mobile).toMatchObject({
+        ...inlineGutter,
+        position: 'sticky',
+        'inset-block-start': '0',
+        'z-index': 'var(--am-z-sticky)',
+        'grid-template-areas': "'intro actions' 'states states'",
+        'padding-block': 'var(--am-space-4) var(--am-space-2)',
+        background: 'var(--am-color-surface-subtle)',
+      })
+      expect(
+        readLayout(catalogListStyles, ['.catalog-drawers'], width)['padding-block-start'],
+      ).toBe('0')
       expect(
         readLayout(catalogListHeaderStyles, ['.catalog-drawers__description'], width).display,
       ).toBe('none')
@@ -445,8 +485,25 @@ describe('Classic shell and current page layout integration', () => {
     'lets the music-list grid allocate columns without a fixed limit (%ipx)',
     (list) => {
       const containers = { 'am-catalog-list': list }
-      const grid = readLayout(catalogListStyles, ['.catalog-drawers__grid'], 1384, containers)
-      expect(grid['grid-template-columns']).toBe('repeat(auto-fill, minmax(min(100%, 300px), 1fr))')
+      const grid = readLayout(
+        virtualGridStyles,
+        [".virtual-track-list__items[data-grid-layout='collection']"],
+        1384,
+      )
+      const catalog = readLayout(catalogGridStyles, ['.catalog-drawers__grid'], 1384, containers)
+      expect(catalog['--am-collection-card-width']).toBe('300px')
+      expect(grid['grid-template-columns']).toBe(
+        'repeat( auto-fill, minmax(min(100%, var(--am-collection-card-width, 320px)), 1fr) )',
+      )
+      const narrowGrid = readLayout(
+        catalogGridStyles,
+        ['.catalog-drawers__grid :deep(.virtual-track-list__items)'],
+        1384,
+        containers,
+      )
+      expect(narrowGrid.gap ?? grid.gap).toBe(
+        list <= 680 ? 'var(--am-space-3)' : 'var(--am-space-4)',
+      )
     },
   )
 
@@ -454,11 +511,6 @@ describe('Classic shell and current page layout integration', () => {
     expect(
       readLayout(sharedStyles, ['.catalog-page--lists > .catalog-drawers'], 1920)['inline-size'],
     ).toBe('100%')
-    expect(
-      readLayout(catalogListStyles, ['.catalog-drawers__grid'], 1920, {
-        'am-catalog-list': 1568,
-      })['grid-template-columns'],
-    ).toBe('repeat(auto-fill, minmax(min(100%, 300px), 1fr))')
   })
 
   it('shrinks only card internals when sidebar expansion narrows a column', () => {
@@ -475,7 +527,7 @@ describe('Classic shell and current page layout integration', () => {
     ).toBe('minmax(0, 1fr)')
   })
 
-  it('animates desktop sidebar space, respects reduced motion and remembers offscreen sizes', () => {
+  it('animates desktop sidebar space, respects reduced motion and measures visible request cards', () => {
     const shell = ['.music-app-shell', '.music-app-shell--sidebar-transition']
     expect(readLayout(shellStyles, shell, 1384).transition).toBe(
       'grid-template-columns var(--am-motion-normal) var(--am-ease-emphasized)',
@@ -489,11 +541,13 @@ describe('Classic shell and current page layout integration', () => {
       'am-content / inline-size',
     )
     const card = readLayout(catalogCardStyles, ['.catalog-card'], 1384)
-    expect(card['content-visibility']).toBe('auto')
-    expect(card['contain-intrinsic-block-size']).toBe('auto 280px')
+    expect(card.contain).toBe('layout style paint')
+    expect(card['contain-intrinsic-block-size']).toBeUndefined()
     expect(
-      readLayout(catalogListStyles, ['.catalog-drawers__cell'], 1384)['content-visibility'],
-    ).toBeUndefined()
+      readLayout(virtualGridStyles, ['.virtual-track-list__items :deep(*)'], 1384)[
+        'content-visibility'
+      ],
+    ).toBe('visible')
     expect(
       readLayout(sharedStyles, ['.list .track-card'], 1384)['contain-intrinsic-block-size'],
     ).toBe('auto 320px')
@@ -504,6 +558,41 @@ describe('Classic shell and current page layout integration', () => {
         390,
       )['contain-intrinsic-block-size'],
     ).toBe('auto 140px')
+  })
+
+  it('reserves room before expansion and reveals the wider content during desktop collapse', () => {
+    const railMotion = '.music-app-shell--sidebar-transition'
+    const preparing = '.music-app-shell--preparing-sidebar-expansion'
+    const content = '.music-app-shell__content'
+    const movingContent = `${railMotion} > ${content}`
+    const railCollapse = `${railMotion}.music-app-shell--sidebar-collapsed`
+    const collapsingContent = `${railCollapse} > ${content}`
+    const rightRailContent = `${railMotion}[data-sidebar-side='right'] > ${content}`
+    const rightCollapsingContent = `${railCollapse}[data-sidebar-side='right'] > ${content}`
+
+    expect(readLayout(shellStyles, [preparing], 1384)['--am-size-sidebar']).toBe(
+      'var(--am-size-sidebar-collapsed)',
+    )
+    expect(readLayout(shellStyles, [railMotion], 1384).overflow).toBe('clip')
+    expect(readLayout(shellStyles, [content, movingContent], 1384)).toMatchObject({
+      'inline-size': 'calc(100cqi - var(--am-size-sidebar-expanded))',
+      'justify-self': 'end',
+    })
+    expect(readLayout(shellStyles, [movingContent, collapsingContent], 1384)).toMatchObject({
+      'inline-size': 'calc(100cqi - var(--am-size-sidebar-collapsed))',
+      'justify-self': 'start',
+      'will-change': 'transform',
+    })
+    expect(readLayout(shellStyles, [movingContent, rightRailContent], 1384)['justify-self']).toBe(
+      'start',
+    )
+    expect(
+      readLayout(shellStyles, [collapsingContent, rightCollapsingContent], 1384)['justify-self'],
+    ).toBe('end')
+    expect(readLayout(shellStyles, [content, movingContent], 768)['inline-size']).toBeUndefined()
+    expect(
+      readLayout(shellStyles, [content, movingContent], 1384, 1384, true)['inline-size'],
+    ).toBeUndefined()
   })
 
   it.each([

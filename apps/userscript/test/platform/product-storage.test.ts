@@ -84,6 +84,7 @@ vi.mock('../../src/platform/http/gm-proxy', () => ({ configureGmHttpProxy: vi.fn
 import { configureUserscriptWorkbench } from '../../src/platform/configure-userscript-workbench'
 
 const POINTER = 'any-music:userscript:product-data:commit'
+const SIDEBAR_PREFERENCE = 'any-music:userscript:runtime:sidebar-collapsed:v1'
 async function realm(tab: string) {
   vi.resetModules()
   vi.doMock('$', () => manager(tab))
@@ -150,6 +151,7 @@ describe('production GM storage composition', () => {
         (key) =>
           key.startsWith('any-music:userscript:product-data:') ||
           key.startsWith('any-music:userscript:resource-cache:') ||
+          key === SIDEBAR_PREFERENCE ||
           key.endsWith('runtime:proxy:v1'),
       ),
     ).toBe(true)
@@ -162,6 +164,22 @@ describe('production GM storage composition', () => {
     ).toBe(true)
     await release()
     expect(fixture.tabs.get('one')).not.toHaveProperty('anyMusicProductWriter')
+  })
+
+  it('persists only the sidebar flag and restores it in a new manager session', async () => {
+    const first = await (await realm('one')).createGmProductStorage()
+    const generation = clone(fixture.values.get(POINTER))
+    fixture.writes.length = 0
+    expect(first.sidebarCollapsePreference.read()).toBeUndefined()
+    first.sidebarCollapsePreference.write(true)
+    await first.dispose()
+    expect(fixture.writes).toEqual([SIDEBAR_PREFERENCE])
+    expect(fixture.values.get(POINTER)).toEqual(generation)
+    expect(() => first.sidebarCollapsePreference.write(false)).toThrow('session changed')
+
+    const restored = await (await realm('two')).createGmProductStorage()
+    expect(restored.sidebarCollapsePreference.read()).toBe(true)
+    await restored.dispose()
   })
   it('releases the writer when runtime configuration rejects', async () => {
     configure.mockImplementationOnce(() => {
