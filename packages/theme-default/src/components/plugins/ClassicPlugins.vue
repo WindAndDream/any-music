@@ -53,6 +53,12 @@ function selectDisplay(value: PluginCenterDisplay): void {
   display.value = value
   displayOpen.value = false
 }
+watch(
+  () => props.mobileLayout,
+  (mobile) => {
+    if (mobile) displayOpen.value = false
+  },
+)
 const filters = [
   { id: 'all', title: '全部' },
   { id: 'builtin', title: '内置' },
@@ -81,7 +87,11 @@ function manageDetails(): void {
 </script>
 
 <template>
-  <section class="listen-queue classic-plugins" aria-label="插件中心">
+  <section
+    class="listen-queue classic-plugins"
+    :data-mobile-layout="!!mobileLayout"
+    aria-label="插件中心"
+  >
     <ClassicFeatureStatus :availability="feature.availability" :status="feature.status" />
     <ClassicCollectionSurface
       title="插件中心"
@@ -158,7 +168,11 @@ function manageDetails(): void {
           :disabled="disabled"
         >
           <legend class="am-sr-only">插件列表</legend>
-          <div v-if="visible.length" class="classic-plugins__items" :data-display="display">
+          <div
+            v-if="visible.length"
+            class="classic-plugins__items"
+            :data-display="mobileLayout ? 'grid' : display"
+          >
             <ClassicPluginCard
               v-for="item in visible"
               :key="item.id"
@@ -202,7 +216,7 @@ function manageDetails(): void {
           :operator-open="operatorOpen"
           :filter-count="filterCount"
           :disabled="disabled"
-          can-display
+          :can-display="!mobileLayout"
           filter-label="筛选插件"
           display-label="选择插件展示方式"
           @filter="draft = { ...criteria }"

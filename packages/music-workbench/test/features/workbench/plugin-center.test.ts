@@ -222,7 +222,7 @@ describe.each([
             f.root,
             (node) =>
               node.tag === 'button' &&
-              node.props['aria-label'] === '更多插件操作 org.example.catalog',
+              node.props['aria-label'] === '查看插件介绍 org.example.catalog',
           ),
           'onClick',
         )
