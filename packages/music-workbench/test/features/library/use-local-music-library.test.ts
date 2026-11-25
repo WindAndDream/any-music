@@ -96,6 +96,36 @@ describe('useLocalMusicLibrary favorites', () => {
     scope.stop()
   })
 
+  it('retains the playable duration when the same video appears again as a listing summary', () => {
+    const scope = effectScope()
+    const library = scope.run(useLocalMusicLibrary)!
+    const summary: Track = {
+      ...createTrack('bilibili'),
+      durationMs: undefined,
+      sourceDurationMs: 43_200_000,
+      source: {
+        pluginId: 'bilibili',
+        mediaKind: 'video',
+        resourceId: 'BV1xx411c7mD',
+        pageUrl: 'https://www.bilibili.com/video/BV1xx411c7mD',
+      },
+    }
+    library.favoriteTrack({
+      ...summary,
+      durationMs: 253_000,
+      source: { ...summary.source, partId: '1' },
+    })
+    const playlist = library.createPlaylist('纯音乐')
+    library.rememberTracks([summary])
+    library.favoriteTrack(summary)
+    library.addTracksToPlaylist(playlist.id, [summary])
+    expect(library.getTrack(summary.id)).toMatchObject({
+      sourceDurationMs: 43_200_000,
+      durationMs: 253_000,
+    })
+    scope.stop()
+  })
+
   it('keeps one custom name per stable ID through source refresh, favorites and reload', () => {
     const scope = effectScope()
     const library = scope.run(useLocalMusicLibrary)!

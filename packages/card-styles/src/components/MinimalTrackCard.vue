@@ -63,8 +63,9 @@ const artist = computed(
   () => props.track.artists.map(({ name }) => name).join(' / ') || '创作者未知',
 )
 const duration = computed(() => {
-  if (props.track.durationMs === undefined) return ''
-  const seconds = Math.floor(props.track.durationMs / 1000)
+  const durationMs = props.track.durationMs ?? props.track.sourceDurationMs
+  if (durationMs === undefined) return ''
+  const seconds = Math.floor(durationMs / 1000)
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
 })
 const progressLength = computed(() => Math.max(0, Math.min(1, props.progress ?? 0)) * 100)

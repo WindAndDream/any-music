@@ -35,7 +35,6 @@ import {
 import { parseBilibiliImportUrl } from './url-parser'
 
 const PAGE_SIZE_POLICY = { defaultSize: 30, maxSize: 50 } as const
-const VIDEO_METADATA_CONCURRENCY = 3
 const EAGER_MEDIA_DURATION_MS = 10 * 60 * 1000
 // B 站媒体 CDN 对 GM 二进制下载同样校验来源；固定官方页面来源，避免泄漏当前宿主页。
 const BILIBILI_MEDIA_REQUEST_HEADERS = { Referer: 'https://www.bilibili.com/' } as const
@@ -110,9 +109,8 @@ export class BilibiliMusicSourcePlugin implements MusicSourcePlugin {
       title: `搜索：${query}`,
       loadPage: async (pageNumber) => {
         const data = await this.api.searchVideos(query, pageNumber, pageSize)
-        const items = await this.resolveVideoTrackMetadata((data.result ?? []).map(mapSearchVideo))
         return {
-          items,
+          items: (data.result ?? []).map(mapSearchVideo),
           pageNumber: data.page,
           pageSize: data.pagesize,
           total: data.numResults,
@@ -293,11 +291,8 @@ export class BilibiliMusicSourcePlugin implements MusicSourcePlugin {
       loadPage: async (pageNumber) => {
         const data = await this.api.getSeason(mid, seasonId, pageNumber, pageSize)
         const owner = { mid: data.meta.mid, name: data.meta.name || `UP ${data.meta.mid}` }
-        const items = await this.resolveVideoTrackMetadata(
-          (data.archives ?? []).map((archive) => mapSeasonArchive(archive, owner)),
-        )
         return {
-          items,
+          items: (data.archives ?? []).map((archive) => mapSeasonArchive(archive, owner)),
           pageNumber: data.page.page_num,
           pageSize: data.page.page_size,
           total: data.page.total,
@@ -319,11 +314,8 @@ export class BilibiliMusicSourcePlugin implements MusicSourcePlugin {
       sourceUrl,
       loadPage: async (pageNumber) => {
         const data = await this.api.getUpperVideos(mid, keyword, pageNumber, pageSize)
-        const items = await this.resolveVideoTrackMetadata(
-          (data.list?.vlist ?? []).map(mapUpperVideo),
-        )
         return {
-          items,
+          items: (data.list?.vlist ?? []).map(mapUpperVideo),
           pageNumber: data.page.pn,
           pageSize: data.page.ps,
           total: data.page.count,
@@ -363,13 +355,10 @@ export class BilibiliMusicSourcePlugin implements MusicSourcePlugin {
       sourceUrl,
       loadPage: async (pageNumber) => {
         const data = await this.api.getFavorite(mediaId, pageNumber, pageSize)
-        const items = await this.resolveVideoTrackMetadata(
-          (data.medias ?? [])
+        return {
+          items: (data.medias ?? [])
             .map(mapFavoriteMedia)
             .filter((track): track is Track => track !== undefined),
-        )
-        return {
-          items,
           pageNumber,
           pageSize,
           total: data.info.media_count,
@@ -377,38 +366,6 @@ export class BilibiliMusicSourcePlugin implements MusicSourcePlugin {
         }
       },
     })
-  }
-
-  /** List durations may sum every part. Resolve only the consumed page, with bounded fan-out. */
-  private async resolveVideoTrackMetadata(tracks: readonly Track[]): Promise<Track[]> {
-    const items = [...tracks]
-    let nextIndex = 0
-    let failed = false
-    const results = await Promise.allSettled(
-      Array.from({ length: Math.min(VIDEO_METADATA_CONCURRENCY, tracks.length) }, async () => {
-        while (!failed && nextIndex < tracks.length) {
-          const index = nextIndex++
-          const track = tracks[index]!
-          try {
-            // oxlint-disable-next-line no-await-in-loop
-            const view = await this.api.getVideoView(track.source.resourceId)
-            const selected = mapVideoView(view)
-            items[index] = { ...track, durationMs: selected.durationMs, source: selected.source }
-          } catch (error) {
-            if (error instanceof AppError && error.code === 'not-found') {
-              // Retain unavailable rows, without displaying an aggregate duration as a song.
-              items[index] = track
-              continue
-            }
-            failed = true
-            throw error
-          }
-        }
-      }),
-    )
-    const failure = results.find((result) => result.status === 'rejected')
-    if (failure) throw failure.reason
-    return items
   }
 
   private createVideoListing(bvid: string, sourceUrl: string, page = 1): TrackListing {

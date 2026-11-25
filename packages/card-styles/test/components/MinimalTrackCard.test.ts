@@ -17,6 +17,29 @@ const track: Track = {
   source: { pluginId: 'test', resourceId: 'one', mediaKind: 'audio' },
 }
 describe('minimal track presentation', () => {
+  it.each([
+    [undefined, '2:00'],
+    [1_000, '0:01'],
+  ] as const)(
+    'renders the appropriate duration with a playable duration of %s',
+    (durationMs, label) => {
+      const view = mount(
+        defineComponent({
+          setup: () => () =>
+            h(MinimalTrackCard, {
+              track: { ...track, durationMs, sourceDurationMs: 120_000 },
+              title: track.title,
+            }),
+        }),
+      )
+      try {
+        expect(view.root.textContent).toContain(label)
+      } finally {
+        view.unmount()
+      }
+    },
+  )
+
   it('renders readonly artwork and metadata without selection or playback controls', () => {
     const view = mount(
       defineComponent({

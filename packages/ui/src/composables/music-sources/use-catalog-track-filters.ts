@@ -190,7 +190,9 @@ export function filterCatalogTracks(
 
     if (
       filters.durationRanges.length > 0 &&
-      !filters.durationRanges.some((range) => isWithinDurationRange(track.durationMs, range))
+      !filters.durationRanges.some((range) =>
+        isWithinDurationRange(track.durationMs ?? track.sourceDurationMs, range),
+      )
     ) {
       return false
     }

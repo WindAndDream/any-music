@@ -40,7 +40,7 @@ const primaryMeta = computed(() =>
   [
     props.contextLabel,
     artistLabel.value,
-    formatDuration(props.track.durationMs),
+    formatDuration(props.track.durationMs ?? props.track.sourceDurationMs),
     props.trailingMeta,
   ]
     .filter(Boolean)

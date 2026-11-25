@@ -85,6 +85,30 @@ describe('useDownloadManager', () => {
     expect(manager.batches.value[0]!.items[0]!.attempts).toHaveLength(3)
   })
 
+  it('queues a track with only a display duration and uses the same target when resuming', async () => {
+    exportAudioSegmentsMock.mockResolvedValue({ blob: new Blob(['mp3']), extension: 'mp3' })
+    const summary = { ...track, durationMs: undefined, sourceDurationMs: 43_200_000 }
+    const manager = useDownloadManager({
+      concurrency: 2,
+      creatorName: '用户',
+      createRecipe: () => undefined,
+      resolveTrack: () => undefined,
+      resolveMedia: vi.fn(),
+    })
+    await manager.startDownloadBatch({
+      tracks: [summary],
+      origin: { kind: 'queue', label: '待听' },
+    })
+    const item = manager.batches.value[0]!.items[0]!
+    expect(item.recipe).toBeUndefined()
+    await manager.resumeDownloadItems([item.id])
+    expect(exportAudioSegmentsMock).toHaveBeenCalledTimes(2)
+    for (const [options] of exportAudioSegmentsMock.mock.calls) {
+      expect(options.track).toMatchObject(summary)
+      expect(options).not.toHaveProperty('segments')
+    }
+  })
+
   it('verifies a shared saved ZIP once and skips generating or saving all its songs', async () => {
     exportAudioSegmentsMock.mockResolvedValue({ blob: new Blob(['mp3']), extension: 'mp3' })
     downloadBlobMock.mockResolvedValue({

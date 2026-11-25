@@ -8,7 +8,7 @@ import type { SegmentRecipe, Track } from '@any-music/core'
 export function createPlayerExportRecipe(
   track: Track,
   compiledSegments: readonly SegmentRecipe[] | undefined,
-): readonly SegmentRecipe[] {
+): readonly SegmentRecipe[] | undefined {
   if (track.source.mediaKind === 'custom') {
     if (!compiledSegments?.length) {
       throw new AppError('export-unavailable', '当前自定义音乐没有可导出的音频片段。')
@@ -21,7 +21,9 @@ export function createPlayerExportRecipe(
   }
 
   const durationMs = track.durationMs
-  if (typeof durationMs !== 'number' || !Number.isFinite(durationMs) || durationMs <= 0) {
+  // Listing summaries can supply display metadata before the playable part is resolved.
+  if (durationMs === undefined) return undefined
+  if (!Number.isFinite(durationMs) || durationMs <= 0) {
     throw new AppError('export-unavailable', '当前曲目缺少有效时长，无法导出完整音频。')
   }
   return [{ sourceTrackId: track.id, startMs: 0, endMs: durationMs }]
