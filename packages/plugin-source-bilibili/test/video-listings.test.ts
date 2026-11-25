@@ -1,5 +1,5 @@
 import { AppError } from '@any-music/core'
-import type { HttpClient, MusicSourcePlugin, Track } from '@any-music/core'
+import type { HttpClient, MusicSourcePlugin } from '@any-music/core'
 import { describe, expect, it, vi } from 'vitest'
 
 import { BilibiliApi } from '../src/bilibili-api'
@@ -45,7 +45,7 @@ function createPlugin(
     upper: { mid: 1, name: 'UP' },
     ugc: { first_cid: index * 10 + 1 },
     duration: '720:00',
-    length: '720:00',
+    length: '12:00:00',
   }))
   const request = vi.fn<HttpClient['request']>(async (input) => {
     const url = new URL(input.url)
@@ -93,7 +93,6 @@ function createPlugin(
       case '/x/player/playurl':
         return response({
           quality: 16,
-          timelength: PART_DURATION_MS,
           durl: [{ url: 'https://media.example/first.mp4' }],
         })
       default:
@@ -107,81 +106,63 @@ function createPlugin(
 }
 
 function listing(plugin: MusicSourcePlugin, url?: string) {
-  return url ? plugin.importFromUrl({ url }) : plugin.search({ query: '纯音乐', pageSize: 2 })
+  return url ? plugin.importFromUrl({ url }) : plugin.search({ query: '纯音乐' })
 }
 
 describe('Bilibili listing media metadata', () => {
   it.each(LISTINGS)(
-    'uses P1 duration instead of multipart totals in $kind without loading another page',
+    'publishes $kind with display durations and only resolves the selected track',
     async ({ url, path, signing }) => {
-      const { plugin, request } = createPlugin()
+      const { plugin, request } = createPlugin(30)
       const iterator = listing(plugin, url).pages()[Symbol.asyncIterator]()
       expect(request).not.toHaveBeenCalled()
       const page = await iterator.next()
+      expect(page.value.items).toHaveLength(30)
       expect(page.value.items[0]).toMatchObject({
         id: 'bilibili:video:BV1xx411c7m0',
         title: '好听的纯音乐合集',
-        durationMs: PART_DURATION_MS,
-        source: { partId: '1', pageUrl: 'https://www.bilibili.com/video/BV1xx411c7m0' },
+        sourceDurationMs: VIDEO_DURATION_MS,
+        source: { pageUrl: 'https://www.bilibili.com/video/BV1xx411c7m0' },
       })
-      expect(page.value.items[1]).toMatchObject({
-        id: 'bilibili:video:BV1xx411c7m1',
-        durationMs: PART_DURATION_MS,
-        source: { partId: '11' },
-      })
+      expect(page.value.items[0]!.durationMs).toBeUndefined()
+      expect(page.value.items[0]!.source.partId).toBeUndefined()
+      expect(page.value.items[29]!.id).toBe('bilibili:video:BV1xx411c7m29')
       expect(page.value).toMatchObject({
         hasMore: true,
         continuation: { kind: 'page', nextPage: 2 },
       })
       await iterator.return?.()
+      const expectedListRequests = [...(signing ? ['/x/web-interface/nav'] : []), path]
       expect(request.mock.calls.map(([input]) => new URL(input.url).pathname)).toEqual([
-        ...(signing ? ['/x/web-interface/nav'] : []),
-        path,
-        '/x/web-interface/view',
-        '/x/web-interface/view',
+        ...expectedListRequests,
       ])
       await expect(plugin.resolveMedia(page.value.items[0]!)).resolves.toMatchObject({
         durationMs: PART_DURATION_MS,
       })
       expect(new URL(request.mock.lastCall![0].url).searchParams.get('cid')).toBe('1')
-      expect(request).toHaveBeenCalledTimes((signing ? 1 : 0) + 4)
+      expect(request.mock.calls.map(([input]) => new URL(input.url).pathname)).toEqual([
+        ...expectedListRequests,
+        '/x/web-interface/view',
+        '/x/player/playurl',
+      ])
       for (const [input] of request.mock.calls) expect(input.credentials).toBe('include')
     },
   )
 
-  it('bounds detail concurrency, retains row order and waits for the entire consumed page', async () => {
-    const release = new Map<string, () => void>()
-    let active = 0
-    let maximum = 0
-    const { plugin, request } = createPlugin(5, async (input) => {
-      active += 1
-      maximum = Math.max(maximum, active)
-      await new Promise<void>((resolve) => release.set(input.url, resolve))
-      active -= 1
-    })
+  it('only requests the next favorite page when the consumer advances', async () => {
+    const { plugin, request } = createPlugin()
     const iterator = listing(plugin, LISTINGS[3].url).pages()[Symbol.asyncIterator]()
-    const pending = iterator.next()
-    await vi.waitFor(() => expect(release.size).toBe(3))
-    const firstBatch = [...release.values()]
-    firstBatch[2]!()
-    await vi.waitFor(() => expect(release.size).toBe(4))
-    firstBatch[1]!()
-    await vi.waitFor(() => expect(release.size).toBe(5))
-    for (const resolve of release.values()) resolve()
-    const page = await pending
-    expect(maximum).toBe(3)
-    expect(page.value.items.map((track: Track) => track.source.partId)).toEqual([
-      '1',
-      '11',
-      '21',
-      '31',
-      '41',
-    ])
+    expect((await iterator.next()).value.pageNumber).toBe(1)
+    expect(request).toHaveBeenCalledOnce()
+    expect((await iterator.next()).value.pageNumber).toBe(2)
     await iterator.return?.()
-    expect(request).toHaveBeenCalledTimes(6)
+    expect(request.mock.calls.map(([input]) => new URL(input.url).searchParams.get('pn'))).toEqual([
+      '1',
+      '2',
+    ])
   })
 
-  it('cancels in-flight details, schedules no remaining rows and permits a fresh retry', async () => {
+  it('cancels the selected detail without requesting media and permits a fresh retry', async () => {
     const controller = new AbortController()
     const { plugin, request } = createPlugin(5, async (input) => {
       if (!input.cancellation) return
@@ -189,7 +170,10 @@ describe('Bilibili listing media metadata', () => {
         input.cancellation!.subscribe(() => reject(new AppError('operation-cancelled')))
       })
     })
-    const pages = listing(plugin, LISTINGS[3].url).pages({
+    const iterator = listing(plugin, LISTINGS[3].url).pages()[Symbol.asyncIterator]()
+    const track = (await iterator.next()).value.items[0]!
+    await iterator.return?.()
+    const pending = plugin.resolveMedia(track, {
       cancellation: {
         isCancelled: () => controller.signal.aborted,
         subscribe(listener) {
@@ -198,32 +182,34 @@ describe('Bilibili listing media metadata', () => {
         },
       },
     })
-    const iterator = pages[Symbol.asyncIterator]()
-    const pending = iterator.next()
-    await vi.waitFor(() => expect(request).toHaveBeenCalledTimes(4))
+    await vi.waitFor(() => expect(request).toHaveBeenCalledTimes(2))
     controller.abort()
     await expect(pending).rejects.toMatchObject({ code: 'operation-cancelled' })
+    expect(request).toHaveBeenCalledTimes(2)
+    await expect(plugin.resolveMedia(track)).resolves.toMatchObject({
+      durationMs: PART_DURATION_MS,
+    })
     expect(request).toHaveBeenCalledTimes(4)
-    const retry = listing(plugin, LISTINGS[3].url).pages()[Symbol.asyncIterator]()
-    expect((await retry.next()).value.items).toHaveLength(5)
-    await retry.return?.()
-    expect(request).toHaveBeenCalledTimes(10)
   })
 
-  it('retains unavailable rows with unknown duration rather than the aggregate total', async () => {
+  it('keeps a detail error on the selected track even though the listing succeeded', async () => {
     const { plugin, request } = createPlugin(1)
     const originalRequest = request.getMockImplementation()!
     request.mockImplementation(async (input) => {
       if (new URL(input.url).pathname !== '/x/web-interface/view') return originalRequest(input)
       return {
         ...response(undefined),
-        body: JSON.stringify({ code: -404, message: '不存在', data: null }),
+        body: JSON.stringify({ code: -412, message: '', data: null }),
       }
     })
     const iterator = listing(plugin, LISTINGS[3].url).pages()[Symbol.asyncIterator]()
     const page = await iterator.next()
-    expect(page.value.items[0]).toMatchObject({ id: 'bilibili:video:BV1xx411c7m0' })
-    expect(page.value.items[0]!.durationMs).toBeUndefined()
+    expect(page.value.items).toHaveLength(1)
     await iterator.return?.()
+    expect(request).toHaveBeenCalledOnce()
+    await expect(plugin.resolveMedia(page.value.items[0]!)).rejects.toMatchObject({
+      code: 'rate-limited',
+    })
+    expect(request).toHaveBeenCalledTimes(2)
   })
 })

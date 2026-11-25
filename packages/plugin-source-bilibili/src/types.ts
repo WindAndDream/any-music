@@ -84,7 +84,6 @@ export interface BilibiliFavoriteMedia {
   bv_id?: string
   upper?: { mid: number; name: string }
   cnt_info?: { play?: number; danmaku?: number; collect?: number; reply?: number }
-  ugc?: { first_cid?: number }
 }
 
 export interface BilibiliFavoriteData {

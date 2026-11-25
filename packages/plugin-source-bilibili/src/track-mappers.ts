@@ -12,7 +12,7 @@ import type {
 
 const PLUGIN_ID = 'bilibili'
 
-// Video summaries omit aggregate durations; the plugin fills in the selected part before publishing.
+// A listing reports the upload's duration. Media resolution obtains the selected part's duration.
 export function mapSearchVideo(video: BilibiliSearchVideo): Track {
   return createVideoTrack({
     bvid: video.bvid,
@@ -20,6 +20,7 @@ export function mapSearchVideo(video: BilibiliSearchVideo): Track {
     artistId: video.mid,
     artistName: video.author,
     artworkUrl: video.pic,
+    sourceDurationMs: parseClockDuration(video.duration),
     publishedAtMs: toMilliseconds(video.pubdate),
     description: video.description,
     sourceTags: video.tag
@@ -43,6 +44,7 @@ export function mapUpperVideo(video: BilibiliUpperVideo): Track {
     artistId: video.mid,
     artistName: video.author,
     artworkUrl: video.pic,
+    sourceDurationMs: parseClockDuration(video.length),
     publishedAtMs: toMilliseconds(video.created),
     description: video.description,
     statistics: {
@@ -63,6 +65,7 @@ export function mapSeasonArchive(
     artistId: owner.mid,
     artistName: owner.name,
     artworkUrl: archive.pic,
+    sourceDurationMs: readDurationSeconds(archive.duration),
     publishedAtMs: toMilliseconds(archive.pubdate),
     statistics: {
       playCount: archive.stat?.view,
@@ -77,11 +80,11 @@ export function mapFavoriteMedia(media: BilibiliFavoriteMedia): Track | undefine
 
   return createVideoTrack({
     bvid,
-    cid: media.ugc?.first_cid,
     title: media.title,
     artistId: media.upper.mid,
     artistName: media.upper.name,
     artworkUrl: media.cover,
+    sourceDurationMs: readDurationSeconds(media.duration),
     publishedAtMs: toMilliseconds(media.pubtime),
     description: media.intro,
     statistics: {
@@ -153,6 +156,7 @@ interface VideoTrackInput {
   artistName: string
   artworkUrl?: string
   durationMs?: number
+  sourceDurationMs?: number
   publishedAtMs?: number
   description?: string
   sourceTags?: readonly string[]
@@ -168,6 +172,7 @@ function createVideoTrack(input: VideoTrackInput): Track {
     artists: [{ id: String(input.artistId), name: input.artistName }],
     artworkUrl: normalizeUrl(input.artworkUrl),
     durationMs: input.durationMs,
+    sourceDurationMs: input.sourceDurationMs,
     publishedAtMs: input.publishedAtMs,
     description: input.description,
     sourceTags: input.sourceTags,
@@ -194,4 +199,16 @@ function normalizeUrl(value?: string): string | undefined {
 
 function toMilliseconds(value?: number): number | undefined {
   return value === undefined ? undefined : value * 1000
+}
+
+function parseClockDuration(value: unknown): number | undefined {
+  if (typeof value !== 'string' || !/^\d+:[0-5]?\d(?::[0-5]?\d)?$/.test(value)) return undefined
+  const seconds = value.split(':').reduce((total, part) => total * 60 + Number(part), 0)
+  return readDurationSeconds(seconds)
+}
+
+function readDurationSeconds(value: unknown): number | undefined {
+  if (typeof value !== 'number' || value <= 0) return undefined
+  const milliseconds = value * 1000
+  return Number.isSafeInteger(milliseconds) ? milliseconds : undefined
 }

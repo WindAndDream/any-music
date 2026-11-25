@@ -174,6 +174,7 @@ export function sanitizeStoredTrack(input: unknown): Track | undefined {
     artists,
     artworkUrl: sanitizeTrackMetadataUrl(input.artworkUrl),
     durationMs: optionalNonNegativeNumber(input.durationMs),
+    sourceDurationMs: optionalNonNegativeNumber(input.sourceDurationMs),
     publishedAtMs: optionalNonNegativeNumber(input.publishedAtMs),
     description: optionalString(input.description),
     sourceTags: readStringArray(input.sourceTags),

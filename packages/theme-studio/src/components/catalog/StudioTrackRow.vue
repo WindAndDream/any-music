@@ -29,6 +29,12 @@ const queueDisabled = computed(
 const queueLabel = computed(() =>
   props.queued ? (props.queueAction === 'toggle' ? '移出待听' : '已在待听') : '加入待听',
 )
+const durationLabel = computed(() => {
+  const durationMs = props.track.durationMs ?? props.track.sourceDurationMs
+  if (durationMs === undefined) return '未知时长'
+  const seconds = Math.floor(durationMs / 1000)
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
+})
 const emit = defineEmits<{
   select: []
   play: []
@@ -69,13 +75,7 @@ const emit = defineEmits<{
         </div>
       </div>
     </td>
-    <td>
-      {{
-        track.durationMs === undefined
-          ? '未知时长'
-          : `${Math.floor(track.durationMs / 60000)}:${String(Math.floor(track.durationMs / 1000) % 60).padStart(2, '0')}`
-      }}
-    </td>
+    <td>{{ durationLabel }}</td>
     <td v-if="!readonly">
       <div class="studio-actions">
         <button

@@ -6,11 +6,13 @@ import { describe, expect, it, vi } from 'vitest'
 import { exportAudioSegments } from '#workbench/features/audio-export/audio-exporter'
 
 // Exercise the application/engine boundary without duplicating the engine's codec tests.
+const compose = vi.hoisted(() => vi.fn<(options: ExportAudioOptions) => void>())
 vi.mock('@any-music/audio-composition/browser', async (importOriginal) => {
   const actual = await importOriginal<typeof import('@any-music/audio-composition/browser')>()
   return {
     ...actual,
     exportAudioSegments: async (options: ExportAudioOptions) => {
+      compose(options)
       await options.loadSource(options.segments[0]!.sourceTrackId, { signal: options.signal })
       return { blob: new Blob(), extension: 'wav' }
     },
@@ -25,6 +27,54 @@ const track: Track = {
 }
 
 describe('music export adapter', () => {
+  it.each([253_000, undefined])(
+    'uses the resolved duration %s for a full-track export and releases the single media descriptor',
+    async (durationMs) => {
+      compose.mockClear()
+      const summary = { ...track, sourceDurationMs: 43_200_000 }
+      const release = vi.fn()
+      const quality = { id: 'test', label: 'Test', rank: 1 }
+      const source: ResolvedMediaSource = {
+        type: 'complete-binary',
+        bytes: new Uint8Array(),
+        mimeType: 'audio/wav',
+        quality,
+        availableQualities: [quality],
+        loadingStrategy: 'eager',
+        durationMs,
+        release,
+      }
+      const resolveMedia = vi.fn(async () => source)
+      const loadMediaFile = vi.fn(async () => {
+        expect(release).not.toHaveBeenCalled()
+        return { bytes: new Uint8Array() }
+      })
+      const pending = exportAudioSegments({
+        title: 'Test',
+        format: 'wav',
+        track: summary,
+        resolveTrack: () => undefined,
+        resolveMedia,
+        loadMediaFile,
+      })
+      if (durationMs === undefined) {
+        await expect(pending).rejects.toMatchObject({ code: 'export-unavailable' })
+        expect(compose).not.toHaveBeenCalled()
+        expect(loadMediaFile).not.toHaveBeenCalled()
+      } else {
+        await pending
+        expect(compose).toHaveBeenCalledExactlyOnceWith(
+          expect.objectContaining({
+            segments: [{ sourceTrackId: track.id, startMs: 0, endMs: durationMs }],
+          }),
+        )
+        expect(loadMediaFile).toHaveBeenCalledOnce()
+      }
+      expect(resolveMedia).toHaveBeenCalledExactlyOnceWith(summary, undefined)
+      expect(release).toHaveBeenCalledOnce()
+    },
+  )
+
   it.each(['success', 'failure', 'cancelled'])(
     'releases media account leases after %s without releasing during the read',
     async (outcome) => {

@@ -108,7 +108,7 @@ export function usePlaylistFilters(
       const platformId = getPlatformId(record)
       if (!selectedIds.has(platformId)) return false
       if (filters.value.favoriteOnly && record.favoritedAtMs === undefined) return false
-      const durationMs = record.track.durationMs
+      const durationMs = record.track.durationMs ?? record.track.sourceDurationMs
       if (filters.value.durationRange !== 'any') {
         if (durationMs === undefined) return false
         if (filters.value.durationRange === 'short' && durationMs >= 4 * 60_000) return false
