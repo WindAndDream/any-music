@@ -44,6 +44,15 @@ const statusLabel = computed(() => getPluginStatusLabel(statusItem.value))
       :disabled="busy"
       @click="selectable ? emit('select') : emit('details')"
     />
+    <label v-if="selectable" class="classic-plugin-card__selection">
+      <input
+        type="checkbox"
+        :checked="selected"
+        :disabled="busy"
+        :aria-label="`勾选插件 ${item.name}`"
+        @change="emit('select')"
+      />
+    </label>
     <header class="classic-plugin-card__header">
       <span class="classic-plugin-card__icon">
         <AppIcon :name="item.category === '音乐源' ? 'music' : 'plugin'" :size="24" />
@@ -71,43 +80,22 @@ const statusLabel = computed(() => getPluginStatusLabel(statusItem.value))
         >{{ statusLabel }}</span
       >
       <div class="classic-plugin-card__actions">
-        <div class="classic-plugin-card__primary-actions">
-          <label v-if="item.origin === 'builtin'" class="classic-plugin-card__toggle">
-            <span>{{ item.enabled ? '启用中' : '已停用' }}</span>
-            <input
-              type="checkbox"
-              role="switch"
-              :aria-label="`启用 ${item.name}`"
-              :checked="item.enabled"
-              :disabled="busy"
-              :aria-disabled="!!item.unavailableReason"
-              :title="item.unavailableReason"
-              @click="checkAvailability"
-              @change="changeEnabled"
-            />
-            <span class="classic-plugin-card__switch" aria-hidden="true"></span>
-          </label>
-        </div>
-        <label v-if="selectable" class="classic-plugin-card__selection">
+        <label v-if="item.origin === 'builtin'" class="classic-plugin-card__toggle">
+          <span>{{ item.enabled ? '启用中' : '已停用' }}</span>
           <input
             type="checkbox"
-            :checked="selected"
+            role="switch"
+            :aria-label="`启用 ${item.name}`"
+            :checked="item.enabled"
             :disabled="busy"
-            :aria-label="`勾选插件 ${item.name}`"
-            @change="emit('select')"
+            :aria-disabled="!!item.unavailableReason"
+            :title="item.unavailableReason"
+            @click="checkAvailability"
+            @change="changeEnabled"
           />
+          <span class="classic-plugin-card__switch" aria-hidden="true"></span>
         </label>
       </div>
     </footer>
-    <button
-      class="classic-plugin-card__more"
-      type="button"
-      :disabled="busy"
-      :aria-label="`更多插件操作 ${item.name}`"
-      aria-haspopup="dialog"
-      @click="emit('details')"
-    >
-      <AppIcon name="more" :size="20" />
-    </button>
   </article>
 </template>
