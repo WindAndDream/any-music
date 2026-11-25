@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import CollectionGrid from '@any-music/ui/components/CollectionGrid.vue'
 import MusicListEmptyState from '@any-music/ui/components/music-sources/MusicListEmptyState.vue'
-import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed } from 'vue'
 
@@ -12,6 +11,7 @@ import QueueViewControls from '../music-sources/QueueViewControls.vue'
 import TrackRow from '../music-sources/TrackRow.vue'
 import ClassicCollectionSurface from './ClassicCollectionSurface.vue'
 import ClassicResultView from './ClassicResultView.vue'
+import ClassicTrackResultGrid from './ClassicTrackResultGrid.vue'
 import { formatHistoryRecord } from './history-record-presentation'
 
 const props = defineProps<{
@@ -21,7 +21,23 @@ const props = defineProps<{
 }>()
 const { history, navigation, filtered, activePlatform } = props.presentation
 const groups = computed(() => props.presentation.groups.value.filter(({ count }) => count > 0))
-const itemKeys = computed(() => history.visible.value.map(({ entry }) => entry.id))
+type HistoryRow = (typeof history.visible.value)[number]
+const entryId = ({ entry }: HistoryRow) => entry.id
+const selected = computed(() => new Set(history.selectedIds.value))
+const continuityRegion = computed(() =>
+  activePlatform.value ? `history:platform:${activePlatform.value.id}` : 'history:flat',
+)
+function contentGeneration({ entry, track }: HistoryRow) {
+  const state = props.feature.state
+  return JSON.stringify([
+    entry,
+    track,
+    state.customNamesByTrackId.get(track.id),
+    state.customTagsByTrackId.get(track.id),
+    state.platformNames.get(track.source.pluginId),
+    history.operatorOpen.value,
+  ])
+}
 const intro = computed(() =>
   history.arrangement.value === 'platform'
     ? '勾选音乐源批量操作播放记录，点击平台卡片查看历史。'
@@ -118,42 +134,47 @@ const intro = computed(() =>
             @select="history.togglePlatform(group.id)"
           />
         </CollectionGrid>
-        <TrackCardGrid
+        <ClassicTrackResultGrid
           v-else
+          :items="history.visible.value"
+          :item-key="entryId"
+          :content-generation="contentGeneration"
           :display-mode="history.displayMode.value"
           :mobile-columns="history.mobileColumns.value"
-          :item-keys="itemKeys"
+          :item-style="feature.state.itemStyle"
+          :scroll-element="presentation.viewport.value"
+          :continuity-region="continuityRegion"
+          :reset-key="history.filters.value"
+          :popover-key="presentation.actionOpenerId.value"
           animate
         >
-          <div
-            v-for="{ entry, track } in history.visible.value"
-            :key="entry.id"
-            class="history-record list__cell"
-          >
-            <TrackRow
-              :selectable="history.operatorOpen.value"
-              :track="track"
-              :custom-tags="feature.state.customTagsByTrackId.get(track.id)"
-              :active="track.id === feature.state.currentTrackId"
-              :invalid="feature.state.invalidTrackIds.includes(track.id)"
-              :favorite="feature.state.favoriteTrackIds.includes(track.id)"
-              :download-busy="Boolean(feature.state.downloadBusy)"
-              :selected="history.selectedIds.value.includes(entry.id)"
-              :display-mode="history.displayMode.value"
-              :context-label="
-                feature.state.platformNames.get(track.source.pluginId) ?? track.source.pluginId
-              "
-              :trailing-meta="formatHistoryRecord(entry)"
-              :focus-id="entry.id"
-              :selection-description="`${feature.state.customNamesByTrackId.get(track.id) ?? track.title} 的${formatHistoryRecord(entry)}记录`"
-              @select="history.select(entry.id)"
-              @play="presentation.play(track.id)"
-              @favorite="feature.actions.toggleFavorite(track.id)"
-              @download="feature.actions.download([track.id])"
-              @show-actions="presentation.actionEntryId.value = entry.id"
-            />
-          </div>
-        </TrackCardGrid>
+          <template #default="{ item: { entry, track } }">
+            <div class="history-record list__cell" :data-am-continuity-item="entry.id">
+              <TrackRow
+                :selectable="history.operatorOpen.value"
+                :track="track"
+                :custom-tags="feature.state.customTagsByTrackId.get(track.id)"
+                :active="track.id === feature.state.currentTrackId"
+                :invalid="feature.state.invalidTrackIds.includes(track.id)"
+                :favorite="feature.state.favoriteTrackIds.includes(track.id)"
+                :download-busy="Boolean(feature.state.downloadBusy)"
+                :selected="selected.has(entry.id)"
+                :display-mode="history.displayMode.value"
+                :context-label="
+                  feature.state.platformNames.get(track.source.pluginId) ?? track.source.pluginId
+                "
+                :trailing-meta="formatHistoryRecord(entry)"
+                :focus-id="entry.id"
+                :selection-description="`${feature.state.customNamesByTrackId.get(track.id) ?? track.title} 的${formatHistoryRecord(entry)}记录`"
+                @select="history.select(entry.id)"
+                @play="presentation.play(track.id)"
+                @favorite="feature.actions.toggleFavorite(track.id)"
+                @download="feature.actions.download([track.id])"
+                @show-actions="presentation.showActions(entry.id)"
+              />
+            </div>
+          </template>
+        </ClassicTrackResultGrid>
       </ClassicResultView>
     </div>
   </ClassicCollectionSurface>

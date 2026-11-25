@@ -11,7 +11,7 @@ const props = defineProps<{
   row?: { entry: PlaybackHistoryEntry; track: Track }
   feature: UiThemeFeatureMap['history']
 }>()
-const emit = defineEmits<{ close: []; play: [trackId: string]; clear: [] }>()
+const emit = defineEmits<{ close: []; afterLeave: []; play: [trackId: string]; clear: [] }>()
 const activity = usePresentationActivity()
 const isCurrent = activity.checkpoint()
 function available() {
@@ -39,6 +39,7 @@ function clear() {
     :download-busy="Boolean(feature.state.downloadBusy)"
     scroll-primary-actions
     @close="emit('close')"
+    @after-leave="emit('afterLeave')"
     @play="available() && emit('play', $event.id)"
     @queue="available() && feature.actions.toggleQueue($event.id)"
     @favorite="available() && feature.actions.toggleFavorite($event.id)"
