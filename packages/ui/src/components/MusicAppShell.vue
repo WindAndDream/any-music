@@ -35,8 +35,9 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   closeMobileDrawer: []
 }>()
+const isMobileDrawerOpen = computed(() => props.mobileLayout && props.mobileDrawerOpen)
 useBackHandler({
-  active: () => props.mobileLayout && props.mobileDrawerOpen && !props.modalOpen,
+  active: () => isMobileDrawerOpen.value && !props.modalOpen,
   layer: 'drawer',
   handle: () => emit('closeMobileDrawer'),
 })
@@ -116,7 +117,7 @@ watch(
 )
 
 watch(
-  [() => props.mobileLayout, () => props.mobileDrawerOpen, () => props.sidebarSide],
+  [() => props.mobileLayout, isMobileDrawerOpen, () => props.sidebarSide],
   ([isMobile, isOpen, side], [wasMobile, wasOpen, previousSide]) => {
     // 断点切换会把桌面侧栏重排成宽抽屉；只为同一移动布局内的主动开合启用退场延迟。
     isMobileDrawerTransitioning.value =
@@ -148,27 +149,30 @@ watch(
   { flush: 'post' },
 )
 
-watch(
-  () => props.mobileDrawerOpen,
-  async (isOpen) => {
-    if (!isOpen) {
-      // 关闭补丁会同时移除顶部栏的 inert；过早聚焦会被浏览器静默拒绝。
-      await nextTick()
-      if (previousFocus.value?.isConnected) previousFocus.value.focus({ preventScroll: true })
-      previousFocus.value = undefined
-      return
-    }
+watch(isMobileDrawerOpen, async (isOpen, _, onCleanup) => {
+  let active = true
+  onCleanup(() => {
+    active = false
+  })
+  if (isOpen) {
     const root = sidebar.value?.getRootNode()
     previousFocus.value =
       root instanceof ShadowRoot && root.activeElement instanceof HTMLElement
         ? root.activeElement
         : undefined
-    await nextTick()
-    sidebar.value?.querySelector<HTMLElement>('button:not([disabled]), a[href]')?.focus({
-      preventScroll: true,
-    })
-  },
-)
+  }
+  // 关闭补丁会同时移除顶部栏的 inert；过早聚焦会被浏览器静默拒绝。
+  await nextTick()
+  if (!active) return
+  if (!isOpen) {
+    if (previousFocus.value?.isConnected) previousFocus.value.focus({ preventScroll: true })
+    previousFocus.value = undefined
+    return
+  }
+  sidebar.value?.querySelector<HTMLElement>('button:not([disabled]), a[href]')?.focus({
+    preventScroll: true,
+  })
+})
 
 function handleKeydown(event: KeyboardEvent): void {
   if (event.key !== 'Tab' || !sidebar.value) return
@@ -198,8 +202,7 @@ function handleKeydown(event: KeyboardEvent): void {
 }
 
 useOverlayKeyboard({
-  active: () =>
-    props.mobileLayout && props.mobileDrawerOpen && !props.modalOpen && !props.playerModalOpen,
+  active: () => isMobileDrawerOpen.value && !props.modalOpen && !props.playerModalOpen,
   layer: 'drawer',
   onEscape: () => emit('closeMobileDrawer'),
   onTab: handleKeydown,
@@ -225,7 +228,7 @@ defineSlots<{
       'music-app-shell--sidebar-collapsed': props.sidebarCollapsed,
       'music-app-shell--sidebar-transition': isSidebarTransitioning,
       'music-app-shell--preparing-sidebar-expansion': isPreparingSidebarExpansion,
-      'music-app-shell--mobile-drawer-open': props.mobileDrawerOpen,
+      'music-app-shell--mobile-drawer-open': isMobileDrawerOpen,
       'music-app-shell--mobile-drawer-transition': isMobileDrawerTransitioning,
       'music-app-shell--without-player': !props.hasPlayer,
       'music-app-shell--without-mobile-navigation': !props.hasMobileNavigation,
@@ -238,7 +241,7 @@ defineSlots<{
     "
   >
     <button
-      v-if="props.mobileDrawerOpen"
+      v-if="isMobileDrawerOpen"
       class="music-app-shell__scrim"
       type="button"
       aria-label="关闭功能导航"
@@ -248,13 +251,13 @@ defineSlots<{
       id="am-product-navigation"
       ref="sidebar"
       class="music-app-shell__sidebar"
-      :role="props.mobileDrawerOpen ? 'dialog' : undefined"
-      :aria-modal="props.mobileDrawerOpen ? 'true' : undefined"
-      :aria-label="props.mobileDrawerOpen ? '功能导航' : undefined"
-      :aria-hidden="props.mobileLayout && !props.mobileDrawerOpen ? 'true' : undefined"
-      :tabindex="props.mobileDrawerOpen ? -1 : undefined"
+      :role="isMobileDrawerOpen ? 'dialog' : undefined"
+      :aria-modal="isMobileDrawerOpen ? 'true' : undefined"
+      :aria-label="isMobileDrawerOpen ? '功能导航' : undefined"
+      :aria-hidden="props.mobileLayout && !isMobileDrawerOpen ? 'true' : undefined"
+      :tabindex="isMobileDrawerOpen ? -1 : undefined"
       :inert="
-        props.modalOpen || props.playerModalOpen || (props.mobileLayout && !props.mobileDrawerOpen)
+        props.modalOpen || props.playerModalOpen || (props.mobileLayout && !isMobileDrawerOpen)
           ? true
           : undefined
       "
@@ -264,21 +267,21 @@ defineSlots<{
     </aside>
     <div
       class="music-app-shell__header"
-      :inert="props.mobileDrawerOpen || props.modalOpen || props.playerModalOpen ? true : undefined"
+      :inert="isMobileDrawerOpen || props.modalOpen || props.playerModalOpen ? true : undefined"
     >
       <slot name="header" />
     </div>
     <main
       class="music-app-shell__content"
       data-am-scroll-key="workspace"
-      :inert="props.mobileDrawerOpen || props.modalOpen || props.playerModalOpen ? true : undefined"
+      :inert="isMobileDrawerOpen || props.modalOpen || props.playerModalOpen ? true : undefined"
     >
       <slot />
     </main>
     <div
       v-if="props.hasPlayer"
       class="music-app-shell__player"
-      :inert="props.mobileDrawerOpen || props.modalOpen ? true : undefined"
+      :inert="isMobileDrawerOpen || props.modalOpen ? true : undefined"
     >
       <slot name="player" />
     </div>
@@ -286,7 +289,7 @@ defineSlots<{
       v-if="props.hasMobileNavigation"
       ref="mobileNavigation"
       class="music-app-shell__mobile-navigation"
-      :inert="props.mobileDrawerOpen || props.modalOpen || props.playerModalOpen ? true : undefined"
+      :inert="isMobileDrawerOpen || props.modalOpen || props.playerModalOpen ? true : undefined"
     >
       <slot name="mobileNavigation" />
     </div>

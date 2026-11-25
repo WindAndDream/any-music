@@ -58,6 +58,7 @@ function mountShell(sidebarSide: 'left' | 'right') {
   })
   return {
     props,
+    shell,
     sidebar,
     reducedMotion,
     getAnimations,
@@ -92,6 +93,26 @@ function createTransition(transitionProperty = 'grid-template-columns') {
 }
 
 describe('MusicAppShell responsive drawer motion', () => {
+  it('releases the content when mobile layout ends before the drawer open prop clears', async () => {
+    const view = mountShell('left')
+    const content = findCatalogElement(view.shell, (node) => node.tag === 'main')
+    const hasScrim = () =>
+      view.shell.children.some((node) => node.props['aria-label'] === '关闭功能导航')
+
+    view.props.mobileLayout = true
+    view.props.mobileDrawerOpen = true
+    await nextTick()
+    expect(content.props.inert).toBe(true)
+    expect(hasScrim()).toBe(true)
+
+    view.props.mobileLayout = false
+    await nextTick()
+    expect(content.props.inert).toBeUndefined()
+    expect(hasScrim()).toBe(false)
+    expect(view.sidebar.props['aria-modal']).toBeUndefined()
+    expect(view.isAnimated()).toBe(false)
+  })
+
   it.each(['left', 'right'] as const)(
     'keeps the %s sidebar mounted and hides it without a transition on repeated breakpoint changes',
     async (side) => {
