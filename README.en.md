@@ -13,7 +13,7 @@ Any Music brings music content from sources such as Bilibili, Douyin and NetEase
 
 > The project is not yet released. Development currently starts from source and local builds. The userscript and Tauri desktop app are the existing product entries; Android is in active development, and iOS is incomplete. Capabilities and verification scope differ by runtime.
 
-Team development follows the [Git Flow policy](docs/en/cross-platform/architecture/git-flow.md); see [Contributing](CONTRIBUTING.md) before opening a PR.
+Team development follows the [Git Flow policy](docs/en/guides/git-flow.md); see [Contributing](CONTRIBUTING.md) before opening a PR.
 
 ## Features
 
@@ -36,7 +36,7 @@ The library stores stable source identities and composition recipes, resolving m
 | **Android / Tauri**           | Android project, signed APK/AAB builds, document saving and Keystore adapters; a reference debug device has verified Bilibili login, search, foreground playback, seeking, MP3 saving and native proxy requests | Requires Android API 26 and WebView 111+; optimized-release media/proxy, audio interruption, minimum-device and distribution-channel acceptance remain incomplete; no external plugin execution |
 | **iOS / Tauri**               | Configuration and shared capability boundaries                                                                                                                                                                  | Native engineering, login, media and device acceptance remain incomplete; no external plugin execution                                                                                          |
 
-A reference arm64 Android phone has also passed release-launch and lifecycle checks; this does not establish release acceptance for every feature. Mobile background playback is not currently guaranteed. See the [Tauri runtime](docs/en/desktop/runtime-architecture.md), [desktop plugin matrix](docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md) and [mobile engineering record](docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md) for detailed scope.
+A reference arm64 Android phone has also passed release-launch and lifecycle checks; this does not establish release acceptance for every feature. Mobile background playback is not currently guaranteed. See the [Tauri runtime](docs/en/modules/tauri/runtime.md), [desktop plugin matrix](docs/en/modules/plugins/desktop-delivery.md) and [mobile engineering record](docs/en/modules/tauri/mobile.md) for detailed scope.
 
 ## Getting started from source
 
@@ -60,7 +60,7 @@ pnpm install --frozen-lockfile
 pnpm privacy:setup
 ```
 
-Before contributing, configure your GitHub noreply email and read [Contributing](CONTRIBUTING.md) and [Privacy and Secret Handling](docs/en/cross-platform/architecture/privacy-and-secrets.md). Never commit real account data or credentials.
+Before contributing, configure your GitHub noreply email and read [Contributing](CONTRIBUTING.md) and [Privacy and Secret Handling](docs/en/guides/privacy-and-secrets.md). Never commit real account data or credentials.
 
 Keep `pnpm-lock.yaml` and `Cargo.lock`. Run `pnpm install --frozen-lockfile` after moving the checkout or pulling updates to recreate dependency links on the current computer; do not copy `node_modules` or build caches from the previous machine. Initial native builds also download Cargo, Gradle and Maven dependencies and need access to their repositories.
 
@@ -96,7 +96,7 @@ The development page uses GM doubles. To develop with real GM requests through T
 pnpm setup:userscript
 ```
 
-The command launches/reuses stable Chrome/Edge with a persistent profile and checks Tampermonkey installation, enablement and user-script permission. Missing Tampermonkey opens its official store for confirmation; the command also starts the local server and checks the development connection. Confirm installation of `server:Any Music` once, then retain `.local/userscript-browser/` to reuse it without repeated installation. Use `--browser edge` to select Edge or `--browser-only` to prepare only the browser. Disable the production script in the same profile to avoid duplicate launchers. Development and production scripts have separate storage. Build and install the production artifact for final permission and startup checks. See [Userscript Development](docs/en/userscript/development.md).
+The command launches/reuses stable Chrome/Edge with a persistent profile and checks Tampermonkey installation, enablement and user-script permission. Missing Tampermonkey opens its official store for confirmation; the command also starts the local server and checks the development connection. Confirm installation of `server:Any Music` once, then retain `.local/userscript-browser/` to reuse it without repeated installation. Use `--browser edge` to select Edge or `--browser-only` to prepare only the browser. Disable the production script in the same profile to avoid duplicate launchers. Development and production scripts have separate storage. Build and install the production artifact for final permission and startup checks. See [Userscript Development](docs/en/modules/userscript/development.md).
 
 ### Desktop app
 
@@ -109,9 +109,9 @@ pnpm bundle:tauri         # Generate installers for the current platform
 
 `dev:tauri` starts both the frontend server and the native window; no separate frontend command is needed. The Windows production executable is `target/release/any-music-tauri.exe`, and installers are under `target/release/bundle/`. `start:tauri` runs the existing Release executable, so rebuild after source changes. `build:tauri:dev` produces Debug output and does not supply `start:tauri`.
 
-Creating an installer does not establish signing, automatic-update or distribution acceptance; other operating systems still require their own build dependencies and verification. See the [desktop runtime](docs/en/desktop/runtime-architecture.md).
+Creating an installer does not establish signing, automatic-update or distribution acceptance; other operating systems still require their own build dependencies and verification. See the [desktop runtime](docs/en/modules/tauri/runtime.md).
 
-For automated candidate builds, signed Android publication and tag-triggered GitHub Releases, see [GitHub Actions Builds and Releases](docs/en/cross-platform/architecture/github-actions-release.md). Manual runs default to build-only mode.
+For automated candidate builds, signed Android publication and tag-triggered GitHub Releases, see [GitHub Actions Builds and Releases](docs/en/guides/github-actions-release.md). Manual runs default to build-only mode.
 
 ### Android development
 
@@ -233,7 +233,7 @@ adb -s $deviceSerial install -r apps/tauri/src-tauri/gen/android/app/build/outpu
 adb -s $deviceSerial shell am start -W -n com.anymusic.app/.BootstrapActivity
 ```
 
-For an x86_64 emulator, use its APK from the table instead. Replacement installs require the same signature as the installed application. On a signature conflict, check the package and installed version first; uninstalling clears that application's data. See the [mobile engineering record](docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md) for automated device tests, signature verification and current acceptance limits. Producing an APK does not verify device behavior, and local builds do not publish to app stores.
+For an x86_64 emulator, use its APK from the table instead. Replacement installs require the same signature as the installed application. On a signature conflict, check the package and installed version first; uninstalling clears that application's data. See the [mobile engineering record](docs/en/modules/tauri/mobile.md) for automated device tests, signature verification and current acceptance limits. Producing an APK does not verify device behavior, and local builds do not publish to app stores.
 
 ### Environment modes
 
@@ -298,7 +298,7 @@ scripts/                      # Build, boundary checks and verification tools
 docs/                         # Chinese/English design, development and acceptance records
 ```
 
-Applications inject networking, storage, login, media and saving capabilities; shared packages never depend on applications. Userscript source requests use `GM_xmlhttpRequest`, while desktop invokes Rust native capabilities through IPC. See [Project Architecture](docs/en/cross-platform/architecture/project-architecture.md) and [Reusable Package Boundaries](docs/en/cross-platform/architecture/reusable-package-boundaries.md) for dependency rules.
+Applications inject networking, storage, login, media and saving capabilities; shared packages never depend on applications. Userscript source requests use `GM_xmlhttpRequest`, while desktop invokes Rust native capabilities through IPC. See [Project Architecture](docs/en/architecture/README.md) and [Reusable Package Boundaries](docs/en/architecture/package-boundaries.md) for dependency rules.
 
 ## Plugin development
 
@@ -308,7 +308,7 @@ Built-in source, tag and creation plugins ship with the application. External `.
 - [SDK](packages/plugin-sdk/README.md): plugin declarations, versioned protocols and controlled capability interfaces.
 - [testkit](packages/plugin-testkit/README.md): plugin tests using the same VM as the product.
 
-SDK / CLI / testkit are currently **0.1.0**, locally packable and not registry-published. Existing templates cover metadata catalogs, tag suggestions and text exports; **external catalogs do not yet support media resolution, playback or downloads**. Userscript and mobile external-plugin policies are both `none`. A marketplace, automatic updates and broader platform support are outside current delivery. See [implementation progress](docs/en/cross-platform/architecture/plugin-system-refactoring-steps.md).
+SDK / CLI / testkit are currently **0.1.0**, locally packable and not registry-published. Existing templates cover metadata catalogs, tag suggestions and text exports; **external catalogs do not yet support media resolution, playback or downloads**. Userscript and mobile external-plugin policies are both `none`. A marketplace, automatic updates and broader platform support are outside current delivery. See [implementation progress](docs/en/modules/plugins/README.md).
 
 ## Checks and contributions
 
@@ -336,15 +336,12 @@ pnpm check:rust:deny
 
 The first two commands prepare a new environment for full native checks: MSRV checks need a separate Rust 1.90.0 toolchain, and dependency checks need `cargo-deny`. Android changes also require `pnpm check:mobile:boundaries`, `pnpm check:mobile:android` and the corresponding target build.
 
-See [AGENTS.md](AGENTS.md) and [Development Workflow](docs/en/cross-platform/architecture/development-workflow.md) for contribution conventions. Automated checks, website observations, actual GM requests, Rust requests and device acceptance are recorded separately and do not substitute for one another.
+See [AGENTS.md](AGENTS.md) and [Development Workflow](docs/en/guides/development-workflow.md) for contribution conventions. Automated checks, website observations, actual GM requests, Rust requests and device acceptance are recorded separately and do not substitute for one another.
 
 ## Documentation
 
-| Topic                    | Entry points                                                                                                                                                                                                         |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| All documentation        | [English index](docs/en/README.md) · [中文索引](docs/zh-cn/文档索引.md)                                                                                                                                              |
-| Runtime development      | [Userscript](docs/en/userscript/development.md) · [Desktop](docs/en/desktop/development.md)                                                                                                                          |
-| Architecture and modules | [Project Architecture](docs/en/cross-platform/architecture/project-architecture.md) · [Reusable Package Boundaries](docs/en/cross-platform/architecture/reusable-package-boundaries.md)                              |
-| Product and interaction  | [Library and Custom Tracks](docs/en/cross-platform/features/local-library-and-custom-plugins.md) · [Cross-Platform UI](docs/en/cross-platform/features/cross-platform-ui-and-interaction.md)                         |
-| Source protocols         | [Music Source Plugin Architecture](docs/en/cross-platform/architecture/music-source-plugin-architecture.md)                                                                                                          |
-| Current delivery scope   | [Desktop Plugin Matrix](docs/en/cross-platform/architecture/plugin-system-s15-tools-and-desktop-delivery.md) · [Mobile Engineering Record](docs/en/cross-platform/architecture/plugin-system-s16-mobile-delivery.md) |
+- [Documentation index](docs/en/README.md) · [中文索引](docs/zh-cn/文档索引.md)
+- [System architecture](docs/en/architecture/README.md) and [feature/runtime modules](docs/en/modules/README.md)
+- [Work in progress](docs/en/changes/in-progress/README.md), [acceptance](docs/en/changes/acceptance/README.md) and [temporary acceptance](docs/en/changes/temporary-acceptance/README.md)
+- [Future plans](docs/en/plans/future/README.md) and [discarded alternatives](docs/en/plans/discarded/README.md)
+- [Developer guides](docs/en/guides/README.md) and [documentation workflow](docs/en/guides/documentation-workflow.md)

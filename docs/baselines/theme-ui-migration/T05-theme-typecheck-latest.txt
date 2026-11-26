@@ -1,3 +1,0 @@
-
-> @any-music/theme-default@0.0.0 typecheck <project-root>\packages\theme-default
-> vue-tsc --noEmit -p tsconfig.json

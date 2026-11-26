@@ -5,7 +5,7 @@ description: Recapture Douyin website API contracts in the dedicated test browse
 
 # Douyin Contract Capture
 
-Produce a sanitized contract update for the requested Douyin behavior. Read the [website contract](../../../docs/en/cross-platform/platforms/douyin/web-api-contract.md) first.
+Produce a sanitized contract update for the requested Douyin behavior. Read the [website contract](../../../docs/en/modules/sources/douyin/web-api-contract.md) first.
 
 ## Establish the capture boundary
 

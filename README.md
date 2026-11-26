@@ -13,7 +13,7 @@ Any Music 将 Bilibili、抖音和网易云音乐等来源中的音乐内容接�
 
 > 项目尚未正式发布，目前以源码开发与本地构建为主。用户脚本和 Tauri 桌面端是现有产品入口；Android 持续开发中，iOS 尚未完成。各端能力与验证范围见下表。
 
-多人开发遵循 [Git Flow 团队规范](docs/zh-cn/跨平台/架构/GitFlow团队规范.md)，提交 PR 前请阅读[贡献指南](CONTRIBUTING.md)。
+多人开发遵循 [Git Flow 团队规范](docs/zh-cn/开发指南/GitFlow团队规范.md)，提交 PR 前请阅读[贡献指南](CONTRIBUTING.md)。
 
 ## 功能概览
 
@@ -36,7 +36,7 @@ Any Music 将 Bilibili、抖音和网易云音乐等来源中的音乐内容接�
 | **Android / Tauri**         | 已有 Android 工程、签名 APK/AAB、文档保存与 Keystore 适配；参考调试设备已验证 Bilibili 登录、搜索、前台播放、跳转、MP3 保存和原生代理请求 | 要求 Android API 26、WebView 111+；优化 Release 的媒体/代理、音频中断、最低设备及发布渠道验收尚未完成；不支持外置插件执行 |
 | **iOS / Tauri**             | 保留配置与共享能力边界                                                                                                                    | 原生工程、登录、媒体及设备验收尚未完成；不支持外置插件执行                                                                |
 
-Android 已有参考 arm64 真机的 Release 启动与生命周期检查，但这不代表全部功能已通过 Release 验收。移动端暂不提供后台播放保证。详细范围见 [Tauri 运行端](docs/zh-cn/桌面端/运行端架构.md)、[桌面插件支持矩阵](docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md)和[移动端工程记录](docs/zh-cn/跨平台/架构/插件系统重构S16手机交付.md)。
+Android 已有参考 arm64 真机的 Release 启动与生命周期检查，但这不代表全部功能已通过 Release 验收。移动端暂不提供后台播放保证。详细范围见 [Tauri 运行端](docs/zh-cn/板块/桌面与移动端/运行端架构.md)、[桌面插件支持矩阵](docs/zh-cn/板块/插件/工具与桌面交付.md)和[移动端工程记录](docs/zh-cn/板块/桌面与移动端/移动端能力.md)。
 
 ## 从源码开始
 
@@ -60,7 +60,7 @@ pnpm install --frozen-lockfile
 pnpm privacy:setup
 ```
 
-提交前配置 GitHub noreply 邮箱，阅读[贡献指南](CONTRIBUTING.md)和[隐私与密钥规范](docs/zh-cn/跨平台/架构/隐私与密钥规范.md)，不能提交真实账号数据或凭据。
+提交前配置 GitHub noreply 邮箱，阅读[贡献指南](CONTRIBUTING.md)和[隐私与密钥规范](docs/zh-cn/开发指南/隐私与密钥规范.md)，不能提交真实账号数据或凭据。
 
 保留 `pnpm-lock.yaml` 和 `Cargo.lock`。迁移或拉取更新后重新执行 `pnpm install --frozen-lockfile`，在当前电脑重建依赖链接；不要从旧电脑复制 `node_modules` 或构建缓存。首次原生构建还会下载 Cargo、Gradle 和 Maven 依赖，需要可访问相应依赖仓库。
 
@@ -96,7 +96,7 @@ pnpm build:userscript     # 仅构建 prod 环境用户脚本
 pnpm setup:userscript
 ```
 
-命令启动／复用正式版 Chrome/Edge 的固定配置，检查篡改猴是否已安装、启用且允许用户脚本；缺失时打开官方商店等待确认安装，并启动本地服务、检查开发连接。首次在浏览器确认安装 `server:Any Music`，以后保留 `.local/userscript-browser/` 即可复用，无需反复安装。可用 `--browser edge` 选择 Edge，或用 `--browser-only` 只准备浏览器。在同一配置中停用生产脚本，避免重复入口。开发脚本与生产脚本存储独立；最终仍需构建并安装生产产物验证权限与启动。详见[用户脚本开发规范](docs/zh-cn/用户脚本/开发规范.md)。
+命令启动／复用正式版 Chrome/Edge 的固定配置，检查篡改猴是否已安装、启用且允许用户脚本；缺失时打开官方商店等待确认安装，并启动本地服务、检查开发连接。首次在浏览器确认安装 `server:Any Music`，以后保留 `.local/userscript-browser/` 即可复用，无需反复安装。可用 `--browser edge` 选择 Edge，或用 `--browser-only` 只准备浏览器。在同一配置中停用生产脚本，避免重复入口。开发脚本与生产脚本存储独立；最终仍需构建并安装生产产物验证权限与启动。详见[用户脚本开发规范](docs/zh-cn/板块/用户脚本/开发规范.md)。
 
 ### 桌面应用
 
@@ -109,9 +109,9 @@ pnpm bundle:tauri         # 生成当前平台的安装包
 
 `dev:tauri` 会自动启动前端服务和原生窗口，无需再单独启动前端。Windows 生产可执行文件位于 `target/release/any-music-tauri.exe`，安装包位于 `target/release/bundle/`；`start:tauri` 使用已有的 Release 可执行文件，源码变更后先重新构建。`build:tauri:dev` 生成 Debug 产物，不用于 `start:tauri`。
 
-构建安装包不代表已完成签名、自动更新或分发验收；其他操作系统仍需各自的构建依赖与验证。详见[桌面运行端](docs/zh-cn/桌面端/运行端架构.md)。
+构建安装包不代表已完成签名、自动更新或分发验收；其他操作系统仍需各自的构建依赖与验证。详见[桌面运行端](docs/zh-cn/板块/桌面与移动端/运行端架构.md)。
 
-各平台构建命令、iOS 构建检查、Android 签名与 Tag 触发的 GitHub Release 见[GitHub Actions 构建与发布](docs/zh-cn/跨平台/架构/GitHubActions构建与发布.md)。手动运行默认只构建。
+各平台构建命令、iOS 构建检查、Android 签名与 Tag 触发的 GitHub Release 见[GitHub Actions 构建与发布](docs/zh-cn/开发指南/GitHubActions构建与发布.md)。手动运行默认只构建。
 
 ### Android 开发
 
@@ -233,7 +233,7 @@ adb -s $deviceSerial install -r apps/tauri/src-tauri/gen/android/app/build/outpu
 adb -s $deviceSerial shell am start -W -n com.anymusic.app/.BootstrapActivity
 ```
 
-x86_64 模拟器改用上表对应的 APK。覆盖安装需要与已有应用的签名一致；如出现签名冲突，先确认安装包和设备上的版本，卸载会清除该应用数据。自动化设备测试、签名校验细节和现有验收边界见[移动端工程记录](docs/zh-cn/跨平台/架构/插件系统重构S16手机交付.md)。生成 APK 不验证真机功能，本地构建也不会发布到应用商店。
+x86_64 模拟器改用上表对应的 APK。覆盖安装需要与已有应用的签名一致；如出现签名冲突，先确认安装包和设备上的版本，卸载会清除该应用数据。自动化设备测试、签名校验细节和现有验收边界见[移动端工程记录](docs/zh-cn/板块/桌面与移动端/移动端能力.md)。生成 APK 不验证真机功能，本地构建也不会发布到应用商店。
 
 ### 环境模式
 
@@ -298,7 +298,7 @@ scripts/                      # 构建、边界检查与验证工具
 docs/                         # 中英文设计、开发文档与验收记录
 ```
 
-应用注入网络、存储、登录、媒体和保存能力；共享包不依赖应用。用户脚本通过 `GM_xmlhttpRequest` 访问来源，桌面通过 IPC 调用 Rust 原生能力。具体依赖方向见[项目架构](docs/zh-cn/跨平台/架构/项目架构.md)与[可复用包边界](docs/zh-cn/跨平台/架构/可复用包边界.md)。
+应用注入网络、存储、登录、媒体和保存能力；共享包不依赖应用。用户脚本通过 `GM_xmlhttpRequest` 访问来源，桌面通过 IPC 调用 Rust 原生能力。具体依赖方向见[项目架构](docs/zh-cn/系统架构/文档索引.md)与[可复用包边界](docs/zh-cn/系统架构/可复用包边界.md)。
 
 ## 插件开发
 
@@ -308,7 +308,7 @@ docs/                         # 中英文设计、开发文档与验收记录
 - [SDK](packages/plugin-sdk/README.md)：插件声明、版本化协议与受控能力接口。
 - [testkit](packages/plugin-testkit/README.md)：在与产品一致的 VM 中运行插件测试。
 
-SDK / CLI / testkit 当前版本为 **0.1.0**，可本地打包，尚未发布到包注册表。现有模板覆盖元数据目录、标签建议与文本导出；**外置目录尚不支持媒体解析、播放或下载**。用户脚本与移动端的外置插件策略均为 `none`。插件市场、自动更新及更广的平台支持不属于当前已交付能力，详见[插件实现进度](docs/zh-cn/跨平台/架构/插件系统重构实施步骤.md)。
+SDK / CLI / testkit 当前版本为 **0.1.0**，可本地打包，尚未发布到包注册表。现有模板覆盖元数据目录、标签建议与文本导出；**外置目录尚不支持媒体解析、播放或下载**。用户脚本与移动端的外置插件策略均为 `none`。插件市场、自动更新及更广的平台支持不属于当前已交付能力，详见[插件实现进度](docs/zh-cn/板块/插件/文档索引.md)。
 
 ## 检查与贡献
 
@@ -336,15 +336,12 @@ pnpm check:rust:deny
 
 前两条仅在新环境准备完整原生检查时执行；MSRV 检查需要独立的 Rust 1.90.0，依赖检查需要 `cargo-deny`。Android 改动另执行 `pnpm check:mobile:boundaries`、`pnpm check:mobile:android` 和对应目标构建。
 
-开发约定见 [AGENTS.md](AGENTS.md) 和[开发工作流](docs/zh-cn/跨平台/架构/开发工作流.md)。自动化检查、网站接口观察、实际 GM 请求、Rust 请求和真机验收分别记录，不能互相替代。
+开发约定见 [AGENTS.md](AGENTS.md) 和[开发工作流](docs/zh-cn/开发指南/开发工作流.md)。自动化检查、网站接口观察、实际 GM 请求、Rust 请求和真机验收分别记录，不能互相替代。
 
 ## 文档导航
 
-| 内容         | 入口                                                                                                                                            |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| 全部文档     | [中文索引](docs/zh-cn/文档索引.md) · [English index](docs/en/README.md)                                                                         |
-| 运行端开发   | [用户脚本](docs/zh-cn/用户脚本/开发规范.md) · [桌面端](docs/zh-cn/桌面端/开发规范.md)                                                           |
-| 架构与模块   | [项目架构](docs/zh-cn/跨平台/架构/项目架构.md) · [可复用包边界](docs/zh-cn/跨平台/架构/可复用包边界.md)                                         |
-| 产品与交互   | [音乐库与自定义歌曲](docs/zh-cn/跨平台/功能设计/本地资料库与自定义插件.md) · [跨端界面与交互](docs/zh-cn/跨平台/功能设计/跨端界面与交互规范.md) |
-| 来源协议     | [音乐源插件架构](docs/zh-cn/跨平台/架构/音乐源插件架构.md)                                                                                      |
-| 当前交付范围 | [桌面插件矩阵](docs/zh-cn/跨平台/架构/插件系统重构S15工具与桌面交付.md) · [移动端工程记录](docs/zh-cn/跨平台/架构/插件系统重构S16手机交付.md)   |
+- [中文文档索引](docs/zh-cn/文档索引.md) · [English index](docs/en/README.md)
+- [系统架构](docs/zh-cn/系统架构/文档索引.md)与[功能／运行端板块](docs/zh-cn/板块/文档索引.md)
+- [内容修改中](docs/zh-cn/变更/修改中/文档索引.md)、[修改内容验收](docs/zh-cn/变更/验收/文档索引.md)及[临时验收](docs/zh-cn/变更/临时验收/文档索引.md)
+- [未来计划](docs/zh-cn/计划/未来/文档索引.md)与[废弃计划](docs/zh-cn/计划/废弃/文档索引.md)
+- [开发指南](docs/zh-cn/开发指南/文档索引.md)与[文档变更流程](docs/zh-cn/开发指南/文档变更流程.md)

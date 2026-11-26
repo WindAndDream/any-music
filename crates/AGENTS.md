@@ -1,6 +1,6 @@
 # Native plugin protocol and policy
 
-- Follow the root guide and the [Rust backend rules](../docs/en/desktop/backend-engineering.md). These are native, framework independent libraries with no Tauri, accounts or credentials. Protocol/policy/runtime have no concrete IO/global clock; package validates owned bytes; net owns anonymous HTTP/TLS. Apply each crate's local guide and dependency closure separately.
+- Follow the root guide and the [Rust backend rules](../docs/en/modules/tauri/backend-engineering.md). These are native, framework independent libraries with no Tauri, accounts or credentials. Protocol/policy/runtime have no concrete IO/global clock; package validates owned bytes; net owns anonymous HTTP/TLS. Apply each crate's local guide and dependency closure separately.
 - `am-plugin-protocol` consumes the SDK's versioned Schema/registry and raw corpus. Regenerate serde DTOs and field checks with `pnpm generate:protocol`; never edit generated Rust or create another Schema authority.
 - `am-plugin-policy -> am-plugin-protocol`; all time, subject, scope, grant and usage snapshots come from trusted callers. Runtime and the application consume decisions as native values, never renderer bearer grants; no framework or IPC dependency belongs in policy.
 - Inherit workspace edition/MSRV/lints, use private modules and explicit public contracts. Keep tests in each crate's `tests/` and use SDK-owned protocol fixtures by their actual path.
