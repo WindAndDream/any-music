@@ -7,7 +7,7 @@ runtimeScope: repository
 
 [中文](../../zh-cn/开发指南/文档索引.md)
 
-- [Getting started from source](../../../README.en.md#getting-started-from-source) and [moving to another computer](../../../README.en.md#moving-to-another-computer-and-troubleshooting)
+- [Getting started from source](source-setup.md#getting-started-from-source) and [moving to another computer](source-setup.md#moving-to-another-computer-and-troubleshooting)
 - [Documentation and change workflow](documentation-workflow.md)
 - [TypeScript/Vue, verification and result reporting](development-workflow.md)
 - [Privacy and secret handling](privacy-and-secrets.md)

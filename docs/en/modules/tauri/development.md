@@ -50,7 +50,7 @@ Native runtime_capabilities selects mobile form and platform-specific ACLs. Andr
 
 ### Windows Android toolchain and migration
 
-For the executable setup, environment-variable, build and device-install sequence, follow [Android development in the README](../../../../README.en.md#android-development).
+For the executable setup, environment-variable, build and device-install sequence, follow [Android development](../../guides/source-setup.md#android-development).
 
 Install a full JDK and Android SDK before building. The maintained project uses Gradle 9.6.1, Android Gradle Plugin 9.3.1, platform 37 and Build-Tools 36.0.0. Match the JDK 21 and NDK 30.0.16248370 versions in `scripts/native-targets.json`. The NDK supplies the API 26 cross-compilers. Install Rust's `aarch64-linux-android` target for phones and `x86_64-linux-android` for emulator builds under the pinned toolchain.
 

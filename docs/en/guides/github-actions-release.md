@@ -68,7 +68,7 @@ Run `pnpm release:build --list` from the repository root to list the targets and
 | `pnpm release:build android-arm64` | Android SDK/NDK and the `aarch64-linux-android` Rust target   |
 | `pnpm release:build android-x64`   | Android SDK/NDK and the `x86_64-linux-android` Rust target    |
 
-On Linux, CI builds on Ubuntu 22.04. Install the [Tauri system dependencies](https://v2.tauri.app/start/prerequisites/#linux), `patchelf` for AppImage packaging, and `libkeyutils-dev` and `libdbus-1-dev` for the native keyring. Set `APPIMAGE_EXTRACT_AND_RUN=1` when building in a container without FUSE access. The [Android setup guide](../../../README.en.md#android-development) lists the SDK packages and local signing commands.
+On Linux, CI builds on Ubuntu 22.04. Install the [Tauri system dependencies](https://v2.tauri.app/start/prerequisites/#linux), `patchelf` for AppImage packaging, and `libkeyutils-dev` and `libdbus-1-dev` for the native keyring. Set `APPIMAGE_EXTRACT_AND_RUN=1` when building in a container without FUSE access. The [Android setup guide](source-setup.md#android-development) lists the SDK packages and local signing commands.
 
 ### Build for iOS on macOS
 

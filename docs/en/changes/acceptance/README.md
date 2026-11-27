@@ -31,3 +31,4 @@ Check the applicable real-world scenarios for each implemented scope. Each page 
 ## Passed
 
 - [Documentation structure](documentation-structure.md) · Bilingual navigation, workflow and evidence verification.
+- [Product README](product-readme.md) · Bilingual product pages, installation links and source setup migration.

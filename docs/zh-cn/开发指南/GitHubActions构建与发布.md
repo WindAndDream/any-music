@@ -68,7 +68,7 @@ Windows 本地 Android 签名材料可保存在 `%USERPROFILE%\.android\any-musi
 | `pnpm release:build android-arm64` | Android SDK/NDK 和 `aarch64-linux-android` 目标 |
 | `pnpm release:build android-x64`   | Android SDK/NDK 和 `x86_64-linux-android` 目标  |
 
-Linux CI 使用 Ubuntu 22.04。本机需安装 [Tauri 系统依赖](https://v2.tauri.app/start/prerequisites/#linux)、AppImage 打包工具 `patchelf`，以及原生密钥环所需的 `libkeyutils-dev` 和 `libdbus-1-dev`。在无法使用 FUSE 的容器中构建时，设置 `APPIMAGE_EXTRACT_AND_RUN=1`。[Android 环境配置](../../../README.md#android-开发)列出了 SDK 组件和本地签名命令。
+Linux CI 使用 Ubuntu 22.04。本机需安装 [Tauri 系统依赖](https://v2.tauri.app/start/prerequisites/#linux)、AppImage 打包工具 `patchelf`，以及原生密钥环所需的 `libkeyutils-dev` 和 `libdbus-1-dev`。在无法使用 FUSE 的容器中构建时，设置 `APPIMAGE_EXTRACT_AND_RUN=1`。[Android 环境配置](源码开发.md#android-开发)列出了 SDK 组件和本地签名命令。
 
 ### 在 macOS 构建 iOS
 
