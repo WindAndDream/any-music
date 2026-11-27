@@ -13,6 +13,7 @@ Check the applicable real-world scenarios for each implemented scope. Each page 
 
 | Scope                                                       | Next check                                                            |
 | ----------------------------------------------------------- | --------------------------------------------------------------------- |
+| [Release 0.2.0](release-0-2-0.md)                           | Candidate build matrix and maintainer and tester acceptance           |
 | [Playback failure feedback](playback-failure-feedback.md)   | Check the top notice and persisted skip setting in installed builds   |
 | [Operator list jump](operator-list-jump.md)                 | Check installed Userscript and remaining collection views             |
 | [Studio interface retirement](retire-studio-ui.md)          | Classic startup with a stored Studio preference on installed builds   |
