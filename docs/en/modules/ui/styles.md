@@ -7,7 +7,7 @@ runtimeScope: shared
 
 [中文](../../../zh-cn/板块/界面/视觉样式.md)
 
-Classic, Studio and controlled UI share the token and component contracts below. `packages/card-styles` supplies reusable track/playlist skin metadata and controlled renderers. Action dialogs, playback, and writes stay with their feature owners.
+Classic and controlled UI share the token and component contracts below. `packages/card-styles` supplies reusable track/playlist skin metadata and controlled renderers. Action dialogs, playback, and writes stay with their feature owners.
 
 ## 2. Design Principles
 
@@ -67,7 +67,7 @@ Browsers without scrollbar pseudo-elements use standard thin scrollbars and incr
 
 ## 8. Component and Bundle Boundaries
 
-Themes are independent complete-root packages selected at `theme.root`; partial row/list/navigation dispatch and cross-theme overrides have been removed. Classic rows/page skins stay in theme-default, Studio owns its own structure, and UI retains neutral summary/grid/media controls and fixed host forms. Creation owns neutral timeline styles. Add build-owned themes using [Independent Theme Development](themes.md); metadata, lazy style resources and module registration share the same directory.
+Themes are independent complete-root packages selected at `theme.root`; partial row/list/navigation dispatch and cross-theme overrides have been removed. Classic owns its page and row styles. UI retains neutral summary, grid and media controls and fixed host forms. Creation owns neutral timeline styles. Add build-owned themes using [Independent Theme Development](themes.md); metadata, lazy style resources and module registration share the same directory.
 
 - Classic product presentation is maintained in `packages/theme-default`; `packages/ui` maintains runtime-neutral icons, navigation/shell primitives, controlled contracts, headless interactions, remote-image policy, tokens and protected host panels, without GM, Tauri, or source-private state. After plugin extraction, generic components/host panels remain in ui while tag/creation specialist views already belong to their plugins. Runtimes consume one shared view contract instead of copying application templates; see section 10 for the target boundary.
 - Each apps/* package maps its runtime controllers to shared props/emits. Shared business state, playback and cross-view async orchestration belong to music-workbench. Userscript GM/DOM/page bridges stay in application platform; Tauri IPC stays in platform and native HTTP/accounts/credentials in src-tauri.

@@ -13,6 +13,7 @@ Check the applicable real-world scenarios for each implemented scope. Each page 
 
 | Scope                                                       | Next check                                                            |
 | ----------------------------------------------------------- | --------------------------------------------------------------------- |
+| [Studio interface retirement](retire-studio-ui.md)          | Classic startup with a stored Studio preference on installed builds   |
 | [Userscript themes](theme-userscript.md)                    | Current installed production bundle and physical input                |
 | [Windows themes](theme-windows.md)                          | Physical input and real system dialogs                                |
 | [Android themes](theme-android.md)                          | Broader devices, configurations and longer sessions                   |

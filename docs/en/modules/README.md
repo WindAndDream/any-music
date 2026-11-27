@@ -9,7 +9,7 @@ runtimeScope: repository
 
 | Work area                                                                      | Contract and owner                                                                              |
 | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| Themes, page layout, styles, motion or virtual lists                           | [UI and themes](ui/README.md) · `ui`, both theme packages                                       |
+| Themes, page layout, styles, motion or virtual lists                           | [UI and themes](ui/README.md) · `ui`, `theme-default`                                           |
 | Favorites, playlists, tags, creation, history and download tasks               | [Library and playback](library/README.md) · `music-workbench`, `core`, built-in feature plugins |
 | Discover, search/import, catalog pagination, playback startup or source fields | [Music sources](sources/README.md) · `plugin-source-*`, runtime transports                      |
 | Plugin contributions, packages, native grants, execution or delivery           | [Plugins](plugins/README.md) · plugin packages and native crates                                |

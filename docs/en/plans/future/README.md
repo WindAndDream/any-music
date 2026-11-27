@@ -24,7 +24,7 @@ These proposals describe available directions. Select a small batch and put its 
 
 ## Virtual-list consumers
 
-The next selected batch has a [step document](../../changes/in-progress/virtual-list-consumers.md). Other families are still proposed.
+The remaining consumer families are proposals. Select the next batch from the current Classic and shared surfaces.
 
 - [Catalog](virtual-catalog-consumers.md)
 - [Library, history and download views](virtual-library-consumers.md)

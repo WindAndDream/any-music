@@ -7,9 +7,9 @@ runtimeScope: repository
 
 [简体中文](README.md) | English
 
-A cross-platform workbench for discovering, organizing, playing and creating music.
+A cross-platform workbench for discovering, organizing and playing music.
 
-Any Music brings music content from sources such as Bilibili, Douyin and NetEase Cloud Music into one workbench, with search and imports, favorites and playlists, playback queues, tags, segment composition and audio export. Built as a pnpm monorepo with Vue 3, TypeScript, Vite, Tampermonkey and Tauri 2 / Rust, it shares product logic across the userscript and native applications while implementing networking, accounts, storage and file saving separately.
+Any Music brings music content from sources such as Bilibili, Douyin and NetEase Cloud Music into one workbench, with search and imports, favorites and playlists, playback queues, tags and audio export. Built as a pnpm monorepo with Vue 3, TypeScript, Vite, Tampermonkey and Tauri 2 / Rust, it shares product logic across the userscript and native applications while implementing networking, accounts, storage and file saving separately.
 
 > The project is not yet released. Development currently starts from source and local builds. The userscript and Tauri desktop app are the existing product entries; Android is in active development, and iOS is incomplete. Capabilities and verification scope differ by runtime.
 
@@ -20,10 +20,10 @@ Team development follows the [Git Flow policy](docs/en/guides/git-flow.md); see 
 - **Multiple music sources**: built-in Bilibili, Douyin and NetEase Cloud Music adapters provide search, supported link and listing imports, and on-demand pagination. Availability depends on the source, login state and runtime.
 - **Library and playback**: favorites, playlists, Listen Later, playback queues and history, with one player for source tracks and custom compositions.
 - **Tag management**: organize the library with tags, search, filters and sorting through an independent built-in plugin.
-- **Segment composition**: manage material collections and drafts, trim and combine audio segments, reference nested custom tracks, and export MP3 / WAV.
+- **Custom music**: play and export published segment recipes from existing library references. The creation workspace is paused.
 - **Download management**: individual and batch downloads, concurrency control, retries, cancellation and history. Single tracks save as MP3; multi-track batches produce a ZIP with a result report.
 - **Desktop accounts and proxies**: manage multiple accounts per platform with isolated credentials and connection environments, account checks, proxies and backup connections. Rust owns requests and credentials.
-- **Plugins and themes**: built-in sources, tags, creation and themes use modular assembly. Desktop external plugins offer controlled installation, consent, rollback, commands and metadata catalogs.
+- **Plugins and themes**: built-in sources, tags and the Classic theme use modular assembly. Desktop external plugins offer controlled installation, consent, rollback, commands and metadata catalogs.
 
 The library stores stable source identities and composition recipes, resolving media when needed. Temporary media URLs, audio bytes and final save paths stay out of product snapshots. Userscript and Tauri storage are separate and do not synchronize automatically.
 
