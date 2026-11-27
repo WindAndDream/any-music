@@ -790,6 +790,26 @@ describe('Classic shell and current page layout integration', () => {
     )
   })
 
+  it('fits the mobile catalog platform hover background to the padded label', () => {
+    const button = '.catalog-page__context-platform'
+    const label = '.catalog-page__context-platform-label'
+    expect(readLayout(sharedStyles, [`.catalog-page__heading ${button}`], 390)).toMatchObject({
+      background: 'transparent',
+      'min-block-size': '44px',
+      'padding-inline': 'var(--am-space-1)',
+    })
+    expect(readLayout(sharedStyles, [label], 390)).toMatchObject({
+      'inline-size': 'fit-content',
+      'max-inline-size': '100%',
+      'box-sizing': 'border-box',
+      padding: 'var(--am-space-1) var(--am-space-2)',
+      'text-overflow': 'ellipsis',
+    })
+    expect(readLayout(sharedStyles, [`${button}:hover > ${label}`], 390).background).toBe(
+      'var(--am-color-surface-hover)',
+    )
+  })
+
   it('shows grab cursors in heading drag areas without disabling text selection or callouts', () => {
     const mobileSelectors = [
       '.catalog-page__heading',

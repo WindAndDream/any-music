@@ -485,7 +485,7 @@
     font: 650 var(--am-font-size-xs) var(--am-font-family);
   }
 
-  .catalog-page__heading button:hover:not(:disabled) {
+  .catalog-page__heading button:hover:not(:disabled, .catalog-page__context-platform) {
     border-color: var(--am-color-border-strong);
     background: var(--am-color-surface-hover);
   }
@@ -532,14 +532,28 @@
     inline-size: 100%;
     min-inline-size: 0;
     min-block-size: 44px;
-    overflow: hidden;
+    padding-inline: var(--am-space-1);
     border-color: transparent;
     background: transparent;
     font-size: var(--am-font-size-md);
     font-weight: 700;
     text-align: start;
+  }
+
+  .catalog-page__context-platform-label {
+    display: block;
+    box-sizing: border-box;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    overflow: hidden;
+    padding: var(--am-space-1) var(--am-space-2);
+    border-radius: var(--am-radius-sm);
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .catalog-page__context-platform:hover > .catalog-page__context-platform-label {
+    background: var(--am-color-surface-hover);
   }
 
   .catalog-page__context-summary {

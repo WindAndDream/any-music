@@ -217,7 +217,9 @@ function finishView(element: Element): void {
                     aria-label="查看音乐列表完整信息"
                     @click="contextOpen = true"
                   >
-                    {{ drawer.pluginName }}
+                    <span class="catalog-page__context-platform-label">{{
+                      drawer.pluginName
+                    }}</span>
                   </button>
                   <CatalogContextTitle
                     v-else
@@ -246,7 +248,7 @@ function finishView(element: Element): void {
                     :aria-label="
                       allDrawerFavorited
                         ? '已加载歌曲均已喜欢'
-                        : `喜欢已加载的 ${drawer.tracks.length} 首歌曲`
+                        : `喜欢 ${drawer.tracks.length} 首已加载歌曲`
                     "
                     :disabled="
                       !drawer.tracks.length ||
@@ -257,9 +259,7 @@ function finishView(element: Element): void {
                   >
                     <AppIcon name="heart" :size="17" />
                     <span class="catalog-page__favorite-label">{{
-                      allDrawerFavorited
-                        ? '已加载歌曲均已喜欢'
-                        : `喜欢已加载 ${drawer.tracks.length} 首`
+                      allDrawerFavorited ? '已加载歌曲均已喜欢' : `喜欢 ${drawer.tracks.length} 首`
                     }}</span>
                   </button>
                   <button
