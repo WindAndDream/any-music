@@ -7,13 +7,13 @@ runtimeScope: repository
 
 英文对应页：[GitHub Actions Builds and Releases](../../en/guides/github-actions-release.md)。
 
-仓库提供 Windows 全仓检查工作流，以及 Userscript、Windows x64、macOS arm64/x64、Linux x64、Android arm64/x64 的构建发布工作流。正式发布要求 Android 正式签名。iOS 有独立的模拟器构建检查。运行能力、插件执行准入和待验收事项由[桌面运行端指南](../板块/桌面与移动端/运行端架构.md)与 [S16 矩阵](../板块/桌面与移动端/移动端能力.md)维护。
+仓库在 CI 中运行 Windows 和 Android 检查，并提供 Userscript、Windows x64、macOS arm64/x64、Linux x64、Android arm64/x64 的构建发布工作流。正式发布要求 Android 正式签名。iOS 有独立的模拟器构建检查。运行能力、插件执行准入和待验收事项由[桌面运行端指南](../板块/桌面与移动端/运行端架构.md)与 [S16 矩阵](../板块/桌面与移动端/移动端能力.md)维护。
 
 ## 工作流与产物
 
 `.github/dependabot.yml` 为 pnpm 和 Cargo 的安全更新 PR 指定 Conventional Commits 格式，并关闭这两个生态的定期版本更新 PR。在仓库设置中开启 **Dependabot security updates**，GitHub 才会创建安全更新 PR。合并前检查锁文件是否仍有受影响版本。
 
-`.github/workflows/ci.yml` 在 PR 及 `main`、`develop`、`release/**`、`hotfix/**` 推送时运行，也供发布工作流复用。PR 额外运行 `Git Flow policy`，检查分支流向、标题和非 merge 提交格式。feature/fix 分支通过其 PR 运行 CI。两个 Windows job 并行运行，并分别使用独立的 Rust 缓存。一个按现有包顺序串行运行完整测试，另一个检查产品版本、类型、lint、格式、原生发布配置、Rust MSRV 和 cargo-deny，并通过根目录的 `build:prod` 脚本构建全部生产目标。只有两个 job 都成功，必需检查 `Repository checks (Windows x64)` 才会通过。Node 由 `.node-version` 固定，pnpm 由 `packageManager` 固定，Rust 由 `rust-toolchain.toml` 固定。外部 Action 固定到已核对的 Commit SHA。
+`.github/workflows/ci.yml` 在 PR 及 `main`、`develop`、`release/**`、`hotfix/**` 推送时运行，也供发布工作流复用。PR 额外运行 `Git Flow policy`，检查分支流向、标题和非 merge 提交格式。feature/fix 分支通过其 PR 运行 CI。两个 Windows job 并行运行，并分别使用独立的 Rust 缓存。一个按现有包顺序串行运行完整测试，另一个检查产品版本、类型、lint、格式、原生发布配置、Rust MSRV 和 cargo-deny，并通过根目录的 `build:prod` 脚本构建全部生产目标。并行的 Linux job 使用发布 SDK 和 NDK 为 Android arm64 运行 `pnpm check:mobile:android`。必需检查沿用规则集中的 `Repository checks (Windows x64)` 名称，三个 job 都成功后才通过。Node 由 `.node-version` 固定，pnpm 由 `packageManager` 固定，Rust 由 `rust-toolchain.toml` 固定。外部 Action 固定到已核对的 Commit SHA。
 
 `.github/workflows/release.yml` 先解析一个确定的 Commit。复用的 CI 与 Userscript、桌面端和未签名 Android 构建并行运行。已签名 Android job 等 CI 通过后才进入签名环境。`scripts/native-targets.json` 统一维护桌面 Runner、target、安装包类型，以及 Android 工具链和 versionCode。发布构建使用锁定的依赖图与明确的原生 features，不包含诊断 features。
 

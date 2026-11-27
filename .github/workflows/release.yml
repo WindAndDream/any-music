@@ -159,9 +159,6 @@ jobs:
           sdk: ${{ needs.prepare.outputs.sdk }}
           build-tools: ${{ needs.prepare.outputs.build-tools }}
           ndk: ${{ needs.prepare.outputs.ndk }}
-      - name: Check Android native code
-        if: matrix.target == 'aarch64'
-        run: pnpm check:mobile:android
       - name: Build unsigned release APK and AAB
         run: pnpm release:build "$AM_RELEASE_TARGET"
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
@@ -203,9 +200,6 @@ jobs:
           sdk: ${{ needs.prepare.outputs.sdk }}
           build-tools: ${{ needs.prepare.outputs.build-tools }}
           ndk: ${{ needs.prepare.outputs.ndk }}
-      - name: Check Android native code
-        if: matrix.target == 'aarch64'
-        run: pnpm check:mobile:android
       - name: Build and verify signed release APK and AAB
         env:
           AM_ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
