@@ -1,6 +1,7 @@
 import { createAppErrorState } from '@any-music/core'
 import { createMusicCreationModule } from '@any-music/plugin-music-creation'
 import { createTagManagementModule } from '@any-music/plugin-tag-management'
+import { descriptor as classic } from '@any-music/theme-default'
 import type { ProductViewId } from '@any-music/ui'
 import { describe, expect, it, vi } from 'vitest'
 import { effectScope } from 'vue'
@@ -11,6 +12,7 @@ import {
   createWorkbenchModuleDirectory,
 } from '../../../src/plugin-adapters/workbench-module-directory'
 import type { WorkbenchRuntime } from '../../../src/runtime/workbench-runtime'
+import { alternateDescriptor } from '../../fixtures/alternate-theme'
 
 function fixture(runtimeId: 'userscript' | 'tauri' = 'tauri') {
   const values = new Map<string, unknown>()
@@ -276,6 +278,13 @@ describe('independent module recovery startup', () => {
   })
   it('allocates trusted themes through the host and rejects stale contribution/view contexts', async () => {
     const value = fixture()
+    const config = value.runtime.modules!
+    value.runtime.uiThemes = [classic, alternateDescriptor]
+    config.directory = createWorkbenchModuleDirectory(
+      config.runtime,
+      config.features,
+      value.runtime.uiThemes,
+    )
     let viewRevision = 1
     value.ports.navigation.revision = () => viewRevision
     const scope = effectScope()
@@ -294,12 +303,12 @@ describe('independent module recovery startup', () => {
     expect(
       modules.contributions.accepts(item, 'trackList.operator.actions', { selectionCount: 2 }),
     ).toBe(false)
-    const theme = await modules.prepareTheme('studio')
-    expect(theme.slots['theme.root']).toEqual(['theme.studio/root'])
+    const theme = await modules.prepareTheme('alternate')
+    expect(theme.slots['theme.root']).toEqual(['theme.alternate/root'])
     expect(value.ports.playback.stop).not.toHaveBeenCalled()
     expect(value.ports.downloads.cancelActiveBatch).not.toHaveBeenCalled()
     await modules.safeStart()
-    await expect(modules.prepareTheme('studio')).rejects.toThrow()
+    await expect(modules.prepareTheme('alternate')).rejects.toThrow()
     expect((await modules.prepareTheme('default')).slots['theme.root']).toEqual([
       'theme.default/root',
     ])

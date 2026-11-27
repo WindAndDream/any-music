@@ -440,7 +440,7 @@
     min-width: 0;
   }
   .player__title,
-  .player__status {
+  .player__artist {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -449,7 +449,7 @@
   .player__title {
     font-size: 12px;
   }
-  .player__status {
+  .player__artist {
     color: var(--am-color-text-secondary);
     font-size: 10px;
   }
@@ -825,7 +825,7 @@
     font-size: var(--am-font-size-md);
     font-weight: 750;
   }
-  :where(.tags, .composer, .custom-plugins) {
+  :where(.tags, .custom-plugins) {
     min-block-size: 100%;
     padding: 0;
     background: transparent;

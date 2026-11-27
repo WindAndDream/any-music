@@ -6,8 +6,8 @@ const trackRowSource = readFileSync(
   new URL('../../../src/components/music-sources/TrackRow.vue', import.meta.url),
   'utf8',
 )
-const catalogDrawerSource = readFileSync(
-  new URL('../../../src/components/music-sources/CatalogDrawer.vue', import.meta.url),
+const classicCatalogSource = readFileSync(
+  new URL('../../../src/components/music-sources/ClassicCatalog.vue', import.meta.url),
   'utf8',
 )
 const operatorPanelSource = readFileSync(
@@ -71,9 +71,8 @@ describe('catalog track selection markup', () => {
     expect(operatorPanelSource).toContain("'下载处理中…' : '下载已选'")
     expect(operatorPanelSource).toContain('<span>添加喜欢</span>')
     expect(operatorPanelSource).not.toContain('删除已选歌曲')
-    expect(catalogDrawerSource).toContain('useTrackBatchActions({')
-    expect(catalogDrawerSource).toContain('@download-selected="batchActions.downloadSelected"')
-    expect(catalogDrawerSource).toContain(
+    expect(classicCatalogSource).toContain('@download-selected="batchActions.downloadSelected"')
+    expect(classicCatalogSource).toContain(
       '@add-to-playlist="batchActions.requestAddSelectedToPlaylist"',
     )
   })

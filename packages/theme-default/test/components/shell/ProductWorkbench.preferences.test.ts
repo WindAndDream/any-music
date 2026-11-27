@@ -215,7 +215,7 @@ describe('AppShellPreferencesPanel interactions', () => {
     const view = mountWorkbench({
       choices: [
         { id: 'standard', title: '标准界面' },
-        { id: 'studio', title: '工作室' },
+        { id: 'alternate', title: '测试主题' },
       ],
       currentId: () => currentId.value,
       select,
@@ -240,25 +240,25 @@ describe('AppShellPreferencesPanel interactions', () => {
     dispatchCatalogEvent(
       findCatalogElement(
         dialog,
-        (node) => node.tag === 'button' && node.textContent.includes('工作室'),
+        (node) => node.tag === 'button' && node.textContent.includes('测试主题'),
       ),
       'onClick',
     )
     await nextTick()
-    expect(select).toHaveBeenCalledExactlyOnceWith('studio')
-    expect(findButton(view.root, '界面主题：工作室')).toBeDefined()
+    expect(select).toHaveBeenCalledExactlyOnceWith('alternate')
+    expect(findButton(view.root, '界面主题：测试主题')).toBeDefined()
     expect(() => findCatalogElement(view.root, (node) => node.props.role === 'dialog')).toThrow()
     expect(
       findCatalogElement(view.root, (node) => node.props['aria-label'] === '自定义界面').props
         .inert,
     ).toBeUndefined()
 
-    dispatchCatalogEvent(findButton(view.root, '界面主题：工作室'), 'onClick')
+    dispatchCatalogEvent(findButton(view.root, '界面主题：测试主题'), 'onClick')
     await nextTick()
     dispatchCatalogEvent(findButton(view.root, '关闭选择'), 'onClick')
     await nextTick()
     expect(select).toHaveBeenCalledTimes(1)
-    expect(findButton(view.root, '界面主题：工作室')).toBeDefined()
+    expect(findButton(view.root, '界面主题：测试主题')).toBeDefined()
     view.unmount()
   })
 })

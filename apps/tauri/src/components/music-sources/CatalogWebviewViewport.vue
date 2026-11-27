@@ -12,7 +12,6 @@ import { useCatalogWebview } from '../../platform/use-catalog-webview'
 const props = defineProps<
   CatalogViewportContext & {
     feature: UiThemeFeatureMap['catalog']
-    theme: string
     colorScheme: 'light' | 'dark'
     density: string
     suspended: boolean
@@ -32,7 +31,6 @@ const snapshot = computed<CatalogSnapshot>(() => {
   const ids = new Set(tracks.value.map(({ id }) => id))
   const relevant = <T>(values: ReadonlyMap<string, T>) => [...values].filter(([id]) => ids.has(id))
   return {
-    theme: props.theme === 'studio' ? 'studio' : 'classic',
     colorScheme: props.colorScheme,
     density: props.density,
     selectable: props.selectable,
@@ -41,7 +39,6 @@ const snapshot = computed<CatalogSnapshot>(() => {
     selected: state.selectedTrackIds.filter((id) => ids.has(id)),
     favorite: state.favoriteTrackIds.filter((id) => ids.has(id)),
     invalid: state.invalidTrackIds.filter((id) => ids.has(id)),
-    queued: state.queuedTrackIds.filter((id) => ids.has(id)),
     names: relevant(state.customNamesByTrackId),
     tags: relevant(state.customTagsByTrackId),
     itemStyle: state.itemStyle,
@@ -55,7 +52,6 @@ const snapshot = computed<CatalogSnapshot>(() => {
       status: drawer.status,
       hasMore: drawer.hasMore,
       paginationLocked: drawer.paginationLocked,
-      errorMessage: drawer.errorMessage,
       loadedPageCount: drawer.loadedPageCount,
     },
     loadedTrackCount: drawer.tracks.length,
@@ -107,9 +103,6 @@ function onAction(action: CatalogAction) {
     }
     case 'favorite':
       void actions.toggleFavorite(action.id)
-      break
-    case 'queue':
-      actions.toggleQueue(action.id)
       break
     case 'download':
       void actions.download([action.id])

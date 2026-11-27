@@ -32,7 +32,6 @@
     "@any-music/plugin-music-creation": "workspace:*",
     "@any-music/plugin-tag-management": "workspace:*",
     "@any-music/theme-default": "workspace:*",
-    "@any-music/theme-studio": "workspace:*",
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "sass": "catalog:",

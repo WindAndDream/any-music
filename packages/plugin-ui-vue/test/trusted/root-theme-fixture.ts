@@ -45,7 +45,10 @@ export function rootComposition(
   fallback = rootTheme('default'),
 ): ThemeApplicationComposition {
   return {
-    themes: BUILT_IN_UI_THEMES.map((descriptor) => ({
+    themes: [
+      ...BUILT_IN_UI_THEMES,
+      { ...BUILT_IN_UI_THEMES[0]!, id: 'alternate', title: 'Test theme' },
+    ].map((descriptor) => ({
       descriptor,
       load: () => load(descriptor.id),
     })),

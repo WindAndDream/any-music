@@ -10,10 +10,10 @@ function detach(node: CatalogTestElement) {
 }
 
 /** Real compiled theme components, injected boxes/focus only; no native layout acceptance. */
-export function createSemanticThemeRenderer(getTheme: () => 'classic' | 'studio') {
+export function createSemanticThemeRenderer(columns: () => number = () => 3) {
   const view = Object.assign(new EventTarget(), {
     getComputedStyle: () => ({
-      gridTemplateColumns: '300px 300px 300px',
+      gridTemplateColumns: Array.from({ length: columns() }, () => '300px').join(' '),
       columnGap: '12px',
       rowGap: '12px',
       direction: 'ltr',
@@ -103,17 +103,13 @@ export function createSemanticThemeRenderer(getTheme: () => 'classic' | 'studio'
       return this.isConnected ? [this.getBoundingClientRect()] : []
     }
     getBoundingClientRect(): DOMRect {
-      const scroll = this.closest('.music-app-shell__content, .studio-content')
+      const scroll = this.closest('.music-app-shell__content')
       const occurrence = this.closest('[data-occurrence], [data-am-continuity-item]')
       const key = occurrence?.dataset.occurrence ?? occurrence?.dataset.amContinuityItem
       const index = key ? Number(key.slice(key.lastIndexOf(':') + 1)) : undefined
       const position =
-        index !== undefined && Number.isFinite(index)
-          ? getTheme() === 'classic'
-            ? Math.floor(index / 3) * 112
-            : index * 60
-          : 0
-      const height = getTheme() === 'classic' ? 100 : 60
+        index !== undefined && Number.isFinite(index) ? Math.floor(index / columns()) * 112 : 0
+      const height = 100
       const top = this === scroll ? 0 : 80 + position - (scroll?.scrollTop ?? 0)
       return {
         top,

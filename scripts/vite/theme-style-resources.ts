@@ -38,7 +38,6 @@ export function themeStyleResources(root: string, app: 'userscript' | 'tauri') {
       'packages/music-workbench/src',
       'packages/plugin-ui-vue/src',
       'packages/plugin-tag-management/src',
-      'packages/plugin-music-creation/src',
       `apps/${app}/src`,
     ],
     ...Object.fromEntries(themeRoots),

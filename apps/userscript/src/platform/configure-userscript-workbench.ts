@@ -8,7 +8,6 @@ import {
   builtInWorkbenchModules,
   builtInFeatureModules,
   loadTagManagement,
-  loadMusicCreation,
   builtInUiThemes,
 } from '../features/plugins/built-in-workbench-modules'
 import { gmHttpClient, gmHttpTransport, configureGmHttpCache } from './http/gm-http-client'
@@ -35,7 +34,6 @@ export async function configureUserscriptWorkbench(): Promise<() => Promise<void
       protectedStyles,
       externalPlugins: 'none',
       loadTagManagement,
-      loadMusicCreation,
       uiThemes: builtInUiThemes,
       modules: {
         runtime: 'userscript',

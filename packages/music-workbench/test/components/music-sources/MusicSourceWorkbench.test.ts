@@ -1,8 +1,6 @@
 import type { HttpClient, MusicSourcePlugin } from '@any-music/core'
 import { descriptor as classic } from '@any-music/theme-default'
 import { definition as classicRoot } from '@any-music/theme-default/vue'
-import { descriptor as studio } from '@any-music/theme-studio'
-import { definition as studioRoot } from '@any-music/theme-studio/vue'
 import { UI_THEME_SELECTION } from '@any-music/ui'
 import type { UiThemeSelection } from '@any-music/ui'
 import type { UiThemeDefinition } from '@any-music/ui/theme'
@@ -16,6 +14,7 @@ import * as libraryFactory from '../../../src/features/library/use-local-music-l
 import * as playerFactory from '../../../src/features/player/use-audio-player'
 import { configureWorkbenchRuntime } from '../../../src/runtime/workbench-runtime'
 import { createProductGenerationStorage } from '../../../src/storage/product-generation-store'
+import { alternateDefinition, alternateDescriptor } from '../../fixtures/alternate-theme'
 import { CatalogTestElement, renderer, findCatalogElement } from '../../helpers/test-renderer'
 import { memory, options } from '../../storage/product-storage-fixtures'
 
@@ -39,7 +38,7 @@ afterEach(() => {
   vi.unstubAllGlobals()
 })
 
-async function verifyAccountCapability(hasAccountUi: boolean, blockStudio = false) {
+async function verifyAccountCapability(hasAccountUi: boolean, blockAlternate = false) {
   const shadows: CatalogTestElement[] = []
   const prototype = CatalogTestElement.prototype
   const additions = {
@@ -123,9 +122,13 @@ async function verifyAccountCapability(hasAccountUi: boolean, blockStudio = fals
       }),
     }
   }
-  const loadStudio = vi.fn(async () => ({
-    definition: observeCapabilities(studioRoot),
-    css: 'studio-resource',
+  const unavailableReason = '测试主题正在开发中。'
+  const optionalDescriptor = blockAlternate
+    ? { ...alternateDescriptor, unavailableReason }
+    : alternateDescriptor
+  const loadAlternate = vi.fn(async () => ({
+    definition: observeCapabilities(alternateDefinition),
+    css: 'alternate-resource',
   }))
   const fallback = {
     descriptor: classic,
@@ -161,14 +164,14 @@ async function verifyAccountCapability(hasAccountUi: boolean, blockStudio = fals
     configureProxy() {},
     openLogin() {},
     protectedStyles: 'host-resource',
+    uiThemes: [classic, optionalDescriptor],
     themes: {
       fallback,
       themes: [
         { descriptor: classic, load: async () => fallback.loaded },
-        // Continuity cases admit a future Studio build; blocked cases retain production metadata.
         {
-          descriptor: blockStudio ? studio : { ...studio, unavailableReason: undefined },
-          load: loadStudio,
+          descriptor: optionalDescriptor,
+          load: loadAlternate,
         },
       ],
     },
@@ -220,7 +223,7 @@ async function verifyAccountCapability(hasAccountUi: boolean, blockStudio = fals
       (node) => node.tag === 'style' && node.textContent === 'classic-resource',
     ),
   )!
-  expect(loadStudio).not.toHaveBeenCalled()
+  expect(loadAlternate).not.toHaveBeenCalled()
   function expectAccountCapability() {
     expect(accountCapability).toBe(hasAccountUi)
     expect(networkCapability).toBe(true)
@@ -228,29 +231,29 @@ async function verifyAccountCapability(hasAccountUi: boolean, blockStudio = fals
   }
   expectAccountCapability()
   const saved = storage.read('ui-theme:v1')
-  if (blockStudio) {
-    selection.select('studio')
-    await vi.waitFor(() => expect(surface.textContent).toContain(studio.unavailableReason))
-    expect(loadStudio).not.toHaveBeenCalled()
+  if (blockAlternate) {
+    selection.select('alternate')
+    await vi.waitFor(() => expect(surface.textContent).toContain(unavailableReason))
+    expect(loadAlternate).not.toHaveBeenCalled()
     expect(selection.currentId()).toBe('default')
     expect(selection.error?.()).toBe('')
     expect(storage.read('ui-theme:v1')).toEqual(saved)
   } else {
-    loadStudio.mockRejectedValueOnce(new Error('optional import failed'))
-    selection.select('studio')
+    loadAlternate.mockRejectedValueOnce(new Error('optional import failed'))
+    selection.select('alternate')
     await vi.waitFor(() => expect(selection.error?.()).toContain('界面主题不可用'))
     expect(selection.currentId()).toBe('default')
     expect(storage.read('ui-theme:v1')).toEqual(saved)
-    selection.select('studio')
+    selection.select('alternate')
     await vi.waitFor(() =>
       expect(
-        findCatalogElement(surface, (node) => node.props['data-am-ui-theme'] === 'studio'),
+        findCatalogElement(surface, (node) => node.props['data-am-ui-theme'] === 'alternate'),
       ).toBeDefined(),
     )
     expectAccountCapability()
     expect(
       surface.children.filter((node) => node.tag === 'style').map((node) => node.textContent),
-    ).toEqual(['studio-resource'])
+    ).toEqual(['alternate-resource'])
     selection.select('default')
     await vi.waitFor(() =>
       expect(
@@ -272,6 +275,6 @@ it.each([false, true])(
   (hasAccountUi) => verifyAccountCapability(hasAccountUi),
 )
 it.each([false, true])(
-  'keeps developing Studio unloaded and shows its notice in the production host (account UI: %s)',
+  'keeps a developing theme unloaded and shows its notice in the production host (account UI: %s)',
   (hasAccountUi) => verifyAccountCapability(hasAccountUi, true),
 )

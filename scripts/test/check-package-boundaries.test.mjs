@@ -187,7 +187,7 @@ test('source metadata cannot load protocols and source plugins cannot access the
 test('independent themes accept only public metadata, Vue and style entries without eager presentation', (context) => {
   const workspace = createWorkspace(context)
   workspace.theme()
-  workspace.theme('theme-studio')
+  workspace.theme('theme-alternate')
   workspace.theme('theme-default', {
     dependencies: { '@any-music/ui': 'workspace:*', '@any-music/core': 'workspace:*' },
   })
@@ -197,7 +197,7 @@ test('independent themes accept only public metadata, Vue and style entries with
   )
   workspace.write(
     'apps/userscript/src/themes.ts',
-    "import { descriptor } from '@any-music/theme-default'; export const load = () => import('@any-music/theme-studio/vue'); export const styles = () => import('@any-music/theme-studio/styles?inline')",
+    "import { descriptor } from '@any-music/theme-default'; export const load = () => import('@any-music/theme-alternate/vue'); export const styles = () => import('@any-music/theme-alternate/styles?inline')",
   )
   assert.deepEqual(workspace.check(), [])
   workspace.write('packages/theme-default/src/index.ts', "export * from './vue'")
@@ -209,9 +209,9 @@ test('independent themes accept only public metadata, Vue and style entries with
 test('theme dependency fixtures reject cross-theme, host, native, SDK, private and cyclic edges', (context) => {
   const workspace = createWorkspace(context)
   workspace.theme()
-  workspace.theme('theme-studio')
+  workspace.theme('theme-alternate')
   for (const specifier of [
-    '@any-music/theme-studio/vue',
+    '@any-music/theme-alternate/vue',
     '@any-music/music-workbench',
     '@any-music/plugin-sdk',
     '@any-music/core',
@@ -226,15 +226,19 @@ test('theme dependency fixtures reject cross-theme, host, native, SDK, private a
     workspace.write('packages/theme-default/src/vue.ts', `import '${specifier}'`)
     assert.ok(workspace.check().length > 0, specifier)
   }
-  workspace.theme('theme-default', { dependencies: { '@any-music/theme-studio': 'workspace:*' } })
-  workspace.theme('theme-studio', { dependencies: { '@any-music/theme-default': 'workspace:*' } })
+  workspace.theme('theme-default', {
+    dependencies: { '@any-music/theme-alternate': 'workspace:*' },
+  })
+  workspace.theme('theme-alternate', {
+    dependencies: { '@any-music/theme-default': 'workspace:*' },
+  })
   assert.ok(workspace.check().some((error) => error.includes('package dependency cycle')))
 })
 
 test('theme metadata follows local barrels; private exports and cross-theme Sass cannot escape checks', (context) => {
   const workspace = createWorkspace(context)
   workspace.theme()
-  workspace.theme('theme-studio')
+  workspace.theme('theme-alternate')
   workspace.write('packages/theme-default/src/index.ts', "export * from './metadata'")
   workspace.write(
     'packages/theme-default/src/metadata.ts',
@@ -244,7 +248,7 @@ test('theme metadata follows local barrels; private exports and cross-theme Sass
   assert.ok(errors.some((error) => error.includes('eagerly loads vue')))
   assert.ok(errors.some((error) => error.includes('eagerly loads business or presentation')))
   workspace.write(
-    'packages/theme-studio/src/styles/index.scss',
+    'packages/theme-alternate/src/styles/index.scss',
     "@use '@any-music/theme-default/styles';",
   )
   assert.ok(

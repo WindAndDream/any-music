@@ -277,6 +277,8 @@ export function useWorkbenchModules(
       })
     },
     contributions: contributionHost,
+    hasModule: (id: string) =>
+      getWorkbenchModuleConfiguration(runtime).directory.some((entry) => entry.id === id),
     getDevelopmentStatus: (id: string) =>
       getWorkbenchModuleConfiguration(runtime).directory.find(
         (entry) =>

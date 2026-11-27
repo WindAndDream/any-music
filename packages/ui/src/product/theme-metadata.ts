@@ -22,14 +22,13 @@ export const UI_THEME_REQUIRED_VIEWS = Object.freeze([
   'queue',
   'favorites',
   'playlists',
-  'custom-tracks',
   'history',
   'downloads',
   'plugins',
   'settings',
   'overlays',
 ] as const)
-export const UI_THEME_OPTIONAL_VIEWS = Object.freeze(['tags', 'composer'] as const)
+export const UI_THEME_OPTIONAL_VIEWS = Object.freeze(['tags', 'composer', 'custom-tracks'] as const)
 export type UiThemeRequiredView = (typeof UI_THEME_REQUIRED_VIEWS)[number]
 export type UiThemeOptionalView = (typeof UI_THEME_OPTIONAL_VIEWS)[number]
 export type UiThemeViewId = UiThemeRequiredView | UiThemeOptionalView

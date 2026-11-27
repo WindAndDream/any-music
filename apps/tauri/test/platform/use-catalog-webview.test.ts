@@ -156,7 +156,6 @@ it('keeps ordinary song actions in the current surface and paints before opening
   const actions: CatalogAction[] = [
     { type: 'select', id: 'track' },
     { type: 'favorite', id: 'track' },
-    { type: 'queue', id: 'track' },
     { type: 'play', id: 'track' },
     { type: 'download', id: 'track' },
     { type: 'more' },

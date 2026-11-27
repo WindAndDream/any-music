@@ -25,9 +25,8 @@ describe('production Userscript graph boundary', () => {
       assertUserscriptBundleBoundary(
         [
           'packages/plugin-source-bilibili/src/bilibili-plugin.ts',
-          'packages/plugin-ui-vue/src/trusted/themes/default.ts',
+          'packages/theme-default/src/vue.ts',
           'packages/plugin-tag-management/src/vue/index.ts',
-          'packages/plugin-music-creation/src/vue/index.ts',
           'packages/music-workbench/src/features/plugins/use-native-plugin-authority.ts',
         ],
         ['apps/userscript/src/main.ts', 'packages/plugin-source-douyin/src/runtime-contracts.ts'],

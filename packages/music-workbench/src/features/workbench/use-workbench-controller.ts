@@ -16,9 +16,7 @@ import {
 } from '@any-music/ui'
 import type {
   AppShellPreferenceKind,
-  CatalogDrawerListSummary,
   CatalogTrackDisplayMode,
-  CatalogTrackListSummary,
   MobileTrackColumns,
   TrackPlaybackState,
   NavigationItem,
@@ -30,7 +28,6 @@ import {
   catalogRootEditingKey,
   createCatalogRootEditing,
   hasCatalogDrawerError,
-  useCatalogSelectionOperator,
 } from '@any-music/ui/catalog'
 import { computed, onScopeDispose, shallowRef, watch } from 'vue'
 import type { ShallowRef } from 'vue'
@@ -105,26 +102,10 @@ export function useWorkbenchController(
   const isCatalogContextOpen = shallowRef(false)
   const activeCatalogDrawerId = shallowRef<string>()
   const lastViewedCatalogDrawerId = shallowRef<string>()
-  const isCatalogFilterOpen = shallowRef(false)
-  const isCatalogOperatorOpen = shallowRef(false)
   const queueView = useTrackCollectionView('queue')
   const favoriteView = useTrackCollectionView('favorites')
   const downloadView = useTrackCollectionView('downloads')
   downloadView.isOperatorAvailable.value = true
-  const isCatalogChildModalOpen = shallowRef(false)
-  const catalogFilterCount = shallowRef(0)
-  const catalogTrackListSummary = shallowRef<CatalogTrackListSummary>({
-    selectedCount: 0,
-    visibleCount: 0,
-    totalCount: 0,
-  })
-  const catalogDrawerListSummary = shallowRef<CatalogDrawerListSummary>({
-    selectedCount: 0,
-    visibleCount: 0,
-    totalCount: 0,
-    filterCount: 0,
-  })
-  const isCatalogDisplayDialogOpen = shallowRef(false)
   const trackDisplayMode = shallowRef<CatalogTrackDisplayMode>('standard')
   const mobileTrackColumns = shallowRef<MobileTrackColumns>(1)
   const activeActionTrackId = shallowRef<string>()
@@ -151,7 +132,7 @@ export function useWorkbenchController(
       onUnavailable: actionFeedback.showUnavailable,
       requiredOptionalViews: () => [
         ...(tagManagement.available.value ? ['tags' as const] : []),
-        ...(musicCreation.available.value ? ['composer' as const] : []),
+        ...(musicCreation.available.value ? (['composer', 'custom-tracks'] as const) : []),
       ],
     },
   )
@@ -328,9 +309,6 @@ export function useWorkbenchController(
   watch(activeTab, () => {
     isMusicSourcePickerOpen.value = false
     isCatalogContextOpen.value = false
-    // 导航不修改筛选器/操作器的逻辑开关，隐藏页面负责暂停自己的浮层。
-    isCatalogChildModalOpen.value = false
-    isCatalogDisplayDialogOpen.value = false
     activeActionTrackId.value = undefined
     closeCatalogError()
   })
@@ -459,10 +437,6 @@ export function useWorkbenchController(
     },
     { flush: 'sync' },
   )
-  useCatalogSelectionOperator({
-    context: () => activeCatalogDrawerId.value ?? 'drawers',
-    open: isCatalogOperatorOpen,
-  })
   const activeCatalogContextTitle = computed(() => {
     const drawer = activeCatalogDrawer.value
     if (!drawer) return ''
@@ -492,14 +466,9 @@ export function useWorkbenchController(
     )
   })
   watch(activeCatalogDrawer, (drawer) => {
-    // 配方可能被外部同步移除；清理筛选器和操作器，避免壳层残留浮层状态。
+    // An externally removed request releases its view and action target.
     if (drawer || !activeCatalogDrawerId.value) return
     activeCatalogDrawerId.value = undefined
-    isCatalogFilterOpen.value = false
-    isCatalogOperatorOpen.value = false
-    isCatalogChildModalOpen.value = false
-    catalogFilterCount.value = 0
-    isCatalogDisplayDialogOpen.value = false
     activeActionTrackId.value = undefined
   })
   watch(activeActionTrack, (track) => {
@@ -540,14 +509,11 @@ export function useWorkbenchController(
       isDiscoveryOpen.value ||
       isMusicSourcePickerOpen.value ||
       isCatalogContextOpen.value ||
-      (activeTab.value === 'catalog' && isCatalogFilterOpen.value) ||
       isQueueFilterOpen.value ||
       ((activeTab.value === 'queue' ||
         activeTab.value === 'favorites' ||
         activeTab.value === 'downloads') &&
         activeCollectionView.value.isChildModalOpen.value) ||
-      isCatalogChildModalOpen.value ||
-      isCatalogDisplayDialogOpen.value ||
       Boolean(activeActionTrack.value) ||
       Boolean(activeActionDrawer.value) ||
       Boolean(catalogErrorDrawer.value) ||
@@ -579,11 +545,7 @@ export function useWorkbenchController(
     isDiscoveryOpen.value = false
     // 设置叠在当前歌曲页上方，主题或布局变化不能把用户送回列表首页。
     if (activeTab.value === 'catalog') {
-      isCatalogFilterOpen.value = false
-      isCatalogOperatorOpen.value = false
     }
-    isCatalogChildModalOpen.value = false
-    isCatalogDisplayDialogOpen.value = false
     activeActionTrackId.value = undefined
     catalogErrorDrawerId.value = undefined
     initialSettingsSection.value = initialSection
@@ -599,8 +561,6 @@ export function useWorkbenchController(
 
   function openDiscovery(): void {
     activeActionDrawerId.value = undefined
-    isCatalogOperatorOpen.value = false
-    isCatalogFilterOpen.value = false
     isGlobalSettingsOpen.value = false
     closePreferences()
     isDiscoveryOpen.value = true
@@ -620,8 +580,6 @@ export function useWorkbenchController(
   function openCatalogDrawer(drawerId: string): void {
     const drawer = workspace.drawers.value.find((item) => item.id === drawerId)
     if (!drawer) return
-    isCatalogOperatorOpen.value = false
-    isCatalogFilterOpen.value = false
     lastViewedCatalogDrawerId.value = drawerId
     catalogErrorDrawerId.value = undefined
     activeCatalogDrawerId.value = drawerId
@@ -629,11 +587,6 @@ export function useWorkbenchController(
   }
 
   function closeCatalogDrawer(): void {
-    isCatalogFilterOpen.value = false
-    isCatalogOperatorOpen.value = false
-    isCatalogChildModalOpen.value = false
-    catalogFilterCount.value = 0
-    isCatalogDisplayDialogOpen.value = false
     activeActionTrackId.value = undefined
     activeCatalogDrawerId.value = undefined
   }
@@ -646,28 +599,11 @@ export function useWorkbenchController(
     activeActionTrackId.value = track.id
   }
 
-  function openCatalogFilter(): void {
-    isCatalogOperatorOpen.value = false
-    isCatalogFilterOpen.value = true
-  }
-
-  function toggleCatalogOperator(): void {
-    const shouldOpen = !isCatalogOperatorOpen.value
-    isCatalogFilterOpen.value = false
-    isCatalogOperatorOpen.value = shouldOpen
-  }
-
   function openQueueFilter(): void {
     activeCollectionView.value.openFilter()
   }
   function toggleQueueOperator(): void {
     activeCollectionView.value.toggleOperator()
-  }
-
-  function openCatalogDisplayDialog(): void {
-    isCatalogFilterOpen.value = false
-    isCatalogOperatorOpen.value = false
-    isCatalogDisplayDialogOpen.value = true
   }
 
   /** 空歌单引导沿用正式“我的歌单”创建入口，不在只读搜索结果中复制写入表单。 */
@@ -732,7 +668,6 @@ export function useWorkbenchController(
 
   function openMusicSourcePicker(): void {
     if (displayedCatalogDrawer.value) return
-    isCatalogOperatorOpen.value = false
     isMusicSourcePickerOpen.value = true
   }
 
@@ -743,7 +678,6 @@ export function useWorkbenchController(
   }
 
   function openCatalogContext(): void {
-    isCatalogOperatorOpen.value = false
     isCatalogContextOpen.value = true
   }
 
@@ -808,16 +742,9 @@ export function useWorkbenchController(
     isCatalogContextOpen,
     activeCatalogDrawerId,
     lastViewedCatalogDrawerId,
-    isCatalogFilterOpen,
-    isCatalogOperatorOpen,
     queueView,
     favoriteView,
     downloadView,
-    isCatalogChildModalOpen,
-    catalogFilterCount,
-    catalogTrackListSummary,
-    catalogDrawerListSummary,
-    isCatalogDisplayDialogOpen,
     trackDisplayMode,
     mobileTrackColumns,
     activeActionTrackId,
@@ -984,11 +911,8 @@ export function useWorkbenchController(
     openCatalogDrawer,
     closeCatalogDrawer,
     openTrackActions,
-    openCatalogFilter,
-    toggleCatalogOperator,
     openQueueFilter,
     toggleQueueOperator,
-    openCatalogDisplayDialog,
     openPlaylistCreation,
     openCatalogError,
     closeCatalogError,

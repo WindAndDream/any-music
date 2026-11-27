@@ -17,11 +17,9 @@ type Result = Pick<
   | 'hasMore'
   | 'paginationLocked'
   | 'loadedPageCount'
-  | 'errorMessage'
 >
 
 export interface CatalogSnapshot extends Display {
-  theme: 'classic' | 'studio'
   colorScheme: 'light' | 'dark'
   density: string
   drawer: Result
@@ -32,12 +30,11 @@ export interface CatalogSnapshot extends Display {
   selected: readonly string[]
   favorite: readonly string[]
   invalid: readonly string[]
-  queued: readonly string[]
   names: readonly [string, string][]
   tags: readonly [string, readonly string[]][]
 }
 
-export type TrackAction = 'play' | 'select' | 'favorite' | 'queue' | 'download' | 'actions'
+export type TrackAction = 'play' | 'select' | 'favorite' | 'download' | 'actions'
 export type CatalogAction = { type: TrackAction; id: string } | { type: 'more' }
 
 export interface CatalogLayout {

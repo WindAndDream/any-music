@@ -1,6 +1,5 @@
 import { BUILT_IN_UI_THEMES } from '@any-music/plugin-ui-vue/directory'
 import type { LoadedRootTheme, ThemeApplicationComposition } from '@any-music/plugin-ui-vue/trusted'
-import { descriptor as studioDescriptor } from '@any-music/theme-studio'
 import { provideActionFeedback } from '@any-music/ui'
 import { UI_THEME_REQUIRED_VIEWS } from '@any-music/ui/theme'
 import type { UiThemeRootProps, UiThemeViews } from '@any-music/ui/theme'
@@ -10,6 +9,9 @@ import type { PropType } from 'vue'
 
 import type { WorkbenchRuntime } from '../../../src/runtime/workbench-runtime'
 import { useWorkbenchRootTheme } from '../../../src/theme'
+import { alternateDescriptor } from '../../fixtures/alternate-theme'
+
+const unavailableReason = '测试主题正在开发中。'
 
 const renderer = createRenderer<object, object>({
   createElement: () => ({}),
@@ -57,7 +59,8 @@ function mount(
     write?: () => void
     renderFailure?: boolean
     read?: () => unknown
-    blockStudio?: boolean
+    blockAlternate?: boolean
+    classicOnly?: boolean
   } = {},
 ) {
   vi.stubGlobal(
@@ -84,8 +87,14 @@ function mount(
     storage: { read: options.read ?? (() => undefined), write },
   } as unknown as WorkbenchRuntime
   const composition: ThemeApplicationComposition = {
-    themes: BUILT_IN_UI_THEMES.map((descriptor) => ({
-      descriptor: options.blockStudio && descriptor.id === 'studio' ? studioDescriptor : descriptor,
+    themes: (options.classicOnly
+      ? BUILT_IN_UI_THEMES
+      : [...BUILT_IN_UI_THEMES, alternateDescriptor]
+    ).map((descriptor) => ({
+      descriptor:
+        options.blockAlternate && descriptor.id === alternateDescriptor.id
+          ? { ...descriptor, unavailableReason }
+          : descriptor,
       load: () => options.load?.(descriptor.id) ?? Promise.resolve(loaded(descriptor.id)),
     })),
     fallback: { descriptor: BUILT_IN_UI_THEMES[0]!, loaded: loaded('default') },
@@ -103,7 +112,7 @@ function mount(
           watch(
             session.current,
             (snapshot) => {
-              if (snapshot.theme.definition.id === 'studio')
+              if (snapshot.theme.definition.id === 'alternate')
                 session.reportRenderFailure(snapshot.generation, new Error('render failed'))
             },
             { flush: 'sync' },
@@ -124,17 +133,17 @@ function mount(
 }
 it('rejects the developing theme before loading and shows its reason for every selection attempt', async () => {
   const load = vi.fn(async (id: string) => loaded(id))
-  const value = mount({ blockStudio: true, load })
+  const value = mount({ blockAlternate: true, load })
   await vi.waitFor(() => expect(value.write).toHaveBeenCalledOnce())
   load.mockClear()
-  await value.session.select('studio')
+  await value.session.select('alternate')
   expect(value.session.current.value.theme.definition.id).toBe('default')
   expect(value.feedback.notice.value).toMatchObject({
     tone: 'info',
-    message: studioDescriptor.unavailableReason,
+    message: unavailableReason,
   })
   const firstId = value.feedback.notice.value!.id
-  await value.session.select('studio')
+  await value.session.select('alternate')
   expect(value.feedback.notice.value!.id).toBeGreaterThan(firstId)
   expect(load).not.toHaveBeenCalled()
   expect(value.write).toHaveBeenCalledOnce()
@@ -143,9 +152,9 @@ it('rejects the developing theme before loading and shows its reason for every s
 it('starts the default theme without loading a saved developing theme', async () => {
   const load = vi.fn(async (id: string) => loaded(id))
   const value = mount({
-    blockStudio: true,
+    blockAlternate: true,
     load,
-    read: () => ({ themeId: 'studio', settingsByTheme: {} }),
+    read: () => ({ themeId: 'alternate', settingsByTheme: {} }),
   })
   await vi.waitFor(() => expect(value.write).toHaveBeenCalledOnce())
   expect(load.mock.calls.map(([id]) => id)).toEqual(['default'])
@@ -153,10 +162,27 @@ it('starts the default theme without loading a saved developing theme', async ()
   expect(value.feedback.notice.value).toBeUndefined()
   expect(value.session.failure.value).toBe(false)
 })
+it('starts Classic and retains other settings when a stored Studio theme is absent', async () => {
+  const load = vi.fn(async (id: string) => loaded(id))
+  const studio = { schemaVersion: 1, density: 'compact' }
+  const value = mount({
+    classicOnly: true,
+    load,
+    read: () => ({ themeId: 'studio', settingsByTheme: { studio } }),
+  })
+  await vi.waitFor(() => expect(value.write).toHaveBeenCalledOnce())
+  expect(load.mock.calls.map(([id]) => id)).toEqual(['default'])
+  expect(value.session.current.value.theme.definition.id).toBe('default')
+  expect(value.session.failure.value).toBe(false)
+  expect(value.write).toHaveBeenCalledWith('ui-theme:v1', {
+    themeId: 'default',
+    settingsByTheme: { default: { schemaVersion: 1, density: 'standard' }, studio },
+  })
+})
 it('does not persist a root that fails its first render and preserves usable fallback without saving it', async () => {
   const value = mount({ renderFailure: true })
   await vi.waitFor(() => expect(value.write).toHaveBeenCalledOnce())
-  await value.session.select('studio')
+  await value.session.select('alternate')
   expect(value.session.current.value.theme.definition.id).toBe('default')
   expect(value.session.needsRecovery.value).toBe(false)
   expect(value.write).toHaveBeenCalledOnce()
@@ -166,22 +192,22 @@ it('saves only the newest successful root, skips late imports, and releases ever
   let resolve!: (theme: LoadedRootTheme) => void
   const value = mount({
     load: (id) =>
-      id === 'studio'
+      id === 'alternate'
         ? new Promise((done) => {
             resolve = done
           })
         : Promise.resolve(loaded(id)),
   })
   await vi.waitFor(() => expect(value.write).toHaveBeenCalledOnce())
-  const old = value.session.select('studio')
+  const old = value.session.select('alternate')
   await value.session.select('default')
-  resolve(loaded('studio'))
+  resolve(loaded('alternate'))
   await old
   expect(value.write).toHaveBeenCalledTimes(2)
   expect(value.session.current.value.theme.definition.id).toBe('default')
-  const pending = value.session.select('studio')
+  const pending = value.session.select('alternate')
   value.unmount()
-  resolve(loaded('studio'))
+  resolve(loaded('alternate'))
   await pending
   expect(value.write).toHaveBeenCalledTimes(2)
   expect(value.styles.size).toBe(0)
@@ -195,12 +221,12 @@ it('keeps a committed complete root usable when saving its preference fails and 
   })
   await vi.waitFor(() => expect(value.write).toHaveBeenCalledOnce())
   fail = true
-  await value.session.select('studio')
-  expect(value.session.current.value.theme.definition.id).toBe('studio')
+  await value.session.select('alternate')
+  expect(value.session.current.value.theme.definition.id).toBe('alternate')
   expect(value.session.failure.value).toBe(true)
   expect(value.session.needsRecovery.value).toBe(false)
   fail = false
-  await value.session.select('studio')
+  await value.session.select('alternate')
   expect(value.session.failure.value).toBe(false)
 })
 it('retains a startup read failure without overwriting unread preferences and can explicitly retry', async () => {
@@ -224,12 +250,12 @@ it('restores saved fallback settings when a requested theme fails without changi
       settingsByTheme: { default: { schemaVersion: 1, density: 'compact' } },
     }),
     load: async (id) => {
-      if (id === 'studio') throw new Error('import failed')
+      if (id === 'alternate') throw new Error('import failed')
       return loaded(id)
     },
   })
   await vi.waitFor(() => expect(value.write).toHaveBeenCalledOnce())
-  await value.session.select('studio')
+  await value.session.select('alternate')
   expect(value.session.current.value.theme.definition.id).toBe('default')
   expect(value.session.current.value.settings.density).toBe('compact')
   expect(value.write).toHaveBeenCalledOnce()

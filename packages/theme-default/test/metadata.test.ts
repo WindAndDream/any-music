@@ -29,9 +29,7 @@ describe('classic theme admission', () => {
       expect.arrayContaining(['shell', 'navigation', 'player', 'catalog']),
     )
     for (const form of descriptor.forms)
-      expect(() =>
-        assertUiThemeDefinition(descriptor, definition, form, ['tags', 'composer']),
-      ).not.toThrow()
+      expect(() => assertUiThemeDefinition(descriptor, definition, form, ['tags'])).not.toThrow()
   })
 
   it('scopes extracted chrome CSS and preserves reduced motion without copying tokens or host rules', () => {
