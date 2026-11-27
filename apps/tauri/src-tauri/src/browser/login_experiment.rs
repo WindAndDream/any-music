@@ -10,7 +10,6 @@ use std::{
     sync::{Arc, Mutex},
     time::{Duration, Instant},
 };
-use tauri::{State, Webview};
 use tokio::sync::{mpsc, oneshot};
 use tokio_util::sync::CancellationToken;
 
@@ -53,7 +52,7 @@ struct Run {
 pub struct Manager {
     current: tokio::sync::Mutex<Option<Run>>,
 }
-pub fn enabled() -> bool {
+fn enabled() -> bool {
     cfg!(all(debug_assertions, target_os = "windows"))
 }
 fn require_development() -> Result<(), String> {
@@ -182,13 +181,6 @@ impl Manager {
             return Ok(Some(snapshot));
         }
         Ok(None)
-    }
-    pub async fn shutdown(&self) {
-        let mut current = self.current.lock().await;
-        if let Some(run) = current.take() {
-            run.cancel.cancel();
-            let _ = run.task.await;
-        }
     }
 }
 async fn page_action(
@@ -557,11 +549,6 @@ async fn check_rust_session(
     }
 }
 
-fn require(webview: &Webview) -> Result<(), String> {
-    crate::browser::verification::require_main(webview)?;
-    require_development()
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -629,67 +616,4 @@ mod tests {
             assert!(manager.status("new").await.is_err());
         });
     }
-}
-#[tauri::command]
-pub fn login_experiment_enabled(webview: Webview) -> Result<bool, String> {
-    crate::browser::verification::require_main(&webview)?;
-    Ok(enabled())
-}
-#[tauri::command]
-pub async fn begin_login_experiment(
-    webview: Webview,
-    state: State<'_, crate::state::RuntimeState>,
-    mode: Mode,
-) -> Result<String, String> {
-    require(&webview)?;
-    state
-        .experiments
-        .start(state.directory.join("login-experiments"), mode)
-        .await
-}
-#[tauri::command]
-pub async fn poll_login_experiment(
-    webview: Webview,
-    state: State<'_, crate::state::RuntimeState>,
-    run_id: String,
-) -> Result<Snapshot, String> {
-    require(&webview)?;
-    state.experiments.status(&run_id).await
-}
-#[tauri::command]
-pub async fn send_experiment_sms(
-    webview: Webview,
-    state: State<'_, crate::state::RuntimeState>,
-    run_id: String,
-) -> Result<(), String> {
-    require(&webview)?;
-    state.experiments.sms(&run_id, None).await
-}
-#[tauri::command]
-pub async fn submit_experiment_sms(
-    webview: Webview,
-    state: State<'_, crate::state::RuntimeState>,
-    run_id: String,
-    code: String,
-) -> Result<(), String> {
-    require(&webview)?;
-    state.experiments.sms(&run_id, Some(code)).await
-}
-#[tauri::command]
-pub async fn cancel_login_experiment(
-    webview: Webview,
-    state: State<'_, crate::state::RuntimeState>,
-    run_id: String,
-) -> Result<Option<Snapshot>, String> {
-    require(&webview)?;
-    state.experiments.cancel(&run_id).await
-}
-#[tauri::command]
-pub async fn open_experiment_browser(
-    webview: Webview,
-    state: State<'_, crate::state::RuntimeState>,
-    run_id: String,
-) -> Result<(), String> {
-    require(&webview)?;
-    state.experiments.visible(&run_id).await
 }

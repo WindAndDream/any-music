@@ -102,6 +102,7 @@ pub async fn begin_qr_login(
         current.handoff = Some(crate::state::QrHandoff {
             url: handoff_url,
             expires: std::time::Instant::now() + std::time::Duration::from_secs(180),
+            #[cfg(any(mobile, test))]
             opened: false,
         });
         Ok(json!({"status":"waiting","qrContent":url}))
