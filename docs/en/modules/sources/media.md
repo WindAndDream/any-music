@@ -25,6 +25,8 @@ Runtime-owned disposable [resource caches](../resource-cache.md) may retain boun
 
 ## 6. Media Loading
 
+Terminal playback errors use the top notice. Settings → Playback Settings offers **无法播放时自动跳过**, on by default. Both runtimes save an explicit off choice with the playback queue preferences. When enabled, the active queue or collection advances according to its playback mode, using the next song in list order if repeat-one fails. A run of failures attempts each song at most once and stops when the candidates run out. Preview failures only report the error. See [playback failure acceptance](../../changes/acceptance/playback-failure-feedback.md).
+
 - `eager`: short content may be preloaded aggressively by the browser; it still uses remote media and does not imply persisted bytes.
 - `range`: long content loads metadata only and relies on HTTP Range requests from the media element for on-demand seeking.
 

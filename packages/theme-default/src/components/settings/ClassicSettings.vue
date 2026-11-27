@@ -78,6 +78,7 @@ function moveDestination(id: ProductViewId, offset: -1 | 1): void {
       :external-sources-enabled="state.externalSourcesEnabled"
       :profile="{ id: state.profileId, displayName: state.creatorDisplayName }"
       :history-limit="state.playbackHistoryLimit"
+      :skip-unavailable-tracks="state.skipUnavailableTracks"
       :download-concurrency="state.downloadConcurrency"
       :is-mobile-layout="state.isMobileLayout"
       :initial-section="state.section"
@@ -103,6 +104,7 @@ function moveDestination(id: ProductViewId, offset: -1 | 1): void {
       @set-plugin-enabled="feature.actions.setSourceEnabled"
       @check-plugin="feature.actions.checkSource"
       @set-history-limit="feature.actions.setPlaybackHistoryLimit"
+      @set-skip-unavailable-tracks="feature.actions.setSkipUnavailableTracks"
       @set-download-concurrency="feature.actions.setDownloadConcurrency"
       @update-local-user-display-name="feature.actions.setCreatorDisplayName"
     >

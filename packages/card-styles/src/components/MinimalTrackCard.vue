@@ -68,6 +68,11 @@ const duration = computed(() => {
   const seconds = Math.floor(durationMs / 1000)
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
 })
+const trackMeta = computed(() =>
+  [artist.value, duration.value, props.invalid ? undefined : props.detail]
+    .filter(Boolean)
+    .join(' · '),
+)
 const progressLength = computed(() => Math.max(0, Math.min(1, props.progress ?? 0)) * 100)
 const selectionLabel = computed(
   () =>
@@ -137,12 +142,9 @@ const selectionLabel = computed(
     </button>
     <div class="am-minimal-track__copy">
       <h3 :title="title">{{ title }}</h3>
-      <p :title="artist">{{ artist }}</p>
-      <div class="am-minimal-track__metadata">
-        <p class="am-minimal-track__detail" :title="invalid ? '歌曲已失效' : detail">
-          {{ invalid ? '歌曲已失效' : [duration, detail].filter(Boolean).join(' · ') }}
-        </p>
-        <CollectionTagSummary :tags="customTags ?? []" label="歌曲标签" single-line />
+      <p :title="trackMeta">{{ trackMeta }}</p>
+      <div v-if="customTags?.length" class="am-minimal-track__metadata">
+        <CollectionTagSummary :tags="customTags" label="歌曲标签" single-line />
       </div>
     </div>
     <div v-if="!readonly" class="am-minimal-track__controls">
@@ -319,13 +321,6 @@ const selectionLabel = computed(
   min-inline-size: 0;
   overflow: hidden;
   margin-block-start: var(--am-space-1);
-}
-.am-minimal-track__copy .am-minimal-track__detail {
-  /* Keep duration/status readable while the single-line tag strip yields the remaining width. */
-  flex: 0 0 auto;
-  max-inline-size: 100%;
-  min-block-size: 1.4em;
-  margin: 0;
 }
 .am-minimal-track__controls {
   display: grid;

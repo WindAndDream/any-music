@@ -1,4 +1,4 @@
-import type { Track } from '@any-music/core'
+import { formatAppErrorMessage, type Track } from '@any-music/core'
 import {
   ALREADY_PLAYING_MESSAGE,
   createEditingSession,
@@ -243,6 +243,7 @@ export function useWorkbenchController(
     session,
     setDownloadConcurrency,
     setHistoryLimit,
+    setSkipUnavailableTracks,
     setPluginEnabled,
     setProxySettings,
     taggedRecordCount,
@@ -724,6 +725,17 @@ export function useWorkbenchController(
     }) as AudioPlayerEmit,
   })
 
+  watch(player.errorState, (error) => {
+    const track = playerTrack.value
+    if (!error || !track) return
+    const title = library.customNamesByTrackId.value.get(track.id) ?? track.title
+    actionFeedback.show({
+      status: 'error',
+      message: `《${title}》播放失败：${formatAppErrorMessage(error)}`,
+    })
+    if (!previewTrack.value) queue.nextAfterFailure(track.id)
+  })
+
   return {
     catalogFilterHistory,
     setPreferences,
@@ -859,6 +871,7 @@ export function useWorkbenchController(
     session,
     setDownloadConcurrency,
     setHistoryLimit,
+    setSkipUnavailableTracks,
     setPluginEnabled,
     setProxySettings,
     taggedRecordCount,

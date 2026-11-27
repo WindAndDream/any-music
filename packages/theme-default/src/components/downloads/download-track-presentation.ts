@@ -24,6 +24,7 @@ export function getDownloadTrackAction(entry: DownloadListEntry) {
 
 export function getDownloadTrackStatus(entry: DownloadListEntry): string {
   const { item, state } = entry
+  if (item.error?.code === 'access-denied') return '下载失败'
   const error = getDownloadEntryError(entry)
   if (error) return error
   if (state === 'succeeded') return '已下载'

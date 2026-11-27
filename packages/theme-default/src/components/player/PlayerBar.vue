@@ -45,8 +45,9 @@ const artistLabel = computed(
   () => props.track?.artists.map((artist) => artist.name).join('、') || '选择一首音乐开始播放',
 )
 
-// 正常原生播放的状态文案就是作者；只有独立播放状态或错误才另占一行。
+// 全屏播放器保留加载和中断状态，最终播放失败由顶部提示显示。
 const detailStatusLabel = computed(() => {
+  if (props.state.status === 'error') return ''
   const artists = props.track?.artists.map((artist) => artist.name).join(' / ')
   return props.state.statusLabel === artists || props.state.statusLabel === artistLabel.value
     ? ''
@@ -186,7 +187,6 @@ onScopeDispose(() => {
               displayName ?? '未选择音乐'
             }}</strong>
             <span class="player__artist" :title="artistLabel">{{ artistLabel }}</span>
-            <span class="player__status" aria-live="polite">{{ props.state.statusLabel }}</span>
           </div>
         </div>
 
@@ -472,8 +472,7 @@ onScopeDispose(() => {
 }
 
 .player__title,
-.player__artist,
-.player__status {
+.player__artist {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -484,8 +483,7 @@ onScopeDispose(() => {
   font-size: var(--am-font-size-sm);
 }
 
-.player__artist,
-.player__status {
+.player__artist {
   color: var(--am-color-text-secondary);
   font-size: var(--am-font-size-xs);
 }
@@ -709,7 +707,6 @@ onScopeDispose(() => {
     block-size: 32px;
   }
 
-  .player__status,
   .player__transport > :deep(.player__precision-seek),
   .player__extras,
   .player__button--seek {

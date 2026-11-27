@@ -914,6 +914,14 @@ export function useMusicSourceWorkbench(workbenchOptions: UseMusicSourceWorkbenc
     )
   }
 
+  function setSkipUnavailableTracks(enabled: boolean): void {
+    runSettingsAction(
+      () => queue.setSkipUnavailableTracks(enabled),
+      '播放设置已保存。',
+      () => queue.persistenceErrorState.value,
+    )
+  }
+
   function setDownloadConcurrency(concurrency: number) {
     runSettingsAction(
       () => {
@@ -1187,6 +1195,7 @@ export function useMusicSourceWorkbench(workbenchOptions: UseMusicSourceWorkbenc
     session,
     setDownloadConcurrency,
     setHistoryLimit,
+    setSkipUnavailableTracks,
     setPluginEnabled,
     setProxySettings,
     taggedRecordCount,

@@ -34,6 +34,7 @@ import { createWorkbenchModuleDirectory } from '../../../src/plugin-adapters/wor
 import { configureWorkbenchRuntime } from '../../../src/runtime/workbench-runtime'
 import type { SourceInvalidation } from '../../../src/runtime/workbench-runtime'
 import { musicSourceWorkspaceRepository } from '../../../src/storage/music-source-workspace-repository'
+import { playbackQueueRepository } from '../../../src/storage/playback-queue-repository'
 import { createProductGenerationStorage } from '../../../src/storage/product-generation-store'
 import { createSemanticThemeRenderer } from '../../helpers/semantic-theme-renderer'
 import { dispatchCatalogEvent, findCatalogElement } from '../../helpers/test-renderer'
@@ -394,6 +395,36 @@ function mountWorkbench(
 }
 
 describe('stable workbench lifetime', () => {
+  it.each([false, true])(
+    'shows a top notice and only advances with auto-skip enabled (%s)',
+    async (enabled) => {
+      const { controller, themeFixture, resolveMedia } = mountWorkbench()
+      await controller.modules.ready
+      const { features } = themeFixture
+      expect(features.value.settings.state.skipUnavailableTracks).toBe(true)
+      if (!enabled) {
+        features.value.settings.actions.setSkipUnavailableTracks(false)
+        expect(features.value.settings.state.skipUnavailableTracks).toBe(false)
+        expect(playbackQueueRepository.load().skipUnavailableTracks).toBe(false)
+      }
+      resolveMedia
+        .mockRejectedValueOnce(new AppError('access-denied', '该歌曲不可完整播放。'))
+        .mockResolvedValueOnce(media())
+      controller.playFavoriteTrack(track('one'), [track('one'), track('two')])
+      await vi.waitFor(() => {
+        expect(features.value.overlays.state.notice).toMatchObject({
+          tone: 'error',
+          message: expect.stringContaining('《one》播放失败'),
+        })
+        expect(controller.playerTrack.value?.id).toBe(enabled ? 'two' : 'one')
+        expect(controller.player.status.value).toBe(enabled ? 'ready' : 'error')
+      })
+      expect(resolveMedia.mock.calls.map(([song]) => song.id)).toEqual(
+        enabled ? ['one', 'two'] : ['one'],
+      )
+    },
+  )
+
   it('shares one history entry per track between playback entry points', async () => {
     const { controller, themeFixture } = mountWorkbench()
     await controller.modules.ready

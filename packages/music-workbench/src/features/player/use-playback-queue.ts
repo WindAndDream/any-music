@@ -41,6 +41,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
   const playbackSource = shallowRef<'queue' | 'collection'>('queue')
   const currentTrackId = shallowRef<string>()
   const mode = shallowRef<PlaybackMode>(initial.snapshot.mode)
+  const skipUnavailableTracks = shallowRef(initial.snapshot.skipUnavailableTracks ?? true)
   const arrangementMode = shallowRef<QueueArrangementMode>(
     initial.snapshot.arrangementMode ?? 'flat',
   )
@@ -56,6 +57,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
   )
 
   const history: string[] = []
+  const failedTrackIds = new Set<string>()
   let shuffleBag: string[] = []
 
   function add(track: Track) {
@@ -143,6 +145,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
   function playTracks(tracks: readonly Track[], startTrackId: string) {
     const uniqueTracks = deduplicateTracks(tracks)
     if (!uniqueTracks.some((track) => track.id === startTrackId)) return
+    resetPlaybackFailures()
     playbackSource.value = 'collection'
     playbackItems.value = uniqueTracks
     shuffleBag = mode.value === 'shuffle-no-repeat' ? createShuffleBag() : []
@@ -151,6 +154,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
 
   function select(trackId: string, rememberCurrent = true) {
     if (!items.value.some((track) => track.id === trackId)) return
+    resetPlaybackFailures()
     activateQueue()
     selectPlaybackTrack(trackId, rememberCurrent)
   }
@@ -167,6 +171,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
   }
 
   function next() {
+    resetPlaybackFailures()
     if (playbackItems.value.length === 0) return
     if (!currentTrackId.value) {
       selectPlaybackTrack(playbackItems.value[0]?.id ?? '', false)
@@ -178,7 +183,19 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
     if (nextId) selectPlaybackTrack(nextId)
   }
 
+  function nextAfterFailure(trackId: string): void {
+    if (!skipUnavailableTracks.value || trackId !== currentTrackId.value) return
+    failedTrackIds.add(trackId)
+    const nextId = pickNextId(failedTrackIds)
+    if (nextId) selectPlaybackTrack(nextId)
+  }
+
+  function resetPlaybackFailures(): void {
+    failedTrackIds.clear()
+  }
+
   function previous() {
+    resetPlaybackFailures()
     while (history.length > 0) {
       const previousId = history.pop()
       if (previousId && playbackItems.value.some((track) => track.id === previousId)) {
@@ -190,6 +207,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
 
   /** 身份或来源失效只结束播放，不移除用户保存的待听歌曲，也不自动续播。 */
   function stop(): void {
+    resetPlaybackFailures()
     currentTrackId.value = undefined
     history.length = 0
     shuffleBag = []
@@ -308,6 +326,12 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
     persistNow()
   }
 
+  function setSkipUnavailableTracks(enabled: boolean): void {
+    skipUnavailableTracks.value = enabled
+    resetPlaybackFailures()
+    persistNow()
+  }
+
   /** 用户的每次队列修改都立即提交，避免关闭或刷新页面时丢失最后一次操作。 */
   function persistNow(): void {
     try {
@@ -316,6 +340,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
         trackIds: items.value.map((track) => track.id),
         mode: mode.value,
         arrangementMode: arrangementMode.value,
+        ...(skipUnavailableTracks.value ? {} : { skipUnavailableTracks: false }),
         addedAtMsByTrackId: Object.fromEntries(addedAtMsByTrackId.value),
       })
       persistenceErrorState.value = undefined
@@ -328,23 +353,30 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
     }
   }
 
-  function pickNextId(): string | undefined {
-    const currentIndex = playbackItems.value.findIndex((track) => track.id === currentTrackId.value)
-    if (mode.value === 'sequence') {
-      return playbackItems.value[(currentIndex + 1) % playbackItems.value.length]?.id
+  function pickNextId(excluded?: ReadonlySet<string>): string | undefined {
+    const tracks = playbackItems.value
+    if (mode.value === 'sequence' || mode.value === 'repeat-one') {
+      const currentIndex = tracks.findIndex((track) => track.id === currentTrackId.value)
+      for (let offset = 1; offset <= tracks.length; offset += 1) {
+        const id = tracks[(currentIndex + offset) % tracks.length]!.id
+        if (!excluded?.has(id)) return id
+      }
+      return undefined
     }
     if (mode.value === 'shuffle') {
-      return playbackItems.value[Math.floor(random() * playbackItems.value.length)]?.id
+      const candidates = excluded ? tracks.filter(({ id }) => !excluded.has(id)) : tracks
+      return candidates[Math.floor(random() * candidates.length)]?.id
     }
 
-    if (shuffleBag.length === 0) shuffleBag = createShuffleBag()
+    if (excluded) shuffleBag = shuffleBag.filter((id) => !excluded.has(id))
+    if (shuffleBag.length === 0) shuffleBag = createShuffleBag(excluded)
     return shuffleBag.pop()
   }
 
-  function createShuffleBag(): string[] {
+  function createShuffleBag(excluded?: ReadonlySet<string>): string[] {
     const ids = playbackItems.value
       .map((track) => track.id)
-      .filter((id) => id !== currentTrackId.value)
+      .filter((id) => id !== currentTrackId.value && !excluded?.has(id))
     // Fisher–Yates 原地洗牌为 O(n)，优于反复随机抽取并用 Set 重试。
     for (let index = ids.length - 1; index > 0; index -= 1) {
       const swapIndex = Math.floor(random() * (index + 1))
@@ -369,6 +401,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
     currentTrackId: readonly(currentTrackId),
     currentTrack,
     mode: readonly(mode),
+    skipUnavailableTracks: readonly(skipUnavailableTracks),
     arrangementMode: readonly(arrangementMode),
     persistenceError: readonly(persistenceError),
     persistenceErrorState: readonly(persistenceErrorState),
@@ -378,6 +411,8 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
     playTracks,
     select,
     next,
+    nextAfterFailure,
+    resetPlaybackFailures,
     previous,
     stop,
     remove,
@@ -386,6 +421,7 @@ export function usePlaybackQueue(options: UsePlaybackQueueOptions) {
     movePlatform,
     pin,
     setMode,
+    setSkipUnavailableTracks,
     setArrangementMode,
     persistNow,
   }

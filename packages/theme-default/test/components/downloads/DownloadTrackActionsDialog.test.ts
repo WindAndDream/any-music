@@ -1,4 +1,8 @@
-import type { DownloadHistoryBatch, DownloadHistoryItem } from '@any-music/core'
+import {
+  createAppErrorState,
+  type DownloadHistoryBatch,
+  type DownloadHistoryItem,
+} from '@any-music/core'
 import { getDownloadListState } from '@any-music/ui/library'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -62,6 +66,36 @@ const batch: DownloadHistoryBatch = {
 }
 
 describe('download task song actions', () => {
+  it('omits the access error from the song actions dialog and keeps retry available', () => {
+    const view = mountCatalogComponent(DownloadTrackActionsDialog, {
+      entry: {
+        item: {
+          ...item,
+          status: 'failed',
+          error: createAppErrorState(
+            'access-denied',
+            '该歌曲不可完整播放，请检查版权、会员或购买权限。',
+          ),
+        },
+        batch,
+        state: 'failed',
+        saving: false,
+      },
+      customTags: [],
+      favorite: false,
+      queued: false,
+      invalid: false,
+      cancelling: false,
+      suspended: false,
+    })
+    try {
+      expect(view.root.textContent).not.toContain('AM-2002')
+      expect(view.root.textContent).toContain('重新下载')
+    } finally {
+      view.unmount()
+    }
+  })
+
   it.each([
     ['downloading', false, '下载中', 'pause'],
     ['queued', false, '排队中', 'pause'],

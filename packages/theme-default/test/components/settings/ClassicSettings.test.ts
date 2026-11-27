@@ -67,6 +67,7 @@ function mountSettings(
     ],
     preferences: createDefaultAppShellPreferences(),
     playbackHistoryLimit: 100,
+    skipUnavailableTracks: false,
     downloadConcurrency: 2,
     creatorDisplayName: 'Saved',
     filterHistory: {
@@ -83,6 +84,7 @@ function mountSettings(
     selectTheme: vi.fn(),
     setPreferences: vi.fn(),
     setPlaybackHistoryLimit: vi.fn(),
+    setSkipUnavailableTracks: vi.fn(),
     setDownloadConcurrency: vi.fn(),
     setCreatorDisplayName: vi.fn(),
     setFilterHistory: vi.fn(),
