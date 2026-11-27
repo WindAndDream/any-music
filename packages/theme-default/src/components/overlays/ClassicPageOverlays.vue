@@ -2,7 +2,6 @@
 import { useClassicOverlays } from '../../composables/use-classic-overlays'
 const props = defineProps<{
   modalOpen?: boolean
-  operatorOpen?: boolean
   modalTarget?: HTMLElement | null
 }>()
 defineSlots<{
@@ -11,10 +10,7 @@ defineSlots<{
   toolbar?(): unknown
   source?(): unknown
 }>()
-const overlays = useClassicOverlays(
-  () => Boolean(props.modalOpen),
-  () => Boolean(props.operatorOpen),
-)
+const overlays = useClassicOverlays(() => Boolean(props.modalOpen))
 </script>
 <template>
   <Teleport

@@ -129,7 +129,6 @@ function contentGeneration(drawer: CatalogDrawerView) {
     drawer.tracks.length,
     drawer.errorMessage,
     drawer.invalidReason,
-    props.selectable,
   ])
 }
 

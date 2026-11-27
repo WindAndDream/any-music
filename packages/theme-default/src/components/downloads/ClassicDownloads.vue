@@ -72,7 +72,6 @@ function contentGeneration(entry: DownloadListEntry) {
     state.value.customTagsByTrackId.get(track.id),
     state.value.platformNames.get(track.source.pluginId),
     getDownloadTrackStatus(entry),
-    operatorOpen.value,
   ])
 }
 const reorder = useQueueReorder({
@@ -193,10 +192,7 @@ function toggleAllSelection(): void {
         :actions="feature.actions"
         scope="downloads-root"
       />
-      <ClassicPageOverlays
-        :operator-open="operatorOpen"
-        :modal-open="displayOpen || Boolean(actionEntry)"
-      >
+      <ClassicPageOverlays :modal-open="displayOpen || Boolean(actionEntry)">
         <DownloadTrackActionsDialog
           :playlists="state.playlists"
           @add-to-playlist="(track, id) => feature.actions.addToPlaylist(id, [track.id])"

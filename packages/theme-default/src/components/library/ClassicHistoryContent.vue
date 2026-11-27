@@ -35,7 +35,6 @@ function contentGeneration({ entry, track }: HistoryRow) {
     state.customNamesByTrackId.get(track.id),
     state.customTagsByTrackId.get(track.id),
     state.platformNames.get(track.source.pluginId),
-    history.operatorOpen.value,
   ])
 }
 const intro = computed(() =>

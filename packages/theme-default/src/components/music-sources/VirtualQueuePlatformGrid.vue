@@ -36,7 +36,6 @@ function contentGeneration(group: QueuePlatformGridGroup) {
     group.totalCount,
     group.isCustom,
     props.filtered,
-    props.selectable,
   ])
 }
 const continuity = usePresentationContinuity({

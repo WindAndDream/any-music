@@ -208,7 +208,7 @@ function manageDetails(): void {
         </ClassicResultView>
       </div>
     </ClassicCollectionSurface>
-    <ClassicPageOverlays :modal-open="modalOpen" :operator-open="operatorOpen">
+    <ClassicPageOverlays :modal-open="modalOpen">
       <template #toolbar>
         <ClassicCollectionControls
           :selected-count="selected.length"
