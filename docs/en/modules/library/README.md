@@ -16,7 +16,7 @@ The workbench owns canonical tracks, favorites, local playlists and managed task
 
 ## Creation and published tracks
 
-The current creation module is gated. See [creation workspace](creation-workspace.md) for the development notice, material lifecycle and published-track ownership.
+The creation workspace is paused in both applications. Published tracks remain available through existing library references. See [creation workspace](creation-workspace.md) for material and recipe ownership.
 
 ## Related contracts
 

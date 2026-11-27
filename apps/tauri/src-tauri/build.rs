@@ -39,7 +39,6 @@ fn main() {
         "../../../packages/ui/src",
         "../../../packages/card-styles/src",
         "../../../packages/theme-default/src",
-        "../../../packages/theme-studio/src",
         "../scripts/build-plugin-executor.mjs",
         "../../../packages/plugin-vm/src",
         "../../../packages/plugin-sandbox-browser/src",

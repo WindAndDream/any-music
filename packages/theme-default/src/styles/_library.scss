@@ -87,7 +87,6 @@
   }
   .playlists,
   .favorites,
-  .custom-tracks,
   .history {
     height: 100%;
     overflow-x: hidden;
@@ -374,135 +373,6 @@
   .favorite-track__actions .favorite-track__remove-playlist {
     color: var(--am-color-danger);
   }
-  .custom-tracks__toolbar {
-    display: grid;
-    grid-template-columns: minmax(240px, 1fr) auto auto;
-    gap: 8px;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid var(--am-color-border);
-    background: var(--am-color-surface);
-  }
-  .custom-tracks__toolbar input,
-  .custom-tracks__toolbar select {
-    min-width: 0;
-    min-height: 32px;
-    padding: 0 9px;
-    border: 1px solid var(--am-color-border);
-    border-radius: 7px;
-    background: var(--am-color-surface);
-    color: var(--am-color-text);
-    font: 11px var(--am-font-family);
-  }
-  .custom-tracks__toolbar > span,
-  .custom-tracks__toolbar label {
-    color: var(--am-color-text-secondary);
-    font-size: 10px;
-    white-space: nowrap;
-  }
-  .custom-tracks__toolbar label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .custom-tracks__message {
-    margin: 0;
-    padding: 16px;
-    color: var(--am-color-text-secondary);
-    font-size: 11px;
-    text-align: center;
-  }
-  .custom-tracks__message--error {
-    color: var(--am-color-danger);
-  }
-  .custom-tracks__items {
-    display: grid;
-    gap: 8px;
-    padding: 9px;
-  }
-  .custom-track-drawer {
-    overflow: hidden;
-    border: 1px solid var(--am-color-border);
-    border-radius: 10px;
-    background: var(--am-color-surface);
-  }
-  .custom-track-drawer__header {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-  }
-  .custom-track-drawer__toggle {
-    display: grid;
-    min-width: 0;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 8px;
-    align-items: center;
-    padding: 7px 10px;
-    border: 0;
-    background: transparent;
-    color: var(--am-color-text);
-    text-align: left;
-    cursor: pointer;
-  }
-  .custom-track-drawer__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: flex-end;
-    padding: 8px;
-  }
-  .custom-track-drawer__actions button,
-  .custom-track-drawer__source-heading button {
-    min-height: 29px;
-    padding: 0 8px;
-    border: 1px solid var(--am-color-border);
-    border-radius: 6px;
-    background: var(--am-color-surface);
-    color: var(--am-color-text);
-    font: 600 10px var(--am-font-family);
-    cursor: pointer;
-  }
-  .custom-track-drawer__actions button:disabled {
-    cursor: wait;
-    opacity: 0.55;
-  }
-  .custom-track-drawer__actions .custom-track-drawer__delete {
-    color: var(--am-color-danger);
-  }
-  .custom-track-drawer__panel {
-    border-top: 1px solid var(--am-color-border);
-    background: var(--am-color-surface-subtle);
-  }
-  .custom-track-drawer__source-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 9px 10px;
-  }
-  .custom-track-drawer__source-heading strong,
-  .custom-track-drawer__source-heading small {
-    display: block;
-  }
-  .custom-track-drawer__source-heading strong {
-    font-size: 11px;
-  }
-  .custom-track-drawer__source-heading small,
-  .custom-track-drawer__ranges {
-    color: var(--am-color-text-secondary);
-    font-size: 10px;
-  }
-  .custom-track-drawer__sources {
-    display: grid;
-    gap: 7px;
-    padding: 0 9px 9px;
-  }
-  .custom-track-drawer__ranges {
-    margin: 0;
-    padding: 4px 8px;
-    border-radius: 6px 6px 0 0;
-    background: color-mix(in srgb, var(--am-color-accent) 7%, var(--am-color-surface));
-  }
   .history__item {
     grid-template-columns: minmax(0, 1fr) auto;
     cursor: default;
@@ -525,16 +395,6 @@
     }
     .queue__actions {
       grid-column: 2;
-    }
-    .custom-tracks__toolbar,
-    .custom-track-drawer__header {
-      grid-template-columns: 1fr;
-    }
-    .custom-tracks__toolbar label {
-      justify-content: space-between;
-    }
-    .custom-track-drawer__actions {
-      border-top: 1px solid var(--am-color-border);
     }
     .favorite-track--selectable {
       grid-template-columns: auto minmax(0, 1fr);
@@ -626,20 +486,20 @@
     flex-direction: column;
     padding: 0;
   }
-  :where(.queue, .favorites, .playlists, .custom-tracks) {
+  :where(.queue, .favorites, .playlists) {
     min-block-size: 100%;
     padding: 0;
     background: transparent;
   }
-  :where(.favorite-drawer, .playlist-drawer, .custom-track-drawer) {
+  :where(.favorite-drawer, .playlist-drawer) {
     border-color: var(--am-color-border);
     background: var(--am-color-surface);
     box-shadow: var(--am-shadow-control);
   }
-  :where(.favorite-drawer, .playlist-drawer, .custom-track-drawer) {
+  :where(.favorite-drawer, .playlist-drawer) {
     border-radius: var(--am-radius-lg);
   }
-  :where(.queue__header, .favorites__header, .playlists__toolbar, .custom-tracks__toolbar) {
+  :where(.queue__header, .favorites__header, .playlists__toolbar) {
     border-color: var(--am-color-border);
     border-radius: var(--am-radius-lg);
     background: var(--am-color-surface);

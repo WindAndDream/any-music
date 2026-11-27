@@ -56,9 +56,9 @@ describe('dynamic workbench view adapter', () => {
         )
       }
       await host.start()
-      const themeMappings = Object.fromEntries([[THEME_ROOT_POINT, 'theme.studio/root']])
-      const theme = await host.controller.activate(['theme.studio'], { ...input, themeMappings })
-      expect(theme.slots[THEME_ROOT_POINT]).toEqual(['theme.studio/root'])
+      const themeMappings = Object.fromEntries([[THEME_ROOT_POINT, 'theme.default/root']])
+      const theme = await host.controller.activate(['theme.default'], { ...input, themeMappings })
+      expect(theme.slots[THEME_ROOT_POINT]).toEqual(['theme.default/root'])
       expect(host.controller.states.get('feature.tags')?.activation).toBe('inactive')
       expect(host.controller.states.get('feature.composer')?.activation).toBe('inactive')
       expect(resolve()).toHaveLength(10)

@@ -9,7 +9,6 @@ import { builtInThemes, protectedStyles } from '../features/plugins/built-in-the
 import {
   createBuiltInWorkbenchModules,
   loadTagManagement,
-  loadMusicCreation,
   builtInUiThemes,
 } from '../features/plugins/built-in-workbench-modules'
 import { androidPlaybackEnvironment } from './android-playback-environment'
@@ -113,7 +112,6 @@ export async function configureTauriWorkbench(): Promise<void> {
           ? nativePackagePreview
           : undefined,
     loadTagManagement,
-    loadMusicCreation,
     uiThemes: builtInUiThemes,
     modules: {
       runtime: 'tauri',

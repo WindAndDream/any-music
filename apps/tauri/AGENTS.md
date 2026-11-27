@@ -16,11 +16,11 @@ The native crate belongs to the root Cargo workspace. Application test/typecheck
 
 Run application test/typecheck (including Rust fmt/all-target Clippy), check:native for native changes, then root checks. TypeScript/Vue naming does not apply to Rust; read [Backend Engineering](../../docs/en/modules/tauri/backend-engineering.md) and the native guide.
 
-- tags/creation inject metadata and separate `/vue` loaders from features/plugins. Bind existing generation storage, without exposing GM/IPC, accounts or private repositories.
+- Inject tag metadata and its separate `/vue` loader from features/plugins. The creation workspace is paused. Tag data uses its named generation-storage port.
 - built-ins use independent source metadata and lazy /runtime assembly. Keep provider IDs separate from module/contribution IDs. Disablement/invalidation cancels old lists/resolution/media; restore never replays tasks. Zero usable sources must not block core views.
 - plugins.sqlite3 (schema 3) is native authority. native-plugin-authority injects snapshot/revoke, previews and named delivery ports; the center never creates grants. Native verification/consent drives install/rollback, without fixture seeds, arbitrary grants/sessions or general data-relay commands.
 - Generic omit only reads current loopback media grants. plugins/network injects am-plugin-net Gate for external networking, without account cookies/proxies. Reject unknown required capabilities according to S15.
 
 - The product is unreleased: implement the current architecture directly. Do not add compatibility packages, previous product-schema readers, source JSON importers, archive UI or duplicate IPC aliases. Current plugin upgrade/rollback and crash recovery remain supported.
 
-- features/plugins/built-in-theme-directory owns metadata only; built-in-themes preloads the classic fallback and dynamically imports Studio Vue/styles. The sole MusicSourceWorkbench owns one controller/audio above the complete ThemeHost. Shared/SFC/theme CSS resources are activated transactionally inside its stable Shadow surface; protected slots receive host-only CSS. Build audits record actual static execution graphs.
+- features/plugins/built-in-theme-directory owns metadata only; built-in-themes registers the Classic root as the production renderer and fallback. The sole MusicSourceWorkbench owns one controller/audio above the complete ThemeHost. Shared/SFC/theme CSS resources are activated transactionally inside its stable Shadow surface; protected slots receive host-only CSS. Build audits record actual static execution graphs.

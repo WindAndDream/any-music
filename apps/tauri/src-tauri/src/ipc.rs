@@ -76,13 +76,6 @@ pub(crate) fn handler() -> impl Fn(tauri::ipc::Invoke<tauri::Wry>) -> bool + Sen
         system::download_directory::reset_download_directory,
         system::external::open_external,
         system::external::login_capabilities,
-        browser::login_experiment::login_experiment_enabled,
-        browser::login_experiment::begin_login_experiment,
-        browser::login_experiment::poll_login_experiment,
-        browser::login_experiment::send_experiment_sms,
-        browser::login_experiment::submit_experiment_sms,
-        browser::login_experiment::cancel_login_experiment,
-        browser::login_experiment::open_experiment_browser,
         crate::isolation::plugin_probe_relay
     ]
 }

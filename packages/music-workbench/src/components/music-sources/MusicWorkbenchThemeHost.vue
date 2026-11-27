@@ -27,7 +27,6 @@ defineSlots<{
   'catalog-viewport'?: (
     context: CatalogViewportContext & {
       feature: UiThemeFeatureMap['catalog']
-      theme: string
       colorScheme: 'light' | 'dark'
       density: string
       suspended: boolean
@@ -80,7 +79,6 @@ function drawer(id: string) {
         name="catalog-viewport"
         v-bind="context"
         :feature="features.catalog"
-        :theme="c.uiTheme.current.value.theme.definition.id"
         :color-scheme="features.shell.state.resolvedTheme ?? 'light'"
         :density="c.uiTheme.current.value.settings.density"
         :suspended="

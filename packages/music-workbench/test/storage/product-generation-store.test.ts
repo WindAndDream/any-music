@@ -24,11 +24,21 @@ describe('S06 product ownership and generation commit', () => {
           'platform:source': { displayMode: 'comfortable', mobileColumns: 1 },
         },
       }
-      for (const context of ['queue', 'favorites', 'downloads'])
-        store.write(`collection-display:${context}:v1`, views)
+      const contexts = [
+        'catalog',
+        'queue',
+        'favorites',
+        'downloads',
+        'playlists',
+        'history',
+        'tags',
+        'plugins',
+        'custom-tracks',
+      ]
+      for (const context of contexts) store.write(`collection-display:${context}:v1`, views)
       store.write('download-collection-order:v1', { schemaVersion: 1, itemIds: ['two', 'one'] })
       const restored = createProductGenerationStorage(state.raw, { runtime })
-      for (const context of ['queue', 'favorites', 'downloads'])
+      for (const context of contexts)
         expect(restored.read(`collection-display:${context}:v1`)).toEqual(views)
       expect(restored.read('download-collection-order:v1')).toEqual({
         schemaVersion: 1,

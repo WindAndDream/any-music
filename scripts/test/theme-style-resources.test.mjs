@@ -30,7 +30,6 @@ test('third theme styles load as inert values with the same scope ID as their te
     'music-workbench',
     'plugin-ui-vue',
     'plugin-tag-management',
-    'plugin-music-creation',
   ])
     mkdirSync(join(workspace.root, `packages/${directory}/src`), { recursive: true })
   const hostOutput = plugin.load.call(host, plugin.resolveId('virtual:any-music-theme-styles/host'))

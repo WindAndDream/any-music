@@ -134,7 +134,6 @@ pub fn run() {
                 app.state::<plugins::executor::Executors>().stop_all();
                 let state = app.state::<state::RuntimeState>();
                 state.download_schedules.clear();
-                tauri::async_runtime::block_on(state.experiments.shutdown());
                 tauri::async_runtime::block_on(state.douyin_browsers.shutdown());
                 let ids = state
                     .browsers

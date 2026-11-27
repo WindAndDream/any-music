@@ -70,7 +70,6 @@ vi.mock('../../src/features/music-sources/built-in-music-sources', () => ({
 vi.mock('../../src/features/plugins/built-in-workbench-modules', () => ({
   builtInFeatureModules: [],
   loadTagManagement: vi.fn(),
-  loadMusicCreation: vi.fn(),
   builtInWorkbenchModules: [],
   builtInUiThemes: [],
 }))

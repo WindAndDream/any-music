@@ -7,7 +7,7 @@ runtimeScope: shared
 
 [中文](../../../zh-cn/板块/资料库/创作工作区.md)
 
-The build-owned `feature.composer` module owns Custom Music and Segment Creation together. The current build sets `unavailableReason` and blocks activation through enable, retry and recovery. The user sees `片段创作正在开发中，暂时无法启用，敬请期待。` Existing published works remain playable and downloadable in the host wherever already referenced.
+Userscript and Tauri currently omit the creation workspace. The retained `feature.composer` module owns the Custom Music and Segment Creation contributions, material and draft logic. Existing published tracks remain playable and downloadable through the host wherever already referenced.
 
 ## Materials, drafts and published tracks
 
@@ -16,4 +16,4 @@ The build-owned `feature.composer` module owns Custom Music and Segment Creation
 - Saving creates a host-owned published track and adds it to the creation collection. [Recipe compilation](custom-tracks.md) resolves nested references to leaf media. Removing a collection member used by one of its works fails with a conflict.
 - Deleting a collection with works requires explicit cascade. The host rejects deletion if another recipe still references one of the works. Keep source tracks referenced by favorites, playlists, other collections, recipes, the current draft or the pending-material area.
 
-Theme detail and editor interactions follow [specialist views](../ui/specialist-views.md).
+The shared [recipe and playback contract](custom-tracks.md) also covers published tracks imported from playlists.

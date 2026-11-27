@@ -100,7 +100,7 @@ describe('complete-root transactions', () => {
           },
         },
       })
-      const first = controller.select('studio')
+      const first = controller.select('alternate')
       let finished = false
       void first.then(() => {
         finished = true
@@ -127,8 +127,8 @@ describe('complete-root transactions', () => {
   it('admits an injected third complete theme through the same root slot and recovery path', async () => {
     const base = rootComposition()
     const paper = {
-      ...rootTheme('studio'),
-      definition: { ...rootTheme('studio').definition, id: 'paper' },
+      ...rootTheme('alternate'),
+      definition: { ...rootTheme('alternate').definition, id: 'paper' },
     }
     const load = vi.fn(async () => paper)
     const controller = createThemeController({
@@ -173,7 +173,7 @@ describe('complete-root transactions', () => {
   })
   it('commits A → B → A as a single root/resource and preserves normalized settings', async () => {
     const value = fixture({ prepareAllocation: async (id) => allocation(id) })
-    for (const id of ['default', 'studio', 'default']) {
+    for (const id of ['default', 'alternate', 'default']) {
       expect(await value.controller.select(id, { schemaVersion: 1, density: 'compact' })).toBe(true)
       expect(value.controller.current.value.theme.definition.id).toBe(id)
       expect(value.controller.current.value.settings.density).toBe('compact')
@@ -192,12 +192,12 @@ describe('complete-root transactions', () => {
       prepareAllocation: allocate,
     })
     const old = value.controller.select('default')
-    expect(await value.controller.select('studio')).toBe(true)
+    expect(await value.controller.select('alternate')).toBe(true)
     const committed = value.controller.current.value
     slow.reject(new Error('obsolete import'))
     expect(await old).toBe(false)
     expect(value.controller.current.value).toBe(committed)
-    expect(allocate.mock.calls.map(([id]) => id)).toEqual(['studio'])
+    expect(allocate.mock.calls.map(([id]) => id)).toEqual(['alternate'])
     expect(value.onFailure).not.toHaveBeenCalled()
     value.controller.dispose()
   })
@@ -207,11 +207,11 @@ describe('complete-root transactions', () => {
       let fail = true
       const cleanup = vi.fn()
       const load = vi.fn(async (id: string) => {
-        if (id === 'studio' && fail && phase === 'import') throw new Error('import failed')
+        if (id === 'alternate' && fail && phase === 'import') throw new Error('import failed')
         const theme = rootTheme(id)
-        if (id === 'studio' && fail && phase === 'coverage')
+        if (id === 'alternate' && fail && phase === 'coverage')
           return { ...theme, definition: { ...theme.definition, views: {} } } as LoadedRootTheme
-        if (id === 'studio' && fail && phase === 'activation')
+        if (id === 'alternate' && fail && phase === 'activation')
           return {
             ...theme,
             activate(defer: (cb: () => void) => void) {
@@ -224,7 +224,7 @@ describe('complete-root transactions', () => {
       const value = fixture({
         load,
         prepareAllocation: async (id) => {
-          if (id === 'studio' && fail && phase === 'allocation')
+          if (id === 'alternate' && fail && phase === 'allocation')
             throw new Error('allocation failed')
           return allocation(id)
         },
@@ -233,15 +233,15 @@ describe('complete-root transactions', () => {
         value.prepare.mockImplementationOnce(() => {
           throw new Error('style failed')
         })
-      expect(await value.controller.select('studio')).toBe(false)
+      expect(await value.controller.select('alternate')).toBe(false)
       expect(value.controller.current.value.theme.definition.id).toBe('default')
       expect(value.active.size).toBe(1)
       expect(value.allocated.size).toBe(1)
       expect(value.controller.needsRecovery.value).toBe(false)
       if (phase === 'activation') expect(cleanup).toHaveBeenCalledOnce()
       fail = false
-      expect(await value.controller.select('studio')).toBe(true)
-      expect(load.mock.calls.filter(([id]) => id === 'studio')).toHaveLength(2)
+      expect(await value.controller.select('alternate')).toBe(true)
+      expect(load.mock.calls.filter(([id]) => id === 'alternate')).toHaveLength(2)
       value.controller.dispose()
       expect(value.allocated.size).toBe(0)
     },
@@ -255,9 +255,9 @@ describe('complete-root transactions', () => {
         },
       },
     })
-    expect(await value.controller.select('studio')).toBe(true)
+    expect(await value.controller.select('alternate')).toBe(true)
     expect(await value.controller.select('unknown')).toBe(false)
-    expect(value.controller.current.value.theme.definition.id).toBe('studio')
+    expect(value.controller.current.value.theme.definition.id).toBe('alternate')
     expect(value.controller.needsRecovery.value).toBe(false)
     value.controller.reportRenderFailure(
       value.controller.current.value.generation,
@@ -277,10 +277,10 @@ describe('complete-root transactions', () => {
     })
     const old = value.controller.select('unknown')
     await nextTick()
-    expect(await value.controller.select('studio')).toBe(true)
+    expect(await value.controller.select('alternate')).toBe(true)
     pending.reject(new Error('stale fallback allocation'))
     expect(await old).toBe(false)
-    expect(value.controller.current.value.theme.definition.id).toBe('studio')
+    expect(value.controller.current.value.theme.definition.id).toBe('alternate')
     expect(value.active.size).toBe(1)
     value.controller.dispose()
   })
@@ -290,21 +290,21 @@ describe('complete-root transactions', () => {
     const value = fixture({
       load: (id) => (delay ? imported.promise : Promise.resolve(rootTheme(id))),
     })
-    await value.controller.select('studio')
+    await value.controller.select('alternate')
     const retired = value.controller.current.value.generation
     await value.controller.select('default')
     value.controller.reportRenderFailure(retired, new Error('retired root'))
     expect(value.onFailure).not.toHaveBeenCalled()
     delay = true
-    const pending = value.controller.select('studio')
+    const pending = value.controller.select('alternate')
     value.controller.reportRenderFailure(
       value.controller.current.value.generation,
       new Error('current root failed'),
     )
     expect(value.prepare).toHaveBeenCalledTimes(2)
-    imported.resolve(rootTheme('studio'))
+    imported.resolve(rootTheme('alternate'))
     expect(await pending).toBe(true)
-    expect(value.controller.current.value.theme.definition.id).toBe('studio')
+    expect(value.controller.current.value.theme.definition.id).toBe('alternate')
     expect(value.controller.needsRecovery.value).toBe(false)
     expect(value.active.size).toBe(1)
     value.controller.dispose()
@@ -317,7 +317,7 @@ describe('complete-root transactions', () => {
       },
     })
     const selections: Promise<boolean>[] = []
-    for (const id of ['default', 'studio', 'default']) {
+    for (const id of ['default', 'alternate', 'default']) {
       selections.push(value.controller.select(id))
       await nextTick()
       await nextTick()
@@ -333,7 +333,7 @@ describe('complete-root transactions', () => {
     'rejects incompatible %s before allocating or activating resources',
     async (invalid) => {
       const base = rootComposition()
-      const load = vi.fn(async () => rootTheme('studio'))
+      const load = vi.fn(async () => rootTheme('alternate'))
       const allocate = vi.fn(async (id: string) => allocation(id))
       const controller = createThemeController({
         composition: {
@@ -360,8 +360,8 @@ describe('complete-root transactions', () => {
         prepareAllocation: allocate,
         requiredOptionalViews: () => (invalid === 'optional' ? ['tags'] : []),
       })
-      expect(await controller.select('studio')).toBe(false)
-      expect(allocate.mock.calls.some(([id]) => id === 'studio')).toBe(false)
+      expect(await controller.select('alternate')).toBe(false)
+      expect(allocate.mock.calls.some(([id]) => id === 'alternate')).toBe(false)
       expect(load).toHaveBeenCalledTimes(invalid === 'optional' ? 1 : 0)
       controller.dispose()
     },
@@ -378,25 +378,25 @@ describe('complete-root transactions', () => {
           phase === 'import'
             ? imported.promise
             : Promise.resolve({
-                ...rootTheme('studio'),
+                ...rootTheme('alternate'),
                 activate(defer) {
                   defer(cleanup)
                   if (phase === 'activation') value.controller.dispose()
                 },
               }),
         prepareAllocation: () =>
-          phase === 'allocation' ? allocated.promise : Promise.resolve(allocation('studio')),
+          phase === 'allocation' ? allocated.promise : Promise.resolve(allocation('alternate')),
         afterRender: (cb) => {
           callbacks.push(cb)
         },
       })
-      const selected = value.controller.select('studio')
+      const selected = value.controller.select('alternate')
       await nextTick()
       await nextTick()
       await nextTick()
       value.controller.dispose()
-      imported.resolve(rootTheme('studio'))
-      allocated.resolve(allocation('studio'))
+      imported.resolve(rootTheme('alternate'))
+      allocated.resolve(allocation('alternate'))
       expect(await selected).toBe(false)
       expect(value.allocated.size).toBe(0)
       for (const callback of callbacks) callback()
@@ -412,7 +412,7 @@ describe('complete-root transactions', () => {
       },
     })
     const selections: Promise<boolean>[] = []
-    for (const id of ['default', 'studio', 'default']) {
+    for (const id of ['default', 'alternate', 'default']) {
       selections.push(value.controller.select(id))
       await nextTick()
       await nextTick()

@@ -6,6 +6,7 @@
 - Before adding, modifying or removing code/configuration, create and index a step document under [In progress](docs/en/changes/in-progress/README.md). Record the user's goal, steps and targeted verification. **Keep small fixes small. A few lines and one focused check are enough. Avoid defensive overengineering.**
 - Update the step's next action when switching tasks. Move the record to [Acceptance](docs/en/changes/acceptance/README.md) when implementation is ready, or to [Temporary acceptance](docs/en/changes/temporary-acceptance/README.md) after explicit user approval to proceed with a gap. Follow the [documentation workflow](docs/en/guides/documentation-workflow.md) for statuses, closeout and evidence. User-approved scope and actual verification belong in the same record.
 - Use `$any-music-userscript-runtime` for GM, `$any-music-tauri-runtime` for IPC/native data/accounts, `$any-music-ui-delivery` for product UI and `$music-source-adapter` for source or playback startup. Source capture skills establish website contracts, with GM and Rust acceptance separate.
+- Scope routine UI delivery and verification to Classic and shared contracts. Studio is paused until the user explicitly starts its redesign. See [Independent Theme Development](docs/en/modules/ui/themes.md).
 
 ## Place implementations
 

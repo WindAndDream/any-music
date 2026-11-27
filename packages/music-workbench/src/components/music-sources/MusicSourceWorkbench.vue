@@ -21,7 +21,6 @@ defineSlots<{
   'catalog-viewport'?: (
     context: CatalogViewportContext & {
       feature: UiThemeFeatureMap['catalog']
-      theme: string
       colorScheme: 'light' | 'dark'
       density: string
       suspended: boolean

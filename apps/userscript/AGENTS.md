@@ -15,9 +15,9 @@ This guide applies only to Tampermonkey. Read [Userscript Development](../../doc
 
 Start with `pnpm --filter @any-music/userscript test` and `pnpm --filter @any-music/userscript typecheck`. Build consumers after public style/export changes; complete root checks before committing.
 
-- tag/creation metadata and separate `/vue` loaders come from the features/plugins build directory. Bind existing generation storage only; no GM/IPC, accounts or private repository access.
+- Tag metadata and its separate `/vue` loader come from the build directory. The creation workspace is paused.
 - built-ins use lightweight plugin-source-bilibili / plugin-source-douyin metadata and lazy /runtime assembly. Provider IDs stay stable and separate from music.sources module/contribution IDs. Disablement/invalidation cancels listings/resolution/media; restoration never replays old tasks. Zero usable sources must not block core views.
 
 - The product is unreleased: implement the current architecture directly. Do not add compatibility packages, previous product-schema readers, source JSON importers, archive UI or duplicate IPC aliases. Current plugin upgrade/rollback and crash recovery remain supported.
 
-- features/plugins/built-in-theme-directory owns metadata only; built-in-themes preloads the classic fallback and dynamically imports Studio Vue/styles. The sole MusicSourceWorkbench owns one controller/audio above the complete ThemeHost. Shared/SFC/theme CSS resources are activated transactionally inside its stable Shadow surface; protected slots receive host-only CSS. Build audits record actual static execution graphs.
+- features/plugins/built-in-theme-directory owns metadata only; built-in-themes registers the Classic root as the production renderer and fallback. The sole MusicSourceWorkbench owns one controller/audio above the complete ThemeHost. Shared/SFC/theme CSS resources are activated transactionally inside its stable Shadow surface; protected slots receive host-only CSS. Build audits record actual static execution graphs.

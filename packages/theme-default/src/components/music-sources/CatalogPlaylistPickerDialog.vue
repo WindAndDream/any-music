@@ -15,7 +15,6 @@ provideEditingSession(editing)
 function reset() {
   editing.clearScope('playlist-picker')
   editing.clearScope('playlist-picker-panel')
-  editing.clearScope('studio-playlist-picker-panel')
 }
 watch(
   () => props.open,

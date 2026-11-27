@@ -25,7 +25,7 @@ S06 registers the tab's writer session and creates versioned product generations
 
 - Product keys use `any-music:userscript:*` with separate test storage. Do not mix GM storage with desktop product.json or native credential files. Proxy secrets remain in runtime configuration, outside product snapshots, errors and logs. Async persistence failure freezes later saves and displays a persistent storage error with a reload instruction; its event listener is removed with the workbench scope.
 - Use shared workbench/media algorithms, GM HTTP for managed media bytes and the shared native-streaming fallback order. GM Range/MSE evidence does not prove Rust grant playback.
-- Keep the launcher and document-start bridge light; load the product tree on first expansion. T11 injects host styles into the outer Shadow Root and activates shared/SFC/selected-theme resources inside the stable complete-theme surface. Metadata is separate; the optional Studio entry executes only after selection. Hiding preserves playback/downloads; disposal cleans up. See [edge cases](host-isolation.md).
+- Keep the launcher and document-start bridge light; load the product tree on first expansion. T11 injects host styles into the outer Shadow Root and activates shared/SFC/selected-theme resources inside the stable complete-theme surface. The Classic root is the app-owned renderer and fallback. Hiding preserves playback/downloads; disposal cleans up. See [edge cases](host-isolation.md).
 
 ## Iterate in Tampermonkey with the local server
 

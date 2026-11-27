@@ -20,7 +20,7 @@ The unreleased product reads and writes the current architecture directly. It do
 
 ## Current product storage
 
-The optional `feature.composer` plugin owns both Custom Music (`custom-tracks`) and Segment Creation (`composer`) navigation, views and open commands. Disabling it withdraws both sections together and leaves the current section for Discover. Re-enabling restores both with their saved navigation preferences, works, materials and drafts. Published assets stay in host core, so works already in Favorites, playlists or Listen Later retain ordinary playback and download without the editor.
+The paused `feature.composer` workspace retains Custom Music (`custom-tracks`) and Segment Creation (`composer`) contribution identities and namespace data. When injected, the two views share one lifecycle. Published assets stay in host core. Works referenced by Favorites, playlists or Listen Later retain ordinary playback and download.
 
 Both applications create generation storage before configuring the workbench. The only partitions are `core`, `host` and `namespaces`. Repository keys such as `local-library:v1` are named storage ports into these partitions; they are not separate persisted copies. No startup scan of prior business keys or automatic conversion is performed.
 

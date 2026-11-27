@@ -28,7 +28,6 @@ vi.mock('../../src/features/plugins/built-in-workbench-modules', () => ({
   createBuiltInWorkbenchModules: () => ({ directory: [], features: [] }),
   builtInUiThemes: [],
   loadTagManagement: vi.fn(),
-  loadMusicCreation: vi.fn(),
 }))
 import {
   accountRuntime,

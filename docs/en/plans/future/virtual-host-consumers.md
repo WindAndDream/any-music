@@ -13,7 +13,6 @@ status: proposed
 | Batch | Consumer                                                       | Behavior to verify                                                                                                         |
 | ----- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | C30   | Classic `ClassicPlugins` directory                             | Filtering, enabled state and configuration opening; no guest execution on virtual mount.                                   |
-| C31   | Studio `StudioPlugins` directory                               | Preserve independent plugin controls and native-host slot isolation.                                                       |
 | C32   | Host `NativePluginInstallList` install directory               | Keep exact install identity and native consent authority. Bounded previews retain their existing limits; commands are C48. |
 | C33   | Tauri `AccountList` directory                                  | Virtualization must not close account editing or expose secrets to themes; nested selectors are separate steps.            |
 | C34   | Host `ProxyManagementList`                                     | Preserve proxy identity, validation and protected state; picker branches are separate steps.                               |
@@ -27,10 +26,7 @@ status: proposed
 | C48   | Host `NativePluginInstallList` nested command directory        | Preserve command/install identity and consent gates independently of parent-directory virtualization.                      |
 | C62   | Classic `MusicSourcePickerDialog` source directory             | Two fixed group headings do not bound their source directories; reselecting the current source only closes the dialog.     |
 | C63   | Classic `MusicSourceSettings` source directory                 | Preserve external-source state and host operations; fixed groups do not bound their members.                               |
-| C64   | Studio `StudioSettings` source directory                       | Preserve protected account slots and independent settings layout.                                                          |
-| C65   | Studio `StudioSearch` source native selector                   | Investigate actual directory size; preserve the native selector and search/import drafts.                                  |
 | C67   | Tauri `AccountPlatformList` account platform directory         | Native source identities are extensible; the two built-ins do not justify exclusion. Keep host authority.                  |
 | C70   | Classic `PlayerSettingsDialog` quality directory               | Source candidates have no enforced count limit; investigate actual cost and preserve quality selection/playback lifetime.  |
-| C71   | Studio `StudioPlayer` quality native selector                  | Independently investigate the same candidates in its native control; do not replace without evidence.                      |
 
 Use the [recorded branch inventory](../../../baselines/virtual-lists/2026-11-03-p00-p03/collection-surfaces.json) to locate candidate callers. Recheck current source and select one reusable batch before editing.

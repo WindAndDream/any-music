@@ -120,9 +120,6 @@ importers:
       '@any-music/plugin-center':
         specifier: workspace:*
         version: link:../../packages/plugin-center
-      '@any-music/plugin-music-creation':
-        specifier: workspace:*
-        version: link:../../packages/plugin-music-creation
       '@any-music/plugin-sandbox-browser':
         specifier: workspace:*
         version: link:../../packages/plugin-sandbox-browser
@@ -150,9 +147,6 @@ importers:
       '@any-music/theme-default':
         specifier: workspace:*
         version: link:../../packages/theme-default
-      '@any-music/theme-studio':
-        specifier: workspace:*
-        version: link:../../packages/theme-studio
       '@any-music/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -214,9 +208,6 @@ importers:
       '@any-music/plugin-center':
         specifier: workspace:*
         version: link:../../packages/plugin-center
-      '@any-music/plugin-music-creation':
-        specifier: workspace:*
-        version: link:../../packages/plugin-music-creation
       '@any-music/plugin-source-bilibili':
         specifier: workspace:*
         version: link:../../packages/plugin-source-bilibili
@@ -235,9 +226,6 @@ importers:
       '@any-music/theme-default':
         specifier: workspace:*
         version: link:../../packages/theme-default
-      '@any-music/theme-studio':
-        specifier: workspace:*
-        version: link:../../packages/theme-studio
       '@any-music/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -382,9 +370,6 @@ importers:
       '@any-music/theme-default':
         specifier: workspace:*
         version: link:../theme-default
-      '@any-music/theme-studio':
-        specifier: workspace:*
-        version: link:../theme-studio
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -696,43 +681,6 @@ importers:
         specifier: workspace:*
         version: link:../ui
     devDependencies:
-      '@vitejs/plugin-vue':
-        specifier: 'catalog:'
-        version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))
-      sass:
-        specifier: 'catalog:'
-        version: 1.103.1
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
-      vite:
-        specifier: 'catalog:'
-        version: 8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1)
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))
-      vue:
-        specifier: 'catalog:'
-        version: 3.5.44(typescript@6.0.3)
-      vue-tsc:
-        specifier: 'catalog:'
-        version: 3.3.11(typescript@6.0.3)
-
-  packages/theme-studio:
-    dependencies:
-      '@any-music/card-styles':
-        specifier: workspace:*
-        version: link:../card-styles
-      '@any-music/core':
-        specifier: workspace:*
-        version: link:../core
-      '@any-music/ui':
-        specifier: workspace:*
-        version: link:../ui
-    devDependencies:
-      '@types/node':
-        specifier: 'catalog:'
-        version: 24.13.3
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
         version: 6.0.8(vite@8.2.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.103.1))(vue@3.5.44(typescript@6.0.3))

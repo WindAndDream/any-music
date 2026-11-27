@@ -1,11 +1,11 @@
 import { createAppErrorState } from '@any-music/core'
 import { definition as classic } from '@any-music/theme-default/vue'
-import { definition as studio } from '@any-music/theme-studio/vue'
 import { createEditingSession, provideEditingSession } from '@any-music/ui'
 import type { UiPluginCenterItem, UiThemeFeatureMap } from '@any-music/ui/theme'
 import { describe, expect, it, vi } from 'vitest'
 import { defineComponent, h, nextTick, reactive, shallowRef } from 'vue'
 
+import { alternateDefinition as alternate } from '../../fixtures/alternate-theme'
 import {
   CatalogTestElement,
   dispatchCatalogEvent,
@@ -59,8 +59,8 @@ const external: UiPluginCenterItem = {
   publisher: 'publisher',
   generation: 3,
 }
-function mount(initial: typeof classic | typeof studio) {
-  const selection = shallowRef<typeof classic | typeof studio>(initial)
+function mount(initial: typeof classic | typeof alternate) {
+  const selection = shallowRef<typeof classic | typeof alternate>(initial)
   const state = reactive({ items: [builtin, external], externalSupported: true, busy: false })
   const actions = {
     setEnabled: vi.fn(),
@@ -80,7 +80,7 @@ function mount(initial: typeof classic | typeof studio) {
     defineComponent({
       setup() {
         provideEditingSession(editing)
-        return () => h(selection.value.views.plugins, { feature })
+        return () => h(selection.value.views.plugins, { key: selection.value.id, feature })
       },
     }),
   )
@@ -104,12 +104,9 @@ function button(root: CatalogTestElement, label: string) {
   )
 }
 
-describe.each([
-  ['classic', classic],
-  ['studio', studio],
-] as const)('%s plugin center', (_name, definition) => {
+describe('Classic plugin center', () => {
   it('keeps unavailable switches off while forwarding clicks to the host notice action', async () => {
-    const f = mount(definition)
+    const f = mount(classic)
     try {
       f.state.items = [{ ...builtin, enabled: false, unavailableReason: '这个插件正在开发中。' }]
       await nextTick()
@@ -126,7 +123,7 @@ describe.each([
     'keeps enablement text stable until a load settles or takes longer (%s)',
     async (slow) => {
       vi.useFakeTimers()
-      const f = mount(definition)
+      const f = mount(classic)
       try {
         f.state.items = [{ ...builtin, enabled: false }]
         await nextTick()
@@ -182,7 +179,7 @@ describe.each([
   ] as const)(
     'combines developer %s with live enablement and loading failures',
     async (status, label) => {
-      const f = mount(definition)
+      const f = mount(classic)
       try {
         f.state.items = [{ ...builtin, developmentStatus: status }, external]
         await nextTick()
@@ -213,7 +210,7 @@ describe.each([
     },
   )
   it('shows error details and retry only in the plugin introduction', async () => {
-    const f = mount(definition)
+    const f = mount(classic)
     try {
       const failure = '标签数据格式不可用，原数据已保留。'
       f.state.items = [
@@ -261,7 +258,7 @@ describe.each([
     }
   })
   it('filters live counts and forwards only explicit management and import actions', async () => {
-    const f = mount(definition)
+    const f = mount(classic)
     try {
       expect(f.actions.importPlugin).not.toHaveBeenCalled()
       expect(f.actions.manageExternal).not.toHaveBeenCalled()
@@ -270,19 +267,17 @@ describe.each([
       await nextTick()
       expect(f.root.textContent).not.toContain('标签管理')
       expect(f.root.textContent).toContain('org.example.catalog')
-      if (definition === classic) {
-        dispatchCatalogEvent(
-          findCatalogElement(
-            f.root,
-            (node) =>
-              node.tag === 'button' &&
-              node.props['aria-label'] === '查看插件介绍 org.example.catalog',
-          ),
-          'onClick',
-        )
-        await nextTick()
-        expect(f.actions.manageExternal).not.toHaveBeenCalled()
-      }
+      dispatchCatalogEvent(
+        findCatalogElement(
+          f.root,
+          (node) =>
+            node.tag === 'button' &&
+            node.props['aria-label'] === '查看插件介绍 org.example.catalog',
+        ),
+        'onClick',
+      )
+      await nextTick()
+      expect(f.actions.manageExternal).not.toHaveBeenCalled()
       dispatchCatalogEvent(button(f.root, '管理插件'), 'onClick')
       expect(f.actions.manageExternal).toHaveBeenCalledExactlyOnceWith('install-1')
       dispatchCatalogEvent(button(f.root, '导入'), 'onClick')
@@ -300,14 +295,14 @@ describe.each([
     }
   })
   it('retains filter and display across theme replacement and forwards builtin changes', async () => {
-    const f = mount(definition)
+    const f = mount(classic)
     try {
       dispatchCatalogEvent(button(f.root, '内置'), 'onClick')
       dispatchCatalogEvent(button(f.root, '展示方式'), 'onClick')
       await nextTick()
       dispatchCatalogEvent(button(f.root, '列表'), 'onClick')
       await nextTick()
-      f.selection.value = definition === classic ? studio : classic
+      f.selection.value = alternate
       await nextTick()
       expect(button(f.root, '内置').props['aria-pressed']).toBe(true)
       expect(

@@ -26,6 +26,7 @@ pub struct AccountSession {
 pub struct QrHandoff {
     pub url: String,
     pub expires: std::time::Instant,
+    #[cfg(any(mobile, test))]
     pub opened: bool,
 }
 #[derive(Clone)]
@@ -50,7 +51,6 @@ pub struct RuntimeState {
     pub renderer_uses: Mutex<HashMap<String, (String, crate::accounts::usage::AccountUse)>>,
     pub douyin_browsers: crate::browser::douyin_browser::Manager,
     pub embedded: Arc<crate::browser::embedded::Host>,
-    pub experiments: crate::browser::login_experiment::Manager,
     pub directory: PathBuf,
     pub snapshot: Mutex<Snapshot>,
     pub sessions: Mutex<HashMap<String, Arc<AccountSession>>>,
@@ -120,7 +120,6 @@ impl RuntimeState {
             renderer_uses: Mutex::default(),
             douyin_browsers: crate::browser::douyin_browser::Manager::default(),
             embedded: Arc::default(),
-            experiments: crate::browser::login_experiment::Manager::default(),
             directory,
             snapshot: Mutex::new(snapshot),
             sessions: Mutex::new(HashMap::new()),

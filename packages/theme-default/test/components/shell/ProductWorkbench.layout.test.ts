@@ -38,7 +38,7 @@ const catalogDetailsStyles = compileSfcStyles('music-sources/CatalogDrawerDetail
 const catalogCardStyles = compileSfcStyles('music-sources/CatalogDrawerCard')
 const catalogHeadingHandleStyles = compileSfcStyles('music-sources/CatalogHeadingHandle')
 const trackListStyles = compileSfcStyles('music-sources/TrackCardGrid')
-const queueStyles = compileSfcStyles('music-sources/QueuePanel')
+const collectionSurfaceStyles = compileSfcStyles('library/ClassicCollectionSurface')
 const queueRowStyles = compileSfcStyles('music-sources/QueueTrackRow')
 const downloadRowStyles = compileSfcStyles('downloads/DownloadTrackRow')
 const downloadCollectionStyles = compileSfcStyles('downloads/DownloadCollectionContent')
@@ -202,12 +202,12 @@ describe('Classic shell and current page layout integration', () => {
   it.each([320, 390, 600, 768, 1440])(
     'keeps queue padding aligned and bounds horizontal overflow at %ipx',
     (width) => {
-      const queue = readLayout(queueStyles, ['.listen-queue'], width)
+      const queue = readLayout(sharedStyles, ['.listen-queue'], width)
       expect(queue['inline-size']).toBe('100%')
       expect(queue['min-inline-size']).toBe('0')
       expect(queue['overflow-x']).toBe('clip')
       expect(queue.background).toBe('var(--am-color-background)')
-      const surface = readLayout(queueStyles, ['.listen-queue__surface'], width)
+      const surface = readLayout(collectionSurfaceStyles, ['.listen-queue__surface'], width)
       expect(surface.background).toBe('var(--am-color-surface-subtle)')
       expect(surface.padding).toBe('var(--am-space-4) var(--am-space-3)')
       expect(surface['inline-size']).toBe('100%')
@@ -252,48 +252,48 @@ describe('Classic shell and current page layout integration', () => {
   it.each([320, 600, 1440])(
     'uses the current result height and keeps detail navigation in one frame at %ipx',
     (width) => {
-      for (const styles of [queueStyles, sharedStyles]) {
-        for (const reducedMotion of [false, true]) {
-          const results = readLayout(
-            styles,
-            ['.listen-queue__results'],
+      for (const reducedMotion of [false, true]) {
+        const results = readLayout(
+          sharedStyles,
+          ['.listen-queue__results'],
+          width,
+          width,
+          reducedMotion,
+        )
+        expect(results.display).toBe('grid')
+        expect(results.position).toBe('relative')
+        expect(readLayout(sharedStyles, ['.listen-queue__content'], width).position).toBe(
+          'relative',
+        )
+        expect(results['grid-template-columns']).toBe('minmax(0, 1fr)')
+        const list = readLayout(sharedStyles, ['.listen-queue__list'], width)
+        expect(list['grid-area']?.replace(/\s/g, '')).toBe('1/1')
+        expect(list.position).not.toBe('absolute')
+        expect(
+          readLayout(
+            sharedStyles,
+            ['.listen-queue__results', '.listen-queue--empty .listen-queue__results'],
             width,
-            width,
-            reducedMotion,
-          )
-          expect(results.display).toBe('grid')
-          expect(results.position).toBe('relative')
-          expect(readLayout(styles, ['.listen-queue__content'], width).position).toBe('relative')
-          expect(results['grid-template-columns']).toBe('minmax(0, 1fr)')
-          const list = readLayout(styles, ['.listen-queue__list'], width)
-          expect(list['grid-area']?.replace(/\s/g, '')).toBe('1/1')
-          expect(list.position).not.toBe('absolute')
-          expect(
-            readLayout(
-              styles,
-              ['.listen-queue__results', '.listen-queue--empty .listen-queue__results'],
+          ).display,
+        ).toBe('grid')
+        for (const direction of ['forward', 'back']) {
+          for (const phase of ['enter', 'leave']) {
+            const view = readLayout(
+              sharedStyles,
+              ['.listen-queue__view', `.queue-view-${direction}-${phase}-active`],
               width,
-            ).display,
-          ).toBe('grid')
-          for (const direction of ['forward', 'back']) {
-            for (const phase of ['enter', 'leave']) {
-              const view = readLayout(
-                styles,
-                ['.listen-queue__view', `.queue-view-${direction}-${phase}-active`],
-                width,
-                width,
-                reducedMotion,
-              )
-              if (phase === 'leave') {
-                expect(view.position).toBe('absolute')
-                expect(view.inset).toBe('0')
-                expect(view.overflow).toBe('clip')
-              } else {
-                expect(view.position).not.toBe('absolute')
-              }
-              expect(view.display).not.toBe('none')
-              if (reducedMotion) expect(view.transition).toBe('none')
+              width,
+              reducedMotion,
+            )
+            if (phase === 'leave') {
+              expect(view.position).toBe('absolute')
+              expect(view.inset).toBe('0')
+              expect(view.overflow).toBe('clip')
+            } else {
+              expect(view.position).not.toBe('absolute')
             }
+            expect(view.display).not.toBe('none')
+            if (reducedMotion) expect(view.transition).toBe('none')
           }
         }
       }

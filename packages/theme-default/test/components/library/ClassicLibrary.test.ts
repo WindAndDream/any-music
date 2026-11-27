@@ -1,9 +1,4 @@
-import type {
-  CustomTrackDefinition,
-  DownloadHistoryBatch,
-  LibraryTrackRecord,
-  Track,
-} from '@any-music/core'
+import type { DownloadHistoryBatch, Track } from '@any-music/core'
 import {
   createCatalogTrackFilterState,
   createFavoriteFilterState,
@@ -1766,67 +1761,6 @@ describe('complete-root classic library contracts', () => {
       }
     },
   )
-
-  it('renders published assets with creation disabled and forwards their format and expansion', async () => {
-    const record: LibraryTrackRecord = {
-      track: {
-        ...tracks[0]!,
-        source: { pluginId: 'local-custom', resourceId: 'one', mediaKind: 'custom' },
-      },
-      customTags: [],
-      addedAtMs: 1,
-      updatedAtMs: 1,
-    }
-    const definitionData: CustomTrackDefinition = {
-      version: 1,
-      trackId: 'one',
-      materialCollectionId: '',
-      recipe: [{ sourceTrackId: 'two', startMs: 0, endMs: 1000 }],
-      compiledSegments: [
-        { sourceTrackId: 'two', startMs: 0, endMs: 1000, virtualStartMs: 0, virtualEndMs: 1000 },
-      ],
-      creator: { id: 'c', displayName: '创作者' },
-      sourceCredits: [],
-      createdAtMs: 1,
-    }
-    const state = shallowReactive({
-      ...list(),
-      records: [record],
-      definitions: [definitionData],
-      materialCollections: [],
-      query: '',
-      expandedTrackIds: [],
-      exportFormat: 'wav' as const,
-      exportBusy: false,
-    })
-    const commands = {
-      ...actions(state),
-      remove: vi.fn(),
-      edit: vi.fn(),
-      setQuery: vi.fn(),
-      setExpanded: vi.fn(),
-      setExportFormat: vi.fn(),
-    }
-    const view = mountRoot(definition.views['custom-tracks'], feature(state, commands))
-    expect(view.root.textContent).toContain('创作者')
-    expect(view.root.textContent).not.toContain('作为素材')
-    dispatchCatalogEvent(
-      findCatalogElement(
-        view.root,
-        (node) =>
-          node.tag === 'button' && String(node.props.class).includes('custom-track-drawer__toggle'),
-      ),
-      'onClick',
-      false,
-    )
-    expect(commands.setExpanded).toHaveBeenCalledExactlyOnceWith('one', true)
-    dispatchCatalogEvent(view.button('下载'), 'onClick', false)
-    expect(commands.download).toHaveBeenCalledExactlyOnceWith(['one'], 'wav')
-    await view.replace()
-    expect(commands.download).toHaveBeenCalledTimes(1)
-    expect(commands.setQuery).not.toHaveBeenCalled()
-    view.close()
-  })
 
   it('keeps playback records selected across remount and sends only history actions', async () => {
     const state = shallowReactive({

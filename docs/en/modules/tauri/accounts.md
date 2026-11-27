@@ -57,7 +57,7 @@ The portable adapter parses search state and optionally reports it through `repo
 
 ## Windows development background-login experiment
 
-Settings no longer expose developer verification tools. The isolated Douyin experiment backend and explicit driver remain available only in Windows Rust debug builds. Release IPC rejects experiment actions. Experiments remain independent of production account CDP sessions, never read/update product accounts, vaults or everyday profiles, and do not establish production acceptance.
+The isolated Douyin login experiment runs through the standalone Rust example in Windows debug builds. Experiments remain independent of production account CDP sessions, never read/update product accounts, vaults or everyday profiles, and do not establish production acceptance.
 
 Compare system Chrome (Edge when Chrome is absent) with headed `--no-startup-window` plus CDP `Target.createTarget(hidden: true)` against modern `--headless`. The official page owns QR generation, signing, polling and SMS requests. Rust observes exact allowlisted endpoints and operates uniquely matched controls. Unknown UI or security challenges stop automatic actions. Only clicking the visible-browser entry closes the background process and starts a new official login with the same temporary profile; QR/challenge continuity is not promised.
 
