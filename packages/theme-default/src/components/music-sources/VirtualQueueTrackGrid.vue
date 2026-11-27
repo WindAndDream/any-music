@@ -25,6 +25,7 @@ const estimate = computed(() =>
 // batches also check remembered offscreen items; serializing every cached track for each
 // batch makes scrolling repeat business-sized work. This O(N) map is separate from the
 // bounded height cache, preserves in-place edits and owns no per-item effects/listeners.
+// Selection controls already have reserved space. Toggling them preserves measured heights.
 const contentGenerations = computed<ReadonlyMap<string, string>>(
   () =>
     new Map(
@@ -37,7 +38,6 @@ const contentGenerations = computed<ReadonlyMap<string, string>>(
           props.platformNames.get(track.source.pluginId),
           props.addedAtMsByTrackId.get(track.id),
           props.dateLabel,
-          props.selectable,
         ]),
       ]),
     ),

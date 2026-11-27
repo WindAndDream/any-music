@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { provideCardPresentation } from '@any-music/card-styles/vue'
-import { BottomSheet, useElementBlockSize } from '@any-music/ui'
+import { BottomSheet } from '@any-music/ui'
 import { getDownloadListEntries, providePlaylistPickerPresentation } from '@any-music/ui/library'
 import type { UiThemeHostSlots, UiThemeRootProps } from '@any-music/ui/theme'
-import { computed, h, nextTick, shallowRef, useSlots, useTemplateRef, watch } from 'vue'
+import { computed, h, nextTick, shallowRef, useSlots, watch } from 'vue'
 import type { Component } from 'vue'
 
 import DownloadSummary from './components/downloads/DownloadSummary.vue'
@@ -45,8 +45,6 @@ const playerExpanded = shallowRef(false)
 const playerSettingsOpen = shallowRef(false)
 const settingsDetailOpen = shallowRef(false)
 const pageOverlays = provideClassicOverlays()
-const playerContent = useTemplateRef<HTMLElement>('playerContent')
-const playerBlockSize = useElementBlockSize(playerContent)
 const mobileLayout = computed(
   () => props.features.shell.state.mobileLayout ?? props.form === 'mobile',
 )
@@ -232,13 +230,9 @@ function SettingsView() {
       ></div>
     </template>
     <template #player>
-      <div ref="toolbarTarget"></div>
-      <div
-        :style="{ '--am-player-block-size': `${playerBlockSize}px` }"
-        class="catalog-player-stage"
-        :class="{ 'catalog-player-stage--operator-open': pageOverlays.operatorOpen.value }"
-      >
-        <div ref="playerContent"><PlayerView /></div>
+      <div ref="toolbarTarget" class="catalog-operator-toolbar"></div>
+      <div class="catalog-player-stage">
+        <PlayerView />
         <div ref="operatorTarget" class="catalog-operator-overlay-target"></div>
       </div>
     </template>

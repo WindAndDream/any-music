@@ -340,19 +340,16 @@
 
   .catalog-player-stage {
     position: relative;
-    padding-block-start: 0px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     background: var(--am-color-surface);
-    /* 真实空间必须参与壳层 Grid：与操作条滑入同步让出滚动高度，播放器始终贴住底边。 */
-    transition: padding-block-start var(--am-motion-slow) var(--am-ease-emphasized);
   }
 
-  .catalog-player-stage--operator-open {
-    padding-block-start: max(
+  .catalog-operator-toolbar:has(> .classic-collection-controls) + .catalog-player-stage {
+    // 底栏始终容纳两排操作按钮，切换面板时保持列表视口高度。
+    min-block-size: max(
       0px,
-      calc(
-        92px + var(--am-space-2) * 3 - var(--am-player-block-size, 0px) -
-          var(--am-shell-mobile-navigation-offset)
-      )
+      calc(92px + var(--am-space-2) * 3 - var(--am-shell-mobile-navigation-offset))
     );
   }
 
@@ -784,7 +781,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .catalog-player-stage,
     .catalog-page-forward-enter-active,
     .catalog-page-forward-leave-active,
     .catalog-page-back-enter-active,

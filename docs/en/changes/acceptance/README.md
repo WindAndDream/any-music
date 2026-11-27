@@ -14,6 +14,7 @@ Check the applicable real-world scenarios for each implemented scope. Each page 
 | Scope                                                       | Next check                                                            |
 | ----------------------------------------------------------- | --------------------------------------------------------------------- |
 | [Playback failure feedback](playback-failure-feedback.md)   | Check the top notice and persisted skip setting in installed builds   |
+| [Operator list jump](operator-list-jump.md)                 | Check installed Userscript and remaining collection views             |
 | [Studio interface retirement](retire-studio-ui.md)          | Classic startup with a stored Studio preference on installed builds   |
 | [Userscript themes](theme-userscript.md)                    | Current installed production bundle and physical input                |
 | [Windows themes](theme-windows.md)                          | Physical input and real system dialogs                                |

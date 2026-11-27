@@ -57,7 +57,7 @@ const modalOpen = computed(
         <TagManagementResults :editor="editor" />
       </SlidingView>
     </TagManagementOverview>
-    <ClassicPageOverlays :modal-open="modalOpen" :operator-open="state.operatorOpen">
+    <ClassicPageOverlays :modal-open="modalOpen">
       <template v-if="mobileLayout" #source>
         <span
           class="product-top-bar__queue-count"

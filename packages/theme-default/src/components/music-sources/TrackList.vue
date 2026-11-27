@@ -61,7 +61,6 @@ function contentGeneration(track: Track) {
     customNamesByTrackId.value.get(track.id),
     props.customTagsByTrackId?.get(track.id),
     props.invalidTrackIds.has(track.id),
-    props.selectable,
   ])
 }
 const emptyMessage = computed(() => {

@@ -236,7 +236,7 @@ async function importPlaylist(event: Event) {
       </TrackCardGrid>
     </div>
     <p v-if="error" role="alert">{{ error }}</p>
-    <ClassicPageOverlays :modal-open="modalOpen" :operator-open="collection.operatorOpen.value">
+    <ClassicPageOverlays :modal-open="modalOpen">
       <template #toolbar>
         <ClassicCollectionControls
           :selected-count="collection.selected.value.length"

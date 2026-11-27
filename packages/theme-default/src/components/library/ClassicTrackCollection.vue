@@ -176,10 +176,7 @@ watch([operatorOpen, displayOpen, contentDisplayOpen], presentation.reorder.clea
         :actions="actions"
         :scope="scope ?? `library-root:${title}`"
       />
-      <ClassicPageOverlays
-        :modal-open="playlistOpen || displayOpen || contentDisplayOpen"
-        :operator-open="operatorOpen"
-      >
+      <ClassicPageOverlays :modal-open="playlistOpen || displayOpen || contentDisplayOpen">
         <template #toolbar>
           <ClassicCollectionControls
             :selected-count="selected.length"

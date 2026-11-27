@@ -366,7 +366,7 @@ function finishView(element: Element): void {
         </div>
       </Transition>
     </div>
-    <ClassicPageOverlays :modal-open="modalOpen" :operator-open="operatorOpen">
+    <ClassicPageOverlays :modal-open="modalOpen">
       <template #source>
         <slot v-if="mobileLayout && drawer" name="request-account" :drawer-id="drawer.id" />
         <MusicSourcePickerButton

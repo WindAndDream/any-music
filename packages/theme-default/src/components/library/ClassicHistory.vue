@@ -99,10 +99,7 @@ function openFilters() {
           />
         </Transition>
       </div>
-      <ClassicPageOverlays
-        :modal-open="presentation.modalOpen.value"
-        :operator-open="history.operatorOpen.value"
-      >
+      <ClassicPageOverlays :modal-open="presentation.modalOpen.value">
         <template #toolbar>
           <ClassicCollectionControls
             :selected-count="history.selected.value.length"
