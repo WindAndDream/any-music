@@ -92,6 +92,7 @@ describe('minimal track presentation', () => {
       )
       try {
         const cover = find(view.root, (node) => node.props['data-queue-handle'] !== undefined)
+        expect(view.root.textContent).not.toContain('歌曲已失效')
         click(cover)
         ;(cover.props.onPointerdown as (event: object) => void)({ pointerId: 1 })
         const handlers = cover.props.onKeydown as ((event: object) => void)[]

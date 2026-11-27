@@ -45,6 +45,7 @@ function mountSettings(isMobileLayout = true, desktopAccounts = false, withCache
     externalSourcesEnabled: true,
     profile: { id: 'creator:stable', displayName: '我的创作' },
     historyLimit: 100,
+    skipUnavailableTracks: false,
     downloadConcurrency: 2,
     isMobileLayout,
     displayDefaults: {},
@@ -54,6 +55,7 @@ function mountSettings(isMobileLayout = true, desktopAccounts = false, withCache
     networkSummary: desktopAccounts ? '已配置 2 个代理' : undefined,
     onSetDownloadConcurrency: vi.fn(),
     onSetHistoryLimit: vi.fn(),
+    onSetSkipUnavailableTracks: vi.fn(),
     onUpdateLocalUserDisplayName: vi.fn(),
     onSetPluginEnabled: vi.fn(),
     onCheckPlugin: vi.fn(),
@@ -96,6 +98,26 @@ function findEntry(root: CatalogTestElement, title: string) {
 }
 
 describe('GlobalSettingsPanel', () => {
+  it('opens playback settings and emits the requested auto-skip preference', async () => {
+    const view = mountSettings()
+    try {
+      dispatchCatalogEvent(findEntry(view.root, '播放设置'), 'onClick')
+      await nextTick()
+      const control = findCatalogElement(
+        view.root,
+        (node) => node.props['data-am-focus-key'] === 'settings:playback:skip-unavailable',
+      )
+      expect(control.props['aria-checked']).toBe(false)
+      dispatchCatalogEvent(control, 'onClick')
+      expect(view.props.onSetSkipUnavailableTracks).toHaveBeenCalledExactlyOnceWith(true)
+      view.props.skipUnavailableTracks = true
+      await nextTick()
+      expect(control.props['aria-checked']).toBe(true)
+    } finally {
+      view.unmount()
+    }
+  })
+
   it.each([true, false])(
     'opens the default display settings with collapsed feature groups (mobile=%s)',
     async (mobile) => {

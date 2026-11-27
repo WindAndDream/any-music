@@ -421,6 +421,7 @@ export interface UiThemeFeatureMap {
       themes: readonly { id: string; title: string; unavailableReason?: string }[]
       preferences: AppShellPreferences
       playbackHistoryLimit: number
+      skipUnavailableTracks: boolean
       downloadConcurrency: number
       creatorDisplayName: string
       filterHistory: CatalogFilterHistorySettings
@@ -435,6 +436,7 @@ export interface UiThemeFeatureMap {
       selectTheme: (id: string) => UiThemeAction
       setPreferences: (value: AppShellPreferences) => void
       setPlaybackHistoryLimit: (limit: number) => void
+      setSkipUnavailableTracks: (enabled: boolean) => void
       setDownloadConcurrency: (count: number) => void
       setCreatorDisplayName: (name: string) => void
       setFilterHistory: (value: CatalogFilterHistorySettings) => AppErrorState | void

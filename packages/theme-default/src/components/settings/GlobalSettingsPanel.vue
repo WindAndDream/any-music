@@ -15,8 +15,8 @@ import CreatorProfileSettingsForm from './CreatorProfileSettingsForm.vue'
 import MusicSourceSettings from './MusicSourceSettings.vue'
 import SettingsNavigation from './SettingsNavigation.vue'
 
-const props = defineProps<GlobalSettingsProps>()
-const emit = defineEmits<GlobalSettingsEmits>()
+const props = defineProps<GlobalSettingsProps & { skipUnavailableTracks: boolean }>()
+const emit = defineEmits<GlobalSettingsEmits & { setSkipUnavailableTracks: [enabled: boolean] }>()
 
 defineSlots<GlobalSettingsSlots>()
 
@@ -142,8 +142,15 @@ const settingsGroups = computed<readonly SettingsGroup[]>(() => [
   },
   {
     id: 'data',
-    title: '记录与创作',
+    title: '播放、记录与创作',
     entries: [
+      {
+        id: 'playback',
+        title: '播放设置',
+        icon: 'play',
+        description: '设置歌曲无法播放时是否继续播放下一首。',
+        summary: props.skipUnavailableTracks ? '自动跳过已开启' : '自动跳过已关闭',
+      },
       {
         id: 'playback-history',
         title: '播放历史',
@@ -265,6 +272,25 @@ const {
         />
       </div>
     </template>
+    <template #playback>
+      <div class="settings-form">
+        <div class="settings-form__card playback-setting">
+          <span id="skip-unavailable-tracks-label">无法播放时自动跳过</span>
+          <button
+            class="settings-switch"
+            type="button"
+            role="switch"
+            aria-labelledby="skip-unavailable-tracks-label"
+            :aria-checked="props.skipUnavailableTracks"
+            :disabled="props.suspended"
+            data-am-focus-key="settings:playback:skip-unavailable"
+            @click="emit('setSkipUnavailableTracks', !props.skipUnavailableTracks)"
+          >
+            <span class="settings-switch__thumb" />
+          </button>
+        </div>
+      </div>
+    </template>
     <template #playback-history>
       <SettingsNumberForm
         v-model="historyLimitInput"
@@ -298,3 +324,10 @@ const {
     </template>
   </SettingsNavigation>
 </template>
+
+<style scoped>
+.playback-setting {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+</style>

@@ -100,7 +100,12 @@ export function createWorkbenchThemeFeatures(
       },
       actions: {
         play: async () => {
-          if (!c.player.displayedIsPlaying.value) await c.player.toggleCustomPlayback()
+          if (c.player.status.value === 'error') {
+            c.queue.resetPlaybackFailures()
+            await c.player.retry()
+          } else if (!c.player.displayedIsPlaying.value) {
+            c.player.toggleCustomPlayback()
+          }
         },
         pause: () => {
           if (c.player.displayedIsPlaying.value) void c.player.toggleCustomPlayback()
@@ -143,6 +148,7 @@ export function createWorkbenchThemeFeatures(
         themes: runtime.themes?.themes.map(({ descriptor }) => descriptor) ?? [],
         preferences: preferences.value,
         playbackHistoryLimit: c.library.historyLimit.value,
+        skipUnavailableTracks: c.queue.skipUnavailableTracks.value,
         downloadConcurrency: c.workspace.downloadConcurrency.value,
         creatorDisplayName: c.library.profile.value.displayName,
         filterHistory: history.settings.value,
@@ -161,6 +167,7 @@ export function createWorkbenchThemeFeatures(
         selectTheme: c.uiTheme.select,
         setPreferences: c.setPreferences,
         setPlaybackHistoryLimit: c.setHistoryLimit,
+        setSkipUnavailableTracks: c.setSkipUnavailableTracks,
         setDownloadConcurrency: c.setDownloadConcurrency,
         setCreatorDisplayName: c.updateLocalUserDisplayName,
         setFilterHistory: history.setSettings,

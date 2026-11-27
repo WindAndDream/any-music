@@ -10,6 +10,7 @@ export interface PlaybackQueueSnapshot {
   trackIds: readonly string[]
   mode: PlaybackMode
   arrangementMode: QueueArrangementMode
+  skipUnavailableTracks?: boolean
   /** 可选的入队时间；无有效记录时保持未知，不伪造日期。 */
   addedAtMsByTrackId?: Readonly<Record<string, number>>
 }
@@ -43,6 +44,9 @@ export function sanitizePlaybackQueueSnapshot(input: unknown): PlaybackQueueSnap
     trackIds: [...trackIds],
     mode: isPlaybackMode(input.mode) ? input.mode : 'sequence',
     arrangementMode: input.arrangementMode === 'platform' ? 'platform' : 'flat',
+    ...(typeof input.skipUnavailableTracks === 'boolean'
+      ? { skipUnavailableTracks: input.skipUnavailableTracks }
+      : {}),
     ...(addedTimes
       ? {
           addedAtMsByTrackId: Object.fromEntries(
