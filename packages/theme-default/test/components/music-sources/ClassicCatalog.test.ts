@@ -517,7 +517,7 @@ describe('classic catalog complete-root contract', () => {
 
   it('delegates loaded favorites to one host batch from both catalog entry points', async () => {
     const f = mountPage()
-    click(f.root, '喜欢已加载')
+    click(f.root, '喜欢 2 首')
     expect(f.actions.favoriteDrawer).toHaveBeenCalledExactlyOnceWith('request:stable')
     expect(f.actions.toggleFavorite).not.toHaveBeenCalled()
     f.state.activeDrawerId = null
