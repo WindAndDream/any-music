@@ -217,7 +217,9 @@ function finishView(element: Element): void {
                     aria-label="查看音乐列表完整信息"
                     @click="contextOpen = true"
                   >
-                    {{ drawer.pluginName }}
+                    <span class="catalog-page__context-platform-label">{{
+                      drawer.pluginName
+                    }}</span>
                   </button>
                   <CatalogContextTitle
                     v-else
