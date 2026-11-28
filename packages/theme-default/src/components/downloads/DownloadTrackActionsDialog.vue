@@ -5,7 +5,7 @@ import { computed } from 'vue'
 
 import CatalogTrackActionsDialog from '../music-sources/CatalogTrackActionsDialog.vue'
 import TrackActionButton from '../music-sources/TrackActionButton.vue'
-import { getDownloadTrackAction, getDownloadTrackStatus } from './download-track-presentation'
+import { getDownloadTrackAction } from './download-track-presentation'
 
 /** Extend the shared song actions with task control and confirmed record removal. */
 const props = defineProps<{
@@ -35,7 +35,6 @@ const emit = defineEmits<{
   rename: [track: Track, name: string]
 }>()
 const action = computed(() => (props.entry ? getDownloadTrackAction(props.entry) : undefined))
-const statusMessage = computed(() => (props.entry ? getDownloadTrackStatus(props.entry) : ''))
 
 function controlTask(): void {
   if (!props.entry || !action.value || props.suspended || props.cancelling || action.value.disabled)
@@ -74,6 +73,7 @@ function cancelTask(): void {
     @add-to-playlist="(track, id) => emit('addToPlaylist', track, id)"
     :open="Boolean(entry)"
     :track="entry?.item.track"
+    preview-track-title
     :favorite="favorite"
     :queued="queued"
     :invalid="invalid"
@@ -109,15 +109,6 @@ function cancelTask(): void {
         @click="removeTask"
       />
     </template>
-    <template #details>
-      <p
-        class="download-track-actions__status"
-        :data-error="entry?.state === 'failed'"
-        role="status"
-      >
-        {{ statusMessage }}
-      </p>
-    </template>
     <template #secondary-actions>
       <TrackActionButton
         v-if="
@@ -134,15 +125,3 @@ function cancelTask(): void {
     </template>
   </CatalogTrackActionsDialog>
 </template>
-
-<style scoped>
-.download-track-actions__status {
-  margin: 0;
-  color: var(--am-color-text-secondary);
-  font-size: var(--am-font-size-xs);
-  overflow-wrap: anywhere;
-}
-.download-track-actions__status[data-error='true'] {
-  color: var(--am-color-danger);
-}
-</style>

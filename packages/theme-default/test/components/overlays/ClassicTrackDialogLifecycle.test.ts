@@ -26,7 +26,7 @@ vi.mock('../../../src/components/shell/ClassicShell.vue', () => ({
 }))
 vi.mock('../../../src/components/overlays/ClassicTrackDialog.vue', () => ({
   default: defineComponent({
-    props: ['open', 'trackId'],
+    props: ['open', 'trackId', 'previewTrackTitle'],
     emits: ['afterLeave'],
     setup(props, { emit }) {
       const overlays = useClassicOverlays(() => false)
@@ -38,6 +38,7 @@ vi.mock('../../../src/components/overlays/ClassicTrackDialog.vue', () => ({
           open: props.open,
           trackId: props.trackId,
           'data-opener': overlays?.trackActionId.value,
+          'data-preview-track-title': props.previewTrackTitle,
           onFinish: () => emit('afterLeave', props.trackId),
         })
     },
@@ -96,7 +97,7 @@ describe('classic track action dialog lifetime', () => {
     }
   })
 
-  it.each(['queue', 'favorites', 'downloads'])(
+  it.each(['catalog', 'queue', 'favorites', 'downloads'])(
     'keeps the %s dialog mounted across opening, closing and reopening',
     async (viewId) => {
       const overlays = reactive<{ active: { kind: 'track-actions'; trackId: string } | null }>({
@@ -106,6 +107,7 @@ describe('classic track action dialog lifetime', () => {
       const features = {
         shell: { state: { activeViewId: viewId } },
         navigation: {},
+        catalog: trackList,
         queue: trackList,
         favorites: trackList,
         downloads: { ...trackList, state: { ...trackList.state, batches: [] } },
@@ -118,6 +120,7 @@ describe('classic track action dialog lifetime', () => {
       overlays.active = { kind: 'track-actions', trackId: 'first' }
       await nextTick()
       expect(dialog().props).toMatchObject({ open: true, trackId: 'first' })
+      expect(dialog().props['data-preview-track-title']).toBe(viewId === 'catalog')
       overlays.active = null
       await nextTick()
       expect(dialog().props).toMatchObject({ open: false, trackId: 'first' })

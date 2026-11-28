@@ -5,6 +5,7 @@ import {
 } from '@any-music/core'
 import { getDownloadListState } from '@any-music/ui/library'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
 
 import DownloadTrackActionsDialog from '../../../src/components/downloads/DownloadTrackActionsDialog.vue'
 import {
@@ -24,19 +25,6 @@ vi.mock('vue', async (importOriginal) => {
         (_props, { slots }) =>
         () =>
           slots.default?.(),
-    }),
-  }
-})
-vi.mock('@any-music/ui/components/AppDialog.vue', async () => {
-  const vue = await import('vue')
-  return {
-    default: vue.defineComponent({
-      props: ['open'],
-      inheritAttrs: false,
-      setup:
-        (props, { slots }) =>
-        () =>
-          props.open ? slots.default?.() : null,
     }),
   }
 })
@@ -66,11 +54,13 @@ const batch: DownloadHistoryBatch = {
 }
 
 describe('download task song actions', () => {
-  it('omits the access error from the song actions dialog and keeps retry available', () => {
+  it('omits the repeated header name and status, and opens the full name next to retry actions', async () => {
+    const name = '一首在下载记录里需要查看完整名称的歌'.repeat(12)
     const view = mountCatalogComponent(DownloadTrackActionsDialog, {
       entry: {
         item: {
           ...item,
+          track: { ...item.track, title: name },
           status: 'failed',
           error: createAppErrorState(
             'access-denied',
@@ -89,8 +79,20 @@ describe('download task song actions', () => {
       suspended: false,
     })
     try {
+      const dialog = findCatalogElement(view.root, (node) => node.props.role === 'dialog')
+      const header = findCatalogElement(dialog, (node) => node.tag === 'header')
+      expect(findCatalogElement(header, (node) => node.tag === 'h2').textContent).toBe('歌曲操作')
+      expect(header.textContent).not.toContain(name)
+      expect(dialog.props['aria-describedby']).toBeUndefined()
+      expect(view.root.querySelector('[role="status"]')).toBeNull()
       expect(view.root.textContent).not.toContain('AM-2002')
       expect(view.root.textContent).toContain('重新下载')
+      const title = dialog.querySelector('[aria-haspopup="dialog"]')!
+      expect(title.textContent).toBe(name)
+      dispatchCatalogEvent(title, 'onClick')
+      await nextTick()
+      const [, preview] = view.root.querySelectorAll('[role="dialog"]')
+      expect(findCatalogElement(preview!, (node) => node.tag === 'p').textContent).toBe(name)
     } finally {
       view.unmount()
     }

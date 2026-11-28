@@ -16,6 +16,7 @@ import CatalogTrackActionsDialog from '../music-sources/CatalogTrackActionsDialo
 const props = defineProps<{
   open: boolean
   trackId: string
+  previewTrackTitle?: boolean
   state: DeepReadonly<Omit<UiThemeTrackListState, 'selectedTrackIds'>>
   actions: Readonly<
     Omit<UiThemeTrackListActions, 'select' | 'download'> &
@@ -51,6 +52,7 @@ function available() {
     :open="open"
     appear
     :track="track"
+    :preview-track-title="props.previewTrackTitle"
     :editing-scope="`track-actions:${trackId}`"
     :suspended="availability.status !== 'available'"
     :favorite="state.favoriteTrackIds.includes(trackId)"
