@@ -39,6 +39,7 @@ export const BUILT_IN_SOURCE_DIRECTORY = [
     createModule: createDouyinSourceModule,
     validateImportUrl: (url: string) => void parseDouyinImportUrl(url),
     loginUrl: 'https://www.douyin.com/',
+    catalogWebview: true,
     loadPlugin: async (context: NativeSourceContext): Promise<MusicSourcePlugin> =>
       (await import('./native-source-plugins')).loadDouyinPlugin(context),
   },

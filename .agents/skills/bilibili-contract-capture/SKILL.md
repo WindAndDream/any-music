@@ -5,7 +5,7 @@ description: Recapture Bilibili website API contracts in the dedicated test brow
 
 # Bilibili Contract Capture
 
-Produce a sanitized contract update for the requested Bilibili behavior. Read the [website contract](../../../docs/en/cross-platform/platforms/bilibili/web-api-contract.md) first.
+Produce a sanitized contract update for the requested Bilibili behavior. Read the [website contract](../../../docs/en/modules/sources/bilibili/web-api-contract.md) first.
 
 ## Establish the capture boundary
 

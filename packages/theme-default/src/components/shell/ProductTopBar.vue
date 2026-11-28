@@ -168,21 +168,25 @@ defineSlots<{
 
 @container am-top-bar (max-width: 720px) {
   .product-top-bar {
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: 'copy copy' 'source actions';
+    grid-template-columns: minmax(4em, 1fr) minmax(0, 180px) auto;
   }
 
-  .product-top-bar__source {
-    justify-content: flex-start;
+  .product-top-bar__actions :deep(.session--compact .session__label) {
+    max-inline-size: 20cqi;
   }
 }
 
 /* 抽屉入口由运行端的视口模式决定，局部容器变窄只影响内容排版。 */
 .product-top-bar[data-mobile-layout='true'] {
+  --am-mobile-top-bar-inset-start: max(var(--am-space-2), env(safe-area-inset-top));
   grid-template-columns: 40px minmax(0, 1fr) minmax(0, auto);
   grid-template-areas: 'menu copy source';
-  min-block-size: var(--am-size-mobile-top-bar);
-  padding: max(var(--am-space-2), env(safe-area-inset-top)) var(--am-space-3) var(--am-space-2);
+  /* Reserve the full source picker height even on destinations that only show a count. */
+  min-block-size: max(
+    var(--am-size-mobile-top-bar),
+    calc(44px + var(--am-mobile-top-bar-inset-start) + var(--am-space-2) + 1px)
+  );
+  padding: var(--am-mobile-top-bar-inset-start) var(--am-space-3) var(--am-space-2);
 }
 
 .product-top-bar[data-mobile-layout='true'][data-sidebar-side='right'] {
@@ -201,6 +205,12 @@ defineSlots<{
 .product-top-bar[data-mobile-layout='true'] .product-top-bar__source {
   justify-content: flex-end;
   justify-self: end;
+}
+
+.product-top-bar[data-mobile-layout='true']
+  .product-top-bar__source
+  :deep(.product-top-bar__source-context) {
+  min-inline-size: 0;
   max-inline-size: min(42cqi, 180px);
 }
 

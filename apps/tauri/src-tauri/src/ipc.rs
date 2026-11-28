@@ -19,6 +19,7 @@ pub(crate) fn handler() -> impl Fn(tauri::ipc::Invoke<tauri::Wry>) -> bool + Sen
         accounts::commands::request_state,
         storage::product::save_product_data,
         storage::product::load_product_data,
+        storage::product::sidebar_collapse_preference,
         storage::resource_cache_commands::resource_cache_snapshot,
         storage::resource_cache_commands::resource_cache_configure,
         storage::resource_cache_commands::resource_cache_clear,
@@ -52,6 +53,10 @@ pub(crate) fn handler() -> impl Fn(tauri::ipc::Invoke<tauri::Wry>) -> bool + Sen
         browser::douyin_browser::verification::begin_douyin_search_verification,
         browser::douyin_browser::verification::poll_douyin_search_verification,
         browser::douyin_browser::verification::end_douyin_search_verification,
+        browser::embedded::account_page_layout,
+        browser::embedded::account_page_report,
+        browser::embedded::catalog::sync_catalog_webview,
+        browser::embedded::catalog::close_catalog_webview,
         media::register_media,
         media::release_media,
         accounts::login::begin_qr_login,
@@ -71,13 +76,6 @@ pub(crate) fn handler() -> impl Fn(tauri::ipc::Invoke<tauri::Wry>) -> bool + Sen
         system::download_directory::reset_download_directory,
         system::external::open_external,
         system::external::login_capabilities,
-        browser::login_experiment::login_experiment_enabled,
-        browser::login_experiment::begin_login_experiment,
-        browser::login_experiment::poll_login_experiment,
-        browser::login_experiment::send_experiment_sms,
-        browser::login_experiment::submit_experiment_sms,
-        browser::login_experiment::cancel_login_experiment,
-        browser::login_experiment::open_experiment_browser,
         crate::isolation::plugin_probe_relay
     ]
 }

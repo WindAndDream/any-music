@@ -123,6 +123,7 @@ export function createThemeFeatures(submit: () => void): UiThemeFeatureMap {
           toggleQueue: noop,
           requestCreatePlaylist: noop,
           loadMore: noop,
+          refresh: noop,
           retry: noop,
           cancel: noop,
           removeDrawer: noop,
@@ -304,6 +305,7 @@ export function createThemeFeatures(submit: () => void): UiThemeFeatureMap {
         themes: [],
         preferences,
         playbackHistoryLimit: 100,
+        skipUnavailableTracks: false,
         downloadConcurrency: 2,
         creatorDisplayName: '',
         filterHistory: {
@@ -320,6 +322,7 @@ export function createThemeFeatures(submit: () => void): UiThemeFeatureMap {
         selectTheme: noop,
         setPreferences: noop,
         setPlaybackHistoryLimit: noop,
+        setSkipUnavailableTracks: noop,
         setDownloadConcurrency: noop,
         setCreatorDisplayName: noop,
         setFilterHistory: noop,

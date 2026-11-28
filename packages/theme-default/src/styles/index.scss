@@ -1,5 +1,4 @@
 @use './foundation';
-@use './specialists';
 @use './tags';
 @use './plugins';
 @use './catalog';
@@ -32,26 +31,9 @@
     container-name: am-content am-workbench;
   }
 
-  @media (max-width: 768px) {
-    .music-app-shell .am-workspace-surface {
-      // Playlist actions start at the collection surface inset, without another toolbar inset.
-      :is(
-        .catalog-drawers__header,
-        .queue-view-controls,
-        .download-collection__toolbar,
-        .classic-plugins__toolbar,
-        .custom-tracks__toolbar
-      ) {
-        padding-block-start: 0;
-      }
-
-      // These pages have no collection frame; reproduce its outer and inner top spacing.
-      > :is(.custom-tracks, .composer) {
-        padding-block-start: calc(
-          clamp(var(--am-space-4), 2.2cqi, var(--am-space-7)) + var(--am-space-4)
-        );
-      }
-    }
+  .music-app-shell__content:has(> .am-workspace-surface > .classic-catalog) {
+    overflow: clip;
+    scrollbar-gutter: auto;
   }
 
   .product-reopen {

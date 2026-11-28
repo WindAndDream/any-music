@@ -3,13 +3,10 @@ import { createFilterPanelState, filterPanelKey } from '@any-music/ui/catalog'
 import { useCatalogFilterHistory } from '@any-music/ui/catalog'
 import {
   cloneCatalogTrackFilterState,
-  createCatalogTrackFilterState,
-  countCatalogTrackFilters,
   type CatalogTagStat,
   type CatalogTrackFilterState,
 } from '@any-music/ui/catalog'
 import { useBackHandler } from '@any-music/ui/catalog'
-import { useConfirmAction } from '@any-music/ui/catalog'
 import { useEditingSession, provideEditingSession } from '@any-music/ui/catalog'
 import { useUiContributionAvailability } from '@any-music/ui/catalog'
 import {
@@ -23,7 +20,8 @@ import {
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import { computed, nextTick, shallowRef, useTemplateRef, watch } from 'vue'
 
-import CatalogFilterPreview from './CatalogFilterPreview.vue'
+import CatalogFilterDimensions from './CatalogFilterDimensions.vue'
+import CatalogFilterHelp from './CatalogFilterHelp.vue'
 import CatalogTrackFilterEditor from './CatalogTrackFilterEditor.vue'
 import CatalogTrackFilterSummary from './CatalogTrackFilterSummary.vue'
 
@@ -32,8 +30,6 @@ const props = withDefaults(
   defineProps<{
     tagStats: readonly CatalogTagStat[]
     platformStats?: readonly { id: string; name: string; count: number }[]
-    resultCount: number
-    totalCount: number
     /** 稳定归属标识必须由业务容器提供；相同维度在不同筛选器中不共享历史。 */
     historyScope: string
     filterContext?: CatalogFilterContext
@@ -46,7 +42,7 @@ defineSlots<{ extensions?: () => unknown }>()
 
 const emit = defineEmits<{
   detailOpenChange: [isOpen: boolean]
-  /** 预览可以包含未提交的维度输入，调用方只能用它派生数量，不能覆盖面板草稿。 */
+  /** 预览可以包含未提交的维度输入，仅用于派生匹配结果。 */
   previewChange: [filters: CatalogTrackFilterState]
 }>()
 
@@ -54,18 +50,11 @@ const filters = defineModel<CatalogTrackFilterState>('filters', {
   required: true,
 })
 
-const confirmAction = useConfirmAction()
 const contributions = useUiContributionAvailability('trackList.filters')
 const overview = useTemplateRef<HTMLElement>('overview')
-const dimensionsRail = useTemplateRef<HTMLElement>('dimensionsRail')
+const dimensionsRail =
+  useTemplateRef<InstanceType<typeof CatalogFilterDimensions>>('dimensionsRail')
 let dimensionsScrollLeft = 0
-watch(
-  dimensionsRail,
-  (rail) => {
-    if (rail) rail.scrollLeft = dimensionsScrollLeft
-  },
-  { flush: 'post' },
-)
 const editor = useTemplateRef<InstanceType<typeof CatalogTrackFilterEditor>>('editor')
 const history = useCatalogFilterHistory().forScope(() => props.historyScope)
 const editing = useEditingSession('filter-panel')
@@ -86,17 +75,12 @@ watch(
   { immediate: true },
 )
 
-const filterCounts = computed(() => countCatalogTrackFilters(filters.value))
 const dimensions = computed(() =>
   getCatalogFilterDimensions(props.filterContext, { platformScoped: props.platformScoped })
     .filter((dimension) => dimension.id !== 'tags' || contributions.allows('tag-filter'))
     .map((dimension) => ({
       id: dimension.id,
       label: props.historyRecords && dimension.id === 'published' ? '播放时间' : dimension.label,
-      description:
-        props.historyRecords && dimension.id === 'published'
-          ? '按播放日期筛选，支持多个日期区间'
-          : dimension.description,
       icon: dimension.icon,
       count: getCatalogTrackFilterDimensionCount(filters.value, dimension.id),
     })),
@@ -107,8 +91,20 @@ const activeDimensionView = computed(() => {
       (item) => item.id === activeDimension.value,
     ) ?? getCatalogFilterDimensions(props.filterContext)[0]!
   return props.historyRecords && dimension.id === 'published'
-    ? { ...dimension, label: '播放时间', description: '按播放日期筛选，支持多个日期区间' }
+    ? { ...dimension, label: '播放时间' }
     : dimension
+})
+const helpDescription = computed(() => {
+  const dimension = activeDimensionView.value
+  if (dimension.id === 'platforms') return '未选择时显示全部平台；选择多个平台时匹配其中任意一个。'
+  if (dimension.id === 'search') {
+    return props.filterContext === 'drawers'
+      ? '列表名称、搜索词、链接或来源。'
+      : '名称、作者或用户 ID。'
+  }
+  if (dimension.id === 'published' && props.historyRecords)
+    return '按播放日期筛选，支持多个日期区间。'
+  return `${dimension.description}。`
 })
 const activeDraftCount = computed(() =>
   activeDimension.value
@@ -140,7 +136,7 @@ function handleViewAfterLeave(): void {
 
 /** 维度编辑使用隔离副本；返回不会污染概览，确定才合并当前维度。 */
 function openDimension(dimension: CatalogTrackFilterDimension, index?: number): void {
-  dimensionsScrollLeft = dimensionsRail.value?.scrollLeft ?? dimensionsScrollLeft
+  dimensionsScrollLeft = dimensionsRail.value?.getScrollLeft() ?? dimensionsScrollLeft
   editing.clearScope('range-editor')
   dimensionDraft.value = cloneCatalogTrackFilterState(filters.value)
   dimensionPreview.value = undefined
@@ -176,7 +172,7 @@ async function confirmDimension(): Promise<void> {
   await returnToOverview()
 }
 
-/** 单项删除立即更新面板草稿；外层取消仍可撤回，只有清空全部需要确认。 */
+/** 单项删除立即更新面板草稿，外层取消仍可撤回。 */
 async function removeFilter(dimension: CatalogTrackFilterDimension, index: number): Promise<void> {
   if (getCatalogTrackFilterLabels(filters.value, dimension)[index] === undefined) return
 
@@ -214,29 +210,6 @@ async function removeFilter(dimension: CatalogTrackFilterDimension, index: numbe
   await nextTick()
   overview.value
     ?.querySelector<HTMLButtonElement>(`[data-filter-dimension="${dimension}"]`)
-    ?.focus({ preventScroll: true })
-}
-
-/** 清空当前草稿；外层“取消”仍可放弃这次面板编辑。 */
-async function clearAllFilters(): Promise<void> {
-  const counts = filterCounts.value
-  if (counts.total === 0) return
-  const shouldClear = await confirmAction({
-    title: '清空全部筛选？',
-    message: [
-      `将移除当前草稿中的 ${counts.total} 条条件。`,
-      dimensions.value.map(({ label, count }) => `${label} ${count} 条`).join(' · ') + '。',
-      `此操作只修改当前草稿，应用筛选后才会影响${props.filterContext === 'drawers' ? '音乐' : '歌曲'}列表。`,
-    ].join('\n'),
-    confirmLabel: '清空全部',
-    tone: 'danger',
-  })
-  if (!shouldClear) return
-
-  filters.value = createCatalogTrackFilterState()
-  await nextTick()
-  overview.value
-    ?.querySelector<HTMLButtonElement>('[data-filter-dimension="search"]')
     ?.focus({ preventScroll: true })
 }
 
@@ -308,7 +281,11 @@ function disableLeavingView(element: Element): void {
       @after-enter="handleViewAfterEnter"
     >
       <div v-if="!activeDimension" ref="overview" key="overview" class="catalog-filters__overview">
-        <nav ref="dimensionsRail" class="catalog-filters__dimensions" aria-label="筛选类型">
+        <CatalogFilterDimensions
+          ref="dimensionsRail"
+          label="筛选类型"
+          :initial-scroll-left="dimensionsScrollLeft"
+        >
           <slot name="extensions" />
           <button
             v-for="dimension in dimensions"
@@ -321,29 +298,23 @@ function disableLeavingView(element: Element): void {
             <span class="catalog-filter-dimension__icon">
               <AppIcon :name="dimension.icon" :size="17" />
             </span>
-            <span class="catalog-filter-dimension__copy">
-              <strong>{{ dimension.label }}</strong>
-              <small v-if="dimension.count > 0">已筛选 {{ dimension.count }} 项</small>
-            </span>
+            <strong class="catalog-filter-dimension__label">{{ dimension.label }}</strong>
             <span v-if="dimension.count > 0" class="catalog-filter-dimension__count">
               {{ dimension.count }}
             </span>
             <AppIcon class="catalog-filter-dimension__arrow" name="arrow-right" :size="15" />
           </button>
-        </nav>
+        </CatalogFilterDimensions>
 
         <div class="catalog-filters__summary">
           <CatalogTrackFilterSummary
             :filters="filters"
-            :result-count="resultCount"
-            :total-count="totalCount"
             :filter-context="props.filterContext"
             :history-records="props.historyRecords"
             :platform-scoped="props.platformScoped"
             :platform-stats="props.platformStats"
             @edit="openDimension"
             @remove="removeFilter"
-            @clear="clearAllFilters"
           />
         </div>
       </div>
@@ -356,18 +327,9 @@ function disableLeavingView(element: Element): void {
       >
         <header class="catalog-filters__detail-header">
           <div class="catalog-filters__detail-heading">
-            <div>
-              <strong>{{ activeDimensionView.label }}</strong>
-              <small>{{ activeDimensionView.description }}</small>
-            </div>
+            <strong>{{ activeDimensionView.label }}</strong>
+            <CatalogFilterHelp :label="activeDimensionView.label" :description="helpDescription" />
           </div>
-          <CatalogFilterPreview
-            :result-count="resultCount"
-            :total-count="totalCount"
-            :unit="
-              props.historyRecords ? '条' : props.filterContext === 'drawers' ? '个列表' : '首'
-            "
-          />
         </header>
 
         <div class="catalog-filters__detail-content">

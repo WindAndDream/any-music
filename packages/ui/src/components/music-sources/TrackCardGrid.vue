@@ -2,19 +2,28 @@
 import { useTemplateRef } from 'vue'
 
 import { useGridMoveTransition } from '../../composables/music-sources/use-grid-move-transition'
-import type { CatalogTrackDisplayMode, MobileTrackColumns } from './catalog-track-display-mode'
+import { useSidebarCollapseGridMotion } from '../../composables/use-sidebar-collapse-grid-motion'
+import type {
+  CatalogTrackDisplayMode,
+  MobileTrackColumns,
+  TrackGridViewport,
+} from './catalog-track-display-mode'
 
 /** Controlled grid geometry and keyed movement; card skins belong to the consuming theme. */
 const props = defineProps<{
   displayMode: CatalogTrackDisplayMode
   mobileColumns: MobileTrackColumns
+  /** A results list in a child WebView follows the main window's breakpoint. */
+  viewportSize?: TrackGridViewport
   animate?: boolean
   /** Stable keys in slot element order; density/column changes share the same batched movement. */
   itemKeys?: readonly string[]
 }>()
 defineSlots<{ default(): unknown }>()
+const items = useTemplateRef<HTMLElement>('items')
+useSidebarCollapseGridMotion({ element: items })
 useGridMoveTransition({
-  element: useTemplateRef<HTMLElement>('items'),
+  element: items,
   itemKeys: () => props.itemKeys ?? [],
   layoutKey: () => `${props.displayMode}:${props.mobileColumns}`,
   enabled: () => Boolean(props.animate),
@@ -27,6 +36,7 @@ useGridMoveTransition({
       class="list__items"
       :data-display-mode="displayMode"
       :data-mobile-columns="mobileColumns"
+      :data-viewport-size="viewportSize"
     >
       <slot />
     </div>
@@ -41,6 +51,7 @@ useGridMoveTransition({
 }
 .list__items {
   display: grid;
+  --am-track-mobile-columns: minmax(0, 1fr);
   --am-track-card-min-width: 296px;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--am-track-card-min-width)), 1fr));
   gap: var(--am-space-3);
@@ -57,13 +68,18 @@ useGridMoveTransition({
   display: grid;
   min-inline-size: 0;
 }
+.list__items[data-mobile-columns='2'] {
+  --am-track-mobile-columns: repeat(2, minmax(0, 1fr));
+  --am-track-mobile-gap: var(--am-space-2);
+}
+.list__items[data-viewport-size='narrow'] {
+  grid-template-columns: var(--am-track-mobile-columns);
+  gap: var(--am-track-mobile-gap, var(--am-space-3));
+}
 @media (max-width: 600px) {
-  .list__items[data-mobile-columns='1'] {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .list__items[data-mobile-columns='2'] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--am-space-2);
+  .list__items:not([data-viewport-size]) {
+    grid-template-columns: var(--am-track-mobile-columns);
+    gap: var(--am-track-mobile-gap, var(--am-space-3));
   }
 }
 </style>

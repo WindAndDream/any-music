@@ -1,5 +1,6 @@
 import type { Slots, VNodeChild } from 'vue'
 
+import type { CatalogDrawerView } from './catalog-drawer'
 import type { ResourceCacheSettingsContext, SettingsDetailContext } from './settings-detail-context'
 import type { UiThemeFeatureMap } from './theme-features'
 import {
@@ -26,6 +27,18 @@ export type UiThemeViews = {
   readonly [Key in UiThemeOptionalView]?: UiThemeComponent<{ feature: UiThemeFeatureMap[Key] }>
 }
 
+/** Opens a catalog dialog once the runtime's list viewport has yielded to the theme. */
+export type CatalogOverlayOpener = (open: () => void) => void
+
+export interface CatalogViewportContext {
+  drawer: CatalogDrawerView
+  selectable: boolean
+  suspended?: boolean
+  setReady: (ready: boolean) => void
+  registerOverlayOpener: (opener: CatalogOverlayOpener) => () => void
+  showTrackActions: (id: string) => void
+}
+
 /** Slots contain trusted host content. Themes may arrange it, never replace its authority. */
 export interface UiThemeHostSlots {
   'account-settings'?: (context: SettingsDetailContext) => VNodeChild
@@ -34,6 +47,7 @@ export interface UiThemeHostSlots {
   'cache-settings'?: (context: ResourceCacheSettingsContext) => VNodeChild
   'external-source-settings'?: () => VNodeChild
   'source-identity'?: (context: { sourceId: string }) => VNodeChild
+  'catalog-viewport'?: (context: CatalogViewportContext) => VNodeChild
   'request-account'?: (context: { drawerId: string }) => VNodeChild
 }
 

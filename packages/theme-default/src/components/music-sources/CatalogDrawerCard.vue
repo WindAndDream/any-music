@@ -11,7 +11,6 @@ import {
 } from '@any-music/ui/catalog'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import { computed } from 'vue'
-import type { CSSProperties } from 'vue'
 
 // 卡片负责请求摘要和选择热区；二级操作交由统一弹窗，业务动作仍由上层执行。
 const props = withDefaults(
@@ -20,7 +19,6 @@ const props = withDefaults(
     selected: boolean
     selectable?: boolean
     dragging?: boolean
-    reorderStyle?: CSSProperties
   }>(),
   { dragging: false },
 )
@@ -91,7 +89,6 @@ function handlePrimaryAction(): void {
 <template>
   <article
     class="catalog-card"
-    data-am-grid-motion
     data-catalog-handle
     :data-catalog-drawer-id="props.drawer.id"
     :class="{
@@ -99,9 +96,7 @@ function handlePrimaryAction(): void {
       'catalog-card--selectable': props.selectable,
       'catalog-card--disconnected': isDisconnected,
       'catalog-card--dragging': props.dragging,
-      'catalog-card--shifted': props.reorderStyle && !props.dragging,
     }"
-    :style="props.reorderStyle"
     :data-status="props.drawer.status"
     tabindex="0"
     :aria-label="`音乐列表 ${props.drawer.title}；${props.selectable ? '点击空白选择，' : ''}长按空白拖动排序；方向键可逐项移动`"
@@ -174,15 +169,11 @@ function handlePrimaryAction(): void {
           </span>
         </div>
         <div class="catalog-card__metrics" aria-label="列表加载概况">
-          <span data-catalog-text
+          <span class="am-metadata-label" data-catalog-text
             ><strong>{{ props.drawer.tracks.length }}</strong> 首已加载</span
           >
-          <span data-catalog-text
+          <span class="am-metadata-label" data-catalog-text
             ><strong>{{ props.drawer.loadedPageCount }}</strong> 页内容</span
-          >
-          <span v-if="props.drawer.hasMore && !isDisconnected" data-catalog-text>还有更多</span>
-          <span v-else-if="props.drawer.status === 'ready' && !isDisconnected" data-catalog-text
-            >已到末尾</span
           >
         </div>
       </div>
@@ -263,15 +254,10 @@ function handlePrimaryAction(): void {
   content-visibility: visible;
   user-select: none;
 }
-.catalog-card--shifted {
-  will-change: transform;
-}
-
 @supports (content-visibility: auto) {
   .catalog-card {
-    /* 跳过屏外内容并记住实际高度；边界放在卡片自身，网格单元不裁切悬停位移与阴影。 */
-    content-visibility: auto;
-    contain-intrinsic-block-size: auto 280px;
+    /* Keep the card's paint boundary while the virtual grid measures its natural size. */
+    contain: layout style paint;
   }
 }
 
@@ -486,19 +472,10 @@ function handlePrimaryAction(): void {
   flex: 0 0 auto;
   align-items: center;
   gap: var(--am-space-2);
-  color: var(--am-color-text-secondary);
-  font-size: var(--am-font-size-xs);
 }
 
-.catalog-card__metrics span {
-  display: inline-flex;
-  flex: 0 0 auto;
-  min-block-size: 28px;
-  align-items: center;
+.catalog-card__metrics .am-metadata-label {
   gap: var(--am-space-1);
-  padding: var(--am-space-1) var(--am-space-2);
-  border-radius: var(--am-radius-detail);
-  background: var(--am-color-surface-subtle);
 }
 
 .catalog-card__metrics strong {
@@ -668,7 +645,6 @@ function handlePrimaryAction(): void {
   .catalog-card {
     gap: var(--am-space-2);
     padding: var(--am-space-3);
-    contain-intrinsic-block-size: auto 240px;
   }
 
   .catalog-card__body {

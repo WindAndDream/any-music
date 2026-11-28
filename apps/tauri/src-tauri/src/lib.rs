@@ -106,6 +106,7 @@ pub fn run() {
                 runtime
             };
             accounts::deletion::schedule(runtime.directory.clone());
+            runtime.embedded.attach(app.handle().clone());
             app.manage(runtime);
             #[cfg(any(desktop, target_os = "android"))]
             media::start(app.handle().clone()).map_err(std::io::Error::other)?;
@@ -133,7 +134,6 @@ pub fn run() {
                 app.state::<plugins::executor::Executors>().stop_all();
                 let state = app.state::<state::RuntimeState>();
                 state.download_schedules.clear();
-                tauri::async_runtime::block_on(state.experiments.shutdown());
                 tauri::async_runtime::block_on(state.douyin_browsers.shutdown());
                 let ids = state
                     .browsers

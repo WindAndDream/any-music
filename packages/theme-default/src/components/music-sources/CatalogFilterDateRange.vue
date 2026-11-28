@@ -114,6 +114,8 @@ function selectStage(stage: 'start' | 'end'): void {
 }
 .catalog-date-range__endpoint .catalog-date-range__placeholder {
   color: var(--am-color-text-secondary);
+}
+.catalog-date-range--prominent .catalog-date-range__placeholder {
   font-weight: 400;
 }
 /* 当前输入采用两条端点行，避免窄右栏挤小日期；历史仍沿用横向摘要。 */

@@ -54,7 +54,7 @@
     "sdk": "37.0",
     "buildTools": "36.0.0",
     "ndk": "30.0.16248370",
-    "versionCode": 3,
+    "versionCode": 4,
     "targets": [
       {
         "id": "android-arm64",

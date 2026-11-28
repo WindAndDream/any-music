@@ -28,7 +28,7 @@ function setup(clockOverride?: RoutingClock) {
       enabled: true,
       status: 'ready',
     })
-  catalog.savePolicy('bilibili', 'search', { ...DEFAULT_ATTEMPT_POLICY, selection: 'random' })
+  catalog.savePolicy('bilibili', 'search', { ...DEFAULT_ATTEMPT_POLICY })
   const proxies = new ProxyPool(clock)
   for (const id of ['p1', 'p2'])
     proxies.save({ id, name: id, configurationKey: `config_${id}`, enabled: true })
@@ -38,7 +38,6 @@ function setup(clockOverride?: RoutingClock) {
     catalog,
     proxies,
     capabilities,
-    random: () => 0,
     isProxyFailure: (error) => error instanceof Error && error.message === 'proxy-connect',
   })
   return { router, catalog, proxies, capabilities, timers }
@@ -57,7 +56,6 @@ describe('formal account/proxy composition', () => {
       })
       catalog.savePolicy('bilibili', 'search', {
         ...DEFAULT_ATTEMPT_POLICY,
-        selection: 'random',
         attemptTimeoutMs: 10,
         totalTimeoutMs: 30,
       })

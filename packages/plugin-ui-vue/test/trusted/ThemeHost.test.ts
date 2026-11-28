@@ -169,7 +169,7 @@ it('mounts one complete root in a stable style surface and keeps protected/recov
     brokenFallback = false
   const composition = rootComposition(async (id) => {
     const theme = rootTheme(id)
-    return id === 'studio' && broken
+    return id === 'alternate' && broken
       ? {
           ...theme,
           definition: {
@@ -237,7 +237,7 @@ it('mounts one complete root in a stable style surface and keeps protected/recov
   await nextTick()
   try {
     expect(await controller.select('default')).toBe(true)
-    expect(await controller.select('studio')).toBe(true)
+    expect(await controller.select('alternate')).toBe(true)
     expect(shadows).toHaveLength(1)
     const shadow = shadows[0]!
     dispatchCatalogEvent(
@@ -249,17 +249,17 @@ it('mounts one complete root in a stable style surface and keeps protected/recov
       findCatalogElement(shadow, (node) => node.props['data-am-theme-root'] !== undefined).props[
         'data-am-ui-theme'
       ],
-    ).toBe('studio')
+    ).toBe('alternate')
     expect(() => findCatalogElement(shadow, (node) => node.tag === 'aside')).toThrow()
     expect(findCatalogElement(mounted.root, (node) => node.tag === 'aside').textContent).toBe(
       'Native consent',
     )
     broken = true
-    expect(await controller.select('studio')).toBe(false)
+    expect(await controller.select('alternate')).toBe(false)
     expect(controller.current.value.theme.definition.id).toBe('default')
     expect(controller.needsRecovery.value).toBe(false)
     brokenFallback = true
-    expect(await controller.select('studio')).toBe(false)
+    expect(await controller.select('alternate')).toBe(false)
     await nextTick()
     expect(controller.needsRecovery.value).toBe(true)
     expect(shadow.textContent).not.toContain('Search')

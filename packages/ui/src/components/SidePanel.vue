@@ -201,7 +201,7 @@ useOverlayKeyboard({
 
 .am-side-panel-enter-active,
 .am-side-panel-leave-active {
-  /* Vue 按根节点过渡判定离场结束，必须等内部滑动及底部空间一起收回后再卸载。 */
+  /* 根节点与面板滑动使用同一时长，Vue 等滑动结束后再卸载。 */
   transition: opacity var(--am-motion-slow) var(--am-ease-standard);
 }
 

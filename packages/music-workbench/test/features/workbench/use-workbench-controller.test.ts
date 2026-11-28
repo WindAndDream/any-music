@@ -10,13 +10,7 @@ import { createMusicCreationModule } from '@any-music/plugin-music-creation'
 import { createSession as createCreation, Composer } from '@any-music/plugin-music-creation/vue'
 import { createTagManagementModule } from '@any-music/plugin-tag-management'
 import { createSession as createTags, Panel } from '@any-music/plugin-tag-management/vue'
-import {
-  definition as classicDefinition,
-  CatalogDrawer,
-  QueuePanel,
-  ActiveDownloadPanel,
-} from '@any-music/theme-default/vue'
-import { definition as studioDefinition } from '@any-music/theme-studio/vue'
+import { definition as classicDefinition } from '@any-music/theme-default/vue'
 import { createCatalogTrackFilterState } from '@any-music/ui'
 import { catalogRootEditingKey, createCatalogRootEditing } from '@any-music/ui/catalog'
 import type { TagManagementPresentation, MusicCreationPresentation } from '@any-music/ui/theme'
@@ -40,7 +34,9 @@ import { createWorkbenchModuleDirectory } from '../../../src/plugin-adapters/wor
 import { configureWorkbenchRuntime } from '../../../src/runtime/workbench-runtime'
 import type { SourceInvalidation } from '../../../src/runtime/workbench-runtime'
 import { musicSourceWorkspaceRepository } from '../../../src/storage/music-source-workspace-repository'
+import { playbackQueueRepository } from '../../../src/storage/playback-queue-repository'
 import { createProductGenerationStorage } from '../../../src/storage/product-generation-store'
+import { createSemanticThemeRenderer } from '../../helpers/semantic-theme-renderer'
 import { dispatchCatalogEvent, findCatalogElement } from '../../helpers/test-renderer'
 import { renderer, CatalogTestElement } from '../../helpers/test-renderer'
 import { memory, options } from '../../storage/product-storage-fixtures'
@@ -138,7 +134,7 @@ const media = (release = vi.fn()): ResolvedMediaSource => ({
 })
 
 function mountWorkbench(
-  withLibrary: boolean | 'catalog' | 'root' | 'specialists' = false,
+  withLibrary: false | 'catalog' | 'downloads' | 'specialists' = false,
   initialWorkspace?: MusicSourceWorkspaceSnapshot,
   creationAvailable = true,
 ) {
@@ -159,8 +155,6 @@ function mountWorkbench(
   vi.stubGlobal('Document', CatalogTestElement)
   vi.stubGlobal('Element', CatalogTestElement)
   vi.stubGlobal('ShadowRoot', CatalogTestElement)
-  const catalogOverlay = new CatalogTestElement('catalog-overlay')
-  const catalogOperator = new CatalogTestElement('catalog-operator')
   const data = memory()
   const storage = createProductGenerationStorage(data.raw, options)
   const secondPage = deferred<void>()
@@ -300,172 +294,35 @@ function mountWorkbench(
         mounted(id)
         return () => {
           if (withLibrary === 'specialists') {
-            const theme = id === 'A' ? classicDefinition : studioDefinition
+            if (controller.activeTab.value === 'composer') return h(CreationEditor)
+            const theme = classicDefinition
             return h(theme.Root, {
               features: {
                 ...themeFixture.features.value,
                 tags: { ...specialists.tags, state: { Editor: TagEditor } },
-                composer: { ...specialists.composer, state: { Editor: CreationEditor } },
               },
               views: theme.views,
               form: 'desktop',
             })
-          }
-          if (withLibrary === 'catalog') {
-            const drawer = controller.activeCatalogDrawer.value
-            return drawer
-              ? h(CatalogDrawer, {
-                  key: drawer.id,
-                  drawer,
-                  active: true,
-                  invalidTrackIds: controller.workspace.invalidTrackIds.value,
-                  favoriteTrackIds: controller.library.favoriteTrackIds.value,
-                  customTagsByTrackId: controller.library.customTagsByTrackId.value,
-                  playlists: controller.library.playlists.value,
-                  displayMode: 'standard',
-                  mobileColumns: 1,
-                  filterOpen: controller.isCatalogFilterOpen.value,
-                  operatorOpen: true,
-                  overlayTarget: catalogOverlay as unknown as HTMLElement,
-                  operatorOverlayTarget: catalogOperator as unknown as HTMLElement,
-                  onCloseFilter: () => {
-                    controller.isCatalogFilterOpen.value = false
-                  },
-                  onLoadMore: controller.workspace.loadNext,
-                  onSummaryChange: (summary) => {
-                    controller.catalogTrackListSummary.value = summary
-                  },
-                })
-              : h('div', id)
           }
           if (!withLibrary) return h('div', id)
-          if (withLibrary === 'root') {
-            const listState = {
-              mobileLayout: false,
-              arrangementMode: 'flat' as const,
-              platformOrder: [],
-              platformTrackCounts: new Map<string, number>(),
-              totalCount: 0,
-              tracks: controller.queue.items.value,
-              selectedTrackIds: [],
-              invalidTrackIds: [],
-              favoriteTrackIds: [],
-              queuedTrackIds: [],
-              downloadedTrackIds: [],
-              platformNames: new Map<string, string>(),
-              customNamesByTrackId: new Map<string, string>(),
-              customTagsByTrackId: new Map<string, readonly string[]>(),
-              addedAtMsByTrackId: new Map<string, number>(),
-              displayMode: 'standard' as const,
-              mobileColumns: 1 as const,
-              filters: createCatalogTrackFilterState(),
-              filterDraft: null,
-            }
-            const listActions = {
-              setArrangementMode: vi.fn(),
-              moveTrack: vi.fn(),
-              movePlatform: vi.fn(),
-              play: vi.fn(),
-              download: vi.fn(),
-              toggleFavorite: vi.fn(),
-              select: vi.fn(),
-              setFilterDraft: vi.fn(),
-              applyFilters: vi.fn(),
-              cancelFilters: vi.fn(),
-              showTrackActions: vi.fn(),
-              enqueue: vi.fn(),
-              rename: vi.fn(),
-              addToPlaylist: vi.fn(),
-              useAsMaterial: vi.fn(),
-              addTag: vi.fn(),
-              removeTag: vi.fn(),
-              setDisplayMode: vi.fn(),
-              setMobileColumns: vi.fn(),
-            }
-            const availability = { status: 'available' as const },
-              status = { status: 'ready' as const }
-            const theme = id === 'A' ? classicDefinition : studioDefinition
-            const queue = {
-              state: { ...listState, currentTrackId: null },
-              actions: { ...listActions, remove: vi.fn(), reorder: vi.fn(), clear: vi.fn() },
-              availability,
-              status,
-            }
-            const downloads = {
-              state: {
-                ...listState,
-                tracks: controller.downloads.batches.value.flatMap((batch) =>
-                  batch.items.map((item) => item.track),
-                ),
-                batches: controller.downloads.batches.value,
-                selectedItemIds: [],
-                concurrency: 1,
-                statusFilter: 'all' as const,
-              },
-              actions: {
-                ...listActions,
-                pause: controller.downloads.pauseDownloadItems,
-                resume: async (ids: readonly string[]) => {
-                  controller.downloads.resumeDownloadItems(ids)
-                },
-                cancel: controller.downloads.cancelDownloadItems,
-                remove: async (ids: readonly string[]) => {
-                  controller.downloads.removeDownloadItems(ids)
-                },
-                retry: async (ids: readonly string[]) => {
-                  controller.downloads.resumeDownloadItems(ids)
-                },
-                setStatusFilter: vi.fn(),
-                moveItem: themeFixture.features.value.downloads.actions.moveItem,
-              },
-              availability,
-              status,
-            }
-            return h(theme.Root, {
-              features: {
-                ...themeFixture.features.value,
-                shell: {
-                  ...themeFixture.features.value.shell,
-                  state: { ...themeFixture.features.value.shell.state, activeViewId: 'downloads' },
-                },
-                queue,
-                downloads,
-              },
-              views: theme.views,
-              form: 'desktop',
-            })
-          }
-          if (id === 'B')
-            return h(QueuePanel, {
-              items: controller.queue.items.value,
-              arrangementMode: 'flat',
-              platformNames: new Map(),
-              errorMessage: '',
-              downloadBusy: false,
-            })
-          return h(ActiveDownloadPanel, {
-            batches: controller.downloads.batches.value,
-            concurrency: 1,
-            mobileLayout: false,
-            platformNames: new Map(),
-            statusMessage: controller.downloads.statusMessage.value,
-            errorMessage: controller.downloads.persistenceError.value,
-            cancelling: controller.downloads.isCancelling.value,
-            filterOpen: false,
-            operatorOpen: false,
-            panelsSuspended: false,
-            overlayTarget: null,
-            operatorOverlayTarget: null,
-            displayMode: 'standard',
-            mobileColumns: 1,
-            favoriteTrackIds: new Set<string>(),
-            queuedTrackIds: new Set<string>(),
-            invalidTrackIds: new Set<string>(),
-            customTagsByTrackId: new Map<string, readonly string[]>(),
-            onPause: controller.downloads.pauseDownloadItems,
-            onResume: controller.downloads.resumeDownloadItems,
-            onCancel: controller.downloads.cancelDownloadItems,
-            onRemove: controller.downloads.removeDownloadItems,
+          const themeFeatures = themeFixture.features.value
+          return h(classicDefinition.Root, {
+            features:
+              withLibrary === 'downloads'
+                ? {
+                    ...themeFeatures,
+                    shell: {
+                      ...themeFeatures.shell,
+                      state: {
+                        ...themeFeatures.shell.state,
+                        activeViewId: id === 'A' ? 'downloads' : 'queue',
+                      },
+                    },
+                  }
+                : themeFeatures,
+            views: classicDefinition.views,
+            form: 'desktop',
           })
         }
       },
@@ -473,7 +330,9 @@ function mountWorkbench(
   const A = root('A'),
     B = root('B')
   let controller!: WorkbenchController
-  const app = renderer.createApp(
+  const catalogRenderer = withLibrary === 'catalog' ? createSemanticThemeRenderer() : undefined
+  if (catalogRenderer) vi.stubGlobal('getComputedStyle', catalogRenderer.view.getComputedStyle)
+  const app = (catalogRenderer?.renderer ?? renderer).createApp(
     defineComponent({
       setup() {
         controller = useWorkbenchController({}, vi.fn(), shallowRef(null))
@@ -485,7 +344,7 @@ function mountWorkbench(
   )
   const pinia = createPinia()
   app.use(pinia)
-  const rootElement = new CatalogTestElement('workbench')
+  const rootElement = catalogRenderer?.root ?? new CatalogTestElement('workbench')
   app.mount(rootElement)
   let unmounted = false
   const unmount = () => {
@@ -511,9 +370,8 @@ function mountWorkbench(
     get specialists() {
       return specialists
     },
-    catalogOverlay,
-    catalogOperator,
     controller,
+    themeFixture,
     presentation,
     mounted,
     factories,
@@ -537,6 +395,64 @@ function mountWorkbench(
 }
 
 describe('stable workbench lifetime', () => {
+  it.each([false, true])(
+    'shows a top notice and only advances with auto-skip enabled (%s)',
+    async (enabled) => {
+      const { controller, themeFixture, resolveMedia } = mountWorkbench()
+      await controller.modules.ready
+      const { features } = themeFixture
+      expect(features.value.settings.state.skipUnavailableTracks).toBe(true)
+      if (!enabled) {
+        features.value.settings.actions.setSkipUnavailableTracks(false)
+        expect(features.value.settings.state.skipUnavailableTracks).toBe(false)
+        expect(playbackQueueRepository.load().skipUnavailableTracks).toBe(false)
+      }
+      resolveMedia
+        .mockRejectedValueOnce(new AppError('access-denied', '该歌曲不可完整播放。'))
+        .mockResolvedValueOnce(media())
+      controller.playFavoriteTrack(track('one'), [track('one'), track('two')])
+      await vi.waitFor(() => {
+        expect(features.value.overlays.state.notice).toMatchObject({
+          tone: 'error',
+          message: expect.stringContaining('《one》播放失败'),
+        })
+        expect(controller.playerTrack.value?.id).toBe(enabled ? 'two' : 'one')
+        expect(controller.player.status.value).toBe(enabled ? 'ready' : 'error')
+      })
+      expect(resolveMedia.mock.calls.map(([song]) => song.id)).toEqual(
+        enabled ? ['one', 'two'] : ['one'],
+      )
+    },
+  )
+
+  it('shares one history entry per track between playback entry points', async () => {
+    const { controller, themeFixture } = mountWorkbench()
+    await controller.modules.ready
+    const { features } = themeFixture
+    const first = track('one')
+    const second = track('two')
+
+    controller.playTrack(first)
+    await nextTick()
+    controller.playTrack(second)
+    await nextTick()
+    features.value.history.actions.play(first.id)
+    await nextTick()
+
+    expect(features.value.history.state.entries.map(({ trackId }) => trackId)).toEqual([
+      first.id,
+      second.id,
+    ])
+
+    controller.playFavoriteTrack(second, [first, second])
+    await nextTick()
+
+    expect(features.value.history.state.entries.map(({ trackId }) => trackId)).toEqual([
+      second.id,
+      first.id,
+    ])
+  })
+
   it('never loads blocked creation and reports its configured reason without changing data', async () => {
     const f = mountWorkbench(false, undefined, false)
     await f.controller.modules.ready
@@ -897,9 +813,9 @@ describe('stable workbench lifetime', () => {
     ).toBe('未提交名称')
     expect(c.tagManagement.tagsByTrackId.value).toBe(namespace)
     expect(f.data.writes).toHaveLength(writes)
-    const studioEditor = f.tagEditor
+    const replacementEditor = f.tagEditor
     f.presentation.value = 'A'
-    await vi.waitFor(() => expect(f.tagEditor).not.toBe(studioEditor))
+    await vi.waitFor(() => expect(f.tagEditor).not.toBe(replacementEditor))
     expect(f.tagEditor.state.filters.searchQuery).toBe('现')
     expect(c.tagManagement.editing.value).toBe(editing)
     expect(f.data.writes).toHaveLength(writes)
@@ -918,7 +834,7 @@ describe('stable workbench lifetime', () => {
     f.unmount()
   })
 
-  it('retains classic materials and unsaved recipe through remounts, rejects stale editing and keeps published playback/download independent', async () => {
+  it('retains creation materials and unsaved recipe through remounts, rejects stale editing and keeps published playback/download independent', async () => {
     const f = mountWorkbench('specialists')
     const c = f.controller
     await c.modules.ready
@@ -927,7 +843,7 @@ describe('stable workbench lifetime', () => {
     const collection = session.createMaterialCollection('素材合集')
     session.addTracksToMaterialCollection(collection.id, [track('one')])
     c.selectTab('composer')
-    await vi.waitFor(() => expect(f.rootElement.textContent).toContain('保存为自定义歌曲'))
+    await vi.waitFor(() => expect(f.creationEditor).toBeDefined())
     const editor = f.creationEditor
     editor.actions.setTitle('未保存作品')
     editor.actions.addSegment({ sourceTrackId: 'one', startMs: 0, endMs: 1000 })
@@ -944,9 +860,9 @@ describe('stable workbench lifetime', () => {
     expect(f.creationEditor.state.filters.query).toBe('one')
     expect(c.musicCreation.state.value.draft).toBe(draft)
     expect(f.data.writes).toHaveLength(writes)
-    const studioEditor = f.creationEditor
+    const replacementEditor = f.creationEditor
     f.presentation.value = 'A'
-    await vi.waitFor(() => expect(f.creationEditor).not.toBe(studioEditor))
+    await vi.waitFor(() => expect(f.creationEditor).not.toBe(replacementEditor))
     expect(f.creationEditor.state.recipe).toBe(recipe)
     expect(c.musicCreation.current()).toBe(session)
     expect(f.data.writes).toHaveLength(writes)
@@ -982,6 +898,63 @@ describe('stable workbench lifetime', () => {
     expect(f.loadCreation).toHaveBeenCalledTimes(2)
     f.unmount()
   })
+  it.each(['back to the music lists', 'another section'])(
+    'locks pagination after leaving for %s and refreshes from page one',
+    async (exit) => {
+      const f = mountWorkbench()
+      const c = f.controller
+      await c.modules.ready
+      await c.workspace.search('submitted')
+      const id = c.workspace.drawers.value[0]!.id
+      const actions = f.themeFixture.features.value.catalog.actions
+      actions.openDrawer(id)
+      expect(c.displayedCatalogDrawer.value?.paginationLocked).toBe(false)
+      const pendingPage = actions.loadMore(id)
+      await vi.waitFor(() => expect(f.requestedPages).toEqual([1, 2]))
+      const cancellation = f.listingCancellation()
+
+      if (exit === 'another section') {
+        c.selectTab('favorites')
+        c.selectTab('catalog')
+      } else {
+        actions.closeDrawer()
+        actions.openDrawer(id)
+      }
+      expect(cancellation?.isCancelled()).toBe(true)
+      f.secondPage.resolve()
+      await pendingPage
+      expect(c.displayedCatalogDrawer.value).toMatchObject({
+        id,
+        hasMore: true,
+        paginationLocked: true,
+        loadedPageCount: 1,
+      })
+      await actions.loadMore(id)
+      expect(f.requestedPages).toEqual([1, 2])
+
+      const cancelled = actions.refresh(id)
+      c.confirmationDialog.cancel()
+      await cancelled
+      await actions.loadMore(id)
+      expect(f.requestedPages).toEqual([1, 2])
+
+      const refreshed = actions.refresh(id)
+      c.confirmationDialog.accept()
+      await refreshed
+      expect(c.displayedCatalogDrawer.value).toMatchObject({
+        id,
+        refreshRevision: 1,
+        paginationLocked: false,
+        loadedPageCount: 1,
+      })
+      expect(f.requestedPages).toEqual([1, 2, 1])
+      await actions.loadMore(id)
+      expect(f.requestedPages).toEqual([1, 2, 1, 2])
+      actions.closeDrawer()
+      actions.openDrawer(id)
+      expect(c.displayedCatalogDrawer.value?.paginationLocked).toBe(true)
+    },
+  )
   it('keeps real classic catalog pagination, selection and unfinished filter input across root replacement', async () => {
     const f = mountWorkbench('catalog')
     const c = f.controller
@@ -989,32 +962,10 @@ describe('stable workbench lifetime', () => {
     await c.workspace.search('submitted')
     const drawerId = c.workspace.drawers.value[0]!.id
     c.openCatalogDrawer(drawerId)
-    await new Promise<void>((resolve) => setImmediate(resolve))
-    dispatchCatalogEvent(
-      findCatalogElement(
-        f.rootElement,
-        (node) => node.tag === 'input' && node.props['aria-label'] === '选择歌曲 one',
-      ),
-      'onChange',
-    )
-    await new Promise<void>((resolve) => setImmediate(resolve))
-    c.openCatalogFilter()
-    await new Promise<void>((resolve) => setImmediate(resolve))
-    expect(c.isCatalogFilterOpen.value).toBe(true)
-    dispatchCatalogEvent(
-      findCatalogElement(
-        f.catalogOverlay,
-        (node) => node.tag === 'button' && node.textContent.includes('搜索筛选'),
-      ),
-      'onClick',
-    )
-    await new Promise<void>((resolve) => setImmediate(resolve))
-    const input = findCatalogElement(
-      f.catalogOverlay,
-      (node) => node.tag === 'input' && node.props.type === 'search',
-    )
-    input.value = 'unfinished filter'
-    input.dispatchListeners('input', { target: input })
+    const searchFilters = [{ query: 'unfinished filter' }]
+    const catalog = () => f.themeFixture.features.value.catalog
+    catalog().actions.select(['one'])
+    catalog().actions.setFilterDraft({ ...createCatalogTrackFilterState(), searchFilters })
     const paging = c.workspace.loadNext(drawerId)
     const repeated = c.workspace.loadNext(drawerId)
     await vi.waitFor(() => expect(f.requestedPages).toEqual([1, 2]))
@@ -1025,20 +976,14 @@ describe('stable workbench lifetime', () => {
       expect(f.requestedPages).toEqual([1, 2])
       expect(f.search).toHaveBeenCalledTimes(1)
       expect(f.resolveMedia).not.toHaveBeenCalled()
-      expect(c.catalogTrackListSummary.value.selectedCount).toBe(1)
-      expect(c.isCatalogFilterOpen.value).toBe(true)
-      expect(
-        findCatalogElement(
-          f.catalogOverlay,
-          (node) => node.tag === 'input' && node.props.type === 'search',
-        ).value,
-      ).toBe('unfinished filter')
+      expect(f.themeFixture.selected.value).toEqual(['one'])
+      expect(catalog().state.filterDraft?.searchFilters).toEqual(searchFilters)
       expect(f.listingCancellation()?.isCancelled()).toBe(false)
     }
     f.secondPage.resolve()
     await Promise.all([paging, repeated])
     expect(c.workspace.drawers.value[0]!.tracks.map(({ id }) => id)).toEqual(['one', 'two'])
-    expect(c.catalogTrackListSummary.value.selectedCount).toBe(1)
+    expect(f.themeFixture.selected.value).toEqual(['one'])
     expect(f.requestedPages).toEqual([1, 2])
     expect(f.maximumPageReads()).toBe(1)
     expect(f.resolveMedia).not.toHaveBeenCalled()
@@ -1265,74 +1210,70 @@ describe('stable workbench lifetime', () => {
     expect(encoder.run).toHaveBeenCalledTimes(1)
     f.subscriptions.forEach(({ unsubscribe }) => expect(unsubscribe).toHaveBeenCalledTimes(1))
   })
-  it.each([true, 'root'] as const)(
-    'keeps real classic download and queue views on one scheduler across %s presentation replacement',
-    async (mode) => {
-      encoder.run.mockReset()
-      const openSchedule = vi.spyOn(browserDownloadScheduler, 'open')
-      const f = mountWorkbench(mode)
-      const c = f.controller
-      await c.modules.ready
-      c.setDownloadConcurrency(1)
-      const first = deferred<{ blob: Blob; extension: string }>()
-      let signal: AbortSignal | undefined
-      let progress: ((value: { message: string }) => void) | undefined
-      encoder.run.mockImplementationOnce((exportOptions) => {
-        signal = exportOptions.signal
-        progress = exportOptions.onProgress
-        return first.promise
-      })
-      const tracks = [track('active'), track('queued')]
-      c.library.rememberTracks(tracks)
-      c.queueTrack(tracks[1]!)
-      const pending = c.downloads.startDownloadBatch({
-        tracks,
-        origin: { kind: 'queue', label: '待听' },
-      })
-      await vi.waitFor(() => expect(signal).toBeDefined())
-      progress?.({ message: '测试下载进度 42%' })
-      await vi.waitFor(() => expect(f.rootElement.textContent).toContain('测试下载进度 42%'), {
-        timeout: 10_000,
-      })
-      const original = c.downloads.batches.value[0]!
-      const ids = original.items.map((item) => item.id)
-      expect(original.items.map((item) => item.status)).toEqual(['downloading', 'queued'])
-      for (const next of ['B', null, 'A', 'B', 'A'] as const) {
-        f.presentation.value = next
+  it('keeps the Classic download and queue views on one scheduler across presentation replacement', async () => {
+    encoder.run.mockReset()
+    const openSchedule = vi.spyOn(browserDownloadScheduler, 'open')
+    const f = mountWorkbench('downloads')
+    const c = f.controller
+    await c.modules.ready
+    c.setDownloadConcurrency(1)
+    const first = deferred<{ blob: Blob; extension: string }>()
+    let signal: AbortSignal | undefined
+    let progress: ((value: { message: string }) => void) | undefined
+    encoder.run.mockImplementationOnce((exportOptions) => {
+      signal = exportOptions.signal
+      progress = exportOptions.onProgress
+      return first.promise
+    })
+    const tracks = [track('active'), track('queued')]
+    c.library.rememberTracks(tracks)
+    c.queueTrack(tracks[1]!)
+    const pending = c.downloads.startDownloadBatch({
+      tracks,
+      origin: { kind: 'queue', label: '待听' },
+    })
+    await vi.waitFor(() => expect(signal).toBeDefined())
+    progress?.({ message: '测试下载进度 42%' })
+    await vi.waitFor(() => expect(f.rootElement.textContent).toContain('测试下载进度 42%'), {
+      timeout: 10_000,
+    })
+    const original = c.downloads.batches.value[0]!
+    const ids = original.items.map((item) => item.id)
+    expect(original.items.map((item) => item.status)).toEqual(['downloading', 'queued'])
+    for (const next of ['B', null, 'A', 'B', 'A'] as const) {
+      f.presentation.value = next
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise<void>((resolve) => setImmediate(resolve))
+      if (next === 'A') {
         // eslint-disable-next-line no-await-in-loop
-        await new Promise<void>((resolve) => setImmediate(resolve))
-        if (next === 'A' || (mode === 'root' && next === 'B')) {
-          // eslint-disable-next-line no-await-in-loop
-          await vi.waitFor(() => expect(f.rootElement.textContent).toContain('测试下载进度 42%'), {
-            timeout: 10_000,
-          })
-        }
-        if (next === 'B') {
-          // eslint-disable-next-line no-await-in-loop
-          await vi.waitFor(() => expect(f.rootElement.textContent).toContain('待听'), {
-            timeout: 10_000,
-          })
-        }
-        expect(signal!.aborted).toBe(false)
-        expect(c.downloads.batches.value[0]!.id).toBe(original.id)
-        expect(c.downloads.batches.value[0]!.items.map((item) => item.id)).toEqual(ids)
-        expect(c.downloads.batches.value[0]!.items.map((item) => item.status)).toEqual([
-          'downloading',
-          'queued',
-        ])
-        expect(c.queue.items.value.map((item) => item.id)).toEqual(['queued'])
-        expect(c.downloads.batches.value[0]!.concurrency).toBe(1)
-        expect(encoder.run).toHaveBeenCalledTimes(1)
-        expect(openSchedule).toHaveBeenCalledExactlyOnceWith(1)
+        await vi.waitFor(() => expect(f.rootElement.textContent).toContain('测试下载进度 42%'), {
+          timeout: 10_000,
+        })
       }
-      f.factories.forEach((factory) => expect(factory).toHaveBeenCalledTimes(1))
-      expect(f.resolveMedia).not.toHaveBeenCalled()
-      f.unmount()
-      expect(signal!.aborted).toBe(true)
-      first.resolve({ blob: new Blob(['audio']), extension: 'mp3' })
-      await pending
+      if (next === 'B') {
+        // eslint-disable-next-line no-await-in-loop
+        await vi.waitFor(() => expect(f.rootElement.textContent).toContain('待听'), {
+          timeout: 10_000,
+        })
+      }
+      expect(signal!.aborted).toBe(false)
+      expect(c.downloads.batches.value[0]!.id).toBe(original.id)
+      expect(c.downloads.batches.value[0]!.items.map((item) => item.id)).toEqual(ids)
+      expect(c.downloads.batches.value[0]!.items.map((item) => item.status)).toEqual([
+        'downloading',
+        'queued',
+      ])
+      expect(c.queue.items.value.map((item) => item.id)).toEqual(['queued'])
+      expect(c.downloads.batches.value[0]!.concurrency).toBe(1)
       expect(encoder.run).toHaveBeenCalledTimes(1)
-    },
-    20_000,
-  )
+      expect(openSchedule).toHaveBeenCalledExactlyOnceWith(1)
+    }
+    f.factories.forEach((factory) => expect(factory).toHaveBeenCalledTimes(1))
+    expect(f.resolveMedia).not.toHaveBeenCalled()
+    f.unmount()
+    expect(signal!.aborted).toBe(true)
+    first.resolve({ blob: new Blob(['audio']), extension: 'mp3' })
+    await pending
+    expect(encoder.run).toHaveBeenCalledTimes(1)
+  }, 20_000)
 })

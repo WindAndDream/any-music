@@ -3,7 +3,6 @@
 import { createAppErrorState } from '@any-music/core'
 import type { DownloadHistoryBatch, Track } from '@any-music/core'
 import { definition as classic } from '@any-music/theme-default/vue'
-import { definition as studio } from '@any-music/theme-studio/vue'
 import {
   createEditingSession,
   provideEditingSession,
@@ -16,6 +15,7 @@ import type { UiThemeDefinition, UiThemeFeatureMap } from '@any-music/ui/theme'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defineComponent, h, nextTick, reactive, shallowReactive, shallowRef } from 'vue'
 
+import { alternateDefinition as alternate } from '../../fixtures/alternate-theme'
 import { createThemeFeatures } from '../../fixtures/theme-features'
 import {
   CatalogTestElement,
@@ -167,7 +167,7 @@ function mount(initial: UiThemeDefinition, form: 'desktop' | 'mobile' = 'desktop
         return () =>
           h(
             choice.value.Root,
-            { features, views: choice.value.views, form },
+            { key: choice.value.id, features, views: choice.value.views, form },
             {
               'account-settings': () => h('p', '固定宿主账号'),
               'network-settings': () => h('p', '固定宿主网络'),
@@ -192,17 +192,10 @@ function mount(initial: UiThemeDefinition, form: 'desktop' | 'mobile' = 'desktop
     )
   const click = (text: string) =>
     dispatchCatalogEvent(
-      button(
-        choice.value.id === 'default' && text === '暂停已选'
-          ? '暂停下载'
-          : choice.value.id === 'default' && text === '下载已选'
-            ? '下载已选歌曲'
-            : text,
-      ),
+      button(text === '暂停已选' ? '暂停下载' : text === '下载已选' ? '下载已选歌曲' : text),
       'onClick',
     )
   async function openOperator() {
-    if (choice.value.id !== 'default') return
     const launcher = findCatalogElement(
       root,
       (node) => node.tag === 'button' && node.textContent.trim().startsWith('操作器'),
@@ -230,12 +223,9 @@ function mount(initial: UiThemeDefinition, form: 'desktop' | 'mobile' = 'desktop
   }
 }
 
-describe.each([
-  ['classic', classic],
-  ['studio', studio],
-] as const)('%s complete feature contract', (_name, initial) => {
+describe('Classic feature contract', () => {
   it('shows host theme failures in appearance settings and clears them after recovery', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     f.settings.open = true
     f.settings.section = 'appearance'
     f.settings.themeError = '界面主题不可用，已使用默认主题。可重新选择主题以重试。'
@@ -254,16 +244,14 @@ describe.each([
   it.each(['desktop', 'mobile'] as const)(
     'switches bidirectionally from every major page without a source on %s',
     async (form) => {
-      const f = mount(initial, form)
+      const f = mount(classic, form)
       for (const destination of PRODUCT_DESTINATIONS) {
-        f.shell.activeViewId = destination.id
+        const viewId = destination.id
+        if (viewId === 'composer' || viewId === 'custom-tracks') continue
+        f.shell.activeViewId = viewId
         f.features.tags = {
           ...f.features.tags,
           availability: { status: 'disabled', reason: '标签已停用，数据保留' },
-        }
-        f.features.composer = {
-          ...f.features.composer,
-          availability: { status: 'disabled', reason: '创作已停用，数据保留' },
         }
         await nextTick()
         const text = f.root.textContent
@@ -273,13 +261,12 @@ describe.each([
           queue: ['待听'],
           favorites: ['我的喜欢'],
           playlists: ['我的歌单'],
-          'custom-tracks': ['全部自定义音乐列表'],
           history: ['播放历史'],
           downloads: ['下载任务'],
           plugins: ['插件中心'],
         }
         const assertPage = () => {
-          const expected = labels[destination.id]
+          const expected = labels[viewId]
           if (expected)
             expect(
               findCatalogElement(
@@ -295,8 +282,7 @@ describe.each([
         ]
         expect(scrollKey).toBeTruthy()
         if (destination.id === 'tags') expect(text).toContain('标签已停用，数据保留')
-        if (destination.id === 'composer') expect(text).toContain('创作已停用，数据保留')
-        f.choice.value = initial === classic ? studio : classic
+        f.choice.value = alternate
         await nextTick()
         expect(f.shell.activeViewId).toBe(destination.id)
         expect(f.root.textContent).not.toContain('尚未迁移')
@@ -304,7 +290,7 @@ describe.each([
         expect(
           findCatalogElement(f.root, (node) => node.tag === 'main').props['data-am-scroll-key'],
         ).toBe(scrollKey)
-        f.choice.value = initial
+        f.choice.value = classic
         await nextTick()
       }
       expect(f.actions.select).not.toHaveBeenCalled()
@@ -314,19 +300,17 @@ describe.each([
   )
 
   it('keeps queue selection and rejects confirmation from the replaced root', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     f.shell.activeViewId = 'queue'
     await nextTick()
-    if (initial === classic) {
-      dispatchCatalogEvent(
-        findCatalogElement(
-          f.root,
-          (node) => node.tag === 'button' && node.textContent.trim().startsWith('操作器'),
-        ),
-        'onClick',
-      )
-      await nextTick()
-    }
+    dispatchCatalogEvent(
+      findCatalogElement(
+        f.root,
+        (node) => node.tag === 'button' && node.textContent.trim().startsWith('操作器'),
+      ),
+      'onClick',
+    )
+    await nextTick()
     dispatchCatalogEvent(
       findCatalogElement(f.root, (node) => node.tag === 'input' && node.props.type === 'checkbox'),
       'onChange',
@@ -335,7 +319,7 @@ describe.each([
     await nextTick()
     f.click('下载已选')
     expect(f.confirmation.activeRequest.value?.title).toMatch(/下载/)
-    f.choice.value = initial === classic ? studio : classic
+    f.choice.value = alternate
     await nextTick()
     f.confirmation.accept()
     await nextTick()
@@ -344,7 +328,7 @@ describe.each([
   })
 
   it('retains the shared unsaved settings cell and blocks an old save callback', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     f.settings.open = true
     f.settings.section = 'creator-profile'
     await vi.waitFor(() => expect(f.root.textContent).toContain('保存创作者名称'))
@@ -357,7 +341,7 @@ describe.each([
       f.root,
       (node) => node.tag === 'form' && node.textContent.includes('保存创作者名称'),
     )
-    f.choice.value = initial === classic ? studio : classic
+    f.choice.value = alternate
     await vi.waitFor(() =>
       expect(
         findCatalogElement(
@@ -379,7 +363,7 @@ describe.each([
   })
 
   it('preserves task item identities and forwards task commands across roots', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     const batch: DownloadHistoryBatch = {
       id: 'batch',
       origin: { kind: 'queue', label: '待听' },
@@ -414,7 +398,7 @@ describe.each([
     await f.openOperator()
     f.click('暂停已选')
     expect(pause).toHaveBeenCalledExactlyOnceWith(['attempt-one'])
-    f.choice.value = initial === classic ? studio : classic
+    f.choice.value = alternate
     await vi.waitFor(() => expect(f.root.textContent).toContain('读取 42%'))
     expect(state.selectedItemIds).toEqual(['attempt-one'])
     expect(pause).toHaveBeenCalledOnce()
@@ -424,7 +408,7 @@ describe.each([
   })
 
   it('shows errors and protected settings slots without enabling native authority', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     f.features.queue = {
       ...f.features.queue,
       status: { status: 'partial', errors: [createAppErrorState('network-error', '部分加载失败')] },
@@ -447,14 +431,14 @@ describe.each([
   })
 
   it('requires explicit download confirmation and ignores the replaced selection', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     f.shell.activeViewId = 'queue'
     f.queue.selectedTrackIds = ['one']
     await nextTick()
     await f.openOperator()
     f.click('下载已选')
     expect(f.actions.download).not.toHaveBeenCalled()
-    f.choice.value = initial === classic ? studio : classic
+    f.choice.value = alternate
     await nextTick()
     f.confirmation.accept()
     await nextTick()
@@ -467,30 +451,22 @@ describe.each([
   })
 
   it('provides ordering without a drag gesture', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     f.shell.activeViewId = 'queue'
     f.queue.tracks = [track, { ...track, id: 'two', title: 'two' }]
     await nextTick()
-    if (initial === classic) {
-      const cover = findCatalogElement(f.root, (node) =>
-        String(node.props['aria-label']).includes('歌曲 one；'),
-      )
-      const handlers = cover.props.onKeydown as ((event: unknown) => void)[]
-      handlers.forEach((handler) =>
-        handler({ key: 'ArrowDown', preventDefault() {}, stopPropagation() {} }),
-      )
-      expect(f.actions.moveTrack).toHaveBeenCalledExactlyOnceWith('one', 'two', ['one', 'two'])
-    } else {
-      dispatchCatalogEvent(
-        findCatalogElement(f.root, (node) => node.props['aria-label'] === '下移《one》'),
-        'onClick',
-      )
-      expect(f.actions.reorder).toHaveBeenCalledExactlyOnceWith(['two', 'one'])
-    }
+    const cover = findCatalogElement(f.root, (node) =>
+      String(node.props['aria-label']).includes('歌曲 one；'),
+    )
+    const handlers = cover.props.onKeydown as ((event: unknown) => void)[]
+    handlers.forEach((handler) =>
+      handler({ key: 'ArrowDown', preventDefault() {}, stopPropagation() {} }),
+    )
+    expect(f.actions.moveTrack).toHaveBeenCalledExactlyOnceWith('one', 'two', ['one', 'two'])
   })
 
   it('keeps invalid numeric settings and unfinished input across both roots until explicit save', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     const save = vi.fn()
     f.features.settings = {
       ...f.features.settings,
@@ -517,7 +493,7 @@ describe.each([
     await nextTick()
     expect(save).not.toHaveBeenCalled()
     expect(f.root.textContent).toContain('历史记录数量须为')
-    f.choice.value = initial === classic ? studio : classic
+    f.choice.value = alternate
     await vi.waitFor(() => expect(field().value).toBe(''))
     expect(f.root.textContent).toContain('历史记录数量须为')
     ;(field().props['onUpdate:modelValue'] as (value: string) => void)('27')
@@ -526,7 +502,7 @@ describe.each([
   })
 
   it('forwards module enable and retry from the full root', async () => {
-    const f = mount(initial)
+    const f = mount(classic)
     const setEnabled = vi.fn(),
       retry = vi.fn()
     f.features.plugins = {
@@ -554,10 +530,13 @@ describe.each([
       (node) => node.tag === 'input' && node.props.type === 'checkbox',
     )
     ;(checkbox.props.onChange as (event: unknown) => void)({ target: { checked: true } })
-    f.click('重试')
+    expect(f.root.textContent).not.toContain('重试')
+    f.click('查看插件介绍 标签管理')
+    await nextTick()
+    f.click('重试加载')
     expect(setEnabled).toHaveBeenCalledExactlyOnceWith('feature.tags', true)
     expect(retry).toHaveBeenCalledExactlyOnceWith('feature.tags')
-    expect(f.root.textContent).toContain('加载失败')
+    expect(f.root.textContent).toContain('错误信息加载失败')
   })
 })
 
@@ -676,7 +655,7 @@ it('opens classic collection song actions outside the inert page and rejects a r
     (node) => node.tag === 'button' && node.textContent.trim() === '播放',
   )
   const oldPlay = play.props.onClick as () => void
-  f.choice.value = studio
+  f.choice.value = alternate
   await nextTick()
   oldPlay()
   expect(f.actions.play).not.toHaveBeenCalled()
@@ -725,4 +704,24 @@ it('closes the classic mobile navigation drawer after selecting a destination', 
   expect(f.shell.activeViewId).toBe('queue')
   expect(drawer.props['aria-modal']).toBeUndefined()
   expect(drawer.props.inert).toBe(true)
+})
+
+it('unlocks the classic content on widening and keeps the drawer closed on narrowing again', async () => {
+  const f = mount(classic)
+  const content = findCatalogElement(f.root, (node) => node.tag === 'main')
+  Object.assign(content.parent!, { ownerDocument: { defaultView: null } })
+  f.shell.mobileLayout = true
+  await nextTick()
+  f.click('打开功能导航')
+  await nextTick()
+  expect(content.props.inert).toBe(true)
+
+  f.shell.mobileLayout = false
+  await nextTick()
+  expect(content.props.inert).toBeUndefined()
+
+  f.shell.mobileLayout = true
+  await nextTick()
+  expect(content.props.inert).toBeUndefined()
+  expect(f.button('打开功能导航').props['aria-expanded']).toBe(false)
 })

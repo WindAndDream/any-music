@@ -1,20 +1,20 @@
 use crate::{browser::verification::require_main, model::validate_public_url};
-use tauri::WebviewWindow;
+use tauri::Webview;
 use tauri_plugin_opener::OpenerExt;
 
 #[tauri::command]
-pub fn open_external(window: WebviewWindow, url: String) -> Result<(), String> {
-    require_main(&window)?;
+pub fn open_external(webview: Webview, url: String) -> Result<(), String> {
+    require_main(&webview)?;
     validate_public_url(&url)?;
-    window
+    webview
         .opener()
         .open_url(url, None::<String>)
         .map_err(|_| "无法打开系统浏览器。".into())
 }
 
 #[tauri::command]
-pub fn login_capabilities(window: WebviewWindow) -> Result<serde_json::Value, String> {
-    require_main(&window)?;
+pub fn login_capabilities(webview: Webview) -> Result<serde_json::Value, String> {
+    require_main(&webview)?;
     Ok(login_capability_values(
         crate::system::capabilities::Platform::current(),
     ))

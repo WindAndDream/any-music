@@ -5,6 +5,7 @@ import { useEditingSession } from '@any-music/ui/catalog'
 import { getMusicSourceInputHints } from '@any-music/ui/catalog'
 import { getImportUrlScopeError } from '@any-music/ui/catalog'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
+import SlidingSegments from '@any-music/ui/components/SlidingSegments.vue'
 import { computed, nextTick, onScopeDispose, shallowRef, watch } from 'vue'
 import type { CSSProperties } from 'vue'
 
@@ -142,7 +143,11 @@ onScopeDispose(cancelSwipe)
 
 <template>
   <section class="source-toolbar" aria-label="搜索或导入音乐">
-    <div v-if="availableModes.length > 1" class="source-toolbar__segments" role="tablist">
+    <SlidingSegments
+      v-if="availableModes.length > 1"
+      class="source-toolbar__segments"
+      role="tablist"
+    >
       <button
         id="am-source-search-tab"
         type="button"
@@ -167,7 +172,7 @@ onScopeDispose(cancelSwipe)
       >
         导入链接
       </button>
-    </div>
+    </SlidingSegments>
 
     <div
       class="source-toolbar__viewport"
@@ -295,6 +300,8 @@ onScopeDispose(cancelSwipe)
 }
 
 .source-toolbar__segments {
+  --am-segment-highlight: var(--am-color-surface);
+  --am-segment-highlight-shadow: var(--am-shadow-control);
   display: grid;
   inline-size: min(320px, calc(100% - (var(--am-space-5) * 2)));
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -321,6 +328,10 @@ onScopeDispose(cancelSwipe)
   background: var(--am-color-surface);
   box-shadow: var(--am-shadow-control);
   color: var(--am-color-primary);
+}
+.source-toolbar__segments[data-slider-positioned] button[aria-selected='true'] {
+  background: transparent;
+  box-shadow: none;
 }
 
 .source-toolbar__segments button:hover:not([aria-selected='true']) {

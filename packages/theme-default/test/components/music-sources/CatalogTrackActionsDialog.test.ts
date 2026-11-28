@@ -355,11 +355,22 @@ describe('shared track naming', () => {
       const scrollTo = vi.fn((options: ScrollToOptions) => {
         viewport.scrollLeft = Math.min(128, options.left ?? 0)
       })
-      Object.assign(viewport, { clientWidth: 272, scrollWidth: 400, scrollTo })
-      Object.assign(content, { scrollWidth: 400 })
-      content.children
-        .filter((node) => node.tag === 'button')
-        .forEach((node, index) => Object.assign(node, { offsetLeft: index * 80, offsetWidth: 80 }))
+      Object.assign(viewport, {
+        clientWidth: 272,
+        scrollWidth: 400,
+        scrollTo,
+        getBoundingClientRect: () => ({ left: 0 }),
+      })
+      const buttons = content.children.filter((node) => node.tag === 'button')
+      Object.assign(content, { scrollWidth: 400, querySelectorAll: () => buttons })
+      buttons.forEach((button, index) => {
+        Object.assign(button, {
+          getBoundingClientRect: () => {
+            const left = index * 80 - viewport.scrollLeft
+            return { left, right: left + 80 }
+          },
+        })
+      })
       resize()
       await nextTick()
       dispatchCatalogEvent(
@@ -367,7 +378,7 @@ describe('shared track naming', () => {
         'onClick',
         false,
       )
-      expect(scrollTo).toHaveBeenLastCalledWith({ left: 240, behavior: 'instant' })
+      expect(scrollTo).toHaveBeenLastCalledWith({ left: 128, behavior: 'instant' })
       dispatchCatalogEvent(viewport, 'onScroll', false)
       await nextTick()
       dispatchCatalogEvent(

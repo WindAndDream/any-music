@@ -5,7 +5,7 @@ defineProps<{
   totalCount: number
   operatorOpen: boolean
   filterLabel?: string
-  filterActive?: boolean
+  filterCount: number
   canDisplay?: boolean
   iconOnlyDisplay?: boolean
   displayLabel?: string
@@ -37,16 +37,23 @@ defineSlots<{ 'before-display'?: () => unknown }>()
       <button
         type="button"
         :disabled="disabled"
-        class="catalog-operator-launcher__filter"
-        :class="{ 'classic-collection-controls__filter--active': filterActive }"
+        class="catalog-operator-launcher__filter classic-collection-controls__action classic-collection-controls__filter"
         :aria-label="filterLabel ?? '筛选歌曲'"
-        :aria-description="filterActive ? '已启用筛选' : undefined"
+        :aria-description="filterCount ? `已应用 ${filterCount} 个筛选条件` : undefined"
         @click="$emit('filter')"
       >
-        <AppIcon name="filter" :size="18" />筛选器
+        <AppIcon name="filter" :size="18" /><span>筛选器</span>
+        <span
+          v-if="filterCount"
+          class="classic-collection-controls__filter-count"
+          aria-hidden="true"
+        >
+          {{ filterCount > 99 ? '99+' : filterCount }}
+        </span>
       </button>
       <button
         type="button"
+        class="classic-collection-controls__action"
         :disabled="disabled"
         :aria-label="'操作器 已选 ' + selectedCount"
         :aria-expanded="operatorOpen"
@@ -58,12 +65,25 @@ defineSlots<{ 'before-display'?: () => unknown }>()
   </div>
 </template>
 <style scoped>
-.classic-collection-controls__filter--active::after {
-  inline-size: 6px;
-  block-size: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  content: '';
+.classic-collection-controls__filter {
+  position: relative;
+}
+.classic-collection-controls__filter-count {
+  position: absolute;
+  inset-block-start: -5px;
+  inset-inline-end: 0;
+  display: grid;
+  min-inline-size: 15px;
+  block-size: 14px;
+  align-items: center;
+  padding-inline: 3px;
+  border-radius: var(--am-radius-detail);
+  background: var(--am-color-primary);
+  color: var(--am-color-on-primary);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  pointer-events: none;
 }
 .classic-collection-controls
   .classic-collection-controls__display:is(:hover, :focus-visible):not(:disabled) {
@@ -81,6 +101,9 @@ defineSlots<{ 'before-display'?: () => unknown }>()
   }
   .classic-collection-controls__display span {
     display: none;
+  }
+  .classic-collection-controls .classic-collection-controls__action {
+    gap: var(--am-space-1);
   }
 }
 </style>

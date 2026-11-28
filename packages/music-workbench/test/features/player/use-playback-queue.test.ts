@@ -34,6 +34,36 @@ describe('usePlaybackQueue persistence', () => {
     expect(queue.currentTrack.value).toBeUndefined()
   })
 
+  it('defaults to skipping unavailable tracks and restores an explicit off choice', () => {
+    const options = { resolveTrack: (id: string) => tracks.get(id) }
+    const queue = usePlaybackQueue(options)
+    expect(queue.skipUnavailableTracks.value).toBe(true)
+    queue.setSkipUnavailableTracks(false)
+    const snapshot = repositoryMock.save.mock.lastCall?.[0]
+    expect(snapshot).toMatchObject({ skipUnavailableTracks: false })
+    repositoryMock.load.mockReturnValueOnce(snapshot)
+    expect(usePlaybackQueue(options).skipUnavailableTracks.value).toBe(false)
+  })
+
+  it.each(['sequence', 'repeat-one', 'shuffle', 'shuffle-no-repeat'] as const)(
+    'tries each failed collection song once in %s mode',
+    (mode) => {
+      const queue = usePlaybackQueue({ resolveTrack: (id) => tracks.get(id), random: () => 0 })
+      queue.setMode(mode)
+      queue.playTracks([...tracks.values()], 'one')
+      const attempted = new Set<string>()
+      for (let attempt = 0; attempt < tracks.size; attempt += 1) {
+        const id = queue.currentTrackId.value!
+        expect(attempted.has(id)).toBe(false)
+        attempted.add(id)
+        queue.nextAfterFailure(id)
+        if (attempt === tracks.size - 1) expect(queue.currentTrackId.value).toBe(id)
+      }
+      expect(attempted).toEqual(new Set(tracks.keys()))
+      expect(queue.items.value.map(({ id }) => id)).toEqual(['two', 'one'])
+    },
+  )
+
   it('appends a deduplicated batch in selection order and saves once, including platform mode', () => {
     repositoryMock.load.mockReturnValue({
       schemaVersion: 1,

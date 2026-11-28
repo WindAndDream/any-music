@@ -207,17 +207,21 @@ export function createWorkbenchSpecialistFeatures(
               unavailableReason: controller.modules.getUnavailableReason('feature.tags'),
               status: tagStatus(),
             },
-            {
-              id: 'feature.composer',
-              name: '片段创作（含自定义音乐）',
-              description: '剪取音乐片段、编排素材，将灵感组合为自己的音乐作品。',
-              origin: 'builtin' as const,
-              category: '音乐创作',
-              enabled: controller.modules.isEnabled('feature.composer'),
-              developmentStatus: controller.modules.getDevelopmentStatus('feature.composer'),
-              unavailableReason: controller.modules.getUnavailableReason('feature.composer'),
-              status: creationStatus(),
-            },
+            ...(controller.modules.hasModule('feature.composer')
+              ? [
+                  {
+                    id: 'feature.composer',
+                    name: '片段创作（含自定义音乐）',
+                    description: '剪取音乐片段、编排素材，将灵感组合为自己的音乐作品。',
+                    origin: 'builtin' as const,
+                    category: '音乐创作',
+                    enabled: controller.modules.isEnabled('feature.composer'),
+                    developmentStatus: controller.modules.getDevelopmentStatus('feature.composer'),
+                    unavailableReason: controller.modules.getUnavailableReason('feature.composer'),
+                    status: creationStatus(),
+                  },
+                ]
+              : []),
             ...controller.pluginCenter.installs.value.map((install): UiPluginCenterItem => ({
               id: install.installId,
               name: `${install.dev ? '[DEV] ' : ''}${install.pluginId}`,
@@ -250,7 +254,10 @@ export function createWorkbenchSpecialistFeatures(
             controller.actionFeedback.showUnavailable(controller.modules.getUnavailableReason(id))
           )
             return
-          if (id === 'feature.tags' || id === 'feature.composer')
+          if (
+            id === 'feature.tags' ||
+            (id === 'feature.composer' && controller.modules.hasModule(id))
+          )
             await controller.modules.setEnabled(id, enabled)
           else if (
             controller.registry.plugins.value.some(

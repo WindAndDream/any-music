@@ -120,19 +120,47 @@ jobs:
       - name: Native dependency audit
         run: pnpm check:rust:deny
 
+  android-native:
+    name: Android arm64 native checks
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+      - name: Read the release toolchain
+        id: release
+        run: node scripts/check-release.mjs
+      - uses: ./.github/actions/setup-android-release
+        with:
+          cache-key: ci-android-arm64
+          target: aarch64
+          java: ${{ steps.release.outputs.java }}
+          sdk: ${{ steps.release.outputs.sdk }}
+          build-tools: ${{ steps.release.outputs.build-tools }}
+          ndk: ${{ steps.release.outputs.ndk }}
+      - run: pnpm check:mobile:android
+
   repository-checks:
+    # Keep the existing required check name for GitHub rulesets.
     name: Repository checks (Windows x64)
     if: always()
-    needs: [tests, quality]
+    needs: [tests, quality, android-native]
     runs-on: ubuntu-22.04
     timeout-minutes: 5
     steps:
-      - name: Require both Windows jobs to succeed
+      - name: Require Windows and Android checks to succeed
         shell: bash
         env:
           TESTS_RESULT: ${{ needs.tests.result }}
           QUALITY_RESULT: ${{ needs.quality.result }}
+          ANDROID_RESULT: ${{ needs.android-native.result }}
         run: |
           echo "Repository tests: $TESTS_RESULT"
           echo "Builds and static checks: $QUALITY_RESULT"
-          test "$TESTS_RESULT" = success && test "$QUALITY_RESULT" = success
+          echo "Android arm64 native checks: $ANDROID_RESULT"
+          test "$TESTS_RESULT" = success && test "$QUALITY_RESULT" = success && test "$ANDROID_RESULT" = success

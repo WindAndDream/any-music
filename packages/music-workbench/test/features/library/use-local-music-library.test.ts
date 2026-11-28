@@ -96,6 +96,36 @@ describe('useLocalMusicLibrary favorites', () => {
     scope.stop()
   })
 
+  it('retains the playable duration when the same video appears again as a listing summary', () => {
+    const scope = effectScope()
+    const library = scope.run(useLocalMusicLibrary)!
+    const summary: Track = {
+      ...createTrack('bilibili'),
+      durationMs: undefined,
+      sourceDurationMs: 43_200_000,
+      source: {
+        pluginId: 'bilibili',
+        mediaKind: 'video',
+        resourceId: 'BV1xx411c7mD',
+        pageUrl: 'https://www.bilibili.com/video/BV1xx411c7mD',
+      },
+    }
+    library.favoriteTrack({
+      ...summary,
+      durationMs: 253_000,
+      source: { ...summary.source, partId: '1' },
+    })
+    const playlist = library.createPlaylist('纯音乐')
+    library.rememberTracks([summary])
+    library.favoriteTrack(summary)
+    library.addTracksToPlaylist(playlist.id, [summary])
+    expect(library.getTrack(summary.id)).toMatchObject({
+      sourceDurationMs: 43_200_000,
+      durationMs: 253_000,
+    })
+    scope.stop()
+  })
+
   it('keeps one custom name per stable ID through source refresh, favorites and reload', () => {
     const scope = effectScope()
     const library = scope.run(useLocalMusicLibrary)!
@@ -250,6 +280,31 @@ describe('useLocalMusicLibrary favorites', () => {
     scope.stop()
   })
 
+  it('saves only when grouping changes the playlist track order', () => {
+    const scope = effectScope()
+    const library = scope.run(useLocalMusicLibrary)!
+    const playlist = library.createPlaylist('顺序测试')
+    const tracks = [createTrack('bilibili'), createTrack('douyin')]
+    try {
+      library.addTracksToPlaylist(playlist.id, tracks)
+      library.persistNow()
+      repositoryMock.save.mockClear()
+      const original = library.playlists.value
+      library.reorderPlaylistTracks(playlist.id, original[0]!.trackIds)
+      vi.runAllTimers()
+      expect(library.playlists.value).toBe(original)
+      expect(repositoryMock.save).not.toHaveBeenCalled()
+
+      const trackIds = original[0]!.trackIds.toReversed()
+      library.reorderPlaylistTracks(playlist.id, trackIds)
+      vi.runAllTimers()
+      expect(library.playlists.value[0]?.trackIds).toEqual(trackIds)
+      expect(repositoryMock.save).toHaveBeenCalledOnce()
+    } finally {
+      scope.stop()
+    }
+  })
+
   it('rejects invalid custom names without altering records or saving a snapshot', () => {
     const scope = effectScope()
     const library = scope.run(useLocalMusicLibrary)!
@@ -311,14 +366,45 @@ describe('useLocalMusicLibrary favorites', () => {
     scope.stop()
   })
 
+  it('moves a replayed track to the top and records progress for the latest play', () => {
+    const scope = effectScope()
+    const library = scope.run(useLocalMusicLibrary)!
+    const track = createTrack('bilibili')
+    const otherTrack = createTrack('douyin')
+    library.rememberTracks([track, otherTrack])
+    const oldId = library.beginHistory(track)
+    library.updateHistory(oldId, 10_000, 10_000, true)
+    const otherId = library.beginHistory(otherTrack)
+
+    vi.advanceTimersByTime(1_000)
+    const replayId = library.beginHistory({ ...track, title: '更新后的歌曲名称' })
+    library.updateHistory(oldId, 10_000, 10_000, true)
+
+    expect(library.history.value.map((entry) => entry.id)).toEqual([replayId, otherId])
+    expect(library.history.value[0]).toMatchObject({
+      trackId: track.id,
+      startedAtMs: Date.now(),
+      positionMs: 0,
+      completed: false,
+      playCount: 2,
+    })
+    library.updateHistory(replayId, 2_000, 10_000)
+    vi.advanceTimersByTime(1_000)
+    expect(repositoryMock.save.mock.lastCall?.[0].history).toEqual(library.history.value)
+    expect(library.history.value[0]?.positionMs).toBe(2_000)
+    scope.stop()
+  })
+
   it('persists a configurable history limit and immediately removes the oldest overflow', () => {
     const scope = effectScope()
     const library = scope.run(useLocalMusicLibrary)!
-    const track = createTrack()
-    library.rememberTracks([track])
-    const firstId = library.beginHistory(track)
-    const secondId = library.beginHistory(track)
-    const thirdId = library.beginHistory(track)
+    const firstTrack = createTrack()
+    const secondTrack = createTrack('bilibili')
+    const thirdTrack = createTrack('douyin')
+    library.rememberTracks([firstTrack, secondTrack, thirdTrack])
+    const firstId = library.beginHistory(firstTrack)
+    const secondId = library.beginHistory(secondTrack)
+    const thirdId = library.beginHistory(thirdTrack)
 
     library.setHistoryLimit(2)
 

@@ -51,7 +51,7 @@ export interface MaterialCollection {
   updatedAtMs: number
 }
 
-/** 一次播放选择对应一条历史记录，进度更新覆盖同一条记录而不是持续追加。 */
+/** 每首曲目保留一条历史记录，播放进度对应最近一次播放。 */
 export interface PlaybackHistoryEntry {
   id: string
   trackId: string
@@ -61,11 +61,13 @@ export interface PlaybackHistoryEntry {
   durationMs?: number
   completed: boolean
   completedAtMs?: number
+  /** 当前记录累计的播放次数，未保存次数的记录按一次计算。 */
+  playCount?: number
   /** 自定义歌曲采用不可变版本，便于未来迁移与复现历史。 */
   customTrackVersion?: number
 }
 
-/** 可持久化的资料库设置；历史上限表示最多保留多少次播放选择。 */
+/** 可持久化的资料库设置，历史上限表示最多保留多少首曲目。 */
 export interface LocalMusicLibrarySettings {
   historyLimit: number
 }

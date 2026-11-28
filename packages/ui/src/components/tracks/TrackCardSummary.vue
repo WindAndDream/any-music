@@ -3,8 +3,7 @@ import type { Track } from '@any-music/core'
 import { computed } from 'vue'
 
 import { useTrackName } from '../../composables/tracks/use-track-name'
-import AppIcon from '../AppIcon.vue'
-import RemoteImage from '../music-sources/RemoteImage.vue'
+import TrackArtwork from './TrackArtwork.vue'
 
 // 卡牌摘要统一跨板块的封面与曲目信息；标签和操作仍由各功能组件通过插槽组合。
 const props = withDefaults(
@@ -40,7 +39,7 @@ const primaryMeta = computed(() =>
   [
     props.contextLabel,
     artistLabel.value,
-    formatDuration(props.track.durationMs),
+    formatDuration(props.track.durationMs ?? props.track.sourceDurationMs),
     props.trailingMeta,
   ]
     .filter(Boolean)
@@ -64,19 +63,11 @@ function formatDuration(durationMs?: number): string {
 <template>
   <div class="track-card-summary">
     <div class="track-card-summary__media">
-      <RemoteImage
-        v-if="props.track.artworkUrl"
+      <TrackArtwork
         class="track-card-summary__cover"
         :src="props.track.artworkUrl"
         :alt="`${props.track.title} 封面`"
       />
-      <div
-        v-else
-        class="track-card-summary__cover track-card-summary__cover--empty"
-        aria-hidden="true"
-      >
-        <AppIcon name="music" :size="24" />
-      </div>
       <slot name="cover-overlay" />
     </div>
 

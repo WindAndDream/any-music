@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import { useId, useTemplateRef } from 'vue'
 
 import type { PluginFilterState } from '../../composables/use-classic-plugins'
 import { usePluginFilterPanel } from '../../composables/use-plugin-filter-panel'
 import ClassicFilterFooter from '../library/ClassicFilterFooter.vue'
-import CatalogFilterPreview from '../music-sources/CatalogFilterPreview.vue'
+import CatalogFilterDimensions from '../music-sources/CatalogFilterDimensions.vue'
+import CatalogFilterHelp from '../music-sources/CatalogFilterHelp.vue'
 import CollectionFilterChoices from '../music-sources/CollectionFilterChoices.vue'
+import CollectionFilterSheet from '../music-sources/CollectionFilterSheet.vue'
 import CollectionFilterSummary from '../music-sources/CollectionFilterSummary.vue'
 
 const props = defineProps<{
@@ -33,7 +34,6 @@ const {
   back,
   finish,
   remove,
-  clear,
   leave,
   afterLeave,
   focusView,
@@ -41,7 +41,7 @@ const {
 </script>
 
 <template>
-  <BottomSheet :open="draft !== null" title="插件筛选器" size="full" @close="draft = null">
+  <CollectionFilterSheet :open="draft !== null" title="插件筛选器" @close="draft = null">
     <section
       v-if="draft"
       class="catalog-filters"
@@ -57,7 +57,7 @@ const {
         @after-enter="focusView"
       >
         <div v-if="!active" key="overview" ref="overview" class="catalog-filters__overview">
-          <nav class="catalog-filters__dimensions" aria-label="插件筛选类型">
+          <CatalogFilterDimensions label="插件筛选类型">
             <button
               v-for="dimension in dimensions"
               :key="dimension.id"
@@ -69,45 +69,23 @@ const {
               <span class="catalog-filter-dimension__icon"
                 ><AppIcon :name="dimension.icon" :size="17"
               /></span>
-              <span class="catalog-filter-dimension__copy"
-                ><strong>{{ dimension.label }}</strong
-                ><small v-if="dimension.labels.length"
-                  >已筛选 {{ dimension.labels.length }} 项</small
-                ></span
-              >
+              <strong class="catalog-filter-dimension__label">{{ dimension.label }}</strong>
               <span v-if="dimension.labels.length" class="catalog-filter-dimension__count">{{
                 dimension.labels.length
               }}</span>
               <AppIcon class="catalog-filter-dimension__arrow" name="arrow-right" :size="15" />
             </button>
-          </nav>
+          </CatalogFilterDimensions>
           <div class="catalog-filters__summary">
-            <CollectionFilterSummary
-              :groups="groups"
-              :result-count="resultCount"
-              :total-count="totalCount"
-              unit="个插件"
-              all-label="全部插件"
-              all-description="当前分类的全部插件都会显示"
-              @edit="edit"
-              @remove="remove"
-              @clear="clear"
-            />
+            <CollectionFilterSummary :groups="groups" @edit="edit" @remove="remove" />
           </div>
         </div>
         <section v-else key="detail" class="catalog-filters__detail">
           <header class="catalog-filters__detail-header">
             <div class="catalog-filters__detail-heading">
-              <div>
-                <strong>{{ current.label }}</strong
-                ><small>{{ current.description }}</small>
-              </div>
+              <strong>{{ current.label }}</strong>
+              <CatalogFilterHelp :label="current.label" :description="current.description" />
             </div>
-            <CatalogFilterPreview
-              :result-count="resultCount"
-              :total-count="totalCount"
-              unit="个插件"
-            />
           </header>
           <div class="catalog-filters__detail-content">
             <div
@@ -168,7 +146,9 @@ const {
             </div>
           </div>
           <footer class="catalog-filters__detail-footer">
-            <span>匹配 {{ resultCount }} / {{ totalCount }} 个插件</span>
+            <span
+              >匹配 <strong>{{ resultCount }} / {{ totalCount }} 个插件</strong></span
+            >
             <div class="catalog-filters__detail-actions">
               <button
                 class="catalog-filters__footer-back"
@@ -188,13 +168,15 @@ const {
     </section>
     <template v-if="!detailOpen" #footer>
       <ClassicFilterFooter
-        :summary="`匹配 ${resultCount} / ${totalCount} 个插件`"
+        :result-count="resultCount"
+        :total-count="totalCount"
+        unit="个插件"
         :disabled="disabled"
         @cancel="draft = null"
         @apply="$emit('apply')"
       />
     </template>
-  </BottomSheet>
+  </CollectionFilterSheet>
 </template>
 
 <style scoped lang="scss">

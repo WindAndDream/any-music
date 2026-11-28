@@ -25,6 +25,7 @@ commands.allow = [
   "request_state",
   "save_product_data",
   "load_product_data",
+  "sidebar_collapse_preference",
   "plugin_authority_snapshot",
   "plugin_authority_revoke",
   "plugin_package_preview",
@@ -45,6 +46,9 @@ commands.allow = [
   "begin_douyin_search_verification",
   "poll_douyin_search_verification",
   "end_douyin_search_verification",
+  "account_page_layout",
+  "sync_catalog_webview",
+  "close_catalog_webview",
   "register_media",
   "release_media",
   "begin_qr_login",
@@ -63,13 +67,6 @@ commands.allow = [
   "reset_download_directory",
   "open_external",
   "login_capabilities",
-  "login_experiment_enabled",
-  "begin_login_experiment",
-  "poll_login_experiment",
-  "send_experiment_sms",
-  "submit_experiment_sms",
-  "cancel_login_experiment",
-  "open_experiment_browser",
   "plugin_package_install",
   "plugin_package_rollback",
   "plugin_command_run",
@@ -78,3 +75,9 @@ commands.allow = [
   "plugin_result_save",
   "plugin_diagnostics_export",
 ]
+
+# Embedded official account pages may only report bounded observations to their own actor.
+[[permission]]
+identifier = "allow-account-page-report"
+description = "Bridge observations from embedded account pages; no product operation."
+commands.allow = ["account_page_report"]

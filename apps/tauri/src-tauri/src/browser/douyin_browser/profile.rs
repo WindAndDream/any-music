@@ -1,4 +1,4 @@
-//! Fresh account identity checks own a temporary page, leaving visible verification untouched.
+//! Full profile reads for account pages own a temporary target and preserve visible verification.
 use super::{body, projection, search, target, validate_browser_profile, verification};
 use crate::browser::cdp::Cdp;
 use serde_json::{Value, json};
@@ -9,6 +9,8 @@ use std::{
 use tokio_util::sync::CancellationToken;
 
 const PROFILE_URL: &str = "https://www.douyin.com/user/self";
+const PAGE_REQUEST_DELAY: Duration = Duration::from_secs(3);
+const PAGE_REQUEST_RETRY: Duration = Duration::from_secs(1);
 
 /// An auxiliary profile check shares the CDP reader with the login page. Preserve
 /// its bounded login transitions for the account actor instead of consuming them.
@@ -89,7 +91,8 @@ pub(super) async fn refresh(
         searches,
         verification_capture,
         login_events,
-        Duration::from_secs(15),
+        // Includes a cold official page load, which can exceed ten seconds on slow links.
+        Duration::from_secs(30),
     )
     .await
 }
@@ -106,8 +109,7 @@ async fn refresh_with_budget(
     if cancel.is_cancelled() {
         return Err("operation-cancelled:请求已取消。".into());
     }
-    // A visible account browser uses a hidden target; the inactive Windows desktop
-    // retains ordinary headed targets and their established document visibility.
+    // Auxiliary checks always use a hidden page and never navigate a presented page.
     let (target_id, session) = target(cdp, hidden).await?;
     let work = async {
         let navigation = cdp
@@ -117,12 +119,24 @@ async fn refresh_with_budget(
             return Err(format!("network-error:{error}"));
         }
         let mut requests = HashMap::new();
+        let mut observed = false;
+        // Ask the page itself once when its own bootstrap does not request the profile.
+        let request = tokio::time::sleep(PAGE_REQUEST_DELAY);
+        tokio::pin!(request);
+        let mut requested = false;
         loop {
-            let event = cdp
-                .events
-                .recv()
-                .await
-                .ok_or_else(|| cdp.disconnect_reason())?;
+            let event = tokio::select! {
+                event = cdp.events.recv() => event.ok_or_else(|| cdp.disconnect_reason())?,
+                _ = &mut request, if !requested && !observed => {
+                    let result = cdp.call(Some(&session), "Runtime.evaluate", json!({
+                        "expression": include_str!("request-profile.js"), "returnByValue": true
+                    })).await?;
+                    // A still-loading document retries after another delay.
+                    requested = result["result"]["value"] == true;
+                    request.as_mut().reset(tokio::time::Instant::now() + PAGE_REQUEST_RETRY);
+                    continue;
+                }
+            };
             if event["sessionId"] != session {
                 login_events.defer(&event)?;
                 if let Some(capture) = verification_capture.as_deref_mut() {
@@ -137,6 +151,7 @@ async fn refresh_with_budget(
                 Some("Network.responseReceived")
                     if projection::response_endpoint(params) == Some("profile") =>
                 {
+                    observed = true;
                     if requests.len() >= 8 {
                         return Err("limit-exceeded:账号检查响应超过读取预算。".into());
                     }

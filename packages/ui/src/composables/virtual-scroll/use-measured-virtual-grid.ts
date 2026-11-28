@@ -110,11 +110,14 @@ export function useMeasuredVirtualGrid<T>(options: MeasuredVirtualGridOptions<T>
     return memberships
   })
   const context = useVirtualScrollContext(options)
+  const layoutGeneration = computed(() =>
+    JSON.stringify([toValue(options.layoutGeneration), columns.value, columnGap.value]),
+  )
+  const cacheLimit = options.cacheLimit ?? 512
   const measurements = useVirtualItemMeasurements({
     context,
-    layoutGeneration: () =>
-      JSON.stringify([toValue(options.layoutGeneration), columns.value, columnGap.value]),
-    cacheLimit: options.cacheLimit,
+    layoutGeneration,
+    cacheLimit,
     getContentGeneration: (key) => {
       const position = index.value.indexOf(key)
       if (position === undefined) return undefined
@@ -124,40 +127,96 @@ export function useMeasuredVirtualGrid<T>(options: MeasuredVirtualGridOptions<T>
       return `${rowMembership.value[Math.floor(position / columns.value)]}|${typeof content}:${content}`
     },
   })
+  const measuredWidth = computed<number>(
+    (previous) => context.metrics.value.listWidth || previous || 0,
+  )
+  const estimateBasis = computed(() => [
+    context.scrollElement.value,
+    measuredWidth.value,
+    layoutGeneration.value,
+    estimatedItemSize.value,
+  ])
   // Compare bounded row deviations before constructing the complete immutable geometry.
   // Ingress/eviction at the estimate and changes below an existing maximum are not reflows.
-  const measuredRows = computed<ReadonlyMap<number, number>>((previous) => {
+  const rowSizing = computed<{
+    identity: typeof index.value
+    memberships: readonly string[]
+    basis: typeof estimateBasis.value
+    estimates: ReadonlyMap<number, number>
+    sizes: ReadonlyMap<number, number>
+  }>((previous) => {
     const identity = index.value
+    const basis = estimateBasis.value
     const columnCount = columns.value
     const itemCount = count.value
     const estimate = estimatedItemSize.value
+    const estimates = new Map(previous?.basis === basis ? previous.estimates : undefined)
+    if (
+      previous?.basis === basis &&
+      previous.identity !== identity &&
+      (previous.identity.keys.length !== itemCount ||
+        identity.keys.some((key, position) => previous.identity.keys[position] !== key))
+    ) {
+      if (
+        previous.identity.keys.length !== itemCount ||
+        identity.keys.some((key) => previous.identity.indexOf(key) === undefined)
+      ) {
+        estimates.clear()
+      } else if (columnCount > 1 && previous.sizes.size) {
+        // A move can regroup many already measured, now offscreen rows. Preserve their
+        // last positional sizes as estimates until mounted cells provide current heights.
+        // The old stretched size is never transferred as a measurement of a new cohort.
+        const currentMemberships = rowMembership.value
+        for (const [rowIndex, size] of previous.sizes) {
+          const firstKey = previous.identity.keys[rowIndex * columnCount]!
+          const currentRow = Math.floor(identity.indexOf(firstKey)! / columnCount)
+          if (currentMemberships[currentRow] !== previous.memberships[rowIndex])
+            estimates.set(rowIndex, size)
+        }
+        for (const rowIndex of estimates.keys()) {
+          if (estimates.size <= cacheLimit) break
+          estimates.delete(rowIndex)
+        }
+      }
+    }
     const cells = new Map<number, { count: number; maximum: number }>()
     for (const [key, height] of measurements.heights.value) {
-      // Estimate-sized cells cannot raise a row or prove that every cell is smaller.
-      // Omit them just like unknown cells; only a fully measured smaller row may shrink.
-      if (height === estimate) continue
       const position = identity.indexOf(key)
       if (position === undefined) continue
       const rowIndex = Math.floor(position / columnCount)
+      // Estimate-sized cells cannot raise a row or prove that every cell is smaller.
+      // Count them when replacing an estimate retained at a different size.
+      if (height === estimate && !estimates.has(rowIndex)) continue
       const row = cells.get(rowIndex) ?? { count: 0, maximum: 0 }
       row.count++
       row.maximum = Math.max(row.maximum, height)
       cells.set(rowIndex, row)
     }
-    const sizes = new Map<number, number>()
+    const sizes = new Map(estimates)
     for (const [rowIndex, row] of cells) {
       const cellCount = Math.min(columnCount, itemCount - rowIndex * columnCount)
-      const size = row.count === cellCount ? row.maximum : Math.max(row.maximum, estimate)
-      if (size !== estimate) sizes.set(rowIndex, size)
+      const complete = row.count === cellCount
+      const size = complete
+        ? row.maximum
+        : Math.max(row.maximum, estimates.get(rowIndex) ?? estimate)
+      if (complete) estimates.delete(rowIndex)
+      if (size === estimate) sizes.delete(rowIndex)
+      else sizes.set(rowIndex, size)
     }
-    if (
-      previous &&
-      previous.size === sizes.size &&
-      [...sizes].every(([rowIndex, size]) => previous.get(rowIndex) === size)
-    )
-      return previous
-    return sizes
+    const previousSizes = previous?.sizes
+    return {
+      identity,
+      memberships: sizes.size ? rowMembership.value : [],
+      basis,
+      estimates,
+      sizes:
+        previousSizes?.size === sizes.size &&
+        [...sizes].every(([rowIndex, size]) => previousSizes.get(rowIndex) === size)
+          ? previousSizes
+          : sizes,
+    }
   })
+  const measuredRows = computed(() => rowSizing.value.sizes)
   const rows = computed<ReturnType<typeof createVirtualRowGeometry>>((previous) => {
     const sizes = measuredRows.value
     const estimate = estimatedItemSize.value
@@ -330,8 +389,12 @@ export function useMeasuredVirtualGrid<T>(options: MeasuredVirtualGridOptions<T>
   const virtualItems = computed<readonly MeasuredVirtualGridItem<T>[]>(() => {
     void totalSize.value
     if (!ready.value) return []
+    const snapshot = rows.value
     return virtualizer.value.getVirtualItems().flatMap((item) => {
-      const row = rows.value.getRow(item.index)!
+      // Vue Virtual applies options in a queued watcher. A synchronous geometry reader
+      // can still see the previous range after columns change or results are filtered.
+      const row = snapshot.getRow(item.index)
+      if (!row) return []
       return Array.from({ length: row.endIndex - row.startIndex }, (_, offset) =>
         geometry.value.getItem(row.startIndex + offset)!,
       )

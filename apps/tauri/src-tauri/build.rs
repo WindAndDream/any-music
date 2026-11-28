@@ -13,6 +13,15 @@ fn main() {
             "trusted executor resource build failed"
         );
     }
+    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows") {
+        let output = std::env::var_os("OUT_DIR").expect("Cargo output directory");
+        let status = std::process::Command::new("node")
+            .arg("../scripts/build-catalog-webview.mjs")
+            .arg(output)
+            .status()
+            .expect("Node is required to build the embedded catalog renderer");
+        assert!(status.success(), "embedded catalog renderer build failed");
+    }
     for path in [
         "src/lib.rs",
         "src/plugins",
@@ -24,6 +33,12 @@ fn main() {
         "../../../Cargo.lock",
         "tauri.conf.json",
         "../src/plugin-executor",
+        "../src/catalog-webview",
+        "../scripts/build-catalog-webview.mjs",
+        "../../../scripts/vite/theme-style-resources.ts",
+        "../../../packages/ui/src",
+        "../../../packages/card-styles/src",
+        "../../../packages/theme-default/src",
         "../scripts/build-plugin-executor.mjs",
         "../../../packages/plugin-vm/src",
         "../../../packages/plugin-sandbox-browser/src",
@@ -31,15 +46,16 @@ fn main() {
     ] {
         println!("cargo:rerun-if-changed={path}");
     }
-    // Cargo examples do not inherit Tauri's executable resource manifest. Dialog
-    // imports require Common Controls v6 before any WebView can be constructed.
-    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows")
-        && (std::env::var_os("CARGO_FEATURE_S03_ISOLATION_PROBE").is_some()
-            || std::env::var_os("CARGO_FEATURE_S15_ACCEPTANCE").is_some())
-    {
-        println!("cargo:rustc-link-arg-examples=/MANIFEST:EMBED");
+    // Dialog imports require Common Controls v6 before any WebView can be constructed.
+    // Tauri's resource manifest reaches only executables, so library unit tests and
+    // examples would fail to load (STATUS_ENTRYPOINT_NOT_FOUND). With MSVC, embed the
+    // same dependency through the linker for every linked target instead.
+    let msvc = std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows")
+        && std::env::var("CARGO_CFG_TARGET_ENV").as_deref() == Ok("msvc");
+    if msvc {
+        println!("cargo:rustc-link-arg=/MANIFEST:EMBED");
         println!(
-            "cargo:rustc-link-arg-examples=/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'"
+            "cargo:rustc-link-arg=/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'"
         );
     }
     // Derive ACL coverage from the same registry compiled by invoke_handler.
@@ -91,8 +107,14 @@ fn main() {
     }
     // AppManifest requires a static slice; this one allocation lives for the build process.
     let commands = Box::leak(commands.into_boxed_slice());
+    let windows = if msvc {
+        tauri_build::WindowsAttributes::new_without_app_manifest()
+    } else {
+        tauri_build::WindowsAttributes::new()
+    };
     tauri_build::try_build(
         tauri_build::Attributes::new()
+            .windows_attributes(windows)
             .app_manifest(tauri_build::AppManifest::new().commands(commands)),
     )
     .expect("application permission manifest");

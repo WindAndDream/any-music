@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { computed, defineComponent, h, nextTick, reactive, shallowRef } from 'vue'
 
 import VirtualQueueTrackGrid from '../../../src/components/music-sources/VirtualQueueTrackGrid.vue'
-import type { ClassicVirtualTrackGridAdapter } from '../../../src/composables/classic-virtual-favorites-canary'
+import type { ClassicVirtualTrackGridAdapter } from '../../../src/composables/classic-virtual-track-grid'
 import { provideClassicOverlays } from '../../../src/composables/use-classic-overlays'
 import {
   dispatchCatalogEvent,
@@ -38,6 +38,7 @@ function setup(
       })),
   )
   const displayMode = shallowRef<'standard' | 'compact' | 'comfortable'>('standard')
+  const selectable = shallowRef(false)
   const filters = shallowRef(createCatalogTrackFilterState())
   const filteredTracks = computed(() => filterCatalogTracks(tracks.value, new Map(), filters.value))
   const itemStyle = shallowRef(skin)
@@ -80,6 +81,7 @@ function setup(
             getReorderStyle: () => undefined,
             downloadBusy: false,
             displayMode: displayMode.value,
+            selectable: selectable.value,
             mobileColumns: 1,
             virtual: {
               scrollElement: props.scroll as HTMLElement,
@@ -102,6 +104,7 @@ function setup(
     filters,
     filteredTracks,
     displayMode,
+    selectable,
     itemStyle,
     columns,
     customTags,
@@ -116,6 +119,40 @@ function setup(
 }
 
 describe('C00 real-row candidate (injected geometry; no production admission)', () => {
+  it('keeps measured offscreen rows and scroll offset when toggling selection', async () => {
+    const test = setup(180, 'minimal')
+    await settle()
+    try {
+      test.scroll.scrollTop = 3_000
+      test.scroll.dispatchEvent(new Event('scroll'))
+      await settle()
+      const cells = test.cells()
+      expect(cells.some((cell) => cell.dataset.queueDropId === '0')).toBe(false)
+      const ids = test.tracks.value.map(({ id }) => id)
+      const offset = test.scroll.scrollTop
+      const session = test.adapter().createGeometry({
+        kind: 'track',
+        sourceId: cells[0]!.dataset.queueDropId!,
+        ids,
+        eligibleIds: new Set(ids),
+        container: test.root as unknown as HTMLElement,
+        bounds: { top: 0, left: 0, width: 1000, height: 300 } as DOMRect,
+        initialScrollTop: offset,
+      })!
+      expect(session.findSlot(0, -1_000_000)).toMatchObject({ id: '0', height: 100 })
+
+      for (const selectable of [true, false, true, false]) {
+        test.selectable.value = selectable
+        // eslint-disable-next-line no-await-in-loop -- Exercise successive operator toggles.
+        await settle()
+        expect(test.scroll.scrollTop).toBe(offset)
+        expect(session.findSlot(0, -1_000_000)).toMatchObject({ id: '0', height: 100 })
+      }
+    } finally {
+      test.unmount()
+    }
+  })
+
   it('reuses semantic content generations through repeated measurements and window changes', async () => {
     const serialized = vi.fn(() => 'Unrendered track metadata')
     const tracks = reactive<Track[]>(

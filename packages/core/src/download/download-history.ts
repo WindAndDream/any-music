@@ -286,6 +286,7 @@ function sanitizeTrack(input: unknown): Track | undefined {
     artists,
     artworkUrl: sanitizeTrackMetadataUrl(input.artworkUrl),
     durationMs: readNonNegativeNumber(input.durationMs),
+    sourceDurationMs: readNonNegativeNumber(input.sourceDurationMs),
     publishedAtMs: readNonNegativeNumber(input.publishedAtMs),
     description: optionalString(input.description),
     sourceTags: readStringArray(input.sourceTags),

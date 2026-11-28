@@ -48,15 +48,18 @@ export class DouyinMusicSourcePlugin implements MusicSourcePlugin {
   private readonly cancellation?: CancellationSignal
   private readonly api: DouyinApi
   private readonly protectedPageSource?: DouyinProtectedPageSource
+  private readonly readSession?: () => Promise<MusicSourceSession>
 
   constructor(
     api: DouyinApi,
     protectedPageSource?: DouyinProtectedPageSource,
     cancellation?: CancellationSignal,
+    readSession?: () => Promise<MusicSourceSession>,
   ) {
     this.api = api
     this.cancellation = cancellation
     this.protectedPageSource = protectedPageSource
+    this.readSession = readSession
   }
 
   checkAvailability() {
@@ -69,6 +72,7 @@ export class DouyinMusicSourcePlugin implements MusicSourcePlugin {
 
   async getSession(): Promise<MusicSourceSession> {
     try {
+      if (this.readSession) return await this.readSession()
       const data = await this.api.getSelfProfile()
       if (!data.user) return { status: 'signed-out' }
       return {
@@ -449,7 +453,7 @@ export class DouyinMusicSourcePlugin implements MusicSourcePlugin {
       load: async (cursor) => {
         if (!favorites) {
           if (!secUid) {
-            const profile = await this.api.getSelfProfile()
+            const profile = await this.api.getSelfImportProfile()
             secUid = profile.user && getUserSecUid(profile.user)
             if (!secUid) {
               throw new MusicSourceError('not-authenticated', '请先登录抖音再导入个人内容。')
@@ -460,7 +464,7 @@ export class DouyinMusicSourcePlugin implements MusicSourcePlugin {
 
         try {
           if (!secUid) {
-            const profile = await this.api.getSelfProfile()
+            const profile = await this.api.getSelfImportProfile()
             secUid = profile.user && getUserSecUid(profile.user)
             if (!secUid) {
               throw new MusicSourceError('not-authenticated', '请先登录抖音再导入个人内容。')
@@ -486,7 +490,7 @@ export class DouyinMusicSourcePlugin implements MusicSourcePlugin {
       pageSize,
       loadMixDirectory: async (cursor) => {
         if (!secUid) {
-          const profile = await this.api.getSelfProfile()
+          const profile = await this.api.getSelfImportProfile()
           secUid = profile.user && getUserSecUid(profile.user)
           if (!secUid) {
             throw new MusicSourceError('not-authenticated', '请先登录抖音再导入个人合集。')
@@ -508,7 +512,7 @@ export class DouyinMusicSourcePlugin implements MusicSourcePlugin {
       load: async (cursor) => {
         try {
           if (!secUid) {
-            const profile = await this.api.getSelfProfile()
+            const profile = await this.api.getSelfImportProfile()
             secUid = profile.user && getUserSecUid(profile.user)
             if (!secUid) {
               throw new MusicSourceError('not-authenticated', '请先登录抖音再导入推荐内容。')

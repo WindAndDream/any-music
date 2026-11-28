@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { cloneCatalogTrackFilterState } from '@any-music/ui/catalog'
-import TrackCardGrid from '@any-music/ui/components/music-sources/TrackCardGrid.vue'
+import { cloneCatalogTrackFilterState, countCatalogTrackFilters } from '@any-music/ui/catalog'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
+import type { DownloadListEntry } from '@any-music/ui/library'
 import { useCatalogSelectionOperator, useQueueReorder } from '@any-music/ui/library'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
-import { computed, onDeactivated, shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, nextTick, onDeactivated, shallowRef, useTemplateRef, watch } from 'vue'
 
 import { useClassicCompactControls } from '../../composables/use-classic-compact-controls'
 import { useClassicDownloads } from '../../composables/use-classic-downloads'
 import ClassicCollectionControls from '../library/ClassicCollectionControls.vue'
 import ClassicFeatureStatus from '../library/ClassicFeatureStatus.vue'
 import ClassicTrackFilters from '../library/ClassicTrackFilters.vue'
+import ClassicTrackResultGrid from '../library/ClassicTrackResultGrid.vue'
 import CatalogDisplayModeDialog from '../music-sources/CatalogDisplayModeDialog.vue'
 import ClassicPageOverlays from '../overlays/ClassicPageOverlays.vue'
+import { getDownloadTrackStatus } from './download-track-presentation'
 import DownloadCollectionContent from './DownloadCollectionContent.vue'
 import DownloadOperatorPanel from './DownloadOperatorPanel.vue'
 import DownloadTrackActionsDialog from './DownloadTrackActionsDialog.vue'
@@ -38,17 +40,54 @@ const {
   resume,
   remove,
 } = useClassicDownloads(props)
+const filterCount = computed(() => countCatalogTrackFilters(state.value.filters).total)
 const actionItemId = shallowRef<string>()
+const actionOpenerId = shallowRef<string>()
 const actionEntry = computed(() => entries.value.find(({ item }) => item.id === actionItemId.value))
+function showActions(id: string) {
+  actionOpenerId.value = id
+  actionItemId.value = id
+}
+async function releaseActionOpener() {
+  // The dialog restores focus after its leave transition and the overlay patch.
+  await nextTick()
+  if (!actionEntry.value) actionOpenerId.value = undefined
+}
 const operatorOpen = shallowRef(false)
 const displayOpen = shallowRef(false)
 const scrollElement = useTemplateRef<HTMLElement>('scrollElement')
+const results = useTemplateRef('results')
+const virtualized = import.meta.env.MODE === 'dev'
+const viewport = computed(
+  () => scrollElement.value?.closest<HTMLElement>('.music-app-shell__content') ?? null,
+)
+const resetKey = computed(() => JSON.stringify([state.value.statusFilter, state.value.filters]))
 const compactControls = useClassicCompactControls(scrollElement, () => state.value.mobileLayout)
+const itemId = ({ item }: DownloadListEntry) => item.id
+function contentGeneration(entry: DownloadListEntry) {
+  const { track } = entry.item
+  return JSON.stringify([
+    track,
+    state.value.customNamesByTrackId.get(track.id),
+    state.value.customTagsByTrackId.get(track.id),
+    state.value.platformNames.get(track.source.pluginId),
+    getDownloadTrackStatus(entry),
+  ])
+}
 const reorder = useQueueReorder({
   arrangementMode: 'flat',
   trackIds: () => visible.value.map(({ item }) => item.id),
   platformIds: [],
   scrollElement,
+  autoScrollElement: virtualized ? viewport : undefined,
+  createGeometry: virtualized ? (input) => results.value?.createGeometry?.(input) : undefined,
+  retainItem: virtualized
+    ? (kind, id) => (kind === 'track' ? results.value?.retainItem(id) : undefined)
+    : undefined,
+  focusItem: virtualized
+    ? (kind, id, signal) =>
+        (kind === 'track' && results.value?.focusItem(id, signal)) || Promise.resolve(false)
+    : undefined,
   getPlatformId: () => undefined,
   moveTrack: (id, target, ids) => {
     if (props.feature.availability.status === 'available')
@@ -56,6 +95,7 @@ const reorder = useQueueReorder({
   },
   movePlatform: () => {},
 })
+const trackReorderStyle = (id: string) => reorder.getItemStyle('track', id)
 // Scalar getters avoid shallowRef's forced multi-source notifications when the host
 // republishes an otherwise unchanged projection after committing this drag.
 watch(
@@ -100,36 +140,51 @@ function toggleAllSelection(): void {
         @status="feature.actions.setStatusFilter"
         @display="displayOpen = true"
       >
-        <TrackCardGrid :display-mode="state.displayMode" :mobile-columns="state.mobileColumns">
-          <DownloadTrackRow
-            :selectable="operatorOpen"
-            v-for="entry in visible"
-            :key="entry.item.id"
-            :entry="entry"
-            :custom-tags="state.customTagsByTrackId.get(entry.item.track.id)"
-            :selected="selected.has(entry.item.id)"
-            :context-label="
-              state.platformNames.get(entry.item.track.source.pluginId) ??
-              entry.item.track.source.pluginId
-            "
-            :display-mode="state.displayMode"
-            :favorite="state.favoriteTrackIds.includes(entry.item.track.id)"
-            :active="state.currentTrackId === entry.item.track.id"
-            :invalid="state.invalidTrackIds.includes(entry.item.track.id)"
-            reorderable
-            :dragging="reorder.draggedId.value === entry.item.id"
-            :get-reorder-style="(id) => reorder.getItemStyle('track', id)"
-            @drag-start="reorder.startTrackPress"
-            @shift="(id, direction) => reorder.shift('track', id, direction)"
-            @drag-cancel="reorder.clearDrag"
-            @select="select"
-            @pause="feature.actions.pause([$event])"
-            @resume="resume"
-            @play="feature.actions.play($event.id)"
-            @favorite="feature.actions.toggleFavorite($event.id)"
-            @show-actions="actionItemId = $event"
-          />
-        </TrackCardGrid>
+        <ClassicTrackResultGrid
+          ref="results"
+          :items="visible"
+          :item-key="itemId"
+          :content-generation="contentGeneration"
+          :display-mode="state.displayMode"
+          :mobile-columns="state.mobileColumns"
+          :item-style="state.itemStyle"
+          :scroll-element="viewport"
+          :reset-key="resetKey"
+          :continuity-region="`downloads:${state.statusFilter}`"
+          :popover-key="actionOpenerId"
+          :get-reorder-style="trackReorderStyle"
+          :animate="false"
+        >
+          <template #default="{ item: entry, virtualPlacement }">
+            <DownloadTrackRow
+              :selectable="operatorOpen"
+              :entry="entry"
+              :custom-tags="state.customTagsByTrackId.get(entry.item.track.id)"
+              :selected="selected.has(entry.item.id)"
+              :context-label="
+                state.platformNames.get(entry.item.track.source.pluginId) ??
+                entry.item.track.source.pluginId
+              "
+              :display-mode="state.displayMode"
+              :favorite="state.favoriteTrackIds.includes(entry.item.track.id)"
+              :active="state.currentTrackId === entry.item.track.id"
+              :invalid="state.invalidTrackIds.includes(entry.item.track.id)"
+              reorderable
+              :virtual-placement="virtualPlacement"
+              :dragging="reorder.draggedId.value === entry.item.id"
+              :get-reorder-style="trackReorderStyle"
+              @drag-start="reorder.startTrackPress"
+              @shift="(id, direction) => reorder.shift('track', id, direction)"
+              @drag-cancel="reorder.clearDrag"
+              @select="select"
+              @pause="feature.actions.pause([$event])"
+              @resume="resume"
+              @play="feature.actions.play($event.id)"
+              @favorite="feature.actions.toggleFavorite($event.id)"
+              @show-actions="showActions"
+            />
+          </template>
+        </ClassicTrackResultGrid>
       </DownloadCollectionContent>
       <ClassicTrackFilters
         :disabled="feature.availability.status !== 'available'"
@@ -137,10 +192,7 @@ function toggleAllSelection(): void {
         :actions="feature.actions"
         scope="downloads-root"
       />
-      <ClassicPageOverlays
-        :operator-open="operatorOpen"
-        :modal-open="displayOpen || Boolean(actionEntry)"
-      >
+      <ClassicPageOverlays :modal-open="displayOpen || Boolean(actionEntry)">
         <DownloadTrackActionsDialog
           :playlists="state.playlists"
           @add-to-playlist="(track, id) => feature.actions.addToPlaylist(id, [track.id])"
@@ -158,6 +210,7 @@ function toggleAllSelection(): void {
           :cancelling="false"
           :suspended="feature.availability.status !== 'available'"
           @close="actionItemId = undefined"
+          @after-leave="releaseActionOpener"
           @pause="feature.actions.pause([$event])"
           @resume="resume"
           @cancel="feature.actions.cancel([$event])"
@@ -186,6 +239,7 @@ function toggleAllSelection(): void {
             :disabled="feature.availability.status !== 'available'"
             :total-count="visible.length"
             :operator-open="operatorOpen"
+            :filter-count="filterCount"
             can-display
             :icon-only-display="compactControls"
             @filter="feature.actions.setFilterDraft(cloneCatalogTrackFilterState(state.filters))"

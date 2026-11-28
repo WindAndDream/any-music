@@ -24,6 +24,7 @@
     "@vitejs/plugin-vue": "catalog:",
     "sass": "catalog:",
     "typescript": "catalog:",
+    "vite": "catalog:",
     "vitest": "catalog:",
     "vue": "catalog:",
     "vue-tsc": "catalog:"

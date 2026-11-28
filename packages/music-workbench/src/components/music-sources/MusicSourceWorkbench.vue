@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { SettingsDetailContext, SettingsSectionId } from '@any-music/ui'
 import { provideRemoteImageResolver } from '@any-music/ui'
+import type { CatalogViewportContext, UiThemeFeatureMap } from '@any-music/ui/theme'
 import { useTemplateRef } from 'vue'
 
 import {
@@ -17,6 +18,14 @@ const emit = defineEmits<{
   settingsClosed: []
 }>()
 defineSlots<{
+  'catalog-viewport'?: (
+    context: CatalogViewportContext & {
+      feature: UiThemeFeatureMap['catalog']
+      colorScheme: 'light' | 'dark'
+      density: string
+      suspended: boolean
+    },
+  ) => unknown
   'download-settings'?: () => unknown
   'network-settings'?: () => unknown
   'account-settings'?: (context: SettingsDetailContext) => unknown
@@ -64,6 +73,9 @@ defineExpose({
     @select-account="emit('selectAccount', $event)"
     @add-account="emit('addAccount', $event)"
   >
+    <template v-if="$slots['catalog-viewport']" #catalog-viewport="context">
+      <slot name="catalog-viewport" v-bind="context" />
+    </template>
     <template v-if="$slots['download-settings']" #download-settings
       ><slot name="download-settings"
     /></template>

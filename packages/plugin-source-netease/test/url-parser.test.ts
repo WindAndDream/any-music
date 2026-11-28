@@ -18,6 +18,16 @@ describe('NetEase lightweight URL metadata', () => {
         })
     },
   )
+  it.each(['/discover/toplist', '/#/discover/toplist', '/m/discover/toplist'])(
+    'uses the playlist identity for %s',
+    (path) => {
+      expect(parseNeteaseImportUrl(`https://music.163.com${path}?id=3778678`)).toEqual({
+        kind: 'playlist',
+        id: '3778678',
+        url: 'https://music.163.com/playlist?id=3778678',
+      })
+    },
+  )
   it.each([
     'https://music.163.com.evil.example/song?id=1',
     'https://evil@music.163.com/song?id=1',
@@ -29,6 +39,10 @@ describe('NetEase lightweight URL metadata', () => {
     'https://music.163.com/song?id=9007199254740992',
     'https://music.163.com/djradio?id=1',
     'https://music.163.com/playlist?id=1#/song?id=2',
+    'https://music.163.com/#//example.invalid/discover/toplist?id=1',
+    'https://music.163.com/#/\\example.invalid/discover/toplist?id=1',
+    'https://music.163.com/discover/toplist',
+    'https://music.163.com/discover/toplist?id=1&id=2',
   ])('rejects invalid scope or ID %s locally', (url) => {
     expect(() => parseNeteaseImportUrl(url)).toThrow()
   })

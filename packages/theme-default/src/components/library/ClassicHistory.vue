@@ -2,7 +2,6 @@
 import { cloneCatalogTrackFilterState } from '@any-music/ui/catalog'
 import type { CatalogTrackFilterState } from '@any-music/ui/catalog'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
-import BottomSheet from '@any-music/ui/components/BottomSheet.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
 import type { UiThemeFeatureMap } from '@any-music/ui/theme'
 import { computed, shallowRef, useTemplateRef } from 'vue'
@@ -13,6 +12,7 @@ import CatalogDisplayModeDialog from '../music-sources/CatalogDisplayModeDialog.
 import CatalogPlaylistPickerDialog from '../music-sources/CatalogPlaylistPickerDialog.vue'
 import CatalogTrackFilterPanel from '../music-sources/CatalogTrackFilterPanel.vue'
 import CatalogTrackOperatorPanel from '../music-sources/CatalogTrackOperatorPanel.vue'
+import CollectionFilterSheet from '../music-sources/CollectionFilterSheet.vue'
 import ClassicPageOverlays from '../overlays/ClassicPageOverlays.vue'
 import ClassicCollectionControls from './ClassicCollectionControls.vue'
 import ClassicFeatureStatus from './ClassicFeatureStatus.vue'
@@ -99,16 +99,14 @@ function openFilters() {
           />
         </Transition>
       </div>
-      <ClassicPageOverlays
-        :modal-open="presentation.modalOpen.value"
-        :operator-open="history.operatorOpen.value"
-      >
+      <ClassicPageOverlays :modal-open="presentation.modalOpen.value">
         <template #toolbar>
           <ClassicCollectionControls
             :selected-count="history.selected.value.length"
             :total-count="history.visible.value.length"
             :disabled="!presentation.available()"
             :operator-open="history.operatorOpen.value"
+            :filter-count="presentation.filterCount.value"
             can-display
             :icon-only-display="compactControls"
             filter-label="筛选播放记录"
@@ -128,10 +126,9 @@ function openFilters() {
           @update-display-mode="history.displayMode.value = $event"
           @update-mobile-columns="history.mobileColumns.value = $event"
         />
-        <BottomSheet
+        <CollectionFilterSheet
           :open="history.draft.value !== null"
           title="播放历史筛选器"
-          size="full"
           @close="history.draft.value = null"
         >
           <CatalogTrackFilterPanel
@@ -142,24 +139,25 @@ function openFilters() {
             :tag-stats="history.tagStats.value"
             :platform-scoped="history.activePlatform.value !== null"
             :platform-stats="filterPlatformStats"
-            :result-count="preview.length"
-            :total-count="history.scopedRows.value.length"
             history-scope="history:tracks"
             @detail-open-change="detailOpen = $event"
             @preview-change="previewFilters = $event"
           />
           <template v-if="!detailOpen" #footer>
             <ClassicFilterFooter
-              :summary="`匹配 ${preview.length} / ${history.scopedRows.value.length} 条`"
+              :result-count="preview.length"
+              :total-count="history.scopedRows.value.length"
+              unit="条"
               @cancel="history.draft.value = null"
               @apply="history.applyFilters()"
             />
           </template>
-        </BottomSheet>
+        </CollectionFilterSheet>
         <HistoryTrackActionsDialog
           :row="actionRow"
           :feature="feature"
           @close="actionEntryId = null"
+          @after-leave="presentation.releaseActionOpener"
           @play="presentation.play"
           @clear="presentation.clear"
         />

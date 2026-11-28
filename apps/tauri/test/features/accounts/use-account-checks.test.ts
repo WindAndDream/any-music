@@ -98,6 +98,13 @@ describe('explicit account detection', () => {
     expect(checks.checkSummary.value).toContain('1 个登录有效')
     expect(checks.checkSummary.value).toContain('1 个需要验证')
   })
+  it('preserves the previously read nickname if a valid session has no new name', async () => {
+    const checks = setup(async () => ({ status: 'signed-in', user: { id: '123', name: '' } }))
+    checks.runtime.sessionUserNames.value = new Map([['b', '测试抖音昵称']])
+    await checks.checkAll()
+    expect(checks.checkResults.value.get('b')?.status).toBe('signed-in')
+    expect(checks.runtime.sessionUserNames.value.get('b')).toBe('测试抖音昵称')
+  })
   it('reports an anonymous account without starting a native login or browser', async () => {
     const getSession = vi.fn()
     const checks = setup(getSession)

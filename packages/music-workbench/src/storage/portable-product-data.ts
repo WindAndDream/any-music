@@ -1,3 +1,7 @@
+import {
+  consolidatePlaybackHistory,
+  sanitizePlaybackHistoryEntries,
+} from './local-music-library-repository'
 import { copyJson, isRecord, jsonText, validateNamespaces } from './product-data'
 import type { PluginDataNamespace, ProductCore, ProductData } from './product-data'
 import { createProductData } from './product-data-projection'
@@ -128,12 +132,17 @@ function parseBackup(input: unknown): PortableProductData {
     )
   )
     throw new Error('Invalid core references or recipe')
-  if (
-    Array.isArray(library.history) &&
-    jsonText(library.history.map((entry) => (isRecord(entry) ? entry.id : null))) !==
-      jsonText(sanitized.core.library.history.map((entry) => entry.id))
-  )
-    throw new Error('History import would lose stable references or exceed its limit')
+  if (Array.isArray(library.history)) {
+    const trackIds = new Set(sanitized.core.library.tracks.map(({ track }) => track.id))
+    const history = sanitizePlaybackHistoryEntries(library.history, trackIds)
+    if (
+      history.length !== library.history.length ||
+      history.length > sanitized.core.library.settings.historyLimit
+    )
+      throw new Error('History import would lose stable references or exceed its limit')
+    // Preserve the validated input for backup identity. Collapse repeated tracks when merging.
+    sanitized.core.library.history = history
+  }
   return copyJson({
     format: 'any-music-data',
     schemaVersion: 1,
@@ -256,7 +265,16 @@ export function previewPortableProductImport(
           (item) => item.trackId,
           useBackup,
         ),
-        history: keyed(left.history, right.history, (item) => item.id, useBackup),
+        history: consolidatePlaybackHistory(
+          keyed(
+            consolidatePlaybackHistory(left.history),
+            consolidatePlaybackHistory(right.history),
+            (item) => item.id,
+            useBackup,
+          ).toSorted((first, second) => second.startedAtMs - first.startedAtMs),
+          // Backups can share the same earlier plays, so avoid adding the two totals.
+          Math.max,
+        ),
       }
       for (const key of ['queue', 'downloads', 'favorites'] as const)
         if (backup.core[key] !== undefined && (useBackup || current.core[key] === undefined))

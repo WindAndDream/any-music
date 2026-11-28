@@ -1,15 +1,87 @@
 use crate::{
+    accounts::session as account_session,
     browser::verification::require_main,
-    model::{HttpRequest, classify, validate_public_url},
-    state::RuntimeState,
+    model::{Account, HttpRequest, classify, validate_public_url},
+    state::{AccountSession, RuntimeState},
 };
 use futures_util::StreamExt;
-use std::time::Duration;
-use tauri::{State, WebviewWindow};
+use std::{sync::Arc, time::Duration};
+use tauri::{State, Webview};
 use tokio_util::sync::CancellationToken;
 
 mod response;
 use response::HttpResponse;
+
+const DOUYIN_IDENTITY_LIMIT: usize = 32 * 1024;
+
+/// Check under the browser lifecycle lock before starting and before applying a probe.
+fn douyin_probe_account(
+    state: &RuntimeState,
+    id: &str,
+    session: &Arc<AccountSession>,
+    cancellation: &CancellationToken,
+) -> Result<Account, String> {
+    let current = state.account(id)?;
+    if !current.enabled
+        || session.cancelled.is_cancelled()
+        || cancellation.is_cancelled()
+        || !state
+            .sessions
+            .lock()
+            .unwrap()
+            .get(id)
+            .is_some_and(|active| Arc::ptr_eq(active, session))
+    {
+        return Err("operation-cancelled:账号环境已改变。".into());
+    }
+    if current.pending || account_session::has_pending_login(state, id) {
+        return Err("verification-required:此账号正在登录或验证，请先完成当前操作。".into());
+    }
+    Ok(current)
+}
+
+fn douyin_identity_response(user_id: Option<&str>, input: &HttpRequest) -> HttpResponse {
+    HttpResponse {
+        status: 200,
+        status_text: "OK".into(),
+        headers: String::new(),
+        body: serde_json::json!({"userId":user_id})
+            .to_string()
+            .into_bytes(),
+        is_binary: input.response_type.as_deref() == Some("bytes"),
+    }
+}
+
+fn apply_douyin_identity(
+    state: &RuntimeState,
+    input: &HttpRequest,
+    session: &Arc<AccountSession>,
+    cancellation: &CancellationToken,
+    result: Result<String, String>,
+) -> Result<HttpResponse, String> {
+    let id = input.account_id.as_deref().unwrap();
+    let _lifecycle = state.browsers.lock().unwrap();
+    let current = douyin_probe_account(state, id, session, cancellation)?;
+    let uid = match result {
+        Ok(uid) => uid,
+        Err(error) => {
+            if error.starts_with("verification-required:") {
+                state.status(id, "verification-required")?;
+            }
+            return Err(error);
+        }
+    };
+    // Even guests can receive a valid-looking UID. Never change the binding made at login.
+    if current.platform_user_id.as_deref() != Some(uid.as_str())
+        || !crate::browser::douyin_browser::projection::has_login(&session.cookies.lock().unwrap())
+    {
+        state.status(id, "expired")?;
+        return Ok(douyin_identity_response(None, input));
+    }
+    state.save_credentials(id)?;
+    account_session::confirm_identity(state, id, &uid)?;
+    Ok(douyin_identity_response(Some(&uid), input))
+}
 
 pub fn anonymous_client() -> Result<reqwest::Client, String> {
     reqwest::Client::builder()
@@ -95,7 +167,7 @@ async fn execute(
     } else {
         None
     };
-    let session = if input.credentials.as_deref() == Some("include") {
+    let (session, douyin_probe) = if input.credentials.as_deref() == Some("include") {
         let id = input
             .account_id
             .as_deref()
@@ -109,9 +181,12 @@ async fn execute(
         {
             return Err(error.into());
         }
-        Some(state.session(id)?)
+        (
+            Some(state.session(id)?),
+            account_session::is_douyin_probe(&account, input, &url),
+        )
     } else {
-        None
+        (None, false)
     };
     let owned_session = session.clone();
     let _permit = if let Some(session) = &session {
@@ -133,6 +208,22 @@ async fn execute(
             && !crate::accounts::session::is_identity_probe(&current, input, &url)
         {
             return Err(error.into());
+        }
+        if douyin_probe {
+            let _lifecycle = state.browsers.lock().unwrap();
+            let current = douyin_probe_account(state, id, session, cancellation)?;
+            if current.authentication != "credential" {
+                return Ok(douyin_identity_response(None, input));
+            }
+            if !crate::browser::douyin_browser::projection::has_login(
+                &session.cookies.lock().unwrap(),
+            ) {
+                state.status(id, "expired")?;
+                return Ok(douyin_identity_response(None, input));
+            }
+            if current.platform_user_id.is_none() {
+                return Err("invalid-response:抖音账号缺少已确认的用户标识，请重新登录。".into());
+            }
         }
         let failures = *session.failures.lock().unwrap();
         let delay = if failures == 0 {
@@ -203,7 +294,11 @@ async fn execute(
         let limit = input
             .max_response_bytes
             .unwrap_or(16 * 1024 * 1024)
-            .min(512 * 1024 * 1024);
+            .min(if douyin_probe {
+                DOUYIN_IDENTITY_LIMIT
+            } else {
+                512 * 1024 * 1024
+            });
         let retry_url = if final_url.host_str() == Some("127.0.0.1")
             && final_url.path().starts_with("/media/")
         {
@@ -232,6 +327,22 @@ async fn execute(
                 return Err(over_budget());
             }
             bytes.extend_from_slice(&chunk);
+        }
+        if douyin_probe {
+            if final_url != url {
+                return Err("upstream-error:抖音账号检测请求被重定向。".into());
+            }
+            let result = account_session::douyin_probe_uid(
+                status.as_u16(),
+                &String::from_utf8_lossy(&bytes),
+            );
+            return apply_douyin_identity(
+                state,
+                input,
+                session.as_ref().unwrap(),
+                cancellation,
+                result,
+            );
         }
         if let Some(id) = &input.account_id
             && session.is_some()
@@ -350,11 +461,11 @@ fn require_anonymous_grant(url: &reqwest::Url, media_port: u16) -> Result<(), St
 
 #[tauri::command]
 pub async fn http_request(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     request: HttpRequest,
 ) -> Result<tauri::ipc::Response, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     request_http(&state, &request).await
 }
 
@@ -374,11 +485,11 @@ async fn request_http(
 }
 #[tauri::command]
 pub fn cancel_request(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     request_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     crate::model::validate_id(&request_id)?;
     state.requests.lock().unwrap().cancel(&request_id);
     Ok(())
@@ -387,7 +498,6 @@ pub fn cancel_request(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::sync::Arc;
     use tauri::ipc::{InvokeResponseBody, IpcResponse};
     use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -426,6 +536,62 @@ mod tests {
         let mut requests = state.requests.lock().unwrap();
         assert!(!requests.begin(&request.request_id).unwrap().is_cancelled());
         requests.finish(&request.request_id);
+    }
+
+    #[tokio::test]
+    async fn douyin_identity_needs_the_bound_uid_and_keeps_content_verification() {
+        let directory =
+            std::env::temp_dir().join(format!("http-douyin-probe-{}", uuid::Uuid::new_v4()));
+        let mut state = RuntimeState::new(directory.clone()).unwrap();
+        state.credential_key_loader = Some(Arc::new(|| Ok([0x5a; 32])));
+        let account = crate::state::add_test_account(&state, "douyin");
+        let id = account.id;
+        account_session::confirm_identity(&state, &id, "123").unwrap();
+        let mut request = test_request(account_session::DOUYIN_IDENTITY_URL.into());
+        request.account_id = Some(id.clone());
+        request.credentials = Some("include".into());
+        let (_, body) = raw(request_http(&state, &request).await.unwrap());
+        assert_eq!(body, br#"{"userId":null}"#);
+        assert_eq!(state.account(&id).unwrap().status, "expired");
+        assert_finished(&state, &request);
+
+        let session = state.session(&id).unwrap();
+        session
+            .cookies
+            .lock()
+            .unwrap()
+            .parse(
+                "sessionid=synthetic; Path=/; Secure; HttpOnly",
+                &request.url.parse().unwrap(),
+            )
+            .unwrap();
+        let cancel = CancellationToken::new();
+        state.status(&id, "verification-required").unwrap();
+        let apply = |result| apply_douyin_identity(&state, &request, &session, &cancel, result);
+        assert_eq!(
+            apply(Ok("123".into())).unwrap().body,
+            br#"{"userId":"123"}"#
+        );
+        assert_eq!(state.account(&id).unwrap().status, "verification-required");
+        assert!(apply(Err("upstream-error:fixture".into())).is_err());
+        assert_eq!(state.account(&id).unwrap().status, "verification-required");
+        assert_eq!(apply(Ok("456".into())).unwrap().body, br#"{"userId":null}"#);
+        assert_eq!(state.account(&id).unwrap().status, "expired");
+        assert_eq!(
+            state.account(&id).unwrap().platform_user_id.as_deref(),
+            Some("123")
+        );
+
+        cancel.cancel();
+        assert!(
+            apply(Ok("123".into()))
+                .err()
+                .unwrap()
+                .starts_with("operation-cancelled:")
+        );
+        assert_eq!(state.account(&id).unwrap().status, "expired");
+        drop(state);
+        std::fs::remove_dir_all(directory).unwrap();
     }
 
     #[tokio::test]

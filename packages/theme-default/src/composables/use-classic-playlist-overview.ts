@@ -15,6 +15,10 @@ import { usePresentationActivity } from './use-presentation-activity'
 export function useClassicPlaylistOverview(
   props: Readonly<{ feature: UiThemeFeatureMap['playlists']; suspended?: boolean }>,
   grid: ShallowRef<HTMLElement | null>,
+  virtualReorder: Pick<
+    Parameters<typeof useQueueReorder>[0],
+    'autoScrollElement' | 'createGeometry' | 'retainItem' | 'focusItem'
+  >,
 ) {
   const state = computed(() => props.feature.state)
   const collection = usePlaylistCollection({
@@ -35,6 +39,18 @@ export function useClassicPlaylistOverview(
     trackIds: ids,
     platformIds: [],
     scrollElement: grid,
+    get autoScrollElement() {
+      return virtualReorder.autoScrollElement
+    },
+    get createGeometry() {
+      return virtualReorder.createGeometry
+    },
+    get retainItem() {
+      return virtualReorder.retainItem
+    },
+    get focusItem() {
+      return virtualReorder.focusItem
+    },
     getPlatformId: () => undefined,
     movePlatform: () => {},
     moveTrack: (id, target, visible) => {

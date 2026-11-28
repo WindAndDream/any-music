@@ -9,7 +9,7 @@ import type {
 } from '@any-music/ui/virtual-scroll'
 import { onScopeDispose, useTemplateRef, watch } from 'vue'
 
-import type { ClassicVirtualTrackGridAdapter } from '../../composables/classic-virtual-favorites-canary'
+import type { ClassicVirtualTrackGridAdapter } from '../../composables/classic-virtual-track-grid'
 import type {
   QueuePlatformGridEmits,
   QueuePlatformGridGroup,
@@ -36,7 +36,6 @@ function contentGeneration(group: QueuePlatformGridGroup) {
     group.totalCount,
     group.isCustom,
     props.filtered,
-    props.selectable,
   ])
 }
 const continuity = usePresentationContinuity({

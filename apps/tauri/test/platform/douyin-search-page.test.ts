@@ -70,7 +70,7 @@ describe('official search page controls', () => {
   })
   it('focuses and selects the unique official field for browser-native text insertion', () => {
     const events: string[] = []
-    const input = {
+    const input: Record<string, unknown> = {
       disabled: false,
       value: '',
       focus: () => {
@@ -84,17 +84,22 @@ describe('official search page controls', () => {
       activeElement: unknown
       querySelectorAll: (selector: string) => unknown[]
     } = {
-      readyState: 'interactive',
+      readyState: 'loading',
       activeElement: null,
-      querySelectorAll: (selector) =>
-        selector.startsWith('input') ? [input] : [{ disabled: false }],
+      querySelectorAll: (selector) => (selector.startsWith('input') ? [input] : [button]),
     }
+    const button: Record<string, unknown> = { disabled: false }
     vi.stubGlobal('location', { origin: 'https://www.douyin.com', pathname: '/jingxuan' })
     vi.stubGlobal('document', document)
     const run = () => new Function(`return ${prepare.slice(1)}`)()
     expect(run()).toBe(false)
+    // Server-rendered controls are present before React owns them.
+    document.readyState = 'interactive'
+    expect(run()).toBe(false)
+    input['__reactProps$test'] = {}
+    expect(run()).toBe(false)
     expect(events).toEqual([])
-    document.readyState = 'complete'
+    button['__reactProps$test'] = {}
     expect(run()).toBe(true)
     expect(events).toEqual(['focus', 'select'])
     expect(input.value).toBe('')
@@ -103,7 +108,12 @@ describe('official search page controls', () => {
   })
   it('reads the native controlled input after rendering and targets the current button', async () => {
     const query = '古风 / "& # +\\n'
-    let inputs = [{ value: '', disabled: false }]
+    const field = (value: string, rendered = value) => ({
+      value,
+      disabled: false,
+      __reactProps$test: { value: rendered },
+    })
+    let inputs = [field('')]
     const button = {
       disabled: false,
       getBoundingClientRect: () => ({ left: 40, top: 60, width: 80, height: 40 }),
@@ -121,10 +131,14 @@ describe('official search page controls', () => {
     const run = new Function(`return (${submit})`)()
     const pending = run(query)
     queueMicrotask(() => {
-      inputs = [{ value: query, disabled: false }]
+      inputs = [field(query)]
     })
-    expect(await pending).toEqual({ x: 80, y: 80 })
+    expect(await pending).toMatchObject({ x: 80, y: 80, time: expect.any(Number) })
     expect(button.click).not.toHaveBeenCalled()
+    // The DOM value alone is not accepted until the controlled props render it.
+    inputs = [field(query, '')]
+    expect(await run(query)).toBe(false)
+    inputs = [field(query)]
     inputs[0]!.value = ''
     expect(await run(query)).toBe(false)
     inputs[0]!.value = query
@@ -144,9 +158,11 @@ describe('official search page controls', () => {
     }
     hit = button
     const document = {
-      readyState: 'interactive',
+      readyState: 'loading',
       querySelectorAll: (selector: string) =>
-        selector.startsWith('input') ? [{ value: '古风', disabled: false }] : [button],
+        selector.startsWith('input')
+          ? [{ value: '古风', disabled: false, __reactProps$test: { value: '古风' } }]
+          : [button],
       elementFromPoint: () => hit,
     }
     const location = { origin: 'https://www.douyin.com', pathname: '/jingxuan' }
@@ -156,8 +172,9 @@ describe('official search page controls', () => {
     vi.stubGlobal('innerHeight', 800)
     const run = new Function(`return (${submit})`)()
     expect(await run('古风')).toBe(false)
-    document.readyState = 'complete'
-    expect(await run('古风')).toEqual({ x: 80, y: 80 })
+    document.readyState = 'interactive'
+    const point = { x: 80, y: 80, time: expect.any(Number) }
+    expect(await run('古风')).toMatchObject(point)
     hit = {}
     expect(await run('古风')).toBe(false)
     hit = button
@@ -167,7 +184,13 @@ describe('official search page controls', () => {
     expect(await run('古风')).toBe(false)
     button.disabled = true
     expect(await run('古风')).toBe(false)
+    button.disabled = false
+    bounds = { left: 40, top: 60, width: 80, height: 40 }
+    location.pathname = '/search/古风'
+    expect(await run('古风')).toMatchObject(point)
     location.pathname = '/jingxuan/search/古风'
+    expect(await run('古风')).toMatchObject(point)
+    location.pathname = '/video/123'
     expect(await run('古风')).toBe(false)
     location.pathname = '/jingxuan'
     location.origin = 'https://evil.example'
@@ -267,6 +290,32 @@ describe('official search page controls', () => {
     })
     expect(root.scrollTop).toBe(100)
     expect(scrollBy).not.toHaveBeenCalled()
+  })
+  it('advances only the original result scroller on demand when the Shadow list covers it', () => {
+    const content = {
+      clientHeight: 166,
+      scrollHeight: 506,
+      scrollTop: 300,
+      scrollBy: vi.fn(),
+    }
+    const fallback = { scrollBy: vi.fn() }
+    const overlay = {}
+    vi.stubGlobal('location', { origin: 'https://www.douyin.com', pathname: '/search/音乐' })
+    vi.stubGlobal('document', {
+      documentElement: { dataset: { amCatalogDocument: 'current' } },
+      querySelector: (selector: string) =>
+        selector === '[data-am-catalog-host]' ? overlay : { parentElement: content },
+      scrollingElement: fallback,
+      elementFromPoint: () => overlay,
+    })
+    vi.stubGlobal('getComputedStyle', () => ({ overflowY: 'auto' }))
+    const run = (delta?: number) =>
+      new Function('delta', `return ${scroll.trimEnd().slice(1, -2)}(delta)`)(delta)
+    expect(run()).toMatchObject({ embedded: true, remaining: 40, viewportHeight: 166 })
+    expect(content.scrollBy).not.toHaveBeenCalled()
+    run(80)
+    expect(content.scrollBy).toHaveBeenCalledExactlyOnceWith({ top: 40, behavior: 'instant' })
+    expect(fallback.scrollBy).not.toHaveBeenCalled()
   })
   it('refuses covered, nested, offscreen or foreign result areas instead of targeting a sidebar', () => {
     let bounds = { left: 100, top: 60, right: 900, bottom: 560 }

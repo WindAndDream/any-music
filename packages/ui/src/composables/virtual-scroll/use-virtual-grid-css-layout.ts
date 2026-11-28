@@ -18,8 +18,10 @@ export function readVirtualGridCssLayout(
   style: Pick<CSSStyleDeclaration, 'gridTemplateColumns' | 'columnGap' | 'rowGap'> &
     Partial<Pick<CSSStyleDeclaration, 'gridAutoColumns'>>,
 ): VirtualGridCssLayout | undefined {
-  if (!style.gridTemplateColumns.trim() || style.gridTemplateColumns === 'none') return undefined
-  const tracks = style.gridTemplateColumns.trim().split(/\s+/)
+  // A live computed style can resolve and serialize the used track sizes on each access.
+  const template = style.gridTemplateColumns.trim()
+  if (!template || template === 'none') return undefined
+  const tracks = template.split(/\s+/)
   if (!tracks.length || !tracks.every((track) => /^\d+(?:\.\d+)?px$/.test(track)))
     throw new RangeError('Virtual grid requires resolved pixel tracks')
   let columns = tracks.length

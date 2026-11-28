@@ -11,6 +11,7 @@ export type SettingsSectionId =
   | 'proxy'
   | 'downloads'
   | 'cache'
+  | 'playback'
   | 'playback-history'
   | 'filter-history'
   | 'creator-profile'

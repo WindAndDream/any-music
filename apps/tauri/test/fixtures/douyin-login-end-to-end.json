@@ -9,7 +9,7 @@
       "the 登录 button disappeared",
       "the 登录后免费畅享 login wall disappeared",
       "the login panel disappeared and the page navigated, which wiped the in-page recorder",
-      "a GET to /aweme/v1/web/user/profile/self/ returned 200, an endpoint that only answers for a signed-in session"
+      "the browser requested GET /aweme/v1/web/user/profile/self/ after sign-in and received HTTP 200; this status alone is not a login signal"
     ],
     "recorderNote": "The in-page recorders were cleared by the post-login navigation, so the send_code / validate_code / confirmed frames of this particular run were not retained. Their contract was already captured earlier in the session and is unchanged."
   },

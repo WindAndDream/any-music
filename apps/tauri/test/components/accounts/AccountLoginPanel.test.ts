@@ -74,7 +74,7 @@ describe('account login presentation', () => {
     } as const
     const choose = await render({ capabilities })
     expect(choose).toContain('哔哩哔哩扫码授权')
-    expect(choose).not.toContain('使用系统浏览器')
+    expect(choose).not.toContain('应用内网页登录')
     const waiting = await render({ capabilities, phase: 'waiting', qrContent: 'public-qr-url' })
     expect(waiting).toContain('登录 / 打开哔哩哔哩')
     expect(waiting).toContain('应用分身')
@@ -93,14 +93,14 @@ describe('account login presentation', () => {
       },
     })
     expect(html).not.toContain('二维码登录')
-    expect(html).not.toContain('使用系统浏览器')
+    expect(html).not.toContain('应用内网页登录')
     expect(html).toContain('检测账号状态')
     expect(html).toContain('检测确认失效后')
     const expired = await render({
       account: { ...account, authentication: 'credential', status: 'expired' },
     })
     expect(expired).toContain('二维码登录')
-    expect(expired).toContain('使用系统浏览器')
+    expect(expired).toContain('应用内网页登录')
   })
   it('exposes in-app QR for Douyin and displays the native image', async () => {
     const html = await render({ phase: 'waiting', qrImage: 'data:image/png;base64,synthetic' })
@@ -113,7 +113,7 @@ describe('account login presentation', () => {
     const html = await render({ qrUnavailable: true })
     expect(html).toMatch(/<button[^>]*disabled[^>]*>[\s\S]*?二维码登录/)
     expect(html).toContain('请选择其他方式登录')
-    expect(html).toContain('使用系统浏览器')
+    expect(html).toContain('应用内网页登录')
     expect(html).not.toContain('Chrome')
     expect(html).not.toContain('Edge')
     expect(html).not.toContain('我已完成登录 / 验证')
@@ -122,8 +122,8 @@ describe('account login presentation', () => {
   it('presents actual challenge choices and explains external branches', async () => {
     const html = await render({ phase: 'verification', verification })
     expect(html).toContain('接收短信验证码')
-    expect(html).toContain('手机刷脸验证（使用系统浏览器）')
-    expect(html).toContain('发送短信验证（使用系统浏览器）')
+    expect(html).toContain('手机刷脸验证（在应用内页面中完成）')
+    expect(html).toContain('发送短信验证（在应用内页面中完成）')
     expect(html).not.toContain('autocomplete="one-time-code"')
   })
   it('shows the six-digit input, masked destination and disabled resend countdown', async () => {

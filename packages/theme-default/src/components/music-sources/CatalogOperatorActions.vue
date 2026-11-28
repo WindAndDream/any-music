@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useCatalogOperatorScroll } from '@any-music/ui/catalog'
-import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import { useTemplateRef } from 'vue'
+
+import CatalogScrollArrow from './CatalogScrollArrow.vue'
 
 /** 列表状态与操作器共用单行按钮视口；右侧箭头不覆盖按钮热区。 */
 const props = withDefaults(
@@ -47,15 +48,13 @@ const scroll = useCatalogOperatorScroll({ container, viewport, content })
     >
       <div ref="content" class="catalog-operator-actions__content"><slot /></div>
     </div>
-    <button
+    <CatalogScrollArrow
       v-if="scroll.hasOverflow.value"
-      class="catalog-operator-actions__arrow"
-      type="button"
-      :aria-label="scroll.isAtEnd.value ? props.backLabel : props.forwardLabel"
-      @click="scroll.advance"
-    >
-      <AppIcon :name="scroll.isAtEnd.value ? 'arrow-left' : 'arrow-right'" :size="28" />
-    </button>
+      :at-end="scroll.isAtEnd.value"
+      :forward-label="props.forwardLabel"
+      :back-label="props.backLabel"
+      @advance="scroll.advance"
+    />
   </div>
 </template>
 
@@ -115,58 +114,5 @@ const scroll = useCatalogOperatorScroll({ container, viewport, content })
 
 .catalog-operator-actions__viewport :deep(button:focus-visible) {
   outline-offset: calc(-1 * var(--am-focus-offset));
-}
-
-.catalog-operator-actions__arrow {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  inline-size: 44px;
-  block-size: 44px;
-  place-items: center;
-  padding: 0;
-  border: 0;
-  border-radius: var(--am-radius-control);
-  background: transparent;
-  color: var(--am-color-text-secondary);
-  cursor: pointer;
-  transition:
-    background-color var(--am-motion-fast) var(--am-ease-standard),
-    color var(--am-motion-fast) var(--am-ease-standard);
-}
-
-.catalog-operator-actions__arrow::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0 0 0 -16px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--am-operator-actions-background, var(--am-color-surface))
-  );
-  backdrop-filter: blur(12px);
-  mask-image: linear-gradient(to right, transparent, black 55%);
-  pointer-events: none;
-  content: '';
-}
-
-.catalog-operator-actions__arrow:focus-visible {
-  background: var(--am-color-surface-hover);
-  color: var(--am-color-primary);
-  outline: var(--am-focus-ring);
-  outline-offset: calc(-1 * var(--am-focus-offset));
-}
-
-@media (hover: hover) {
-  .catalog-operator-actions__arrow:hover {
-    background: var(--am-color-surface-hover);
-    color: var(--am-color-primary);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .catalog-operator-actions__arrow {
-    transition: none;
-  }
 }
 </style>

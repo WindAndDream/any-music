@@ -5,7 +5,7 @@ use serde::Serialize;
 use std::{path::PathBuf, sync::Mutex};
 #[cfg(target_os = "android")]
 use tauri::Manager;
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 #[cfg(desktop)]
 use tauri_plugin_dialog::DialogExt;
 
@@ -72,10 +72,10 @@ impl DownloadPreferences {
 
 #[tauri::command]
 pub(crate) async fn get_download_directory(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
 ) -> Result<DownloadDirectory, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let _ = &state;
     #[cfg(desktop)]
     {
@@ -88,7 +88,7 @@ pub(crate) async fn get_download_directory(
     }
     #[cfg(target_os = "android")]
     {
-        super::android::download_directory(window.app_handle(), "getDownloadDirectory").await
+        super::android::download_directory(webview.app_handle(), "getDownloadDirectory").await
     }
     #[cfg(target_os = "ios")]
     Err("此运行端暂不支持下载目录选择。".into())
@@ -96,10 +96,10 @@ pub(crate) async fn get_download_directory(
 
 #[tauri::command]
 pub(crate) async fn choose_download_directory(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
 ) -> Result<Option<DownloadDirectory>, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let _guard = state
         .downloads
         .picker
@@ -108,7 +108,7 @@ pub(crate) async fn choose_download_directory(
     #[cfg(desktop)]
     {
         let path = tauri::async_runtime::spawn_blocking(move || {
-            window
+            webview
                 .dialog()
                 .file()
                 .set_title("选择下载保存目录")
@@ -129,7 +129,7 @@ pub(crate) async fn choose_download_directory(
     }
     #[cfg(target_os = "android")]
     {
-        window
+        webview
             .app_handle()
             .state::<super::android::AndroidPlatform>()
             .download_directory_choice()
@@ -141,10 +141,10 @@ pub(crate) async fn choose_download_directory(
 
 #[tauri::command]
 pub(crate) async fn reset_download_directory(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
 ) -> Result<DownloadDirectory, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let _guard = state
         .downloads
         .picker
@@ -156,7 +156,7 @@ pub(crate) async fn reset_download_directory(
     }
     #[cfg(target_os = "android")]
     {
-        super::android::download_directory(window.app_handle(), "resetDownloadDirectory").await
+        super::android::download_directory(webview.app_handle(), "resetDownloadDirectory").await
     }
     #[cfg(target_os = "ios")]
     Err("此运行端暂不支持下载目录选择。".into())

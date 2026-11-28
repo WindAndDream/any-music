@@ -14,9 +14,15 @@ interface Association {
 /** One feature-owned state, committed synchronously through its namespace port. */
 export function createTagManagementSession(ports: TagManagementPorts): TagManagementSession {
   const input = ports.read()
-  if (input !== undefined && (!isRecord(input) || !Array.isArray(input.associations)))
-    throw new AppError('invalid-input', '标签数据格式不可用，原数据已保留。')
   const original = isRecord(input) ? input : {}
+  // Filter history can create the namespace before the first tag association is saved.
+  const trackAssociations =
+    original.associations === undefined &&
+    (input === undefined || Array.isArray(original.filterConditions))
+      ? []
+      : original.associations
+  if (!Array.isArray(trackAssociations))
+    throw new AppError('invalid-input', '标签数据格式不可用，原数据已保留。')
   if (original.definitions !== undefined && !Array.isArray(original.definitions))
     throw new AppError('invalid-input', '标签定义数据格式不可用，原数据已保留。')
   if (original.playlistAssociations !== undefined && !Array.isArray(original.playlistAssociations))
@@ -33,7 +39,7 @@ export function createTagManagementSession(ports: TagManagementPorts): TagManage
     definitions.set(tagKey(item.name), { name: item.name, updatedAtMs: item.updatedAtMs })
   }
   let associations = new Map<string, Association>()
-  for (const item of Array.isArray(original.associations) ? original.associations : []) {
+  for (const item of trackAssociations) {
     if (!isRecord(item) || typeof item.trackId !== 'string' || !Array.isArray(item.tags)) continue
     // Keep old labels byte-for-byte on read. New edits alone apply current normalization.
     associations.set(item.trackId, {

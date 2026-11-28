@@ -127,7 +127,9 @@ function createFeature(externalSupported = true): UiThemeFeatureMap['plugins'] {
 function button(root: CatalogTestElement, text: string): CatalogTestElement {
   return findCatalogElement(
     root,
-    (node) => node.tag === 'button' && node.textContent.trim() === text,
+    (node) =>
+      node.tag === 'button' &&
+      (node.props['aria-label'] === text || node.textContent.trim() === text),
   )
 }
 async function click(root: CatalogTestElement, text: string): Promise<void> {
@@ -184,7 +186,7 @@ describe('classic plugin collection controls', () => {
     }
     const { root, unmount } = mountCatalogComponent(ClassicPlugins, { feature })
     try {
-      await click(root, '筛选器')
+      await click(root, '筛选插件')
       await edit(root, 'developmentStatus')
       await choose(root, 'developing')
       expect(root.textContent).toContain('匹配 1 / 3 个插件')
@@ -211,7 +213,7 @@ describe('classic plugin collection controls', () => {
     const heading = findCatalogElement(root, (node) => node.tag === 'h2')
     expect(heading.textContent).toContain('内置 2 个·外置 1 个')
     expect(root.textContent).toContain('已选 0 · 共 3')
-    expect(button(root, '筛选器')).toBeDefined()
+    expect(button(root, '筛选插件')).toBeDefined()
     await click(root, '导入')
     expect(feature.actions.importPlugin).toHaveBeenCalledTimes(1)
     await click(root, '外置 1')
@@ -222,15 +224,19 @@ describe('classic plugin collection controls', () => {
 
   it('previews draft filters, cancels without applying and combines keyword, category and status', async () => {
     const { root, unmount } = mountCatalogComponent(ClassicPlugins, { feature: createFeature() })
-    await click(root, '筛选器')
+    const filterButton = button(root, '筛选插件')
+    expect(filterButton.props['aria-description']).toBeUndefined()
+    await click(root, '筛选插件')
     await edit(root, 'keyword')
     change(root, '筛选插件关键词', '标签', 'onInput')
     await nextTick()
     expect(root.textContent).toContain('匹配 1 / 3 个插件')
+    expect(filterButton.props['aria-description']).toBeUndefined()
     await click(root, '确定')
     await click(root, '取消')
     expect(root.textContent).toContain('外置目录')
-    await click(root, '筛选器')
+    expect(filterButton.props['aria-description']).toBeUndefined()
+    await click(root, '筛选插件')
     await edit(root, 'keyword')
     change(root, '筛选插件关键词', '整理', 'onInput')
     await nextTick()
@@ -245,16 +251,28 @@ describe('classic plugin collection controls', () => {
     expect(root.textContent).toContain('标签管理')
     expect(root.textContent).not.toContain('外置目录')
     expect(root.textContent).toContain('已选 0 · 共 1')
-    await click(root, '筛选器')
-    await click(root, '清空全部')
+    expect(filterButton.props['aria-description']).toBe('已应用 3 个筛选条件')
+    const badge = findCatalogElement(
+      filterButton,
+      (node) => node.props.class === 'classic-collection-controls__filter-count',
+    )
+    expect(badge.textContent).toBe('3')
+    expect(badge.props['aria-hidden']).toBe('true')
+    await click(root, '筛选插件')
+    await activate(root, '删除关键词条件 整理')
+    await activate(root, '删除插件类型条件 资料整理')
+    await activate(root, '删除插件状态条件 加载失败')
+    expect(filterButton.props['aria-description']).toBe('已应用 3 个筛选条件')
     await click(root, '应用筛选')
     expect(root.textContent).toContain('外置目录')
+    expect(filterButton.props['aria-description']).toBeUndefined()
+    expect(filterButton.children).not.toContain(badge)
     unmount()
   })
 
   it('discards unfinished dimension edits on Back and can remove one committed draft condition', async () => {
     const { root, unmount } = mountCatalogComponent(ClassicPlugins, { feature: createFeature() })
-    await click(root, '筛选器')
+    await click(root, '筛选插件')
     await edit(root, 'keyword')
     change(root, '筛选插件关键词', '标签', 'onInput')
     await nextTick()
@@ -265,7 +283,7 @@ describe('classic plugin collection controls', () => {
     await click(root, '返回')
     expect(root.textContent).toContain('匹配 1 / 3 个插件')
     await activate(root, '删除关键词条件 标签')
-    expect(root.textContent).toContain('全部插件')
+    expect(root.textContent).toContain('还没有筛选条件')
     await click(root, '应用筛选')
     expect(root.textContent).toContain('外置目录')
     unmount()
@@ -325,7 +343,7 @@ describe('classic plugin collection controls', () => {
         },
       })
       try {
-        await click(root, '筛选器')
+        await click(root, '筛选插件')
         await edit(root, dimension)
         const option = (value: string) =>
           findCatalogElement(root, (node) => node.tag === 'input' && node.props.value === value)
@@ -356,7 +374,7 @@ describe('classic plugin collection controls', () => {
         expect(root.textContent).toContain(`匹配 ${remainingCount} / 3 个插件`)
         await click(root, '应用筛选')
         expect(root.textContent).toContain(`已选 0 · 共 ${remainingCount}`)
-        await click(root, '筛选器')
+        await click(root, '筛选插件')
         await edit(root, dimension)
         expect(option(second).props.checked).toBe(true)
         await choose(root, 'all')
@@ -374,7 +392,7 @@ describe('classic plugin collection controls', () => {
     async (action) => {
       const { root, unmount } = mountCatalogComponent(ClassicPlugins, { feature: createFeature() })
       try {
-        await click(root, '筛选器')
+        await click(root, '筛选插件')
         dispatchCatalogEvent(
           findCatalogElement(root, (node) => node.props['data-filter-dimension'] === 'keyword'),
           'onClick',
@@ -391,16 +409,16 @@ describe('classic plugin collection controls', () => {
         // A closed sheet starts in the overview even if its detail transition never completed.
         await edit(root, 'status')
         await activate(root, '关闭筛选')
-        await click(root, '筛选器')
+        await click(root, '筛选插件')
         expect(root.textContent).toContain('应用筛选')
-        expect(root.textContent).toContain('全部插件')
+        expect(root.textContent).toContain('还没有筛选条件')
       } finally {
         unmount()
       }
     },
   )
 
-  it('opens introductions from the card and its three-dot control, forwarding only explicit actions', async () => {
+  it('opens introductions from the card surface, forwarding only explicit actions', async () => {
     const feature = createFeature()
     const { root, unmount } = mountCatalogComponent(ClassicPlugins, { feature })
     await activate(root, '查看插件介绍 哔哩哔哩')
@@ -411,7 +429,7 @@ describe('classic plugin collection controls', () => {
     await click(root, '停用插件')
     expect(feature.actions.setEnabled).toHaveBeenCalledExactlyOnceWith('source', false)
     await click(root, '关闭介绍')
-    await activate(root, '更多插件操作 外置目录')
+    await activate(root, '查看插件介绍 外置目录')
     const details = findCatalogElement(root, (node) => node.tag === 'dialog')
     expect(details.textContent).toContain('外置插件')
     expect(details.textContent).toContain('发布者Example')
@@ -423,27 +441,34 @@ describe('classic plugin collection controls', () => {
     unmount()
   })
 
-  it('keeps selection separate from introductions and preserves it while inspecting plugin actions', async () => {
+  it('switches between introductions and corner checkboxes with the operator', async () => {
     const feature = createFeature()
     const { root, unmount } = mountCatalogComponent(ClassicPlugins, { feature })
+    const card = button(root, '查看插件介绍 标签管理').parent!
+    const selection = () =>
+      card.children.find((node) => node.props.class === 'classic-plugin-card__selection')
+    expect(selection()).toBeUndefined()
+    expect(card.querySelector('[aria-label="更多插件操作 标签管理"]')).toBeNull()
+
     await click(root, '操作器')
     await activate(root, '选择插件 标签管理')
     expect(root.textContent).toContain('已选 1 · 共 3')
     expect(root.textContent).not.toContain('关闭介绍')
-    await activate(root, '更多插件操作 标签管理')
+    const checkbox = selection()?.querySelector('[aria-label="勾选插件 标签管理"]')
+    expect(checkbox).toBeTruthy()
+    expect(checkbox?.props.checked).toBe(true)
+    dispatchCatalogEvent(checkbox!, 'onChange')
+    await nextTick()
+    expect(root.textContent).toContain('已选 0 · 共 3')
+
+    await click(root, '关闭')
+    expect(selection()).toBeUndefined()
+    await activate(root, '查看插件介绍 标签管理')
     expect(findCatalogElement(root, (node) => node.tag === 'dialog').textContent).toContain(
       '加载失败',
     )
     await click(root, '重试加载')
     expect(feature.actions.retry).toHaveBeenCalledExactlyOnceWith('tags')
-    await click(root, '关闭介绍')
-    expect(root.textContent).toContain('已选 1 · 共 3')
-    dispatchCatalogEvent(
-      findCatalogElement(root, (node) => node.props['aria-label'] === '勾选插件 标签管理'),
-      'onChange',
-    )
-    await nextTick()
-    expect(root.textContent).toContain('已选 0 · 共 3')
     unmount()
   })
 
@@ -484,8 +509,54 @@ describe('classic plugin collection controls', () => {
     )
     dispatchCatalogEvent(list, 'onClick')
     await nextTick()
-    expect(findCatalogElement(root, (node) => node.props['data-display'] === 'list')).toBeDefined()
+    const items = findCatalogElement(root, (node) => node.props['data-display'] === 'list')
+    const toggle = findCatalogElement(items, (node) => node.props['aria-label'] === '启用 哔哩哔哩')
+    const card = button(items, '查看插件介绍 哔哩哔哩').parent!
+    await click(root, '操作器')
+    expect(card.props['data-selectable']).toBe(true)
+    expect(card.querySelector('[aria-label="勾选插件 哔哩哔哩"]')).toBeTruthy()
+    await click(root, '关闭')
+    expect(card.props['data-selectable']).toBe(false)
+    expect(card.querySelector('[aria-label="勾选插件 哔哩哔哩"]')).toBeNull()
+    expect(findCatalogElement(card, (node) => node.props.role === 'switch')).toBe(toggle)
     unmount()
+  })
+
+  it('uses one mobile layout with corner selection and restores the desktop display choice', async () => {
+    const feature = createFeature()
+    const mobileLayout = shallowRef(false)
+    const host = defineComponent({
+      setup: () => () => h(ClassicPlugins, { feature, mobileLayout: mobileLayout.value }),
+    })
+    const { root, unmount } = mountCatalogComponent(host, {})
+    try {
+      await click(root, '展示方式')
+      const list = findCatalogElement(
+        root,
+        (node) => node.tag === 'button' && node.textContent.startsWith('列表'),
+      )
+      dispatchCatalogEvent(list, 'onClick')
+      await nextTick()
+      const items = findCatalogElement(root, (node) => node.props['data-display'] === 'list')
+      await click(root, '展示方式')
+      expect(root.querySelector('[aria-label="插件展示方式"]')).toBeTruthy()
+
+      mobileLayout.value = true
+      await nextTick()
+      expect(root.querySelector('[aria-label="选择插件展示方式"]')).toBeNull()
+      expect(root.querySelector('[aria-label="插件展示方式"]')).toBeNull()
+      expect(items.props['data-display']).toBe('grid')
+      await click(root, '操作器')
+      expect(items.querySelector('[aria-label="勾选插件 哔哩哔哩"]')).toBeTruthy()
+      expect(items.props['data-display']).toBe('grid')
+
+      mobileLayout.value = false
+      await nextTick()
+      expect(root.querySelector('[aria-label="选择插件展示方式"]')).toBeTruthy()
+      expect(items.props['data-display']).toBe('list')
+    } finally {
+      unmount()
+    }
   })
 
   it('changes only selected built-ins through named host actions', async () => {

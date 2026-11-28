@@ -16,8 +16,11 @@ describe('resolved CSS grid layout (injected browser style, no CSS engine)', () 
     const element = new VirtualElement(env.document)
     const width = shallowRef(1000),
       generation = shallowRef('standard')
+    const readColumns = vi.fn(() => '320px 320px 320px')
     const getComputedStyle = vi.fn(() => ({
-      gridTemplateColumns: '320px 320px 320px',
+      get gridTemplateColumns() {
+        return readColumns()
+      },
       columnGap: '12px',
       rowGap: '12px',
     }))
@@ -42,6 +45,7 @@ describe('resolved CSS grid layout (injected browser style, no CSS engine)', () 
         // eslint-disable-next-line no-await-in-loop -- Observe each settled resize frame.
         await nextTick()
         expect(getComputedStyle).toHaveBeenCalledTimes(frame + 1)
+        expect(readColumns).toHaveBeenCalledTimes(frame + 1)
         expect(result.layout.value).toBe(layout)
       }
       expect(add).toHaveBeenCalledExactlyOnceWith('resize', expect.any(Function))

@@ -8,7 +8,7 @@ afterEach(() => vi.unstubAllGlobals())
 describe('element block size', () => {
   it('tracks the actual player size and releases observers when the host changes or unmounts', async () => {
     const observers: {
-      notify: () => void
+      notify: (blockSize: number) => void
       observe: ReturnType<typeof vi.fn>
       disconnect: ReturnType<typeof vi.fn>
     }[] = []
@@ -17,24 +17,40 @@ describe('element block size', () => {
       class {
         observe = vi.fn()
         disconnect = vi.fn()
-        constructor(notify: () => void) {
-          observers.push({ notify, observe: this.observe, disconnect: this.disconnect })
+        constructor(notify: ResizeObserverCallback) {
+          observers.push({
+            notify: (blockSize) => {
+              const entry: Partial<ResizeObserverEntry> = {
+                borderBoxSize: [{ blockSize, inlineSize: 500 }],
+              }
+              notify([entry as ResizeObserverEntry], this as unknown as ResizeObserver)
+            },
+            observe: this.observe,
+            disconnect: this.disconnect,
+          })
         }
       },
     )
     const scope = effectScope()
-    const first = { offsetHeight: 68 }
+    const readHeight = vi.fn(() => 68)
+    const first = Object.defineProperty({}, 'offsetHeight', { get: readHeight })
     const element = shallowRef<HTMLElement | null>(first as HTMLElement)
     const size = scope.run(() => useElementBlockSize(element))!
     expect(size.value).toBe(68)
-    first.offsetHeight = 92
-    observers[0]!.notify()
+    expect(observers[0]!.observe).toHaveBeenCalledWith(first, { box: 'border-box' })
+    observers[0]!.notify(68)
+    readHeight.mockClear()
+    observers[0]!.notify(68)
+    expect(readHeight).not.toHaveBeenCalled()
+    readHeight.mockReturnValue(92)
+    observers[0]!.notify(92)
     expect(size.value).toBe(92)
+    expect(readHeight).toHaveBeenCalledOnce()
     element.value = { offsetHeight: 112 } as HTMLElement
     await nextTick()
     expect(observers[0]!.disconnect).toHaveBeenCalledOnce()
     expect(size.value).toBe(112)
-    observers[0]!.notify()
+    observers[0]!.notify(100)
     expect(size.value).toBe(112)
     scope.stop()
     expect(observers[1]!.disconnect).toHaveBeenCalledOnce()

@@ -102,7 +102,8 @@ export function useWorkbenchThemeSession(
     error: () => error.value,
   })
   onMounted(() => {
-    void select(saved.themeId, true)
+    const preferred = composition.themes.find(({ descriptor }) => descriptor.id === saved.themeId)
+    void select(preferred?.descriptor.id ?? composition.fallback.descriptor.id, true)
   })
   onScopeDispose(() => {
     disposed = true

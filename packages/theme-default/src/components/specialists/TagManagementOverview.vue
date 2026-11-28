@@ -26,14 +26,18 @@ defineSlots<{ default(): unknown }>()
   >
     <template #controls>
       <div class="tag-management__actions">
-        <TagEntitySwitch :kind="editor.state.entityKind" @change="editor.actions.setEntityKind" />
+        <TagEntitySwitch
+          :kind="editor.state.entityKind"
+          :compact="mobileLayout"
+          @change="editor.actions.setEntityKind"
+        />
         <button
           class="tag-management__create"
           type="button"
           aria-haspopup="dialog"
           @click="editor.actions.beginCreate"
         >
-          <AppIcon name="plus" :size="16" />创建标签
+          <AppIcon name="plus" :size="16" />创建
         </button>
       </div>
     </template>

@@ -4,38 +4,12 @@ import {
   builtInWorkbenchModules,
   builtInUiThemes,
   loadTagManagement,
-  loadMusicCreation,
 } from '../../../src/features/plugins/built-in-workbench-modules'
 
 describe('Userscript build module directory', () => {
-  it('loads creation through its separate Vue entry without GM or private repositories', async () => {
-    const implementation = await loadMusicCreation()
-    expect(implementation.Composer).toBeDefined()
-    const session = implementation.createSession({
-      read: () => ({
-        materialCollections: [],
-        pendingMaterialTrackIds: ['legacy:leaf'],
-        materialCollectionByTrackId: {},
-      }),
-      write() {
-        throw new Error('No replay during load')
-      },
-      changed() {},
-      isCurrent: () => true,
-      rememberTracks() {},
-      readPublishedRecipe: () => undefined,
-      publishCustomTrack() {
-        throw new Error('No publication during load')
-      },
-      deleteCreationMaterials: () => [],
-    })
-    expect(session.snapshot().pendingMaterialTrackIds).toEqual(['legacy:leaf'])
-    expect(
-      builtInWorkbenchModules.filter((module) => module.id === 'feature.composer'),
-    ).toHaveLength(1)
-    session.dispose()
-    expect(() => session.clearData()).toThrow('停用')
-  }, 20_000)
+  it('leaves the unfinished creation feature outside the product directory', () => {
+    expect(builtInWorkbenchModules.some((module) => module.id === 'feature.composer')).toBe(false)
+  })
   it('loads the reviewed tag implementation through its separate Vue entry', async () => {
     expect(
       builtInWorkbenchModules
@@ -71,7 +45,7 @@ describe('Userscript build module directory', () => {
       builtInWorkbenchModules.every((module) => module.installationId.startsWith('userscript:')),
     ).toBe(true)
     expect(Object.isFrozen(builtInWorkbenchModules)).toBe(true)
-    expect(builtInUiThemes.map((theme) => theme.id)).toEqual(['default', 'studio'])
+    expect(builtInUiThemes.map((theme) => theme.id)).toEqual(['default'])
     expect(Object.isFrozen(builtInUiThemes)).toBe(true)
     expect(JSON.stringify(builtInUiThemes)).not.toMatch(/\.vue|loader|externalPlugins|grants/)
     expect(builtInWorkbenchModules.some((module) => module.id.includes('playlists'))).toBe(false)

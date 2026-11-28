@@ -202,9 +202,9 @@ watch(step, async () => {
             />
             <div v-if="phase === 'browser'" class="settings-form__card">
               <div class="settings-form__heading">
-                <h4 class="native-settings__section-title">在浏览器中完成后</h4>
+                <h4 class="native-settings__section-title">在应用内登录页面中完成后</h4>
                 <p class="settings-form__hint">
-                  保持账号浏览器窗口打开，回到这里保存登录状态。关闭此面板会结束未完成的验证。
+                  完成登录后点击页面下方或这里的按钮保存登录状态。关闭登录页面会结束未完成的验证。
                 </p>
               </div>
               <button

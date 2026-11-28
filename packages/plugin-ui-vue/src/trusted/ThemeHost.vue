@@ -160,6 +160,9 @@ defineExpose({ getResourceRoot: () => surface.value })
                 :theme="props.features.shell.state.resolvedTheme"
                 ><slot name="source-identity" v-bind="context" /></ThemeHostSurface
             ></template>
+            <template v-if="$slots['catalog-viewport']" #catalog-viewport="context">
+              <slot name="catalog-viewport" v-bind="context" />
+            </template>
             <template v-if="$slots['request-account']" #request-account="context"
               ><ThemeHostSurface
                 :css="props.protectedCss"

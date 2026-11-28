@@ -47,6 +47,10 @@ export interface CatalogDrawerView {
   tracks: readonly Track[]
   total?: number
   hasMore: boolean
+  /** Retained results are browse-only until the user refreshes the original request. */
+  paginationLocked?: boolean
+  /** Identifies an explicit refresh so the theme can start a new scroll session. */
+  refreshRevision?: number
   isLoading: boolean
   status: CatalogDrawerStatus
   errorCode?: AppErrorCode

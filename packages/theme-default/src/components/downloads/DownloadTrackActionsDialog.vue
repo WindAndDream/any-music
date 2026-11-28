@@ -21,6 +21,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   addToPlaylist: [track: Track, playlistId: string]
   close: []
+  afterLeave: []
   pause: [id: string]
   resume: [id: string]
   cancel: [id: string]
@@ -80,6 +81,7 @@ function cancelTask(): void {
     :suspended="suspended"
     scroll-primary-actions
     @close="emit('close')"
+    @after-leave="emit('afterLeave')"
     @play="emit('play', $event)"
     @queue="emit('queue', $event)"
     @favorite="emit('favorite', $event)"

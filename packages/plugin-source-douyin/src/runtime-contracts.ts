@@ -16,7 +16,8 @@ export interface DouyinBrowserImportReader {
 
 /** Optional account-owned official-page transport. Protocol parsing and mapping stay portable. */
 export interface DouyinBrowserCatalog {
-  getSelfProfile(): Promise<HttpResponse>
+  /** The full profile supplies the sec_uid required by some import scopes. */
+  getSelfImportProfile(): Promise<HttpResponse>
   /** Fresh official detail API or React Flight page; never reuse listing media URLs. */
   getAwemeDetail?(awemeId: string, pageKind: 'video' | 'note'): Promise<HttpResponse>
   openImport?(target: DouyinBrowserImportTarget): DouyinBrowserImportReader

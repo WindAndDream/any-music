@@ -27,4 +27,4 @@ State omitted live/browser/device checks and remaining limits explicitly.
 - [ ] Release/hotfix: back-merge destinations and branch cleanup owner are recorded.
 
 Use Create a merge commit. Retain release/hotfix branches until every required back-merge is confirmed.
-See [Git Flow policy](../docs/en/cross-platform/architecture/git-flow.md).
+See [Git Flow policy](../docs/en/guides/git-flow.md).

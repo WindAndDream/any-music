@@ -6,6 +6,7 @@ import {
   QUEUE_DRAG_READY_MESSAGE,
 } from '../../product/action-feedback'
 import type { CatalogDrawerView } from '../../product/catalog-drawer'
+import type { GridReorderGeometryFactory } from '../grid-reorder-geometry'
 import { useActionFeedback } from '../use-action-feedback'
 import { useGridReorder } from '../use-grid-reorder'
 import { useLongPressDrag } from '../use-long-press-drag'
@@ -14,6 +15,10 @@ interface UseCatalogDrawerReorderOptions {
   drawers: MaybeRefOrGetter<readonly CatalogDrawerView[]>
   element: MaybeRefOrGetter<HTMLElement | null>
   suspended: MaybeRefOrGetter<boolean>
+  autoScrollElement?: MaybeRefOrGetter<HTMLElement | null>
+  createGeometry?: GridReorderGeometryFactory<'drawer'>
+  retainItem?: (kind: 'drawer', id: string) => (() => void) | undefined
+  focusItem?: (kind: 'drawer', id: string, signal: AbortSignal) => Promise<boolean>
   move: (id: string, targetId: string, visibleIds: readonly string[]) => void
 }
 
@@ -27,9 +32,13 @@ export function useCatalogDrawerReorder(options: UseCatalogDrawerReorderOptions)
   const orderAndGroups = computed(() =>
     JSON.stringify(drawers.value.map((item) => [item.id, Boolean(item.isPinned)])),
   )
-  const reorder = useGridReorder({
+  const reorder = useGridReorder<'drawer'>({
     idsByKind: computed(() => ({ drawer: drawers.value.map((item) => item.id) })),
     scrollElement: options.element,
+    autoScrollElement: options.autoScrollElement,
+    createGeometry: options.createGeometry,
+    retainItem: options.retainItem,
+    focusItem: options.focusItem,
     attributePrefix: 'catalog',
     getGroupId: (_kind, id) => (groups.value.get(id) ? 'pinned' : 'regular'),
     onGroupMismatch: () =>

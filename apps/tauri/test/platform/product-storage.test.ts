@@ -99,6 +99,31 @@ describe('S06 desktop generation mirrors', () => {
     store.write('ui-theme:v1', { themeId: 'studio', settingsByTheme: {} })
     await vi.waitFor(() => expect(JSON.parse(local.get(KEY)!)).toEqual(native))
   })
+  it('writes the complete mirror once on each successful commit', async () => {
+    const storage = await createProductStorage()
+    const before = { local: localCount, native: nativeCount }
+    storage.write('ui-theme:v1', { themeId: 'studio' })
+    expect(localCount).toBe(before.local + 1)
+    await vi.waitFor(() => expect(JSON.parse(local.get(KEY)!)).toEqual(native))
+    expect(nativeCount).toBe(before.native + 1)
+  })
+  it.each([false, true])(
+    'recovers a failed renderer publication (persisted=%s)',
+    async (persist) => {
+      const storage = await createProductStorage()
+      const before = local.get(KEY)
+      const nativeBefore = nativeCount
+      persistFirst = persist
+      localFail = localCount + 1
+      expect(() => storage.write('ui-theme:v1', { themeId: 'studio' })).toThrow('power loss')
+      expect(nativeCount).toBe(nativeBefore)
+      if (!persist) expect(local.get(KEY)).toBe(before)
+      localFail = Infinity
+      const restored = await createProductStorage()
+      expect(restored.read('ui-theme:v1')).toEqual(persist ? { themeId: 'studio' } : undefined)
+      expect(JSON.parse(local.get(KEY)!)).toEqual(native)
+    },
+  )
   it('isolates queued native generations from later saves and caller mutations', async () => {
     const store = await createProductStorage()
     nativeWrites = []

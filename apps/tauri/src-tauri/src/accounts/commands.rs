@@ -4,14 +4,14 @@ use crate::{
     state::{RuntimeState, USER_AGENT},
 };
 use std::collections::HashSet;
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 
 #[tauri::command]
 pub fn account_snapshot(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
 ) -> Result<serde_json::Value, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let snapshot = state.snapshot.lock().unwrap();
     Ok(
         serde_json::json!({"accounts":snapshot.accounts.iter().filter(|a| !a.pending).collect::<Vec<_>>(),"proxies":snapshot.proxies,
@@ -21,11 +21,11 @@ pub fn account_snapshot(
 
 #[tauri::command]
 pub fn cancel_platform_requests(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     platform_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     platform_url(&platform_id)?;
     cancel_platform_work(&state, &platform_id);
     Ok(())
@@ -60,13 +60,13 @@ fn cancel_platform_work(state: &RuntimeState, platform_id: &str) {
 
 #[tauri::command]
 pub fn create_account(
-    window: WebviewWindow,
+    webview: Webview,
     app: tauri::AppHandle,
     state: State<'_, RuntimeState>,
     platform_id: String,
     name: String,
 ) -> Result<Account, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     #[cfg(desktop)]
     if super::super::plugins::source_auth::is_external(&platform_id) {
         crate::plugins::source_auth::validate_platform(&app, &platform_id)?;
@@ -89,6 +89,7 @@ pub fn create_account(
         platform_id,
         name: name.into(),
         platform_user_id: None,
+        platform_nickname: None,
         status: "signed-out".into(),
         state: crate::accounts::state::AccountState::anonymous(),
         enabled: true,
@@ -124,7 +125,7 @@ pub fn create_account(
 
 #[tauri::command]
 pub fn update_account(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     name: String,
@@ -132,7 +133,7 @@ pub fn update_account(
     proxy_id: Option<String>,
     backup_proxy_ids: Option<Vec<String>>,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.account(&account_id)?;
     if state
         .account(&account_id)?
@@ -215,11 +216,11 @@ pub fn update_account(
 
 #[tauri::command]
 pub async fn remove_account(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.account(&account_id)?;
     remove(&state, &account_id, false).await
 }
@@ -227,11 +228,11 @@ pub async fn remove_account(
 /// A late close must never remove an account whose login has already committed.
 #[tauri::command]
 pub async fn discard_account_draft(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     validate_id(&account_id)?;
     remove(&state, &account_id, true).await
 }
@@ -261,16 +262,24 @@ async fn remove(state: &RuntimeState, account_id: &str, only_pending: bool) -> R
     let _handoff = state.douyin_browsers.handoff(account_id).await;
     state.douyin_browsers.stop(account_id).await?;
     state.douyin_browsers.forget(account_id);
-    let browser = state.browsers.lock().unwrap().remove(account_id);
+    if let Some(browser) = state.browsers.lock().unwrap().remove(account_id) {
+        browser.page.close(&state.embedded);
+    }
+    state.embedded.remove_store(account_id).await;
     let directory = state.directory.clone();
     let id = account_id.to_owned();
-    // Process waits, vault IO and Profile rename run outside Tokio's async worker threads.
+    // Vault IO and Profile rename run outside Tokio's async worker threads. A closed page's
+    // engine process can release its data directory shortly after the close request.
     tauri::async_runtime::spawn_blocking(move || {
-        if let Some(mut browser) = browser {
-            let _ = browser.child.kill();
-            browser.child.wait().map_err(|_| "账号浏览器尚未退出。")?;
+        let mut result = super::deletion::detach(&directory, &id);
+        for _ in 0..20 {
+            if result.is_ok() {
+                break;
+            }
+            std::thread::sleep(std::time::Duration::from_millis(150));
+            result = super::deletion::detach(&directory, &id);
         }
-        super::deletion::detach(&directory, &id)
+        result
     })
     .await
     .map_err(|_| "账号清理任务中断。")??;
@@ -310,22 +319,22 @@ fn revoke_account_work(state: &RuntimeState, account_id: &str) {
 
 #[tauri::command]
 pub fn save_proxy(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     name: String,
     url: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.mutate(|snapshot| crate::network::proxies::save_proxy(snapshot, &name, &url))
 }
 
 #[tauri::command]
 pub fn remove_proxy(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     proxy_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.mutate(|snapshot| {
         if snapshot.accounts.iter().any(|a| {
             a.proxy_id.as_deref() == Some(&proxy_id) || a.backup_proxy_ids.contains(&proxy_id)
@@ -337,13 +346,15 @@ pub fn remove_proxy(
     })
 }
 
+/// Async so the first vault-key read (a Keychain call that may wait on a system prompt)
+/// never runs on the AppKit main thread, which also serves every embedded account page.
 #[tauri::command]
-pub fn request_state(
-    window: WebviewWindow,
+pub async fn request_state(
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
 ) -> Result<serde_json::Value, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let _usage = state.use_account(&account_id, "准备请求")?;
     let account = state.account(&account_id)?;
     let session = state.session(&account_id)?;
@@ -374,13 +385,13 @@ fn request_projection<'a>(
 
 #[tauri::command]
 pub fn acquire_account_usage(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     usage_id: String,
     reason: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     validate_id(&usage_id)?;
     if !matches!(
         reason.as_str(),
@@ -398,11 +409,11 @@ pub fn acquire_account_usage(
 }
 #[tauri::command]
 pub fn release_account_usage(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     usage_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     validate_id(&usage_id)?;
     state.renderer_uses.lock().unwrap().remove(&usage_id);
     Ok(())
@@ -410,11 +421,11 @@ pub fn release_account_usage(
 
 #[tauri::command]
 pub fn account_usage(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
 ) -> Result<Vec<String>, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.account(&account_id)?;
     crate::browser::verification::retain_running(&mut state.browsers.lock().unwrap(), &account_id)?;
     Ok(state.usage.reasons(&account_id))

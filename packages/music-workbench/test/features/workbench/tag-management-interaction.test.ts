@@ -1,13 +1,13 @@
 import type { LibraryTrackRecord } from '@any-music/core'
 import { createSession, Panel } from '@any-music/plugin-tag-management/vue'
 import { definition as classic } from '@any-music/theme-default/vue'
-import { definition as studio } from '@any-music/theme-studio/vue'
 import { provideActionFeedback, provideConfirmationDialog } from '@any-music/ui'
 import type { ConfirmationDialogController, TrackDisplayPreferences } from '@any-music/ui'
 import type { TagManagementPresentation, UiThemeFeatureMap } from '@any-music/ui/theme'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { computed, defineComponent, h, markRaw, nextTick, shallowRef } from 'vue'
 
+import { alternateDefinition as alternate } from '../../fixtures/alternate-theme'
 import {
   CatalogTestElement,
   dispatchCatalogEvent,
@@ -30,6 +30,8 @@ vi.mock('vue', async (load) => {
           if (previousKey !== undefined && key !== previousKey)
             (attrs.onAfterLeave as (() => void) | undefined)?.()
           previousKey = key
+          if (children?.[0] && String(attrs.name).startsWith('sliding-view-'))
+            return vue.cloneVNode(children[0], { 'data-transition': attrs.name })
           return children
         }
       },
@@ -97,7 +99,7 @@ afterEach(() => {
 })
 
 function mount(
-  initial: typeof classic | typeof studio,
+  initial: typeof classic | typeof alternate,
   mobileLayout = false,
   secondPlatform = 'bilibili',
   initialSnapshot?: unknown,
@@ -209,8 +211,7 @@ function mount(
     setup() {
       confirmation = provideConfirmationDialog()
       feedback = provideActionFeedback()
-      return () =>
-        h(theme.value.views.tags, { feature, ...(theme.value === classic ? { mobileLayout } : {}) })
+      return () => h(theme.value.views.tags, { key: theme.value.id, feature, mobileLayout })
     },
   })
   const root = new CatalogTestElement('root')
@@ -272,19 +273,46 @@ it('hides the mobile heading and description while updating the top-bar count an
   expect(view.element('标签管理共 2 个标签').textContent).toContain('个')
   expect(view.root.textContent).toContain('共 2')
   expect(view.root.textContent).toContain('已选 0 · 共 2')
-  await view.click('创建标签')
+  const create = view.button('创建')
+  expect(create.textContent.trim()).toBe('创建')
+  expect(create.parent).toBe(view.element('标签类型').parent)
+  expect(create.parent?.children.at(-1)).toBe(create)
+  await view.click('创建')
   view.editor.actions.setCreateNameDraft('现场')
   view.editor.actions.createTag()
   await nextTick()
   expect(view.element('标签管理共 3 个标签').textContent).toContain('3')
 })
 
-describe.each([
-  { name: 'Classic', theme: classic },
-  { name: 'Studio', theme: studio },
-])('$name tag directory', ({ theme }) => {
-  it('keeps music selection across themes and removes only the selected label in one commit', async () => {
-    const view = mount(theme)
+describe('Classic tag directory', () => {
+  it('slides the result pane in both directions and keeps the switch mounted', async () => {
+    const view = mount(classic)
+    const musicButton = view.button('音乐标签')
+    const playlistButton = view.button('歌单标签')
+    const results = () =>
+      findCatalogElement(view.root, (node) => node.props.class === 'sliding-view__content')
+    const musicResults = results()
+
+    await view.click('歌单标签')
+    const playlistResults = results()
+    expect(playlistResults).not.toBe(musicResults)
+    expect(playlistResults.props['data-transition']).toBe('sliding-view-forward')
+    expect(view.button('歌单标签')).toBe(playlistButton)
+    expect(playlistButton.props['aria-pressed']).toBe(true)
+
+    await view.click('音乐标签')
+    const nextMusicResults = results()
+    expect(nextMusicResults).not.toBe(playlistResults)
+    expect(nextMusicResults.props['data-transition']).toBe('sliding-view-back')
+    expect(view.button('音乐标签')).toBe(musicButton)
+    expect(musicButton.props['aria-pressed']).toBe(true)
+    await view.click('音乐标签')
+    expect(results()).toBe(nextMusicResults)
+    expect(view.write).not.toHaveBeenCalled()
+  })
+
+  it('keeps music selection across remounts and removes only the selected label in one commit', async () => {
+    const view = mount(classic)
     view.session.addPlaylistTag('p', '通勤')
     const writes = view.write.mock.calls.length
     await view.activate('查看标签 通勤')
@@ -301,7 +329,7 @@ describe.each([
     ).toBe(count)
     expect(count.props.style).toMatchObject({ inlineSize: 'calc(2em + 1ch)' })
     expect([...view.editor.state.detailSelectedIds]).toEqual(['一'])
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(view.element('取消选择歌曲 歌曲一').props.checked).toBe(true)
     await view.activate('全选当前音乐')
@@ -328,7 +356,7 @@ describe.each([
   })
 
   it('selects associated playlists and removes their label without changing music tags', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     view.session.addPlaylistTag('p', '通勤')
     view.session.addPlaylistTag('p', '保留')
     await nextTick()
@@ -351,7 +379,7 @@ describe.each([
   })
 
   it('keeps association selection and shows the error when removal cannot be saved', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     await view.activate('查看标签 通勤')
     await view.click('关联音乐')
     await view.activate('全选当前音乐')
@@ -369,7 +397,7 @@ describe.each([
   })
 
   it('rejects removal after closing and reopening the same detail or changing its associations', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     await view.activate('查看标签 通勤')
     await view.click('关联音乐')
     await view.activate('全选当前音乐')
@@ -392,8 +420,8 @@ describe.each([
     expect(view.session.tagsByTrackId().get('一')).toEqual(['通勤', '新标签'])
   })
 
-  it('switches association counts and browses readonly playlists across themes without writes', async () => {
-    const view = mount(theme, false, 'douyin')
+  it('switches association counts and browses readonly playlists across remounts without writes', async () => {
+    const view = mount(classic, false, 'douyin')
     view.session.addPlaylistTag('p', '通勤')
     await nextTick()
     const writes = view.write.mock.calls.length
@@ -419,7 +447,7 @@ describe.each([
     await view.activate('关联歌单展示方式')
     await view.click('排列方式')
     await view.click('一行两个')
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(view.editor.state.entityKind).toBe('playlists')
     expect(view.editor.state.detailView).toBe('tracks')
@@ -439,7 +467,7 @@ describe.each([
   })
 
   it('shows and deletes labels held only by playlists or missing songs, keeping song choices consistent', async () => {
-    const view = mount(theme, false, 'bilibili', {
+    const view = mount(classic, false, 'bilibili', {
       associations: [{ trackId: 'missing-song', tags: ['2223'] }],
       playlistAssociations: [{ playlistId: 'p', tags: ['歌单专用'] }],
     })
@@ -468,13 +496,14 @@ describe.each([
     })
   })
 
-  it('creates an unused tag, keeps drafts across themes, and blocks duplicates with a top notice', async () => {
-    const view = mount(theme)
-    await view.click('创建标签')
+  it('creates an unused tag, keeps drafts across remounts, and blocks duplicates with a top notice', async () => {
+    const view = mount(classic)
+    expect(view.button('创建').textContent.trim()).toBe('创建')
+    await view.click('创建')
     const input = () => findCatalogElement(view.root, (node) => node.props.name === 'tag-name')
     input().value = '  ＦＯＯ  '
     dispatchCatalogEvent(input(), 'onInput', false)
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(input().value).toBe('  ＦＯＯ  ')
     const submit = async () => {
@@ -490,7 +519,7 @@ describe.each([
     })
     expect(() => view.element('查看标签 FOO')).not.toThrow()
     expect(view.records.value.every(({ customTags }) => !customTags.includes('FOO'))).toBe(true)
-    await view.click('创建标签')
+    await view.click('创建')
     input().value = 'foo'
     dispatchCatalogEvent(input(), 'onInput', false)
     await submit()
@@ -505,16 +534,16 @@ describe.each([
     expect(view.notice?.message).toBe('已存在重复标签。')
     view.editor.actions.cancelCreate()
     await nextTick()
-    await view.click('创建标签')
+    await view.click('创建')
     expect(input().value).toBe('')
   })
 
   it('keeps the creation form open and reports failed saves without publishing a label', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     view.write.mockImplementation(() => {
       throw new Error('disk full')
     })
-    await view.click('创建标签')
+    await view.click('创建')
     view.editor.actions.setCreateNameDraft('现场')
     view.editor.actions.createTag()
     await nextTick()
@@ -525,72 +554,66 @@ describe.each([
   })
 
   it('opens tag details normally and exposes checkboxes only in operator mode', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     expect(view.root.textContent).toContain('标签管理')
     expect(() => view.element('选择标签 通勤')).toThrow()
     await view.activate('查看标签 通勤')
     expect(view.root.textContent).toContain('关联音乐 · 2 首')
     expect(view.write).not.toHaveBeenCalled()
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(view.root.textContent).toContain('关联音乐 · 2 首')
   })
 
   it('previews tag filters, discards cancellation and applies a name query without writes', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     await view.click('筛选器')
     await view.click('标签名称')
     await view.input('搜索标签名称', '通勤')
     expect(view.root.textContent).toContain('匹配 1 / 2 个标签')
-    if (theme === classic) await view.click('确定')
+    await view.click('确定')
     await view.click('取消')
     expect(() => view.element('查看标签 夜晚')).not.toThrow()
     await view.click('筛选器')
-    if (theme === classic) await view.click('标签名称')
+    await view.click('标签名称')
     expect(view.element('搜索标签名称').value).toBe('')
     await view.input('搜索标签名称', '通勤')
-    if (theme === classic) await view.click('确定')
+    await view.click('确定')
     await view.click('应用筛选')
     expect(view.root.textContent).toContain('匹配 1 / 2 个标签')
     expect(() => view.element('查看标签 夜晚')).toThrow()
     expect(view.write).not.toHaveBeenCalled()
   })
 
-  it('retains multiple filter choices across themes and applies ordered sorting without writes', async () => {
-    const view = mount(theme)
-    const choose = async (value: string, label: string) => {
-      if (view.theme.value === studio) await view.click(label)
-      else {
-        dispatchCatalogEvent(
-          findCatalogElement(
-            view.root,
-            (node) => node.tag === 'input' && node.props.value === value,
-          ),
-          'onChange',
-          false,
-        )
-        await nextTick()
-      }
+  it('retains multiple filter choices across remounts and applies ordered sorting without writes', async () => {
+    const view = mount(classic)
+    const choose = async (value: string) => {
+      dispatchCatalogEvent(
+        findCatalogElement(view.root, (node) => node.tag === 'input' && node.props.value === value),
+        'onChange',
+        false,
+      )
+      await nextTick()
     }
     const finish = async () => {
-      if (view.theme.value === classic) await view.click('确定')
+      await view.click('确定')
     }
     await view.click('筛选器')
     await view.click('关联歌曲')
-    await choose('single', '仅关联一首')
-    await choose('multiple', '关联多首')
+    await choose('single')
+    await choose('multiple')
     await finish()
     expect(view.editor.state.filterDraft?.usage).toEqual(['single', 'multiple'])
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(view.editor.state.filterDraft?.usage).toEqual(['single', 'multiple'])
     await view.click('平台覆盖')
-    await choose('single', '单个平台')
-    await choose('multiple', '跨平台')
+    await choose('single')
+    await choose('multiple')
     await finish()
     await view.click('排序方式')
-    await choose('usage-desc', '关联歌曲最多')
-    await choose('updated-desc', '最近维护')
+    await choose('usage-desc')
+    await choose('updated-desc')
     await finish()
     expect(view.editor.state.filters.usage).toEqual([])
     await view.click('应用筛选')
@@ -602,7 +625,7 @@ describe.each([
   })
 
   it('returns from the rename actions without saving the edited name', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     await view.activate('查看标签 通勤')
     await view.click('修改标签')
     await view.input('标签的新名称', '未保存')
@@ -622,7 +645,7 @@ describe.each([
   })
 
   it('confirms deletion from the edit heading and retains songs after accepting', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     await view.activate('查看标签 通勤')
     await view.click('修改标签')
     await view.click('删除标签')
@@ -676,7 +699,7 @@ describe.each([
         disconnect() {}
       },
     )
-    const view = mount(theme)
+    const view = mount(classic)
     await view.activate('查看标签 通勤')
     await view.click('修改标签')
     expect(() => view.element('修改标签说明')).toThrow()
@@ -701,8 +724,8 @@ describe.each([
     expect(view.write).not.toHaveBeenCalled()
   })
 
-  it('keeps a cancelled rename merge draft across themes and writes only after confirmation', async () => {
-    const view = mount(theme)
+  it('keeps a cancelled rename merge draft across remounts and writes only after confirmation', async () => {
+    const view = mount(classic)
     await view.activate('查看标签 通勤')
     await view.click('修改标签')
     await view.input('标签的新名称', '夜晚')
@@ -712,7 +735,7 @@ describe.each([
     view.confirmation.cancel()
     await nextTick()
     expect(view.element('标签的新名称').value).toBe('夜晚')
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(view.element('标签的新名称').value).toBe('夜晚')
     await view.submitRename()
@@ -724,7 +747,7 @@ describe.each([
   })
 
   it('shows described navigation and counts each covered platform without changing associations', async () => {
-    const view = mount(theme, false, 'douyin')
+    const view = mount(classic, false, 'douyin')
     await view.activate('查看标签 通勤')
     for (const label of ['修改标签', '覆盖平台', '关联音乐']) {
       const entry = view.button(label)
@@ -745,7 +768,7 @@ describe.each([
     expect(list.textContent).toContain('歌曲二')
     expect(descendants(list, 'button')).toHaveLength(3)
     expect(descendants(list, 'input')).toHaveLength(2)
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(view.editor.state.detailView).toBe('tracks')
     expect(descendants(view.element('关联音乐列表'), 'button')).toHaveLength(3)
@@ -753,7 +776,7 @@ describe.each([
   })
 
   it('browses an unused tag and resets navigation on explicit close', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     view.session.createTag('未使用')
     await nextTick()
     await view.activate('查看标签 未使用')
@@ -768,8 +791,8 @@ describe.each([
     expect(view.editor.state.detailView).toBe('actions')
   })
 
-  it('inherits associated-music defaults and retains a local choice across themes until detail closes', async () => {
-    const view = mount(theme)
+  it('inherits associated-music defaults and retains a local choice across remounts until detail closes', async () => {
+    const view = mount(classic)
     view.defaultTrackDisplayPreferences.value = {
       displayMode: 'compact',
       mobileColumns: 2,
@@ -804,7 +827,7 @@ describe.each([
       mobileColumns: 2,
       itemStyle: 'default',
     }
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(grid().props).toMatchObject({
       'data-display-mode': 'compact',
@@ -820,13 +843,13 @@ describe.each([
     expect(view.write).not.toHaveBeenCalled()
   })
 
-  it('filters readonly music with the existing editor, retains results across themes, and clears on close', async () => {
-    const view = mount(theme)
+  it('filters readonly music with the existing editor, retains results across remounts, and clears on close', async () => {
+    const view = mount(classic)
     await view.activate('查看标签 通勤')
     await view.click('关联音乐')
     await view.activate('选择歌曲 歌曲一', 'onChange')
     await view.activate('关联音乐筛选器')
-    if (theme === classic) await view.click('搜索筛选')
+    await view.click('搜索筛选')
     const search = findCatalogElement(
       view.root,
       (node) => node.tag === 'input' && node.props.type === 'search',
@@ -834,7 +857,7 @@ describe.each([
     search.value = '歌曲二'
     dispatchCatalogEvent(search, 'onInput', false)
     await nextTick()
-    if (theme === classic) await view.click('确定')
+    await view.click('确定')
     await view.click('应用筛选')
     expect(view.element('关联音乐列表').textContent).toContain('已选 1 个')
     expect(() => view.element('选择歌曲 歌曲一')).toThrow()
@@ -844,7 +867,7 @@ describe.each([
     expect(view.element('全选当前音乐').props['aria-pressed']).toBe(true)
     await view.activate('全选当前音乐')
     expect([...view.editor.state.detailSelectedIds]).toEqual(['一'])
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(view.element('关联音乐列表').textContent).toContain('已选 1 个')
     expect(() => view.element('取消选择歌曲 歌曲一')).toThrow()
@@ -865,7 +888,7 @@ describe.each([
   })
 
   it('selects visible labels, confirms global song impact and batch deletes in one write', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     await view.click('操作器')
     await view.activate('全选当前匹配标签', 'onChange')
     expect(() => view.element('标签的新名称')).toThrow()
@@ -882,14 +905,14 @@ describe.each([
     expect(view.records.value.map(({ customTags }) => customTags)).toEqual([[], []])
   })
 
-  it('keeps row display and selection across themes, then merges selected tags atomically', async () => {
-    const view = mount(theme)
+  it('keeps row display and selection across remounts, then merges selected tags atomically', async () => {
+    const view = mount(classic)
     await view.activate('标签展示方式')
     await view.click('单独一行')
     await view.click('操作器')
     await view.activate('选择标签 通勤', 'onChange')
     await view.activate('选择标签 夜晚', 'onChange')
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     expect(view.element('选择标签 通勤').props.checked).toBe(true)
     await view.activate('标签展示方式')
@@ -909,18 +932,18 @@ describe.each([
   })
 
   it('does not replay a pending destructive confirmation after its presentation is replaced', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     await view.activate('查看标签 通勤')
     const pending = view.editor.actions.deleteTag('通勤')
     const rejected = expect(pending).rejects.toThrow('会话已失效')
-    view.theme.value = theme === classic ? studio : classic
+    view.theme.value = alternate
     await nextTick()
     view.confirmation.accept()
     await rejected
     expect(view.write).not.toHaveBeenCalled()
   })
   it('retains global affected-song counts when a platform and name filter show only one label', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     view.editor.actions.setFilters({
       ...view.editor.state.filters,
       selectedPlatformIds: ['bilibili'],
@@ -938,7 +961,7 @@ describe.each([
     expect(view.write).not.toHaveBeenCalled()
   })
   it('invalidates a pending confirmation when the underlying associations change', async () => {
-    const view = mount(theme)
+    const view = mount(classic)
     const pending = view.editor.actions.deleteTag('通勤')
     view.session.addTag(view.records.value[0]!.track, '现场')
     view.confirmation.accept()

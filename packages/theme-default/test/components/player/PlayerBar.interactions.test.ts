@@ -123,7 +123,7 @@ describe('controlled classic player', () => {
     expect(view.events.onSettingsOpenChange).toHaveBeenLastCalledWith(false)
   })
 
-  it('preserves loading, missing-track, unavailable download and error text contracts', async () => {
+  it('keeps playback controls available as appropriate and omits inline playback errors', async () => {
     const view = mountPlayer()
     view.props.state = { ...view.props.state, status: 'resolving', seekDisabled: true }
     view.props.canDownload = false
@@ -133,7 +133,7 @@ describe('controlled classic player', () => {
     expect(view.button('下载当前音乐').props.disabled).toBe(true)
     view.props.state = { ...view.props.state, status: 'error', statusLabel: '媒体暂时不可用' }
     await nextTick()
-    expect(view.root.textContent).toContain('媒体暂时不可用')
+    expect(view.root.textContent).not.toContain('媒体暂时不可用')
     view.props.track = undefined
     await nextTick()
     expect(view.button('播放').props.disabled).toBe(true)

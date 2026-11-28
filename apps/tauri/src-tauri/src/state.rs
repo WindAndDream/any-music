@@ -26,6 +26,7 @@ pub struct AccountSession {
 pub struct QrHandoff {
     pub url: String,
     pub expires: std::time::Instant,
+    #[cfg(any(mobile, test))]
     pub opened: bool,
 }
 #[derive(Clone)]
@@ -33,7 +34,6 @@ pub struct QrSession {
     pub _usage: Option<Arc<crate::accounts::usage::AccountUse>>,
     pub key: String,
     pub handoff: Option<QrHandoff>,
-    pub douyin: Option<crate::accounts::douyin_login::DouyinQr>,
     pub generation: String,
     pub session: Arc<AccountSession>,
 }
@@ -50,7 +50,7 @@ pub struct RuntimeState {
     pub active_proxies: Arc<Mutex<HashMap<String, String>>>,
     pub renderer_uses: Mutex<HashMap<String, (String, crate::accounts::usage::AccountUse)>>,
     pub douyin_browsers: crate::browser::douyin_browser::Manager,
-    pub experiments: crate::browser::login_experiment::Manager,
+    pub embedded: Arc<crate::browser::embedded::Host>,
     pub directory: PathBuf,
     pub snapshot: Mutex<Snapshot>,
     pub sessions: Mutex<HashMap<String, Arc<AccountSession>>>,
@@ -119,7 +119,7 @@ impl RuntimeState {
             active_proxies: Arc::default(),
             renderer_uses: Mutex::default(),
             douyin_browsers: crate::browser::douyin_browser::Manager::default(),
-            experiments: crate::browser::login_experiment::Manager::default(),
+            embedded: Arc::default(),
             directory,
             snapshot: Mutex::new(snapshot),
             sessions: Mutex::new(HashMap::new()),
@@ -294,6 +294,7 @@ pub fn add_test_account(state: &RuntimeState, platform: &str) -> Account {
         platform_id: platform.into(),
         name: format!("测试{platform}账号"),
         platform_user_id: None,
+        platform_nickname: None,
         status: "ready".into(),
         state: crate::accounts::state::AccountState::anonymous(),
         enabled: true,
@@ -391,7 +392,6 @@ mod tests {
                 _usage: None,
                 key: "key".into(),
                 handoff: None,
-                douyin: None,
                 generation: "nonce".into(),
                 session: login.clone(),
             },

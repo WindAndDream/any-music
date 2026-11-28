@@ -77,7 +77,7 @@
   }
 
   .catalog-drawer {
-    // clip 保留圆角裁切且不会创建滚动容器，使列表标题能相对工作台内容区吸顶。
+    // clip 保留圆角裁切，不会为标题或分页创建额外的滚动容器。
     overflow: clip;
     border: 1px solid var(--am-color-border);
     border-radius: 10px;
@@ -340,19 +340,16 @@
 
   .catalog-player-stage {
     position: relative;
-    padding-block-start: 0px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     background: var(--am-color-surface);
-    /* 真实空间必须参与壳层 Grid：与操作条滑入同步让出滚动高度，播放器始终贴住底边。 */
-    transition: padding-block-start var(--am-motion-slow) var(--am-ease-emphasized);
   }
 
-  .catalog-player-stage--operator-open {
-    padding-block-start: max(
+  .catalog-operator-toolbar:has(> .classic-collection-controls) + .catalog-player-stage {
+    // 底栏始终容纳两排操作按钮，切换面板时保持列表视口高度。
+    min-block-size: max(
       0px,
-      calc(
-        92px + var(--am-space-2) * 3 - var(--am-player-block-size, 0px) -
-          var(--am-shell-mobile-navigation-offset)
-      )
+      calc(92px + var(--am-space-2) * 3 - var(--am-shell-mobile-navigation-offset))
     );
   }
 
@@ -388,7 +385,7 @@
   }
 
   .catalog-page--tracks {
-    padding-block-start: 0;
+    padding: 0;
   }
 
   .catalog-page--lists {
@@ -396,12 +393,32 @@
     flex: 1 0 auto;
     flex-direction: column;
     min-block-size: 0;
+    padding-block-start: 0;
   }
 
   .catalog-page--lists > .catalog-drawers {
     /* 空态可沿弹性链铺满；页面背景与四周留白由外层 catalog-page 保留。 */
     inline-size: 100%;
     min-block-size: 0;
+    // The outer gap scrolls away without shifting the sticky boundary.
+    margin-block-start: var(--am-catalog-page-padding);
+  }
+
+  .catalog-page--lists,
+  .catalog-page__tracks-scroll {
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scroll-padding-block-end: var(--am-space-6);
+  }
+
+  .catalog-page__tracks-scroll {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-block-size: 0;
+    padding-inline: var(--am-catalog-page-padding);
+    padding-block-end: max(var(--am-catalog-page-padding), var(--am-space-6));
   }
 
   .catalog-page__sticky-header {
@@ -413,6 +430,12 @@
     margin-block-end: var(--am-space-4);
     background: var(--am-color-surface);
     box-shadow: var(--am-shadow-control);
+  }
+
+  .catalog-page--tracks > .catalog-page__sticky-header {
+    position: relative;
+    flex-shrink: 0;
+    margin-inline: 0;
   }
 
   .catalog-page__heading {
@@ -459,7 +482,7 @@
     font: 650 var(--am-font-size-xs) var(--am-font-family);
   }
 
-  .catalog-page__heading button:hover:not(:disabled) {
+  .catalog-page__heading button:hover:not(:disabled, .catalog-page__context-platform) {
     border-color: var(--am-color-border-strong);
     background: var(--am-color-surface-hover);
   }
@@ -506,14 +529,28 @@
     inline-size: 100%;
     min-inline-size: 0;
     min-block-size: 44px;
-    overflow: hidden;
+    padding-inline: var(--am-space-1);
     border-color: transparent;
     background: transparent;
     font-size: var(--am-font-size-md);
     font-weight: 700;
     text-align: start;
+  }
+
+  .catalog-page__context-platform-label {
+    display: block;
+    box-sizing: border-box;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    overflow: hidden;
+    padding: var(--am-space-1) var(--am-space-2);
+    border-radius: var(--am-radius-sm);
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .catalog-page__context-platform:hover > .catalog-page__context-platform-label {
+    background: var(--am-color-surface-hover);
   }
 
   .catalog-page__context-summary {
@@ -639,18 +676,6 @@
     color: var(--am-color-text);
   }
 
-  .catalog-operator-launcher__filter b {
-    display: grid;
-    min-inline-size: 20px;
-    block-size: 20px;
-    place-items: center;
-    padding-inline: 4px;
-    border-radius: var(--am-radius-detail);
-    background: var(--am-color-primary);
-    color: var(--am-color-on-primary);
-    font-size: 10px;
-  }
-
   .catalog-operator-launcher button.catalog-operator-launcher__top {
     display: none;
   }
@@ -756,7 +781,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .catalog-player-stage,
     .catalog-page-forward-enter-active,
     .catalog-page-forward-leave-active,
     .catalog-page-back-enter-active,

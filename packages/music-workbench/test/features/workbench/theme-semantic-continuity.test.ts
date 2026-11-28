@@ -1,11 +1,10 @@
 import type { Track } from '@any-music/core'
 import { createThemeResources } from '@any-music/plugin-ui-vue/trusted'
 import { definition as classic } from '@any-music/theme-default/vue'
-import { definition as studio } from '@any-music/theme-studio/vue'
 import { UI_CONTRIBUTIONS, provideConfirmationDialog } from '@any-music/ui'
 import { createEditingSession, provideEditingSession } from '@any-music/ui/library'
 import { getPresentationContinuity } from '@any-music/ui/theme'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defineComponent, h, nextTick, provide, shallowRef } from 'vue'
 
 import { createThemeFeatures } from '../../fixtures/theme-features'
@@ -16,8 +15,7 @@ const lazyRenderer = vi.hoisted(() => ({
   release: undefined as (() => void) | undefined,
 }))
 
-// The canary stays private and default-closed in production. This test-only injected value
-// exercises the actual candidate through the themes' public complete definitions.
+// Use the development profile to exercise the virtual grids through the complete theme definitions.
 vi.mock('vue', async (load) => {
   const vue = await load<typeof import('vue')>()
   const passthrough = vue.defineComponent({
@@ -39,14 +37,11 @@ vi.mock('vue', async (load) => {
             return source()
           })
         : vue.defineAsyncComponent(source),
-    inject: (...args: Parameters<typeof vue.inject>) =>
-      typeof args[0] === 'symbol' && args[0].description === 'classic-virtual-favorites-canary'
-        ? true
-        : vue.inject(...args),
   }
 })
 const cleanups: (() => void)[] = []
 const restorationAborts: AbortController[] = []
+beforeEach(() => vi.stubEnv('MODE', 'dev'))
 afterEach(async () => {
   // Cancel pending semantic restores before removing the mock HTMLElement globals.
   restorationAborts.splice(0).forEach((controller) => controller.abort())
@@ -58,6 +53,7 @@ afterEach(async () => {
     cleanups.splice(0).forEach((cleanup) => cleanup())
     await settle()
   } finally {
+    vi.unstubAllEnvs()
     vi.unstubAllGlobals()
   }
 })
@@ -69,16 +65,17 @@ async function settle() {
 
 function setup(
   skin: 'default' | 'minimal',
-  initial: 'classic' | 'studio' = 'classic',
+  initial: 'wide' | 'narrow' = 'wide',
   platforms = false,
+  trackCount = 1_000,
 ) {
-  const theme = shallowRef<'classic' | 'studio'>(initial)
-  const env = createSemanticThemeRenderer(() => theme.value)
+  const layout = shallowRef<'wide' | 'narrow'>(initial)
+  const env = createSemanticThemeRenderer(() => (layout.value === 'wide' ? 3 : 1))
   for (const name of ['Element', 'HTMLElement', 'HTMLInputElement', 'Document', 'ShadowRoot'])
     vi.stubGlobal(name, env.Element)
   vi.stubGlobal('document', env.document)
   vi.stubGlobal('window', env.view)
-  const tracks: Track[] = Array.from({ length: 1_000 }, (_, index) => ({
+  const tracks: Track[] = Array.from({ length: trackCount }, (_, index) => ({
     id: `track:${index}`,
     title: `Song ${index}`,
     artists: [],
@@ -119,11 +116,11 @@ function setup(
           h(
             'main',
             {
-              key: theme.value,
-              class: theme.value === 'classic' ? 'music-app-shell__content' : 'studio-content',
+              key: layout.value,
+              class: 'music-app-shell__content',
               'data-am-scroll-key': 'workspace',
             },
-            [h((theme.value === 'classic' ? classic : studio).views.favorites!, { feature })],
+            [h(classic.views.favorites, { feature })],
           )
       },
     }),
@@ -150,7 +147,7 @@ function setup(
   restorationAborts.push(restoration)
   return {
     ...env,
-    theme,
+    layout,
     region,
     adapter,
     scroll,
@@ -160,22 +157,25 @@ function setup(
   }
 }
 
-describe('C00 cross-theme semantic handoff through real compiled consumers', () => {
+describe('Classic collection semantic restoration after remount', () => {
   it('waits for the first delayed lazy Classic renderer before restoring the offscreen occurrence', async () => {
     let ready!: () => void
     lazyRenderer.wait = new Promise<void>((resolve) => {
       ready = resolve
     })
     lazyRenderer.release = ready
-    const test = setup('default', 'studio')
+    vi.stubEnv('MODE', 'prod')
+    const test = setup('default', 'narrow', false, 40)
     await settle()
-    test.scroll().scrollTop = 54_093
-    const play = test
-      .region()
-      .querySelectorAll<HTMLElement>('[data-am-focus-key="track:track:900:play"]')[0]!
-    play.focus()
+    const snapshot = {
+      anchor: { key: 'track:30', offset: 13 },
+      focus: { itemKey: 'track:30', controlKey: 'track:track:30:play' },
+    }
+    expect(await test.adapter().restore(snapshot, test.signal)).toBe(true)
+    expect(test.adapter().capture()).toEqual(snapshot)
     const restore = test.capture()
-    test.theme.value = 'classic'
+    vi.stubEnv('MODE', 'dev')
+    test.layout.value = 'wide'
     await nextTick()
     expect(test.region()).toBeDefined() // The parent bridge exists before its lazy child.
     const pending = restore()
@@ -191,31 +191,31 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
     await pending
     lazyRenderer.wait = undefined
     lazyRenderer.release = undefined
-    expect(test.adapter().capture()!.anchor).toEqual({ key: 'track:900', offset: 13 })
+    expect(test.adapter().capture()!.anchor).toEqual(snapshot.anchor)
     expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
-      'track:track:900:play',
+      'track:track:30:play',
     )
   })
-  it('preserves a distant platform overview occurrence through Studio and back without replaying actions', async () => {
-    const test = setup('default', 'classic', true)
+  it('preserves a distant platform overview occurrence across viewport layouts without replaying actions', async () => {
+    const test = setup('default', 'wide', true)
     await settle()
     const snapshot = {
       anchor: { key: 'source:900', offset: 13 },
       focus: { itemKey: 'source:900', controlKey: 'platform:source:900:open' },
     }
     expect(await test.adapter().restore(snapshot, test.signal)).toBe(true)
-    const restoreStudio = test.capture()
-    test.theme.value = 'studio'
+    const restoreNarrow = test.capture()
+    test.layout.value = 'narrow'
     await settle()
-    await restoreStudio()
+    await restoreNarrow()
     expect(test.adapter().capture()!.anchor).toEqual(snapshot.anchor)
     expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
       snapshot.focus.controlKey,
     )
-    const restoreClassic = test.capture()
-    test.theme.value = 'classic'
+    const restoreWide = test.capture()
+    test.layout.value = 'wide'
     await nextTick()
-    await restoreClassic()
+    await restoreWide()
     expect(test.adapter().capture()!.anchor).toEqual(snapshot.anchor)
     expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
       snapshot.focus.controlKey,
@@ -226,7 +226,7 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
   it.each([0, 999])(
     'restores platform boundary %i with an available semantic focus counterpart',
     async (index) => {
-      const test = setup('default', 'classic', true)
+      const test = setup('default', 'wide', true)
       await settle()
       const key = `source:${index}`
       expect(
@@ -238,24 +238,24 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
           test.signal,
         ),
       ).toBe(true)
-      const restoreStudio = test.capture()
-      test.theme.value = 'studio'
+      const restoreNarrow = test.capture()
+      test.layout.value = 'narrow'
       await settle()
-      await restoreStudio()
+      await restoreNarrow()
       const current = test.document.activeElement as HTMLElement
       expect(current.hasAttribute('disabled')).toBe(false)
-      expect(current.dataset.amFocusKey).toBe(`platform:${key}:${index === 0 ? 'open' : 'reorder'}`)
-      const restoreClassic = test.capture()
-      test.theme.value = 'classic'
+      expect(current.dataset.amFocusKey).toBe(`platform:${key}:reorder`)
+      const restoreWide = test.capture()
+      test.layout.value = 'wide'
       await nextTick()
-      await restoreClassic()
+      await restoreWide()
       expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
-        `platform:${key}:${index === 0 ? 'open' : 'reorder'}`,
+        `platform:${key}:reorder`,
       )
     },
   )
   it.each(['default', 'minimal'] as const)(
-    'restores distant %s occurrence and offset grid → Studio → grid before focus',
+    'restores distant %s occurrence and offset across column changes before focus',
     async (skin) => {
       const test = setup(skin)
       await settle()
@@ -272,24 +272,25 @@ describe('C00 cross-theme semantic handoff through real compiled consumers', () 
       await settle()
       const before = test.adapter().capture()!
       expect(before.anchor).toEqual({ key: 'track:900', offset: 13 })
-      const restoreStudio = test.capture()
+      const restoreNarrow = test.capture()
       const oldPixelOffset = test.scroll().scrollTop
-      test.theme.value = 'studio'
+      test.layout.value = 'narrow'
       await settle()
-      await restoreStudio()
+      await restoreNarrow()
       expect(test.adapter().capture()!.anchor).toEqual(before.anchor)
-      expect(test.scroll().scrollTop).toBe(54_093)
+      expect(test.scroll().scrollTop).toBeGreaterThan(0)
       expect(test.scroll().scrollTop).not.toBe(oldPixelOffset)
+      expect(test.region().querySelectorAll('[data-am-continuity-item]').length).toBeLessThan(32)
       expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
         'track:track:900:play',
       )
-      const restoreClassic = test.capture()
-      test.theme.value = 'classic'
+      const restoreWide = test.capture()
+      test.layout.value = 'wide'
       await settle()
       expect(test.region().querySelectorAll('[data-am-continuity-item="track:900"]')).toHaveLength(
         0,
       )
-      await restoreClassic()
+      await restoreWide()
       expect(test.adapter().capture()!.anchor).toEqual(before.anchor)
       expect((test.document.activeElement as HTMLElement).dataset.amFocusKey).toBe(
         'track:track:900:play',

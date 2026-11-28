@@ -5,7 +5,7 @@ description: Implement or diagnose Any Music Tampermonkey runtime bindings for G
 
 # Any Music Userscript Runtime
 
-Use for the GM/host-page boundary, not portable protocol implementation. Read the target app's AGENTS.md and [userscript rules](../../../docs/en/userscript/development.md).
+Use for the GM/host-page boundary, not portable protocol implementation. Read the target app's AGENTS.md and [userscript rules](../../../docs/en/modules/userscript/development.md).
 
 ## Follow the actual transport
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import SidePanel from '@any-music/ui/components/SidePanel.vue'
+import SlidingView from '@any-music/ui/components/SlidingView.vue'
 import type { TagManagementPresentation } from '@any-music/ui/theme'
 import { computed, shallowRef } from 'vue'
 
@@ -13,6 +14,15 @@ import TagManagementResults from './TagManagementResults.vue'
 
 const props = defineProps<{ editor: TagManagementPresentation; mobileLayout?: boolean }>()
 const state = computed(() => props.editor.state)
+const filterCount = computed(() => {
+  const { searchQuery, selectedPlatformIds, usage, platformScope } = state.value.filters
+  return (
+    Number(Boolean(searchQuery.trim())) +
+    selectedPlatformIds.length +
+    usage.length +
+    platformScope.length
+  )
+})
 const displayOpen = shallowRef(false)
 const modalOpen = computed(
   () =>
@@ -43,9 +53,11 @@ const modalOpen = computed(
       >
         {{ state.errorMessage }}
       </p>
-      <TagManagementResults :editor="editor" />
+      <SlidingView :view-key="state.entityKind" :reverse="state.entityKind === 'tracks'">
+        <TagManagementResults :editor="editor" />
+      </SlidingView>
     </TagManagementOverview>
-    <ClassicPageOverlays :modal-open="modalOpen" :operator-open="state.operatorOpen">
+    <ClassicPageOverlays :modal-open="modalOpen">
       <template v-if="mobileLayout" #source>
         <span
           class="product-top-bar__queue-count"
@@ -59,7 +71,7 @@ const modalOpen = computed(
           :selected-count="state.selectedTags.length"
           :total-count="state.tagOptions.length"
           :operator-open="state.operatorOpen"
-          :filter-active="state.hasFilters"
+          :filter-count="filterCount"
           can-display
           filter-label="筛选标签"
           display-label="标签展示方式"

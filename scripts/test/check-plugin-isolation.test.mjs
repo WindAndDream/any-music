@@ -25,17 +25,19 @@ const fixture = () => ({
   build: read('build.rs'),
   permission: read('permissions/product.toml'),
   capability: JSON.parse(read('capabilities/main.json')),
+  accountPages: JSON.parse(read('capabilities/account-pages.json')),
   config: JSON.parse(read('tauri.conf.json')),
 })
 
 test('the actual registry has complete AppManifest coverage and exact main authority', () => {
   const commands = inspectIsolationConfig()
-  assert.equal(commands.length, 77)
+  assert.equal(commands.length, 75)
   for (const command of [
     'runtime_capabilities',
     'discard_account_draft',
     'source_account_platforms',
     'source_account_auth',
+    'sidebar_collapse_preference',
     'resource_cache_snapshot',
     'resource_cache_configure',
     'resource_cache_clear',
@@ -63,6 +65,8 @@ test('the actual registry has complete AppManifest coverage and exact main autho
     'plugin_result_save',
     'plugin_diagnostics_export',
     'plugin_executor_relay',
+    'account_page_layout',
+    'account_page_report',
   ])
     assert(commands.includes(command))
 })
@@ -98,6 +102,30 @@ test('new commands, broad capabilities, remote access and relay grants cannot si
     },
     (value) => {
       value.config.app.security.capabilities.push('another-capability')
+    },
+    (value) => {
+      value.accountPages.permissions.push('core:default')
+    },
+    (value) => {
+      value.accountPages.webviews = ['*']
+    },
+    (value) => {
+      value.accountPages.local = true
+    },
+    (value) => {
+      value.accountPages.remote.urls.push('https://*')
+    },
+    (value) => {
+      value.permission = value.permission.replace(
+        'commands.allow = ["account_page_report"]',
+        'commands.allow = ["account_page_report", "http_request"]',
+      )
+    },
+    (value) => {
+      value.permission = value.permission.replace(
+        '"account_page_layout",',
+        '"account_page_layout", "account_page_report",',
+      )
     },
     (value) => {
       value.build = value.build.replace(

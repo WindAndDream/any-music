@@ -17,6 +17,29 @@ const track: Track = {
   source: { pluginId: 'test', resourceId: 'one', mediaKind: 'audio' },
 }
 describe('minimal track presentation', () => {
+  it.each([
+    [undefined, '2:00'],
+    [1_000, '0:01'],
+  ] as const)(
+    'renders the appropriate duration with a playable duration of %s',
+    (durationMs, label) => {
+      const view = mount(
+        defineComponent({
+          setup: () => () =>
+            h(MinimalTrackCard, {
+              track: { ...track, durationMs, sourceDurationMs: 120_000 },
+              title: track.title,
+            }),
+        }),
+      )
+      try {
+        expect(view.root.textContent).toContain(label)
+      } finally {
+        view.unmount()
+      }
+    },
+  )
+
   it('renders readonly artwork and metadata without selection or playback controls', () => {
     const view = mount(
       defineComponent({
@@ -69,6 +92,7 @@ describe('minimal track presentation', () => {
       )
       try {
         const cover = find(view.root, (node) => node.props['data-queue-handle'] !== undefined)
+        expect(view.root.textContent).not.toContain('歌曲已失效')
         click(cover)
         ;(cover.props.onPointerdown as (event: object) => void)({ pointerId: 1 })
         const handlers = cover.props.onKeydown as ((event: object) => void)[]

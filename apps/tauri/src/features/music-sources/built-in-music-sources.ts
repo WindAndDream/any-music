@@ -243,12 +243,10 @@ export function createBuiltInMusicSources(
       getLoginUrl: () => loginUrl,
       getSession: () =>
         runtime
-          .run(descriptor.id, 'session', async (account, plugin) => {
+          .run(descriptor.id, 'session', async (account, plugin, signal) => {
             const session = await plugin.getSession()
-            const names = new Map(runtime.sessionUserNames.value)
-            if (session.status === 'signed-in') names.set(account.id, session.user.name)
-            else names.delete(account.id)
-            runtime.sessionUserNames.value = names
+            if (signal.isCancelled()) throw new AppError('operation-cancelled')
+            runtime.rememberSessionUserName(account.id, session)
             if (session.status === 'unavailable' || session.status === 'expired')
               throw new AppError(session.error.code, session.error.message)
             if (session.status !== 'signed-in') return session
@@ -256,6 +254,7 @@ export function createBuiltInMusicSources(
               ...session,
               user: {
                 ...session.user,
+                name: runtime.sessionUserNames.value.get(account.id) ?? session.user.name,
                 // 命名跟随公开快照更新，保持平台用户名和账号身份不变。
                 get customName() {
                   return (

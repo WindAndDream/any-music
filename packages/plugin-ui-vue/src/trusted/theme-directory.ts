@@ -9,13 +9,6 @@ export const BUILT_IN_UI_THEMES: readonly UiThemeDescriptor[] = Object.freeze([
     forms: ['desktop', 'mobile'] as const,
     settingsSchemaVersion: 1,
   }),
-  Object.freeze({
-    id: 'studio',
-    title: '工作室',
-    contractVersion: 1,
-    forms: ['desktop', 'mobile'] as const,
-    settingsSchemaVersion: 1,
-  }),
 ])
 /** Complete-theme admission is atomic; no row/list/navigation substitutions. */
 export const THEME_ROOT_POINT = 'theme.root'

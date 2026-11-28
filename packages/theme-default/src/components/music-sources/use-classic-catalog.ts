@@ -1,4 +1,5 @@
 import type { Track } from '@any-music/core'
+import type { CatalogDrawerListSummary } from '@any-music/ui'
 import {
   cloneCatalogTrackFilterState,
   filterCatalogTracks,
@@ -33,9 +34,9 @@ export function useClassicCatalog(props: { readonly feature: UiThemeFeatureMap['
     filterPreview,
     filterDetailOpen,
   } = editing.state(catalogRootEditingKey, createCatalogRootEditing)
-  const drawerSelectedCount = shallowRef(0)
-  function updateDrawerSummary(summary: { selectedCount: number }) {
-    drawerSelectedCount.value = summary.selectedCount
+  const drawerListSummary = shallowRef<CatalogDrawerListSummary>()
+  function updateDrawerSummary(summary: CatalogDrawerListSummary) {
+    drawerListSummary.value = summary
   }
   const drawer = computed(() =>
     state.value.drawers.find(({ id }) => id === state.value.activeDrawerId),
@@ -195,7 +196,7 @@ export function useClassicCatalog(props: { readonly feature: UiThemeFeatureMap['
 
   return {
     state,
-    drawerSelectedCount,
+    drawerListSummary,
     updateDrawerSummary,
     modalOpen,
     editing,

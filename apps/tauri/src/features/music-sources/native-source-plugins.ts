@@ -1,13 +1,58 @@
-import type { CancellationSignal, HttpClient, MusicSourcePlugin } from '@any-music/core'
-import type { DouyinBrowserCatalog } from '@any-music/plugin-source-douyin/runtime'
+import { AppError } from '@any-music/core'
+import type {
+  CancellationSignal,
+  HttpClient,
+  MusicSourcePlugin,
+  MusicSourceSession,
+} from '@any-music/core'
 import { invoke } from '@tauri-apps/api/core'
 
 import { createDouyinBrowserCatalog } from '../../platform/douyin-browser-catalog'
+import type { DouyinAccountBrowserCatalog } from '../../platform/douyin-browser-catalog'
+import { readDouyinAccountNickname } from './douyin-account-nickname'
 
 export interface NativeSourceContext {
   accountId: string
   http: HttpClient
   cancellation?: CancellationSignal
+}
+
+// Rust recognizes this exact read and returns only the verified identity projection.
+const DOUYIN_IDENTITY_URL =
+  'https://www.douyin.com/aweme/v1/web/query/user/?device_platform=webapp&aid=6383&channel=channel_pc_web&publish_video_strategy_type=2'
+
+async function readDouyinIdentity(
+  http: HttpClient,
+  pageCatalog: DouyinAccountBrowserCatalog,
+  cancellation?: CancellationSignal,
+): Promise<MusicSourceSession> {
+  const response = await http.request({
+    url: DOUYIN_IDENTITY_URL,
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      Referer: 'https://www.douyin.com/jingxuan',
+    },
+    timeoutMs: 10_000,
+    maxResponseBytes: 32 * 1024,
+    cancellation,
+  })
+  if (response.status !== 200 || typeof response.body !== 'string')
+    throw new AppError('invalid-response', '抖音登录状态响应无效。')
+  let result: unknown
+  try {
+    result = JSON.parse(response.body)
+  } catch (cause) {
+    throw new AppError('invalid-response', '抖音登录状态响应无效。', { cause })
+  }
+  if (!result || typeof result !== 'object' || !('userId' in result))
+    throw new AppError('invalid-response', '抖音登录状态响应无效。')
+  if (result.userId === null) return { status: 'signed-out' }
+  if (typeof result.userId !== 'string' || !/^[1-9][0-9]*$/.test(result.userId))
+    throw new AppError('invalid-response', '抖音登录状态响应缺少账号标识。')
+  const nickname = await readDouyinAccountNickname(pageCatalog, cancellation)
+  return { status: 'signed-in', user: { id: result.userId, name: nickname } }
 }
 
 export async function loadNeteasePlugin({
@@ -22,7 +67,7 @@ export async function loadNeteasePlugin({
 /** Trusted composition selects the account-owned page reader; the source never chooses a browser. */
 export type DouyinPageCatalogFactory = (
   context: Pick<NativeSourceContext, 'accountId' | 'cancellation'>,
-) => DouyinBrowserCatalog
+) => DouyinAccountBrowserCatalog
 
 export async function loadBilibiliPlugin({
   http,
@@ -49,8 +94,7 @@ export async function loadDouyinPlugin(
     msToken?: string
   }>('request_state', { accountId })
   const browserState = createDouyinWebRequestStateProvider()
-  // The current default is native CDP. An admitted embedded-page adapter can later supply
-  // this same bounded catalog contract without changing source parsing or adding renderer fetch.
+  // The account page reads the official profile API for nicknames and personal imports.
   const pageCatalog = options.createPageCatalog
     ? options.createPageCatalog({ accountId, cancellation })
     : createDouyinBrowserCatalog(accountId, cancellation)
@@ -71,5 +115,8 @@ export async function loadDouyinPlugin(
       async () => ({ uifid: state.uifid ?? '', verifyFp: state.verifyFp ?? '' }),
       pageCatalog,
     ),
+    undefined,
+    cancellation,
+    () => readDouyinIdentity(http, pageCatalog, cancellation),
   )
 }

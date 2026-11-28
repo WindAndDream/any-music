@@ -55,6 +55,7 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
             class="queue-view-controls__segments"
             role="group"
             :aria-label="`${collectionTitle ?? '待听'}排列方式`"
+            :style="{ '--am-state-tab-index': arrangementMode === 'platform' ? 1 : 0 }"
           >
             <button
               type="button"
@@ -105,12 +106,15 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../styles/collection-chrome';
+
 .queue-view-controls-shell {
   /* 工具栏直接参与列表布局，不被短父盒限制吸顶范围。 */
   display: contents;
 }
 .queue-view-controls {
+  @include collection-chrome.toolbar-divider;
   position: sticky;
   z-index: var(--am-z-sticky);
   inset-block-start: 0;
@@ -121,8 +125,6 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
   align-items: center;
   gap: var(--am-space-2);
   margin-block-end: var(--am-space-4);
-  padding-block: var(--am-space-2);
-  border-block-end: 1px solid var(--am-color-border);
   background: var(--am-color-surface-subtle);
 }
 .queue-view-controls__arrangement {
@@ -141,15 +143,9 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
   grid-template-columns: minmax(0, 1fr);
 }
 .queue-view-controls__segments {
-  display: flex;
-  gap: var(--am-space-1);
-  padding: var(--am-space-1);
-  border: 0;
-  border-radius: var(--am-radius-control);
-  background: var(--am-color-surface);
-  box-shadow: inset 0 0 0 1px var(--am-color-border);
+  @include collection-chrome.inset-state-tabs;
 }
-.queue-view-controls button {
+.queue-view-controls__trigger {
   display: flex;
   min-block-size: 44px;
   align-items: center;
@@ -168,26 +164,13 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
     color var(--am-motion-fast) var(--am-ease-standard);
   touch-action: manipulation;
 }
-.queue-view-controls__segments button {
-  border: 0;
-  background: transparent;
-  color: var(--am-color-text-secondary);
-  min-block-size: 44px;
-}
-.queue-view-controls button[aria-pressed='true'] {
-  background: var(--am-color-primary-container);
-  color: var(--am-color-primary);
-}
-.queue-view-controls button:focus-visible {
+.queue-view-controls__trigger:focus-visible {
   outline: var(--am-focus-ring);
   outline-offset: -3px;
 }
-.queue-view-controls button:is(:hover, :focus-visible) {
+.queue-view-controls__trigger:is(:hover, :focus-visible) {
   background: var(--am-color-surface-hover);
   color: var(--am-color-text);
-}
-.queue-view-controls button[aria-pressed='true']:is(:hover, :focus-visible) {
-  color: var(--am-color-primary);
 }
 @container am-listen-queue (max-width: 760px) {
   .queue-view-controls {
@@ -198,10 +181,10 @@ function selectArrangement(mode: 'flat' | 'platform'): void {
   }
   .queue-view-controls__segments {
     flex: 1;
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    inline-size: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .queue-view-controls button {
+  .queue-view-controls__trigger {
     min-inline-size: 0;
     gap: var(--am-space-1);
     padding-inline: var(--am-space-1);

@@ -3,12 +3,67 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { effectScope } from 'vue'
 
 import { AccountRuntime } from '@/features/accounts/account-runtime'
+import type { NativeAccount } from '@/features/accounts/account-runtime'
 import { useAccountSwitcher } from '@/features/accounts/use-account-switcher'
+import { readDouyinAccountNickname } from '@/features/music-sources/douyin-account-nickname'
 
 vi.mock('@tauri-apps/api/core', () => ({ invoke: vi.fn() }))
+vi.mock('@/features/music-sources/douyin-account-nickname', () => ({
+  readDouyinAccountNickname: vi.fn(),
+}))
 afterEach(() => vi.restoreAllMocks())
 
 describe('desktop account switcher', () => {
+  it('loads only missing alternate Douyin names and cancels when the dialog closes', async () => {
+    const runtime = new AccountRuntime()
+    const refresh = vi.spyOn(runtime, 'refresh').mockResolvedValue()
+    const account: NativeAccount = {
+      id: 'default',
+      platformId: 'douyin',
+      name: '本地名称',
+      status: 'ready',
+      state: { login: 'signed-in', verification: 'not-required', connection: 'available' },
+      enabled: true,
+      authentication: 'credential',
+      userAgent: '',
+      webId: '',
+      proxyId: null,
+      backupProxyIds: [],
+    }
+    runtime.snapshot.value = {
+      accounts: [
+        account,
+        { ...account, id: 'saved', platformNickname: '已保存的昵称' },
+        { ...account, id: 'disabled', enabled: false },
+        { ...account, id: 'missing' },
+        { ...account, id: 'queued' },
+      ],
+      proxies: [],
+    }
+    runtime.selectedAccountIds.value = { douyin: account.id }
+    let finish!: (nickname: string) => void
+    const pending = new Promise<string>((resolve) => {
+      finish = resolve
+    })
+    const readNickname = vi.mocked(readDouyinAccountNickname).mockReturnValueOnce(pending)
+    const scope = effectScope()
+    const switcher = scope.run(() => useAccountSwitcher(runtime))!
+
+    await switcher.open('douyin')
+    expect(switcher.busy.value).toBe(false)
+    expect(readNickname).toHaveBeenCalledOnce()
+    const signal = readNickname.mock.calls[0]![1]
+    expect(signal?.isCancelled()).toBe(false)
+
+    switcher.close()
+    expect(signal?.isCancelled()).toBe(true)
+    finish('迟到的昵称')
+    await pending
+    expect(readNickname).toHaveBeenCalledOnce()
+    expect(refresh).toHaveBeenCalledOnce()
+    scope.stop()
+  })
+
   it('does not open or refresh an unassigned mobile platform', async () => {
     const runtime = new AccountRuntime()
     const refresh = vi.spyOn(runtime, 'refresh').mockResolvedValue()

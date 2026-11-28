@@ -5,7 +5,7 @@ import type {
 } from '@any-music/ui/catalog'
 import { createDrawerActionEditingState, drawerActionEditingKey } from '@any-music/ui/catalog'
 import { useEditingSession } from '@any-music/ui/catalog'
-import { isCatalogDrawerDisconnected } from '@any-music/ui/catalog'
+import { canRefreshCatalogDrawer } from '@any-music/ui/catalog'
 import AppDialog from '@any-music/ui/components/AppDialog.vue'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import DialogPages from '@any-music/ui/components/DialogPages.vue'
@@ -38,17 +38,7 @@ const isFullyFavorited = computed(() => {
   const tracks = props.drawer?.tracks ?? []
   return tracks.length > 0 && tracks.every((track) => props.favoriteTrackIds.has(track.id))
 })
-const canRefresh = computed(() => {
-  const drawer = props.drawer
-  return Boolean(
-    drawer &&
-    !isCatalogDrawerDisconnected(drawer) &&
-    drawer.status !== 'paused' &&
-    drawer.status !== 'restoring' &&
-    !drawer.isLoading &&
-    !drawer.isVerifying,
-  )
-})
+const canRefresh = computed(() => canRefreshCatalogDrawer(props.drawer))
 
 watch([() => props.open, () => props.drawer?.id], () => {
   isRenaming.value = false

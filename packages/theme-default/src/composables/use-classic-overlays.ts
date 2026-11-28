@@ -17,7 +17,7 @@ interface ClassicOverlays {
   operatorTarget: Readonly<Ref<HTMLElement | null>>
   /** Root-owned action opener retained through the dialog's closing/focus handoff. */
   trackActionId: Readonly<Ref<string | undefined>>
-  pages: Map<symbol, { modal: boolean; operator: boolean }>
+  pages: Map<symbol, boolean>
 }
 const overlaysKey: InjectionKey<ClassicOverlays> = Symbol('classic-overlays')
 
@@ -28,7 +28,7 @@ export function provideClassicOverlays() {
   const modalTarget = useTemplateRef<HTMLElement>('modalTarget')
   const operatorTarget = useTemplateRef<HTMLElement>('operatorTarget')
   const trackActionId = shallowRef<string>()
-  const pages = shallowReactive(new Map<symbol, { modal: boolean; operator: boolean }>())
+  const pages = shallowReactive(new Map<symbol, boolean>())
   provide(overlaysKey, {
     toolbarTarget,
     sourceTarget,
@@ -41,22 +41,15 @@ export function provideClassicOverlays() {
     modalTarget,
     operatorTarget,
     trackActionId,
-    modalOpen: computed(() => [...pages.values()].some((page) => page.modal)),
-    operatorOpen: computed(() => [...pages.values()].some((page) => page.operator)),
+    modalOpen: computed(() => [...pages.values()].some(Boolean)),
   }
 }
 
-export function useClassicOverlays(modal: () => boolean, operator: () => boolean = () => false) {
+export function useClassicOverlays(modal: () => boolean) {
   const overlays = inject(overlaysKey, undefined)
   const id = Symbol('classic-page')
   if (overlays) {
-    watch(
-      [modal, operator],
-      ([isModal, isOperator]) => overlays.pages.set(id, { modal: isModal, operator: isOperator }),
-      {
-        immediate: true,
-      },
-    )
+    watch(modal, (isModal) => overlays.pages.set(id, isModal), { immediate: true })
     onScopeDispose(() => overlays.pages.delete(id))
   }
   return overlays

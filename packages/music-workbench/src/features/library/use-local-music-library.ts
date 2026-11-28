@@ -77,7 +77,7 @@ export function useLocalMusicLibrary() {
     for (const track of tracks) {
       const existing = trackById.get(track.id)
       const next: LibraryTrackRecord = existing
-        ? { ...existing, track, updatedAtMs: now }
+        ? { ...existing, track: retainKnownDuration(track, existing.track), updatedAtMs: now }
         : { track, customTags: [], addedAtMs: now, updatedAtMs: now }
       trackById.set(track.id, next)
       changed = true
@@ -119,7 +119,7 @@ export function useLocalMusicLibrary() {
       if (existing?.favoritedAtMs === undefined) addedCount += 1
       trackById.set(track.id, {
         ...existing,
-        track,
+        track: retainKnownDuration(track, existing?.track),
         customTags: existing?.customTags ?? [],
         favoritedAtMs: existing?.favoritedAtMs ?? now,
         addedAtMs: existing?.addedAtMs ?? now,
@@ -192,7 +192,7 @@ export function useLocalMusicLibrary() {
       const existing = trackById.get(track.id)
       trackById.set(track.id, {
         ...existing,
-        track,
+        track: retainKnownDuration(track, existing?.track),
         customTags: existing?.customTags ?? [],
         addedAtMs: existing?.addedAtMs ?? now,
         updatedAtMs: now,
@@ -354,6 +354,9 @@ export function useLocalMusicLibrary() {
   function beginHistory(track: Track): string {
     const now = Date.now()
     const definition = customTrackById.get(track.id)
+    const previous = history.value.find((entry) => entry.trackId === track.id)
+    const previousPlayCount = previous ? (previous.playCount ?? 1) : 0
+    // Each play gets its own ID so progress from a replaced play cannot update its successor.
     const entry: PlaybackHistoryEntry = {
       id: `history:${crypto.randomUUID()}`,
       trackId: track.id,
@@ -362,9 +365,11 @@ export function useLocalMusicLibrary() {
       positionMs: 0,
       durationMs: track.durationMs,
       completed: false,
+      playCount: Math.min(previousPlayCount + 1, Number.MAX_SAFE_INTEGER),
       customTrackVersion: definition?.version,
     }
-    history.value = [entry, ...history.value].slice(0, historyLimit.value)
+    const otherEntries = history.value.filter(({ trackId }) => trackId !== track.id)
+    history.value = [entry, ...otherEntries].slice(0, historyLimit.value)
     schedulePersist()
     return entry.id
   }
@@ -500,13 +505,12 @@ export function useLocalMusicLibrary() {
     playlistId: string,
     updater: (playlist: MusicPlaylist) => MusicPlaylist,
   ): void {
-    let found = false
-    playlists.value = playlists.value.map((playlist) => {
-      if (playlist.id !== playlistId) return playlist
-      found = true
-      return updater(playlist)
-    })
-    if (!found) throw new AppError('not-found', '找不到歌单。')
+    const index = playlists.value.findIndex(({ id }) => id === playlistId)
+    if (index < 0) throw new AppError('not-found', '找不到歌单。')
+    const playlist = playlists.value[index]!
+    const updated = updater(playlist)
+    if (updated === playlist) return
+    playlists.value = playlists.value.with(index, updated)
     schedulePersist()
   }
 
@@ -682,9 +686,15 @@ export function useLocalMusicLibrary() {
         const known = new Set(playlist.trackIds)
         const requested = [...new Set(ids)].filter((id) => known.has(id))
         const requestedIds = new Set(requested)
+        const trackIds = [...requested, ...playlist.trackIds.filter((id) => !requestedIds.has(id))]
+        if (
+          trackIds.length === playlist.trackIds.length &&
+          trackIds.every((id, index) => id === playlist.trackIds[index])
+        )
+          return playlist
         return {
           ...playlist,
-          trackIds: [...requested, ...playlist.trackIds.filter((id) => !requestedIds.has(id))],
+          trackIds,
           updatedAtMs: Date.now(),
         }
       })
@@ -743,6 +753,21 @@ export function useLocalMusicLibrary() {
     }
     return [...credits.values()]
   }
+}
+
+function retainKnownDuration(track: Track, existing?: Track): Track {
+  if (track.durationMs !== undefined || existing?.durationMs === undefined) return track
+  const source = track.source
+  const previous = existing.source
+  if (
+    source.pluginId !== previous.pluginId ||
+    source.mediaKind !== previous.mediaKind ||
+    source.resourceId !== previous.resourceId ||
+    (source.partId !== previous.partId &&
+      (source.partId !== undefined || !source.pageUrl || source.pageUrl !== previous.pageUrl))
+  )
+    return track
+  return { ...track, durationMs: existing.durationMs }
 }
 
 function normalizeName(input: string, label: string): string {

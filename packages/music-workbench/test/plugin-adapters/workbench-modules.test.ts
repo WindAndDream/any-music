@@ -1,12 +1,12 @@
 import { createMusicCreationModule } from '@any-music/plugin-music-creation'
 import { createTagManagementModule } from '@any-music/plugin-tag-management'
 import { BUILT_IN_UI_THEMES, THEME_ROOT_POINT } from '@any-music/plugin-ui-vue/directory'
-import { descriptor as studioDescriptor } from '@any-music/theme-studio'
 import { describe, expect, it, vi } from 'vitest'
 
 import { createWorkbenchModuleDirectory } from '../../src/plugin-adapters/workbench-module-directory'
 import { createWorkbenchModuleHost } from '../../src/plugin-adapters/workbench-modules'
 import type { WorkbenchModulePorts } from '../../src/plugin-adapters/workbench-modules'
+import { alternateDescriptor } from '../fixtures/alternate-theme'
 
 function ports() {
   return {
@@ -23,7 +23,10 @@ describe('built-in workbench business adapter', () => {
     'blocks developing plugin and theme activation at the module boundary on %s',
     async (runtime) => {
       const features = [createMusicCreationModule(runtime)]
-      const themes = [BUILT_IN_UI_THEMES[0]!, studioDescriptor]
+      const themes = [
+        BUILT_IN_UI_THEMES[0]!,
+        { ...alternateDescriptor, unavailableReason: '测试主题正在开发中。' },
+      ]
       const business = ports()
       const host = createWorkbenchModuleHost({
         runtime,
@@ -35,7 +38,7 @@ describe('built-in workbench business adapter', () => {
         onRequiredFailure: vi.fn(),
       })
       await host.start()
-      for (const id of ['feature.composer', 'theme.studio']) {
+      for (const id of ['feature.composer', 'theme.alternate']) {
         expect(host.controller.states.get(id)).toMatchObject({
           enabled: false,
           activation: 'inactive',
@@ -43,7 +46,7 @@ describe('built-in workbench business adapter', () => {
         expect(() => host.controller.setEnabled(id, true)).toThrow('module-unavailable')
       }
       await Promise.all(
-        ['feature.composer', 'theme.studio'].map((id) =>
+        ['feature.composer', 'theme.alternate'].map((id) =>
           expect(host.controller.activate([id])).rejects.toThrow(),
         ),
       )
@@ -54,6 +57,7 @@ describe('built-in workbench business adapter', () => {
   it('allocates an app-injected third theme as one root while preserving semantic contributions', async () => {
     const themes = [
       ...BUILT_IN_UI_THEMES,
+      alternateDescriptor,
       { ...BUILT_IN_UI_THEMES[0]!, id: 'paper', title: '纸页' },
     ]
     const host = createWorkbenchModuleHost({

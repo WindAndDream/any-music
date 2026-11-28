@@ -3,6 +3,8 @@ import type { CancellationSignal, MusicPlaylist, Track } from '@any-music/core'
 import type { UiPlaylistValidation } from '@any-music/ui/theme'
 import { readonly, shallowRef, watch } from 'vue'
 
+const PROGRESS_INTERVAL_MS = 100
+
 /** Only an open playlist admits checks. One run deduplicates leaves and caps concurrent requests. */
 export function usePlaylistValidation(options: {
   playlist: () => MusicPlaylist | undefined
@@ -20,7 +22,10 @@ export function usePlaylistValidation(options: {
   watch(
     () => {
       const playlist = options.playlist()
-      return playlist ? JSON.stringify([playlist.id, playlist.trackIds, attempt.value]) : ''
+      // Arrangement changes reorder the same songs without invalidating their checks.
+      return playlist
+        ? JSON.stringify([playlist.id, playlist.trackIds.toSorted(), attempt.value])
+        : ''
     },
     (_, __, onCleanup) => {
       const playlist = options.playlist()
@@ -29,6 +34,7 @@ export function usePlaylistValidation(options: {
         return
       }
       let cancelled = false
+      let progressTimer: ReturnType<typeof setTimeout> | undefined
       const listeners = new Set<() => void>()
       const cancellation: CancellationSignal = {
         isCancelled: () => cancelled,
@@ -40,6 +46,7 @@ export function usePlaylistValidation(options: {
       }
       onCleanup(() => {
         cancelled = true
+        clearTimeout(progressTimer)
         for (const listener of listeners) listener()
         listeners.clear()
       })
@@ -72,7 +79,11 @@ export function usePlaylistValidation(options: {
           }
           if (cancelled) return
           checked.add(id)
-          publish(false)
+          // Fast failures and in-memory checks can all settle within a single frame.
+          progressTimer ??= setTimeout(() => {
+            progressTimer = undefined
+            publish(false)
+          }, PROGRESS_INTERVAL_MS)
         }
       }
       function publish(complete: boolean) {
@@ -98,6 +109,7 @@ export function usePlaylistValidation(options: {
         }
       }
       void Promise.all(Array.from({ length: Math.min(3, pending.length) }, worker)).then(() => {
+        clearTimeout(progressTimer)
         if (!cancelled) publish(true)
       })
     },

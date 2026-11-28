@@ -5,7 +5,7 @@ import type {
   MobileTrackColumns,
 } from '../components/music-sources/catalog-track-display-mode'
 import type { CatalogDrawerListSummary } from '../composables/music-sources/use-catalog-drawer-list'
-import type { CatalogDrawerView, CatalogTrackListSummary } from './catalog-drawer'
+import type { CatalogDrawerView } from './catalog-drawer'
 
 /** Controlled catalog presentation for the current host composition; no business instances. */
 export type UiCatalogContextDetailsDialogProps = {
@@ -37,50 +37,6 @@ export type UiCatalogDisplayModeDialogEmits = {
   close: []
   updateDisplayMode: [mode: CatalogTrackDisplayMode]
   updateMobileColumns: [columns: MobileTrackColumns]
-}
-
-export type UiCatalogDrawerProps = {
-  drawer: CatalogDrawerView
-  /** 缓存的歌曲页离开当前板块时暂停分页和子弹窗，保留筛选与选择。 */
-  active?: boolean
-  currentTrackId?: string
-  invalidTrackIds: ReadonlySet<string>
-  favoriteTrackIds: ReadonlySet<string>
-  queuedTrackIds?: ReadonlySet<string>
-  downloadedTrackIds?: ReadonlySet<string>
-  customTagsByTrackId: ReadonlyMap<string, readonly string[]>
-  playlists: readonly MusicPlaylist[]
-  displayMode: CatalogTrackDisplayMode
-  mobileColumns: MobileTrackColumns
-  downloadBusy?: boolean
-  /** 壳层已在固定返回栏展示错误摘要时，关闭列表内部的重复提示。 */
-  errorNoticeVisible?: boolean
-  filterOpen?: boolean
-  operatorOpen?: boolean
-  operatorAutoFocus?: boolean
-  panelsSuspended?: boolean
-  overlayTarget?: HTMLElement | null
-  operatorOverlayTarget?: HTMLElement | null
-}
-
-export type UiCatalogDrawerEmits = {
-  play: [track: Track]
-  addSelectedToQueue: [tracks: readonly Track[]]
-  favorite: [track: Track]
-  addSelectedToFavorites: [tracks: readonly Track[]]
-  addSelectedToPlaylist: [playlistId: string, tracks: readonly Track[]]
-  downloadSelected: [tracks: readonly Track[], drawerId: string]
-  restoreNames: [trackIds: readonly string[]]
-  requestCreatePlaylist: []
-  loadMore: [drawerId: string]
-  showError: [drawerId: string]
-  showTrackActions: [track: Track]
-  closeFilter: []
-  closeOperator: []
-  toggleAllVisible: [selectedCount: number]
-  filterCountChange: [count: number]
-  summaryChange: [summary: CatalogTrackListSummary]
-  modalOpenChange: [isOpen: boolean]
 }
 
 export type UiCatalogDrawerActionsDialogProps = {

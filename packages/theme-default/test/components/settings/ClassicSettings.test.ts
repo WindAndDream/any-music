@@ -60,13 +60,14 @@ function mountSettings(
     themes: [
       { id: 'default' as const, title: '经典' },
       {
-        id: 'studio' as const,
-        title: '工作室',
+        id: 'alternate' as const,
+        title: '测试主题',
         unavailableReason: undefined as string | undefined,
       },
     ],
     preferences: createDefaultAppShellPreferences(),
     playbackHistoryLimit: 100,
+    skipUnavailableTracks: false,
     downloadConcurrency: 2,
     creatorDisplayName: 'Saved',
     filterHistory: {
@@ -83,6 +84,7 @@ function mountSettings(
     selectTheme: vi.fn(),
     setPreferences: vi.fn(),
     setPlaybackHistoryLimit: vi.fn(),
+    setSkipUnavailableTracks: vi.fn(),
     setDownloadConcurrency: vi.fn(),
     setCreatorDisplayName: vi.fn(),
     setFilterHistory: vi.fn(),
@@ -123,9 +125,9 @@ describe('classic complete-root settings adapter', () => {
     const view = mountSettings('appearance')
     try {
       view.state.themes[1] = {
-        id: 'studio',
-        title: '工作室',
-        unavailableReason: '工作室主题正在开发中。',
+        id: 'alternate',
+        title: '测试主题',
+        unavailableReason: '测试主题主题正在开发中。',
       }
       dispatchCatalogEvent(
         findCatalogElement(view.root, (node) => node.props['aria-label'] === '界面主题：经典'),
@@ -134,18 +136,18 @@ describe('classic complete-root settings adapter', () => {
       await nextTick()
       const choice = findCatalogElement(
         view.root,
-        (node) => node.props['data-am-focus-key'] === 'preference:ui-theme:studio',
+        (node) => node.props['data-am-focus-key'] === 'preference:ui-theme:alternate',
       )
       expect(choice.props['aria-disabled']).toBe(true)
       dispatchCatalogEvent(choice, 'onClick')
       await nextTick()
-      expect(view.actions.selectTheme).toHaveBeenCalledExactlyOnceWith('studio')
+      expect(view.actions.selectTheme).toHaveBeenCalledExactlyOnceWith('alternate')
       expect(view.state.themeId).toBe('default')
       expect(view.detailOpenChange).toHaveBeenLastCalledWith(true)
       expect(
         findCatalogElement(
           view.root,
-          (node) => node.props['data-am-focus-key'] === 'preference:ui-theme:studio',
+          (node) => node.props['data-am-focus-key'] === 'preference:ui-theme:alternate',
         ),
       ).toBeDefined()
     } finally {
@@ -198,11 +200,11 @@ describe('classic complete-root settings adapter', () => {
     dispatchCatalogEvent(
       findCatalogElement(
         view.root,
-        (node) => node.props['data-am-focus-key'] === 'preference:ui-theme:studio',
+        (node) => node.props['data-am-focus-key'] === 'preference:ui-theme:alternate',
       ),
       'onClick',
     )
-    expect(view.actions.selectTheme).toHaveBeenCalledExactlyOnceWith('studio')
+    expect(view.actions.selectTheme).toHaveBeenCalledExactlyOnceWith('alternate')
     expect(view.actions.setAppearance).not.toHaveBeenCalled()
     await nextTick()
     dispatchCatalogEvent(

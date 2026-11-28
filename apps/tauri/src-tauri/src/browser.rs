@@ -1,6 +1,7 @@
-//! System-browser verification, account-owned CDP sessions and process cleanup.
+//! Embedded account pages, account-owned page sessions and verification handoff.
 pub(crate) mod cdp;
 pub(crate) mod douyin_browser;
+pub(crate) mod embedded;
 pub(crate) mod process;
 pub(crate) mod verification;
 

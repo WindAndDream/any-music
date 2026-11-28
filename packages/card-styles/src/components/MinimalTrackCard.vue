@@ -2,7 +2,7 @@
 import type { Track } from '@any-music/core'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
 import CollectionTagSummary from '@any-music/ui/components/CollectionTagSummary.vue'
-import RemoteImage from '@any-music/ui/components/music-sources/RemoteImage.vue'
+import TrackArtwork from '@any-music/ui/components/tracks/TrackArtwork.vue'
 import { computed } from 'vue'
 
 const props = defineProps<{
@@ -63,10 +63,16 @@ const artist = computed(
   () => props.track.artists.map(({ name }) => name).join(' / ') || '创作者未知',
 )
 const duration = computed(() => {
-  if (props.track.durationMs === undefined) return ''
-  const seconds = Math.floor(props.track.durationMs / 1000)
+  const durationMs = props.track.durationMs ?? props.track.sourceDurationMs
+  if (durationMs === undefined) return ''
+  const seconds = Math.floor(durationMs / 1000)
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
 })
+const trackMeta = computed(() =>
+  [artist.value, duration.value, props.invalid ? undefined : props.detail]
+    .filter(Boolean)
+    .join(' · '),
+)
 const progressLength = computed(() => Math.max(0, Math.min(1, props.progress ?? 0)) * 100)
 const selectionLabel = computed(
   () =>
@@ -92,8 +98,11 @@ const selectionLabel = computed(
       class="am-minimal-track__cover"
       :data-readonly="readonly ? 'true' : undefined"
     >
-      <RemoteImage v-if="track.artworkUrl" :src="track.artworkUrl" :alt="`${title} 封面`" />
-      <AppIcon v-else name="music" :size="26" />
+      <TrackArtwork
+        class="am-minimal-track__artwork"
+        :src="track.artworkUrl"
+        :alt="`${title} 封面`"
+      />
     </div>
     <button
       v-else
@@ -116,8 +125,11 @@ const selectionLabel = computed(
       @keydown.right="shift($event, 1)"
       @keydown.esc="reorderable && emit('cancelDrag')"
     >
-      <RemoteImage v-if="track.artworkUrl" :src="track.artworkUrl" :alt="`${title} 封面`" />
-      <AppIcon v-else name="music" :size="26" />
+      <TrackArtwork
+        class="am-minimal-track__artwork"
+        :src="track.artworkUrl"
+        :alt="`${title} 封面`"
+      />
       <span
         v-if="!readonly && !selectionOnly && !selectable"
         class="am-minimal-track__play"
@@ -130,12 +142,9 @@ const selectionLabel = computed(
     </button>
     <div class="am-minimal-track__copy">
       <h3 :title="title">{{ title }}</h3>
-      <p :title="artist">{{ artist }}</p>
-      <div class="am-minimal-track__metadata">
-        <p class="am-minimal-track__detail" :title="invalid ? '歌曲已失效' : detail">
-          {{ invalid ? '歌曲已失效' : [duration, detail].filter(Boolean).join(' · ') }}
-        </p>
-        <CollectionTagSummary :tags="customTags ?? []" label="歌曲标签" single-line />
+      <p :title="trackMeta">{{ trackMeta }}</p>
+      <div v-if="customTags?.length" class="am-minimal-track__metadata">
+        <CollectionTagSummary :tags="customTags" label="歌曲标签" single-line />
       </div>
     </div>
     <div v-if="!readonly" class="am-minimal-track__controls">
@@ -224,18 +233,17 @@ const selectionLabel = computed(
   overflow: hidden;
   border: 0;
   border-radius: var(--am-radius-artwork, 8px);
-  background: var(--am-color-primary-container);
-  color: var(--am-color-primary);
+  background: transparent;
   cursor: pointer;
   touch-action: pan-y;
   user-select: none;
   -webkit-touch-callout: none;
 }
-.am-minimal-track__cover img {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
+.am-minimal-track__cover > .am-minimal-track__artwork {
+  position: absolute;
+  inset: 0;
+}
+.am-minimal-track__cover :deep(img) {
   /* Zoom only the artwork inside its clipped frame, preserving grid and drag geometry. */
   transform: scale(var(--am-minimal-track-artwork-scale, 1));
   transition: transform var(--am-motion-slow) var(--am-ease-emphasized);
@@ -259,6 +267,9 @@ const selectionLabel = computed(
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--am-motion-normal);
+}
+.am-minimal-track__cover:has([data-image-state='loading']) .am-minimal-track__play {
+  visibility: hidden;
 }
 .am-minimal-track__play-icon {
   display: grid;
@@ -310,13 +321,6 @@ const selectionLabel = computed(
   min-inline-size: 0;
   overflow: hidden;
   margin-block-start: var(--am-space-1);
-}
-.am-minimal-track__copy .am-minimal-track__detail {
-  /* Keep duration/status readable while the single-line tag strip yields the remaining width. */
-  flex: 0 0 auto;
-  max-inline-size: 100%;
-  min-block-size: 1.4em;
-  margin: 0;
 }
 .am-minimal-track__controls {
   display: grid;
@@ -489,13 +493,13 @@ button:focus-visible,
     animation: none;
   }
   .am-minimal-track,
-  .am-minimal-track__cover img,
+  .am-minimal-track__cover :deep(img),
   .am-minimal-track__play,
   .am-minimal-track__play-icon,
   .am-minimal-track__more {
     transition: none;
   }
-  .am-minimal-track__cover img,
+  .am-minimal-track__cover :deep(img),
   .am-minimal-track__play-icon {
     transform: none;
   }

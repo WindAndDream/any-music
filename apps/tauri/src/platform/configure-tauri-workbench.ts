@@ -9,7 +9,6 @@ import { builtInThemes, protectedStyles } from '../features/plugins/built-in-the
 import {
   createBuiltInWorkbenchModules,
   loadTagManagement,
-  loadMusicCreation,
   builtInUiThemes,
 } from '../features/plugins/built-in-workbench-modules'
 import { androidPlaybackEnvironment } from './android-playback-environment'
@@ -23,6 +22,7 @@ import { createProductStorage } from './product-storage'
 import { nativeResourceCache, resolveNativeArtwork } from './resource-cache'
 import { loadRuntimeCapabilities, requireRuntimeCapability } from './runtime-capabilities'
 import type { NativeRuntimeCapabilities } from './runtime-capabilities'
+import { loadSidebarCollapsePreference } from './sidebar-collapse-preference'
 import { verifyNativeDownload } from './verify-native-download'
 
 let configuredCapabilities: Readonly<NativeRuntimeCapabilities> | undefined
@@ -77,7 +77,10 @@ export async function configureTauriWorkbench(): Promise<void> {
     )
   }
   if (capabilities.form === 'desktop') await accountRuntime.refreshSourcePlatforms()
-  const storage = await createProductStorage()
+  const [storage, sidebarCollapsePreference] = await Promise.all([
+    createProductStorage(),
+    capabilities.form === 'desktop' ? loadSidebarCollapsePreference() : undefined,
+  ])
   const externalPlugins = capabilities.externalPlugins
   const modules = createBuiltInWorkbenchModules(capabilities.form)
   const sources =
@@ -109,7 +112,6 @@ export async function configureTauriWorkbench(): Promise<void> {
           ? nativePackagePreview
           : undefined,
     loadTagManagement,
-    loadMusicCreation,
     uiThemes: builtInUiThemes,
     modules: {
       runtime: 'tauri',
@@ -117,6 +119,7 @@ export async function configureTauriWorkbench(): Promise<void> {
       ...modules,
     },
     storage,
+    sidebarCollapsePreference,
     http:
       capabilities.accountTransport === 'provided'
         ? createNativeHttpClient()

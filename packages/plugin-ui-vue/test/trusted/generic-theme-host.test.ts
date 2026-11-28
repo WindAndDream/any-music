@@ -14,6 +14,6 @@ it('loads and runs the public generic host graph without evaluating either concr
       afterRender: (callback) => callback(),
     },
   })
-  expect(await controller.select('studio')).toBe(true)
+  expect(await controller.select('alternate')).toBe(true)
   controller.dispose()
 })

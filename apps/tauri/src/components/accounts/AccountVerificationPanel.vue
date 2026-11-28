@@ -57,7 +57,7 @@ function resend() {
         :disabled="busy || (method.inApp && retryAfter > 0 && !verification.selectedMethod)"
         @click="choose(method.id)"
       >
-        {{ method.label }}{{ method.inApp ? '' : '（使用系统浏览器）' }}
+        {{ method.label }}{{ method.inApp ? '' : '（在应用内页面中完成）' }}
       </button>
       <p v-if="retryAfter > 0 && !verification.selectedMethod" role="status">
         请在 {{ retryAfter }} 秒后重试发送短信。

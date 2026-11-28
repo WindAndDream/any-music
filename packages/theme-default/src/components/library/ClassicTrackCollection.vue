@@ -176,16 +176,14 @@ watch([operatorOpen, displayOpen, contentDisplayOpen], presentation.reorder.clea
         :actions="actions"
         :scope="scope ?? `library-root:${title}`"
       />
-      <ClassicPageOverlays
-        :modal-open="playlistOpen || displayOpen || contentDisplayOpen"
-        :operator-open="operatorOpen"
-      >
+      <ClassicPageOverlays :modal-open="playlistOpen || displayOpen || contentDisplayOpen">
         <template #toolbar>
           <ClassicCollectionControls
             :selected-count="selected.length"
             :disabled="availability.status !== 'available'"
             :total-count="presentation.displayedTracks.value.length"
             :operator-open="operatorOpen"
+            :filter-count="presentation.filterCount.value"
             can-display
             :icon-only-display="Boolean(collection) && presentation.compactControls.value"
             @filter="actions.setFilterDraft(cloneCatalogTrackFilterState(state.filters))"

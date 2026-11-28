@@ -18,6 +18,13 @@ class ScrollElement extends EventTarget {
   scrollTop = 0
   scrollHeight = 1000
   clientHeight = 400
+  clientTop = 0
+  top = 0
+  bottom = 0
+
+  getBoundingClientRect() {
+    return { top: this.top, bottom: this.bottom }
+  }
 
   scrollTo(top: number): void {
     this.scrollTop = top
@@ -36,8 +43,17 @@ afterEach(() => {
 })
 
 /** 用事件目标模拟详情对话框的滚动容器，验证逐页请求及卸载清理。 */
-function createLoader(editing?: EditingSession, fillShortList = true) {
-  vi.stubGlobal('getComputedStyle', (element: ScrollElement) => ({ overflowY: element.overflowY }))
+function createLoader(
+  editing?: EditingSession,
+  fillShortList = true,
+  restoreScroll = false,
+  prefetch = false,
+  prepareViewport = false,
+) {
+  vi.stubGlobal('getComputedStyle', (element: ScrollElement) => ({
+    overflowY: element.overflowY,
+    paddingBottom: '20px',
+  }))
   const container = new ScrollElement()
   container.overflowY = 'auto'
   const list = new ScrollElement()
@@ -51,7 +67,7 @@ function createLoader(editing?: EditingSession, fillShortList = true) {
   const loadNext = vi.fn()
   const scope = effectScope()
   scopes.push(scope)
-  scope.run(() =>
+  const { preparing } = scope.run(() =>
     useScrollPageLoader({
       editing,
       listElement,
@@ -62,13 +78,18 @@ function createLoader(editing?: EditingSession, fillShortList = true) {
       loadedCount,
       loadNext,
       fillShortList,
+      restoreScroll,
+      prefetch,
+      initialFill: prepareViewport ? { enabled: true, contentElement: listElement } : undefined,
     }),
-  )
+  )!
 
   return {
     container,
     listElement,
     list: list as unknown as HTMLElement,
+    content: list,
+    preparing,
     hasMore,
     loading,
     pageNumber,
@@ -102,12 +123,14 @@ function createVirtualLoader({
   editing,
   fillShortList = true,
   state = createPageState(count),
+  measuredHeights,
 }: {
   count?: number
   listOffset?: number
   editing?: EditingSession
   fillShortList?: boolean
   state?: ReturnType<typeof createPageState>
+  measuredHeights?: Pick<ReadonlyMap<number | string, number>, 'get'>
 } = {}) {
   const env = createResizeEnvironment()
   // The installed engine's touch-tail lifecycle uses the element's owning window timers.
@@ -128,7 +151,7 @@ function createVirtualLoader({
   const loadNext = vi.fn()
   const scope = effectScope()
   scopes.push(scope)
-  const virtual = scope.run(() => {
+  const { virtual, preparing, restorePosition } = scope.run(() => {
     const virtualList = useFixedVirtualList({
       items,
       getItemKey: (item) => item,
@@ -137,16 +160,21 @@ function createVirtualLoader({
       scrollElement,
       enabled,
     })
-    useScrollPageLoader({
+    const pagination = useScrollPageLoader({
       editing,
       listElement,
-      virtualList,
+      virtualList: {
+        ...virtualList,
+        measurements: measuredHeights && { getHeight: (key) => measuredHeights.get(key) },
+      },
       ...state,
       visibleCount: virtualList.count,
       loadNext,
       fillShortList,
+      initialFill: measuredHeights ? { enabled: true, contentElement: listElement } : undefined,
+      restoreScroll: true,
     })
-    return virtualList
+    return { virtual: virtualList, ...pagination }
   })!
   return {
     ...env,
@@ -161,6 +189,8 @@ function createVirtualLoader({
     enabled,
     loadNext,
     virtual,
+    preparing,
+    restorePosition,
     mount: () => {
       listElement.value = list.asElement()
     },
@@ -184,6 +214,196 @@ function press(element: EventTarget, key: string): void {
 }
 
 describe('useScrollPageLoader', () => {
+  it('uses measured virtual extent for first-viewport fill and keeps the existing page budget', async () => {
+    vi.stubGlobal('getComputedStyle', () => ({ paddingBottom: '0px' }))
+    const heights = shallowRef(new Map<number | string, number>())
+    const loader = createVirtualLoader({
+      count: 10,
+      fillShortList: false,
+      measuredHeights: { get: (key) => heights.value.get(key) },
+    })
+    loader.itemSize.value = 80
+    loader.mount()
+    await nextTick()
+    expect(loader.preparing.value).toBe(true)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+
+    loader.itemSize.value = 20
+    heights.value = new Map(loader.items.value.map((key) => [key, 20]))
+    await nextTick()
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    expect(loader.preparing.value).toBe(true)
+
+    loader.pageNumber.value = 4
+    await nextTick()
+    expect(loader.preparing.value).toBe(false)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+  })
+
+  it('restores a virtual viewport near the end without admitting a page until fresh input', async () => {
+    const loader = createVirtualLoader({ fillShortList: false })
+    loader.mount()
+    await nextTick()
+    loader.restorePosition(1600)
+    loader.container.dispatchEvent(new Event('scroll'))
+    await nextTick()
+    expect(loader.virtual.virtualItems.value[0]?.index).toBeGreaterThan(50)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+    loader.container.wheel(120)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+  })
+
+  it('prepares short rows one page at a time and reveals them at the top', async () => {
+    const editing = createEditingSession()
+    const loader = createLoader(editing, false, true, true, true)
+    loader.container.scrollHeight = 420 // The surrounding layout is taller than the viewport.
+    loader.content.bottom = 220
+    loader.loading.value = true
+    loader.pageNumber.value = 0
+    loader.listElement.value = loader.list
+    await nextTick()
+    expect(loader.preparing.value).toBe(true)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+
+    loader.pageNumber.value = 1
+    loader.loading.value = false
+    await nextTick()
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    loader.loading.value = true
+    loader.container.scrollTo(10)
+    loader.container.wheel(120)
+    await nextTick()
+    expect(loader.preparing.value).toBe(true)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+
+    loader.content.bottom = 370 // Content coordinate is 380, excluding the bottom padding.
+    loader.pageNumber.value = 2
+    loader.loading.value = false
+    await nextTick()
+    expect(loader.preparing.value).toBe(false)
+    expect(loader.container.scrollTop).toBe(0)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+
+    loader.container.scrollTo(15)
+    loader.stop()
+    const restored = createLoader(editing, false, true, true, true)
+    restored.listElement.value = restored.list
+    await nextTick()
+    expect(restored.preparing.value).toBe(false)
+    expect(restored.container.scrollTop).toBe(15)
+    expect(restored.loadNext).not.toHaveBeenCalled()
+  })
+
+  it('reveals the available rows after the preparation timeout without chaining more requests', async () => {
+    vi.useFakeTimers()
+    try {
+      const loader = createLoader(undefined, false, true, true, true)
+      loader.content.bottom = 100
+      loader.listElement.value = loader.list
+      await nextTick()
+      expect(loader.loadNext).toHaveBeenCalledOnce()
+      loader.loading.value = true
+      await vi.advanceTimersByTimeAsync(4_000)
+      expect(loader.preparing.value).toBe(false)
+      expect(loader.container.scrollTop).toBe(0)
+
+      loader.pageNumber.value = 2
+      loader.loading.value = false
+      await nextTick()
+      expect(loader.loadNext).toHaveBeenCalledOnce()
+      loader.container.wheel(120)
+      expect(loader.loadNext).toHaveBeenCalledTimes(2)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('bounds automatic filling even when three more pages cannot fill the viewport', async () => {
+    const loader = createLoader(undefined, false, false, false, true)
+    loader.listElement.value = loader.list
+    await nextTick()
+    loader.pageNumber.value = 2
+    await nextTick()
+    loader.pageNumber.value = 3
+    await nextTick()
+    expect(loader.preparing.value).toBe(true)
+    expect(loader.loadNext).toHaveBeenCalledTimes(3)
+    loader.pageNumber.value = 4
+    await nextTick()
+    expect(loader.preparing.value).toBe(false)
+    expect(loader.loadNext).toHaveBeenCalledTimes(3)
+  })
+
+  it('reveals loaded rows when a request ends without a new page and waits for fresh scroll input', async () => {
+    const loader = createLoader(undefined, false, false, true, true)
+    loader.listElement.value = loader.list
+    await nextTick()
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    loader.loading.value = true
+    loader.loading.value = false
+    await nextTick()
+    expect(loader.preparing.value).toBe(false)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    loader.container.wheel(120)
+    expect(loader.loadNext).toHaveBeenCalledTimes(2)
+  })
+
+  it.each(['filled', 'filtered', 'exhausted'])(
+    'reveals a %s first page without fetching',
+    async (kind) => {
+      const loader = createLoader(undefined, false, false, false, true)
+      if (kind === 'filled') loader.content.bottom = 400
+      if (kind === 'filtered') loader.visibleCount.value = 1
+      if (kind === 'exhausted') loader.hasMore.value = false
+      loader.listElement.value = loader.list
+      await nextTick()
+      expect(loader.preparing.value).toBe(false)
+      expect(loader.loadNext).not.toHaveBeenCalled()
+    },
+  )
+
+  it('prefetches one page on early downward input without chaining loads or expanding filtered demand', async () => {
+    const loader = createLoader(undefined, false, false, true)
+    loader.container.scrollHeight = 1300
+    loader.listElement.value = loader.list
+    await nextTick()
+    loader.container.scrollTo(290)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+    loader.visibleCount.value = 10
+    loader.container.scrollTo(340)
+    expect(loader.loadNext).not.toHaveBeenCalled()
+
+    loader.visibleCount.value = 20
+    loader.container.scrollTo(350)
+    loader.container.wheel(120)
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    loader.loading.value = true
+    loader.container.scrollTo(400)
+    loader.pageNumber.value = 2
+    loader.container.scrollHeight = 1350
+    loader.loading.value = false
+    await nextTick()
+    expect(loader.loadNext).toHaveBeenCalledOnce()
+    loader.container.scrollTo(410)
+    expect(loader.loadNext).toHaveBeenCalledTimes(2)
+  })
+  it('restores a retained scroll position without requesting a page on entry', async () => {
+    const editing = createEditingSession()
+    const first = createLoader(editing, false, true)
+    first.listElement.value = first.list
+    await nextTick()
+    first.container.scrollTop = 580
+    first.stop()
+
+    const second = createLoader(editing, false, true)
+    second.listElement.value = second.list
+    await nextTick()
+    expect(second.container.scrollTop).toBe(580)
+    second.container.dispatchEvent(new Event('scroll'))
+    expect(second.loadNext).not.toHaveBeenCalled()
+    second.container.wheel(120)
+    expect(second.loadNext).toHaveBeenCalledOnce()
+  })
   it('does not carry a previous scroll demand into an explicitly refreshed listing', async () => {
     const loader = createLoader(undefined, false)
     loader.listElement.value = loader.list

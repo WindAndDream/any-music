@@ -3,9 +3,11 @@ import { DEFAULT_CATALOG_FILTER_HISTORY_COLLAPSE_AFTER } from '@any-music/ui/cat
 import type { CatalogFilterHistoryEntry } from '@any-music/ui/catalog'
 import { getCatalogTrackFilterLabels } from '@any-music/ui/catalog'
 import AppIcon from '@any-music/ui/components/AppIcon.vue'
-import { computed, nextTick, shallowRef, useId, useTemplateRef, watch } from 'vue'
+import FilterHistoryChips from '@any-music/ui/components/FilterHistoryChips.vue'
+import { computed, inject, nextTick, shallowRef, useId, useTemplateRef, watch } from 'vue'
 
 import CatalogFilterDateRange from './CatalogFilterDateRange.vue'
+import { filterDialogKey } from './filter-dialog'
 
 /** 历史整组恢复或删除；两个操作并列，区间逐行分隔，标签组按内容宽度流式换行。 */
 const props = withDefaults(
@@ -23,6 +25,7 @@ const emit = defineEmits<{
   focusEmpty: []
 }>()
 const headingId = useId()
+const showDialog = inject(filterDialogKey)
 const root = useTemplateRef<HTMLElement>('root')
 const isExpanded = shallowRef(false)
 const isTagHistory = computed(() => props.entries[0]?.dimension === 'tags')
@@ -43,6 +46,18 @@ const visibleItems = computed(() =>
 watch([() => props.title, () => props.collapseAfter], () => {
   isExpanded.value = false
 })
+
+function activate(item: (typeof items.value)[number], triggerId: string): void {
+  if (item.entry.dimension !== 'platforms' || !showDialog) {
+    emit('restore', item.entry)
+    return
+  }
+  showDialog({
+    title: props.title,
+    returnFocusSelector: `[id="${triggerId}"]`,
+    platformHistory: { labels: item.labels, restore: () => emit('restore', item.entry) },
+  })
+}
 
 /** 等受控列表回流后聚焦相邻删除按钮；最后一组消失时由编辑器接回输入焦点。 */
 async function handleRemove(entry: CatalogFilterHistoryEntry, index: number): Promise<void> {
@@ -79,16 +94,20 @@ async function handleRemove(entry: CatalogFilterHistoryEntry, index: number): Pr
         }"
       >
         <button
+          :id="`${headingId}-entry-${itemIndex}`"
           class="catalog-filter-history__entry"
           :class="{
             'catalog-filter-history__entry--published': item.entry.dimension === 'published',
             'catalog-filter-history__entry--ranges':
               item.entry.dimension === 'published' || item.entry.dimension === 'duration',
+            'catalog-filter-history__entry--chips':
+              item.entry.dimension === 'tags' || item.entry.dimension === 'platforms',
             'catalog-filter-history__entry--tags': item.entry.dimension === 'tags',
           }"
           type="button"
-          :aria-label="`恢复筛选 ${item.labels.join('；')}`"
-          @click="emit('restore', item.entry)"
+          :aria-haspopup="item.entry.dimension === 'platforms' && showDialog ? 'dialog' : undefined"
+          :aria-label="`${item.entry.dimension === 'platforms' && showDialog ? '查看平台筛选历史' : '恢复筛选'} ${item.labels.join('；')}`"
+          @click="activate(item, `${headingId}-entry-${itemIndex}`)"
         >
           <template v-if="item.entry.dimension === 'published'">
             <CatalogFilterDateRange
@@ -100,14 +119,16 @@ async function handleRemove(entry: CatalogFilterHistoryEntry, index: number): Pr
               :show-labels="false"
             />
           </template>
+          <FilterHistoryChips
+            v-else-if="item.entry.dimension === 'tags' || item.entry.dimension === 'platforms'"
+            :labels="item.labels"
+            :single-line="item.entry.dimension === 'platforms'"
+          />
           <template v-else>
             <span
               v-for="(label, index) in item.labels"
               :key="index"
-              :class="{
-                'catalog-filter-history__range': item.entry.dimension === 'duration',
-                'catalog-filter-history__tag': item.entry.dimension === 'tags',
-              }"
+              :class="{ 'catalog-filter-history__range': item.entry.dimension === 'duration' }"
               >{{ label }}</span
             >
           </template>
@@ -188,6 +209,7 @@ async function handleRemove(entry: CatalogFilterHistoryEntry, index: number): Pr
   min-inline-size: 0;
   border: 0;
   border-radius: var(--am-radius-control) 0 0 var(--am-radius-control);
+  font-weight: 650;
 }
 .catalog-filter-history .catalog-filter-history__remove {
   place-content: center;
@@ -227,24 +249,8 @@ async function handleRemove(entry: CatalogFilterHistoryEntry, index: number): Pr
   align-items: flex-start;
   align-content: flex-start;
 }
-.catalog-filter-history .catalog-filter-history__entry--tags {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--am-space-1);
-  max-inline-size: 100%;
-  min-inline-size: 0;
+.catalog-filter-history .catalog-filter-history__entry--chips {
   padding: var(--am-space-2);
-  /* 组框保留主题表面色（浅色为白色），内层标签用浅底形成区域层次。 */
-  background: transparent;
-}
-.catalog-filter-history__tag {
-  min-inline-size: 0;
-  padding: var(--am-space-1) var(--am-space-2);
-  border: 1px solid var(--am-color-border);
-  border-radius: var(--am-radius-detail);
-  background: var(--am-color-surface-subtle);
-  color: var(--am-color-text);
 }
 /* 展开后的历史在自身窗口内滚动，移动端仍能快速到达面板底部的确定操作。 */
 .catalog-filter-history__entries--expanded {
@@ -258,7 +264,8 @@ async function handleRemove(entry: CatalogFilterHistoryEntry, index: number): Pr
   color: var(--am-color-primary);
   font-weight: 700;
 }
-.catalog-filter-history button:hover {
+.catalog-filter-history
+  button:hover:where(:not(.catalog-filter-history__entry--tags, .catalog-filter-history__remove)) {
   border-color: var(--am-color-primary);
   background: var(--am-color-primary-soft);
 }

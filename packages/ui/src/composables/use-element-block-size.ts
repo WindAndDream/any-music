@@ -16,8 +16,14 @@ export function useElementBlockSize(element: MaybeRefOrGetter<HTMLElement | null
       measure()
       let disconnect: (() => void) | undefined
       if (typeof ResizeObserver !== 'undefined') {
-        const observer = new ResizeObserver(measure)
-        observer.observe(target)
+        let previousBlockSize: number | undefined
+        const observer = new ResizeObserver(([entry]) => {
+          const size = entry?.borderBoxSize?.[0]?.blockSize
+          // A sidebar toggle only changes the player's inline size on most frames.
+          if (size === undefined || size !== previousBlockSize) measure()
+          previousBlockSize = size
+        })
+        observer.observe(target, { box: 'border-box' })
         disconnect = () => observer.disconnect()
       } else if (typeof window !== 'undefined') {
         window.addEventListener('resize', measure)

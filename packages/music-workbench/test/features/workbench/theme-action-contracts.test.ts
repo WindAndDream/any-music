@@ -1,6 +1,5 @@
 import type { Track } from '@any-music/core'
 import { definition as classic } from '@any-music/theme-default/vue'
-import { definition as studio } from '@any-music/theme-studio/vue'
 import {
   createDefaultAppShellPreferences,
   PRODUCT_DESTINATIONS,
@@ -13,12 +12,13 @@ import type { UiPluginCenterItem, UiThemeFeatureMap, UiThemeViews } from '@any-m
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defineComponent, h, nextTick, provide, reactive, shallowRef } from 'vue'
 
+import { alternateDefinition as alternate } from '../../fixtures/alternate-theme'
 import { createThemeFeatures } from '../../fixtures/theme-features'
+import { createSemanticThemeRenderer } from '../../helpers/semantic-theme-renderer'
 import {
   CatalogTestElement,
   dispatchCatalogEvent,
   findCatalogElement,
-  renderer,
 } from '../../helpers/test-renderer'
 
 vi.mock('vue', async (load) => {
@@ -85,7 +85,10 @@ const track: Track = {
   source: { pluginId: 'source', resourceId: 'song', mediaKind: 'audio' },
 }
 
-function mountTheme(initial: typeof classic | typeof studio, contributions?: UiContributionHost) {
+function mountTheme(
+  initial: typeof classic | typeof alternate,
+  contributions?: UiContributionHost,
+) {
   const base = createThemeFeatures(vi.fn())
   const catalog = reactive({
     ...base.catalog.state,
@@ -213,7 +216,8 @@ function mountTheme(initial: typeof classic | typeof studio, contributions?: UiC
   }
   const selection = shallowRef(initial)
   const editing = createEditingSession()
-  const root = new CatalogTestElement('root')
+  const { renderer, root, view } = createSemanticThemeRenderer()
+  vi.stubGlobal('getComputedStyle', view.getComputedStyle)
   let confirmation!: ReturnType<typeof provideConfirmationDialog>
   const app = renderer.createApp(
     defineComponent({
@@ -224,7 +228,12 @@ function mountTheme(initial: typeof classic | typeof studio, contributions?: UiC
         return () =>
           h(
             selection.value.Root,
-            { features, views: selection.value.views as UiThemeViews, form: 'desktop' },
+            {
+              key: selection.value.id,
+              features,
+              views: selection.value.views as UiThemeViews,
+              form: 'desktop',
+            },
             {
               'source-identity': () => h('span', '宿主身份'),
               'request-account': () => h('span', '请求账号'),
@@ -315,14 +324,9 @@ function openDiscovery(root: CatalogTestElement) {
   )
 }
 
-// Both real implementations execute exactly the same action assertions. Incomplete definitions
-// are mounted only here; no production loader fills missing views or bypasses admission.
-describe.each([
-  ['classic', classic],
-  ['studio', studio],
-] as const)('%s shared action contracts', (_name, definition) => {
+describe('Classic action contracts', () => {
   it('opens a checkbox playlist picker directly and submits all checked destinations once', async () => {
-    const f = mountTheme(definition)
+    const f = mountTheme(classic)
     f.catalog.playlists = ['commute', 'relax'].map((id) => ({
       id,
       name: id,
@@ -331,7 +335,7 @@ describe.each([
       updatedAtMs: 1,
     }))
     f.catalog.selectedTrackIds = ['song']
-    if (definition === classic) clickText(f.root, '操作器')
+    clickText(f.root, '操作器')
     await nextTick()
     clickText(f.root, '加入歌单')
     await nextTick()
@@ -339,7 +343,7 @@ describe.each([
     dispatchCatalogEvent(control(f.root, '全选当前歌单'), 'onClick')
     await nextTick()
     expect(control(f.root, '全选当前歌单').props['aria-pressed']).toBe(true)
-    f.selection.value = definition === classic ? studio : classic
+    f.selection.value = alternate
     await nextTick()
     expect(control(f.root, '全选当前歌单').props['aria-pressed']).toBe(true)
     clickText(f.root, '加入歌单（2）')
@@ -361,7 +365,7 @@ describe.each([
         selected: option.selected || option.value === value,
       }))
     })
-    const f = mountTheme(definition, {
+    const f = mountTheme(classic, {
       resolve: (_point, context) => [
         {
           id: 'tags',
@@ -378,7 +382,7 @@ describe.each([
       invoke,
     })
     f.catalog.selectedTrackIds = ['song']
-    if (definition === classic) clickText(f.root, '操作器')
+    clickText(f.root, '操作器')
     await nextTick()
     expect(() =>
       findCatalogElement(f.root, (node) => node.props.name === 'contribution-input'),
@@ -424,9 +428,9 @@ describe.each([
     expect(f.catalog.selectedTrackIds).toEqual(['song'])
   })
   it('confirms batch queue additions and preserves the selection on cancellation', async () => {
-    const f = mountTheme(definition)
+    const f = mountTheme(classic)
     f.catalog.selectedTrackIds = ['song']
-    if (definition === classic) clickText(f.root, '操作器')
+    clickText(f.root, '操作器')
     await nextTick()
     clickText(f.root, '添加待听')
     expect(f.confirmation.activeRequest.value?.title).toBe('添加到待听')
@@ -444,16 +448,16 @@ describe.each([
   it.each(['selection', 'context', 'theme'] as const)(
     'ignores queue confirmation after the %s changes',
     async (change) => {
-      const f = mountTheme(definition)
+      const f = mountTheme(classic)
       f.catalog.selectedTrackIds = ['song']
-      if (definition === classic) clickText(f.root, '操作器')
+      clickText(f.root, '操作器')
       await nextTick()
       clickText(f.root, '添加待听')
       if (change === 'selection') f.catalog.selectedTrackIds = []
       else if (change === 'context') {
         f.catalog.drawers = [{ ...f.catalog.drawers[0]!, id: 'another-request' }]
         f.catalog.activeDrawerId = 'another-request'
-      } else f.selection.value = definition === classic ? studio : classic
+      } else f.selection.value = alternate
       await nextTick()
       f.confirmation.accept()
       await nextTick()
@@ -462,7 +466,7 @@ describe.each([
   )
 
   it('routes player transport, precise seek and navigation through named host actions', async () => {
-    const f = mountTheme(definition)
+    const f = mountTheme(classic)
     dispatchCatalogEvent(control(f.root, '播放'), 'onClick')
     expect(f.playerActions.play).toHaveBeenCalledOnce()
     f.player.playing = true
@@ -480,16 +484,14 @@ describe.each([
     clickText(f.root, '我的喜欢')
     expect(f.navigate).toHaveBeenLastCalledWith('favorites')
   })
-  it('retains selection and distinct search/import drafts across both real roots without implicit actions', async () => {
-    const f = mountTheme(definition)
-    if (definition === classic) {
-      f.catalog.activeDrawerId = null
-      await nextTick()
-      openDiscovery(f.root)
-      await nextTick()
-      f.catalog.activeDrawerId = 'request'
-      await nextTick()
-    }
+  it('retains selection and distinct search/import drafts across a root remount without implicit actions', async () => {
+    const f = mountTheme(classic)
+    f.catalog.activeDrawerId = null
+    await nextTick()
+    openDiscovery(f.root)
+    await nextTick()
+    f.catalog.activeDrawerId = 'request'
+    await nextTick()
     const input = findCatalogElement(
       f.root,
       (node) => node.tag === 'input' && node.props.type === 'search',
@@ -498,48 +500,32 @@ describe.each([
     dispatchCatalogEvent(input, 'onInput')
     expect(f.catalog.searchQuery).toBe('unfinished')
     f.catalog.importUrl = 'https://example.com/draft'
-    if (definition === classic) {
-      clickText(f.root, '操作器')
-      await nextTick()
-    }
-    dispatchCatalogEvent(
+    clickText(f.root, '操作器')
+    await nextTick()
+    const trackSelection = () =>
       findCatalogElement(
         f.root,
         (node) => node.tag === 'input' && node.props['data-am-focus-key'] === 'track:song:select',
-      ),
-      'onChange',
-    )
+      )
+    dispatchCatalogEvent(await vi.waitFor(trackSelection), 'onChange')
     expect(f.actions.select).toHaveBeenCalledExactlyOnceWith(['song'])
 
-    f.selection.value = definition === classic ? studio : classic
+    f.selection.value = alternate
     await nextTick()
     expect(f.catalog.searchQuery).toBe('unfinished')
     expect(f.catalog.importUrl).toBe('https://example.com/draft')
-    if (definition === studio) {
-      clickText(f.root, '操作器')
-      await nextTick()
-    }
-    await vi.waitFor(() =>
-      expect(
-        findCatalogElement(
-          f.root,
-          (node) => node.tag === 'input' && node.props['data-am-focus-key'] === 'track:song:select',
-        ).props.checked,
-      ).toBe(true),
-    )
+    await vi.waitFor(() => expect(trackSelection().props.checked).toBe(true))
     expect(f.root.textContent).toContain('请求账号')
     expect(f.actions.submit).not.toHaveBeenCalled()
     expect(f.actions.loadMore).not.toHaveBeenCalled()
     expect(f.actions.play).not.toHaveBeenCalled()
   })
   it('submits explicitly and loads another page using the original request identity', async () => {
-    const f = mountTheme(definition)
-    if (definition === classic) {
-      f.catalog.activeDrawerId = null
-      await nextTick()
-      openDiscovery(f.root)
-      await nextTick()
-    }
+    const f = mountTheme(classic)
+    f.catalog.activeDrawerId = null
+    await nextTick()
+    openDiscovery(f.root)
+    await nextTick()
     dispatchCatalogEvent(
       findCatalogElement(f.root, (node) => node.tag === 'form'),
       'onSubmit',
@@ -549,85 +535,5 @@ describe.each([
     await nextTick()
     expect(f.root.textContent).not.toContain('加载更多歌曲')
     expect(f.actions.loadMore).not.toHaveBeenCalled()
-  })
-})
-
-describe('Studio capability and catalog edge states', () => {
-  it('retains the shared request-list filter draft across both roots and applies only explicitly', async () => {
-    const f = mountTheme(studio)
-    f.catalog.activeDrawerId = null
-    await nextTick()
-    clickText(f.root, '筛选音乐列表')
-    await nextTick()
-    const input = control(f.root, '列表筛选')
-    input.value = 'no matching request'
-    dispatchCatalogEvent(input, 'onInput')
-    f.selection.value = classic
-    await nextTick()
-    f.selection.value = studio
-    await nextTick()
-    expect(control(f.root, '列表筛选').value).toBe('no matching request')
-    expect(f.actions.submit).not.toHaveBeenCalled()
-    expect(f.actions.loadMore).not.toHaveBeenCalled()
-    clickText(f.root, '应用筛选')
-    await nextTick()
-    expect(f.root.textContent).toContain('没有匹配的音乐列表')
-  })
-
-  it('keeps loaded results when a source is disabled and prevents new submits/pages', async () => {
-    const f = mountTheme(studio)
-    f.catalog.sources = []
-    f.catalog.drawers[0]!.isSourceEnabled = false
-    await nextTick()
-    expect(f.root.textContent).toContain('暂无可用音乐源')
-    expect(f.root.textContent).toContain('测试歌曲')
-    dispatchCatalogEvent(
-      findCatalogElement(f.root, (node) => node.tag === 'form'),
-      'onSubmit',
-    )
-    expect(f.root.textContent).not.toContain('加载更多歌曲')
-    expect(f.actions.submit).not.toHaveBeenCalled()
-    expect(f.actions.loadMore).not.toHaveBeenCalled()
-  })
-
-  it('keeps distinct import/search drafts and clears only on explicit request', async () => {
-    const f = mountTheme(studio)
-    f.catalog.importUrl = 'https://example.com/draft'
-    clickText(f.root, '导入链接')
-    await nextTick()
-    expect(control(f.root, '导入链接').value).toBe('https://example.com/draft')
-    dispatchCatalogEvent(
-      findCatalogElement(f.root, (node) => node.tag === 'form'),
-      'onSubmit',
-    )
-    expect(f.actions.submit).toHaveBeenCalledOnce()
-    expect(f.actions.setRequestKind).toHaveBeenCalledExactlyOnceWith('import-url')
-    clickText(f.root, '清空输入')
-    expect(f.catalog.searchQuery).toBe('')
-    expect(f.catalog.importUrl).toBe('')
-    expect(f.actions.submit).toHaveBeenCalledOnce()
-  })
-
-  it('preserves an unfinished filter across roots without apply, and blocks invalid row playback/download', async () => {
-    const f = mountTheme(studio)
-    clickText(f.root, '筛选器')
-    await nextTick()
-    const filter = control(f.root, '歌曲筛选')
-    filter.value = 'unfinished'
-    dispatchCatalogEvent(filter, 'onInput')
-    f.selection.value = classic
-    await nextTick()
-    f.selection.value = studio
-    await nextTick()
-    expect(control(f.root, '歌曲筛选').value).toBe('unfinished')
-    expect(f.actions.applyFilters).not.toHaveBeenCalled()
-    f.catalog.invalidTrackIds = ['song']
-    await nextTick()
-    dispatchCatalogEvent(control(f.root, '播放 测试歌曲'), 'onClick')
-    dispatchCatalogEvent(control(f.root, '下载 测试歌曲'), 'onClick')
-    expect(f.actions.play).not.toHaveBeenCalled()
-    expect(f.actions.download).not.toHaveBeenCalled()
-    clickText(f.root, '取消筛选')
-    expect(f.catalog.filterDraft).toBeNull()
   })
 })

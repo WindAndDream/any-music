@@ -4,7 +4,6 @@ import {
   createBuiltInWorkbenchModules,
   builtInUiThemes,
   loadTagManagement,
-  loadMusicCreation,
 } from '../../../src/features/plugins/built-in-workbench-modules'
 
 const { directory: builtInWorkbenchModules } = createBuiltInWorkbenchModules('desktop')
@@ -20,35 +19,9 @@ describe('Tauri build module directory', () => {
       expect(module?.contributions).toEqual([])
     },
   )
-  it('loads creation state through named ports without native, GM or account capabilities', async () => {
-    const implementation = await loadMusicCreation()
-    expect(implementation.Composer).toBeDefined()
-    const original = {
-      materialCollections: [],
-      pendingMaterialTrackIds: ['legacy:leaf'],
-      materialCollectionByTrackId: {},
-    }
-    const session = implementation.createSession({
-      read: () => original,
-      write() {
-        throw new Error('No replay during load')
-      },
-      changed() {},
-      isCurrent: () => true,
-      rememberTracks() {},
-      publishCustomTrack() {
-        throw new Error('No publication during load')
-      },
-      readPublishedRecipe: () => undefined,
-      deleteCreationMaterials: () => [],
-    })
-    expect(session.snapshot().pendingMaterialTrackIds).toEqual(['legacy:leaf'])
-    expect(
-      builtInWorkbenchModules.filter((module) => module.id === 'feature.composer'),
-    ).toHaveLength(1)
-    session.dispose()
-    expect(() => session.clearData()).toThrow('停用')
-  }, 20_000)
+  it('leaves the unfinished creation feature outside the product directory', () => {
+    expect(builtInWorkbenchModules.some((module) => module.id === 'feature.composer')).toBe(false)
+  })
   it('loads tag state independently of account and native capabilities', async () => {
     const implementation = await loadTagManagement()
     expect(implementation.Panel).toBeDefined()
@@ -79,7 +52,7 @@ describe('Tauri build module directory', () => {
       builtInWorkbenchModules.every((module) => module.installationId.startsWith('tauri:')),
     ).toBe(true)
     expect(Object.isFrozen(builtInWorkbenchModules)).toBe(true)
-    expect(builtInUiThemes.map((theme) => theme.id)).toEqual(['default', 'studio'])
+    expect(builtInUiThemes.map((theme) => theme.id)).toEqual(['default'])
     expect(Object.isFrozen(builtInUiThemes)).toBe(true)
     expect(JSON.stringify(builtInUiThemes)).not.toMatch(/\.vue|loader|externalPlugins|grants/)
     expect(JSON.stringify(builtInWorkbenchModules)).not.toMatch(/grants|cookie|secret|invoke|\.vue/)

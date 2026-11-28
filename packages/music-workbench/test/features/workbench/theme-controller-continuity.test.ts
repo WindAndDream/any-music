@@ -7,7 +7,6 @@ import type {
   Track,
 } from '@any-music/core'
 import { definition as classic } from '@any-music/theme-default/vue'
-import { definition as studio } from '@any-music/theme-studio/vue'
 import { createCatalogTrackFilterState } from '@any-music/ui/catalog'
 import type { UiThemeViews } from '@any-music/ui/theme'
 import { createPinia, disposePinia } from 'pinia'
@@ -24,11 +23,12 @@ import { configureWorkbenchRuntime } from '../../../src/runtime/workbench-runtim
 import type { SourceInvalidation } from '../../../src/runtime/workbench-runtime'
 import { localMusicLibraryRepository } from '../../../src/storage/local-music-library-repository'
 import { createProductGenerationStorage } from '../../../src/storage/product-generation-store'
+import { alternateDefinition as alternate } from '../../fixtures/alternate-theme'
+import { createSemanticThemeRenderer } from '../../helpers/semantic-theme-renderer'
 import {
   CatalogTestElement,
   dispatchCatalogEvent,
   findCatalogElement,
-  renderer,
 } from '../../helpers/test-renderer'
 import { memory, options } from '../../storage/product-storage-fixtures'
 import { createControllerThemeFixture } from './controller-theme-fixture'
@@ -179,7 +179,9 @@ function mount(loadedTracks: readonly Track[] = [track('one')]) {
       controller?.player.handleNativePause()
     }),
   }
-  const selection = shallowRef<typeof classic | typeof studio>(classic)
+  const selection = shallowRef<typeof classic | typeof alternate>(classic)
+  const { renderer, root, view } = createSemanticThemeRenderer()
+  vi.stubGlobal('getComputedStyle', view.getComputedStyle)
   const app = renderer.createApp(
     defineComponent({
       setup() {
@@ -193,6 +195,7 @@ function mount(loadedTracks: readonly Track[] = [track('one')]) {
           h(
             selection.value.Root,
             {
+              key: selection.value.id,
               features: fixture.features.value,
               views: selection.value.views as UiThemeViews,
               form: 'desktop',
@@ -204,7 +207,6 @@ function mount(loadedTracks: readonly Track[] = [track('one')]) {
   )
   const pinia = createPinia()
   app.use(pinia)
-  const root = new CatalogTestElement('root')
   app.mount(root)
   let disposed = false
   const unmount = () => {
@@ -256,7 +258,54 @@ function button(root: CatalogTestElement, label: string) {
   )
 }
 
-describe('T09 actual classic/Studio roots with one real business controller', () => {
+describe('Classic root remounts with one business controller', () => {
+  it.each([classic])(
+    'updates the $id search field without rebuilding the catalog projection',
+    async (theme) => {
+      const f = mount()
+      await f.controller.modules.ready
+      await f.controller.workspace.search('previous')
+      f.selection.value = theme
+      await nextTick()
+      if (theme === classic) {
+        dispatchCatalogEvent(
+          findCatalogElement(
+            f.root,
+            (node) => node.props['aria-haspopup'] === 'dialog' && node.textContent === '发现',
+          ),
+          'onClick',
+        )
+        await nextTick()
+      }
+
+      const field = findCatalogElement(
+        f.root,
+        (node) => node.tag === 'input' && node.props.type === 'search',
+      )
+      const form = field.closest('form')!
+      const submit = findCatalogElement(form, (node) => node.props.type === 'submit')
+      const catalog = f.fixture.features.value.catalog
+      async function editQuery(text: string) {
+        field.value = text
+        dispatchCatalogEvent(field, 'onInput')
+        await nextTick()
+        expect(f.fixture.features.value.catalog).toBe(catalog)
+        expect(catalog.state.searchQuery).toBe(text)
+        expect(submit.props.disabled).toBe(!text)
+      }
+      await editQuery('音')
+      await editQuery('音乐')
+      await editQuery('音')
+      await editQuery('')
+      await editQuery('新歌曲')
+      expect(f.search).toHaveBeenCalledOnce()
+
+      dispatchCatalogEvent(form, 'onSubmit')
+      await vi.waitFor(() => expect(f.search).toHaveBeenCalledTimes(2))
+      expect(f.search).toHaveBeenLastCalledWith(expect.objectContaining({ query: '新歌曲' }))
+    },
+  )
+
   it('imports offline, checks only on playlist entry and releases descriptors without starting playback', async () => {
     const f = mount()
     await f.controller.modules.ready
@@ -307,7 +356,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     })
     expect(f.audio.play).not.toHaveBeenCalled()
     expect(f.audio.src).toBe('')
-    f.selection.value = studio
+    f.selection.value = alternate
     await nextTick()
     expect(resolve).toHaveBeenCalledOnce()
     expect(JSON.stringify(f.controller.library.records.value)).not.toContain('temporary')
@@ -323,8 +372,8 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     library.addTracksToPlaylist(other.id, [track('two')])
     const counts = () => f.fixture.features.value.playlists.state.playCountByPlaylistId!
     expect(counts().get(playlist.id)).toBe(0)
-    const entry = library.beginHistory(track('one'))
     library.beginHistory(track('one'))
+    const entry = library.beginHistory(track('one'))
     library.beginHistory(track('two'))
     library.beginHistory(track('outside'))
     library.updateHistory(entry, 3000, 10000)
@@ -339,7 +388,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     expect(counts().get(other.id)).toBe(0)
   })
 
-  it.each([classic, studio])(
+  it.each([classic])(
     'pauses $id notices and releases the pause on theme replacement',
     async (theme) => {
       vi.useFakeTimers()
@@ -365,7 +414,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
       dispatchCatalogEvent(playbackToast, 'onMouseenter', false)
       vi.advanceTimersByTime(10000)
       expect(f.controller.playbackNotice.message.value).toBe('播放提示')
-      f.selection.value = theme === classic ? studio : classic
+      f.selection.value = theme === classic ? alternate : classic
       await nextTick()
       vi.advanceTimersByTime(2200)
       expect(f.controller.playbackNotice.message.value).toBeUndefined()
@@ -394,7 +443,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     setDefault('history', 'tracks', { itemStyle: 'minimal' })
     setDefault('plugins', 'tracks', { layout: 'list' })
     setDefault('tags', 'tracks', { layout: 'rows' })
-    f.selection.value = studio
+    f.selection.value = alternate
     await nextTick()
     expect(features().history.state.itemStyle).toBe('minimal')
     expect(features().plugins.state.defaultDisplay).toBe('list')
@@ -416,7 +465,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
         f.root,
         (node) => node.tag === 'button' && node.props['data-am-focus-key'] === 'track:one:play',
       )
-    dispatchCatalogEvent(cover(), 'onClick')
+    dispatchCatalogEvent(await vi.waitFor(cover), 'onClick')
     await vi.waitFor(() => expect(f.resolveMedia).toHaveBeenCalledOnce())
     f.resolving.resolve({
       type: 'remote-url',
@@ -447,9 +496,9 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     await nextTick()
     expect(f.fixture.selected.value).toEqual(['one'])
     expect(f.audio.paused).toBe(false)
-    f.selection.value = studio
+    f.selection.value = alternate
     await nextTick()
-    expect(cover().props['aria-pressed']).toBe(true)
+    await vi.waitFor(() => expect(cover().props['aria-pressed']).toBe(true))
     dispatchCatalogEvent(cover(), 'onClick')
     await nextTick()
     expect(f.fixture.selected.value).toEqual([])
@@ -480,7 +529,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
         before.favorites.state.addedAtMsByTrackId,
       )
       expect(after.favorites.state.selectedTrackIds).toEqual([ids[0]])
-      for (const id of ['queue', 'playlists', 'custom-tracks', 'downloads', 'history'] as const)
+      for (const id of ['queue', 'playlists', 'downloads', 'history'] as const)
         expect(after[id]).toBe(before[id])
       expect(after.catalog.state.tracks).toBe(before.catalog.state.tracks)
     }
@@ -610,7 +659,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     expect(features().queue.state.platformTrackCounts.get(one.source.pluginId)).toBe(2)
     await new Promise<void>((done) => setImmediate(done))
     const writes = f.data.writes.length
-    f.selection.value = studio
+    f.selection.value = alternate
     await nextTick()
     f.selection.value = classic
     await nextTick()
@@ -627,8 +676,15 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     await c.workspace.search('cancelled')
     const id = c.workspace.drawers.value[0]!.id
     c.openCatalogDrawer(id)
+    f.selection.value = alternate
     const pending = f.fixture.features.value.catalog.actions.loadMore(id)
     await vi.waitFor(() => expect(f.requested).toEqual([1, 2]))
+    const refresh = findCatalogElement(
+      f.root,
+      (node) => node.tag === 'button' && node.textContent.trim() === '刷新',
+    )
+    expect(refresh.props.disabled).toBe(true)
+    expect(f.root.textContent).not.toContain('取消加载')
     f.fixture.features.value.catalog.actions.cancel(id)
     expect(f.cancellation()?.isCancelled()).toBe(true)
     f.page.resolve()
@@ -725,15 +781,23 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     f.fixture.features.value.overlays.actions.close(c.confirmationDialog.activeRequest.value!.id)
     expect(await next).toBe(false)
   })
-  it('preserves requests, selection, native playback and navigation across classic → Studio → classic', async () => {
+  it('preserves requests, selection, native playback and navigation across root replacement', async () => {
     const f = mount(),
       c = f.controller
     await c.modules.ready
     f.fixture.features.value.catalog.actions.setItemStyle?.('default')
-    // Submit from the real Studio form to the real source workspace.
-    f.selection.value = studio
-    await vi.waitFor(() => expect(f.root.textContent).toContain('开始搜索'))
-    const query = findCatalogElement(f.root, (node) => node.props['aria-label'] === '搜索关键词')
+    f.selection.value = alternate
+    await nextTick()
+    dispatchCatalogEvent(
+      findCatalogElement(
+        f.root,
+        (node) => node.props['aria-haspopup'] === 'dialog' && node.textContent.trim() === '发现',
+      ),
+      'onClick',
+    )
+    const query = await vi.waitFor(() =>
+      findCatalogElement(f.root, (node) => node.tag === 'input' && node.props.type === 'search'),
+    )
     query.value = 'submitted'
     dispatchCatalogEvent(query, 'onInput')
     await nextTick()
@@ -744,11 +808,17 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     await vi.waitFor(() => expect(f.requested).toEqual([1]))
     const id = c.workspace.drawers.value[0]!.id
     c.openCatalogDrawer(id)
+    const playTrack = () =>
+      findCatalogElement(
+        f.root,
+        (node) => node.tag === 'button' && node.props['data-am-focus-key'] === 'track:one:play',
+      )
+    dispatchCatalogEvent(await vi.waitFor(playTrack), 'onClick')
+    await vi.waitFor(() => expect(f.resolveMedia).toHaveBeenCalledOnce())
+    await vi.waitFor(() => click(f.root, '操作器'))
     await vi.waitFor(() => expect(input(f.root, 'track:one:select')).toBeDefined())
     dispatchCatalogEvent(input(f.root, 'track:one:select'), 'onChange')
-    dispatchCatalogEvent(button(f.root, '播放 one'), 'onClick')
-    await vi.waitFor(() => expect(f.resolveMedia).toHaveBeenCalledOnce())
-    void c.workspace.loadNext(id)
+    const pendingPage = c.workspace.loadNext(id)
     await vi.waitFor(() => expect(f.requested).toEqual([1, 2]))
     const subscriptions = f.subscriptions.length
     c.workspace.searchQuery.value = 'unfinished'
@@ -757,7 +827,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     c.library.persistNow()
     await new Promise<void>((done) => setImmediate(done))
     const writes = f.data.writes.length
-    for (const definition of [classic, studio, classic]) {
+    for (const definition of [classic, alternate, classic]) {
       f.selection.value = definition
       // eslint-disable-next-line no-await-in-loop
       await vi.waitFor(() => expect(input(f.root, 'track:one:select').props.checked).toBe(true))
@@ -784,7 +854,7 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     c.player.handleLoadedMetadata()
     await vi.waitFor(() => expect(c.player.displayedIsPlaying.value).toBe(true))
     const loads = f.audio.load.mock.calls.length
-    f.selection.value = studio
+    f.selection.value = alternate
     await vi.waitFor(() => expect(button(f.root, '暂停')).toBeDefined())
     dispatchCatalogEvent(button(f.root, '暂停'), 'onClick')
     await vi.waitFor(() => expect(f.audio.paused).toBe(true))
@@ -796,10 +866,16 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     expect(f.audio.currentTime).toBe(4)
     click(f.root, '我的喜欢')
     await vi.waitFor(() => expect(c.activeTab.value).toBe('favorites'))
+    expect(f.cancellation()?.isCancelled()).toBe(true)
     click(f.root, '发现')
     f.selection.value = classic
     f.page.resolve()
-    await vi.waitFor(() => expect(c.activeCatalogDrawer.value?.tracks).toHaveLength(2))
+    await pendingPage
+    expect(c.activeCatalogDrawer.value).toMatchObject({
+      tracks: [track('one')],
+      paginationLocked: true,
+    })
+    await f.fixture.features.value.catalog.actions.loadMore(id)
     expect(f.fixture.selected.value).toEqual(['one'])
     expect(f.requested).toEqual([1, 2])
     expect(f.maximumReads()).toBe(1)
@@ -825,8 +901,8 @@ describe('T09 actual classic/Studio roots with one real business controller', ()
     c.openCatalogDrawer(id)
     const pending = c.workspace.loadNext(id)
     await vi.waitFor(() => expect(f.requested).toEqual([1, 2]))
-    f.selection.value = studio
-    await vi.waitFor(() => expect(f.root.textContent).toContain('寻找下一首音乐'))
+    f.selection.value = alternate
+    await vi.waitFor(() => expect(f.root.textContent).toContain('正在加载歌曲'))
     const cancellation = f.cancellation()!
     f.subscriptions.forEach(({ listener }) =>
       listener({

@@ -6,8 +6,12 @@ const trackRowSource = readFileSync(
   new URL('../../../src/components/music-sources/TrackRow.vue', import.meta.url),
   'utf8',
 )
-const catalogDrawerSource = readFileSync(
-  new URL('../../../src/components/music-sources/CatalogDrawer.vue', import.meta.url),
+const classicCatalogSource = readFileSync(
+  new URL('../../../src/components/music-sources/ClassicCatalog.vue', import.meta.url),
+  'utf8',
+)
+const classicRootSource = readFileSync(
+  new URL('../../../src/ClassicRoot.vue', import.meta.url),
   'utf8',
 )
 const operatorPanelSource = readFileSync(
@@ -71,9 +75,8 @@ describe('catalog track selection markup', () => {
     expect(operatorPanelSource).toContain("'下载处理中…' : '下载已选'")
     expect(operatorPanelSource).toContain('<span>添加喜欢</span>')
     expect(operatorPanelSource).not.toContain('删除已选歌曲')
-    expect(catalogDrawerSource).toContain('useTrackBatchActions({')
-    expect(catalogDrawerSource).toContain('@download-selected="batchActions.downloadSelected"')
-    expect(catalogDrawerSource).toContain(
+    expect(classicCatalogSource).toContain('@download-selected="batchActions.downloadSelected"')
+    expect(classicCatalogSource).toContain(
       '@add-to-playlist="batchActions.requestAddSelectedToPlaylist"',
     )
   })
@@ -98,19 +101,22 @@ describe('catalog track selection markup', () => {
     expect(operatorPanelSource).not.toContain('catalog-actions__scope')
   })
 
-  it('reserves real scroll space above the bottom-anchored player with coordinated reduced-motion-aware transitions', () => {
-    expect(workbenchStyles).toContain(
-      'transition: padding-block-start var(--am-motion-slow) var(--am-ease-emphasized);',
+  it('keeps the scroll viewport height independent of the operator toggle', () => {
+    expect(classicRootSource).toMatch(
+      /class="catalog-operator-toolbar"[^>]*><\/div>\s*<div class="catalog-player-stage">/,
     )
-    expect(workbenchStyles).toContain('.catalog-player-stage--operator-open')
-    expect(workbenchStyles).toContain('var(--am-player-block-size, 0px)')
-    expect(workbenchStyles).not.toContain('.catalog-player-stage--list-operator-open')
+    const reservation = workbenchStyles
+      .split(
+        '.catalog-operator-toolbar:has(> .classic-collection-controls) + .catalog-player-stage {',
+      )[1]
+      ?.split('}')[0]
+    expect(reservation).toMatch(/min-block-size:\s*max\(/)
+    expect(reservation).toContain(' - var(--am-shell-mobile-navigation-offset)')
+    expect(workbenchStyles).not.toContain('.catalog-player-stage--operator-open')
+    expect(workbenchStyles).not.toContain('transition: padding-block-start')
     expect(workbenchStyles).toContain(
       'padding-block-end: max(var(--am-catalog-page-padding), var(--am-space-6));',
     )
     expect(shellSource).toContain('scroll-padding-block-end: var(--am-space-6);')
-    expect(workbenchStyles).toMatch(
-      /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.catalog-player-stage,/,
-    )
   })
 })

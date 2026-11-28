@@ -745,13 +745,19 @@ describe('account-owned Douyin catalog IPC', () => {
     )
     const cancellation = new CancellationSource()
     const source = createDouyinBrowserCatalog('account-a', cancellation.signal)
-    const result = source.getSelfProfile()
+    const result = source.getSelfImportProfile()
+    expect(native.invoke).toHaveBeenCalledWith(
+      'douyin_catalog_request',
+      expect.objectContaining({ accountId: 'account-a', importKind: 'self-profile' }),
+    )
     cancellation.cancel()
     resolve(Uint8Array.from([0, 200, 123, 125]).buffer)
     await expect(result).rejects.toMatchObject({ code: 'operation-cancelled' })
     const requestId = native.invoke.mock.calls[0]?.[1].requestId
     expect(native.invoke).toHaveBeenCalledWith('cancel_request', { requestId })
-    await expect(source.getSelfProfile()).rejects.toMatchObject({ code: 'operation-cancelled' })
+    await expect(source.getSelfImportProfile()).rejects.toMatchObject({
+      code: 'operation-cancelled',
+    })
     expect(
       native.invoke.mock.calls.filter(([command]) => command === 'douyin_catalog_request'),
     ).toHaveLength(1)
@@ -800,7 +806,9 @@ describe('account-owned Douyin catalog IPC', () => {
     'rejects truncated or invalid native status packets %j',
     async (...values) => {
       native.invoke.mockResolvedValue(Uint8Array.from(values).buffer)
-      await expect(createDouyinBrowserCatalog('account-a').getSelfProfile()).rejects.toMatchObject({
+      await expect(
+        createDouyinBrowserCatalog('account-a').getSelfImportProfile(),
+      ).rejects.toMatchObject({
         code: 'invalid-response',
       })
     },

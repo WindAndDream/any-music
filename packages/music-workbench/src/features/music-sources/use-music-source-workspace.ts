@@ -41,6 +41,7 @@ interface CatalogDrawerRuntime {
   requiresRestart?: boolean
   interruptionError: ShallowRef<AppErrorState | undefined>
   accountStatusVisible: ShallowRef<boolean>
+  pagination: ShallowRef<{ locked: boolean; refreshRevision: number }>
 }
 
 interface UseMusicSourceWorkspaceOptions {
@@ -249,8 +250,12 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
     runtime.invalidReason.value = ''
     // search/import 自身只消费第一页；后续页由详情列表的滚动动作逐页推进。
     runtime.requiresRestart = false
+    const wasPaginationLocked = runtime.pagination.value.locked
     if (recipe.kind === 'search') await catalog.search(recipe.input)
     else await catalog.importUrl(recipe.input)
+    // The card still receives its first page if the detail was closed during loading.
+    if (!wasPaginationLocked && runtime.pagination.value.locked && catalog.hasMore.value)
+      catalog.suspend()
     updateDrawerOutcome(recipe, runtime)
   }
 
@@ -275,8 +280,9 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
       // Rebind through the current plugin; only an explicit refresh starts at page one.
       restoreCatalog(recipe, runtime, plugin)
     }
-    await runtime.catalog.loadNext()
-    updateDrawerOutcome(recipe, runtime)
+    const catalog = runtime.catalog
+    await catalog.loadNext()
+    if (runtime.catalog === catalog) updateDrawerOutcome(recipe, runtime)
   }
 
   /** 删除歌曲同步当前抽屉的保留结果，不改写资料库、喜欢列表或原始请求。 */
@@ -289,6 +295,28 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
 
   function retry(drawerId: string): Promise<void> {
     return runDrawer(drawerId)
+  }
+
+  function refresh(drawerId: string): Promise<void> {
+    const runtime = runtimeById.get(drawerId)
+    if (!runtime || runtime.pendingRun) return Promise.resolve()
+    disposeCatalog(runtime)
+    store.setDrawerResult(drawerId, undefined)
+    runtime.pagination.value = {
+      locked: false,
+      refreshRevision: runtime.pagination.value.refreshRevision + 1,
+    }
+    const reload = retry(drawerId)
+    store.persistNow()
+    return reload
+  }
+
+  function closeDrawer(drawerId: string): void {
+    const runtime = runtimeById.get(drawerId)
+    if (!runtime) return
+    runtime.pagination.value = { ...runtime.pagination.value, locked: true }
+    // The initial search belongs to the card; later pages belong to the open detail.
+    if (runtime.catalog && runtime.catalog.loadedPageCount.value > 0) runtime.catalog.suspend()
   }
 
   function prepareVerification(drawerId: string): void {
@@ -392,8 +420,10 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
     if (!recipe) return
     if (!recipe.isExpanded) store.setDrawerExpanded(drawerId, true)
     const runtime = runtimeById.get(drawerId)
-    if (runtime) runtime.accountStatusVisible.value = true
-    if (runtime?.status.value === 'idle') void runDrawer(drawerId)
+    if (!runtime) return
+    runtime.accountStatusVisible.value = true
+    if (runtime.pagination.value.locked) return
+    if (runtime.status.value === 'idle') void runDrawer(drawerId)
   }
 
   function toggleDrawer(drawerId: string): void {
@@ -554,6 +584,7 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
   function createDrawerView(recipe: CatalogDrawerRecipe): CatalogDrawerView {
     const runtime = runtimeById.get(recipe.id)
     const catalog = runtime?.catalog
+    const result = recipe.result
     const isSourceEnabled =
       isPluginEnabled(recipe.pluginId) && Boolean(options.getPlugin(recipe.pluginId))
     const status = !options.getPlugin(recipe.pluginId)
@@ -562,7 +593,7 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
         ? 'disconnected'
         : (runtime?.status.value ?? getDormantDrawerStatus(recipe.pluginId))
     const liveAccount = catalog?.account.value
-    const origin = catalog?.originAccount.value ?? liveAccount ?? recipe.result?.account
+    const origin = catalog?.originAccount.value ?? liveAccount ?? result?.account
     const account = origin
       ? {
           ...origin,
@@ -580,11 +611,13 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
       // 多账号列表尚未选出身份时保持未知，不能拿当前平台会话冒充请求账号。
       account,
       accountStatusVisible: runtime?.accountStatusVisible.value ?? false,
-      sourceUrl: catalog?.sourceUrl.value ?? recipe.result?.sourceUrl,
+      sourceUrl: catalog?.sourceUrl.value ?? result?.sourceUrl,
       isSourceEnabled,
-      loadedPageCount: catalog?.loadedPageCount.value ?? recipe.result?.loadedPageCount ?? 0,
-      tracks: catalog?.tracks.value ?? recipe.result?.tracks ?? [],
-      total: catalog ? catalog.total.value : recipe.result?.total,
+      paginationLocked: runtime?.pagination.value.locked,
+      refreshRevision: runtime?.pagination.value.refreshRevision,
+      loadedPageCount: catalog?.loadedPageCount.value ?? result?.loadedPageCount ?? 0,
+      tracks: catalog?.tracks.value ?? result?.tracks ?? [],
+      total: catalog ? catalog.total.value : result?.total,
       hasMore:
         isSourceEnabled && isPluginAvailable(recipe.pluginId) && (catalog?.hasMore.value ?? false),
       isLoading: isSourceEnabled && (catalog?.isLoading.value ?? false),
@@ -615,6 +648,7 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
           invalidReason: shallowRef(getDormantDrawerReason(recipe.pluginId)),
           interruptionError: shallowRef(),
           accountStatusVisible: shallowRef(false),
+          pagination: shallowRef({ locked: Boolean(recipe.result), refreshRevision: 0 }),
         })
         const runtime = runtimeById.get(recipe.id)!
         const plugin = options.getPlugin(recipe.pluginId)
@@ -804,6 +838,7 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
     loadNext,
     removeTracks,
     retry,
+    refresh,
     verify,
     prepareVerification,
     cancelVerification,
@@ -821,6 +856,7 @@ export function useMusicSourceWorkspace(options: UseMusicSourceWorkspaceOptions)
     toggleDrawerPinned,
     moveDrawer,
     openDrawer,
+    closeDrawer,
     toggleDrawer,
     removeDrawer,
     removeDrawers,

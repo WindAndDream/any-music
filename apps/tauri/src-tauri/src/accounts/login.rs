@@ -3,17 +3,17 @@ use crate::{
     state::{QrSession, RuntimeState},
 };
 use serde_json::{Value, json};
-use tauri::{State, WebviewWindow};
+use tauri::{State, Webview};
 
 /// Renderer UUIDs scope cancellation even before generation finishes; platform tokens stay native.
 #[tauri::command]
 pub async fn begin_qr_login(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     login_id: String,
 ) -> Result<Value, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     crate::model::validate_id(&login_id)?;
     let usage = std::sync::Arc::new(state.use_account(&account_id, "登录与验证")?);
     if state.account(&account_id)?.platform_id == "douyin" {
@@ -23,16 +23,13 @@ pub async fn begin_qr_login(
         let mut browsers = state.browsers.lock().unwrap();
         let account = state.account(&account_id)?;
         if crate::browser::verification::retain_running(&mut browsers, &account_id)? {
-            return Err("请先完成或关闭此账号的系统浏览器验证。".into());
+            return Err("请先完成或关闭此账号的应用内登录页面。".into());
         }
         if !account.enabled {
             return Err("请先启用此账号。".into());
         }
-        if !matches!(
-            account.platform_id.as_str(),
-            "bilibili" | "douyin" | "netease"
-        ) {
-            return Err("此平台使用系统浏览器完成验证。".into());
+        if !matches!(account.platform_id.as_str(), "bilibili" | "netease") {
+            return Err("此平台使用应用内网页完成验证。".into());
         }
         let session =
             state.create_session(&account, reqwest_cookie_store::CookieStore::default())?;
@@ -52,7 +49,6 @@ pub async fn begin_qr_login(
                 _usage: Some(usage),
                 key: String::new(),
                 handoff: None,
-                douyin: None,
                 generation: login_id.clone(),
                 session: session.clone(),
             },
@@ -69,16 +65,6 @@ pub async fn begin_qr_login(
                 .filter(|qr| qr.generation == login_id && !qr.session.cancelled.is_cancelled())
                 .ok_or("二维码会话已取消或替换。")?;
             current.key = key;
-            return Ok(public);
-        }
-        if platform == "douyin" {
-            let (pending, public) = crate::accounts::douyin_login::generate(&session).await?;
-            let mut qr = state.qr.lock().unwrap();
-            let current = qr
-                .get_mut(&account_id)
-                .filter(|qr| qr.generation == login_id && !qr.session.cancelled.is_cancelled())
-                .ok_or("二维码会话已取消或替换。")?;
-            current.douyin = Some(pending);
             return Ok(public);
         }
         let account = state.account(&account_id)?;
@@ -116,6 +102,7 @@ pub async fn begin_qr_login(
         current.handoff = Some(crate::state::QrHandoff {
             url: handoff_url,
             expires: std::time::Instant::now() + std::time::Duration::from_secs(180),
+            #[cfg(any(mobile, test))]
             opened: false,
         });
         Ok(json!({"status":"waiting","qrContent":url}))
@@ -123,7 +110,7 @@ pub async fn begin_qr_login(
     let result = tokio::select! {
         _ = session.cancelled.cancelled() => Err("登录已取消。".into()),
         result = tokio::time::timeout(std::time::Duration::from_secs(20), work) =>
-            result.map_err(|_| "二维码生成超时，请改用系统浏览器登录。".to_string()).and_then(|value| value),
+            result.map_err(|_| "二维码生成超时，请改用应用内网页登录。".to_string()).and_then(|value| value),
     };
     if result.is_err() {
         let _browsers = state.browsers.lock().unwrap();
@@ -183,12 +170,12 @@ fn bilibili_handoff_url(value: &str, key: &str) -> Result<String, String> {
 
 #[tauri::command]
 pub async fn open_qr_login(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     login_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let current = pending(&state, &account_id, &login_id)?;
     let public_url = current
         .handoff
@@ -215,7 +202,7 @@ pub async fn open_qr_login(
             handoff.opened = true;
             public_url
         };
-        crate::system::android::open_bilibili_login(window.app_handle(), &url).await
+        crate::system::android::open_bilibili_login(webview.app_handle(), &url).await
     }
     #[cfg(not(target_os = "android"))]
     {
@@ -226,12 +213,12 @@ pub async fn open_qr_login(
 
 #[tauri::command]
 pub async fn poll_qr_login(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     login_id: String,
 ) -> Result<Value, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     let current = pending(&state, &account_id, &login_id)?;
     if state.account(&account_id)?.platform_id == "douyin" {
         return poll_douyin(&state, &account_id, &login_id);
@@ -243,14 +230,10 @@ pub async fn poll_qr_login(
             .acquire()
             .await
             .map_err(|_| "登录会话已关闭。")?;
-        // A preceding SMS operation may have updated the challenge while this request was queued.
         let current = pending(&state, &account_id, &login_id)?;
-        let mut douyin = current.douyin.clone();
         let platform = state.account(&account_id)?.platform_id;
         let public = if platform == "netease" {
             super::netease_login::poll(&state, &account_id, &current.session, &current.key).await?
-        } else if let Some(qr) = &mut douyin {
-            crate::accounts::douyin_login::poll(&current.session, qr).await?
         } else {
             if current.key.is_empty() {
                 return Err("二维码尚未生成。".into());
@@ -281,7 +264,7 @@ pub async fn poll_qr_login(
                 Some(86090) => "scanned",
                 Some(86038) => "expired",
                 Some(86101) => "waiting",
-                _ => return Err("未知二维码状态，请用系统浏览器验证。".into()),
+                _ => return Err("未知二维码状态，请改用应用内网页验证。".into()),
             };
             json!({"status":status})
         };
@@ -294,15 +277,13 @@ pub async fn poll_qr_login(
         // Serialize credential commit with browser launch and account environment changes.
         let _browsers = state.browsers.lock().unwrap();
         let mut qr = state.qr.lock().unwrap();
-        let latest = qr
-            .get_mut(&account_id)
+        qr.get(&account_id)
             .filter(|qr| qr.generation == login_id && !qr.session.cancelled.is_cancelled())
             .ok_or("二维码会话已取消或替换。")?;
-        latest.douyin = douyin;
         if public["status"] == "signed-in" {
             let platform = state.account(&account_id)?.platform_id;
             if !has_credential(&current, &platform) {
-                return Err("登录确认未返回有效凭证，请用系统浏览器验证。".into());
+                return Err("登录确认未返回有效凭证，请改用应用内网页验证。".into());
             }
             state
                 .sessions
@@ -358,16 +339,6 @@ fn has_credential(current: &QrSession, platform: &str) -> bool {
                 && match platform {
                     "bilibili" => name == "SESSDATA",
                     "netease" => name == "MUSIC_U",
-                    // Confirmed against the live site on 2026-10-03, after the first fully
-                    // completed scan-plus-verification sign-in: the browser's own subsequent
-                    // request carried BOTH sessionid and sessionid_ss (equal values), together
-                    // with sid_tt, sid_guard, uid_tt, uid_tt_ss, session_tlb_tag, sid_ucp_v1,
-                    // ssid_ucp_v1, x_tt_token, passport_assist_user, n_mh, login_time and
-                    // bd_ticket_guard_server_data. This pair is therefore observed rather than
-                    // assumed, and no cookie value is recorded here on purpose. Note that
-                    // sessionid does not appear in document.cookie, so only a request header or
-                    // an equivalent credential read can see it.
-                    "douyin" => matches!(name, "sessionid" | "sessionid_ss"),
                     _ => false,
                 }
         })
@@ -380,60 +351,40 @@ async fn sms_action(
     code: Option<&str>,
 ) -> Result<Value, String> {
     let current = pending(state, account_id, login_id)?;
-    if state.account(account_id)?.platform_id == "douyin" {
-        let result = state
-            .douyin_browsers
-            .sms(
-                account_id,
-                code.map(str::to_owned),
-                &current.session.cancelled,
-            )
-            .await?;
-        pending(state, account_id, login_id)?;
-        return Ok(result);
+    if state.account(account_id)?.platform_id != "douyin" {
+        return Err("此账号没有抖音验证会话。".into());
     }
-    let work = async {
-        let _queue = current
-            .session
-            .queue
-            .acquire()
-            .await
-            .map_err(|_| "登录会话已关闭。")?;
-        let mut current = pending(state, account_id, login_id)?;
-        let douyin = current.douyin.as_mut().ok_or("此账号没有抖音验证会话。")?;
-        let result = crate::accounts::douyin_login::sms(&current.session, douyin, code).await;
-        let _browsers = state.browsers.lock().unwrap();
-        let mut qr = state.qr.lock().unwrap();
-        let latest = qr
-            .get_mut(account_id)
-            .filter(|qr| qr.generation == login_id && !qr.session.cancelled.is_cancelled())
-            .ok_or("二维码会话已取消或替换。")?;
-        // Keep resend cooldowns on rejected sends; pending challenge state never goes to disk.
-        latest.douyin = current.douyin;
-        result
-    };
-    tokio::select! { _ = current.session.cancelled.cancelled() => Err("登录已取消。".into()), result = work => result }
+    let result = state
+        .douyin_browsers
+        .sms(
+            account_id,
+            code.map(str::to_owned),
+            &current.session.cancelled,
+        )
+        .await?;
+    pending(state, account_id, login_id)?;
+    Ok(result)
 }
 
 #[tauri::command]
 pub async fn send_login_sms(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     login_id: String,
 ) -> Result<Value, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     sms_action(&state, &account_id, &login_id, None).await
 }
 #[tauri::command]
 pub async fn submit_login_sms(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     login_id: String,
     code: String,
 ) -> Result<Value, String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     sms_action(&state, &account_id, &login_id, Some(&code)).await
 }
 
@@ -492,7 +443,6 @@ async fn begin_douyin(
                 _usage: Some(usage),
                 key: String::new(),
                 handoff: None,
-                douyin: None,
                 generation: login_id.into(),
                 session: session.clone(),
             },
@@ -513,7 +463,7 @@ async fn begin_douyin(
             tokio::time::sleep(std::time::Duration::from_millis(200)).await;
         }
     };
-    let result = tokio::select! {_=session.cancelled.cancelled()=>Err("登录已取消。".into()),result=tokio::time::timeout(std::time::Duration::from_secs(35),work)=>result.map_err(|_|"官方页面未生成二维码，请在账号浏览器中查看登录入口。".to_string()).and_then(|v|v)};
+    let result = tokio::select! {_=session.cancelled.cancelled()=>Err("登录已取消。".into()),result=tokio::time::timeout(std::time::Duration::from_secs(35),work)=>result.map_err(|_|"官方页面未生成二维码，请在账号页面中查看登录入口。".to_string()).and_then(|v|v)};
     if result.is_err() {
         let _lock = state.browsers.lock().unwrap();
         cancel_pending(state, account_id, login_id)?;
@@ -559,12 +509,12 @@ pub fn commit_douyin(
 }
 #[tauri::command]
 pub fn cancel_qr_login(
-    window: WebviewWindow,
+    webview: Webview,
     state: State<'_, RuntimeState>,
     account_id: String,
     login_id: String,
 ) -> Result<(), String> {
-    require_main(&window)?;
+    require_main(&webview)?;
     state.account(&account_id)?;
     let _browsers = state.browsers.lock().unwrap();
     cancel_pending(&state, &account_id, &login_id)
@@ -617,19 +567,16 @@ mod tests {
             _usage: None,
             key: String::new(),
             handoff: None,
-            douyin: None,
             generation: "new".into(),
             session: session.clone(),
         };
-        state
-            .qr
-            .lock()
-            .unwrap()
-            .insert(account.id.clone(), qr.clone());
+        state.qr.lock().unwrap().insert(account.id.clone(), qr);
         state.pause_login(&account.id).unwrap();
         cancel_pending(&state, &account.id, "old").unwrap();
         assert!(pending(&state, &account.id, "new").is_ok());
-        assert!(!has_credential(&qr, "douyin"));
+        assert!(!crate::browser::douyin_browser::projection::has_login(
+            &session.cookies.lock().unwrap()
+        ));
         let url = "https://www.douyin.com/".parse().unwrap();
         session
             .cookies
@@ -637,7 +584,9 @@ mod tests {
             .unwrap()
             .parse("sessionid=test; Domain=douyin.com; Path=/; Secure", &url)
             .unwrap();
-        assert!(has_credential(&qr, "douyin"));
+        assert!(crate::browser::douyin_browser::projection::has_login(
+            &session.cookies.lock().unwrap()
+        ));
         cancel_pending(&state, &account.id, "new").unwrap();
         assert!(session.cancelled.is_cancelled());
         assert_eq!(state.account(&account.id).unwrap().status, "ready");

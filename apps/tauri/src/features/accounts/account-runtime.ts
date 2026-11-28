@@ -1,7 +1,12 @@
-import { AccountCatalog, AccountSelector, requestWithAccountPool } from '@any-music/account-pool'
+import { AccountCatalog, requestWithAccountPool } from '@any-music/account-pool'
 import type { AccountOperationPolicy } from '@any-music/account-pool'
 import { AppError, createAppErrorState } from '@any-music/core'
-import type { CancellationSignal, MusicSourcePlugin, Track } from '@any-music/core'
+import type {
+  CancellationSignal,
+  MusicSourcePlugin,
+  MusicSourceSession,
+  Track,
+} from '@any-music/core'
 import type { SourceInvalidation } from '@any-music/music-workbench'
 import {
   CancellationSource,
@@ -23,6 +28,7 @@ export interface NativeAccount {
   id: string
   platformId: string
   name: string
+  platformNickname?: string
   status: string
   state: AccountState
   enabled: boolean
@@ -44,7 +50,6 @@ export interface AccountSnapshot {
   accountLabels?: Readonly<Record<string, { name: string; activeAccountId: string | null }>>
 }
 export type AccountOperation = 'search' | 'import' | 'playback' | 'session'
-const POLICY_STORAGE_KEY = 'any-music:tauri:account-policies:v1'
 const SELECTION_STORAGE_KEY = 'any-music:tauri:selected-accounts:v1'
 
 /** Public account metadata is reactive; credentials and browser processes remain in Rust. */
@@ -70,10 +75,16 @@ export class AccountRuntime {
   readonly snapshot = shallowRef<AccountSnapshot>({ accounts: [], proxies: [] })
   /** 复用既有会话检查的公开用户名；账号弹窗与列表详情不为展示额外请求平台。 */
   readonly sessionUserNames = shallowRef<ReadonlyMap<string, string>>(new Map())
+  rememberSessionUserName(accountId: string, session: MusicSourceSession): void {
+    const name = session.status === 'signed-in' ? session.user.name.trim() : ''
+    if (!name && session.status !== 'signed-out' && session.status !== 'expired') return
+    const names = new Map(this.sessionUserNames.value)
+    if (name) names.set(accountId, name)
+    else names.delete(accountId)
+    this.sessionUserNames.value = names
+  }
   readonly catalog = new AccountCatalog()
   readonly selectedAccountIds = shallowRef<Readonly<Record<string, string>>>({})
-  private readonly selector = new AccountSelector()
-  private readonly policies = new Map<string, AccountOperationPolicy>()
   private generation = 0
   private readonly invalidationListeners = new Set<(event: SourceInvalidation) => void>()
   private readonly uses = new Map<string, Set<{ trackId?: string; release: () => void }>>()
@@ -185,57 +196,60 @@ export class AccountRuntime {
           : 'signed-out',
       })
     }
-    const selected = Object.fromEntries(
-      Object.entries(this.selectedAccountIds.value).filter(([platform, id]) =>
-        next.accounts.some(
-          (account) => account.id === id && account.platformId === platform && account.enabled,
-        ),
-      ),
-    )
-    if (JSON.stringify(selected) !== JSON.stringify(this.selectedAccountIds.value)) {
-      this.selectedAccountIds.value = selected
-      localStorage.setItem(SELECTION_STORAGE_KEY, JSON.stringify(selected))
-    }
+    this.restoreSelectedAccounts()
   }
   async initialize(): Promise<void> {
-    await this.refresh()
-    let stored: Record<string, AccountOperationPolicy> = {}
-    try {
-      stored = JSON.parse(localStorage.getItem(POLICY_STORAGE_KEY) ?? '{}') ?? {}
-    } catch {
-      // Preferences can be restored independently of the native account vault.
-    }
-    for (const [key, policy] of Object.entries(stored)) {
-      const [platform, operation] = key.split('/')
-      if (platform && operation) {
-        try {
-          this.setPolicy(platform, operation as AccountOperation, policy, false)
-        } catch {
-          /* Discard invalid preferences. */
-        }
-      }
-    }
     try {
       const selected: unknown = JSON.parse(localStorage.getItem(SELECTION_STORAGE_KEY) ?? '{}')
       if (selected && typeof selected === 'object' && !Array.isArray(selected)) {
         this.selectedAccountIds.value = Object.fromEntries(
           Object.entries(selected).filter(
-            ([platform, id]) =>
-              typeof id === 'string' &&
-              this.snapshot.value.accounts.some(
-                (account) =>
-                  account.id === id && account.platformId === platform && account.enabled,
-              ),
+            (entry): entry is [string, string] => typeof entry[1] === 'string',
           ),
         )
       }
     } catch {
       /* Ignore invalid identity preferences; credentials remain in the native vault. */
     }
+    // Read the saved choice before refreshing so the default cannot overwrite it at startup.
+    await this.refresh()
+  }
+
+  private getDefaultAccount(platform: string): NativeAccount | undefined {
+    const accounts = this.snapshot.value.accounts.filter(
+      (account) => account.platformId === platform && account.enabled && !account.pending,
+    )
+    return (
+      accounts.find((account) => account.id === this.selectedAccountIds.value[platform]) ??
+      accounts.find(
+        (account) =>
+          account.status === 'ready' &&
+          (account.authentication === 'credential' || platform.startsWith('external:')),
+      ) ??
+      accounts[0]
+    )
+  }
+
+  private restoreSelectedAccounts(): void {
+    const platforms = new Set(this.snapshot.value.accounts.map((account) => account.platformId))
+    const selected = Object.fromEntries(
+      [...platforms].flatMap((platform) => {
+        const account = this.getDefaultAccount(platform)
+        return account ? [[platform, account.id]] : []
+      }),
+    )
+    if (JSON.stringify(selected) === JSON.stringify(this.selectedAccountIds.value)) return
+    localStorage.setItem(SELECTION_STORAGE_KEY, JSON.stringify(selected))
+    this.selectedAccountIds.value = selected
+  }
+
+  getSelectedAccountName(platform: string): string | undefined {
+    const selectedId = this.selectedAccountIds.value[platform]
+    return this.snapshot.value.accounts.find((account) => account.id === selectedId)?.name
   }
 
   /** 搜索偏好只作用于新操作；已存在的列表和媒体保持实际使用的账号。 */
-  async selectAccount(platform: string, id: string | null): Promise<void> {
+  async selectAccount(platform: string, id: string): Promise<void> {
     if (
       ![...ACCOUNT_PLATFORMS, ...this.sourcePlatforms.value].some(
         (source) => source.id === platform,
@@ -243,76 +257,33 @@ export class AccountRuntime {
     )
       throw new AppError('invalid-input', '平台不支持账号切换。')
     if (
-      id &&
       !this.snapshot.value.accounts.some(
-        (account) => account.id === id && account.platformId === platform && account.enabled,
+        (account) =>
+          account.id === id &&
+          account.platformId === platform &&
+          account.enabled &&
+          !account.pending,
       )
     )
       throw new AppError('invalid-input', '账号已停用或不存在，请刷新后重试。')
-    if ((this.selectedAccountIds.value[platform] ?? null) === id) return
-    const selected = { ...this.selectedAccountIds.value }
-    if (id) selected[platform] = id
-    else delete selected[platform]
+    if (this.selectedAccountIds.value[platform] === id) return
+    const selected = { ...this.selectedAccountIds.value, [platform]: id }
     localStorage.setItem(SELECTION_STORAGE_KEY, JSON.stringify(selected))
     this.selectedAccountIds.value = selected
   }
-  getPolicy(
-    platform: string,
-    operation: AccountOperation,
-    useSelection = true,
-  ): AccountOperationPolicy {
+  getPolicy(platform: string, operation: AccountOperation): AccountOperationPolicy {
     const isDouyinSearch = platform === 'douyin' && operation === 'search'
-    const signedInAccounts =
-      operation === 'session' || (platform === 'douyin' && operation === 'search')
-        ? this.snapshot.value.accounts
-            .filter(
-              (a) => a.platformId === platform && a.enabled && a.authentication === 'credential',
-            )
-            .map((a) => a.id)
-        : []
-    const configuredPolicy = this.policies.get(`${platform}/${operation}`)
-    const availableIds = configuredPolicy?.accountIds?.filter((id) =>
-      this.snapshot.value.accounts.some(
-        (account) => account.id === id && account.platformId === platform && account.enabled,
-      ),
-    )
-    // 删除/停用最后一个参与账号后恢复默认候选范围，避免遗留策略阻挡剩余账号。
-    const policy: AccountOperationPolicy = configuredPolicy
-      ? {
-          ...configuredPolicy,
-          accountIds:
-            configuredPolicy.accountIds?.length && !availableIds?.length
-              ? signedInAccounts.length
-                ? signedInAccounts
-                : undefined
-              : availableIds,
-        }
-      : {
-          ...DEFAULT_ATTEMPT_POLICY,
-          // Native search has a 45s deadline including browser startup and queued work.
-          // Leave time for its bounded cleanup/error projection instead of cancelling at 25s.
-          attemptTimeoutMs: isDouyinSearch ? 50_000 : 25_000,
-          totalTimeoutMs: 60_000,
-          concurrency: 2,
-          selection: 'shuffle',
-          // A fast guest response must not hide an existing account's login/verification state.
-          accountIds: signedInAccounts.length ? signedInAccounts : undefined,
-        }
-    // Official-page search is deliberately serial, including previously saved parallel policies.
-    const selected = useSelection ? this.selectedAccountIds.value[platform] : undefined
-    const scoped = selected ? { ...policy, accountIds: [selected] } : policy
-    return isDouyinSearch ? { ...scoped, mode: 'serial', concurrency: 1 } : scoped
-  }
-  setPolicy(
-    platform: string,
-    operation: AccountOperation,
-    policy: AccountOperationPolicy,
-    persist = true,
-  ): void {
-    this.catalog.savePolicy(platform, operation, policy)
-    this.policies.set(`${platform}/${operation}`, this.catalog.getPolicy(platform, operation)!)
-    if (persist)
-      localStorage.setItem(POLICY_STORAGE_KEY, JSON.stringify(Object.fromEntries(this.policies)))
+    const isDouyinPlayback = platform === 'douyin' && operation === 'playback'
+    const selected = this.getDefaultAccount(platform)
+    return {
+      ...DEFAULT_ATTEMPT_POLICY,
+      // Allow native official-page loading and bounded cleanup to finish before cancellation.
+      attemptTimeoutMs: isDouyinSearch ? 105_000 : isDouyinPlayback ? 50_000 : 25_000,
+      totalTimeoutMs: isDouyinSearch ? 115_000 : isDouyinPlayback ? 70_000 : 60_000,
+      mode: 'serial',
+      concurrency: 1,
+      accountIds: selected ? [selected.id] : [],
+    }
   }
   async run<T>(
     platform: string,
@@ -347,7 +318,13 @@ export class AccountRuntime {
         )
       const preferredId =
         accountId &&
-        this.snapshot.value.accounts.some((account) => account.id === accountId && account.enabled)
+        this.snapshot.value.accounts.some(
+          (account) =>
+            account.id === accountId &&
+            account.platformId === platform &&
+            account.enabled &&
+            !account.pending,
+        )
           ? accountId
           : undefined
       const policy = preferredId
@@ -448,7 +425,6 @@ export class AccountRuntime {
       }
       const result = await requestWithAccountPool({
         catalog: this.catalog,
-        selector: this.selector,
         platformId: platform,
         operation,
         policy,

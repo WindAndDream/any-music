@@ -14,6 +14,7 @@ const props = defineProps<{
   selected?: boolean
   selectionOnly?: boolean
   disabled?: boolean
+  virtualPlacement?: boolean
   getReorderStyle?: (kind: 'track', id: string) => CSSProperties | undefined
 }>()
 const reorderStyle = computed(() => props.getReorderStyle?.('track', props.playlist.id))
@@ -34,7 +35,8 @@ const emit = defineEmits<{
       'playlist-tile--moving': reorderStyle || dragging,
       'playlist-tile--selected': selected,
     }"
-    data-am-grid-motion
+    :data-am-grid-motion="virtualPlacement ? undefined : ''"
+    :data-am-continuity-item="playlist.id"
     :style="reorderStyle"
     :inert="disabled ? true : undefined"
     @click="!disabled && (selectable ? emit('select', playlist.id) : emit('open', playlist.id))"

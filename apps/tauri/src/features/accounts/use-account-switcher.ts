@@ -1,9 +1,13 @@
 import { formatAppErrorMessage, toAppErrorState } from '@any-music/core'
+import { CancellationSource } from '@any-music/network-routing'
 import { computed, onScopeDispose, readonly, shallowRef, toValue } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
 
+import { createDouyinBrowserCatalog } from '../../platform/douyin-browser-catalog'
+import { readDouyinAccountNickname } from '../music-sources/douyin-account-nickname'
 import { ACCOUNT_PLATFORMS } from './account-presentation'
 import type { AccountRuntime } from './account-runtime'
+import { getAccountState } from './account-state'
 
 /** The switcher owns one platform at a time and ignores results from a closed dialog. */
 export function useAccountSwitcher(
@@ -17,6 +21,7 @@ export function useAccountSwitcher(
   const error = shallowRef('')
   let generation = 0
   let disposed = false
+  let nicknameReads: CancellationSource | undefined
   const accounts = computed(() =>
     runtime.snapshot.value.accounts.filter((account) => account.platformId === platformId.value),
   )
@@ -24,14 +29,51 @@ export function useAccountSwitcher(
     platformId.value ? (runtime.selectedAccountIds.value[platformId.value] ?? null) : null,
   )
 
+  async function readMissingDouyinNicknames(source: CancellationSource) {
+    const defaultId = selectedId.value
+    for (const { id } of accounts.value) {
+      if (source.signal.isCancelled()) return
+      const account = runtime.snapshot.value.accounts.find((candidate) => candidate.id === id)
+      // Discover already checks the default account. Fill only missing names on other rows.
+      if (
+        id === defaultId ||
+        !account?.enabled ||
+        account.authentication !== 'credential' ||
+        getAccountState(account).login !== 'signed-in' ||
+        account.platformNickname ||
+        runtime.sessionUserNames.value.has(id)
+      )
+        continue
+      try {
+        // oxlint-disable-next-line no-await-in-loop -- Bound profile pages to one alternate account at a time.
+        const nickname = await readDouyinAccountNickname(
+          createDouyinBrowserCatalog(id, source.signal),
+          source.signal,
+        )
+        if (nickname && !source.signal.isCancelled()) {
+          // oxlint-disable-next-line no-await-in-loop -- Publish each completed nickname before starting the next read.
+          await runtime.refresh()
+        }
+      } catch {
+        // A display read leaves the account selectable and can be retried on the next open.
+      }
+    }
+  }
+
   async function open(platform: string) {
     if (!toValue(supportedPlatforms).includes(platform)) return
+    nicknameReads?.cancel()
+    nicknameReads = undefined
     const current = ++generation
     platformId.value = platform
     error.value = ''
     busy.value = true
     try {
       await runtime.refresh()
+      if (platform === 'douyin' && current === generation) {
+        nicknameReads = new CancellationSource()
+        void readMissingDouyinNicknames(nicknameReads)
+      }
     } catch (cause) {
       if (current === generation)
         error.value = formatAppErrorMessage(
@@ -43,11 +85,13 @@ export function useAccountSwitcher(
   }
   function close() {
     generation++
+    nicknameReads?.cancel()
+    nicknameReads = undefined
     platformId.value = null
     busy.value = false
     error.value = ''
   }
-  async function select(id: string | null, refreshSession: () => Promise<void>) {
+  async function select(id: string, refreshSession: () => Promise<void>) {
     if (!platformId.value || busy.value) return
     const current = generation
     busy.value = true
@@ -77,7 +121,7 @@ export function useAccountSwitcher(
   }
   onScopeDispose(() => {
     disposed = true
-    generation++
+    close()
   })
   return {
     platformId: readonly(platformId),

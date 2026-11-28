@@ -211,9 +211,9 @@ it.each(['shadow', 'embedded'])(
             : [hidden, replacement],
     } as unknown as HTMLElement
     const resources = createThemeResources(() => root)
-    const resource = resources.prepare('studio', '.am-theme-studio .studio-navigation {}')
+    const resource = resources.prepare('alternate', '.am-theme-alternate .alternate-navigation {}')
     expect(styles).toHaveLength(1)
-    expect(styles[0]?.dataset.amThemeResource).toBe('studio')
+    expect(styles[0]?.dataset.amThemeResource).toBe('alternate')
     expect(styles[0]?.media).toBe('not all')
     resource.activate()
     expect(styles[0]?.media).toBe('all')
