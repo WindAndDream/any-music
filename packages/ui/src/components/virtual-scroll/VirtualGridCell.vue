@@ -33,8 +33,9 @@ const reorderAttributes = computed(() =>
     : {},
 )
 let release: (() => void) | undefined
+// Compare DOM identities so production's shallow template refs cannot force registration churn.
 watch(
-  [content, () => props.row.key],
+  [() => content.value, () => props.row.key],
   ([element, key]) => {
     release?.()
     release = element ? props.observe(key, element) : undefined
@@ -44,7 +45,7 @@ watch(
 onScopeDispose(() => release?.())
 let releaseMotion: (() => void) | undefined
 watch(
-  [cell, flip, () => props.row.key],
+  [() => cell.value, () => flip.value, () => props.row.key],
   ([slot, surface, key]) => {
     releaseMotion?.()
     releaseMotion = slot && surface ? props.registerMotion(key, slot, surface) : undefined
@@ -54,7 +55,12 @@ watch(
 onScopeDispose(() => releaseMotion?.())
 let releaseInteraction: (() => void) | undefined
 watch(
-  [cell, () => props.row.key, () => props.registerInteraction, () => props.interactionGeneration],
+  [
+    () => cell.value,
+    () => props.row.key,
+    () => props.registerInteraction,
+    () => props.interactionGeneration,
+  ],
   ([element, key, register]) => {
     releaseInteraction?.()
     releaseInteraction = element && register ? register(key, element) : undefined
