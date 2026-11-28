@@ -27,6 +27,7 @@ Check the applicable real-world scenarios for each implemented scope. Each page 
 | [Discover grid focus](catalog-grid-focus.md)                | Verify list, Track Actions and return in the Windows build            |
 | [Catalog platform hover](catalog-platform-hover.md)         | Mobile platform highlight and details button                          |
 | [Discover favorite button](catalog-favorite-label.md)       | Button text in the Discover track header                              |
+| [Song actions dialog](song-actions-dialog.md)               | Two-row summary and name preview in Discover and Downloads            |
 | [Desktop plugins](desktop-plugin-delivery.md)               | Renew exact target admission and verify actual installer registration |
 | [Desktop source authentication](desktop-source-gateways.md) | Live declarative gateway and account-bound pagination                 |
 | [Android release](android-release.md)                       | Signed-release transport, physical minimum-device and channel checks  |
