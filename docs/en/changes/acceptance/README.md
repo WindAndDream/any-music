@@ -23,6 +23,7 @@ Check the applicable real-world scenarios for each implemented scope. Each page 
 | [Android themes](theme-android.md)                          | Broader devices, configurations and longer sessions                   |
 | [Library virtual lists](virtual-library-lists.md)           | Individual consumer check before staging or production activation     |
 | [Catalog virtual lists](virtual-catalog-lists.md)           | Real paging, input and Windows host/child handoff                     |
+| [Discover grid focus](catalog-grid-focus.md)                | Verify list, Track Actions and return in the Windows build            |
 | [Catalog platform hover](catalog-platform-hover.md)         | Mobile platform highlight and details button                          |
 | [Discover favorite button](catalog-favorite-label.md)       | Button text in the Discover track header                              |
 | [Desktop plugins](desktop-plugin-delivery.md)               | Renew exact target admission and verify actual installer registration |

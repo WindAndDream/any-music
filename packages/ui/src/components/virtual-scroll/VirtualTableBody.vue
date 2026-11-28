@@ -23,7 +23,7 @@ defineSlots<{
 const content = useTemplateRef<HTMLElement>('content')
 let release: (() => void) | undefined
 watch(
-  [content, () => props.row.key],
+  [() => content.value, () => props.row.key],
   ([element, key]) => {
     release?.()
     release = element ? props.observe(key, element) : undefined
@@ -34,7 +34,7 @@ onScopeDispose(() => release?.())
 let releaseInteraction: (() => void) | undefined
 watch(
   [
-    content,
+    () => content.value,
     () => props.row.key,
     () => props.registerInteraction,
     () => props.interactionGeneration,
