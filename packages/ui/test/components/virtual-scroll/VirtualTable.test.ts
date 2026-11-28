@@ -14,6 +14,15 @@ import {
 } from '../../fixtures/virtual-scroll/resize-observer'
 import { findCatalogElement, type CatalogTestElement } from '../music-sources/catalog-test-renderer'
 
+vi.mock('vue', async (load) => {
+  const vue = await load<typeof import('vue')>()
+  return {
+    ...vue,
+    // Production Vue exposes the shallow template ref directly.
+    useTemplateRef: <T>(key: string) => vue.toRaw(vue.useTemplateRef<T>(key)),
+  }
+})
+
 async function settle() {
   await nextTick()
   await nextTick()
@@ -111,6 +120,25 @@ function setup(count: number, withDetails = false, interaction = false) {
 const samples: { count: number; mounted: number; observed: number; released: number }[] = []
 
 describe('controlled native VirtualTable (Node renderer; injected boxes)', () => {
+  it('keeps production row registrations across snapshots with the same occurrence key', async () => {
+    const test = setup(1000, false, true)
+    await settle()
+    const first = groups(test.root)[0]!
+    const releaseListener = vi.spyOn(first as unknown as EventTarget, 'removeEventListener')
+    const observer = test.observers[0]!
+    observer.unobserve.mockClear()
+    try {
+      const [item, ...rest] = test.items.value
+      test.items.value = [{ ...item!, entity: 'updated-song' }, ...rest]
+      await settle()
+      expect(groups(test.root)[0]).toBe(first)
+      expect(releaseListener).not.toHaveBeenCalled()
+      expect(observer.unobserve).not.toHaveBeenCalledWith(first)
+    } finally {
+      test.unmount()
+    }
+  })
+
   it('opts into bounded focus/composition leases and re-registers surviving row groups after disable', async () => {
     const test = setup(1000, false, true)
     await settle()

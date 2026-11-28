@@ -14,6 +14,7 @@ Check the applicable real-world scenarios for each implemented scope. Each page 
 | Scope                                                       | Next check                                                            |
 | ----------------------------------------------------------- | --------------------------------------------------------------------- |
 | [Release 0.2.0](release-0-2-0.md)                           | Candidate build matrix and maintainer and tester acceptance           |
+| [Release 0.2.1](release-0-2-1.md)                           | Hotfix candidate CI, independent review and runtime acceptance        |
 | [Android release build](android-release-compilation.md)     | Required Android CI and refreshed release candidate                   |
 | [Playback failure feedback](playback-failure-feedback.md)   | Check the top notice and persisted skip setting in installed builds   |
 | [Operator list jump](operator-list-jump.md)                 | Check installed Userscript and remaining collection views             |
@@ -23,6 +24,7 @@ Check the applicable real-world scenarios for each implemented scope. Each page 
 | [Android themes](theme-android.md)                          | Broader devices, configurations and longer sessions                   |
 | [Library virtual lists](virtual-library-lists.md)           | Individual consumer check before staging or production activation     |
 | [Catalog virtual lists](virtual-catalog-lists.md)           | Real paging, input and Windows host/child handoff                     |
+| [Discover grid focus](catalog-grid-focus.md)                | Verify list, Track Actions and return in the Windows build            |
 | [Catalog platform hover](catalog-platform-hover.md)         | Mobile platform highlight and details button                          |
 | [Discover favorite button](catalog-favorite-label.md)       | Button text in the Discover track header                              |
 | [Desktop plugins](desktop-plugin-delivery.md)               | Renew exact target admission and verify actual installer registration |
