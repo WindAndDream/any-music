@@ -20,7 +20,9 @@ use tokio::sync::mpsc;
 
 /// Hidden pages keep a desktop-sized viewport outside the visible window area, so official
 /// layouts, lazy lists and scroll observers behave as they do for a visible browser tab.
+#[cfg(desktop)]
 const HIDDEN_ORIGIN: f64 = 8192.0;
+#[cfg(desktop)]
 const VIEWPORT: (f64, f64) = (1280.0, 800.0);
 /// Captured bodies use the same budget as the account response caches, plus metadata.
 pub(crate) const MAX_BODY: usize = 12 * 1024 * 1024;
@@ -417,6 +419,7 @@ pub fn seed_cookies(
 }
 
 struct Link {
+    #[cfg(any(windows, test))]
     account: String,
     token: String,
     reports: mpsc::Sender<Value>,
@@ -425,8 +428,10 @@ struct Shown {
     label: String,
     mode: Presentation,
     revealed: bool,
+    #[cfg(desktop)]
     focused: bool,
     size: Option<(f64, f64)>,
+    #[cfg(desktop)]
     webview: tauri::Webview,
 }
 
@@ -479,6 +484,7 @@ impl Host {
         self.links.lock().unwrap().insert(
             label.clone(),
             Link {
+                #[cfg(any(windows, test))]
                 account: store.account.clone(),
                 token,
                 reports: reports.clone(),
@@ -524,7 +530,7 @@ impl Host {
     pub fn close(&self, page: &Page) {
         #[cfg(windows)]
         let retained = self.catalog.reader_closed(&page.label);
-        #[cfg(not(windows))]
+        #[cfg(all(desktop, not(windows)))]
         let retained = false;
         self.links.lock().unwrap().remove(&page.label);
         let account = {
@@ -541,6 +547,7 @@ impl Host {
         if let Some(account) = account {
             self.emit(&account, "closed", None, None);
         }
+        #[cfg(desktop)]
         if !retained {
             let _ = page.webview.close();
         }
@@ -553,13 +560,15 @@ impl Host {
                 label: page.label.clone(),
                 mode,
                 revealed: false,
+                #[cfg(desktop)]
                 focused: false,
                 size: None,
+                #[cfg(desktop)]
                 webview: page.webview.clone(),
             },
         );
         if let Some(previous) = previous {
-            hide(&previous.webview);
+            hide(&previous);
         }
         self.emit(account, "pending", Some(mode), None);
         if mode == Presentation::Page {
@@ -603,7 +612,7 @@ impl Host {
             }
             current.revealed = false;
             current.size = None;
-            hide(&current.webview);
+            hide(current);
             (account.clone(), current.mode)
         };
         self.emit(&event.0, "pending", Some(event.1), None);
@@ -629,7 +638,7 @@ impl Host {
         if let Some(shown) = self.shown.lock().unwrap().get_mut(account) {
             match bounds {
                 Some(bounds) if shown.revealed => place(shown, &bounds),
-                _ => hide(&shown.webview),
+                _ => hide(shown),
             }
         }
         Ok(())
@@ -677,7 +686,8 @@ impl Host {
         #[cfg(not(target_os = "macos"))]
         let _ = account;
     }
-    pub fn owns(&self, label: &str, account: &str) -> bool {
+    #[cfg(any(windows, test))]
+    fn owns(&self, label: &str, account: &str) -> bool {
         self.links
             .lock()
             .unwrap()
@@ -708,6 +718,8 @@ impl Host {
     }
 }
 
+// Only desktop can create a child WebView. The shared presentation code also compiles on mobile.
+#[cfg(desktop)]
 fn place(shown: &mut Shown, bounds: &Bounds) {
     let _ = shown.webview.set_bounds(tauri::Rect {
         position: tauri::LogicalPosition::new(bounds.x, bounds.y).into(),
@@ -718,12 +730,18 @@ fn place(shown: &mut Shown, bounds: &Bounds) {
         let _ = shown.webview.set_focus();
     }
 }
-fn hide(webview: &tauri::Webview) {
-    let _ = webview.set_bounds(tauri::Rect {
+#[cfg(not(desktop))]
+fn place(_: &mut Shown, _: &Bounds) {}
+
+#[cfg(desktop)]
+fn hide(shown: &Shown) {
+    let _ = shown.webview.set_bounds(tauri::Rect {
         position: tauri::LogicalPosition::new(HIDDEN_ORIGIN, 0.0).into(),
         size: tauri::LogicalSize::new(VIEWPORT.0, VIEWPORT.1).into(),
     });
 }
+#[cfg(not(desktop))]
+fn hide(_: &Shown) {}
 
 #[cfg(target_os = "macos")]
 fn safari_agent() -> String {
