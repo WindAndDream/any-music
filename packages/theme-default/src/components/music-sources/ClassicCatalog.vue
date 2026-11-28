@@ -457,6 +457,7 @@ function finishView(element: Element): void {
         @add-to-playlist="(track, id) => feature.actions.addToPlaylist(id, [track.id])"
         :open="Boolean(actionTrack)"
         :track="actionTrack"
+        preview-track-title
         :custom-tags="state.customTagsByTrackId.get(actionTrackId ?? '') ?? []"
         :invalid="invalidIds.has(actionTrackId ?? '')"
         :favorite="favoriteIds.has(actionTrackId ?? '')"

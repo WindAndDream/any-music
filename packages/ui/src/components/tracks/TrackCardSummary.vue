@@ -25,6 +25,7 @@ const props = withDefaults(
 )
 
 defineSlots<{
+  title?: (props: { displayName: string }) => unknown
   details?: () => unknown
   'cover-overlay'?: () => unknown
   meta?: (props: { primaryMeta: string }) => unknown
@@ -72,33 +73,39 @@ function formatDuration(durationMs?: number): string {
     </div>
 
     <div class="track-card-summary__body">
-      <h3 class="track-card-summary__title" :title="displayName">
-        {{ displayName }}
-        <span v-if="props.badgeLabel" class="track-card-summary__badge" :class="badgeClass">
-          {{ props.badgeLabel }}
-        </span>
-      </h3>
-      <p
-        v-if="customName"
-        class="track-card-summary__original"
-        :title="`原名：${props.track.title}`"
-      >
-        <span class="track-card-summary__name-label">原名</span>
-        <span class="track-card-summary__original-text">{{ props.track.title }}</span>
-      </p>
-      <slot name="meta" :primary-meta="primaryMeta">
-        <p class="track-card-summary__meta" :title="primaryMeta">{{ primaryMeta }}</p>
-      </slot>
-      <p
-        v-for="(line, lineIndex) in props.detailLines"
-        :key="`${lineIndex}:${line}`"
-        class="track-card-summary__meta track-card-summary__meta--detail"
-        :title="line"
-      >
-        {{ line }}
-      </p>
-      <div v-if="$slots.details" class="track-card-summary__details">
-        <slot name="details" />
+      <div class="track-card-summary__heading">
+        <h3 class="track-card-summary__title" :title="$slots.title ? undefined : displayName">
+          <slot name="title" :display-name="displayName ?? props.track.title">{{
+            displayName
+          }}</slot>
+          <span v-if="props.badgeLabel" class="track-card-summary__badge" :class="badgeClass">
+            {{ props.badgeLabel }}
+          </span>
+        </h3>
+        <p
+          v-if="customName"
+          class="track-card-summary__original"
+          :title="`原名：${props.track.title}`"
+        >
+          <span class="track-card-summary__name-label">原名</span>
+          <span class="track-card-summary__original-text">{{ props.track.title }}</span>
+        </p>
+      </div>
+      <div class="track-card-summary__metadata">
+        <slot name="meta" :primary-meta="primaryMeta">
+          <p class="track-card-summary__meta" :title="primaryMeta">{{ primaryMeta }}</p>
+        </slot>
+        <p
+          v-for="(line, lineIndex) in props.detailLines"
+          :key="`${lineIndex}:${line}`"
+          class="track-card-summary__meta track-card-summary__meta--detail"
+          :title="line"
+        >
+          {{ line }}
+        </p>
+        <div v-if="$slots.details" class="track-card-summary__details">
+          <slot name="details" />
+        </div>
       </div>
     </div>
   </div>

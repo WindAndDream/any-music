@@ -42,7 +42,7 @@ vi.mock('@any-music/ui/components/AppDialog.vue', async () => {
   const vue = await import('vue')
   return {
     default: vue.defineComponent({
-      props: ['open', 'title', 'suspended'],
+      props: ['open', 'title', 'description', 'suspended'],
       emits: ['close'],
       inheritAttrs: false,
       setup:
@@ -57,6 +57,7 @@ vi.mock('@any-music/ui/components/AppDialog.vue', async () => {
                   'aria-hidden': props.suspended ? 'true' : undefined,
                 },
                 [
+                  props.description ? vue.h('header', props.description) : null,
                   vue.h('button', {
                     type: 'button',
                     'aria-label': `关闭${props.title}`,
@@ -79,6 +80,71 @@ function createTrack(id: string): Track {
 }
 
 describe('shared track naming', () => {
+  it('groups the Discover song names above the details and previews the displayed name', async () => {
+    const name = '一首歌的完整名称'.repeat(16)
+    const props = reactive({
+      open: true,
+      track: { ...createTrack('one'), title: name },
+      favorite: false,
+      invalid: false,
+      customTags: [],
+      previewTrackTitle: true,
+    })
+    const names = shallowRef<ReadonlyMap<string, string>>(new Map())
+    const view = mountCatalogComponent(
+      defineComponent({
+        setup() {
+          provideTrackNames(names)
+          return () => h(CatalogTrackActionsDialog, props)
+        },
+      }),
+      {},
+    )
+    const dialog = (title: string) =>
+      findCatalogElement(
+        view.root,
+        (node) => node.props.role === 'dialog' && node.props['aria-label'] === title,
+      )
+
+    try {
+      const actions = dialog('歌曲操作')
+      expect(() => findCatalogElement(actions, (node) => node.tag === 'header')).toThrow()
+      const heading = findCatalogElement(
+        actions,
+        (node) => node.props.class === 'track-card-summary__heading',
+      )
+      const trigger = heading.querySelector('button[aria-haspopup="dialog"]')!
+      expect(visibleText(heading)).toBe(name)
+      expect(actions.textContent).toContain('作者 · --:--')
+
+      dispatchCatalogEvent(trigger, 'onClick')
+      await nextTick()
+      const preview = dialog('完整歌名')
+      expect(preview.textContent).toBe(name)
+      expect(actions.props['aria-hidden']).toBe('true')
+
+      dispatchCatalogEvent(preview.querySelector('[aria-label="关闭完整歌名"]')!, 'onClick')
+      await nextTick()
+      expect(() => dialog('完整歌名')).toThrow()
+      expect(actions.props['aria-hidden']).toBeUndefined()
+
+      const customName = '通勤歌单'
+      names.value = new Map([['one', customName]])
+      await nextTick()
+      expect(visibleText(heading)).toMatch(new RegExp(`^${customName}\\s*原名\\s*${name}$`))
+      expect(trigger.textContent).toBe(customName)
+
+      dispatchCatalogEvent(trigger, 'onClick')
+      await nextTick()
+      expect(dialog('完整歌名').textContent).toBe(customName)
+      props.track = createTrack('two')
+      await nextTick()
+      expect(() => dialog('完整歌名')).toThrow()
+    } finally {
+      view.unmount()
+    }
+  })
+
   it('offers playlist selection below naming and adds one song to multiple checked playlists', async () => {
     const track = createTrack('one')
     const addToPlaylist = vi.fn()

@@ -25,6 +25,7 @@ const props = withDefaults(
     UiCatalogTrackActionsDialogProps & {
       editingScope?: string
       appear?: boolean
+      previewTrackTitle?: boolean
       scrollPrimaryActions?: boolean
     }
   >(),
@@ -69,6 +70,8 @@ const { activeView, lastEditor, tagDraft } = editing.state(
   createTrackActionEditingState,
 )
 const isReturning = shallowRef(false)
+const isTitlePreviewOpen = shallowRef(false)
+const titleTrigger = useTemplateRef<HTMLButtonElement>('titleTrigger')
 const isTagDetailsOpen = shallowRef(false)
 const isPlaylistModalOpen = shallowRef(false)
 const playlistTrigger = useTemplateRef<HTMLButtonElement>('playlistTrigger')
@@ -103,6 +106,7 @@ watch([() => props.open, () => props.track?.id], () => {
   editing.clearScope('name-editor')
   activeView.value = 'actions'
   tagDraft.value = ''
+  isTitlePreviewOpen.value = false
   isTagDetailsOpen.value = false
   isPlaylistModalOpen.value = false
   editing.clearScope('playlist-picker')
@@ -116,6 +120,12 @@ watch(hasTagDetails, (available) => {
 function openTagDetails(): void {
   if (!props.open || props.suspended || !hasTagDetails.value) return
   isTagDetailsOpen.value = true
+}
+
+function openTitlePreview(): void {
+  if (!props.open || props.suspended || isTagDetailsOpen.value || isPlaylistModalOpen.value) return
+  titleTrigger.value?.focus({ preventScroll: true })
+  isTitlePreviewOpen.value = true
 }
 
 function openTags(): void {
@@ -251,10 +261,10 @@ function activateView(element: Element): void {
   <AppDialog
     :open="props.open"
     :appear="props.appear"
-    :suspended="props.suspended || isTagDetailsOpen || isPlaylistModalOpen"
+    :suspended="props.suspended || isTitlePreviewOpen || isTagDetailsOpen || isPlaylistModalOpen"
     :back-action="activeView === 'actions' ? () => emit('close') : returnToActions"
     title="歌曲操作"
-    :description="displayName"
+    :description="props.previewTrackTitle ? undefined : displayName"
     :size="activeView === 'playlists' ? 'wide' : 'compact'"
     :initial-focus-selector="
       props.invalid
@@ -270,7 +280,23 @@ function activateView(element: Element): void {
         :detail-lines="detailLines"
         :badge-label="props.invalid ? '已失效' : ''"
         badge-tone="danger"
-      />
+        :class="{ 'track-actions-dialog__summary--title-preview': props.previewTrackTitle }"
+      >
+        <template v-if="props.previewTrackTitle" #title="{ displayName: name }">
+          <button
+            ref="titleTrigger"
+            class="track-actions-dialog__title-trigger"
+            type="button"
+            :aria-label="`查看完整歌名：${name}`"
+            aria-haspopup="dialog"
+            :aria-expanded="isTitlePreviewOpen"
+            @click="openTitlePreview"
+          >
+            <span>{{ name }}</span>
+            <AppIcon name="preview" :size="16" />
+          </button>
+        </template>
+      </TrackCardSummary>
       <button
         v-if="hasTagDetails"
         class="track-actions-dialog__tag-details"
@@ -479,6 +505,16 @@ function activateView(element: Element): void {
     <template #overlays><div ref="pickerModalTarget" /></template>
   </AppDialog>
   <AppDialog
+    :open="props.open && isTitlePreviewOpen"
+    :suspended="props.suspended"
+    title="完整歌名"
+    size="compact"
+    return-focus-selector=".track-actions-dialog__title-trigger"
+    @close="isTitlePreviewOpen = false"
+  >
+    <p class="track-actions-dialog__full-title">{{ displayName }}</p>
+  </AppDialog>
+  <AppDialog
     :open="props.open && hasTagDetails && isTagDetailsOpen"
     :suspended="props.suspended"
     title="歌曲标签"
@@ -532,11 +568,107 @@ function activateView(element: Element): void {
   border-radius: var(--am-radius-sm);
 }
 
-/* 操作详情保留完整名称；卡片自身仍省略过长文字，窄屏不会横向溢出。 */
+/* 摘要中的名称允许换行；启用预览时在按钮内截断。 */
 .track-actions-dialog :deep(.track-card-summary__title),
 .track-actions-dialog :deep(.track-card-summary__original-text) {
   overflow-wrap: anywhere;
   white-space: normal;
+}
+
+.track-actions-dialog__summary--title-preview {
+  grid-template-areas:
+    'heading heading'
+    'media metadata';
+}
+
+.track-actions-dialog__summary--title-preview :deep(.track-card-summary__body) {
+  display: contents;
+}
+
+.track-actions-dialog__summary--title-preview :deep(.track-card-summary__heading) {
+  grid-area: heading;
+  padding-block-end: var(--am-space-2);
+  border-block-end: 1px solid var(--am-color-border);
+}
+
+.track-actions-dialog__summary--title-preview :deep(.track-card-summary__media) {
+  grid-area: media;
+}
+
+.track-actions-dialog__summary--title-preview :deep(.track-card-summary__metadata) {
+  min-inline-size: 0;
+  grid-area: metadata;
+}
+
+.track-actions-dialog__summary--title-preview :deep(.track-card-summary__title) {
+  display: flex;
+  overflow: visible;
+  align-items: center;
+  font-size: var(--am-font-size-md);
+}
+
+.track-actions-dialog__summary--title-preview :deep(.track-card-summary__original) {
+  margin-block-end: 0;
+}
+
+.track-actions-dialog__summary--title-preview :deep(.track-card-summary__original-text) {
+  white-space: nowrap;
+}
+
+.track-actions-dialog__title-trigger {
+  display: grid;
+  min-inline-size: 0;
+  flex: 0 1 auto;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--am-space-2);
+  padding: 0;
+  border: 0;
+  border-radius: var(--am-radius-control);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: start;
+}
+
+.track-actions-dialog__title-trigger > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track-actions-dialog__title-trigger .app-icon {
+  color: var(--am-color-text-secondary);
+  transform-origin: center;
+  transition:
+    color var(--am-motion-fast) var(--am-ease-standard),
+    transform var(--am-motion-fast) var(--am-ease-standard);
+}
+
+@media (hover: hover) {
+  .track-actions-dialog__title-trigger:hover .app-icon {
+    color: var(--am-color-primary);
+    transform: scale(1.15);
+  }
+}
+
+.track-actions-dialog__title-trigger:focus-visible {
+  outline: var(--am-focus-ring);
+  outline-offset: 2px;
+}
+
+.track-actions-dialog__title-trigger:is(:active, :focus-visible) .app-icon {
+  color: var(--am-color-primary);
+}
+
+.track-actions-dialog__full-title {
+  margin: 0;
+  font-size: var(--am-font-size-lg);
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  user-select: text;
 }
 
 .track-actions-dialog__stage {
@@ -732,9 +864,13 @@ function activateView(element: Element): void {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .track-actions-dialog__title-trigger .app-icon,
   .track-actions-dialog__option,
   .track-actions-dialog__option > .app-icon {
     transition: none;
+  }
+  .track-actions-dialog__title-trigger:hover .app-icon {
+    transform: none;
   }
   .track-actions-forward-enter-active,
   .track-actions-forward-leave-active,

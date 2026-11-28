@@ -247,6 +247,7 @@ function SettingsView() {
         :state="trackList.state"
         :actions="trackList.actions"
         :availability="trackList.availability"
+        :preview-track-title="features.shell.state.activeViewId === 'catalog'"
         @queue="
           trackList.state.queuedTrackIds.includes($event)
             ? features.queue.actions.remove([$event])

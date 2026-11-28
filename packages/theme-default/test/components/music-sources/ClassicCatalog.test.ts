@@ -55,15 +55,16 @@ vi.mock('@any-music/ui/components/AppDialog.vue', async () => {
   const { defineComponent: defineOverlay, h: renderOverlay } = await import('vue')
   return {
     default: defineOverlay({
-      props: ['open', 'title'],
+      props: ['open', 'title', 'description'],
       setup:
         (props, { slots }) =>
         () =>
           props.open
-            ? renderOverlay('section', { 'aria-label': props.title }, [
-                slots.default?.(),
-                slots.footer?.(),
-              ])
+            ? renderOverlay(
+                'section',
+                { 'aria-label': props.title, 'data-description': props.description },
+                [slots.default?.(), slots.footer?.()],
+              )
             : null,
     }),
   }
@@ -384,15 +385,21 @@ describe('classic catalog complete-root contract', () => {
     }
   })
 
-  it('opens the regular Classic song dialog for a row from the native viewport', async () => {
+  it('opens song actions with a name preview for a row from the native viewport', async () => {
     let viewport!: CatalogViewportContext
     const f = mountPage(false, (context) => (viewport = context))
     try {
       viewport.showTrackActions('one')
       await nextTick()
+      const dialog = findCatalogElement(f.root, (node) => node.props['aria-label'] === '歌曲操作')
+      expect(dialog.props['data-description']).toBeUndefined()
+      const title = dialog.querySelector('[aria-label="查看完整歌名：one"]')!
+      expect(title.textContent).toBe('one')
+      dispatchCatalogEvent(title, 'onClick')
+      await nextTick()
       expect(
-        findCatalogElement(f.root, (node) => node.props['aria-label'] === '歌曲操作').textContent,
-      ).toContain('one')
+        findCatalogElement(f.root, (node) => node.props['aria-label'] === '完整歌名').textContent,
+      ).toBe('one')
     } finally {
       f.dispose()
     }
